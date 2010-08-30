@@ -15,8 +15,11 @@ int main(int argc, char** argv)
 
   queue<Point> q("somewhere", 24, bip::read_write);
 
-  message<Point> msg = q.create();
+  for (unsigned i=0; i< 100; ++i)
+    {
+      message<Point> msg = q.create();
 
+    }
 
 }
 

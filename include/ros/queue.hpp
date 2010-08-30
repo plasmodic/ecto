@@ -26,13 +26,21 @@ public:
     : name(name_)
     , shm(bip::open_or_create, name.c_str(), mode)
   {
+    shm.truncate(size * sizeof(T));
+
+    bip::mapped_region(shm, bip::read_write,
+		       0, size * sizeof(T))
+      .swap(reg);
+    data = static_cast<T*>(reg.get_address());
+
+    SHOW("region = " << data);
 
   }
 
   message<T> create() 
   {
     SHOW("making message");
-    return message<T>();
+    return new (allocator) message<T>();
   }
 };
 
