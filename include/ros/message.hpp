@@ -4,20 +4,12 @@
 #include <ros/allocator.hpp>
 
 template <typename T>
-struct message : allocable
+struct message 
 {
 
   unsigned refcount;
   T data;
 
-public:
-
-  T* operator->()
-  {
-    return &data;
-  }
-
 };
-
 
 #endif

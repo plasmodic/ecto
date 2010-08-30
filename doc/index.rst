@@ -3,18 +3,29 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to ROS shmem infrastructure's documentation!
-====================================================
+ROS shmem infrastructure
+========================
 
-Contents:
+This is a message queue that lives in shared memory and supports
+multiple publishers and subscribers.
 
-.. toctree::
-   :maxdepth: 2
+Both must specify the type and key of the message queue.  The first
+publisher to construct the queue publishes 
 
-Indices and tables
-==================
+The specifies the type of message and the number of messages
+there are to be in the queue at construction time.  
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+
+
+Things that a message queue might have:
+
+- "key" name for message queue
+- type of message
+- n messages in queue
+- number of current publishers
+- number of current subscribers
+- data rate
+- read lock
+- write lock
+
 

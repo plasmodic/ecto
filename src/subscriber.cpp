@@ -11,8 +11,6 @@ struct Point {
 int main(int argc, char** argv)
 {
 
-  std::cout << name_of<int>() << "\n";
-
   queue<Point> q("somewhere", 24, bip::read_write);
 
   for (unsigned i=0; i< 100; ++i)

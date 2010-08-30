@@ -16,31 +16,42 @@ class queue
 {
   std::string name;
   unsigned size;
-  T* data;
+  message<T>* data;
   bip::shared_memory_object shm;
   bip::mapped_region reg;
 
+  unsigned head;
+
 public:
+
+  typedef message<T> message_t;
 
   queue(const std::string& name_, std::size_t size_, bip::mode_t mode)
     : name(name_)
+    , size(size_)
     , shm(bip::open_or_create, name.c_str(), mode)
   {
-    shm.truncate(size * sizeof(T));
+    head = 0;
+    shm.truncate(size * sizeof(message_t));
 
     bip::mapped_region(shm, bip::read_write,
-		       0, size * sizeof(T))
+		       0, size * sizeof(message_t))
       .swap(reg);
-    data = static_cast<T*>(reg.get_address());
+
+    data = static_cast<message_t*>(reg.get_address());
 
     SHOW("region = " << data);
 
   }
 
-  message<T> create() 
+  message_t& create() 
   {
-    SHOW("making message");
-    return new (allocator) message<T>();
+    SHOW("making message at "<< head);
+    
+    unsigned thishead = head;
+    new (data+thishead) message_t;
+    head = (head + 1) % size;
+    return data[thishead];
   }
 };
 
