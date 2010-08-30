@@ -6,4 +6,5 @@ add_executable(bang
   src/main.cpp
   src/name_of.cpp)
 
+target_link_libraries(bang rt)
 		    

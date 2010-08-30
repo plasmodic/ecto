@@ -1,19 +1,20 @@
 #ifndef ROS_MESSAGE_HPP_INCLUDED
 #define ROS_MESSAGE_HPP_INCLUDED
 
+#include <ros/allocator.hpp>
 
 template <typename T>
-struct message 
+struct message : allocable
 {
 
   unsigned refcount;
-  T* px;
+  T data;
 
 public:
 
   T* operator->()
   {
-    return px;
+    return &data;
   }
 
 };

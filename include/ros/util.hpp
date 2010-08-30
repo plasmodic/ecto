@@ -3,7 +3,7 @@
 
 #include <typeinfo>
 #include <string>
-#include <iosfwd>
+#include <iostream>
 
 std::string name_of(const std::type_info &ti);
 
