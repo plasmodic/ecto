@@ -16,6 +16,7 @@ class queue
 {
   std::string name;
   unsigned size;
+  
   message<T>* data;
   bip::shared_memory_object shm;
   bip::mapped_region reg;

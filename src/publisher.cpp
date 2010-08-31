@@ -2,7 +2,12 @@
 #include <ros/message.hpp>
 #include <ros/queue.hpp>
 
-namespace bip = boost::interprocess;
+#include <boost/asio.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
+
+using namespace boost;
+
+namespace ip = boost::interprocess;
 
 struct Point {
   float x, y, z;
@@ -11,13 +16,16 @@ struct Point {
 int main(int argc, char** argv)
 {
 
-  std::cout << name_of<int>() << "\n";
+  asio::io_service serv;
 
-  queue<Point> q("somewhere", 8, bip::read_write);
+  queue<Point> q("somewhere", 8, ip::read_write);
+
 
   for (unsigned i=0; i<24; ++i)
     {
       message<Point> msg = q.create();
+      asio::deadline_timer timer(serv, posix_time::seconds(1));
+      timer.wait();
     }
 
 }
