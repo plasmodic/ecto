@@ -6,10 +6,8 @@
 template <typename T>
 struct message 
 {
-
   unsigned refcount;
   T data;
-
 };
 
 #endif

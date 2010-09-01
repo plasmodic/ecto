@@ -8,6 +8,7 @@
 
 #include <boost/interprocess/shared_memory_object.hpp>
 #include <boost/interprocess/mapped_region.hpp>
+#include <boost/interprocess/sync/interprocess_mutex.hpp>
 
 namespace bip = boost::interprocess;
 
@@ -15,43 +16,59 @@ template <typename T>
 class queue 
 {
   std::string name;
-  unsigned size;
   
-  message<T>* data;
   bip::shared_memory_object shm;
-  bip::mapped_region reg;
+  bip::mapped_region header_region, data_region;
 
-  unsigned head;
+  struct header_t
+  {
+    bip::interprocess_mutex mutex;
+    unsigned head_index;
+    unsigned length;
+  };
+  header_t* header;
+  
+  typedef message<T> message_t;
+  message_t* data;
 
 public:
 
-  typedef message<T> message_t;
-
-  queue(const std::string& name_, std::size_t size_, bip::mode_t mode)
+  queue(const std::string& name_, std::size_t size, bip::mode_t mode)
     : name(name_)
-    , size(size_)
     , shm(bip::open_or_create, name.c_str(), mode)
   {
-    head = 0;
-    shm.truncate(size * sizeof(message_t));
+    shm.truncate(sizeof(header_t) + size * sizeof(message_t));
 
     bip::mapped_region(shm, bip::read_write,
-		       0, size * sizeof(message_t))
-      .swap(reg);
+		       0, sizeof(header_t))
+      .swap(header_region);
 
-    data = static_cast<message_t*>(reg.get_address());
+    header = static_cast<header_t*>(header_region.get_address());
+    header->length = size;
+    header->head_index = 0;
 
+    bip::mapped_region(shm, bip::read_write,
+		       sizeof(header_t), size * sizeof(message_t))
+      .swap(data_region);
+
+    data = static_cast<message_t*>(data_region.get_address());
+
+    for(unsigned i = 0; i<size; ++i)
+      {
+	new (data+i) message_t;
+      }
     SHOW("region = " << data);
 
   }
 
   message_t& create() 
   {
-    SHOW("making message at "<< head);
+    SHOW("making message at "<< header->head_index);
     
-    unsigned thishead = head;
+    unsigned thishead = header->head_index;
+    data[thishead].~message_t();
     new (data+thishead) message_t;
-    head = (head + 1) % size;
+    header->head_index = (thishead + 1) % header->length;
     return data[thishead];
   }
 };
