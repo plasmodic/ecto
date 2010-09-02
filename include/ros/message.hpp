@@ -18,21 +18,18 @@ struct message_ptr
 
   static std::size_t shm_size() { return sizeof(impl_t); }
 
-  message_ptr(void* p) 
+  static message_ptr create_inplace(void* p) 
   {
-    impl = new (p) impl_t;
-    SHOW("constructing msg impl == " << impl);
-    ++(impl->refcount);
+    impl_t* impl = new (p) impl_t;
+    return message_ptr(impl);
   }
 
-  /*
-  message_ptr(impl_t* p) 
+  explicit message_ptr(impl_t* p) 
   {
-    SHOW("constructing msg impl == " << impl_);
-    impl = new (p) impl_t;
+    SHOW("constructing msg impl == " << p);
+    impl = p;
     ++(impl->refcount);
   }
-  */
 
   message_ptr(const message_ptr& rhs) 
   {

@@ -79,8 +79,7 @@ public:
 
     for(unsigned i = 0; i<size; ++i)
       {
-	new (data+i) message_ptr_impl_t;
-	data[i].refcount = 0;
+	message_ptr_t mp(data+i);
       }
     SHOW("region = " << data);
 
@@ -93,7 +92,7 @@ public:
     bip::scoped_lock<bip::interprocess_mutex> lock(header->mutex);
     unsigned thishead = header->head_index;
     data[thishead].~message_ptr_impl_t();
-    message_ptr_t newptr(data + thishead);
+    message_ptr_t newptr = message_ptr_t::create_inplace(data + thishead);
 
     // new (data+thishead) message_ptr_impl_t;
     // SHOW("newing at " << data+thishead);
