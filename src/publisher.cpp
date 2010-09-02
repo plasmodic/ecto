@@ -28,7 +28,7 @@ int main(int argc, char** argv)
 
   for (unsigned i=0; i<24; ++i)
     {
-      message<Point> msg = q.create();
+      message_ptr<Point> msg = q.create();
       Point& p = *msg;
       p.x = i * 1.01;
       p.y = i * 1.02;

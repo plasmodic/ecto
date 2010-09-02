@@ -29,11 +29,10 @@ class queue
   };
   header_t* header;
   
-  typedef message<T> message_t;
-  typedef typename message_t::impl_t message_impl_t;
-  message_impl_t* data;
+  typedef message_ptr<T> message_ptr_t;
+  typedef typename message_ptr_t::impl_t message_ptr_impl_t;
+  message_ptr_impl_t* data;
 
-  
   friend std::ostream& operator<<(std::ostream& os, const queue& q) 
   {
     os << "[Queue: header @ " << q.header << "\n"
@@ -62,7 +61,7 @@ public:
     , shm(bip::open_or_create, name.c_str(), mode)
   {
 
-    shm.truncate(sizeof(header_t) + size * sizeof(message_t));
+    shm.truncate(sizeof(header_t) + size * message_ptr_t::shm_size());
 
     bip::mapped_region(shm, bip::read_write,
 		       0, sizeof(header_t))
@@ -73,32 +72,32 @@ public:
     header->head_index = 0;
 
     bip::mapped_region(shm, bip::read_write,
-		       sizeof(header_t), size * sizeof(message_t))
+		       sizeof(header_t), size * message_ptr_t::shm_size())
       .swap(data_region);
 
-    data = static_cast<message_impl_t*>(data_region.get_address());
+    data = static_cast<message_ptr_impl_t*>(data_region.get_address());
 
     for(unsigned i = 0; i<size; ++i)
       {
-	new (data+i) message_impl_t;
+	new (data+i) message_ptr_impl_t;
 	data[i].refcount = 0;
       }
     SHOW("region = " << data);
 
   }
 
-  message_t create() 
+  message_ptr_t create() 
   {
     SHOW("making message at "<< header->head_index);
     
     bip::scoped_lock<bip::interprocess_mutex> lock(header->mutex);
     unsigned thishead = header->head_index;
-    data[thishead].~message_impl_t();
-    new (data+thishead) message_impl_t;
+    data[thishead].~message_ptr_impl_t();
+    new (data+thishead) message_ptr_impl_t;
     SHOW("newing at " << data+thishead);
     header->head_index = (thishead + 1) % header->length;
     
-    message_t msg(data + thishead);
+    message_ptr_t msg(data + thishead);
     return msg;
   }
 };
