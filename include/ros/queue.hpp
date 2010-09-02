@@ -93,12 +93,13 @@ public:
     bip::scoped_lock<bip::interprocess_mutex> lock(header->mutex);
     unsigned thishead = header->head_index;
     data[thishead].~message_ptr_impl_t();
-    new (data+thishead) message_ptr_impl_t;
-    SHOW("newing at " << data+thishead);
+    message_ptr_t newptr(data + thishead);
+
+    // new (data+thishead) message_ptr_impl_t;
+    // SHOW("newing at " << data+thishead);
     header->head_index = (thishead + 1) % header->length;
     
-    message_ptr_t msg(data + thishead);
-    return msg;
+    return newptr;
   }
 };
 
