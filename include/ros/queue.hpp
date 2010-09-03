@@ -11,19 +11,24 @@
 #include <boost/interprocess/sync/interprocess_mutex.hpp>
 #include <boost/interprocess/sync/scoped_lock.hpp>
 
-namespace bip = boost::interprocess;
+namespace ip = boost::interprocess;
 
 template <typename T>
 class queue 
 {
   std::string name;
   
-  bip::shared_memory_object shm;
-  bip::mapped_region header_region, data_region;
+  ip::shared_memory_object shm;
+  ip::mapped_region header_region, data_region;
+
+  struct item {
+    T data;
+    unsigned refcount;
+  };
 
   struct header_t
   {
-    bip::interprocess_mutex mutex;
+    ip::interprocess_mutex mutex;
     unsigned head_index;
     unsigned length;
   };
@@ -56,14 +61,14 @@ class queue
 
 public:
 
-  queue(const std::string& name_, std::size_t size, bip::mode_t mode)
+  queue(const std::string& name_, std::size_t size, ip::mode_t mode)
     : name(name_)
-    , shm(bip::open_or_create, name.c_str(), mode)
+    , shm(ip::open_or_create, name.c_str(), mode)
   {
 
     shm.truncate(sizeof(header_t) + size * message_ptr_t::shm_size());
 
-    bip::mapped_region(shm, bip::read_write,
+    ip::mapped_region(shm, ip::read_write,
 		       0, sizeof(header_t))
       .swap(header_region);
 
@@ -71,7 +76,7 @@ public:
     header->length = size;
     header->head_index = 0;
 
-    bip::mapped_region(shm, bip::read_write,
+    ip::mapped_region(shm, ip::read_write,
 		       sizeof(header_t), size * message_ptr_t::shm_size())
       .swap(data_region);
 
@@ -89,7 +94,7 @@ public:
   {
     SHOW("making message at "<< header->head_index);
     
-    bip::scoped_lock<bip::interprocess_mutex> lock(header->mutex);
+    ip::scoped_lock<ip::interprocess_mutex> lock(header->mutex);
     unsigned thishead = header->head_index;
     data[thishead].~message_ptr_impl_t();
     message_ptr_t newptr = message_ptr_t::create_inplace(data + thishead);
