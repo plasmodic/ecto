@@ -10,6 +10,7 @@
 #include <boost/interprocess/mapped_region.hpp>
 #include <boost/interprocess/sync/interprocess_mutex.hpp>
 #include <boost/interprocess/sync/scoped_lock.hpp>
+#include <boost/interprocess/offset_ptr.hpp>
 
 namespace ip = boost::interprocess;
 
@@ -21,11 +22,6 @@ class queue
   ip::shared_memory_object shm;
   ip::mapped_region header_region, data_region;
 
-  struct item {
-    T data;
-    unsigned refcount;
-  };
-
   struct header_t
   {
     ip::interprocess_mutex mutex;
@@ -34,9 +30,17 @@ class queue
   };
   header_t* header;
   
-  typedef message_ptr<T> message_ptr_t;
-  typedef typename message_ptr_t::impl_t message_ptr_impl_t;
-  message_ptr_impl_t* data;
+  struct item 
+  {
+    T data;
+    unsigned refcount;
+    ip::offset_ptr<item> next;
+    friend std::ostream& operator<<(std::ostream& os, const item& i)
+    {
+      return os << "[data=" << i.data << " refcount=" << i.refcount << "]";
+    }
+  };
+  item* data;
 
   friend std::ostream& operator<<(std::ostream& os, const queue& q) 
   {
@@ -66,7 +70,7 @@ public:
     , shm(ip::open_or_create, name.c_str(), mode)
   {
 
-    shm.truncate(sizeof(header_t) + size * message_ptr_t::shm_size());
+    shm.truncate(sizeof(header_t) + size * sizeof(item));
 
     ip::mapped_region(shm, ip::read_write,
 		       0, sizeof(header_t))
@@ -77,34 +81,64 @@ public:
     header->head_index = 0;
 
     ip::mapped_region(shm, ip::read_write,
-		       sizeof(header_t), size * message_ptr_t::shm_size())
+		      sizeof(header_t), size * sizeof(item))
       .swap(data_region);
 
-    data = static_cast<message_ptr_impl_t*>(data_region.get_address());
+    data = static_cast<item*>(data_region.get_address());
 
-    for(unsigned i = 0; i<size; ++i)
+    for(unsigned j = 0; j<size; ++j)
       {
-	message_ptr_t mp(data+i);
+	item* i = new (data+j) item;
+	i->refcount = 0;
       }
     SHOW("region = " << data);
 
   }
 
-  message_ptr_t create() 
+  struct ptr {
+    item* item_;
+
+    ptr() {
+      item_ = 0;
+    }
+    ptr(item* item__) : item_(item__) 
+    { 
+      ++(item_->refcount);
+    }
+    ptr(const ptr& rhs) : item_(rhs.item_)
+    { }
+
+    ~ptr() {
+      --(item_->refcount);
+    }
+
+    T* operator->() {
+      return &(item_->data);
+    }
+    T& operator*() {
+      return item_->data;
+    }
+    friend std::ostream& operator<<(std::ostream& os, const ptr& p) {
+      return os << *(p.item_);
+    }
+  };
+
+  ptr create() 
   {
     SHOW("making message at "<< header->head_index);
     
     ip::scoped_lock<ip::interprocess_mutex> lock(header->mutex);
     unsigned thishead = header->head_index;
-    data[thishead].~message_ptr_impl_t();
-    message_ptr_t newptr = message_ptr_t::create_inplace(data + thishead);
+    data[thishead].~item();
+    ptr newptr(data + thishead);
 
-    // new (data+thishead) message_ptr_impl_t;
+    //new (data+thishead) message_ptr_impl_t;
     // SHOW("newing at " << data+thishead);
     header->head_index = (thishead + 1) % header->length;
     
     return newptr;
   }
+
 };
 
 #endif

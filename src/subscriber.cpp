@@ -15,7 +15,7 @@ int main(int argc, char** argv)
 
   for (unsigned i=0; i< 100; ++i)
     {
-      message_ptr<Point> msg = q.create();
+      queue<Point>::ptr msg = q.create();
 
     }
 
