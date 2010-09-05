@@ -88,9 +88,8 @@ private:
       {
 	time_t curtime;
 	time(&curtime);
-	unsigned nsec = curtime - start_time;
-	unsigned meg_per_second = ((1.0 * nblocks * blocksize) 
-				   / (1024*1024)) / nsec;
+	float meg_per_second = ((1.0 * nblocks * blocksize) 
+				/ (1024*1024)) / (curtime - start_time);
 	std::cout << meg_per_second << " meg/second\n";
 	init();
       } 
