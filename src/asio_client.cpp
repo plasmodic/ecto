@@ -24,6 +24,7 @@ int main(int argc, char* argv[])
       return 1;
     }
 
+
     boost::asio::io_service io_service;
 
     tcp::resolver resolver(io_service);
@@ -41,10 +42,13 @@ int main(int argc, char* argv[])
     if (error)
       throw boost::system::system_error(error);
 
+    time_t starttime;
+    time(&starttime);
     unsigned nblocks = 0;
     unsigned blocksize = atoi(argv[2]);
     std::vector<char> buf(blocksize);
 
+    buf.reserve(blocksize);
     for (;;)
     {
       nblocks++;
@@ -58,10 +62,15 @@ int main(int argc, char* argv[])
         throw boost::system::system_error(error); // Some other error.
 
       // std::cout.write(buf.data(), len);
-      if (nblocks % 10000 == 0)
+      if (nblocks > 1000000)
 	{
-	  std::cout << ".";
+	  time_t curtime;
+	  time(&curtime);
+	  std::cout << ((1.0 * nblocks * blocksize) / (1024*1024)) / (curtime - starttime)
+		    << " megs/sec\n";
 	  std::cout.flush();
+	  starttime = curtime;
+	  nblocks = 0;
 	}
       
     }

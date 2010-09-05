@@ -46,9 +46,6 @@ public:
 	p->the_message += ('A' + (i % 16));
       }
     
-    time(&p->start_time); 
-    std::cout << "Start at " << ctime(&p->start_time) << "\n";
-
     return p;
   }
 
@@ -57,6 +54,11 @@ public:
     return socket_;
   }
 
+  void init() {
+    time(&start_time); 
+    nblocks = 0;
+    std::cout << "Start at " << ctime(&start_time) << "\n";
+  }
   void start()
   {
      boost::asio::async_write(socket_, boost::asio::buffer(the_message),
@@ -72,11 +74,17 @@ private:
   }
 
   void handle_write(const boost::system::error_code& /*error*/,
-      size_t /*bytes_transferred*/)
+      size_t bytes_transferred)
   {
     ++nblocks;
+    if (bytes_transferred != blocksize)
+      {
+	std::cout << "only " << bytes_transferred << " transferred, ending thread.\n";
+	return;
+      }
     start();
-    if ((nblocks % 100000) == 0)
+
+    if (nblocks > 1000000)
       {
 	time_t curtime;
 	time(&curtime);
@@ -84,6 +92,7 @@ private:
 	unsigned meg_per_second = ((1.0 * nblocks * blocksize) 
 				   / (1024*1024)) / nsec;
 	std::cout << meg_per_second << " meg/second\n";
+	init();
       } 
   }
 
@@ -116,6 +125,7 @@ private:
   {
     if (!error)
     {
+      new_connection->init();
       new_connection->start();
       start_accept();
     }
