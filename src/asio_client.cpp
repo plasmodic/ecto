@@ -18,9 +18,9 @@ int main(int argc, char* argv[])
 {
   try
   {
-    if (argc != 2)
+    if (argc != 3)
     {
-      std::cerr << "Usage: client <host>" << std::endl;
+      std::cerr << "Usage: client <host> <blocksize>" << std::endl;
       return 1;
     }
 
@@ -42,10 +42,12 @@ int main(int argc, char* argv[])
       throw boost::system::system_error(error);
 
     unsigned nblocks = 0;
+    unsigned blocksize = atoi(argv[2]);
+    std::vector<char> buf(blocksize);
+
     for (;;)
     {
       nblocks++;
-      boost::array<char, 1024> buf;
       boost::system::error_code error;
 
       size_t len = socket.read_some(boost::asio::buffer(buf), error);
@@ -56,13 +58,11 @@ int main(int argc, char* argv[])
         throw boost::system::system_error(error); // Some other error.
 
       // std::cout.write(buf.data(), len);
-      if (nblocks % 1000 == 0)
+      if (nblocks % 10000 == 0)
 	{
 	  std::cout << ".";
 	  std::cout.flush();
 	}
-      
-      
       
     }
   }
