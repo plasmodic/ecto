@@ -23,5 +23,12 @@ myexec(subscriber
 myexec(remover
   src/remove.cpp)
 
+myexec(asio_srv
+  src/asio_srv.cpp)
+
+myexec(asio_client
+  src/asio_client.cpp)
+
+
 		    
 

@@ -22,14 +22,6 @@ class queue
   ip::shared_memory_object shm;
   ip::mapped_region header_region, data_region;
 
-  struct header_t
-  {
-    ip::interprocess_mutex mutex;
-    unsigned head_index;
-    unsigned length;
-  };
-  header_t* header;
-  
   struct item 
   {
     T data;
@@ -42,6 +34,15 @@ class queue
   };
   item* data;
 
+  struct header_t
+  {
+    ip::interprocess_mutex mutex;
+    unsigned head_index;
+    unsigned length;
+    ip::offset_ptr<item> head, tail, free;
+  };
+  header_t* header;
+  
   friend std::ostream& operator<<(std::ostream& os, const queue& q) 
   {
     os << "[Queue: header @ " << q.header << "\n"
@@ -90,6 +91,8 @@ public:
       {
 	item* i = new (data+j) item;
 	i->refcount = 0;
+	i->next = header->free;
+	header->free = i;
       }
     SHOW("region = " << data);
 
