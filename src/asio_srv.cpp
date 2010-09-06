@@ -13,10 +13,13 @@
 #include <string>
 #include <boost/bind.hpp>
 #include <boost/shared_ptr.hpp>
+
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/asio.hpp>
+#include "boost/date_time/posix_time/posix_time.hpp"
 
 using boost::asio::ip::tcp;
+namespace pt = boost::posix_time;
 
 std::string make_daytime_string()
 {
@@ -30,7 +33,7 @@ class tcp_connection
 {
 public:
   
-  time_t start_time;
+  pt::ptime start_time;
   unsigned nblocks, blocksize;
   std::string the_message;
 
@@ -55,9 +58,8 @@ public:
   }
 
   void init() {
-    time(&start_time); 
+    start_time = pt::microsec_clock::local_time();
     nblocks = 0;
-    std::cout << "Start at " << ctime(&start_time) << "\n";
   }
   void start()
   {
@@ -86,11 +88,12 @@ private:
 
     if (nblocks > 1000000)
       {
-	time_t curtime;
-	time(&curtime);
-	float meg_per_second = ((1.0 * nblocks * blocksize) 
-				/ (1024*1024)) / (curtime - start_time);
-	std::cout << meg_per_second << " meg/second\n";
+	pt::time_duration elapsed = pt::microsec_clock::local_time() - start_time;
+
+	float meg_per_second = ((1000.0 * nblocks * blocksize) 
+				/ (1024*1024)) / elapsed.total_milliseconds();
+	std::cout << nblocks << " " << elapsed.total_milliseconds() << " "
+		  << meg_per_second << " meg/second\n";
 	init();
       } 
   }
