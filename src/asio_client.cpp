@@ -65,7 +65,7 @@ int main(int argc, char* argv[])
         throw boost::system::system_error(error); // Some other error.
 
       // std::cout.write(buf.data(), len);
-      if (nblocks > 1000000)
+      if (nblocks == 1000000)
 	{
 	  pt::time_duration elapsed = pt::microsec_clock::local_time() - start_time;
 

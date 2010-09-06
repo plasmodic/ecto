@@ -86,16 +86,16 @@ private:
       }
     start();
 
-    if (nblocks > 1000000)
+    if (nblocks == 1000000)
       {
 	pt::time_duration elapsed = pt::microsec_clock::local_time() - start_time;
 
 	float meg_per_second = ((1000.0 * nblocks * blocksize) 
 				/ (1024*1024)) / elapsed.total_milliseconds();
-	std::cout << nblocks << " " << elapsed.total_milliseconds() << " "
+	std::cout << elapsed.total_milliseconds()*1000 << "s "
 		  << meg_per_second << " meg/second\n";
 	init();
-      } 
+      }
   }
 
   tcp::socket socket_;
