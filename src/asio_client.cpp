@@ -11,8 +11,10 @@
 #include <iostream>
 #include <boost/array.hpp>
 #include <boost/asio.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
 
 using boost::asio::ip::tcp;
+namespace pt = boost::posix_time;
 
 int main(int argc, char* argv[])
 {
@@ -42,13 +44,14 @@ int main(int argc, char* argv[])
     if (error)
       throw boost::system::system_error(error);
 
-    time_t starttime;
-    time(&starttime);
+    pt::ptime start_time = pt::microsec_clock::local_time();
+
     unsigned nblocks = 0;
     unsigned blocksize = atoi(argv[2]);
     std::vector<char> buf(blocksize);
 
     buf.reserve(blocksize);
+
     for (;;)
     {
       nblocks++;
@@ -64,12 +67,14 @@ int main(int argc, char* argv[])
       // std::cout.write(buf.data(), len);
       if (nblocks > 1000000)
 	{
-	  time_t curtime;
-	  time(&curtime);
-	  std::cout << ((1.0 * nblocks * blocksize) / (1024*1024)) / (curtime - starttime)
+	  pt::time_duration elapsed = pt::microsec_clock::local_time() - start_time;
+
+	  std::cout << ((1000.0 * nblocks * blocksize) 
+			/ (1024*1024)) 
+	    / elapsed.total_milliseconds()
 		    << " megs/sec\n";
 	  std::cout.flush();
-	  starttime = curtime;
+	  start_time = pt::microsec_clock::local_time();
 	  nblocks = 0;
 	}
       
