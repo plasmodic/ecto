@@ -8,6 +8,8 @@
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
+#include <stdint.h>
+
 #include <iostream>
 #include <boost/array.hpp>
 #include <boost/asio.hpp>
@@ -48,7 +50,7 @@ int main(int argc, char* argv[])
 
     unsigned nblocks = 0;
     unsigned blocksize = atoi(argv[2]);
-    std::vector<char> buf(blocksize);
+    std::vector<uint32_t> buf(blocksize/4);
 
     buf.reserve(blocksize);
 

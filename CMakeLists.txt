@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 
+set(CMAKE_CXX_FLAGS -Wall)
+
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 macro(myexec NAME)
@@ -24,7 +26,8 @@ myexec(remover
   src/remove.cpp)
 
 myexec(asio_srv
-  src/asio_srv.cpp)
+  src/asio_srv.cpp
+  src/util.cpp)
 
 myexec(asio_client
   src/asio_client.cpp)

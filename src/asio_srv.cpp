@@ -17,9 +17,11 @@
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/asio.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
+#include <ecto/util.hpp>
 
 using boost::asio::ip::tcp;
 namespace pt = boost::posix_time;
+namespace asio = boost::asio;
 
 std::string make_daytime_string()
 {
@@ -35,19 +37,15 @@ public:
   
   pt::ptime start_time;
   unsigned nblocks, blocksize;
-  std::string the_message;
 
   typedef boost::shared_ptr<tcp_connection> pointer;
 
-  static pointer create(boost::asio::io_service& io_service, unsigned blocksize_)
+  static pointer create(asio::io_service& io_service, unsigned blocksize_)
   {
+    std::cout << "srv created with blocksize=" << blocksize_ << "\n";
     pointer p(new tcp_connection(io_service));
     p->nblocks = 0;
     p->blocksize = blocksize_;
-    for (int i=0; i<blocksize_; ++i)
-      {
-	p->the_message += ('A' + (i % 16));
-      }
     
     return p;
   }
@@ -61,18 +59,41 @@ public:
     start_time = pt::microsec_clock::local_time();
     nblocks = 0;
   }
+
   void start()
   {
-     boost::asio::async_write(socket_, boost::asio::buffer(the_message),
-        boost::bind(&tcp_connection::handle_write, shared_from_this(),
-          boost::asio::placeholders::error,
-          boost::asio::placeholders::bytes_transferred));
+    unsigned n_ints = blocksize / 4;
+    //std::cout << "that is, " << n_ints << " unsigned ints.\n";
+    const std::vector<uint32_t>& msg = gen_data(n_ints);
+
+    asio::async_write(socket_, asio::buffer(msg),
+		      boost::bind(&tcp_connection::handle_write, 
+				  shared_from_this(),
+				  asio::placeholders::error,
+				  asio::placeholders::bytes_transferred));
+
+    perfreport_timer.expires_from_now(pt::seconds(30));
+    perfreport_timer.async_wait(boost::bind(&tcp_connection::handle_perfreport,
+					    shared_from_this()));
+
   }
 
 private:
-  tcp_connection(boost::asio::io_service& io_service)
+  tcp_connection(asio::io_service& io_service)
     : socket_(io_service)
+    , serv_(io_service)
+    , perfreport_timer(io_service)
   {
+  }
+
+  void handle_perfreport()
+  {
+    std::cout << __PRETTY_FUNCTION__ << "\n";
+    //    perfreport_timer.expires_from_now(pt::seconds(30));
+    //    //    perfreport_timer.async_wait(boost::bind(&tcp_connection::handle_perfreport,
+    //					    shared_from_this(),
+    //					    asio::placeholders::error));
+    
   }
 
   void handle_write(const boost::system::error_code& /*error*/,
@@ -86,27 +107,30 @@ private:
       }
     start();
 
-    if (nblocks == 1000000)
+    if (nblocks == 100000)
       {
 	pt::time_duration elapsed = pt::microsec_clock::local_time() - start_time;
 
 	float meg_per_second = ((1000.0 * nblocks * blocksize) 
 				/ (1024*1024)) / elapsed.total_milliseconds();
-	std::cout << elapsed.total_milliseconds()*1000 << "s "
+	std::cout << elapsed.total_milliseconds()/1000.0 << "s "
 		  << meg_per_second << " meg/second\n";
 	init();
       }
   }
 
   tcp::socket socket_;
-  std::string message_;
+  asio::io_service& serv_;
+  asio::deadline_timer perfreport_timer;
 };
 
 class tcp_server
 {
 public:
-  tcp_server(boost::asio::io_service& io_service)
+  tcp_server(asio::io_service& io_service, unsigned blocksize)
     : acceptor_(io_service, tcp::endpoint(tcp::v4(), 10101))
+    , blocksize_(blocksize)
+      
   {
     start_accept();
   }
@@ -115,11 +139,11 @@ private:
   void start_accept()
   {
     tcp_connection::pointer new_connection =
-      tcp_connection::create(acceptor_.io_service(), 1024);
+      tcp_connection::create(acceptor_.io_service(), blocksize_);
 
     acceptor_.async_accept(new_connection->socket(),
         boost::bind(&tcp_server::handle_accept, this, new_connection,
-          boost::asio::placeholders::error));
+          asio::placeholders::error));
   }
 
   void handle_accept(tcp_connection::pointer new_connection,
@@ -127,6 +151,7 @@ private:
   {
     if (!error)
     {
+      std::cout << "accepted.   blocksize=" << blocksize_ << "\n";
       new_connection->init();
       new_connection->start();
       start_accept();
@@ -134,14 +159,15 @@ private:
   }
 
   tcp::acceptor acceptor_;
+  unsigned blocksize_;
 };
 
-int main()
+int main(int argc, char** argv)
 {
   try
   {
-    boost::asio::io_service io_service;
-    tcp_server server(io_service);
+    asio::io_service io_service;
+    tcp_server server(io_service, atoi(argv[1]));
     io_service.run();
   }
   catch (std::exception& e)

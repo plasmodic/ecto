@@ -1,7 +1,7 @@
-#ifndef ROS_ALLOCATOR_HPP_INCLUDED
-#define ROS_ALLOCATOR_HPP_INCLUDED
+#ifndef ECTO_ALLOCATOR_HPP_INCLUDED
+#define ECTO_ALLOCATOR_HPP_INCLUDED
 
-#include <ros/util.hpp>
+#include <ecto/util.hpp>
 
 struct shared_allocator {
 

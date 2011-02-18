@@ -1,7 +1,7 @@
-#ifndef ROS_MESSAGE_HPP_INCLUDED
-#define ROS_MESSAGE_HPP_INCLUDED
+#ifndef ECTO_MESSAGE_HPP_INCLUDED
+#define ECTO_MESSAGE_HPP_INCLUDED
 
-#include <ros/allocator.hpp>
+#include <ecto/allocator.hpp>
 #include <boost/noncopyable.hpp>
 #include <iostream>
 

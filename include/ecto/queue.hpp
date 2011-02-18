@@ -1,10 +1,10 @@
-#ifndef ROS_TOPIC_HPP_INCLUDED
-#define ROS_TOPIC_HPP_INCLUDED
+#ifndef ECTO_TOPIC_HPP_INCLUDED
+#define ECTO_TOPIC_HPP_INCLUDED
 
 #include <iostream>
-#include <ros/message.hpp>
-#include <ros/util.hpp>
-#include <ros/allocator.hpp>
+#include <ecto/message.hpp>
+#include <ecto/util.hpp>
+#include <ecto/allocator.hpp>
 
 #include <boost/interprocess/shared_memory_object.hpp>
 #include <boost/interprocess/mapped_region.hpp>
