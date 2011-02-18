@@ -18,6 +18,21 @@ struct Point {
 void intrusive_ptr_add_ref(Point* p) { ++(p->refcount); } 
 void intrusive_ptr_release(Point* p) { --(p->refcount); } 
 
+template <typename Alloc>
+struct node_deleter 
+{
+  Alloc& alloc;
+  node_deleter(Alloc& a) : alloc(a) { }
+  node_deleter(const node_deleter& rhs) 
+    : alloc(rhs.alloc)
+  { }
+    
+  void operator()(typename Alloc::value_type *p)
+  {
+    alloc.deallocate_one(p);
+  }
+};
+
 /*
 template <typename T>
 struct pool_deleter 
@@ -31,21 +46,6 @@ struct pool_deleter
   void operator()(T *p)
   {
     pool.destroy(p);
-  }
-};
-
-template <typename Alloc>
-struct node_deleter 
-{
-  Alloc& alloc;
-  node_deleter(Alloc& a) : alloc(a) { }
-  node_deleter(const node_deleter& rhs) 
-    : alloc(rhs.alloc)
-  { }
-    
-  void operator()(typename Alloc::value_type *p)
-  {
-    alloc.deallocate_one(p);
   }
 };
 
