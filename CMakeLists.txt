@@ -36,3 +36,4 @@ myexec(asio_client
 myexec(poolio src/poolio.cpp)
 
 myexec(rcc src/rcc.cpp)
+myexec(vec src/vec.cpp)

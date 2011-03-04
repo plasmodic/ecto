@@ -79,16 +79,26 @@ public:
 };
 
 template <typename T>
-struct shm_queue
+struct topic
 {
   managed_shared_memory shmem;
-
-  shm_queue(const std::string& name, unsigned size)
-    : shmem(create_only, name, size * sizeof(T));
+  std::string name;
+  topic(const std::string& name_, unsigned size)
+    : shmem(open_or_create, name_.c_str(), size * sizeof(T)),
+      name(name_)
+  { 
+    //    shmem.grow(name.c_str(), size * sizeof(T));
   }
 
-  T::ptr
-
+  typename T::ptr create()
+  {
+    T* raw_ptr = shmem.construct<T>(anonymous_instance)(shmem.get_segment_manager());
+    SHOW("raw_ptr=" << raw_ptr);
+    typename T::ptr ptr(raw_ptr);
+    SHOW("ptr=" << (ptr.get().get()));
+    return ptr;
+  };
+  
   
 };
 
@@ -97,10 +107,17 @@ int main()
   //Remove shared memory on construction and destruction
   struct shm_remove
   {
-    shm_remove() { shared_memory_object::remove("MySharedMemory"); }
-    ~shm_remove(){ shared_memory_object::remove("MySharedMemory"); }
+    shm_remove() { 
+      shared_memory_object::remove("MySharedMemory"); 
+      shared_memory_object::remove("points"); 
+    }
+    ~shm_remove(){ 
+      shared_memory_object::remove("MySharedMemory"); 
+      shared_memory_object::remove("points"); 
+    }
   } remover;
 
+#if 0
   //Create shared memory
   managed_shared_memory shmem(create_only, "MySharedMemory", 10000);
 
@@ -115,14 +132,22 @@ int main()
   if(ref_counted->use_count() != 10)
     return 1;
 
-  //Now destroy the array of intrusive pointer owners
-  //This should destroy every intrusive_ptr and because of
-  //that rc_base will be destroyed
+  //Now destroy the array of intrusive pointer owners This should
+  //destroy every intrusive_ptr and because of that rc_base will be
+  //destroyed
   shmem.destroy_ptr(intrusive_owner_array);
 
   //Now the reference counted object should have been destroyed
   if(shmem.find<intrusive_ptr_owner>("ref_counted").first)
     return 1;
   //Success!
+
+#endif
+  topic<N::Point> t("points", 100);
+
+  N::Point::ptr p1 = t.create();
+  N::Point::ptr p2 = t.create();
+  
+
   return 0;
 }
