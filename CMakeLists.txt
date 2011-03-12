@@ -2,7 +2,13 @@ cmake_minimum_required(VERSION 2.8)
 
 set(CMAKE_CXX_FLAGS -Wall)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+find_package(PythonLibs)
+
+
+include_directories(
+  ${CMAKE_CURRENT_SOURCE_DIR}/include
+  ${PYTHON_INCLUDE_PATH}
+  )
 
 macro(myexec NAME)
 
@@ -33,7 +39,27 @@ myexec(asio_client
   src/asio_client.cpp)
 
 
-myexec(poolio src/poolio.cpp)
+#myexec(poolio src/poolio.cpp)
 
-myexec(rcc src/rcc.cpp)
-myexec(vec src/vec.cpp)
+#myexec(rcc src/rcc.cpp)
+#myexec(vec src/vec.cpp)
+#myexec(doc_cont src/doc_cont.cpp)
+
+
+
+add_library(ecto-pybindings SHARED
+  src/name_of.cpp
+  src/bindings.cpp
+  )
+
+set_target_properties(ecto-pybindings
+  PROPERTIES
+  OUTPUT_NAME ecto
+  PREFIX ""
+  )
+
+target_link_libraries(ecto-pybindings
+  boost_python
+  ${PYTHON_LIBRARIES})
+
+  

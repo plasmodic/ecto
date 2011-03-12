@@ -33,6 +33,7 @@ struct node_deleter
   }
 };
 
+
 /*
 template <typename T>
 struct pool_deleter 
@@ -64,6 +65,7 @@ struct shmem_allocator
   }
 };
 */
+
 
 int main(int argc, char** argv)
 {

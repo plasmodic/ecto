@@ -4,28 +4,33 @@
 #include <string>
 #include <stdlib.h>
 
-std::string name_of(const std::type_info &ti)
-{
-  const static std::string typename_notavailable = "N/A";
+namespace ecto {
 
-  const char* mangled = ti.name();
+  std::string name_of(const std::type_info &ti)
+  {
+    const static std::string typename_notavailable = "N/A";
 
-  if (!mangled)
-    {
-      return typename_notavailable;
-    }
+    const char* mangled = ti.name();
 
-  int status;
+    if (!mangled)
+      {
+	return typename_notavailable;
+      }
 
-  char* demangled = abi::__cxa_demangle(mangled, 0, 0, &status);
+    int status;
 
-  std::string rv;
+    char* demangled = abi::__cxa_demangle(mangled, 0, 0, &status);
 
-  if (status != 0)
-    rv = mangled;
-  else
-    rv = demangled ? demangled : typename_notavailable; 
+    std::string rv;
+
+    if (status != 0)
+      rv = mangled;
+    else
+      rv = demangled ? demangled : typename_notavailable; 
       
-  free(demangled);
-  return rv;
+    free(demangled);
+    return rv;
+  }
+
 }
+
