@@ -5,6 +5,7 @@
 #include <boost/python/suite/indexing/map_indexing_suite.hpp>
 #include <ecto/name_of.hpp>
 #include <map>
+#include <set>
 
 #define SHOW() std::cout  << __PRETTY_FUNCTION__ << "\n";
 
@@ -74,9 +75,17 @@ namespace ecto {
 
   struct module : boost::noncopyable
   {
+    typedef boost::shared_ptr<module> ptr;
     typedef std::map<std::string, connection> connections_t;
     connections_t inputs, outputs;
 
+    std::set<boost::shared_ptr<module> > downstream;
+
+    void connect(const std::string& out_name, ptr to, const std::string& in_name)
+    {
+      downstream.insert(to);
+      to->inputs[in_name].connect(outputs[out_name]);
+    }
   };
 
 
@@ -90,12 +99,6 @@ namespace ecto {
       
 
 
-}
-
-std::string foo() 
-{
-  ecto::connection cf = ecto::connection::make<float>();
-  return cf.type_name();
 }
 
 namespace bp = boost::python;
@@ -162,8 +165,6 @@ BOOST_PYTHON_MODULE(ecto)
 {
   using namespace ecto;
 
-  bp::def("foo", &foo);
-
   bp::class_<connection>("Connection", bp::no_init)
     .def("type_name", &connection::type_name)
     .def("value", &connection::value)
@@ -177,6 +178,7 @@ BOOST_PYTHON_MODULE(ecto)
   bp::class_<module, boost::noncopyable>("Module")
     .def_readwrite("inputs", &module::inputs)
     .def_readwrite("outputs", &module::outputs)
+    .def("connect", &module::connect)
     ;
 
   wrap<OurModule>("OurModule");

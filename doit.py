@@ -24,7 +24,7 @@ g.Config(17, 3)
 m = ecto.Multiply();
 m.Config(2);
 
-m.inputs["in"].connect(g.outputs["out"])
+g.connect("out", m, "in")
 
 g.Process()
 print "gout:", g.outputs["out"].value()
