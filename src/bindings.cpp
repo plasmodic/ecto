@@ -179,7 +179,7 @@ namespace ecto {
         ss << PRINT_NAME((it->first)) << " -> {";
         for (edge::const_iterator dit = it->second.downstream.begin(), end = it->second.downstream.end(); dit != end; ++dit)
         {
-          ss << PRINT_NAME(*dit);
+          ss << PRINT_NAME(*dit) << " ";
         }
         ss << "};\n";
       }
