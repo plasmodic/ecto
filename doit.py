@@ -19,11 +19,28 @@ print o2, o2.type_name()
 
 
 g = ecto.Generate();
-
 g.Config(17, 3)
 
+m = ecto.Multiply();
+m.Config(2);
+
+m.inputs["in"].connect(g.outputs["out"])
+
 g.Process()
+print "gout:", g.outputs["out"].value()
+
+m.Process()
+print "gout:", g.outputs["out"].value()
+print "mout:", m.outputs["out"].value()
+
+g.Process()
+print "gout:", g.outputs["out"].value()
+
+m.Process()
+print "gout:", g.outputs["out"].value()
+print "mout:", m.outputs["out"].value()
 
 
-result = g.outputs["out"]
-print "result is:", result.value()
+
+
+

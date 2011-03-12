@@ -61,6 +61,12 @@ namespace ecto {
       return *(reinterpret_cast<T*>(impl_->get()));
     }
 
+    void connect(connection& rhs) 
+    {
+      impl_ = rhs.impl_;
+    }
+
+
   };
 
   connection::impl_base::~impl_base() { }
@@ -130,6 +136,27 @@ struct Generate : ecto::module
   }
 };
 
+struct Multiply : ecto::module
+{
+  int factor_;
+
+  void Config(int factor)
+  {
+    SHOW();
+    factor_ = factor;
+    inputs["in"] = ecto::connection::make<int>();
+    outputs["out"] = ecto::connection::make<int>();
+  }
+
+  void Process() 
+  {
+    SHOW();
+    const int& i = inputs["in"].get<int>();
+    int& o = outputs["out"].get<int>();
+    o = i * factor_;
+  }
+};
+
 
 BOOST_PYTHON_MODULE(ecto)
 {
@@ -140,6 +167,7 @@ BOOST_PYTHON_MODULE(ecto)
   bp::class_<connection>("Connection", bp::no_init)
     .def("type_name", &connection::type_name)
     .def("value", &connection::value)
+    .def("connect", &connection::connect)
     ;
 
   bp::class_<module::connections_t>("Connections")
@@ -153,6 +181,7 @@ BOOST_PYTHON_MODULE(ecto)
 
   wrap<OurModule>("OurModule");
   wrap<Generate>("Generate");
+  wrap<Multiply>("Multiply");
 }
 
 
