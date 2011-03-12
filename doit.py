@@ -27,6 +27,7 @@ m.Config(2);
 g.connect("out", m, "in")
 
 g.Process()
+
 print "gout:", g.outputs["out"].value()
 
 m.Process()
@@ -40,6 +41,26 @@ m.Process()
 print "gout:", g.outputs["out"].value()
 print "mout:", m.outputs["out"].value()
 
+print "#################\nPlasm test\n#################"
+plasm = ecto.Plasm()
+
+m2 = ecto.Multiply()
+m3 = ecto.Multiply()
+m2.Config(3)
+m3.Config(5)
+m.Config(5)
+g.Config(17, 3)
+plasm.markDirty(g)
+plasm.connect(g, "out", m, "in")
+plasm.connect(g, "out", m2, "in")
+plasm.connect(m2, "out", m3, "in")
+plasm.go(m)
+plasm.go(m3)
+print plasm.viz()
+print "gout:", g.outputs["out"].value()
+print "mout:", m.outputs["out"].value()
+print "m2out:", m2.outputs["out"].value()
+print "m3out:", m3.outputs["out"].value()
 
 
 
