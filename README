@@ -1,0 +1,36 @@
+ecto is ...
+
+  mkdir build
+  cd build
+  cmake ..
+  make
+
+The libs will be located in source under lib
+
+Assuming you're in this directory, try the following:
+
+  export PYTHONPATH=`pwd`/lib:`pwd`/python
+  python test/python/doit.py
+  python test/python/test_plasm.py
+  
+structure:
+  include #c++ include files
+  src #c++ library
+  src/ecto_py #ecto boost::python wrappers
+  python #ecto python library
+  test/modules #ecto c++ modules
+  test/python #python tests of ecto
+  
+libraries:
+  libecto.so #c++ library, clients must link against this and the 
+  _ecto.so #python bindings lib
+  buster.so #a sample client python exposed module
+
+to make a module use the macro in cmake:
+  #this takes care of linking against python and ecto
+  ectomodule(buster
+    test/modules/buster.cpp
+  )
+  target_link_libraries(buster_pymodule
+    ${MY_EXTRA_LIBS}
+  )
