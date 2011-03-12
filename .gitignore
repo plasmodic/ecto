@@ -1,2 +1,5 @@
 build/
 ._*
+lib
+bin
+*.pyc

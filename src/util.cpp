@@ -1,25 +1,38 @@
 #include <vector>
 #include <iostream>
+#include <ecto/util.hpp>
 
-#include <boost/random/mersenne_twister.hpp>
-#include <boost/crc.hpp>
+#include <cxxabi.h>
+#include <string>
+#include <stdlib.h>
 
-const std::vector<uint32_t>& gen_data(unsigned len)
+namespace ecto
 {
-  //std::cout << __PRETTY_FUNCTION__ << " " << len << "\n";
-  
-  static std::vector<uint32_t> v;
-  v.resize(len);
-  boost::mt19937 rng;
 
-  for (unsigned j = 0; j<len-1; ++j)
+  std::string name_of(const std::type_info &ti)
+  {
+    const static std::string typename_notavailable = "N/A";
+
+    const char* mangled = ti.name();
+
+    if (!mangled)
     {
-      v[j] = rng();
+      return typename_notavailable;
     }
 
-  boost::crc_32_type crc;
-  crc.process_block(v.data(), v.data() + v.size());
+    int status;
 
-  v[len-1] = crc.checksum();
-  return v;
+    char* demangled = abi::__cxa_demangle(mangled, 0, 0, &status);
+
+    std::string rv;
+
+    if (status != 0)
+      rv = mangled;
+    else
+      rv = demangled ? demangled : typename_notavailable;
+
+    free(demangled);
+    return rv;
+  }
 }
+

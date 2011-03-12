@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
 import ecto
+import buster
 
-
-m = ecto.OurModule()
+m = buster.OurModule()
 
 i = m.inputs['in']
 print i, i.type_name()
@@ -18,10 +18,10 @@ print o2, o2.type_name()
 
 
 
-g = ecto.Generate();
+g = buster.Generate();
 g.Config(17, 3)
 
-m = ecto.Multiply();
+m = buster.Multiply();
 m.Config(2);
 
 g.connect("out", m, "in")
@@ -43,9 +43,9 @@ print "mout:", m.outputs["out"].value()
 
 print "#################\nPlasm test\n#################"
 plasm = ecto.Plasm()
-m2 = ecto.Multiply()
-m3 = ecto.Multiply()
-m4 = ecto.Multiply()
+m2 = buster.Multiply()
+m3 = buster.Multiply()
+m4 = buster.Multiply()
 m4.Config(4)
 m2.Config(3)
 m3.Config(5)
