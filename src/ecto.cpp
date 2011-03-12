@@ -40,6 +40,8 @@ namespace ecto
 
   void connection::connect(connection& rhs)
   {
+    if(impl_->type_info() != rhs.impl_->type_info())
+      throw std::runtime_error("bad connect! input(" + impl_->type_name() + ") != output(" + rhs.type_name() +")");
     impl_ = rhs.impl_;
   }
 
@@ -59,6 +61,7 @@ namespace ecto
 
   void module::connect(const std::string& out_name, ptr to, const std::string& in_name)
   {
+
     to->inputs[in_name].connect(outputs[out_name]);
   }
 

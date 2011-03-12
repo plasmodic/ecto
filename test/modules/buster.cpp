@@ -52,6 +52,7 @@ struct Multiply : ecto::module
     SHOW();
     factor_ = factor;
     setIn<int> ("in", "multly in by factor");
+    setIn<float> ("fin", "float input");
     setOut<int> ("out", "the result of in * factor");
   }
 
