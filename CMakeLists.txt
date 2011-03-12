@@ -35,6 +35,7 @@ set_target_properties(${NAME}_pymodule
   PROPERTIES
   OUTPUT_NAME ${NAME}
   PREFIX ""
+#SUFFIX ".pyd"
   )
 
 target_link_libraries(${NAME}_pymodule
@@ -45,16 +46,17 @@ target_link_libraries(${NAME}_pymodule
 endmacro()
 
 add_library(ecto SHARED
-  src/ecto.cpp
+  src/connection.cpp
+  src/module.cpp
+  src/plasm.cpp
   src/util.cpp
 )
 
-target_link_libraries(ecto
-  ${Boost_LIBRARIES}
-)
-
-ectomodule(ecto
+ectomodule(_ecto
   src/ecto_py/ecto.cpp
+  src/ecto_py/plasm.cpp
+  src/ecto_py/connection.cpp
+  src/ecto_py/module.cpp
 )
 
 set(BUILD_TEST_MODULES ON CACHE BOOL "Build test modules")

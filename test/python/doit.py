@@ -1,17 +1,8 @@
 #!/usr/bin/env python
 
 import ecto
+from ecto.doc import printModuleDoc
 import buster
-
-def printModuleDoc(m):
-    print "inputs:"
-    for x in m.inputs :
-        print "\t",x.data().name(),"type=%s"%x.data().type_name()
-        print "\t\t", x.data().doc()
-    print "outputs:"
-    for x in m.outputs :
-        print "\t",x.data().name(),"type=%s"%x.data().type_name()
-        print "\t\t", x.data().doc()
 
 g = buster.Generate()
 g.Config(17, 3)
@@ -28,21 +19,27 @@ printModuleDoc(fan)
 idx = buster.Indexer()
 idx.Config(2)
 printModuleDoc(idx)
+print "scatter doc"
+fan = buster.Scatter()
+fan.Config(10,10)
+gather = buster.Gather()
+gather.Config(10)
+printModuleDoc(gather)
 
 g.connect("out", m, "in")
 
-g.Process()
+g.process()
 
 print "gout:", g.outputs["out"].value()
 
-m.Process()
+m.process()
 print "gout:", g.outputs["out"].value()
 print "mout:", m.outputs["out"].value()
 
-g.Process()
+g.process()
 print "gout:", g.outputs["out"].value()
 
-m.Process()
+m.process()
 print "gout:", g.outputs["out"].value()
 print "mout:", m.outputs["out"].value()
 
@@ -50,8 +47,6 @@ print "#################\nPlasm test\n#################"
 plasm = ecto.Plasm()
 m2 = buster.Multiply()
 m3 = buster.Multiply()
-m4 = buster.Multiply()
-m4.Config(4)
 m2.Config(3)
 m3.Config(5)
 m.Config(5)
@@ -61,22 +56,18 @@ try:
 except RuntimeError,e:
     print "caught a type mismatch"
     print e
-plasm.connect(g, "out", m2, "in")
-plasm.connect(m2, "out", m3, "in")
-plasm.connect(m2, "out", m4, "in")
-
-gather = buster.Gather()
-gather.Config(10)
-printModuleDoc(gather)
+plasm.connect(g, "out", m, "in")
+plasm.connect(m, "out", m2, "in")
+plasm.connect(m, "out", m3, "in")
 for x in range(0,10):
     idx = buster.Indexer()
     idx.Config(x)
     plasm.connect(fan,"out",idx,"in")
     plasm.connect(idx,"out",gather,"in_%04d"%x)
-    
+plasm.markDirty(fan)
 plasm.markDirty(g)
-plasm.go(m)
-plasm.go(m4)
+plasm.go(m3)
+plasm.go(m2)
 plasm.go(gather)
 print "digraph plasm {"
 print plasm.viz()

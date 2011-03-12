@@ -1,9 +1,17 @@
 #include <ecto/ecto.hpp>
-#include <ecto/util.hpp>
-#include <ecto/ecto_wrap.hpp>
+
 #include <iostream>
 #include <boost/format.hpp>
 #include <boost/foreach.hpp>
+
+//disable show in here
+#if 1
+#ifdef SHOW
+#undef SHOW
+#define SHOW() do{}while(false)
+#endif
+#endif
+
 struct OurModule : ecto::module
 {
   OurModule()
@@ -16,7 +24,7 @@ struct OurModule : ecto::module
   void Config()
   {
   }
-  void Process()
+  void process()
   {
   }
 
@@ -35,7 +43,7 @@ struct Generate : ecto::module
     setOut<float> ("out02", "What a blast", 0);
   }
 
-  void Process()
+  void process()
   {
     //SHOW();
     int& o = getOut<int> ("out");
@@ -57,7 +65,7 @@ struct Multiply : ecto::module
     setOut<int> ("out", "the result of in * factor");
   }
 
-  void Process()
+  void process()
   {
     //SHOW();
     const int& i = getIn<int> ("in");
@@ -82,8 +90,9 @@ struct Scatter : ecto::module
     x_ = x;
     setOut<std::vector<int> >("out",str(boost::format("A vector, length n=%d, value=%d")%n_ %x_));
   }
-  void Process()
+  void process()
   {
+    SHOW();
     std::vector<int>& out = getOut<std::vector<int> >("out");
     out = std::vector<int>(n_,x_);
   }
@@ -101,8 +110,9 @@ struct Gather : ecto::module
     }
     setOut<int> ("out", "The sum of all inputs.");
   }
-  void Process()
+  void process()
   {
+    SHOW();
     int& out = getOut<int>("out");
     out = 0;
     typedef std::pair<std::string,ecto::connection> pp;
@@ -122,8 +132,9 @@ struct Indexer : ecto::module
     setIn<std::vector<int> >("in", "the vector to index",std::vector<int>(n_));
     setOut<int >("out",str(boost::format("the output at in[%d]")%n_),0);
   }
-  void Process()
+  void process()
   {
+    SHOW();
     const std::vector<int>& in = getIn<std::vector<int> >("in");
     int & out = getOut<int>("out");
     if(in.size() > size_t( n_))
