@@ -27,7 +27,7 @@ struct Generate : ecto::module
 
   void Config(int start, int step)
   {
-    SHOW();
+    //SHOW();
     start_ = start;
     step_ = step;
     setOut<int> ("out", "output", 0);
@@ -49,7 +49,7 @@ struct Multiply : ecto::module
 
   void Config(int factor)
   {
-    SHOW();
+    //SHOW();
     factor_ = factor;
     setIn<int> ("in", "multly in by factor");
     setIn<float> ("fin", "float input");
@@ -58,7 +58,7 @@ struct Multiply : ecto::module
 
   void Process()
   {
-    SHOW();
+    //SHOW();
     const int& i = getIn<int> ("in");
     int& o = getOut<int> ("out");
     o = i * factor_;

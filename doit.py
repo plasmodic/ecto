@@ -3,29 +3,26 @@
 import ecto
 import buster
 
-m = buster.OurModule()
-
-i = m.inputs['in']
-print i, i.type_name()
-
-o1 = m.outputs['out1']
-print o1, o1.type_name()
-
-o2 = m.outputs['out2']
-print o2, o2.type_name()
-
-
-
-
+def printModuleDoc(m):
+    print "inputs:"
+    for x in m.inputs :
+        print "\t",x.data().name(),"type=%s"%x.data().type_name()
+        print "\t\t", x.data().doc()
+    print "outputs:"
+    for x in m.outputs :
+        print "\t",x.data().name(),"type=%s"%x.data().type_name()
+        print "\t\t", x.data().doc()
 
 g = buster.Generate();
 g.Config(17, 3)
+printModuleDoc(g)
 
 m = buster.Multiply();
 m.Config(2);
+printModuleDoc(m)
+
 
 g.connect("out", m, "in")
-
 g.Process()
 
 print "gout:", g.outputs["out"].value()
@@ -51,7 +48,11 @@ m2.Config(3)
 m3.Config(5)
 m.Config(5)
 g.Config(17, 3)
-plasm.connect(g, "out", m, "fin")
+try:
+    plasm.connect(g, "out", m, "fin")
+except RuntimeError,e:
+    print "caught a type mismatch"
+    print e
 plasm.connect(g, "out", m2, "in")
 plasm.connect(m2, "out", m3, "in")
 plasm.connect(m2, "out", m4, "in")
