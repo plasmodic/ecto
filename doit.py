@@ -13,16 +13,24 @@ def printModuleDoc(m):
         print "\t",x.data().name(),"type=%s"%x.data().type_name()
         print "\t\t", x.data().doc()
 
-g = buster.Generate();
+g = buster.Generate()
 g.Config(17, 3)
 printModuleDoc(g)
 
-m = buster.Multiply();
-m.Config(2);
+m = buster.Multiply()
+m.Config(2)
 printModuleDoc(m)
 
+fan = buster.Scatter()
+fan.Config(10,10)
+printModuleDoc(fan)
+
+idx = buster.Indexer()
+idx.Config(2)
+printModuleDoc(idx)
 
 g.connect("out", m, "in")
+
 g.Process()
 
 print "gout:", g.outputs["out"].value()
@@ -56,14 +64,29 @@ except RuntimeError,e:
 plasm.connect(g, "out", m2, "in")
 plasm.connect(m2, "out", m3, "in")
 plasm.connect(m2, "out", m4, "in")
+
+gather = buster.Gather()
+gather.Config(10)
+printModuleDoc(gather)
+for x in range(0,10):
+    idx = buster.Indexer()
+    idx.Config(x)
+    plasm.connect(fan,"out",idx,"in")
+    plasm.connect(idx,"out",gather,"in_%04d"%x)
+    
 plasm.markDirty(g)
 plasm.go(m)
 plasm.go(m4)
+plasm.go(gather)
+print "digraph plasm {"
 print plasm.viz()
+print "}"
 print "gout:", g.outputs["out"].value()
 print "mout:", m.outputs["out"].value()
 print "m2out:", m2.outputs["out"].value()
 print "m3out:", m3.outputs["out"].value()
+print "scatter out:", fan.outputs["out"].value()
+print "gather out:", gather.outputs["out"].value()
 
 
 

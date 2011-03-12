@@ -71,10 +71,19 @@ const std::type_info & connection::impl<T>::type_info() const
 template<typename T>
 void* connection::impl<T>::get() { return &t; }
 
-template<typename T>
+
+//template<typename T>
+//std::ostream& operator<<(std::ostream& out, const T& t)
+//{
+//  return out;
+//}
+
+                         template<typename T>
 std::string connection::impl<T>::value() const
 {
-  return boost::lexical_cast<std::string>(t);
+  std::stringstream ss;
+  ss << t;
+  return ss.str();//boost::lexical_cast<std::string>(t);
 }
 
 template<typename T>

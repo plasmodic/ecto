@@ -2,7 +2,8 @@
 #include <ecto/util.hpp>
 #include <ecto/ecto_wrap.hpp>
 #include <iostream>
-
+#include <boost/format.hpp>
+#include <boost/foreach.hpp>
 struct OurModule : ecto::module
 {
   OurModule()
@@ -65,9 +66,79 @@ struct Multiply : ecto::module
   }
 };
 
+std::ostream& operator<<(std::ostream& out, const std::vector<int>& t)
+{
+  out << "[";
+  BOOST_FOREACH(int x, t)
+      out << x <<" ";
+  return out<<"]";
+}
+
+struct Scatter : ecto::module
+{
+  void Config(int x, int n)
+  {
+    n_ = n;
+    x_ = x;
+    setOut<std::vector<int> >("out",str(boost::format("A vector, length n=%d, value=%d")%n_ %x_));
+  }
+  void Process()
+  {
+    std::vector<int>& out = getOut<std::vector<int> >("out");
+    out = std::vector<int>(n_,x_);
+  }
+  int n_,x_;
+};
+
+struct Gather : ecto::module
+{
+  void Config(int n)
+  {
+    n_ = n;
+    for(int i = 0; i < n_; i++)
+    {
+      setIn<int >(str(boost::format("in_%04d")%i),"An integer input.");
+    }
+    setOut<int> ("out", "The sum of all inputs.");
+  }
+  void Process()
+  {
+    int& out = getOut<int>("out");
+    out = 0;
+    typedef std::pair<std::string,ecto::connection> pp;
+    BOOST_FOREACH(const pp& in,inputs)
+    {
+      out += in.second.get<int>();
+    }
+  }
+  int n_;
+};
+
+struct Indexer : ecto::module
+{
+  void Config(int n)
+  {
+    n_ = n;
+    setIn<std::vector<int> >("in", "the vector to index",std::vector<int>(n_));
+    setOut<int >("out",str(boost::format("the output at in[%d]")%n_),0);
+  }
+  void Process()
+  {
+    const std::vector<int>& in = getIn<std::vector<int> >("in");
+    int & out = getOut<int>("out");
+    if(in.size() > size_t( n_))
+    out = in[n_];
+    else
+      std::cerr << "wrong size! idx= " << n_ << " length of vector " << in.size() << std::endl;
+  }
+  int n_;
+};
 ECTO_MODULE(buster)
 {
   ecto::wrap<OurModule>("OurModule");
   ecto::wrap<Generate>("Generate");
   ecto::wrap<Multiply>("Multiply");
+  ecto::wrap<Scatter>("Scatter");
+  ecto::wrap<Indexer>("Indexer");
+  ecto::wrap<Gather>("Gather");
 }
