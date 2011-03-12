@@ -53,7 +53,11 @@ namespace ecto {
     }
 
     std::string type_name() { return impl_->type_name(); }
-    std::string value() { return impl_->value(); }
+    std::string value() 
+    { 
+      // fixme: smartness
+      return impl_->value(); 
+    }
 
     template <typename T>
     T& get() 
@@ -67,7 +71,10 @@ namespace ecto {
       impl_ = rhs.impl_;
     }
 
+    bool dirty_;
 
+    bool dirty(bool b) { dirty_ = b; return dirty_; }
+    bool dirty() { return dirty_; }
   };
 
   connection::impl_base::~impl_base() { }
@@ -79,13 +86,33 @@ namespace ecto {
     typedef std::map<std::string, connection> connections_t;
     connections_t inputs, outputs;
 
-    std::set<boost::shared_ptr<module> > downstream;
+    std::set<ptr> downstream;
+    std::set<module*> upstream;
 
     void connect(const std::string& out_name, ptr to, const std::string& in_name)
     {
       downstream.insert(to);
+      to->upstream.insert(this);
       to->inputs[in_name].connect(outputs[out_name]);
     }
+
+    void dirty() 
+    {
+      for(connections_t::iterator it = outputs.begin(), end = outputs.end();
+	  it != end; 
+	  ++it)
+	{
+	  it->second.dirty(true);
+	}
+      for (std::set<ptr>::iterator it = downstream.begin(), end = downstream.end();
+	   it != end;
+	   ++it)
+	{
+	  (*it)->dirty();
+	}
+    }
+    
+
   };
 
 
