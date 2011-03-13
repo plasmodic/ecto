@@ -14,6 +14,9 @@ printModuleDoc(imshow)
 sobelShower = im.ImageShower()
 sobelShower.Config("sobel",1,True)
 
+grayShower = im.ImageShower()
+grayShower.Config("gray",1,True)
+
 sobelX = im.Sobel()
 sobelX.Config(1,0)
 sobelY = im.Sobel()
@@ -32,6 +35,7 @@ plasm.connect(video, "out", imshow, "in")
 plasm.connect(video, "out", rgb2gray , "in")
 plasm.connect(rgb2gray, "out", sobelX, "in")
 plasm.connect(rgb2gray, "out", sobelY, "in")
+plasm.connect(rgb2gray, "out", grayShower,"in")
 plasm.connect(sobelX, "out", abs1, "in")
 plasm.connect(sobelY, "out", abs2, "in")
 plasm.connect(abs1, "out", adder , "a")
@@ -42,8 +46,10 @@ graphviz(plasm)
 
 while(imshow.outputs["out"].value() != '27'):
     plasm.markDirty(video)
-    plasm.go(imshow)
+    # TODO just call go on the whole plasm, to trigger all leaves being called. 
     plasm.go(sobelShower)
+    plasm.go(grayShower)
+    plasm.go(imshow)
 
 
 
