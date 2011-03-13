@@ -12,3 +12,8 @@ def printModuleDoc(m):
     for x in m.outputs :
         print "\t",x.data().name(),"type=%s"%x.data().type_name()
         print "\t\t", x.data().doc()
+
+def graphviz(plasm):
+    print "digraph plasm {"
+    print plasm.viz()
+    print "}"

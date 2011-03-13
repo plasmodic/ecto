@@ -44,6 +44,11 @@ target_link_libraries(${NAME}_pymodule
   ecto
 )
 endmacro()
+macro(link_ecto NAME)
+target_link_libraries(${NAME}_pymodule
+ ${ARGN}
+)
+endmacro()
 
 add_library(ecto SHARED
   src/connection.cpp
@@ -65,6 +70,17 @@ if(BUILD_TEST_MODULES)
   ectomodule(buster
     test/modules/buster.cpp
   )
+  
+find_package(OpenCV)
+if(OpenCV_FOUND)
+	ectomodule( imageproc 
+		test/modules/imageproc.cpp
+	)
+	link_ecto(imageproc
+		${OpenCV_LIBS})
+	
+endif(OpenCV_FOUND)
+
 endif()
 
   
