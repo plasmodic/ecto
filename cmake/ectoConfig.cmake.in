@@ -1,0 +1,63 @@
+# ==============================================================================
+#  The ecto CMake configuration file
+#
+#             ** File generated automatically, do not modify **
+#
+#  Usage from an external project:
+#    In your CMakeLists.txt, add these lines:
+#
+#    find_package(ecto REQUIRED)
+#    ectomodule(mymodule src/module.cpp)
+#    ecto_link(mymodule ${MY_LIB_DEPS})
+#
+#    This file will define the following variables:
+#      - ecto_LIBRARIES                 : The list of libraries to link against.
+#      - ecto_INCLUDE_DIRS              : The ecto include directories
+# ==============================================================================
+find_package(Boost COMPONENTS
+ python
+ REQUIRED
+)
+
+find_package(PythonLibs REQUIRED)
+
+macro(ectomodule NAME)
+add_library(${NAME}_ectomodule SHARED
+  ${ARGN}
+  )
+
+set_target_properties(${NAME}_ectomodule
+  PROPERTIES
+  OUTPUT_NAME ${NAME}
+  PREFIX ""
+  )
+
+target_link_libraries(${NAME}_ectomodule
+  ${Boost_LIBRARIES}
+  ${PYTHON_LIBRARIES}
+  ecto
+)
+message(STATUS "To use your module, modify your PYTHONPATH
+####### PYTHON PATH SETUP #############
+ecto_path=@LIBRARY_OUTPUT_PATH@:@CMAKE_SOURCE_DIR@/python
+${NAME}_path=${CMAKE_BINARY_DIR}
+export PYTHONPATH=$PYTHONPATH:$ecto_path:$${NAME}_path
+####### PYTHON PATH SETUP #############")
+message(STATUS "In a python script:
+#!/bin/python
+import ecto;import ${NAME};
+...")
+endmacro()
+macro(link_ecto NAME)
+target_link_libraries(${NAME}_ectomodule
+ ${ARGN}
+)
+endmacro()
+
+set(ecto_INCLUDE_DIRS @ecto_INCLUDE_DIRS@)
+set(ecto_LIBRARIES @ecto_LIBRARIES@)
+INCLUDE_DIRECTORIES(${ecto_INCLUDE_DIRS} 
+  ${PYTHON_INCLUDE_PATH}
+  ${Boost_INCLUDE_DIRS}
+)
+link_directories(@ecto_LIBRARIES_DIR@)
