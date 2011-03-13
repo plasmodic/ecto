@@ -2,6 +2,11 @@ ecto doc
 ================================
 ecto is...
 
+Contents:
+
+.. toctree::
+   :maxdepth: 2
+
 Building
 ==================
 Using a standard cmake build system:
