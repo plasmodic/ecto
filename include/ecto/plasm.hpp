@@ -14,13 +14,13 @@ namespace ecto
   namespace plasm_ops
   {
     template<typename T>
-      struct oless
+    struct oless
+    {
+      bool operator()(const T& lhs, const T& rhs)
       {
-        bool operator()(const T& lhs, const T& rhs)
-        {
-          return lhs.get() < rhs.get();
-        }
-      };
+	return lhs.get() < rhs.get();
+      }
+    };
     typedef oless<boost::shared_ptr<module> > lessMPtr;
   }
 

@@ -22,17 +22,20 @@ namespace ecto {
     bool dirty() const;
 
     template<typename T>
-    connection& setOut(const std::string& name,
-                          const std::string& doc = "",
-                          const T& t = T());
+    connection& 
+    setOut(const std::string& name, const std::string& doc = "", const T& t = T());
+
     template<typename T>
-    connection& setIn(const std::string& name,
-                          const std::string& doc = "",
-                          const T& t = T());
-    template<typename T>
-    T& getOut(const std::string& name);
-    template<typename T>
-    const T& getIn(const std::string& name);
+    connection& 
+    setIn(const std::string& name, const std::string& doc = "", const T& t = T());
+
+    template <typename T>
+    T& 
+    getOut(const std::string& name);
+    
+    template <typename T>
+    const T& 
+    getIn(const std::string& name);
 
     connections_t inputs, outputs;
   private:

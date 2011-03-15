@@ -5,7 +5,7 @@
 
 namespace bp = boost::python;
 
-BOOST_PYTHON_MODULE(_ecto)
+BOOST_PYTHON_MODULE(ecto)
 {
   //wrap all modules
   ecto::py::wrapConnection();
