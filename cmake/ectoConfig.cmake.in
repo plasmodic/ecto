@@ -37,16 +37,7 @@ target_link_libraries(${NAME}_ectomodule
   ${PYTHON_LIBRARIES}
   ecto
 )
-message(STATUS "To use your module, modify your PYTHONPATH
-####### PYTHON PATH SETUP #############
-ecto_path=@LIBRARY_OUTPUT_PATH@:@CMAKE_SOURCE_DIR@/python
-${NAME}_path=${CMAKE_BINARY_DIR}
-export PYTHONPATH=$PYTHONPATH:$ecto_path:$${NAME}_path
-####### PYTHON PATH SETUP #############")
-message(STATUS "In a python script:
-#!/bin/python
-import ecto;import ${NAME};
-...")
+
 endmacro()
 macro(link_ecto NAME)
 target_link_libraries(${NAME}_ectomodule

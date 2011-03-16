@@ -79,38 +79,28 @@ set(ecto_LIBRARIES_DIR ${LIBRARY_OUTPUT_PATH})
 configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoConfig.cmake.in 
   ${CMAKE_BINARY_DIR}/ectoConfig.cmake @ONLY)
 
-message(STATUS "To use ecto in your own packages use"
-  "find_library(ecto REQUIRED)"
-  "and point cmake to the file: "
-  "${CMAKE_BINARY_DIR}/ectoConfig.cmake")
-
 set(BUILD_TEST_MODULES ON CACHE BOOL "Build test modules")
 
 if(BUILD_TEST_MODULES)
   ectomodule(buster
     test/modules/buster.cpp
     )
-  
-  #
-  # To use ROS diamondback OpenCV:
-  # This is currently broken, since the installed OpenCVConfig.cmake is
-  # broken.  Don't use.
-  #
-  #set(OpenCV_DIR 
-  #  /opt/ros/diamondback/stacks/vision_opencv/opencv2/opencv/share/opencv)
-
-  #find_package(OpenCV)
+  #use the cmake cache, to -DOpenCV_dir=<path_to_build_of_opencv>
+  #  svn co https://code.ros.org/svn/opencv/trunk
+  #or the release https://code.ros.org/svn/opencv/branches/2.2/opencv
+  #and cmake that baby
+  find_package(OpenCV)
 
   if(OpenCV_FOUND)
-    message("===${OpenCV_INCLUDE_DIRS}")
-    include_directories(${OpenCV_INCLUDE_DIRS})
+    #message("===${OpenCV_INCLUDE_DIRS}")
+    #include_directories(${OpenCV_INCLUDE_DIRS})
     ectomodule( imageproc 
       test/modules/imageproc.cpp
       )
     link_ecto(imageproc
       ${OpenCV_LIBS})
-    
   endif(OpenCV_FOUND)
+  add_subdirectory(samples)
 
 endif()
 

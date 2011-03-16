@@ -6,6 +6,7 @@
 #include <boost/format.hpp>
 #include <cmath>
 #include "FASTHarris.h"
+
 template<typename T>
   std::ostream& operator<<(std::ostream& out, const std::vector<T>& t)
   {
@@ -32,8 +33,8 @@ struct Pyramid : ecto::module
   {
     for (int i = 0; i < levels_; i++)
     {
-      setOut<cv::Mat> (str(boost::format("out_%04d") % i));
-      setOut<float> (str(boost::format("scale_%04d") % i));
+      setOut<cv::Mat> (str(boost::format("out:%d") % i));
+      setOut<float> (str(boost::format("scale:%d") % i));
     }
     setIn<cv::Mat> ("in");
   }
@@ -42,6 +43,7 @@ struct Pyramid : ecto::module
     levels_ = levels;
     scale_factor_ = scale_factor;
     magnification_ = magnification;
+    inout();
   }
   void process()
   {
@@ -52,8 +54,8 @@ struct Pyramid : ecto::module
     //scales.resize(levels_);
     for (int i = 0; i < levels_; i++)
     {
-      cv::Mat& out = getOut<cv::Mat> (str(boost::format("out_%04d") % i));
-      float & scale = getOut<float> (str(boost::format("scale_%04d") % i));
+      cv::Mat& out = getOut<cv::Mat> (str(boost::format("out:%d") % i));
+      float & scale = getOut<float> (str(boost::format("scale:%d") % i));
       scale = 1.0f / float(std::pow(scale_factor_, i - magnification_));
       //use liner interp if magnifying, area based if decimating
       cv::resize(in, out, cv::Size(), scale, scale, i - magnification_ < 0 ? CV_INTER_LINEAR : CV_INTER_AREA);
@@ -118,9 +120,32 @@ struct Harris : ecto::module
 
   int thresh_;
 };
+
+struct DrawKeypoints : ecto::module
+{
+  DrawKeypoints()
+  {
+    Config();
+  }
+
+  void Config()
+  {
+    setIn<cv::Mat> ("image", "The input image, to draw over.");
+    setOut<cv::Mat> ("image" , "The output image.");
+    setIn<std::vector<cv::KeyPoint> > ("kpts", "The keypoints to draw.");
+  }
+  void process()
+  {
+    const cv::Mat& image = getIn<cv::Mat> ("image");
+    const std::vector<cv::KeyPoint>& kpts_in = getIn<std::vector<cv::KeyPoint> > ("kpts");
+    cv::Mat& out_image = getOut<cv::Mat>("image");
+    cv::drawKeypoints(image,kpts_in,out_image);
+  }
+};
 ECTO_MODULE(orb)
 {
   ecto::wrap<Pyramid>("Pyramid");
   ecto::wrap<FAST>("FAST");
   ecto::wrap<Harris>("Harris");
+  ecto::wrap<DrawKeypoints>("DrawKeypoints");
 }

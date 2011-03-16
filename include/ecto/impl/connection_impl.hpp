@@ -36,7 +36,10 @@ do \
 template<typename T>
 bool connection::impl_base::check(connection::impl_base& i)
 {
-  return typeid(T) == i.type_info();
+  //this fails across multiple modules!
+  //return typeid(T) == i.type_info();
+  //however type name should be ok?
+  return name_of<T>() == i.type_name();
 }
 
 template<typename T>
