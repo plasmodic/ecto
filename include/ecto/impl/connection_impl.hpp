@@ -1,16 +1,16 @@
 template <typename T>
 const T& connection::get() const
 {
-  //SHOW();
-  // fixme: typecheck
+  if(!impl_)
+    throw std::logic_error("This connection is uninitialized! type: " + name_of<T>());
   return *impl_base::get<T>(*impl_);
 }
 
 template <typename T>
 T& connection::get()
 {
-  // fixme: typecheck
-  //SHOW();
+  if(!impl_)
+    throw std::logic_error("This connection is uninitialized! type: " + name_of<T>());
   return *(impl_base::get<T>(*impl_));
 }
 
@@ -23,6 +23,7 @@ connection connection::make(const T& t,const std::string& name, const std::strin
   c.impl_->doc = doc;
   return c;
 }
+
 #if NDEBUG
 #define ECTO_ASSERT(_impl_check_ ) \
 do {} while(false)
@@ -39,7 +40,7 @@ bool connection::impl_base::check(connection::impl_base& i)
   //this fails across multiple modules!
   //return typeid(T) == i.type_info();
   //however type name should be ok?
-  return name_of<T>() == i.type_name();
+  return std::strcmp(typeid(T).name(),i.type_info().name()) == 0;
 }
 
 template<typename T>
