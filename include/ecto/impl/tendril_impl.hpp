@@ -90,15 +90,27 @@ template<typename T>
 template<typename T>
 boost::python::object tendril::impl<T>::getPython() const
 {
-//  boost::python::class_<T> c( "T", boost::python::init<>() );
-//  boost::python::object o = c();
   return boost::python::object(t);
 
+#if 0
+  try {
+    boost::python::object o(t);
+    return o;
+  }
+  // if you want to play with the errors, do so like this
+  catch (const boost::python::error_already_set& e) {
+    std::cout << "I CAUGHT IT I CAUGHT IT\n";
+    PyErr_Print();
+  }
+  return boost::python::object();
+#endif
 }
+
 template<typename T>
   std::string tendril::impl<T>::value() const
   {
-    std::stringstream ss;
-    ss << t;
-    return ss.str();//boost::lexical_cast<std::string>(t);
+    //std::stringstream ss;
+    //ss << t;
+    //    return ss.str();//boost::lexical_cast<std::string>(t);
+    return "";
   }

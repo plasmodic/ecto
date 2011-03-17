@@ -23,6 +23,7 @@ namespace ecto {
       .def("Config", &T::Config)
       .def("Params", &T::Params)
       .staticmethod("Params")
+
       ;
   }
 }

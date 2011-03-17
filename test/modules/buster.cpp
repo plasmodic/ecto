@@ -52,20 +52,21 @@ struct Generate : ecto::module
   }
 };
 
+
 struct Multiply : ecto::module
 {
-  int factor_;
+  float factor_;
 
   static void Params(connections_t& c)
   {
-    c["factor"] = ecto::tendril::make<int>(13, "factor", "multiply by...");
+    c["factor"] = ecto::tendril::make<float>(13, "factor", "multiply by...");
   }
 
   void Config()
   {
     //SHOW();
-    factor_ = getParam<int>("factor");
-    setIn<int> ("in", "multly in by factor");
+    factor_ = getParam<float>("factor");
+    setIn<float> ("in", "multly in by factor");
     setIn<float> ("fin", "float input");
     setOut<float> ("out", "the result of in * factor");
   }
@@ -73,8 +74,8 @@ struct Multiply : ecto::module
   void Process()
   {
     //SHOW();
-    const int& i = getIn<int> ("in");
-    int& o = getOut<int> ("out");
+    const float& i = getIn<float> ("in");
+    float& o = getOut<float> ("out");
     o = i * factor_;
   }
 };

@@ -10,10 +10,15 @@ namespace ecto
   module::~module()
   {
   }
-  void module::Process()
-  {
-    //SHOW();
-  }
+  void module::Process() 
+  { 
+    throw std::logic_error("Process not implemented"); 
+  } // noop default
+  
+  void module::Config() 
+  { 
+    throw std::logic_error("Process not implemented"); 
+  } // noop default
 
   void module::connect(const std::string& out_name, ptr to, const std::string& in_name)
   {

@@ -6,6 +6,7 @@ tendril& module::setOut(const std::string& name,
   outputs[name] = ecto::tendril::make<T>(t,name,doc);
   return outputs[name];
 }
+
 template<typename T>
 tendril& 
 module::setIn(const std::string& name,

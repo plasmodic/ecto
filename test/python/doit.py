@@ -9,10 +9,13 @@ g.Config(17, 3)
 printModuleDoc(g)
 
 m = buster.Multiply()
+printModuleDoc(m)
 m.Params(m.params)
 printModuleDoc(m)
+m.params['factor'].set(15)
+printModuleDoc(m)
 
-m.Config(2)
+m.Config()
 printModuleDoc(m)
 
 fan = buster.Scatter()

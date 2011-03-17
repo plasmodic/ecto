@@ -16,6 +16,7 @@ namespace ecto
     module();
     virtual ~module();
     virtual void Process();
+    virtual void Config();
 
     void connect(const std::string& output, ptr to, const std::string& input);
     void dirty(bool hmm);
