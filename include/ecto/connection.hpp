@@ -33,6 +33,11 @@ namespace ecto
       inline bool dirty(bool b) { dirty_ = b; return dirty_; }
       inline bool dirty() const { return dirty_; }
 
+      bool operator<(const connection& rhs) const
+      {
+	return name() < rhs.name();
+      }
+
     private:
   // ############################### NVI ####################################
       struct impl_base

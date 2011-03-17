@@ -15,8 +15,15 @@ namespace ecto {
   template <typename T>
   void wrap(const char* name)
   {
-    boost::python::class_<T, boost::python::bases<module>, boost::shared_ptr<T>, boost::noncopyable> thing(name);
-    thing.def("Config", &T::Config);
+    boost::python::class_<T, boost::python::bases<module>, 
+      boost::shared_ptr<T>, boost::noncopyable> thing(name);
+
+    thing
+      .def("process", &T::process)
+      .def("config", &T::config)
+      .def("params", &T::params)
+      .staticmethod("params")
+      ;
   }
 }
 

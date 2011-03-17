@@ -7,8 +7,8 @@
 
 #include <map>
 
-namespace ecto {
-
+namespace ecto 
+{
   struct module : boost::noncopyable
   {
     typedef boost::shared_ptr<module> ptr;
@@ -29,6 +29,10 @@ namespace ecto {
     connection& 
     setIn(const std::string& name, const std::string& doc = "", const T& t = T());
 
+    template<typename T>
+    connection& 
+    setParam(const std::string& name, const std::string& doc = "", const T& t = T());
+
     template <typename T>
     T& 
     getOut(const std::string& name);
@@ -37,7 +41,12 @@ namespace ecto {
     const T& 
     getIn(const std::string& name);
 
-    connections_t inputs, outputs;
+    template <typename T>
+    const T& 
+    getParam(const std::string& name);
+
+    connections_t inputs, outputs, params;
+
   private:
     bool dirty_;
     friend class plasm;

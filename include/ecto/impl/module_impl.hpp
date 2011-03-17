@@ -16,6 +16,15 @@ connection& module::setIn(const std::string& name,
 }
 
 template<typename T>
+connection& module::setParam(const std::string& name,
+			     const std::string& doc,
+			     const T& t)
+{
+  params[name] = ecto::connection::make<T>(t,name,doc);
+  return params[name];
+}
+
+template<typename T>
 T& module::getOut(const std::string& name)
 {
   //FIXME check for null, throw
@@ -26,4 +35,11 @@ const T& module::getIn(const std::string& name)
 {
   //FIXME check for null, throw
   return inputs[name].get<T>();
+}
+
+template<typename T>
+const T& module::getParam(const std::string& name)
+{
+  //FIXME check for null, throw
+  return params[name].get<T>();
 }

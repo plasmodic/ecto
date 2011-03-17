@@ -8,7 +8,9 @@ struct Generate : ecto::module
 {
   int step_;
 
-  void Config(int start, int step)
+  static void params(connections_t& p) { }
+
+  void config(int start, int step)
   {
     step_ = step;
     setOut<int> ("out", "output", start);
@@ -24,7 +26,9 @@ struct Multiply : ecto::module
 {
   int factor_;
 
-  void Config(int factor)
+  static void params(connections_t& p) { }
+
+  void config(int factor)
   {
     factor_ = factor;
     setIn<int> ("in", "multly in by factor");
@@ -46,7 +50,9 @@ std::ostream& operator<<(std::ostream& out, const std::vector<int>& t)
 
 struct Scatter : ecto::module
 {
-  void Config(int x, int n)
+  static void params(connections_t& p) { }
+
+  void config(int x, int n)
   {
     n_ = n;
     x_ = x;
@@ -63,7 +69,9 @@ struct Scatter : ecto::module
 
 struct Gather : ecto::module
 {
-  void Config(int n)
+  static void params(connections_t& p) { }
+
+  void config(int n)
   {
     n_ = n;
     for(int i = 0; i < n_; i++)
@@ -88,7 +96,9 @@ struct Gather : ecto::module
 
 struct Indexer : ecto::module
 {
-  void Config(int n)
+  static void params(connections_t& p) { }
+
+  void config(int n)
   {
     n_ = n;
     setIn<std::vector<int> >("in", "the vector to index",std::vector<int>(n_));
@@ -106,6 +116,8 @@ struct Indexer : ecto::module
   }
   int n_;
 };
+
+
 ECTO_MODULE(sample)
 {
   ecto::wrap<Generate>("Generate");
