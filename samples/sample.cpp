@@ -77,7 +77,7 @@ struct Gather : ecto::module
     SHOW();
     int& out = getOut<int>("out");
     out = 0;
-    typedef std::pair<std::string,ecto::connection> pp;
+    typedef std::pair<std::string,ecto::tendril> pp;
     BOOST_FOREACH(const pp& in,inputs)
     {
       out += in.second.get<int>();

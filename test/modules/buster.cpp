@@ -16,9 +16,9 @@ struct OurModule : ecto::module
 {
   OurModule()
   {
-    inputs["in"] = ecto::connection::make<int>();
-    outputs["out1"] = ecto::connection::make<float>();
-    outputs["out2"] = ecto::connection::make<bool>();
+    inputs["in"] = ecto::tendril::make<int>();
+    outputs["out1"] = ecto::tendril::make<float>();
+    outputs["out2"] = ecto::tendril::make<bool>();
   }
 
   void Config()
@@ -115,7 +115,7 @@ struct Gather : ecto::module
     SHOW();
     int& out = getOut<int>("out");
     out = 0;
-    typedef std::pair<std::string,ecto::connection> pp;
+    typedef std::pair<std::string,ecto::tendril> pp;
     BOOST_FOREACH(const pp& in,inputs)
     {
       out += in.second.get<int>();

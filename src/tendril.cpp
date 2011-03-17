@@ -7,36 +7,36 @@ if(!(x).impl_) \
 }while(false)
 namespace ecto
 {
-  connection::connection() :
+  tendril::tendril() :
     dirty_(true)
   {
   }
-  connection::connection(impl_base::ptr impl) :
+  tendril::tendril(impl_base::ptr impl) :
     impl_(impl), dirty_(true)
   {
   }
-  std::string connection::type_name() const
+  std::string tendril::type_name() const
   {
     pre_check(*this);
     return impl_->type_name();
   }
-  std::string connection::value() const
+  std::string tendril::value() const
   {
     pre_check(*this);
     return impl_->value();
   }
-  std::string connection::name() const
+  std::string tendril::name() const
   {
     pre_check(*this);
     return impl_->name;
   }
-  std::string connection::doc() const
+  std::string tendril::doc() const
   {
     pre_check(*this);
     return impl_->doc;
   }
 
-  void connection::connect(connection& rhs)
+  void tendril::connect(tendril& rhs)
   {
     pre_check(*this);
     pre_check(rhs);
@@ -45,7 +45,7 @@ namespace ecto
     impl_ = rhs.impl_;
   }
 
-  connection::impl_base::~impl_base()
+  tendril::impl_base::~impl_base()
   {
   }
 }

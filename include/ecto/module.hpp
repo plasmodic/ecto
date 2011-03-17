@@ -12,7 +12,7 @@ namespace ecto {
   struct module : boost::noncopyable
   {
     typedef boost::shared_ptr<module> ptr;
-    typedef std::map<std::string, connection> connections_t;
+    typedef std::map<std::string, tendril> connections_t;
     module();
     virtual ~module();
     virtual void process();
@@ -22,11 +22,11 @@ namespace ecto {
     bool dirty() const;
 
     template<typename T>
-    connection& 
+    tendril& 
     setOut(const std::string& name, const std::string& doc = "", const T& t = T());
 
     template<typename T>
-    connection& 
+    tendril& 
     setIn(const std::string& name, const std::string& doc = "", const T& t = T());
 
     template <typename T>
