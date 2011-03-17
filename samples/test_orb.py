@@ -12,9 +12,10 @@ def hookUpORB(plasm, image,image_key, imshow):
   plasm.connect(image, image_key, FAST, "in")
   plasm.connect(FAST, "out", Harris, "kpts")
   plasm.connect(image, image_key, Harris, "image")
-  plasm.connect(FAST, "out", DrawKeypoints, "kpts")
+  plasm.connect(Harris, "out", DrawKeypoints, "kpts")
   plasm.connect(image, image_key, DrawKeypoints, "image")
   plasm.connect(DrawKeypoints, "image", imshow, "in")
+  #plasm.connect(image, image_key, imshow, "in")
   
 plasm = ecto.Plasm()
 
@@ -36,12 +37,16 @@ plasm.connect(video, "out", rgb2gray , "in")
 plasm.connect(rgb2gray, "out", pyramid, "in")
 
 imshows = []
-for i in range(0,n+2):
-  x = imageproc.ImageShower()
-  x.Config("pyr:%d"%i,1,True)
-  hookUpORB(plasm,pyramid, "out:%d"%i, x)
-  imshows.append(x)
-
+try:
+  for i in range(0,n+2):
+    x = imageproc.ImageShower()
+    x.Config("pyr:%d"%i,1,True)
+    hookUpORB(plasm,pyramid, "out:%d"%i, x)
+    imshows.append(x)
+except RuntimeError,e:
+  print "Good, caught exception..."
+  print e
+  
 graphviz(plasm)
 
 while(imshow.outputs["out"].value() != '27'):
