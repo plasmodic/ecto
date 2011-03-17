@@ -3,7 +3,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/noncopyable.hpp>
 
-#include <ecto/connection.hpp>
+#include <ecto/tendril.hpp>
 
 #include <map>
 
@@ -12,25 +12,25 @@ namespace ecto
   struct module : boost::noncopyable
   {
     typedef boost::shared_ptr<module> ptr;
-    typedef std::map<std::string, connection> connections_t;
+    typedef std::map<std::string, tendril> connections_t;
     module();
     virtual ~module();
-    virtual void process();
+    virtual void Process();
 
     void connect(const std::string& output, ptr to, const std::string& input);
     void dirty(bool hmm);
     bool dirty() const;
 
     template<typename T>
-    connection& 
+    tendril& 
     setOut(const std::string& name, const std::string& doc = "", const T& t = T());
 
     template<typename T>
-    connection& 
+    tendril& 
     setIn(const std::string& name, const std::string& doc = "", const T& t = T());
 
     template<typename T>
-    connection& 
+    tendril& 
     setParam(const std::string& name, const std::string& doc = "", const T& t = T());
 
     template <typename T>

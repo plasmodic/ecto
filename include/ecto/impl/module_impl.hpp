@@ -1,26 +1,28 @@
 template<typename T>
-connection& module::setOut(const std::string& name,
+tendril& module::setOut(const std::string& name,
                       const std::string& doc,
                       const T& t)
 {
-  outputs[name] = ecto::connection::make<T>(t,name,doc);
+  outputs[name] = ecto::tendril::make<T>(t,name,doc);
   return outputs[name];
 }
 template<typename T>
-connection& module::setIn(const std::string& name,
-                      const std::string& doc,
-                      const T& t)
+tendril& 
+module::setIn(const std::string& name,
+	      const std::string& doc,
+	      const T& t)
 {
-  inputs[name] = ecto::connection::make<T>(t,name,doc);
+  inputs[name] = ecto::tendril::make<T>(t,name,doc);
   return inputs[name];
 }
 
 template<typename T>
-connection& module::setParam(const std::string& name,
-			     const std::string& doc,
-			     const T& t)
+tendril& 
+module::setParam(const std::string& name,
+		 const std::string& doc,
+		 const T& t)
 {
-  params[name] = ecto::connection::make<T>(t,name,doc);
+  params[name] = ecto::tendril::make<T>(t,name,doc);
   return params[name];
 }
 

@@ -3,7 +3,7 @@
 
 //ecto includes
 #include <ecto/module.hpp>
-#include <ecto/connection.hpp>
+#include <ecto/tendril.hpp>
 #include <ecto/plasm.hpp>
 #include <ecto/util.hpp>
 
@@ -19,10 +19,10 @@ namespace ecto {
       boost::shared_ptr<T>, boost::noncopyable> thing(name);
 
     thing
-      .def("process", &T::process)
-      .def("config", &T::config)
-      .def("params", &T::params)
-      .staticmethod("params")
+      .def("Process", &T::Process)
+      .def("Config", &T::Config)
+      .def("Params", &T::Params)
+      .staticmethod("Params")
       ;
   }
 }

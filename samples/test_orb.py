@@ -5,47 +5,47 @@ import imageproc
 #import orb as imageproc
 import orb
 
+def hookUpORB(plasm, image,image_key, imshow):
+  FAST = orb.FAST()
+  Harris = orb.Harris()
+  DrawKeypoints = orb.DrawKeypoints()
+  plasm.connect(image, image_key, FAST, "in")
+  plasm.connect(FAST, "out", Harris, "kpts")
+  plasm.connect(image, image_key, Harris, "image")
+  plasm.connect(Harris, "out", DrawKeypoints, "kpts")
+  plasm.connect(image, image_key, DrawKeypoints, "image")
+  plasm.connect(DrawKeypoints, "image", imshow, "in")
+  #plasm.connect(image, image_key, imshow, "in")
+  
 plasm = ecto.Plasm()
 
+n=5
+s=1.3
+m=0
 pyramid = orb.Pyramid()
-pyramid.Config(3,1.2,0)
+pyramid.Config(n,s,m)
 printModuleDoc(pyramid)
 
-FAST = orb.FAST()
-printModuleDoc(FAST)
-
-Harris = orb.Harris()
-printModuleDoc(Harris)
-
-DrawKeypoints = orb.DrawKeypoints()
-printModuleDoc(DrawKeypoints)
+imshow = imageproc.ImageShower()
+rgb2gray = imageproc.Rgb2Gray()
 
 video = imageproc.VideoCapture()
 video.Config(0)
-printModuleDoc(video)
 
-imshow = imageproc.ImageShower()
-printModuleDoc(imshow)
-
-rgb2gray = imageproc.Rgb2Gray()
-printModuleDoc(rgb2gray)
-
+plasm.connect(video, "out", imshow , "in")
 plasm.connect(video, "out", rgb2gray , "in")
-plasm.connect(video, "out", DrawKeypoints, "image")
-plasm.connect(DrawKeypoints, "image", imshow, "in")
-plasm.connect(rgb2gray, "out", FAST, "in")
 plasm.connect(rgb2gray, "out", pyramid, "in")
-plasm.connect(FAST, "out", Harris, "kpts")
-plasm.connect(rgb2gray, "out", Harris, "image")
-plasm.connect(Harris, "out", DrawKeypoints, "kpts")
-plasm.connect(Harris, "out", DrawKeypoints, "kpts")
 
 imshows = []
-for i in range(0,3):
-  x = imageproc.ImageShower()
-  x.Config("pyr:%d"%i,1,True)
-  plasm.connect(pyramid, "out:%d"%i, x, "in")
-  imshows.append(x)
+try:
+  for i in range(0,n+2):
+    x = imageproc.ImageShower()
+    x.Config("pyr:%d"%i,1,True)
+    hookUpORB(plasm,pyramid, "out:%d"%i, x)
+    imshows.append(x)
+except RuntimeError,e:
+  print "Good, caught exception..."
+  print e
   
 graphviz(plasm)
 

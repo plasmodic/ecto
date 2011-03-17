@@ -10,7 +10,7 @@ namespace ecto
   module::~module()
   {
   }
-  void module::process()
+  void module::Process()
   {
     //SHOW();
   }

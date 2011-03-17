@@ -9,6 +9,9 @@ g.Config(17, 3)
 printModuleDoc(g)
 
 m = buster.Multiply()
+m.Params(m.params)
+printModuleDoc(m)
+
 m.Config(2)
 printModuleDoc(m)
 
@@ -47,7 +50,9 @@ print "#################\nPlasm test\n#################"
 plasm = ecto.Plasm()
 m2 = buster.Multiply()
 m3 = buster.Multiply()
+m2.Params(m2.params)
 m2.Config(3)
+m3.Params(m3.params)
 m3.Config(5)
 m.Config(5)
 g.Config(17, 3)

@@ -1,5 +1,5 @@
 #include <ecto/plasm.hpp>
-#include <ecto/connection.hpp>
+#include <ecto/tendril.hpp>
 #include <ecto/module.hpp>
 namespace ecto
 {
@@ -32,7 +32,7 @@ namespace ecto
     {
       go(it->second);
     }
-    m->process();
+    m->Process();
     m->dirty(false);
   }
 

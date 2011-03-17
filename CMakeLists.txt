@@ -54,16 +54,20 @@ macro(link_ecto NAME)
 endmacro()
 
 add_library(ecto SHARED
-  src/connection.cpp
+  src/tendril.cpp
   src/module.cpp
   src/plasm.cpp
   src/util.cpp
   )
+target_link_libraries(ecto
+	${Boost_LIBRARIES}
+    ${PYTHON_LIBRARIES}
+)    
 
 ectomodule(ecto
   src/ecto_py/ecto.cpp
   src/ecto_py/plasm.cpp
-  src/ecto_py/connection.cpp
+  src/ecto_py/tendril.cpp
   src/ecto_py/module.cpp
   )
 
