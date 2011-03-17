@@ -1,10 +1,5 @@
 #include <ecto/tendril.hpp>
 
-#define pre_check(x) \
-do{ \
-if(!(x).impl_) \
-    throw std::logic_error("This connection is uninitialized!"); \
-}while(false)
 namespace ecto
 {
 
@@ -13,7 +8,8 @@ namespace ecto
     return out << "none";
   }
   tendril::tendril() :
-    impl_(new impl<none>(none())), dirty_(true)
+      //impl_ is never not initialized
+    impl_(new impl<none> (none())), dirty_(true)
   {
   }
   tendril::tendril(impl_base::ptr impl) :
@@ -22,29 +18,24 @@ namespace ecto
   }
   std::string tendril::type_name() const
   {
-    pre_check(*this);
     return impl_->type_name();
   }
   std::string tendril::value() const
   {
-    pre_check(*this);
+
     return impl_->value();
   }
   std::string tendril::name() const
   {
-    pre_check(*this);
     return impl_->name;
   }
   std::string tendril::doc() const
   {
-    pre_check(*this);
     return impl_->doc;
   }
 
   void tendril::connect(tendril& rhs)
   {
-    pre_check(*this);
-    pre_check(rhs);
     if (impl_->type_name() != rhs.impl_->type_name())
       throw std::runtime_error("bad connect! input(" + impl_->type_name() + ") != output(" + rhs.type_name() + ")");
     impl_ = rhs.impl_;
@@ -52,5 +43,14 @@ namespace ecto
 
   tendril::impl_base::~impl_base()
   {
+  }
+
+  boost::python::object tendril::extractFromPython()
+  {
+    return impl_->getPython();
+  }
+  void tendril::setFromPython(boost::python::object o)
+  {
+    impl_->setPython(o);
   }
 }

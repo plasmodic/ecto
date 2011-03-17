@@ -26,22 +26,24 @@ gather = buster.Gather()
 gather.Config(10)
 printModuleDoc(gather)
 
+
+
 g.connect("out", m, "in")
 
 g.process()
 
-print "gout:", g.outputs["out"].value()
+print "gout:", g.outputs["out"].get()
 
 m.process()
-print "gout:", g.outputs["out"].value()
-print "mout:", m.outputs["out"].value()
+print "gout:", g.outputs["out"].get()
+print "mout:", m.outputs["out"].get()
 
 g.process()
-print "gout:", g.outputs["out"].value()
+print "gout:", g.outputs["out"].get()
 
 m.process()
-print "gout:", g.outputs["out"].value()
-print "mout:", m.outputs["out"].value()
+print "gout:", g.outputs["out"].get()
+print "mout:", m.outputs["out"].get()
 
 print "#################\nPlasm test\n#################"
 plasm = ecto.Plasm()
