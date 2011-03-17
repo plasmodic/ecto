@@ -7,8 +7,13 @@ if(!(x).impl_) \
 }while(false)
 namespace ecto
 {
+
+  std::ostream& operator<<(std::ostream&out, const tendril::none& rhs)
+  {
+    return out << "none";
+  }
   tendril::tendril() :
-    dirty_(true)
+    impl_(new impl<none>(none())), dirty_(true)
   {
   }
   tendril::tendril(impl_base::ptr impl) :
@@ -40,8 +45,8 @@ namespace ecto
   {
     pre_check(*this);
     pre_check(rhs);
-    if(impl_->type_name() != rhs.impl_->type_name())
-      throw std::runtime_error("bad connect! input(" + impl_->type_name() + ") != output(" + rhs.type_name() +")");
+    if (impl_->type_name() != rhs.impl_->type_name())
+      throw std::runtime_error("bad connect! input(" + impl_->type_name() + ") != output(" + rhs.type_name() + ")");
     impl_ = rhs.impl_;
   }
 

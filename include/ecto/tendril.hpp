@@ -1,6 +1,7 @@
 #pragma once
 #include <ecto/util.hpp> //name_of
 #include <boost/shared_ptr.hpp>
+#include <boost/python.hpp>
 
 #include <stdexcept>
 #include <string>
@@ -33,6 +34,9 @@ namespace ecto
     template<typename T>
       static tendril make(const T& t = T(), const std::string& name = std::string(),
                           const std::string& doc = std::string());
+
+    boost::python::object extractFromPython();
+    void setFromPython(boost::python::object o);
 
     /** \brief This is an unmangled type name for what ever tendril is holding.
      * @return the unmangled name, e.g. "cv::Mat", or "pcl::PointCloud<pcl::PointXYZ>"
@@ -68,6 +72,10 @@ namespace ecto
       return dirty_;
     }
 
+    struct none
+    {
+    };
+
   private:
     // ############################### NVI ####################################
     struct impl_base
@@ -78,7 +86,8 @@ namespace ecto
       virtual void* get() = 0;
       virtual std::string value() const = 0;
       virtual const std::type_info & type_info() const = 0;
-
+      virtual void setPython(boost::python::object o) = 0;
+      virtual boost::python::object getPython() const = 0;
       //convience functions for checking types
       template<typename T>
         static bool inline check(impl_base& i);
@@ -98,6 +107,8 @@ namespace ecto
         const std::type_info & type_info() const;
         void* get();
         std::string value() const;
+        void setPython(boost::python::object o);
+        boost::python::object getPython() const;
         T t;
       };
     tendril(impl_base::ptr impl);

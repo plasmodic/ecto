@@ -59,6 +59,10 @@ add_library(ecto SHARED
   src/plasm.cpp
   src/util.cpp
   )
+target_link_libraries(ecto
+	${Boost_LIBRARIES}
+    ${PYTHON_LIBRARIES}
+)    
 
 ectomodule(ecto
   src/ecto_py/ecto.cpp
