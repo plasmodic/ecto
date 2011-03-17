@@ -1,4 +1,4 @@
-#include <ecto/connection.hpp>
+#include <ecto/tendril.hpp>
 
 #include <boost/python.hpp>
 

@@ -3,7 +3,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/noncopyable.hpp>
 
-#include <ecto/connection.hpp>
+#include <ecto/tendril.hpp>
 
 #include <map>
 

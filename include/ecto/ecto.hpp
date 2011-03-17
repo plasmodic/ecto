@@ -3,7 +3,7 @@
 
 //ecto includes
 #include <ecto/module.hpp>
-#include <ecto/connection.hpp>
+#include <ecto/tendril.hpp>
 #include <ecto/plasm.hpp>
 #include <ecto/util.hpp>
 

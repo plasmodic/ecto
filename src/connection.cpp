@@ -1,4 +1,4 @@
-#include "ecto/connection.hpp"
+#include <ecto/tendril.hpp>
 
 #define pre_check(x) \
 do{ \
