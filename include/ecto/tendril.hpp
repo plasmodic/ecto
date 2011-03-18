@@ -33,7 +33,7 @@ namespace ecto
      * @param doc docstring for t
      * @return a tendril holding a copy of t
      */
-    template<typename T>
+    template <typename T>
     static tendril 
     make(const T& t = T(), 
 	 const std::string& doc = std::string());
@@ -41,9 +41,8 @@ namespace ecto
     boost::python::object extract();
     void set(boost::python::object o);
 
-    template<typename T>
-    void set(const std::string& doc,
-             const T& t);
+    template <typename T>
+    void set(const std::string& doc, const T& t);
 
     /** \brief This is an unmangled type name for what ever tendril is
      * holding.
@@ -56,16 +55,16 @@ namespace ecto
     /** \brief A doc string for this tendril, "foo is for the input
 	and will be mashed with spam."
 
-     * @return A very descriptive human readable string of whatever
-     * the tendril is holding on to.
-     */
+	* @return A very descriptive human readable string of whatever
+	* the tendril is holding on to.
+	*/
     std::string doc() const;
 
-    template<typename T>
-      const T& get() const;
+    template <typename T>
+    const T& get() const;
 
-    template<typename T>
-      T& get();
+    template <typename T>
+    T& get();
     void connect(tendril& rhs);
 
     inline bool dirty(bool b)
@@ -94,27 +93,27 @@ namespace ecto
       virtual void setPython(boost::python::object o) = 0;
       virtual boost::python::object getPython() const = 0;
       //convience functions for checking types
-      template<typename T>
-        static bool inline check(impl_base& i);
-      template<typename T>
-        static inline void checkThrow(impl_base& i) throw (std::logic_error);
-      template<typename T>
-        static inline T* get(impl_base& i);
+      template <typename T>
+      static bool inline check(impl_base& i);
+      template <typename T>
+      static inline void checkThrow(impl_base& i) throw (std::logic_error);
+      template <typename T>
+      static inline T* get(impl_base& i);
 
       std::string name, doc;
     };
 
-    template<typename T>
-      struct impl : impl_base
-      {
-        impl(const T& t);
-        std::string type_name() const;
-        const std::type_info & type_info() const;
-        void* get();
-        void setPython(boost::python::object o);
-        boost::python::object getPython() const;
-        T t;
-      };
+    template <typename T>
+    struct impl : impl_base
+    {
+      impl(const T& t);
+      std::string type_name() const;
+      const std::type_info & type_info() const;
+      void* get();
+      void setPython(boost::python::object o);
+      boost::python::object getPython() const;
+      T t;
+    };
     tendril(impl_base::ptr impl);
     boost::shared_ptr<impl_base> impl_;
     bool dirty_;
