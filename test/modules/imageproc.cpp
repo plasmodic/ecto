@@ -30,7 +30,7 @@ struct VideoCapture : ecto::module
       throw std::runtime_error("Could not open video device " + video_device);
   }
 
-  static void Params(connections_t& c)
+  static void Params(tendrils_t& c)
   {
     c["video_device"].set<int> ("The device ID to open", 0);
   }
@@ -54,7 +54,7 @@ struct imshow : ecto::module
     setOut<int> ("out", "Character pressed.");
   }
 
-  static void Params(connections_t& c)
+  static void Params(tendrils_t& c)
   {
     c["name"].set<std::string> ("The window name", "image");
     c["waitKey"].set<int> ("Number of millis to wait, -1 for not at all, 0 for infinity.", -1);
@@ -99,7 +99,7 @@ struct Rgb2Gray : ecto::module
   {
     cv::cvtColor(getIn<cv::Mat> ("in"), getOut<cv::Mat> ("out"), CV_RGB2GRAY);
   }
-  static void Params(connections_t& p)
+  static void Params(tendrils_t& p)
   {
   }
 };
@@ -113,7 +113,7 @@ struct Sobel : ecto::module
     setOut<cv::Mat> ("out", "sobel image");
   }
 
-  static void Params(connections_t& p)
+  static void Params(tendrils_t& p)
   {
     p["x"].set<int> ("The derivative order in the x direction", 0);
     p["y"].set<int> ("The derivative order in the y direction", 0);
@@ -144,7 +144,7 @@ template<typename T>
     {
       getOut<T> ("out") = getIn<T> ("a") + getIn<T> ("b");
     }
-    static void Params(connections_t& p){}
+    static void Params(tendrils_t& p){}
   };
 
 struct AbsNormalized : ecto::module
@@ -154,7 +154,7 @@ struct AbsNormalized : ecto::module
     setIn<cv::Mat> ("in", "image.");
     setOut<cv::Mat> ("out", "absolute and normalized");
   }
-  static void Params(connections_t& p){}
+  static void Params(tendrils_t& p){}
   void Process()
   {
     const cv::Mat& m = getIn<cv::Mat> ("in");
@@ -166,7 +166,7 @@ struct AbsNormalized : ecto::module
 ECTO_MODULE(imageproc)
 {
   ecto::wrap<VideoCapture>("VideoCapture");
-  ecto::wrap<imshow>("ImageShower");
+  ecto::wrap<imshow>("imshow");
   ecto::wrap<AbsNormalized>("AbsNormalized");
   ecto::wrap<Sobel>("Sobel");
   ecto::wrap<Rgb2Gray>("Rgb2Gray");

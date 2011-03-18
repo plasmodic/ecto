@@ -96,17 +96,18 @@ template<typename T>
 template<typename T>
 boost::python::object tendril::impl<T>::getPython() const
 {
-  return boost::python::object(t);
+  //return boost::python::object(t);
 
-#if 0
+#if 1
   try {
     boost::python::object o(t);
     return o;
   }
   // if you want to play with the errors, do so like this
   catch (const boost::python::error_already_set& e) {
-    std::cout << "I CAUGHT IT I CAUGHT IT\n";
-    PyErr_Print();
+    //std::cout << "I CAUGHT IT I CAUGHT IT\n";
+    //PyErr_Print();
+    //silent!
   }
   return boost::python::object();
 #endif

@@ -1,16 +1,16 @@
 #!/bin/python
 import ecto
 from ecto.doc import printModuleDoc
-import sample
+import buster
 
 plasm = ecto.Plasm()
 
-g = sample.Generate()
+g = buster.Generate()
 g.Params(g.params)
 g.Config()
 printModuleDoc(g)
 
-m = sample.Multiply()
+m = buster.Multiply()
 m.Params(m.params)
 m.Config()
 printModuleDoc(m)

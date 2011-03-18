@@ -39,32 +39,51 @@ namespace py
       return this->module::getIn<bp::object>(name);
     }
 
+    bp::object getParam(const std::string& name)
+    {
+      return this->module::getParam<bp::object>(name);
+    }
+
     void put(const std::string& name, bp::object obj)
     {
       this->module::getOut<bp::object>(name) = obj;
+    }
+    static std::string name()
+    {
+     return "module";
+    }
+    static std::string doc()
+    {
+      //this->get_override("Doc");
+      return "doc";
     }
   };
 
 void wrapModule(){
 
-  bp::class_<module::connections_t>("connections")
-    .def(bp::map_indexing_suite<module::connections_t>())
+  bp::class_<module::tendrils_t>("tendrils")
+    .def(bp::map_indexing_suite<module::tendrils_t,false>())
     ;
 
   bp::class_<modwrap, boost::noncopyable>("module")
       .def("connect", &module::connect)
       .def("Process", &module::Process)
+      .def("Config", &module::Config)
+      .def("Name",&modwrap::name)
+      .staticmethod("Name")
+      .def("Doc",&modwrap::doc)
+      .staticmethod("Doc")
       .def("setIn", &modwrap::setIn)
       .def("setOut", &modwrap::setOut)
       .def("getIn", &modwrap::getIn)
+      .def("getParam", &modwrap::getParam)
       .def("put", &modwrap::put)
-      .def("Config", &module::Config)
-
       .def_readwrite("inputs", &module::inputs)
       .def_readwrite("outputs", &module::outputs)
       .def_readwrite("params", &module::params)
     ;
-
+//  void a_map_indexing_suite(); // moved to a_map_indexing_suite.cpp to
+//     a_map_indexing_suite();
   /*
   bp::class_<module, boost::noncopyable>("module")
     .def_readwrite("inputs", &module::inputs)

@@ -62,7 +62,7 @@ struct Pyramid : ecto::module
     }
   }
 
-  static void Params(connections_t& p)
+  static void Params(tendrils_t& p)
   {
     p["levels"].set<int> ("Number of pyramid levels.", 3);
     p["scale_factor"].set<float> ("The scale factor between levels", 1.42);
@@ -98,7 +98,7 @@ struct FAST : ecto::module
     cv::FastFeatureDetector fd(thresh_, true);
     fd.detect(in, kpts, mask);
   }
-  static void Params(connections_t& p)
+  static void Params(tendrils_t& p)
   {
     p["thresh"].set<int> ("FAST threshhold.", 20);
   }
@@ -130,7 +130,7 @@ struct Harris : ecto::module
     kpts = kpts_in;
     h(kpts);
   }
-  static void Params(connections_t& p)
+  static void Params(tendrils_t& p)
   {
 
   }
@@ -157,7 +157,7 @@ struct DrawKeypoints : ecto::module
     cv::Mat& out_image = getOut<cv::Mat> ("image");
     cv::drawKeypoints(image, kpts_in, out_image);
   }
-  static void Params(connections_t& p)
+  static void Params(tendrils_t& p)
   {
 
   }

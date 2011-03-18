@@ -13,8 +13,8 @@ namespace ecto
   /** \brief A tendril is the slender, winding organ of the ecto::module that gives it
    * its awesome type erasure and uber flexibility.
    *
-   * Each tendril is actually a type erasing holder for any value, and allows introspection into that
-   * value, including its value, type, name (think per instance), and doc string.
+   * Each tendril is a type erasing holder for any instance of any type,
+   * and allows introspection including its value, type, and doc string.
    */
   class tendril
   {
@@ -38,6 +38,7 @@ namespace ecto
 
     boost::python::object extractFromPython();
     void setFromPython(boost::python::object o);
+
     template<typename T>
     void set(const std::string& doc,
              const T& t);
@@ -46,10 +47,7 @@ namespace ecto
      * @return the unmangled name, e.g. "cv::Mat", or "pcl::PointCloud<pcl::PointXYZ>"
      */
     std::string type_name() const;
-//    /** \brief The instance name of the type, think variable name.
-//     * @return "myInt", "foo", "spam"
-//     */
-//    std::string name() const;
+
     /** \brief  A doc string for this tendril, "foo is for the input and will be mashed with spam."
      * @return A very descriptive human readable string of whatever the tendril is holding on to.
      */

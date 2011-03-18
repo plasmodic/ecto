@@ -28,7 +28,7 @@ namespace ecto
 
   void module::dirty(bool mark)
   {
-    for (connections_t::iterator it = outputs.begin(), end = outputs.end(); it != end; ++it)
+    for (tendrils_t::iterator it = outputs.begin(), end = outputs.end(); it != end; ++it)
     {
       it->second.dirty(mark);
     }
@@ -36,7 +36,7 @@ namespace ecto
   }
   bool module::dirty() const
   {
-    for (connections_t::const_iterator it = inputs.begin(), end = inputs.end(); it != end; ++it)
+    for (tendrils_t::const_iterator it = inputs.begin(), end = inputs.end(); it != end; ++it)
     {
       if (it->second.dirty())
         return true;

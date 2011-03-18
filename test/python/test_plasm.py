@@ -5,7 +5,7 @@ import ecto
 import buster
 
 scatter = buster.Scatter()
-scatter.Config(10,10)
+scatter.Config()
 
 idx = buster.Indexer()
 idx.Config(2)

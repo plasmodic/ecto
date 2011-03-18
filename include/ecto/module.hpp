@@ -12,7 +12,7 @@ namespace ecto
   struct module : boost::noncopyable
   {
     typedef boost::shared_ptr<module> ptr;
-    typedef std::map<std::string, tendril> connections_t;
+    typedef std::map<std::string, tendril> tendrils_t;
     module();
     virtual ~module();
     virtual void Process();
@@ -47,7 +47,7 @@ namespace ecto
     getParam(const std::string& name);
 
 
-    connections_t inputs, outputs, params;
+    tendrils_t inputs, outputs, params;
     //std::string doc,name;
   private:
     bool dirty_;
