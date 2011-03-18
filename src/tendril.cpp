@@ -2,7 +2,6 @@
 
 namespace ecto
 {
-
   std::ostream& operator<<(std::ostream&out, const tendril::none& rhs)
   {
     return out << "none";
