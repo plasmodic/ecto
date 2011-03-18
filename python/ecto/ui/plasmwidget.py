@@ -2,7 +2,6 @@
 import sys, inspect
 from PySide import QtCore, QtGui
 
-from ectoui import Ui_MainWindow
 import ecto
 from plasmnode import PlasmNode
 

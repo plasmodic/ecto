@@ -3,7 +3,7 @@
 import sys, inspect
 from PySide import QtCore, QtGui
 
-from ectoui import Ui_MainWindow
+from uic import Ui_MainWindow
 import ecto
 
 class MyMainWindow(QtGui.QMainWindow):
@@ -18,7 +18,7 @@ class MyMainWindow(QtGui.QMainWindow):
 
 
 
-if __name__ == "__main__":
+def main():
     app = QtGui.QApplication(sys.argv)
     gooduns = []
     for modname in sys.argv[1:]:
