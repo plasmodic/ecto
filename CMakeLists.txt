@@ -24,7 +24,16 @@ include_directories(
   ${Boost_INCLUDE_DIRS}
   )
 
-#make sure undefined symbols are errors (helps a lot for python)!
+add_custom_command(OUTPUT ${CMAKE_SOURCE_DIR}/python/ecto/ui/uic.py
+  COMMAND pyside-uic ${CMAKE_SOURCE_DIR}/python/ecto/ui/ecto.ui > ${CMAKE_SOURCE_DIR}/python/ecto/ui/uic.py
+  DEPENDS ${CMAKE_SOURCE_DIR}/python/ecto/ui/ecto.ui
+  COMMENT "Generating python ui code with pyside-uic")
+
+add_custom_target(uic ALL
+  DEPENDS ${CMAKE_SOURCE_DIR}/python/ecto/ui/uic.py
+  )
+
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wl,--no-undefined")
 
 macro(ectomodule NAME)
