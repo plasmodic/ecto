@@ -33,6 +33,9 @@ add_custom_target(uic ALL
   DEPENDS ${CMAKE_SOURCE_DIR}/python/ecto/ui/uic.py
   )
 
+configure_file(${CMAKE_SOURCE_DIR}/python/ectoedit.py.in
+  ${CMAKE_BINARY_DIR}/bin/ectoedit.py
+  @ONLY)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wl,--no-undefined")
 
