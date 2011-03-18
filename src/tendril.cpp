@@ -7,15 +7,16 @@ namespace ecto
   {
     return out << "none";
   }
+
   tendril::tendril() :
       //impl_ is never not initialized
     impl_(new impl<none> (none())), dirty_(true)
-  {
-  }
+  { }
+
   tendril::tendril(impl_base::ptr impl) :
     impl_(impl), dirty_(true)
-  {
-  }
+  { }
+
   std::string tendril::type_name() const
   {
     return impl_->type_name();
@@ -34,14 +35,14 @@ namespace ecto
   }
 
   tendril::impl_base::~impl_base()
-  {
-  }
+  { }
 
-  boost::python::object tendril::extractFromPython()
+  boost::python::object tendril::extract()
   {
     return impl_->getPython();
   }
-  void tendril::setFromPython(boost::python::object o)
+
+  void tendril::set(boost::python::object o)
   {
     impl_->setPython(o);
   }

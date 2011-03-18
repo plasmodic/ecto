@@ -53,8 +53,8 @@ namespace ecto
   {
     typedef std::map<boost::shared_ptr<module>, edge, plasm_ops::lessMPtr> map_t;
     map_t edge_map;
-    void connect(boost::shared_ptr<module> from, const std::string& output, boost::shared_ptr<module> to,
-                 const std::string& input);
+    void connect(boost::shared_ptr<module> from, const std::string& output, 
+		 boost::shared_ptr<module> to,   const std::string& input);
     void markDirty(boost::shared_ptr<module> m);
     void go(boost::shared_ptr<module> m);
     std::string viz() const;

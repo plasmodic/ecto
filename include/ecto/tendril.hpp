@@ -10,8 +10,9 @@
 
 namespace ecto
 {
-  /** \brief A tendril is the slender, winding organ of the ecto::module that gives it
-   * its awesome type erasure and uber flexibility.
+  /** \brief A tendril is the slender, winding organ of the
+   * ecto::module that gives it its awesome type erasure and uber
+   * flexibility.
    *
    * Each tendril is a type erasing holder for any instance of any type,
    * and allows introspection including its value, type, and doc string.
@@ -19,8 +20,9 @@ namespace ecto
   class tendril
   {
   public:
-    /** \brief default constructor, creates a tendril that is not initialized with any value
-     * FIXME make this default to a tendril::none type.
+    /** \brief default constructor, creates a tendril that is not
+     * initialized with any value FIXME make this default to a
+     * tendril::none type.
      */
     tendril();
 
@@ -36,20 +38,26 @@ namespace ecto
     make(const T& t = T(), 
 	 const std::string& doc = std::string());
 
-    boost::python::object extractFromPython();
-    void setFromPython(boost::python::object o);
+    boost::python::object extract();
+    void set(boost::python::object o);
 
     template<typename T>
     void set(const std::string& doc,
              const T& t);
 
-    /** \brief This is an unmangled type name for what ever tendril is holding.
-     * @return the unmangled name, e.g. "cv::Mat", or "pcl::PointCloud<pcl::PointXYZ>"
+    /** \brief This is an unmangled type name for what ever tendril is
+     * holding.
+
+     * @return the unmangled name, e.g. "cv::Mat", or
+     * "pcl::PointCloud<pcl::PointXYZ>"
      */
     std::string type_name() const;
 
-    /** \brief  A doc string for this tendril, "foo is for the input and will be mashed with spam."
-     * @return A very descriptive human readable string of whatever the tendril is holding on to.
+    /** \brief A doc string for this tendril, "foo is for the input
+	and will be mashed with spam."
+
+     * @return A very descriptive human readable string of whatever
+     * the tendril is holding on to.
      */
     std::string doc() const;
 

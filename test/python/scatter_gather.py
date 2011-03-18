@@ -17,13 +17,16 @@ m = ecto.make(buster.Multiply)
 printModuleDoc(m)
 
 class SG(ecto.module):
+
     def __init__(self):
         ecto.module.__init__(self)
         self.s = ecto.make(buster.Scatter)
         self.g = ecto.make(buster.Gather)
+
     @staticmethod
     def Params(params):
         buster.Scatter.Params(params)
+
     def Config(self):
         plasm = ecto.Plasm()
         s = self.s
@@ -36,8 +39,9 @@ class SG(ecto.module):
         ecto.config(g)
         self.outputs = g.outputs
         for f,t in zip(ecto.keys(s.outputs),ecto.keys(g.inputs)):
-            plasm.connect(s,f,g,t)
+            plasm.connect(s, f, g, t)
         self.plasm = plasm
+
     def Process(self):
         self.plasm.go(self.g)
 
@@ -45,8 +49,8 @@ class SG(ecto.module):
 print "#################\nPlasm test\n#################"
 plasm = ecto.Plasm()
 
-for f,t in zip(ecto.keys(s.outputs),ecto.keys(g.inputs)):
-    plasm.connect(s,f,g,t)
+for f,t in zip(ecto.keys(s.outputs), ecto.keys(g.inputs)):
+    plasm.connect(s, f, g, t)
 
 
 

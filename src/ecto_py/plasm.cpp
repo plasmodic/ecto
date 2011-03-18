@@ -153,6 +153,8 @@ namespace ecto
 namespace py
 {
 
+using bp::arg;
+
 void wrapPlasm(){
   bp::class_<edge>("Edge")
     .def_readwrite("downstream",&edge::downstream)
@@ -172,7 +174,8 @@ void wrapPlasm(){
       ;
   bp::class_<plasm,boost::noncopyable>("Plasm")
     .def_readwrite("edges",&plasm::edge_map)
-    .def("connect", &plasm::connect)
+    .def("connect", &plasm::connect, (arg("from_module"), arg("output_name"),
+				      arg("to_module"),   arg("intput_name")))
     .def("markDirty", &plasm::markDirty)
     .def("go", &plasm::go)
     .def("viz",&plasm::viz)

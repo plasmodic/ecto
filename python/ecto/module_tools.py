@@ -3,7 +3,8 @@ class Tendrils(object): pass
 def set_tendril_attribute(sub, tendrils):
     for el in tendrils:
         #print el.key(), el.data()
-        setattr(sub, el.key(),el.data())
+        setattr(sub, el.key(), el.data())
+
 def in_out_magic(module):
     module.i = Tendrils()
     module.o = Tendrils()

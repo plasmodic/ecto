@@ -61,17 +61,17 @@ namespace buster
       n_ = getParam<int> ("n");
       x_ = getParam<int> ("x");
       for (int i = 0; i < n_; i++)
-      {
-        setOut<int> (str(boost::format("out_%04d") % i), "The ith scater");
-      }
+	{
+	  setOut<int> (str(boost::format("out_%04d") % i), "The ith scater");
+	}
     }
     void Process()
     {
       SHOW();
       for (int i = 0; i < n_; i++)
-      {
-        getOut<int> (str(boost::format("out_%04d") % i)) = x_;
-      }
+	{
+	  getOut<int> (str(boost::format("out_%04d") % i)) = x_;
+	}
     }
     int n_, x_;
   };
@@ -87,9 +87,9 @@ namespace buster
     {
       n_ = getParam<int> ("n");
       for (int i = 0; i < n_; i++)
-      {
-        setIn<int> (str(boost::format("in_%04d") % i), "An integer input.");
-      }
+	{
+	  setIn<int> (str(boost::format("in_%04d") % i), "An integer input.");
+	}
       setOut<int> ("out", "The sum of all inputs.");
     }
     void Process()
@@ -99,14 +99,15 @@ namespace buster
       out = 0;
       typedef std::pair<std::string, ecto::tendril> pp;
       BOOST_FOREACH(const pp& in,inputs)
-            {
-              out += in.second.get<int> ();
-            }
+	{
+	  out += in.second.get<int> ();
+	}
     }
     int n_;
   };
 
- }
+}
+
 ECTO_MODULE(buster)
 {
   using namespace buster;

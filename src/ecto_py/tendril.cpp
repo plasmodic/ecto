@@ -15,8 +15,8 @@ void wrapConnection(){
     .def("connect", &tendril::connect)
     //.def("name",&tendril::name, "Give the name of this connection.")
     .def("doc",&tendril::doc)
-    .def("get",&tendril::extractFromPython)
-    .def("set",&tendril::setFromPython)
+    .def("get",&tendril::extract)
+    .def("set",(void(tendril::*)(bp::object)) &tendril::set)
     ;
 }
 
