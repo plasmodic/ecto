@@ -35,14 +35,25 @@ namespace ecto
      */
     template <typename T>
     static tendril 
-    make(const T& t = T(), 
-	 const std::string& doc = std::string());
+    make(const T& t = T(), const std::string& doc = std::string())
+    {
+      // fixme: allocators
+      tendril c(impl_base::ptr(new impl<T> (t)));
+      c.impl_->doc = doc;
+      return c;
+    }
+
+
 
     boost::python::object extract();
     void set(boost::python::object o);
 
-    template <typename T>
-    void set(const std::string& doc, const T& t);
+    template<typename T>
+    void set(const std::string& doc, const T& t)
+    {
+      *this = make<T>(t,doc);
+    }
+
 
     /** \brief This is an unmangled type name for what ever tendril is
      * holding.
@@ -61,10 +72,21 @@ namespace ecto
     std::string doc() const;
 
     template <typename T>
-    const T& get() const;
+    const T& get() const
+    {
+      if (!impl_)
+	throw std::logic_error("This connection is uninitialized! type: " + name_of<T> ());
+      return *impl_base::get<T>(*impl_);
+    }
 
     template <typename T>
-    T& get();
+    T& get()
+    {
+      if (!impl_)
+	throw std::logic_error("This connection is uninitialized! type: " + name_of<T> ());
+      return *(impl_base::get<T>(*impl_));
+    }
+
     void connect(tendril& rhs);
 
     inline bool dirty(bool b)
@@ -72,6 +94,7 @@ namespace ecto
       dirty_ = b;
       return dirty_;
     }
+
     inline bool dirty() const
     {
       return dirty_;
@@ -118,5 +141,6 @@ namespace ecto
     boost::shared_ptr<impl_base> impl_;
     bool dirty_;
   };
-#include "ecto/impl/tendril.hpp"
+#include <ecto/impl/tendril.hpp>
+
 }
