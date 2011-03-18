@@ -57,5 +57,5 @@ namespace ecto
 
 
 
-#include <ecto/impl/module_impl.hpp>
+#include <ecto/impl/module.hpp>
 }//namespace ecto

@@ -113,5 +113,5 @@ namespace ecto
     boost::shared_ptr<impl_base> impl_;
     bool dirty_;
   };
-#include "ecto/impl/tendril_impl.hpp"
+#include "ecto/impl/tendril.hpp"
 }
