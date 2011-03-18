@@ -37,3 +37,19 @@ plasm.markDirty(m)
 plasm.go(m)
 
 printModuleDoc(m)
+
+t = """
+MyMod:
+  inputs: 
+   numberIn: 777
+  outputs:
+   numberOut: 1313
+"""
+
+import yaml
+d = yaml.load(t)
+for k, v in d.iteritems():
+    x= init_from_config(MyMod, k , v)
+    inputs = v['inputs']
+    for k2, v2 in inputs.iteritems():
+        x.setIn(label, k2, v2)

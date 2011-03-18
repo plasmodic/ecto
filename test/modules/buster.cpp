@@ -18,7 +18,7 @@ struct OurModule : ecto::module
 
   OurModule()
   {
-    inputs["in"] = ecto::tendril::make<int>();
+    inputs["in"].set("input int",0);
     outputs["out1"] = ecto::tendril::make<float>();
     outputs["out2"] = ecto::tendril::make<bool>();
   }
@@ -59,7 +59,7 @@ struct Multiply : ecto::module
 
   static void Params(connections_t& c)
   {
-    c["factor"] = ecto::tendril::make<float>(13, "factor", "multiply by...");
+    c["factor"] = ecto::tendril::make<float>(13, "multiply by...");
   }
 
   void Config()

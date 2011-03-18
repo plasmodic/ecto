@@ -38,11 +38,11 @@ struct Pyramid : ecto::module
     }
     setIn<cv::Mat> ("in");
   }
-  void Config(int levels, float scale_factor, int magnification)
+  void Config()
   {
-    levels_ = levels;
-    scale_factor_ = scale_factor;
-    magnification_ = magnification;
+    levels_ = getParam<int> ("levels");
+    scale_factor_ = getParam<float> ("scale_factor");
+    magnification_ = getParam<int> ("magnification");
     inout();
   }
   void process()
@@ -61,6 +61,15 @@ struct Pyramid : ecto::module
       cv::resize(in, out, cv::Size(), scale, scale, i - magnification_ < 0 ? CV_INTER_LINEAR : CV_INTER_AREA);
     }
   }
+
+  static void Params(connections_t& p)
+  {
+    p["levels"].set<int> ("Number of pyramid levels.", 3);
+    p["scale_factor"].set<float> ("The scale factor between levels", 1.42);
+    p["magnification"].set<int> (
+                                 "The magnification, positive to start at a larger than real life. The scale at each pyramid level is 1.0/(scale_factor^{i - magnification}",
+                                 0);
+  }
   int levels_, magnification_;
   float scale_factor_;
 };
@@ -74,12 +83,12 @@ struct FAST : ecto::module
   void inout()
   {
     setOut<std::vector<cv::KeyPoint> > ("out", "Detected keypoints");
-    setIn<cv::Mat> ("in" , "The image to detect FAST on.");
+    setIn<cv::Mat> ("in", "The image to detect FAST on.");
     setIn<cv::Mat> ("mask", "optional mask");
   }
-  void Config(int thresh)
+  void Config()
   {
-    thresh_ = thresh;
+    thresh_ = getParam<int> ("thresh");
   }
   void process()
   {
@@ -88,6 +97,10 @@ struct FAST : ecto::module
     std::vector<cv::KeyPoint>& kpts = getOut<std::vector<cv::KeyPoint> > ("out");
     cv::FastFeatureDetector fd(thresh_, true);
     fd.detect(in, kpts, mask);
+  }
+  static void Params(connections_t& p)
+  {
+    p["thresh"].set<int> ("FAST threshhold.", 20);
   }
 
   int thresh_;
@@ -102,7 +115,7 @@ struct Harris : ecto::module
   void inout()
   {
     setOut<std::vector<cv::KeyPoint> > ("out", "Detected keypoints, with Harris");
-    setIn<cv::Mat> ("image" , "The image to calc harris response from.");
+    setIn<cv::Mat> ("image", "The image to calc harris response from.");
     setIn<std::vector<cv::KeyPoint> > ("kpts", "The keypoints to fill with Harris response.");
   }
   void Config()
@@ -117,7 +130,10 @@ struct Harris : ecto::module
     kpts = kpts_in;
     h(kpts);
   }
+  static void Params(connections_t& p)
+  {
 
+  }
   int thresh_;
 };
 
@@ -131,15 +147,19 @@ struct DrawKeypoints : ecto::module
   void Config()
   {
     setIn<cv::Mat> ("image", "The input image, to draw over.");
-    setOut<cv::Mat> ("image" , "The output image.");
+    setOut<cv::Mat> ("image", "The output image.");
     setIn<std::vector<cv::KeyPoint> > ("kpts", "The keypoints to draw.");
   }
   void process()
   {
     const cv::Mat& image = getIn<cv::Mat> ("image");
     const std::vector<cv::KeyPoint>& kpts_in = getIn<std::vector<cv::KeyPoint> > ("kpts");
-    cv::Mat& out_image = getOut<cv::Mat>("image");
-    cv::drawKeypoints(image,kpts_in,out_image);
+    cv::Mat& out_image = getOut<cv::Mat> ("image");
+    cv::drawKeypoints(image, kpts_in, out_image);
+  }
+  static void Params(connections_t& p)
+  {
+
   }
 };
 ECTO_MODULE(orb)

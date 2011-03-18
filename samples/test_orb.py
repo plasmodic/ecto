@@ -49,7 +49,7 @@ except RuntimeError,e:
   
 graphviz(plasm)
 
-while(imshow.outputs["out"].value() != '27'):
+while(imshow.outputs["out"].get() != 27):
     plasm.markDirty(video)
     # TODO just call go on the whole plasm, to trigger all leaves being called. 
     for x in imshows:

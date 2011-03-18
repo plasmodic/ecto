@@ -20,15 +20,7 @@ namespace ecto
   {
     return impl_->type_name();
   }
-  std::string tendril::value() const
-  {
 
-    return impl_->value();
-  }
-  std::string tendril::name() const
-  {
-    return impl_->name;
-  }
   std::string tendril::doc() const
   {
     return impl_->doc;

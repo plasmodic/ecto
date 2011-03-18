@@ -3,23 +3,19 @@
         
         @author: ethan.rublee@gmail.com (Ethan Rublee)
 '''
+def printTendril(tendril, n):
+    for x in tendril :
+        print  n*" " +" name=" + x.key() + " type=%s"%x.data().type_name() + " default=",x.data().get()
+        print  (n+2)*" " +x.data().doc()
 def printModuleDoc(m):
-    print "inputs:"
-    for x in m.inputs :
-        print "\t",x.data().name(),"type=%s"%x.data().type_name()
-        print "\t\t", x.data().doc()
-        print "\t\t", x.data().get()
-    print "outputs:"
-    for x in m.outputs :
-        print "\t",x.data().name(),"type=%s"%x.data().type_name()
-        print "\t\t", x.data().doc()
-        print "\t\t", x.data().get()
-    print "params:"
-    for x in m.params :
-        print "\t",x.data().name(),"type=%s"%x.data().type_name()
-        print "\t\t", x.data().doc()
-        print "\t\t value:", x.data().get()
-
+    print "Module: "+ m.Name()
+    print "     Doc: " + m.Doc()
+    print "  inputs:"
+    printTendril(m.inputs,2)
+    print " outputs:"
+    printTendril(m.outputs,2)
+    print "  params:"
+    printTendril(m.params,2)
 def graphviz(plasm):
     print "digraph plasm {"
     print plasm.viz()

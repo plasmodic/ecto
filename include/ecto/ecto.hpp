@@ -11,19 +11,33 @@
 #include <boost/python.hpp>
 #include <boost/shared_ptr.hpp>
 namespace ecto {
-
+  template<typename T>
+  struct doc{
+    static std::string doc_str;
+    static std::string name;
+    static std::string getDoc(){return doc_str;}
+    static std::string getName(){return name;}
+  };
+  template<typename T>
+  std::string doc<T>::doc_str;
+  template<typename T>
+  std::string doc<T>::name;
   template <typename T>
-  void wrap(const char* name)
+  void wrap(const char* name, std::string doc_str = "A module...")
   {
     boost::python::class_<T, boost::python::bases<module>, 
-      boost::shared_ptr<T>, boost::noncopyable> thing(name);
+      boost::shared_ptr<T>, boost::noncopyable> m(name);
+    typedef doc<T> docT;
+    docT::name = name;
+    docT::doc_str = doc_str;
 
-    thing
-      .def("Process", &T::Process)
-      .def("Config", &T::Config)
+    m
       .def("Params", &T::Params)
       .staticmethod("Params")
-
+      .def("Doc", &docT::getDoc)
+      .staticmethod("Doc")
+      .def("Name", &docT::getName)
+      .staticmethod("Name")
       ;
   }
 }

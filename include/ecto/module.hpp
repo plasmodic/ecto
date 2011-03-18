@@ -46,10 +46,12 @@ namespace ecto
     const T& 
     getParam(const std::string& name);
 
-    connections_t inputs, outputs, params;
 
+    connections_t inputs, outputs, params;
+    //std::string doc,name;
   private:
     bool dirty_;
+
     friend class plasm;
   };
 

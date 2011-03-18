@@ -5,7 +5,8 @@ from ecto.doc import printModuleDoc,graphviz
 import imageproc as im
 
 video = im.VideoCapture()
-video.Config(0)
+video
+video.Config()
 printModuleDoc(video)
 
 imshow = im.ImageShower()
@@ -44,7 +45,7 @@ plasm.connect(adder, "out", sobelShower, "in")
 
 graphviz(plasm)
 
-while(imshow.outputs["out"].value() != '27'):
+while(imshow.outputs["out"].get() != 27):
     plasm.markDirty(video)
     # TODO just call go on the whole plasm, to trigger all leaves being called. 
     plasm.go(sobelShower)

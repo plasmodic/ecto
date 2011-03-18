@@ -15,14 +15,20 @@ template<typename T>
   }
 
 template<typename T>
-  tendril tendril::make(const T& t, const std::string& name, const std::string& doc)
+  tendril tendril::make(const T& t,const std::string& doc)
   {
     // fixme: allocators
     tendril c(impl_base::ptr(new impl<T> (t)));
-    c.impl_->name = name;
     c.impl_->doc = doc;
     return c;
   }
+
+template<typename T>
+void tendril::set(const std::string& doc,
+         const T& t)
+{
+  *this = make<T>(t,doc);
+}
 
 #if NDEBUG
 #define ECTO_ASSERT(_impl_check_ ) \
@@ -105,12 +111,3 @@ boost::python::object tendril::impl<T>::getPython() const
   return boost::python::object();
 #endif
 }
-
-template<typename T>
-  std::string tendril::impl<T>::value() const
-  {
-    //std::stringstream ss;
-    //ss << t;
-    //    return ss.str();//boost::lexical_cast<std::string>(t);
-    return "";
-  }

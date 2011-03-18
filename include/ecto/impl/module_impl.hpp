@@ -3,7 +3,7 @@ tendril& module::setOut(const std::string& name,
                       const std::string& doc,
                       const T& t)
 {
-  outputs[name] = ecto::tendril::make<T>(t,name,doc);
+  outputs[name] = ecto::tendril::make<T>(t,doc);
   return outputs[name];
 }
 
@@ -13,7 +13,7 @@ module::setIn(const std::string& name,
 	      const std::string& doc,
 	      const T& t)
 {
-  inputs[name] = ecto::tendril::make<T>(t,name,doc);
+  inputs[name] = ecto::tendril::make<T>(t,doc);
   return inputs[name];
 }
 
@@ -23,7 +23,7 @@ module::setParam(const std::string& name,
 		 const std::string& doc,
 		 const T& t)
 {
-  params[name] = ecto::tendril::make<T>(t,name,doc);
+  params[name] = ecto::tendril::make<T>(t,doc);
   return params[name];
 }
 

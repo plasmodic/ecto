@@ -34,24 +34,22 @@ namespace ecto
     template<typename T>
     static tendril 
     make(const T& t = T(), 
-	 const std::string& name = std::string(),
 	 const std::string& doc = std::string());
 
     boost::python::object extractFromPython();
     void setFromPython(boost::python::object o);
+    template<typename T>
+    void set(const std::string& doc,
+             const T& t);
 
     /** \brief This is an unmangled type name for what ever tendril is holding.
      * @return the unmangled name, e.g. "cv::Mat", or "pcl::PointCloud<pcl::PointXYZ>"
      */
     std::string type_name() const;
-    /** \brief A string representation of the value.
-     * @return string value, could be anything...
-     */
-    std::string value() const;
-    /** \brief The instance name of the type, think variable name.
-     * @return "myInt", "foo", "spam"
-     */
-    std::string name() const;
+//    /** \brief The instance name of the type, think variable name.
+//     * @return "myInt", "foo", "spam"
+//     */
+//    std::string name() const;
     /** \brief  A doc string for this tendril, "foo is for the input and will be mashed with spam."
      * @return A very descriptive human readable string of whatever the tendril is holding on to.
      */
@@ -86,7 +84,6 @@ namespace ecto
       virtual ~impl_base();
       virtual std::string type_name() const = 0;
       virtual void* get() = 0;
-      virtual std::string value() const = 0;
       virtual const std::type_info & type_info() const = 0;
       virtual void setPython(boost::python::object o) = 0;
       virtual boost::python::object getPython() const = 0;
@@ -108,7 +105,6 @@ namespace ecto
         std::string type_name() const;
         const std::type_info & type_info() const;
         void* get();
-        std::string value() const;
         void setPython(boost::python::object o);
         boost::python::object getPython() const;
         T t;

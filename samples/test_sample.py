@@ -6,11 +6,13 @@ import sample
 plasm = ecto.Plasm()
 
 g = sample.Generate()
-g.Config(17, 3)
+g.Params(g.params)
+g.Config()
 printModuleDoc(g)
 
 m = sample.Multiply()
-m.Config(2)
+m.Params(m.params)
+m.Config()
 printModuleDoc(m)
 
 plasm.connect(g, "out", m , "in")
@@ -18,4 +20,4 @@ plasm.connect(g, "out", m , "in")
 for i in range(0,10):
   plasm.markDirty(g)
   plasm.go(m)
-  print m.outputs["out"].value()
+  print m.outputs["out"].get()
