@@ -25,6 +25,7 @@ struct VideoCapture : ecto::module
   void Config()
   {
     int video_device = getParam<int> ("video_device");
+    capture = cv::VideoCapture();
     capture.open(video_device);
     if (!capture.isOpened())
       throw std::runtime_error("Could not open video device " + video_device);
@@ -96,20 +97,29 @@ struct imshow : ecto::module
   bool auto_size_;
 };
 
-struct Rgb2Gray : ecto::module
+struct cvtColor : ecto::module
 {
-  Rgb2Gray()
+  cvtColor()
   {
+  }
+  void Config()
+  {
+    flag_ = getParam<int> ("flag");
     setIn<cv::Mat> ("in", "Color image.");
     setOut<cv::Mat> ("out", "input as a Gray image.");
   }
   void Process()
   {
-    cv::cvtColor(getIn<cv::Mat> ("in"), getOut<cv::Mat> ("out"), CV_RGB2GRAY);
+    cv::cvtColor(getIn<cv::Mat> ("in"), getOut<cv::Mat> ("out"), flag_);
   }
   static void Params(tendrils_t& p)
   {
+    std::stringstream ss;
+    ss << "Convert an image's color using opencv, possible flags are:\n" << "RGB2GRAY = " << CV_RGB2GRAY << std::endl
+        << "RGB2BGR = " << CV_RGB2BGR;
+    p["flag"].set<int> (ss.str(), CV_RGB2BGR);
   }
+  int flag_;
 };
 
 struct Sobel : ecto::module
@@ -181,6 +191,6 @@ ECTO_MODULE(imageproc)
   ecto::wrap<imshow>("imshow");
   ecto::wrap<AbsNormalized>("AbsNormalized");
   ecto::wrap<Sobel>("Sobel");
-  ecto::wrap<Rgb2Gray>("Rgb2Gray");
+  ecto::wrap<cvtColor>("cvtColor");
   ecto::wrap<Adder<cv::Mat> >("ImageAdder");
 }

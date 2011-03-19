@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/ssd/wg/ecto/python/ecto/ui/ecto.ui'
+# Form implementation generated from reading ui file '/home/erublee/ecto/python/ecto/ui/ecto.ui'
 #
-# Created: Fri Mar 18 16:08:37 2011
+# Created: Sat Mar 19 15:46:26 2011
 #      by: pyside-uic 0.2.7 running on PySide 1.0.0
 #
 # WARNING! All changes made in this file will be lost!

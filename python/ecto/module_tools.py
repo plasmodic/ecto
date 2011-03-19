@@ -26,10 +26,10 @@ def config(module,**kwargs):
     module.Config()
     in_out_magic(module)
 
-def make(module_t):
+def make(module_t,**kwargs):
     m = module_t()
     module_t.Params(m.params)
-    config(m)
+    config(m,**kwargs)
     return m
 
 def keys(tendrils):
