@@ -1,6 +1,8 @@
 #pragma once
 #include <opencv2/features2d/features2d.hpp>
 #include <vector>
+namespace FASTHarris
+{
 struct HarrisResponse
 {
   explicit HarrisResponse(const cv::Mat& image, double k = 0.04);
@@ -9,6 +11,16 @@ struct HarrisResponse
   cv::Rect imgroi;
   double k;
 };
+
+inline bool keypointResponseLess(const cv::KeyPoint& lhs, const cv::KeyPoint& rhs)
+{
+  return lhs.response < rhs.response;
+}
+
+inline bool keypointResponseGreater(const cv::KeyPoint& lhs, const cv::KeyPoint& rhs)
+{
+  return lhs.response > rhs.response;
+}
 
 class SimpleFASTHarris : public cv::FeatureDetector
 {
@@ -25,3 +37,4 @@ protected:
   virtual void detectImpl(const cv::Mat& image, std::vector<cv::KeyPoint>& keypoints, const cv::Mat& mask = cv::Mat()) const;
   size_t desired_n_features_;
 };
+}

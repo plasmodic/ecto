@@ -3,6 +3,8 @@
         
         @author: ethan.rublee@gmail.com (Ethan Rublee)
 '''
+import ecto
+
 def printTendril(tendril, n):
     for x in tendril :
         print  n*" " +" name=" + x.key() + " type=%s"%x.data().type_name() + " default=",x.data().get()
@@ -16,7 +18,11 @@ def printModuleDoc(m):
     printTendril(m.outputs,2)
     print "  params:"
     printTendril(m.params,2)
-def graphviz(plasm):
-    print "digraph plasm {"
-    print plasm.viz()
-    print "}"
+    
+def graphviz(plasm = ecto.Plasm()):
+    str = """digraph plasm {
+    %s
+    }"""%plasm.viz()
+    print str
+    
+    

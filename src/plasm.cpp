@@ -26,7 +26,10 @@ namespace ecto
   void plasm::go(module::ptr m)
   {
     if (!m->dirty())
+    {
+      //std::cout << "clean" << std::endl;
       return;
+    }
     edge& edges = edge_map[m];
     for (edge::us::iterator it = edges.upstream.begin(), end = edges.upstream.end(); it != end; ++it)
     {
@@ -34,6 +37,7 @@ namespace ecto
     }
     m->Process();
     m->dirty(false);
+
   }
 
   //this grabs the name of the underlying type and appends the address as a unique name

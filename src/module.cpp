@@ -28,20 +28,10 @@ namespace ecto
 
   void module::dirty(bool mark)
   {
-    for (tendrils_t::iterator it = outputs.begin(), end = outputs.end(); it != end; ++it)
-    {
-      it->second.dirty(mark);
-    }
     dirty_ = mark;
   }
   bool module::dirty() const
   {
-    for (tendrils_t::const_iterator it = inputs.begin(), end = inputs.end(); it != end; ++it)
-    {
-      if (it->second.dirty())
-        return true;
-    }
-
     return dirty_;
   }
 }

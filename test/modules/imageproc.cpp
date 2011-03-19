@@ -73,15 +73,23 @@ struct imshow : ecto::module
     if (image.empty())
     {
       getOut<int> ("out") = 0;
+      throw std::logic_error("empty image!");
       return;
     }
 
     if (auto_size_)
     {
-      cv::namedWindow(window_name_, CV_WINDOW_AUTOSIZE);
+      cv::namedWindow(window_name_, CV_WINDOW_KEEPRATIO);
     }
     cv::imshow(window_name_, image);
-    getOut<int> ("out") = int(0xff & cv::waitKey(waitkey_));
+    if (waitkey_ >= 0)
+    {
+      getOut<int> ("out") = int(0xff & cv::waitKey(waitkey_));
+    }
+    else
+    {
+      getOut<int> ("out") = 0;
+    }
   }
   std::string window_name_;
   int waitkey_;
@@ -144,7 +152,9 @@ template<typename T>
     {
       getOut<T> ("out") = getIn<T> ("a") + getIn<T> ("b");
     }
-    static void Params(tendrils_t& p){}
+    static void Params(tendrils_t& p)
+    {
+    }
   };
 
 struct AbsNormalized : ecto::module
@@ -154,7 +164,9 @@ struct AbsNormalized : ecto::module
     setIn<cv::Mat> ("in", "image.");
     setOut<cv::Mat> ("out", "absolute and normalized");
   }
-  static void Params(tendrils_t& p){}
+  static void Params(tendrils_t& p)
+  {
+  }
   void Process()
   {
     const cv::Mat& m = getIn<cv::Mat> ("in");

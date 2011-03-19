@@ -7,7 +7,8 @@
 #include <iostream>
 #include <boost/foreach.hpp>
 
-namespace
+
+namespace FASTHarris
 {
 inline float harris(const cv::Mat& patch, float k)
 {
@@ -41,16 +42,7 @@ inline float harris(const cv::Mat& patch, float k)
   }
   return ((a * b - c * c) - (k * ((a + b) * (a + b))));
 }
-inline bool keypointResponseLess(const cv::KeyPoint& lhs, const cv::KeyPoint& rhs)
-{
-  return lhs.response < rhs.response;
-}
 
-inline bool keypointResponseGreater(const cv::KeyPoint& lhs, const cv::KeyPoint& rhs)
-{
-  return lhs.response > rhs.response;
-}
-}
 
 HarrisResponse::HarrisResponse(const cv::Mat& image, double k) :
   image(image), imgroi(0, 0, image.cols, image.rows), k(k)
@@ -88,6 +80,7 @@ void SimpleFASTHarris::detectImpl(const cv::Mat& image, std::vector<cv::KeyPoint
     std::nth_element(keypoints.begin(), keypoints.begin() + n_features, keypoints.end(), keypointResponseGreater);
     keypoints.resize(n_features);
   }
+}
 }
 #if 0
 int main(int argc, char** argv){
