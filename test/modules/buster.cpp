@@ -11,40 +11,40 @@ namespace buster
 
     static void Params(tendrils_t& p)
     {
-      p["step"].set<int> ("The step with which i generate integers.", 2);
-      p["start"].set<int> ("My starting value", 0);
+      p["step"].set<double> ("The step with which i generate integers.", 2);
+      p["start"].set<double> ("My starting value", 0);
     }
 
     void Config()
     {
-      step_ = getParam<int> ("step");
-      setOut<int> ("out", "output", getParam<int> ("start"));
+      step_ = getParam<double> ("step");
+      setOut<double> ("out", "output", getParam<double> ("start"));
     }
 
     void Process()
     {
-      getOut<int> ("out") += step_;
+      getOut<double> ("out") += step_;
     }
   };
 
   struct Multiply : ecto::module
   {
-    int factor_;
+    double factor_;
 
     static void Params(tendrils_t& p)
     {
-      p["factor"].set<float> ("A factor to multiply by.", 3.14);
+      p["factor"].set<double> ("A factor to multiply by.", 3.14);
     }
 
     void Config()
     {
-      factor_ = getParam<float> ("factor");
-      setIn<int> ("in", "multly in by factor");
-      setOut<int> ("out", "the result of in * factor");
+      factor_ = getParam<double> ("factor");
+      setIn<double> ("in", "multly in by factor");
+      setOut<double> ("out", "the result of in * factor");
     }
     void Process()
     {
-      getOut<int> ("out") = getIn<int> ("in") * factor_;
+      getOut<double> ("out") = getIn<double> ("in") * factor_;
     }
   };
 

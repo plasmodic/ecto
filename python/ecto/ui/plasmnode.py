@@ -8,6 +8,9 @@ class PlasmNode(QtGui.QGraphicsItem):
 
     def __init__(self, graphWidget, inst):
         QtGui.QGraphicsItem.__init__(self)
+        self.xsize = 80
+        self.ysize = 80
+        self.shadowoffset = 3
         # self.graph = weakref.ref(graphWidget)
         # self.edgeList = []
         # self.newPos = QtCore.QPointF()
@@ -22,30 +25,50 @@ class PlasmNode(QtGui.QGraphicsItem):
 
     def shape(self):
         path = QtGui.QPainterPath()
-        path.addRect(-40, -40, 45, 45)
+        path.addRect(0, 0, 
+                      self.xsize+self.shadowoffset, self.ysize+self.shadowoffset)
         return path
 
     def boundingRect(self):
-        adjust = 5.0
-        return QtCore.QRectF(-40 - adjust, -40 - adjust,
-                             40 + adjust, 40 + adjust)
+        return QtCore.QRectF(-self.xsize - self.shadowoffset, -self.ysize - self.shadowoffset,
+                              self.xsize + self.shadowoffset, self.ysize + self.shadowoffset)
+
+    def drawports(self, painter, portlist, xcoord):
+        painter.setBrush(QtCore.Qt.red)
+        painter.setPen(QtCore.Qt.green)
+        nport = len(portlist)
+        npix = (self.ysize * 1.0)/ (nport+1)
+        print "nport=", nport, "npix=", npix
+        j = 0
+        for i in portlist:
+            j += 1
+            n = i.key()
+            e = i.data()
+            print n, e
+            painter.drawRect(xcoord, j*npix, 5, 5)
+        
 
     def paint(self, painter, option, widget):
+        print "paint", self.inst.Name()
         painter.setPen(QtCore.Qt.NoPen)
         painter.setBrush(QtCore.Qt.darkGray)
-        painter.drawRect(-15, -15, 40, 40)
+        painter.drawRect(self.shadowoffset, self.shadowoffset,
+                         self.xsize + self.shadowoffset, 
+                         self.ysize + self.shadowoffset)
 
-        gradient = QtGui.QRadialGradient(-3, -3, 30)
+        gradient = QtGui.QLinearGradient(0, 0, self.xsize, self.ysize)
+
         if option.state & QtGui.QStyle.State_Sunken:
-            gradient.setCenter(3, 3)
-            gradient.setFocalPoint(3, 3)
-            gradient.setColorAt(1, QtGui.QColor(QtCore.Qt.yellow).lighter(120))
-            gradient.setColorAt(0, QtGui.QColor(QtCore.Qt.darkYellow).lighter(120))
+            gradient.setColorAt(1, QtGui.QColor(QtCore.Qt.yellow).lighter(100))
+            gradient.setColorAt(0, QtGui.QColor(QtCore.Qt.darkYellow).lighter(100))
         else:
             gradient.setColorAt(0, QtCore.Qt.yellow)
             gradient.setColorAt(1, QtCore.Qt.darkYellow)
- 
+            
         painter.setBrush(QtGui.QBrush(gradient))
         painter.setPen(QtGui.QPen(QtCore.Qt.black, 0))
-        painter.drawRect(-20, -20, 40, 40)
+        painter.drawRect(0, 0, self.xsize, self.ysize)
+        painter.drawText(15,15, self.inst.Name())
 
+        self.drawports(painter, self.inst.inputs, 0)
+        self.drawports(painter, self.inst.outputs, self.xsize-5)
