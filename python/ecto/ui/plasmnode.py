@@ -34,8 +34,8 @@ class PlasmNode(QtGui.QGraphicsItem):
                               self.xsize + self.shadowoffset, self.ysize + self.shadowoffset)
 
     def drawports(self, painter, portlist, xcoord):
-        painter.setBrush(QtCore.Qt.red)
-        painter.setPen(QtCore.Qt.green)
+        painter.setBrush(QtCore.Qt.green)
+        painter.setPen(QtCore.Qt.black)
         nport = len(portlist)
         npix = (self.ysize * 1.0)/ (nport+1)
         print "nport=", nport, "npix=", npix

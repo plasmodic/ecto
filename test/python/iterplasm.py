@@ -1,22 +1,8 @@
 #!/usr/bin/env python
 
-import ecto, buster
+import ecto, buster, makeplasm
 
-plasm = ecto.Plasm()
-g = buster.Generate()
-g.Params(g.params)
-g.params['step'].set(3.0)
-g.params['start'].set(4.0)
-g.Config()
-
-m = buster.Multiply()
-m.Params(m.params)
-m.params['factor'].set(13.0)
-m.Config()
-
-plasm.connect(g, 'out', m, 'in')
-
-print plasm
+plasm = makeplasm.makeplasm()
 
 
 for pr in plasm.edges:
@@ -24,3 +10,14 @@ for pr in plasm.edges:
     e = pr.data()
     print n, " => ", e
     print n.Name(), len(n.inputs), len(n.outputs), len(n.params)
+    for i in n.inputs:
+        print "in:", i
+    for o in n.outputs:
+        print "out:", o
+        
+    for ds in e.downstream:
+        print "ds:", ds
+        for mod in ds.data():
+            print "   mod:", mod
+    for us in e.upstream:
+        print "us:", us

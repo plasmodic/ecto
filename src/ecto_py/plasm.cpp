@@ -160,16 +160,16 @@ void wrapPlasm(){
     .def_readwrite("downstream",&edge::downstream)
     .def_readwrite("upstream",&edge::upstream)
     ;
-  bp::class_<plasm::map_t>("EdgeMap")
+  bp::class_<plasm::map_t>("map_module_edge")
     .def(bp::map_indexing_suite<plasm::map_t>())
     ;
-  bp::class_<edge::us::modules>("Upstream")
+  bp::class_<edge::us::modules>("map_string_module")
     .def(bp::map_indexing_suite<edge::us::modules>())
     ;
-  bp::class_<edge::ds::modules>("Downstream")
+  bp::class_<edge::ds::modules>("map_string_set_module")
     .def(bp::map_indexing_suite<edge::ds::modules>())
     ;
-  bp::class_<edge::ds::module_set>("ModuleSet")
+  bp::class_<edge::ds::module_set>("set_module")
       .def(bp::set_indexing_suite<edge::ds::module_set>())
       ;
   bp::class_<plasm,boost::noncopyable>("Plasm")
