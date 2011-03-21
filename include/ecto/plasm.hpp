@@ -13,6 +13,8 @@ namespace ecto
 
   namespace plasm_ops
   {
+    //this is needed for forward declared module ptr working well with
+    //std::map :(
     template<typename T>
     struct oless
     {

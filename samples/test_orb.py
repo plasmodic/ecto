@@ -8,8 +8,8 @@ import orb
 debug = True
 
 def hookUpORB(plasm, image, image_key, imshow):
-    FAST = ecto.make(orb.FAST, N_max=1500)
-    Harris = ecto.make(orb.Harris, N_max=100)
+    FAST = ecto.make(orb.FAST, N_max=5000)
+    Harris = ecto.make(orb.Harris, N_max=2000)
     plasm.connect(image, image_key, FAST, "image")
     plasm.connect(FAST, "out", Harris, "kpts")
     plasm.connect(image, image_key, Harris, "image")
@@ -45,7 +45,7 @@ harrises = []
 for i in pyramid.outputs:
     if("out" in i.key()):
         x = ecto.make(imageproc.imshow)
-        ecto.config(x, name=i.key(), waitKey=10, autoSize=False)
+        ecto.config(x, name=i.key(), waitKey=-1, autoSize=False)
         harrises.append(hookUpORB(plasm, pyramid, i.key(), x))
         imshows.append(x)
 i = 0

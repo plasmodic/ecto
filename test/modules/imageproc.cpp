@@ -122,6 +122,64 @@ struct cvtColor : ecto::module
   int flag_;
 };
 
+struct ChannelSplitter : ecto::module
+{
+    enum Channel
+    {
+     CB=0,CG = 1, CR=2, BLUE = 'b', GREEN = 'g', RED = 'r'
+    };
+
+    void pickColorIdx()
+    {
+       idxs_[CB] = bgr_ ? 0 : 2; //if its bgr then blue is first channel
+
+       idxs_[CR]  = bgr_ ? 2 : 0; //if its bgr, then the red is the last channel
+
+       idxs_[CG] = 1;
+
+    }
+    void Config()
+    {
+      SHOW();
+      //store the color and the index per channel
+      bgr_ = getParam<bool> ("bgr");
+      pickColorIdx();
+
+      setIn<cv::Mat> ("in", "The color image to split.");
+      setOut<cv::Mat> ("red", "Red channel.");
+      setOut<cv::Mat> ("green", "Green channel.");
+      setOut<cv::Mat> ("blue", "Blue channel.");
+    }
+    void Process()
+    {
+      SHOW();
+      const cv::Mat& in = getIn<cv::Mat> ("in");
+      if (in.channels() == 3)
+        cv::split(in, channels_);
+      else if (in.channels() == 1)
+      {
+        for(int i = 0; i < 3; i++)
+        {
+          channels_[i] = in;
+        }
+      }else
+      {
+        throw std::runtime_error("unsupported number of channels! must be 1 or 3");
+      }
+      getOut<cv::Mat>("blue") = channels_[CB];
+      getOut<cv::Mat>("green") = channels_[CG];
+      getOut<cv::Mat>("red") = channels_[CR];
+    }
+    static void Params(tendrils_t& p)
+    {
+      SHOW();
+      p["bgr"].set<bool> ("color format", true);
+    }
+    bool bgr_;
+    int idxs_[3];
+    cv::Mat channels_[3];
+  };
+
 struct Sobel : ecto::module
 {
   Sobel() :
@@ -193,4 +251,5 @@ ECTO_MODULE(imageproc)
   ecto::wrap<Sobel>("Sobel");
   ecto::wrap<cvtColor>("cvtColor");
   ecto::wrap<Adder<cv::Mat> >("ImageAdder");
+  ecto::wrap<ChannelSplitter> ("ChannelSplitter");
 }
