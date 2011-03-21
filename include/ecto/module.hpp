@@ -23,12 +23,41 @@ namespace ecto
     bool dirty() const;
 
     template<typename T>
+    inline static tendril& set(tendrils_t& tendrils,
+                               const std::string& name,
+                               const std::string& doc,
+                               const T& t)
+    {
+      //if there are no exiting tendrils by the given name,
+      //just add it.
+      if (tendrils.count(name) == 0)
+      {
+        tendrils[name] = ecto::tendril::make<T>(t, doc);
+      }else // we want to just return the existing tendril (so that modules preconnected don't get messed up)...
+      {
+        //there is already an existing tendril with the given name
+        //check if the types are the same
+        bool same_type = std::strcmp(tendrils[name].impl_->type_info().name(), typeid(T).name()) == 0;
+        if(!same_type)
+        {
+          //to throw or not to throw...
+          std::stringstream ss;
+          ss << "Your types aren't the same, this could lead to very undefined behavior...";
+          ss << " old type = " << tendrils[name].impl_->type_info().name()
+             << " new type = " <<  typeid(T).name() << std::endl;
+          throw std::logic_error(ss.str());
+          //tendrils[name] = ecto::tendril::make<T>(t, doc);
+        }
+      }
+      return tendrils[name];
+    }
+
+    template<typename T>
     tendril& setOut(const std::string& name,
 		    const std::string& doc = "",
 		    const T& t = T())
     {
-      outputs[name] = ecto::tendril::make<T>(t,doc);
-      return outputs[name];
+      return set<T>(outputs,name,doc,t);
     }
 
     template<typename T>
@@ -36,8 +65,7 @@ namespace ecto
 		   const std::string& doc = "",
 		   const T& t = T())
     {
-      inputs[name] = ecto::tendril::make<T>(t,doc);
-      return inputs[name];
+      return set<T>(inputs,name,doc,t);
     }
 
     template<typename T>
@@ -45,8 +73,7 @@ namespace ecto
 		      const std::string& doc = "",
 		      const T& t = T())
     {
-      params[name] = ecto::tendril::make<T>(t,doc);
-      return params[name];
+      return set<T>(params,name,doc,t);
     }
 
     template<typename T>

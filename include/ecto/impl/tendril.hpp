@@ -1,4 +1,6 @@
-#if NDEBUG
+//no sure if we should disable this even in release...
+//#if NDEBUG
+#if 0
 #define ECTO_ASSERT(_impl_check_ )		\
   do {} while(false)
 #else
@@ -11,9 +13,9 @@
 template<typename T>
 bool tendril::impl_base::check(tendril::impl_base& i)
 {
-  //this fails across multiple modules!
+  //this fails across shared library boundaries
   //return typeid(T) == i.type_info();
-  //however type name should be ok?
+  //however type name should be ok...
   return std::strcmp(typeid(T).name(), i.type_info().name()) == 0;
 }
 
@@ -66,19 +68,13 @@ void tendril::impl<T>:: setPython(boost::python::object o)
 template<typename T>
 boost::python::object tendril::impl<T>::getPython() const
 {
-  //return boost::python::object(t);
-
-#if 1
-  try {
+  try
+  {
     boost::python::object o(t);
     return o;
   }
-  // if you want to play with the errors, do so like this
   catch (const boost::python::error_already_set& e) {
-    //std::cout << "I CAUGHT IT I CAUGHT IT\n";
-    //PyErr_Print();
-    //silent!
+    //silently handle no python wrapping
   }
   return boost::python::object();
-#endif
 }
