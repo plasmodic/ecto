@@ -1,9 +1,10 @@
 
-import sys, inspect, math
+import sys, inspect, math, weakref
 from PySide import QtCore, QtGui
 
 import ecto
 from plasmnode import PlasmNode
+from plasmedge import PlasmEdge
 
 class PlasmWidget(QtGui.QGraphicsView):
     def __init__(self, x):
@@ -24,18 +25,30 @@ class PlasmWidget(QtGui.QGraphicsView):
     def add(self, plasm):
         print "plasm!", plasm
         
-        #node = PlasmNode(self, what)
-        #self.scene().addItem(node)
-        #node.setPos(0, self.coo)
-        #self.coo -= node.boundingRect().y()
+        self.nodes = {}
+        self.inedges = {}
+        self.outedges = {}
 
-        for e in plasm.edges:
-            edge = e.data()
-            pnode = PlasmNode(self, e.key())
-            print ">>>", edge, pnode
+        for pr in plasm.edges:
+            node = pr.key()
+            pnode = PlasmNode(self, node)
+            self.nodes[node] = pnode
+            print ">>>", pnode
             self.scene().addItem(pnode)
             pnode.setPos(self.coo, 50)
-            self.coo += pnode.boundingRect().x() - 50
+            xoff = (pnode.boundingRect().width() * 1.25)
+            print "xoff=", xoff
+            self.coo += xoff 
+            
+        for pr in plasm.edges:
+            print '-'*40
+            e = pr.data()
+            for ds in e.downstream:
+                for n in ds.data():
+                    print "ds n:", n
+
+            for us in e.upstream:
+                print "us:", us
         
     def scaleView(self, scaleFactor):
         factor = self.matrix().scale(scaleFactor, scaleFactor).mapRect(QtCore.QRectF(0, 0, 1, 1)).width()

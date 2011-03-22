@@ -26,12 +26,13 @@ class PlasmNode(QtGui.QGraphicsItem):
     def shape(self):
         path = QtGui.QPainterPath()
         path.addRect(0, 0, 
-                      self.xsize+self.shadowoffset, self.ysize+self.shadowoffset)
+                     self.xsize+self.shadowoffset, 
+                     self.ysize+self.shadowoffset)
         return path
 
     def boundingRect(self):
-        return QtCore.QRectF(-self.xsize - self.shadowoffset, -self.ysize - self.shadowoffset,
-                              self.xsize + self.shadowoffset, self.ysize + self.shadowoffset)
+        return QtCore.QRectF(0, 0, self.xsize + self.shadowoffset, 
+                             self.ysize + self.shadowoffset)
 
     def drawports(self, painter, portlist, xcoord):
         painter.setBrush(QtCore.Qt.green)
@@ -69,6 +70,10 @@ class PlasmNode(QtGui.QGraphicsItem):
         painter.setPen(QtGui.QPen(QtCore.Qt.black, 0))
         painter.drawRect(0, 0, self.xsize, self.ysize)
         painter.drawText(15,15, self.inst.Name())
+        x = 30
+        for p in self.inst.params:
+            painter.drawText(15,x, "%s %s" % (p.key(), p.data().get()))
+            x += 15
 
         self.drawports(painter, self.inst.inputs, 0)
         self.drawports(painter, self.inst.outputs, self.xsize-5)
