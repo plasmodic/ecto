@@ -203,7 +203,8 @@ struct CameraCalibrator : ecto::module
     SHOW();
     set<int> (p, "rows", "Number of dots in row direction", 4);
     set<int> (p, "cols", "Number of dots in col direction", 11);
-    set<int> (p, "n_obs", "Number of observations", 100);
+    set<int> (p, "n_obs", "Number of observations", 50);
+    set<float> (p, "square_size", "Number of observations", 25);
   }
   cv::Size grid_size_;
   int n_obs_;
