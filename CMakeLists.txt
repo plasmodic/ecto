@@ -118,6 +118,19 @@ if(BUILD_TEST_MODULES)
       ${OpenCV_LIBS})
   endif(OpenCV_FOUND)
   add_subdirectory(samples)
+  ectomodule(push_ups
+    test/benchmarks/push_ups.cpp
+    )
+    
+    add_executable(push_ups
+    	test/benchmarks/main.cpp
+    )
+    target_link_libraries(push_ups
+    	${Boost_LIBRARIES}
+    	${PYTHON_LIBRARIES}
+    	ecto
+    )
+  
 
 endif()
 
