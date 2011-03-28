@@ -69,6 +69,7 @@ endmacro()
 add_library(ecto SHARED
   src/tendril.cpp
   src/module.cpp
+  src/plasm2.cpp
   src/plasm.cpp
   src/util.cpp
   )
@@ -109,8 +110,6 @@ if(BUILD_TEST_MODULES)
   find_package(OpenCV)
 
   if(OpenCV_FOUND)
-    #message("===${OpenCV_INCLUDE_DIRS}")
-    #include_directories(${OpenCV_INCLUDE_DIRS})
     ectomodule( imageproc 
       test/modules/imageproc.cpp
       )
@@ -126,6 +125,15 @@ if(BUILD_TEST_MODULES)
     	test/benchmarks/main.cpp
     )
     target_link_libraries(push_ups
+    	${Boost_LIBRARIES}
+    	${PYTHON_LIBRARIES}
+    	ecto
+    )
+    
+    add_executable(plasm2
+    	test/benchmarks/plasm2.cpp
+    )
+    target_link_libraries(plasm2
     	${Boost_LIBRARIES}
     	${PYTHON_LIBRARIES}
     	ecto
