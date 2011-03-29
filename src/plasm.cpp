@@ -116,7 +116,7 @@ namespace ecto
       {
 
         Vertex& vert = graph.get_vert(v);
-        if (vert.first->dirty())
+        if (!vert.first->dirty())
           return;
         GraphTraits::in_edge_iterator in_i, in_end;
         GraphTraits::edge_descriptor e;

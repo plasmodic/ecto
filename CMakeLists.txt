@@ -96,49 +96,7 @@ set(ecto_LIBRARIES_DIR ${LIBRARY_OUTPUT_PATH})
 configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoConfig.cmake.in 
   ${CMAKE_BINARY_DIR}/ectoConfig.cmake @ONLY)
 
-set(BUILD_TEST_MODULES ON CACHE BOOL "Build test modules")
-
-if(BUILD_TEST_MODULES)
-  ectomodule(buster
-    test/modules/buster.cpp
-    )
-  #use the cmake cache, to -DOpenCV_dir=<path_to_build_of_opencv>
-  #  svn co https://code.ros.org/svn/opencv/trunk
-  #or the release https://code.ros.org/svn/opencv/branches/2.2/opencv
-  #and cmake that baby
-  find_package(OpenCV)
-
-  if(OpenCV_FOUND)
-    ectomodule( imageproc 
-      test/modules/imageproc.cpp
-      )
-    link_ecto(imageproc
-      ${OpenCV_LIBS})
-  endif(OpenCV_FOUND)
-  add_subdirectory(samples)
-  ectomodule(push_ups
-    test/benchmarks/push_ups.cpp
-    )
-    
-    add_executable(push_ups
-    	test/benchmarks/main.cpp
-    )
-    target_link_libraries(push_ups
-    	${Boost_LIBRARIES}
-    	${PYTHON_LIBRARIES}
-    	ecto
-    )
-    
-    add_executable(plasm2
-    	test/benchmarks/plasm2.cpp
-    )
-    target_link_libraries(plasm2
-    	${Boost_LIBRARIES}
-    	${PYTHON_LIBRARIES}
-    	ecto
-    )
-  
-
-endif()
+add_subdirectory(test)
+add_subdirectory(samples)
 
 
