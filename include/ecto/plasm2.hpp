@@ -18,7 +18,8 @@ namespace ecto
     void connect(modulePtr from, const std::string& output, modulePtr to, const std::string& input);
     void markDirty(modulePtr m);
     void go(modulePtr m);
-    void viz(std::ostream& out);
+    void viz(std::ostream& out) const;
+    std::string viz() const;
     class impl;
     boost::shared_ptr<impl> impl_;
   };

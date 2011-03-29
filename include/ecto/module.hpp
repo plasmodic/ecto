@@ -103,7 +103,7 @@ namespace ecto
   private:
     bool dirty_;
 
-    friend class plasm;
+    friend class plasm2;
   };
 
 }//namespace ecto

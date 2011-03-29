@@ -27,7 +27,7 @@ namespace ecto
   struct ModuleGraph
   {
     typedef std::pair<module::ptr, std::string> _Vertex;
-    struct Vertex : _Vertex
+    struct Vertex : public _Vertex
     {
       Vertex() :
         _Vertex()
@@ -37,12 +37,19 @@ namespace ecto
         _Vertex(p, s)
       {
       }
+
       struct Tag
       {
         typedef vertex_property_tag kind;
       };
       typedef property<Tag, Vertex> Property;
       size_t uid;
+    };
+    struct opless{
+    inline bool operator()(const Vertex&lhs, const Vertex& rhs) const
+    {
+      return lhs.first.get() < rhs.first.get() ||  (lhs.first.get() == rhs.first.get()  && lhs.second < rhs.second);
+    }
     };
 
     typedef adjacency_list<boost::setS, vecS, boost::bidirectionalS, Vertex::Property> graph_t;
@@ -86,13 +93,12 @@ namespace ecto
       void operator()(const Vertex_Desc& v)
       {
         graph.get_vert(v).first->dirty(true);
-        property_map<graph_t, boost::vertex_index_t>::type index = get(boost::vertex_index_t(), graph.root_graph_);
         GraphTraits::out_edge_iterator out_i, out_end;
         GraphTraits::edge_descriptor e;
         for (boost::tie(out_i, out_end) = boost::out_edges(v, graph.root_graph_); out_i != out_end; ++out_i)
         {
           e = *out_i;
-          Vertex_Desc targ = target(e, graph.graph_);
+          Vertex_Desc targ = target(e, graph.root_graph_);
           (*this)(targ);
         }
       }
@@ -111,13 +117,12 @@ namespace ecto
         Vertex& vert = graph.get_vert(v);
         if (vert.first->dirty())
           return;
-        property_map<graph_t, boost::vertex_index_t>::type index = get(boost::vertex_index_t(), graph.root_graph_);
         GraphTraits::in_edge_iterator in_i, in_end;
         GraphTraits::edge_descriptor e;
         for (boost::tie(in_i, in_end) = boost::in_edges(v, graph.root_graph_); in_i != in_end; ++in_i)
         {
           e = *in_i;
-          Vertex_Desc targ = target(e, graph.graph_);
+          Vertex_Desc targ = boost::source(e, graph.root_graph_);
           (*this)(targ);
         }
         vert.first->Process();
@@ -136,9 +141,8 @@ namespace ecto
       Goer(*this)(make_vert(m).uid);
     }
 
-    typedef std::set<Vertex> module_set_t;
-    size_t uid_gen;
-    module_set_t module_set;
+    typedef std::set<Vertex,opless> module_set_t;
+     module_set_t module_set;
 
     /** Assigns a unique vertex id, from the graph.
      *
@@ -146,14 +150,16 @@ namespace ecto
      */
     inline void getUID(Vertex& v)
     {
+      //std::cout << v.first << v.second << std::endl;
       module_set_t::const_iterator it = module_set.find(v);
       if (it == module_set.end())
       {
         v.uid = boost::add_vertex(graph_);
-        module_set.insert(v);
+        module_set.insert(v).second;
       }
       else
         v.uid = it->uid;
+
     }
 
   };
@@ -185,9 +191,16 @@ namespace ecto
     impl_->modules_.go(m);
   }
 
-  void plasm2::viz(std::ostream& out)
+  void plasm2::viz(std::ostream& out) const
   {
     boost::write_graphviz(out, impl_->modules_.graph_);
+  }
+
+  std::string plasm2::viz() const
+  {
+    std::stringstream ss;
+    viz(ss);
+    return ss.str();
   }
 
 }

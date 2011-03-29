@@ -8,7 +8,7 @@ scatter = buster.Scatter()
 scatter.Config()
 
 idx = buster.Indexer()
-idx.Config(2)
+idx.Config()
 
 gather = buster.Gather()
 gather.Config(10)

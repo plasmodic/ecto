@@ -17,6 +17,7 @@ int main()
 
   p.markDirty(m);
 
+  p.go(m2);
   p.viz(std::cout);
 
 }

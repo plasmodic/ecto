@@ -17,7 +17,9 @@ printModuleDoc(m)
 
 plasm.connect(g, "out", m , "in")
 
+print plasm.viz()
 for i in range(0,10):
   plasm.markDirty(g)
   plasm.go(m)
-  print m.outputs["out"].get()
+  print "output: ", m.outputs["out"].get()
+
