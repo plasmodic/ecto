@@ -13,7 +13,7 @@ int main()
   ecto::module::ptr b(new ecto_push_ups::BigData());
   b->Config();
 
-  std::cout << "adding (" << std::endl;
+  std::cout << "adding" << std::endl;
   std::cout << "ecto" << std::endl;
   {
     boost::progress_timer t; // start timing

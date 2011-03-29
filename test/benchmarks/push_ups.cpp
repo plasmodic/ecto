@@ -32,7 +32,7 @@ namespace ecto_push_ups
     }
     void Process()
     {
-      SHOW();
+      //SHOW();
       getOut<int> ("out") = add2(std::rand(),std::rand());
     }
     static void Params(tendrils_t& p)
