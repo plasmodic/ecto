@@ -9,7 +9,7 @@ namespace buster
   {
     int step_;
 
-    static void Params(tendrils_t& p)
+    static void Params(ecto::tendrils& p)
     {
       p["step"].set<double> ("The step with which i generate integers.", 2);
       p["start"].set<double> ("My starting value", 0);
@@ -31,7 +31,7 @@ namespace buster
   {
     double factor_;
 
-    static void Params(tendrils_t& p)
+    static void Params(ecto::tendrils& p)
     {
       p["factor"].set<double> ("A factor to multiply by.", 3.14);
     }
@@ -50,7 +50,7 @@ namespace buster
 
   struct Scatter : ecto::module
   {
-    static void Params(tendrils_t& p)
+    static void Params(ecto::tendrils& p)
     {
       p["n"].set<int> ("Number to scatter...", 2);
       p["x"].set<int> ("The value to scatter...", 13);
@@ -78,7 +78,7 @@ namespace buster
 
   struct Gather : ecto::module
   {
-    static void Params(tendrils_t& p)
+    static void Params(ecto::tendrils& p)
     {
       p["n"].set<int> ("N to gather", 2);
     }

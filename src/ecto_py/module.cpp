@@ -61,8 +61,7 @@ namespace py
 
 void wrapModule(){
 
-  bp::class_<module::tendrils_t>("tendrils")
-    .def(bp::map_indexing_suite<module::tendrils_t,false>())
+  bp::class_<tendrils>("tendrils")
     ;
 
   bp::class_<modwrap, boost::noncopyable>("module")

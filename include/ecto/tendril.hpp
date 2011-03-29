@@ -86,7 +86,12 @@ namespace ecto
 	throw std::logic_error("This connection is uninitialized! type: " + name_of<T> ());
       return *(impl_base::get<T>(*impl_));
     }
-
+    template <typename T>
+    bool is_type()
+    {
+      bool same_type = std::strcmp(impl_->type_info().name(), typeid(T).name()) == 0;
+      return same_type;
+    }
     void connect(tendril& rhs);
 
     inline bool dirty(bool b)
@@ -140,6 +145,7 @@ namespace ecto
     tendril(impl_base::ptr impl);
     boost::shared_ptr<impl_base> impl_;
     bool dirty_;
+    friend class tendrils;
     friend class module;
   };
 #include <ecto/impl/tendril.hpp>

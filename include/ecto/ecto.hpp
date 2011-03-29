@@ -5,11 +5,14 @@
 #include <ecto/module.hpp>
 #include <ecto/tendril.hpp>
 #include <ecto/plasm.hpp>
+#include <ecto/tendrils.hpp>
 #include <ecto/util.hpp>
 
 //boost stuff
 #include <boost/python.hpp>
 #include <boost/shared_ptr.hpp>
+
+
 namespace ecto {
   template<typename T>
   struct doc{

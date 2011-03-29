@@ -45,11 +45,12 @@ namespace ecto
       typedef property<Tag, Vertex> Property;
       size_t uid;
     };
-    struct opless{
-    inline bool operator()(const Vertex&lhs, const Vertex& rhs) const
+    struct opless
     {
-      return lhs.first.get() < rhs.first.get() ||  (lhs.first.get() == rhs.first.get()  && lhs.second < rhs.second);
-    }
+      inline bool operator()(const Vertex&lhs, const Vertex& rhs) const
+      {
+        return lhs.first.get() < rhs.first.get() || (lhs.first.get() == rhs.first.get() && lhs.second < rhs.second);
+      }
     };
 
     typedef adjacency_list<boost::setS, vecS, boost::bidirectionalS, Vertex::Property> graph_t;
@@ -141,8 +142,8 @@ namespace ecto
       Goer(*this)(make_vert(m).uid);
     }
 
-    typedef std::set<Vertex,opless> module_set_t;
-     module_set_t module_set;
+    typedef std::set<Vertex, opless> module_set_t;
+    module_set_t module_set;
 
     /** Assigns a unique vertex id, from the graph.
      *

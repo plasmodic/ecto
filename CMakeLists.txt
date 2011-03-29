@@ -69,7 +69,6 @@ endmacro()
 add_library(ecto SHARED
   src/tendril.cpp
   src/module.cpp
-  src/plasm2.cpp
   src/plasm.cpp
   src/util.cpp
   )
