@@ -3,7 +3,7 @@
 project(ecto_samples)
 set(BUILD_SAMPLES ON CACHE BOOL "Build sample modules")
 
-if(BUILD_SAMLES)
+if(BUILD_SAMPLES)
 
 	#use the cmake cache, to -DOpenCV_dir=<path_to_build_of_opencv>
 	#  svn co https://code.ros.org/svn/opencv/trunk
