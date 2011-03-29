@@ -94,6 +94,7 @@ namespace ecto
       void operator()(const Vertex_Desc& v)
       {
         graph.get_vert(v).first->dirty(true);
+        //fixme!!!
         if(graph.graph_.out_edge_list(v).empty())
           return;
         GraphTraits::out_edge_iterator out_i, out_end;
@@ -122,6 +123,7 @@ namespace ecto
           return;
         GraphTraits::in_edge_iterator in_i, in_end;
         GraphTraits::edge_descriptor e;
+        //fixme!!!
         if(!graph.graph_.out_edge_list(v).empty())
         for (boost::tie(in_i, in_end) = boost::in_edges(v, graph.root_graph_); in_i != in_end; ++in_i)
         {
