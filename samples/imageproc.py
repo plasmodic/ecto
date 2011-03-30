@@ -4,31 +4,26 @@ import ecto
 from ecto.doc import printModuleDoc,graphviz
 import imageproc as im
 
-video = im.VideoCapture()
-video
-video.Config()
+video = ecto.make(im.VideoCapture)
 printModuleDoc(video)
 
-imshow = im.ImageShower()
+imshow = ecto.make(im.imshow,name="video",waitKey=10)
 printModuleDoc(imshow)
 
-sobelShower = im.ImageShower()
-sobelShower.Config("sobel",1,True)
+sobelShower = ecto.make(im.imshow,name="sobel",waitKey=-1)
 
-grayShower = im.ImageShower()
-grayShower.Config("gray",1,True)
+grayShower = ecto.make(im.imshow,name="gray",waitKey=-1)
 
-sobelX = im.Sobel()
-sobelX.Config(1,0)
-sobelY = im.Sobel()
-sobelY.Config(0,1)
 
-rgb2gray = im.Rgb2Gray()
+sobelX = ecto.make(im.Sobel, x= 1, y = 0)
+sobelY = ecto.make(im.Sobel, x= 0, y = 1)
 
-adder = im.ImageAdder()
+rgb2gray = ecto.make(im.cvtColor, flag=7)
+
+adder = ecto.make(im.ImageAdder)
 printModuleDoc(adder)
-abs1 = im.AbsNormalized()
-abs2 = im.AbsNormalized()
+abs1 = ecto.make(im.AbsNormalized)
+abs2 = ecto.make(im.AbsNormalized)
 
 plasm = ecto.Plasm()
 

@@ -10,6 +10,8 @@
 #endif
 #endif
 
+using ecto::tendrils;
+
 enum Pattern
 {
   CHESSBOARD, CIRCLES_GRID, ASYMMETRIC_CIRCLES_GRID
@@ -75,13 +77,13 @@ struct PatternDetector : ecto::module
         break;
     }
   }
-  static void Params(tendrils_t& p)
+  static void Params(tendrils& p)
   {
     SHOW();
-    set<int> (p, "rows", "Number of dots in row direction", 4);
-    set<int> (p, "cols", "Number of dots in col direction", 11);
-    set<std::string> (p, "pattern_type", "The pattern type, possible values are: [chessboard|circles|acircles]",
-                      "acircles");
+    p.set<int> ("rows", "Number of dots in row direction", 4);
+    p.set<int> ("cols", "Number of dots in col direction", 11);
+    p.set<std::string> ("pattern_type", "The pattern type, possible values are: [chessboard|circles|acircles]",
+                        "acircles");
   }
   void choosePattern()
   {
@@ -126,11 +128,11 @@ struct PatternDrawer : ecto::module
     in.copyTo(out);
     cv::drawChessboardCorners(out, grid_size_, points, found);
   }
-  static void Params(tendrils_t& p)
+  static void Params(tendrils& p)
   {
     SHOW();
-    set<int> (p, "rows", "Number of dots in row direction", 4);
-    set<int> (p, "cols", "Number of dots in col direction", 11);
+    p.set<int> ("rows", "Number of dots in row direction", 4);
+    p.set<int> ("cols", "Number of dots in col direction", 11);
   }
   cv::Size grid_size_;
 };
@@ -198,12 +200,13 @@ struct CameraCalibrator : ecto::module
 
     getOut<float> ("norm") = norm;
   }
-  static void Params(tendrils_t& p)
+  static void Params(tendrils& p)
   {
     SHOW();
-    set<int> (p, "rows", "Number of dots in row direction", 4);
-    set<int> (p, "cols", "Number of dots in col direction", 11);
-    set<int> (p, "n_obs", "Number of observations", 100);
+    p.set<int> ("rows", "Number of dots in row direction", 4);
+    p.set<int> ("cols", "Number of dots in col direction", 11);
+    p.set<int> ("n_obs", "Number of observations", 50);
+    p.set<float> ("square_size", "Number of observations", 25);
   }
   cv::Size grid_size_;
   int n_obs_;

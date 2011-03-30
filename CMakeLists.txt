@@ -24,6 +24,8 @@ include_directories(
   ${Boost_INCLUDE_DIRS}
   )
 
+option(ECTO_BUILD_UI "build the ui stuffs" OFF)
+if (ECTO_BUILD_UI)
 add_custom_command(OUTPUT ${CMAKE_SOURCE_DIR}/python/ecto/ui/uic.py
   COMMAND pyside-uic ${CMAKE_SOURCE_DIR}/python/ecto/ui/ecto.ui > ${CMAKE_SOURCE_DIR}/python/ecto/ui/uic.py
   DEPENDS ${CMAKE_SOURCE_DIR}/python/ecto/ui/ecto.ui
@@ -36,6 +38,7 @@ add_custom_target(uic ALL
 configure_file(${CMAKE_SOURCE_DIR}/python/ectoedit.py.in
   ${CMAKE_BINARY_DIR}/bin/ectoedit.py
   @ONLY)
+endif()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wl,--no-undefined")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -DBOOST_DISABLE_ASSERTS")
@@ -96,29 +99,7 @@ set(ecto_LIBRARIES_DIR ${LIBRARY_OUTPUT_PATH})
 configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoConfig.cmake.in 
   ${CMAKE_BINARY_DIR}/ectoConfig.cmake @ONLY)
 
-set(BUILD_TEST_MODULES ON CACHE BOOL "Build test modules")
-
-if(BUILD_TEST_MODULES)
-  ectomodule(buster
-    test/modules/buster.cpp
-    )
-  #use the cmake cache, to -DOpenCV_dir=<path_to_build_of_opencv>
-  #  svn co https://code.ros.org/svn/opencv/trunk
-  #or the release https://code.ros.org/svn/opencv/branches/2.2/opencv
-  #and cmake that baby
-  find_package(OpenCV)
-
-  if(OpenCV_FOUND)
-    #message("===${OpenCV_INCLUDE_DIRS}")
-    #include_directories(${OpenCV_INCLUDE_DIRS})
-    ectomodule( imageproc 
-      test/modules/imageproc.cpp
-      )
-    link_ecto(imageproc
-      ${OpenCV_LIBS})
-  endif(OpenCV_FOUND)
-  add_subdirectory(samples)
-
-endif()
+add_subdirectory(test)
+add_subdirectory(samples)
 
 

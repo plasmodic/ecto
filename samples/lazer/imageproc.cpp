@@ -116,7 +116,7 @@ struct cvtColor : ecto::module
   {
     std::stringstream ss;
     ss << "Convert an image's color using opencv, possible flags are:\n" << "RGB2GRAY = " << CV_RGB2GRAY << std::endl
-        << "RGB2BGR = " << CV_RGB2BGR;
+        << "RGB2BGR = " << CV_RGB2BGR  << std::endl << " RGB2LAB=" << CV_RGB2Lab << std::endl<< " CV_BGR2Lab" << CV_BGR2Lab;
     p["flag"].set<int> (ss.str(), CV_RGB2BGR);
   }
   int flag_;
@@ -124,31 +124,13 @@ struct cvtColor : ecto::module
 
 struct ChannelSplitter : ecto::module
 {
-    enum Channel
-    {
-     CB=0,CG = 1, CR=2, BLUE = 'b', GREEN = 'g', RED = 'r'
-    };
-
-    void pickColorIdx()
-    {
-       idxs_[CB] = bgr_ ? 0 : 2; //if its bgr then blue is first channel
-
-       idxs_[CR]  = bgr_ ? 2 : 0; //if its bgr, then the red is the last channel
-
-       idxs_[CG] = 1;
-
-    }
     void Config()
     {
       SHOW();
-      //store the color and the index per channel
-      bgr_ = getParam<bool> ("bgr");
-      pickColorIdx();
-
-      setIn<cv::Mat> ("in", "The color image to split.");
-      setOut<cv::Mat> ("red", "Red channel.");
-      setOut<cv::Mat> ("green", "Green channel.");
-      setOut<cv::Mat> ("blue", "Blue channel.");
+      setIn<cv::Mat> ("in", "The 3 channel image to split.");
+      setOut<cv::Mat> ("out_0", "Channel 0.");
+      setOut<cv::Mat> ("out_1", "Channel 1.");
+      setOut<cv::Mat> ("out_2", "Channel 2.");
     }
     void Process()
     {
@@ -166,17 +148,14 @@ struct ChannelSplitter : ecto::module
       {
         throw std::runtime_error("unsupported number of channels! must be 1 or 3");
       }
-      getOut<cv::Mat>("blue") = channels_[CB];
-      getOut<cv::Mat>("green") = channels_[CG];
-      getOut<cv::Mat>("red") = channels_[CR];
+      getOut<cv::Mat>("out_0") = channels_[0];
+      getOut<cv::Mat>("out_1") = channels_[1];
+      getOut<cv::Mat>("out_2") = channels_[2];
     }
     static void Params(tendrils_t& p)
     {
       SHOW();
-      p["bgr"].set<bool> ("color format", true);
     }
-    bool bgr_;
-    int idxs_[3];
     cv::Mat channels_[3];
   };
 

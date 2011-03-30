@@ -50,11 +50,11 @@ struct ScanLineDrawer : ecto::module
     if (scan_idx_ >= in.rows)
       scan_idx_ = 0;
   }
-  static void Params(tendrils_t& p)
+  static void Params(ecto::tendrils& p)
   {
     SHOW();
-    set<float> (p, "scan_idx", "The scan line index, [0,1]", 0.5f);
-    set<bool> (p, "auto_scan", "After each process, increment the scanline", true);
+    p.set<float> ("scan_idx", "The scan line index, [0,1]", 0.5f);
+    p.set<bool> ("auto_scan", "After each process, increment the scanline", true);
   }
   int scan_idx_;
   bool auto_scan_;
@@ -74,7 +74,7 @@ struct mm : ecto::module
     //const cv::Mat& in = getIn<cv::Mat> ("in");
     //cv::Mat& out = getOut<cv::Mat> ("out");
   }
-  static void Params(tendrils_t& p)
+  static void Params(ecto::tendrils& p)
   {
     SHOW();
   }
@@ -94,7 +94,7 @@ struct LaserDetector : ecto::module
     //const cv::Mat& in = getIn<cv::Mat> ("in");
     //cv::Mat& out = getOut<cv::Mat> ("out");
   }
-  static void Params(tendrils_t& p)
+  static void Params(ecto::tendrils& p)
   {
     SHOW();
   }

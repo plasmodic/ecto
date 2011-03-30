@@ -8,13 +8,15 @@ import calib
 debug = True
 
 plasm = ecto.Plasm()
-
+rows = 9
+cols = 3
+square_size = 25 # in millis
 pattern_show = ecto.make(imageproc.imshow, name="pattern", waitKey=10, autoSize=True)
 rgb2gray = ecto.make(imageproc.cvtColor, flag=7)
 video = ecto.make(imageproc.VideoCapture, video_device=0)
-circle_detector = ecto.make(calib.PatternDetector, rows=11, cols=4)
-circle_drawer = ecto.make(calib.PatternDrawer, rows=11, cols=4)
-camera_calibrator = ecto.make(calib.CameraCalibrator, rows=11, cols=4)
+circle_detector = ecto.make(calib.PatternDetector, rows=rows, cols=cols)
+circle_drawer = ecto.make(calib.PatternDrawer, rows=rows, cols=cols)
+camera_calibrator = ecto.make(calib.CameraCalibrator, rows=rows, cols=cols, square_size=square_size)
 printModuleDoc(camera_calibrator)
 plasm.connect(video, "out", rgb2gray, "in")
 plasm.connect(rgb2gray, "out", circle_detector, "in")
