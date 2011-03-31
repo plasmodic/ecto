@@ -3,8 +3,36 @@
 #include <boost/format.hpp>
 #include <boost/foreach.hpp>
 
+//disable show in here
+#define DISABLE_SHOW 1
+#if DISABLE_SHOW
+#ifdef SHOW
+#undef SHOW
+#define SHOW() do{}while(false)
+#endif
+#endif
+
 namespace buster
 {
+
+  struct Printer : ecto::module
+  {
+
+    static void Params(ecto::tendrils& p)
+    {
+      p["str"].set<std::string> ("I print this:", "Hello World");
+    }
+
+    void Config()
+    {
+    }
+
+    void Process()
+    {
+      std::cout << getParam<std::string>("str") << std::endl;
+    }
+  };
+
   struct Generate : ecto::module
   {
     int step_;
@@ -111,6 +139,7 @@ namespace buster
 ECTO_MODULE(buster)
 {
   using namespace buster;
+  ecto::wrap<Printer>("Printer", "A printer...");
   ecto::wrap<Generate>("Generate", "A generator module.");
   ecto::wrap<Multiply>("Multiply", "Multiply an input with a constant");
   ecto::wrap<Scatter>("Scatter", "Scatter a value...");

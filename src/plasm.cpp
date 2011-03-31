@@ -29,11 +29,15 @@ namespace ecto
     typedef std::pair<module::ptr, std::string> _Vertex;
     struct Vertex : public _Vertex
     {
-      Vertex() : _Vertex() { }
+      Vertex() :
+        _Vertex()
+      {
+      }
 
       Vertex(const module::ptr& p, const std::string& s) :
         _Vertex(p, s)
-      { }
+      {
+      }
 
       struct Tag
       {
@@ -46,21 +50,17 @@ namespace ecto
     {
       inline bool operator()(const Vertex&lhs, const Vertex& rhs) const
       {
-        return lhs.first.get() < rhs.first.get() 
-	  || (lhs.first.get() == rhs.first.get() 
-	      && lhs.second < rhs.second);
+        return lhs.first.get() < rhs.first.get() || (lhs.first.get() == rhs.first.get() && lhs.second < rhs.second);
       }
     };
 
-    typedef adjacency_list<boost::setS, vecS, boost::bidirectionalS, 
-			   Vertex::Property> graph_t;
+    typedef adjacency_list<boost::setS, vecS, boost::bidirectionalS, Vertex::Property> graph_t;
     typedef graph_traits<graph_t> GraphTraits;
     typedef graph_traits<graph_t>::vertex_descriptor Vertex_Desc;
 
     graph_t graph_, root_graph_;
 
-    void add_edge(module::ptr from_m, const std::string& out_name, 
-		  module::ptr to_m, const std::string& in_name)
+    void add_edge(module::ptr from_m, const std::string& out_name, module::ptr to_m, const std::string& in_name)
     {
       Vertex from = make_vert(from_m, out_name);
       Vertex to = make_vert(to_m, in_name);
@@ -75,6 +75,11 @@ namespace ecto
     Vertex& get_vert(size_t uid)
     {
       return boost::get(Vertex::Tag(), graph_)[uid];
+    }
+
+    Vertex& get_root_vert(size_t uid)
+    {
+      return boost::get(Vertex::Tag(), root_graph_)[uid];
     }
 
     Vertex make_vert(const module::ptr& p, const std::string& s = "root")
@@ -96,7 +101,7 @@ namespace ecto
       {
         graph.get_vert(v).first->dirty(true);
         //fixme!!!
-        if(graph.graph_.out_edge_list(v).empty())
+        if (graph.graph_.out_edge_list(v).empty())
           return;
         GraphTraits::out_edge_iterator out_i, out_end;
         GraphTraits::edge_descriptor e;
@@ -118,21 +123,26 @@ namespace ecto
       }
       void operator()(const Vertex_Desc& v)
       {
-
         Vertex& vert = graph.get_vert(v);
+        //check if the module is dirty, early escape if it is.
         if (!vert.first->dirty())
           return;
+
         GraphTraits::in_edge_iterator in_i, in_end;
         GraphTraits::edge_descriptor e;
-        //fixme!!!
-        if(!graph.graph_.out_edge_list(v).empty())
-        for (boost::tie(in_i, in_end) = boost::in_edges(v, graph.root_graph_); in_i != in_end; ++in_i)
+        //verify that the current node is in the graph? WTF (shouldn't in_i == in_end in this case?)
+        if (!boost::in_edge_list(graph.graph_, v).empty())
         {
-          e = *in_i;
-          Vertex_Desc targ = boost::source(e, graph.root_graph_);
-          (*this)(targ);
+          for (boost::tie(in_i, in_end) = boost::in_edges(v, graph.root_graph_); in_i != in_end; ++in_i)
+          {
+            e = *in_i; //if we don't check and the vertex is not in the graph this causes segfault
+            Vertex_Desc targ = boost::source(e, graph.root_graph_);
+            (*this)(targ); //recurse.
+          }
         }
+        //process the module
         vert.first->Process();
+        //mark dirty for caching.
         vert.first->dirty(true);
       }
       ModuleGraph& graph;
@@ -162,7 +172,7 @@ namespace ecto
       if (it == module_set.end())
       {
         v.uid = boost::add_vertex(graph_);
-        module_set.insert(v).second;
+        module_set.insert(v);
       }
       else
         v.uid = it->uid;
@@ -177,9 +187,11 @@ namespace ecto
     ModuleGraph modules_;
   };
 
-  plasm::plasm() : impl_(new impl) { }
-  void plasm::connect(module::ptr from, const std::string& out_name, 
-		      module::ptr to, const std::string& in_name)
+  plasm::plasm() :
+    impl_(new impl)
+  {
+  }
+  void plasm::connect(module::ptr from, const std::string& out_name, module::ptr to, const std::string& in_name)
   {
     impl_->modules_.add_edge(from, out_name, to, in_name);
     from->connect(out_name, to, in_name);
