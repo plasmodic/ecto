@@ -61,3 +61,11 @@ to make a module use the macro in cmake:
     ${MY_EXTRA_LIBS}
   )
 
+Gdb Debugging
+=================
+To debug a module with gdb:
+gdb --args /usr/bin/python test_module.py
+
+Or in eclipse:
+Create a C/C++ application run target, set the application to /usr/bin/python
+and args to the python script to test.
