@@ -41,7 +41,6 @@ public:
     while (!thread_.interruption_requested())
     {
       boost::thread::yield();
-
     }
 
     c.disconnect();

@@ -12,11 +12,11 @@ def test_plasm():
 #    ecto.printModuleDoc(gather)
     print "#################\nPlasm test\n#################"
     plasm = ecto.Plasm()
-    for f,t in zip(ecto.keys(scatter.outputs),ecto.keys(gather.inputs)):
+    for f, t in zip(ecto.keys(scatter.outputs), ecto.keys(gather.inputs)):
             plasm.connect(scatter, f, gather, t)
     plasm.go(gather)
-    result =  gather.o.out.get()
-    print "gather out (should be 100):",result
+    result = gather.o.out.get()
+    print "gather out (should be 100):", result
     assert(result == 100)
     #print plasm.viz()
 

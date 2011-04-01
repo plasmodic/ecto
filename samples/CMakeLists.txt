@@ -21,7 +21,7 @@ if(BUILD_SAMPLES)
 	endif()
 
 
-	find_package(PCL REQUIRED)
+	find_package(PCL)
 	if(PCL_FOUND)
 		include_directories(${PCL_INCLUDE_DIRS})
 		link_directories(${PCL_LIBRARY_DIRS})

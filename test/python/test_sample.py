@@ -19,11 +19,11 @@ def test_sample():
     plasm.connect(g, "out", m , "in")
     
     print plasm.viz()
-    for i in range(0,10):
-      plasm.markDirty(g)
-      plasm.go(m)
-      print "output: ", m.outputs["out"].get()
+    for i in range(0, 10):
+        plasm.markDirty(g)
+        plasm.go(m)
+        print "output: ", m.outputs["out"].get()
     print "finished"
     
 if __name__ == '__main__':
-   test_sample()
+    test_sample()

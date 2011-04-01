@@ -38,7 +38,7 @@ class SG(ecto.module):
         ecto.config(s)
         ecto.config(g)
         self.outputs = g.outputs
-        for f,t in zip(ecto.keys(s.outputs),ecto.keys(g.inputs)):
+        for f, t in zip(ecto.keys(s.outputs), ecto.keys(g.inputs)):
             plasm.connect(s, f, g, t)
         self.plasm = plasm
 
@@ -49,7 +49,7 @@ class SG(ecto.module):
 print "#################\nPlasm test\n#################"
 plasm = ecto.Plasm()
 
-for f,t in zip(ecto.keys(s.outputs), ecto.keys(g.inputs)):
+for f, t in zip(ecto.keys(s.outputs), ecto.keys(g.inputs)):
     plasm.connect(s, f, g, t)
 
 
