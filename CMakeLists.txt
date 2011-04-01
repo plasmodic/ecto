@@ -6,6 +6,8 @@ project(ecto)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 #set the default path for built libraries to the "lib" directory
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
+
+set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 configure_file(python/ecto/__init__.py 
   ${CMAKE_BINARY_DIR}/lib/ecto/__init__.py
   @ONLY)
@@ -39,8 +41,9 @@ configure_file(${CMAKE_SOURCE_DIR}/python/ectoedit.py.in
   ${CMAKE_BINARY_DIR}/bin/ectoedit.py
   @ONLY)
 endif()
-
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wl,--no-undefined")
+#openni makes this fail -Werror
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wl,--no-undefined")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wl,--no-undefined")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -DBOOST_DISABLE_ASSERTS")
 
 macro(ectomodule NAME)
