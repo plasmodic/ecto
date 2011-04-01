@@ -8,9 +8,9 @@ import calib
 debug = True
 
 plasm = ecto.Plasm()
-rows = 9
+rows = 5
 cols = 3
-square_size = 25 # in millis
+square_size = 40 # in millis
 pattern_show = ecto.make(imageproc.imshow, name="pattern", waitKey=10, autoSize=True)
 rgb2gray = ecto.make(imageproc.cvtColor, flag=7)
 video = ecto.make(imageproc.VideoCapture, video_device=0)
