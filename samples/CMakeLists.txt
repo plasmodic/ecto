@@ -26,7 +26,7 @@ if(BUILD_SAMPLES)
 		include_directories(${PCL_INCLUDE_DIRS})
 		link_directories(${PCL_LIBRARY_DIRS})
 		ectomodule(pcl pcl/pcl_awesomeness.cpp)
-		set_target_properties(pcl_ectomodule PROPERTIES COMPILE_FLAGS "-Wno-reorder")		
+		set_target_properties(pcl_ectomodule PROPERTIES COMPILE_FLAGS "-Wno-reorder")
 		link_ecto(pcl ${PCL_LIBRARIES})
 	endif()
 
