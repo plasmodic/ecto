@@ -39,7 +39,7 @@ include(FindPackageHandleStandardArgs)
 set(PCL_SUFFIX pcl-2.0)
 
 #set all pcl component and their account into variables
-set(pcl_all_components io common kdtree keypoints range_image registration sample_consensus segmentation features surface visualization )
+set(pcl_all_components io common kdtree keypoints filters range_image registration sample_consensus segmentation features surface visualization )
 list(LENGTH pcl_all_components PCL_NB_COMPONENTS)
 
 #list each component dependencies IN PCL

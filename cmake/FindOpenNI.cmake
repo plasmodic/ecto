@@ -10,13 +10,13 @@
 find_package(PkgConfig)
 pkg_check_modules(PC_OPENNI openni-dev)
 set(OPENNI_DEFINITIONS ${PC_OPENNI_CFLAGS_OTHER})
-
+#add a hint so that it can find it without the pkg-config
 find_path(OPENNI_INCLUDE_DIR XnStatus.h
-    HINTS ${PC_OPENNI_INCLUDEDIR} ${PC_OPENNI_INCLUDE_DIRS} 
+    HINTS ${PC_OPENNI_INCLUDEDIR} ${PC_OPENNI_INCLUDE_DIRS} /usr/include/openni 
     PATH_SUFFIXES openni)
 
 find_library(OPENNI_LIBRARY OpenNI
-    HINTS ${PC_OPENNI_LIBDIR} ${PC_OPENNI_LIBRARY_DIRS})
+    HINTS ${PC_OPENNI_LIBDIR} ${PC_OPENNI_LIBRARY_DIRS} /usr/include/openni )
 
 set(OPENNI_INCLUDE_DIRS ${OPENNI_INCLUDE_DIR})
 set(OPENNI_LIBRARIES ${OPENNI_LIBRARY})
