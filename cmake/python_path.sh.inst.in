@@ -1,0 +1,2 @@
+#source me to get the python path for ecto setup
+export PYTHONPATH=@CMAKE_INSTALL_PREFIX@/@ecto_PYTHON_INSTALL@:$PYTHONPATH
