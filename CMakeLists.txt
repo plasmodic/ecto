@@ -1,6 +1,9 @@
+#if(ROSBUILD)
+#  include(rosbuild.cmake)
+#  return()
+#endif()
 cmake_minimum_required(VERSION 2.8)
 project(ecto)
-
 
 #set the default path for built executables to the "bin" directory
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
@@ -9,7 +12,7 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 configure_file(python/ecto/__init__.py 
-  ${CMAKE_BINARY_DIR}/lib/ecto/__init__.py
+  ${LIBRARY_OUTPUT_PATH}/ecto/__init__.py
   @ONLY)
 
 find_package(Boost COMPONENTS
@@ -103,6 +106,7 @@ configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoConfig.cmake.in
   ${CMAKE_BINARY_DIR}/ectoConfig.cmake @ONLY)
 
 add_subdirectory(test)
-add_subdirectory(samples)
+#disable samples
+#add_subdirectory(samples)
 
 

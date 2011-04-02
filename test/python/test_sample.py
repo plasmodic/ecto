@@ -1,4 +1,4 @@
-#!/bin/python
+#!/usr/bin/env python
 import ecto
 from ecto.doc import printModuleDoc
 import buster
