@@ -11,7 +11,7 @@ debug = True
 plasm = ecto.Plasm()
 
 splitter = ecto.make(imageproc.ChannelSplitter)
-sl_drawer = ecto.make(lazer.ScanLineDrawer);
+sl_drawer = ecto.make(lazer.ScanLineDrawer)
 laser_detector = ecto.make(lazer.LaserDetector)
 imshowL = ecto.make(imageproc.imshow, name="L", waitKey=10, autoSize=True)
 imshowA = ecto.make(imageproc.imshow, name="A", waitKey= -1, autoSize=True)
