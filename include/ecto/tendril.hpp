@@ -10,7 +10,8 @@
 
 namespace ecto
 {
-  /** \brief A tendril is the slender, winding organ of the
+  /**
+   * \brief A tendril is the slender, winding organ of the
    * ecto::module that gives it its awesome type erasure and uber
    * flexibility.
    *
@@ -20,13 +21,15 @@ namespace ecto
   class tendril
   {
   public:
-    /** \brief default constructor, creates a tendril that is not
+    /**
+     * \brief default constructor, creates a tendril that is not
      * initialized with any value FIXME make this default to a
      * tendril::none type.
      */
     tendril();
 
-    /**  \brief This factory function creates a tendril, holding type T.
+    /**
+     * \brief This factory function creates a tendril, holding type T.
      *
      * @param t the default value of t
      * @param name the instance name of t
@@ -55,27 +58,28 @@ namespace ecto
     }
 
 
-    /** \brief This is an unmangled type name for what ever tendril is
+    /**
+     * \brief This is an unmangled type name for what ever tendril is
      * holding.
-
+     *
      * @return the unmangled name, e.g. "cv::Mat", or
      * "pcl::PointCloud<pcl::PointXYZ>"
      */
     std::string type_name() const;
 
-    /** \brief A doc string for this tendril, "foo is for the input
-	and will be mashed with spam."
-
-	* @return A very descriptive human readable string of whatever
-	* the tendril is holding on to.
-	*/
+    /**
+    * \brief A doc string for this tendril, "foo is for the input
+    * and will be mashed with spam."
+    * @return A very descriptive human readable string of whatever
+    * the tendril is holding on to.
+    */
     std::string doc() const;
 
     template <typename T>
     const T& get() const
     {
       if (!impl_)
-	throw std::logic_error("This connection is uninitialized! type: " + name_of<T> ());
+    throw std::logic_error("This connection is uninitialized! type: " + name_of<T> ());
       return *impl_base::get<T>(*impl_);
     }
 
@@ -83,7 +87,7 @@ namespace ecto
     T& get()
     {
       if (!impl_)
-	throw std::logic_error("This connection is uninitialized! type: " + name_of<T> ());
+    throw std::logic_error("This connection is uninitialized! type: " + name_of<T> ());
       return *(impl_base::get<T>(*impl_));
     }
     template <typename T>
@@ -148,6 +152,86 @@ namespace ecto
     friend class tendrils;
     friend class module;
   };
-#include <ecto/impl/tendril.hpp>
+  
+//not sure if we should disable this even in release...
+//#if NDEBUG
+#if 0
+#define ECTO_ASSERT(_impl_check_ )        \
+  do {} while(false)
+#else
+#define ECTO_ASSERT(_impl_check_ )\
+  do\
+    {\
+      _impl_check_;\
+    }while(false)
+#endif
+template<typename T>
+bool tendril::impl_base::check(tendril::impl_base& i)
+{
+  //this fails across shared library boundaries
+  //return typeid(T) == i.type_info();
+  //however type name should be ok...
+  return std::strcmp(typeid(T).name(), i.type_info().name()) == 0;
+}
+
+template<typename T>
+void tendril::impl_base::checkThrow(tendril::impl_base& i) throw (std::logic_error)
+{
+  if (!check<T> (i))
+    throw(std::logic_error(std::string(i.type_name() + " is not a " + name_of<T> ()).c_str()));
+}
+
+template<typename T>
+T* tendril::impl_base::get(tendril::impl_base& i)
+{
+  ECTO_ASSERT(checkThrow<T>(i));
+  return reinterpret_cast<T*> (i.get());
+}
+template<typename T>
+tendril::impl<T>::impl(const T& t) :
+  t(t)
+{
+}
+
+template<typename T>
+std::string tendril::impl<T>::type_name() const
+{
+  return name_of<T> ();
+}
+template<typename T>
+const std::type_info & tendril::impl<T>::type_info() const
+{
+  return typeid(t);
+}
+
+template<typename T>
+void* tendril::impl<T>::get()
+{
+  return &t;
+}
+
+template<typename T>
+void tendril::impl<T>:: setPython(boost::python::object o)
+{
+  boost::python::extract<T> get_T(o);
+  if(get_T.check())
+    t = get_T();
+  else
+    throw std::logic_error("Could not convert python object to type : " + type_name());
+}
+
+template<typename T>
+boost::python::object tendril::impl<T>::getPython() const
+{
+  try
+  {
+    boost::python::object o(t);
+    return o;
+  }
+  catch (const boost::python::error_already_set& e) {
+    //silently handle no python wrapping
+  }
+  return boost::python::object();
+}
 
 }

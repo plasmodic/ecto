@@ -19,7 +19,7 @@ if(BUILD_SAMPLES)
 		ectomodule(imageproc lazer/imageproc.cpp)
 		link_ecto(imageproc ${OpenCV_LIBS})
 	endif()
-
+	message(STATUS "module path : ${CMAKE_MODULE_PATH}")
 
 	find_package(PCL)
 	if(PCL_FOUND)

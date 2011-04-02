@@ -9,7 +9,7 @@ debug = True
 
 def hookUpORB(plasm, image, image_key, imshow):
     FAST = ecto.make(orb.FAST, N_max=5000)
-    Harris = ecto.make(orb.Harris, N_max=2000)
+    Harris = ecto.make(orb.Harris, N_max=1000)
     plasm.connect(image, image_key, FAST, "image")
     plasm.connect(FAST, "out", Harris, "kpts")
     plasm.connect(image, image_key, Harris, "image")
@@ -22,14 +22,14 @@ def hookUpORB(plasm, image, image_key, imshow):
   
 plasm = ecto.Plasm()
 
-levels = 3
+levels = 1
 pyramid = ecto.make(orb.Pyramid, levels=levels, magnification=0, scale_factor=1.3)
 printModuleDoc(pyramid)
 #rescale needs the same number of levels as the pyramid
 rescale = ecto.make(orb.PyramidRescale, levels=levels)
 imshow = ecto.make(imageproc.imshow)
 #configure the imshow
-ecto.config(imshow, name="video", waitKey=10, autoSize=True)
+ecto.config(imshow, name="video", waitKey=2, autoSize=True)
 rgb2gray = ecto.make(imageproc.cvtColor, flag=7)
 printModuleDoc(rgb2gray)
 

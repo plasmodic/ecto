@@ -126,8 +126,11 @@ struct cvtColor : ecto::module
   {
     SHOW();
     std::stringstream ss;
-    ss << "Convert an image's color using opencv, possible flags are:\n" << "RGB2GRAY = " << CV_RGB2GRAY << std::endl
-        << "RGB2BGR = " << CV_RGB2BGR  << std::endl << " RGB2LAB=" << CV_RGB2Lab << std::endl<< " CV_BGR2Lab" << CV_BGR2Lab;
+    ss << "Convert an image's color using opencv, possible flags are:\n"
+        << " RGB2GRAY = " << CV_RGB2GRAY << "\n"
+        << " RGB2BGR = " << CV_RGB2BGR  << "\n"
+        << " RGB2LAB=" << CV_RGB2Lab << "\n"
+        << " BGR2LAB=" << CV_BGR2Lab;
     p["flag"].set<int> (ss.str(), CV_RGB2BGR);
   }
   int flag_;
