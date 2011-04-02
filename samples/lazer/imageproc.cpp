@@ -18,12 +18,14 @@ struct VideoCapture : ecto::module
 {
   VideoCapture()
   {
+    SHOW();
     setOut<cv::Mat> ("out", "A video frame.", cv::Mat());
     setOut<int> ("frame_number", "The number of frames captured.", 0);
   }
 
   void Config()
   {
+    SHOW();
     int video_device = getParam<int> ("video_device");
     capture = cv::VideoCapture();
     capture.open(video_device);
@@ -33,11 +35,13 @@ struct VideoCapture : ecto::module
 
   static void Params(tendrils_t& c)
   {
+    SHOW();
     c["video_device"].set<int> ("The device ID to open", 0);
   }
 
   void Process()
   {
+    SHOW();
     //getOut is a reference;
     capture >> getOut<cv::Mat> ("out");
     ++(getOut<int> ("frame_number"));
@@ -51,12 +55,14 @@ struct imshow : ecto::module
   imshow() :
     window_name_("window"), waitkey_(10), auto_size_(true)
   {
+    SHOW();
     setIn<cv::Mat> ("in", "The image to show");
     setOut<int> ("out", "Character pressed.");
   }
 
   static void Params(tendrils_t& c)
   {
+    SHOW();
     c["name"].set<std::string> ("The window name", "image");
     c["waitKey"].set<int> ("Number of millis to wait, -1 for not at all, 0 for infinity.", -1);
     c["autoSize"].set<bool> ("Autosize the window.", true);
@@ -64,12 +70,14 @@ struct imshow : ecto::module
 
   void Config()
   {
+    SHOW();
     window_name_ = getParam<std::string> ("name");
     waitkey_ = getParam<int> ("waitKey");
     auto_size_ = getParam<bool> ("autoSize");
   }
   void Process()
   {
+    SHOW();
     const cv::Mat& image = getIn<cv::Mat> ("in");
     if (image.empty())
     {
@@ -104,16 +112,19 @@ struct cvtColor : ecto::module
   }
   void Config()
   {
+    SHOW();
     flag_ = getParam<int> ("flag");
     setIn<cv::Mat> ("in", "Color image.");
     setOut<cv::Mat> ("out", "input as a Gray image.");
   }
   void Process()
   {
+    SHOW();
     cv::cvtColor(getIn<cv::Mat> ("in"), getOut<cv::Mat> ("out"), flag_);
   }
   static void Params(tendrils_t& p)
   {
+    SHOW();
     std::stringstream ss;
     ss << "Convert an image's color using opencv, possible flags are:\n" << "RGB2GRAY = " << CV_RGB2GRAY << std::endl
         << "RGB2BGR = " << CV_RGB2BGR  << std::endl << " RGB2LAB=" << CV_RGB2Lab << std::endl<< " CV_BGR2Lab" << CV_BGR2Lab;
@@ -176,11 +187,13 @@ struct Sobel : ecto::module
 
   void Config()
   {
+    SHOW();
     x_ = getParam<int> ("x");
     y_ = getParam<int> ("y");
   }
   void Process()
   {
+    SHOW();
     cv::Sobel(getIn<cv::Mat> ("in"), getOut<cv::Mat> ("out"), CV_32F, x_, y_);
   }
   int x_, y_;
@@ -197,6 +210,7 @@ template<typename T>
     }
     void Process()
     {
+      SHOW();
       getOut<T> ("out") = getIn<T> ("a") + getIn<T> ("b");
     }
     static void Params(tendrils_t& p)
@@ -216,6 +230,7 @@ struct AbsNormalized : ecto::module
   }
   void Process()
   {
+    SHOW();
     const cv::Mat& m = getIn<cv::Mat> ("in");
     cv::Mat& out = getOut<cv::Mat> ("out");
     out = cv::abs(m) / (cv::norm(m, cv::NORM_INF) * 0.5);
