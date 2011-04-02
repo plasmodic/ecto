@@ -8,8 +8,8 @@ import orb
 debug = True
 
 def hookUpORB(plasm, image, image_key, imshow):
-    FAST = ecto.make(orb.FAST, N_max=5000)
-    Harris = ecto.make(orb.Harris, N_max=1000)
+    FAST = ecto.make(orb.FAST, thresh=100, N_max=1000000)
+    Harris = ecto.make(orb.Harris, N_max=100000)
     plasm.connect(image, image_key, FAST, "image")
     plasm.connect(FAST, "out", Harris, "kpts")
     plasm.connect(image, image_key, Harris, "image")
