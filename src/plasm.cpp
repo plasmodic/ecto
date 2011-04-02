@@ -143,7 +143,8 @@ namespace ecto
         //process the module
         vert.first->Process();
         //mark dirty for caching.
-        vert.first->dirty(true);
+        vert.first->dirty(false);
+
       }
       ModuleGraph& graph;
     };
