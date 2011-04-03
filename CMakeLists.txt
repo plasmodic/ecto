@@ -156,5 +156,4 @@ configure_file(${CMAKE_SOURCE_DIR}/cmake/python_path.sh.inst.in
 install(FILES ${CMAKE_BINARY_DIR}/unix_install/python_path.sh
         DESTINATION share/ecto COMPONENT ecto_python
   )
-
 #add_subdirectory(samples)
