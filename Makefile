@@ -8,4 +8,3 @@ build:
 	
 clean :
 	cd build && $(MAKE) clean
-	rm -rf build
