@@ -76,7 +76,7 @@ configure_file(${CMAKE_SOURCE_DIR}/cmake/python_path.sh.in
 message(STATUS "To setup your python path for ecto you may source:"
   " ${CMAKE_BINARY_DIR}/python_path.sh")
 
-
+set(ecto_PYTHONPATH ${LIBRARY_OUTPUT_PATH} ${CMAKE_SOURCE_DIR}/python)
 configure_file(python/ecto/__init__.py 
   ${CMAKE_BINARY_DIR}/lib/ecto/__init__.py
   @ONLY)
@@ -119,6 +119,8 @@ install(TARGETS ecto
 set(ecto_INCLUDE_DIRS ${CMAKE_INSTALL_PREFIX}/include)
 set(ecto_LIBRARIES ecto)
 set(ecto_LIBRARIES_DIR ${CMAKE_INSTALL_PREFIX}/lib)
+set(ecto_PYTHON_INSTALL share/ecto/python)
+set(ecto_PYTHONPATH ${CMAKE_INSTALL_PREFIX}/${ecto_PYTHON_INSTALL})
 configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoConfig.cmake.in 
   ${CMAKE_BINARY_DIR}/unix_install/ectoConfig.cmake @ONLY)
 
@@ -129,7 +131,7 @@ INSTALL(FILES ${CMAKE_BINARY_DIR}/unix_install/ectoConfig.cmake
   )
 
 #install python stuff
-set(ecto_PYTHON_INSTALL share/ecto/python)
+
 
 #this is the python extension
 install(TARGETS ecto_ectomodule
@@ -155,4 +157,4 @@ install(FILES ${CMAKE_BINARY_DIR}/unix_install/python_path.sh
         DESTINATION share/ecto COMPONENT ecto_python
   )
 
-add_subdirectory(samples)
+#add_subdirectory(samples)

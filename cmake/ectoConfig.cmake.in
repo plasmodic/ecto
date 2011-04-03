@@ -52,3 +52,5 @@ INCLUDE_DIRECTORIES(${ecto_INCLUDE_DIRS}
   ${Boost_INCLUDE_DIRS}
 )
 link_directories(@ecto_LIBRARIES_DIR@)
+set(ecto_PYTHONPATH @ecto_PYTHONPATH@ )
+message(STATUS "ecto === Append this to the PYTHONPATH ${ecto_PYTHONPATH}")
