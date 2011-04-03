@@ -4,8 +4,8 @@ import ecto
 import buster
 
 def test_plasm():
-    scatter = ecto.make(buster.Scatter, n=10, x=10)
-    gather = ecto.make(buster.Gather, n=10)
+    scatter = ecto.make(buster.Scatter, n=3, x=3)
+    gather = ecto.make(buster.Gather, n=3)
 #    printer = ecto.make(buster.Printer)
 #    ecto.printModuleDoc(scatter)
 #    ecto.printModuleDoc(gather)
@@ -15,9 +15,11 @@ def test_plasm():
             plasm.connect(scatter, f, gather, t)
     plasm.go(gather)
     result = gather.o.out.get()
-    print "gather out (should be 100):", result
-    assert(result == 100)
-    #print plasm.viz()
+    print "gather out (should be 9):", result
+    assert(result == 9)
+    print plasm.viz()
+    print plasm.vertices()
+    print plasm.edges()
 
 if __name__ == '__main__':
     test_plasm()

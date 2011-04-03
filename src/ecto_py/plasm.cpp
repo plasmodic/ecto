@@ -4,48 +4,59 @@
 //#include "ecto_split.h"
 
 #include <boost/python.hpp>
+#include <boost/python/args.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <boost/python/suite/indexing/map_indexing_suite.hpp>
 
+#include "plasm_impl.hpp"
 namespace bp = boost::python;
-
+using bp::arg;
 namespace ecto
 {
-namespace py
-{
+  struct plasm_wrapper
+  {
+    static std::string wrapViz(const ecto::plasm& p)
+    {
+      return p.viz();
+    }
 
-using bp::arg;
-std::string wrapViz(const ecto::plasm& p)
-{
-  return p.viz();
-}
-void wrapPlasm(){
-//  bp::class_<edge>("Edge")
-//    .def_readwrite("downstream",&edge::downstream)
-//    .def_readwrite("upstream",&edge::upstream)
-//    ;
-//  bp::class_<plasm::map_t>("EdgeMap")
-//    .def(bp::map_indexing_suite<plasm::map_t>())
-//    ;
-//  bp::class_<edge::us::modules>("Upstream")
-//    .def(bp::map_indexing_suite<edge::us::modules>())
-//    ;
-//  bp::class_<edge::ds::modules>("Downstream")
-//    .def(bp::map_indexing_suite<edge::ds::modules>())
-//    ;
-//  bp::class_<edge::ds::module_set>("ModuleSet")
-//      .def(bp::set_indexing_suite<edge::ds::module_set>())
-//      ;
+    static bp::dict getModules(plasm& p)
+    {
+      return p.impl_->modules_.getVerticesPy();
+    }
 
-  bp::class_<plasm,boost::noncopyable>("Plasm")
-    .def("connect", &plasm::connect, (arg("from_module"), arg("output_name"),
-				      arg("to_module"),   arg("intput_name")))
-    .def("markDirty", &plasm::markDirty)
-    .def("go", &plasm::go)
-    .def("viz",wrapViz)
-    ;
-}
+    static bp::list getEdges(plasm& p)
+    {
+      return p.impl_->modules_.getEdgesPy();
+    }
 
-}
+    static void wrap()
+    {
+      bp::class_<plasm, boost::noncopyable> p("Plasm");
+      p.def("connect", &plasm::connect, bp::args("from_module", "output_name", "to_module", "intput_name"));
+      p.def("markDirty", &plasm::markDirty);
+      p.def("go", &plasm::go);
+      p.def("viz", wrapViz, "Get a graphviz string representation of the plasm.");
+      p.def("vertices", getModules,
+            "Get a dict of the plasm's vertices, with key being integers, and a tuple (module,vertice_type,tendril_key)");
+      p.def("edges", getEdges, "Get a list of edges, tuples of two integers(source,target).");
+
+      bp::enum_<plasm::vertex_t> v_enum("vertex_t");
+      v_enum.value("root", plasm::root);
+      v_enum.value("input", plasm::input);
+      v_enum.value("output", plasm::output);
+      v_enum.value("param", plasm::param);
+    }
+
+  };
+  namespace py
+  {
+
+    void wrapPlasm()
+    {
+      plasm_wrapper::wrap();
+    }
+
+  }
 }
 
