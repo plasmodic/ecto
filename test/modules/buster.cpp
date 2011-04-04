@@ -46,7 +46,7 @@ namespace buster
     void Config()
     {
       step_ = getParam<double> ("step");
-      setOut<double> ("out", "output", getParam<double> ("start"));
+      setOut<double> ("out", "output", getParam<double> ("start") - step_);
     }
 
     void Process()

@@ -106,7 +106,7 @@ namespace ecto
 
     graph_t graph_, root_graph_;
 
-    void add_edge(module::ptr from_m, const std::string& out_name, module::ptr to_m, const std::string& in_name)
+    void add_edge(const module::ptr& from_m, const std::string& out_name,const module::ptr& to_m, const std::string& in_name)
     {
       Vertex root_from = make_vert(from_m);
       Vertex root_to = make_vert(to_m);
@@ -154,6 +154,7 @@ namespace ecto
       void operator()(const Vertex_Desc& v)
       {
         graph.get_vert(v).first->dirty(true);
+        //std::cout << "v : " << v <<   " ptr: " <<     graph.get_vert(v).first<< std::endl;
         //fixme!!!
         if (graph.graph_.out_edge_list(v).empty())
           return;
@@ -203,11 +204,11 @@ namespace ecto
       ModuleGraph& graph;
     };
 
-    void mark_dirty(module::ptr m)
+    void mark_dirty(const module::ptr& m)
     {
       Dirtier(*this)(make_vert(m).uid);
     }
-    void go(module::ptr m)
+    void go(const module::ptr& m)
 
     {
       Goer(*this)(make_vert(m).uid);
@@ -217,6 +218,18 @@ namespace ecto
     module_set_t module_set;
 
     plasm::vertex_map_t getVertices()
+    {
+      plasm::vertex_map_t vertices;
+      GraphTraits::vertex_iterator vi, vi_end;
+      for (boost::tie(vi, vi_end) = boost::vertices(graph_); vi != vi_end; ++vi)
+      {
+        Vertex& v = get_vert(*vi);
+        vertices[*vi] = boost::make_tuple(v.first, v.ecto_type, v.second, v.getTendril());
+      }
+      return vertices;
+    }
+
+    plasm::vertex_map_t getRoots()
     {
       plasm::vertex_map_t vertices;
       GraphTraits::vertex_iterator vi, vi_end;

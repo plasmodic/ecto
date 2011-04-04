@@ -13,12 +13,12 @@ namespace py
   struct modwrap : module, bp::wrapper<module>
   {
     void Process() {
-      std::cout << "dispatching Process...\n";
+      //std::cout << "dispatching Process...\n";
       this->get_override("Process")();
     }
 
     void Config() {
-      std::cout << "dispatching Config...\n";
+      //std::cout << "dispatching Config...\n";
       this->get_override("Config")();
     }
 
@@ -65,8 +65,7 @@ void wrapModule(){
     .def(bp::map_indexing_suite<tendrils,false>())
         ;
 
-
-  bp::class_<modwrap, boost::noncopyable>("module")
+  bp::class_<modwrap, boost::shared_ptr<module>,boost::noncopyable>("module")
       .def("connect", &module::connect)
       .def("Process", &module::Process)
       .def("Config", &module::Config)

@@ -2,31 +2,27 @@
 
 import ecto, buster, makeplasm
 
+strs = {ecto.vertex_t.output : "OUTPUT", ecto.vertex_t.input:"INPUT",ecto.vertex_t.root:"ROOT"}
+def print_vertex(vert):
+    return vert[0].Name() + ":"+strs[vert[1]]+"(" + vert[2]+")"
 plasm = makeplasm.makeplasm()
+ 
+vertices = plasm.vertices()
+edges = plasm.edges()
 
+for s, t in edges:
+    source = vertices[s]
+    target = vertices[t]   
+    print print_vertex(source), " => ", print_vertex(target)
 
-for pr in plasm.edges:
+print vertices
+for k,(x,t,name,tendril) in vertices.items():
+    if(t == ecto.vertex_t.root):
+        print x.Name(), " has parameters:"
+        for p in x.params:
+            print p.key()," value = ",p.data().get()
 
-    n = pr.key()
-    e = pr.data()
-
-    print n, " => ", e
-
-    print n.Name(), len(n.inputs), len(n.outputs), len(n.params)
-
-    for i in n.inputs:
-        print "in:", i
-
-    for o in n.outputs:
-        print "out:", o
-        
-    for ds in e.downstream:
-        print "ds:", ds
-        for mod in ds.data():
-            print "   mod:", mod
-
-    for us in e.upstream:
-        print "us:", us
-
-    for p in n.params:
-        print p.key(), p.data().get()
+module = plasm.toModule()
+module2 = makeplasm.makeplasm().toModule()
+print moduleDoc(module)
+ecto.view_plasm(plasm)

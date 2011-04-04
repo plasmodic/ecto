@@ -29,10 +29,25 @@ namespace ecto
     {
       return p.impl_->modules_.getEdgesPy();
     }
+    template<typename T>
+      static void list_assign(std::list<T>& l, bp::object o)
+      {
+        // Turn a Python sequence into an STL input range
+        bp::stl_input_iterator<T> begin(o), end;
+        l.assign(begin, end);
+      }
+    static boost::shared_ptr<module> toModule(boost::shared_ptr<plasm> p, bp::object inputs, bp::object outputs)
+    {
+
+      std::list<module::ptr> mi, mo;
+      list_assign(mi, inputs);
+      list_assign(mo, outputs);
+      return plasm::toModule(p, mi, mo);
+    }
 
     static void wrap()
     {
-      bp::class_<plasm, boost::noncopyable> p("Plasm");
+      bp::class_<plasm,boost::shared_ptr<plasm>, boost::noncopyable> p("Plasm");
       p.def("connect", &plasm::connect, bp::args("from_module", "output_name", "to_module", "intput_name"));
       p.def("markDirty", &plasm::markDirty);
       p.def("go", &plasm::go);
@@ -40,7 +55,7 @@ namespace ecto
       p.def("vertices", getModules,
             "Get a dict of the plasm's vertices, with key being integers, and a tuple (module,vertice_type,tendril_key)");
       p.def("edges", getEdges, "Get a list of edges, tuples of two integers(source,target).");
-
+      p.def("toModule",toModule);
       bp::enum_<plasm::vertex_t> v_enum("vertex_t");
       v_enum.value("root", plasm::root);
       v_enum.value("input", plasm::input);

@@ -19,8 +19,12 @@ namespace ecto
     virtual void Process();
     virtual void Config();
 
-    void connect(const std::string& output, ptr to, const std::string& input);
-    void dirty(bool hmm);
+    virtual void connect(const std::string& output, ptr to, const std::string& input);
+    /**
+     * \brief Only override if you know what you're doing
+     * @param hmm
+     */
+    virtual void dirty(bool hmm);
     bool dirty() const;
 
 
