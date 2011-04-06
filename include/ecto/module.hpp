@@ -19,6 +19,10 @@ namespace ecto
     virtual void Process();
     virtual void Config();
 
+    struct listener{
+      virtual void onUpdate(const module& m) = 0;
+    };
+
     virtual void connect(const std::string& output, ptr to, const std::string& input);
     /**
      * \brief Only override if you know what you're doing
