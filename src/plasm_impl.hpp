@@ -93,8 +93,24 @@ namespace ecto
       void operator()(std::ostream& out, const size_t& v) const
       {
         const Vertex& vert = graph.get_vert(v);
-        out << "[label=\"" << ecto::name_of(typeid(*vert.first)) << (vert.second.empty() ? "" : ":") << vert.second
-            << "\"]";
+        switch (vert.ecto_type)
+        {
+          case plasm::root:
+            out << "[label=\"" << ecto::name_of(typeid(*vert.first)) << "\",fillcolor=green, style=\"rounded,filled\"]";
+            break;
+          case plasm::output:
+            out << "[label=\"" <</* ecto::name_of(typeid(*vert.first)) << "out(" */ vert.second
+                << "\", shape=invhouse]";
+            break;
+          case plasm::input:
+            out << "[label=\"" << /*ecto::name_of(typeid(*vert.first)) << "in(" */ vert.second
+                << "\", shape=house]";
+
+            break;
+          case plasm::param:
+            break;
+        }
+
       }
     private:
       const ModuleGraph& graph;
@@ -106,7 +122,8 @@ namespace ecto
 
     graph_t graph_, root_graph_;
 
-    void add_edge(const module::ptr& from_m, const std::string& out_name,const module::ptr& to_m, const std::string& in_name)
+    void add_edge(const module::ptr& from_m, const std::string& out_name, const module::ptr& to_m,
+                  const std::string& in_name)
     {
       Vertex root_from = make_vert(from_m);
       Vertex root_to = make_vert(to_m);
