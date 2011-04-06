@@ -1,11 +1,8 @@
 #include "plasm_impl.hpp"
 namespace ecto
 {
+  plasm::plasm() : impl_(new impl) { }
 
-  plasm::plasm() :
-    impl_(new impl)
-  {
-  }
   void plasm::connect(module::ptr from, const std::string& out_name, module::ptr to, const std::string& in_name)
   {
     impl_->modules_.add_edge(from, out_name, to, in_name);
@@ -22,8 +19,6 @@ namespace ecto
   {
     impl_->modules_.go(m);
   }
-
-
 
   void plasm::viz(std::ostream& out) const
   {

@@ -120,6 +120,7 @@ namespace buster
 	}
       setOut<int> ("out", "The sum of all inputs.");
     }
+
     void Process()
     {
       SHOW();
