@@ -90,8 +90,6 @@ configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoConfig.cmake.in
   ${CMAKE_BINARY_DIR}/ectoConfig.cmake @ONLY)
 
 add_subdirectory(test)
-#disable samples
-#add_subdirectory(samples)
 
 #### install stuff #####
 
@@ -144,6 +142,7 @@ set(ecto_PYTHON_FILES
   python/ecto/__init__.py
   python/ecto/doc.py
   python/ecto/module_tools.py
+  python/ecto/xdot.py
 )
 
 install(FILES ${ecto_PYTHON_FILES}

@@ -1,20 +1,20 @@
 #!/usr/bin/env python
 
 import ecto
-from ecto.doc import printModuleDoc, graphviz
+from ecto.doc import print_module_doc, graphviz
 import buster
 
 print "#################\nconfig test\n#################"
 s = ecto.make(buster.Scatter)
 ecto.config(s, n=5)
-printModuleDoc(s)
+print_module_doc(s)
 
 g = ecto.make(buster.Gather)
 ecto.config(g, n=5)
-printModuleDoc(g)
+print_module_doc(g)
 
 m = ecto.make(buster.Multiply)
-printModuleDoc(m)
+print_module_doc(m)
 
 class SG(ecto.module):
 
@@ -57,7 +57,7 @@ for f, t in zip(ecto.keys(s.outputs), ecto.keys(g.inputs)):
 plasm.go(g)
 print g.outputs["out"].get()
 sg = ecto.make(SG)
-printModuleDoc(sg)
+print_module_doc(sg)
 sg.p.x.set(10)
 sg.p.n.set(50)
 ecto.config(sg)
