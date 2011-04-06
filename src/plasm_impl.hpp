@@ -153,8 +153,10 @@ namespace ecto
     Vertex make_vert(const module::ptr& p, const std::string& s, plasm::vertex_t t)
     {
       Vertex v(p, s, t);
-      getUID(v);
-      get_vert(v.uid) = v;
+      if(getUID(v)){
+        boost::put(Vertex::Tag(),graph_,v.uid,v);
+        //boost::put(Vertex::Tag(),root_graph_,v.uid,v);
+      }
       return v;
     }
     Vertex make_vert(const module::ptr& p)
@@ -232,7 +234,7 @@ namespace ecto
     }
 
     typedef std::set<Vertex, opless> module_set_t;
-    module_set_t module_set;
+    module_set_t module_set, module_root_set;
 
     plasm::vertex_map_t getVertices()
     {
@@ -246,17 +248,6 @@ namespace ecto
       return vertices;
     }
 
-    plasm::vertex_map_t getRoots()
-    {
-      plasm::vertex_map_t vertices;
-      GraphTraits::vertex_iterator vi, vi_end;
-      for (boost::tie(vi, vi_end) = boost::vertices(graph_); vi != vi_end; ++vi)
-      {
-        Vertex& v = get_vert(*vi);
-        vertices[*vi] = boost::make_tuple(v.first, v.ecto_type, v.second, v.getTendril());
-      }
-      return vertices;
-    }
     plasm::edge_list_t getEdges()
     {
       plasm::edge_list_t list;
@@ -297,17 +288,22 @@ namespace ecto
     /** Assigns a unique vertex id, from the graph.
      *
      * @param v
+     * @return true if new
      */
-    inline void getUID(Vertex& v)
+    inline bool getUID(Vertex& v)
     {
       module_set_t::const_iterator it = module_set.find(v);
       if (it == module_set.end())
       {
         v.uid = boost::add_vertex(graph_);
         module_set.insert(v);
+        return true;
       }
       else
+      {
         v.uid = it->uid;
+        return false;
+      }
     }
 
   };

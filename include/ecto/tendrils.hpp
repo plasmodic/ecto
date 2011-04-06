@@ -37,6 +37,7 @@ namespace ecto
       }
       return it->second;
     }
+
     template <typename T>
     const T& get(const std::string& name) const
     {

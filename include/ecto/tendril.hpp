@@ -46,8 +46,6 @@ namespace ecto
       return c;
     }
 
-
-
     boost::python::object extract();
     void set(boost::python::object o);
 

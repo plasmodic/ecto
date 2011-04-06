@@ -1,20 +1,6 @@
 #!/usr/bin/env python
-
 import ecto
-from ecto.doc import print_module_doc, graphviz
 import buster
-
-print "#################\nconfig test\n#################"
-s = ecto.make(buster.Scatter)
-ecto.config(s, n=5)
-print_module_doc(s)
-
-g = ecto.make(buster.Gather)
-ecto.config(g, n=5)
-print_module_doc(g)
-
-m = ecto.make(buster.Multiply)
-print_module_doc(m)
 
 class SG(ecto.module):
 

@@ -43,6 +43,12 @@ namespace ecto
 
   void tendril::set(boost::python::object o)
   {
-    impl_->setPython(o);
+    if(is_type<none>())
+    {
+
+    }else
+    {
+      impl_->setPython(o);
+    }
   }
 }
