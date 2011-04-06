@@ -62,7 +62,7 @@ namespace ecto
         BOOST_FOREACH(tendrils::value_type& t , m->inputs)
         {
           t.second.connect(inputs[t.first]);
-          std::cout << "connecting: " << t.first << std::endl;
+          //std::cout << "connecting: " << t.first << std::endl;
         }
       }
       BOOST_FOREACH(const module::ptr& m , module_outputs_)

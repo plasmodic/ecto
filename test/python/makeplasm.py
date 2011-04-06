@@ -18,7 +18,7 @@ def makemodule():
     plasm.connect(g, 'out', m, 'in')
     m2 = ecto.make( buster.Multiply, factor=2)
     plasm.connect(m, 'out', m2, 'in')
-    return plasm.toModule([],[m2])
+    return plasm.toModule([g],[m2])
 
 def makemodule2():
     plasm = ecto.Plasm()
@@ -32,7 +32,7 @@ if __name__ == "__main__":
     m1 = makemodule()
     m2 = makemodule2()
     plasm.connect(m1,"out",m2,"in")
-    for i in range(1):
+    for i in range(3):
         plasm.markDirty(m1)
         plasm.go(m2)
         print m1.outputs["out"].get()
