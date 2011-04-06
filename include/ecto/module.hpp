@@ -23,12 +23,9 @@ namespace ecto
       virtual void onUpdate(const module& m) = 0;
     };
 
-    virtual void connect(const std::string& output, ptr to, const std::string& input);
-    /**
-     * \brief Only override if you know what you're doing
-     * @param hmm
-     */
-    virtual void dirty(bool hmm);
+    void connect(const std::string& output, ptr to, const std::string& input);
+
+    void dirty(bool hmm);
     bool dirty() const;
 
 

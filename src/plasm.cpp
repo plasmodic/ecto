@@ -51,16 +51,6 @@ namespace ecto
     {
     }
 
-    virtual void connect(const std::string& output, ptr to, const std::string& input)
-    {
-
-    }
-    virtual void dirty(bool hmm)
-    {
-      std::cout << "dirty ("<< hmm<<")"<< std::endl;
-      ecto::module::dirty(hmm);
-    }
-
     virtual void Process()
     {
       BOOST_FOREACH(const module::ptr& m , module_inputs_)

@@ -12,6 +12,7 @@ def m_squared():
     plasm.connect(m, "out", m2 , "in")
     module = plasm.toModule([m,],[m2,])
     print_module_doc(module)
+    return module
 
 def test_sample():
     plasm = ecto.Plasm()
@@ -33,7 +34,7 @@ def test_sample():
         plasm.markDirty(g)
         plasm.go(m)
         print "output: ", m.outputs["out"].get()
-    ecto.view_plasm(plasm)
+    #ecto.view_plasm(plasm)
     print "finished"
     
 if __name__ == '__main__':

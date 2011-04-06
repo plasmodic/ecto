@@ -20,7 +20,7 @@ def test_plasm():
     print plasm.viz()
     print plasm.vertices()
     print plasm.edges()
-    ecto.view_plasm(plasm)
+    #ecto.view_plasm(plasm)
     pm = plasm.toModule([scatter],[gather])
     ecto.print_module_doc(pm)
     
