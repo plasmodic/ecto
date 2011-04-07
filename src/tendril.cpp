@@ -28,7 +28,7 @@ namespace ecto
 
   void tendril::connect(tendril& rhs)
   {
-    if (impl_->type_name() != rhs.impl_->type_name())
+    if (type_name() != rhs.type_name())
       throw std::runtime_error("bad connect! input(" + impl_->type_name() + ") != output(" + rhs.type_name() + ")");
     impl_ = rhs.impl_;
   }
@@ -45,7 +45,7 @@ namespace ecto
   {
     if(is_type<none>())
     {
-
+      impl_.reset(new impl_py(o));
     }else
     {
       impl_->setPython(o);

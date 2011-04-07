@@ -2,7 +2,7 @@
 #include <ecto/util.hpp> //name_of
 #include <boost/shared_ptr.hpp>
 #include <boost/python.hpp>
-
+#include <boost/python/type_id.hpp>
 #include <stdexcept>
 #include <string>
 #include <sstream>
@@ -22,8 +22,7 @@ namespace ecto
   {
   public:
     /**
-     * \brief default constructor, creates a tendril that is not
-     * initialized with any value FIXME make this default to a
+     * \brief default constructor, creates a tendril that is initialized with the
      * tendril::none type.
      */
     tendril();
@@ -45,6 +44,8 @@ namespace ecto
       c.impl_->doc = doc;
       return c;
     }
+
+
 
     boost::python::object extract();
     void set(boost::python::object o);
@@ -72,34 +73,32 @@ namespace ecto
     * the tendril is holding on to.
     */
     std::string doc() const;
+    void setDoc(const std::string& doc_str)
+    {
+      impl_->doc = doc_str;
+    }
 
     template <typename T>
     const T& get() const
     {
-      if (!impl_)
-    throw std::logic_error("This connection is uninitialized! type: " + name_of<T> ());
       return *impl_base::get<T>(*impl_);
     }
 
     template <typename T>
     T& get()
     {
-      if (!impl_)
-    throw std::logic_error("This connection is uninitialized! type: " + name_of<T> ());
       return *(impl_base::get<T>(*impl_));
     }
     template <typename T>
     bool is_type()
     {
-      bool same_type = std::strcmp(impl_->type_info().name(), typeid(T).name()) == 0;
-      return same_type;
+      return impl_base::check<T>(*impl_);
     }
     void connect(tendril& rhs);
 
-    inline bool dirty(bool b)
+    inline void dirty(bool b)
     {
       dirty_ = b;
-      return dirty_;
     }
 
     inline bool dirty() const
@@ -117,9 +116,9 @@ namespace ecto
     {
       typedef boost::shared_ptr<impl_base> ptr;
       virtual ~impl_base();
-      virtual std::string type_name() const = 0;
+      virtual const std::string& type_name() const = 0;
       virtual void* get() = 0;
-      virtual const std::type_info & type_info() const = 0;
+      virtual bool is_type(std::type_info const& ti) const = 0;
       virtual void setPython(boost::python::object o) = 0;
       virtual boost::python::object getPython() const = 0;
       //convience functions for checking types
@@ -130,20 +129,54 @@ namespace ecto
       template <typename T>
       static inline T* get(impl_base& i);
 
-      std::string name, doc;
+      std::string doc;
     };
 
     template <typename T>
     struct impl : impl_base
     {
       impl(const T& t);
-      std::string type_name() const;
-      const std::type_info & type_info() const;
+      const std::string& type_name() const;
+      bool is_type(std::type_info const& ti) const;
       void* get();
       void setPython(boost::python::object o);
       boost::python::object getPython() const;
       T t;
     };
+
+      struct impl_py : impl_base
+      {
+        typedef boost::python::object T;
+        impl_py(const T& t) :
+          t(t)
+        {
+
+        }
+        const std::string& type_name() const
+        {
+          type_name_ ="boost::python::object";
+          return type_name_;
+        }
+
+        bool is_type(std::type_info const& ti) const
+        {
+          return true;
+        }
+        void* get()
+        {
+          return NULL;
+        }
+        void setPython(boost::python::object o)
+        {
+          t = o;
+        }
+        boost::python::object getPython() const
+        {
+          return t;
+        }
+        T t;
+        mutable std::string type_name_;
+      };
     tendril(impl_base::ptr impl);
     boost::shared_ptr<impl_base> impl_;
     bool dirty_;
@@ -169,7 +202,7 @@ bool tendril::impl_base::check(tendril::impl_base& i)
   //this fails across shared library boundaries
   //return typeid(T) == i.type_info();
   //however type name should be ok...
-  return std::strcmp(typeid(T).name(), i.type_info().name()) == 0;
+  return i.is_type(typeid(T));
 }
 
 template<typename T>
@@ -192,14 +225,15 @@ tendril::impl<T>::impl(const T& t) :
 }
 
 template<typename T>
-std::string tendril::impl<T>::type_name() const
+const std::string& tendril::impl<T>::type_name() const
 {
-  return name_of<T> ();
+  static const std::string name =  name_of<T> ();
+  return name;
 }
 template<typename T>
-const std::type_info & tendril::impl<T>::type_info() const
+bool tendril::impl<T>::is_type(std::type_info const& ti) const
 {
-  return typeid(t);
+  return std::strcmp(typeid(T).name(), ti.name()) == 0;
 }
 
 template<typename T>
@@ -230,6 +264,16 @@ boost::python::object tendril::impl<T>::getPython() const
     //silently handle no python wrapping
   }
   return boost::python::object();
+}
+
+template<>
+inline tendril
+tendril::make<boost::python::object>(const boost::python::object& t, const std::string& doc)
+{
+  // fixme: allocators
+  tendril c(impl_base::ptr(new impl_py(t)));
+  c.impl_->doc = doc;
+  return c;
 }
 
 }

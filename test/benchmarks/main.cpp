@@ -19,7 +19,7 @@ int main()
     boost::progress_timer t; // start timing
     for (size_t i = 0; i < 10e6; i++)
     {
-      p.markDirty(m);
+      p.mark_dirty(m);
       p.go(m);
     }
   }
@@ -45,7 +45,7 @@ int main()
     boost::progress_timer t; // start timing
     for (size_t i = 0; i < 10e3; i++)
     {
-      p.markDirty(b);
+      p.mark_dirty(b);
       p.go(b);
     }
   }

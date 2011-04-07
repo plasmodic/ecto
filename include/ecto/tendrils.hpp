@@ -30,7 +30,7 @@ namespace ecto
         {
           std::stringstream ss;
           ss << "Your types aren't the same, this could lead to very undefined behavior...";
-          ss << " old type = " << (*this)[name].impl_->type_info().name() << " new type = " << typeid(T).name()
+          ss << " old type = " << (*this)[name].impl_->type_name() << " new type = " <<  name_of<T>()
               << std::endl;
           throw std::logic_error(ss.str());
         }

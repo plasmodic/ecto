@@ -7,94 +7,61 @@ namespace bp = boost::python;
 
 namespace ecto
 {
-namespace py
-{
-
-  struct modwrap : module, bp::wrapper<module>
+  namespace py
   {
-    void Process() {
-      //std::cout << "dispatching Process...\n";
-      this->get_override("Process")();
-    }
 
-    void Config() {
-      //std::cout << "dispatching Config...\n";
-      this->get_override("Config")();
-    }
-
-    void setIn(const std::string& name, const std::string& doc, 
-	       bp::object obj)
+    struct modwrap : module, bp::wrapper<module>
     {
-      this->module::setIn<bp::object>(name, doc, obj);
-    }
+      void Process()
+      {
+        this->get_override("Process")();
+      }
 
-    void setOut(const std::string& name, const std::string& doc, 
-		bp::object obj)
+      void Config()
+      {
+        this->get_override("Config")();
+      }
+
+      static std::string name()
+      {
+        return "module";
+      }
+      static std::string doc()
+      {
+        return "doc";
+      }
+    };
+
+    void setTendril(tendrils& t, const std::string& name, const std::string& doc, bp::object o)
     {
-      this->module::setOut<bp::object>(name, doc, obj);
+      t.set(name, doc, o);
     }
 
-    bp::object getIn(const std::string& name)
+    bp::object getTendril(tendrils& t, const std::string& name)
     {
-      return this->module::getIn<bp::object>(name);
+      return t[name].extract();
     }
 
-    bp::object getParam(const std::string& name)
+    void wrapModule()
     {
-      return this->module::getParam<bp::object>(name);
+      bp::class_<tendrils> tendrils_("tendrils");
+      tendrils_.def(bp::map_indexing_suite<tendrils, false>());
+      tendrils_.def("set", setTendril);
+      tendrils_.def("get", getTendril);
+      bp::class_<module, boost::shared_ptr<module>, boost::noncopyable>("module");
+      bp::class_<modwrap, boost::noncopyable> mw("module");
+      mw.def("connect", &module::connect);
+      mw.def("Process", bp::pure_virtual(&module::Process));
+      mw.def("Config", bp::pure_virtual(&module::Config));
+      mw.def_readwrite("inputs", &module::inputs);
+      mw.def_readwrite("outputs", &module::outputs);
+      mw.def_readwrite("params", &module::params);
+      mw.def("Name", &modwrap::name);
+      mw.staticmethod("Name");
+      mw.def("Doc", &modwrap::doc);
+      mw.staticmethod("Doc");
     }
 
-    void put(const std::string& name, bp::object obj)
-    {
-      this->module::getOut<bp::object>(name) = obj;
-    }
-    static std::string name()
-    {
-     return "module";
-    }
-    static std::string doc()
-    {
-      //this->get_override("Doc");
-      return "doc";
-    }
-  };
-
-void wrapModule(){
-
-  bp::class_<tendrils>("tendrils")
-    .def(bp::map_indexing_suite<tendrils,false>())
-        ;
-
-  bp::class_<modwrap, boost::shared_ptr<module>,boost::noncopyable>("module")
-      .def("connect", &module::connect)
-      .def("Process", &module::Process)
-      .def("Config", &module::Config)
-      .def("Name",&modwrap::name)
-      .staticmethod("Name")
-      .def("Doc",&modwrap::doc)
-      .staticmethod("Doc")
-      .def("setIn", &modwrap::setIn)
-      .def("setOut", &modwrap::setOut)
-      .def("getIn", &modwrap::getIn)
-      .def("getParam", &modwrap::getParam)
-      .def("put", &modwrap::put)
-      .def_readwrite("inputs", &module::inputs)
-      .def_readwrite("outputs", &module::outputs)
-      .def_readwrite("params", &module::params)
-    ;
-//  void a_map_indexing_suite(); // moved to a_map_indexing_suite.cpp to
-//     a_map_indexing_suite();
-  /*
-  bp::class_<module, boost::noncopyable>("module")
-    .def_readwrite("inputs", &module::inputs)
-    .def_readwrite("outputs", &module::outputs)
-    .def_readwrite("params", &module::params)
-    .def("connect", &module::connect)
-    .def("process", &module::Process)
-    ;
-  */
-}
-
-}
+  }
 }
 
