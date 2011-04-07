@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 
-import ecto, buster, makeplasm
-
+import ecto, buster
+import test_to_module
 strs = {ecto.vertex_t.output : "OUTPUT", ecto.vertex_t.input:"INPUT",ecto.vertex_t.root:"ROOT"}
 
 def print_vertex(vert):
     return vert[0].Name() + ":"+strs[vert[1]]+"(" + vert[2]+")"
 
 def test_iterplasm():
-    plasm = makeplasm.makeplasm()
+    plasm = test_to_module.makeplasm()
      
     vertices = plasm.vertices()
     edges = plasm.edges()
@@ -24,9 +24,6 @@ def test_iterplasm():
             for p in x.params:
                 print p.key()," value = ",p.data().get()
     
-    module = plasm.to_module()
-    module2 = makeplasm.makeplasm().to_module()
-    ecto.print_module_doc(module)
     #ecto.view_plasm(plasm)
     
 if __name__ == '__main__':
