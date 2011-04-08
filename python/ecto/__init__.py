@@ -61,3 +61,4 @@ __path__ = extend_path(__path__, __name__)
 
 from module_tools import *
 from doc import *
+from eyaml import *

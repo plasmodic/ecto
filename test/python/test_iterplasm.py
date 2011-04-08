@@ -23,7 +23,14 @@ def test_iterplasm():
             print x.Name(), " has parameters:"
             for p in x.params:
                 print p.key()," value = ",p.data().get()
+    print ecto.dump_plasm_params(plasm)
+    data = """Generate_0: {start: 3.0, step: 25.0}
+Multiply_1: {factor: 1.0}
+Multiply_4: {factor: 10.0}"""
+    ecto.load_plasm_params(plasm, data)
+    ecto.config_plasm(plasm)
     
+    print ecto.dump_plasm_params(plasm)
     #ecto.view_plasm(plasm)
     
 if __name__ == '__main__':
