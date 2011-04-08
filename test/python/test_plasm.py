@@ -12,6 +12,7 @@ def test_plasm():
             plasm.connect(scatter, f, gather, t)
     plasm.go(gather)
     result = gather.o.out.get()
+    str = ecto.print_module_doc(scatter)
     print "gather out (should be 9):", result
     assert(result == 9)
     #print plasm.viz()

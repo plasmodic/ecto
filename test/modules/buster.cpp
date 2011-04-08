@@ -25,11 +25,12 @@ namespace buster
 
     void Config()
     {
+      setIn<std::string>("str","A string to print","hello");
     }
 
     void Process()
     {
-      std::cout << getParam<std::string>("str") << std::endl;
+      std::cout << getIn<std::string>("str") << std::endl;
     }
   };
 

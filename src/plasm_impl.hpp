@@ -96,7 +96,7 @@ namespace ecto
         switch (vert.ecto_type)
         {
           case plasm::root:
-            out << "[label=\"" << ecto::name_of(typeid(*vert.first)) << "\",fillcolor=green, style=\"rounded,filled\"]";
+            out << "[label=\"" << vert.first->name() << "\",fillcolor=green, style=\"rounded,filled\"]";
             break;
           case plasm::output:
             out << "[label=\"" <</* ecto::name_of(typeid(*vert.first)) << "out(" */ vert.second

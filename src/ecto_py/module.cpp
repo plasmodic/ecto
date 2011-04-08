@@ -22,14 +22,32 @@ namespace ecto
         this->get_override("Config")();
       }
 
-      static std::string name()
+      std::string name()
       {
-        return "module";
+        bp::reference_existing_object::apply<modwrap*>::type converter;
+        PyObject* obj = converter(this);
+        bp::object real_obj = bp::object(bp::handle<>(obj));
+        bp::object n = real_obj.attr("__class__").attr("__name__");
+        std::string nm = bp::extract<std::string>(n);
+        return nm;
       }
-      static std::string doc()
+      static std::string nameBp(bp::object o)
       {
-        return "doc";
+        bp::object n = o["__class__"]["__name__"];
+        modwrap& m = bp::extract<modwrap&>(o);
+        m.name_ = bp::extract<std::string>(n);
+        return m.name_;
       }
+      static std::string doc(modwrap* mod)
+      {
+        bp::reference_existing_object::apply<modwrap*>::type converter;
+        PyObject* obj = converter(mod);
+        bp::object real_obj = bp::object(bp::handle<>(obj));
+        bp::object n = real_obj.attr("__class__").attr("__doc__");
+        std::string nm = bp::extract<std::string>(n);
+        return nm;
+      }
+      std::string name_;
     };
 
     void setTendril(tendrils& t, const std::string& name, const std::string& doc, bp::object o)
@@ -56,10 +74,8 @@ namespace ecto
       mw.def_readwrite("inputs", &module::inputs);
       mw.def_readwrite("outputs", &module::outputs);
       mw.def_readwrite("params", &module::params);
-      mw.def("Name", &modwrap::name);
-      mw.staticmethod("Name");
+      mw.def("Name", &module::name);
       mw.def("Doc", &modwrap::doc);
-      mw.staticmethod("Doc");
     }
 
   }

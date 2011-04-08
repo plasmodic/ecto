@@ -12,11 +12,9 @@ def dump_plasm_params(plasm):
     params = {}
     for k,(x,t,name,tendril) in vertices.items():
         if(t == ecto.vertex_t.root):
-            print x.Name(), " has parameters:"
             pl = {}
             for p in x.params:
-                print p.key()," value = ",p.data().get()
-                pl[p.key()] = p.data().get()
+                pl[p.key()] = p.data().val
             params["%s_%d"%(x.Name(),k)] = pl
     output = dump(params,Dumper=Dumper)
     return output

@@ -8,13 +8,15 @@ namespace ecto
   }
 
   tendril::tendril() :
-      //impl_ is never not initialized
-    impl_(new impl<none> (none())), dirty_(true)
-  { }
+    //impl_ is never not initialized
+        impl_(new impl<none> (none()))
+  {
+  }
 
   tendril::tendril(impl_base::ptr impl) :
-    impl_(impl), dirty_(true)
-  { }
+    impl_(impl)
+  {
+  }
 
   std::string tendril::type_name() const
   {
@@ -26,15 +28,33 @@ namespace ecto
     return impl_->doc;
   }
 
+  void tendril::setDoc(const std::string& doc_str)
+  {
+    impl_->doc = doc_str;
+  }
+
   void tendril::connect(tendril& rhs)
   {
     if (type_name() != rhs.type_name())
-      throw std::runtime_error("bad connect! input(" + impl_->type_name() + ") != output(" + rhs.type_name() + ")");
+    {
+      if (rhs.is_type<boost::python::object> () && impl_->steal(rhs))
+      {
+      }
+      else if (is_type<boost::python::object> () && rhs.impl_->steal(*this))
+      {
+      }
+      else
+      {
+        throw std::runtime_error("bad connect! input(" + impl_->type_name() + ") != output(" + rhs.type_name() + ")");
+      }
+    }
     impl_ = rhs.impl_;
+
   }
 
   tendril::impl_base::~impl_base()
-  { }
+  {
+  }
 
   boost::python::object tendril::extract()
   {
@@ -43,10 +63,11 @@ namespace ecto
 
   void tendril::set(boost::python::object o)
   {
-    if(is_type<none>())
+    if (is_type<none> ())
     {
-      impl_.reset(new impl_py(o));
-    }else
+      impl_.reset(new impl<boost::python::object> (o));
+    }
+    else
     {
       impl_->setPython(o);
     }

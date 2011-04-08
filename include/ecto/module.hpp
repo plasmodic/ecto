@@ -72,6 +72,10 @@ namespace ecto
       return params.get<T>(name);
     }
 
+    virtual std::string name()
+    {
+      return ecto::name_of(typeid(*this));
+    }
 
     tendrils inputs, outputs, params;
   private:
