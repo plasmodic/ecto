@@ -25,7 +25,7 @@ namespace ecto
     plasm();
     void connect(boost::shared_ptr<module> from, const std::string& output, boost::shared_ptr<module> to,
                  const std::string& input);
-    void markDirty(const boost::shared_ptr<module>& m);
+    void mark_dirty(const boost::shared_ptr<module>& m);
     void go(const boost::shared_ptr<module>& m);
     void viz(std::ostream& out) const;
     std::string viz() const;
@@ -33,7 +33,7 @@ namespace ecto
     vertex_map_t getVertices();
     edge_list_t getEdges();
 
-    static boost::shared_ptr<module> toModule(boost::shared_ptr<plasm> plasm, const std::list< boost::shared_ptr<module> >& mi,
+    static boost::shared_ptr<module> to_module(boost::shared_ptr<plasm> plasm, const std::list< boost::shared_ptr<module> >& mi,
                                               const std::list<  boost::shared_ptr<module> >& mo);
   private:
     class impl;

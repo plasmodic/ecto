@@ -63,4 +63,5 @@ ECTO_MODULE(push_ups)
 {
   using namespace ecto_push_ups;
   ecto::wrap<Add2>("Add2", "An adder.");
+  ecto::wrap<BigData>("BigData", "BigData...");
 }

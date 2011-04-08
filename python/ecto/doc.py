@@ -9,8 +9,8 @@ import gtk.gdk
 
 def print_tendrils(tendril, n):
     for x in tendril :
-        print  n*" " + x.key() + " type=%s"%x.data().type_name() + " value=",x.data().get()
-        print  (n+2)*" " +x.data().doc()
+        print  n*" " + x.key() + " type=%s"%x.data().type_name + " value=",x.data().val
+        print  (n+2)*" " +x.data().doc
 def print_module_doc(m):
     print "Module: "+ m.Name()
     print "     Doc: " + m.Doc()

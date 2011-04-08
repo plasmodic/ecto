@@ -12,6 +12,19 @@
 
 #define SHOW() (std::cout << __PRETTY_FUNCTION__ << "\n")
 
+//not sure if we should disable this even in release...
+//#if NDEBUG
+#if 0
+#define ECTO_ASSERT(_impl_check_ )        \
+  do {} while(false)
+#else
+#define ECTO_ASSERT(_impl_check_ )\
+  do\
+    {\
+      _impl_check_;\
+    }while(false)
+#endif
+
 namespace ecto {
   std::string name_of(const std::type_info &ti);
 

@@ -13,6 +13,7 @@ def in_out_magic(module):
     set_tendril_attribute(module.o, module.outputs)
     set_tendril_attribute(module.p, module.params)
 
+
 def config(module,**kwargs):
     """
     Given an ecto module, and kward args, it sets the params

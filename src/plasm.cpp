@@ -5,11 +5,19 @@ namespace ecto
 
   void plasm::connect(module::ptr from, const std::string& out_name, module::ptr to, const std::string& in_name)
   {
+    if(from->outputs.count(out_name) == 0)
+    {
+      throw std::logic_error("The specified output does not exist: " + out_name);
+    }
+    if(to->inputs.count(in_name) == 0)
+    {
+      throw std::logic_error("The specified input does not exist: "+in_name);
+    }
     impl_->modules_.add_edge(from, out_name, to, in_name);
     from->connect(out_name, to, in_name);
   }
 
-  void plasm::markDirty(const module::ptr& m)
+  void plasm::mark_dirty(const module::ptr& m)
   {
     // Access the property accessor type for this graph
     impl_->modules_.mark_dirty(m);
@@ -48,28 +56,18 @@ namespace ecto
     {
     }
 
-    virtual void connect(const std::string& output, ptr to, const std::string& input)
-    {
-
-    }
-    virtual void dirty(bool hmm)
-    {
-      std::cout << "dirty ("<< hmm<<")"<< std::endl;
-      ecto::module::dirty(hmm);
-    }
-
     virtual void Process()
     {
       BOOST_FOREACH(const module::ptr& m , module_inputs_)
      {
-       plasm_->markDirty(m);
+       plasm_->mark_dirty(m);
      }
       BOOST_FOREACH(module::ptr& m , module_inputs_)
       {
         BOOST_FOREACH(tendrils::value_type& t , m->inputs)
         {
           t.second.connect(inputs[t.first]);
-          std::cout << "connecting: " << t.first << std::endl;
+          //std::cout << "connecting: " << t.first << std::endl;
         }
       }
       BOOST_FOREACH(const module::ptr& m , module_outputs_)
@@ -100,7 +98,7 @@ namespace ecto
     std::list<module::ptr> module_inputs_, module_outputs_;
   };
 
-  boost::shared_ptr<module> plasm::toModule(boost::shared_ptr<plasm> plasm, const std::list<module::ptr>& mi,
+  boost::shared_ptr<module> plasm::to_module(boost::shared_ptr<plasm> plasm, const std::list<module::ptr>& mi,
                                             const std::list<module::ptr>& mo)
   {
     boost::shared_ptr<module> plasm_ (new PlasmModule(plasm, mi, mo));

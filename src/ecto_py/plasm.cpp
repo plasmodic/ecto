@@ -13,6 +13,8 @@ namespace bp = boost::python;
 using bp::arg;
 namespace ecto
 {
+
+
   struct plasm_wrapper
   {
     static std::string wrapViz(const ecto::plasm& p)
@@ -36,26 +38,26 @@ namespace ecto
         bp::stl_input_iterator<T> begin(o), end;
         l.assign(begin, end);
       }
-    static boost::shared_ptr<module> toModule(boost::shared_ptr<plasm> p, bp::object inputs, bp::object outputs)
+    static boost::shared_ptr<module> to_module(boost::shared_ptr<plasm> p, bp::object inputs = bp::list(), bp::object outputs = bp::list())
     {
 
       std::list<module::ptr> mi, mo;
       list_assign(mi, inputs);
       list_assign(mo, outputs);
-      return plasm::toModule(p, mi, mo);
+      return plasm::to_module(p, mi, mo);
     }
-
+    BOOST_PYTHON_FUNCTION_OVERLOADS(to_module_overloads, to_module, 1, 3);
     static void wrap()
     {
       bp::class_<plasm,boost::shared_ptr<plasm>, boost::noncopyable> p("Plasm");
       p.def("connect", &plasm::connect, bp::args("from_module", "output_name", "to_module", "intput_name"));
-      p.def("markDirty", &plasm::markDirty);
+      p.def("mark_dirty", &plasm::mark_dirty);
       p.def("go", &plasm::go);
       p.def("viz", wrapViz, "Get a graphviz string representation of the plasm.");
       p.def("vertices", getModules,
             "Get a dict of the plasm's vertices, with key being integers, and a tuple (module,vertice_type,tendril_key)");
       p.def("edges", getEdges, "Get a list of edges, tuples of two integers(source,target).");
-      p.def("toModule",toModule);
+      p.def("to_module",to_module,to_module_overloads());
       bp::enum_<plasm::vertex_t> v_enum("vertex_t");
       v_enum.value("root", plasm::root);
       v_enum.value("input", plasm::input);
