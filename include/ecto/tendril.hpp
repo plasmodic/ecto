@@ -41,7 +41,7 @@ namespace ecto
     {
       // fixme: allocators
       tendril c(impl_base::ptr(new impl<T> (t)));
-      c.impl_->doc = doc;
+      c.setDoc(doc);
       return c;
     }
 
@@ -53,15 +53,15 @@ namespace ecto
     template<typename T>
     inline void set(const std::string& doc, const T& t)
     {
-      try
+      if(is_type<T>())
       {
         get<T>() = t;
         setDoc(doc);
-      }
-      catch(const std::exception&)
+      }else if(is_type<none>())
       {
         *this = make<T>(t,doc);
-      }
+      }else
+        enforce_type<T>();
     }
 
 
@@ -87,32 +87,35 @@ namespace ecto
     template<typename T>
     inline const T& get() const
     {
-      if (is_type<T> ())
-        {
-          return *reinterpret_cast<const T*> (impl_->get());
-        }
-        throw(std::logic_error(std::string(type_name() + " is not a " + name_of<T> ()).c_str()));
+      enforce_type<T> ();
+      return *reinterpret_cast<const T*> (impl_->get());
     }
 
     template<typename T>
-      inline T& get()
-      {
-        if (is_type<T> ())
-        {
-          return *reinterpret_cast<T*> (impl_->get());
-        }
-        throw(std::logic_error(std::string(type_name() + " is not a " + name_of<T> ()).c_str()));
-      }
+    inline T& get()
+    {
+      enforce_type<T> ();
+      return *reinterpret_cast<T*> (impl_->get());
+    }
 
     template <typename T>
     inline bool is_type() const
     {
       return impl_base::check<T>(*impl_);
     }
+
+    template<typename T>
+      inline void enforce_type() const
+      {
+        if (!is_type<T> ())
+          throw(std::logic_error(std::string(type_name() + " is not a " + name_of<T> ()).c_str()));
+      }
     void connect(tendril& rhs);
 
-    boost::python::object extract();
+    boost::python::object extract() const;
     void set(boost::python::object o);
+
+    bool connected() const{return connected_;}
 
     struct none
     {
@@ -153,6 +156,7 @@ namespace ecto
 
     tendril(impl_base::ptr impl);
     boost::shared_ptr<impl_base> impl_;
+    bool connected_;
     friend class tendrils;
     friend class module;
   };
@@ -226,7 +230,7 @@ bool tendril::impl<T>::steal(tendril& to)
   boost::python::extract<T> get_T(to.extract());
   if (get_T.check())
   {
-    //std::cout << "stealing to a native tendril..."<< std::endl;
+    std::cout << "stealing to a native tendril..."<< std::endl;
     //reset the impl from a python type to a c++ type.
     typedef impl<T> impl_T;
     impl_T* i_t(new impl_T(get_T()));

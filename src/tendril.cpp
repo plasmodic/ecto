@@ -9,12 +9,12 @@ namespace ecto
 
   tendril::tendril() :
     //impl_ is never not initialized
-        impl_(new impl<none> (none()))
+        impl_(new impl<none> (none())),connected_(false)
   {
   }
 
   tendril::tendril(impl_base::ptr impl) :
-    impl_(impl)
+    impl_(impl),connected_(false)
   {
   }
 
@@ -49,14 +49,14 @@ namespace ecto
       }
     }
     impl_ = rhs.impl_;
-
+    connected_ = true;
   }
 
   tendril::impl_base::~impl_base()
   {
   }
 
-  boost::python::object tendril::extract()
+  boost::python::object tendril::extract() const
   {
     return impl_->getPython();
   }

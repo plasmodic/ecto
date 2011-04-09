@@ -10,6 +10,10 @@
 
 namespace ecto 
 {
+  namespace py
+  {
+    void wrapModule();
+  }
   struct module : boost::noncopyable
   {
     typedef boost::shared_ptr<module> ptr;
@@ -19,9 +23,6 @@ namespace ecto
     virtual void Process();
     virtual void Config();
 
-    struct listener{
-      virtual void onUpdate(const module& m) = 0;
-    };
 
     void connect(const std::string& output, ptr to, const std::string& input);
 
@@ -30,34 +31,34 @@ namespace ecto
 
 
     template<typename T>
-       tendril& setOut(const std::string& name,
+       void setOut(const std::string& name,
                        const std::string& doc = "",
                        const T& t = T())
        {
-         return outputs.set<T>(name,doc,t);
+         (outputs).set<T>(name,doc,t);
        }
 
        template<typename T>
-       tendril& setIn(const std::string& name,
+       void setIn(const std::string& name,
                       const std::string& doc = "",
                       const T& t = T())
        {
-          return inputs.set<T>(name,doc,t);
+          (inputs).set<T>(name,doc,t);
        }
 
        template<typename T>
-       tendril& setParam(const std::string& name,
+       void setParam(const std::string& name,
                          const std::string& doc = "",
                          const T& t = T())
        {
-         return params.set<T>(name,doc,t);
+         (params).set<T>(name,doc,t);
        }
 
 
     template<typename T>
     T& getOut(const std::string& name)
     {
-      return outputs.get<T>(name);
+      return (outputs).get<T>(name);
     }
 
     template<typename T>
@@ -76,12 +77,16 @@ namespace ecto
     {
       return ecto::name_of(typeid(*this));
     }
-
-    tendrils inputs, outputs, params;
+    const tendrils& i()const{return inputs;}
+    const tendrils& o()const{return outputs;}
+    const tendrils& p()const{return params;}
   private:
+    tendrils params,inputs,outputs;
     bool dirty_;
-
-    friend class plasm2;
+    friend class PlasmModule;
+    friend class ModuleGraph;
+    friend class plasm;
+    friend void ecto::py::wrapModule();
   };
 
 }//namespace ecto

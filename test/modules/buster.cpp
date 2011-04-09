@@ -20,7 +20,7 @@ namespace buster
 
     static void Params(ecto::tendrils& p)
     {
-      p["str"].set<std::string> ("I print this:", "Hello World");
+      p.set<std::string> ("str","I print this:", "Hello World");
     }
 
     void Config()
@@ -105,6 +105,7 @@ namespace buster
     int n_, x_;
   };
 
+  template<typename T>
   struct Gather : ecto::module
   {
     static void Params(ecto::tendrils& p)
@@ -117,19 +118,19 @@ namespace buster
       n_ = getParam<int> ("n");
       for (int i = 0; i < n_; i++)
 	{
-	  setIn<int> (str(boost::format("in_%04d") % i), "An integer input.");
+	  setIn<T> (str(boost::format("in_%04d") % i), "An " + ecto::name_of<T>() + "input.");
 	}
-      setOut<int> ("out", "The sum of all inputs.");
+      setOut<T> ("out", "The sum of all inputs.");
     }
     void Process()
     {
       SHOW();
-      int& out = getOut<int> ("out");
+      T& out = getOut<T> ("out");
       out = 0;
       typedef std::pair<std::string, ecto::tendril> pp;
-      BOOST_FOREACH(const pp& in,inputs)
+      BOOST_FOREACH(const pp& in,i())
 	{
-	  out += in.second.get<int> ();
+	  out += in.second.get<T> ();
 	}
     }
     int n_;
@@ -144,5 +145,6 @@ ECTO_MODULE(buster)
   ecto::wrap<Generate>("Generate", "A generator module.");
   ecto::wrap<Multiply>("Multiply", "Multiply an input with a constant");
   ecto::wrap<Scatter>("Scatter", "Scatter a value...");
-  ecto::wrap<Gather>("Gather", "Gather a scattered value...");
+  ecto::wrap<Gather<int> >("Gather", "Gather a scattered value...");
+  ecto::wrap<Gather<double> >("Gather_double", "Gather a scattered value...");
 }

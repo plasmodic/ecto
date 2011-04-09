@@ -9,13 +9,13 @@
 
 namespace ecto
 {
-  class tendrils : public std::map<std::string, tendril>
+  class tendrils : public std::map<std::string, tendril>, boost::noncopyable
   {
   public:
     template<typename T>
-    tendril& set(const std::string& name, const std::string& doc, const T& default_val = T())
+    void set(const std::string& name, const std::string& doc, const T& default_val = T())
     {
-      map_t::iterator it = find(name);
+      map_t::const_iterator it = find(name);
       //if there are no exiting tendrils by the given name,
       //just add it.
       if (it == end())
@@ -30,12 +30,11 @@ namespace ecto
         {
           std::stringstream ss;
           ss << "Your types aren't the same, this could lead to very undefined behavior...";
-          ss << " old type = " << (*this)[name].impl_->type_name() << " new type = " <<  name_of<T>()
+          ss << " old type = " << it->second.impl_->type_name() << " new type = " <<  name_of<T>()
               << std::endl;
           throw std::logic_error(ss.str());
         }
       }
-      return it->second;
     }
 
     template <typename T>
@@ -58,6 +57,22 @@ namespace ecto
         return tendril().get<T>();
       }else
         return it->second.get<T>();
+    }
+
+    const tendril& at(const std::string& name) const
+    {
+      map_t::const_iterator it = find(name);
+      if(it == end())
+        throw std::logic_error("name does not exist!");
+      return it->second;
+    }
+
+    tendril& at(const std::string& name)
+    {
+      map_t::iterator it = find(name);
+      if(it == end())
+        throw std::logic_error("name does not exist!");
+      return it->second;
     }
 
   private:

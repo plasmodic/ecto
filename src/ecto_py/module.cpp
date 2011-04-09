@@ -62,18 +62,19 @@ namespace ecto
 
     void wrapModule()
     {
-      bp::class_<tendrils> tendrils_("tendrils");
+      bp::class_<tendrils,boost::noncopyable> tendrils_("tendrils");
       tendrils_.def(bp::map_indexing_suite<tendrils, false>());
       tendrils_.def("set", setTendril);
       tendrils_.def("get", getTendril);
+
       bp::class_<module, boost::shared_ptr<module>, boost::noncopyable>("module");
       bp::class_<modwrap, boost::noncopyable> mw("module");
       mw.def("connect", &module::connect);
       mw.def("Process", bp::pure_virtual(&module::Process));
       mw.def("Config", bp::pure_virtual(&module::Config));
-      mw.def_readwrite("inputs", &module::inputs);
-      mw.def_readwrite("outputs", &module::outputs);
-      mw.def_readwrite("params", &module::params);
+      mw.def_readonly("inputs", &module::inputs);
+      mw.def_readonly("outputs", &module::outputs);
+      mw.def_readonly("params", &module::params);
       mw.def("Name", &module::name);
       mw.def("Doc", &modwrap::doc);
     }

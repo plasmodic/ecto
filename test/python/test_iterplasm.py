@@ -13,6 +13,9 @@ def test_iterplasm():
     vertices = plasm.vertices()
     edges = plasm.edges()
     
+    print vertices
+    print edges
+    
     for s, t in edges:
         source = vertices[s]
         target = vertices[t]   

@@ -16,8 +16,11 @@ namespace ecto
     {
       throw std::logic_error("The specified input does not exist: "+in_name);
     }
-    impl_->modules_.add_edge(from, out_name, to, in_name);
+    //this throws on bad connection.
     from->connect(out_name, to, in_name);
+
+    //only add to graph if it was actually connected.
+    impl_->modules_.add_edge(from, out_name, to, in_name);
   }
 
   void plasm::mark_dirty(const module::ptr& m)
@@ -67,9 +70,10 @@ namespace ecto
      }
       BOOST_FOREACH(module::ptr& m , module_inputs_)
       {
-        BOOST_FOREACH(tendrils::value_type& t , m->inputs)
+        BOOST_FOREACH(const tendrils::value_type& t , m->inputs)
         {
-          t.second.connect(inputs[t.first]);
+
+          const_cast<tendril&>(t.second).connect(inputs.at(t.first));
           //std::cout << "connecting: " << t.first << std::endl;
         }
       }
@@ -83,9 +87,9 @@ namespace ecto
     {
       BOOST_FOREACH(module::ptr& m , module_inputs_)
       {
-        BOOST_FOREACH(tendrils::value_type& t , m->inputs)
+        BOOST_FOREACH(const tendrils::value_type& t , m->inputs)
         {
-          inputs[t.first] = t.second;
+          const_cast<tendrils&>(inputs)[t.first] = t.second;
         }
       }
 
@@ -93,7 +97,7 @@ namespace ecto
       {
         BOOST_FOREACH(const tendrils::value_type& t , m->outputs)
         {
-          outputs[t.first] = t.second;
+          const_cast<tendrils&>(outputs)[t.first] = t.second;
         }
       }
     }
