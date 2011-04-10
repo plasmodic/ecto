@@ -1,8 +1,10 @@
 #pragma once
-#include <ecto/util.hpp> //name_of
-#include <boost/shared_ptr.hpp>
 #include <boost/python.hpp>
 #include <boost/python/type_id.hpp>
+#include <boost/shared_ptr.hpp>
+
+#include <ecto/util.hpp> //name_of
+
 #include <stdexcept>
 #include <string>
 #include <sstream>

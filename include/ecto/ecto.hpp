@@ -1,4 +1,9 @@
 #pragma once
+//boost python first.
+#include <boost/python.hpp>
+//boost stuff
+#include <boost/shared_ptr.hpp>
+
 //do not include this in ecto lib files, only in client modules
 
 //ecto includes
@@ -8,9 +13,6 @@
 #include <ecto/tendrils.hpp>
 #include <ecto/util.hpp>
 
-//boost stuff
-#include <boost/python.hpp>
-#include <boost/shared_ptr.hpp>
 
 
 namespace ecto {

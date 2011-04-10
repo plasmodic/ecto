@@ -1,5 +1,4 @@
 #pragma once
-
 #include <ecto/tendril.hpp>
 #include <string>
 #include <sstream>

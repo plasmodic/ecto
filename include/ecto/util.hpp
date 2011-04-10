@@ -1,6 +1,5 @@
 #ifndef ECTO_UTIL_HPP_INCLUDED
 #define ECTO_UTIL_HPP_INCLUDED
-
 #include <typeinfo>
 #include <string>
 #include <vector>
