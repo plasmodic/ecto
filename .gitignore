@@ -5,3 +5,4 @@ bin
 *.pyc
 .*
 python/ecto/ui/uic.py
+\#*\#

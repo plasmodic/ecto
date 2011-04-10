@@ -1,11 +1,8 @@
 #include "plasm_impl.hpp"
 namespace ecto
 {
+  plasm::plasm() : impl_(new impl) { }
 
-  plasm::plasm() :
-    impl_(new impl)
-  {
-  }
   void plasm::connect(module::ptr from, const std::string& out_name, module::ptr to, const std::string& in_name)
   {
     if(from->outputs.count(out_name) == 0)

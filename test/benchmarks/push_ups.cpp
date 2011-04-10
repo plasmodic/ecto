@@ -40,6 +40,7 @@ namespace ecto_push_ups
       SHOW();
     }
   };
+
   struct BigData : ecto::module
   {
     void Config()
@@ -56,7 +57,6 @@ namespace ecto_push_ups
       SHOW();
     }
   };
-
 }
 
 ECTO_MODULE(push_ups)

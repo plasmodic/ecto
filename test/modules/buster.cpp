@@ -122,6 +122,7 @@ namespace buster
 	}
       setOut<T> ("out", "The sum of all inputs.");
     }
+
     void Process()
     {
       SHOW();
