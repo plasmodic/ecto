@@ -68,6 +68,7 @@ def test_my_module():
     plasm.go(printer)
     ecto.print_module_doc(mul)
     ecto.view_plasm(plasm)
+    print "it is:", mm.outputs['out'].val
     assert(mm.outputs["out"].val == "spamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspam")
 
 if __name__ == '__main__':
