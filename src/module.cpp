@@ -7,6 +7,7 @@ namespace ecto
    params(),inputs(),outputs(), dirty_(true)
   {
   }
+
   module::~module()
   {
   }

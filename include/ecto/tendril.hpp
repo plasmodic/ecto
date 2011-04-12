@@ -56,13 +56,13 @@ namespace ecto
     inline void set(const std::string& doc, const T& t)
     {
       if(is_type<T>())
-      {
-        get<T>() = t;
-        setDoc(doc);
-      }else if(is_type<none>())
-      {
-        *this = make<T>(t,doc);
-      }else
+	{
+	  get<T>() = t;
+	  setDoc(doc);
+	}else if(is_type<none>())
+	{
+	  *this = make<T>(t,doc);
+	}else
         enforce_type<T>();
     }
 
@@ -77,11 +77,11 @@ namespace ecto
     std::string type_name() const;
 
     /**
-    * \brief A doc string for this tendril, "foo is for the input
-    * and will be mashed with spam."
-    * @return A very descriptive human readable string of whatever
-    * the tendril is holding on to.
-    */
+     * \brief A doc string for this tendril, "foo is for the input
+     * and will be mashed with spam."
+     * @return A very descriptive human readable string of whatever
+     * the tendril is holding on to.
+     */
     std::string doc() const;
 
     void setDoc(const std::string& doc_str);
@@ -107,11 +107,11 @@ namespace ecto
     }
 
     template<typename T>
-      inline void enforce_type() const
-      {
-        if (!is_type<T> ())
-          throw(std::logic_error(std::string(type_name() + " is not a " + name_of<T> ()).c_str()));
-      }
+    inline void enforce_type() const
+    {
+      if (!is_type<T> ())
+	throw(std::logic_error(std::string(type_name() + " is not a " + name_of<T> ()).c_str()));
+    }
     void connect(tendril& rhs);
 
     boost::python::object extract() const;
@@ -163,84 +163,84 @@ namespace ecto
     friend class module;
   };
   
-template<typename T>
-bool tendril::impl_base::check(tendril::impl_base& i)
-{
-  return i.is_type(typeid(T));
-}
-
-template<typename T>
-void tendril::impl_base::checkThrow(tendril::impl_base& i) throw (std::logic_error)
-{
-  if (!check<T> (i))
-    throw(std::logic_error(std::string(i.type_name() + " is not a " + name_of<T> ()).c_str()));
-}
-
-
-
-template<typename T>
-tendril::impl<T>::impl(const T& t) :
-  t(t)
-{
-}
-
-template<typename T>
-const std::string& tendril::impl<T>::type_name() const
-{
-  static const std::string name = name_of<T> ();
-  return name;
-}
-template<typename T>
-bool tendril::impl<T>::is_type(std::type_info const& ti) const
-{
-  return std::strcmp(typeid(T).name(), ti.name()) == 0;
-}
-
-template<typename T>
-void* tendril::impl<T>::get()
-{
-  return &t;
-}
-
-template<typename T>
-void tendril::impl<T>:: setPython(boost::python::object o)
-{
-  boost::python::extract<T> get_T(o);
-  if(get_T.check())
-    t = get_T();
-  else
-    throw std::logic_error("Could not convert python object to type : " + type_name());
-}
-
-template<typename T>
-boost::python::object tendril::impl<T>::getPython() const
-{
-  try
+  template<typename T>
+  bool tendril::impl_base::check(tendril::impl_base& i)
   {
-    boost::python::object o(t);
-    return o;
+    return i.is_type(typeid(T));
   }
-  catch (const boost::python::error_already_set&) {
-    //silently handle no python wrapping
-  }
-  return boost::python::object();
-}
 
-template<typename T>
-bool tendril::impl<T>::steal(tendril& to)
-{
-  boost::python::extract<T> get_T(to.extract());
-  if (get_T.check())
+  template<typename T>
+  void tendril::impl_base::checkThrow(tendril::impl_base& i) throw (std::logic_error)
   {
-    std::cout << "stealing to a native tendril..."<< std::endl;
-    //reset the impl from a python type to a c++ type.
-    typedef impl<T> impl_T;
-    impl_T* i_t(new impl_T(get_T()));
-    i_t->doc = to.doc();
-    to.impl_.reset(i_t);
-    return true;
+    if (!check<T> (i))
+      throw(std::logic_error(std::string(i.type_name() + " is not a " + name_of<T> ()).c_str()));
   }
-  return false;
-}
+
+
+
+  template<typename T>
+  tendril::impl<T>::impl(const T& t) :
+    t(t)
+  {
+  }
+
+  template<typename T>
+  const std::string& tendril::impl<T>::type_name() const
+  {
+    static const std::string name = name_of<T> ();
+    return name;
+  }
+  template<typename T>
+  bool tendril::impl<T>::is_type(std::type_info const& ti) const
+  {
+    return std::strcmp(typeid(T).name(), ti.name()) == 0;
+  }
+
+  template<typename T>
+  void* tendril::impl<T>::get()
+  {
+    return &t;
+  }
+
+  template<typename T>
+  void tendril::impl<T>::setPython(boost::python::object o)
+  {
+    boost::python::extract<T> get_T(o);
+    if(get_T.check())
+      t = get_T();
+    else
+      throw std::logic_error("Could not convert python object to type : " + type_name());
+  }
+
+  template<typename T>
+  boost::python::object tendril::impl<T>::getPython() const
+  {
+    try
+      {
+	boost::python::object o(t);
+	return o;
+      }
+    catch (const boost::python::error_already_set&) {
+      //silently handle no python wrapping
+    }
+    return boost::python::object();
+  }
+
+  template<typename T>
+  bool tendril::impl<T>::steal(tendril& to)
+  {
+    boost::python::extract<T> get_T(to.extract());
+    if (get_T.check())
+      {
+	std::cout << "stealing to a native tendril..."<< std::endl;
+	//reset the impl from a python type to a c++ type.
+	typedef impl<T> impl_T;
+	impl_T* i_t(new impl_T(get_T()));
+	i_t->doc = to.doc();
+	to.impl_.reset(i_t);
+	return true;
+      }
+    return false;
+  }
 
 }

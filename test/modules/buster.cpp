@@ -17,7 +17,6 @@ namespace buster
 
   struct Printer : ecto::module
   {
-
     static void Params(ecto::tendrils& p)
     {
       p.set<std::string> ("str","I print this:", "Hello World");
@@ -139,7 +138,7 @@ namespace buster
 
 }
 
-ECTO_MODULE(buster)
+BOOST_PYTHON_MODULE(buster)
 {
   using namespace buster;
   ecto::wrap<Printer>("Printer", "A printer...");
