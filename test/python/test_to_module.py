@@ -4,26 +4,26 @@ import ecto, buster
 
 def makeplasm():
     plasm = ecto.Plasm()
-    g = ecto.make(buster.Generate, step=3,start=4)
-    m = ecto.make(buster.Multiply,factor=13)
+    g = buster.Generate(step=3,start=4)
+    m = buster.Multiply(factor=13)
     plasm.connect(g, 'out', m, 'in')
-    m2 = ecto.make( buster.Multiply, factor=2)
+    m2 = buster.Multiply(factor=2)
     plasm.connect(m, 'out', m2, 'in')
     return plasm
 
 def makemodule():
     plasm = ecto.Plasm()
-    g = ecto.make(buster.Generate, step=3,start=4)
-    m = ecto.make(buster.Multiply,factor=2)
+    g = buster.Generate(step=3,start=4)
+    m = buster.Multiply(factor=2)
     plasm.connect(g, 'out', m, 'in')
-    m2 = ecto.make( buster.Multiply, factor=2)
+    m2 = buster.Multiply(factor=2)
     plasm.connect(m, 'out', m2, 'in')
     return plasm.to_module([g],[m2])
 
 def makemodule2():
     plasm = ecto.Plasm()
-    m = ecto.make(buster.Multiply,factor=5)
-    m2 = ecto.make( buster.Multiply, factor=3)
+    m = buster.Multiply(factor=5)
+    m2 = buster.Multiply(factor=3)
     plasm.connect(m, 'out', m2, 'in')
     return plasm.to_module([m],[m2])
 
