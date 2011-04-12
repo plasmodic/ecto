@@ -7,14 +7,13 @@ import buster
 
 def test_plasm():
     scatter = buster.Scatter(n=3, x=3)
-    #scatter = ecto.make(buster.Scatter, n=3, x=3)
     print scatter, dir(scatter), scatter.outputs #, scatter.o
     gather = buster.Gather(n=3)
-    # gather = ecto.make(buster.Gather, n=3)
     print "#################\nPlasm test\n#################"
     plasm = ecto.Plasm()
-    for f, t in zip(ecto.keys(scatter.outputs), ecto.keys(gather.inputs)):
-            plasm.connect(scatter, f, gather, t)
+    print "KEEZ:", scatter.outputs.keys()
+    for f, t in zip(scatter.outputs.keys(), gather.inputs.keys()):
+        plasm.connect(scatter, f, gather, t)
     plasm.go(gather)
     print dir(gather)
     # print gather.outputs, gather.o

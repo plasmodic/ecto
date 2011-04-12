@@ -3,7 +3,7 @@
 
 #include <boost/python.hpp>
 #include <boost/python/raw_function.hpp>
-#include <boost/python/suite/indexing/map_indexing_suite.hpp>
+#include <ecto/python/std_map_indexing_suite.hpp>
 
 #include <ecto/python/raw_constructor.hpp>
 #include <ecto/python/repr.hpp>
@@ -114,7 +114,7 @@ namespace ecto
     void wrapModule()
     {
       bp::class_<tendrils, boost::shared_ptr<tendrils>, boost::noncopyable>("tendrils")
-	.def(bp::map_indexing_suite<tendrils, false>())
+	.def(bp::std_map_indexing_suite<tendrils, false>())
 	.def("set", setTendril)
 	.def("get", getTendril)
 	.def("__str__", strTendril)
