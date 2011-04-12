@@ -1,7 +1,12 @@
 #include <ecto/module.hpp>
+#include <ecto/ecto.hpp>
 
 #include <boost/python.hpp>
-#include <boost/python/suite/indexing/map_indexing_suite.hpp>
+#include <boost/python/raw_function.hpp>
+#include <ecto/python/std_map_indexing_suite.hpp>
+
+#include <ecto/python/raw_constructor.hpp>
+#include <ecto/python/repr.hpp>
 
 namespace bp = boost::python;
 
@@ -12,14 +17,48 @@ namespace ecto
 
     struct modwrap : module, bp::wrapper<module>
     {
+      static boost::shared_ptr<modwrap>
+      make_modwrap(bp::tuple args, bp::dict kwargs)
+      {
+	//SHOW();
+	std::cout << "args=" << bp::len(args) << "\n";
+	boost::shared_ptr<modwrap> m(new modwrap);
+
+	bp::object klass = args[0];
+	bp::object params = klass.attr("Params");
+	std::cout << "params=" << repr(params) << "\n";
+	params(boost::ref(m->params));
+
+	boost::python::list l = kwargs.items();
+	for (unsigned j=0; j<boost::python::len(l); ++j)
+	  {
+	    boost::python::object key = l[j][0];
+	    boost::python::object value = l[j][1];
+	    std::string keystring = boost::python::extract<std::string>(key);
+	    std::string valstring = boost::python::extract<std::string>(value.attr("__repr__")());
+	    std::cout << "modwrap " << keystring << " => " << valstring << "\n";
+	    m->p().at(keystring).set(value);
+	  }
+	std::cout << "done setting params\n";
+	return m;
+      }
+
       void Process()
       {
-        this->get_override("Process")();
+	std::cout << this->name() << " Process...\n";
+	if(bp::override process = this->get_override("Process"))
+	  process();
+	else
+	  throw std::logic_error("Process is not overridden it seems");
       }
 
       void Config()
       {
-        this->get_override("Config")();
+	std::cout << this->name() << " Config...\n";
+	if (bp::override config = this->get_override("Config"))
+	  config();
+	else
+	  throw std::logic_error("Config is not overridden it seems");
       }
 
       std::string name()
@@ -60,23 +99,40 @@ namespace ecto
       return t[name].extract();
     }
 
+    std::string strTendril(const tendrils& t)
+    {
+      std::string s = "tendrils:\n";
+      for (tendrils::const_iterator iter = t.begin(), end = t.end();
+	   iter != end;
+	   ++iter)
+	{
+	  s += "    " + iter->first + " [" + iter->second.type_name() + "]\n";
+	}
+      return s;
+    }
+
     void wrapModule()
     {
-      bp::class_<tendrils,boost::noncopyable> tendrils_("tendrils");
-      tendrils_.def(bp::map_indexing_suite<tendrils, false>());
-      tendrils_.def("set", setTendril);
-      tendrils_.def("get", getTendril);
+      bp::class_<tendrils, boost::shared_ptr<tendrils>, boost::noncopyable>("tendrils")
+	.def(bp::std_map_indexing_suite<tendrils, false>())
+	.def("set", setTendril)
+	.def("get", getTendril)
+	.def("__str__", strTendril)
+	;
 
-      bp::class_<module, boost::shared_ptr<module>, boost::noncopyable>("module");
-      bp::class_<modwrap, boost::noncopyable> mw("module");
-      mw.def("connect", &module::connect);
-      mw.def("Process", bp::pure_virtual(&module::Process));
-      mw.def("Config", bp::pure_virtual(&module::Config));
-      mw.def_readonly("inputs", &module::inputs);
-      mw.def_readonly("outputs", &module::outputs);
-      mw.def_readonly("params", &module::params);
-      mw.def("Name", &module::name);
-      mw.def("Doc", &modwrap::doc);
+      bp::class_<module, boost::shared_ptr<module>, boost::noncopyable>("module_cpp");
+
+      bp::class_<modwrap, boost::shared_ptr<modwrap>, boost::noncopyable>("module_base"/*, bp::no_init*/)
+	/*.def("__init__", raw_constructor(&modwrap::make_modwrap))*/
+	.def("connect", &module::connect)
+	.def("Process", bp::pure_virtual(&module::Process))
+	.def("Config", bp::pure_virtual(&module::Config))
+	.def_readonly("inputs", &module::inputs)
+	.def_readonly("outputs", &module::outputs)
+	.def_readonly("params", &module::params)
+	.def("Name", &module::name)
+	.def("Doc", &modwrap::doc)
+	;
     }
 
   }

@@ -8,11 +8,11 @@ import ecto,buster
 
 def test_reconnect():
     plasm = ecto.Plasm()
-    g = ecto.make(buster.Generate,start=2, step=2)    
-    m = ecto.make(buster.Multiply, factor=2)
-    m2 = ecto.make(buster.Multiply, factor=2)
+    g = buster.Generate(start=0, step=2)    
+    m = buster.Multiply(factor=2)
+    m2 = buster.Multiply(factor=2)
         
-    gather = ecto.make(buster.Gather_double, n=2)
+    gather = buster.Gather_double(n=2)
     ecto.print_module_doc(gather)
     plasm.connect(g, "out", m , "in")
     plasm.connect(g, "out", m2 , "in")

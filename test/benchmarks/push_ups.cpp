@@ -25,7 +25,7 @@ namespace ecto_push_ups
   {
     void Config()
     {
-      SHOW();
+      //SHOW();
       setOut<int> ("out", "x+y");
       setIn<int>("x");
       setIn<int>("y");
@@ -59,7 +59,7 @@ namespace ecto_push_ups
   };
 }
 
-ECTO_MODULE(push_ups)
+BOOST_PYTHON_MODULE(push_ups)
 {
   using namespace ecto_push_ups;
   ecto::wrap<Add2>("Add2", "An adder.");

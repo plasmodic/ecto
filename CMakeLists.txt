@@ -12,9 +12,11 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
-configure_file(python/ecto/__init__.py 
-  ${LIBRARY_OUTPUT_PATH}/ecto/__init__.py
-  @ONLY)
+execute_process(COMMAND mkdir -p ${LIBRARY_OUTPUT_PATH}/ecto)
+
+execute_process(COMMAND ln -s ${CMAKE_SOURCE_DIR}/python/ecto/__init__.py
+  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/lib/ecto
+  )
 
 include(${CMAKE_SOURCE_DIR}/cmake/ectoMacros.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/ectoFindDeps.cmake)
@@ -78,9 +80,6 @@ message(STATUS "To setup your python path for ecto you may source:"
   " ${CMAKE_BINARY_DIR}/python_path.sh")
 
 set(ecto_PYTHONPATH ${LIBRARY_OUTPUT_PATH} ${CMAKE_SOURCE_DIR}/python)
-configure_file(python/ecto/__init__.py 
-  ${CMAKE_BINARY_DIR}/lib/ecto/__init__.py
-  @ONLY)
 
 set(ecto_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/include)
 set(ecto_LIBRARIES ecto)
@@ -141,7 +140,6 @@ install(TARGETS ecto_ectomodule
 set(ecto_PYTHON_FILES
   python/ecto/__init__.py
   python/ecto/doc.py
-  python/ecto/module_tools.py
   python/ecto/xdot.py
 )
 

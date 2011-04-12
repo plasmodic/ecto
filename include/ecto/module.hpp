@@ -23,6 +23,10 @@ namespace ecto
     virtual void Process();
     virtual void Config();
 
+    template <typename T>
+    void Initialize() {
+      T::Params(params);
+    }
 
     void connect(const std::string& output, ptr to, const std::string& input);
 
@@ -31,28 +35,28 @@ namespace ecto
 
 
     template<typename T>
-       void setOut(const std::string& name,
-                       const std::string& doc = "",
-                       const T& t = T())
-       {
-         (outputs).set<T>(name,doc,t);
-       }
+    void setOut(const std::string& name,
+		const std::string& doc = "",
+		const T& t = T())
+    {
+      (outputs).set<T>(name,doc,t);
+    }
 
-       template<typename T>
-       void setIn(const std::string& name,
-                      const std::string& doc = "",
-                      const T& t = T())
-       {
-          (inputs).set<T>(name,doc,t);
-       }
+    template<typename T>
+    void setIn(const std::string& name,
+	       const std::string& doc = "",
+	       const T& t = T())
+    {
+      (inputs).set<T>(name,doc,t);
+    }
 
-       template<typename T>
-       void setParam(const std::string& name,
-                         const std::string& doc = "",
-                         const T& t = T())
-       {
-         (params).set<T>(name,doc,t);
-       }
+    template<typename T>
+    void setParam(const std::string& name,
+		  const std::string& doc = "",
+		  const T& t = T())
+    {
+      (params).set<T>(name,doc,t);
+    }
 
 
     template<typename T>
@@ -77,11 +81,12 @@ namespace ecto
     {
       return ecto::name_of(typeid(*this));
     }
-    const tendrils& i()const{return inputs;}
-    const tendrils& o()const{return outputs;}
-    const tendrils& p()const{return params;}
-  private:
+    const tendrils& i() const {return inputs;}
+    const tendrils& o()const {return outputs;}
+    tendrils& p() {return params;}
+  protected:
     tendrils params,inputs,outputs;
+  private:
     bool dirty_;
     friend class PlasmModule;
     friend class ModuleGraph;

@@ -6,8 +6,8 @@ import buster
 def test_sample():
     plasm = ecto.Plasm()
     
-    g = ecto.make(buster.Generate,start=0, step=2)    
-    m = ecto.make(buster.Multiply, factor=2)
+    g = buster.Generate(start=0, step=2)    
+    m = buster.Multiply(factor=2)
     
     plasm.connect(g, "out", m , "in")
     

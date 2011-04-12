@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 import ecto
 import buster
+from ecto import module 
 
 class MyModule(ecto.module):
-    def __init__(self):
-        ecto.module.__init__(self)
+    def __init__(self, *args, **kwargs):
+        ecto.module.__init__(self, MyModule, **kwargs)
         
     @staticmethod
     def Params(params):
@@ -22,8 +23,10 @@ class MyModule(ecto.module):
 
 class Mult(ecto.module):
     """Mult is documented"""
-    def __init__(self):
-        ecto.module.__init__(self)
+    def __init__(self, *args, **kwargs):
+        print "HERE"
+        ecto.module.__init__(self, Mult, **kwargs)
+        print "THERE"
         
     @staticmethod
     def Params(params):
@@ -39,14 +42,25 @@ class Mult(ecto.module):
         self.outputs["out"].val = b * a
         
 def test_my_module():
-    mm = ecto.make( MyModule, text="spam")
-    mul = ecto.make( Mult, factor=4)
-    printer = ecto.make(buster.Printer)
-    gen = ecto.make(buster.Generate,start=2,step=3)
+    t = ecto.tendrils()
+    print t
+
+    mm = MyModule(text="spam")
+    mm.Config()
+    mul = Mult(factor=4)
+    mul.Config()
+    printer = buster.Printer()
+    printer.Config()
+    print printer
+    gen = buster.Generate(start=2,step=3)
+    gen.Config()
     plasm = ecto.Plasm()
+    print str(gen.outputs)
+    print str(mul.inputs)
     plasm.connect(gen,"out",mul,"in")
     plasm.connect(mul,"out",mm, "in")
     plasm.connect(mm,"out",printer,"str")
+    print plasm.go
     plasm.go(printer)
     plasm.mark_dirty(gen)
     plasm.go(printer)
@@ -54,6 +68,7 @@ def test_my_module():
     plasm.go(printer)
     ecto.print_module_doc(mul)
     ecto.view_plasm(plasm)
+    print "it is:", mm.outputs['out'].val
     assert(mm.outputs["out"].val == "spamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspam")
 
 if __name__ == '__main__':

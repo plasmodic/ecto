@@ -3,21 +3,11 @@
 #include <boost/format.hpp>
 #include <boost/foreach.hpp>
 
-//disable show in here
-#define DISABLE_SHOW 1
-#if DISABLE_SHOW
-#ifdef SHOW
-#undef SHOW
-#define SHOW() do{}while(false)
-#endif
-#endif
-
 namespace buster
 {
 
   struct Printer : ecto::module
   {
-
     static void Params(ecto::tendrils& p)
     {
       p.set<std::string> ("str","I print this:", "Hello World");
@@ -139,7 +129,7 @@ namespace buster
 
 }
 
-ECTO_MODULE(buster)
+BOOST_PYTHON_MODULE(buster)
 {
   using namespace buster;
   ecto::wrap<Printer>("Printer", "A printer...");
