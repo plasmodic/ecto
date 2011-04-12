@@ -67,7 +67,7 @@ def test_my_module():
     plasm.mark_dirty(gen)
     plasm.go(printer)
     ecto.print_module_doc(mul)
-    ecto.view_plasm(plasm)
+    #ecto.view_plasm(plasm)
     print "it is:", mm.outputs['out'].val
     assert(mm.outputs["out"].val == "spamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspam")
 
