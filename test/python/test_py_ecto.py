@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import ecto
 import buster
+from ecto import module 
 
 class MyModule(ecto.module):
     def __init__(self, *args, **kwargs):
@@ -41,11 +42,18 @@ class Mult(ecto.module):
         self.outputs["out"].val = b * a
         
 def test_my_module():
+    t = ecto.tendrils()
+    print t
+
     mm = MyModule(text="spam")
+    mm.Config()
     mul = Mult(factor=4)
+    mul.Config()
     printer = buster.Printer()
+    printer.Config()
     print printer
     gen = buster.Generate(start=2,step=3)
+    gen.Config()
     plasm = ecto.Plasm()
     print str(gen.outputs)
     print str(mul.inputs)

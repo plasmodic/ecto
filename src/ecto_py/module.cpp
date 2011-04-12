@@ -27,9 +27,7 @@ namespace ecto
 	bp::object klass = args[0];
 	bp::object params = klass.attr("Params");
 	std::cout << "params=" << repr(params) << "\n";
-	params(m->params);
-	return m;
-	//	m->module::Initialize<T>();
+	params(boost::ref(m->params));
 
 	boost::python::list l = kwargs.items();
 	for (unsigned j=0; j<boost::python::len(l); ++j)
@@ -41,19 +39,26 @@ namespace ecto
 	    std::cout << "modwrap " << keystring << " => " << valstring << "\n";
 	    m->p().at(keystring).set(value);
 	  }
-
-	m->Config();
+	std::cout << "done setting params\n";
 	return m;
       }
 
       void Process()
       {
-        this->get_override("Process")();
+	std::cout << this->name() << " Process...\n";
+	if(bp::override process = this->get_override("Process"))
+	  process();
+	else
+	  throw std::logic_error("Process is not overridden it seems");
       }
 
       void Config()
       {
-        this->get_override("Config")();
+	std::cout << this->name() << " Config...\n";
+	if (bp::override config = this->get_override("Config"))
+	  config();
+	else
+	  throw std::logic_error("Config is not overridden it seems");
       }
 
       std::string name()
@@ -96,12 +101,12 @@ namespace ecto
 
     std::string strTendril(const tendrils& t)
     {
-      std::string s;
+      std::string s = "tendrils:\n";
       for (tendrils::const_iterator iter = t.begin(), end = t.end();
 	   iter != end;
 	   ++iter)
 	{
-	  s += iter->first + " [" + iter->second.type_name() + "]\n";
+	  s += "    " + iter->first + " [" + iter->second.type_name() + "]\n";
 	}
       return s;
     }
@@ -115,10 +120,10 @@ namespace ecto
 	.def("__str__", strTendril)
 	;
 
-      bp::class_<module, boost::shared_ptr<module>, boost::noncopyable>("module_base");
+      bp::class_<module, boost::shared_ptr<module>, boost::noncopyable>("module_cpp");
 
-      bp::class_<modwrap, boost::shared_ptr<modwrap>, boost::noncopyable>("module", bp::no_init)
-	.def("__init__", raw_constructor(&modwrap::make_modwrap))
+      bp::class_<modwrap, boost::shared_ptr<modwrap>, boost::noncopyable>("module_base"/*, bp::no_init*/)
+	/*.def("__init__", raw_constructor(&modwrap::make_modwrap))*/
 	.def("connect", &module::connect)
 	.def("Process", bp::pure_virtual(&module::Process))
 	.def("Config", bp::pure_virtual(&module::Config))
