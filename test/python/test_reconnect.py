@@ -8,7 +8,7 @@ import ecto,buster
 
 def test_reconnect():
     plasm = ecto.Plasm()
-    g = ecto.make(buster.Generate,start=0, step=2)    
+    g = ecto.make(buster.Generate,start=2, step=2)    
     m = ecto.make(buster.Multiply, factor=2)
     m2 = ecto.make(buster.Multiply, factor=2)
         
@@ -28,7 +28,20 @@ def test_reconnect():
         assert(False)
     except Exception,e:
         print "Reconnect caught: ",e
-    ecto.view_plasm(plasm)
+    
+    #check some values
+    plasm.go(gather)
+    print "Gather out :", gather.o.out.val;
+    assert(gather.o.out.val == 2 *(2*2))
+    plasm.go(gather)
+    #should remain unchanged
+    assert(gather.o.out.val == 2*(2*2))
+    plasm.mark_dirty(g) #mark top of tree dirty (propagates down)
+    plasm.go(gather)
+    print "Gather out :", gather.o.out.val;
+    assert(g.o.out.val == 4)
+    assert(gather.o.out.val == 2*(2*4)) #g should be at 4 here
+    #ecto.view_plasm(plasm)
 
 if __name__ == "__main__":
     test_reconnect()
