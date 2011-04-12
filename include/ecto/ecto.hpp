@@ -33,7 +33,7 @@ namespace ecto {
   {
     namespace bp = boost::python;
 
-    SHOW();
+    //SHOW();
     boost::shared_ptr<T> m(new T);
     m->module::Initialize<T>();
     bp::list l = kwargs.items();
@@ -54,7 +54,7 @@ namespace ecto {
   void 
   wrap(const char* name, std::string doc_str = "A module...")
   {
-    SHOW();
+    //SHOW();
     boost::python::class_<T, boost::python::bases<module>, 
       boost::shared_ptr<T>, boost::noncopyable> m(name);
     typedef doc<T> docT;

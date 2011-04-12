@@ -3,15 +3,6 @@
 #include <boost/format.hpp>
 #include <boost/foreach.hpp>
 
-//disable show in here
-#define DISABLE_SHOW 1
-#if DISABLE_SHOW
-#ifdef SHOW
-#undef SHOW
-#define SHOW() do{}while(false)
-#endif
-#endif
-
 namespace buster
 {
 

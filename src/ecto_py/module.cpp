@@ -20,7 +20,7 @@ namespace ecto
       static boost::shared_ptr<modwrap>
       make_modwrap(bp::tuple args, bp::dict kwargs)
       {
-	SHOW();
+	//SHOW();
 	std::cout << "args=" << bp::len(args) << "\n";
 	boost::shared_ptr<modwrap> m(new modwrap);
 

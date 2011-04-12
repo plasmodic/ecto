@@ -140,7 +140,6 @@ install(TARGETS ecto_ectomodule
 set(ecto_PYTHON_FILES
   python/ecto/__init__.py
   python/ecto/doc.py
-  python/ecto/module_tools.py
   python/ecto/xdot.py
 )
 

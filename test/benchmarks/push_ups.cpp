@@ -25,7 +25,7 @@ namespace ecto_push_ups
   {
     void Config()
     {
-      SHOW();
+      //SHOW();
       setOut<int> ("out", "x+y");
       setIn<int>("x");
       setIn<int>("y");

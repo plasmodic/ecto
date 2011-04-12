@@ -17,8 +17,7 @@
 """
 """
 
-print "ECTO!"
-import platform,sys
+import platform, sys
 
 if platform.system().startswith('freebsd'):
         # C++ modules are extremely fragile when loaded with RTLD_LOCAL,
@@ -50,19 +49,17 @@ def load_pybindings(name, path):
 
     import imp, sys
     m = imp.load_dynamic(name, path[0] + ".so")
-    print "M!=>", m
     thismod = sys.modules[name]
 
     for (k,v) in m.__dict__.items():
         if not k.startswith("_"):
-            print k, "=>", v
             thismod.__dict__[k] = v
+
 load_pybindings(__name__, __path__)
 
 from pkgutil import extend_path
 __path__ = extend_path(__path__, __name__)
 
-# from module_tools import *
 from doc import *
 from eyaml import *
 from module import *
