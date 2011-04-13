@@ -3,24 +3,6 @@ import ecto
 import buster
 from ecto import module 
 
-class MyModule(ecto.module):
-    def __init__(self, *args, **kwargs):
-        ecto.module.__init__(self, **kwargs)
-        
-    @staticmethod
-    def Params(params):
-        params.set("text", "a param.","hello there")
-        
-    def Config(self):
-        self.text = self.params["text"].val
-        self.inputs.set("input","aye", 2)
-        self.outputs.set("out", "i'll give you this", "hello")
-        
-    def Process(self):
-        c = int(self.inputs.input)
-        self.outputs.out = c*self.text
-        print MyModule.__name__
-
 class Mult(ecto.module):
     """Mult is documented"""
     def __init__(self, *args, **kwargs):
@@ -42,7 +24,33 @@ class Mult(ecto.module):
         b = self.inputs.input
         self.outputs.out = b * a
         
-def test_tendril_getattr():
+class Compound(ecto.module):
+    def __init__(self, *args, **kwargs):
+        ecto.module.__init__(self, **kwargs)
+
+    @staticmethod
+    def Params(params):
+        params.set("plasm", "subgraph", None)
+        params.set("inputnames", "input names", None)
+        params.set("otputnames", "outputs names", None)
+
+    def Config(self):
+        for i in self.params.inputnames:
+            print "input", i
+        for o in self.params.outputnames:
+            print "output", o
+
+    def Process(self):
+        # get inputs from inputs
+        # put them in to the plasm
+        # plasm.go(last...
+
+subplasm = make_some_plasm()
+
+mod = Compound(plasm=subplasm, inputs=['foo_in', 'bar_in'], outputs=['foo_out', 'bar_out'])
+
+
+def test_compound():
     gen = buster.Generate(start=2, step=3)
     print "OUTPUTS:::", gen.outputs.out
     assert gen.outputs.keys() == ['out']
@@ -87,7 +95,7 @@ def test_my_module():
     plasm.mark_dirty(gen)
     plasm.go(printer)
     ecto.print_module_doc(mul)
-    #ecto.view_plasm(plasm)
+    ecto.view_plasm(plasm)
     print "it is:", mm.outputs['out'].val
     assert(mm.outputs["out"].val == "spamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspam")
 

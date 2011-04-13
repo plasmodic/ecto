@@ -31,14 +31,18 @@ namespace ecto
     {
       return p.impl_->modules_.getEdgesPy();
     }
+
     template<typename T>
-      static void list_assign(std::list<T>& l, bp::object o)
-      {
-        // Turn a Python sequence into an STL input range
-        bp::stl_input_iterator<T> begin(o), end;
-        l.assign(begin, end);
-      }
-    static boost::shared_ptr<module> to_module(boost::shared_ptr<plasm> p, bp::object inputs = bp::list(), bp::object outputs = bp::list())
+    static void 
+    list_assign(std::list<T>& l, bp::object o)
+    {
+      // Turn a Python sequence into an STL input range
+      bp::stl_input_iterator<T> begin(o), end;
+      l.assign(begin, end);
+    }
+
+    static boost::shared_ptr<module> 
+    to_module(boost::shared_ptr<plasm> p, bp::object inputs = bp::list(), bp::object outputs = bp::list())
     {
 
       std::list<module::ptr> mi, mo;
@@ -47,6 +51,7 @@ namespace ecto
       return plasm::to_module(p, mi, mo);
     }
     BOOST_PYTHON_FUNCTION_OVERLOADS(to_module_overloads, to_module, 1, 3);
+
     static void wrap()
     {
       bp::class_<plasm,boost::shared_ptr<plasm>, boost::noncopyable> p("Plasm");

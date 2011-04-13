@@ -3,7 +3,7 @@ import ecto
 
 class MyModule(ecto.module):
     def __init__(self, *args, **kwargs):
-        ecto.module.__init__(self, MyModule, **kwargs)
+        ecto.module.__init__(self, **kwargs)
         
     @staticmethod
     def Params(params):
