@@ -18,37 +18,8 @@ namespace ecto
     struct modwrap : module, bp::wrapper<module>
     {
 
-#if 0
-      static boost::shared_ptr<modwrap>
-      make_modwrap(bp::tuple args, bp::dict kwargs)
-      {
-	//SHOW();
-	std::cout << "args=" << bp::len(args) << "\n";
-	boost::shared_ptr<modwrap> m(new modwrap);
-
-	bp::object klass = args[0];
-	bp::object params = klass.attr("Params");
-	std::cout << "params=" << repr(params) << "\n";
-	params(boost::ref(m->params));
-
-	boost::python::list l = kwargs.items();
-	for (unsigned j=0; j<boost::python::len(l); ++j)
-	  {
-	    boost::python::object key = l[j][0];
-	    boost::python::object value = l[j][1];
-	    std::string keystring = boost::python::extract<std::string>(key);
-	    std::string valstring = boost::python::extract<std::string>(value.attr("__repr__")());
-	    std::cout << "modwrap " << keystring << " => " << valstring << "\n";
-	    m->p().at(keystring).set(value);
-	  }
-	std::cout << "done setting params\n";
-	return m;
-      }
-#endif
-
       void Process()
       {
-	std::cout << this->name() << " Process...\n";
 	if(bp::override process = this->get_override("Process"))
 	  process();
 	else
@@ -57,7 +28,6 @@ namespace ecto
 
       void Config()
       {
-	std::cout << this->name() << " Config...\n";
 	if (bp::override config = this->get_override("Config"))
 	  config();
 	else
@@ -73,13 +43,7 @@ namespace ecto
         std::string nm = bp::extract<std::string>(n);
         return nm;
       }
-      static std::string nameBp(bp::object o)
-      {
-        bp::object n = o["__class__"]["__name__"];
-        modwrap& m = bp::extract<modwrap&>(o);
-        m.name_ = bp::extract<std::string>(n);
-        return m.name_;
-      }
+
       static std::string doc(modwrap* mod)
       {
         bp::reference_existing_object::apply<modwrap*>::type converter;
@@ -89,7 +53,6 @@ namespace ecto
         std::string nm = bp::extract<std::string>(n);
         return nm;
       }
-      std::string name_;
     };
 
     void setTendril(tendrils& t, const std::string& name, const std::string& doc, bp::object o)
@@ -139,7 +102,6 @@ namespace ecto
       bp::class_<module, boost::shared_ptr<module>, boost::noncopyable>("module_cpp");
 
       bp::class_<modwrap, boost::shared_ptr<modwrap>, boost::noncopyable>("module_base"/*, bp::no_init*/)
-	/*.def("__init__", raw_constructor(&modwrap::make_modwrap))*/
 	.def("connect", &module::connect)
 	.def("Process", bp::pure_virtual(&module::Process))
 	.def("Config", bp::pure_virtual(&module::Config))

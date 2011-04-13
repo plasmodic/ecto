@@ -229,17 +229,17 @@ namespace ecto
   template<typename T>
   bool tendril::impl<T>::steal(tendril& to)
   {
-    boost::python::extract<T> get_T(to.extract());
-    if (get_T.check())
-      {
-	std::cout << "stealing to a native tendril..."<< std::endl;
-	//reset the impl from a python type to a c++ type.
-	typedef impl<T> impl_T;
-	impl_T* i_t(new impl_T(get_T()));
-	i_t->doc = to.doc();
-	to.impl_.reset(i_t);
-	return true;
-      }
+    boost::python::object o = to.extract();
+    boost::python::extract<T> get_T(o);
+    if (get_T.check() || o.ptr() ==  boost::python::object().ptr()) //verify that the boost python is of type T or is None
+    {
+      //reset the impl from a python type to a c++ type.
+      typedef impl<T> impl_T;
+      impl_T* i_t(new impl_T(get_T()));
+      i_t->doc = to.doc();
+      to.impl_.reset(i_t);
+      return true;
+    }
     return false;
   }
 
