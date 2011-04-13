@@ -1,12 +1,9 @@
-#include <ecto/module.hpp>
-#include <ecto/ecto.hpp>
-
 #include <boost/python.hpp>
-#include <boost/python/raw_function.hpp>
-#include <ecto/python/std_map_indexing_suite.hpp>
 
-#include <ecto/python/raw_constructor.hpp>
-#include <ecto/python/repr.hpp>
+#include <ecto/ecto.hpp>
+#include <ecto/module.hpp>
+
+#include <ecto/python/std_map_indexing_suite.hpp>
 
 namespace bp = boost::python;
 
