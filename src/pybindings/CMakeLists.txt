@@ -2,6 +2,7 @@ ectomodule(ecto
   ecto.cpp
   plasm.cpp
   tendril.cpp
+  tendrils.cpp
   module.cpp
   )
 
