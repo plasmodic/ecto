@@ -17,6 +17,8 @@ namespace ecto
 
     struct modwrap : module, bp::wrapper<module>
     {
+
+#if 0
       static boost::shared_ptr<modwrap>
       make_modwrap(bp::tuple args, bp::dict kwargs)
       {
@@ -42,6 +44,7 @@ namespace ecto
 	std::cout << "done setting params\n";
 	return m;
       }
+#endif
 
       void Process()
       {
@@ -111,6 +114,17 @@ namespace ecto
       return s;
     }
 
+    bp::object tendril_get(const tendrils& ts, const std::string& name)
+    {
+      const tendril& t = ts.at(name);
+      return t.extract();
+    }
+
+    void tendril_set(tendrils& ts, const std::string& name, bp::object obj)
+    {
+      ts.at(name).set(obj);
+    }
+
     void wrapModule()
     {
       bp::class_<tendrils, boost::shared_ptr<tendrils>, boost::noncopyable>("tendrils")
@@ -118,6 +132,8 @@ namespace ecto
 	.def("set", setTendril)
 	.def("get", getTendril)
 	.def("__str__", strTendril)
+	.def("__getattr__", &tendril_get)
+	.def("__setattr__", &tendril_set)
 	;
 
       bp::class_<module, boost::shared_ptr<module>, boost::noncopyable>("module_cpp");
