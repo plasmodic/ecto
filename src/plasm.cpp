@@ -103,7 +103,7 @@ namespace ecto
   };
 
   boost::shared_ptr<module> plasm::to_module(boost::shared_ptr<plasm> plasm, const std::list<module::ptr>& mi,
-                                            const std::list<module::ptr>& mo)
+					     const std::list<module::ptr>& mo)
   {
     boost::shared_ptr<module> plasm_ (new PlasmModule(plasm, mi, mo));
     plasm_->Config();
