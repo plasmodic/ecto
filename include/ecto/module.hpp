@@ -42,12 +42,12 @@ namespace ecto
     inline const tendrils& p() const {return params;}
     inline tendrils& o() {return outputs;}
     inline tendrils& p() {return params;}
+
   private:
     tendrils params,inputs,outputs;
     bool dirty_;
 
     friend class PlasmModule;
-    friend void ecto::py::wrapModule();
   };
 
 }//namespace ecto

@@ -63,9 +63,11 @@ namespace ecto
 	.def("connect", &module::connect)
 	.def("Process", bp::pure_virtual(&module::Process))
 	.def("Config", bp::pure_virtual(&module::Config))
-	.def_readonly("inputs", &module::inputs)
-	.def_readonly("outputs", &module::outputs)
-	.def_readonly("params", &module::params)
+	.add_property("inputs", make_function(&module::i, bp::return_internal_reference<>()))
+	.add_property("outputs", make_function((tendrils&(module::*)()) &module::o, 
+					       bp::return_internal_reference<>()))
+	.add_property("params", make_function((tendrils&(module::*)()) &module::p, 
+					      bp::return_internal_reference<>()))
 	.def("Name", &module::name)
 	.def("Doc", &modwrap::doc)
 	;
