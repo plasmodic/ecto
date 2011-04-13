@@ -12,13 +12,13 @@ class MyModule(ecto.module):
         print "params=", params
 
     def Config(self):
-        self.text = self.params["text"].val
-        self.inputs.set("in","aye", 2)
+        self.text = self.params.text
+        self.inputs.set("input","aye", 2)
         self.outputs.set("out", "i'll give you this", "hello")
         
     def Process(self):
-        c = int(self.inputs["in"].val)
-        self.outputs["out"].val = c*self.text
+        c = int(self.inputs.input)
+        self.outputs.out = c*self.text
         print MyModule.__name__
 
 def test_python_module():

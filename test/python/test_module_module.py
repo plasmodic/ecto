@@ -44,10 +44,10 @@ class Identity(ecto.module):
     def Process(self):
         m = self.m
         d = self.d
-        m.inputs["input"] = self.inputs["input"]
+        m.inputs.input = self.inputs.input
         self.plasm.mark_dirty(m)
         self.plasm.go(d)
-        self.outputs["out"] = d.outputs["out"]
+        self.outputs.out = d.outputs.out
 
 def test_python_module():
     mod = Identity(factor = 5.3)

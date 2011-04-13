@@ -19,8 +19,7 @@ class Mult(ecto.module):
         self.outputs.set("out", "multed",8)
         
     def Process(self):
-        a = self.params["factor"].val
-        ### a = self.params.factor.val
+        a = self.params.factor
         b = self.inputs.input
         self.outputs.out = b * a
         

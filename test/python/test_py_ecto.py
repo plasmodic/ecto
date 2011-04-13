@@ -12,7 +12,7 @@ class MyModule(ecto.module):
         params.set("text", "a param.","hello there")
         
     def Config(self):
-        self.text = self.params["text"].val
+        self.text = self.params.text
         self.inputs.set("input","aye", 2)
         self.outputs.set("out", "i'll give you this", "hello")
         
@@ -37,8 +37,7 @@ class Mult(ecto.module):
         self.outputs.set("out", "multed",8)
         
     def Process(self):
-        a = self.params["factor"].val
-        ### a = self.params.factor.val
+        a = self.params.factor
         b = self.inputs.input
         self.outputs.out = b * a
         
@@ -88,8 +87,8 @@ def test_my_module():
     plasm.go(printer)
     ecto.print_module_doc(mul)
     #ecto.view_plasm(plasm)
-    print "it is:", mm.outputs['out'].val
-    assert(mm.outputs["out"].val == "spamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspam")
+    print "it is:", mm.outputs.out
+    assert(mm.outputs.out == "spamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspam")
 
 if __name__ == '__main__':
     test_my_module()

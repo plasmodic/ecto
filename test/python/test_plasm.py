@@ -18,7 +18,7 @@ def test_plasm():
     print dir(gather)
     # print gather.outputs, gather.o
     # result = gather.o.out.get()
-    result = gather.outputs['out'].get()
+    result = gather.outputs.out
     str = ecto.print_module_doc(scatter)
     print "gather out (should be 9):", result
     assert(result == 9)
