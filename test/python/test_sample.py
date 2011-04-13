@@ -15,7 +15,7 @@ def test_sample():
         plasm.mark_dirty(g)
         plasm.go(m)
         print "output: ", m.outputs["out"].get()
-    assert(m.outputs["out"].get() == 40)
+    assert m.outputs.out == 40
     #ecto.view_plasm(plasm)
     print "finished"
     

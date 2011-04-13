@@ -1,7 +1,5 @@
 build/
 ._*
-lib
-bin
 *.pyc
 .*
 python/ecto/ui/uic.py

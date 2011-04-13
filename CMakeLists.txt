@@ -47,33 +47,6 @@ include_directories(
   ${CMAKE_SOURCE_DIR}/src
   )
   
-add_library(ecto SHARED
-  src/tendril.cpp
-  src/module.cpp
-  src/plasm.cpp
-  src/util.cpp
-  )
-  
-target_link_libraries(ecto
-  ${ECTO_DEP_LIBS}
-  )
-  
-# Additional target properties
-set_target_properties(ecto PROPERTIES
-    INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/lib"
-    )
-        
-ectomodule(ecto
-  src/ecto_py/ecto.cpp
-  src/ecto_py/plasm.cpp
-  src/ecto_py/tendril.cpp
-  src/ecto_py/module.cpp
-  )
-
-set_target_properties(ecto_ectomodule PROPERTIES
-    INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/share/ecto/python"
-    )
-
 configure_file(${CMAKE_SOURCE_DIR}/cmake/python_path.sh.in 
   ${CMAKE_BINARY_DIR}/python_path.sh)
 message(STATUS "To setup your python path for ecto you may source:"
@@ -107,12 +80,6 @@ INSTALL(FILES ${ecto_HEADERS}
   COMPONENT ecto
   )
 
-#install the main shared lib
-install(TARGETS ecto
-  LIBRARY DESTINATION lib
-  COMPONENT ecto
-  )
-
 #create an ectoConfig.cmake for easy find_package(ecto)
 set(ecto_INCLUDE_DIRS ${CMAKE_INSTALL_PREFIX}/include)
 set(ecto_LIBRARIES ecto)
@@ -130,11 +97,6 @@ INSTALL(FILES ${CMAKE_BINARY_DIR}/unix_install/ectoConfig.cmake
 
 #install python stuff
 
-
-#this is the python extension
-install(TARGETS ecto_ectomodule
-  LIBRARY DESTINATION ${ecto_PYTHON_INSTALL} COMPONENT ecto_python
-  )
 
 #python support
 set(ecto_PYTHON_FILES
@@ -155,3 +117,5 @@ install(FILES ${CMAKE_BINARY_DIR}/unix_install/python_path.sh
         DESTINATION share/ecto COMPONENT ecto_python
   )
 #add_subdirectory(samples)
+
+add_subdirectory(src)
