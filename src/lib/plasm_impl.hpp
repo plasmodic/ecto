@@ -59,13 +59,13 @@ namespace ecto
             return tendril();
             break;
           case plasm::input:
-            return first->inputs.at(second);
+            return first->i().at(second);
             break;
           case plasm::output:
-            return first->outputs.at(second);
+            return first->o().at(second);
             break;
           case plasm::param:
-            return first->params.at(second);
+            return first->p().at(second);
             break;
         }
       }

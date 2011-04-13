@@ -107,8 +107,6 @@ using namespace ecto;
 
     void Config()
     {
-
-
       n_ = p().template get<int>("n");
       for (int ii = 0; ii < n_; ii++)
       {

@@ -5,14 +5,15 @@ namespace ecto
 
   void plasm::connect(module::ptr from, const std::string& out_name, module::ptr to, const std::string& in_name)
   {
-    if(from->outputs.count(out_name) == 0)
+    if(from->o().count(out_name) == 0)
     {
       throw std::logic_error("The specified output does not exist: " + out_name);
     }
-    if(to->inputs.count(in_name) == 0)
+    if(to->i().count(in_name) == 0)
     {
       throw std::logic_error("The specified input does not exist: "+in_name);
     }
+
     //this throws on bad connection.
     from->connect(out_name, to, in_name);
 
@@ -67,9 +68,8 @@ namespace ecto
      }
       BOOST_FOREACH(module::ptr& m , module_inputs_)
       {
-        BOOST_FOREACH(const tendrils::value_type& t , m->inputs)
+        BOOST_FOREACH(const tendrils::value_type& t, m->i())
         {
-
           const_cast<tendril&>(t.second).connect(inputs.at(t.first));
           //std::cout << "connecting: " << t.first << std::endl;
         }
@@ -103,7 +103,7 @@ namespace ecto
   };
 
   boost::shared_ptr<module> plasm::to_module(boost::shared_ptr<plasm> plasm, const std::list<module::ptr>& mi,
-                                            const std::list<module::ptr>& mo)
+					     const std::list<module::ptr>& mo)
   {
     boost::shared_ptr<module> plasm_ (new PlasmModule(plasm, mi, mo));
     plasm_->Config();

@@ -45,9 +45,8 @@ namespace ecto
   private:
     tendrils params,inputs,outputs;
     bool dirty_;
+
     friend class PlasmModule;
-    friend class ModuleGraph;
-    friend class plasm;
     friend void ecto::py::wrapModule();
   };
 
