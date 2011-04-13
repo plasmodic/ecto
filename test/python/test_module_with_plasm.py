@@ -41,13 +41,14 @@ class Compound(ecto.module):
             print "output", o
 
     def Process(self):
+        pass
         # get inputs from inputs
         # put them in to the plasm
         # plasm.go(last...
 
-subplasm = make_some_plasm()
+#subplasm = make_some_plasm()
 
-mod = Compound(plasm=subplasm, inputs=['foo_in', 'bar_in'], outputs=['foo_out', 'bar_out'])
+#mod = Compound(plasm=subplasm, inputs=['foo_in', 'bar_in'], outputs=['foo_out', 'bar_out'])
 
 
 def test_compound():
@@ -67,37 +68,7 @@ def test_compound():
         print gen.outputs.nonexistent
         assert "that should have thrown"
     except RuntimeError, e:
-        assert str(e) == 'name does not exist!'
-
-def test_my_module():
-    t = ecto.tendrils()
-    print t
-
-    mm = MyModule(text="spam")
-    mm.Config()
-    mul = Mult(factor=4)
-    mul.Config()
-    printer = buster.Printer()
-    printer.Config()
-    print printer
-    gen = buster.Generate(start=2, step=3)
-    gen.Config()
-    plasm = ecto.Plasm()
-    print str(gen.outputs)
-    print str(mul.inputs)
-    plasm.connect(gen,"out",mul,"input")
-    plasm.connect(mul,"out",mm, "input")
-    plasm.connect(mm,"out",printer,"str")
-    print plasm.go
-    plasm.go(printer)
-    plasm.mark_dirty(gen)
-    plasm.go(printer)
-    plasm.mark_dirty(gen)
-    plasm.go(printer)
-    ecto.print_module_doc(mul)
-    ecto.view_plasm(plasm)
-    print "it is:", mm.outputs['out'].val
-    assert(mm.outputs["out"].val == "spamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspamspam")
+        assert str(e) == 'nonexistent does not exist!'
 
 if __name__ == '__main__':
     test_my_module()

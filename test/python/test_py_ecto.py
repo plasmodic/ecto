@@ -59,7 +59,7 @@ def test_tendril_getattr():
         print gen.outputs.nonexistent
         assert "that should have thrown"
     except RuntimeError, e:
-        assert str(e) == 'name does not exist!'
+        assert 'does not exist!' in str(e)
 
 def test_my_module():
     t = ecto.tendrils()

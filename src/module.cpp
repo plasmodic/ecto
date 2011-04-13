@@ -23,12 +23,11 @@ namespace ecto
 
   void module::connect(const std::string& out_name, ptr to, const std::string& in_name)
   {
-    typedef std::map<std::string,tendril> map_t;
-    map_t::const_iterator it = to->inputs.find(in_name);
-    map_t::const_iterator out_it = outputs.find(out_name);
-    if(!it->second.connected())
+    tendril& in = to->inputs.at(in_name);
+    tendril& out = outputs.at(out_name);
+    if(!in.connected())
     {
-      const_cast<tendril&>(it->second).connect(const_cast<tendril&>(out_it->second));
+      in.connect(out);
     }else
       throw std::logic_error("These tendrils are already connected.  This is considered an error.  The state of the module has not been affected.");
   }

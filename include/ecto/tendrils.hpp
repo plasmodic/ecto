@@ -12,14 +12,14 @@ namespace ecto
   {
   public:
     template<typename T>
-    void set(const std::string& name, const std::string& doc, const T& default_val = T())
+    void declare(const std::string& name, const std::string& doc = "TODO: doc str me.", const T& default_val = T()) const
     {
       map_t::const_iterator it = find(name);
       //if there are no exiting tendrils by the given name,
       //just add it.
       if (it == end())
       {
-        it = insert(std::make_pair(name,tendril::make<T>(default_val, doc))).first;
+        it = const_cast<tendrils*>(this)->insert(std::make_pair(name,tendril::make<T>(default_val, doc))).first;
       }
       else // we want to just return the existing tendril (so that modules preconnected don't get messed up)...
       {
@@ -58,11 +58,22 @@ namespace ecto
         return it->second.get<T>();
     }
 
+    template <typename T>
+    static T& get(tendrils & t, const std::string& name)
+    {
+      map_t::iterator it = t.find(name);
+      if (it == t.end())
+      {
+        return tendril().get<T>();
+      }else
+        return it->second.get<T>();
+    }
+
     const tendril& at(const std::string& name) const
     {
       map_t::const_iterator it = find(name);
       if(it == end())
-        throw std::logic_error("name does not exist!");
+        throw std::logic_error(name +" does not exist!");
       return it->second;
     }
 
@@ -70,7 +81,7 @@ namespace ecto
     {
       map_t::iterator it = find(name);
       if(it == end())
-        throw std::logic_error("name does not exist!");
+        throw std::logic_error(name +" does not exist!");
       return it->second;
     }
 

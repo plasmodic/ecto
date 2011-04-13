@@ -56,13 +56,13 @@ namespace ecto
     inline void set(const std::string& doc, const T& t)
     {
       if(is_type<T>())
-	{
-	  get<T>() = t;
-	  setDoc(doc);
-	}else if(is_type<none>())
-	{
-	  *this = make<T>(t,doc);
-	}else
+      {
+        get<T>() = t;
+        setDoc(doc);
+      }else if(is_type<none>())
+      {
+        *this = make<T>(t,doc);
+      }else
         enforce_type<T>();
     }
 

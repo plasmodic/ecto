@@ -57,7 +57,7 @@ namespace ecto
 
     void setTendril(tendrils& t, const std::string& name, const std::string& doc, bp::object o)
     {
-      t.set(name, doc, o);
+      t.declare<bp::object>(name, doc, o);
     }
 
     bp::object getTendril(tendrils& t, const std::string& name)

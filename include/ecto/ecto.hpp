@@ -34,7 +34,7 @@ namespace ecto {
     namespace bp = boost::python;
 
     //SHOW();
-    boost::shared_ptr<T> m(new T);
+    boost::shared_ptr<T> m(new T() );
     m->module::Initialize<T>();
     bp::list l = kwargs.items();
     for (unsigned j=0; j<bp::len(l); ++j)

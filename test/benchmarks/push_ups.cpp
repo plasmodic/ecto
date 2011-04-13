@@ -26,14 +26,14 @@ namespace ecto_push_ups
     void Config()
     {
       //SHOW();
-      setOut<int> ("out", "x+y");
-      setIn<int>("x");
-      setIn<int>("y");
+      o().declare<int> ("out", "x+y");
+      i().declare<int>("x");
+      i().declare<int>("y");
     }
     void Process()
     {
       //SHOW();
-      getOut<int> ("out") = add2(std::rand(),std::rand());
+      o().get<int> ("out") = add2(std::rand(),std::rand());
     }
     static void Params(tendrils_t& p)
     {
@@ -46,11 +46,11 @@ namespace ecto_push_ups
     void Config()
     {
       SHOW();
-      setOut<int> ("out", "sum of random array");
+      o().declare<int> ("out", "sum of random array");
     }
     void Process()
     {
-      getOut<int> ("out") = big_data();
+      o().get<int> ("out") = big_data();
     }
     static void Params(tendrils_t& p)
     {
