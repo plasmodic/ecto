@@ -29,7 +29,7 @@ def test_python_module():
     # print t
     print MyModule
     mod = MyModule(text="spam")
-    mod.Config()
+    mod.Process()
 
 if __name__ == '__main__':
     test_python_module()

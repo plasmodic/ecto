@@ -32,11 +32,11 @@ def test_make_modules():
     m1 = makemodule()
     m2 = makemodule2()
     plasm.connect(m1,"out",m2,"in")
-    for i in range(3):
+    for _i in range(3):
         plasm.mark_dirty(m1)
         plasm.go(m2)
         print m1.outputs["out"].get()
         print m2.outputs["out"].get()
     #ecto.view_plasm(plasm)
 if __name__ == "__main__":
-   test_make_modules()
+    test_make_modules()
