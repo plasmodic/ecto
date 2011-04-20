@@ -71,12 +71,23 @@ set(ecto_HEADERS
   include/ecto/tendrils.hpp
   include/ecto/util.hpp
   )
+set (ecto_PYTHON_HEADERS
+  include/ecto/python/copy_suite.hpp
+  include/ecto/python/raw_constructor.hpp
+  include/ecto/python/repr.hpp
+  include/ecto/python/std_map_indexing_suite.hpp
+  include/ecto/python/std_vector_indexing_suite.hpp
+  )
 
 INSTALL(FILES ${ecto_HEADERS}
   DESTINATION include/ecto
   COMPONENT ecto
   )
-
+INSTALL(FILES ${ecto_PYTHON_HEADERS}
+  DESTINATION include/ecto/python
+  COMPONENT ecto
+  )
+  
 #create an ectoConfig.cmake for easy find_package(ecto)
 set(ecto_INCLUDE_DIRS ${CMAKE_INSTALL_PREFIX}/include)
 set(ecto_LIBRARIES ecto)
@@ -99,6 +110,8 @@ INSTALL(FILES ${CMAKE_BINARY_DIR}/unix_install/ectoConfig.cmake
 set(ecto_PYTHON_FILES
   python/ecto/__init__.py
   python/ecto/doc.py
+  python/ecto/eyaml.py
+  python/ecto/module.py
   python/ecto/xdot.py
 )
 
