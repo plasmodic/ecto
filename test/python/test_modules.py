@@ -4,16 +4,16 @@ import buster
 
 def test_modules_01():
     g = buster.Generate(start=0, step=2)
-    g.Process()
+    g.process()
     assert g.outputs.out == 0
-    g.Process()
+    g.process()
     assert g.outputs.out == 2
-    g.Config()
+    g.config()
     g.outputs.out = 7.0
-    g.Process()
+    g.process()
     assert  g.outputs.out == 9
     s = buster.Scatter(n = 4, x=3)
-    s.Process()
+    s.process()
     assert(len(s.outputs) == 4)
     for out in s.outputs:
         print out[1].val

@@ -20,18 +20,18 @@ namespace ecto
 
       void Process()
       {
-	if(bp::override process = this->get_override("Process"))
+	if(bp::override process = this->get_override("process"))
 	  process();
 	else
-	  throw std::logic_error("Process is not overridden it seems");
+	  throw std::logic_error("process is not overridden it seems");
       }
 
       void Config()
       {
-	if (bp::override config = this->get_override("Config"))
+	if (bp::override config = this->get_override("config"))
 	  config();
 	else
-	  throw std::logic_error("Config is not overridden it seems");
+	  throw std::logic_error("config is not overridden it seems");
       }
 
       std::string name()
@@ -62,15 +62,15 @@ namespace ecto
 
       bp::class_<modwrap, boost::shared_ptr<modwrap>, boost::noncopyable>("_module_base"/*, bp::no_init*/)
 	.def("connect", &module::connect)
-	.def("Process", bp::pure_virtual(&module::Process))
-	.def("Config", bp::pure_virtual(&module::Config))
+	.def("process", bp::pure_virtual(&module::Process))
+	.def("config", bp::pure_virtual(&module::Config))
 	.add_property("inputs", make_function(&module::i, bp::return_internal_reference<>()))
 	.add_property("outputs", make_function((tendrils&(module::*)()) &module::o,
 					       bp::return_internal_reference<>()))
 	.add_property("params", make_function((tendrils&(module::*)()) &module::p,
 					      bp::return_internal_reference<>()))
-	.def("Name", &module::name)
-	.def("Doc", &modwrap::doc)
+	.def("name", &module::name)
+	.def("doc", &modwrap::doc)
 	;
     }
 

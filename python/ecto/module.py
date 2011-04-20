@@ -11,4 +11,4 @@ class Module(_module_base):
         for k, v in kwargs.iteritems():
             self.params[k].set(v)
 
-        self.Config()
+        self.config()

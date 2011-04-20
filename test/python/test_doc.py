@@ -5,7 +5,7 @@ import ecto
 #from ecto.doc import print_module_doc
 import buster
 
-def test_plasm():
+def test_doc():
     scatter = buster.Scatter(n=3, x=3)
     gather = buster.Gather(n=3)
     plasm = ecto.Plasm()
@@ -21,7 +21,7 @@ def test_plasm():
     #ecto.view_plasm(plasm)
 
 if __name__ == '__main__':
-    test_plasm()
+    test_doc()
 
 
 

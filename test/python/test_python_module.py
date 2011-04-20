@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import ecto
+import buster
 
 class MyModule(ecto.Module):
     def __init__(self, *args, **kwargs):
@@ -9,12 +10,12 @@ class MyModule(ecto.Module):
     def Params(params):
         params.declare("text", "a param.","hello there")
 
-    def Config(self):
+    def config(self):
         self.text = self.params.text
         self.inputs.declare("input","aye", 2)
         self.outputs.declare("out", "i'll give you this", "hello")
         
-    def Process(self):
+    def process(self):
         c = int(self.inputs.input)
         self.outputs.out = c*self.text
 
@@ -22,9 +23,26 @@ def test_python_module():
     mod = MyModule(text="spam")
     assert mod.text == "spam"
     assert mod.params.text == "spam"
-    mod.Process()
+    mod.process()
     assert mod.outputs.out == "spam"*2
     assert mod.outputs["out"].val == "spam"*2
 
+def test_python_module_plasm():
+    mod = MyModule(text="spam")
+    g = buster.Generate(start = 1 , step =1)
+    plasm = ecto.Plasm()
+    plasm.connect(g,"out",mod,"input")
+    for i in range(1,5):
+        plasm.mark_dirty(g)
+        plasm.go(mod)
+        assert g.outputs.out == i
+        print mod.outputs.out
+        assert mod.outputs.out == "spam"*i
+    plasm.go(mod)
+    assert g.outputs.out == 4
+    print mod.outputs.out
+    assert mod.outputs.out == "spam"*4
+    
 if __name__ == '__main__':
     test_python_module()
+    test_python_module_plasm()
