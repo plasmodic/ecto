@@ -10,7 +10,7 @@ namespace py
 {
 
 void wrapConnection(){
-  bp::class_<tendril>("tendril")
+  bp::class_<tendril>("Tendril")
     .def("connect", &tendril::connect)
     .add_property("doc",&tendril::doc,&tendril::setDoc)
     .add_property("type_name", &tendril::type_name)

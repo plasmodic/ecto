@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import ecto
-from ecto.doc import print_module_doc
 import buster
 
 def test_modules_01():

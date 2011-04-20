@@ -11,9 +11,7 @@ def test_reconnect():
     g = buster.Generate(start=2, step=2)    
     m = buster.Multiply(factor=2)
     m2 = buster.Multiply(factor=2)
-        
     gather = buster.Gather_double(n=2)
-    ecto.print_module_doc(gather)
     plasm.connect(g, "out", m , "in")
     plasm.connect(g, "out", m2 , "in")
     try:
@@ -31,14 +29,12 @@ def test_reconnect():
     
     #check some values
     plasm.go(gather)
-    print "Gather out :", gather.outputs["out"].val;
     assert(gather.outputs["out"].val == 2 *(2*2))
     plasm.go(gather)
     #should remain unchanged
     assert(gather.outputs["out"].val == 2*(2*2))
     plasm.mark_dirty(g) #mark top of tree dirty (propagates down)
     plasm.go(gather)
-    print "Gather out :", gather.outputs["out"].val;
     assert(g.outputs["out"].val == 4)
     assert(gather.outputs["out"].val == 2*(2*4)) #g should be at 4 here
     #ecto.view_plasm(plasm)

@@ -57,9 +57,9 @@ namespace ecto
 
     void wrapModule()
     {
-      bp::class_<module, boost::shared_ptr<module>, boost::noncopyable>("module_cpp");
+      bp::class_<module, boost::shared_ptr<module>, boost::noncopyable>("_module_cpp");
 
-      bp::class_<modwrap, boost::shared_ptr<modwrap>, boost::noncopyable>("module_base"/*, bp::no_init*/)
+      bp::class_<modwrap, boost::shared_ptr<modwrap>, boost::noncopyable>("_module_base"/*, bp::no_init*/)
 	.def("connect", &module::connect)
 	.def("Process", bp::pure_virtual(&module::Process))
 	.def("Config", bp::pure_virtual(&module::Config))

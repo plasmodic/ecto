@@ -33,6 +33,8 @@ namespace ecto
               << std::endl;
           throw std::logic_error(ss.str());
         }
+
+        const_cast<tendril&>(it->second).set(doc,default_val);
       }
     }
 

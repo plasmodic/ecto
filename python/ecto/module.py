@@ -1,10 +1,10 @@
-from ecto import module_base
+from ecto import _module_base
 
-class module(module_base):
+class Module(_module_base):
 
     def __init__(self, *args, **kwargs):
 
-        module_base.__init__(self)
+        _module_base.__init__(self)
 
         self.Params(self.params)
 
