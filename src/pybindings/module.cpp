@@ -57,6 +57,7 @@ namespace ecto
 
     void wrapModule()
     {
+      //use private names so that python people know these are internal
       bp::class_<module, boost::shared_ptr<module>, boost::noncopyable>("_module_cpp");
 
       bp::class_<modwrap, boost::shared_ptr<modwrap>, boost::noncopyable>("_module_base"/*, bp::no_init*/)

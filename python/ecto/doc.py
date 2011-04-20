@@ -9,7 +9,7 @@ import gtk.gdk
 
 def print_tendrils(tendril, n):
     for x in tendril :
-        print  n*" " + x.key() + " type=%s"%x.data().type_name + " value=",x.data().val
+        print  n*" " + x.key() + " [%s]"%x.data().type_name + " value=",x.data().val
         print  (n+2)*" " +x.data().doc
 
 def print_module_doc(m):
@@ -22,9 +22,6 @@ def print_module_doc(m):
     print "  params:"
     print_tendrils(m.params,2)
     
-def graphviz(plasm):
-    str = plasm.viz()
-    return str  
 
 class PlasmDotView(xdot.DotWindow):
     def __init__(self):
@@ -32,7 +29,7 @@ class PlasmDotView(xdot.DotWindow):
 
 def view_plasm(plasm):
     window = PlasmDotView()
-    window.set_dotcode(graphviz(plasm))
+    window.set_dotcode(plasm.viz())
     window.connect('destroy',gtk.main_quit)
     gtk.main()
     
