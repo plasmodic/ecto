@@ -7,11 +7,11 @@ class Mult(ecto.module):
         
     @staticmethod
     def Params(params):
-        params.set("factor", "multiply input by this", None)
+        params.declare("factor", "multiply input by this", None)
         
     def Config(self):
-        self.inputs.set("input","mul", None)
-        self.outputs.set("out", "multed", None)
+        self.inputs.declare("input","mul", None)
+        self.outputs.declare("out", "multed", None)
         
     def Process(self):
         f = self.params.factor
@@ -30,11 +30,11 @@ class Identity(ecto.module):
         
     @staticmethod
     def Params(params):
-        params.set("factor", "multiply input by this", None)
+        params.declare("factor", "multiply input by this", None)
 
     def Config(self):
-        self.inputs.set("input","mul", None)
-        self.outputs.set("out", "multed", None)
+        self.inputs.declare("input","mul", None)
+        self.outputs.declare("out", "multed", None)
         f = self.params.factor
         self.m.params.factor = f
         self.d.params.factor = 1.0/f

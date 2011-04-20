@@ -8,13 +8,13 @@ class MyModule(ecto.module):
     @staticmethod
     def Params(params):
         print "setting params!"
-        params.set("text", "a param.","hello there")
+        params.declare("text", "a param.","hello there")
         print "params=", params
 
     def Config(self):
         self.text = self.params.text
-        self.inputs.set("input","aye", 2)
-        self.outputs.set("out", "i'll give you this", "hello")
+        self.inputs.declare("input","aye", 2)
+        self.outputs.declare("out", "i'll give you this", "hello")
         
     def Process(self):
         c = int(self.inputs.input)

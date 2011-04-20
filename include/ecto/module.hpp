@@ -18,8 +18,10 @@ namespace ecto
   {
     typedef boost::shared_ptr<module> ptr;
     typedef tendrils tendrils_t;
+
     module();
     virtual ~module();
+
     virtual void Process();
     virtual void Config();
 
@@ -42,12 +44,13 @@ namespace ecto
     inline const tendrils& p() const {return params;}
     inline tendrils& o() {return outputs;}
     inline tendrils& p() {return params;}
-
   private:
-    tendrils params,inputs,outputs;
+    tendrils params_,inputs_,outputs_;
     bool dirty_;
-
-    friend class PlasmModule;
+  public:
+    tendrils& params;
+    const tendrils& inputs;
+    tendrils& outputs;
   };
 
 }//namespace ecto

@@ -1,6 +1,4 @@
 find_package(Boost COMPONENTS
-  program_options
-  thread
   python
   )
 

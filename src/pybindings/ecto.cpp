@@ -20,5 +20,3 @@ BOOST_PYTHON_MODULE(ecto)
   ecto::py::wrapTendrils();
 }
 
-
-

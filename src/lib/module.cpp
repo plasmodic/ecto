@@ -4,8 +4,7 @@
 namespace ecto
 {
   module::module() :
-   params(),inputs(),outputs(), dirty_(true)
-  {
+    dirty_(true),params(params_),inputs(inputs_),outputs(outputs_) {
   }
 
   module::~module()

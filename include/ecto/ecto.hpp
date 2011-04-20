@@ -43,7 +43,7 @@ namespace ecto {
 	bp::object value = l[j][1];
 	std::string keystring = bp::extract<std::string>(key);
 	std::string valstring = bp::extract<std::string>(value.attr("__repr__")());
-	m->p().at(keystring).set(value);
+	m->params.at(keystring).set(value);
       }
     m->Config();
     return m;

@@ -9,12 +9,12 @@ class MyModule(ecto.module):
         
     @staticmethod
     def Params(params):
-        params.set("text", "a param.","hello there")
+        params.declare("text", "a param.","hello there")
         
     def Config(self):
         self.text = self.params.text
-        self.inputs.set("input","aye", 2)
-        self.outputs.set("out", "i'll give you this", "hello")
+        self.inputs.declare("input","aye", 2)
+        self.outputs.declare("out", "i'll give you this", "hello")
         
     def Process(self):
         c = int(self.inputs.input)
@@ -30,11 +30,11 @@ class Mult(ecto.module):
         
     @staticmethod
     def Params(params):
-        params.set("factor", "multiply input by this", 4)
+        params.declare("factor", "multiply input by this", 4)
         
     def Config(self):
-        self.inputs.set("input","mul", 2)
-        self.outputs.set("out", "multed",8)
+        self.inputs.declare("input","mul", 2)
+        self.outputs.declare("out", "multed",8)
         
     def Process(self):
         a = self.params.factor

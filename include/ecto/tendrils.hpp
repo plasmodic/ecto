@@ -61,12 +61,7 @@ namespace ecto
     template <typename T>
     static T& get(tendrils & t, const std::string& name)
     {
-      map_t::iterator it = t.find(name);
-      if (it == t.end())
-      {
-        return tendril().get<T>();
-      }else
-        return it->second.get<T>();
+      return t.get<T>(name);
     }
 
     const tendril& at(const std::string& name) const

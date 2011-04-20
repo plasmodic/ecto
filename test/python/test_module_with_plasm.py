@@ -12,11 +12,11 @@ class Mult(ecto.module):
         
     @staticmethod
     def Params(params):
-        params.set("factor", "multiply input by this", 4)
+        params.declare("factor", "multiply input by this", 4)
         
     def Config(self):
-        self.inputs.set("input","mul", 2)
-        self.outputs.set("out", "multed",8)
+        self.inputs.declare("input","mul", 2)
+        self.outputs.declare("out", "multed",8)
         
     def Process(self):
         a = self.params.factor
@@ -29,9 +29,9 @@ class Compound(ecto.module):
 
     @staticmethod
     def Params(params):
-        params.set("plasm", "subgraph", None)
-        params.set("inputnames", "input names", None)
-        params.set("otputnames", "outputs names", None)
+        params.declare("plasm", "subgraph", None)
+        params.declare("inputnames", "input names", None)
+        params.declare("otputnames", "outputs names", None)
 
     def Config(self):
         for i in self.params.inputnames:

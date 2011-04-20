@@ -1,7 +1,3 @@
-#if(ROSBUILD)
-#  include(rosbuild.cmake)
-#  return()
-#endif()
 cmake_minimum_required(VERSION 2.8)
 project(ecto)
 
@@ -37,8 +33,9 @@ if (ECTO_BUILD_UI)
     @ONLY)
 endif()
 
-#openni makes this fail -Werror
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wl,--no-undefined")
+#set flags so that we have awesome compile time errors on all warnings
+#notice the -Wl,--no-undefined helps with making sure all symbols are found during
+#link time.
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wl,--no-undefined")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -DBOOST_DISABLE_ASSERTS")
 
@@ -89,7 +86,7 @@ set(ecto_PYTHONPATH ${CMAKE_INSTALL_PREFIX}/${ecto_PYTHON_INSTALL})
 configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoConfig.cmake.in 
   ${CMAKE_BINARY_DIR}/unix_install/ectoConfig.cmake @ONLY)
 
-#instal the ectoConfig.cmake
+#install the ectoConfig.cmake
 INSTALL(FILES ${CMAKE_BINARY_DIR}/unix_install/ectoConfig.cmake
   DESTINATION share/ecto
   COMPONENT ecto

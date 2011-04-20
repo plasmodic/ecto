@@ -11,6 +11,7 @@ namespace ecto
 {
   //forward declare module so we don't get affected by its header
   class module;
+  typedef boost::shared_ptr<module> module_ptr;
 
   class plasm : boost::noncopyable
   {
@@ -19,7 +20,7 @@ namespace ecto
     {
       root, input, output, param
     };
-    typedef std::map<int, boost::tuple<boost::shared_ptr<module>, vertex_t, std::string, tendril> > vertex_map_t;
+    typedef std::map<int, boost::tuple<module_ptr, vertex_t, std::string, tendril> > vertex_map_t;
     typedef std::list<boost::tuple<size_t, size_t> > edge_list_t;
 
     plasm();
@@ -33,8 +34,6 @@ namespace ecto
     vertex_map_t getVertices();
     edge_list_t getEdges();
 
-    static boost::shared_ptr<module> to_module(boost::shared_ptr<plasm> plasm, const std::list< boost::shared_ptr<module> >& mi,
-                                              const std::list<  boost::shared_ptr<module> >& mo);
   private:
     class impl;
     boost::shared_ptr<impl> impl_;

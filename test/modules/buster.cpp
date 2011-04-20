@@ -5,7 +5,6 @@
 
 namespace buster
 {
-
   struct Printer : ecto::module
   {
     static void Params(ecto::tendrils& p)
@@ -15,12 +14,12 @@ namespace buster
 
     void Config()
     {
-      i().declare<std::string>("str","A string to print","hello");
+      inputs.declare<std::string>("str","A string to print","hello");
     }
 
     void Process()
     {
-      std::cout << i().get<std::string>("str") << std::endl;
+      std::cout << inputs.get<std::string>("str") << std::endl;
     }
   };
 
@@ -36,13 +35,13 @@ namespace buster
 
     void Config()
     {
-      step_ = p().get<double> ("step");
-      o().declare<double>("out", "output", p().get<double> ("start") - step_);
+      step_ = params.get<double> ("step");
+      outputs.declare<double>("out", "output", params.get<double> ("start") - step_);
     }
 
     void Process()
     {
-      o().get<double> ("out") += step_;
+      outputs.get<double> ("out") += step_;
     }
   };
 
@@ -57,13 +56,13 @@ namespace buster
 
     void Config()
     {
-      factor_ = p().get<double> ("factor");
-      i().declare<double> ("in", "multly in by factor");
-      o().declare<double> ("out", "the result of in * factor");
+      factor_ = params.get<double> ("factor");
+      inputs.declare<double> ("in", "multly in by factor");
+      outputs.declare<double> ("out", "the result of in * factor");
     }
     void Process()
     {
-      o().get<double> ("out") = i().get<double> ("in") * factor_;
+      outputs.get<double> ("out") = inputs.get<double> ("in") * factor_;
     }
   };
 
@@ -77,20 +76,19 @@ namespace buster
 
     void Config()
     {
-      n_ = p().get<int> ("n");
-      x_ = p().get<int> ("x");
+      n_ = params.get<int> ("n");
+      x_ = params.get<int> ("x");
       for (int i = 0; i < n_; i++)
 	{
-	  o().declare<int> (str(boost::format("out_%04d") % i), "The ith scater");
+	  outputs.declare<int> (str(boost::format("out_%04d") % i), "The ith scater");
 	}
     }
     void Process()
     {
-      SHOW();
       for (int i = 0; i < n_; i++)
-	{
-        o().get<int> (str(boost::format("out_%04d") % i)) = x_;
-	}
+      {
+      outputs.get<int> (str(boost::format("out_%04d") % i)) = x_;
+      }
     }
     int n_, x_;
   };
@@ -107,24 +105,24 @@ using namespace ecto;
 
     void Config()
     {
-      n_ = p().template get<int>("n");
+      n_ = params.get<int>("n");
       for (int ii = 0; ii < n_; ii++)
       {
-        i().template declare<value_type>(str(boost::format("in_%04d") % ii), "An " + ecto::name_of<value_type>() + "input.");
+        inputs.declare<value_type>(str(boost::format("in_%04d") % ii), "An " + ecto::name_of<value_type>() + "input.");
       }
-      o().template declare<value_type>("out", "The sum of all inputs.");
+      outputs.declare<value_type>("out", "The sum of all inputs.");
     }
 
     void Process()
     {
       //SHOW();
-      value_type& out = o().template get<value_type>("out");
+      value_type& out = outputs.get<value_type>("out");
       out = 0;
       typedef std::pair<std::string, ecto::tendril> pp;
-      BOOST_FOREACH(const pp& in,i())
-            {
-              out += in.second.get<value_type> ();
-            }
+      BOOST_FOREACH(const pp& in,inputs)
+      {
+        out += in.second.get<value_type> ();
+      }
     }
     int n_;
   };
@@ -138,6 +136,6 @@ BOOST_PYTHON_MODULE(buster)
   ecto::wrap<Generate>("Generate", "A generator module.");
   ecto::wrap<Multiply>("Multiply", "Multiply an input with a constant");
   ecto::wrap<Scatter>("Scatter", "Scatter a value...");
- ecto::wrap<Gather<int> >("Gather", "Gather a scattered value...");
- ecto::wrap<Gather<double> >("Gather_double", "Gather a scattered value...");
+  ecto::wrap<Gather<int> >("Gather", "Gather a scattered value...");
+  ecto::wrap<Gather<double> >("Gather_double", "Gather a scattered value...");
 }

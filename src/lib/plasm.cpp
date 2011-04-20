@@ -5,11 +5,11 @@ namespace ecto
 
   void plasm::connect(module::ptr from, const std::string& out_name, module::ptr to, const std::string& in_name)
   {
-    if(from->o().count(out_name) == 0)
+    if(from->outputs.count(out_name) == 0)
     {
       throw std::logic_error("The specified output does not exist: " + out_name);
     }
-    if(to->i().count(in_name) == 0)
+    if(to->inputs.count(in_name) == 0)
     {
       throw std::logic_error("The specified input does not exist: "+in_name);
     }
@@ -53,60 +53,60 @@ namespace ecto
     return impl_->modules_.getEdges();
   }
 
-  struct PlasmModule : ecto::module
-  {
-    PlasmModule(boost::shared_ptr<plasm> plasm, const std::list<module::ptr>& mi, const std::list<module::ptr>& mo) :
-      plasm_(plasm), module_inputs_(mi), module_outputs_(mo)
-    {
-    }
-
-    virtual void Process()
-    {
-      BOOST_FOREACH(const module::ptr& m , module_inputs_)
-     {
-       plasm_->mark_dirty(m);
-     }
-      BOOST_FOREACH(module::ptr& m , module_inputs_)
-      {
-        BOOST_FOREACH(const tendrils::value_type& t, m->i())
-        {
-          const_cast<tendril&>(t.second).connect(inputs.at(t.first));
-          //std::cout << "connecting: " << t.first << std::endl;
-        }
-      }
-      BOOST_FOREACH(const module::ptr& m , module_outputs_)
-      {
-        plasm_->go(m);
-      }
-    }
-
-    virtual void Config()
-    {
-      BOOST_FOREACH(module::ptr& m , module_inputs_)
-      {
-        BOOST_FOREACH(const tendrils::value_type& t , m->inputs)
-        {
-          const_cast<tendrils&>(inputs)[t.first] = t.second;
-        }
-      }
-
-      BOOST_FOREACH(const module::ptr& m , module_outputs_)
-      {
-        BOOST_FOREACH(const tendrils::value_type& t , m->outputs)
-        {
-          const_cast<tendrils&>(outputs)[t.first] = t.second;
-        }
-      }
-    }
-    boost::shared_ptr<plasm> plasm_;
-    std::list<module::ptr> module_inputs_, module_outputs_;
-  };
-
-  boost::shared_ptr<module> plasm::to_module(boost::shared_ptr<plasm> plasm, const std::list<module::ptr>& mi,
-					     const std::list<module::ptr>& mo)
-  {
-    boost::shared_ptr<module> plasm_ (new PlasmModule(plasm, mi, mo));
-    plasm_->Config();
-    return plasm_;
-  }
+//  struct PlasmModule : ecto::module
+//  {
+//    PlasmModule(boost::shared_ptr<plasm> plasm, const std::list<module::ptr>& mi, const std::list<module::ptr>& mo) :
+//      plasm_(plasm), module_inputs_(mi), module_outputs_(mo)
+//    {
+//    }
+//
+//    virtual void Process()
+//    {
+//      BOOST_FOREACH(const module::ptr& m , module_inputs_)
+//     {
+//       plasm_->mark_dirty(m);
+//     }
+//      BOOST_FOREACH(module::ptr& m , module_inputs_)
+//      {
+//        BOOST_FOREACH(const tendrils::value_type& t, m->inputs)
+//        {
+//          t.second.connect(inputs.at(t.first));
+//          //std::cout << "connecting: " << t.first << std::endl;
+//        }
+//      }
+//      BOOST_FOREACH(const module::ptr& m , module_outputs_)
+//      {
+//        plasm_->go(m);
+//      }
+//    }
+//
+//    virtual void Config()
+//    {
+//      BOOST_FOREACH(module::ptr& m , module_inputs_)
+//      {
+//        BOOST_FOREACH(const tendrils::value_type& t , m->inputs)
+//        {
+//          const_cast<tendrils&>(inputs)[t.first] = t.second;
+//        }
+//      }
+//
+//      BOOST_FOREACH(const module::ptr& m , module_outputs_)
+//      {
+//        BOOST_FOREACH(const tendrils::value_type& t , m->outputs)
+//        {
+//          const_cast<tendrils&>(outputs)[t.first] = t.second;
+//        }
+//      }
+//    }
+//    boost::shared_ptr<plasm> plasm_;
+//    std::list<module::ptr> module_inputs_, module_outputs_;
+//  };
+//
+//  boost::shared_ptr<module> plasm::to_module(boost::shared_ptr<plasm> plasm, const std::list<module::ptr>& mi,
+//					     const std::list<module::ptr>& mo)
+//  {
+//    boost::shared_ptr<module> plasm_ (new PlasmModule(plasm, mi, mo));
+//    plasm_->Config();
+//    return plasm_;
+//  }
 }

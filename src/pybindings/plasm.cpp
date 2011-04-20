@@ -13,8 +13,6 @@ namespace bp = boost::python;
 using bp::arg;
 namespace ecto
 {
-
-
   struct plasm_wrapper
   {
     static std::string wrapViz(const ecto::plasm& p)
@@ -41,17 +39,6 @@ namespace ecto
       l.assign(begin, end);
     }
 
-    static boost::shared_ptr<module> 
-    to_module(boost::shared_ptr<plasm> p, bp::object inputs = bp::list(), bp::object outputs = bp::list())
-    {
-
-      std::list<module::ptr> mi, mo;
-      list_assign(mi, inputs);
-      list_assign(mo, outputs);
-      return plasm::to_module(p, mi, mo);
-    }
-    BOOST_PYTHON_FUNCTION_OVERLOADS(to_module_overloads, to_module, 1, 3);
-
     static void wrap()
     {
       bp::class_<plasm,boost::shared_ptr<plasm>, boost::noncopyable> p("Plasm");
@@ -62,7 +49,6 @@ namespace ecto
       p.def("vertices", getModules,
             "Get a dict of the plasm's vertices, with key being integers, and a tuple (module,vertice_type,tendril_key)");
       p.def("edges", getEdges, "Get a list of edges, tuples of two integers(source,target).");
-      p.def("to_module",to_module,to_module_overloads());
       bp::enum_<plasm::vertex_t> v_enum("vertex_t");
       v_enum.value("root", plasm::root);
       v_enum.value("input", plasm::input);
@@ -73,12 +59,10 @@ namespace ecto
   };
   namespace py
   {
-
     void wrapPlasm()
     {
       plasm_wrapper::wrap();
     }
-
   }
 }
 
