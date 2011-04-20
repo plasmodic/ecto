@@ -1,5 +1,6 @@
 add_library(ecto SHARED
   tendril.cpp
+  tendrils.cpp
   module.cpp
   plasm.cpp
   util.cpp

@@ -41,46 +41,22 @@ namespace ecto
     template <typename T>
     const T& get(const std::string& name) const
     {
-      map_t::const_iterator it = (*this).find(name);
-      if (it == (*this).end())
-      {
-        return tendril().get<T>();
-      }else
-        return it->second.get<T>();
+      return at(name).get<T>();
     }
 
     template <typename T>
     T& get(const std::string& name)
     {
-      map_t::iterator it = (*this).find(name);
-      if (it == (*this).end())
-      {
-        return tendril().get<T>();
-      }else
-        return it->second.get<T>();
+      return at(name).get<T>();
     }
-
     template <typename T>
     static T& get(tendrils & t, const std::string& name)
     {
       return t.get<T>(name);
     }
 
-    const tendril& at(const std::string& name) const
-    {
-      map_t::const_iterator it = find(name);
-      if(it == end())
-        throw std::logic_error(name +" does not exist!");
-      return it->second;
-    }
-
-    tendril& at(const std::string& name)
-    {
-      map_t::iterator it = find(name);
-      if(it == end())
-        throw std::logic_error(name +" does not exist!");
-      return it->second;
-    }
+    const tendril& at(const std::string& name) const;
+    tendril& at(const std::string& name);
 
   private:
     typedef std::map<std::string, tendril> map_t;
