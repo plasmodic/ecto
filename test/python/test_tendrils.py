@@ -32,8 +32,8 @@ def test_tendrils():
     
     print t
     #by value
-    x = t.x
-    x = 10
+    _x = t.x
+    _x = 10
     assert t.x != 10
     x = t.x
     t.x = 11

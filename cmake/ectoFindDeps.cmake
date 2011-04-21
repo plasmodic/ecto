@@ -1,5 +1,6 @@
 find_package(Boost COMPONENTS
   python
+  serialization
   )
 
 find_package(PythonLibs)

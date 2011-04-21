@@ -1,7 +1,13 @@
 #!/usr/bin/env python
 import ecto
 import buster
-
+#  bp::class_<tendril>("Tendril")
+#    .def("connect", &tendril::connect)
+#    .add_property("doc",&tendril::doc,&tendril::setDoc)
+#    .add_property("type_name", &tendril::type_name)
+#    .add_property("val", &tendril::extract,(void(tendril::*)(bp::object)) &tendril::set)
+#    .def("get",&tendril::extract)
+#    .def("set",(void(tendril::*)(bp::object)) &tendril::set)
 def test_tendril():
     tendril = ecto.Tendril()
     tendril.set(5)
@@ -18,5 +24,23 @@ def test_tendril():
     assert tendril.val != "hi"
     assert t.val == t.get()
     assert t.val == "hi"
+    
+def test_tendril_defs():
+    t1 = ecto.Tendril()
+    t2 = ecto.Tendril()
+    t1.val = 10
+    t1.connect(t2)
+    assert t2.val == t1.val
+    t2.val = 13
+    assert t1.val == 13
+    print t1.doc
+    print t1.type_name
+    print t1.val
+    print t1.get()
+    t1.set("foo")
+    print t1.val
+    assert t2.val == t1.val
+    
 if __name__ == '__main__':
     test_tendril()
+    test_tendril_defs()

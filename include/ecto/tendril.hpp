@@ -29,6 +29,12 @@ namespace ecto
      */
     tendril();
 
+    template<typename T>
+    tendril(const T& t = T(), const std::string& doc = std::string()):impl_(new impl<T> (t)),connected_(false)
+    {
+      setDoc(doc);
+    }
+
     /**
      * \brief This factory function creates a tendril, holding type T.
      *

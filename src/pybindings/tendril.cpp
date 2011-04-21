@@ -9,8 +9,14 @@ namespace ecto
 namespace py
 {
 
+boost::shared_ptr<tendril> tendril_ctr()
+{
+  return boost::shared_ptr<tendril>(new tendril(bp::object(),"A pythonic tendril."));
+}
+
 void wrapConnection(){
-  bp::class_<tendril>("Tendril")
+  bp::class_<tendril,boost::shared_ptr<tendril> >("Tendril")
+    .def("__init__", bp::make_constructor(tendril_ctr))
     .def("connect", &tendril::connect)
     .add_property("doc",&tendril::doc,&tendril::setDoc)
     .add_property("type_name", &tendril::type_name)

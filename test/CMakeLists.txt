@@ -16,6 +16,15 @@ add_executable(push_ups
 	benchmarks/main.cpp
 )
 
+add_executable(serial
+	modules/are_you_serial.cpp
+
+	)
+target_link_libraries(serial
+	${Boost_LIBRARIES}
+	${PYTHON_LIBRARIES}
+	ecto
+	)
 target_link_libraries(push_ups
 	${Boost_LIBRARIES}
 	${PYTHON_LIBRARIES}
