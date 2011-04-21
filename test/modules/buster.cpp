@@ -92,8 +92,8 @@ namespace buster
     }
     int n_, x_;
   };
-using namespace ecto;
- template<typename ValueT>
+
+  template<typename ValueT>
   struct Gather : public ecto::module
   {
     typedef ValueT value_type;

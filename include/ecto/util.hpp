@@ -1,5 +1,4 @@
-#ifndef ECTO_UTIL_HPP_INCLUDED
-#define ECTO_UTIL_HPP_INCLUDED
+#pragma once
 #include <typeinfo>
 #include <string>
 #include <vector>
@@ -25,4 +24,3 @@ namespace ecto {
   }
 
 }
-#endif

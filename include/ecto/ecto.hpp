@@ -34,17 +34,17 @@ namespace ecto {
     namespace bp = boost::python;
 
     //SHOW();
-    boost::shared_ptr<T> m(new T() );
+    boost::shared_ptr<T> m(new T());
     m->module::Initialize<T>();
     bp::list l = kwargs.items();
-    for (unsigned j=0; j<bp::len(l); ++j)
-      {
-	bp::object key = l[j][0];
-	bp::object value = l[j][1];
-	std::string keystring = bp::extract<std::string>(key);
-	std::string valstring = bp::extract<std::string>(value.attr("__repr__")());
-	m->params.at(keystring).set(value);
-      }
+    for (unsigned j = 0; j < bp::len(l); ++j)
+    {
+      bp::object key = l[j][0];
+      bp::object value = l[j][1];
+      std::string keystring = bp::extract<std::string>(key);
+      std::string valstring = bp::extract<std::string>(value.attr("__repr__")());
+      m->params.at(keystring).set(value);
+    }
     m->Config();
     return m;
   }
@@ -64,10 +64,10 @@ namespace ecto {
       .def("__init__", boost::python::raw_constructor(&raw_construct<T>))
       .def("Params", &T::Params)
       .staticmethod("Params")
-      .def("Doc", &docT::getDoc)
-      .staticmethod("Doc")
-      .def("Name", &docT::getName)
-      .staticmethod("Name")
+      .def("doc", &docT::getDoc)
+      .staticmethod("doc")
+      .def("name", &docT::getName)
+      .staticmethod("name")
       ;
   }
 }
