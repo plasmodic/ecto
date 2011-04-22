@@ -2,11 +2,6 @@
 
 namespace ecto
 {
-  std::ostream& operator<<(std::ostream&out, const tendril::none& rhs)
-  {
-    return out << "none";
-  }
-
   tendril::tendril() :
     //impl_ is never not initialized
         impl_(new impl<none> (none())),connected_(false)
@@ -32,9 +27,9 @@ namespace ecto
   {
     impl_->doc = doc_str;
   }
-
   void tendril::connect(tendril& rhs)
   {
+
     if (type_name() != rhs.type_name())
     {
       if (rhs.is_type<boost::python::object> () && impl_->steal(rhs))
@@ -48,7 +43,14 @@ namespace ecto
         throw std::runtime_error("bad connect! input(" + impl_->type_name() + ") != output(" + rhs.type_name() + ")");
       }
     }
-    impl_ = rhs.impl_;
+    if( !connected_)
+    {
+      impl_ = rhs.impl_;
+    }
+    else
+    {
+      throw std::runtime_error("both of these are already connected.");
+    }
     connected_ = true;
   }
 

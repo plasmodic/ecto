@@ -134,20 +134,25 @@ namespace ecto
     struct impl_base
     {
       typedef boost::shared_ptr<impl_base> ptr;
+      impl_base():doc(){}
       virtual ~impl_base();
       virtual const std::string& type_name() const = 0;
       virtual void* get() = 0;
       virtual bool is_type(std::type_info const& ti) const = 0;
+
       virtual void setPython(boost::python::object o) = 0;
       virtual boost::python::object getPython() const = 0;
+
       virtual bool steal( tendril& to) = 0;
+
       //convenience functions for checking types
       template <typename T>
       static bool inline check(impl_base& i);
       template <typename T>
       static inline void checkThrow(impl_base& i) throw (std::logic_error);
+
       std::string doc;
-    };
+   };
 
     template <typename T>
     struct impl : impl_base
@@ -164,6 +169,7 @@ namespace ecto
 
     tendril(impl_base::ptr impl);
     boost::shared_ptr<impl_base> impl_;
+
     bool connected_;
     friend class tendrils;
     friend class module;
@@ -205,7 +211,7 @@ namespace ecto
   template<typename T>
   void* tendril::impl<T>::get()
   {
-    return &t;
+    return &t;//.get();
   }
 
   template<typename T>
@@ -222,10 +228,10 @@ namespace ecto
   boost::python::object tendril::impl<T>::getPython() const
   {
     try
-      {
-	boost::python::object o(t);
-	return o;
-      }
+    {
+      boost::python::object o(t);
+      return o;
+    }
     catch (const boost::python::error_already_set&) {
       //silently handle no python wrapping
     }
@@ -237,16 +243,21 @@ namespace ecto
   {
     boost::python::object o = to.extract();
     boost::python::extract<T> get_T(o);
-    if (get_T.check() || o.ptr() ==  boost::python::object().ptr()) //verify that the boost python is of type T or is None
+    typedef impl<T> impl_T;
+    boost::shared_ptr<impl_T> i_t;
+    if (o.ptr() ==  boost::python::object().ptr())
     {
-      //reset the impl from a python type to a c++ type.
-      typedef impl<T> impl_T;
-      impl_T* i_t(new impl_T(get_T()));
-      i_t->doc = to.doc();
-      to.impl_.reset(i_t);
-      return true;
+      i_t.reset(new impl_T(T()));
     }
-    return false;
+    else if(get_T.check())
+    {
+      i_t.reset(new impl_T(get_T()));
+    }else
+      return false;
+
+    i_t->doc = to.doc();
+    to.impl_= (i_t);
+    return true;
   }
 
 }

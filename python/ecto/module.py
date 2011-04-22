@@ -2,7 +2,7 @@ from ecto import _module_base
 
 class Module(_module_base):
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, **kwargs):
 
         _module_base.__init__(self)
 

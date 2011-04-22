@@ -5,6 +5,29 @@
 
 namespace buster
 {
+  struct FooPOD
+  {
+    int x;
+    float y;
+  };
+
+  struct FooPODModule : ecto::module
+  {
+    static void Params(ecto::tendrils& p)
+    {
+      p.declare<std::string> ("str","I print this:", "Hello World");
+    }
+
+    void Config()
+    {
+      inputs.declare<FooPOD>("foo","A string to print");
+    }
+
+    void Process()
+    {
+      std::cout << inputs.get<std::string>("str") << std::endl;
+    }
+  };
   struct Printer : ecto::module
   {
     static void Params(ecto::tendrils& p)
