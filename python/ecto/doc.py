@@ -13,8 +13,8 @@ def print_tendrils(tendril, n):
         print  (n+2)*" " +x.data().doc
 
 def print_module_doc(m):
-    print "Module: "+ m.Name()
-    print "     Doc: " + m.Doc()
+    print "Module: "+ m.name()
+    print "     doc: " + m.doc()
     print "  inputs:"
     print_tendrils(m.inputs,2)
     print " outputs:"

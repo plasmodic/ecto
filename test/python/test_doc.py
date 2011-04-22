@@ -1,8 +1,5 @@
-
-
 #!/usr/bin/env python
 import ecto
-#from ecto.doc import print_module_doc
 import buster
 
 def test_doc():
@@ -22,6 +19,4 @@ def test_doc():
 
 if __name__ == '__main__':
     test_doc()
-
-
 
