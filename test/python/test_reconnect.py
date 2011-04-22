@@ -17,18 +17,19 @@ def test_reconnect():
     try:
         plasm.connect(m2,"out",m,"in")
         assert(False)
-    except Exception,e:
+    except RuntimeError,e:
         print "Reconnect caught: ",e
     plasm.connect(m2, "out", gather , "in_0000")
     plasm.connect(m, "out", gather , "in_0001")
     try:
         plasm.connect(m2, "out", gather , "in_0001")
         assert(False)
-    except Exception,e:
+    except RuntimeError,e:
         print "Reconnect caught: ",e
     
     #check some values
     plasm.go(gather)
+    print gather.outputs.out
     assert(gather.outputs["out"].val == 2 *(2*2))
     plasm.go(gather)
     #should remain unchanged

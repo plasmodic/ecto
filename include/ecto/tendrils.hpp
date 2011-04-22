@@ -19,7 +19,7 @@ namespace ecto
       //just add it.
       if (it == end())
       {
-        it = const_cast<tendrils*>(this)->insert(std::make_pair(name,tendril::make<T>(default_val, doc))).first;
+        it = const_cast<tendrils*>(this)->insert(std::make_pair(name,tendril(default_val, doc))).first;
       }
       else // we want to just return the existing tendril (so that modules preconnected don't get messed up)...
       {
@@ -29,7 +29,7 @@ namespace ecto
         {
           std::stringstream ss;
           ss << "Your types aren't the same, this could lead to very undefined behavior...";
-          ss << " old type = " << it->second.impl_->type_name() << " new type = " <<  name_of<T>()
+          ss << " old type = " << it->second.type_name() << " new type = " <<  name_of<T>()
               << std::endl;
           throw std::logic_error(ss.str());
         }

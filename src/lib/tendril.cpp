@@ -1,11 +1,34 @@
 #include <ecto/tendril.hpp>
-
+#include <boost/foreach.hpp>
+#define foreach BOOST_FOREACH
 namespace ecto
 {
   tendril::tendril() :
     //impl_ is never not initialized
-        impl_(new impl<none> (none())),connected_(false)
+        impl_(new impl<none> (none(),this)),connected_(false)
   {
+  }
+
+  tendril::~tendril()
+  {
+    //SHOW();
+    impl_->owners.erase(this);
+  }
+
+  tendril::tendril(const tendril& rhs):impl_(rhs.impl_),connected_(rhs.connected_)
+  {
+    impl_->owners.insert(this);
+  }
+  tendril& tendril::operator=(const tendril& rhs)
+  {
+    if(this == &rhs)
+      return *this;
+
+    impl_->owners.erase(this);
+    impl_ = rhs.impl_;
+    impl_->owners.insert(this);
+    connected_ = rhs.connected_;
+    return *this;
   }
 
   tendril::tendril(impl_base::ptr impl) :
@@ -29,6 +52,8 @@ namespace ecto
   }
   void tendril::connect(tendril& rhs)
   {
+    if(connected_)
+      throw std::runtime_error("already connected");
 
     if (type_name() != rhs.type_name())
     {
@@ -43,14 +68,12 @@ namespace ecto
         throw std::runtime_error("bad connect! input(" + impl_->type_name() + ") != output(" + rhs.type_name() + ")");
       }
     }
-    if( !connected_)
+    std::set<tendril*> owners = impl_->owners;
+    foreach(tendril* x, owners)
     {
-      impl_ = rhs.impl_;
+      x->impl_ = rhs.impl_;
     }
-    else
-    {
-      throw std::runtime_error("both of these are already connected.");
-    }
+    rhs.impl_->owners.insert(owners.begin(),owners.end());
     connected_ = true;
   }
 
@@ -67,7 +90,7 @@ namespace ecto
   {
     if (is_type<none> ())
     {
-      impl_.reset(new impl<boost::python::object> (o));
+      impl_.reset(new impl<boost::python::object> (o,this));
     }
     else
     {

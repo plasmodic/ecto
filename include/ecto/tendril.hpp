@@ -7,6 +7,7 @@
 
 #include <stdexcept>
 #include <string>
+#include <set>
 #include <sstream>
 #include <cstring>
 
@@ -28,30 +29,16 @@ namespace ecto
      * tendril::none type.
      */
     tendril();
+    ~tendril();
+    tendril(const tendril& rhs);
+    tendril& operator=(const tendril& rhs);
 
     template<typename T>
-    tendril(const T& t = T(), const std::string& doc = std::string()):impl_(new impl<T> (t)),connected_(false)
+    tendril(const T& t = T(), const std::string& doc = std::string()):impl_(new impl<T> (t,this)),connected_(false)
     {
       setDoc(doc);
     }
 
-    /**
-     * \brief This factory function creates a tendril, holding type T.
-     *
-     * @param t the default value of t
-     * @param name the instance name of t
-     * @param doc docstring for t
-     * @return a tendril holding a copy of t
-     */
-    template <typename T>
-    static inline tendril
-    make(const T& t = T(), const std::string& doc = std::string())
-    {
-      // fixme: allocators
-      tendril c(impl_base::ptr(new impl<T> (t)));
-      c.setDoc(doc);
-      return c;
-    }
 
     /**
      *
@@ -61,13 +48,9 @@ namespace ecto
     template<typename T>
     inline void set(const std::string& doc, const T& t)
     {
-      if(is_type<T>())
+      if(is_type<T>() || is_type<none>())
       {
-        get<T>() = t;
-        setDoc(doc);
-      }else if(is_type<none>())
-      {
-        *this = make<T>(t,doc);
+        *this = tendril(t,doc);
       }else
         enforce_type<T>();
     }
@@ -134,7 +117,8 @@ namespace ecto
     struct impl_base
     {
       typedef boost::shared_ptr<impl_base> ptr;
-      impl_base():doc(){}
+      impl_base():doc(){
+      }
       virtual ~impl_base();
       virtual const std::string& type_name() const = 0;
       virtual void* get() = 0;
@@ -150,14 +134,14 @@ namespace ecto
       static bool inline check(impl_base& i);
       template <typename T>
       static inline void checkThrow(impl_base& i) throw (std::logic_error);
-
       std::string doc;
+      std::set<tendril*> owners;
    };
 
     template <typename T>
     struct impl : impl_base
     {
-      impl(const T& t);
+      impl(const T& t,tendril* owner);
       const std::string& type_name() const;
       bool is_type(std::type_info const& ti) const;
       void* get();
@@ -169,10 +153,7 @@ namespace ecto
 
     tendril(impl_base::ptr impl);
     boost::shared_ptr<impl_base> impl_;
-
     bool connected_;
-    friend class tendrils;
-    friend class module;
   };
   
   template<typename T>
@@ -191,9 +172,11 @@ namespace ecto
 
 
   template<typename T>
-  tendril::impl<T>::impl(const T& t) :
+  tendril::impl<T>::impl(const T& t,tendril * const owner) :
     t(t)
   {
+    if(owner != NULL)
+      owners.insert(owner);
   }
 
   template<typename T>
@@ -247,15 +230,16 @@ namespace ecto
     boost::shared_ptr<impl_T> i_t;
     if (o.ptr() ==  boost::python::object().ptr())
     {
-      i_t.reset(new impl_T(T()));
+      i_t.reset(new impl_T(T(),NULL));
     }
     else if(get_T.check())
     {
-      i_t.reset(new impl_T(get_T()));
+      i_t.reset(new impl_T(get_T(),NULL));
     }else
       return false;
 
     i_t->doc = to.doc();
+    i_t->owners = to.impl_->owners;
     to.impl_= (i_t);
     return true;
   }

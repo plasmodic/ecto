@@ -25,6 +25,7 @@ namespace ecto
     typedef std::map<std::string,tendril> map_t;
     map_t::const_iterator it = to->inputs.find(in_name);
     map_t::const_iterator out_it = outputs.find(out_name);
+    //allow inputs to be connected to many outputs.
     const_cast<tendril&>(it->second).connect(const_cast<tendril&>(out_it->second));
   }
 

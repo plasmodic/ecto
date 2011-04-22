@@ -21,11 +21,14 @@ namespace buster
     void Config()
     {
       inputs.declare<FooPOD>("foo","A string to print");
+      outputs.declare<FooPOD>("foo","A string to print");
+
     }
 
     void Process()
     {
-      std::cout << inputs.get<std::string>("str") << std::endl;
+      std::cout << inputs.get<FooPOD>("foo").x << std::endl;
+      outputs.get<FooPOD>("foo").y = 3.14;
     }
   };
   struct Printer : ecto::module
