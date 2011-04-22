@@ -53,27 +53,28 @@ namespace ecto
   void tendril::connect(tendril& rhs)
   {
     if(connected_)
-      throw std::runtime_error("already connected");
+      throw std::runtime_error("Already connected. This is considered an error.");
 
+    //check if the types aren't the same
     if (type_name() != rhs.type_name())
     {
-      if (rhs.is_type<boost::python::object> () && impl_->steal(rhs))
-      {
-      }
-      else if (is_type<boost::python::object> () && rhs.impl_->steal(*this))
-      {
-      }
-      else
+      //they may be boost python types, attempt to steal
+      //these only work argument is a boost python object
+      //this will change the type of rhs to the type of impl_ if possible
+      if (!impl_->steal(rhs) && !rhs.impl_->steal(*this))
       {
         throw std::runtime_error("bad connect! input(" + impl_->type_name() + ") != output(" + rhs.type_name() + ")");
       }
     }
+    //propagate the new impl to all owners
     std::set<tendril*> owners = impl_->owners;
     foreach(tendril* x, owners)
     {
       x->impl_ = rhs.impl_;
     }
-    rhs.impl_->owners.insert(owners.begin(),owners.end());
+    //insert our old owners
+    impl_->owners.insert(owners.begin(),owners.end());
+    //set out connected state to true
     connected_ = true;
   }
 

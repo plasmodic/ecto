@@ -20,6 +20,9 @@ namespace ecto
    *
    * Each tendril is a type erasing holder for any instance of any type,
    * and allows introspection including its value, type, and doc string.
+   *
+   * Tendrils also support being tied to other tendrils so that many tendrils
+   * may point to the same underlying data. AKA the multi pointer paradigm
    */
   class tendril
   {
@@ -30,23 +33,34 @@ namespace ecto
      */
     tendril();
     ~tendril();
+    /**
+     * \brief The copy constructor assures that all the tendrils points towards the right value
+     * @param rhs the tendril to copy from
+     */
     tendril(const tendril& rhs);
+    /**
+     * \brief The assignment operator will release the tendril from another's grasp, and assure the multi pointer
+     * paradigm.
+     * @param rhs
+     * @return
+     */
     tendril& operator=(const tendril& rhs);
 
     template<typename T>
-    tendril(const T& t = T(), const std::string& doc = std::string()):impl_(new impl<T> (t,this)),connected_(false)
+    tendril(const T& t = T(), const std::string& doc = std::string())
+      :impl_(new impl<T> (t,this)),connected_(false)
     {
       setDoc(doc);
     }
 
-
     /**
-     *
-     * @param doc
-     * @param t
+     * \brief set this tendril with a doc string and default type. If the types are not the same an exception
+     * will be thrown.
+     * @param doc docstring of this tendril.
+     * @param t a default value.
      */
     template<typename T>
-    inline void set(const std::string& doc, const T& t)
+    void set(const std::string& doc, const T& t)
     {
       if(is_type<T>() || is_type<none>())
       {
@@ -73,41 +87,84 @@ namespace ecto
      */
     std::string doc() const;
 
+    /**
+     * \brief The doc for this tendril is runtime defined, so you may want to update it.
+     * @param doc_str A human readable description of the tendril.
+     */
     void setDoc(const std::string& doc_str);
 
+  /**
+   * Given T this will get the type from the tendril, also enforcing type with an exception.
+   * @return a const reference to the value of the tendril (no copies)
+   */
     template<typename T>
     inline const T& get() const
     {
+      //throws on failure
       enforce_type<T> ();
-      return *reinterpret_cast<const T*> (impl_->get());
+      //cast a void pointer to this type.
+      return *static_cast<const T*> (impl_->get());
     }
 
+    /**
+     * Given T this will get the type from the tendril, also enforcing type with an exception.
+     * @return a reference to the value of the tendril (no copies)
+     */
     template<typename T>
     inline T& get()
     {
+      //throws on failure
       enforce_type<T> ();
-      return *reinterpret_cast<T*> (impl_->get());
+      //cast a void pointer to this type.
+      return *static_cast<T*> (impl_->get());
     }
 
+    /**
+     * \brief runtime check if the tendril is of the given type.
+     * @return true if it is the type.
+     */
     template <typename T>
     inline bool is_type() const
     {
       return impl_base::check<T>(*impl_);
     }
 
+    /**
+     * \brief runtime check if the tendril is of the given type, this will throw.
+     */
     template<typename T>
     inline void enforce_type() const
     {
       if (!is_type<T> ())
 	throw(std::logic_error(std::string(type_name() + " is not a " + name_of<T> ()).c_str()));
     }
-    void connect(tendril& rhs);
 
+    /**
+     * \brief This ties the tendrils so that they look at the same object. This ensures that all preconnected
+     * tendrils point to the same object.  The existing tendril value may be destroyed in favor of the source tendril.
+     * If a tendril is of a stronger type it will override the other tendril.
+     * @param source  The tendril to connect to.
+     */
+    void connect(tendril& source);
+
+    /**
+     * \brief Get the boost::python version of the object (by value)
+     * @return A copy of the underlying object as a boost python object, will be None type if the conversion fails.
+     */
     boost::python::object extract() const;
+    /**
+     * \brief Set this tendril's value from the python object. This will copy the value
+     * @param o a python object holding a type compatible with this tendril. Will throw if the types are not compatible.
+     */
     void set(boost::python::object o);
 
+    /** Check if this tendril is preconnected.
+     * @return true if connected.
+     */
     bool connected() const{return connected_;}
 
+    /** A none type for tendril when the tendril is uninitialized.
+     */
     struct none
     {
     };
@@ -224,20 +281,26 @@ namespace ecto
   template<typename T>
   bool tendril::impl<T>::steal(tendril& to)
   {
+    if(!to.is_type<T>() && !to.is_type<boost::python::object>())
+    {
+      return false;
+    }
     boost::python::object o = to.extract();
     boost::python::extract<T> get_T(o);
     typedef impl<T> impl_T;
     boost::shared_ptr<impl_T> i_t;
+    //if i'm a None object, just set me up scotty
     if (o.ptr() ==  boost::python::object().ptr())
     {
       i_t.reset(new impl_T(T(),NULL));
     }
-    else if(get_T.check())
+    else if(get_T.check()) //check my type, we better be compatible
     {
       i_t.reset(new impl_T(get_T(),NULL));
     }else
-      return false;
+      return false; //this steal failed
 
+    //set the doc str,
     i_t->doc = to.doc();
     i_t->owners = to.impl_->owners;
     to.impl_= (i_t);
