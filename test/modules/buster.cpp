@@ -5,153 +5,164 @@
 
 namespace buster
 {
-  struct FooPOD
+struct FooPOD
+{
+  int x;
+  float y;
+};
+
+struct FooPODModule: ecto::module
+{
+  static void Params(ecto::tendrils& p)
   {
-    int x;
-    float y;
-  };
+    p.declare<std::string> ("str", "I print this:", "Hello World");
+  }
 
-  struct FooPODModule : ecto::module
+  void Config()
   {
-    static void Params(ecto::tendrils& p)
-    {
-      p.declare<std::string> ("str","I print this:", "Hello World");
-    }
+    inputs.declare<FooPOD> ("foo", "A string to print");
+    outputs.declare<FooPOD> ("foo", "A string to print");
 
-    void Config()
-    {
-      inputs.declare<FooPOD>("foo","A string to print");
-      outputs.declare<FooPOD>("foo","A string to print");
+  }
 
-    }
-
-    void Process()
-    {
-      std::cout << inputs.get<FooPOD>("foo").x << std::endl;
-      outputs.get<FooPOD>("foo").y = 3.14;
-    }
-  };
-  struct Printer : ecto::module
+  void Process()
   {
-    static void Params(ecto::tendrils& p)
-    {
-      p.declare<std::string> ("str","I print this:", "Hello World");
-    }
-
-    void Config()
-    {
-      inputs.declare<std::string>("str","A string to print","hello");
-    }
-
-    void Process()
-    {
-      std::cout << inputs.get<std::string>("str") << std::endl;
-    }
-  };
-
-  struct Generate : ecto::module
+    std::cout << inputs.get<FooPOD> ("foo").x << std::endl;
+    outputs.get<FooPOD> ("foo").y = 3.14;
+  }
+};
+struct Printer: ecto::module
+{
+  static void Params(ecto::tendrils& p)
   {
-    int step_;
+    p.declare<std::string> ("str", "I print this:", "Hello World");
+  }
 
-    static void Params(ecto::tendrils& p)
-    {
-      p["step"].set<double> ("The step with which i generate integers.", 2);
-      p["start"].set<double> ("My starting value", 0);
-    }
-
-    void Config()
-    {
-      step_ = params.get<double> ("step");
-      outputs.declare<double>("out", "output", params.get<double> ("start") - step_);
-    }
-
-    void Process()
-    {
-      outputs.get<double> ("out") += step_;
-    }
-  };
-
-  struct Multiply : ecto::module
+  void Config()
   {
-    double factor_;
+    inputs.declare<std::string> ("str", "A string to print", "hello");
+  }
 
-    static void Params(ecto::tendrils& p)
-    {
-      p["factor"].set<double> ("A factor to multiply by.", 3.14);
-    }
-
-    void Config()
-    {
-      factor_ = params.get<double> ("factor");
-      inputs.declare<double> ("in", "multly in by factor");
-      outputs.declare<double> ("out", "the result of in * factor");
-    }
-    void Process()
-    {
-      outputs.get<double> ("out") = inputs.get<double> ("in") * factor_;
-    }
-  };
-
-  struct Scatter : ecto::module
+  void Process()
   {
-    static void Params(ecto::tendrils& p)
-    {
-      p["n"].set<int> ("Number to scatter...", 2);
-      p["x"].set<int> ("The value to scatter...", 13);
-    }
+    std::cout << inputs.get<std::string> ("str") << std::endl;
+  }
+};
 
-    void Config()
+struct Generate: ecto::module
+{
+  int step_;
+
+  static void Params(ecto::tendrils& p)
+  {
+    p["step"].set<double> ("The step with which i generate integers.", 2);
+    p["start"].set<double> ("My starting value", 0);
+  }
+
+  void Config()
+  {
+    step_ = params.get<double> ("step");
+    outputs.declare<double> ("out", "output",
+        params.get<double> ("start") - step_);
+  }
+
+  void Process()
+  {
+    outputs.get<double> ("out") += step_;
+  }
+};
+
+struct Multiply: ecto::module
+{
+  double factor_;
+
+  static void Params(ecto::tendrils& p)
+  {
+    p["factor"].set<double> ("A factor to multiply by.", 3.14);
+  }
+
+  void Config()
+  {
+    factor_ = params.get<double> ("factor");
+    inputs.declare<double> ("in", "multly in by factor");
+    outputs.declare<double> ("out", "the result of in * factor");
+  }
+  void Process()
+  {
+    outputs.get<double> ("out") = inputs.get<double> ("in") * factor_;
+  }
+};
+
+struct Scatter: ecto::module
+{
+  static void Params(ecto::tendrils& p)
+  {
+    p["n"].set<int> ("Number to scatter...", 2);
+    p["x"].set<int> ("The value to scatter...", 13);
+  }
+
+  void Config()
+  {
+    n_ = params.get<int> ("n");
+    x_ = params.get<int> ("x");
+    for (int i = 0; i < n_; i++)
     {
-      n_ = params.get<int> ("n");
-      x_ = params.get<int> ("x");
-      for (int i = 0; i < n_; i++)
-	{
-	  outputs.declare<int> (str(boost::format("out_%04d") % i), "The ith scater");
-	}
+      outputs.declare<int> (str(boost::format("out_%04d") % i),
+          "The ith scater");
     }
-    void Process()
+  }
+  void Process()
+  {
+    for (int i = 0; i < n_; i++)
     {
-      for (int i = 0; i < n_; i++)
-      {
       outputs.get<int> (str(boost::format("out_%04d") % i)) = x_;
-      }
     }
-    int n_, x_;
-  };
+  }
+  int n_, x_;
+};
 
-  template<typename ValueT>
-  struct Gather : public ecto::module
+template<typename ValueT>
+struct Gather: public ecto::module
+{
+  typedef ValueT value_type;
+
+  static void Params(ecto::tendrils& p)
   {
-    typedef ValueT value_type;
+    p.declare<int> ("n", "N to gather", 2);
+  }
 
-    static void Params(ecto::tendrils& p)
+  void Config()
+  {
+    n_ = params.get<int> ("n");
+    for (int ii = 0; ii < n_; ii++)
     {
-      p.declare<int> ("n", "N to gather", 2);
+      inputs.declare<value_type> (str(boost::format("in_%04d") % ii),
+          "An " + ecto::name_of<value_type>() + "input.");
     }
+    outputs.declare<value_type> ("out", "The sum of all inputs.");
+  }
 
-    void Config()
-    {
-      n_ = params.get<int>("n");
-      for (int ii = 0; ii < n_; ii++)
-      {
-        inputs.declare<value_type>(str(boost::format("in_%04d") % ii), "An " + ecto::name_of<value_type>() + "input.");
-      }
-      outputs.declare<value_type>("out", "The sum of all inputs.");
-    }
+  void Process()
+  {
+    //SHOW();
+    value_type& out = outputs.get<value_type> ("out");
+    out = 0;
+    typedef std::pair<std::string, ecto::tendril> pp;
+    BOOST_FOREACH(const pp& in,inputs)
+          {
+            out += in.second.get<value_type> ();
+          }
+  }
+  int n_;
+};
 
-    void Process()
-    {
-      //SHOW();
-      value_type& out = outputs.get<value_type>("out");
-      out = 0;
-      typedef std::pair<std::string, ecto::tendril> pp;
-      BOOST_FOREACH(const pp& in,inputs)
-      {
-        out += in.second.get<value_type> ();
-      }
-    }
-    int n_;
-  };
+boost::shared_ptr<ecto::tendril> makePodTendril()
+{
+  boost::shared_ptr<ecto::tendril> p;
+  ecto::tendril* t = new ecto::tendril::tendril(0, "doc");
+  p.reset(t);
+  return p;
+}
 
 }
 
@@ -164,4 +175,5 @@ BOOST_PYTHON_MODULE(buster)
   ecto::wrap<Scatter>("Scatter", "Scatter a value...");
   ecto::wrap<Gather<int> >("Gather", "Gather a scattered value...");
   ecto::wrap<Gather<double> >("Gather_double", "Gather a scattered value...");
+  boost::python::def("make_pod_tendril", buster::makePodTendril);
 }

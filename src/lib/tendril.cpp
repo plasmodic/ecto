@@ -3,99 +3,133 @@
 #define foreach BOOST_FOREACH
 namespace ecto
 {
-  tendril::tendril() :
-    //impl_ is never not initialized
-        impl_(new impl<none> (none(),this)),connected_(false)
-  {
-  }
+tendril::tendril() :
+  impl_(new impl<none> (none(), this)), connected_(false)
+{
+  //impl_ is never not initialized
+}
 
-  tendril::~tendril()
-  {
-    //SHOW();
-    impl_->owners.erase(this);
-  }
+tendril::~tendril()
+{
+  //SHOW();
+  impl_->owners.erase(this);
+}
 
-  tendril::tendril(const tendril& rhs):impl_(rhs.impl_),connected_(rhs.connected_)
-  {
-    impl_->owners.insert(this);
-  }
-  tendril& tendril::operator=(const tendril& rhs)
-  {
-    if(this == &rhs)
-      return *this;
-
-    impl_->owners.erase(this);
-    impl_ = rhs.impl_;
-    impl_->owners.insert(this);
-    connected_ = rhs.connected_;
+tendril::tendril(const tendril& rhs) :
+  impl_(rhs.impl_), connected_(rhs.connected_)
+{
+  impl_->owners.insert(this);
+}
+tendril& tendril::operator=(const tendril& rhs)
+{
+  if (this == &rhs)
     return *this;
-  }
 
-  tendril::tendril(impl_base::ptr impl) :
-    impl_(impl),connected_(false)
-  {
-  }
+  impl_->owners.erase(this);
+  impl_ = rhs.impl_;
+  impl_->owners.insert(this);
+  connected_ = rhs.connected_;
+  return *this;
+}
 
-  std::string tendril::type_name() const
-  {
-    return impl_->type_name();
-  }
+tendril::tendril(impl_base::ptr impl) :
+  impl_(impl), connected_(false)
+{
+}
 
-  std::string tendril::doc() const
-  {
-    return impl_->doc;
-  }
+std::string tendril::type_name() const
+{
+  return impl_->type_name();
+}
 
-  void tendril::setDoc(const std::string& doc_str)
-  {
-    impl_->doc = doc_str;
-  }
-  void tendril::connect(tendril& rhs)
-  {
-    if(connected_)
-      throw std::runtime_error("Already connected. This is considered an error.");
+std::string tendril::doc() const
+{
+  return impl_->doc;
+}
 
-    //check if the types aren't the same
-    if (type_name() != rhs.type_name())
+void tendril::setDoc(const std::string& doc_str)
+{
+  impl_->doc = doc_str;
+}
+namespace
+{
+bool isBoostPython(const tendril& t)
+{
+  return t.is_type<boost::python::object> ();
+}
+}
+void tendril::connect(tendril& rhs)
+{
+  if (connected_)
+  {
+    //TODO should this throw on reconnect?
+    throw std::runtime_error("Already connected. This is considered an error.");
+    //disconnect();
+  }
+  boost::shared_ptr<impl_base> impl;
+  //check if the types aren't the same
+  if (!same_type(rhs))
+  {
+    //FIXME this sucks for now...
+    //if one is a boost::python::object then we may
+    //override its impl_
+    if (isBoostPython(*this))
     {
-      //they may be boost python types, attempt to steal
-      //these only work argument is a boost python object
-      //this will change the type of rhs to the type of impl_ if possible
-      if (!impl_->steal(rhs) && !rhs.impl_->steal(*this))
-      {
-        throw std::runtime_error("bad connect! input(" + impl_->type_name() + ") != output(" + rhs.type_name() + ")");
-      }
+      impl = rhs.impl_;
+      impl->owners.insert(impl_->owners.begin(), impl_->owners.end());
     }
-    //propagate the new impl to all owners
-    std::set<tendril*> owners = impl_->owners;
-    foreach(tendril* x, owners)
+    else if (isBoostPython(rhs))
     {
-      x->impl_ = rhs.impl_;
-    }
-    //insert our old owners
-    impl_->owners.insert(owners.begin(),owners.end());
-    //set out connected state to true
-    connected_ = true;
-  }
-
-  tendril::impl_base::~impl_base()
-  {
-  }
-
-  boost::python::object tendril::extract() const
-  {
-    return impl_->getPython();
-  }
-
-  void tendril::set(boost::python::object o)
-  {
-    if (is_type<none> ())
-    {
-      impl_.reset(new impl<boost::python::object> (o,this));
+      impl = impl_;
+      impl->owners.insert(rhs.impl_->owners.begin(), rhs.impl_->owners.end());
     }
     else
-    {
-      impl_->setPython(o);
-    }
+      throw std::runtime_error(
+          "bad connect! input(" + impl_->type_name() + ") != output("
+              + rhs.type_name() + ")");
   }
+  else
+  {
+    impl = rhs.impl_;
+    impl->owners.insert(impl_->owners.begin(), impl_->owners.end());
+  }
+
+  foreach(tendril* x, impl->owners)
+        {
+          x->impl_ = impl;
+        }
+  //set out connected state to true
+  connected_ = true;
+}
+
+void tendril::disconnect()
+{
+  //erase all owners
+  impl_->owners.erase(this);
+  //reset this impl;
+  impl_ = impl_->make(this);
+  //set the connected_ flag to false
+  connected_ = false;
+}
+
+tendril::impl_base::~impl_base()
+{
+}
+
+boost::python::object tendril::extract() const
+{
+  return impl_->getPython();
+}
+
+void tendril::set(boost::python::object o)
+{
+  if (is_type<none> ())
+  {
+    impl_.reset(new impl<boost::python::object> (o, this));
+  }
+  else
+  {
+    impl_->setPython(o);
+  }
+}
 }

@@ -40,7 +40,22 @@ def test_tendril_defs():
     t1.set("foo")
     print t1.val
     assert t2.val == t1.val
+
+def test_cpp_python_tendril():
+    x = buster.make_pod_tendril()
+    print x.val
+    x.val = 10
+    print x.val
+    print x.type_name
+    t1 = ecto.Tendril()
+    print t1.type_name
+    t1.connect(x)
+    t1.val = 20
+    print t1.type_name
+    print x.type_name
+    print x.val
     
 if __name__ == '__main__':
     test_tendril()
     test_tendril_defs()
+    test_cpp_python_tendril()
