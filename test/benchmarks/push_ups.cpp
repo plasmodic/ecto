@@ -26,9 +26,9 @@ namespace ecto_push_ups
     void configure()
     {
       //SHOW();
-      o().declare<int> ("out", "x+y");
-      i().declare<int>("x");
-      i().declare<int>("y");
+      outputs.declare<int> ("out", "x+y");
+      inputs.declare<int>("x");
+      inputs.declare<int>("y");
     }
     void process()
     {

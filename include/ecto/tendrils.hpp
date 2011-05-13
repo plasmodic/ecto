@@ -11,6 +11,12 @@ namespace ecto
 class tendrils: public std::map<std::string, tendril>, boost::noncopyable
 {
 public:
+  /**
+   * \brief Declare a tendril, given a symbolic name, doc string and default value
+   * @param name
+   * @param doc
+   * @param default_val
+   */
   template<typename T>
   void declare(const std::string& name,
       const std::string& doc = "TODO: doc str me.", const T& default_val = T()) const
@@ -36,7 +42,9 @@ public:
             << name_of<T> () << std::endl;
         throw std::logic_error(ss.str());
       }
-      const_cast<tendril&> (it->second).get<T> () = default_val;
+      //most likely should not overwrite tendril's value this behavior
+      //FIXME
+      //const_cast<tendril&> (it->second).get<T> () = default_val;
     }
   }
 

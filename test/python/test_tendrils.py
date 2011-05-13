@@ -11,9 +11,10 @@ def test_tendrils():
     assert t["x"].val == "str"
     assert t.x == "str"
     #test the redeclare
+    #a redeclaration will not change the value, or doc string
     t.declare("Hello","new doc", "you")
-    assert t.Hello == "you"
-    assert t["Hello"].doc == "new doc"
+    assert t.Hello == 6
+    assert t["Hello"].doc == "doc str"
     try:
         #read erro
         t.nonexistant = 1

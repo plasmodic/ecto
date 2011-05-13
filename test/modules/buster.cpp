@@ -22,7 +22,6 @@ struct FooPODModule: ecto::module
   {
     inputs.declare<FooPOD> ("foo", "A string to print");
     outputs.declare<FooPOD> ("foo", "A string to print");
-
   }
 
   void process()
@@ -55,8 +54,8 @@ struct Generate: ecto::module
 
   static void Initialize(ecto::tendrils& p)
   {
-    p.declare<double> ("step","The step with which i generate integers.", 2);
-    p.declare<double> ("start","My starting value", 0);
+    p.declare<double> ("step", "The step with which i generate integers.", 2);
+    p.declare<double> ("start", "My starting value", 0);
   }
 
   void configure()
@@ -78,7 +77,7 @@ struct Multiply: ecto::module
 
   static void Initialize(ecto::tendrils& p)
   {
-    p.declare<double> ("factor","A factor to multiply by.", 3.14);
+    p.declare<double> ("factor", "A factor to multiply by.", 3.14);
   }
 
   void configure()
@@ -97,8 +96,8 @@ struct Scatter: ecto::module
 {
   static void Initialize(ecto::tendrils& p)
   {
-    p.declare<int> ("n","Number to scatter...", 2);
-    p.declare<int> ("x","The value to scatter...", 13);
+    p.declare<int> ("n", "Number to scatter...", 2);
+    p.declare<int> ("x", "The value to scatter...", 13);
   }
 
   void configure()

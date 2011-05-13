@@ -10,10 +10,11 @@
 
 namespace ecto
 {
-namespace py
-{
-void wrapModule();
-}
+/**
+ * \brief ecto::module is c++ interface definition for ecto processing
+ * modules.  Subclasses should also implement  Initialize, which
+ * will take an ecto::tendrils reference.
+ */
 struct module: boost::noncopyable
 {
   typedef boost::shared_ptr<module> ptr;
@@ -22,18 +23,41 @@ struct module: boost::noncopyable
   module();
   virtual ~module();
 
+  /**
+   *
+   */
   virtual void process();
+  /**
+   *
+   */
   virtual void configure();
 
+  /**
+   *
+   */
   template<typename T>
   void initialize()
   {
     T::Initialize(params);
   }
 
+  /**
+   *
+   * @param output The key to the output. the output will be the source to the input.
+   * @param to The pointer to the module that should be connected.
+   * @param input The key to the input tendril in the to module.
+   */
   void connect(const std::string& output, ptr to, const std::string& input);
 
+  /**
+   * \brief Mark this module dirty or clean
+   * @param hmm set dirty to this, true if it should be dirty.
+   */
   void dirty(bool hmm);
+  /**
+   * \brief test whether the module is dirty or not.
+   * @return
+   */
   bool dirty() const;
 
   virtual std::string name()
