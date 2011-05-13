@@ -23,19 +23,19 @@ namespace ecto_push_ups
 
   struct Add2 : ecto::module
   {
-    void Config()
+    void configure()
     {
       //SHOW();
       o().declare<int> ("out", "x+y");
       i().declare<int>("x");
       i().declare<int>("y");
     }
-    void Process()
+    void process()
     {
       //SHOW();
       o().get<int> ("out") = add2(std::rand(),std::rand());
     }
-    static void Params(tendrils_t& p)
+    static void Initialize(tendrils_t& p)
     {
       SHOW();
     }
@@ -43,16 +43,16 @@ namespace ecto_push_ups
 
   struct BigData : ecto::module
   {
-    void Config()
+    void configure()
     {
       SHOW();
       o().declare<int> ("out", "sum of random array");
     }
-    void Process()
+    void process()
     {
       o().get<int> ("out") = big_data();
     }
-    static void Params(tendrils_t& p)
+    static void Initialize(tendrils_t& p)
     {
       SHOW();
     }

@@ -13,19 +13,19 @@ struct FooPOD
 
 struct FooPODModule: ecto::module
 {
-  static void Params(ecto::tendrils& p)
+  static void Initialize(ecto::tendrils& p)
   {
     p.declare<std::string> ("str", "I print this:", "Hello World");
   }
 
-  void Config()
+  void configure()
   {
     inputs.declare<FooPOD> ("foo", "A string to print");
     outputs.declare<FooPOD> ("foo", "A string to print");
 
   }
 
-  void Process()
+  void process()
   {
     std::cout << inputs.get<FooPOD> ("foo").x << std::endl;
     outputs.get<FooPOD> ("foo").y = 3.14;
@@ -33,17 +33,17 @@ struct FooPODModule: ecto::module
 };
 struct Printer: ecto::module
 {
-  static void Params(ecto::tendrils& p)
+  static void Initialize(ecto::tendrils& p)
   {
     p.declare<std::string> ("str", "I print this:", "Hello World");
   }
 
-  void Config()
+  void configure()
   {
     inputs.declare<std::string> ("str", "A string to print", "hello");
   }
 
-  void Process()
+  void process()
   {
     std::cout << inputs.get<std::string> ("str") << std::endl;
   }
@@ -53,20 +53,20 @@ struct Generate: ecto::module
 {
   int step_;
 
-  static void Params(ecto::tendrils& p)
+  static void Initialize(ecto::tendrils& p)
   {
     p.declare<double> ("step","The step with which i generate integers.", 2);
     p.declare<double> ("start","My starting value", 0);
   }
 
-  void Config()
+  void configure()
   {
     step_ = params.get<double> ("step");
     outputs.declare<double> ("out", "output",
         params.get<double> ("start") - step_);
   }
 
-  void Process()
+  void process()
   {
     outputs.get<double> ("out") += step_;
   }
@@ -76,18 +76,18 @@ struct Multiply: ecto::module
 {
   double factor_;
 
-  static void Params(ecto::tendrils& p)
+  static void Initialize(ecto::tendrils& p)
   {
     p.declare<double> ("factor","A factor to multiply by.", 3.14);
   }
 
-  void Config()
+  void configure()
   {
     factor_ = params.get<double> ("factor");
     inputs.declare<double> ("in", "multly in by factor");
     outputs.declare<double> ("out", "the result of in * factor");
   }
-  void Process()
+  void process()
   {
     outputs.get<double> ("out") = inputs.get<double> ("in") * factor_;
   }
@@ -95,13 +95,13 @@ struct Multiply: ecto::module
 
 struct Scatter: ecto::module
 {
-  static void Params(ecto::tendrils& p)
+  static void Initialize(ecto::tendrils& p)
   {
     p.declare<int> ("n","Number to scatter...", 2);
     p.declare<int> ("x","The value to scatter...", 13);
   }
 
-  void Config()
+  void configure()
   {
     n_ = params.get<int> ("n");
     x_ = params.get<int> ("x");
@@ -111,7 +111,7 @@ struct Scatter: ecto::module
           "The ith scater");
     }
   }
-  void Process()
+  void process()
   {
     for (int i = 0; i < n_; i++)
     {
@@ -126,12 +126,12 @@ struct Gather: public ecto::module
 {
   typedef ValueT value_type;
 
-  static void Params(ecto::tendrils& p)
+  static void Initialize(ecto::tendrils& p)
   {
     p.declare<int> ("n", "N to gather", 2);
   }
 
-  void Config()
+  void configure()
   {
     n_ = params.get<int> ("n");
     for (int ii = 0; ii < n_; ii++)
@@ -142,7 +142,7 @@ struct Gather: public ecto::module
     outputs.declare<value_type> ("out", "The sum of all inputs.");
   }
 
-  void Process()
+  void process()
   {
     //SHOW();
     value_type& out = outputs.get<value_type> ("out");

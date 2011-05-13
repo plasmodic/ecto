@@ -46,7 +46,7 @@ boost::shared_ptr<T> raw_construct(boost::python::tuple args,
 
   //SHOW();
   boost::shared_ptr<T> m(new T());
-  m->module::Initialize<T>();
+  m->module::initialize<T>();
   bp::list l = kwargs.items();
   for (unsigned j = 0; j < bp::len(l); ++j)
   {
@@ -56,7 +56,7 @@ boost::shared_ptr<T> raw_construct(boost::python::tuple args,
     std::string valstring = bp::extract<std::string>(value.attr("__repr__")());
     m->params.at(keystring).set(value);
   }
-  m->Config();
+  m->configure();
   return m;
 }
 
@@ -70,9 +70,12 @@ void wrap(const char* name, std::string doc_str = "A module...")
   docT::name = name;
   docT::doc_str = doc_str;
 
-  m .def("__init__", boost::python::raw_constructor(&raw_construct<T> )) .def(
-      "Params", &T::Params) .staticmethod("Params") .def("doc", &docT::getDoc) .staticmethod(
-      "doc") .def("name", &docT::getName) .staticmethod("name");
+  m.def("__init__", boost::python::raw_constructor(&raw_construct<T> ));
+  m.def("Initialize", &T::Initialize);
+  m.staticmethod("Initialize");
+  m.def("doc", &docT::getDoc) .staticmethod("doc");
+  m.def("name", &docT::getName);
+  m.staticmethod("name");
 }
 }
 

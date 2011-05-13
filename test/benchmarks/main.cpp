@@ -8,10 +8,10 @@ int main()
 {
   ecto::plasm p;
   ecto::module::ptr m(new ecto_push_ups::Add2());
-  m->Config();
+  m->configure();
 
   ecto::module::ptr b(new ecto_push_ups::BigData());
-  b->Config();
+  b->configure();
 
   std::cout << "adding" << std::endl;
   std::cout << "ecto" << std::endl;

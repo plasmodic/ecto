@@ -1,5 +1,0 @@
-#!/usr/bin/python
-
-from ecto.ui.main import main
-
-main()

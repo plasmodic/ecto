@@ -17,22 +17,6 @@ execute_process(COMMAND ln -s ${CMAKE_SOURCE_DIR}/python/ecto/__init__.py
 include(${CMAKE_SOURCE_DIR}/cmake/ectoMacros.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/ectoFindDeps.cmake)
 
-option(ECTO_BUILD_UI "build the ui stuffs" OFF)
-if (ECTO_BUILD_UI)
-  add_custom_command(OUTPUT ${CMAKE_SOURCE_DIR}/python/ecto/ui/uic.py
-    COMMAND pyside-uic ${CMAKE_SOURCE_DIR}/python/ecto/ui/ecto.ui > ${CMAKE_SOURCE_DIR}/python/ecto/ui/uic.py
-    DEPENDS ${CMAKE_SOURCE_DIR}/python/ecto/ui/ecto.ui
-    COMMENT "Generating python ui code with pyside-uic")
-
-  add_custom_target(uic ALL
-    DEPENDS ${CMAKE_SOURCE_DIR}/python/ecto/ui/uic.py
-    )
-
-  configure_file(${CMAKE_SOURCE_DIR}/python/ectoedit.py.in
-    ${CMAKE_BINARY_DIR}/bin/ectoedit.py
-    @ONLY)
-endif()
-
 #set flags so that we have awesome compile time errors on all warnings
 #notice the -Wl,--no-undefined helps with making sure all symbols are found during
 #link time.
@@ -126,6 +110,7 @@ configure_file(${CMAKE_SOURCE_DIR}/cmake/python_path.sh.inst.in
 install(FILES ${CMAKE_BINARY_DIR}/unix_install/python_path.sh
         DESTINATION share/ecto COMPONENT ecto_python
   )
-#add_subdirectory(samples)
+
+add_subdirectory(samples)
 
 add_subdirectory(src)

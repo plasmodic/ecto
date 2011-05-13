@@ -42,13 +42,12 @@ public:
   tendril(const tendril& rhs);
 
   /**
-   * \brief The assignment operator will release the tendril from another's grasp, and assure the multi pointer
-   * paradigm.
-   * @param rhs
-   * @return
+   * \brief A templated convenience constructor for creating a tendril
+   * that hides the given type.
+   * @tparam T The type to hide in this tendril
+   * @param t default value for t
+   * @param doc a documentation string
    */
-  tendril& operator=(const tendril& rhs);
-
   template<typename T>
   tendril(const T& t, const std::string& doc) :
     holder_(new holder<T> (t, this)), connected_(false)
@@ -56,22 +55,13 @@ public:
     setDoc(doc);
   }
 
-//  /**
-//   * \brief set this tendril with a doc string and default type. If the types are not the same an exception
-//   * will be thrown.
-//   * @param doc docstring of this tendril.
-//   * @param t a default value.
-//   */
-//  template<typename T>
-//  void set(const std::string& doc, const T& t)
-//  {
-//    //if (is_type<T> () || is_type<none> ())
-//    //{
-//      *this = tendril(t, doc); //this will disconnect the tendril from existing tendrils.
-//    //}
-//    //else
-//    //  enforce_type<T> (); //throws since the tendril is a different type.
-//  }
+  /**
+   * \brief The assignment operator will release the tendril from another's grasp, and assure the multi pointer
+   * paradigm.
+   * @param rhs
+   * @return
+   */
+  tendril& operator=(const tendril& rhs);
 
   /**
    * \brief This is an unmangled type name for what ever tendril is
@@ -132,6 +122,11 @@ public:
     return holder_base::check<T>(*holder_);
   }
 
+  /**
+   * \brief Test if the given tendril is the same type as this one
+   * @param rhs The tendril to test against.
+   * @return true if they are the same type.
+   */
   inline bool same_type(const tendril& rhs) const
   {
     return type_name() == rhs.type_name();

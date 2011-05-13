@@ -22,13 +22,13 @@ struct module: boost::noncopyable
   module();
   virtual ~module();
 
-  virtual void Process();
-  virtual void Config();
+  virtual void process();
+  virtual void configure();
 
   template<typename T>
-  void Initialize()
+  void initialize()
   {
-    T::Params(params);
+    T::Initialize(params);
   }
 
   void connect(const std::string& output, ptr to, const std::string& input);
