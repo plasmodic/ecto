@@ -1,0 +1,3 @@
+To generate docs, use cmake.
+From the build directory run:
+make doc
