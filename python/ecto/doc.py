@@ -30,7 +30,6 @@ class PlasmDotView(xdot.DotWindow):
 def view_plasm(plasm):
     window = PlasmDotView()
     x = plasm.viz()
-    print x
     window.set_dotcode(x)
     window.connect('destroy',gtk.main_quit)
     gtk.main()

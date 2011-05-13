@@ -4,7 +4,7 @@
 namespace ecto
 {
 tendril::tendril() :
-  impl_(new impl<none> (none(), this)), connected_(false)
+  holder_(new holder<none> (none(), this)), connected_(false)
 {
   //impl_ is never not initialized
 }
@@ -12,44 +12,44 @@ tendril::tendril() :
 tendril::~tendril()
 {
   //SHOW();
-  impl_->owners.erase(this);
+  holder_->release(this);
 }
 
 tendril::tendril(const tendril& rhs) :
-  impl_(rhs.impl_), connected_(rhs.connected_)
+  holder_(rhs.holder_), connected_(rhs.connected_)
 {
-  impl_->owners.insert(this);
+  holder_->claim(this);
 }
 tendril& tendril::operator=(const tendril& rhs)
 {
   if (this == &rhs)
     return *this;
 
-  impl_->owners.erase(this);
-  impl_ = rhs.impl_;
-  impl_->owners.insert(this);
+  holder_->release(this);
+  holder_ = rhs.holder_;
+  holder_->claim(this);
   connected_ = rhs.connected_;
   return *this;
 }
 
-tendril::tendril(impl_base::ptr impl) :
-  impl_(impl), connected_(false)
+tendril::tendril(holder_base::ptr impl) :
+  holder_(impl), connected_(false)
 {
 }
 
 std::string tendril::type_name() const
 {
-  return impl_->type_name();
+  return holder_->type_name();
 }
 
 std::string tendril::doc() const
 {
-  return impl_->doc;
+  return holder_->doc;
 }
 
 void tendril::setDoc(const std::string& doc_str)
 {
-  impl_->doc = doc_str;
+  holder_->doc = doc_str;
 }
 namespace
 {
@@ -66,7 +66,7 @@ void tendril::connect(tendril& rhs)
     throw std::runtime_error("Already connected. This is considered an error.");
     //disconnect();
   }
-  boost::shared_ptr<impl_base> impl;
+  boost::shared_ptr<holder_base> impl;
   //check if the types aren't the same
   if (!same_type(rhs))
   {
@@ -75,28 +75,28 @@ void tendril::connect(tendril& rhs)
     //override its impl_
     if (isBoostPython(*this))
     {
-      impl = rhs.impl_;
-      impl->owners.insert(impl_->owners.begin(), impl_->owners.end());
+      impl = rhs.holder_;
+      impl->owners.insert(holder_->owners.begin(), holder_->owners.end());
     }
     else if (isBoostPython(rhs))
     {
-      impl = impl_;
-      impl->owners.insert(rhs.impl_->owners.begin(), rhs.impl_->owners.end());
+      impl = holder_;
+      impl->owners.insert(rhs.holder_->owners.begin(), rhs.holder_->owners.end());
     }
     else
       throw std::runtime_error(
-          "bad connect! input(" + impl_->type_name() + ") != output("
+          "bad connect! input(" + holder_->type_name() + ") != output("
               + rhs.type_name() + ")");
   }
   else
   {
-    impl = rhs.impl_;
-    impl->owners.insert(impl_->owners.begin(), impl_->owners.end());
+    impl = rhs.holder_;
+    impl->owners.insert(holder_->owners.begin(), holder_->owners.end());
   }
 
   foreach(tendril* x, impl->owners)
         {
-          x->impl_ = impl;
+          x->holder_ = impl;
         }
   //set out connected state to true
   connected_ = true;
@@ -104,32 +104,32 @@ void tendril::connect(tendril& rhs)
 
 void tendril::disconnect()
 {
-  //erase all owners
-  impl_->owners.erase(this);
-  //reset this impl;
-  impl_ = impl_->make(this);
+  //release the holder
+  holder_->release(this);
+  //reset this holder_;
+  holder_ = holder_->make(this);
   //set the connected_ flag to false
   connected_ = false;
 }
 
-tendril::impl_base::~impl_base()
+tendril::holder_base::~holder_base()
 {
 }
 
 boost::python::object tendril::extract() const
 {
-  return impl_->getPython();
+  return holder_->getPython();
 }
 
 void tendril::set(boost::python::object o)
 {
   if (is_type<none> ())
   {
-    impl_.reset(new impl<boost::python::object> (o, this));
+    holder_.reset(new holder<boost::python::object> (o, this));
   }
   else
   {
-    impl_->setPython(o);
+    holder_->setPython(o);
   }
 }
 }

@@ -55,8 +55,8 @@ struct Generate: ecto::module
 
   static void Params(ecto::tendrils& p)
   {
-    p["step"].set<double> ("The step with which i generate integers.", 2);
-    p["start"].set<double> ("My starting value", 0);
+    p.declare<double> ("step","The step with which i generate integers.", 2);
+    p.declare<double> ("start","My starting value", 0);
   }
 
   void Config()
@@ -78,7 +78,7 @@ struct Multiply: ecto::module
 
   static void Params(ecto::tendrils& p)
   {
-    p["factor"].set<double> ("A factor to multiply by.", 3.14);
+    p.declare<double> ("factor","A factor to multiply by.", 3.14);
   }
 
   void Config()
@@ -97,8 +97,8 @@ struct Scatter: ecto::module
 {
   static void Params(ecto::tendrils& p)
   {
-    p["n"].set<int> ("Number to scatter...", 2);
-    p["x"].set<int> ("The value to scatter...", 13);
+    p.declare<int> ("n","Number to scatter...", 2);
+    p.declare<int> ("x","The value to scatter...", 13);
   }
 
   void Config()

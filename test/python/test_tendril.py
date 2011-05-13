@@ -43,17 +43,13 @@ def test_tendril_defs():
 
 def test_cpp_python_tendril():
     x = buster.make_pod_tendril()
-    print x.val
     x.val = 10
-    print x.val
-    print x.type_name
     t1 = ecto.Tendril()
-    print t1.type_name
+    #this connection should force the t1 to become a native type.
     t1.connect(x)
     t1.val = 20
-    print t1.type_name
-    print x.type_name
-    print x.val
+    assert t1.type_name == x.type_name
+    assert x.val == 20
     
 if __name__ == '__main__':
     test_tendril()

@@ -45,7 +45,7 @@ def test_modules_wrong_args():
     do_fail(noarg)
     g = buster.Generate()
     do_fail(wrong_type,g)
-    do_fail(already_set,g)
+    already_set(g)
     novel_sets(g)
     right_type(g)
     

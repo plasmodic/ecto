@@ -32,7 +32,7 @@ public:
    */
   tendril();
   /**
-   * \brief desctructor, will disconnect the tendril.
+   * \brief destructor, will disconnect the tendril.
    */
   ~tendril();
   /**
@@ -51,27 +51,27 @@ public:
 
   template<typename T>
   tendril(const T& t, const std::string& doc) :
-    impl_(new impl<T> (t, this)), connected_(false)
+    holder_(new holder<T> (t, this)), connected_(false)
   {
     setDoc(doc);
   }
 
-  /**
-   * \brief set this tendril with a doc string and default type. If the types are not the same an exception
-   * will be thrown.
-   * @param doc docstring of this tendril.
-   * @param t a default value.
-   */
-  template<typename T>
-  void set(const std::string& doc, const T& t)
-  {
-    if (is_type<T> () || is_type<none> ())
-    {
-      *this = tendril(t, doc); //this will disconnect the tendril to existing tendrils.
-    }
-    else
-      enforce_type<T> (); //throws since the tendril is already a different type.
-  }
+//  /**
+//   * \brief set this tendril with a doc string and default type. If the types are not the same an exception
+//   * will be thrown.
+//   * @param doc docstring of this tendril.
+//   * @param t a default value.
+//   */
+//  template<typename T>
+//  void set(const std::string& doc, const T& t)
+//  {
+//    //if (is_type<T> () || is_type<none> ())
+//    //{
+//      *this = tendril(t, doc); //this will disconnect the tendril from existing tendrils.
+//    //}
+//    //else
+//    //  enforce_type<T> (); //throws since the tendril is a different type.
+//  }
 
   /**
    * \brief This is an unmangled type name for what ever tendril is
@@ -106,7 +106,7 @@ public:
     //throws on failure
     enforce_type<T> ();
     //cast a void pointer to this type.
-    return *static_cast<const T*> (impl_->get());
+    return *static_cast<const T*> (holder_->get());
   }
 
   /**
@@ -119,7 +119,7 @@ public:
     //throws on failure
     enforce_type<T> ();
     //cast a void pointer to this type.
-    return *static_cast<T*> (impl_->get());
+    return *static_cast<T*> (holder_->get());
   }
 
   /**
@@ -129,7 +129,7 @@ public:
   template<typename T>
   inline bool is_type() const
   {
-    return impl_base::check<T>(*impl_);
+    return holder_base::check<T>(*holder_);
   }
 
   inline bool same_type(const tendril& rhs) const
@@ -188,14 +188,14 @@ public:
 
 private:
   // ############################### NVI ####################################
-  struct impl_base
+  struct holder_base
   {
-    typedef boost::shared_ptr<impl_base> ptr;
-    impl_base() :
+    typedef boost::shared_ptr<holder_base> ptr;
+    holder_base() :
       doc()
     {
     }
-    virtual ~impl_base();
+    virtual ~holder_base();
     virtual const std::string& type_name() const = 0;
     virtual void* get() = 0;
     virtual bool is_type(std::type_info const& ti) const = 0;
@@ -204,46 +204,55 @@ private:
     virtual boost::python::object getPython() const = 0;
     virtual ptr make(tendril* owner) const = 0;
 
+    void claim(tendril* p)
+    {
+      owners.insert(p);
+    }
+    void release(tendril* p)
+    {
+      owners.erase(p);
+    }
+
     //convenience functions for checking types
     template<typename T>
-    static bool inline check(impl_base& i);
+    static bool inline check(holder_base& i);
     template<typename T>
-    static inline void checkThrow(impl_base& i) throw (std::logic_error);
+    static inline void checkThrow(holder_base& i) throw (std::logic_error);
     std::string doc;
     std::set<tendril*> owners;
   };
 
   template<typename T>
-  struct impl: impl_base
+  struct holder: holder_base
   {
-    impl(const T& t, tendril* owner);
+    holder(const T& t, tendril* owner);
     const std::string& type_name() const;
     bool is_type(std::type_info const& ti) const;
     void* get();
     void setPython(boost::python::object o);
     boost::python::object getPython() const;
-    impl_base::ptr make(tendril* owner) const
+    holder_base::ptr make(tendril* owner) const
     {
-      impl_base::ptr p(new impl<T> (t, owner));
+      holder_base::ptr p(new holder<T> (t, owner));
       p->doc = doc;
       return p;
     }
     T t;
   };
 
-  tendril(impl_base::ptr impl);
-  boost::shared_ptr<impl_base> impl_;
+  tendril(holder_base::ptr impl);
+  boost::shared_ptr<holder_base> holder_;
   bool connected_;
 };
 
 template<typename T>
-bool tendril::impl_base::check(tendril::impl_base& i)
+bool tendril::holder_base::check(tendril::holder_base& i)
 {
   return i.is_type(typeid(T));
 }
 
 template<typename T>
-void tendril::impl_base::checkThrow(tendril::impl_base& i)
+void tendril::holder_base::checkThrow(tendril::holder_base& i)
     throw (std::logic_error)
 {
   if (!check<T> (i))
@@ -252,7 +261,7 @@ void tendril::impl_base::checkThrow(tendril::impl_base& i)
 }
 
 template<typename T>
-tendril::impl<T>::impl(const T& t, tendril * const owner) :
+tendril::holder<T>::holder(const T& t, tendril * const owner) :
   t(t)
 {
   if (owner != NULL)
@@ -260,25 +269,25 @@ tendril::impl<T>::impl(const T& t, tendril * const owner) :
 }
 
 template<typename T>
-const std::string& tendril::impl<T>::type_name() const
+const std::string& tendril::holder<T>::type_name() const
 {
   static const std::string name = name_of<T> ();
   return name;
 }
 template<typename T>
-bool tendril::impl<T>::is_type(std::type_info const& ti) const
+bool tendril::holder<T>::is_type(std::type_info const& ti) const
 {
   return std::strcmp(typeid(T).name(), ti.name()) == 0;
 }
 
 template<typename T>
-void* tendril::impl<T>::get()
+void* tendril::holder<T>::get()
 {
   return &t;//.get();
 }
 
 template<typename T>
-void tendril::impl<T>::setPython(boost::python::object o)
+void tendril::holder<T>::setPython(boost::python::object o)
 {
   boost::python::extract<T> get_T(o);
   if (get_T.check())
@@ -289,7 +298,7 @@ void tendril::impl<T>::setPython(boost::python::object o)
 }
 
 template<typename T>
-boost::python::object tendril::impl<T>::getPython() const
+boost::python::object tendril::holder<T>::getPython() const
 {
   try
   {
