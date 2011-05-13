@@ -8,7 +8,7 @@ def test_modules_01():
     assert g.outputs.out == 0
     g.process()
     assert g.outputs.out == 2
-    g.config()
+    g.configure()
     g.outputs.out = 7.0
     g.process()
     assert  g.outputs.out == 9

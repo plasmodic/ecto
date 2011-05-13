@@ -9,10 +9,10 @@ class Mult(ecto.Module):
         ecto.Module.__init__(self,**kwargs)
         
     @staticmethod
-    def Params(params):
+    def Initialize(params):
         params.declare("factor", "multiply input by this", None)
         
-    def config(self):
+    def configure(self):
         self.inputs.declare("input","mul", None)
         self.outputs.declare("out", "multed", None)
         

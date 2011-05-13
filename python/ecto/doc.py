@@ -29,7 +29,8 @@ class PlasmDotView(xdot.DotWindow):
 
 def view_plasm(plasm):
     window = PlasmDotView()
-    window.set_dotcode(plasm.viz())
+    x = plasm.viz()
+    window.set_dotcode(x)
     window.connect('destroy',gtk.main_quit)
     gtk.main()
     

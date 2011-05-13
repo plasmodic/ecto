@@ -215,7 +215,7 @@ namespace ecto
           }
         }
         //process the module
-        vert.first->Process();
+        vert.first->process();
         //mark dirty for caching.
         vert.first->dirty(false);
 

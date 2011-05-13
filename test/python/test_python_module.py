@@ -7,10 +7,10 @@ class MyModule(ecto.Module):
         ecto.Module.__init__(self, **kwargs)
         
     @staticmethod
-    def Params(params):
+    def Initialize(params):
         params.declare("text", "a param.","hello there")
 
-    def config(self):
+    def configure(self):
         self.text = self.params.text
         self.inputs.declare("input","aye", 2)
         self.outputs.declare("out", "i'll give you this", "hello")
