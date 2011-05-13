@@ -127,5 +127,5 @@ install(FILES ${CMAKE_BINARY_DIR}/unix_install/python_path.sh
         DESTINATION share/ecto COMPONENT ecto_python
   )
 #add_subdirectory(samples)
-
+add_subdirectory(doc)
 add_subdirectory(src)
