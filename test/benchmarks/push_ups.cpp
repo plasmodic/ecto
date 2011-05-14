@@ -8,55 +8,55 @@
 
 namespace ecto_push_ups
 {
-  size_t big_data()
-  {
-    std::vector<int> data;
-    data.resize(10e4);
-    for (size_t i = 0; i < 10e4; i++)
-      data[i] = std::rand();
-    return std::accumulate(data.begin(), data.end(), 0);
-  }
-  int add2(int x, int y)
-  {
-    return x + y;
-  }
+size_t big_data()
+{
+  std::vector<int> data;
+  data.resize(10e4);
+  for (size_t i = 0; i < 10e4; i++)
+    data[i] = std::rand();
+  return std::accumulate(data.begin(), data.end(), 0);
+}
+int add2(int x, int y)
+{
+  return x + y;
+}
 
-  struct Add2 : ecto::module
+struct Add2: ecto::module
+{
+  void configure()
   {
-    void configure()
-    {
-      //SHOW();
-      outputs.declare<int> ("out", "x+y");
-      inputs.declare<int>("x");
-      inputs.declare<int>("y");
-    }
-    void process()
-    {
-      //SHOW();
-      o().get<int> ("out") = add2(std::rand(),std::rand());
-    }
-    static void Initialize(tendrils_t& p)
-    {
-      SHOW();
-    }
-  };
+    //SHOW();
+    outputs.declare<int> ("out", "x+y");
+    inputs.declare<int> ("x");
+    inputs.declare<int> ("y");
+  }
+  void process()
+  {
+    //SHOW();
+    outputs.get<int> ("out") = add2(std::rand(), std::rand());
+  }
+  static void Initialize(ecto::tendrils& p)
+  {
+    SHOW();
+  }
+};
 
-  struct BigData : ecto::module
+struct BigData: ecto::module
+{
+  void configure()
   {
-    void configure()
-    {
-      SHOW();
-      o().declare<int> ("out", "sum of random array");
-    }
-    void process()
-    {
-      o().get<int> ("out") = big_data();
-    }
-    static void Initialize(tendrils_t& p)
-    {
-      SHOW();
-    }
-  };
+    SHOW();
+    outputs.declare<int> ("out", "sum of random array");
+  }
+  void process()
+  {
+    outputs.get<int> ("out") = big_data();
+  }
+  static void Initialize(ecto::tendrils& p)
+  {
+    SHOW();
+  }
+};
 }
 
 BOOST_PYTHON_MODULE(push_ups)

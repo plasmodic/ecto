@@ -21,13 +21,13 @@ namespace ecto
     impl_->modules_.add_edge(from, out_name, to, in_name);
   }
 
-  void plasm::mark_dirty(const module::ptr& m)
+  void plasm::mark_dirty(module::ptr m)
   {
     // Access the property accessor type for this graph
     impl_->modules_.mark_dirty(m);
 
   }
-  void plasm::go(const module::ptr& m)
+  void plasm::go(module::ptr m)
   {
     impl_->modules_.go(m);
   }

@@ -14,20 +14,26 @@
 #include <ecto/util.hpp>
 #include <ecto/python/raw_constructor.hpp>
 
+/**
+ * \namespace ecto
+ * What?
+ */
 namespace ecto
 {
-//! documentation
+/**
+ * \internal
+ */
 template<typename T>
 struct doc
 {
-  //!a doc string for humans to read in python.
-  static std::string doc_str;
-  static std::string name;
+  static std::string doc_str; //!<a doc string for humans to read in python.
+  static std::string name; //!< the name for this type.
   //! get the doc
   static std::string getDoc()
   {
     return doc_str;
   }
+  //! get the name
   static std::string getName()
   {
     return name;

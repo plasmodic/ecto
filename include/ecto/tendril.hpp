@@ -175,8 +175,7 @@ public:
     return connected_;
   }
 
-  /** A none type for tendril when the tendril is uninitialized.
-   */
+  //! A none type for tendril when the tendril is uninitialized.
   struct none
   {
   };

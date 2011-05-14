@@ -8,6 +8,9 @@
 
 namespace ecto
 {
+/**
+ * \brief The tendrils are a collection for the ecto::tendril class, addressable by a string key.
+ */
 class tendrils: public std::map<std::string, tendril>, boost::noncopyable
 {
 public:
@@ -48,29 +51,44 @@ public:
     }
   }
 
+  /**
+   * \brief get the given type that is stored at the given key.  Will throw if there is a type mismatch.
+   * @tparam T The compile time type to attempt to get from the tendrils.
+   * @param name The key value
+   * @return A const reference to the value, no copy is done.
+   */
   template<typename T>
   const T& get(const std::string& name) const
   {
     return at(name).get<T> ();
   }
 
+  /**
+   * \brief get the given type that is stored at the given key.  Will throw if there is a type mismatch.
+   * @tparam T The compile time type to attempt to get from the tendrils.
+   * @param name The key value
+   * @return A reference to the value, no copy is done.
+   */
   template<typename T>
   T& get(const std::string& name)
   {
     return at(name).get<T> ();
   }
-  template<typename T>
-  static T& get(tendrils & t, const std::string& name)
-  {
-    return t.get<T> (name);
-  }
 
+  /**
+   * \brief Grabs the tendril at the key.
+   * @param name The key for the desired tendril.
+   * @return A reference to the tendril.
+   */
   const tendril& at(const std::string& name) const;
+  /**
+   * \brief Grabs the tendril at the key.
+   * @param name The key for the desired tendril.
+   * @return A reference to the tendril.
+   */
   tendril& at(const std::string& name);
 
 private:
   typedef std::map<std::string, tendril> map_t;
-  friend class module;
-  friend class plasm;
 };
 }

@@ -17,22 +17,14 @@ namespace ecto
  */
 struct module: boost::noncopyable
 {
-  typedef boost::shared_ptr<module> ptr;
-  typedef tendrils tendrils_t;
+  typedef boost::shared_ptr<module> ptr; //!< A convenience pointer typedef
 
   module();
   virtual ~module();
 
   /**
+   *\brief Member function to call the static Initialize, this is a convenience thing.
    *
-   */
-  virtual void process();
-  /**
-   *
-   */
-  virtual void configure();
-
-  /**
    *
    */
   template<typename T>
@@ -40,6 +32,16 @@ struct module: boost::noncopyable
   {
     T::Initialize(params);
   }
+
+  /**
+   * \brief Called after parameters have been set and before process. Inputs and Outputs should be declared in this call.
+   */
+  virtual void configure();
+
+  /**
+   * \brief Called after configure, when ever the module is dirty.
+   */
+  virtual void process();
 
   /**
    *
@@ -60,37 +62,21 @@ struct module: boost::noncopyable
    */
   bool dirty() const;
 
+  /**
+   * \brief Grab the name of the child class.
+   * @return
+   */
   virtual std::string name()
   {
     return ecto::name_of(typeid(*this));
-  }
-  inline const tendrils& i() const
-  {
-    return inputs;
-  }
-  inline const tendrils& o() const
-  {
-    return outputs;
-  }
-  inline const tendrils& p() const
-  {
-    return params;
-  }
-  inline tendrils& o()
-  {
-    return outputs;
-  }
-  inline tendrils& p()
-  {
-    return params;
   }
 private:
   tendrils params_, inputs_, outputs_;
   bool dirty_;
 public:
-  tendrils& params;
-  const tendrils& inputs;
-  tendrils& outputs;
+  tendrils& params; //!< internal reference to params
+  const tendrils& inputs; //!< internal reference to params, notice how inputs are const.
+  tendrils& outputs; //!< internal reference to the outputs, non const.
 };
 
 }//namespace ecto

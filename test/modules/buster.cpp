@@ -158,7 +158,7 @@ struct Gather: public ecto::module
 boost::shared_ptr<ecto::tendril> makePodTendril()
 {
   boost::shared_ptr<ecto::tendril> p;
-  ecto::tendril* t = new ecto::tendril::tendril(0, "doc");
+  ecto::tendril* t = new ecto::tendril(0, "doc");
   p.reset(t);
   return p;
 }

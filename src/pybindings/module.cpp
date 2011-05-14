@@ -55,6 +55,18 @@ struct modwrap: module, bp::wrapper<module>
   }
 };
 
+const tendrils& inputs(module& mod)
+{
+  return mod.inputs;
+}
+tendrils& outputs(module& mod)
+{
+  return mod.outputs;
+}
+tendrils& params(module& mod)
+{
+  return mod.params;
+}
 void wrapModule()
 {
   //use private names so that python people know these are internal
@@ -67,15 +79,11 @@ void wrapModule()
   m_base.def("process", bp::pure_virtual(&module::process));
   m_base.def("configure", bp::pure_virtual(&module::configure));
   m_base.add_property("inputs",
-      make_function(&module::i, bp::return_internal_reference<>()));
-  m_base.add_property(
-      "outputs",
-      make_function((tendrils&(module::*)()) &module::o,
-          bp::return_internal_reference<>()));
-  m_base.add_property(
-      "params",
-      make_function((tendrils&(module::*)()) &module::p,
-          bp::return_internal_reference<>()));
+      make_function(&inputs, bp::return_internal_reference<>()));
+  m_base.add_property("outputs",
+      make_function(outputs, bp::return_internal_reference<>()));
+  m_base.add_property("params",
+      make_function(params, bp::return_internal_reference<>()));
   m_base .def("name", &module::name) .def("doc", &modwrap::doc);
 }
 
