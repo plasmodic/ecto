@@ -16,7 +16,9 @@
 
 /**
  * \namespace ecto
- * What?
+ * \brief ecto is ...
+ *
+ * ecto is a plugin architecture / pipeline tool based on boost::python.
  */
 namespace ecto
 {
