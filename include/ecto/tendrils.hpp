@@ -21,7 +21,7 @@ public:
    * @param default_val
    */
   template<typename T>
-  void declare(const std::string& name,
+  tendril declare(const std::string& name,
       const std::string& doc = "TODO: doc str me.", const T& default_val = T()) const
   {
     map_t::const_iterator it = find(name);
@@ -49,8 +49,8 @@ public:
       //FIXME
       //const_cast<tendril&> (it->second).get<T> () = default_val;
     }
+    return at(name);
   }
-
   /**
    * \brief get the given type that is stored at the given key.  Will throw if there is a type mismatch.
    * @tparam T The compile time type to attempt to get from the tendrils.

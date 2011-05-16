@@ -32,16 +32,17 @@ def test_python_module_plasm():
     g = buster.Generate(start = 1 , step =1)
     plasm = ecto.Plasm()
     plasm.connect(g,"out",mod,"input")
+    plasm.set_input(g)
+    plasm.set_output(mod)
     for i in range(1,5):
-        plasm.mark_dirty(g)
-        plasm.go(mod)
+        plasm.execute()
         assert g.outputs.out == i
         print mod.outputs.out
         assert mod.outputs.out == "spam"*i
-    plasm.go(mod)
-    assert g.outputs.out == 4
+    plasm.execute()
+    assert g.outputs.out == 5
     print mod.outputs.out
-    assert mod.outputs.out == "spam"*4
+    assert mod.outputs.out == "spam"*5
     
 if __name__ == '__main__':
     test_python_module()

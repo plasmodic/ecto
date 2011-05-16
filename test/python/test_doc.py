@@ -8,7 +8,9 @@ def test_doc():
     plasm = ecto.Plasm()
     for f, t in zip(scatter.outputs.keys(), gather.inputs.keys()):
         plasm.connect(scatter, f, gather, t)
-    plasm.go(gather)
+    plasm.set_input(scatter)
+    plasm.set_output(gather)
+    plasm.execute()
     result = gather.outputs.out
     assert(result == 9) # 3 * 3
     

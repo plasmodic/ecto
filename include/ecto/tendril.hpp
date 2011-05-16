@@ -12,6 +12,7 @@
 
 namespace ecto
 {
+
 /**
  * \brief A tendril is the slender, winding organ of the
  * ecto::module that gives it its awesome type erasure and uber
@@ -180,6 +181,7 @@ public:
   {
   };
 
+
 private:
   // ############################### NVI ####################################
   struct holder_base
@@ -239,6 +241,29 @@ private:
   bool connected_;
 };
 
+template <typename T>
+  struct Handle
+  {
+    Handle(const tendril& t):t(t){}
+    Handle(){}
+    T& operator*()
+    {
+      return t.get<T>();
+    }
+    const T& operator*() const
+    {
+      return t.get<T>();
+    }
+    T* operator->()
+    {
+      return &t.get<T>();
+    }
+    const T* operator->() const
+    {
+      return &t.get<T>();
+    }
+    tendril t;
+  };
 template<typename T>
 bool tendril::holder_base::check(tendril::holder_base& i)
 {

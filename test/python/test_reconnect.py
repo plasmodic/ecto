@@ -8,17 +8,20 @@ import ecto,buster
 def test_one_to_many():
     plasm = ecto.Plasm()
     g = buster.Generate(start=2, step=2)
+    plasm.set_input(g)
     modules = []
     for x in range(0,5):
         m = buster.Multiply(factor=2)
         plasm.connect(g,"out",m,"in")
-        plasm.go(m)
-        #print m.outputs.out
-        assert(m.outputs.out == 4)
+        plasm.set_output(m)
         modules.append(m)
-    plasm.mark_dirty(g)
+        
+    plasm.execute()
     for x in modules:
-        plasm.go(x)
+        #print x.outputs.out
+        assert(x.outputs.out == 4)
+    plasm.execute()
+    for x in modules:
         #print x.outputs.out
         assert(x.outputs.out == 8)
     

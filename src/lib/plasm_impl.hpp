@@ -232,6 +232,37 @@ struct ModuleGraph
     ModuleGraph& graph;
   };
 
+  struct Stacker
+  {
+    Stacker(ModuleGraph&g) :
+      graph(g)
+    {
+    }
+    void operator()(const Vertex_Desc& v)
+    {
+      if (visited.count(v))
+        return; //exit as we already visited.
+      GraphTraits::in_edge_iterator in_i, in_end;
+      GraphTraits::edge_descriptor e;
+      //verify that the current node is in the graph? WTF (shouldn't in_i == in_end in this case?)
+      if (!boost::in_edge_list(graph.graph_, v).empty())
+      {
+        for (boost::tie(in_i, in_end) = boost::in_edges(v, graph.root_graph_); in_i
+            != in_end; ++in_i)
+        {
+          e = *in_i; //if we don't check and the vertex is not in the graph this causes segfault
+          Vertex_Desc targ = boost::source(e, graph.root_graph_);
+          (*this)(targ); //recurse.
+        }
+      }
+      stack.push_back(graph.get_vert(v).first);
+      visited.insert(v);
+
+    }
+    ModuleGraph& graph;
+    std::vector<module_ptr> stack;
+    std::set<Vertex_Desc> visited;
+  };
   void mark_dirty(const module::ptr& m)
   {
     Dirtier(*this)(make_vert(m).uid);
@@ -240,6 +271,13 @@ struct ModuleGraph
 
   {
     Goer(*this)(make_vert(m).uid);
+  }
+
+  std::vector<module_ptr> getStack(const module::ptr& output)
+  {
+    Stacker x(*this);
+    x(make_vert(output).uid);
+    return x.stack;
   }
 
   typedef std::set<Vertex, opless> module_set_t;
@@ -324,8 +362,54 @@ struct ModuleGraph
 
 struct plasm::impl
 {
-
+  impl() :
+    dirty_(true)
+  {
+  }
   ModuleGraph modules_;
+  std::set<module_ptr> inputs_, outputs_;
+  typedef std::map<module_ptr, std::vector<module_ptr> > stack_map;
+  stack_map p_stacks_;
+  void calc_stacks()
+  {
+    if (dirty_)
+    {
+      p_stacks_.clear();
+      BOOST_FOREACH(module_ptr x, outputs_)
+            {
+              p_stacks_[x] = modules_.getStack(x);
+            }
+      dirty_ = false;
+    }
+  }
+  void mark_stacks_dirty()
+  {
+    BOOST_FOREACH(stack_map::value_type& x, p_stacks_)
+          {
+            BOOST_FOREACH(module::ptr m, x.second)
+                  {
+                    m->dirty(true);
+                  }
+          }
+  }
+  void proc_stacks()
+  {
+    BOOST_FOREACH(stack_map::value_type& x, p_stacks_)
+    {
+      //std::cout << "[";
+      BOOST_FOREACH(module::ptr m, x.second)
+      {
+       // std::cout << modules_.make_vert(m).uid << ",";
+        if (!m->dirty())
+          continue;
+        m->process();
+        m->dirty(false);
+        //std::cout << "executing: " << m->name() << std::endl;
+      }
+      //std::cout << "]" <<std::endl;
+    }
+  }
+  bool dirty_;
 };
 
 }
