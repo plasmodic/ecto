@@ -23,14 +23,16 @@ int add2(int x, int y)
 
 struct Add2: ecto::module
 {
-  void configure()
+  void configure(const ecto::tendrils& parameters, ecto::tendrils& inputs,
+      ecto::tendrils& outputs)
   {
     //SHOW();
     outputs.declare<int> ("out", "x+y");
     inputs.declare<int> ("x");
     inputs.declare<int> ("y");
   }
-  void process()
+  void process(const ecto::tendrils& parameters, const ecto::tendrils& inputs,
+      ecto::tendrils& outputs)
   {
     //SHOW();
     outputs.get<int> ("out") = add2(std::rand(), std::rand());
@@ -43,12 +45,14 @@ struct Add2: ecto::module
 
 struct BigData: ecto::module
 {
-  void configure()
+  void configure(const ecto::tendrils& parameters, ecto::tendrils& inputs,
+      ecto::tendrils& outputs)
   {
     SHOW();
     outputs.declare<int> ("out", "sum of random array");
   }
-  void process()
+  void process(const ecto::tendrils& parameters, const ecto::tendrils& inputs,
+      ecto::tendrils& outputs)
   {
     outputs.get<int> ("out") = big_data();
   }

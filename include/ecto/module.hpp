@@ -24,24 +24,16 @@ struct module: boost::noncopyable
 
   /**
    *\brief Member function to call the static Initialize, this is a convenience thing.
-   *
-   *
    */
   template<typename T>
   void initialize()
   {
-    T::Initialize(params);
+    T::Initialize(parameters_);
   }
 
-  /**
-   * \brief Called after parameters have been set and before process. Inputs and Outputs should be declared in this call.
-   */
-  virtual void configure();
+  void configure();
+  void process();
 
-  /**
-   * \brief Called after configure, when ever the module is dirty.
-   */
-  virtual void process();
 
   /**
    *
@@ -70,13 +62,21 @@ struct module: boost::noncopyable
   {
     return ecto::name_of(typeid(*this));
   }
+  tendrils parameters_,inputs_,outputs_;
+protected:
+  /**
+   * \brief Called after parameters have been set and before process. Inputs and Outputs should be declared in this call.
+   */
+  virtual void configure(const tendrils& parameters, tendrils& inputs, tendrils& outputs);
+
+  /**
+   * \brief Called after configure, when ever the module is dirty.
+   */
+  virtual void process(const tendrils& parameters, const tendrils& inputs, tendrils& outputs);
 private:
-  tendrils params_, inputs_, outputs_;
   bool dirty_;
-public:
-  tendrils& params; //!< internal reference to params
-  const tendrils& inputs; //!< internal reference to params, notice how inputs are const.
-  tendrils& outputs; //!< internal reference to the outputs, non const.
+  friend class plasm;
+  friend class ModuleGraph;
 };
 
 }//namespace ecto

@@ -46,6 +46,7 @@ f.close()
       each set of input data.  This assumes that input data is available before the previous data set has been fully processed.
 
 # To enable parallelism, without locking, in the most simple of ways include the following constraints:
+    * input,output, and parameters, must be separable from the module, so that there may be one independent set of data per graph execution
 	* input data must be const
 	* output data may only be modified from within the process function call
 	* the process function call should not mutate the module (however this adds quite a bit of annoyance to the user)

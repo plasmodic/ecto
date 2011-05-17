@@ -62,9 +62,9 @@ boost::shared_ptr<T> raw_construct(boost::python::tuple args,
     bp::object value = l[j][1];
     std::string keystring = bp::extract<std::string>(key);
     std::string valstring = bp::extract<std::string>(value.attr("__repr__")());
-    m->params.at(keystring).set(value);
+    m->parameters_.at(keystring).set(value);
   }
-  m->configure();
+  m->configure(m->parameters_,m->inputs_,m->outputs_);
   return m;
 }
 

@@ -9,11 +9,11 @@ plasm::plasm() :
 void plasm::connect(module::ptr from, const std::string& out_name,
     module::ptr to, const std::string& in_name)
 {
-  if (from->outputs.count(out_name) == 0)
+  if (from->outputs_.count(out_name) == 0)
   {
     throw std::logic_error("The specified output does not exist: " + out_name);
   }
-  if (to->inputs.count(in_name) == 0)
+  if (to->inputs_.count(in_name) == 0)
   {
     throw std::logic_error("The specified input does not exist: " + in_name);
   }

@@ -59,13 +59,13 @@ struct ModuleGraph
         return tendril();
         break;
       case plasm::input:
-        return first->inputs.at(second);
+        return first->inputs_.at(second);
         break;
       case plasm::output:
-        return first->outputs.at(second);
+        return first->outputs_.at(second);
         break;
       case plasm::param:
-        return first->params.at(second);
+        return first->parameters_.at(second);
         break;
       }
     }
@@ -224,7 +224,7 @@ struct ModuleGraph
         }
       }
       //process the module
-      vert.first->process();
+      vert.first->process(vert.first->parameters_,vert.first->inputs_,vert.first->outputs_);
       //mark dirty for caching.
       vert.first->dirty(false);
 
@@ -402,7 +402,7 @@ struct plasm::impl
        // std::cout << modules_.make_vert(m).uid << ",";
         if (!m->dirty())
           continue;
-        m->process();
+        m->process(m->parameters_,m->inputs_,m->outputs_);
         m->dirty(false);
         //std::cout << "executing: " << m->name() << std::endl;
       }

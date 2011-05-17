@@ -18,7 +18,8 @@ namespace py
 struct modwrap: module, bp::wrapper<module>
 {
 
-  void process()
+  void process(const ecto::tendrils& parameters, const ecto::tendrils& inputs,
+        ecto::tendrils& outputs)
   {
     if (bp::override process = this->get_override("process"))
       process();
@@ -26,7 +27,9 @@ struct modwrap: module, bp::wrapper<module>
       throw std::logic_error("process is not implemented it seems");
   }
 
-  void configure()
+
+  void configure(const ecto::tendrils& parameters, ecto::tendrils& inputs,
+      ecto::tendrils& outputs)
   {
     if (bp::override config = this->get_override("configure"))
       config();
@@ -57,15 +60,15 @@ struct modwrap: module, bp::wrapper<module>
 
 const tendrils& inputs(module& mod)
 {
-  return mod.inputs;
+  return mod.inputs_;
 }
 tendrils& outputs(module& mod)
 {
-  return mod.outputs;
+  return mod.outputs_;
 }
 tendrils& params(module& mod)
 {
-  return mod.params;
+  return mod.parameters_;
 }
 void wrapModule()
 {
@@ -76,8 +79,8 @@ void wrapModule()
   bp::class_<modwrap, boost::shared_ptr<modwrap>, boost::noncopyable> m_base(
       "_module_base"/*, bp::no_init*/);
   m_base.def("connect", &module::connect);
-  m_base.def("process", bp::pure_virtual(&module::process));
-  m_base.def("configure", bp::pure_virtual(&module::configure));
+  m_base.def("process", bp::pure_virtual((void(module::*)())&module::process));
+  m_base.def("configure", bp::pure_virtual((void(module::*)())&module::configure));
   m_base.add_property("inputs",
       make_function(&inputs, bp::return_internal_reference<>()));
   m_base.add_property("outputs",
