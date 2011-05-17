@@ -181,7 +181,6 @@ public:
   {
   };
 
-
 private:
   // ############################### NVI ####################################
   struct holder_base
@@ -241,29 +240,47 @@ private:
   bool connected_;
 };
 
-template <typename T>
-  struct Handle
+template<typename T>
+struct ConstHandle
+{
+  ConstHandle(const tendril& t) :
+    t(t)
   {
-    Handle(const tendril& t):t(t){}
-    Handle(){}
-    T& operator*()
-    {
-      return t.get<T>();
-    }
-    const T& operator*() const
-    {
-      return t.get<T>();
-    }
-    T* operator->()
-    {
-      return &t.get<T>();
-    }
-    const T* operator->() const
-    {
-      return &t.get<T>();
-    }
-    tendril t;
-  };
+  }
+  ConstHandle()
+  {
+  }
+  const T& operator*() const
+  {
+    return t.get<T> ();
+  }
+  const T* operator->() const
+  {
+    return &t.get<T> ();
+  }
+  tendril t;
+};
+
+template<typename T>
+struct Handle
+{
+  Handle(const tendril& t) :
+    t(t)
+  {
+  }
+  Handle()
+  {
+  }
+  T& operator*()
+  {
+    return t.get<T> ();
+  }
+  T* operator->()
+  {
+    return &t.get<T> ();
+  }
+  tendril t;
+};
 template<typename T>
 bool tendril::holder_base::check(tendril::holder_base& i)
 {

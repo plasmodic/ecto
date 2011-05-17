@@ -95,6 +95,8 @@ struct SharedPass: ecto::module
 {
 
   typedef ecto::Handle<boost::shared_ptr<int> > handle_t;
+  typedef ecto::ConstHandle<boost::shared_ptr<int> > handle_const_t;
+
   static void Initialize(ecto::tendrils& p)
   {
     p.declare<int> ("x", "Default value", -1);
@@ -102,10 +104,11 @@ struct SharedPass: ecto::module
 
   void configure()
   {
-    input =  inputs.declare<boost::shared_ptr<int> > ("input", "a pass through",
+    input = inputs.declare<boost::shared_ptr<int> > ("input", "a pass through",
         boost::shared_ptr<int>(new int(params.get<int> ("x"))));
-    output = outputs.declare<boost::shared_ptr<int> >("output", "a pass through",*input);
-    value = outputs.declare<int>("value","value",-1);
+    output = outputs.declare<boost::shared_ptr<int> > ("output",
+        "a pass through", *input);
+    value = outputs.declare<int> ("value", "value", -1);
   }
   void process()
   {
@@ -113,7 +116,7 @@ struct SharedPass: ecto::module
     //std::cout << *output << std::endl;
     *value = **output;
   }
-  handle_t input;
+  handle_const_t input;
   handle_t output;
   ecto::Handle<int> value;
 };
@@ -195,7 +198,7 @@ BOOST_PYTHON_MODULE(buster)
   using namespace buster;
   ecto::wrap<Printer>("Printer", "A printer...");
   ecto::wrap<Generate>("Generate", "A generator module.");
-  ecto::wrap<SharedPass>("SharedPass","A shared pointer pass through");
+  ecto::wrap<SharedPass>("SharedPass", "A shared pointer pass through");
   ecto::wrap<Multiply>("Multiply", "Multiply an input with a constant");
   ecto::wrap<Scatter>("Scatter", "Scatter a value...");
   ecto::wrap<Gather<int> >("Gather", "Gather a scattered value...");

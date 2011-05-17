@@ -36,3 +36,17 @@ f.close()
 # cpp syntax for tendrils
 
 # use cases...
+
+# Parallelization considerations are important.
+# In a DAG there may be two forms of parallelism.
+    * independent paths in the graph may be executed in parrallel,
+      due to the observation that the data flow in one path is not dependent on the
+      data in another path, and so nodes do not need to wait for data to be processed.
+    * A DAG may also be run in parallel by queuing data to be run, and then spawning a separate thread for
+      each set of input data.  This assumes that input data is available before the previous data set has been fully processed.
+
+# To enable parallelism, without locking, in the most simple of ways include the following constraints:
+	* input data must be const
+	* output data may only be modified from within the process function call
+	* the process function call should not mutate the module (however this adds quite a bit of annoyance to the user)
+	  *this is unacceptable, so this will be solved by guaranteeing that all calls to process are atomic
