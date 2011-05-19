@@ -91,7 +91,8 @@ void wrapModule()
   m_base.add_property("inputs", make_function(&inputs, bp::return_internal_reference<>()));
   m_base.add_property("outputs", make_function(outputs, bp::return_internal_reference<>()));
   m_base.add_property("params", make_function(params, bp::return_internal_reference<>()));
-  m_base .def("name", &module::name) .def("doc", &modwrap::doc);
+  m_base.add_property("name",make_function(params, bp::return_internal_reference<>()));
+  m_base.def("doc", &modwrap::doc);
 }
 
 }

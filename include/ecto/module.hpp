@@ -64,15 +64,17 @@ struct module: boost::noncopyable
    * \brief Grab the name of the child class.
    * @return
    */
-  std::string name()
+  const std::string& name()
   {
-    return ecto::name_of(typeid(*this));
+    return name_;
   }
 
   //f_parm paramenator;
   f_conf configurator;
   f_proc processor;
   tendrils parameters, inputs, outputs;
+protected:
+  std::string name_;
 private:
   bool dirty_;
   friend class plasm;
@@ -91,6 +93,7 @@ struct module_: module
         boost::bind(&Module::configure, &m_, _1, _2, _3),
         boost::bind(&Module::process, &m_, _1, _2, _3))
   {
+    module::name_ = name_of<Module>();
   }
   Module m_;
 };

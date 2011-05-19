@@ -18,7 +18,7 @@ def test_doc():
     ecto.print_module_doc(scatter)
     ecto.print_module_doc(gather)
     print plasm.viz()
-    #ecto.view_plasm(plasm)
+#    ecto.view_plasm(plasm)
 
 if __name__ == '__main__':
     test_doc()
