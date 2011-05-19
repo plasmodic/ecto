@@ -66,6 +66,7 @@ Use should use cmake to find ecto and bring in a few macros:
   ectomodule(buster
     test/modules/buster.cpp
   )
+  
   ecto_link(buster
     ${MY_EXTRA_LIBS}
   )
