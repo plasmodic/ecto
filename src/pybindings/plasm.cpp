@@ -43,11 +43,13 @@ struct plasm_wrapper
     bp::class_<plasm, boost::shared_ptr<plasm>, boost::noncopyable> p("Plasm");
     p.def("connect", &plasm::connect,
         bp::args("from_module", "output_name", "to_module", "intput_name"));
+    p.def("disconnect", &plasm::disconnect,
+            bp::args("from_module", "output_name", "to_module", "intput_name"));
     p.def("mark_dirty", &plasm::mark_dirty);
-    p.def("set_input", &plasm::set_input);
-    p.def("set_output", &plasm::set_output);
-    p.def("clear_input", &plasm::clear_input);
-    p.def("clear_output", &plasm::clear_output);
+//    p.def("set_input", &plasm::set_input);
+//    p.def("set_output", &plasm::set_output);
+//    p.def("clear_input", &plasm::clear_input);
+//    p.def("clear_output", &plasm::clear_output);
     p.def("execute", &plasm::execute);
     p.def("go", &plasm::go);
     p.def("viz", wrapViz, "Get a graphviz string representation of the plasm.");

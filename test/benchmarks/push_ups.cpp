@@ -21,7 +21,7 @@ int add2(int x, int y)
   return x + y;
 }
 
-struct Add2: ecto::module
+struct Add2
 {
   void configure(const ecto::tendrils& parameters, ecto::tendrils& inputs,
       ecto::tendrils& outputs)
@@ -43,7 +43,7 @@ struct Add2: ecto::module
   }
 };
 
-struct BigData: ecto::module
+struct BigData
 {
   void configure(const ecto::tendrils& parameters, ecto::tendrils& inputs,
       ecto::tendrils& outputs)

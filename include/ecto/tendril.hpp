@@ -194,7 +194,6 @@ private:
     virtual const std::string& type_name() const = 0;
     virtual void* get() = 0;
     virtual bool is_type(std::type_info const& ti) const = 0;
-
     virtual void setPython(boost::python::object o) = 0;
     virtual boost::python::object getPython() const = 0;
     virtual ptr make(tendril* owner) const = 0;

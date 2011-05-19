@@ -47,13 +47,15 @@ template<typename T>
 std::string doc<T>::name;
 
 template<typename T>
-boost::shared_ptr<T> raw_construct(boost::python::tuple args,
+boost::shared_ptr<ecto::module_<T> > raw_construct(boost::python::tuple args,
     boost::python::dict kwargs)
 {
+  typedef ecto::module_<T> module_t;
+
   namespace bp = boost::python;
 
   //SHOW();
-  boost::shared_ptr<T> m(new T());
+  boost::shared_ptr<module_t> m(new module_t());
   m->module::initialize<T>();
   bp::list l = kwargs.items();
   for (unsigned j = 0; j < bp::len(l); ++j)
@@ -62,17 +64,18 @@ boost::shared_ptr<T> raw_construct(boost::python::tuple args,
     bp::object value = l[j][1];
     std::string keystring = bp::extract<std::string>(key);
     std::string valstring = bp::extract<std::string>(value.attr("__repr__")());
-    m->parameters_.at(keystring).set(value);
+    m->parameters.at(keystring).set(value);
   }
-  m->configure(m->parameters_,m->inputs_,m->outputs_);
+  m->module::configure();
   return m;
 }
 
 template<typename T>
 void wrap(const char* name, std::string doc_str = "A module...")
 {
+  typedef ecto::module_<T> module_t;
   //SHOW();
-  boost::python::class_<T, boost::python::bases<module>, boost::shared_ptr<T>,
+  boost::python::class_<module_t, boost::python::bases<module>, boost::shared_ptr<module_t>,
       boost::noncopyable> m(name);
   typedef doc<T> docT;
   docT::name = name;

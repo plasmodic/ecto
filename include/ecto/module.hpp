@@ -2,6 +2,8 @@
 
 #include <boost/shared_ptr.hpp>
 #include <boost/noncopyable.hpp>
+#include <boost/function.hpp>
+#include <boost/bind.hpp>
 
 #include <ecto/tendril.hpp>
 #include <ecto/tendrils.hpp>
@@ -18,9 +20,13 @@ namespace ecto
 struct module: boost::noncopyable
 {
   typedef boost::shared_ptr<module> ptr; //!< A convenience pointer typedef
+  //tendrils parameters_,inputs_,outputs_;
+  //typedef  boost::function<void(tendrils& params)> f_parm;
+  typedef boost::function<void(const tendrils& params, tendrils& inputs, tendrils& outputs)> f_conf;
+  typedef boost::function<void(const tendrils& params, const tendrils& inputs, tendrils& outputs)> f_proc;
 
-  module();
-  virtual ~module();
+  module(/*f_parm parm,*/f_conf conf, f_proc proc):/*paramenator(parm),*/configurator(conf),processor(proc),dirty_(true){}
+  ~module();
 
   /**
    *\brief Member function to call the static Initialize, this is a convenience thing.
@@ -28,7 +34,7 @@ struct module: boost::noncopyable
   template<typename T>
   void initialize()
   {
-    T::Initialize(parameters_);
+    T::Initialize(parameters);
   }
 
   void configure();
@@ -58,25 +64,42 @@ struct module: boost::noncopyable
    * \brief Grab the name of the child class.
    * @return
    */
-  virtual std::string name()
+  std::string name()
   {
     return ecto::name_of(typeid(*this));
   }
-  tendrils parameters_,inputs_,outputs_;
-protected:
-  /**
-   * \brief Called after parameters have been set and before process. Inputs and Outputs should be declared in this call.
-   */
-  virtual void configure(const tendrils& parameters, tendrils& inputs, tendrils& outputs);
 
-  /**
-   * \brief Called after configure, when ever the module is dirty.
-   */
-  virtual void process(const tendrils& parameters, const tendrils& inputs, tendrils& outputs);
+  //f_parm paramenator;
+  f_conf configurator;
+  f_proc processor;
+  tendrils parameters, inputs, outputs;
 private:
   bool dirty_;
   friend class plasm;
   friend class ModuleGraph;
 };
+
+template<typename Module>
+struct module_: module
+{
+  //these allow for non ambiguous init of the functions.
+  //typedef void(*Initialize_sig)(const tendrils& params, tendrils& inputs, tendrils& outputs);
+  typedef void(Module::*configure_sig)(const tendrils& params, tendrils& inputs, tendrils& outputs);
+  typedef void(Module::*process_sig)(const tendrils& params, const tendrils& inputs, tendrils& outputs);
+  module_() :
+    module(//&Module::Initialize,
+        boost::bind(&Module::configure, &m_, _1, _2, _3),
+        boost::bind(&Module::process, &m_, _1, _2, _3))
+  {
+  }
+  Module m_;
+};
+
+template<typename T>
+module::ptr create_module()
+{
+  module::ptr p(new module_<T>());
+  return p;
+}
 
 }//namespace ecto

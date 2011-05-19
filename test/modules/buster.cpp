@@ -11,7 +11,7 @@ struct FooPOD
   float y;
 };
 
-struct FooPODModule: ecto::module
+struct FooPODModule
 {
   static void Initialize(ecto::tendrils& p)
   {
@@ -32,7 +32,7 @@ struct FooPODModule: ecto::module
     outputs.get<FooPOD> ("foo").y = 3.14;
   }
 };
-struct Printer: ecto::module
+struct Printer
 {
   static void Initialize(ecto::tendrils& p)
   {
@@ -52,7 +52,7 @@ struct Printer: ecto::module
   }
 };
 
-struct Generate: ecto::module
+struct Generate
 {
   int step_;
 
@@ -77,7 +77,7 @@ struct Generate: ecto::module
   }
 };
 
-struct Multiply: ecto::module
+struct Multiply
 {
   double factor_;
 
@@ -99,7 +99,7 @@ struct Multiply: ecto::module
     outputs.get<double> ("out") = inputs.get<double> ("in") * factor_;
   }
 };
-struct SharedPass: ecto::module
+struct SharedPass
 {
 
   typedef ecto::Handle<boost::shared_ptr<int> > handle_t;
@@ -130,7 +130,7 @@ struct SharedPass: ecto::module
   handle_t output;
   ecto::Handle<int> value;
 };
-struct Scatter: ecto::module
+struct Scatter
 {
   static void Initialize(ecto::tendrils& p)
   {
@@ -161,7 +161,7 @@ struct Scatter: ecto::module
 };
 
 template<typename ValueT>
-struct Gather: public ecto::module
+struct Gather
 {
   typedef ValueT value_type;
 

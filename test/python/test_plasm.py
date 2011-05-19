@@ -12,8 +12,8 @@ def test_plasm():
     for f, t in zip(scatter.outputs.keys(), gather.inputs.keys()):
         plasm.connect(scatter, f, gather, t)
     #plasm.go(gather)
-    plasm.set_input(scatter)
-    plasm.set_output(gather)
+    #plasm.set_input(scatter)
+    #plasm.set_output(gather)
     plasm.execute()
     #ecto.view_plasm(plasm)
     result = gather.outputs.out

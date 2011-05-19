@@ -8,12 +8,10 @@ import ecto,buster
 def test_one_to_many():
     plasm = ecto.Plasm()
     g = buster.Generate(start=2, step=2)
-    plasm.set_input(g)
     modules = []
     for x in range(0,5):
         m = buster.Multiply(factor=2)
         plasm.connect(g,"out",m,"in")
-        plasm.set_output(m)
         modules.append(m)
         
     plasm.execute()
@@ -49,16 +47,18 @@ def test_reconnect():
         pass
         #print "Reconnect caught: ",e
         
-    m.outputs["out"].disconnect()
-    gather.inputs["in_0001"].disconnect()
+#    m.outputs["out"].disconnect()
+#    gather.inputs["in_0001"].disconnect()
+    plasm.disconnect(m, "out", gather , "in_0001")
     plasm.connect(m, "out", gather , "in_0001")
+
 
     
     #ecto.view_plasm(plasm)
     #check some values
     plasm.go(gather)
-    #print gather.outputs.out
-    assert(gather.outputs["out"].val == 2 *(2*2))
+    print gather.outputs.out
+    assert(gather.outputs.out == 2 *(2*2))
     plasm.go(gather)
     #should remain unchanged
     assert(gather.outputs["out"].val == 2*(2*2))

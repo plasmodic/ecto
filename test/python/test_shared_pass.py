@@ -16,10 +16,6 @@ def test_plasm():
     plasm.connect(sps[6],"output",sps[0],"input");
     plasm.connect(sps[0],"output",sps[4],"input");
     plasm.connect(sps[4],"output",sps[5],"input");
-    
-    plasm.set_input(sps[6])
-    plasm.set_output(sps[5])
-    plasm.set_output(sps[2])
 
     plasm.execute()
     #ecto.view_plasm(plasm)

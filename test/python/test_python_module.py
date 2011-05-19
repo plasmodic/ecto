@@ -32,8 +32,6 @@ def test_python_module_plasm():
     g = buster.Generate(start = 1 , step =1)
     plasm = ecto.Plasm()
     plasm.connect(g,"out",mod,"input")
-    plasm.set_input(g)
-    plasm.set_output(mod)
     for i in range(1,5):
         plasm.execute()
         assert g.outputs.out == i

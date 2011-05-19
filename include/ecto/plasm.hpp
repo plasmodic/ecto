@@ -57,29 +57,19 @@ public:
    */
   void connect(module_ptr from, const std::string& output, module_ptr to,
       const std::string& input);
+  /**
+   * Disconnect a tendril from another tendril.
+   *
+   * @param from
+   * @param output
+   * @param to
+   * @param input
+   */
+  void disconnect(module_ptr from, const std::string& output, module_ptr to,
+      const std::string& input);
 
   /**
-   * \brief Set the given module as an input to the graph.
-   * @param input
-   */
-  void set_input(module_ptr input);
-  /**
-   * \brief Remove the module as input.
-   * @param input
-   */
-  void clear_input(module_ptr input);
-  /**
-   * \brief Set the module as an output to the graph.
-   * @param output
-   */
-  void set_output(module_ptr output);
-  /**
-   * \brief Remove the module as output.
-   * @param output
-   */
-  void clear_output(module_ptr output);
-  /**
-   * \brief This executes the graph, using the inputs and outputs that have been previously set.
+   * \brief This executes the graph, by executing all nodes in dependency order.
    */
   void execute();
   /**

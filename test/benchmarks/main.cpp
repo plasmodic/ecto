@@ -7,10 +7,10 @@
 int main()
 {
   ecto::plasm p;
-  ecto::module::ptr m(new ecto_push_ups::Add2());
+  ecto::module::ptr m = ecto::create_module<ecto_push_ups::Add2>();
   m->configure();
 
-  ecto::module::ptr b(new ecto_push_ups::BigData());
+  ecto::module::ptr b = ecto::create_module<ecto_push_ups::BigData>();
   b->configure();
 
   std::cout << "adding" << std::endl;

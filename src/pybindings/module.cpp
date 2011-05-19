@@ -17,9 +17,20 @@ namespace py
 
 struct modwrap: module, bp::wrapper<module>
 {
+  modwrap() :
+    module(/*&modwrap::Initialize,*/
+    boost::bind(&modwrap::configure, this, _1, _2, _3), boost::bind(&modwrap::process, this, _1, _2, _3))
+  {
 
-  void process(const ecto::tendrils& parameters, const ecto::tendrils& inputs,
-        ecto::tendrils& outputs)
+  }
+
+  static
+  void Initialize(ecto::tendrils& parameters)
+  {
+
+  }
+
+  void process(const ecto::tendrils& parameters, const ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     if (bp::override process = this->get_override("process"))
       process();
@@ -27,9 +38,7 @@ struct modwrap: module, bp::wrapper<module>
       throw std::logic_error("process is not implemented it seems");
   }
 
-
-  void configure(const ecto::tendrils& parameters, ecto::tendrils& inputs,
-      ecto::tendrils& outputs)
+  void configure(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     if (bp::override config = this->get_override("configure"))
       config();
@@ -60,33 +69,28 @@ struct modwrap: module, bp::wrapper<module>
 
 const tendrils& inputs(module& mod)
 {
-  return mod.inputs_;
+  return mod.inputs;
 }
 tendrils& outputs(module& mod)
 {
-  return mod.outputs_;
+  return mod.outputs;
 }
 tendrils& params(module& mod)
 {
-  return mod.parameters_;
+  return mod.parameters;
 }
 void wrapModule()
 {
   //use private names so that python people know these are internal
-  bp::class_<module, boost::shared_ptr<module>, boost::noncopyable>(
-      "_module_cpp");
+  bp::class_<module, boost::shared_ptr<module>, boost::noncopyable>("_module_cpp", bp::no_init);
 
-  bp::class_<modwrap, boost::shared_ptr<modwrap>, boost::noncopyable> m_base(
-      "_module_base"/*, bp::no_init*/);
+  bp::class_<modwrap, boost::shared_ptr<modwrap>, boost::noncopyable> m_base("_module_base" /*bp::no_init*/);
   m_base.def("connect", &module::connect);
-  m_base.def("process", bp::pure_virtual((void(module::*)())&module::process));
-  m_base.def("configure", bp::pure_virtual((void(module::*)())&module::configure));
-  m_base.add_property("inputs",
-      make_function(&inputs, bp::return_internal_reference<>()));
-  m_base.add_property("outputs",
-      make_function(outputs, bp::return_internal_reference<>()));
-  m_base.add_property("params",
-      make_function(params, bp::return_internal_reference<>()));
+  m_base.def("process", bp::pure_virtual((void(module::*)()) &module::process));
+  m_base.def("configure", bp::pure_virtual((void(module::*)()) &module::configure));
+  m_base.add_property("inputs", make_function(&inputs, bp::return_internal_reference<>()));
+  m_base.add_property("outputs", make_function(outputs, bp::return_internal_reference<>()));
+  m_base.add_property("params", make_function(params, bp::return_internal_reference<>()));
   m_base .def("name", &module::name) .def("doc", &modwrap::doc);
 }
 

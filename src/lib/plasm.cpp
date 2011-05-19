@@ -6,14 +6,13 @@ plasm::plasm() :
 {
 }
 
-void plasm::connect(module::ptr from, const std::string& out_name,
-    module::ptr to, const std::string& in_name)
+void plasm::connect(module::ptr from, const std::string& out_name, module::ptr to, const std::string& in_name)
 {
-  if (from->outputs_.count(out_name) == 0)
+  if (from->outputs.count(out_name) == 0)
   {
     throw std::logic_error("The specified output does not exist: " + out_name);
   }
-  if (to->inputs_.count(in_name) == 0)
+  if (to->inputs.count(in_name) == 0)
   {
     throw std::logic_error("The specified input does not exist: " + in_name);
   }
@@ -39,8 +38,7 @@ void plasm::go(module::ptr m)
 
 void plasm::viz(std::ostream& out) const
 {
-  boost::write_graphviz(out, impl_->modules_.graph_,
-      ModuleGraph::label_writer(impl_->modules_));
+  boost::write_graphviz(out, impl_->modules_.graph_, ModuleGraph::label_writer(impl_->modules_));
 }
 
 std::string plasm::viz() const
@@ -59,30 +57,22 @@ plasm::edge_list_t plasm::getEdges()
   return impl_->modules_.getEdges();
 }
 
-void plasm::set_input(module_ptr input)
-{
-  impl_->inputs_.insert(input);
-  impl_->dirty_ = true;
-}
-void plasm::clear_input(module_ptr input)
-{
-  impl_->inputs_.erase(input);
-  impl_->dirty_ = true;
-}
-void plasm::set_output(module_ptr output)
-{
-  impl_->outputs_.insert(output);
-  impl_->dirty_ = true;
-}
-void plasm::clear_output(module_ptr output)
-{
-  impl_->outputs_.erase(output);
-  impl_->dirty_ = true;
-}
 void plasm::execute()
 {
   impl_->calc_stacks();
   impl_->mark_stacks_dirty();
   impl_->proc_stacks();
+}
+
+void plasm::disconnect(module_ptr from, const std::string& output, module_ptr to, const std::string& input)
+{
+  std::pair<ModuleGraph::Edge_Desc, bool> e = boost::edge(impl_->modules_.make_vert(from, output, plasm::output).uid,
+      impl_->modules_.make_vert(to, input, plasm::input).uid, impl_->modules_.graph_);
+  if (e.second)
+    boost::remove_edge(e.first, impl_->modules_.graph_);
+  else
+    throw std::runtime_error(from->name() + ":" + output + " not connected to " + to->name() + ":" + input);
+  from->outputs[output].disconnect();
+  to->inputs[input].disconnect();
 }
 }
