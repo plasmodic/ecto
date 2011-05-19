@@ -8,7 +8,7 @@ Contents:
    :maxdepth: 2
 
 Building
-==================
+================================
 Using a standard cmake build system:
 
 .. code-block:: sh
@@ -19,45 +19,49 @@ Using a standard cmake build system:
   make
   
 
-The libs will be located in source under lib
+The libs will be located in the build folder under lib
 
 Assuming you're in the top level ecto directory, try the following in a shell:
 
 .. code-block:: sh
 
-  export PYTHONPATH=`pwd`/lib:`pwd`/python
-  python test/python/doit.py
+  #add ecto to your python path
+  . build/python_path.sh
   python test/python/test_plasm.py
   
 Structure
-==================
+================================
   - include
       c++ include files
-  - src
-      c++ library
-  - src/ecto_py
-      ecto boost::python wrappers
+  - src/lib
+      Mostly straight implementation, with little boost::python, results in libecto.so
+  - src/pybindings
+      The python bindings for libecto.so, results in the python module ecto.
   - python
-      ecto python library
+      ecto python library, has a few utilies that are available in python.
   - test/modules
-      ecto c++ modules
+      ecto c++ test modules
   - test/python
-      python tests of ecto
+      python unit tests of ecto. Try installing python-nose, and running nosetests from within this dir.
   
-libraries:
+libraries
+================================
   - libecto.so
       c++ library, clients must link against this and the 
-  - _ecto.so
+  - ecto.so
       python bindings lib
   - buster.so
       a sample client python exposed module
 
-Usage
-=================
-to make a module use the macro in cmake:
+Usage in client code
+================================
+
+Use should use cmake to find ecto and bring in a few macros:
 
 .. code-block:: cmake
 
+  find_package(ecto REQUIRED)
+  
   #this takes care of linking against python and ecto
   ectomodule(buster
     test/modules/buster.cpp
@@ -65,4 +69,3 @@ to make a module use the macro in cmake:
   ecto_link(buster
     ${MY_EXTRA_LIBS}
   )
-
