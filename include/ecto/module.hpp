@@ -20,12 +20,10 @@ namespace ecto
 struct module: boost::noncopyable
 {
   typedef boost::shared_ptr<module> ptr; //!< A convenience pointer typedef
-  //tendrils parameters_,inputs_,outputs_;
-  //typedef  boost::function<void(tendrils& params)> f_parm;
   typedef boost::function<void(const tendrils& params, tendrils& inputs, tendrils& outputs)> f_conf;
   typedef boost::function<void(const tendrils& params, const tendrils& inputs, tendrils& outputs)> f_proc;
 
-  module(/*f_parm parm,*/f_conf conf, f_proc proc):/*paramenator(parm),*/configurator(conf),processor(proc),dirty_(true){}
+  module(f_conf conf, f_proc proc):configurator(conf),processor(proc),dirty_(true){}
   ~module();
 
   /**
@@ -68,8 +66,6 @@ struct module: boost::noncopyable
   {
     return name_;
   }
-
-  //f_parm paramenator;
   f_conf configurator;
   f_proc processor;
   tendrils parameters, inputs, outputs;
@@ -77,8 +73,6 @@ protected:
   std::string name_;
 private:
   bool dirty_;
-  friend class plasm;
-  friend class ModuleGraph;
 };
 
 template<typename Module>
