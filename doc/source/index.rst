@@ -1,72 +1,97 @@
 ecto doc
 ================================
-ecto is...
+ecto is a dynamically configurable *Directed Acyclic processing Graph* **(DAG)** framework.  
+Users may write reusable ecto::modules which 
+become the nodes in the DAG, or ecto::plasm.  Modules may be written 
+in c++ as boost::python extensions, or in pure python, 
+and python is used for the declaration of the ecto DAG(ecto::plasm).
 
 Contents:
 
 .. toctree::
    :maxdepth: 2
+   
+   layout
+   building
+   client_usage
 
-Building
-================================
-Using a standard cmake build system:
-
-.. code-block:: sh
-  
-  mkdir build
-  cd build
-  cmake ..
-  make
-  
-
-The libs will be located in the build folder under lib
-
-Assuming you're in the top level ecto directory, try the following in a shell:
-
-.. code-block:: sh
-
-  #add ecto to your python path
-  . build/python_path.sh
-  python test/python/test_plasm.py
-  
-Structure
-================================
-  - include
-      c++ include files
-  - src/lib
-      Mostly straight implementation, with little boost::python, results in libecto.so
-  - src/pybindings
-      The python bindings for libecto.so, results in the python module ecto.
-  - python
-      ecto python library, has a few utilies that are available in python.
-  - test/modules
-      ecto c++ test modules
-  - test/python
-      python unit tests of ecto. Try installing python-nose, and running nosetests from within this dir.
-  
-libraries
-================================
-  - libecto.so
-      c++ library, clients must link against this and the 
-  - ecto.so
-      python bindings lib
-  - buster.so
-      a sample client python exposed module
-
-Usage in client code
-================================
-
-Use should use cmake to find ecto and bring in a few macros:
-
-.. code-block:: cmake
-
-  find_package(ecto REQUIRED)
-  
-  #this takes care of linking against python and ecto
-  ectomodule(buster
-    test/modules/buster.cpp
-  )
-  
-  ecto_link(buster
-    ${MY_EXTRA_LIBS}
-  )
+features
+=====================================
+    * Simple processing node interface for building your own modules.
+    
+    .. code-block:: c++
+        
+        struct MyModule
+        {
+            static void Initialize(ecto::tendrils& params);
+            void configure(const tendrils& parms, tendrils& inputs, tendrils& outputs);
+            void process(const tendrils& parms, const tendrils& inputs, tendrils& outputs);
+        }
+    
+    * Inputs, outputs and parameters are templated, and type erasing, giving typesafety and the ability to use your
+      own data types..
+      
+    .. code-block:: c++
+        
+        void MyModule::Initialize(ecto::tendrils& params)
+        {
+            params.declare<Foo>("foo","Foo is for spam",Foo(3.14));
+            params.declare<std::string>("str","str is a standard string.","default");
+        }
+    
+    * Python is used as the plugin architecture of ecto, however, exposing your modules to python is dead simple.
+      The use of boost::python means that the python bindings for your data types are an optional powerful tool.
+      
+    .. code-block:: c++
+        
+        BOOST_PYTHON_MODULE(hello_ecto)
+        {
+          ecto::wrap<Printer>("Printer", "Prints a string input to standard output.");
+          ecto::wrap<Reader>("Reader", "Reads input from standard input.");
+        }
+        
+    * ecto forces your modules to be somewhat self documenting, and allows full
+      introspection from python and c++, including
+      type names, docstrings and variable names.
+    * The plasm (DAG) executes in compiled code,
+    * Python is used for declaring the processing graph, plasm.
+    
+    .. code-block:: python
+    
+        #!/usr/bin/env python
+        import ecto
+        import hello_ecto
+        
+        def mygraph():
+            plasm = ecto.Plasm()
+            help(hello_ecto)
+            r = hello_ecto.Reader()
+            p = hello_ecto.Printer(str="default")
+            s = hello_ecto.Sayer(voice="Bart Simpson")
+            plasm.connect(r, "output", p, "str")
+            plams.connect(r, "output", s, "str")
+            print plasm.viz()
+            print "Enter input, q to quit"
+            while r.outputs.output != 'q':
+                plasm.execute()
+                
+    * The ecto::plasm is easily inspected using graphviz tools.
+    
+    .. image:: images/plasm.png
+    
+    .. code-block:: viz
+        
+        digraph G {
+            0[label="hello_ecto::Reader",fillcolor=green, style="rounded,filled"];
+            1[label="hello_ecto::Printer",fillcolor=green, style="rounded,filled"];
+            2[label="output", shape=invhouse];
+            3[label="str", shape=house];
+            4[label="hello_ecto::Printer",fillcolor=green, style="rounded,filled"];
+            5[label="str", shape=house];
+            0->2 ;
+            2->3 ;
+            3->1 ;
+            2->5 ;
+            5->4 ;
+        }
+    

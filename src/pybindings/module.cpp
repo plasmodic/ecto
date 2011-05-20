@@ -33,7 +33,7 @@ struct modwrap: module, bp::wrapper<module>
   void process(const ecto::tendrils& parameters, const ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     if (bp::override process = this->get_override("process"))
-      process();
+      process(/*parameters,inputs,outputs*/);
     else
       throw std::logic_error("process is not implemented it seems");
   }
@@ -41,7 +41,7 @@ struct modwrap: module, bp::wrapper<module>
   void configure(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     if (bp::override config = this->get_override("configure"))
-      config();
+      config(/*parameters,inputs,outputs*/);
     else
       throw std::logic_error("configure is not implemented it seems");
   }
