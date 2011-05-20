@@ -1,4 +1,4 @@
-ecto doc
+ecto
 ================================
 ecto is a dynamically configurable *Directed Acyclic processing Graph* **(DAG)** framework.  
 Users may write reusable ecto::modules which 
@@ -7,15 +7,16 @@ in c++ as boost::python extensions, or in pure python,
 and python is used for the declaration of the ecto DAG(ecto::plasm).
 
 Contents:
+================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    
-   layout
    building
    client_usage
+   layout
 
-features
+ecto at a glance
 =====================================
     * Simple processing node interface for building your own modules.
     
@@ -59,21 +60,31 @@ features
     .. code-block:: python
     
         #!/usr/bin/env python
-        import ecto
-        import hello_ecto
+        import ecto #ecto core library
+        import hello_ecto #a user library, that has a few ecto modules
         
         def mygraph():
+            #instantiate a plasm, our DAG structure
             plasm = ecto.Plasm()
-            help(hello_ecto)
+            #instantiate processing modules
             r = hello_ecto.Reader()
-            p = hello_ecto.Printer(str="default")
-            s = hello_ecto.Sayer(voice="Bart Simpson")
-            plasm.connect(r, "output", p, "str")
-            plams.connect(r, "output", s, "str")
+            #notice the keyword args, these get mapped
+            #as parameters
+            p1 = hello_ecto.Printer(str="default")
+            p2 = hello_ecto.Printer(str="default")
+            #connect outputs to inputs
+            plasm.connect(r, "output", p1, "str")
+            plasm.connect(r, "output", p2, "str")
+            #render the DAG with dot
             print plasm.viz()
+            ecto.view_plasm(plasm)
+            #an execution loop
             print "Enter input, q to quit"
             while r.outputs.output != 'q':
-                plasm.execute()
+                plasm.execute() #this executes the graph in compiled code.
+        
+        if __name__ == '__main__':
+            mygraph()
                 
     * The ecto::plasm is easily inspected using graphviz tools.
     
