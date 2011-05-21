@@ -14,50 +14,66 @@ namespace ecto
 {
 namespace py
 {
-
+#undef SHOW
+#define SHOW() do{}while(false)
 struct modwrap: module, bp::wrapper<module>
 {
-  modwrap() :
-    module(/*&modwrap::Initialize,*/
-    boost::bind(&modwrap::configure, this, _1, _2, _3), boost::bind(&modwrap::process, this, _1, _2, _3))
+  void dispatch_initialize(tendrils&)
   {
-
-  }
-
-  static
-  void Initialize(ecto::tendrils& parameters)
-  {
-
-  }
-
-  void process(const ecto::tendrils& parameters, const ecto::tendrils& inputs, ecto::tendrils& outputs)
-  {
-    if (bp::override process = this->get_override("process"))
-      process(/*parameters,inputs,outputs*/);
+    SHOW();
+    if (bp::override init = this->get_override("initialize"))
+      init(boost::ref(parameters));
     else
-      throw std::logic_error("process is not implemented it seems");
+      throw std::logic_error("initialize is not implemented it seems");
   }
-
-  void configure(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
+  void dispatch_configure(const tendrils&params, tendrils&inputs, tendrils&outputs)
   {
+    SHOW();
     if (bp::override config = this->get_override("configure"))
-      config(/*parameters,inputs,outputs*/);
+      config(boost::ref(params), boost::ref(inputs), boost::ref(outputs));
     else
       throw std::logic_error("configure is not implemented it seems");
   }
-
-  std::string name()
+  void dispatch_process(const tendrils& params, const tendrils& inputs, tendrils& outputs)
   {
+    SHOW();
+    if (bp::override proc = this->get_override("process"))
+    {
+      proc(boost::ref(params), boost::ref(inputs), boost::ref(outputs));
+
+    }
+    else
+      throw std::logic_error("process is not implemented it seems");
+  }
+  void dispatch_reconfigure(const tendrils& params)
+  {
+    SHOW();
+    if (bp::override reconfig = this->get_override("reconfigure"))
+      reconfig(params);
+    else
+      throw std::logic_error("reconfigure is not implemented it seems");
+  }
+  void dispatch_destroy()
+  {
+    SHOW();
+    if (bp::override dest = this->get_override("destroy"))
+      dest();
+    else
+      throw std::logic_error("destroy is not implemented it seems");
+  }
+  const std::string& name() const
+  {
+    SHOW();
     bp::reference_existing_object::apply<modwrap*>::type converter;
     PyObject* obj = converter(this);
     bp::object real_obj = bp::object(bp::handle<>(obj));
     bp::object n = real_obj.attr("__class__").attr("__name__");
-    std::string nm = bp::extract<std::string>(n);
+    static std::string nm = bp::extract<std::string>(n);
     return nm;
   }
-
   static std::string doc(modwrap* mod)
   {
+    SHOW();
     bp::reference_existing_object::apply<modwrap*>::type converter;
     PyObject* obj = converter(mod);
     bp::object real_obj = bp::object(bp::handle<>(obj));
@@ -85,13 +101,15 @@ void wrapModule()
   bp::class_<module, boost::shared_ptr<module>, boost::noncopyable>("_module_cpp", bp::no_init);
 
   bp::class_<modwrap, boost::shared_ptr<modwrap>, boost::noncopyable> m_base("_module_base" /*bp::no_init*/);
-  m_base.def("connect", &module::connect);
-  m_base.def("process", bp::pure_virtual((void(module::*)()) &module::process));
-  m_base.def("configure", bp::pure_virtual((void(module::*)()) &module::configure));
+  m_base.def("initialize", &module::initialize);
+  m_base.def("reconfigure", &module::reconfigure);
+  m_base.def("destroy", &module::destroy);
+  m_base.def("process", (void(module::*)()) &module::process);
+  m_base.def("configure", ((void(module::*)()) &module::configure));
   m_base.add_property("inputs", make_function(&inputs, bp::return_internal_reference<>()));
   m_base.add_property("outputs", make_function(outputs, bp::return_internal_reference<>()));
   m_base.add_property("params", make_function(params, bp::return_internal_reference<>()));
-  m_base.add_property("name",make_function(params, bp::return_internal_reference<>()));
+  m_base.add_property("name", make_function(params, bp::return_internal_reference<>()));
   m_base.def("doc", &modwrap::doc);
 }
 

@@ -17,12 +17,12 @@ void plasm::connect(module::ptr from, const std::string& out_name, module::ptr t
     throw std::logic_error("The specified input does not exist: " + in_name);
   }
 
-  //this throws on bad connection.
-  from->connect(out_name, to, in_name);
+  to->inputs[in_name].enforce_compatible_type(from->outputs[out_name]);
 
   //only add to graph if it was actually connected.
   impl_->modules_.add_edge(from, out_name, to, in_name);
   impl_->dirty_ = true;
+
 }
 
 void plasm::mark_dirty(module::ptr m)
@@ -72,7 +72,7 @@ void plasm::disconnect(module_ptr from, const std::string& output, module_ptr to
     boost::remove_edge(e.first, impl_->modules_.graph_);
   else
     throw std::runtime_error(from->name() + ":" + output + " not connected to " + to->name() + ":" + input);
-  from->outputs[output].disconnect();
-  to->inputs[input].disconnect();
+  //  from->outputs[output].disconnect();
+  //  to->inputs[input].disconnect();
 }
 }

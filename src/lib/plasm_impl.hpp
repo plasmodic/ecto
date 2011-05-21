@@ -13,11 +13,7 @@
 #include <boost/graph/graph_traits.hpp>
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/topological_sort.hpp>
-#include <boost/tuple/tuple.hpp>
 #include <boost/graph/graphviz.hpp>
-#include <boost/thread.hpp>
-#include <boost/signal.hpp>
-
 #include <boost/foreach.hpp>
 
 using boost::vertex_property_tag;
@@ -130,6 +126,10 @@ struct ModuleGraph
     Vertex root_to = make_vert(to_m);
     Vertex from = make_vert(from_m, out_name, plasm::output);
     Vertex to = make_vert(to_m, in_name, plasm::input);
+    if(!boost::in_edge_list(graph_,to.uid).empty())
+    {
+      throw std::runtime_error(in_name + " is already connected, this is considered an error");
+    }
     boost::add_edge(root_from.uid_root, root_to.uid_root, root_graph_);
     boost::add_edge(root_from.uid, from.uid, graph_);
     boost::add_edge(from.uid, to.uid, graph_);
@@ -174,7 +174,7 @@ struct ModuleGraph
 
     void operator()(const Vertex_Desc& v)
     {
-      graph.get_root_vert(v).first->dirty(true);
+      graph.get_root_vert(v).first->mark_dirty();
       GraphTraits::out_edge_iterator out_i, out_end;
       GraphTraits::edge_descriptor e;
       for (boost::tie(out_i, out_end) = boost::out_edges(v, graph.root_graph_); out_i != out_end; ++out_i)
@@ -193,27 +193,41 @@ struct ModuleGraph
       graph(g)
     {
     }
+    void process(Vertex& vert)
+    {
+      GraphTraits::in_edge_iterator in_i, in_end;
+      GraphTraits::edge_descriptor e, e2;
+      //go over all inputs and populate them with the outputs
+      for (boost::tie(in_i, in_end) = boost::in_edges(vert.uid, graph.graph_); in_i != in_end; ++in_i)
+      {
+        e = *in_i; //if we don't check and the vertex is not in the graph this causes segfault
+        Vertex input = graph.get_vert(boost::source(e, graph.graph_));
+        //there should only be one edge here
+        e2 = *(boost::in_edges(input.uid, graph.graph_).first);
+        Vertex output = graph.get_vert(boost::source(e2, graph.graph_));
+        //sets the input equal to the output
+        //std::cout << "copy " << output.second << " to " << input.second << std::endl;
+        input.first->inputs.at(input.second).copy_value(output.first->outputs.at(output.second));
+      }
+      //process the module
+      vert.first->process();
+    }
     void operator()(const Vertex_Desc& v)
     {
       Vertex& vert = graph.get_root_vert(v);
-      if (!vert.first)
-        throw std::logic_error("wtf");
       //check if the module is dirty, early escape if it is.
-      if (!vert.first->dirty())
+      if (vert.first->clean())
         return;
       GraphTraits::in_edge_iterator in_i, in_end;
-      GraphTraits::edge_descriptor e;
-      for (boost::tie(in_i, in_end) = boost::in_edges(v, graph.root_graph_); in_i != in_end; ++in_i)
+      GraphTraits::edge_descriptor e, e2;
+      for (boost::tie(in_i, in_end) = boost::in_edges(vert.uid_root, graph.root_graph_); in_i != in_end; ++in_i)
       {
         e = *in_i; //if we don't check and the vertex is not in the graph this causes segfault
         Vertex_Desc targ = boost::source(e, graph.root_graph_);
         (*this)(targ); //recurse.
-
       }
-      //process the module
-      vert.first->processor(vert.first->parameters, vert.first->inputs, vert.first->outputs);
-      //mark dirty for caching.
-      vert.first->dirty(false);
+      process(vert);
+
     }
     ModuleGraph& graph;
   };
@@ -233,16 +247,12 @@ struct ModuleGraph
 
       BOOST_FOREACH(Vertex_Desc x,result)
             {
-              Vertex& vert = graph.get_root_vert(x);
-              if (vert.ecto_type == plasm::root)
-              {
-                //in reverse order
-                stack.push_front(vert.first);
-              }
+              //in reverse order
+              stack.push_front(x);
             }
     }
     ModuleGraph& graph;
-    std::list<module_ptr> stack;
+    std::list<Vertex_Desc> stack;
   };
 
   void mark_dirty(const module::ptr& m)
@@ -330,8 +340,6 @@ struct ModuleGraph
 
 };
 
-
-
 struct plasm::impl
 {
   impl() :
@@ -351,31 +359,25 @@ struct plasm::impl
   }
   void mark_stacks_dirty()
   {
-    BOOST_FOREACH(module_ptr m, stack_)
+    BOOST_FOREACH(ModuleGraph::Vertex_Desc desc, stack_)
           {
-            m->dirty(true);
+            module::ptr m = modules_.get_root_vert(desc).first;
+            m->mark_dirty();
           }
   }
 
-
   void proc_stacks()
   {
-    std::set<ModuleGraph::Vertex_Desc> done;
-    BOOST_FOREACH(module::ptr m, stack_)
+    ModuleGraph::Goer goer(modules_);
+    BOOST_FOREACH(ModuleGraph::Vertex_Desc desc, stack_)
           {
-#if NDEBUG
-            if (!m->dirty())
-            throw std::logic_error("shouldn't be dirty!");
-#endif
-            m->processor(m->parameters, m->inputs, m->outputs);
-            m->dirty(false);
+            goer.process(modules_.get_root_vert(desc));
           }
-
   }
 
   bool dirty_;
   ModuleGraph modules_;
-  std::list<module_ptr> stack_;
+  std::list<ModuleGraph::Vertex_Desc> stack_;
 };
 
 }

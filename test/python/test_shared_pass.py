@@ -20,6 +20,7 @@ def test_plasm():
     plasm.execute()
     #ecto.view_plasm(plasm)
 
+    print sps[2].outputs.value
     assert sps[2].outputs.value == 6
     assert sps[4].outputs.value == 6
     assert sps[6].outputs.value == 6

@@ -61,11 +61,11 @@ public:
    */
   tendril();
   /**
-   * \brief destructor, will disconnect the tendril.
+   * \brief destructor, will deallocate the value held.
    */
   ~tendril();
   /**
-   * \brief The copy constructor assures that all the tendrils points towards the right value
+   * \brief Copy the value held by the tendril.
    * @param rhs the tendril to copy from
    */
   tendril(const tendril& rhs);
@@ -79,18 +79,19 @@ public:
    */
   template<typename T>
   tendril(const T& t, const std::string& doc) :
-    holder_(new holder<T> (t, this)), connected_(false)
+    holder_(new holder<T> (t))
   {
     setDoc(doc);
   }
 
   /**
-   * \brief The assignment operator will release the tendril from another's grasp, and assure the multi pointer
-   * paradigm.
+   * \brief Copies the value held by the given tendril to this one.
    * @param rhs
-   * @return
+   * @return this
    */
   tendril& operator=(const tendril& rhs);
+
+  void copy_value(const tendril& rhs);
 
   /**
    * \brief This is an unmangled type name for what ever tendril is
@@ -161,6 +162,22 @@ public:
     return type_name() == rhs.type_name();
   }
 
+  inline bool compatible_type(const tendril& rhs) const
+  {
+    if(same_type(rhs))return true;
+    return is_type<boost::python::object>() || rhs.is_type<boost::python::object>();
+  }
+
+  inline void enforce_compatible_type(const tendril& rhs) const
+  {
+    if(!compatible_type(rhs))
+    {
+      throw(std::logic_error(
+           std::string(type_name() + " is not a " + rhs.type_name()).c_str()));
+
+    }
+  }
+
   /**
    * \brief runtime check if the tendril is of the given type, this will throw.
    */
@@ -171,20 +188,6 @@ public:
       throw(std::logic_error(
           std::string(type_name() + " is not a " + name_of<T> ()).c_str()));
   }
-
-  /**
-   * \brief This ties the tendrils so that they look at the same object. This ensures that all preconnected
-   * tendrils point to the same object.  The existing tendril value may be destroyed in favor of the source tendril.
-   * If a tendril is of a stronger type it will override the other tendril.
-   * @param source  The tendril to connect to.
-   */
-  void connect(tendril& source);
-
-  /**
-   * \brief disconnect this tendril from all tendrils previously associated with it.
-   */
-  void disconnect();
-
   /**
    * \brief Get the boost::python version of the object (by value)
    * @return A copy of the underlying object as a boost python object, will be None type if the conversion fails.
@@ -192,17 +195,9 @@ public:
   boost::python::object extract() const;
   /**
    * \brief Set this tendril's value from the python object. This will copy the value
-   * @param o a python object holding a type compatible with this tendril. Will throw if the types are not compatible.
+   * @param o a python object holding a type compatible_type with this tendril. Will throw if the types are not compatible_type.
    */
   void set(boost::python::object o);
-
-  /** Check if this tendril is preconnected.
-   * @return true if connected.
-   */
-  bool connected() const
-  {
-    return connected_;
-  }
 
   //! A none type for tendril when the tendril is uninitialized.
   struct none
@@ -214,25 +209,28 @@ private:
   struct holder_base
   {
     typedef boost::shared_ptr<holder_base> ptr;
-    holder_base() :
-      doc()
+    holder_base()
     {
     }
+    holder_base& operator=(const holder_base& rhs);
     virtual ~holder_base();
     virtual const std::string& type_name() const = 0;
     virtual void* get() = 0;
     virtual bool is_type(std::type_info const& ti) const = 0;
     virtual void setPython(boost::python::object o) = 0;
     virtual boost::python::object getPython() const = 0;
-    virtual ptr make(tendril* owner) const = 0;
+    virtual void copy_to(holder_base& holder) const = 0;
+    virtual ptr clone() const = 0;
 
-    void claim(tendril* p)
+    template<typename T>
+    const T& getT() const
     {
-      owners.insert(p);
+      return *static_cast<const T*>(get());
     }
-    void release(tendril* p)
+    template<typename T>
+    T& getT()
     {
-      owners.erase(p);
+      return *static_cast<T*>(get());
     }
 
     //convenience functions for checking types
@@ -240,31 +238,24 @@ private:
     static bool inline check(holder_base& i);
     template<typename T>
     static inline void checkThrow(holder_base& i) throw (std::logic_error);
-    std::string doc;
-    std::set<tendril*> owners;
   };
 
   template<typename T>
   struct holder: holder_base
   {
-    holder(const T& t, tendril* owner);
+    holder(const T& t);
     const std::string& type_name() const;
     bool is_type(std::type_info const& ti) const;
     void* get();
     void setPython(boost::python::object o);
     boost::python::object getPython() const;
-    holder_base::ptr make(tendril* owner) const
-    {
-      holder_base::ptr p(new holder<T> (t, owner));
-      p->doc = doc;
-      return p;
-    }
+    void copy_to(holder_base& holder) const;
+    boost::shared_ptr<holder_base> clone() const;
     T t;
   };
-
   tendril(holder_base::ptr impl);
   boost::shared_ptr<holder_base> holder_;
-  bool connected_;
+  std::string doc_;
 };
 
 template<typename T>
@@ -324,11 +315,9 @@ void tendril::holder_base::checkThrow(tendril::holder_base& i)
 }
 
 template<typename T>
-tendril::holder<T>::holder(const T& t, tendril * const owner) :
+tendril::holder<T>::holder(const T& t) :
   t(t)
 {
-  if (owner != NULL)
-    owners.insert(owner);
 }
 
 template<typename T>
@@ -359,6 +348,12 @@ void tendril::holder<T>::setPython(boost::python::object o)
     throw std::logic_error(
         "Could not convert python object to type : " + type_name());
 }
+template<>
+inline void tendril::holder<boost::python::object>::setPython(boost::python::object o)
+{
+  t = o;
+}
+
 
 template<typename T>
 boost::python::object tendril::holder<T>::getPython() const
@@ -372,6 +367,29 @@ boost::python::object tendril::holder<T>::getPython() const
     //silently handle no python wrapping
   }
   return boost::python::object();
+}
+template<>
+inline boost::python::object tendril::holder<boost::python::object>::getPython() const
+{
+  return t;
+}
+template<typename T>
+void  tendril::holder<T>::copy_to(holder_base& holder) const
+{
+  holder.getT<T>() = t;
+}
+
+template<>
+inline void  tendril::holder<boost::python::object>::copy_to(holder_base& holder) const
+{
+  holder.setPython(t);
+}
+
+template<typename T>
+tendril::holder_base::ptr  tendril::holder<T>::clone() const
+{
+  tendril::holder_base::ptr p(new holder<T>(t));
+  return p;
 }
 
 }

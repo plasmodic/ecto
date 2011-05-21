@@ -3,39 +3,85 @@
 
 namespace ecto
 {
-//  module::module() :
-//    dirty_(true){
-//  }
-
-  module::~module()
-  {
-  }
-  
-  void module::process(){
-    processor(parameters,inputs,outputs);
-
-  }
-  void module::configure()
-  {
-    configurator(parameters,inputs,outputs);
-  }
-
-  void module::connect(const std::string& out_name, ptr to, const std::string& in_name)
-  {
-    typedef std::map<std::string,tendril> map_t;
-    map_t::iterator it = to->inputs.find(in_name);
-    map_t::iterator out_it = outputs.find(out_name);
-    //allow inputs to be connected to many outputs.
-    it->second.connect(out_it->second);
-  }
-
-  void module::dirty(bool mark)
-  {
-    dirty_ = mark;
-  }
-  bool module::dirty() const
-  {
-    return dirty_;
-  }
+module::module() :
+  dirty_(true)
+{
 }
 
+module::~module()
+{
+}
+
+void module::initialize()
+{
+  dispatch_initialize(parameters);
+}
+
+void module::process()
+{
+  dispatch_process(parameters, inputs, outputs);
+  mark_clean();
+}
+void module::configure()
+{
+  dispatch_configure(parameters, inputs, outputs);
+  mark_dirty();
+}
+
+void module::reconfigure()
+{
+  dispatch_reconfigure(parameters);
+  mark_dirty();
+}
+void module::destroy()
+{
+  dispatch_destroy();
+}
+
+void module::mark_clean()
+{
+  dirty_ = false;
+}
+void module::mark_dirty()
+{
+  dirty_ = true;
+}
+bool module::dirty() const
+{
+  return dirty_;
+}
+bool module::clean() const
+{
+  return !dirty_;
+}
+
+void module_interface::initialize(tendrils& params)
+{
+
+}
+void module_interface::configure(const tendrils& parms, tendrils& in, tendrils& out)
+{
+
+}
+void module_interface::process(const tendrils& parms, const tendrils& in, tendrils& out)
+{
+
+}
+void module_interface::reconfigure(const tendrils& params)
+{
+
+}
+void module_interface::destroy()
+{
+
+}
+void module_interface::finish()
+{
+  finish_handler_();
+}
+void module_interface::register_finish_handler(boost::function<void()> handler)
+{
+  finish_handler_ = handler;
+}
+
+}

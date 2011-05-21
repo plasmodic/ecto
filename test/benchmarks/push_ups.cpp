@@ -21,7 +21,7 @@ int add2(int x, int y)
   return x + y;
 }
 
-struct Add2
+struct Add2 : ecto::module_interface
 {
   void configure(const ecto::tendrils& parameters, ecto::tendrils& inputs,
       ecto::tendrils& outputs)
@@ -37,13 +37,10 @@ struct Add2
     //SHOW();
     outputs.get<int> ("out") = add2(std::rand(), std::rand());
   }
-  static void Initialize(ecto::tendrils& p)
-  {
-    SHOW();
-  }
+
 };
 
-struct BigData
+struct BigData : ecto::module_interface
 {
   void configure(const ecto::tendrils& parameters, ecto::tendrils& inputs,
       ecto::tendrils& outputs)
@@ -55,10 +52,6 @@ struct BigData
       ecto::tendrils& outputs)
   {
     outputs.get<int> ("out") = big_data();
-  }
-  static void Initialize(ecto::tendrils& p)
-  {
-    SHOW();
   }
 };
 }

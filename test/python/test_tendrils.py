@@ -6,17 +6,17 @@ def test_tendrils():
     t = ecto.Tendrils()
     t.declare("Hello","doc str",6)
     assert t.Hello == 6
+    print t["Hello"].doc
     t.declare("x","a number", "str")
     assert len(t) == 2
     assert t["x"].val == "str"
     assert t.x == "str"
     #test the redeclare
-    #a redeclaration will not change the value, or doc string
     t.declare("Hello","new doc", "you")
-    assert t.Hello == 6
-    assert t["Hello"].doc == "doc str"
+    assert t.Hello == "you"
+    assert t["Hello"].doc == "new doc"
     try:
-        #read erro
+        #read error
         t.nonexistant = 1
         assert False
     except RuntimeError,e:

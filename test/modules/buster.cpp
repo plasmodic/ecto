@@ -33,152 +33,135 @@
 
 namespace buster
 {
+
 struct FooPOD
 {
   int x;
   float y;
 };
 
-struct FooPODModule
+struct FooPODModule: ecto::module_interface
 {
-  static void Initialize(ecto::tendrils& p)
+  void initialize(ecto::tendrils& p)
   {
     p.declare<std::string> ("str", "I print this:", "Hello World");
   }
 
-  void configure(const ecto::tendrils& parameters, ecto::tendrils& inputs,
-      ecto::tendrils& outputs)
+  void configure(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     inputs.declare<FooPOD> ("foo", "A string to print");
     outputs.declare<FooPOD> ("foo", "A string to print");
   }
 
-  void process(const ecto::tendrils& parameters, const ecto::tendrils& inputs,
-      ecto::tendrils& outputs)
+  void process(const ecto::tendrils& parameters, const ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     std::cout << inputs.get<FooPOD> ("foo").x << std::endl;
     outputs.get<FooPOD> ("foo").y = 3.14;
   }
 };
-struct Printer
+struct Printer: ecto::module_interface
 {
-  static void Initialize(ecto::tendrils& p)
+  void initialize(ecto::tendrils& p)
   {
     p.declare<std::string> ("str", "I print this:", "Hello World");
   }
 
-  void configure(const ecto::tendrils& parameters, ecto::tendrils& inputs,
-      ecto::tendrils& outputs)
+  void configure(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     inputs.declare<std::string> ("str", "A string to print", "hello");
   }
 
-  void process(const ecto::tendrils& parameters, const ecto::tendrils& inputs,
-      ecto::tendrils& outputs)
+  void process(const ecto::tendrils& parameters, const ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     std::cout << inputs.get<std::string> ("str") << std::endl;
   }
 };
 
-struct Generate
+struct Generate: ecto::module_interface
 {
   int step_;
 
-  static void Initialize(ecto::tendrils& p)
+  void initialize(ecto::tendrils& p)
   {
     p.declare<double> ("step", "The step with which i generate integers.", 2);
     p.declare<double> ("start", "My starting value", 0);
   }
 
-  void configure(const ecto::tendrils& parameters, ecto::tendrils& inputs,
-      ecto::tendrils& outputs)
+  void configure(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     step_ = parameters.get<double> ("step");
-    outputs.declare<double> ("out", "output",
-        parameters.get<double> ("start") - step_);
+    outputs.declare<double> ("out", "output", parameters.get<double> ("start") - step_);
   }
 
-  void process(const ecto::tendrils& parameters, const ecto::tendrils& inputs,
-      ecto::tendrils& outputs)
+  void process(const ecto::tendrils& parameters, const ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     outputs.get<double> ("out") += step_;
   }
 };
 
-struct Multiply
+struct Multiply: ecto::module_interface
 {
   double factor_;
 
-  static void Initialize(ecto::tendrils& p)
+  void initialize(ecto::tendrils& p)
   {
     p.declare<double> ("factor", "A factor to multiply by.", 3.14);
   }
 
-  void configure(const ecto::tendrils& parameters, ecto::tendrils& inputs,
-      ecto::tendrils& outputs)
+  void configure(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     factor_ = parameters.get<double> ("factor");
     inputs.declare<double> ("in", "multly in by factor");
     outputs.declare<double> ("out", "the result of in * factor");
   }
-  void process(const ecto::tendrils& parameters, const ecto::tendrils& inputs,
-      ecto::tendrils& outputs)
+  void process(const ecto::tendrils& parameters, const ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     outputs.get<double> ("out") = inputs.get<double> ("in") * factor_;
   }
 };
-struct SharedPass
+struct SharedPass: ecto::module_interface
 {
 
-  typedef ecto::Handle<boost::shared_ptr<int> > handle_t;
-  typedef ecto::ConstHandle<boost::shared_ptr<int> > handle_const_t;
+  typedef boost::shared_ptr<int> ptr_t;
 
-  static void Initialize(ecto::tendrils& p)
+  void initialize(ecto::tendrils& p)
   {
     p.declare<int> ("x", "Default value", -1);
   }
 
-  void configure(const ecto::tendrils& parameters, ecto::tendrils& inputs,
-      ecto::tendrils& outputs)
+  void configure(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
-    input = inputs.declare<boost::shared_ptr<int> > ("input", "a pass through",
-        boost::shared_ptr<int>(new int(parameters.get<int> ("x"))));
-    output = outputs.declare<boost::shared_ptr<int> > ("output",
-        "a pass through", *input);
-    value = outputs.declare<int> ("value", "value", -1);
+
+    inputs.declare<ptr_t> ("input", "a pass through", ptr_t(new int(parameters.get<int> ("x"))));
+
+    outputs.declare<ptr_t> ("output", "a pass through", ptr_t(new int(-1)));
+
+    outputs.declare<int> ("value", "value", -1);
   }
-  void process(const ecto::tendrils& parameters, const ecto::tendrils& inputs,
-      ecto::tendrils& outputs)
+  void process(const ecto::tendrils& parameters, const ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
-    *output = *input;
-    //std::cout << *output << std::endl;
-    *value = **output;
+    outputs.get<ptr_t>("output") = inputs.get<ptr_t>("input");
+    outputs.get<int>("value") = *outputs.get<ptr_t>("output");
   }
-  handle_t input;
-  handle_t output;
-  ecto::Handle<int> value;
 };
-struct Scatter
+struct Scatter: ecto::module_interface
 {
-  static void Initialize(ecto::tendrils& p)
+  void initialize(ecto::tendrils& p)
   {
     p.declare<int> ("n", "Number to scatter...", 2);
     p.declare<int> ("x", "The value to scatter...", 13);
   }
 
-  void configure(const ecto::tendrils& parameters, ecto::tendrils& inputs,
-      ecto::tendrils& outputs)
+  void configure(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     n_ = parameters.get<int> ("n");
     x_ = parameters.get<int> ("x");
     for (int i = 0; i < n_; i++)
     {
-      outputs.declare<int> (str(boost::format("out_%04d") % i),
-          str(boost::format("The %dth scatter") % i));
+      outputs.declare<int> (str(boost::format("out_%04d") % i), str(boost::format("The %dth scatter") % i));
     }
   }
-  void process(const ecto::tendrils& parameters, const ecto::tendrils& inputs,
-      ecto::tendrils& outputs)
+  void process(const ecto::tendrils& parameters, const ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     for (int i = 0; i < n_; i++)
     {
@@ -189,29 +172,26 @@ struct Scatter
 };
 
 template<typename ValueT>
-struct Gather
+struct Gather: ecto::module_interface
 {
   typedef ValueT value_type;
 
-  static void Initialize(ecto::tendrils& p)
+  void initialize(ecto::tendrils& p)
   {
     p.declare<int> ("n", "N to gather", 2);
   }
 
-  void configure(const ecto::tendrils& parameters, ecto::tendrils& inputs,
-      ecto::tendrils& outputs)
+  void configure(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     n_ = parameters.get<int> ("n");
     for (int ii = 0; ii < n_; ii++)
     {
-      inputs.declare<value_type> (str(boost::format("in_%04d") % ii),
-          "An " + ecto::name_of<value_type>() + "input.");
+      inputs.declare<value_type> (str(boost::format("in_%04d") % ii), "An " + ecto::name_of<value_type>() + "input.");
     }
     outputs.declare<value_type> ("out", "The sum of all inputs.");
   }
 
-  void process(const ecto::tendrils& parameters, const ecto::tendrils& inputs,
-      ecto::tendrils& outputs)
+  void process(const ecto::tendrils& parameters, const ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     //SHOW();
     value_type& out = outputs.get<value_type> ("out");

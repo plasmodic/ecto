@@ -6,9 +6,9 @@ class Module(_module_base):
 
         _module_base.__init__(self)
 
-        self.Initialize(self.params)
+        _module_base.initialize(self)
 
         for k, v in kwargs.iteritems():
             self.params[k].set(v)
 
-        self.configure()
+        _module_base.configure(self)

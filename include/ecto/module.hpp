@@ -35,6 +35,7 @@
 
 #include <ecto/tendril.hpp>
 #include <ecto/tendrils.hpp>
+#include <ecto/util.hpp>
 
 #include <map>
 
@@ -48,82 +49,113 @@ namespace ecto
 struct module: boost::noncopyable
 {
   typedef boost::shared_ptr<module> ptr; //!< A convenience pointer typedef
-  typedef boost::function<void(const tendrils& params, tendrils& inputs, tendrils& outputs)> f_conf;
-  typedef boost::function<void(const tendrils& params, const tendrils& inputs, tendrils& outputs)> f_proc;
 
-  module(f_conf conf, f_proc proc):configurator(conf),processor(proc),dirty_(true){}
+  module();
   ~module();
 
-  /**
-   *\brief Member function to call the static Initialize, this is a convenience thing.
-   */
-  template<typename T>
-  void initialize()
-  {
-    T::Initialize(parameters);
-  }
 
+  void initialize();
   void configure();
   void process();
-
-
-  /**
-   *
-   * @param output The key to the output. the output will be the source to the input.
-   * @param to The pointer to the module that should be connected.
-   * @param input The key to the input tendril in the to module.
-   */
-  void connect(const std::string& output, ptr to, const std::string& input);
+  void reconfigure();
+  void destroy();
 
   /**
-   * \brief Mark this module dirty or clean
-   * @param hmm set dirty to this, true if it should be dirty.
+   * \brief Mark this module dirty, meaning that it needs to recompute its outputs,
+   * as either inputs have changed, or parameters have been changed.
    */
-  void dirty(bool hmm);
+  void mark_dirty();
+
+  /**
+   * \brief Mark this module clean, meaning that it should not need to recompute its outputs.
+   */
+  void mark_clean();
+
   /**
    * \brief test whether the module is dirty or not.
-   * @return
+   * @return true if the module is dirty
    */
   bool dirty() const;
+
+  /**
+   * \brief test whether the module is clean or not.
+   * @return true if the module is clean, and should not need to be processed
+   */
+  bool clean() const;
 
   /**
    * \brief Grab the name of the child class.
    * @return
    */
-  const std::string& name()
-  {
-    return name_;
-  }
-  f_conf configurator;
-  f_proc processor;
+  virtual const std::string& name() const = 0;
+
   tendrils parameters, inputs, outputs;
+
 protected:
-  std::string name_;
-private:
+  virtual void dispatch_initialize(tendrils& t) = 0;
+  virtual void dispatch_configure(const tendrils& params, tendrils& inputs, tendrils& outputs) = 0;
+  virtual void dispatch_process(const tendrils& params, const tendrils& inputs, tendrils& outputs) = 0;
+  virtual void dispatch_reconfigure(const tendrils& params) = 0;
+  virtual void dispatch_destroy() = 0;
+
   bool dirty_;
 };
 
 template<typename Module>
 struct module_: module
 {
-  //these allow for non ambiguous init of the functions.
-  //typedef void(*Initialize_sig)(const tendrils& params, tendrils& inputs, tendrils& outputs);
-  typedef void(Module::*configure_sig)(const tendrils& params, tendrils& inputs, tendrils& outputs);
-  typedef void(Module::*process_sig)(const tendrils& params, const tendrils& inputs, tendrils& outputs);
-  module_() :
-    module(//&Module::Initialize,
-        boost::bind(&Module::configure, &m_, _1, _2, _3),
-        boost::bind(&Module::process, &m_, _1, _2, _3))
+  void dispatch_initialize(tendrils& t)
   {
-    module::name_ = name_of<Module>();
+    thiz.initialize(t);
   }
-  Module m_;
+  void dispatch_configure(const tendrils& params, tendrils& inputs, tendrils& outputs)
+  {
+    thiz.configure(params, inputs, outputs);
+  }
+  void dispatch_process(const tendrils& params, const tendrils& inputs, tendrils& outputs)
+  {
+    thiz.process(params, inputs, outputs);
+  }
+  void dispatch_reconfigure(const tendrils& params)
+  {
+    thiz.reconfigure(params);
+  }
+  void dispatch_destroy()
+  {
+    thiz.destroy();
+  }
+  const std::string& name() const
+  {
+    return MODULE_TYPE_NAME;
+  }
+  Module thiz;
+  static const std::string MODULE_TYPE_NAME;
+};
+
+template <typename Module>
+const std::string module_<Module>::MODULE_TYPE_NAME = ecto::name_of<Module>();
+
+
+/**
+ * \brief Default implementations of the module interface.
+ */
+struct module_interface
+{
+  void initialize(tendrils& params);
+  void configure(const tendrils& parms, tendrils& in, tendrils& out);
+  void process(const tendrils& parms, const tendrils& in, tendrils& out);
+  void reconfigure(const tendrils& params);
+  void destroy();
+  void finish();
+  void register_finish_handler(boost::function<void()> handler);
+private:
+  boost::function<void()> finish_handler_;
 };
 
 template<typename T>
 module::ptr create_module()
 {
-  module::ptr p(new module_<T>());
+  module::ptr p(new module_<T> ());
   return p;
 }
 

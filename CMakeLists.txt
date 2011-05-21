@@ -55,6 +55,7 @@ set(ecto_HEADERS
   include/ecto/tendrils.hpp
   include/ecto/util.hpp
   )
+  
 set (ecto_PYTHON_HEADERS
   include/ecto/python/copy_suite.hpp
   include/ecto/python/raw_constructor.hpp
@@ -67,6 +68,7 @@ INSTALL(FILES ${ecto_HEADERS}
   DESTINATION include/ecto
   COMPONENT ecto
   )
+  
 INSTALL(FILES ${ecto_PYTHON_HEADERS}
   DESTINATION include/ecto/python
   COMPONENT ecto

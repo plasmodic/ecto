@@ -45,10 +45,6 @@ def test_reconnect():
         assert(False)
     except RuntimeError,e:
         pass
-        #print "Reconnect caught: ",e
-        
-#    m.outputs["out"].disconnect()
-#    gather.inputs["in_0001"].disconnect()
     plasm.disconnect(m, "out", gather , "in_0001")
     plasm.connect(m, "out", gather , "in_0001")
 

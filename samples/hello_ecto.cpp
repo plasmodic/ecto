@@ -35,9 +35,9 @@ namespace hello_ecto
 
 using ecto::tendrils;
 
-struct Printer
+struct Printer :  ecto::module_interface
 {
-  static void Initialize(tendrils& params)
+  void initialize(tendrils& params)
   {
     params.declare<std::string> ("str", "The default string to print", "hello");
   }
@@ -53,12 +53,8 @@ struct Printer
   }
 };
 
-struct Reader
+struct Reader : ecto::module_interface
 {
-  static void Initialize(tendrils& /*params*/)
-  {
-  }
-
   void configure(const tendrils& parms, tendrils& in, tendrils& out)
   {
     out.declare<std::string> ("output", "Output from standard in");
