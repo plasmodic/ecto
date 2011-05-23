@@ -22,12 +22,14 @@ tendril::~tendril()
 }
 
 tendril::tendril(const tendril& rhs) :
-  holder_(rhs.holder_->clone()), doc_(rhs.doc_)
+  holder_(rhs.holder_), doc_(rhs.doc_)
 {
 }
 tendril& tendril::operator=(const tendril& rhs)
 {
-  copy_value(rhs);
+  if (this == &rhs)
+    return *this;
+  holder_ = rhs.holder_;
   doc_ = rhs.doc_;
   return *this;
 }
@@ -40,10 +42,9 @@ void tendril::copy_value(const tendril& rhs)
   {
     holder_ = rhs.holder_->clone();
   }
-  if (compatible_type(rhs))
+  else if (compatible_type(rhs))
   {
     *holder_ = *rhs.holder_;
-
   }
 }
 
@@ -74,6 +75,7 @@ tendril::holder_base& tendril::holder_base::operator=(const tendril::holder_base
   rhs.copy_to(*this);
   return *this;
 }
+
 tendril::holder_base::~holder_base()
 {
 }

@@ -15,18 +15,19 @@ Contents:
    building
    client_usage
    layout
+   lifecycle
 
 ecto at a glance
-=====================================
+---------------------------------
     * Simple processing node interface for building your own modules.
     
     .. code-block:: c++
         
         struct MyModule
         {
-            static void Initialize(ecto::tendrils& params);
-            void configure(const tendrils& parms, tendrils& inputs, tendrils& outputs);
-            void process(const tendrils& parms, const tendrils& inputs, tendrils& outputs);
+            void initialize(tendrils& params);
+            void configure(const tendrils& params, tendrils& inputs, tendrils& outputs);
+            void process(const tendrils& params, const tendrils& inputs, tendrils& outputs);
         }
     
     * Inputs, outputs and parameters are templated, and type erasing, giving typesafety and the ability to use your
@@ -34,13 +35,13 @@ ecto at a glance
       
     .. code-block:: c++
         
-        void MyModule::Initialize(ecto::tendrils& params)
+        void MyModule::initialize(ecto::tendrils& params)
         {
             params.declare<Foo>("foo","Foo is for spam",Foo(3.14));
             params.declare<std::string>("str","str is a standard string.","default");
         }
     
-    * Python is used as the plugin architecture of ecto, however, exposing your modules to python is dead simple.
+    * Python is used as the plugin architecture of ecto. Exposing your modules to python is dead simple.
       The use of boost::python means that the python bindings for your data types are an optional powerful tool.
       
     .. code-block:: c++
@@ -54,8 +55,8 @@ ecto at a glance
     * ecto forces your modules to be somewhat self documenting, and allows full
       introspection from python and c++, including
       type names, docstrings and variable names.
-    * The plasm (DAG) executes in compiled code,
-    * Python is used for declaring the processing graph, plasm.
+    * The plasm (DAG) executes in compiled code.
+    * Python is used for declaring the processing graph, or as its known to ecto, the *plasm*.
     
     .. code-block:: python
     

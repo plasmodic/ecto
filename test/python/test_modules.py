@@ -28,6 +28,7 @@ def right_type(g):
     assert g.outputs.out == 24.5
 def already_set(g):
     g.outputs.declare("out","doc","str")
+    print g.outputs.out
 def novel_sets(g):
     g.outputs.declare("out2","doc",1.0)
     assert g.outputs.out2 == 1.0

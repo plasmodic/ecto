@@ -1,3 +1,7 @@
-To generate docs, use cmake.
-From the build directory run:
-make doc
+To generate api docs, use cmake. make doc
+
+For sphinx docs, run make from this directory.
+
+You will need to install : https://github.com/michaeljones/sphinx-to-github
+
+

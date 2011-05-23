@@ -47,7 +47,31 @@ public:
   void declare(const std::string& name,
       const std::string& doc = "TODO: doc str me.", const T& default_val = T())
   {
-    (*this)[name] = tendril(default_val,doc);
+    map_t::iterator it = find(name);
+    //if there are no exiting tendrils by the given name,
+    //just add it.
+    if (it == end())
+    {
+      insert(std::make_pair(name, tendril(default_val, doc)));
+    }
+    else // we want to just return the existing tendril (so that modules preconnected don't get messed up)...
+    {
+      //there is already an existing tendril with the given name
+      //check if the types are the same
+      if (!it->second.is_type<T> ())
+      {
+        std::stringstream ss;
+        ss
+            << "Your types aren't the same, this could lead to very undefined behavior...";
+        ss << " old type = " << it->second.type_name() << " new type = "
+            << name_of<T> () << std::endl;
+        throw std::logic_error(ss.str());
+      }else
+      {
+      	it->second = tendril(default_val,doc);
+      }
+    }
+    
   }
 
   /**

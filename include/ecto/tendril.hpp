@@ -219,18 +219,26 @@ private:
     virtual bool is_type(std::type_info const& ti) const = 0;
     virtual void setPython(boost::python::object o) = 0;
     virtual boost::python::object getPython() const = 0;
-    virtual void copy_to(holder_base& holder) const = 0;
+    virtual void copy_to(holder_base& holder) const  = 0;
     virtual ptr clone() const = 0;
 
     template<typename T>
     const T& getT() const
     {
-      return *static_cast<const T*>(get());
+       void* tval = const_cast<holder_base*>(this)->get();
+      if(tval==NULL)
+        throw std::logic_error(type_name() + " is not safe when getting by type");
+      return *static_cast< T*>(tval);
     }
     template<typename T>
     T& getT()
     {
-      return *static_cast<T*>(get());
+      void* tval = get();
+
+      if(tval==NULL)
+        throw std::logic_error(type_name() + " is not safe when getting by type");
+
+      return *static_cast<T*>(tval);
     }
 
     //convenience functions for checking types
@@ -258,47 +266,6 @@ private:
   std::string doc_;
 };
 
-template<typename T>
-struct ConstHandle
-{
-  ConstHandle(const tendril& t) :
-    t(t)
-  {
-  }
-  ConstHandle()
-  {
-  }
-  const T& operator*() const
-  {
-    return t.get<T> ();
-  }
-  const T* operator->() const
-  {
-    return &t.get<T> ();
-  }
-  tendril t;
-};
-
-template<typename T>
-struct Handle
-{
-  Handle(const tendril& t) :
-    t(t)
-  {
-  }
-  Handle()
-  {
-  }
-  T& operator*()
-  {
-    return t.get<T> ();
-  }
-  T* operator->()
-  {
-    return &t.get<T> ();
-  }
-  tendril t;
-};
 template<typename T>
 bool tendril::holder_base::check(tendril::holder_base& i)
 {
@@ -338,6 +305,13 @@ void* tendril::holder<T>::get()
   return &t;//.get();
 }
 
+template<>
+inline void* tendril::holder<boost::python::object>::get()
+{
+  return NULL; //unsafe to dereference the boost python object.
+}
+
+
 template<typename T>
 void tendril::holder<T>::setPython(boost::python::object o)
 {
@@ -376,7 +350,11 @@ inline boost::python::object tendril::holder<boost::python::object>::getPython()
 template<typename T>
 void  tendril::holder<T>::copy_to(holder_base& holder) const
 {
-  holder.getT<T>() = t;
+  void* tval = holder.get();
+  if(tval != NULL)
+    *static_cast<T*>(tval) = t;
+  else
+    holder.setPython(getPython());
 }
 
 template<>
@@ -384,6 +362,8 @@ inline void  tendril::holder<boost::python::object>::copy_to(holder_base& holder
 {
   holder.setPython(t);
 }
+
+
 
 template<typename T>
 tendril::holder_base::ptr  tendril::holder<T>::clone() const
