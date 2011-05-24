@@ -38,6 +38,8 @@ set(ecto_PYTHONPATH ${LIBRARY_OUTPUT_PATH} ${CMAKE_SOURCE_DIR}/python)
 set(ecto_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/include)
 set(ecto_LIBRARIES ecto)
 set(ecto_LIBRARIES_DIR ${LIBRARY_OUTPUT_PATH})
+ 
+set(ECTO_CONFIG_PATH  ${CMAKE_SOURCE_DIR}/cmake)
 
 configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoConfig.cmake.in 
   ${CMAKE_BINARY_DIR}/ectoConfig.cmake @ONLY)

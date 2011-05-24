@@ -61,7 +61,7 @@ foreach(p ${ecto_PYTHONPATH_})
     endif()
 endforeach()
 set(ecto_user_PYTHONPATH ${CMAKE_BINARY_DIR})
-configure_file(@CMAKE_INSTALL_PREFIX@/share/ecto/python_path.sh.user.in 
+configure_file(@ECTO_CONFIG_PATH@/python_path.sh.user.in 
   ${CMAKE_BINARY_DIR}/python_path.sh
   )
 message(STATUS "ecto === Source the python_path.sh in your build folder to setup your python path.")

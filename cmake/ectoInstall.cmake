@@ -34,8 +34,8 @@ set(ecto_LIBRARIES ecto)
 set(ecto_LIBRARIES_DIR ${CMAKE_INSTALL_PREFIX}/lib)
 set(ecto_PYTHON_INSTALL ${PYTHON_PACKAGES_PATH} )
 set(ecto_PYTHONPATH ${CMAKE_INSTALL_PREFIX}/${ecto_PYTHON_INSTALL})
-configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoConfig.cmake.in 
-  ${CMAKE_BINARY_DIR}/unix_install/ectoConfig.cmake @ONLY)
+
+
 
 #install the ectoConfig.cmake
 INSTALL(FILES ${CMAKE_BINARY_DIR}/unix_install/ectoConfig.cmake
@@ -59,6 +59,7 @@ install(FILES ${ecto_PYTHON_FILES}
   DESTINATION ${ecto_PYTHON_INSTALL}/ecto COMPONENT ecto_python
   )
 
+
 configure_file(${CMAKE_SOURCE_DIR}/cmake/python_path.sh.inst.in 
   ${CMAKE_BINARY_DIR}/unix_install/python_path.sh
   )
@@ -69,3 +70,8 @@ install(FILES ${CMAKE_BINARY_DIR}/unix_install/python_path.sh
 install(FILES ${CMAKE_SOURCE_DIR}/cmake/python_path.sh.user.in
         DESTINATION share/ecto COMPONENT ecto_python
   )
+  
+set(ECTO_CONFIG_PATH  ${CMAKE_INSTALL_PREFIX}/share/ecto)
+configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoConfig.cmake.in 
+  ${CMAKE_BINARY_DIR}/unix_install/ectoConfig.cmake @ONLY)
+  
