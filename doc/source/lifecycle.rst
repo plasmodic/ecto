@@ -2,7 +2,7 @@ life cycle of an ecto module
 ================================
 The life cycle of the ecto module as a state machine.
     
-.. image:: images/modulestatemachine.png
+    .. image:: images/modulestatemachine.png
     
 The states of the ecto module are as follows:
   
