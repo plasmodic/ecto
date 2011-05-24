@@ -7,3 +7,8 @@ ectomodule(hello_ecto
     hello_ecto.cpp
 )
 
+#install the main shared lib
+install(PROGRAMS ecto_doc.py
+  DESTINATION bin
+  COMPONENT ecto_python
+  )

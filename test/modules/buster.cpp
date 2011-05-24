@@ -31,6 +31,7 @@
 #include <boost/format.hpp>
 #include <boost/foreach.hpp>
 
+using ecto::tendrils;
 namespace buster
 {
 
@@ -98,6 +99,27 @@ struct Generate: ecto::module_interface
     outputs.get<double> ("out") += step_;
   }
 };
+
+struct Quitter: ecto::module_interface
+{
+  void initialize(tendrils& params)
+  {
+    params.declare<std::string> ("str", "The default string to print", "EXIT");
+  }
+
+  void configure(const tendrils& parms, tendrils& in, tendrils& out)
+  {
+    in.declare<std::string> ("str", "The string to print.",
+        "");
+  }
+
+  void process(const tendrils& parms, const tendrils& in, tendrils& /*out*/)
+  {
+    if (in.get<std::string> ("str") == parms.get<std::string> ("str"))
+      finish();
+  }
+};
+
 
 struct Multiply: ecto::module_interface
 {
@@ -225,5 +247,6 @@ BOOST_PYTHON_MODULE(buster)
   ecto::wrap<Scatter>("Scatter", "Scatter a value...");
   ecto::wrap<Gather<int> >("Gather", "Gather a scattered value...");
   ecto::wrap<Gather<double> >("Gather_double", "Gather a scattered value...");
+  ecto::wrap<Quitter>("Quitter", "Will quit the graph on an appropriate input.");
   boost::python::def("make_pod_tendril", buster::makePodTendril);
 }

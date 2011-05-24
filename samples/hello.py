@@ -2,6 +2,8 @@
 import ecto #ecto core library
 import hello_ecto #a user library, that has a few ecto modules
 
+debug = False
+
 def mygraph():
     #instantiate a plasm, our DAG structure
     plasm = ecto.Plasm()
@@ -18,17 +20,15 @@ def mygraph():
     plasm.connect(r, "output", p1, "str")
     plasm.connect(r, "output", p2, "str")
     
-    #render the DAG with dot
-    print plasm.viz()
-    ecto.view_plasm(plasm)
+    if debug:
+        #render the DAG with dot
+        print plasm.viz()
+        ecto.view_plasm(plasm)
     
     #an execution loop
     print "Enter input, q to quit"
     while r.outputs.output != 'q':
         plasm.execute() #this executes the graph in compiled code.
-    quitter = hello_ecto.Quitter(str="quit")
-    plasm.connect(r,"output",quitter, "str")
-    plasm.spin()
 
 if __name__ == '__main__':
     mygraph()
