@@ -53,7 +53,6 @@ struct module: boost::noncopyable
   module();
   ~module();
 
-
   void initialize();
   void configure();
   void process();
@@ -89,30 +88,42 @@ struct module: boost::noncopyable
    */
   virtual const std::string& name() const = 0;
 
+  void register_finish_handler(boost::function<void()> handler);
+
   tendrils parameters, inputs, outputs;
 
 protected:
   virtual void dispatch_initialize(tendrils& t) = 0;
-  virtual void dispatch_configure(const tendrils& params, tendrils& inputs, tendrils& outputs) = 0;
-  virtual void dispatch_process(const tendrils& params, const tendrils& inputs, tendrils& outputs) = 0;
+  virtual void dispatch_configure(const tendrils& params, tendrils& inputs,
+      tendrils& outputs) = 0;
+  virtual void dispatch_process(const tendrils& params, const tendrils& inputs,
+      tendrils& outputs) = 0;
   virtual void dispatch_reconfigure(const tendrils& params) = 0;
   virtual void dispatch_destroy() = 0;
+  virtual void
+  dispatch_register_finish_handler(boost::function<void()> handler) = 0;
 
   bool dirty_;
 };
 
-template<typename Module>
+/**
+ * \brief module_<T> is a convenience structure for registering an arbitrary class
+ * with the the module. This adds a barrier between client code and the module.
+ */
+template<class Module>
 struct module_: module
 {
   void dispatch_initialize(tendrils& t)
   {
     thiz.initialize(t);
   }
-  void dispatch_configure(const tendrils& params, tendrils& inputs, tendrils& outputs)
+  void dispatch_configure(const tendrils& params, tendrils& inputs,
+      tendrils& outputs)
   {
     thiz.configure(params, inputs, outputs);
   }
-  void dispatch_process(const tendrils& params, const tendrils& inputs, tendrils& outputs)
+  void dispatch_process(const tendrils& params, const tendrils& inputs,
+      tendrils& outputs)
   {
     thiz.process(params, inputs, outputs);
   }
@@ -128,30 +139,79 @@ struct module_: module
   {
     return MODULE_TYPE_NAME;
   }
+  void dispatch_register_finish_handler(boost::function<void()> handler)
+  {
+    thiz.register_finish_handler(handler);
+  }
   Module thiz;
   static const std::string MODULE_TYPE_NAME;
 };
 
-template <typename Module>
+template<typename Module>
 const std::string module_<Module>::MODULE_TYPE_NAME = ecto::name_of<Module>();
-
 
 /**
  * \brief Default implementations of the module interface.
  */
 struct module_interface
 {
+  /**
+   * \brief Use initialize to declare and setup your parameters.
+   *
+   * @param params The parameters to be declared.
+   */
   void initialize(tendrils& params);
-  void configure(const tendrils& parms, tendrils& in, tendrils& out);
-  void process(const tendrils& parms, const tendrils& in, tendrils& out);
+  /**
+   * \brief configure is called after parameters have been declared and the user has had a chance to initialize them.
+   *
+   * You should declare your inputs and outputs from within this call.
+   *
+   * @param params The parameters the module. You may conditionally declare inputs and outputs depending on the parameters.
+   * @param in The inputs, to be declared.
+   * @param out The outputs, to be declared.
+   */
+  void configure(const tendrils& params, tendrils& in, tendrils& out);
+  /**
+   *
+   * @param params The parameters to the module. All parameters declared in initialize will exist in this object.
+   * @param in The inputs, previously declared in configure. These are const and may not be written to in the exectution of this function.
+   * @param out The outputs, previously declared in configure. These are non const and should be written to with a get<T>() expression.
+   */
+  void process(const tendrils& params, const tendrils& in, tendrils& out);
+  /**
+   * \brief Called when ever parameters change. This may be used to do light weight work, that does
+   * not involve changing the inputs or outputs of the module.
+   *
+   * This should be implemented by the client
+   * @param params The parameters that have changed. Hint - all parameters declared in the initialize function will exist
+   * in this tendrils object. Not all of the params have necessarily changed.
+   */
   void reconfigure(const tendrils& params);
+  /**
+   * \brief Called when the module is about to be deallocated.
+   *
+   * This should be implemented by the client. Will be called before shutdown.
+   */
   void destroy();
+
+  /**
+   * \brief Call this to request the system to stop.
+   */
   void finish();
+  /**
+   * This is called by the system if they wish to register a callback that signals that the system should finish
+   * and exit gracefully.
+   * @param handler to be called when finish is called.
+   */
   void register_finish_handler(boost::function<void()> handler);
 private:
   boost::function<void()> finish_handler_;
 };
 
+/**
+ * Create a module from an type that has all of the proper interface functions defined.
+ * @return A module ptr.
+ */
 template<typename T>
 module::ptr create_module()
 {

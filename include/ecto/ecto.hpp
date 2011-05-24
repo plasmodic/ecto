@@ -37,8 +37,8 @@
 //ecto includes
 #include <ecto/module.hpp>
 #include <ecto/tendril.hpp>
-#include <ecto/plasm.hpp>
 #include <ecto/tendrils.hpp>
+#include <ecto/plasm.hpp>
 #include <ecto/util.hpp>
 #include <ecto/python/raw_constructor.hpp>
 
@@ -103,8 +103,8 @@ void wrap(const char* name, std::string doc_str = "A module...")
 {
   typedef ecto::module_<T> module_t;
   //SHOW();
-  boost::python::class_<module_t, boost::python::bases<module>, boost::shared_ptr<module_t>,
-      boost::noncopyable> m(name);
+  boost::python::class_<module_t, boost::python::bases<module>,
+      boost::shared_ptr<module_t>, boost::noncopyable> m(name);
   typedef doc<T> docT;
   docT::name = name;
   docT::doc_str = doc_str;

@@ -26,6 +26,9 @@ def mygraph():
     print "Enter input, q to quit"
     while r.outputs.output != 'q':
         plasm.execute() #this executes the graph in compiled code.
+    quitter = hello_ecto.Quitter(str="quit")
+    plasm.connect(r,"output",quitter, "str")
+    plasm.spin()
 
 if __name__ == '__main__':
     mygraph()

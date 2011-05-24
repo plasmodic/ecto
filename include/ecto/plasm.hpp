@@ -100,6 +100,7 @@ public:
    * \brief This executes the graph, by executing all nodes in dependency order.
    */
   void execute();
+  void spin();
   /**
    * \brief Mark the given module dirty. This will recurse through the graph, dirting all modules downstream.
    * @param m The module to mark dirty.

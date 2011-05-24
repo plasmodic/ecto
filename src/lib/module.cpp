@@ -38,6 +38,11 @@ void module::destroy()
   dispatch_destroy();
 }
 
+void module::register_finish_handler(boost::function<void()> handler)
+{
+  dispatch_register_finish_handler(handler);
+}
+
 void module::mark_clean()
 {
   dirty_ = false;

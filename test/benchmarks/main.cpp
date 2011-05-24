@@ -1,4 +1,5 @@
 #include "push_ups.cpp"
+#include <ecto/plasm.hpp>
 
 #include <iomanip>
 #include <boost/progress.hpp>

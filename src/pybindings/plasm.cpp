@@ -1,7 +1,5 @@
 #include <ecto/plasm.hpp>
 #include <ecto/module.hpp>
-//boost python junk
-//#include "ecto_split.h"
 
 #include <boost/python.hpp>
 #include <boost/python/args.hpp>
@@ -9,6 +7,7 @@
 #include <boost/python/suite/indexing/map_indexing_suite.hpp>
 
 #include "plasm_impl.hpp"
+
 namespace bp = boost::python;
 using bp::arg;
 namespace ecto
@@ -44,14 +43,16 @@ struct plasm_wrapper
     p.def("connect", &plasm::connect,
         bp::args("from_module", "output_name", "to_module", "intput_name"));
     p.def("disconnect", &plasm::disconnect,
-            bp::args("from_module", "output_name", "to_module", "intput_name"));
+        bp::args("from_module", "output_name", "to_module", "intput_name"));
     p.def("mark_dirty", &plasm::mark_dirty);
-//    p.def("set_input", &plasm::set_input);
-//    p.def("set_output", &plasm::set_output);
-//    p.def("clear_input", &plasm::clear_input);
-//    p.def("clear_output", &plasm::clear_output);
-    p.def("execute", &plasm::execute);
-    p.def("go", &plasm::go);
+    p.def("execute", &plasm::execute,
+        "Executes the graph in topological order. Every node will be executed.");
+    p.def(
+        "spin",
+        &plasm::spin,
+        "Causes the graph to execute continuously until finish is called by one of the modules.");
+    p.def("go", &plasm::go,
+        "Executes the graph, given an outputs node, and recursively pulls inputs.");
     p.def("viz", wrapViz, "Get a graphviz string representation of the plasm.");
     p.def(
         "vertices",

@@ -343,7 +343,7 @@ struct ModuleGraph
 struct plasm::impl
 {
   impl() :
-    dirty_(true)
+    dirty_(true),finished_(false)
   {
   }
 
@@ -375,7 +375,12 @@ struct plasm::impl
           }
   }
 
-  bool dirty_;
+  void signal_finished()
+  {
+    finished_ = true;
+  }
+
+  bool dirty_,finished_;
   ModuleGraph modules_;
   std::list<ModuleGraph::Vertex_Desc> stack_;
 };

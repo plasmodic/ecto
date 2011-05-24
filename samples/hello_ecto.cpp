@@ -35,7 +35,7 @@ namespace hello_ecto
 
 using ecto::tendrils;
 
-struct Printer :  ecto::module_interface
+struct Printer: ecto::module_interface
 {
   void initialize(tendrils& params)
   {
@@ -44,7 +44,8 @@ struct Printer :  ecto::module_interface
 
   void configure(const tendrils& parms, tendrils& in, tendrils& out)
   {
-    in.declare<std::string> ("str", "The string to print.", parms.get<std::string> ("str"));
+    in.declare<std::string> ("str", "The string to print.",
+        parms.get<std::string> ("str"));
   }
 
   void process(const tendrils& parms, const tendrils& in, tendrils& /*out*/)
@@ -53,7 +54,27 @@ struct Printer :  ecto::module_interface
   }
 };
 
-struct Reader : ecto::module_interface
+struct Quitter: ecto::module_interface
+{
+  void initialize(tendrils& params)
+  {
+    params.declare<std::string> ("str", "The default string to print", "EXIT");
+  }
+
+  void configure(const tendrils& parms, tendrils& in, tendrils& out)
+  {
+    in.declare<std::string> ("str", "The string to print.",
+        "");
+  }
+
+  void process(const tendrils& parms, const tendrils& in, tendrils& /*out*/)
+  {
+    if (in.get<std::string> ("str") == parms.get<std::string> ("str"))
+      finish();
+  }
+};
+
+struct Reader: ecto::module_interface
 {
   void configure(const tendrils& parms, tendrils& in, tendrils& out)
   {
@@ -75,4 +96,6 @@ BOOST_PYTHON_MODULE(hello_ecto)
   using namespace hello_ecto;
   ecto::wrap<Printer>("Printer", "Prints a string input to standard output.");
   ecto::wrap<Reader>("Reader", "Reads input from standard input.");
+  ecto::wrap<Quitter>("Quitter", "Will quit the graph on an appropriate input.");
+
 }

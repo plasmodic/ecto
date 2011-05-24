@@ -14,7 +14,7 @@ Layout
       python unit tests of ecto. Try installing python-nose, and running nosetests from within this dir.
   
 libraries
-================================
+---------------------------------------
   - libecto.so
       c++ library, clients must link against this and the 
   - ecto.so

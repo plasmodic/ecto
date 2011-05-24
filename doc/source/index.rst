@@ -10,7 +10,7 @@ Contents:
 ================================
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 3
    
    building
    client_usage
@@ -23,7 +23,7 @@ ecto at a glance
     
     .. code-block:: c++
         
-        struct MyModule
+        struct MyModule : ecto::module_interface
         {
             void initialize(tendrils& params);
             void configure(const tendrils& params, tendrils& inputs, tendrils& outputs);
@@ -91,7 +91,7 @@ ecto at a glance
     
     .. image:: images/plasm.png
     
-    .. code-block:: viz
+    .. code-block:: txt
         
         digraph G {
             0[label="hello_ecto::Reader",fillcolor=green, style="rounded,filled"];

@@ -61,6 +61,14 @@ struct modwrap: module, bp::wrapper<module>
     else
       throw std::logic_error("destroy is not implemented it seems");
   }
+  void finish()
+  {
+    finish_handler_();
+  }
+  void dispatch_register_finish_handler(boost::function<void()> handler)
+  {
+   finish_handler_ = handler;
+  }
   const std::string& name() const
   {
     SHOW();
@@ -81,6 +89,7 @@ struct modwrap: module, bp::wrapper<module>
     std::string nm = bp::extract<std::string>(n);
     return nm;
   }
+  boost::function<void()> finish_handler_;
 };
 
 const tendrils& inputs(module& mod)
@@ -106,6 +115,7 @@ void wrapModule()
   m_base.def("destroy", &module::destroy);
   m_base.def("process", (void(module::*)()) &module::process);
   m_base.def("configure", ((void(module::*)()) &module::configure));
+  m_base.def("finish", ((void(module::*)()) &modwrap::finish));
   m_base.add_property("inputs", make_function(&inputs, bp::return_internal_reference<>()));
   m_base.add_property("outputs", make_function(outputs, bp::return_internal_reference<>()));
   m_base.add_property("params", make_function(params, bp::return_internal_reference<>()));

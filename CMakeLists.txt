@@ -10,7 +10,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
 execute_process(COMMAND mkdir -p ${LIBRARY_OUTPUT_PATH}/ecto)
 
-execute_process(COMMAND ln -s ${CMAKE_SOURCE_DIR}/python/ecto/__init__.py
+execute_process(COMMAND ln -sf ${CMAKE_SOURCE_DIR}/python/ecto/__init__.py
   WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/lib/ecto
   )
 
