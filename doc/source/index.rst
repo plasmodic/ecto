@@ -91,7 +91,7 @@ ecto at a glance
     
     .. image:: images/plasm.png
     
-    .. code-block:: txt
+    .. code-block :: c++
         
         digraph G {
             0[label="hello_ecto::Reader",fillcolor=green, style="rounded,filled"];
