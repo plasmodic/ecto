@@ -48,15 +48,15 @@ struct FooPODModule
     parameters.declare<std::string> ("str", "I print this:", "Hello World");
   }
 
-  static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs,
-      ecto::tendrils& outputs)
+  static void declare_io(const ecto::tendrils& parameters,
+      ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     inputs.declare<FooPOD> ("foo", "A string to print");
     outputs.declare<FooPOD> ("foo", "A string to print");
   }
 
-  ecto::ReturnCode process(const ecto::tendrils& parameters, const ecto::tendrils& inputs,
-      ecto::tendrils& outputs)
+  ecto::ReturnCode process(const ecto::tendrils& parameters,
+      const ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     std::cout << inputs.get<FooPOD> ("foo").x << std::endl;
     outputs.get<FooPOD> ("foo").y = 3.14;
@@ -72,9 +72,8 @@ struct Printer
     parameters.declare<std::string> ("str", "I print this:", "Hello World");
   }
 
-
-  static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs,
-      ecto::tendrils& outputs)
+  static void declare_io(const ecto::tendrils& parameters,
+      ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     inputs.declare<std::string> ("str", "A string to print", "hello");
 
@@ -99,8 +98,8 @@ struct Generate
     parameters.declare<double> ("start", "My starting value", 0);
   }
 
-  static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs,
-      ecto::tendrils& outputs)
+  static void declare_io(const ecto::tendrils& parameters,
+      ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     outputs.declare<double> ("out", "output",
         parameters.get<double> ("start") - parameters.get<double> ("step"));
@@ -268,7 +267,8 @@ struct Gather
     n_ = parameters.get<int> ("n");
   }
 
-  ecto::ReturnCode process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
+  ecto::ReturnCode process(const ecto::tendrils& inputs,
+      ecto::tendrils& outputs)
   {
     //SHOW();
     value_type& out = outputs.get<value_type> ("out");
