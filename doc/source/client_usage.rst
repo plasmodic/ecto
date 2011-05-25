@@ -54,91 +54,82 @@ CMakeLists.txt
 
 ..code-block:: cmake
   
-  cmake_minimum_required(VERSION 2.8)
-  project(ecto_samples)
+    cmake_minimum_required(VERSION 2.8)
+    project(ecto_samples)
+    
+    find_package(ecto REQUIRED)
+    
+    ectomodule(hello_ecto
+        hello_ecto.cpp
+    )
+    
+    #optionally link against other libs
+    #ecto_link(hello_ecto
+    #  ${MY_EXTRA_LIBS}
+    #)
   
-  find_package(ecto REQUIRED)
-  
-  ectomodule(hello_ecto
-      hello_ecto.cpp
-  )
-  
-  #optionally link against other libs
-  #ecto_link(hello_ecto
-  #  ${MY_EXTRA_LIBS}
-  #)
   
 Here is hello_ecto.cpp
 ----------------------
 
 ..code-block:: c++
 
-  #include <ecto/ecto.hpp>
-  #include <iostream>
-  
-  namespace hello_ecto
-  {
-  
-  using ecto::tendrils;
-  
-  /* BOILER_PLATE_MODULE
-  struct MyModule
-  {
-    static void declare_params(tendrils& params);
-    static void declare_io(const tendrils& params, tendrils& in, tendrils& out);
-    void configure(tendrils& params);
-    int process(const tendrils& in, tendrils& out);
-  };
-  */
-  
-  struct Printer
-  {
-    static void declare_params(tendrils& params)
+    #include <ecto/ecto.hpp>
+    #include <iostream>
+    
+    namespace hello_ecto
     {
-      params.declare<std::string> ("str", "The default string to print", "hello");
-    }
-  
-    static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
+    
+    using ecto::tendrils;
+
+    struct Printer
     {
-      in.declare<std::string> ("str", "The string to print.", parms.get<std::string> ("str"));
-    }
-  
-    void configure(tendrils& params)
+      static void declare_params(tendrils& params)
+      {
+        params.declare<std::string> ("str", "The default string to print", "hello");
+      }
+    
+      static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
+      {
+        in.declare<std::string> ("str", "The string to print.", parms.get<std::string> ("str"));
+      }
+    
+      void configure(tendrils& params)
+      {
+        str_ = params.get<std::string> ("str");
+      }
+    
+      ecto::ReturnCode process(const tendrils& in, tendrils& /*out*/)
+      {
+        std::cout << in.get<std::string> ("str") << std::endl;
+        return ecto::eOK;
+      }
+      std::string str_;
+    };
+    
+    struct Reader
     {
-      str_ = params.get<std::string> ("str");
+      static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
+      {
+        out.declare<std::string> ("output", "Output from standard in");
+      }
+    
+      ecto::ReturnCode process(const tendrils& in, tendrils& out)
+      {
+        std::string o;
+        std::cin >> o;
+        out.get<std::string> ("output") = o;
+        return ecto::eOK;
+      }
+    };
+    
     }
-  
-    ecto::ReturnCode process(const tendrils& in, tendrils& /*out*/)
+    
+    BOOST_PYTHON_MODULE(hello_ecto)
     {
-      std::cout << in.get<std::string> ("str") << std::endl;
-      return ecto::eOK;
+      using namespace hello_ecto;
+      ecto::wrap<Printer>("Printer", "Prints a string input to standard output.");
+      ecto::wrap<Reader>("Reader", "Reads input from standard input.");
     }
-    std::string str_;
-  };
-  
-  struct Reader
-  {
-    static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
-    {
-      out.declare<std::string> ("output", "Output from standard in");
-    }
-  
-    ecto::ReturnCode process(const tendrils& in, tendrils& out)
-    {
-      std::string o;
-      std::cin >> o;
-      out.get<std::string> ("output") = o;
-      return ecto::eOK;
-    }
-  };
-  
-  }
-  
-  BOOST_PYTHON_MODULE(hello_ecto)
-  {
-    using namespace hello_ecto;
-    ecto::wrap<Printer>("Printer", "Prints a string input to standard output.");
-    ecto::wrap<Reader>("Reader", "Reads input from standard input.");
-  }
   
   

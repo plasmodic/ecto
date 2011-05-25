@@ -87,7 +87,7 @@ boost::shared_ptr<ecto::module_<T> > inspect(boost::python::tuple args, boost::p
   m->declare_params();
 
   bp::list l = kwargs.items();
-  for (unsigned j = 0; j < bp::len(l); ++j)
+  for (int j = 0; j < bp::len(l); ++j)
     {
       bp::object key = l[j][0];
       bp::object value = l[j][1];
