@@ -35,6 +35,16 @@ namespace hello_ecto
 
 using ecto::tendrils;
 
+/* BOILER_PLATE_MODULE
+struct MyModule
+{
+  static void declare_params(tendrils& params);
+  static void declare_io(const tendrils& params, tendrils& in, tendrils& out);
+  void configure(tendrils& params);
+  int process(const tendrils& in, tendrils& out);
+};
+*/
+
 struct Printer
 {
   static void declare_params(tendrils& params)
@@ -44,8 +54,12 @@ struct Printer
 
   static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
   {
-    in.declare<std::string> ("str", "The string to print.",
-        parms.get<std::string> ("str"));
+    in.declare<std::string> ("str", "The string to print.", parms.get<std::string> ("str"));
+  }
+
+  void configure(tendrils& params)
+  {
+    str_ = params.get<std::string> ("str");
   }
 
   ecto::ReturnCode process(const tendrils& in, tendrils& /*out*/)
@@ -53,6 +67,7 @@ struct Printer
     std::cout << in.get<std::string> ("str") << std::endl;
     return ecto::eOK;
   }
+  std::string str_;
 };
 
 struct Reader
