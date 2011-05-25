@@ -12,7 +12,8 @@ include_directories(
   ${Boost_INCLUDE_DIRS}
   )
 
-set(ECTO_DEP_LIBS ${Boost_LIBRARIES}
+set(ECTO_DEP_LIBS 
+  ${Boost_LIBRARIES}
   ${PYTHON_LIBRARIES}
 )
 

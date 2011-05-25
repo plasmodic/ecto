@@ -41,8 +41,11 @@ public:
 
   void stop()
   {
+    if (!workthread)
+      return;
     workthread->interrupt();
     workthread->join();
+    workthread.reset();
   }
 
   ~tendril_monitor() { stop(); }
@@ -54,15 +57,16 @@ private:
   {
     Handler handler_;
     boost::asio::io_service& serv;
+    boost::asio::io_service::work work;
     Tendril& tendril;
 
     wait_op(Handler h,
             boost::asio::io_service& serv_, 
             Tendril& t)
-      : handler_(h), serv(serv_), tendril(t)
+      : handler_(h), serv(serv_), work(serv), tendril(t)
     { };
 
-    ~wait_op() { std::cout << __PRETTY_FUNCTION__ << std::endl; }
+    ~wait_op() { std::cout << "work disappearing\n"; }
 
     void operator()()
     {
@@ -96,7 +100,7 @@ void incbox(Tendril& tendril, const boost::system::error_code& ec)
   {
     boost::unique_lock<boost::mutex> lock(tendril.mtx);
     ++tendril.counter;
-    tendril.value = std::string("TENDRILVALUE:::") 
+    tendril.value = std::string("::::") 
       + boost::lexical_cast<std::string>(tendril.counter);
   }
   tendril.cond.notify_all();
@@ -107,17 +111,20 @@ int main()
   std::cout << "start..." << std::endl;
   boost::asio::io_service io_service;
   tendril_monitor monitor(io_service);
-  monitor.async_wait(&(wait_handler<tendril<std::string> >), box);
+  monitor.async_wait(&wait_handler<tendril<std::string> >, box);
 
-  boost::asio::deadline_timer t(io_service), t2(io_service);
+  boost::asio::deadline_timer t(io_service), t2(io_service), t3(io_service), t4(io_service);
   t.expires_from_now(boost::posix_time::seconds(2));
   boost::function<void(const boost::system::error_code&)> fn;
   fn = boost::bind(&incbox<tendril<std::string> >, boost::ref(box), _1);
   t.async_wait(fn);
   t2.expires_from_now(boost::posix_time::seconds(3));
   t2.async_wait(fn);
-
-
+  t3.expires_from_now(boost::posix_time::seconds(4));
+  t3.async_wait(fn);
+  
+  t4.expires_from_now(boost::posix_time::seconds(6));
+  t4.async_wait(boost::bind(&tendril_monitor::stop, boost::ref(monitor)));
   std::cout << "run..." << std::endl;
   io_service.run();
   std::cout << "exit." << std::endl;
