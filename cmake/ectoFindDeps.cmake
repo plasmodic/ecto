@@ -1,5 +1,7 @@
 find_package(Boost COMPONENTS
   python
+  thread
+  system
   REQUIRED
   )
 
