@@ -237,7 +237,7 @@ private:
 
       if(tval==NULL)
         throw std::logic_error(type_name() + " is not safe when getting by type");
-
+ 
       return *static_cast<T*>(tval);
     }
 
@@ -323,7 +323,8 @@ void tendril::holder<T>::setPython(boost::python::object o)
         "Could not convert python object to type : " + type_name());
 }
 template<>
-inline void tendril::holder<boost::python::object>::setPython(boost::python::object o)
+inline void 
+tendril::holder<boost::python::object>::setPython(boost::python::object o)
 {
   t = o;
 }

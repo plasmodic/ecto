@@ -1,6 +1,5 @@
 #include <ecto/tendril.hpp>
-#include <boost/foreach.hpp>
-#define foreach BOOST_FOREACH
+
 namespace ecto
 {
 namespace
