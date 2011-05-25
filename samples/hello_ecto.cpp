@@ -53,7 +53,6 @@ struct Printer
     std::cout << in.get<std::string> ("str") << std::endl;
     return ecto::eOK;
   }
-
 };
 
 struct Reader

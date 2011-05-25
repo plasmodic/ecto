@@ -48,15 +48,13 @@ struct FooPODModule
     parameters.declare<std::string> ("str", "I print this:", "Hello World");
   }
 
-  static void declare_io(const ecto::tendrils& parameters,
-      ecto::tendrils& inputs, ecto::tendrils& outputs)
+  static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     inputs.declare<FooPOD> ("foo", "A string to print");
     outputs.declare<FooPOD> ("foo", "A string to print");
   }
 
-  ecto::ReturnCode process(const ecto::tendrils& parameters,
-      const ecto::tendrils& inputs, ecto::tendrils& outputs)
+  int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     std::cout << inputs.get<FooPOD> ("foo").x << std::endl;
     outputs.get<FooPOD> ("foo").y = 3.14;
@@ -72,15 +70,13 @@ struct Printer
     parameters.declare<std::string> ("str", "I print this:", "Hello World");
   }
 
-  static void declare_io(const ecto::tendrils& parameters,
-      ecto::tendrils& inputs, ecto::tendrils& outputs)
+  static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     inputs.declare<std::string> ("str", "A string to print", "hello");
 
   }
 
-  ecto::ReturnCode process(const ecto::tendrils& inputs,
-      ecto::tendrils& outputs)
+  int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     std::cout << inputs.get<std::string> ("str") << std::endl;
     return ecto::eOK;
@@ -93,16 +89,13 @@ struct Generate
 
   static void declare_params(tendrils& parameters)
   {
-    parameters.declare<double> ("step",
-        "The step with which i generate integers.", 2);
+    parameters.declare<double> ("step", "The step with which i generate integers.", 2);
     parameters.declare<double> ("start", "My starting value", 0);
   }
 
-  static void declare_io(const ecto::tendrils& parameters,
-      ecto::tendrils& inputs, ecto::tendrils& outputs)
+  static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
-    outputs.declare<double> ("out", "output",
-        parameters.get<double> ("start") - parameters.get<double> ("step"));
+    outputs.declare<double> ("out", "output", parameters.get<double> ("start") - parameters.get<double> ("step"));
   }
 
   void configure(tendrils& parameters)
@@ -110,11 +103,10 @@ struct Generate
     step_ = parameters.get<double> ("step");
   }
 
-  ecto::ReturnCode process(const ecto::tendrils& inputs,
-      ecto::tendrils& outputs)
+  int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     outputs.get<double> ("out") += step_;
-    return ecto::eOK;
+    return 0;
   }
 };
 
@@ -135,7 +127,7 @@ struct Quitter
     stop_word_ = parms.get<std::string> ("str");
   }
 
-  ecto::ReturnCode process(const tendrils& in, tendrils& /*out*/)
+  int process(const tendrils& in, tendrils& /*out*/)
   {
     if (in.get<std::string> ("str") == stop_word_)
       return ecto::eQUIT;
@@ -153,8 +145,7 @@ struct Multiply
     p.declare<double> ("factor", "A factor to multiply by.", 3.14);
   }
 
-  static void declare_io(const ecto::tendrils& parameters,
-      ecto::tendrils& inputs, ecto::tendrils& outputs)
+  static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     inputs.declare<double> ("in", "multly in by factor");
     outputs.declare<double> ("out", "the result of in * factor");
@@ -165,8 +156,7 @@ struct Multiply
     factor_ = parms.get<double> ("factor");
   }
 
-  ecto::ReturnCode process(const ecto::tendrils& inputs,
-      ecto::tendrils& outputs)
+  int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     outputs.get<double> ("out") = inputs.get<double> ("in") * factor_;
     return ecto::eOK;
@@ -183,19 +173,16 @@ struct SharedPass
     p.declare<int> ("x", "Default value", -1);
   }
 
-  static void declare_io(const ecto::tendrils& parameters,
-      ecto::tendrils& inputs, ecto::tendrils& outputs)
+  static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
-    inputs.declare<ptr_t> ("input", "a pass through",
-        ptr_t(new int(parameters.get<int> ("x"))));
+    inputs.declare<ptr_t> ("input", "a pass through", ptr_t(new int(parameters.get<int> ("x"))));
 
     outputs.declare<ptr_t> ("output", "a pass through", ptr_t(new int(-1)));
 
     outputs.declare<int> ("value", "value", -1);
   }
 
-  ecto::ReturnCode process(const ecto::tendrils& inputs,
-      ecto::tendrils& outputs)
+  int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     outputs.get<ptr_t> ("output") = inputs.get<ptr_t> ("input");
     outputs.get<int> ("value") = *outputs.get<ptr_t> ("output");
@@ -210,15 +197,13 @@ struct Scatter
     p.declare<int> ("x", "The value to scatter...", 13);
   }
 
-  static void declare_io(const ecto::tendrils& parameters,
-      ecto::tendrils& inputs, ecto::tendrils& outputs)
+  static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     int n = parameters.get<int> ("n");
     for (int i = 0; i < n; i++)
-    {
-      outputs.declare<int> (str(boost::format("out_%04d") % i),
-          str(boost::format("The %dth scatter") % i));
-    }
+      {
+        outputs.declare<int> (str(boost::format("out_%04d") % i), str(boost::format("The %dth scatter") % i));
+      }
   }
 
   void configure(tendrils& parameters)
@@ -227,13 +212,12 @@ struct Scatter
     x_ = parameters.get<int> ("x");
   }
 
-  ecto::ReturnCode process(const ecto::tendrils& inputs,
-      ecto::tendrils& outputs)
+  int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     for (int i = 0; i < n_; i++)
-    {
-      outputs.get<int> (str(boost::format("out_%04d") % i)) = x_;
-    }
+      {
+        outputs.get<int> (str(boost::format("out_%04d") % i)) = x_;
+      }
     return ecto::eOK;
   }
 
@@ -250,15 +234,13 @@ struct Gather
     p.declare<int> ("n", "N to gather", 2);
   }
 
-  static void declare_io(const ecto::tendrils& parameters,
-      ecto::tendrils& inputs, ecto::tendrils& outputs)
+  static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     int n = parameters.get<int> ("n");
     for (int ii = 0; ii < n; ii++)
-    {
-      inputs.declare<value_type> (str(boost::format("in_%04d") % ii),
-          "An " + ecto::name_of<value_type>() + "input.");
-    }
+      {
+        inputs.declare<value_type> (str(boost::format("in_%04d") % ii), "An " + ecto::name_of<value_type>() + "input.");
+      }
     outputs.declare<value_type> ("out", "The sum of all inputs.");
   }
 
@@ -267,17 +249,16 @@ struct Gather
     n_ = parameters.get<int> ("n");
   }
 
-  ecto::ReturnCode process(const ecto::tendrils& inputs,
-      ecto::tendrils& outputs)
+  int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     //SHOW();
     value_type& out = outputs.get<value_type> ("out");
     out = 0;
     typedef std::pair<std::string, ecto::tendril> pp;
     BOOST_FOREACH(const pp& in,inputs)
-          {
-            out += in.second.get<value_type> ();
-          }
+            {
+              out += in.second.get<value_type> ();
+            }
     return ecto::eOK;
   }
 

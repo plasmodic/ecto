@@ -12,27 +12,34 @@ from inspect import ismodule
 
 def print_tendrils(tendril, n):
     for x in tendril :
-        print  n*" " + x.key() + " [%s]"%x.data().type_name + " default =",x.data().val
-        print  (n+2)*" " +x.data().doc
+        print  " - " + x.key() + " [%s]"%x.data().type_name + " default =",x.data().val
+
+        print  ""
+        print  "    " + x.data().doc
+        print  ""
 
 def print_module_doc(m):
-    print "================================="
     print m.name(), "(ecto::module)"
-    print 4*" " + m.doc()
+    print "================================="
+    print ""
+    print m.doc()
+    print ""
     if len(m.params):
+        print "params"
         print "---------------------------------"
-        print "  params:"
+        print ""
         print_tendrils(m.params,4)
     if len(m.inputs):
+        print "inputs"
         print "---------------------------------"
-        print "  inputs:"
+        print ""
         print_tendrils(m.inputs,4)
     if len(m.outputs):
+        print "ouputs"
         print "---------------------------------"
-        print " outputs:"
+        print ""
         print_tendrils(m.outputs,4)
-    print "---------------------------------"
-
+    print ""
     
 
 class PlasmDotView(xdot.DotWindow):

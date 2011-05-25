@@ -99,8 +99,7 @@ struct module: boost::noncopyable
 
 protected:
   virtual void dispatch_declare_params(tendrils& t) = 0;
-  virtual void dispatch_declare_io(const tendrils& params, tendrils& inputs,
-      tendrils& outputs) = 0;
+  virtual void dispatch_declare_io(const tendrils& params, tendrils& inputs, tendrils& outputs) = 0;
   virtual void dispatch_configure(tendrils& params) = 0;
   virtual ReturnCode
   dispatch_process(const tendrils& inputs, tendrils& outputs) = 0;
@@ -200,22 +199,20 @@ protected:
 
   void dispatch_declare_params(tendrils& params)
   {
+    //this is a none static function. for virtuality.
     declare_params(int_<has_f<Module>::declare_params> (), params);
   }
 
-  static void declare_io(not_implemented, const tendrils& params,
-      tendrils& inputs, tendrils& outputs)
+  static void declare_io(not_implemented, const tendrils& params, tendrils& inputs, tendrils& outputs)
   {
     //SHOW();
   }
-  static void declare_io(implemented, const tendrils& params, tendrils& inputs,
-      tendrils& outputs)
+  static void declare_io(implemented, const tendrils& params, tendrils& inputs, tendrils& outputs)
   {
     Module::declare_io(params, inputs, outputs);
   }
 
-  void dispatch_declare_io(const tendrils& params, tendrils& inputs,
-      tendrils& outputs)
+  void dispatch_declare_io(const tendrils& params, tendrils& inputs, tendrils& outputs)
   {
     declare_io(int_<has_f<Module>::declare_io> (), params, inputs, outputs);
   }
@@ -232,10 +229,11 @@ protected:
 
   void dispatch_configure(tendrils& params)
   {
+    //the module may not be allocated here, so check pointer.
     if (!thiz)
-    {
-      thiz.reset(new Module);
-    }
+      {
+        thiz.reset(new Module);
+      }
     configure(int_<has_f<Module>::configure> (), params);
   }
 
@@ -247,7 +245,7 @@ protected:
 
   ReturnCode process(implemented, const tendrils& inputs, tendrils& outputs)
   {
-    return thiz->process(inputs, outputs);
+    return ReturnCode(thiz->process(inputs, outputs));
   }
 
   ReturnCode dispatch_process(const tendrils& inputs, tendrils& outputs)

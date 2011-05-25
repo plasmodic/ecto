@@ -67,8 +67,7 @@ public:
   /**
    * A vertex in the plasm consists of a pointer to a module, a vertex type, the name of the tendril and the tendril its self.
    */
-  typedef std::map<int,
-      boost::tuple<module_ptr, vertex_t, std::string, tendril> > vertex_map_t;
+  typedef std::map<int, boost::tuple<module_ptr, vertex_t, std::string, tendril> > vertex_map_t;
   /**
    * \brief The edges encode the vertex to vertex relationship.
    */
@@ -83,8 +82,7 @@ public:
    * @param to The to module
    * @param input The input key from the to module.
    */
-  void connect(module_ptr from, const std::string& output, module_ptr to,
-      const std::string& input);
+  void connect(module_ptr from, const std::string& output, module_ptr to, const std::string& input);
   /**
    * Disconnect a tendril from another tendril.
    *
@@ -93,8 +91,7 @@ public:
    * @param to
    * @param input
    */
-  void disconnect(module_ptr from, const std::string& output, module_ptr to,
-      const std::string& input);
+  void disconnect(module_ptr from, const std::string& output, module_ptr to, const std::string& input);
 
   /**
    * \brief This executes the graph, by executing all nodes in dependency order.
