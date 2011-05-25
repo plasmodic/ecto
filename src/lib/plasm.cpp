@@ -16,10 +16,6 @@ void plasm::connect(module::ptr from, const std::string& out_name, module::ptr t
   {
     throw std::logic_error("The specified input does not exist: " + in_name);
   }
-  boost::function<void()> finished_handler(boost::bind(&plasm::impl::signal_finished,impl_));
-  to->register_finish_handler(finished_handler);
-  from->register_finish_handler(finished_handler);
-
   to->inputs[in_name].enforce_compatible_type(from->outputs[out_name]);
   //only add to graph if it was actually connected.
   impl_->modules_.add_edge(from, out_name, to, in_name);

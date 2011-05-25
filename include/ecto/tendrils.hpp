@@ -44,7 +44,7 @@ class tendrils: public std::map<std::string, tendril>, boost::noncopyable
 public:
 
   template<typename T>
-  void declare(const std::string& name,
+  tendril& declare(const std::string& name,
       const std::string& doc = "TODO: doc str me.", const T& default_val = T())
   {
     map_t::iterator it = find(name);
@@ -66,12 +66,14 @@ public:
         ss << " old type = " << it->second.type_name() << " new type = "
             << name_of<T> () << std::endl;
         throw std::logic_error(ss.str());
-      }else
+      }
+      else
       {
-      	it->second = tendril(default_val,doc);
+        it->second = tendril(default_val, doc);
       }
     }
-    
+    return at(name);
+
   }
 
   /**

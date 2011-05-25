@@ -21,37 +21,39 @@ int add2(int x, int y)
   return x + y;
 }
 
-struct Add2 : ecto::module_interface
+struct Add2 
 {
-  void configure(const ecto::tendrils& parameters, ecto::tendrils& inputs,
+  static void declare_io(const ecto::tendrils& /*parameters*/, ecto::tendrils& inputs,
       ecto::tendrils& outputs)
   {
-    //SHOW();
+    SHOW();
     outputs.declare<int> ("out", "x+y");
     inputs.declare<int> ("x");
     inputs.declare<int> ("y");
   }
-  void process(const ecto::tendrils& parameters, const ecto::tendrils& inputs,
+  ecto::ReturnCode process(const ecto::tendrils& inputs,
       ecto::tendrils& outputs)
   {
     //SHOW();
     outputs.get<int> ("out") = add2(std::rand(), std::rand());
+    return ecto::eOK;
   }
 
 };
 
-struct BigData : ecto::module_interface
+struct BigData 
 {
-  void configure(const ecto::tendrils& parameters, ecto::tendrils& inputs,
+  static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs,
       ecto::tendrils& outputs)
   {
     SHOW();
     outputs.declare<int> ("out", "sum of random array");
   }
-  void process(const ecto::tendrils& parameters, const ecto::tendrils& inputs,
+  ecto::ReturnCode process(const ecto::tendrils& inputs,
       ecto::tendrils& outputs)
   {
     outputs.get<int> ("out") = big_data();
+    return ecto::eOK;
   }
 };
 }

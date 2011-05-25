@@ -110,6 +110,9 @@ public:
    */
   std::string doc() const;
 
+  //FIXME add properties, min_, max_, cb_, etc...
+  //properties operator();
+
   /**
    * \brief The doc for this tendril is runtime defined, so you may want to update it.
    * @param doc_str A human readable description of the tendril.

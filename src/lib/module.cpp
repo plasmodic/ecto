@@ -12,35 +12,29 @@ module::~module()
 {
 }
 
-void module::initialize()
+void module::declare_params()
 {
-  dispatch_initialize(parameters);
+  dispatch_declare_params(parameters);
 }
-
-void module::process()
+void module::declare_io()
 {
-  dispatch_process(parameters, inputs, outputs);
-  mark_clean();
+  dispatch_declare_io(parameters, inputs, outputs);
+  mark_dirty();
 }
 void module::configure()
 {
-  dispatch_configure(parameters, inputs, outputs);
+  dispatch_configure(parameters);
   mark_dirty();
 }
-
-void module::reconfigure()
+ReturnCode module::process()
 {
-  dispatch_reconfigure(parameters);
-  mark_dirty();
+  ReturnCode c = dispatch_process(inputs, outputs);
+  mark_clean();
+  return c;
 }
 void module::destroy()
 {
   dispatch_destroy();
-}
-
-void module::register_finish_handler(boost::function<void()> handler)
-{
-  dispatch_register_finish_handler(handler);
 }
 
 void module::mark_clean()
@@ -58,35 +52,6 @@ bool module::dirty() const
 bool module::clean() const
 {
   return !dirty_;
-}
-
-void module_interface::initialize(tendrils& params)
-{
-
-}
-void module_interface::configure(const tendrils& parms, tendrils& in, tendrils& out)
-{
-
-}
-void module_interface::process(const tendrils& parms, const tendrils& in, tendrils& out)
-{
-
-}
-void module_interface::reconfigure(const tendrils& params)
-{
-
-}
-void module_interface::destroy()
-{
-
-}
-void module_interface::finish()
-{
-  finish_handler_();
-}
-void module_interface::register_finish_handler(boost::function<void()> handler)
-{
-  finish_handler_ = handler;
 }
 
 }

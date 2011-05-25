@@ -5,14 +5,14 @@
 #include <boost/progress.hpp>
 #include <boost/timer.hpp>
 
+
+#define STRINGYFY(stuffs) #stuffs
+
 int main()
 {
   ecto::plasm p;
   ecto::module::ptr m = ecto::create_module<ecto_push_ups::Add2>();
-  m->configure();
-
   ecto::module::ptr b = ecto::create_module<ecto_push_ups::BigData>();
-  b->configure();
 
   std::cout << "adding" << std::endl;
   std::cout << "ecto" << std::endl;
@@ -32,15 +32,19 @@ int main()
       ecto_push_ups::add2(std::rand(), std::rand());
     }
   }
+  std::string program = STRINGYFY(
+      size_t big_data()
+      {
+        std::vector<int> data;
+        data.resize(10e4);
+        for (size_t i = 0; i < 10e4; i++)
+          data[i] = std::rand();
+        return std::accumulate(data.begin(), data.end(), 0);
+      }
+  );
 
-  std::cout << "big data (10e3 times)\n"
-      "size_t big_data();\n"
-      "{   std::vector<int> data;\n"
-      "    data.resize(10e4);\n"
-      "    for (size_t i = 0; i < 10e4; i++);\n"
-      "      data[i] = std::rand();\n"
-      "    return std::accumulate(data.begin(), data.end(), 0);\n"
-      "}" << std::endl;
+  std::cout << program << std::endl;
+
   std::cout << "ecto" << std::endl;
   {
     boost::progress_timer t; // start timing

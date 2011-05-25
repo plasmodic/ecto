@@ -35,7 +35,7 @@ namespace hello_ecto
 
 using ecto::tendrils;
 
-struct Printer: ecto::module_interface
+struct Printer
 {
   void initialize(tendrils& params)
   {
@@ -54,7 +54,7 @@ struct Printer: ecto::module_interface
   }
 };
 
-struct Reader: ecto::module_interface
+struct Reader
 {
   void configure(const tendrils& parms, tendrils& in, tendrils& out)
   {
