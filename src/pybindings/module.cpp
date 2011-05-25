@@ -14,44 +14,51 @@ namespace ecto
 {
 namespace py
 {
+#if 0
 #undef SHOW
 #define SHOW() do{}while(false)
+#endif
+
 struct modwrap: module, bp::wrapper<module>
 {
-  void dispatch_initialize(tendrils&)
+
+  void dispatch_declare_params(tendrils& params)
   {
     SHOW();
-    if (bp::override init = this->get_override("initialize"))
-      init(boost::ref(parameters));
+    if (bp::override init = this->get_override("declare_params"))
+      init(boost::ref(params));
     else
-      throw std::logic_error("initialize is not implemented it seems");
+      throw std::logic_error("declare_params is not implemented it seems");
   }
-  void dispatch_configure(const tendrils&params, tendrils&inputs, tendrils&outputs)
+
+  void dispatch_declare_io(const tendrils&params, tendrils&inputs, tendrils&outputs)
   {
     SHOW();
-    if (bp::override config = this->get_override("configure"))
+    if (bp::override config = this->get_override("declare_io"))
       config(boost::ref(params), boost::ref(inputs), boost::ref(outputs));
     else
-      throw std::logic_error("configure is not implemented it seems");
+      throw std::logic_error("declare_io is not implemented it seems");
   }
-  void dispatch_process(const tendrils& params, const tendrils& inputs, tendrils& outputs)
+
+  void dispatch_configure(tendrils& params)
+   {
+     SHOW();
+     if (bp::override config = this->get_override("configure"))
+       config(boost::ref(params));
+     else
+       throw std::logic_error("configure is not implemented it seems");
+   }
+
+  ReturnCode dispatch_process(const tendrils& inputs, tendrils& outputs)
   {
     SHOW();
     if (bp::override proc = this->get_override("process"))
     {
-      proc(boost::ref(params), boost::ref(inputs), boost::ref(outputs));
-
+      proc(boost::ref(inputs), boost::ref(outputs));
     }
     else
       throw std::logic_error("process is not implemented it seems");
-  }
-  void dispatch_reconfigure(const tendrils& params)
-  {
-    SHOW();
-    if (bp::override reconfig = this->get_override("reconfigure"))
-      reconfig(params);
-    else
-      throw std::logic_error("reconfigure is not implemented it seems");
+    return eOK;
   }
   void dispatch_destroy()
   {
@@ -60,14 +67,6 @@ struct modwrap: module, bp::wrapper<module>
       dest();
     else
       throw std::logic_error("destroy is not implemented it seems");
-  }
-  void finish()
-  {
-    finish_handler_();
-  }
-  void dispatch_register_finish_handler(boost::function<void()> handler)
-  {
-   finish_handler_ = handler;
   }
   const std::string& name() const
   {
@@ -110,12 +109,12 @@ void wrapModule()
   bp::class_<module, boost::shared_ptr<module>, boost::noncopyable>("_module_cpp", bp::no_init);
 
   bp::class_<modwrap, boost::shared_ptr<modwrap>, boost::noncopyable> m_base("_module_base" /*bp::no_init*/);
-  m_base.def("initialize", &module::initialize);
-  m_base.def("reconfigure", &module::reconfigure);
-  m_base.def("destroy", &module::destroy);
-  m_base.def("process", (void(module::*)()) &module::process);
+  m_base.def("declare_params", &module::declare_params);
+  m_base.def("declare_io", ((void(module::*)()) &module::declare_io));
   m_base.def("configure", ((void(module::*)()) &module::configure));
-  m_base.def("finish", ((void(module::*)()) &modwrap::finish));
+  m_base.def("process", (void(module::*)()) &module::process);
+  m_base.def("destroy", &module::destroy);
+
   m_base.add_property("inputs", make_function(&inputs, bp::return_internal_reference<>()));
   m_base.add_property("outputs", make_function(outputs, bp::return_internal_reference<>()));
   m_base.add_property("params", make_function(params, bp::return_internal_reference<>()));

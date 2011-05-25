@@ -83,8 +83,10 @@ boost::shared_ptr<ecto::module_<T> > raw_construct(boost::python::tuple args,
   namespace bp = boost::python;
 
   //SHOW();
-  boost::shared_ptr<module_t> m(new module_t());
-  m->module::initialize();
+  boost::shared_ptr<module_t> mm(new module_t());
+  ecto::module * m = mm.get();
+  m->declare_params();
+
   bp::list l = kwargs.items();
   for (unsigned j = 0; j < bp::len(l); ++j)
   {
@@ -94,8 +96,9 @@ boost::shared_ptr<ecto::module_<T> > raw_construct(boost::python::tuple args,
     std::string valstring = bp::extract<std::string>(value.attr("__repr__")());
     m->parameters.at(keystring).set(value);
   }
-  m->module::configure();
-  return m;
+  m->declare_io();
+  m->configure();
+  return mm;
 }
 
 template<typename T>

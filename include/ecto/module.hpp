@@ -41,6 +41,12 @@
 
 namespace ecto
 {
+
+enum ReturnCode
+{
+  eOK = 0, eQUIT = 1,
+};
+
 /**
  * \brief ecto::module is c++ interface definition for ecto processing
  * modules.  Subclasses should also implement  Initialize, which
@@ -53,10 +59,11 @@ struct module: boost::noncopyable
   module();
   ~module();
 
-  void initialize();
+  void declare_params();
+  void declare_io();
+
   void configure();
-  void process();
-  void reconfigure();
+  ReturnCode process();
   void destroy();
 
   /**
@@ -88,22 +95,82 @@ struct module: boost::noncopyable
    */
   virtual const std::string& name() const = 0;
 
-  void register_finish_handler(boost::function<void()> handler);
-
   tendrils parameters, inputs, outputs;
 
 protected:
-  virtual void dispatch_initialize(tendrils& t) = 0;
-  virtual void dispatch_configure(const tendrils& params, tendrils& inputs,
+  virtual void dispatch_declare_params(tendrils& t) = 0;
+  virtual void dispatch_declare_io(const tendrils& params, tendrils& inputs,
       tendrils& outputs) = 0;
-  virtual void dispatch_process(const tendrils& params, const tendrils& inputs,
-      tendrils& outputs) = 0;
-  virtual void dispatch_reconfigure(const tendrils& params) = 0;
+  virtual void dispatch_configure(tendrils& params) = 0;
+  virtual ReturnCode
+  dispatch_process(const tendrils& inputs, tendrils& outputs) = 0;
   virtual void dispatch_destroy() = 0;
-  virtual void
-  dispatch_register_finish_handler(boost::function<void()> handler) = 0;
-
   bool dirty_;
+};
+
+template<class T>
+struct has_f
+{
+  typedef char yes;
+  typedef char (&no)[2];
+
+  template<long I> struct S
+  {
+  };
+
+  // SFINAE eliminates this when the type of arg is invalid
+  template<class U>
+  static yes test_declare_params(S<sizeof(&U::declare_params)> );
+  // overload resolution prefers anything at all over "..."
+  template<class U>
+  static no test_declare_params(...);
+
+  template<class U>
+  static yes test_declare_io(S<sizeof(&U::declare_io)> );
+  template<class U>
+  static no test_declare_io(...);
+
+  template<class U>
+  static yes test_configure(S<sizeof(&U::configure)> );
+  template<class U>
+  static no test_configure(...);
+
+  template<class U>
+  static yes test_process(S<sizeof(&U::process)> );
+  template<class U>
+  static no test_process(...);
+
+  template<class U>
+  static yes test_destroy(S<sizeof(&U::destroy)> );
+  template<class U>
+  static no test_destroy(...);
+
+  void existent_fn();
+  static void existent_static_fn();
+  const static S<sizeof(&has_f<T>::existent_fn)> sarg;
+  const static S<sizeof(&has_f<T>::existent_static_fn)> ssarg;
+
+  enum
+  {
+    declare_params = sizeof(test_declare_params<T> (ssarg)) == sizeof(yes)
+  };
+  enum
+  {
+    declare_io = sizeof(test_declare_io<T> (ssarg)) == sizeof(yes)
+  };
+  enum
+  {
+    configure = sizeof(test_configure<T> (sarg)) == sizeof(yes)
+  };
+  enum
+  {
+    process = sizeof(test_process<T> (sarg)) == sizeof(yes)
+  };
+  enum
+  {
+    destroy = sizeof(test_destroy<T> (sarg)) == sizeof(yes)
+  };
+
 };
 
 /**
@@ -113,100 +180,107 @@ protected:
 template<class Module>
 struct module_: module
 {
-  void dispatch_initialize(tendrils& t)
+protected:
+  template<int I>
+  struct int_
   {
-    thiz.initialize(t);
+  };
+  typedef int_<0> not_implemented;
+  typedef int_<1> implemented;
+
+  static void declare_params(not_implemented, tendrils& params)
+  {
+    //SHOW();
   }
-  void dispatch_configure(const tendrils& params, tendrils& inputs,
+
+  static void declare_params(implemented, tendrils& params)
+  {
+    Module::declare_params(params);
+  }
+
+  void dispatch_declare_params(tendrils& params)
+  {
+    declare_params(int_<has_f<Module>::declare_params> (), params);
+  }
+
+  static void declare_io(not_implemented, const tendrils& params,
+      tendrils& inputs, tendrils& outputs)
+  {
+    //SHOW();
+  }
+  static void declare_io(implemented, const tendrils& params, tendrils& inputs,
       tendrils& outputs)
   {
-    thiz.configure(params, inputs, outputs);
+    Module::declare_io(params, inputs, outputs);
   }
-  void dispatch_process(const tendrils& params, const tendrils& inputs,
+
+  void dispatch_declare_io(const tendrils& params, tendrils& inputs,
       tendrils& outputs)
   {
-    thiz.process(params, inputs, outputs);
+    declare_io(int_<has_f<Module>::declare_io> (), params, inputs, outputs);
   }
-  void dispatch_reconfigure(const tendrils& params)
+
+  void configure(not_implemented, const tendrils& params)
   {
-    thiz.reconfigure(params);
+    //SHOW();
   }
+
+  void configure(implemented, tendrils& params)
+  {
+    thiz->configure(params);
+  }
+
+  void dispatch_configure(tendrils& params)
+  {
+    if (!thiz)
+    {
+      thiz.reset(new Module);
+    }
+    configure(int_<has_f<Module>::configure> (), params);
+  }
+
+  ReturnCode process(not_implemented, const tendrils& inputs, tendrils& outputs)
+  {
+    //SHOW();
+    return eOK;
+  }
+
+  ReturnCode process(implemented, const tendrils& inputs, tendrils& outputs)
+  {
+    return thiz->process(inputs, outputs);
+  }
+
+  ReturnCode dispatch_process(const tendrils& inputs, tendrils& outputs)
+  {
+    return process(int_<has_f<Module>::process> (), inputs, outputs);
+  }
+
+  void destroy(not_implemented)
+  {
+    //SHOW();
+  }
+
+  void destroy(implemented)
+  {
+    thiz->destroy();
+  }
+
   void dispatch_destroy()
   {
-    thiz.destroy();
+    destroy(int_<has_f<Module>::destroy> ());
   }
+
   const std::string& name() const
   {
     return MODULE_TYPE_NAME;
   }
-  void dispatch_register_finish_handler(boost::function<void()> handler)
-  {
-    thiz.register_finish_handler(handler);
-  }
-  Module thiz;
+
+  boost::shared_ptr<Module> thiz;
   static const std::string MODULE_TYPE_NAME;
 };
 
 template<typename Module>
 const std::string module_<Module>::MODULE_TYPE_NAME = ecto::name_of<Module>();
-
-/**
- * \brief Default implementations of the module interface.
- */
-struct module_interface
-{
-  /**
-   * \brief Use initialize to declare and setup your parameters.
-   *
-   * @param params The parameters to be declared.
-   */
-  void initialize(tendrils& params);
-  /**
-   * \brief configure is called after parameters have been declared and the user has had a chance to initialize them.
-   *
-   * You should declare your inputs and outputs from within this call.
-   *
-   * @param params The parameters the module. You may conditionally declare inputs and outputs depending on the parameters.
-   * @param in The inputs, to be declared.
-   * @param out The outputs, to be declared.
-   */
-  void configure(const tendrils& params, tendrils& in, tendrils& out);
-  /**
-   *
-   * @param params The parameters to the module. All parameters declared in initialize will exist in this object.
-   * @param in The inputs, previously declared in configure. These are const and may not be written to in the exectution of this function.
-   * @param out The outputs, previously declared in configure. These are non const and should be written to with a get<T>() expression.
-   */
-  void process(const tendrils& params, const tendrils& in, tendrils& out);
-  /**
-   * \brief Called when ever parameters change. This may be used to do light weight work, that does
-   * not involve changing the inputs or outputs of the module.
-   *
-   * This should be implemented by the client
-   * @param params The parameters that have changed. Hint - all parameters declared in the initialize function will exist
-   * in this tendrils object. Not all of the params have necessarily changed.
-   */
-  void reconfigure(const tendrils& params);
-  /**
-   * \brief Called when the module is about to be deallocated.
-   *
-   * This should be implemented by the client. Will be called before shutdown.
-   */
-  void destroy();
-
-  /**
-   * \brief Call this to request the system to stop.
-   */
-  void finish();
-  /**
-   * This is called by the system if they wish to register a callback that signals that the system should finish
-   * and exit gracefully.
-   * @param handler to be called when finish is called.
-   */
-  void register_finish_handler(boost::function<void()> handler);
-private:
-  boost::function<void()> finish_handler_;
-};
 
 /**
  * Create a module from an type that has all of the proper interface functions defined.
@@ -216,6 +290,8 @@ template<typename T>
 module::ptr create_module()
 {
   module::ptr p(new module_<T> ());
+  p->declare_params();
+  p->declare_io();
   return p;
 }
 

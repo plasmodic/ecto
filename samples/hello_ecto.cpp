@@ -35,37 +35,40 @@ namespace hello_ecto
 
 using ecto::tendrils;
 
-struct Printer: ecto::module_interface
+struct Printer
 {
-  void initialize(tendrils& params)
+  static void declare_params(tendrils& params)
   {
     params.declare<std::string> ("str", "The default string to print", "hello");
   }
 
-  void configure(const tendrils& parms, tendrils& in, tendrils& out)
+  static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
   {
     in.declare<std::string> ("str", "The string to print.",
         parms.get<std::string> ("str"));
   }
 
-  void process(const tendrils& parms, const tendrils& in, tendrils& /*out*/)
+  ecto::ReturnCode process(const tendrils& in, tendrils& /*out*/)
   {
     std::cout << in.get<std::string> ("str") << std::endl;
+    return ecto::eOK;
   }
+
 };
 
-struct Reader: ecto::module_interface
+struct Reader
 {
-  void configure(const tendrils& parms, tendrils& in, tendrils& out)
+  static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
   {
     out.declare<std::string> ("output", "Output from standard in");
   }
 
-  void process(const tendrils& parms, const tendrils& in, tendrils& out)
+  ecto::ReturnCode process(const tendrils& in, tendrils& out)
   {
     std::string o;
     std::cin >> o;
     out.get<std::string> ("output") = o;
+    return ecto::eOK;
   }
 };
 
