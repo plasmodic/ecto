@@ -2,7 +2,7 @@
 import ecto #ecto core library
 import hello_ecto #a user library, that has a few ecto modules
 
-debug = False
+debug = True
 
 def mygraph():
     #instantiate a plasm, our DAG structure
