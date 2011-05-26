@@ -5,3 +5,4 @@ build/
 python/ecto/ui/uic.py
 \#*\#
 *~
+Makefile
