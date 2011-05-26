@@ -35,7 +35,7 @@ def print_module_doc(m):
         print ""
         print_tendrils(m.inputs,4)
     if len(m.outputs):
-        print "ouputs"
+        print "outputs"
         print "---------------------------------"
         print ""
         print_tendrils(m.outputs,4)
