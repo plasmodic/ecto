@@ -15,7 +15,6 @@ Contents:
    building
    client_usage
    layout
-   lifecycle
 
 ecto at a glance
 ---------------------------------
@@ -31,6 +30,7 @@ ecto at a glance
           static void declare_io(const tendrils& params, tendrils& in, tendrils& out);
           void configure(tendrils& params);
           int process(const tendrils& in, tendrils& out);
+          void destroy();
         };
 
     
@@ -122,7 +122,7 @@ ecto at a glance
     * Each module is self documenting by design.
 
 Sample Generated Module Documentation
-===========================
+=====================================
 
 Since the modules are by design self documenting, it is simple to output rst for a given set of modules.
 

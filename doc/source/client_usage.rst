@@ -3,28 +3,28 @@ Usage in client code
 
 Use should use cmake to find ecto and bring in a few macros:
 
-.. code-block:: cmake
+  .. code-block:: cmake
 
-  cmake_minimum_required(VERSION 2.8)
-  project(ecto_samples)
-  
-  find_package(ecto REQUIRED)
-  
-  ectomodule(hello_ecto
-      hello_ecto.cpp
-  )
-  
-  #optionally link against other libs
-  #ecto_link(hello_ecto
-  #  ${MY_EXTRA_LIBS}
-  #)
+    cmake_minimum_required(VERSION 2.8)
+    project(ecto_samples)
+    
+    find_package(ecto REQUIRED)
+    
+    ectomodule(hello_ecto
+        hello_ecto.cpp
+    )
+    
+    #optionally link against other libs
+    #ecto_link(hello_ecto
+    #  ${MY_EXTRA_LIBS}
+    #)
 
-.. code-block:: sh
+  .. code-block:: sh
   
-  mkdir build
-  cd build
-  cmake ..
-  make
+    mkdir build
+    cd build
+    cmake ..
+    make
   
 
 If you installed ecto, this will most likely just work.
@@ -52,8 +52,10 @@ An Example:
 CMakeLists.txt
 -----------------------------------
 
-..code-block:: cmake
-  
+Here is the clients CMakeLists.txt
+
+  .. code-block:: cmake
+    
     cmake_minimum_required(VERSION 2.8)
     project(ecto_samples)
     
@@ -67,12 +69,15 @@ CMakeLists.txt
     #ecto_link(hello_ecto
     #  ${MY_EXTRA_LIBS}
     #)
+    
   
   
-Here is hello_ecto.cpp
+cpp
 ----------------------
 
-..code-block:: c++
+An example implementation of an ecto module:
+
+  .. code-block:: c++
 
     #include <ecto/ecto.hpp>
     #include <iostream>
@@ -81,7 +86,7 @@ Here is hello_ecto.cpp
     {
     
     using ecto::tendrils;
-
+    
     struct Printer
     {
       static void declare_params(tendrils& params)
@@ -99,10 +104,10 @@ Here is hello_ecto.cpp
         str_ = params.get<std::string> ("str");
       }
     
-      ecto::ReturnCode process(const tendrils& in, tendrils& /*out*/)
+      int process(const tendrils& in, tendrils& /*out*/)
       {
         std::cout << in.get<std::string> ("str") << std::endl;
-        return ecto::eOK;
+        return 0;
       }
       std::string str_;
     };
@@ -114,12 +119,12 @@ Here is hello_ecto.cpp
         out.declare<std::string> ("output", "Output from standard in");
       }
     
-      ecto::ReturnCode process(const tendrils& in, tendrils& out)
+      int process(const tendrils& in, tendrils& out)
       {
         std::string o;
         std::cin >> o;
         out.get<std::string> ("output") = o;
-        return ecto::eOK;
+        return 0;
       }
     };
     
@@ -131,5 +136,4 @@ Here is hello_ecto.cpp
       ecto::wrap<Printer>("Printer", "Prints a string input to standard output.");
       ecto::wrap<Reader>("Reader", "Reads input from standard input.");
     }
-  
-  
+
