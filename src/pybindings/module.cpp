@@ -103,6 +103,8 @@ tendrils& params(module& mod)
 {
   return mod.parameters;
 }
+
+
 void wrapModule()
 {
   //use private names so that python people know these are internal
@@ -114,6 +116,8 @@ void wrapModule()
   m_base.def("configure", ((void(module::*)()) &module::configure));
   m_base.def("process", (void(module::*)()) &module::process);
   m_base.def("destroy", &module::destroy);
+
+
 
   m_base.add_property("inputs", make_function(&inputs, bp::return_internal_reference<>()));
   m_base.add_property("outputs", make_function(outputs, bp::return_internal_reference<>()));

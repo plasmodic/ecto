@@ -54,9 +54,12 @@ def list_ecto_module(pymodule):
         if ismodule(mod):
             list_ecto_module(mod)
         if inspect.isclass(mod) and issubclass(mod,ecto._module_base):
-            m = mod()
-            print_module_doc(m)
-            l.append(m)
+            try:
+                m = mod()
+                print_module_doc(m)
+                l.append(m)
+            except:
+                pass
     return l
     
 def view_plasm(plasm):
