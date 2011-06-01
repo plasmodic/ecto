@@ -1,0 +1,5 @@
+import sys
+sys.path.append("@LIBRARY_OUTPUT_PATH@")
+sys.path.append("@CMAKE_SOURCE_DIR@/python")
+import nose
+result = nose.main(sys.argv)
