@@ -48,6 +48,16 @@ add_subdirectory(test)
 
 include(cmake/ectoInstall.cmake)
 
+include_directories(
+  # lockfree contains atomic, include the bryce/hartmut version first
+  ${CMAKE_SOURCE_DIR}/boost.atomic
+  ${CMAKE_SOURCE_DIR}/boost.lockfree 
+  )
+
+
 add_subdirectory(doc)
 add_subdirectory(samples)
 add_subdirectory(src)
+
+add_executable(rpattern rpattern.cpp)
+
