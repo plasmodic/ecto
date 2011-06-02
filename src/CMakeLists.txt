@@ -2,7 +2,12 @@ include_directories(lib)
 add_subdirectory(lib)
 add_subdirectory(pybindings)
 
-#add_executable(asio_sketch asio_sketch.cpp)
+macro(asio_executable name)
+  add_executable(${name} ${name}.cpp)
+  target_link_libraries(${name}
+    ${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY})
+endmacro()
 
-#target_link_libraries(asio_sketch 
-#  ${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY})
+asio_executable(asio_sketch)
+asio_executable(asio_threadpool)
+

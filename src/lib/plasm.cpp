@@ -61,6 +61,7 @@ int plasm::execute()
   impl_->mark_stacks_dirty();
   return impl_->proc_stacks();
 }
+
 void plasm::spin()
 {
   while(!impl_->finished_)

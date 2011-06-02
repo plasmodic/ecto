@@ -296,27 +296,32 @@ const std::string& tendril::holder<T>::type_name() const
   static const std::string name = name_of<T> ();
   return name;
 }
+
 template<typename T>
-bool tendril::holder<T>::is_type(std::type_info const& ti) const
+bool 
+tendril::holder<T>::is_type(std::type_info const& ti) const
 {
   return std::strcmp(typeid(T).name(), ti.name()) == 0;
 }
 
 template<typename T>
-void* tendril::holder<T>::get()
+void* 
+tendril::holder<T>::get()
 {
   return &t;//.get();
 }
 
 template<>
-inline void* tendril::holder<boost::python::object>::get()
+inline void* 
+tendril::holder<boost::python::object>::get()
 {
   return NULL; //unsafe to dereference the boost python object.
 }
 
 
 template<typename T>
-void tendril::holder<T>::setPython(boost::python::object o)
+void 
+tendril::holder<T>::setPython(boost::python::object o)
 {
   boost::python::extract<T> get_T(o);
   if (get_T.check())
@@ -325,6 +330,7 @@ void tendril::holder<T>::setPython(boost::python::object o)
     throw std::logic_error(
         "Could not convert python object to type : " + type_name());
 }
+
 template<>
 inline void 
 tendril::holder<boost::python::object>::setPython(boost::python::object o)
@@ -334,7 +340,8 @@ tendril::holder<boost::python::object>::setPython(boost::python::object o)
 
 
 template<typename T>
-boost::python::object tendril::holder<T>::getPython() const
+boost::python::object 
+tendril::holder<T>::getPython() const
 {
   try
   {
@@ -347,13 +354,17 @@ boost::python::object tendril::holder<T>::getPython() const
   }
   return boost::python::object();
 }
+
 template<>
-inline boost::python::object tendril::holder<boost::python::object>::getPython() const
+inline boost::python::object 
+tendril::holder<boost::python::object>::getPython() const
 {
   return t;
 }
+
 template<typename T>
-void  tendril::holder<T>::copy_to(holder_base& holder) const
+void  
+tendril::holder<T>::copy_to(holder_base& holder) const
 {
   void* tval = holder.get();
   if(tval != NULL)
@@ -363,12 +374,11 @@ void  tendril::holder<T>::copy_to(holder_base& holder) const
 }
 
 template<>
-inline void  tendril::holder<boost::python::object>::copy_to(holder_base& holder) const
+inline void  
+tendril::holder<boost::python::object>::copy_to(holder_base& holder) const
 {
   holder.setPython(t);
 }
-
-
 
 template<typename T>
 tendril::holder_base::ptr  tendril::holder<T>::clone() const
