@@ -34,8 +34,8 @@ namespace ecto
     {
       Vertex() : _Vertex() { }
 
-      Vertex(const module::ptr& p, const std::string& s, plasm::vertex_t t) :
-        _Vertex(p, s), uid(-1), ecto_type(t)
+      Vertex(const module::ptr& p, const std::string& s, plasm::vertex_t t) 
+        : _Vertex(p, s), uid(-1), ecto_type(t)
       { }
 
       struct Tag
@@ -80,13 +80,12 @@ namespace ecto
     };
 
 
-    class label_writer
+    struct label_writer
     {
-    public:
-      label_writer(const ModuleGraph& graph) :
-        graph(graph)
-      {
-      }
+      label_writer(const ModuleGraph& graph) 
+        : graph(graph)
+      { }
+
       void operator()(std::ostream& out, const size_t& v) const
       {
         const Vertex& vert = graph.get_vert(v);
