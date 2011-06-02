@@ -1,26 +1,45 @@
 #include <boost/asio/deadline_timer.hpp>
 #include <boost/asio/io_service.hpp>
+#include <boost/atomic.hpp>
+#include <boost/make_shared.hpp>
+#include <boost/lockfree/fifo.hpp>
 #include <boost/thread.hpp>
+#include <boost/function.hpp>
 #include <boost/shared_array.hpp>
 #include <boost/scoped_ptr.hpp>
 #include <boost/lexical_cast.hpp>
 #include <iostream>
+#include <deque>
 
 // ----- I/O object
 
 template <typename T>
 struct tendril : boost::noncopyable 
 {
-  T value;
+  typedef boost::shared_ptr<T> pointer_type;
+  typedef boost::shared_ptr<const T> const_pointer_type;
+  std::deque<pointer_type> deque;
   typedef uint64_t counter_type;
   counter_type counter;
   boost::mutex mtx;
   boost::condition_variable cond;
-  tendril() : value(T()), counter(0) { }
+  tendril() : counter(0) { }
+  void push_back(const pointer_type& item)
+  {
+    boost::unique_lock<boost::mutex> lock(mtx);
+    ++counter;
+    deque.push_back(item);
+  }
+  const_pointer_type pop()
+  {
+    boost::unique_lock<boost::mutex> lock(mtx);
+    const_pointer_type front = deque.front();
+    deque.pop_front();
+    return front;
+  }
 };
 
 tendril<std::string> box;
-
 
 class tendril_monitor
 {
@@ -87,24 +106,36 @@ private:
 
 template <typename Tendril>
 void 
-wait_handler(Tendril const& t)
+wait_handler(Tendril& t)
 {
   std::cout << __PRETTY_FUNCTION__ << std::endl;
-  std::cout << "VALUE=" << t.value << std::endl;
+  std::cout << "SIZE=" << t.deque.size() << " BACK=" << t.deque.back() << std::endl;
+  typename Tendril::const_pointer_type p = t.pop();
+  std::cout << "SIZE=" << t.deque.size() << "\n";
+  std::cout << *p << "\n";
 }
 
 template <typename Tendril>
-void incbox(Tendril& tendril, const boost::system::error_code& ec) 
+void 
+incbox(Tendril& tendril, const boost::system::error_code& ec) 
 {
   std::cout << __PRETTY_FUNCTION__ << " " << ec << std::endl;
   {
-    boost::unique_lock<boost::mutex> lock(tendril.mtx);
-    ++tendril.counter;
-    tendril.value = std::string("::::") 
-      + boost::lexical_cast<std::string>(tendril.counter);
+    boost::shared_ptr<std::string> s(new std::string);
+    *s = "<<<" + boost::lexical_cast<std::string>(tendril.counter) + ">>>";
+    tendril.push_back(s);
   }
   tendril.cond.notify_all();
 }
+
+struct module 
+{
+  typedef boost::shared_ptr<module> ptr;
+  std::map<std::string, boost::shared_ptr<tendril<std::string> > > inputs;
+  std::map<std::string, boost::shared_ptr<tendril<std::string> > > outputs;
+};
+
+// std::pair<module::ptr, boost::
 
 int main()
 {
