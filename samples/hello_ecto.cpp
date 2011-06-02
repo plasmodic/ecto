@@ -87,7 +87,7 @@ struct Reader
     std::string s;
     std::cin >> s;
     out.get<std::string> ("output") = s;
-    return ecto::eOK;
+    return ecto::OK;
   }
 };
 

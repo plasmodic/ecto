@@ -36,7 +36,7 @@ struct Add2
   {
     //SHOW();
     outputs.get<int> ("out") = add2(std::rand(), std::rand());
-    return ecto::eOK;
+    return ecto::OK;
   }
 
 };
@@ -53,7 +53,7 @@ struct BigData
       ecto::tendrils& outputs)
   {
     outputs.get<int> ("out") = big_data();
-    return ecto::eOK;
+    return ecto::OK;
   }
 };
 }

@@ -58,7 +58,7 @@ struct modwrap: module, bp::wrapper<module>
     }
 //    else
 //      throw std::logic_error("process is not implemented it seems");
-    return eOK;
+    return OK;
   }
   void dispatch_destroy()
   {

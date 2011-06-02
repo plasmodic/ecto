@@ -44,7 +44,7 @@ namespace ecto
 
 enum ReturnCode
 {
-  eOK = 0, eQUIT = 1,
+  OK = 0, QUIT = 1,
 };
 
 /**
@@ -240,7 +240,7 @@ protected:
   ReturnCode process(not_implemented, const tendrils& inputs, tendrils& outputs)
   {
     //SHOW();
-    return eOK;
+    return OK;
   }
 
   ReturnCode process(implemented, const tendrils& inputs, tendrils& outputs)

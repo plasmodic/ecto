@@ -58,7 +58,7 @@ struct FooPODModule
   {
     std::cout << inputs.get<FooPOD> ("foo").x << std::endl;
     outputs.get<FooPOD> ("foo").y = 3.14;
-    return ecto::eOK;
+    return ecto::OK;
   }
 
 };
@@ -79,7 +79,7 @@ struct Printer
   int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     std::cout << inputs.get<std::string> ("str") << std::endl;
-    return ecto::eOK;
+    return ecto::OK;
   }
 };
 
@@ -130,8 +130,8 @@ struct Quitter
   int process(const tendrils& in, tendrils& /*out*/)
   {
     if (in.get<std::string> ("str") == stop_word_)
-      return ecto::eQUIT;
-    return ecto::eOK;
+      return ecto::QUIT;
+    return ecto::OK;
   }
   std::string stop_word_;
 };
@@ -159,7 +159,7 @@ struct Multiply
   int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     outputs.get<double> ("out") = inputs.get<double> ("in") * factor_;
-    return ecto::eOK;
+    return ecto::OK;
   }
 
 };
@@ -186,7 +186,7 @@ struct SharedPass
   {
     outputs.get<ptr_t> ("output") = inputs.get<ptr_t> ("input");
     outputs.get<int> ("value") = *outputs.get<ptr_t> ("output");
-    return ecto::eOK;
+    return ecto::OK;
   }
 };
 struct Scatter
@@ -218,7 +218,7 @@ struct Scatter
       {
         outputs.get<int> (str(boost::format("out_%04d") % i)) = x_;
       }
-    return ecto::eOK;
+    return ecto::OK;
   }
 
   int n_, x_;
@@ -259,7 +259,7 @@ struct Gather
             {
               out += in.second.get<value_type> ();
             }
-    return ecto::eOK;
+    return ecto::OK;
   }
 
   int n_;
