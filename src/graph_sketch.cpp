@@ -182,7 +182,7 @@ struct edge
 };
 
 
-typedef adjacency_list<setS, // OutEdgeList
+typedef adjacency_list<vecS, // OutEdgeList
                        vecS, // VertexList
                        bidirectionalS, // Directed
                        module::ptr, // vertex property
@@ -196,6 +196,25 @@ int main()
   namespace asio = boost::asio;
 
   std::cout << "start..." << std::endl;
+  
+  graph_t g;
+
+  module::ptr m1(new module), m2(new module);
+  edge::ptr e1(new edge), e2(new edge);
+
+  graph_t::vertex_descriptor vd1 = add_vertex(m1, g),
+    vd2 = add_vertex(m2, g);
+
+  bool added;
+  graph_t::edge_descriptor ed1, ed2;
+  tie(ed1, added) = add_edge(vd1, vd2, e1, g);
+  assert(added);
+  tie(ed2, added) = add_edge(vd1, vd2, e2, g);
+  assert(added);
+
+  std::ofstream gviz_str("graph.dot");
+  boost::write_graphviz(gviz_str, g);
+
   /*
 
   module::ptr graph = make_graph(io_service, 30);
