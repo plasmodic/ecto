@@ -40,6 +40,10 @@ struct FooPOD
   int x;
   float y;
 };
+struct EvilNoPython
+{
+  std::string Waz;
+};
 
 struct FooPODModule
 {
@@ -61,6 +65,19 @@ struct FooPODModule
     return ecto::OK;
   }
 
+};
+
+struct NoPythonBindings
+{
+  static void declare_params(tendrils& parameters)
+  {
+    parameters.declare<EvilNoPython> ("Waz", "A Waz is a Waz when a Waz was Waz");
+  }
+
+  static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
+  {
+    outputs.declare<EvilNoPython> ("Straz", "A Straz is a Straz when a Straz saw a Straz");
+  }
 };
 
 struct DontAllocateMe
@@ -305,5 +322,6 @@ BOOST_PYTHON_MODULE(buster)
   ecto::wrap<Gather<double> >("Gather_double", "Gather a scattered value...");
   ecto::wrap<Quitter>("Quitter", "Will quit the graph on an appropriate input.");
   ecto::wrap<DontAllocateMe>("DontAllocateMe", "Don't allocate me, feel free to inspect.");
+  ecto::wrap<NoPythonBindings>("NoPythonBindings", "This uses something that is bound to python!");
   boost::python::def("make_pod_tendril", buster::makePodTendril);
 }

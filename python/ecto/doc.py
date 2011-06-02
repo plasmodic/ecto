@@ -12,10 +12,20 @@ from inspect import ismodule
 
 def print_tendrils(tendril, n):
     for x in tendril :
-        print  " - " + x.key() + " [%s]"%x.data().type_name + " default =",x.data().val
-
+        #print "here"
+        value = str(x.data().get())
+        print  " - " + x.key() + " [%s]"%x.data().type_name + " default = %s"%value
         print  ""
-        print  "    " + x.data().doc
+        docstr = str(x.data().doc)
+        #print len(docstr)
+        #print  "    " + docstr
+        doclines = docstr.splitlines()
+        #print doclines
+        #need to handle newlines with same indentation.
+        #docstr = x.data().doc.split('\n')
+        if doclines :
+            for docline in doclines:
+                print  "    " + docline
         print  ""
 
 def print_module_doc(m):
@@ -54,12 +64,13 @@ def list_ecto_module(pymodule):
         #if ismodule(mod):
         #    list_ecto_module(mod)
         if inspect.isclass(mod) and issubclass(mod,ecto._module_base):
-            try:
+            #try:
                 m = mod.inspect((),{})
                 print_module_doc(m)
                 l.append(m)
-            except Exception,e:
-                print e
+            #except Exception,e:
+            #    pass
+                #print e
     return l
     
 def view_plasm(plasm):

@@ -343,6 +343,7 @@ boost::python::object tendril::holder<T>::getPython() const
   } catch (const boost::python::error_already_set&)
   {
     //silently handle no python wrapping
+    PyErr_Clear(); //Need to clear the error or python craps out. Try commenting out and running the doc tests.
   }
   return boost::python::object();
 }
