@@ -17,12 +17,7 @@ def print_tendrils(tendril, n):
         print  " - " + x.key() + " [%s]"%x.data().type_name + " default = %s"%value
         print  ""
         docstr = str(x.data().doc)
-        #print len(docstr)
-        #print  "    " + docstr
         doclines = docstr.splitlines()
-        #print doclines
-        #need to handle newlines with same indentation.
-        #docstr = x.data().doc.split('\n')
         if doclines :
             for docline in doclines:
                 print  "    " + docline
