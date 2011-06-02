@@ -29,9 +29,9 @@ void plasm::mark_dirty(module::ptr m)
   impl_->modules_.mark_dirty(m);
 
 }
-void plasm::go(module::ptr m)
+int plasm::go(module::ptr m)
 {
-  impl_->modules_.go(m);
+  return impl_->modules_.go(m);
 }
 
 void plasm::viz(std::ostream& out) const
@@ -55,11 +55,11 @@ plasm::edge_list_t plasm::getEdges()
   return impl_->modules_.getEdges();
 }
 
-void plasm::execute()
+int plasm::execute()
 {
   impl_->calc_stacks();
   impl_->mark_stacks_dirty();
-  impl_->proc_stacks();
+  return impl_->proc_stacks();
 }
 
 void plasm::spin()

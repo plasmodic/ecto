@@ -15,30 +15,45 @@ Contents:
    building
    client_usage
    layout
-   lifecycle
+get ecto
+================================
+
+Unless you feel like submitting patches to ecto, or playing around in the source code,
+you may grab the daily deb from a ppa.  This is built atleast once a day from the trunk,
+so its just as unstable as trunk, but you don't have to compile it::
+
+  sudo apt-add-repository ppa:ethan-rublee/ppa
+  sudo apt-get update
+  sudo apt-get install libecto-dev
+  
 
 ecto at a glance
 ---------------------------------
     * Simple processing node interface for building your own modules.
     
     .. code-block:: c++
-        
-        struct MyModule : ecto::module_interface
+    
+        #include <ecto/ecto.hpp>
+        using ecto::tendrils;
+        struct MyModule
         {
-            void initialize(tendrils& params);
-            void configure(const tendrils& params, tendrils& inputs, tendrils& outputs);
-            void process(const tendrils& params, const tendrils& inputs, tendrils& outputs);
-        }
+          static void declare_params(tendrils& params);
+          static void declare_io(const tendrils& params, tendrils& in, tendrils& out);
+          void configure(tendrils& params);
+          int process(const tendrils& in, tendrils& out);
+          void destroy();
+        };
+
     
     * Inputs, outputs and parameters are templated, and type erasing, giving typesafety and the ability to use your
       own data types..
       
     .. code-block:: c++
         
-        void MyModule::initialize(ecto::tendrils& params)
+        void MyModule::declare_params(tendrils& params)
         {
-            params.declare<Foo>("foo","Foo is for spam",Foo(3.14));
-            params.declare<std::string>("str","str is a standard string.","default");
+            params.declare<Foo>("foo","Foo is for spam. This is a doc string", Foo(3.14));
+            params.declare<std::string>("str", "str is a standard string.", "default");
         }
     
     * Python is used as the plugin architecture of ecto. Exposing your modules to python is dead simple.
@@ -60,50 +75,98 @@ ecto at a glance
     
     .. code-block:: python
     
-        #!/usr/bin/env python
-        import ecto #ecto core library
-        import hello_ecto #a user library, that has a few ecto modules
-        
-        def mygraph():
-            #instantiate a plasm, our DAG structure
-            plasm = ecto.Plasm()
-            #instantiate processing modules
-            r = hello_ecto.Reader()
-            #notice the keyword args, these get mapped
-            #as parameters
-            p1 = hello_ecto.Printer(str="default")
-            p2 = hello_ecto.Printer(str="default")
-            #connect outputs to inputs
-            plasm.connect(r, "output", p1, "str")
-            plasm.connect(r, "output", p2, "str")
-            #render the DAG with dot
-            print plasm.viz()
-            ecto.view_plasm(plasm)
-            #an execution loop
-            print "Enter input, q to quit"
-            while r.outputs.output != 'q':
-                plasm.execute() #this executes the graph in compiled code.
-        
-        if __name__ == '__main__':
-            mygraph()
+      import ecto #ecto core library
+      import hello_ecto #a user library, that has a few ecto modules
+      
+      debug = True
+      
+      def mygraph():
+          #instantiate a plasm, our DAG structure
+          plasm = ecto.Plasm()
+          
+          #instantiate processing modules
+          r = hello_ecto.Reader()
+          
+          #notice the keyword args, these get mapped
+          #as parameters
+          p1 = hello_ecto.Printer(str="default")
+          p2 = hello_ecto.Printer(str="default")
+          
+          #connect outputs to inputs
+          plasm.connect(r, "output", p1, "str")
+          plasm.connect(r, "output", p2, "str")
+          
+          if debug:
+              #render the DAG with dot
+              print plasm.viz()
+              ecto.view_plasm(plasm)
+          
+          #an execution loop
+          print "Enter input, q to quit"
+          while r.outputs.output != 'q':
+              plasm.execute() #this executes the graph in compiled code.
+      
+      if __name__ == '__main__':
+          mygraph()
                 
     * The ecto::plasm is easily inspected using graphviz tools.
     
     .. image:: images/plasm.png
     
     .. code-block :: c++
-        
+    
+        #graphviz dot format
         digraph G {
-            0[label="hello_ecto::Reader",fillcolor=green, style="rounded,filled"];
-            1[label="hello_ecto::Printer",fillcolor=green, style="rounded,filled"];
-            2[label="output", shape=invhouse];
-            3[label="str", shape=house];
-            4[label="hello_ecto::Printer",fillcolor=green, style="rounded,filled"];
-            5[label="str", shape=house];
-            0->2 ;
-            2->3 ;
-            3->1 ;
-            2->5 ;
-            5->4 ;
+          0[label="hello_ecto::Reader",fillcolor=green, style="rounded,filled"];
+          1[label="hello_ecto::Printer",fillcolor=green, style="rounded,filled"];
+          2[label="output", shape=invhouse];
+          3[label="str", shape=house];
+          4[label="hello_ecto::Printer",fillcolor=green, style="rounded,filled"];
+          5[label="str", shape=house];
+          0->2 ;
+          2->3 ;
+          3->1 ;
+          2->5 ;
+          5->4 ;
         }
+        
+    * Each module is self documenting by design.
+
+Sample Generated Module Documentation
+=====================================
+
+Since the modules are by design self documenting, it is simple to output rst for a given set of modules.
+
+Printer (ecto::module)
+=================================
+
+Prints a string input to standard output.
+
+params
+---------------------------------
+
+ - str [std::string] default = hello
+
+    The default string to print
+
+inputs
+---------------------------------
+
+ - str [std::string] default = hello
+
+    The string to print.
+
+
+Reader (ecto::module)
+=================================
+
+Reads input from standard input.
+
+ouputs
+---------------------------------
+
+ - output [std::string] default = 
+
+    Output from standard in
+
     

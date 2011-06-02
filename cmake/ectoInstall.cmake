@@ -56,7 +56,7 @@ set(ecto_PYTHON_FILES
 
           
 install(FILES ${ecto_PYTHON_FILES}
-  DESTINATION ${ecto_PYTHON_INSTALL}/ecto COMPONENT ecto_python
+  DESTINATION ${ecto_PYTHON_INSTALL}/ecto COMPONENT ecto
   )
 
 
@@ -65,13 +65,13 @@ configure_file(${CMAKE_SOURCE_DIR}/cmake/python_path.sh.inst.in
   )
 
 install(FILES ${CMAKE_BINARY_DIR}/unix_install/python_path.sh
-        DESTINATION share/ecto COMPONENT ecto_python
+        DESTINATION share/ecto COMPONENT ecto
   )
 install(FILES ${CMAKE_SOURCE_DIR}/cmake/python_path.sh.user.in
-        DESTINATION share/ecto COMPONENT ecto_python
+        DESTINATION share/ecto COMPONENT ecto
   )
   
 set(ECTO_CONFIG_PATH  ${CMAKE_INSTALL_PREFIX}/share/ecto)
 configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoConfig.cmake.in 
   ${CMAKE_BINARY_DIR}/unix_install/ectoConfig.cmake @ONLY)
-  
+

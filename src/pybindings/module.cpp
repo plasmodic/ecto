@@ -14,7 +14,7 @@ namespace ecto
 {
 namespace py
 {
-#if 0
+#if 1
 #undef SHOW
 #define SHOW() do{}while(false)
 #endif
@@ -27,17 +27,17 @@ struct modwrap: module, bp::wrapper<module>
     SHOW();
     if (bp::override init = this->get_override("declare_params"))
       init(boost::ref(params));
-    else
-      throw std::logic_error("declare_params is not implemented it seems");
+//    else
+//      throw std::logic_error("declare_params is not implemented it seems");
   }
 
   void dispatch_declare_io(const tendrils&params, tendrils&inputs, tendrils&outputs)
   {
     SHOW();
-    if (bp::override config = this->get_override("declare_io"))
-      config(boost::ref(params), boost::ref(inputs), boost::ref(outputs));
-    else
-      throw std::logic_error("declare_io is not implemented it seems");
+    if (bp::override declare_io = this->get_override("declare_io"))
+      declare_io(boost::ref(params), boost::ref(inputs), boost::ref(outputs));
+//    else
+//      throw std::logic_error("declare_io is not implemented it seems");
   }
 
   void dispatch_configure(tendrils& params)
@@ -45,8 +45,8 @@ struct modwrap: module, bp::wrapper<module>
      SHOW();
      if (bp::override config = this->get_override("configure"))
        config(boost::ref(params));
-     else
-       throw std::logic_error("configure is not implemented it seems");
+//     else
+//       throw std::logic_error("configure is not implemented it seems");
    }
 
   ReturnCode dispatch_process(const tendrils& inputs, tendrils& outputs)
@@ -56,17 +56,17 @@ struct modwrap: module, bp::wrapper<module>
     {
       proc(boost::ref(inputs), boost::ref(outputs));
     }
-    else
-      throw std::logic_error("process is not implemented it seems");
-    return eOK;
+//    else
+//      throw std::logic_error("process is not implemented it seems");
+    return OK;
   }
   void dispatch_destroy()
   {
     SHOW();
     if (bp::override dest = this->get_override("destroy"))
       dest();
-    else
-      throw std::logic_error("destroy is not implemented it seems");
+//    else
+//      throw std::logic_error("destroy is not implemented it seems");
   }
   const std::string& name() const
   {
@@ -103,6 +103,8 @@ tendrils& params(module& mod)
 {
   return mod.parameters;
 }
+
+
 void wrapModule()
 {
   //use private names so that python people know these are internal
@@ -114,6 +116,8 @@ void wrapModule()
   m_base.def("configure", ((void(module::*)()) &module::configure));
   m_base.def("process", (void(module::*)()) &module::process);
   m_base.def("destroy", &module::destroy);
+
+
 
   m_base.add_property("inputs", make_function(&inputs, bp::return_internal_reference<>()));
   m_base.add_property("outputs", make_function(outputs, bp::return_internal_reference<>()));

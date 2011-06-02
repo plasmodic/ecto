@@ -68,8 +68,8 @@ public:
    * A vertex in the plasm consists of a pointer to a module, a vertex
    * type, the name of the tendril and the tendril itself.
    */
-  typedef std::map<int,
-      boost::tuple<module_ptr, vertex_t, std::string, tendril> > vertex_map_t;
+  typedef std::map<int, boost::tuple<module_ptr, vertex_t, std::string, tendril> > 
+  vertex_map_t;
   /**
    * \brief The edges encode the vertex to vertex relationship.
    */
@@ -86,7 +86,7 @@ public:
    * @param input The input key from the to module.
    */
   void connect(module_ptr from, const std::string& output, module_ptr to,
-      const std::string& input);
+               const std::string& input);
 
   /**
    * Disconnect a tendril from another tendril.
@@ -96,13 +96,13 @@ public:
    * @param to
    * @param input
    */
-  void disconnect(module_ptr from, const std::string& output, module_ptr to,
-      const std::string& input);
+  void disconnect(module_ptr from, const std::string& output, 
+                  module_ptr to, const std::string& input);
 
   /**
    * \brief This executes the graph, by executing all nodes in dependency order.
    */
-  void execute();
+  int execute();
   void spin();
   /**
    * \brief Mark the given module dirty. This will recurse through the graph, dirting all modules downstream.
@@ -113,7 +113,7 @@ public:
    * Execute the given module, recursing to all dependencies and executing them. If the module is dirty this is a NOP.
    * @param m the module to execute.
    */
-  void go(module_ptr m);
+  int go(module_ptr m);
   /**
    * \brief output graphviz to a stream.
    * @param out the output stream. Graphviz will be in plain text format.

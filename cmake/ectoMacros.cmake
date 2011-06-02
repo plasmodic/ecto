@@ -8,7 +8,6 @@ macro(ectomodule NAME)
     PROPERTIES
     OUTPUT_NAME ${NAME}
     PREFIX ""
-    #SUFFIX ".pyd"
     )
 
   target_link_libraries(${NAME}_ectomodule

@@ -51,3 +51,35 @@ f.close()
 	* output data may only be modified from within the process function call
 	* the process function call should not mutate the module (however this adds quite a bit of annoyance to the user)
 	  *this is unacceptable, so this will be solved by guaranteeing that all calls to process are atomic
+
+	  
+//void face_detector_interface(tendrils& in, tendrils&out)
+//{
+//  in.declare<cv::Mat>("image");
+//  in.declare<cv::Mat>("mask");
+//  out.declare<cv::Face>("faces");
+//}
+//
+//#include <ecto/opencv/facedetector.hpp>
+//
+//struct MyFaceDetector
+//{
+//  typedef cv::face_detector params;
+//  typedef cv::face_detector io;
+//
+//};
+
+  void set_n(int n)
+  {
+    n_ = n;
+  }
+  void register_db_name(std::string name)
+  {
+    //expensive
+  }
+  void configure(tendrils& parameters)
+  {
+    n_ = parameters.get<int> ("n");
+    parameters.at("n").set_callback(boost::bind(&Gather::set_n,this,_1)).min(20).max(40);
+    parameters.at("expensive").set_callback(boost::bind(&Gather::register_db_name,this,_1));
+  }

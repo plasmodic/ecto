@@ -35,6 +35,17 @@ namespace hello_ecto
 
 using ecto::tendrils;
 
+/* BOILER_PLATE_MODULE
+struct MyModule
+{
+  static void declare_params(tendrils& params);
+  static void declare_io(const tendrils& params, tendrils& in, tendrils& out);
+  void configure(tendrils& params);
+  int process(const tendrils& in, tendrils& out);
+  void destroy();
+};
+*/
+
 struct Printer
 {
   static void declare_params(tendrils& params)
@@ -44,16 +55,24 @@ struct Printer
 
   static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
   {
-    in.declare<std::string> ("str", "The string to print.",
-        parms.get<std::string> ("str"));
+    in.declare<std::string> ("str", "The string to print.", parms.get<std::string> ("str"));
   }
 
-  ecto::ReturnCode process(const tendrils& in, tendrils& /*out*/)
+  Printer(): str_()
+  {
+  }
+  
+  void configure(tendrils& params)
+  {
+    str_ = params.get<std::string> ("str");
+  }
+
+  int process(const tendrils& in, tendrils& /*out*/)
   {
     std::cout << in.get<std::string> ("str") << std::endl;
-    return ecto::eOK;
+    return 0;
   }
-
+  std::string str_;
 };
 
 struct Reader
@@ -63,12 +82,12 @@ struct Reader
     out.declare<std::string> ("output", "Output from standard in");
   }
 
-  ecto::ReturnCode process(const tendrils& in, tendrils& out)
+  int process(const tendrils& in, tendrils& out)
   {
-    std::string o;
-    std::cin >> o;
-    out.get<std::string> ("output") = o;
-    return ecto::eOK;
+    std::string s;
+    std::cin >> s;
+    out.get<std::string> ("output") = s;
+    return ecto::OK;
   }
 };
 
