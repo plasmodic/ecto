@@ -30,6 +30,7 @@ namespace asio = boost::asio;
 asio::io_service io_service;
 boost::thread_group tgroup;
 
+/*
 struct data {
   float value;
   typedef boost::shared_ptr<data> ptr;
@@ -148,6 +149,70 @@ struct module : boost::enable_shared_from_this<module> , boost::noncopyable
                                                       shared_from_this())));
   }
 };
+*/
+
+struct module
+{
+  typedef std::map<std::string, boost::any> tendrils_t;
+  virtual void process(tendrils_t& in, tendrils_t& out) = 0;
+  typedef boost::shared_ptr<module> ptr;
+  std::string name;
+  module(const std::string& name_) : name(name_) { }
+
+  virtual ~module();
+};
+
+module::~module() { }
+
+struct generator : module
+{
+  float value;
+  generator() : module("generator")
+  { 
+    value = 0.0f; 
+  }
+
+  void process(tendrils_t& in, tendrils_t& out)
+  {
+    out["value"] = value;
+    value += 1.0f;
+  }
+};
+
+struct incrementer : module
+{
+  incrementer() : module("incrementer") { }
+
+  void process(tendrils_t& in, tendrils_t& out)
+  {
+    float val = boost::any_cast<float>(in["value"]);
+    out["value"] = val + 1.0f;
+  }
+};
+
+struct splitter : module
+{
+  splitter() : module("splitter") { }
+
+  void process(tendrils_t& in, tendrils_t& out)
+  {
+    float val = boost::any_cast<float>(in["value"]);
+    out["left"] = val;
+    out["right"] = val;
+  }
+};
+
+struct adder : module
+{
+  adder() : module("adder") { }
+
+  void process(tendrils_t& in, tendrils_t& out)
+  {
+    float left = boost::any_cast<float>(in["left"]);
+    float right = boost::any_cast<float>(in["right"]);
+    out["value"] = left + right;
+  }
+};
 
 
 using boost::adjacency_list;
@@ -206,6 +271,12 @@ struct graph_writer
   }
 };
 
+edge::ptr make_edge(const std::string& fromport, const std::string& toport)
+{
+  edge::ptr eptr(new edge(fromport, toport));
+  return eptr;
+}
+
 int main()
 {
   using boost::bind;
@@ -215,19 +286,41 @@ int main()
   
   graph_t g;
 
-  module::ptr m1(new module("m1")), m2(new module("m2"));
-  edge::ptr e1(new edge("out1", "in1")), e2(new edge("out2", "in2"));
+  module::ptr 
+    gen(new generator), 
+    split(new splitter),
+    inc(new incrementer),
+    add(new adder)
+    ;
+  
+  graph_t::vertex_descriptor 
+    gen_d = add_vertex(gen, g),
+    split_d = add_vertex(split, g),
+    inc_d = add_vertex(inc, g),
+    add_d = add_vertex(add, g)
+    ;
 
-  graph_t::vertex_descriptor vd1 = add_vertex(m1, g),
-    vd2 = add_vertex(m2, g);
+  //  edge::ptr e1(new edge("out1", "in1")), e2(new edge("out2", "in2"));
 
   bool added;
-  graph_t::edge_descriptor ed1, ed2;
-  tie(ed1, added) = add_edge(vd1, vd2, e1, g);
-  assert(added);
-  tie(ed2, added) = add_edge(vd1, vd2, e2, g);
+  graph_t::edge_descriptor ed;
+  tie(ed, added) = add_edge(gen_d, split_d, make_edge("value", "value"), g);
   assert(added);
 
+  tie(ed, added) = add_edge(split_d, inc_d, make_edge("left", "value"), g);
+  assert(added);
+
+  tie(ed, added) = add_edge(split_d, add_d, make_edge("right", "right"), g);
+  assert(added);
+
+  tie(ed, added) = add_edge(inc_d, add_d, make_edge("value", "left"), g);
+  // assert(added);
+
+
+  /*
+  tie(ed2, added) = add_edge(vd1, vd2, e2, g);
+  assert(added);
+  */
   std::ofstream gviz_str("graph.dot");
   boost::write_graphviz(gviz_str, g, vertex_writer(&g), edge_writer(&g), graph_writer());
 
