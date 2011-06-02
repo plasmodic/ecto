@@ -21,7 +21,7 @@ void wrapConnection(){
     .add_property("type_name", &tendril::type_name)
     .add_property("val", &tendril::extract,(void(tendril::*)(bp::object)) &tendril::set)
     .def("get",&tendril::extract)
-    .def("set",(void(tendril::*)(bp::object)) &tendril::set)
+    .def("set",(void(tendril::*)(bp::object)) &tendril::set) 
     ;
 }
 
