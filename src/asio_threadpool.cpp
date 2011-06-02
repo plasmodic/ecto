@@ -6,7 +6,6 @@
 #include <boost/asio/io_service.hpp>
 #include <boost/atomic.hpp>
 #include <boost/make_shared.hpp>
-#include <boost/lockfree/fifo.hpp>
 #include <boost/thread.hpp>
 #include <boost/function.hpp>
 #include <boost/shared_array.hpp>
@@ -60,6 +59,7 @@ struct workstuff : boost::enable_shared_from_this<workstuff>
               << " work(" << ms_work << "ms)" << std::endl;
 
     // spend some time working
+    unsigned ms_work = rand() % 3000;
     boost::asio::io_service inner_serv;
     boost::asio::deadline_timer dt(inner_serv);
     dt.expires_from_now(boost::posix_time::milliseconds(ms_work));
@@ -71,6 +71,7 @@ struct workstuff : boost::enable_shared_from_this<workstuff>
   }
 };
 */
+
 struct data {
   float value;
   typedef boost::shared_ptr<data> ptr;
@@ -79,7 +80,7 @@ struct data {
 
 typedef std::deque<data::const_ptr> datadeque;
 
-struct module : boost::enable_shared_from_this<module>
+struct module : boost::enable_shared_from_this<module> , boost::noncopyable
 {
   typedef boost::shared_ptr<module> ptr;
   typedef std::map<std::string, datadeque> inputs_t;
@@ -94,7 +95,10 @@ struct module : boost::enable_shared_from_this<module>
   {
     boost::unique_lock<boost::mutex> lock(mtx);
     if (inputs.size() == 0)
-      return true;
+      {
+        std::cout << this << " READY CAUSE NO INPUTS\n";
+        return true;
+      }
     for (inputs_t::iterator it = inputs.begin(), end = inputs.end();
          it != end;
          ++it)
@@ -113,9 +117,6 @@ struct module : boost::enable_shared_from_this<module>
 
   void doit(boost::asio::io_service& serv) 
   {
-    // the input_watcher is done... that's why we're here.
-    // input_watcher->join();
-
     data::ptr newdata(new data);
     newdata->value = 1;
     {
@@ -129,6 +130,13 @@ struct module : boost::enable_shared_from_this<module>
         }
     }
     std::cout << this << " new value = " << newdata->value << "\n";
+    std::cout << this << " pushing to " << outputs.size() << " outputs" << std::endl;
+    // spend some time working
+    unsigned ms_work = rand() % 3000;
+    boost::asio::io_service inner_serv;
+    boost::asio::deadline_timer dt(inner_serv);
+    dt.expires_from_now(boost::posix_time::milliseconds(ms_work));
+    dt.wait();
 
     for (outputs_t::iterator it = outputs.begin(), end = outputs.end();
          it != end;
@@ -137,27 +145,32 @@ struct module : boost::enable_shared_from_this<module>
         module::ptr downstream_module = it->second.first;
         const std::string& downstream_port = it->second.second;
 
+        std::cout << this << " => " << downstream_port << "\n";
         downstream_module->push(downstream_port, newdata);
       }
 
     run(serv);
   }
 
-  static void async_waitforinput(boost::asio::io_service& serv,
-                                 module::ptr m)
+  static void 
+  async_waitforinput(boost::asio::io_service& serv,
+                     module::ptr m)
   {
+    std::cout << m.get() << " waiting..." << std::endl;
     boost::asio::io_service inner_serv;
     boost::asio::deadline_timer dt(inner_serv);
+    boost::asio::io_service::work work(serv);
 
     assert(m.get());
       
     for (;;) {
       if (m->inputs_ready())
         {
-          serv.post(boost::bind(&module::doit, m, serv));
+          serv.post(boost::bind(&module::doit, m.get(), boost::ref(serv)));
+          std::cout << m.get() << " inputs ready! " << m->inputs.size() << std::endl;
           return;
         }
-      dt.expires_from_now(boost::posix_time::milliseconds(100));
+      dt.expires_from_now(boost::posix_time::milliseconds(3));
       dt.wait();
     }
   }
@@ -166,8 +179,11 @@ struct module : boost::enable_shared_from_this<module>
 
   void run(boost::asio::io_service& serv)
   {
+    if (input_watcher)
+      input_watcher->join();
     input_watcher.reset(new boost::thread(boost::bind(&async_waitforinput,
-                                                      serv, shared_from_this())));
+                                                      boost::ref(serv), 
+                                                      shared_from_this())));
   }
 };
 
@@ -178,11 +194,13 @@ make_graph(boost::asio::io_service& serv, unsigned N)
   root->run(serv);
   module::ptr prev = root;
   module::ptr next;
+
   for (unsigned n=0; n<N; ++n)
     {
       next.reset(new module);
-      next->run(serv);
+      next->inputs["in"]; 
       prev->outputs["out"] = make_pair(next, std::string("in"));
+      next->run(serv);
       prev = next;
     }
   return root;
@@ -196,12 +214,12 @@ int main()
 
   std::cout << "start..." << std::endl;
 
-  module::ptr graph = make_graph(io_service, 5);
+  module::ptr graph = make_graph(io_service, 30);
 
   graph->run(io_service);
 
   {
-    for (unsigned j=0; j<4; ++j)
+    for (unsigned j=0; j<1; ++j)
       {
         tgroup.create_thread(bind(&asio::io_service::run, &io_service));
       }
