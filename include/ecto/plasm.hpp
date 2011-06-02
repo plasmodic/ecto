@@ -65,7 +65,8 @@ public:
   };
 
   /**
-   * A vertex in the plasm consists of a pointer to a module, a vertex type, the name of the tendril and the tendril its self.
+   * A vertex in the plasm consists of a pointer to a module, a vertex
+   * type, the name of the tendril and the tendril itself.
    */
   typedef std::map<int,
       boost::tuple<module_ptr, vertex_t, std::string, tendril> > vertex_map_t;
@@ -75,6 +76,7 @@ public:
   typedef std::list<boost::tuple<size_t, size_t> > edge_list_t;
 
   plasm();
+
   /**
    * \brief connect one module to another, and populate the plasms graph accordingly.
    * This will throw on a type mismatch.
@@ -85,6 +87,7 @@ public:
    */
   void connect(module_ptr from, const std::string& output, module_ptr to,
       const std::string& input);
+
   /**
    * Disconnect a tendril from another tendril.
    *
