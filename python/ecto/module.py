@@ -13,6 +13,8 @@ class Module(_module_base):
         _module_base.declare_io(self)
         _module_base.configure(self)
     
-    @staticmethod
-    def inspect(x,b):
-        pass
+    @classmethod
+    def inspect(cls,_args,_kwargs):
+        m = cls()
+        return m
+        

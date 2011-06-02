@@ -1,5 +1,9 @@
 import sys
-sys.path.append("@LIBRARY_OUTPUT_PATH@")
-sys.path.append("@CMAKE_SOURCE_DIR@/python")
+
+#ordering important.
+sys.path.insert(0,"@CMAKE_SOURCE_DIR@/test/python")
+sys.path.insert(0,"@CMAKE_SOURCE_DIR@/python")
+sys.path.insert(0,"@LIBRARY_OUTPUT_PATH@")
+
 import nose
 result = nose.main(sys.argv)

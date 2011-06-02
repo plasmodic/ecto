@@ -68,14 +68,14 @@ struct modwrap: module, bp::wrapper<module>
 //    else
 //      throw std::logic_error("destroy is not implemented it seems");
   }
-  const std::string& name() const
+  std::string name() const
   {
     SHOW();
     bp::reference_existing_object::apply<modwrap*>::type converter;
     PyObject* obj = converter(this);
     bp::object real_obj = bp::object(bp::handle<>(obj));
     bp::object n = real_obj.attr("__class__").attr("__name__");
-    static std::string nm = bp::extract<std::string>(n);
+    std::string nm = bp::extract<std::string>(n);
     return nm;
   }
   static std::string doc(modwrap* mod)
@@ -85,8 +85,10 @@ struct modwrap: module, bp::wrapper<module>
     PyObject* obj = converter(mod);
     bp::object real_obj = bp::object(bp::handle<>(obj));
     bp::object n = real_obj.attr("__class__").attr("__doc__");
-    std::string nm = bp::extract<std::string>(n);
-    return nm;
+    bp::extract<std::string> get_str(n);
+    if(get_str.check())
+      return get_str();
+    return "No Doc str.";
   }
   boost::function<void()> finish_handler_;
 };
@@ -122,7 +124,7 @@ void wrapModule()
   m_base.add_property("inputs", make_function(&inputs, bp::return_internal_reference<>()));
   m_base.add_property("outputs", make_function(outputs, bp::return_internal_reference<>()));
   m_base.add_property("params", make_function(params, bp::return_internal_reference<>()));
-  m_base.add_property("name", make_function(params, bp::return_internal_reference<>()));
+  m_base.def("name", &module::name);
   m_base.def("doc", &modwrap::doc);
 }
 

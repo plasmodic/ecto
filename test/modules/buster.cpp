@@ -63,6 +63,24 @@ struct FooPODModule
 
 };
 
+struct DontAllocateMe
+{
+  static void declare_params(tendrils& parameters)
+  {
+    parameters.declare<std::string> ("str");
+  }
+
+  static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
+  {
+    outputs.declare<std::string> ("str");
+  }
+
+  DontAllocateMe()
+  {
+    throw std::logic_error("I shouldn't be allocated");
+  }
+};
+
 struct Printer
 {
   static void declare_params(tendrils& parameters)
@@ -286,5 +304,6 @@ BOOST_PYTHON_MODULE(buster)
   ecto::wrap<Gather<int> >("Gather", "Gather a scattered value...");
   ecto::wrap<Gather<double> >("Gather_double", "Gather a scattered value...");
   ecto::wrap<Quitter>("Quitter", "Will quit the graph on an appropriate input.");
+  ecto::wrap<DontAllocateMe>("DontAllocateMe", "Don't allocate me, feel free to inspect.");
   boost::python::def("make_pod_tendril", buster::makePodTendril);
 }

@@ -51,15 +51,15 @@ def list_ecto_module(pymodule):
     l = []
     for x in dir(pymodule):
         mod = getattr(pymodule,x)
-        if ismodule(mod):
-            list_ecto_module(mod)
+        #if ismodule(mod):
+        #    list_ecto_module(mod)
         if inspect.isclass(mod) and issubclass(mod,ecto._module_base):
             try:
-                m = mod()
+                m = mod.inspect((),{})
                 print_module_doc(m)
                 l.append(m)
-            except:
-                pass
+            except Exception,e:
+                print e
     return l
     
 def view_plasm(plasm):

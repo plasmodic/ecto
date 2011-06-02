@@ -93,7 +93,7 @@ struct module: boost::noncopyable
    * \brief Grab the name of the child class.
    * @return
    */
-  virtual const std::string& name() const = 0;
+  virtual std::string name() const = 0;
 
   tendrils parameters, inputs, outputs;
 
@@ -268,7 +268,7 @@ protected:
     destroy(int_<has_f<Module>::destroy> ());
   }
 
-  const std::string& name() const
+  std::string name() const
   {
     return MODULE_TYPE_NAME;
   }

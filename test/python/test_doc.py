@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import ecto
 import buster
+import pyecto
 
 def test_doc():
     scatter = buster.Scatter(n=6, x=3)
@@ -18,8 +19,12 @@ def test_doc():
     ecto.print_module_doc(scatter)
     ecto.print_module_doc(gather)
     print plasm.viz()
+    
 #    ecto.view_plasm(plasm)
+def test_inspection():
+    ecto.list_ecto_module(buster)
+    ecto.list_ecto_module(pyecto)
 
 if __name__ == '__main__':
     test_doc()
-
+    test_inspection()
