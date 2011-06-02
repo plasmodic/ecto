@@ -32,15 +32,11 @@ namespace ecto
 
     struct Vertex: public _Vertex
     {
-      Vertex() :
-        _Vertex()
-      {
-      }
+      Vertex() : _Vertex() { }
 
       Vertex(const module::ptr& p, const std::string& s, plasm::vertex_t t) :
         _Vertex(p, s), uid(-1), ecto_type(t)
-      {
-      }
+      { }
 
       struct Tag
       {
@@ -73,15 +69,16 @@ namespace ecto
       {
         return first.get() == rhs.first.get() && second == rhs.second;
       }
+
+      friend bool operator<(const Vertex&lhs, const Vertex& rhs)
+      {
+        return 
+          lhs.first.get() < rhs.first.get() || 
+          (lhs.first.get() == rhs.first.get() && lhs.second < rhs.second);
+      }
+
     };
 
-    struct opless
-    {
-      inline bool operator()(const Vertex&lhs, const Vertex& rhs) const
-      {
-        return lhs.first.get() < rhs.first.get() || (lhs.first.get() == rhs.first.get() && lhs.second < rhs.second);
-      }
-    };
 
     class label_writer
     {
@@ -119,8 +116,8 @@ namespace ecto
 
     graph_t graph_, root_graph_;
 
-    void add_edge(const module::ptr& from_m, const std::string& out_name, const module::ptr& to_m,
-                  const std::string& in_name)
+    void add_edge(const module::ptr& from_m, const std::string& out_name, 
+                  const module::ptr& to_m,   const std::string& in_name)
     {
       Vertex root_from = make_vert(from_m);
       Vertex root_to = make_vert(to_m);
@@ -267,7 +264,7 @@ namespace ecto
       return Goer(*this)(make_vert(m).uid_root);
     }
 
-    typedef std::set<Vertex, opless> module_set_t;
+    typedef std::set<Vertex> module_set_t;
     module_set_t module_set;
 
     plasm::vertex_map_t getVertices()
