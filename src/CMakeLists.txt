@@ -2,6 +2,7 @@ include_directories(lib)
 add_subdirectory(lib)
 add_subdirectory(pybindings)
 
+if(STRAZ)
 macro(asio_executable name)
   add_executable(${name} ${name}.cpp)
   target_link_libraries(${name}
@@ -10,4 +11,5 @@ endmacro()
 
 asio_executable(asio_sketch)
 asio_executable(asio_threadpool)
+endif()
 
