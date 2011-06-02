@@ -226,7 +226,7 @@ struct ModuleGraph
           e = *in_i; //if we don't check and the vertex is not in the graph this causes segfault
           Vertex_Desc targ = boost::source(e, graph.root_graph_);
           int val = (*this)(targ); //recurse.
-          if(val)
+          if (val)
             return val;
         }
       return process(vert);
@@ -367,7 +367,7 @@ struct plasm::impl
         module::ptr m = modules_.get_root_vert(desc).first;
         m->mark_dirty();
       }
-  }
+}
 
   int proc_stacks()
   {
@@ -375,9 +375,17 @@ struct plasm::impl
 
     BOOST_FOREACH(ModuleGraph::Vertex_Desc desc, stack_)
       {
-        int val =goer.process(modules_.get_root_vert(desc));
-        if (val)
-          return 1;
+        try
+          {
+            int val = goer.process(modules_.get_root_vert(desc));
+            if (val)
+              return 1;
+          } catch (std::exception& e)
+          {
+            std::cerr << "Exception thrown in " << modules_.get_root_vert(desc).first->name() << std::endl;
+            throw e;
+          }
+
       }
     return 0;
   }
