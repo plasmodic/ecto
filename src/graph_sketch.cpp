@@ -49,6 +49,10 @@ struct module : boost::enable_shared_from_this<module> , boost::noncopyable
 
   boost::mutex mtx;
 
+  std::string name;
+
+  module(const std::string& name_) : name(name_) { }
+
   bool inputs_ready() 
   {
     boost::unique_lock<boost::mutex> lock(mtx);
@@ -145,36 +149,18 @@ struct module : boost::enable_shared_from_this<module> , boost::noncopyable
   }
 };
 
-module::ptr 
-make_graph(boost::asio::io_service& serv, unsigned N)
-{
-  module::ptr root(new module);
-  root->run(serv);
-  module::ptr prev = root;
-  module::ptr next;
 
-  for (unsigned n=0; n<N; ++n)
-    {
-      next.reset(new module);
-      next->inputs["in"]; 
-      prev->outputs["out"] = make_pair(next, std::string("in"));
-      next->run(serv);
-      prev = next;
-    }
-  return root;
-}
-
-using boost::vertex_property_tag;
 using boost::adjacency_list;
 using boost::vecS;
-using boost::setS;
 using boost::bidirectionalS;
-using boost::property;
-using boost::property_map;
 using boost::graph_traits;
 
 struct edge 
 {
+  edge(const std::string& fp, const std::string& tp)
+    : from_port(fp), to_port(tp)
+  { }
+
   std::string from_port, to_port;
   std::deque<boost::any> deque;
   typedef boost::shared_ptr<edge> ptr;
@@ -182,13 +168,43 @@ struct edge
 };
 
 
-typedef adjacency_list<vecS, // OutEdgeList
+// if the first argument is a sequence type (vecS, etc) then parallel edges are allowed
+typedef adjacency_list<vecS, // OutEdgeList... 
                        vecS, // VertexList
                        bidirectionalS, // Directed
                        module::ptr, // vertex property
                        edge::ptr> // edge property 
 graph_t;
                        
+struct vertex_writer
+{
+  graph_t* g;
+  vertex_writer(graph_t* g_) : g(g_) { }
+
+  void operator()(std::ostream& out, graph_t::vertex_descriptor vd)
+  {
+    out << "[label=\"" << (*g)[vd]->name << "\"]";
+  }
+};
+
+struct edge_writer
+{
+  graph_t* g;
+  edge_writer(graph_t* g_) : g(g_) { }
+
+  void operator()(std::ostream& out, graph_t::edge_descriptor ed)
+  {
+    out << "[headlabel=\"" << (*g)[ed]->to_port << "\" taillabel=\"" << (*g)[ed]->from_port << "\"]";
+  }
+};
+
+struct graph_writer
+{
+  void operator()(std::ostream& out) const {
+    out << "graph [rankdir=LR, ranksep=1]" << std::endl;
+    out << "edge [labelfontsize=8]" << std::endl;
+  }
+};
 
 int main()
 {
@@ -199,8 +215,8 @@ int main()
   
   graph_t g;
 
-  module::ptr m1(new module), m2(new module);
-  edge::ptr e1(new edge), e2(new edge);
+  module::ptr m1(new module("m1")), m2(new module("m2"));
+  edge::ptr e1(new edge("out1", "in1")), e2(new edge("out2", "in2"));
 
   graph_t::vertex_descriptor vd1 = add_vertex(m1, g),
     vd2 = add_vertex(m2, g);
@@ -213,10 +229,9 @@ int main()
   assert(added);
 
   std::ofstream gviz_str("graph.dot");
-  boost::write_graphviz(gviz_str, g);
+  boost::write_graphviz(gviz_str, g, vertex_writer(&g), edge_writer(&g), graph_writer());
 
   /*
-
   module::ptr graph = make_graph(io_service, 30);
 
   graph->run(io_service);
