@@ -252,6 +252,7 @@ int main()
   std::ofstream gviz_str("graph.dot");
   boost::write_graphviz(gviz_str, g, vertex_writer(&g), edge_writer(&g), graph_writer());
 
+  // get topo order and execute a few times
   std::vector<graph_t::vertex_descriptor> vv;
 
   boost::topological_sort(g, std::back_inserter(vv));
@@ -265,19 +266,6 @@ int main()
           invoke_process(g, vv[k]);
         }
     }
-  /*
-  module::ptr graph = make_graph(io_service, 30);
 
-  graph->run(io_service);
-
-  {
-    for (unsigned j=0; j<1; ++j)
-      {
-        tgroup.create_thread(bind(&asio::io_service::run, &io_service));
-      }
-  }
-
-  tgroup.join_all();
-  */
   std::cout << "exit." << std::endl;
 }
