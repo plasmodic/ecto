@@ -104,16 +104,7 @@ namespace ecto
      */
     int execute();
     void spin();
-    /**
-     * \brief Mark the given module dirty. This will recurse through the graph, dirting all modules downstream.
-     * @param m The module to mark dirty.
-     */
-    void mark_dirty(module_ptr m);
-    /**
-     * Execute the given module, recursing to all dependencies and executing them. If the module is dirty this is a NOP.
-     * @param m the module to execute.
-     */
-    int go(module_ptr m);
+
     /**
      * \brief output graphviz to a stream.
      * @param out the output stream. Graphviz will be in plain text format.

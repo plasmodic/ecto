@@ -48,22 +48,12 @@ def test_reconnect():
     plasm.disconnect(m, "out", gather , "in_0001")
     plasm.connect(m, "out", gather , "in_0001")
 
-
-    
     #ecto.view_plasm(plasm)
     #check some values
-    plasm.go(gather)
+    plasm.execute()
     print gather.outputs.out
     assert(gather.outputs.out == 2 *(2*2))
-    plasm.go(gather)
-    #should remain unchanged
-    assert(gather.outputs["out"].val == 2*(2*2))
-    plasm.mark_dirty(g) #mark top of tree dirty (propagates down)
-    plasm.go(gather)
-    assert(g.outputs["out"].val == 4)
-    assert(gather.outputs["out"].val == 2*(2*4)) #g should be at 4 here
-    #ecto.view_plasm(plasm)
-
+    
 if __name__ == "__main__":
     test_reconnect()
     test_one_to_many()

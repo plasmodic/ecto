@@ -1,85 +1,268 @@
-#include "plasm_impl.hpp"
+#include <ecto/plasm.hpp>
+#include <ecto/tendril.hpp>
+#include <ecto/module.hpp>
+
+#include <string>
+#include <map>
+#include <set>
+#include <utility>
+#include <deque>
+
+//this quiets a deprecated warning
+#define BOOST_NO_HASH
+#include <boost/graph/graph_traits.hpp>
+#include <boost/graph/adjacency_list.hpp>
+#include <boost/graph/topological_sort.hpp>
+#include <boost/graph/graphviz.hpp>
+#include <boost/foreach.hpp>
+#include <boost/unordered_map.hpp>
+
 namespace ecto
 {
 
-  plasm::plasm() : impl_(new impl)
-  { }
+namespace
+{
+using boost::adjacency_list;
+using boost::vecS;
+using boost::bidirectionalS;
+using boost::graph_traits;
+using boost::tie;
+using boost::add_vertex;
 
-  void plasm::connect(module::ptr from, const std::string& out_name, module::ptr to, const std::string& in_name)
+struct edge
+{
+  edge(const std::string& fp, const std::string& tp) :
+    from_port(fp), to_port(tp)
   {
-    if (from->outputs.count(out_name) == 0)
+  }
+
+  std::string from_port, to_port;
+  std::deque<ecto::tendril> deque;
+  typedef boost::shared_ptr<edge> ptr;
+  typedef boost::shared_ptr<const edge> const_ptr;
+};
+// if the first argument is a sequence type (vecS, etc) then parallel edges are allowed
+typedef adjacency_list<vecS, // OutEdgeList...
+    vecS, // VertexList
+    bidirectionalS, // Directed
+    module::ptr, // vertex property
+    edge::ptr> // edge property
+graph_t;
+
+struct vertex_writer
+{
+  graph_t* g;
+  vertex_writer(graph_t* g_) :
+    g(g_)
+  {
+  }
+
+  void operator()(std::ostream& out, graph_t::vertex_descriptor vd)
+  {
+    out << "[label=\"" << (*g)[vd]->name() << "\"]";
+  }
+};
+
+struct edge_writer
+{
+  graph_t* g;
+  edge_writer(graph_t* g_) :
+    g(g_)
+  {
+  }
+
+  void operator()(std::ostream& out, graph_t::edge_descriptor ed)
+  {
+    out << "[headlabel=\"" << (*g)[ed]->to_port << "\" taillabel=\"" << (*g)[ed]->from_port << "\"]";
+  }
+};
+
+struct graph_writer
+{
+  void operator()(std::ostream& out) const
+  {
+    out << "graph [rankdir=TB, ranksep=1]" << std::endl;
+    out << "edge [labelfontsize=8]" << std::endl;
+  }
+};
+
+edge::ptr make_edge(const std::string& fromport, const std::string& toport)
+{
+  edge::ptr eptr(new edge(fromport, toport));
+  return eptr;
+}
+
+}
+struct plasm::impl
+{
+  impl()
+  {
+  }
+
+  //insert a module into the graph, will retrieve the
+  //vertex descriptor if its already in the graph...
+  graph_t::vertex_descriptor insert_module(module::ptr m)
+  {
+    ModuleVertexMap::iterator it = mv_map.find(m);
+    if (it != mv_map.end())
+      return it->second;
+    graph_t::vertex_descriptor d = add_vertex(m, graph);
+    mv_map.insert(std::make_pair(m, d));
+    return d;
+  }
+
+  void connect(module::ptr from, std::string output, module::ptr to, std::string input)
+  {
+    //throw if the types are bad...
+    to->inputs[input].enforce_compatible_type(from->outputs[output]);
+
+    graph_t::vertex_descriptor fromv = insert_module(from), tov = insert_module(to);
+    edge::ptr new_edge = make_edge(output, input);
+
+    //assert that the new edge does not violate inputs that are already connected.
+    //RULE an input may only have one source.
+    graph_t::in_edge_iterator inbegin, inend;
+    tie(inbegin, inend) = boost::in_edges(tov, graph);
+    while (inbegin != inend)
       {
-        throw std::logic_error("The specified output does not exist: " + out_name);
+        edge::ptr e = graph[*inbegin];
+        if (e->to_port == new_edge->to_port)
+          {
+            throw std::runtime_error(new_edge->to_port + " is already connected, this is considered an error");
+          }
+        ++inbegin;
       }
-    if (to->inputs.count(in_name) == 0)
+
+    bool added;
+    graph_t::edge_descriptor ed;
+    tie(ed, added) = boost::add_edge(fromv, tov, new_edge, graph);
+    if (!added)
       {
-        throw std::logic_error("The specified input does not exist: " + in_name);
+        throw std::runtime_error(
+            "failed to connect " + from->name() + ":" + output + " with " + to->name() + ":" + input);
       }
-    to->inputs[in_name].enforce_compatible_type(from->outputs[out_name]);
-    //only add to graph if it was actually connected.
-    impl_->modules_.add_edge(from, out_name, to, in_name);
-    impl_->dirty_ = true;
-
+    //clear stack to mark the ordering dirty...
+    stack.clear();
   }
 
-  void plasm::mark_dirty(module::ptr m)
+  void disconnect(module::ptr from, std::string output, module::ptr to, std::string input)
   {
-    // Access the property accessor type for this graph
-    impl_->modules_.mark_dirty(m);
+    graph_t::vertex_descriptor fromv = insert_module(from), tov = insert_module(to);
+    boost::remove_edge(fromv, tov, graph);
   }
 
-  int plasm::go(module::ptr m)
+  int invoke_process(graph_t::vertex_descriptor vd)
   {
-    return impl_->modules_.go(m);
-  }
+    module::ptr m = graph[vd];
 
-  void plasm::viz(std::ostream& out) const
-  {
-    boost::write_graphviz(out, impl_->modules_.graph_, ModuleGraph::label_writer(impl_->modules_));
-  }
-
-  std::string plasm::viz() const
-  {
-    std::stringstream ss;
-    viz(ss);
-    return ss.str();
-  }
-
-  plasm::vertex_map_t plasm::getVertices()
-  {
-    return impl_->modules_.getVertices();
-  }
-
-  plasm::edge_list_t plasm::getEdges()
-  {
-    return impl_->modules_.getEdges();
-  }
-
-  int plasm::execute()
-  {
-    impl_->calc_stacks();
-    impl_->mark_stacks_dirty();
-    return impl_->proc_stacks();
-  }
-
-  void plasm::spin()
-  {
-    while(!impl_->finished_)
+    graph_t::in_edge_iterator inbegin, inend;
+    tie(inbegin, inend) = boost::in_edges(vd, graph);
+    while (inbegin != inend)
       {
-        execute();
+        edge::ptr e = graph[*inbegin];
+        m->inputs.at(e->to_port).copy_value(e->deque.front());
+        e->deque.pop_front();
+        ++inbegin;
       }
+    int val = m->process();
+
+    graph_t::out_edge_iterator outbegin, outend;
+    tie(outbegin, outend) = boost::out_edges(vd, graph);
+    while (outbegin != outend)
+      {
+        edge::ptr e = graph[*outbegin];
+        e->deque.push_back(m->outputs.at(e->from_port));
+        ++outbegin;
+      }
+
+    return val;
   }
 
-  void plasm::disconnect(module_ptr from, const std::string& output, module_ptr to, const std::string& input)
+  void compute_stack()
   {
-    std::pair<ModuleGraph::Edge_Desc, bool> e = 
-      boost::edge(impl_->modules_.make_vert(from, output, plasm::output).uid,
-                  impl_->modules_.make_vert(to, input, plasm::input).uid, impl_->modules_.graph_);
-    if (e.second)
-      boost::remove_edge(e.first, impl_->modules_.graph_);
-    else
-      throw std::runtime_error(from->name() + ":" + output + " not connected to " + to->name() + ":" + input);
-    //  from->outputs[output].disconnect();
-    //  to->inputs[input].disconnect();
+    if (!stack.empty()) //will be empty if this needs to be computed.
+      return;
+    boost::topological_sort(graph, std::back_inserter(stack));
+    std::reverse(stack.begin(), stack.end());
   }
+
+  int execute()
+  {
+    //compute ordering
+    compute_stack();
+    for (size_t k = 0; k < stack.size(); ++k)
+      {
+        //need to check the return val of a process here, non zero means exit...
+        size_t retval = invoke_process(stack[k]);
+        if (retval)
+          return retval;
+      }
+    return 0;
+  }
+  //the module to vertex mapping
+  typedef boost::unordered_map<ecto::module::ptr, graph_t::vertex_descriptor> ModuleVertexMap;
+  ModuleVertexMap mv_map;
+  graph_t graph;
+  std::vector<graph_t::vertex_descriptor> stack;
+};
+
+plasm::plasm() :
+  impl_(new impl)
+{
+}
+
+void plasm::connect(module::ptr from, const std::string& output, module::ptr to, const std::string& input)
+{
+  impl_->connect(from, output, to, input);
+
+}
+
+void plasm::viz(std::ostream& out) const
+{
+  boost::write_graphviz(out, impl_->graph, vertex_writer(&impl_->graph), edge_writer(&impl_->graph), graph_writer());
+}
+
+std::string plasm::viz() const
+{
+  std::stringstream ss;
+  viz(ss);
+  return ss.str();
+}
+
+plasm::vertex_map_t plasm::getVertices()
+{
+  return plasm::vertex_map_t();
+}
+
+plasm::edge_list_t plasm::getEdges()
+{
+  return plasm::edge_list_t();
+}
+
+int plasm::execute()
+{
+  return impl_->execute();
+}
+
+void plasm::spin()
+{
+  for (;;)
+    {
+      if (execute())
+        return;
+    }
+}
+
+void plasm::disconnect(module_ptr from, const std::string& output, module_ptr to, const std::string& input)
+{
+  //  std::pair<ModuleGraph::Edge_Desc, bool> e = boost::edge(impl_->modules_.make_vert(from, output, plasm::output).uid,
+  //      impl_->modules_.make_vert(to, input, plasm::input).uid, impl_->modules_.graph_);
+  //  if (e.second)
+  //    boost::remove_edge(e.first, impl_->modules_.graph_);
+  //  else
+  //    throw std::runtime_error(from->name() + ":" + output + " not connected to " + to->name() + ":" + input);
+  //  //  from->outputs[output].disconnect();
+  //  //  to->inputs[input].disconnect();
+  impl_->disconnect(from, output, to, input);
+}
 }

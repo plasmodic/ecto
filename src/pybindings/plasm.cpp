@@ -44,15 +44,12 @@ struct plasm_wrapper
         bp::args("from_module", "output_name", "to_module", "intput_name"));
     p.def("disconnect", &plasm::disconnect,
         bp::args("from_module", "output_name", "to_module", "intput_name"));
-    p.def("mark_dirty", &plasm::mark_dirty);
     p.def("execute", &plasm::execute,
         "Executes the graph in topological order. Every node will be executed.");
     p.def(
         "spin",
         &plasm::spin,
         "Causes the graph to execute continuously until finish is called by one of the modules.");
-    p.def("go", &plasm::go,
-        "Executes the graph, given an outputs node, and recursively pulls inputs.");
     p.def("viz", wrapViz, "Get a graphviz string representation of the plasm.");
     p.def(
         "vertices",

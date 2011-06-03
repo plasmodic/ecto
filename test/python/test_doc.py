@@ -20,7 +20,7 @@ def test_doc():
     ecto.print_module_doc(gather)
     print plasm.viz()
     
-#    ecto.view_plasm(plasm)
+    #ecto.view_plasm(plasm)
 def test_inspection():
     ecto.list_ecto_module(buster)
     ecto.list_ecto_module(pyecto)
