@@ -34,7 +34,6 @@
 using ecto::tendrils;
 namespace ecto_test
 {
-
   struct FooPOD
   {
     int x;
@@ -197,8 +196,35 @@ namespace ecto_test
       outputs.get<double> ("out") = inputs.get<double> ("in") * factor_;
       return ecto::OK;
     }
-
   };
+
+  struct Increment
+  {
+    double amount_;
+
+    static void declare_params(ecto::tendrils& p)
+    {
+      p.declare<double> ("amount", "Amount to increment by.", 1.0);
+    }
+
+    static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
+    {
+      inputs.declare<double> ("in", "input");
+      outputs.declare<double> ("out", "output");
+    }
+
+    void configure(tendrils& parms)
+    {
+      amount_ = parms.get<double> ("amount");
+    }
+
+    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
+    {
+      outputs.get<double> ("out") = inputs.get<double> ("in") + amount_;
+      return ecto::OK;
+    }
+  };
+
   struct SharedPass
   {
 
@@ -225,6 +251,7 @@ namespace ecto_test
       return ecto::OK;
     }
   };
+
   struct Scatter
   {
     static void declare_params(ecto::tendrils& p)
@@ -319,6 +346,7 @@ BOOST_PYTHON_MODULE(ecto_test)
   ecto::wrap<Generate>("Generate", "A generator module.");
   ecto::wrap<SharedPass>("SharedPass", "A shared pointer pass through");
   ecto::wrap<Multiply>("Multiply", "Multiply an input with a constant");
+  ecto::wrap<Increment>("Increment", "Increment input by some amount");
   ecto::wrap<Scatter>("Scatter", "Scatter a value...");
   ecto::wrap<Gather<int> >("Gather", "Gather a scattered value...");
   ecto::wrap<Gather<double> >("Gather_double", "Gather a scattered value...");

@@ -1,8 +1,6 @@
-
-
 #!/usr/bin/env python
+
 import ecto
-#from ecto.doc import print_module_doc
 import ecto_test
 
 def test_plasm():

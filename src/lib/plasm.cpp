@@ -211,6 +211,11 @@ namespace ecto
     : impl_(new impl)
   { }
 
+  void plasm::insert(module::ptr mod)
+  {
+    impl_->insert_module(mod);
+  }
+
   void plasm::connect(module::ptr from, const std::string& output, module::ptr to, const std::string& input)
   {
     impl_->connect(from, output, to, input);

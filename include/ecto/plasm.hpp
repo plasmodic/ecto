@@ -54,6 +54,8 @@ namespace ecto
   public:
     plasm();
 
+    void insert(module_ptr mod);
+
     /**
      * \brief connect one module to another, and populate the plasms graph accordingly.
      * This will throw on a type mismatch.
@@ -62,8 +64,8 @@ namespace ecto
      * @param to The to module
      * @param input The input key from the to module.
      */
-    void connect(module_ptr from, const std::string& output, module_ptr to,
-                 const std::string& input);
+    void connect(module_ptr from, const std::string& output, 
+                 module_ptr to, const std::string& input);
 
     /**
      * Disconnect a tendril from another tendril.
