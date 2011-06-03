@@ -14,3 +14,5 @@ target_link_libraries(push_ups
   ${PYTHON_LIBRARIES}
   ecto
 )
+
+add_subdirectory(scripts)

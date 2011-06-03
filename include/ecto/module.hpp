@@ -67,29 +67,6 @@ struct module: boost::noncopyable
   void destroy();
 
   /**
-   * \brief Mark this module dirty, meaning that it needs to recompute its outputs,
-   * as either inputs have changed, or parameters have been changed.
-   */
-  void mark_dirty();
-
-  /**
-   * \brief Mark this module clean, meaning that it should not need to recompute its outputs.
-   */
-  void mark_clean();
-
-  /**
-   * \brief test whether the module is dirty or not.
-   * @return true if the module is dirty
-   */
-  bool dirty() const;
-
-  /**
-   * \brief test whether the module is clean or not.
-   * @return true if the module is clean, and should not need to be processed
-   */
-  bool clean() const;
-
-  /**
    * \brief Grab the name of the child class.
    * @return
    */
@@ -104,7 +81,6 @@ protected:
   virtual ReturnCode
   dispatch_process(const tendrils& inputs, tendrils& outputs) = 0;
   virtual void dispatch_destroy() = 0;
-  bool dirty_;
 };
 
 template<class T>

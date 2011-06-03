@@ -48,12 +48,8 @@ add_subdirectory(src)
 
 option(BUILD_TEST "Build tests" ON)
 if(BUILD_TEST)
+  enable_testing()
   add_subdirectory(test)
-  ENABLE_TESTING()
-  configure_file(${CMAKE_SOURCE_DIR}/test/run_nose.py.in ${CMAKE_BINARY_DIR}/run_nose.py @ONLY)
-  add_test(NAME nosetests
-    COMMAND "/usr/bin/python" 
-    ${CMAKE_BINARY_DIR}/run_nose.py -v -w ${CMAKE_SOURCE_DIR}/test/python)
 endif()
 
 option(BUILD_DOC "Build documentation" ON)
