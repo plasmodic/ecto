@@ -1,9 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 project(ecto)
 
-#set the default path for built executables to the "bin" directory
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
-#set the default path for built libraries to the "lib" directory
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
@@ -17,10 +15,7 @@ execute_process(COMMAND ln -sf ${CMAKE_SOURCE_DIR}/python/ecto/__init__.py
 include(${CMAKE_SOURCE_DIR}/cmake/ectoMacros.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/ectoFindDeps.cmake)
 
-#set flags so that we have awesome compile time errors on all warnings
-#notice the -Wl,--no-undefined helps with making sure all symbols are found during
-#link time.
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wl,--no-undefined")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wall -Wl,--no-undefined")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -DBOOST_DISABLE_ASSERTS")
 
 include_directories(
@@ -47,13 +42,6 @@ configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoConfig.cmake.in
 
 
 include(cmake/ectoInstall.cmake)
-
-include_directories(
-  # lockfree contains atomic, include the bryce/hartmut version first
-  ${CMAKE_SOURCE_DIR}/boost.atomic
-  ${CMAKE_SOURCE_DIR}/boost.lockfree 
-  )
-
 
 add_subdirectory(src)
 

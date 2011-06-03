@@ -3,14 +3,14 @@ Created on Apr 8, 2011
 
 @author: erublee
 '''
-import ecto,buster
+import ecto,ecto_test
 
 def test_one_to_many():
     plasm = ecto.Plasm()
-    g = buster.Generate(start=2, step=2)
+    g = ecto_test.Generate(start=2, step=2)
     modules = []
     for x in range(0,5):
-        m = buster.Multiply(factor=2)
+        m = ecto_test.Multiply(factor=2)
         plasm.connect(g,"out",m,"in")
         modules.append(m)
         
@@ -26,10 +26,10 @@ def test_one_to_many():
 
 def test_reconnect():
     plasm = ecto.Plasm()
-    g = buster.Generate(start=2, step=2)    
-    m = buster.Multiply(factor=2)
-    m2 = buster.Multiply(factor=2)
-    gather = buster.Gather_double(n=2)
+    g = ecto_test.Generate(start=2, step=2)    
+    m = ecto_test.Multiply(factor=2)
+    m2 = ecto_test.Multiply(factor=2)
+    gather = ecto_test.Gather_double(n=2)
     plasm.connect(g, "out", m , "in")
     plasm.connect(g, "out", m2 , "in")
     try:

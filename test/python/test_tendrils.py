@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import ecto
-import buster
+import ecto_test
 
 def test_tendrils():
     t = ecto.Tendrils()

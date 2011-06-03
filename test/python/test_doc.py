@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 import ecto
-import buster
+import ecto_test
 import pyecto
 
 def test_doc():
-    scatter = buster.Scatter(n=6, x=3)
-    gather = buster.Gather(n=3)
-    gather2 = buster.Gather(n=3)
+    scatter = ecto_test.Scatter(n=6, x=3)
+    gather = ecto_test.Gather(n=3)
+    gather2 = ecto_test.Gather(n=3)
     plasm = ecto.Plasm()
     for t,f in zip(gather.inputs.keys(), scatter.outputs.keys()):
         plasm.connect(scatter, f, gather, t)
@@ -22,7 +22,7 @@ def test_doc():
     
     #ecto.view_plasm(plasm)
 def test_inspection():
-    ecto.list_ecto_module(buster)
+    ecto.list_ecto_module(ecto_test)
     ecto.list_ecto_module(pyecto)
 
 if __name__ == '__main__':

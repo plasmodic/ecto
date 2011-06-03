@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import ecto
-import buster
+import ecto_test
 #  bp::class_<tendril>("Tendril")
 #    .def("connect", &tendril::connect)
 #    .add_property("doc",&tendril::doc,&tendril::setDoc)
@@ -42,7 +42,7 @@ def test_tendril_defs():
     assert t2.val == t1.val
 
 def test_cpp_python_tendril():
-    x = buster.make_pod_tendril()
+    x = ecto_test.make_pod_tendril()
     x.val = 10
     t1 = ecto.Tendril()
     #this connection should force the t1 to become a native type.
