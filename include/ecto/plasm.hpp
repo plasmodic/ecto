@@ -46,8 +46,8 @@ namespace ecto
    * of the connectivity between module and the execution of modules in the context of this
    * graph.
    *
-   * The plasm is mean to be tool interacted with from python, but may be useful
-   * from c++ in a dynamicly loaded environment.
+   * The plasm is meant to be tool interacted with from python, but may be useful
+   * from c++ in a dynamically loaded environment.
    */
   class plasm: boost::noncopyable
   {
