@@ -12,10 +12,15 @@ from inspect import ismodule
 
 def print_tendrils(tendril, n):
     for x in tendril :
-        print  " - " + x.key() + " [%s]"%x.data().type_name + " default =",x.data().val
-
+        #print "here"
+        value = str(x.data().get())
+        print  " - " + x.key() + " [%s]"%x.data().type_name + " default = %s"%value
         print  ""
-        print  "    " + x.data().doc
+        docstr = str(x.data().doc)
+        doclines = docstr.splitlines()
+        if doclines :
+            for docline in doclines:
+                print  "    " + docline
         print  ""
 
 def print_module_doc(m):
@@ -51,15 +56,16 @@ def list_ecto_module(pymodule):
     l = []
     for x in dir(pymodule):
         mod = getattr(pymodule,x)
-        if ismodule(mod):
-            list_ecto_module(mod)
+        #if ismodule(mod):
+        #    list_ecto_module(mod)
         if inspect.isclass(mod) and issubclass(mod,ecto._module_base):
-            try:
-                m = mod()
+            #try:
+                m = mod.inspect((),{})
                 print_module_doc(m)
                 l.append(m)
-            except:
-                pass
+            #except Exception,e:
+            #    pass
+                #print e
     return l
     
 def view_plasm(plasm):

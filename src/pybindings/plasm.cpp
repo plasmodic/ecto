@@ -6,7 +6,6 @@
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <boost/python/suite/indexing/map_indexing_suite.hpp>
 
-#include "plasm_impl.hpp"
 
 namespace bp = boost::python;
 using bp::arg;
@@ -21,12 +20,14 @@ struct plasm_wrapper
 
   static bp::dict getModules(plasm& p)
   {
-    return p.impl_->modules_.getVerticesPy();
+    throw std::logic_error("not implemented");
+    return bp::dict();
   }
 
   static bp::list getEdges(plasm& p)
   {
-    return p.impl_->modules_.getEdgesPy();
+    throw std::logic_error("not implemented");
+    return bp::list();
   }
 
   template<typename T>
@@ -44,15 +45,12 @@ struct plasm_wrapper
         bp::args("from_module", "output_name", "to_module", "intput_name"));
     p.def("disconnect", &plasm::disconnect,
         bp::args("from_module", "output_name", "to_module", "intput_name"));
-    p.def("mark_dirty", &plasm::mark_dirty);
     p.def("execute", &plasm::execute,
         "Executes the graph in topological order. Every node will be executed.");
     p.def(
         "spin",
         &plasm::spin,
         "Causes the graph to execute continuously until finish is called by one of the modules.");
-    p.def("go", &plasm::go,
-        "Executes the graph, given an outputs node, and recursively pulls inputs.");
     p.def("viz", wrapViz, "Get a graphviz string representation of the plasm.");
     p.def(
         "vertices",
@@ -60,11 +58,7 @@ struct plasm_wrapper
         "Get a dict of the plasm's vertices, with key being integers, and a tuple (module,vertice_type,tendril_key)");
     p.def("edges", getEdges,
         "Get a list of edges, tuples of two integers(source,target).");
-    bp::enum_<plasm::vertex_t> v_enum("vertex_t");
-    v_enum.value("root", plasm::root);
-    v_enum.value("input", plasm::input);
-    v_enum.value("output", plasm::output);
-    v_enum.value("param", plasm::param);
+
   }
 
 };

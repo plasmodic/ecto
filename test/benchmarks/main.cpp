@@ -5,7 +5,6 @@
 #include <boost/progress.hpp>
 #include <boost/timer.hpp>
 
-
 #define STRINGYFY(stuffs) #stuffs
 
 int main()
@@ -16,51 +15,49 @@ int main()
 
   std::cout << "adding" << std::endl;
   std::cout << "ecto" << std::endl;
-  {
-    boost::progress_timer t; // start timing
-    for (size_t i = 0; i < 10e6; i++)
     {
-      p.mark_dirty(m);
-      p.go(m);
+      boost::progress_timer t; // start timing
+      for (size_t i = 0; i < 10e6; i++)
+        {
+          m->process();
+        }
     }
-  }
   std::cout << "raw" << std::endl;
-  {
-    boost::progress_timer t; // start timing
-    for (size_t i = 0; i < 10e6; i++)
     {
-      ecto_push_ups::add2(std::rand(), std::rand());
+      boost::progress_timer t; // start timing
+      for (size_t i = 0; i < 10e6; i++)
+        {
+          ecto_push_ups::add2(std::rand(), std::rand());
+        }
     }
-  }
   std::string program = STRINGYFY(
       size_t big_data()
-      {
-        std::vector<int> data;
-        data.resize(10e4);
-        for (size_t i = 0; i < 10e4; i++)
+        {
+          std::vector<int> data;
+          data.resize(10e4);
+          for (size_t i = 0; i < 10e4; i++)
           data[i] = std::rand();
-        return std::accumulate(data.begin(), data.end(), 0);
-      }
+          return std::accumulate(data.begin(), data.end(), 0);
+        }
   );
 
   std::cout << program << std::endl;
 
   std::cout << "ecto" << std::endl;
-  {
-    boost::progress_timer t; // start timing
-    for (size_t i = 0; i < 10e3; i++)
     {
-      p.mark_dirty(b);
-      p.go(b);
+      boost::progress_timer t; // start timing
+      for (size_t i = 0; i < 10e3; i++)
+        {
+          b->process();
+        }
     }
-  }
   std::cout << "raw" << std::endl;
-  {
-    boost::progress_timer t; // start timing
-    for (size_t i = 0; i < 10e3; i++)
     {
-      ecto_push_ups::big_data();
+      boost::progress_timer t; // start timing
+      for (size_t i = 0; i < 10e3; i++)
+        {
+          ecto_push_ups::big_data();
+        }
     }
-  }
 
 }

@@ -52,29 +52,6 @@ namespace ecto
   class plasm: boost::noncopyable
   {
   public:
-    /**
-     * vertex type enum
-     */
-    enum vertex_t
-      {
-        root, //!< This is a module node, not a tendril
-        input, //!< Input tendril
-        output, //!< Output tendril
-        param
-        //!< Parameter node ? TODO is this unused?
-      };
-
-    /**
-     * A vertex in the plasm consists of a pointer to a module, a vertex
-     * type, the name of the tendril and the tendril itself.
-     */
-    typedef std::map<int, boost::tuple<module_ptr, vertex_t, std::string, tendril> > 
-    vertex_map_t;
-    /**
-     * \brief The edges encode the vertex to vertex relationship.
-     */
-    typedef std::list<boost::tuple<size_t, size_t> > edge_list_t;
-
     plasm();
 
     /**
@@ -104,16 +81,7 @@ namespace ecto
      */
     int execute();
     void spin();
-    /**
-     * \brief Mark the given module dirty. This will recurse through the graph, dirting all modules downstream.
-     * @param m The module to mark dirty.
-     */
-    void mark_dirty(module_ptr m);
-    /**
-     * Execute the given module, recursing to all dependencies and executing them. If the module is dirty this is a NOP.
-     * @param m the module to execute.
-     */
-    int go(module_ptr m);
+
     /**
      * \brief output graphviz to a stream.
      * @param out the output stream. Graphviz will be in plain text format.
@@ -124,17 +92,6 @@ namespace ecto
      * @return
      */
     std::string viz() const;
-
-    /**
-     * Get a map of the vertices, useful for graph introspection
-     * @return The map vertices.
-     */
-    vertex_map_t getVertices();
-    /**
-     * Get a list of the edges, useful for graph introspection
-     * @return The edge list.
-     */
-    edge_list_t getEdges();
 
   private:
     class impl;
