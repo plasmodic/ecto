@@ -229,16 +229,6 @@ std::string plasm::viz() const
   return ss.str();
 }
 
-plasm::vertex_map_t plasm::getVertices()
-{
-  return plasm::vertex_map_t();
-}
-
-plasm::edge_list_t plasm::getEdges()
-{
-  return plasm::edge_list_t();
-}
-
 int plasm::execute()
 {
   return impl_->execute();
