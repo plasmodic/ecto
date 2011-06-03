@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   inkscape:export-ydpi="17.280001"
-   inkscape:export-xdpi="17.280001"
-   inkscape:export-filename="/home/erublee/workspace_ecto/plasmodic/plasmodic_192x192.png"
+   inkscape:export-ydpi="20.639999"
+   inkscape:export-xdpi="20.639999"
+   inkscape:export-filename="/home/erublee/workspace_ecto/ecto/doc/source/images/ecto_logo.png"
    sodipodi:docname="ecto.svg"
    inkscape:version="0.48.1 r9760"
    version="1.1"
@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.35"
-     inkscape:cx="1737.6255"
+     inkscape:cx="2889.5939"
      inkscape:cy="620.1219"
      inkscape:document-units="px"
      inkscape:current-layer="g7815"
@@ -80,6 +80,13 @@
   <g
      id="g7815"
      transform="translate(17.036916,91.5)">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect3065"
+       width="3974.2859"
+       height="1340"
+       x="-142.75121"
+       y="-179.12234" />
     <path
        inkscape:connector-curvature="0"
        id="path3042"
