@@ -17,6 +17,8 @@
 #include <boost/foreach.hpp>
 #include <boost/unordered_map.hpp>
 
+#include <boost/timer.hpp>
+
 namespace ecto
 {
 
@@ -154,6 +156,7 @@ struct plasm::impl
 
   int invoke_process(graph_t::vertex_descriptor vd)
   {
+    //boost::timer t;
     module::ptr m = graph[vd];
 
     graph_t::in_edge_iterator inbegin, inend;
@@ -175,7 +178,7 @@ struct plasm::impl
         e->deque.push_back(m->outputs.at(e->from_port));
         ++outbegin;
       }
-
+    //std::cout << m->name() << " time: " << t.elapsed() * 1000.0 << "\n";
     return val;
   }
 
