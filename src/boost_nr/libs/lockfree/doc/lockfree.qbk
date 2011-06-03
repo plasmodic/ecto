@@ -1,0 +1,131 @@
+[library Boost.Lockfree
+    [quickbook 1.4]
+    [authors [Blechmann, Tim]]
+    [copyright 2008-2010 Tim Blechmann]
+    [category algorithms]
+    [purpose
+        lockfree concurrent data structures
+    ]
+    [id lockfree]
+    [dirname lockfree]
+    [license
+        Distributed under the Boost Software License, Version 1.0.
+        (See accompanying file LICENSE_1_0.txt or copy at
+        [@http://www.boost.org/LICENSE_1_0.txt])
+    ]
+]
+
+[c++]
+
+
+[/  Images   ]
+
+[def _note_                         [$images/note.png]]
+[def _alert_                        [$images/caution.png]]
+[def _detail_                       [$images/note.png]]
+[def _tip_                          [$images/tip.png]]
+
+[/  Links   ]
+
+[def _lockfree_                      [^boost.lockfree]]
+
+[/  unspecified stuff   ]
+[def __unspecified_int__ /unspecified-int-type/]
+[def __unspecified_bool__ /unspecified-bool-type/]
+
+[section:disclaimer Disclaimer]
+_lockfree_ is NOT a boost library!
+[endsect]
+
+[section Introduction]
+
+[h2 What is _lockfree_?]
+
+_lockfree_ provides implementations of lock-free data structures. Lock-free data structures can be accessed by multiple
+threads without the necessity of blocking synchronization primitives such as guards. Lock-free data structures can be
+used in real-time systems, where blocking algorithms may lead to high worst-case execution times, to avoid priority
+inversion, or to increase the scalability for multi-processor machines.
+
+The following data structures are provided:
+
+* [classref boost::lockfree::fifo], a lock-free fifo queue
+* [classref boost::lockfree::stack], a lock-free stack
+* [classref boost::lockfree::ringbuffer], a lock-free single-producer/single-consumer ringbuffer
+
+[endsect]
+
+
+[section Examples]
+
+[h2 Fifo]
+
+The [classref boost::lockfree::fifo boost::lockfree::fifo] class implements a multi-writer/multi-reader fifo queue. The
+following example shows how integer values are produced and consumed by 2 threads each:
+
+[import ../examples/fifo.cpp]
+[fifo_example]
+
+The program output is:
+
+[pre
+produced 40000000 objects.
+consumed 40000000 objects.
+]
+
+
+[h2 Stack]
+
+The [classref boost::lockfree::stack boost::lockfree::stack] class implements a multi-writer/multi-reader stack. The
+following example shows how integer values are produced and consumed by 2 threads each:
+
+[import ../examples/stack.cpp]
+[stack_example]
+
+
+The program output is:
+
+[pre
+produced 4000000 objects.
+consumed 4000000 objects.
+]
+
+
+[endsect]
+
+
+[xinclude autodoc.xml]
+
+[section Portability]
+
+Most data structures of _lockfree_ are written to use of Compare-And-Swap instructions. In order to implement the
+=tagged_ptr=, CAS instructions are required, that can operate on one pointer and one integer type. For non-supported
+platforms, a blocking emulation of the atomic instructions is provided. _lockfree_ relies on the boost.atomic library
+for providing low-level primitives.
+
+[endsect]
+
+[section Acknowledgements]
+
+Thanks for suggestions, porting, testing:
+
+* Thomas Grill, original win32/osx code pieces
+* Shiwei Xu, api suggestions
+* Stefan Eilemann, bug fixes
+* Mignon Belongie, bug fix
+* Anthony Williams, found fifo race condition
+* Casey McCandless, msvc/icc fixes
+* Mark Bulas, msvc/x64 fixes
+* Anteru, api/documentation suggestions
+* Helge Bahmann, boost.atomic library
+
+[endsect]
+
+[section References]
+
+# Maged M. Michael and Michael L. Scott. Simple, Fast, and Practical Non-Blocking and Blocking Concurrent Queue Algorithms.
+In Symposium on Principles of Distributed Computing, pages 267–275, 1996.
+# M. Herlihy, V. Luchangco, P. Martin, and M. Moir. Nonblocking memory management support for dynamic-sized data
+structures. ACM Transactions on Computer Systems (TOCS), 23(2):146–196, 2005.
+
+
+[endsect]
