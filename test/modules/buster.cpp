@@ -42,7 +42,7 @@ struct FooPOD
 };
 struct EvilNoPython
 {
-  std::string Waz;
+  std::string Woz;
 };
 
 struct FooPODModule
@@ -71,12 +71,12 @@ struct NoPythonBindings
 {
   static void declare_params(tendrils& parameters)
   {
-    parameters.declare<EvilNoPython> ("Waz", "A Waz is a Waz when a Waz was Waz");
+    parameters.declare<EvilNoPython> ("Woz", "A Woz is a Woz when a Woz was Woz");
   }
 
   static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
-    outputs.declare<EvilNoPython> ("Straz", "A Straz is a Straz when a Straz saw a Straz");
+    outputs.declare<EvilNoPython> ("Strasz", "A Strasz is a Strasz when a Strasz saw a Strasz");
   }
 };
 
