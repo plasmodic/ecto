@@ -1,4 +1,7 @@
 #pragma once
+
+#include <deque>
+
 //this quiets a deprecated warning
 #define BOOST_NO_HASH
 #include <boost/graph/graph_traits.hpp>

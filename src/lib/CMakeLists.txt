@@ -4,6 +4,7 @@ add_library(ecto SHARED
   module.cpp
   plasm.cpp
   util.cpp
+  scheduler/singlethreaded.cpp
   )
   
 target_link_libraries(ecto

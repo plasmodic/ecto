@@ -1,6 +1,7 @@
 #include <ecto/plasm.hpp>
 #include <ecto/tendril.hpp>
 #include <ecto/module.hpp>
+#include <ecto/graph_types.hpp>
 
 #include <string>
 #include <map>
@@ -8,7 +9,6 @@
 #include <utility>
 #include <deque>
 
-#include "graph_types.hpp"
 
 namespace ecto
 {
@@ -72,11 +72,11 @@ namespace ecto
       tie(ed, added) = boost::add_edge(fromv, tov, new_edge, graph);
       if (!added)
         {
-          throw std::runtime_error(
-                                   "failed to connect " + from->name() + ":" + output + " with " + to->name() + ":" + input);
+          throw std::runtime_error("failed to connect " + from->name() + ":" + output 
+                                   + " with " + to->name() + ":" + input);
         }
-      //clear stack to mark the ordering dirty...
-      stack.clear();
+      // clear stack to mark the ordering dirty...
+      // stack.clear();
     }
 
     void disconnect(module::ptr from, std::string output, module::ptr to, std::string input)
@@ -85,6 +85,7 @@ namespace ecto
       boost::remove_edge(fromv, tov, graph);
     }
 
+    /*
     int invoke_process(graph_t::vertex_descriptor vd)
     {
       module::ptr m = graph[vd];
@@ -133,12 +134,13 @@ namespace ecto
         }
       return 0;
     }
+    */
     //the module to vertex mapping
     //unordered_map so that module ptr works as a key...
     typedef boost::unordered_map<ecto::module::ptr, graph_t::vertex_descriptor> ModuleVertexMap;
     ModuleVertexMap mv_map;
     graph_t graph;
-    std::vector<graph_t::vertex_descriptor> stack;
+    //    std::vector<graph_t::vertex_descriptor> stack;
   };
 
   plasm::plasm() 
@@ -168,6 +170,7 @@ namespace ecto
     return ss.str();
   }
 
+  /*
   int plasm::execute()
   {
     return impl_->execute();
@@ -181,7 +184,7 @@ namespace ecto
           return;
       }
   }
-
+  */
   void plasm::disconnect(module_ptr from, const std::string& output, module_ptr to, const std::string& input)
   {
     impl_->disconnect(from, output, to, input);

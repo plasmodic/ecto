@@ -78,11 +78,13 @@ namespace ecto
     void disconnect(module_ptr from, const std::string& output, 
                     module_ptr to, const std::string& input);
 
+#if 0
     /**
      * \brief This executes the graph, by executing all nodes in dependency order.
      */
     int execute();
     void spin();
+#endif
 
     /**
      * \brief output graphviz to a stream.
