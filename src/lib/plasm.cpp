@@ -103,6 +103,7 @@ struct plasm::impl
   //vertex descriptor if its already in the graph...
   graph_t::vertex_descriptor insert_module(module::ptr m)
   {
+    //use the vertex map to look up the graphviz descriptor (reverse lookup)
     ModuleVertexMap::iterator it = mv_map.find(m);
     if (it != mv_map.end())
       return it->second;
@@ -200,6 +201,7 @@ struct plasm::impl
     return 0;
   }
   //the module to vertex mapping
+  //unordered_map so that module ptr works as a key...
   typedef boost::unordered_map<ecto::module::ptr, graph_t::vertex_descriptor> ModuleVertexMap;
   ModuleVertexMap mv_map;
   graph_t graph;
@@ -245,14 +247,6 @@ void plasm::spin()
 
 void plasm::disconnect(module_ptr from, const std::string& output, module_ptr to, const std::string& input)
 {
-  //  std::pair<ModuleGraph::Edge_Desc, bool> e = boost::edge(impl_->modules_.make_vert(from, output, plasm::output).uid,
-  //      impl_->modules_.make_vert(to, input, plasm::input).uid, impl_->modules_.graph_);
-  //  if (e.second)
-  //    boost::remove_edge(e.first, impl_->modules_.graph_);
-  //  else
-  //    throw std::runtime_error(from->name() + ":" + output + " not connected to " + to->name() + ":" + input);
-  //  //  from->outputs[output].disconnect();
-  //  //  to->inputs[input].disconnect();
   impl_->disconnect(from, output, to, input);
 }
 }
