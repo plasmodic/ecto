@@ -1,7 +1,10 @@
 
 macro(pytest _basename)
   message("TEST: ${_basename}")
-  add_test(${_basename} ${CMAKE_CURRENT_SOURCE_DIR}/${_basename}.py)
+  add_test(${_basename} 
+    /usr/bin/env
+    PYTHONPATH=${LIBRARY_OUTPUT_PATH}:${CMAKE_SOURCE_DIR}/python:$PYTHONPATH
+    ${CMAKE_CURRENT_SOURCE_DIR}/${_basename}.py)
 endmacro()
 
 foreach(file
