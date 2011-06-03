@@ -1,13 +1,11 @@
-
-
 #!/usr/bin/env python
+
 import ecto
-#from ecto.doc import print_module_doc
-import buster
+import ecto_test
 
 def test_plasm():
-    scatter = buster.Scatter(n=3, x=3)
-    gather = buster.Gather(n=3)
+    scatter = ecto_test.Scatter(n=3, x=3)
+    gather = ecto_test.Gather(n=3)
     plasm = ecto.Plasm()
     for f, t in zip(scatter.outputs.keys(), gather.inputs.keys()):
         plasm.connect(scatter, f, gather, t)

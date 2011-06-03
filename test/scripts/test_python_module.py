@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import ecto
-import buster
+import ecto_test
 from pyecto import MyModule
 
 
@@ -14,7 +14,7 @@ def test_python_module():
 
 def test_python_module_plasm():
     mod = MyModule(text="spam")
-    g = buster.Generate(start = 1 , step =1)
+    g = ecto_test.Generate(start = 1 , step =1)
     plasm = ecto.Plasm()
     plasm.connect(g,"out",mod,"input")
     #print plasm.viz()

@@ -19,5 +19,5 @@ libraries
       c++ library, clients must link against this and the 
   - ecto.so
       python bindings lib
-  - buster.so
-      a sample client python exposed module
+  - ecto_test.so
+      ecto test modules and examples

@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import ecto
-import buster
 import pickle
 
 class Foo:

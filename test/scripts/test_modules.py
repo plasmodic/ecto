@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 import ecto
-import buster
+import ecto_test
 
 def test_modules_01():
-    g = buster.Generate(start=0, step=2)
+    g = ecto_test.Generate(start=0, step=2)
     g.process()
     assert g.outputs.out == 0
     g.process()
@@ -12,7 +12,7 @@ def test_modules_01():
     g.outputs.out = 7.0
     g.process()
     assert  g.outputs.out == 9
-    s = buster.Scatter(n = 4, x=3)
+    s = ecto_test.Scatter(n = 4, x=3)
     s.process()
     assert(len(s.outputs) == 4)
     for out in s.outputs:
@@ -20,7 +20,7 @@ def test_modules_01():
         assert(out[1].val == 3)
 
 def noarg(x):
-    buster.Generate(start=0, n=3, step=2)
+    ecto_test.Generate(start=0, n=3, step=2)
 def wrong_type(g):
     g.outputs.out = "hello"
 def right_type(g):
@@ -44,7 +44,7 @@ def do_fail(x,args = None):
         
 def test_modules_wrong_args():
     do_fail(noarg)
-    g = buster.Generate()
+    g = ecto_test.Generate()
     do_fail(wrong_type,g)
     do_fail(already_set,g)
     novel_sets(g)
