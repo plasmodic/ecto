@@ -30,9 +30,10 @@ namespace asio = boost::asio;
 asio::io_service io_service;
 boost::thread_group tgroup;
 
+typedef std::map<std::string, boost::any> tendrils_t;
+
 struct module
 {
-  typedef std::map<std::string, boost::any> tendrils_t;
   virtual void process(tendrils_t& in, tendrils_t& out) = 0;
   typedef boost::shared_ptr<module> ptr;
   std::string name;
@@ -93,6 +94,17 @@ struct adder : module
   }
 };
 
+struct printer : module
+{
+  printer(const std::string& name) : module(name) { }
+
+  void process(tendrils_t& in, tendrils_t& out)
+  {
+    float value = boost::any_cast<float>(in["value"]);
+    std::cout << "VALUE=" << value << "\n";
+  }
+};
+
 
 using boost::adjacency_list;
 using boost::vecS;
@@ -119,7 +131,7 @@ typedef adjacency_list<vecS, // OutEdgeList...
                        module::ptr, // vertex property
                        edge::ptr> // edge property 
 graph_t;
-                       
+
 struct vertex_writer
 {
   graph_t* g;
@@ -156,6 +168,45 @@ edge::ptr make_edge(const std::string& fromport, const std::string& toport)
   return eptr;
 }
 
+void invoke_process(graph_t& g, graph_t::vertex_descriptor vd)
+{
+  std::cout << __PRETTY_FUNCTION__ << "  " << g[vd]->name << "\n";
+  module::ptr m = g[vd];
+  tendrils_t tmp_inputs, tmp_outputs;
+  
+  graph_t::in_edge_iterator inbegin, inend;
+  tie(inbegin, inend) = boost::in_edges(vd, g);
+  while(inbegin != inend) {
+    edge::ptr e = g[*inbegin];
+    std::cout << "IN: " << e->from_port << " => " << e->to_port << "\n";
+
+    tmp_inputs[e->to_port] = e->deque.front();
+    e->deque.pop_front();
+    ++inbegin;
+  }
+
+  m->process(tmp_inputs, tmp_outputs);
+
+  // build temporary outedge map
+  std::map<std::string, edge::ptr> outedges;
+  graph_t::out_edge_iterator outbegin, outend;
+  tie(outbegin, outend) = boost::out_edges(vd, g);
+  while(outbegin != outend) 
+    {
+      edge::ptr e = g[*outbegin];
+      outedges[e->from_port] = e;
+      std::cout << e->from_port << " => " << e << "\n";
+      ++outbegin;
+    }
+
+  for (tendrils_t::iterator it = tmp_outputs.begin(), end = tmp_outputs.end();
+       it != end; ++it)
+    {
+      std::cout << "push to " << it->first << "\n";
+      outedges[it->first]->deque.push_back(it->second);
+    }
+}
+
 int main()
 {
   using boost::bind;
@@ -169,14 +220,16 @@ int main()
     gen(new generator("generate")), 
     split(new splitter("split")),
     inc(new incrementer("increment")),
-    add(new adder("add"))
+    add(new adder("add")),
+    print(new printer("print"))
     ;
   
   graph_t::vertex_descriptor 
-    gen_d = add_vertex(gen, g),
-    split_d = add_vertex(split, g),
+    add_d = add_vertex(add, g),
     inc_d = add_vertex(inc, g),
-    add_d = add_vertex(add, g)
+    split_d = add_vertex(split, g),
+    gen_d = add_vertex(gen, g),
+    print_d = add_vertex(print, g)
     ;
 
   bool added;
@@ -193,9 +246,25 @@ int main()
   tie(ed, added) = add_edge(inc_d, add_d, make_edge("value", "left"), g);
   assert(added);
 
+  tie(ed, added) = add_edge(add_d, print_d, make_edge("value", "value"), g);
+  assert(added);
+
   std::ofstream gviz_str("graph.dot");
   boost::write_graphviz(gviz_str, g, vertex_writer(&g), edge_writer(&g), graph_writer());
 
+  std::vector<graph_t::vertex_descriptor> vv;
+
+  boost::topological_sort(g, std::back_inserter(vv));
+  std::reverse(vv.begin(), vv.end());
+
+  for (unsigned j=0; j<5; ++j)
+    {
+      std::cout << "**************************************************\n";
+      for (unsigned k=0; k<vv.size(); ++k)
+        {
+          invoke_process(g, vv[k]);
+        }
+    }
   /*
   module::ptr graph = make_graph(io_service, 30);
 
