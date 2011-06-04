@@ -10,7 +10,7 @@ Contents:
 ================================
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
    
    building
    client_usage
@@ -19,7 +19,7 @@ Contents:
    tendrils
    module
    plasm
-
+   
 ecto at a glance
 ---------------------------------
     * Simple processing node interface for building your own modules.
@@ -45,8 +45,10 @@ ecto at a glance
         
         void MyModule::declare_params(tendrils& params)
         {
-            params.declare<Foo>("foo","Foo is for spam. This is a doc string", Foo(3.14));
-            params.declare<std::string>("str", "str is a standard string.", "default");
+            params.declare<Foo>("foo","Foo is for spam. This is a doc string", 
+            					Foo(3.14));
+            params.declare<std::string>("str", "str is a standard string.",
+            							"default");
         }
     
     * Python is used as the plugin architecture of ecto. Exposing your modules to python is dead simple.
@@ -66,41 +68,30 @@ ecto at a glance
     * The plasm (DAG) executes in compiled code.
     * Python is used for declaring the processing graph, or as its known to ecto, the *plasm*.
     
-    .. code-block:: python
+    .. code-block:: py
     
-      import ecto #ecto core library
-      import hello_ecto #a user library, that has a few ecto modules
-      
-      debug = True
-      
-      def mygraph():
-          #instantiate a plasm, our DAG structure
-          plasm = ecto.Plasm()
-          
-          #instantiate processing modules
-          r = hello_ecto.Reader()
-          
-          #notice the keyword args, these get mapped
-          #as parameters
-          p1 = hello_ecto.Printer(str="default")
-          p2 = hello_ecto.Printer(str="default")
-          
-          #connect outputs to inputs
-          plasm.connect(r, "output", p1, "str")
-          plasm.connect(r, "output", p2, "str")
-          
-          if debug:
-              #render the DAG with dot
-              print plasm.viz()
-              ecto.view_plasm(plasm)
-          
-          #an execution loop
-          print "Enter input, q to quit"
-          while r.outputs.output != 'q':
-              plasm.execute() #this executes the graph in compiled code.
-      
-      if __name__ == '__main__':
-          mygraph()
+		#!/usr/bin/env python
+		import ecto #ecto core library
+		import hello_ecto #a user library, that has a few ecto modules
+		
+		#instantiate a plasm, our DAG structure
+		plasm = ecto.Plasm()
+		
+		#instantiate processing modules
+		r = hello_ecto.Reader()
+		
+		#notice the keyword args, these get mapped
+		#as parameters
+		p = hello_ecto.Printer(str="default")
+		
+		#connect outputs to inputs
+		plasm.connect(r, "output", p, "str")
+		
+		#an execution loop
+		print "Enter input, q to quit"
+		while r.outputs.output != 'q':
+		  plasm.execute() #this executes the graph  
+
                 
     * The ecto::plasm is easily inspected using graphviz tools.
     
@@ -108,19 +99,15 @@ ecto at a glance
     
     .. code-block :: c++
     
-        #graphviz dot format
-        digraph G {
-          0[label="hello_ecto::Reader",fillcolor=green, style="rounded,filled"];
-          1[label="hello_ecto::Printer",fillcolor=green, style="rounded,filled"];
-          2[label="output", shape=invhouse];
-          3[label="str", shape=house];
-          4[label="hello_ecto::Printer",fillcolor=green, style="rounded,filled"];
-          5[label="str", shape=house];
-          0->2 ;
-          2->3 ;
-          3->1 ;
-          2->5 ;
-          5->4 ;
-        }
+		digraph G {
+			graph [rankdir=TB, ranksep=1]
+			edge [labelfontsize=8]
+			0[label="hello_ecto::Reader"];
+			1[label="hello_ecto::Printer"];
+			2[label="hello_ecto::Printer"];
+			0->1 [headlabel="str" taillabel="output"];
+			0->2 [headlabel="str" taillabel="output"];
+		}
+
         
     * Each module is self documenting by design.
