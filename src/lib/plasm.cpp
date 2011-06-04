@@ -186,6 +186,13 @@ struct plasm::impl
     int val = 1;
     try
       {
+        tendrils::iterator begin = m->parameters.begin(), end =
+            m->parameters.end();
+        while (begin != end)
+          {
+            begin->second.trigger_callback();
+            ++begin;
+          }
         val = m->process();
       } catch (std::exception& e)
       {

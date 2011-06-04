@@ -7,6 +7,7 @@ endmacro()
 foreach(file
     test_doc
     test_modules
+    test_parameter_callbacks
     test_plasm
     test_python_module
     test_reconnect

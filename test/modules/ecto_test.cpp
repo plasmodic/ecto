@@ -118,29 +118,30 @@ namespace ecto_test
     }
   };
 
+  template<typename T>
   struct Generate
   {
-    int step_;
+    T step_;
 
     static void declare_params(tendrils& parameters)
     {
-      parameters.declare<double> ("step", "The step with which i generate integers.", 2);
-      parameters.declare<double> ("start", "My starting value", 0);
+      parameters.declare<T> ("step", "The step with which i generate integers.", 2);
+      parameters.declare<T> ("start", "My starting value", 0);
     }
 
     static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
-      outputs.declare<double> ("out", "output", parameters.get<double> ("start") - parameters.get<double> ("step"));
+      outputs.declare<T> ("out", "output", parameters.get<T> ("start") - parameters.get<T> ("step"));
     }
 
     void configure(tendrils& parameters)
     {
-      step_ = parameters.get<double> ("step");
+      step_ = parameters.get<T> ("step");
     }
 
     int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
-      outputs.get<double> ("out") += step_;
+      outputs.get<T> ("out") += step_;
       return 0;
     }
   };
@@ -224,6 +225,44 @@ namespace ecto_test
       return ecto::OK;
     }
   };
+
+  struct ParameterWatcher
+   {
+     double value_;
+
+     static void declare_params(ecto::tendrils& p)
+     {
+       p.declare<double> ("value", "I use this value", 1.0);
+     }
+
+     static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
+     {
+       inputs.declare<double> ("input", "input");
+       outputs.declare<double> ("output", "output");
+       outputs.declare<double> ("value", "the parameter.");
+
+     }
+
+     void onvalue_change(double v)
+     {
+       SHOW();
+       std::cout << "old value: " << value_ << std::endl;
+       std::cout << "new value: " << v << std::endl;
+       value_ = v;
+     }
+
+     void configure(tendrils& parms)
+     {
+       parms.at("value").set_callback<double>(boost::bind(&ParameterWatcher::onvalue_change,this,_1));
+     }
+
+     int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
+     {
+       outputs.get<double> ("output") = inputs.get<double> ("input") * value_;
+       outputs.get<double> ("value") = value_;
+       return ecto::OK;
+     }
+   };
 
   struct SharedPass
   {
@@ -343,7 +382,7 @@ BOOST_PYTHON_MODULE(ecto_test)
 {
   using namespace ecto_test;
   ecto::wrap<Printer>("Printer", "A printer...");
-  ecto::wrap<Generate>("Generate", "A generator module.");
+  ecto::wrap<Generate<double> >("Generate", "A generator module.");
   ecto::wrap<SharedPass>("SharedPass", "A shared pointer pass through");
   ecto::wrap<Multiply>("Multiply", "Multiply an input with a constant");
   ecto::wrap<Increment>("Increment", "Increment input by some amount");
@@ -353,5 +392,6 @@ BOOST_PYTHON_MODULE(ecto_test)
   ecto::wrap<Quitter>("Quitter", "Will quit the graph on an appropriate input.");
   ecto::wrap<DontAllocateMe>("DontAllocateMe", "Don't allocate me, feel free to inspect.");
   ecto::wrap<NoPythonBindings>("NoPythonBindings", "This uses something that is bound to python!");
+  ecto::wrap<ParameterWatcher>("ParameterWatcher","Uses parameter change callbacks.");
   boost::python::def("make_pod_tendril", ecto_test::makePodTendril);
 }
