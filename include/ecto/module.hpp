@@ -61,8 +61,29 @@ enum ReturnCode
  * Clients should expose their code to this interface through
  * ecto::wrap, or ecto::create_module<T>().
  *
+ * For a client's module to satisfy the ecto::module idium, it must
+ * look similar to the following definition.
  * @code
+  struct MyModule
+  {
+    //called first thing, the user should declare their parameters in this
+    //free standing function.
+    static void declare_params(tendrils& params);
+    //declare inputs and outputs here. The parameters may be used to
+    //determine the io
+    static void declare_io(const tendrils& params, tendrils& in, tendrils& out);
+    //called right after allocation of the module, exactly once.
+    void configure(tendrils& params);
+    //called at every execution of the graph
+    int process(const tendrils& in, tendrils& out);
+    //called right before the destructor of the module, a good place to do
+    //critical cleanup work.
+    void destroy();
+  };
  * @endcode
+ *
+ * It is important to note that all functions have are optional and they all have
+ * default implementations.
  */
 struct module: boost::noncopyable
 {

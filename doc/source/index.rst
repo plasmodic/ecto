@@ -14,8 +14,11 @@ Contents:
    
    building
    client_usage
-   layout
+   auto_docs
    tendril
+   tendrils
+   module
+   plasm
 
 ecto at a glance
 ---------------------------------
@@ -121,42 +124,3 @@ ecto at a glance
         }
         
     * Each module is self documenting by design.
-
-Sample Generated Module Documentation
-=====================================
-
-Since the modules are by design self documenting, it is simple to output rst for a given set of modules.
-
-Printer (ecto::module)
-=================================
-
-Prints a string input to standard output.
-
-params
----------------------------------
-
- - str [std::string] default = hello
-
-    The default string to print
-
-inputs
----------------------------------
-
- - str [std::string] default = hello
-
-    The string to print.
-
-
-Reader (ecto::module)
-=================================
-
-Reads input from standard input.
-
-ouputs
----------------------------------
-
- - output [std::string] default = 
-
-    Output from standard in
-
-    

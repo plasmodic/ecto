@@ -1,7 +1,3 @@
 To generate api docs, use cmake. make doc
 
-For sphinx docs, run make from this directory.
-
-You will need to install : https://github.com/michaeljones/sphinx-to-github
-
-
+For sphinx docs, use cmake, and run : make sphinx_doc
