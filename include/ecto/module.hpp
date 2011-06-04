@@ -42,47 +42,106 @@
 namespace ecto
 {
 
+/**
+ * \brief Return values for modules' process functions. These
+ * are appropriate for non exceptional behavior.
+ */
 enum ReturnCode
 {
-  OK = 0, QUIT = 1,
+  OK = 0, //!< Everything A OK.
+  QUIT = 1,
+//!< Explicit quit now.
 };
 
 /**
- * \brief ecto::module is c++ interface definition for ecto processing
- * modules.  Subclasses should also implement  Initialize, which
- * will take an ecto::tendrils reference.
+ * \brief ecto::module is the non virtual interface to the basic building
+ * block of ecto graphs.  This interface should never be the parent of a
+ * client modules, but may be used for polymorphic access to client modules.
+ *
+ * Clients should expose their code to this interface through
+ * ecto::wrap, or ecto::create_module<T>().
+ *
+ * @code
+ * @endcode
  */
 struct module: boost::noncopyable
 {
   typedef boost::shared_ptr<module> ptr; //!< A convenience pointer typedef
 
   module();
-  ~module();
+  virtual ~module();
 
+  /**
+   * \brief Dispatches parameter declaration code. After this code, the parameters
+   * for the module will be set to their defaults.
+   */
   void declare_params();
+  /**
+   * \brief Dispatches input/output declaration code.  It is assumed that the parameters
+   * have been declared before this is called, so that inputs and outputs may be dependent
+   * on those parameters.
+   */
   void declare_io();
 
+  /**
+   * \brief Given initialized parameters,inputs, and outputs, this will dispatch the client
+   * configuration code.  This will allocated an instace of the clients module, so this
+   * should not be called during introspection.
+   */
   void configure();
+
+  /**
+   * \brief Dispatches the process function for the client module.  This should only
+   * be called from one thread at a time.
+   *
+   * Also, this function may throw exceptions...
+   *
+   * @return A return code, ecto::OK , or 0 means all is ok. Anything non zero should be considered an
+   * exit signal.
+   */
   ReturnCode process();
+
+  /**
+   * \brief This should be called at the end of life for the module, and signals immenent destruction.
+   *
+   * Will dispatch the clients destroy code. After this call, do not call any other functions.
+   */
   void destroy();
 
   /**
    * \brief Grab the name of the child class.
-   * @return
+   * @return A human readable non mangled name for the client class.
    */
-  virtual std::string name() const = 0;
+  std::string name() const;
 
-  tendrils parameters, inputs, outputs;
+  /**
+   * \brief Generate an Restructured Text doc string for the module. Includes documentation for all parameters,
+   * inputs, outputs.
+   * @param doc The highest level documentation for the module.
+   * @return A nicely formatted doc string.
+   */
+  std::string gen_doc(const std::string& doc = "A module...") const;
+
+  tendrils parameters; //!< Parameters
+  tendrils inputs; //!< Inputs, inboxes, always have a valid value ( may be NULL )
+  tendrils outputs; //!< Outputs, outboxes, always have a valid value ( may be NULL )
 
 protected:
   virtual void dispatch_declare_params(tendrils& t) = 0;
-  virtual void dispatch_declare_io(const tendrils& params, tendrils& inputs, tendrils& outputs) = 0;
+  virtual void dispatch_declare_io(const tendrils& params, tendrils& inputs,
+                                   tendrils& outputs) = 0;
   virtual void dispatch_configure(tendrils& params) = 0;
   virtual ReturnCode
   dispatch_process(const tendrils& inputs, tendrils& outputs) = 0;
   virtual void dispatch_destroy() = 0;
+  virtual std::string dispatch_name() const = 0;
 };
 
+/**
+ * \brief Helper class for determining if client modules have function
+ * implementations or not.
+ * @internal
+ */
 template<class T>
 struct has_f
 {
@@ -149,8 +208,8 @@ struct has_f
 };
 
 /**
- * \brief module_<T> is a convenience structure for registering an arbitrary class
- * with the the module. This adds a barrier between client code and the module.
+ * \brief module_<T> is for registering an arbitrary class
+ * with the the module NVI. This adds a barrier between client code and the module.
  */
 template<class Module>
 struct module_: module
@@ -165,7 +224,6 @@ protected:
 
   static void declare_params(not_implemented, tendrils& params)
   {
-    //SHOW();
   }
 
   static void declare_params(implemented, tendrils& params)
@@ -179,23 +237,24 @@ protected:
     declare_params(int_<has_f<Module>::declare_params> (), params);
   }
 
-  static void declare_io(not_implemented, const tendrils& params, tendrils& inputs, tendrils& outputs)
+  static void declare_io(not_implemented, const tendrils& params,
+                         tendrils& inputs, tendrils& outputs)
   {
-    //SHOW();
   }
-  static void declare_io(implemented, const tendrils& params, tendrils& inputs, tendrils& outputs)
+  static void declare_io(implemented, const tendrils& params, tendrils& inputs,
+                         tendrils& outputs)
   {
     Module::declare_io(params, inputs, outputs);
   }
 
-  void dispatch_declare_io(const tendrils& params, tendrils& inputs, tendrils& outputs)
+  void dispatch_declare_io(const tendrils& params, tendrils& inputs,
+                           tendrils& outputs)
   {
     declare_io(int_<has_f<Module>::declare_io> (), params, inputs, outputs);
   }
 
   void configure(not_implemented, const tendrils& params)
   {
-    //SHOW();
   }
 
   void configure(implemented, tendrils& params)
@@ -215,7 +274,6 @@ protected:
 
   ReturnCode process(not_implemented, const tendrils& inputs, tendrils& outputs)
   {
-    //SHOW();
     return OK;
   }
 
@@ -231,7 +289,6 @@ protected:
 
   void destroy(not_implemented)
   {
-    //SHOW();
   }
 
   void destroy(implemented)
@@ -244,7 +301,7 @@ protected:
     destroy(int_<has_f<Module>::destroy> ());
   }
 
-  std::string name() const
+  std::string dispatch_name() const
   {
     return MODULE_TYPE_NAME;
   }
@@ -257,15 +314,31 @@ template<typename Module>
 const std::string module_<Module>::MODULE_TYPE_NAME = ecto::name_of<Module>();
 
 /**
+ * Creates a module from type T that has not been configured, so therefore,
+ * not allocated.  This only calls the static functions associated with parameter and
+ * input/output declaration.
+ *
+ * @return A module::ptr that is initialized as far as default params,inputs,outputs go.
+ */
+template<typename T>
+module::ptr inspect_module()
+{
+  module::ptr p(new module_<T> ());
+  p->declare_params();
+  p->declare_io();
+  return p;
+}
+
+/**
  * Create a module from an type that has all of the proper interface functions defined.
+ * This will call configure in the module.
  * @return A module ptr.
  */
 template<typename T>
 module::ptr create_module()
 {
-  module::ptr p(new module_<T> ());
-  p->declare_params();
-  p->declare_io();
+  module::ptr p = inspect_module<T> ();
+  p->configure();
   return p;
 }
 

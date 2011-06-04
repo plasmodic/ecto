@@ -58,7 +58,7 @@ struct modwrap: module, bp::wrapper<module>
     if (bp::override dest = this->get_override("destroy"))
       dest();
   }
-  std::string name() const
+  std::string dispatch_name() const
   {
     SHOW();
     bp::reference_existing_object::apply<modwrap*>::type converter;

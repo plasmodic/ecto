@@ -15,17 +15,7 @@ Contents:
    building
    client_usage
    layout
-get ecto
-================================
-
-Unless you feel like submitting patches to ecto, or playing around in the source code,
-you may grab the daily deb from a ppa.  This is built atleast once a day from the trunk,
-so its just as unstable as trunk, but you don't have to compile it::
-
-  sudo apt-add-repository ppa:ethan-rublee/ppa
-  sudo apt-get update
-  sudo apt-get install libecto-dev
-  
+   tendril
 
 ecto at a glance
 ---------------------------------

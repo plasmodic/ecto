@@ -110,6 +110,13 @@ public:
    */
   tendril& at(const std::string& name);
 
+  /**
+   * \brief Print the tendrils documentation string, in rst format.
+   * @param out The stream to print to.
+   * @param tendrils_name The name used as a label, for the tendrils.
+   */
+  void print_doc(std::ostream& out, const std::string& tendrils_name) const;
+
 private:
   typedef std::map<std::string, tendril> map_t;
 };

@@ -8,3 +8,9 @@ WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 COMMENT "Generating API documentation with Doxygen" VERBATIM
 )
 endif(DOXYGEN_FOUND)
+
+add_custom_target(sphinx_doc
+make html BUILDDIR=${CMAKE_BINARY_DIR}/sphinx_doc
+WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+COMMENT "Generating sphinx documentation." VERBATIM
+)

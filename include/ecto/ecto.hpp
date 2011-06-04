@@ -31,7 +31,6 @@
 #include <boost/python.hpp>
 //boost stuff
 #include <boost/shared_ptr.hpp>
-#include <boost/algorithm/string.hpp>
 //do not include this in ecto lib files, only in client modules
 
 //ecto includes
@@ -77,7 +76,8 @@ template<typename T>
 std::string doc<T>::name;
 
 template<typename T>
-boost::shared_ptr<ecto::module_<T> > inspect(boost::python::tuple args, boost::python::dict kwargs)
+boost::shared_ptr<ecto::module_<T> > inspect(boost::python::tuple args,
+                                             boost::python::dict kwargs)
 {
   typedef ecto::module_<T> module_t;
 
@@ -94,60 +94,25 @@ boost::shared_ptr<ecto::module_<T> > inspect(boost::python::tuple args, boost::p
       bp::object key = l[j][0];
       bp::object value = l[j][1];
       std::string keystring = bp::extract<std::string>(key);
-      std::string valstring = bp::extract<std::string>(value.attr("__repr__")());
+      std::string valstring =
+          bp::extract<std::string>(value.attr("__repr__")());
       m->parameters.at(keystring).set(value);
     }
   m->declare_io();
   return mm;
 }
-struct print_tendril
-{
-  print_tendril(std::ostream& ss) :
-    ss(ss)
-  {
-  }
-  void operator()(const std::pair<std::string, ecto::tendril>& tp)
-  {
-    //default value
-    std::string defval = boost::python::extract<std::string>(boost::python::str(
-        tp.second.extract()));
-    ss << " - " << tp.first << " [" << tp.second.type_name() << "] default = " << defval << "\n";
-    std::string docstr = tp.second.doc();
-    std::vector<std::string> doc_lines;
-    std::string doc_str = tp.second.doc();
-    boost::split(doc_lines,doc_str, boost::is_any_of("\n"));
-    for (size_t i = 0; i < doc_lines.size(); ++i)
-      ss << "    " << doc_lines[i] << "\n";
-    ss << "\n";
-  }
-  std::ostream& ss;
-};
 
-inline void print_tendrils(std::ostream& ss, const std::string& tendrils_name, const ecto::tendrils& t)
-{
-  if (t.empty())
-    return;
-  ss << tendrils_name << "\n" << "---------------------------------\n\n";
-  std::for_each(t.begin(), t.end(), print_tendril(ss));
-}
 //this adds the autodoc to the module. TODO remove python duplication...
 template<typename T>
 std::string module_doc(std::string doc)
 {
-  boost::shared_ptr<ecto::module_<T> > mm = inspect<T> (boost::python::tuple(), boost::python::dict());
-  ecto::module * m = mm.get();
-  std::stringstream ss;
-  ss << m->name() << " (ecto::module)\n";
-  ss << "===============================\n";
-  ss << "\n" << doc << "\n\n";
-  print_tendrils(ss, "Parameters", m->parameters);
-  print_tendrils(ss, "Inputs", m->inputs);
-  print_tendrils(ss, "Outputs", m->outputs);
-  return ss.str();
+  ecto::module::ptr m = ecto::inspect_module<T>();
+  return m->gen_doc(doc);
 }
 
 template<typename T>
-boost::shared_ptr<ecto::module_<T> > raw_construct(boost::python::tuple args, boost::python::dict kwargs)
+boost::shared_ptr<ecto::module_<T> > raw_construct(boost::python::tuple args,
+                                                   boost::python::dict kwargs)
 {
   boost::shared_ptr<ecto::module_<T> > m = inspect<T> (args, kwargs);
   ecto::module *_m = m.get();
@@ -155,13 +120,19 @@ boost::shared_ptr<ecto::module_<T> > raw_construct(boost::python::tuple args, bo
   return m;
 }
 
+/**
+ * @tparam A client module type that implements the idiums of an ecto::module.
+ * @param name
+ * @param doc_str
+ */
 template<typename T>
 void wrap(const char* name, std::string doc_str = "A module...")
 {
   typedef ecto::module_<T> module_t;
   //SHOW();
-  boost::python::class_<module_t, boost::python::bases<module>, boost::shared_ptr<module_t>, boost::noncopyable>
-      m(name, module_doc<T>(doc_str).c_str());
+  boost::python::class_<module_t, boost::python::bases<module>,
+      boost::shared_ptr<module_t>, boost::noncopyable>
+      m(name, module_doc<T> (doc_str).c_str());
   typedef doc<T> docT;
   docT::name = name;
   docT::doc_str = doc_str;
