@@ -1,0 +1,11 @@
+digraph G
+{
+1 [label="30hz"];
+2 [label="30hz"];
+3 [label="1hz", color="red"];
+4 [label="30hz"];
+1->2;
+2->3;
+2->4;
+3->4;
+}

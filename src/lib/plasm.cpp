@@ -186,6 +186,7 @@ struct plasm::impl
     int val = 1;
     try
       {
+        //trigger all parameter change callbacks...
         tendrils::iterator begin = m->parameters.begin(), end =
             m->parameters.end();
         while (begin != end)
