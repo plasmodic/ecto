@@ -6,7 +6,6 @@
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <boost/python/suite/indexing/map_indexing_suite.hpp>
 
-
 namespace bp = boost::python;
 using bp::arg;
 namespace ecto

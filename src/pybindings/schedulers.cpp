@@ -7,9 +7,10 @@ namespace ecto {
   namespace py {
     void wrapSchedulers()
     {
-      bp::class<scheduler::singlethreaded, boost::noncopyable>("singlethreaded", init<) c;
-      c
-        .def( 
+      bp::class_<scheduler::singlethreaded, boost::noncopyable> 
+        c("singlethreaded", bp::init<ecto::graph::graph_t&>());
+      //      c
+      //        .def( 
         
 
 

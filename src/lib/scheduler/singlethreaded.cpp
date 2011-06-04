@@ -9,6 +9,8 @@
 #include <deque>
 
 #include <ecto/graph_types.hpp>
+#include <ecto/plasm.hpp>
+#include "plasm_impl.hpp"
 #include <ecto/scheduler/singlethreaded.hpp>
 
 
@@ -18,6 +20,9 @@ namespace ecto {
 
   namespace scheduler {
 
+    singlethreaded::singlethreaded(plasm& p) 
+      : graph(p.impl_->graph) 
+    { }
     singlethreaded:: singlethreaded(graph::graph_t& g_) : graph(g_) { }
 
     int 

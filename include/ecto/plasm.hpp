@@ -49,6 +49,10 @@ namespace ecto
    * The plasm is meant to be tool interacted with from python, but may be useful
    * from c++ in a dynamically loaded environment.
    */
+  namespace scheduler {
+    class singlethreaded;
+  };
+
   class plasm: boost::noncopyable
   {
   public:
@@ -101,5 +105,6 @@ namespace ecto
     class impl;
     boost::shared_ptr<impl> impl_;
     friend class plasm_wrapper;
+    friend class scheduler::singlethreaded;
   };
 }

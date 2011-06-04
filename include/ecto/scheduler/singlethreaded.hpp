@@ -19,7 +19,7 @@ namespace ecto {
     {
       ecto::graph::graph_t& graph;
       
-      singlethreaded(ecto::graph::graph_t&);
+      singlethreaded(plasm&);
 
       int invoke_process(ecto::graph::graph_t::vertex_descriptor vd);
       void compute_stack();
