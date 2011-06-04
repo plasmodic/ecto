@@ -34,6 +34,7 @@
 #include <map>
 #include <list>
 #include <ecto/tendril.hpp>
+#include <ecto/graph_types.hpp>
 
 namespace ecto
 {
@@ -102,6 +103,9 @@ namespace ecto
     std::string viz() const;
 
   private:
+
+    graph::graph_t& graph();
+
     class impl;
     boost::shared_ptr<impl> impl_;
     friend class plasm_wrapper;

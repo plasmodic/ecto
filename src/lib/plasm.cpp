@@ -189,4 +189,10 @@ namespace ecto
   {
     impl_->disconnect(from, output, to, input);
   }
+
+  graph::graph_t& plasm::graph() 
+  {
+    return impl_->graph;
+  }
+
 }

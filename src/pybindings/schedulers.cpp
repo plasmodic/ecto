@@ -8,12 +8,8 @@ namespace ecto {
     void wrapSchedulers()
     {
       bp::class_<scheduler::singlethreaded, boost::noncopyable> 
-        c("singlethreaded", bp::init<ecto::graph::graph_t&>());
-      //      c
-      //        .def( 
-        
-
-
+        c("Singlethreaded", bp::init<ecto::plasm&>());
+      c.def("execute", &scheduler::singlethreaded::execute);
     }
   }
 }
