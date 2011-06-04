@@ -2,7 +2,7 @@ Building
 ================================
 Using a standard cmake build system:
 
-.. code-block:: sh
+::
   
   mkdir build
   cd build
@@ -14,7 +14,7 @@ The libs will be located in the build folder under lib
 
 Assuming you're in the top level ecto directory, try the following in a shell:
 
-.. code-block:: sh
+::
 
   #add ecto to your python path
   . build/python_path.sh
@@ -26,8 +26,8 @@ Install
 
 You may install ecto using the following:
 
-.. code-block:: sh
-  
+::
+
   cd build
   sudo make install
   sudo ldconfig
@@ -35,7 +35,7 @@ You may install ecto using the following:
 
 This will install ecto to the appropriate system paths. On ubuntu the install may touch the following folders:
 
-.. code-block:: sh
+::
 
   /usr/local/include/ecto/
   /usr/local/share/ecto/
@@ -45,3 +45,24 @@ This will install ecto to the appropriate system paths. On ubuntu the install ma
 The advantage to installing ecto is that it becomes much easier for client code to use.  cmake will auto-magically 
 be able to find ecto, and it will be in your pythonpath by default.
 
+Docs
+------------------------------------------------
+::
+
+	cd build
+	make doc #for doxygen
+	make sphinx_doc #for sphinx (prefer this for usage docs)
+
+Tests
+--------------------------------------------------
+::
+
+	cd build
+	make test
+
+or
+
+::
+
+	cd build
+	ctest -V
