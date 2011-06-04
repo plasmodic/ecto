@@ -4,6 +4,7 @@ Created on Apr 8, 2011
 
 @author: erublee
 '''
+import i
 import ecto,ecto_test
 
 def test_one_to_many():

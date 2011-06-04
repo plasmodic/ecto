@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import i
 import ecto
 import ecto_test
 from pyecto import MyModule
