@@ -20,6 +20,12 @@ Assuming you're in the top level ecto directory, try the following in a shell:
   . build/python_path.sh
   python test/python/test_plasm.py
 
+Dependencies
+----------------------------------------
+
+::
+
+	 sudo apt-get install libboost-python-dev libboost-filesystem-dev libboost-system-dev libboost-thread-dev python-gobject python-gtk2 python-sphinx graphviz doxygen
 
 Install
 ---------------------------------------
