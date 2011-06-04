@@ -25,8 +25,8 @@ Dependencies
 
 ::
 
-	 sudo apt-get install libboost-python-dev libboost-filesystem-dev libboost-system-dev libboost-thread-dev python-gobject python-gtk2 python-sphinx graphviz doxygen
-
+	 sudo apt-get install libboost-python-dev libboost-filesystem-dev libboost-system-dev libboost-thread-dev python-setuptools python-gobject python-gtk2 graphviz doxygen
+	 sudo easy_install sphinx
 Install
 ---------------------------------------
 
