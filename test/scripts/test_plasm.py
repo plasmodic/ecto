@@ -12,7 +12,8 @@ def test_plasm():
     #plasm.go(gather)
     #plasm.set_input(scatter)
     #plasm.set_output(gather)
-    plasm.execute()
+    sched = ecto.schedulers.Singlethreaded(plasm)
+    sched.execute()
     #ecto.view_plasm(plasm)
     result = gather.outputs.out
     print result

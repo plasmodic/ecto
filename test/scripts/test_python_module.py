@@ -18,11 +18,12 @@ def test_python_module_plasm():
     plasm = ecto.Plasm()
     plasm.connect(g,"out",mod,"input")
     #print plasm.viz()
+    sched = ecto.schedulers.Singlethreaded(plasm)
     for i in range(1,5):
-        plasm.execute()
+        sched.execute()
         assert g.outputs.out == i
         assert mod.outputs.out == "spam"*i
-    plasm.execute()
+    sched.execute()
     assert g.outputs.out == 5
     assert mod.outputs.out == "spam"*5
     

@@ -7,7 +7,11 @@ def test_onenode():
     gen = ecto_test.Generate(start=0, step=1)
     plasm = ecto.Plasm()
     plasm.insert(gen)
-    scheduler = ecto.Singlethreaded(plasm)
+    print ">>>", ecto
+    print ">>>", ecto.schedulers
+    print ">>>", ecto.schedulers.Singlethreaded
+    scheduler = ecto.schedulers.Singlethreaded(plasm)
+    print scheduler
     scheduler.execute()
     result = gen.outputs.out
     print result
