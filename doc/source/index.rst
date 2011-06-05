@@ -4,7 +4,7 @@ ecto is a dynamically configurable *Directed Acyclic processing Graph* **(DAG)**
 Users may write reusable ecto::modules which 
 become the nodes in the DAG, or ecto::plasm.  Modules may be written 
 in c++ as boost::python extensions, or in pure python, 
-and python is used for the declaration of the ecto DAG(ecto::plasm).
+and python is used for the declaration of the DAG.
 
 Contents:
 ================================
