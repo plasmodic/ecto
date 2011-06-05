@@ -34,6 +34,7 @@
 #include <map>
 #include <list>
 #include <ecto/tendril.hpp>
+#include <ecto/graph_types.hpp>
 
 namespace ecto
 {
@@ -49,6 +50,10 @@ namespace ecto
    * The plasm is meant to be tool interacted with from python, but may be useful
    * from c++ in a dynamically loaded environment.
    */
+  namespace scheduler {
+    class singlethreaded;
+  };
+
   class plasm: boost::noncopyable
   {
   public:
@@ -78,11 +83,13 @@ namespace ecto
     void disconnect(module_ptr from, const std::string& output, 
                     module_ptr to, const std::string& input);
 
+#if 0
     /**
      * \brief This executes the graph, by executing all nodes in dependency order.
      */
     int execute();
     void spin();
+#endif
 
     /**
      * \brief output graphviz to a stream.
@@ -96,8 +103,12 @@ namespace ecto
     std::string viz() const;
 
   private:
+
+    graph::graph_t& graph();
+
     class impl;
     boost::shared_ptr<impl> impl_;
     friend class plasm_wrapper;
+    friend class scheduler::singlethreaded;
   };
 }

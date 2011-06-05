@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-import i
 import ecto
 import ecto_test
 
@@ -15,7 +14,8 @@ def test_plasm():
     plasm.connect(sps[0],"output",sps[4],"input");
     plasm.connect(sps[4],"output",sps[5],"input");
 
-    plasm.execute()
+    sched = ecto.schedulers.Singlethreaded(plasm)
+    sched.execute()
     #ecto.view_plasm(plasm)
 
     print sps[2].outputs.value

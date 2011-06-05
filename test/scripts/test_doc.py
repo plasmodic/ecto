@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-import i
 import ecto
 import ecto_test
 import pyecto
@@ -13,7 +12,8 @@ def test_doc():
         plasm.connect(scatter, f, gather, t)
     for t,f in zip(gather2.inputs.keys(), scatter.outputs.keys()[3:]):
         plasm.connect(scatter, f, gather2, t)
-    plasm.execute()
+    sched = ecto.schedulers.Singlethreaded(plasm)
+    sched.execute()
     result = gather.outputs.out
     assert(result == 9) # 3 * 3
     

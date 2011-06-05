@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-import i
 import ecto
 import ecto_test
 
@@ -7,17 +6,22 @@ def test_onenode():
     gen = ecto_test.Generate(start=0, step=1)
     plasm = ecto.Plasm()
     plasm.insert(gen)
-    plasm.execute()
+    print ">>>", ecto
+    print ">>>", ecto.schedulers
+    print ">>>", ecto.schedulers.Singlethreaded
+    scheduler = ecto.schedulers.Singlethreaded(plasm)
+    print scheduler
+    scheduler.execute()
     result = gen.outputs.out
     print result
     assert(result == 0)
 
-    plasm.execute()
+    scheduler.execute()
     result = gen.outputs.out
     print result
     assert(result == 1)
 
-    plasm.execute()
+    scheduler.execute()
     result = gen.outputs.out
     print result
     assert(result == 2)

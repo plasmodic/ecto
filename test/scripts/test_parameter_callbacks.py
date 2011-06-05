@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-import i
 import ecto
 import ecto_test
 
@@ -9,10 +8,11 @@ def test_parameter_callbacks():
     plasm = ecto.Plasm()
     plasm.connect(generate, "out", param_watcher, "input")
 
+    sched = ecto.schedulers.Singlethreaded(plasm)
     for i in range(0, 5):
         value = param_watcher.params.value * (i + 1);
         param_watcher.params.value = value
-        plasm.execute()
+        sched.execute()
         print "parameter:", param_watcher.outputs.value
 
     result = param_watcher.outputs.output
