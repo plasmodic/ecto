@@ -37,6 +37,7 @@ namespace ecto {
           e->deque.pop_front();
           ++inbegin;
         }
+
       int val = m->process();
 
       graph_t::out_edge_iterator outbegin, outend;

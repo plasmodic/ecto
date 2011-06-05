@@ -30,9 +30,11 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/tuple/tuple.hpp>
+
 #include <string>
 #include <map>
 #include <list>
+
 #include <ecto/tendril.hpp>
 #include <ecto/graph_types.hpp>
 
@@ -42,23 +44,26 @@ namespace ecto
   class module;
   typedef boost::shared_ptr<module> module_ptr;
 
-  /**
-   * \brief The plasm is the graph structure of ecto, responsible for keeping track
-   * of the connectivity between module and the execution of modules in the context of this
-   * graph.
-   *
-   * The plasm is meant to be tool interacted with from python, but may be useful
-   * from c++ in a dynamically loaded environment.
-   */
+
+  //forward declare schedulers for friendliness.
   namespace scheduler {
     class singlethreaded;
   };
 
+  /**
+   * \brief The plasm is the graph structure of ecto, responsible for keeping track
+   * of the connectivity between module and their inputs and outputs.
+   */
   class plasm: boost::noncopyable
   {
   public:
     plasm();
 
+    /**
+     * \brief insert the module into the graph so that it may be executed by a scheduler.
+     *
+     * @param mod The module to insert into the graph.
+     */
     void insert(module_ptr mod);
 
     /**
@@ -82,15 +87,6 @@ namespace ecto
      */
     void disconnect(module_ptr from, const std::string& output, 
                     module_ptr to, const std::string& input);
-
-#if 0
-    /**
-     * \brief This executes the graph, by executing all nodes in dependency order.
-     */
-    int execute();
-    void spin();
-#endif
-
     /**
      * \brief output graphviz to a stream.
      * @param out the output stream. Graphviz will be in plain text format.
@@ -104,11 +100,13 @@ namespace ecto
 
   private:
 
+    //TODO expose the nodes and edges to the world.
     graph::graph_t& graph();
 
     class impl;
     boost::shared_ptr<impl> impl_;
     friend class plasm_wrapper;
     friend class scheduler::singlethreaded;
+
   };
 }
