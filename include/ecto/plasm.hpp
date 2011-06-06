@@ -98,6 +98,8 @@ namespace ecto
      */
     std::string viz() const;
 
+    int execute();
+
   private:
 
     //TODO expose the nodes and edges to the world.

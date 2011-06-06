@@ -46,12 +46,12 @@ namespace ecto
             bp::args("from_module", "output_name", "to_module", "intput_name"));
       p.def("disconnect", &plasm::disconnect,
             bp::args("from_module", "output_name", "to_module", "intput_name"));
-      /*
-      p.def("execute", &plasm::execute,
+
+      p.def("execute",  &plasm::execute,
             "Executes the graph in topological order. Every node will be executed.");
-      p.def("spin", &plasm::spin,
-            "Causes the graph to execute continuously until finish is called by one of the modules.");
-      */
+
+//      p.def("spin", &plasm::spin,
+//            "Causes the graph to execute continuously until finish is called by one of the modules.");
       p.def("viz", wrapViz, "Get a graphviz string representation of the plasm.");
       p.def("vertices", getModules,
             "Get a dict of the plasm's vertices, with key being integers, and a tuple (module,vertice_type,tendril_key)");
