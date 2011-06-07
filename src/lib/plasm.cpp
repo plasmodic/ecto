@@ -2,6 +2,7 @@
 #include <ecto/tendril.hpp>
 #include <ecto/module.hpp>
 #include <ecto/graph_types.hpp>
+#include <ecto/scheduler/singlethreaded.hpp>
 
 #include <string>
 #include <map>
@@ -99,11 +100,13 @@ namespace ecto
         ModuleVertexMap;
     ModuleVertexMap mv_map;
     graph_t graph;
+    boost::shared_ptr<ecto::scheduler::singlethreaded> scheduler;
   };
 
   plasm::plasm() :
     impl_(new impl)
   {
+    impl_->scheduler.reset(new ecto::scheduler::singlethreaded(*this));
   }
 
   void plasm::insert(module::ptr mod)

@@ -102,6 +102,10 @@ namespace ecto
 
   private:
 
+    //TODO expose the nodes and edges to the world.
+
+  private:
+
     class impl;
     boost::shared_ptr<impl> impl_;
     friend class plasm_wrapper;
