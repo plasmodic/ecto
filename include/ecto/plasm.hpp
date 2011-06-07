@@ -98,15 +98,12 @@ namespace ecto
      */
     std::string viz() const;
 
-  private:
-
-    //TODO expose the nodes and edges to the world.
     graph::graph_t& graph();
+
+  private:
 
     class impl;
     boost::shared_ptr<impl> impl_;
     friend class plasm_wrapper;
-    friend class scheduler::singlethreaded;
-
   };
 }
