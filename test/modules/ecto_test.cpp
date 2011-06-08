@@ -105,21 +105,17 @@ struct DontAllocateMe
 
 struct Printer
 {
-  static void declare_params(tendrils& parameters)
-  {
-    parameters.declare<std::string> ("str", "I print this:", "Hello World");
-  }
+  static void declare_params(tendrils& parameters) { }
 
   static void declare_io(const ecto::tendrils& parameters,
                          ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
-    inputs.declare<std::string> ("str", "A string to print", "hello");
-
+    inputs.declare<double> ("in", "what to print");
   }
 
   int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
-    std::cout << inputs.get<std::string> ("str") << std::endl;
+    std::cout << inputs.get<double> ("in") << std::endl;
     return ecto::OK;
   }
 };
@@ -236,6 +232,25 @@ struct Increment
   int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
     outputs.get<double> ("out") = inputs.get<double> ("in") + amount_;
+    return ecto::OK;
+  }
+};
+
+struct Add
+{
+  static void declare_params(ecto::tendrils& p) { }
+
+  static void declare_io(const ecto::tendrils& parameters,
+                         ecto::tendrils& inputs, ecto::tendrils& outputs)
+  {
+    inputs.declare<double> ("left", "left input");
+    inputs.declare<double> ("right", "right input");
+    outputs.declare<double> ("out", "output");
+  }
+
+  int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
+  {
+    outputs.get<double> ("out") = inputs.get<double> ("left") + inputs.get<double>("right");
     return ecto::OK;
   }
 };
@@ -406,10 +421,11 @@ boost::shared_ptr<ecto::tendril> makePodTendril()
 BOOST_PYTHON_MODULE(ecto_test)
 {
   using namespace ecto_test;
-  ecto::wrap<Printer>("Printer", "A printer...");
+  ecto::wrap<Printer>("Printer", "A printer of doubles...");
   ecto::wrap<Generate<double> >("Generate", "A generator module.");
   ecto::wrap<SharedPass>("SharedPass", "A shared pointer pass through");
   ecto::wrap<Multiply>("Multiply", "Multiply an input with a constant");
+  ecto::wrap<Add>("Add", "Add two numbers");
   ecto::wrap<Increment>("Increment", "Increment input by some amount");
   ecto::wrap<Scatter>("Scatter", "Scatter a value...");
   ecto::wrap<Gather<int> >("Gather", "Gather a scattered value...");
