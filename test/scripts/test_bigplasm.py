@@ -25,7 +25,7 @@ def test_plasm():
     plasm.connect(add, "out", printer, "in")
     
     sched = ecto.schedulers.Threadpool(plasm)
-    sched.execute()
+    sched.execute(1)
     result = add.outputs.out
     print result
     assert(result == 20.0)

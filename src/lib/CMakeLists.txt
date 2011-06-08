@@ -15,8 +15,8 @@ target_link_libraries(ecto
   
 # Additional target properties
 set_target_properties(ecto PROPERTIES
-    INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/lib"
-    )
+  INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/lib"
+  )
         
 #install the main shared lib
 install(TARGETS ecto

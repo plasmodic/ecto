@@ -20,7 +20,7 @@ namespace ecto {
     {
       threadpool(plasm&);
 
-      int execute();
+      int execute(unsigned nthreads);
 
       ecto::graph::graph_t& graph;
       

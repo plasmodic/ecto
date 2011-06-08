@@ -1,3 +1,5 @@
+find_package(Threads)
+
 find_package(Boost COMPONENTS
   python
   thread
@@ -15,6 +17,7 @@ include_directories(
 set(ECTO_DEP_LIBS 
   ${Boost_LIBRARIES}
   ${PYTHON_LIBRARIES}
+  ${CMAKE_THREAD_LIBS_INIT}
 )
 
 #detect the python version and install directories
