@@ -35,5 +35,6 @@ namespace ecto
   struct blackbox
   {
     //typedef boost::function<void(plasm&)>
+
   };
 }//namespace ecto

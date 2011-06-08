@@ -54,16 +54,6 @@ tendril::tendril(holder_base::ptr impl) :
 {
 }
 
-std::string tendril::type_name() const
-{
-  return holder_->type_name();
-}
-
-std::string tendril::doc() const
-{
-  return doc_;
-}
-
 void tendril::setDoc(const std::string& doc_str)
 {
   doc_ = doc_str;

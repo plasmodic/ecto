@@ -11,6 +11,7 @@ class BlackBox(ecto.Module):
     def declare_params(params):
         params.declare("text", "a param.","hello there")
         generate = ecto_test.Generate.inspect(None,None)
+        params = generate.par
 
     @staticmethod
     def declare_io(params, inputs, outputs):

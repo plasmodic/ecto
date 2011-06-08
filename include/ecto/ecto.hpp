@@ -51,105 +51,104 @@
  */
 namespace ecto
 {
-/**
- * \internal
- */
-template<typename T>
-struct doc
-{
-  static std::string doc_str; //!<a doc string for humans to read in python.
-  static std::string name; //!< the name for this type.
-  //! get the doc
-  static std::string getDoc()
+  /**
+   * \internal
+   */
+  template<typename T>
+  struct doc
   {
-    return doc_str;
-  }
-  //! get the name
-  static std::string getName()
-  {
-    return name;
-  }
-};
-template<typename T>
-std::string doc<T>::doc_str;
-template<typename T>
-std::string doc<T>::name;
-
-template<typename T>
-boost::shared_ptr<ecto::module_<T> > inspect(boost::python::tuple args,
-                                             boost::python::dict kwargs)
-{
-  typedef ecto::module_<T> module_t;
-
-  namespace bp = boost::python;
-
-  //SHOW();
-  boost::shared_ptr<module_t> mm(new module_t());
-  ecto::module * m = mm.get();
-  m->declare_params();
-
-  bp::list l = kwargs.items();
-  for (int j = 0; j < bp::len(l); ++j)
+    static std::string doc_str; //!<a doc string for humans to read in python.
+    static std::string name; //!< the name for this type.
+    //! get the doc
+    static std::string getDoc()
     {
-      bp::object key = l[j][0];
-      bp::object value = l[j][1];
-      std::string keystring = bp::extract<std::string>(key);
-      std::string valstring =
-          bp::extract<std::string>(value.attr("__repr__")());
-      m->parameters.at(keystring).set(value);
+      return doc_str;
     }
-  m->declare_io();
-  return mm;
-}
+    //! get the name
+    static std::string getName()
+    {
+      return name;
+    }
+  };
+  template<typename T>
+  std::string doc<T>::doc_str;
+  template<typename T>
+  std::string doc<T>::name;
 
-//this adds the autodoc to the module. TODO remove python duplication...
-template<typename T>
-std::string module_doc(std::string doc)
-{
-  ecto::module::ptr m = ecto::inspect_module<T>();
-  return m->gen_doc(doc);
-}
+  template<typename T>
+  boost::shared_ptr<ecto::module_<T> > inspect(boost::python::tuple args,
+                                               boost::python::dict kwargs)
+  {
+    typedef ecto::module_<T> module_t;
 
-template<typename T>
-boost::shared_ptr<ecto::module_<T> > raw_construct(boost::python::tuple args,
-                                                   boost::python::dict kwargs)
-{
-  boost::shared_ptr<ecto::module_<T> > m = inspect<T> (args, kwargs);
-  ecto::module *_m = m.get();
-  _m->configure();
-  return m;
-}
+    namespace bp = boost::python;
 
-/**
- * \brief Takes a user module, UserModule, that follows the ecto::module idium and exposes
- * it to python or other plugin architecture.
+    //SHOW();
+    boost::shared_ptr<module_t> mm(new module_t());
+    ecto::module * m = mm.get();
+    m->declare_params();
 
- * This should be the preferred method of exposing user
- * modules to the outside world.
- *
- * @tparam UserModule A client module type that implements the idium of an ecto::module.
- * @param name The name of the module, this will be the symbolic name exposed
- *        to python or other plugin systems.
- * @param doc_str A highlevel description of your module.
- */
-template<typename UserModule>
-void wrap(const char* name, std::string doc_str = "A module...")
-{
-  typedef ecto::module_<UserModule> module_t;
-  //SHOW();
-  boost::python::class_<module_t, boost::python::bases<module>,
-      boost::shared_ptr<module_t>, boost::noncopyable>
-      m(name, module_doc<UserModule> (doc_str).c_str());
-  typedef doc<UserModule> docT;
-  docT::name = name;
-  docT::doc_str = doc_str;
+    bp::list l = kwargs.items();
+    for (int j = 0; j < bp::len(l); ++j)
+      {
+        bp::object key = l[j][0];
+        bp::object value = l[j][1];
+        std::string keystring = bp::extract<std::string>(key);
+        std::string valstring =
+            bp::extract<std::string>(value.attr("__repr__")());
+        m->parameters.at(keystring).set(value);
+      }
+    m->declare_io();
+    return mm;
+  }
 
-  m.def("__init__", boost::python::raw_constructor(&raw_construct<UserModule> ));
-  m.def("inspect", &inspect<UserModule> );
-  m.staticmethod("inspect");
-  m.def("doc", &docT::getDoc) .staticmethod("doc");
-  m.def("name", &docT::getName);
-  m.staticmethod("name");
-}
+  //this adds the autodoc to the module. TODO remove python duplication...
+  template<typename T>
+  std::string module_doc(std::string doc)
+  {
+    ecto::module::ptr m = ecto::inspect_module<T>();
+    return m->gen_doc(doc);
+  }
+
+  template<typename T>
+  boost::shared_ptr<ecto::module_<T> > raw_construct(boost::python::tuple args,
+                                                     boost::python::dict kwargs)
+  {
+    boost::shared_ptr<ecto::module_<T> > m = inspect<T> (args, kwargs);
+    return m;
+  }
+
+  /**
+   * \brief Takes a user module, UserModule, that follows the ecto::module idium and exposes
+   * it to python or other plugin architecture.
+
+   * This should be the preferred method of exposing user
+   * modules to the outside world.
+   *
+   * @tparam UserModule A client module type that implements the idium of an ecto::module.
+   * @param name The name of the module, this will be the symbolic name exposed
+   *        to python or other plugin systems.
+   * @param doc_str A highlevel description of your module.
+   */
+  template<typename UserModule>
+  void wrap(const char* name, std::string doc_str = "A module...")
+  {
+    typedef ecto::module_<UserModule> module_t;
+    //SHOW();
+    boost::python::class_<module_t, boost::python::bases<module>,
+        boost::shared_ptr<module_t>, boost::noncopyable>
+        m(name, module_doc<UserModule> (doc_str).c_str());
+    typedef doc<UserModule> docT;
+    docT::name = name;
+    docT::doc_str = doc_str;
+
+    m.def("__init__",
+          boost::python::raw_constructor(&raw_construct<UserModule> ));
+    m.def("inspect", &inspect<UserModule> );
+    m.staticmethod("inspect");
+    m.def("doc", &docT::getDoc) .staticmethod("doc");
+    m.def("name", &docT::getName);
+    m.staticmethod("name");
+  }
 }
 
