@@ -144,8 +144,4 @@ namespace ecto
     return impl_->graph;
   }
 
-  int plasm::execute()
-  {
-    return impl_->scheduler->execute();
-  }
 }
