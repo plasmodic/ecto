@@ -24,7 +24,7 @@ def test_plasm():
     printer = ecto_test.Printer()
     plasm.connect(add, "out", printer, "in")
     
-    sched = ecto.schedulers.Singlethreaded(plasm)
+    sched = ecto.schedulers.Threadpool(plasm)
     sched.execute()
     result = add.outputs.out
     print result
