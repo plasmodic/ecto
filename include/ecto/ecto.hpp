@@ -32,6 +32,7 @@
 //boost stuff
 #include <boost/shared_ptr.hpp>
 //do not include this in ecto lib files, only in client modules
+#include <boost/format.hpp>
 
 //ecto includes
 #include <ecto/module.hpp>
@@ -93,7 +94,10 @@ namespace ecto
     if (bp::len(args) == 0)
       {
         // generate default name == type + address
-        m->name(m->type() + " @ " + boost::lexical_cast<std::string>(m));
+        std::string defaultname = str(boost::format("%s @ %p") % m->type() % m);
+        std::cout << "SETTING DEFAULT NAME: " << defaultname;
+        m->name(defaultname);
+        std::cout << "name now: " << m->name() << "\n";
       }
     else 
       {
@@ -162,9 +166,9 @@ namespace ecto
           boost::python::raw_constructor(&raw_construct<UserModule> ));
     m.def("inspect", &inspect<UserModule> );
     m.staticmethod("inspect");
-    m.def("doc", &docT::getDoc) .staticmethod("doc");
-    m.def("name", &docT::getName);
-    m.staticmethod("name");
+    m.def("doc", &docT::getDoc).staticmethod("doc");
+    m.def("name", (std::string (module_t::*)() const) &module_t::name);
+    m.def("type_name", (std::string (module_t::*)() const) &module_t::type);
   }
 }
 
