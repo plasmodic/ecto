@@ -10,6 +10,6 @@ namespace ecto {
   {
     posix_time::ptime now(posix_time::microsec_clock::local_time());
     
-    std::cout << now << " " << msg << std::endl;
+    std::cout << now << " " << boost::this_thread::get_id() << " " << msg << std::endl;
   }
 }

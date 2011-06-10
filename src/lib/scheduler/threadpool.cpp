@@ -37,6 +37,7 @@ namespace ecto {
         typedef boost::shared_ptr<invoker> ptr;
 
         boost::asio::io_service& serv;
+        boost::asio::deadline_timer dt;
         graph_t& g;
         graph_t::vertex_descriptor vd;
         unsigned n_calls;
@@ -46,29 +47,32 @@ namespace ecto {
         invoker(boost::asio::io_service& serv_, graph_t& g_, 
                 graph_t::vertex_descriptor vd_,
                 respawn_cb_t respawn_)
-          : serv(serv_), g(g_), vd(vd_), n_calls(0), respawn(respawn_)
+          : serv(serv_), dt(serv), g(g_), vd(vd_), n_calls(0), respawn(respawn_)
         { }
 
         void async_wait_for_input()
         {
-          ECTO_LOG_DEBUG("async_wait_for_input %s", this);
+          ECTO_LOG_DEBUG("%s async_wait_for_input", this);
           boost::mutex::scoped_lock lock(mtx);
           namespace asio = boost::asio;
 
           // keep outer run() from returning
           asio::io_service::work work(serv);
 
-          asio::deadline_timer dt(serv);
           if (inputs_ready()) {
+            ECTO_LOG_DEBUG("%s inputs ready", this);
             serv.post(bind(&invoker::invoke, this));
           } else {
-            dt.expires_from_now(boost::posix_time::milliseconds(10));
-            dt.async_wait(bind(&invoker::async_wait_for_input, this));
+            ECTO_LOG_DEBUG("%s wait", this);
+            dt.expires_from_now(boost::posix_time::milliseconds(100));
+            dt.wait();
+            serv.post(bind(&invoker::async_wait_for_input, this));
           }
         }
 
         void invoke()
         {
+          ECTO_LOG_DEBUG("%s invoke", this);
           boost::mutex::scoped_lock lock(mtx);
           ecto::scheduler::invoke_process(g, vd);
           ++n_calls;
@@ -76,6 +80,8 @@ namespace ecto {
             {
               serv.post(bind(&invoker::async_wait_for_input, this));
             }
+          else
+            ECTO_LOG_DEBUG("n_calls (%u) reached, no respawn", n_calls);
         }
         
         bool inputs_ready()
@@ -101,12 +107,14 @@ namespace ecto {
           return true;
         }
 
-        ~invoker() { }
+        ~invoker() { ECTO_LOG_DEBUG("%s ~invoker", this); }
       }; // struct invoker
 
       int execute(unsigned nthreads, impl::respawn_cb_t respawn, graph_t& graph)
       {
         namespace asio = boost::asio;
+
+        serv.reset();
 
         graph_t::vertex_iterator begin, end;
         for (tie(begin, end) = vertices(graph);
@@ -117,8 +125,9 @@ namespace ecto {
             impl::invoker::ptr ip(new impl::invoker(serv, graph, *begin, respawn));
             invokers[*begin] = ip;
             ip->async_wait_for_input();
+            std::cout << "ncalls: " << ip->n_calls << std::endl;
           }
-        std::cout << invokers.size() << " invokers" << std::endl;
+        std::cout << std::dec << invokers.size() << " invokers" << std::endl;
         boost::thread_group tgroup;
 
         { 
@@ -126,19 +135,20 @@ namespace ecto {
 
           for (unsigned j=0; j<nthreads; ++j)
             {
+              ECTO_LOG_DEBUG("%s Start thread %u", this % j);
               tgroup.create_thread(bind(&asio::io_service::run, 
                                         ref(serv)));
             }
         } // let work go out of scope...   invokers now have their own work on serv
 
         tgroup.join_all();
-
         return 0;
       }
 
       ~impl() 
       {
-        // be sure your invokers disappear before you do (you're holding the main service)
+        // be sure your invokers disappear before you do (you're
+        // holding the main service)
         invokers_t().swap(invokers);
       }
 
@@ -162,6 +172,5 @@ namespace ecto {
     {
       return impl_->execute(nthreads, boost::phoenix::arg_names::arg1 < ncalls, graph);
     }
-
   }
 }
