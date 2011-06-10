@@ -31,9 +31,7 @@ namespace ecto
 
   struct plasm::impl
   {
-    impl()
-    {
-    }
+    impl() { }
 
     //insert a module into the graph, will retrieve the
     //vertex descriptor if its already in the graph...
@@ -67,9 +65,8 @@ namespace ecto
           edge::ptr e = graph[*inbegin];
           if (e->to_port == new_edge->to_port)
             {
-              throw std::runtime_error(
-                                       new_edge->to_port
-                                           + " is already connected, this is considered an error");
+              throw std::runtime_error(new_edge->to_port
+                                       + " is already connected, this is considered an error");
             }
           ++inbegin;
         }
@@ -79,18 +76,17 @@ namespace ecto
       tie(ed, added) = boost::add_edge(fromv, tov, new_edge, graph);
       if (!added)
         {
-          throw std::runtime_error(
-                                   "failed to connect " + from->name() + ":"
-                                       + output + " with " + to->name() + ":"
-                                       + input);
+          throw std::runtime_error("failed to connect " + from->name() + ":"
+                                   + output + " with " + to->name() + ":"
+                                   + input);
         }
     }
 
     void disconnect(module::ptr from, std::string output, module::ptr to,
                     std::string input)
     {
-      graph_t::vertex_descriptor fromv = insert_module(from), tov =
-          insert_module(to);
+      graph_t::vertex_descriptor 
+        fromv = insert_module(from), tov = insert_module(to);
       boost::remove_edge(fromv, tov, graph);
     }
 

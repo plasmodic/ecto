@@ -100,10 +100,10 @@ namespace ecto
 
     graph::graph_t& graph();
 
-		/**
-		* \brief Execute using a predefined scheduler.
-		*/
-		int execute();
+    /**
+     * \brief Execute using a predefined scheduler.
+     */
+    int execute();
 		
   private:
     //TODO expose the nodes and edges to the world.

@@ -24,6 +24,8 @@
 namespace ecto {
 
   using namespace ecto::graph;
+  using boost::bind;
+  using boost::ref;
 
   namespace scheduler {
     struct threadpool::impl 
@@ -58,10 +60,10 @@ namespace ecto {
 
           asio::deadline_timer dt(serv);
           if (inputs_ready()) {
-            serv.post(boost::bind(&invoker::invoke, this));
+            serv.post(bind(&invoker::invoke, this));
           } else {
             dt.expires_from_now(boost::posix_time::milliseconds(10));
-            dt.async_wait(boost::bind(&invoker::async_wait_for_input, this));
+            dt.async_wait(bind(&invoker::async_wait_for_input, this));
           }
         }
 
@@ -72,7 +74,7 @@ namespace ecto {
           ++n_calls;
           if (respawn(n_calls)) 
             {
-              serv.post(boost::bind(&invoker::async_wait_for_input, this));
+              serv.post(bind(&invoker::async_wait_for_input, this));
             }
         }
         
@@ -82,9 +84,7 @@ namespace ecto {
           for (tie(in_beg, in_end) = in_edges(vd, g);
                in_beg != in_end; ++in_beg)
             {
-              //std::cout << "in_beg:" << *in_beg << "\n";
               graph::edge::ptr e = g[*in_beg];
-              //std::cout << "in:" << e->from_port << " >> " << e->to_port << " (" << e->size() << ")\n";
               if (e->size() == 0)
                 return false;
             }
@@ -93,31 +93,19 @@ namespace ecto {
           for (tie(out_beg, out_end) = out_edges(vd, g);
                out_beg != out_end; ++out_beg)
             {
-              // std::cout << "in_beg:" << *in_beg << "\n";
               graph::edge::ptr e = g[*out_beg];
-              //std::cout << "out: " << e->from_port << " >> " << e->to_port << " (" << e->size() << ")\n";
               if (e->size() > 0)
                 return false;
             }
 
-          // std::cout << "inputs ready!\n";
           return true;
         }
 
         ~invoker() { }
-
       }; // struct invoker
 
-      static void runservice(boost::asio::io_service& s, unsigned n) 
-      { 
-        // std::cout << ">>> run service " << n << std::endl;
-        s.run();
-        // std::cout << "<<< run service " << n << std::endl;
-      }
-      
       int execute(unsigned nthreads, impl::respawn_cb_t respawn, graph_t& graph)
       {
-        //n_calls = 0;
         namespace asio = boost::asio;
 
         graph_t::vertex_iterator begin, end;
@@ -138,10 +126,9 @@ namespace ecto {
 
           for (unsigned j=0; j<nthreads; ++j)
             {
-              // std::cout << "starting thread...\n";
-              tgroup.create_thread(boost::bind(&runservice, boost::ref(serv), j));
+              tgroup.create_thread(bind(&asio::io_service::run, 
+                                        ref(serv)));
             }
-
         } // let work go out of scope...   invokers now have their own work on serv
 
         tgroup.join_all();
