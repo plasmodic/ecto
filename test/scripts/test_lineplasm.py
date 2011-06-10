@@ -3,17 +3,16 @@ import ecto
 import ecto_test
 import sys
 
-def test_plasm(nthreads, niter, n_nodes):
+def test_plasm(nthreads, niter, n_nodes, incdelay):
     plasm = ecto.Plasm()
 
     gen = ecto_test.Generate("Gen", step=1.0, start=0.0)
-    inc = ecto_test.Increment("Increment 0", delay=100)
+    inc = ecto_test.Increment("Increment 0", delay=incdelay)
 
     plasm.connect(gen, "out", inc, "in")
 
     for j in range(n_nodes-1): # one has already been added
-        print j
-        inc_next = ecto_test.Increment("Increment_%u" % (j+1), delay=100)
+        inc_next = ecto_test.Increment("Increment_%u" % (j+1), delay=incdelay)
         plasm.connect(inc, "out", inc_next, "in")
         inc = inc_next
 
@@ -43,7 +42,9 @@ def test_plasm(nthreads, niter, n_nodes):
 if __name__ == '__main__':
     test_plasm(nthreads=int(sys.argv[1]), 
                niter=int(sys.argv[2]), 
-               n_nodes=int(sys.argv[3]))
+               n_nodes=int(sys.argv[3]),
+               incdelay=int(sys.argv[4])
+               )
 
 
 

@@ -276,7 +276,7 @@ struct Increment
     }
     double in = inputs.get<double>("in");
     double result = in + amount_;
-    std::cout << this << " incrementer: " << in << " ==> " << result << std::endl;
+    // std::cout << this << " incrementer: " << in << " ==> " << result << std::endl;
     outputs.get<double> ("out") = result;
     return ecto::OK;
   }

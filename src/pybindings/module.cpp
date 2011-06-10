@@ -52,12 +52,14 @@ struct modwrap: module, bp::wrapper<module>
     }
     return OK;
   }
+
   void dispatch_destroy()
   {
     SHOW();
     if (bp::override dest = this->get_override("destroy"))
       dest();
   }
+
   std::string dispatch_name() const
   {
     SHOW();
@@ -68,6 +70,7 @@ struct modwrap: module, bp::wrapper<module>
     std::string nm = bp::extract<std::string>(n);
     return nm;
   }
+
   static std::string doc(modwrap* mod)
   {
     SHOW();
