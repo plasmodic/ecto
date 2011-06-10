@@ -8,7 +8,7 @@ macro(pytest _basename)
 endmacro()
 
 foreach(file
-    test_bigplasm
+    #test_bigplasm
     test_doc
     test_modules
     test_parameter_callbacks
