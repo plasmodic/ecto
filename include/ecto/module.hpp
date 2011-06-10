@@ -130,10 +130,21 @@ namespace ecto
     void destroy();
 
     /**
-     * \brief Grab the name of the child class.
+     * \brief Return the type of the child class.
      * @return A human readable non mangled name for the client class.
      */
+    std::string type() const;
+
+    /**
+     * \brief Grab the name of the instance.
+     * @return The name of the instance, or the address if none was given when object was constructed
+     */
     std::string name() const;
+
+    /**
+     * \brief Set the name of the instance.
+     */
+    void name(const std::string&);
 
     /**
      * \brief Generate an Restructured Text doc string for the module. Includes documentation for all parameters,
@@ -162,6 +173,10 @@ namespace ecto
     {
       return ptr();
     }
+
+  private:
+
+    std::string instance_name;
   };
 
   /**

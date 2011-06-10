@@ -44,9 +44,19 @@ namespace ecto
       }
   }
 
-  std::string module::name() const
+  std::string module::type() const
   {
     return dispatch_name();
+  }
+
+  void module::name(const std::string& name)
+  {
+    instance_name = name;
+  }
+
+  std::string module::name() const
+  {
+    return instance_name;
   }
 
   void module::destroy()

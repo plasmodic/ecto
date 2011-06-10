@@ -86,6 +86,22 @@ namespace ecto
     //SHOW();
     boost::shared_ptr<module_t> mm(new module_t());
     ecto::module * m = mm.get();
+    
+    if (bp::len(args) > 1)
+      throw std::runtime_error("Only one non-keyword argument allowed, this will specify instance name");
+
+    if (bp::len(args) == 0)
+      {
+        // generate default name == type + address
+        m->name(m->type() + " @ " + boost::lexical_cast<std::string>(m));
+      }
+    else 
+      {
+        bp::extract<std::string> e(args[0]);
+        if (! e.check())
+          throw std::runtime_error("Non-keyword argument (instance name) not converible to string.");
+        m->name(e());
+      }
     m->declare_params();
 
     bp::list l = kwargs.items();
