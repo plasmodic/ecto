@@ -33,6 +33,7 @@ struct print_tendril
 
 void tendrils::print_doc(std::ostream& out, const std::string& tendrils_name) const
 {
+  boost::mutex::scoped_lock lock(mtx);
   if (empty())
     return;
   out << tendrils_name << "\n";
@@ -42,6 +43,7 @@ void tendrils::print_doc(std::ostream& out, const std::string& tendrils_name) co
 
 const tendril& tendrils::at(const std::string& name) const
 {
+  boost::mutex::scoped_lock lock(mtx);
   map_t::const_iterator it = find(name);
   if (it == end())
     throw std::logic_error(name + " does not exist!");
@@ -50,6 +52,7 @@ const tendril& tendrils::at(const std::string& name) const
 
 tendril& tendrils::at(const std::string& name)
 {
+  boost::mutex::scoped_lock lock(mtx);
   map_t::iterator it = find(name);
   if (it == end())
     throw std::logic_error(name + " does not exist!");

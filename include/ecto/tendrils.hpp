@@ -28,6 +28,8 @@
  */
 #pragma once
 #include <ecto/tendril.hpp>
+#include <boost/thread.hpp>
+
 #include <string>
 #include <sstream>
 #include <cstring>
@@ -119,5 +121,6 @@ public:
 
 private:
   typedef std::map<std::string, tendril> map_t;
+  mutable boost::mutex mtx;
 };
 }

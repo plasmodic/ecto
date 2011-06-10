@@ -47,16 +47,15 @@ namespace ecto
 
     void wrapTendrils()
     {
-      bp::class_<tendrils, boost::shared_ptr<tendrils>, boost::noncopyable>("Tendrils")//
-      .def(bp::std_map_indexing_suite<tendrils, false>())//
-      .def("declare", &setTendril)//
-      //.def("set", &setTendril)
-      .def("get", &getTendril)//
-      .def("__str__", &strTendril)//
-      .def("__getattr__", &tendril_get)//
-      .def("__setattr__", &tendril_set)//
-      ;
-
+      bp::class_<tendrils, boost::shared_ptr<tendrils>, boost::noncopyable>("Tendrils")
+        .def(bp::std_map_indexing_suite<tendrils, false>())
+        .def("declare", &setTendril)
+        //.def("set", &setTendril)
+        .def("get", &getTendril)
+        .def("__str__", &strTendril)
+        .def("__getattr__", &tendril_get)
+        .def("__setattr__", &tendril_set)
+        ;
     }
   }
 }

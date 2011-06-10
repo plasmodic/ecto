@@ -10,6 +10,7 @@
 #include <boost/graph/graphviz.hpp>
 #include <boost/foreach.hpp>
 #include <boost/unordered_map.hpp>
+#include <boost/thread.hpp>
 
 #include <ecto/module.hpp>
 
@@ -23,9 +24,33 @@ namespace ecto {
       { }
 
       std::string from_port, to_port;
-      std::deque<ecto::tendril> deque;
       typedef boost::shared_ptr<edge> ptr;
       typedef boost::shared_ptr<const edge> const_ptr;
+
+      tendril& front() 
+      { 
+        boost::unique_lock<boost::mutex> lock(mtx);
+        return deque.front();
+      }
+      void pop_front() 
+      { 
+        boost::unique_lock<boost::mutex> lock(mtx);
+        deque.pop_front(); 
+      }
+      void push_back(const ecto::tendril& t) 
+      {
+        boost::unique_lock<boost::mutex> lock(mtx);
+        deque.push_back(t);
+      }
+      std::size_t size() 
+      {
+        boost::unique_lock<boost::mutex> lock(mtx);
+        return deque.size(); 
+      }
+
+    private:
+      boost::mutex mtx;
+      std::deque<ecto::tendril> deque;
     };
 
 

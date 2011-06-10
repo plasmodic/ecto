@@ -21,7 +21,8 @@ namespace ecto {
       threadpool(plasm&);
 
       int execute(unsigned nthreads);
-
+      int execute(unsigned nthreads, unsigned maxcalls);
+      
       ecto::graph::graph_t& graph;
       
       struct impl;

@@ -30,6 +30,7 @@
 #include <iostream>
 #include <boost/format.hpp>
 #include <boost/foreach.hpp>
+#include <boost/asio.hpp>
 
 using ecto::tendrils;
 namespace ecto_test
@@ -115,7 +116,7 @@ struct Printer
 
   int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
-    std::cout << inputs.get<double> ("in") << std::endl;
+    std::cout << "***** " << inputs.get<double> ("in") << " ***** " << this << std::endl;
     return ecto::OK;
   }
 };
@@ -154,6 +155,40 @@ struct Generate
   }
 };
 
+/*
+struct Verify
+{
+  double step_, start_;
+
+  static void declare_params(tendrils& parameters)
+  {
+    parameters.declare<T> ("step", "The step with which i generate integers.",
+                           2);
+    parameters.declare<T> ("start", "My starting value", 0);
+  }
+
+  static void declare_io(const ecto::tendrils& parameters,
+                         ecto::tendrils& inputs, ecto::tendrils& outputs)
+  {
+    outputs.declare<T> (
+                        "out",
+                        "output",
+                        parameters.get<T> ("start")
+                            - parameters.get<T> ("step"));
+  }
+
+  void configure(tendrils& parameters)
+  {
+    step_ = parameters.get<T> ("step");
+  }
+
+  int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
+  {
+    outputs.get<T> ("out") += step_;
+    return 0;
+  }
+};
+*/
 struct Quitter
 {
   static void declare_params(tendrils& params)
@@ -211,10 +246,11 @@ struct Multiply
 struct Increment
 {
   double amount_;
-
+  unsigned delay_ms_;
   static void declare_params(ecto::tendrils& p)
   {
     p.declare<double> ("amount", "Amount to increment by.", 1.0);
+    p.declare<unsigned> ("delay", "How long it takes to increment in milliseconds", 0);
   }
 
   static void declare_io(const ecto::tendrils& parameters,
@@ -227,11 +263,21 @@ struct Increment
   void configure(tendrils& parms)
   {
     amount_ = parms.get<double> ("amount");
+    delay_ms_ = parms.get<unsigned>("delay");
   }
 
   int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
   {
-    outputs.get<double> ("out") = inputs.get<double> ("in") + amount_;
+    if (delay_ms_ > 0) {
+      boost::asio::io_service s;
+      boost::asio::deadline_timer dt(s);
+      dt.expires_from_now(boost::posix_time::milliseconds(delay_ms_));
+      dt.wait();
+    }
+    double in = inputs.get<double>("in");
+    double result = in + amount_;
+    std::cout << this << " incrementer: " << in << " ==> " << result << std::endl;
+    outputs.get<double> ("out") = result;
     return ecto::OK;
   }
 };
