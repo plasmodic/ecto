@@ -64,7 +64,7 @@ namespace ecto {
             serv.post(bind(&invoker::invoke, this));
           } else {
             ECTO_LOG_DEBUG("%s wait", this);
-            dt.expires_from_now(boost::posix_time::milliseconds(100));
+            dt.expires_from_now(boost::posix_time::milliseconds(1));
             dt.wait();
             serv.post(bind(&invoker::async_wait_for_input, this));
           }

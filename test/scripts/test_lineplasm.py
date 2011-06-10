@@ -31,10 +31,12 @@ def test_plasm(nthreads, niter, n_nodes):
     print "expected:", shouldbe
     assert inc.outputs.out == shouldbe
     sched.execute(nthreads, niter)
-    print "RESULT:", inc.outputs.out
+    result = inc.outputs.out
+    print "RESULT:", result
     
-#    shouldbe = float(n_nodes + (niter - 1)
-
+    shouldbe = float(n_nodes + (niter*2 - 1))
+    assert result == shouldbe
+                     
     return
 
 
