@@ -58,7 +58,7 @@ namespace ecto {
           if (inputs_ready()) {
             serv.post(boost::bind(&invoker::invoke, this));
           } else {
-            dt.expires_from_now(boost::posix_time::milliseconds(500));
+            dt.expires_from_now(boost::posix_time::milliseconds(10));
             dt.async_wait(boost::bind(&invoker::async_wait_for_input, this));
           }
         }
@@ -74,7 +74,7 @@ namespace ecto {
             }
         }
         
-        bool inputs_ready() 
+        bool inputs_ready()
         {
           graph_t::in_edge_iterator in_beg, in_end;
           for (tie(in_beg, in_end) = in_edges(vd, g);

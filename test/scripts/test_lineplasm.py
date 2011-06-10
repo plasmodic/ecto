@@ -7,13 +7,13 @@ def test_plasm(nthreads, niter, n_nodes):
     plasm = ecto.Plasm()
 
     gen = ecto_test.Generate(step=1.0, start=0.0)
-    inc = ecto_test.Increment(delay=1000)
+    inc = ecto_test.Increment(delay=100)
 
     plasm.connect(gen, "out", inc, "in")
 
     for j in range(n_nodes): # one set of incs has already been added
         print j
-        inc_next = ecto_test.Increment(delay=1000)
+        inc_next = ecto_test.Increment(delay=100)
         plasm.connect(inc, "out", inc_next, "in")
         inc = inc_next
 
