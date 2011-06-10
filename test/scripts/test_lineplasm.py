@@ -11,7 +11,7 @@ def test_plasm(nthreads, niter, n_nodes):
 
     plasm.connect(gen, "out", inc, "in")
 
-    for j in range(n_nodes): # one set of incs has already been added
+    for j in range(n_nodes-1): # one has already been added
         print j
         inc_next = ecto_test.Increment(delay=100)
         plasm.connect(inc, "out", inc_next, "in")
@@ -25,13 +25,23 @@ def test_plasm(nthreads, niter, n_nodes):
     o.close()
     print "\n", plasm.viz(), "\n"
     sched = ecto.schedulers.Threadpool(plasm)
-    sched.execute(int(nthreads), int(niter))
-    # sched.execute(1, 5)
+    sched.execute(nthreads, niter)
+    print "RESULT:", inc.outputs.out
+    shouldbe = float(n_nodes + niter - 1)
+    print "expected:", shouldbe
+    assert inc.outputs.out == shouldbe
+    sched.execute(nthreads, niter)
+    print "RESULT:", inc.outputs.out
+    
+#    shouldbe = float(n_nodes + (niter - 1)
+
     return
 
 
 if __name__ == '__main__':
-    test_plasm(sys.argv[1], sys.argv[2], int(sys.argv[3])-1)
+    test_plasm(nthreads=int(sys.argv[1]), 
+               niter=int(sys.argv[2]), 
+               n_nodes=int(sys.argv[3]))
 
 
 

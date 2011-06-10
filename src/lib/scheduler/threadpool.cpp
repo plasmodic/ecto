@@ -11,6 +11,7 @@
 #include <ecto/plasm.hpp>
 #include <ecto/tendril.hpp>
 #include <ecto/module.hpp>
+#include <ecto/log.hpp>
 
 #include <ecto/graph_types.hpp>
 #include <ecto/plasm.hpp>
@@ -25,7 +26,6 @@ namespace ecto {
   using namespace ecto::graph;
 
   namespace scheduler {
-
     struct threadpool::impl 
     {
       typedef boost::function<bool(unsigned)> respawn_cb_t;
@@ -41,13 +41,15 @@ namespace ecto {
         respawn_cb_t respawn;
         boost::mutex mtx;
 
-        invoker(boost::asio::io_service& serv_, graph_t& g_, graph_t::vertex_descriptor vd_,
+        invoker(boost::asio::io_service& serv_, graph_t& g_, 
+                graph_t::vertex_descriptor vd_,
                 respawn_cb_t respawn_)
           : serv(serv_), g(g_), vd(vd_), n_calls(0), respawn(respawn_)
         { }
 
         void async_wait_for_input()
         {
+          ECTO_LOG_DEBUG("async_wait_for_input %s", this);
           boost::mutex::scoped_lock lock(mtx);
           namespace asio = boost::asio;
 
@@ -115,6 +117,7 @@ namespace ecto {
       
       int execute(unsigned nthreads, impl::respawn_cb_t respawn, graph_t& graph)
       {
+        //n_calls = 0;
         namespace asio = boost::asio;
 
         graph_t::vertex_iterator begin, end;
@@ -127,7 +130,7 @@ namespace ecto {
             invokers[*begin] = ip;
             ip->async_wait_for_input();
           }
-
+        std::cout << invokers.size() << " invokers" << std::endl;
         boost::thread_group tgroup;
 
         { 

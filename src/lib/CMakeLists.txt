@@ -4,6 +4,7 @@ add_library(ecto SHARED
   module.cpp
   plasm.cpp
   util.cpp
+  log.cpp
   scheduler/invoke.cpp
   scheduler/singlethreaded.cpp
   scheduler/threadpool.cpp
