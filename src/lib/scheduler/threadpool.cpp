@@ -121,13 +121,10 @@ namespace ecto {
              begin != end;
              ++begin)
           {
-            std::cout << "vertex: " << *begin << "\n";
             impl::invoker::ptr ip(new impl::invoker(serv, graph, *begin, respawn));
             invokers[*begin] = ip;
             ip->async_wait_for_input();
-            std::cout << "ncalls: " << ip->n_calls << std::endl;
           }
-        std::cout << std::dec << invokers.size() << " invokers" << std::endl;
         boost::thread_group tgroup;
 
         { 

@@ -72,8 +72,8 @@ if __name__ == '__main__':
     test_plasm(1, 1, 2)
     test_plasm(8, 1, 5)
     test_plasm(9, 64, 100)
-    #test_plasm(1, 1, 1)
-    #test_plasm(1, 1, 4)
+    test_plasm(10, 8, 10)
+    test_plasm(11, 8, 10)
 
 
 
