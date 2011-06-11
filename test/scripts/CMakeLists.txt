@@ -24,6 +24,7 @@ foreach(file
     test_small_plasms
     test_tendril
     test_tendrils
+    test_addergraph
     )
   add_test(${file} 
     /usr/bin/env

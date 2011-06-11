@@ -95,9 +95,7 @@ namespace ecto
       {
         // generate default name == type + address
         std::string defaultname = str(boost::format("%s @ %p") % m->type() % m);
-        std::cout << "SETTING DEFAULT NAME: " << defaultname;
         m->name(defaultname);
-        std::cout << "name now: " << m->name() << "\n";
       }
     else 
       {

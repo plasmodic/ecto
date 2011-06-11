@@ -188,10 +188,8 @@ namespace ecto
     {
       if (!compatible_type(rhs))
         {
-          throw(std::logic_error(
-                                 std::string(
-                                             type_name() + " is not a "
-                                                 + rhs.type_name()).c_str()));
+          throw std::logic_error(std::string(type_name() + " is not a "
+                                             + rhs.type_name()).c_str());
 
         }
     }
@@ -203,10 +201,8 @@ namespace ecto
     inline void enforce_type() const
     {
       if (!is_type<T> ())
-        throw(std::logic_error(
-                               std::string(
-                                           type_name() + " is not a "
-                                               + name_of<T> ()).c_str()));
+        throw std::logic_error(std::string(type_name() + " is not a "
+                                           + name_of<T> ()).c_str());
     }
     /**
      * \brief Get the boost::python version of the object (by value)

@@ -155,40 +155,6 @@ struct Generate
   }
 };
 
-/*
-struct Verify
-{
-  double step_, start_;
-
-  static void declare_params(tendrils& parameters)
-  {
-    parameters.declare<T> ("step", "The step with which i generate integers.",
-                           2);
-    parameters.declare<T> ("start", "My starting value", 0);
-  }
-
-  static void declare_io(const ecto::tendrils& parameters,
-                         ecto::tendrils& inputs, ecto::tendrils& outputs)
-  {
-    outputs.declare<T> (
-                        "out",
-                        "output",
-                        parameters.get<T> ("start")
-                            - parameters.get<T> ("step"));
-  }
-
-  void configure(tendrils& parameters)
-  {
-    step_ = parameters.get<T> ("step");
-  }
-
-  int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
-  {
-    outputs.get<T> ("out") += step_;
-    return 0;
-  }
-};
-*/
 struct Quitter
 {
   static void declare_params(tendrils& params)
@@ -329,9 +295,7 @@ struct ParameterWatcher
 
   void configure(tendrils& parms)
   {
-    parms.at("value").set_callback<double> (
-                                            boost::bind(
-                                                        &ParameterWatcher::onvalue_change,
+    parms.at("value").set_callback<double> (boost::bind(&ParameterWatcher::onvalue_change,
                                                         this, _1));
   }
 

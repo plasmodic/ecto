@@ -12,6 +12,7 @@ def test_parameter_callbacks():
     for i in range(0, 5):
         value = param_watcher.params.value * (i + 1);
         param_watcher.params.value = value
+        print "execute..."
         sched.execute()
         print "parameter:", param_watcher.outputs.value
 
