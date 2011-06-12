@@ -2,7 +2,7 @@
 import ecto
 import ecto_test
 
-def test_plasm():
+def test_dual_line_plasm(nlevels):
     plasm = ecto.Plasm()
 
     gen = ecto_test.Generate(step=1.0, start=0.0)
@@ -11,7 +11,7 @@ def test_plasm():
     plasm.connect(gen, "out", incl, "in")
     plasm.connect(gen, "out", incr, "in")
 
-    for j in []: # range(2): # one set of incs has already been added
+    for j in range(nlevels-1): # one set of incs has already been added
         print j
         inc_nextl, inc_nextr = ecto_test.Increment(), ecto_test.Increment()
         plasm.connect(incl, "out", inc_nextl, "in")
@@ -29,22 +29,24 @@ def test_plasm():
     o.close()
     print "\n", plasm.viz(), "\n"
     sched = ecto.schedulers.Threadpool(plasm)
-    sched.execute(1, 5)
-    sched.execute(1, 5)
-    return
-    # print add.outputs
+    sched.execute(nthreads=int(nlevels/2), niter=1)
     result = add.outputs.out
     print "result=", result
-    assert(result == 6.0)
-    print "first iteration okay"
-    sched.execute(1, 1)
+    assert(result == nlevels * 2)
+
+    sched.execute(nthreads=int(nlevels/2), niter=2)
     result = add.outputs.out
     print "iter2 result=", result
-    assert result == 22.0
+    assert result == (nlevels + 2) * 2
 
+    sched.execute(nthreads=int(nlevels/2), niter=3)
+    result = add.outputs.out
+    print "iter3 result=", result
+    assert result == (nlevels + 5) * 2
 
 if __name__ == '__main__':
-    test_plasm()
+    test_dual_line_plasm(10)
+    test_dual_line_plasm(100)
 
 
 

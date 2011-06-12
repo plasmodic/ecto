@@ -7,7 +7,7 @@ namespace bp = boost::python;
 BOOST_PYTHON_MODULE(schedulers)
 {
   using namespace ecto::scheduler;
-
+  using bp::arg;
   {
     bp::class_<singlethreaded, boost::noncopyable> d("Singlethreaded", bp::init<ecto::plasm&>());
     d
@@ -16,8 +16,10 @@ BOOST_PYTHON_MODULE(schedulers)
   {
     bp::class_<threadpool, boost::noncopyable> d("Threadpool", bp::init<ecto::plasm&>());
     d
-      .def("execute", (int (threadpool::*)(unsigned))&threadpool::execute)
-      .def("execute", (int (threadpool::*)(unsigned, unsigned))&threadpool::execute);
+      .def("execute", (int (threadpool::*)(unsigned))&threadpool::execute,
+           arg("nthreads"))
+      .def("execute", (int (threadpool::*)(unsigned, unsigned))&threadpool::execute,
+           (arg("nthreads"), arg("niter")));
   }
 }
 

@@ -3,6 +3,7 @@ import ecto
 import ecto_test
 import sys
 
+
 def test_plasm(nthreads, niter, n_nodes, incdelay):
     plasm = ecto.Plasm()
 

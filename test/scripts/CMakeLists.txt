@@ -18,6 +18,7 @@ foreach(file
     test_modules
     test_parameter_callbacks
     test_plasm
+    test_dual_line_plasm
     test_python_module
     test_reconnect
     test_shared_pass
