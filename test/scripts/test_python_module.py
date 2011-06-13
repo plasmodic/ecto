@@ -20,10 +20,10 @@ def test_python_module_plasm():
     #print plasm.viz()
     sched = ecto.schedulers.Singlethreaded(plasm)
     for i in range(1,5):
-        sched.execute()
+        sched.execute(niter=1)
         assert g.outputs.out == i
         assert mod.outputs.out == "spam"*i
-    sched.execute()
+    sched.execute(niter=1)
     assert g.outputs.out == 5
     assert mod.outputs.out == "spam"*5
     

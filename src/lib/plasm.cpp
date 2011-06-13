@@ -140,8 +140,8 @@ namespace ecto
     return impl_->graph;
   }
   
-  int plasm::execute()
+  int plasm::execute(unsigned niter)
   {
-    return impl_->scheduler->execute();
+    return impl_->scheduler->execute(niter);
   }
 }

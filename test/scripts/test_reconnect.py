@@ -16,11 +16,11 @@ def test_one_to_many():
         modules.append(m)
         
     sched = ecto.schedulers.Singlethreaded(plasm)
-    sched.execute()
+    sched.execute(niter=1)
     for x in modules:
         #print x.outputs.out
         assert(x.outputs.out == 4)
-    sched.execute()
+    sched.execute(niter=1)
     for x in modules:
         #print x.outputs.out
         assert(x.outputs.out == 8)
@@ -53,7 +53,7 @@ def test_reconnect():
     #ecto.view_plasm(plasm)
     #check some values
     sched = ecto.schedulers.Singlethreaded(plasm)
-    sched.execute()
+    sched.execute(niter=1)
     print gather.outputs.out
     assert(gather.outputs.out == 2 *(2*2))
     

@@ -103,7 +103,7 @@ namespace ecto
     /**
      * \brief Execute using a predefined scheduler.
      */
-    int execute();
+    int execute(unsigned niter);
 		
   private:
     //TODO expose the nodes and edges to the world.

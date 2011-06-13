@@ -39,6 +39,8 @@ namespace ecto
 
     static void wrap()
     {
+      using bp::arg;
+
       bp::class_<plasm, boost::shared_ptr<plasm>, boost::noncopyable> p("Plasm");
       p.def("insert", &plasm::insert, bp::args("module"),
             "insert module into the graph");
@@ -47,7 +49,8 @@ namespace ecto
       p.def("disconnect", &plasm::disconnect,
             bp::args("from_module", "output_name", "to_module", "intput_name"));
       p.def("execute",  &plasm::execute,
-            "Executes the graph in topological order. Every node will be executed.");
+            "Executes the graph in topological order. Every node will be executed.",
+            arg("niter"));
       
       p.def("viz", wrapViz, "Get a graphviz string representation of the plasm.");
       p.def("vertices", getModules,

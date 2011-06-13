@@ -40,8 +40,7 @@ def test_blackbox():
     plasm = make_plasm(ecto.Plasm())
     sched = ecto.schedulers.Singlethreaded(plasm)
     
-    for x in range(0, 10):
-        sched.execute()
+    sched.execute(niter=10)
         
     print plasm.inc.outputs.out
     
