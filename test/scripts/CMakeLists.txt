@@ -14,18 +14,19 @@ pytest(test_lineplasm3 ${CMAKE_CURRENT_SOURCE_DIR}/test_lineplasm.py 15 25 35 50
 
 
 foreach(file
+    test_addergraph
     test_doc
+    test_dual_line_plasm
     test_modules
     test_parameter_callbacks
     test_plasm
-    test_dual_line_plasm
     test_python_module
     test_reconnect
     test_shared_pass
     test_small_plasms
+    test_strands
     test_tendril
     test_tendrils
-    test_addergraph
     )
   add_test(${file} 
     /usr/bin/env

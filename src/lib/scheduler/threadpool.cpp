@@ -40,7 +40,6 @@ namespace ecto {
 
         threadpool::impl& context;
 
-        boost::asio::io_service& serv;
         boost::asio::deadline_timer dt;
         graph_t& g;
         graph_t::vertex_descriptor vd;
@@ -51,10 +50,10 @@ namespace ecto {
 
 
         invoker(threadpool::impl& context_,
-                boost::asio::io_service& serv_, graph_t& g_, 
+                graph_t& g_, 
                 graph_t::vertex_descriptor vd_,
                 respawn_cb_t respawn_)
-          : context(context_), serv(serv_), dt(serv), g(g_), vd(vd_), n_calls(0), respawn(respawn_)
+          : context(context_), dt(context.serv), g(g_), vd(vd_), n_calls(0), respawn(respawn_)
         { }
 
         void async_wait_for_input()
@@ -64,31 +63,29 @@ namespace ecto {
           namespace asio = boost::asio;
 
           // keep outer run() from returning
-          asio::io_service::work work(serv);
+          asio::io_service::work work(context.serv);
 
           if (inputs_ready()) {
             ECTO_LOG_DEBUG("%s inputs ready", this);
             module::ptr m = g[vd];
             if (m->strand_)
               {
-                std::cout << "YES " << m->name() << " HAS STRAND: " << m->strand_->id() << "\n";
                 const ecto::strand& skey = *(m->strand_);
                 boost::shared_ptr<asio::io_service::strand>& strand_p = context.strands[skey];
                 if (!strand_p) {
-                  std::cout << "need to make new strand\n";
                   strand_p.reset(new boost::asio::io_service::strand(context.serv));
                 }
                 strand_p->post(bind(&invoker::invoke, this));
               }
             else
               {
-                serv.post(bind(&invoker::invoke, this));
+                context.serv.post(bind(&invoker::invoke, this));
               }
           } else {
             ECTO_LOG_DEBUG("%s wait", this);
             dt.expires_from_now(boost::posix_time::milliseconds(1));
             dt.wait();
-            serv.post(bind(&invoker::async_wait_for_input, this));
+            context.serv.post(bind(&invoker::async_wait_for_input, this));
           }
         }
 
@@ -100,7 +97,7 @@ namespace ecto {
           ++n_calls;
           if (respawn(n_calls)) 
             {
-              serv.post(bind(&invoker::async_wait_for_input, this));
+              context.serv.post(bind(&invoker::async_wait_for_input, this));
             }
           else
             ECTO_LOG_DEBUG("n_calls (%u) reached, no respawn", n_calls);
@@ -143,7 +140,7 @@ namespace ecto {
              begin != end;
              ++begin)
           {
-            impl::invoker::ptr ip(new impl::invoker(*this, serv, graph, *begin, respawn));
+            impl::invoker::ptr ip(new impl::invoker(*this, graph, *begin, respawn));
             invokers[*begin] = ip;
             ip->async_wait_for_input();
           }
