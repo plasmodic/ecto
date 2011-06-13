@@ -5,6 +5,7 @@ ectomodule(ecto
   tendrils.cpp
   module.cpp
   schedulers.cpp
+  strand.cpp
   )
 
 set_target_properties(ecto_ectomodule PROPERTIES

@@ -7,11 +7,13 @@
 #include <boost/make_shared.hpp>
 #include <boost/asio.hpp>
 #include <boost/thread.hpp>
+#include <boost/unordered_map.hpp>
 
 #include <ecto/plasm.hpp>
 #include <ecto/tendril.hpp>
 #include <ecto/module.hpp>
 #include <ecto/log.hpp>
+#include <ecto/strand.hpp>
 
 #include <ecto/graph_types.hpp>
 #include <ecto/plasm.hpp>
@@ -36,6 +38,8 @@ namespace ecto {
       {
         typedef boost::shared_ptr<invoker> ptr;
 
+        threadpool::impl& context;
+
         boost::asio::io_service& serv;
         boost::asio::deadline_timer dt;
         graph_t& g;
@@ -44,10 +48,13 @@ namespace ecto {
         respawn_cb_t respawn;
         boost::mutex mtx;
 
-        invoker(boost::asio::io_service& serv_, graph_t& g_, 
+
+
+        invoker(threadpool::impl& context_,
+                boost::asio::io_service& serv_, graph_t& g_, 
                 graph_t::vertex_descriptor vd_,
                 respawn_cb_t respawn_)
-          : serv(serv_), dt(serv), g(g_), vd(vd_), n_calls(0), respawn(respawn_)
+          : context(context_), serv(serv_), dt(serv), g(g_), vd(vd_), n_calls(0), respawn(respawn_)
         { }
 
         void async_wait_for_input()
@@ -61,7 +68,22 @@ namespace ecto {
 
           if (inputs_ready()) {
             ECTO_LOG_DEBUG("%s inputs ready", this);
-            serv.post(bind(&invoker::invoke, this));
+            module::ptr m = g[vd];
+            if (m->strand_)
+              {
+                std::cout << "YES " << m->name() << " HAS STRAND: " << m->strand_->id() << "\n";
+                const ecto::strand& skey = *(m->strand_);
+                boost::shared_ptr<asio::io_service::strand>& strand_p = context.strands[skey];
+                if (!strand_p) {
+                  std::cout << "need to make new strand\n";
+                  strand_p.reset(new boost::asio::io_service::strand(context.serv));
+                }
+                strand_p->post(bind(&invoker::invoke, this));
+              }
+            else
+              {
+                serv.post(bind(&invoker::invoke, this));
+              }
           } else {
             ECTO_LOG_DEBUG("%s wait", this);
             dt.expires_from_now(boost::posix_time::milliseconds(1));
@@ -121,7 +143,7 @@ namespace ecto {
              begin != end;
              ++begin)
           {
-            impl::invoker::ptr ip(new impl::invoker(serv, graph, *begin, respawn));
+            impl::invoker::ptr ip(new impl::invoker(*this, serv, graph, *begin, respawn));
             invokers[*begin] = ip;
             ip->async_wait_for_input();
           }
@@ -152,6 +174,9 @@ namespace ecto {
       typedef std::map<graph_t::vertex_descriptor, invoker::ptr> invokers_t;
       invokers_t invokers;
       boost::asio::io_service serv;
+      boost::unordered_map<ecto::strand, 
+                           boost::shared_ptr<boost::asio::io_service::strand>,
+                           ecto::strand_hash> strands;
     };
 
     threadpool::threadpool(plasm& p)

@@ -2,15 +2,26 @@
 import ecto
 import ecto_test
 
+s1 = ecto.Strand()
+s2 = s1
+s3 = ecto.Strand()
+
+print "s1.id ==", s1.id
+print "s2.id ==", s2.id
+print "s3.id ==", s3.id
+assert s1.id == s2.id
+assert s3.id != s2.id
+assert s3.id != s1.id
+
 def test_strands(nlevels, SchedType, execfn, expect):
     plasm = ecto.Plasm()
 
     gen = ecto_test.Generate(step=1.0, start=1.0)
-    noncurr = ecto_test.DontCallMeFromTwoThreads()
+    noncurr = ecto_test.DontCallMeFromTwoThreads(strand=s1)
     plasm.connect(gen, "out", noncurr, "in")
 
     for k in range(nlevels):
-        next = ecto_test.DontCallMeFromTwoThreads()
+        next = ecto_test.DontCallMeFromTwoThreads(strand=s1)
         plasm.connect(noncurr, "out", next, "in")
         noncurr = next
 

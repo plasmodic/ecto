@@ -3,6 +3,7 @@
 #include <ecto/tendril.hpp>
 #include <ecto/module.hpp>
 #include <ecto/graph_types.hpp>
+#include <ecto/strand.hpp>
 
 #include <string>
 #include <map>

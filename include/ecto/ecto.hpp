@@ -112,9 +112,18 @@ namespace ecto
         bp::object key = l[j][0];
         bp::object value = l[j][1];
         std::string keystring = bp::extract<std::string>(key);
-        std::string valstring =
-            bp::extract<std::string>(value.attr("__repr__")());
-        m->parameters.at(keystring).set(value);
+        if (keystring == "strand")
+          {
+            ecto::strand s = bp::extract<ecto::strand>(value);
+            std::cout << "setting strand " << s.id() << "\n";
+            m->strand_ = s;
+          }
+        else 
+          {
+            std::string valstring =
+              bp::extract<std::string>(value.attr("__repr__")());
+            m->parameters.at(keystring).set(value);
+          }
       }
     m->declare_io();
     return mm;

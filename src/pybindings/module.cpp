@@ -29,7 +29,7 @@ struct modwrap: module, bp::wrapper<module>
       init(boost::ref(params));
   }
 
-  void dispatch_declare_io(const tendrils&params, tendrils&inputs, tendrils&outputs)
+  void dispatch_declare_io(const tendrils&params, tendrils& inputs, tendrils& outputs)
   {
     SHOW();
     if (bp::override declare_io = this->get_override("declare_io"))
@@ -83,7 +83,6 @@ struct modwrap: module, bp::wrapper<module>
       return get_str();
     return "No Doc str.";
   }
-  boost::function<void()> finish_handler_;
 };
 
 const tendrils& inputs(module& mod)

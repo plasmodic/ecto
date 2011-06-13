@@ -35,6 +35,7 @@
 
 #include <ecto/tendril.hpp>
 #include <ecto/tendrils.hpp>
+#include <ecto/strand.hpp>
 #include <ecto/util.hpp>
 
 #include <map>
@@ -159,6 +160,7 @@ namespace ecto
     tendrils parameters; //!< Parameters
     tendrils inputs; //!< Inputs, inboxes, always have a valid value ( may be NULL )
     tendrils outputs; //!< Outputs, outboxes, always have a valid value ( may be NULL )
+    boost::optional<strand> strand_;
 
   protected:
     virtual void dispatch_declare_params(tendrils& t) = 0;
