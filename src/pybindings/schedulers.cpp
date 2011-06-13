@@ -11,7 +11,10 @@ BOOST_PYTHON_MODULE(schedulers)
   {
     bp::class_<singlethreaded, boost::noncopyable> d("Singlethreaded", bp::init<ecto::plasm&>());
     d
-      .def("execute", &singlethreaded::execute);
+      .def("execute", (int (singlethreaded::*)())&singlethreaded::execute)
+      .def("execute", (int (singlethreaded::*)(unsigned))&singlethreaded::execute,
+           arg("niter"))
+      ;
   }
   {
     bp::class_<threadpool, boost::noncopyable> d("Threadpool", bp::init<ecto::plasm&>());

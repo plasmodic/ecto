@@ -26,6 +26,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+
 #include <ecto/ecto.hpp>
 #include <iostream>
 #include <boost/format.hpp>
@@ -103,6 +104,46 @@ struct DontAllocateMe
     throw std::logic_error("I shouldn't be allocated");
   }
 };
+
+struct DontCallMeFromTwoThreads
+{
+  static void declare_io(const ecto::tendrils& parameters,
+                         ecto::tendrils& inputs, ecto::tendrils& outputs)
+  {
+    inputs.declare<double> ("in");
+    outputs.declare<double> ("out");
+  }
+
+  int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
+  {
+    boost::asio::io_service s;
+    boost::asio::deadline_timer dt(s);
+
+    // try to rock
+    if (mtx.try_lock()) {
+      // we got the rock... i.e. we are rocking
+
+      // wait a bit so's we can be sure there will be collisions
+      dt.expires_from_now(boost::posix_time::milliseconds(250));
+      dt.wait();
+      
+      double value = inputs.get<double>("in");
+      std::cout << "nonconcurrent node @ " << this << " moving " << value << std::endl;
+      // do yer thing
+      outputs.get<double>("out") = value;
+      
+      // unrock
+      mtx.unlock();
+    } else {
+      throw std::logic_error("Didn't get the lock... this means we were called from two threads.  Baaad.");
+    }
+    return ecto::OK;
+
+  }
+  static boost::mutex mtx;
+};
+boost::mutex DontCallMeFromTwoThreads::mtx;
+
 
 struct Printer
 {
@@ -309,7 +350,6 @@ struct ParameterWatcher
 
 struct SharedPass
 {
-
   typedef boost::shared_ptr<int> ptr_t;
 
   static void declare_params(ecto::tendrils& p)
@@ -443,6 +483,8 @@ BOOST_PYTHON_MODULE(ecto_test)
   ecto::wrap<Quitter>("Quitter", "Will quit the graph on an appropriate input.");
   ecto::wrap<DontAllocateMe>("DontAllocateMe",
                              "Don't allocate me, feel free to inspect.");
+  ecto::wrap<DontCallMeFromTwoThreads>("DontCallMeFromTwoThreads",
+                             "Throws if process called concurrently from two threads.");
   ecto::wrap<NoPythonBindings>("NoPythonBindings",
                                "This uses something that is bound to python!");
   ecto::wrap<ParameterWatcher>("ParameterWatcher",

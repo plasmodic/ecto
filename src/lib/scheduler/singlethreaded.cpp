@@ -42,13 +42,30 @@ namespace ecto {
     {
       //compute ordering
       compute_stack();
-      for (size_t k = 0; k < stack.size(); ++k)
-        {
-          //need to check the return val of a process here, non zero means exit...
-          size_t retval = invoke_process(stack[k]);
-          if (retval)
-            return retval;
-        }
+      while(true) {
+        for (size_t k = 0; k < stack.size(); ++k)
+          {
+            //need to check the return val of a process here, non zero means exit...
+            size_t retval = invoke_process(stack[k]);
+            if (retval)
+              return retval;
+          }
+      }
+      return 0;
+    }
+
+    int singlethreaded::execute(unsigned j)
+    {
+      compute_stack();
+
+      for (unsigned r=0; r<j; ++r)
+        for (size_t k = 0; k < stack.size(); ++k)
+          {
+            //need to check the return val of a process here, non zero means exit...
+            size_t retval = invoke_process(stack[k]);
+            if (retval)
+              return retval;
+          }
       return 0;
     }
   }
