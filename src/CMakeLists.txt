@@ -11,4 +11,5 @@ endmacro()
 
 asio_executable(asio_sketch)
 asio_executable(asio_threadpool)
+asio_executable(asio_throwthread)
 asio_executable(graph_sketch)
