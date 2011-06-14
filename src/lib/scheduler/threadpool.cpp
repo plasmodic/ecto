@@ -86,6 +86,7 @@ namespace ecto {
         }
 
         ~runandjoin() {
+          runner.join();
           std::cout << this << " " << __PRETTY_FUNCTION__ << "\n";
         }
 
