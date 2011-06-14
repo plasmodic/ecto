@@ -145,9 +145,6 @@ namespace ecto {
           ECTO_LOG_DEBUG("%s async_wait_for_input", this);
           namespace asio = boost::asio;
 
-          // keep outer run() from returning
-          // asio::io_service::work work(context.workserv);
-
           if (inputs_ready()) {
             ECTO_LOG_DEBUG("%s inputs ready", this);
             module::ptr m = g[vd];
@@ -215,7 +212,7 @@ namespace ecto {
           return true;
         }
 
-        ~invoker() { /*ECTO_LOG_DEBUG("%s ~invoker", this);*/ }
+        ~invoker() { ECTO_LOG_DEBUG("%s ~invoker", this); }
       }; // struct invoker
 
       int execute(unsigned nthreads, impl::respawn_cb_t respawn, graph_t& graph)
@@ -249,7 +246,7 @@ namespace ecto {
         } catch (const exception& e) {
           std::cout << "main thread caught:" << boost::diagnostic_information(e) << std::endl;
           workserv.stop();
-          std::set<runandjoin::ptr>().swap(runners);
+          // std::set<runandjoin::ptr>().swap(runners);
         }
         return 0;
       }

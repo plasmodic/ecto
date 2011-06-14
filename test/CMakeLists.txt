@@ -1,7 +1,7 @@
 project(ecto_tests)
 
 ectomodule(ecto_test
-    modules/ecto_test.cpp
+  modules/ecto_test.cpp
 )
 
 
@@ -16,3 +16,4 @@ target_link_libraries(push_ups
 )
 
 add_subdirectory(scripts)
+add_subdirectory(cpp)

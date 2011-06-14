@@ -78,7 +78,7 @@ namespace ecto
      */
     template<typename T>
     tendril(const T& t, const std::string& doc) :
-      holder_(new holder<T> (t))
+      holder_(new holder<T> (t)), dirty_(false)
     {
       setDoc(doc);
     }
@@ -221,18 +221,15 @@ namespace ecto
     }
 
     //! A none type for tendril when the tendril is uninitialized.
-    struct none
-    {
-    };
+    struct none { };
 
   private:
     // ############################### NVI ####################################
     struct holder_base
     {
       typedef boost::shared_ptr<holder_base> ptr;
-      holder_base()
-      {
-      }
+
+      holder_base() { }
       holder_base& operator=(const holder_base& rhs);
       virtual ~holder_base();
       virtual const std::string& type_name() const = 0;
@@ -245,24 +242,23 @@ namespace ecto
       virtual void trigger_callback() = 0;
 
       template<typename T>
-      const T& getT() const
+      const T& 
+      getT() const
       {
         void* tval = const_cast<holder_base*> (this)->get();
         if (tval == NULL)
-          throw std::logic_error(
-                                 type_name()
-                                     + " is not safe when getting by type");
+          throw std::logic_error(type_name() + " is not safe when getting by type");
         return *static_cast<T*> (tval);
       }
+
       template<typename T>
-      T& getT()
+      T& 
+      getT()
       {
         void* tval = get();
 
         if (tval == NULL)
-          throw std::logic_error(
-                                 type_name()
-                                     + " is not safe when getting by type");
+          throw std::logic_error(type_name() + " is not safe when getting by type");
 
         return *static_cast<T*> (tval);
       }
@@ -270,6 +266,7 @@ namespace ecto
       //convenience functions for checking types
       template<typename T>
       static bool inline check(holder_base& i);
+
       template<typename T>
       static inline void checkThrow(holder_base& i) throw (std::logic_error);
     };
@@ -287,8 +284,7 @@ namespace ecto
       boost::shared_ptr<holder_base> clone() const;
       void trigger_callback()
       {
-        if (cb)
-          cb(t);
+        if (cb) cb(t);
       }
       T t;
       boost::function<void(T)> cb;
@@ -329,21 +325,17 @@ namespace ecto
   }
 
   template<typename T>
-  void tendril::holder_base::checkThrow(tendril::holder_base& i)
-                                                                 throw (std::logic_error)
+  void tendril::holder_base::checkThrow(tendril::holder_base& i) throw (std::logic_error)
   {
     if (!check<T> (i))
-      throw(std::logic_error(
-                             std::string(
-                                         i.type_name() + " is not a "
-                                             + name_of<T> ()).c_str()));
+      throw std::logic_error(std::string(i.type_name() + " is not a "
+                                         + name_of<T> ()).c_str());
   }
 
   template<typename T>
-  tendril::holder<T>::holder(const T& t) :
-    t(t)
-  {
-  }
+  tendril::holder<T>::holder(const T& t) 
+    : t(t)
+  { }
 
   template<typename T>
   const std::string& tendril::holder<T>::type_name() const
@@ -362,7 +354,7 @@ namespace ecto
   void*
   tendril::holder<T>::get()
   {
-    return &t;//.get();
+    return &t;
   }
 
   template<>
@@ -379,14 +371,12 @@ namespace ecto
     if (get_T.check())
       t = get_T();
     else
-      throw std::logic_error(
-                             "Could not convert python object to type : "
-                                 + type_name());
+      throw std::logic_error("Could not convert python object to type : "
+                             + type_name());
   }
 
   template<>
-  inline void tendril::holder<boost::python::object>::setPython(
-                                                                boost::python::object o)
+  inline void tendril::holder<boost::python::object>::setPython(boost::python::object o)
   {
     t = o;
   }
@@ -423,8 +413,7 @@ namespace ecto
   }
 
   template<>
-  inline void tendril::holder<boost::python::object>::copy_to(
-                                                              holder_base& holder) const
+  inline void tendril::holder<boost::python::object>::copy_to(holder_base& holder) const
   {
     holder.setPython(t);
   }
@@ -435,7 +424,6 @@ namespace ecto
     tendril::holder_base::ptr p(new holder<T> (t));
     return p;
   }
-
 }
 
 template<typename T>
