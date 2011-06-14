@@ -24,7 +24,7 @@ using namespace boost;
 void worker() 
 {
   static unsigned offset = 0;
-  offset += 5;
+  offset += 125;
   asio::io_service serv;
   asio::deadline_timer dt(serv);
   for (unsigned j=0; j<4; ++j)
@@ -109,6 +109,7 @@ struct prop : enable_shared_from_this<prop>
       std::cout << this << " done running from\n";
     } catch (const exception& e) {
       std::cout << "POST RETHROWER\n";
+      to.post(thrower(current_exception()));
       // post rethrower to 'to' serv
     }
     to.post(bind(&prop::joinit, this, shared_from_this()));
@@ -152,6 +153,10 @@ int main()
     }
 
   std::cout << "running tops...\n";
-  topserv.run();
+  try {
+    topserv.run();
+  } catch (const exception& e) {
+    std::cout << "SMELLS LIKE VICTORY: " << diagnostic_information(e) << "\n";
+  }
   std::cout << "exit." << std::endl;
 }
