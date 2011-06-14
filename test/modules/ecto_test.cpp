@@ -32,7 +32,7 @@
 #include <boost/format.hpp>
 #include <boost/foreach.hpp>
 #include <boost/asio.hpp>
-#include <boost/exception.hpp>
+#include <boost/exception/all.hpp>
 
 using ecto::tendrils;
 namespace ecto_test
@@ -139,7 +139,7 @@ struct DontCallMeFromTwoThreads
       mtx.unlock();
     } else {
       std::cout << this << " did NOT get the lock, I'm going to throw about this." << std::endl;
-      BOOST_THROW_EXCEPTION(std::runtime_error("boosty exception thrown, yay"));
+      BOOST_THROW_EXCEPTION(std::runtime_error("AAAAGH NO LOCK HEEEEEELP"));
       assert(false && "we should NOT be here");
       // throw std::logic_error("Didn't get the lock... this means we were called from two threads.  Baaad.");
     }

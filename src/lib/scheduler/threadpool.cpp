@@ -22,18 +22,103 @@
 
 #include <boost/spirit/home/phoenix/core.hpp>
 #include <boost/spirit/home/phoenix/operator.hpp>
-#include <boost/exception.hpp>
+#include <boost/exception/all.hpp>
 
 namespace ecto {
 
   using namespace ecto::graph;
   using boost::bind;
   using boost::ref;
+  using boost::shared_ptr;
+  using boost::thread;
+  using boost::exception;
+  using boost::exception_ptr;
 
   namespace scheduler {
+    namespace asio = boost::asio;
+
     struct threadpool::impl 
     {
       typedef boost::function<bool(unsigned)> respawn_cb_t;
+
+
+      struct propagator
+      {
+        asio::io_service &from, &to;
+        asio::io_service::work work;
+
+        propagator(asio::io_service& from_, asio::io_service& to_) 
+          : from(from_), to(to_), work(to) { }
+
+        void operator()() {
+          from.run();
+        }
+
+        template <typename Handler>
+        void post(Handler h)
+        {
+          to.post(h);
+        }
+      };
+
+      struct thrower
+      {
+        exception_ptr eptr;
+        thrower(exception_ptr eptr_) : eptr(eptr_) { }
+
+        void operator()() const
+        {
+          std::cout << "thrower is rethrowing" << std::endl;
+          rethrow_exception(eptr);
+        }
+      };
+
+
+      struct runandjoin
+      {
+        typedef shared_ptr<runandjoin> ptr;
+
+        thread runner;
+
+        runandjoin() 
+        { 
+          runner.join();
+        }
+
+        ~runandjoin() {
+          std::cout << this << " " << __PRETTY_FUNCTION__ << "\n";
+        }
+
+        void joinit() 
+        {
+          std::cout << this << " " << __PRETTY_FUNCTION__ << "\n";
+          runner.join();
+        }
+
+        template <typename Work>
+        void impl(Work w)
+        {
+          std::cout << __PRETTY_FUNCTION__ << "\n";
+          try {
+            w();
+          } catch (const boost::exception& e) {
+            std::cout << "runandjoin caught:" << diagnostic_information(e) << std::endl;
+            w.post(thrower(boost::current_exception()));
+          } catch (const std::exception& e) {
+            // std::cout << "runandjoin caught:" << diagnostic_information(e) << std::endl;
+            w.post(thrower(boost::current_exception()));
+          }
+          w.post(bind(&runandjoin::joinit, this));
+        }
+
+        template <typename Work>
+        void run(Work w)
+        {
+          std::cout << this << " " << __PRETTY_FUNCTION__ << "\n";
+          thread* newthread = new thread(bind(&runandjoin::impl<Work>, this, w));
+          newthread->swap(runner);
+        }
+      };
 
       struct invoker : boost::noncopyable
       {
@@ -46,25 +131,21 @@ namespace ecto {
         graph_t::vertex_descriptor vd;
         unsigned n_calls;
         respawn_cb_t respawn;
-        boost::mutex mtx;
-
-
 
         invoker(threadpool::impl& context_,
                 graph_t& g_, 
                 graph_t::vertex_descriptor vd_,
                 respawn_cb_t respawn_)
-          : context(context_), dt(context.serv), g(g_), vd(vd_), n_calls(0), respawn(respawn_)
+          : context(context_), dt(context.workserv), g(g_), vd(vd_), n_calls(0), respawn(respawn_)
         { }
 
         void async_wait_for_input()
         {
           ECTO_LOG_DEBUG("%s async_wait_for_input", this);
-          boost::mutex::scoped_lock lock(mtx);
           namespace asio = boost::asio;
 
           // keep outer run() from returning
-          asio::io_service::work work(context.serv);
+          // asio::io_service::work work(context.workserv);
 
           if (inputs_ready()) {
             ECTO_LOG_DEBUG("%s inputs ready", this);
@@ -74,32 +155,38 @@ namespace ecto {
                 const ecto::strand& skey = *(m->strand_);
                 boost::shared_ptr<asio::io_service::strand>& strand_p = context.strands[skey];
                 if (!strand_p) {
-                  strand_p.reset(new boost::asio::io_service::strand(context.serv));
+                  strand_p.reset(new boost::asio::io_service::strand(context.workserv));
                 }
                 strand_p->post(bind(&invoker::invoke, this));
               }
             else
               {
-                context.serv.post(bind(&invoker::invoke, this));
+                context.workserv.post(bind(&invoker::invoke, this));
               }
           } else {
             ECTO_LOG_DEBUG("%s wait", this);
             dt.expires_from_now(boost::posix_time::milliseconds(1));
             dt.wait();
-            context.serv.post(bind(&invoker::async_wait_for_input, this));
+            context.workserv.post(bind(&invoker::async_wait_for_input, this));
           }
         }
 
         void invoke()
         {
           ECTO_LOG_DEBUG("%s invoke", this);
-          boost::mutex::scoped_lock lock(mtx);
-          ecto::scheduler::invoke_process(g, vd);
+          try {
+            ecto::scheduler::invoke_process(g, vd);
+          } catch (const std::exception& e) {
+            context.mainserv.post(thrower(boost::current_exception()));
+            return;
+          } catch (const boost::exception& e) {
+            context.mainserv.post(thrower(boost::current_exception()));
+            return;
+          }
           ++n_calls;
-          if (respawn(n_calls)) 
-            {
-              context.serv.post(bind(&invoker::async_wait_for_input, this));
-            }
+          if (respawn(n_calls)) {
+            context.workserv.post(bind(&invoker::async_wait_for_input, this));
+          }
           else
             ECTO_LOG_DEBUG("n_calls (%u) reached, no respawn", n_calls);
         }
@@ -127,45 +214,15 @@ namespace ecto {
           return true;
         }
 
-        ~invoker() { ECTO_LOG_DEBUG("%s ~invoker", this); }
+        ~invoker() { /*ECTO_LOG_DEBUG("%s ~invoker", this);*/ }
       }; // struct invoker
-
-      void run_service(boost::asio::io_service& serv) 
-      {
-        try {
-          serv.run();
-        } catch (const boost::exception& e) {
-          std::cout << "CAUGHT 'ER: " << boost::diagnostic_information(e) << std::endl;
-          boost::lock_guard<boost::mutex> lock(exception_mtx);
-          eptr = boost::current_exception();
-          exception_cond.notify_all();
-        } catch (const std::exception& e) {
-          std::cout << "run_services caught: " << boost::diagnostic_information(e) << std::endl;
-          boost::lock_guard<boost::mutex> lock(exception_mtx);
-          eptr = boost::current_exception();
-          std::cout << "exception set, going to notify all now\n";
-          exception_cond.notify_all();
-        }
-      }
-
-      void threadpool_joiner(boost::thread_group& tg) 
-      {
-        std::cout << "joining the threadpool..." << std::endl;
-        tg.join_all();
-        std::cout << "joined.  notifying..." << std::endl;
-        {
-          boost::mutex::scoped_lock lock(exception_mtx);
-          eptr = boost::copy_exception(std::runtime_error("IS NO ERROR, EES JOINED, OKAY BOSS"));
-          exception_cond.notify_all();
-          std::cout << "notified\n";
-        }
-      }
 
       int execute(unsigned nthreads, impl::respawn_cb_t respawn, graph_t& graph)
       {
         namespace asio = boost::asio;
 
-        serv.reset();
+        workserv.reset();
+        mainserv.reset();
 
         graph_t::vertex_iterator begin, end;
         for (tie(begin, end) = vertices(graph);
@@ -174,36 +231,25 @@ namespace ecto {
           {
             impl::invoker::ptr ip(new impl::invoker(*this, graph, *begin, respawn));
             invokers[*begin] = ip;
-            ip->async_wait_for_input();
+            workserv.post(boost::bind(&impl::invoker::async_wait_for_input, ip));
           }
 
+        std::set<runandjoin::ptr> runners;
+        for (unsigned j=0; j<nthreads; ++j)
+          {
+            ECTO_LOG_DEBUG("%s Start thread %u", this % j);
+            runandjoin::ptr rj(new runandjoin);
+            rj->run(propagator(workserv, mainserv));
+            runners.insert(rj);
+          }
 
-        boost::thread_group tgroup;
-        { 
-          asio::io_service::work work(serv);
-
-          for (unsigned j=0; j<nthreads; ++j)
-            {
-              ECTO_LOG_DEBUG("%s Start thread %u", this % j);
-              tgroup.create_thread(bind(&impl::run_service, this, ref(serv)));
-            }
-        } // let work go out of scope...   invokers now have their own work on serv
-        boost::thread joiner(boost::bind(&impl::threadpool_joiner, this, boost::ref(tgroup))); 
-
-
-        {
-          boost::mutex::scoped_lock exceptlock(exception_mtx);
-          while (eptr != boost::exception_ptr())
-            {
-              std::cout << "waiting...\n";
-              exception_cond.wait(exceptlock);
-            }
-          std::cout << "rethrow time..." << std::endl;
-          boost::rethrow_exception(eptr);
+        try {
+          mainserv.run();
+        } catch (const exception& e) {
+          std::cout << "main thread caught:" << boost::diagnostic_information(e) << std::endl;
+          workserv.stop();
+          std::set<runandjoin::ptr>().swap(runners);
         }
-        
-        joiner.join();
-
         return 0;
       }
 
@@ -216,13 +262,11 @@ namespace ecto {
 
       typedef std::map<graph_t::vertex_descriptor, invoker::ptr> invokers_t;
       invokers_t invokers;
-      boost::asio::io_service serv;
+      boost::asio::io_service mainserv, workserv;
       boost::unordered_map<ecto::strand, 
                            boost::shared_ptr<boost::asio::io_service::strand>,
                            ecto::strand_hash> strands;
-      boost::exception_ptr eptr;
-      boost::mutex exception_mtx;
-      boost::condition_variable exception_cond;
+
     };
 
     threadpool::threadpool(plasm& p)
