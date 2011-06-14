@@ -62,11 +62,10 @@ def shouldfail():
     except Exception, e:
         print "good, python caught error", e
 
-
-
-# test_strands(10, ecto.schedulers.Singlethreaded, lambda s: s.execute(niter=5), expect=5.0)
 shouldfail()
 print "shouldfail passed"
+
+test_strands(2, ecto.schedulers.Singlethreaded, lambda s: s.execute(niter=5), expect=5.0)
 
 # test_strands(10, ecto.schedulers.Threadpool, lambda s: s.execute(nthreads=5, niter=5), expect=5.0)
 #sched = ecto.schedulers.Threadpool(plasm)
