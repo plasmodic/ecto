@@ -10,3 +10,6 @@ target_link_libraries(ecto-test
   ${GTEST_LIBRARIES}
   ${ECTO_DEP_LIBS}
   )
+
+add_test(gtest_units ${EXECUTABLE_OUTPUT_PATH}/ecto-test)
+
