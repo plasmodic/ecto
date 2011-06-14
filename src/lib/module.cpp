@@ -28,20 +28,14 @@ namespace ecto
 
   ReturnCode module::process()
   {
-    try
+    //trigger all parameter change callbacks...
+    tendrils::iterator begin = parameters.begin(), end = parameters.end();
+    while (begin != end)
       {
-        //trigger all parameter change callbacks...
-        tendrils::iterator begin = parameters.begin(), end = parameters.end();
-        while (begin != end)
-          {
-            begin->second.trigger_callback();
-            ++begin;
-          }
-        return dispatch_process(inputs, outputs);
-      } catch (std::exception& e)
-      {
-        throw std::runtime_error(name() + " threw an exception :\n" + e.what());
+        begin->second.trigger_callback();
+        ++begin;
       }
+    return dispatch_process(inputs, outputs);
   }
 
   std::string module::type() const

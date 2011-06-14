@@ -22,6 +22,7 @@
 
 #include <boost/spirit/home/phoenix/core.hpp>
 #include <boost/spirit/home/phoenix/operator.hpp>
+#include <boost/exception.hpp>
 
 namespace ecto {
 
@@ -129,6 +130,37 @@ namespace ecto {
         ~invoker() { ECTO_LOG_DEBUG("%s ~invoker", this); }
       }; // struct invoker
 
+      void run_service(boost::asio::io_service& serv) 
+      {
+        try {
+          serv.run();
+        } catch (const boost::exception& e) {
+          std::cout << "CAUGHT 'ER: " << boost::diagnostic_information(e) << std::endl;
+          boost::lock_guard<boost::mutex> lock(exception_mtx);
+          eptr = boost::current_exception();
+          exception_cond.notify_all();
+        } catch (const std::exception& e) {
+          std::cout << "run_services caught: " << boost::diagnostic_information(e) << std::endl;
+          boost::lock_guard<boost::mutex> lock(exception_mtx);
+          eptr = boost::current_exception();
+          std::cout << "exception set, going to notify all now\n";
+          exception_cond.notify_all();
+        }
+      }
+
+      void threadpool_joiner(boost::thread_group& tg) 
+      {
+        std::cout << "joining the threadpool..." << std::endl;
+        tg.join_all();
+        std::cout << "joined.  notifying..." << std::endl;
+        {
+          boost::mutex::scoped_lock lock(exception_mtx);
+          eptr = boost::copy_exception(std::runtime_error("IS NO ERROR, EES JOINED, OKAY BOSS"));
+          exception_cond.notify_all();
+          std::cout << "notified\n";
+        }
+      }
+
       int execute(unsigned nthreads, impl::respawn_cb_t respawn, graph_t& graph)
       {
         namespace asio = boost::asio;
@@ -144,20 +176,34 @@ namespace ecto {
             invokers[*begin] = ip;
             ip->async_wait_for_input();
           }
-        boost::thread_group tgroup;
 
+
+        boost::thread_group tgroup;
         { 
           asio::io_service::work work(serv);
 
           for (unsigned j=0; j<nthreads; ++j)
             {
               ECTO_LOG_DEBUG("%s Start thread %u", this % j);
-              tgroup.create_thread(bind(&asio::io_service::run, 
-                                        ref(serv)));
+              tgroup.create_thread(bind(&impl::run_service, this, ref(serv)));
             }
         } // let work go out of scope...   invokers now have their own work on serv
+        boost::thread joiner(boost::bind(&impl::threadpool_joiner, this, boost::ref(tgroup))); 
 
-        tgroup.join_all();
+
+        {
+          boost::mutex::scoped_lock exceptlock(exception_mtx);
+          while (eptr != boost::exception_ptr())
+            {
+              std::cout << "waiting...\n";
+              exception_cond.wait(exceptlock);
+            }
+          std::cout << "rethrow time..." << std::endl;
+          boost::rethrow_exception(eptr);
+        }
+        
+        joiner.join();
+
         return 0;
       }
 
@@ -174,6 +220,9 @@ namespace ecto {
       boost::unordered_map<ecto::strand, 
                            boost::shared_ptr<boost::asio::io_service::strand>,
                            ecto::strand_hash> strands;
+      boost::exception_ptr eptr;
+      boost::mutex exception_mtx;
+      boost::condition_variable exception_cond;
     };
 
     threadpool::threadpool(plasm& p)

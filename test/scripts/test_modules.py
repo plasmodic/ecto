@@ -64,9 +64,15 @@ def type_and_instance_names():
     print "m2.type_name =", m2.type_name() 
     assert m2.type_name() == "ecto_test::Generate<double>"
     
-
+def not_allocable():
+    try:
+        d = ecto_test.DontAllocateMe()
+        assert False, "that should have thrown"
+    except:
+        print "threw, okay"
 
 def test_modules_wrong_args():
+    not_allocable()
     do_fail(noarg)
     g = ecto_test.Generate()
     do_fail(wrong_type,g)

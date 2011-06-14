@@ -32,6 +32,7 @@
 #include <boost/format.hpp>
 #include <boost/foreach.hpp>
 #include <boost/asio.hpp>
+#include <boost/exception.hpp>
 
 using ecto::tendrils;
 namespace ecto_test
@@ -101,6 +102,7 @@ struct DontAllocateMe
 
   DontAllocateMe()
   {
+    std::cout << "Nuh-uh... I'm gonna throw now." << std::endl;
     throw std::logic_error("I shouldn't be allocated");
   }
 };
@@ -122,7 +124,7 @@ struct DontCallMeFromTwoThreads
     // try to rock
     if (mtx.try_lock()) {
       // we got the rock... i.e. we are rocking
-
+      std::cout << this << " got the lock." << std::endl;
       // wait a bit so's we can be sure there will be collisions
       dt.expires_from_now(boost::posix_time::milliseconds(250));
       dt.wait();
@@ -133,9 +135,13 @@ struct DontCallMeFromTwoThreads
       outputs.get<double>("out") = value;
       
       // unrock
+      std::cout << this << " done with the lock." << std::endl;
       mtx.unlock();
     } else {
-      throw std::logic_error("Didn't get the lock... this means we were called from two threads.  Baaad.");
+      std::cout << this << " did NOT get the lock, I'm going to throw about this." << std::endl;
+      BOOST_THROW_EXCEPTION(std::runtime_error("boosty exception thrown, yay"));
+      assert(false && "we should NOT be here");
+      // throw std::logic_error("Didn't get the lock... this means we were called from two threads.  Baaad.");
     }
     return ecto::OK;
 

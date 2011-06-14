@@ -2,18 +2,18 @@
 import ecto
 import ecto_test
 
-s1 = ecto.Strand()
-s2 = s1
-s3 = ecto.Strand()
-
-print "s1.id ==", s1.id
-print "s2.id ==", s2.id
-print "s3.id ==", s3.id
-assert s1.id == s2.id
-assert s3.id != s2.id
-assert s3.id != s1.id
-
 def test_strands(nlevels, SchedType, execfn, expect):
+    s1 = ecto.Strand()
+    s2 = s1
+    s3 = ecto.Strand()
+    
+    print "s1.id ==", s1.id
+    print "s2.id ==", s2.id
+    print "s3.id ==", s3.id
+    assert s1.id == s2.id
+    assert s3.id != s2.id
+    assert s3.id != s1.id
+    
     plasm = ecto.Plasm()
 
     gen = ecto_test.Generate(step=1.0, start=1.0)
@@ -41,10 +41,34 @@ def test_strands(nlevels, SchedType, execfn, expect):
     print "result=", result
     assert(result == expect)
 
-if __name__ == '__main__':
-    # test_strands(10, ecto.schedulers.Singlethreaded, lambda s: s.execute(niter=5), expect=5.0)
+def shouldfail():
+    plasm = ecto.Plasm()
 
-    test_strands(10, ecto.schedulers.Threadpool, lambda s: s.execute(nthreads=5, niter=5), expect=5.0)
-    #sched = ecto.schedulers.Threadpool(plasm)
-    #sched.execute(nthreads=int(nlevels), niter=5)
+    gen = ecto_test.Generate(step=1.0, start=1.0)
+    nc1 = ecto_test.DontCallMeFromTwoThreads()
+    plasm.connect(gen, "out", nc1, "in")
+
+    nc2 = ecto_test.DontCallMeFromTwoThreads()
+    plasm.connect(nc1, "out", nc2, "in")
+
+    printer = ecto_test.Printer()
+    plasm.connect(nc2, "out", printer, "in")
+    
+    sched = ecto.schedulers.Threadpool(plasm)
+    try:
+        print "about to execute... this should throw"
+        sched.execute(nthreads=5, niter=2)
+        assert False, "that should have thrown"
+    except Exception, e:
+        print "good, python caught error", e
+
+
+
+# test_strands(10, ecto.schedulers.Singlethreaded, lambda s: s.execute(niter=5), expect=5.0)
+shouldfail()
+print "shouldfail passed"
+
+# test_strands(10, ecto.schedulers.Threadpool, lambda s: s.execute(nthreads=5, niter=5), expect=5.0)
+#sched = ecto.schedulers.Threadpool(plasm)
+#sched.execute(nthreads=int(nlevels), niter=5)
 
