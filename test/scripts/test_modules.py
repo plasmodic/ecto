@@ -54,7 +54,7 @@ def type_and_instance_names():
     m = ecto_test.Generate()
     name = m.name()
     print "name is:", name
-    assert name.startswith("ecto_test::Generate<double> @ ")
+    assert name.startswith("ecto_test::Generate<double>")
 
     t = m.type_name()
     print "type is:", t
