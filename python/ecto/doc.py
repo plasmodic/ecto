@@ -24,27 +24,7 @@ def print_tendrils(tendril, n):
         print  ""
 
 def print_module_doc(m):
-    print m.name(), "(ecto::module)"
-    print "================================="
-    print ""
-    print m.doc()
-    print ""
-    if len(m.params):
-        print "params"
-        print "---------------------------------"
-        print ""
-        print_tendrils(m.params,4)
-    if len(m.inputs):
-        print "inputs"
-        print "---------------------------------"
-        print ""
-        print_tendrils(m.inputs,4)
-    if len(m.outputs):
-        print "outputs"
-        print "---------------------------------"
-        print ""
-        print_tendrils(m.outputs,4)
-    print ""
+    print m.__doc__
     
 
 class PlasmDotView(xdot.DotWindow):
@@ -56,16 +36,10 @@ def list_ecto_module(pymodule):
     l = []
     for x in dir(pymodule):
         mod = getattr(pymodule,x)
-        #if ismodule(mod):
-        #    list_ecto_module(mod)
         if inspect.isclass(mod) and issubclass(mod,ecto._module_base):
-            #try:
                 m = mod.inspect((),{})
                 print_module_doc(m)
                 l.append(m)
-            #except Exception,e:
-            #    pass
-                #print e
     return l
     
 def view_plasm(plasm):

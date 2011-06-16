@@ -93,8 +93,8 @@ namespace ecto
 
     if (bp::len(args) == 0)
       {
-        // generate default name == type + address
-        std::string defaultname = str(boost::format("%s @ %p") % m->type() % m);
+        // generate default name == type
+        std::string defaultname = str(boost::format("%s") % m->type());
         m->name(defaultname);
       }
     else 
@@ -134,6 +134,8 @@ namespace ecto
   std::string module_doc(std::string doc)
   {
     ecto::module::ptr m = ecto::inspect_module<T>();
+    std::string defaultname = str(boost::format("%s") % m->type());
+    m->name(defaultname);
     return m->gen_doc(doc);
   }
 

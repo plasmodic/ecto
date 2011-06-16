@@ -35,8 +35,15 @@ namespace ecto
         begin->second.trigger_callback();
         ++begin;
       }
-    return dispatch_process(inputs, outputs);
-  }
+
+    try
+      {
+        return dispatch_process(inputs, outputs);
+      } catch (std::exception& e)
+      {
+        throw std::runtime_error("Module " + name() + " threw\n" + e.what());
+      }
+    }
 
   std::string module::type() const
   {
@@ -62,7 +69,7 @@ namespace ecto
   {
     std::stringstream ss;
     ss << name() << " (ecto::module)\n";
-    ss << "===============================\n";
+    ss << "=============================================================================================\n";
     ss << "\n" << doc << "\n\n";
     parameters.print_doc(ss, "Parameters");
     inputs.print_doc(ss, "Inputs");
