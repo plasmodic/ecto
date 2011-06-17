@@ -36,7 +36,7 @@ struct modwrap: module, bp::wrapper<module>
       declare_io(boost::ref(params), boost::ref(inputs), boost::ref(outputs));
   }
 
-  void dispatch_configure(tendrils& params)
+  void dispatch_configure(tendrils& params,tendrils& inputs, tendrils& outputs)
    {
      SHOW();
      if (bp::override config = this->get_override("configure"))
@@ -119,6 +119,7 @@ void wrapModule()
   m_base.def("type", &module::type);
   m_base.def("name", (std::string (module::*)() const) &module::name);
   m_base.def("doc", &modwrap::doc);
+  m_base.def("gen_doc", &module::gen_doc);
 }
 
 }

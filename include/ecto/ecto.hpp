@@ -122,7 +122,7 @@ namespace ecto
           {
             std::string valstring =
               bp::extract<std::string>(value.attr("__repr__")());
-            m->parameters.at(keystring).set(value);
+            m->parameters.at(keystring)->set(value);
           }
       }
     m->declare_io();

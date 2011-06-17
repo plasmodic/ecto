@@ -41,7 +41,7 @@ void str_cb_validated(std::string s)
   s_validated_ = s;
 }
 
-void configure(tendrils& params)
+void configure(tendrils& params, tendrils& inputs, tendrils& outputs)
 {
   params.register_callback(boost::bind(reconfigure, this,_1)); //global parameter change callback
   value_ = params.get<float>("value");

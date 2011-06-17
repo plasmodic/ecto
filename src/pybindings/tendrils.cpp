@@ -20,7 +20,7 @@ namespace ecto
 
       bp::object getTendril(tendrils& t, const std::string& name)
       {
-        return t[name].extract();
+        return t[name]->extract();
       }
 
       std::string strTendril(const tendrils& t)
@@ -28,20 +28,25 @@ namespace ecto
         std::string s = "tendrils:\n";
         for (tendrils::const_iterator iter = t.begin(), end = t.end(); iter != end; ++iter)
         {
-          s += "    " + iter->first + " [" + iter->second.type_name() + "]\n";
+          s += "    " + iter->first + " [" + iter->second->type_name() + "]\n";
         }
         return s;
       }
 
       bp::object tendril_get(const tendrils& ts, const std::string& name)
       {
-        const tendril& t = ts.at(name);
+        const tendril& t = *ts.at(name);
         return t.extract();
       }
 
       void tendril_set(tendrils& ts, const std::string& name, bp::object obj)
       {
-        ts.at(name).set(obj);
+        ts.at(name)->set(obj);
+      }
+
+      tendril::ptr tendril_at(tendrils& ts, const std::string& name)
+      {
+        return ts.at(name);
       }
     }
 
@@ -50,11 +55,11 @@ namespace ecto
       bp::class_<tendrils, boost::shared_ptr<tendrils>, boost::noncopyable>("Tendrils")
         .def(bp::std_map_indexing_suite<tendrils, false>())
         .def("declare", &setTendril)
-        //.def("set", &setTendril)
         .def("get", &getTendril)
         .def("__str__", &strTendril)
         .def("__getattr__", &tendril_get)
         .def("__setattr__", &tendril_set)
+        //.def("__getitem__", &tendril_at)
         ;
     }
   }

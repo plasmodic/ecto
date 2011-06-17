@@ -24,7 +24,7 @@ def test_doc():
     #ecto.view_plasm(plasm)
 def test_inspection():
     ecto.list_ecto_module(ecto_test)
-    ecto.list_ecto_module(pyecto)
+    print ecto.list_ecto_module(pyecto)
 
 if __name__ == '__main__':
     test_doc()

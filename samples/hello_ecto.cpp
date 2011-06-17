@@ -33,63 +33,64 @@
 namespace hello_ecto
 {
 
-using ecto::tendrils;
+  using ecto::tendrils;
 
-/* BOILER_PLATE_MODULE
-struct MyModule
-{
-  static void declare_params(tendrils& params);
-  static void declare_io(const tendrils& params, tendrils& in, tendrils& out);
-  void configure(tendrils& params);
-  int process(const tendrils& in, tendrils& out);
-  void destroy();
-};
-*/
+  /* BOILER_PLATE_MODULE
+   struct MyModule
+   {
+   static void declare_params(tendrils& params);
+   static void declare_io(const tendrils& params, tendrils& in, tendrils& out);
+   void configure(tendrils& params, tendrils& inputs, tendrils& outputs);
+   int process(const tendrils& in, tendrils& out);
+   void destroy();
+   };
+   */
 
-struct Printer
-{
-  static void declare_params(tendrils& params)
+  struct Printer
   {
-    params.declare<std::string> ("str", "The default string to print", "hello");
-  }
+    static void declare_params(tendrils& params)
+    {
+      params.declare<std::string> ("str", "The default string to print", "hello");
+    }
 
-  static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
-  {
-    in.declare<std::string> ("str", "The string to print.", parms.get<std::string> ("str"));
-  }
+    static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
+    {
+      in.declare<std::string> ("str", "The string to print.", parms.get<std::string> ("str"));
+    }
 
-  Printer(): str_()
-  {
-  }
-  
-  void configure(tendrils& params)
-  {
-    str_ = params.get<std::string> ("str");
-  }
+    Printer() :
+      str_()
+    {
+    }
 
-  int process(const tendrils& in, tendrils& /*out*/)
-  {
-    std::cout << in.get<std::string> ("str") << std::endl;
-    return 0;
-  }
-  std::string str_;
-};
+    void configure(tendrils& params, tendrils& inputs, tendrils& outputs)
+    {
+      str_ = params.get<std::string> ("str");
+    }
 
-struct Reader
-{
-  static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
-  {
-    out.declare<std::string> ("output", "Output from standard in");
-  }
+    int process(const tendrils& in, tendrils& /*out*/)
+    {
+      std::cout << in.get<std::string> ("str") << std::endl;
+      return 0;
+    }
+    std::string str_;
+  };
 
-  int process(const tendrils& in, tendrils& out)
+  struct Reader
   {
-    std::string s;
-    std::cin >> s;
-    out.get<std::string> ("output") = s;
-    return ecto::OK;
-  }
-};
+    static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
+    {
+      out.declare<std::string> ("output", "Output from standard in");
+    }
+
+    int process(const tendrils& in, tendrils& out)
+    {
+      std::string s;
+      std::cin >> s;
+      out.get<std::string> ("output") = s;
+      return ecto::OK;
+    }
+  };
 
 }
 

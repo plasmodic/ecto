@@ -50,7 +50,7 @@ namespace ecto
                  std::string input)
     {
       //throw if the types are bad...
-      to->inputs[input].enforce_compatible_type(from->outputs[output]);
+      to->inputs.at(input)->enforce_compatible_type(*from->outputs.at(output));
 
       graph_t::vertex_descriptor fromv = insert_module(from), tov =
           insert_module(to);

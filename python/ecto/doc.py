@@ -24,6 +24,8 @@ def print_tendrils(tendril, n):
         print  ""
 
 def print_module_doc(m):
+    if m.__doc__ is None :
+       m.__doc__ = m.gen_doc("TODO: docstr")
     print m.__doc__
     
 

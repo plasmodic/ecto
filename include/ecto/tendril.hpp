@@ -30,6 +30,7 @@
 #include <boost/python.hpp>
 #include <boost/python/type_id.hpp>
 #include <boost/shared_ptr.hpp>
+#include <boost/weak_ptr.hpp>
 #include <boost/function.hpp>
 #include <boost/bind.hpp>
 
@@ -54,6 +55,8 @@ namespace ecto
   class tendril
   {
   public:
+    typedef boost::shared_ptr<tendril> ptr;
+    typedef boost::shared_ptr<const tendril> const_ptr;
     /**
      * \brief default constructor, creates a tendril that is initialized with the
      * tendril::none type.
@@ -119,9 +122,6 @@ namespace ecto
     {
       return doc_;
     }
-
-    //FIXME add properties, min_, max_, cb_, etc...
-    //properties operator();
 
     /**
      * \brief The doc for this tendril is runtime defined, so you may want to update it.
@@ -316,6 +316,40 @@ namespace ecto
       dirty_ = false;
     }
 
+  };
+
+  template<typename T>
+  struct spore
+  {
+    spore(){}
+    spore(tendril::ptr t) :
+      tendril_(t)
+    {
+      t->enforce_type<T> ();
+    }
+    T* operator->()
+    {
+      return *tendril_.lock()->get<T> ();
+    }
+    const T* operator->() const
+    {
+      return *tendril_.lock()->get<T> ();
+    }
+    const T& operator*() const
+    {
+      return tendril_.lock()->get<T> ();
+    }
+    T& operator*()
+    {
+      return tendril_.lock()->get<T> ();
+    }
+    spore<T>& set_callback(boost::function<void(T)> cb)
+    {
+      tendril_.lock()->set_callback(cb);
+      return *this;
+    }
+
+    boost::weak_ptr<tendril> tendril_;
   };
 
   template<typename T>

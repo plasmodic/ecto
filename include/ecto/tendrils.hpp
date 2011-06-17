@@ -41,34 +41,34 @@ namespace ecto
 /**
  * \brief The tendrils are a collection for the ecto::tendril class, addressable by a string key.
  */
-class tendrils: public std::map<std::string, tendril>, boost::noncopyable
+class tendrils: public std::map<std::string, tendril::ptr>, boost::noncopyable
 {
 public:
 
   template<typename T>
-  tendril& declare(const std::string& name, const std::string& doc = "TODO: doc str me.", const T& default_val = T())
+  tendril::ptr declare(const std::string& name, const std::string& doc = "TODO: doc str me.", const T& default_val = T())
   {
     map_t::iterator it = find(name);
     //if there are no exiting tendrils by the given name,
     //just add it.
     if (it == end())
       {
-        insert(std::make_pair(name, tendril(default_val, doc)));
+        insert(std::make_pair(name, tendril::ptr(new tendril(default_val, doc))));
       }
     else // we want to just return the existing tendril (so that modules preconnected don't get messed up)...
       {
         //there is already an existing tendril with the given name
         //check if the types are the same
-        if (!it->second.is_type<T> ())
+        if (!it->second->is_type<T> ())
           {
             std::stringstream ss;
             ss << "Your types aren't the same, this could lead to very undefined behavior...";
-            ss << " old type = " << it->second.type_name() << " new type = " << name_of<T> () << std::endl;
+            ss << " old type = " << it->second->type_name() << " new type = " << name_of<T> () << std::endl;
             throw std::logic_error(ss.str());
           }
         else
           {
-            it->second = tendril(default_val, doc);
+            it->second = tendril::ptr(new tendril(default_val, doc));
           }
       }
     return at(name);
@@ -84,7 +84,7 @@ public:
   template<typename T>
   const T& get(const std::string& name) const
   {
-    return at(name).get<T> ();
+    return at(name)->get<T> ();
   }
 
   /**
@@ -96,7 +96,7 @@ public:
   template<typename T>
   T& get(const std::string& name)
   {
-    return at(name).get<T> ();
+    return at(name)->get<T> ();
   }
 
   /**
@@ -104,13 +104,13 @@ public:
    * @param name The key for the desired tendril.
    * @return A reference to the tendril.
    */
-  const tendril& at(const std::string& name) const;
+  tendril::const_ptr at(const std::string& name) const;
   /**
    * \brief Grabs the tendril at the key.
    * @param name The key for the desired tendril.
    * @return A reference to the tendril.
    */
-  tendril& at(const std::string& name);
+  tendril::ptr at(const std::string& name);
 
   /**
    * \brief Print the tendrils documentation string, in rst format.
@@ -120,7 +120,7 @@ public:
   void print_doc(std::ostream& out, const std::string& tendrils_name) const;
 
 private:
-  typedef std::map<std::string, tendril> map_t;
+  typedef std::map<std::string, tendril::ptr> map_t;
   mutable boost::mutex mtx;
 };
 }

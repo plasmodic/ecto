@@ -23,7 +23,7 @@ namespace ecto
 
   void module::configure()
   {
-    dispatch_configure(parameters);
+    dispatch_configure(parameters,inputs,outputs);
   }
 
   ReturnCode module::process()
@@ -32,7 +32,7 @@ namespace ecto
     tendrils::iterator begin = parameters.begin(), end = parameters.end();
     while (begin != end)
       {
-        begin->second.trigger_callback();
+        begin->second->trigger_callback();
         ++begin;
       }
 
@@ -57,7 +57,7 @@ namespace ecto
 
   std::string module::name() const
   {
-    return instance_name;
+    return instance_name.size() ? instance_name : dispatch_name();
   }
 
   void module::destroy()
@@ -69,7 +69,7 @@ namespace ecto
   {
     std::stringstream ss;
     ss << name() << " (ecto::module)\n";
-    ss << "=============================================================================================\n";
+    ss << "================================================================================\n";
     ss << "\n" << doc << "\n\n";
     parameters.print_doc(ss, "Parameters");
     inputs.print_doc(ss, "Inputs");
