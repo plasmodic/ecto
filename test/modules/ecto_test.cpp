@@ -365,6 +365,7 @@ namespace ecto_test
       SHOW();
       std::cout << "my value: " << *value_ << std::endl;
       std::cout << "new value: " << v << std::endl;
+      if(*value_ != v) throw std::runtime_error("The new value should equal the old value!");
     }
 
     void configure(tendrils& parms, tendrils& inputs, tendrils& outputs)
@@ -510,6 +511,7 @@ BOOST_PYTHON_MODULE(ecto_test)
   ecto::wrap<Gather<int> >("Gather", "Gather a scattered value...");
   ecto::wrap<Gather<double> >("Gather_double", "Gather a scattered value...");
   ecto::wrap<Quitter>("Quitter", "Will quit the graph on an appropriate input.");
+  ecto::wrap<HandleHolder>("HandleHolder","Holds on to handles...");
   ecto::wrap<DontAllocateMe>("DontAllocateMe", "Don't allocate me, feel free to inspect.");
   ecto::wrap<DontCallMeFromTwoThreads>("DontCallMeFromTwoThreads",
                                        "Throws if process called concurrently from two threads.");
