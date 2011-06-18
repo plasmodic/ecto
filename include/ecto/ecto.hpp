@@ -134,7 +134,7 @@ namespace ecto
   std::string module_doc(std::string doc)
   {
     ecto::module::ptr m = ecto::inspect_module<T>();
-    std::string defaultname = str(boost::format("%s") % m->type());
+    std::string defaultname = boost::str(boost::format("%s") % m->type());
     m->name(defaultname);
     return m->gen_doc(doc);
   }
