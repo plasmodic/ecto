@@ -40,7 +40,6 @@ namespace ecto
 
     static void plasm_connect_list(plasm& p, bp::list connections)
     {
-      SHOW();
       bp::stl_input_iterator<bp::tuple> begin(connections), end;
       while (begin != end)
       {
@@ -54,7 +53,6 @@ namespace ecto
     }
     static int plasm_connect_args(boost::python::tuple args, bp::dict kw)
     {
-      SHOW();
       int i = 0;
       plasm::ptr p = bp::extract<plasm::ptr>(args[i++]);
       for (int end = bp::len(args); i < end; i++)
@@ -95,12 +93,12 @@ namespace ecto
       p.def("disconnect", &plasm::disconnect,
             bp::args("from_module", "output_name", "to_module", "intput_name"));
       p.def("connect", &plasm::connect,
-                 bp::args("from_module", "output_name", "to_module", "intput_name"));
+            bp::args("from_module", "output_name", "to_module", "intput_name"));
       p.def(
           "execute",
           &plasm::execute,
           execute_overloads(
-              bp::args("niters"),
+              bp::args("niter"),
               "Executes the graph in topological order. Every node will be executed."));
 
       p.def("viz", wrapViz,
