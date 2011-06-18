@@ -31,17 +31,17 @@ def test_modules_spec():
     try:
         x = g[2.0]
         assert False, "should have thrown"
-    except Exception, e:
+    except TypeError, e:
         print e
     try:
         x = g["out",2.0]
         assert False, "should have thrown"
-    except Exception, e:
+    except RuntimeError, e:
         print e
     try:
         x = g["out","and","about"]
         assert False, "should have thrown"
-    except Exception, e:
+    except RuntimeError, e:
         print e
     
     scatter = ecto_test.Scatter(n=3, x=3)
@@ -62,7 +62,7 @@ def test_modules_spec():
     try:
         scatter[1:-1]
         assert False, "[1:-1] should not work..."
-    except Exception,e:
+    except RuntimeError,e:
         print e
         
 
@@ -112,11 +112,7 @@ def type_and_instance_names():
     assert m2.type_name() == "ecto_test::Generate<double>"
     
 def not_allocable():
-    try:
-        d = ecto_test.DontAllocateMe()
-        assert False, "that should have thrown"
-    except:
-        print "threw, okay"
+    d = ecto_test.DontAllocateMe()
 
 def test_modules_wrong_args():
     not_allocable()
