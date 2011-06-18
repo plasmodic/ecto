@@ -10,6 +10,10 @@ def test_plasm():
     gather2 = ecto_test.Gather(n=5)
     plasm = ecto.Plasm()
     
+    p = ecto.Plasm()
+    #test the old syntax.
+    p.connect(scatter, "out_0000", gather, "in_0000")
+    
     plasm.connect(
                   scatter[:] >> gather[:],
                   scatter2[:] >> gather2[:]
@@ -34,7 +38,6 @@ def test_plasm():
     
     plasm2 = ecto.Plasm()
     plasm2.connect(l)
-    ecto.view_plasm(plasm2)
     assert plasm.viz() == plasm2.viz()
     assert l == plasm2.connections()
     plasm2.execute()
