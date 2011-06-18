@@ -56,6 +56,14 @@ def test_modules_spec():
     result = gather.outputs.out
     print result
     assert(result == 9) # 3 * 3
+    
+    connections = scatter[:] >> gather[:]
+    assert(len(connections) == 3)
+    try:
+        scatter[1:-1]
+        assert False, "[1:-1] should not work..."
+    except Exception,e:
+        print e
         
 
 def noarg(x):
