@@ -28,7 +28,18 @@ def test_plasm():
     result2 = gather2.outputs.out
     print result2
     assert(result2 == 50) # 5 * 10
-
+    
+    l = plasm.connections()
+    print l
+    
+    plasm2 = ecto.Plasm()
+    plasm2.connect(l)
+    ecto.view_plasm(plasm2)
+    assert plasm.viz() == plasm2.viz()
+    assert l == plasm2.connections()
+    plasm2.execute()
+    assert gather2.outputs.out == 50
+    
 def bad_syntax_errors():
     scatter = ecto_test.Scatter(n=3, x=3)
     scatter2 = ecto_test.Scatter(n=5, x=10)
