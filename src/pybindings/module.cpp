@@ -4,6 +4,7 @@
 #include <boost/python.hpp>
 #include <boost/python/raw_function.hpp>
 #include <boost/python/iterator.hpp>
+#include <boost/python/slice.hpp>
 #include <boost/python/stl_iterator.hpp>
 
 #include <ecto/python/std_map_indexing_suite.hpp>
@@ -142,10 +143,11 @@ namespace ecto
         int size = bp::len(keys);
         for (int i = 0; i < size; i++)
         {
-          str +="'";
+          str += "'";
           str += bp::str(keys[i]);
-          str +="'";
-          if(i < size-1) str +=',';
+          str += "'";
+          if (i < size - 1)
+            str += ',';
         }
         str += "]";
 
@@ -164,15 +166,44 @@ namespace ecto
     }
 
     TendrilSpecification getitem_list(module::ptr mod, bp::list keys)
-       {
+    {
       bp::tuple t(keys);
-         return TendrilSpecification(mod, t);
-       }
+      return TendrilSpecification(mod, t);
+    }
 
-    bp::list rshift_spec(const TendrilSpecification& lhs,
-                         const TendrilSpecification& rhs)
+    TendrilSpecification getitem_slice(module::ptr mod, bp::slice s)
+    {
+
+      if (s == bp::slice())
+      {
+        return TendrilSpecification(mod, bp::tuple());
+      }
+      else
+      {
+        throw std::runtime_error("Slice is only valid if its the [:] form...");
+      }
+    }
+    TendrilSpecification expand(module::ptr mod, const tendrils& t)
+    {
+      bp::list x;
+      BOOST_FOREACH(const tendrils::value_type& pair, t)
+      {
+        x.append(bp::str(pair.first));
+      }
+      return TendrilSpecification(mod, bp::tuple(x));
+    }
+    bp::list rshift_spec(TendrilSpecification lhs,
+                         TendrilSpecification rhs)
     {
       bp::list result;
+      if(lhs.keys_str.size() == 0)
+      {
+        lhs = expand(lhs.mod,lhs.mod->outputs);
+      }
+      if(rhs.keys_str.size() == 0)
+      {
+        rhs = expand(rhs.mod,rhs.mod->inputs);
+      }
       //the spec must be the same size...
       if (lhs.keys_str.size() != rhs.keys_str.size())
       {
@@ -220,7 +251,7 @@ namespace ecto
       m_base.def("__getitem__", getitem_str);
       m_base.def("__getitem__", getitem_tuple);
       m_base.def("__getitem__", getitem_list);
-
+      m_base.def("__getitem__", getitem_slice);
 
       bp::class_<TendrilSpecification> ts("TendrilSpecification");
       ts.def_readwrite("module", &TendrilSpecification::mod);

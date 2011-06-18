@@ -94,7 +94,7 @@ namespace ecto
     if (bp::len(args) == 0)
       {
         // generate default name == type
-        std::string defaultname = str(boost::format("%s") % m->type());
+        std::string defaultname = boost::str(boost::format("%s") % m->type());
         m->name(defaultname);
       }
     else 

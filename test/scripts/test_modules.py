@@ -51,9 +51,7 @@ def test_modules_spec():
     print a,b
     print a >> b
     plasm = ecto.Plasm()
-    for x in a >> b:
-        print "connecting %s:%s to %s:%s"%x
-        plasm.connect(*x)
+    plasm.connect(a>>b)
     plasm.execute(1)
     result = gather.outputs.out
     print result
