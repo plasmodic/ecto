@@ -18,6 +18,47 @@ def test_modules_01():
     for out in s.outputs:
         print out[1].val
         assert(out[1].val == 3)
+def test_modules_spec():
+    g = ecto_test.Generate(start=0, step=2)
+    x = g["out"]
+    assert x.keys[0] == "out"
+    print x
+    x = g["out","out"]
+    assert x.keys[0] == "out"
+    assert x.keys[1] == "out"
+    assert x.keys[:] == ("out","out")
+    print x
+    try:
+        x = g[2.0]
+        assert False, "should have thrown"
+    except Exception, e:
+        print e
+    try:
+        x = g["out",2.0]
+        assert False, "should have thrown"
+    except Exception, e:
+        print e
+    try:
+        x = g["out","and","about"]
+        assert False, "should have thrown"
+    except Exception, e:
+        print e
+    
+    scatter = ecto_test.Scatter(n=3, x=3)
+    gather = ecto_test.Gather(n=3)
+    a = scatter[scatter.outputs.keys()]
+    b = gather[gather.inputs.keys()]
+    print a,b
+    print a >> b
+    plasm = ecto.Plasm()
+    for x in a >> b:
+        print "connecting %s:%s to %s:%s"%x
+        plasm.connect(*x)
+    plasm.execute(1)
+    result = gather.outputs.out
+    print result
+    assert(result == 9) # 3 * 3
+        
 
 def noarg(x):
     ecto_test.Generate(start=0, n=3, step=2)
@@ -86,3 +127,4 @@ def test_modules_wrong_args():
 if __name__ == '__main__':
     test_modules_01()
     test_modules_wrong_args()
+    test_modules_spec()
