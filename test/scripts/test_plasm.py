@@ -56,7 +56,7 @@ def bad_syntax_errors():
                   scatter[:] >> gather2[:]
                   )
         assert False, "Should not work as there is a size mismatch..."
-    except Exception, e:
+    except RuntimeError, e:
         print e
 
 if __name__ == '__main__':

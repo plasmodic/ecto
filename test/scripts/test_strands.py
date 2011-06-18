@@ -57,9 +57,9 @@ def shouldfail():
     sched = ecto.schedulers.Threadpool(plasm)
     try:
         print "about to execute... this should throw"
-        sched.execute(nthreads=5, niter=2)
+        sched.execute(nthreads=10, niter=10)
         assert False, "that should have thrown"
-    except Exception, e:
+    except RuntimeError, e:
         print "good, python caught error", e
 
 shouldfail()
