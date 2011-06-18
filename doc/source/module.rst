@@ -17,7 +17,7 @@ The following is a sketch of a user ecto module.
     //determine the io
     static void declare_io(const tendrils& params, tendrils& in, tendrils& out);
     //called right after allocation of the module, exactly once.
-    void configure(tendrils& params);
+    void configure(tendrils& params, tendrils& in, tendrils& out);
     //called at every execution of the graph
     int process(const tendrils& in, tendrils& out);
     //called right before the destructor of the module, a good place to do

@@ -98,7 +98,7 @@ An example implementation of an ecto module:
         in.declare<std::string> ("str", "The string to print.", parms.get<std::string> ("str"));
       }
     
-      void configure(tendrils& params)
+      void configure(tendrils& params, tendrils& in, tendrils& out)
       {
         str_ = params.get<std::string> ("str");
       }

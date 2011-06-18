@@ -1,5 +1,9 @@
 find_package(GTest)
 
+if(GTest_NOT_FOUND)
+return()
+endif()
+
 add_executable(ecto-test
   main.cpp
   tendril.cpp

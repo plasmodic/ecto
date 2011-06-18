@@ -4,7 +4,6 @@ ectomodule(ecto_test
   modules/ecto_test.cpp
 )
 
-
 add_executable(push_ups
   benchmarks/main.cpp
 )
