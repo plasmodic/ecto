@@ -17,8 +17,10 @@ def mygraph():
     p2 = hello_ecto.Printer(str="default")
     
     #connect outputs to inputs
-    plasm.connect(r, "output", p1, "str")
-    plasm.connect(r, "output", p2, "str")
+    plasm.connect(
+                  r["output"] >> p1["str"],
+                  r["output"] >> p2["str"]
+                  )
     
     if debug:
         #render the DAG with dot
