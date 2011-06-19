@@ -12,7 +12,9 @@ class Module(_module_base):
 
         _module_base.declare_io(self)
         _module_base.configure(self)
-    
+        if self.__doc__ is None:
+            self.__doc__ = "TODO docstr me."
+        self.__doc__ = self.gen_doc(self.__doc__)
     @classmethod
     def inspect(cls,_args,_kwargs):
         m = cls()

@@ -53,30 +53,6 @@
  */
 namespace ecto
 {
-  /**
-   * \internal
-   */
-  template<typename T>
-  struct doc
-  {
-    static std::string doc_str; //!<a doc string for humans to read in python.
-    static std::string name; //!< the name for this type.
-    //! get the doc
-    static std::string getDoc()
-    {
-      return doc_str;
-    }
-    //! get the name
-    static std::string getName()
-    {
-      return name;
-    }
-  };
-  template<typename T>
-  std::string doc<T>::doc_str;
-  template<typename T>
-  std::string doc<T>::name;
-
   template<typename T>
   boost::shared_ptr<ecto::module_<T> > inspect(boost::python::tuple args,
                                                boost::python::dict kwargs)
@@ -168,15 +144,10 @@ namespace ecto
     boost::python::class_<module_t, boost::python::bases<module>,
         boost::shared_ptr<module_t>, boost::noncopyable>
         m(name, module_doc<UserModule> (doc_str).c_str());
-    typedef doc<UserModule> docT;
-    docT::name = name;
-    docT::doc_str = doc_str;
-
     m.def("__init__",
           boost::python::raw_constructor(&raw_construct<UserModule> ));
     m.def("inspect", &inspect<UserModule> );
     m.staticmethod("inspect");
-    m.def("doc", &docT::getDoc).staticmethod("doc");
     m.def("name", (std::string (module_t::*)() const) &module_t::name);
     m.def("type_name", (std::string (module_t::*)() const) &module_t::type);
   }

@@ -4,6 +4,7 @@
 #include <boost/python.hpp>
 #include <boost/python/raw_function.hpp>
 #include <boost/python/args.hpp>
+#include <boost/python/type_id.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <boost/python/suite/indexing/map_indexing_suite.hpp>
 
@@ -38,8 +39,33 @@ namespace ecto
       l.assign(begin, end);
     }
 
+    static bp::list sanitize_connection_list(bp::list connections)
+    {
+      int len = bp::len(connections);
+      bp::list tuples;
+      for (int i = 0; i < len; ++i)
+      {
+        bp::extract<bp::tuple> te(connections[i]);
+        bp::extract<bp::list> le(connections[i]);
+        if (te.check())
+        {
+          tuples.append(te());
+        }
+        else if (le.check())
+        {
+          tuples += le();
+        }
+        else
+        {
+          throw std::runtime_error(
+              "Expecting the connection list to contain only lists of tuples, or tuples, no other types.");
+        }
+      }
+      return tuples;
+    }
     static void plasm_connect_list(plasm& p, bp::list connections)
     {
+      connections = sanitize_connection_list(connections);
       bp::stl_input_iterator<bp::tuple> begin(connections), end;
       while (begin != end)
       {

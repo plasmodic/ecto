@@ -149,21 +149,56 @@ namespace ecto_test
 
   struct Printer
   {
+    struct PrintFunctions
+    {
+      template <typename T>
+      static void declare(ecto::tendrils&inputs)
+      {
+        inputs.declare<T> ("in", "what to print");
+      }
+
+      template <typename T>
+      static void process(const ecto::tendrils&inputs,ecto::tendrils&outputs)
+      {
+        std::cout << "***** " << inputs.get<T> ("in") << " ***** ";
+      }
+
+      std::map<std::string, boost::function<void(ecto::tendrils&inputs)> > declares;
+      std::map<std::string, boost::function<void(const ecto::tendrils&inputs,ecto::tendrils&outputs)> > processes;
+      PrintFunctions()
+      {
+        declares["int"] = &declare<int>;
+        declares["double"] = &declare<double>;
+        declares["string"] = &declare<std::string>;
+        declares["bool"] = &declare<bool>;
+        processes[ecto::name_of<int>()] = &process<int>;
+        processes[ecto::name_of<double>()] = &process<double>;
+        processes[ecto::name_of<std::string>()] = &process<std::string>;
+        processes[ecto::name_of<bool>()] = &process<bool>;
+      }
+    };
+    static PrintFunctions pfs;
     static void declare_params(tendrils& parameters)
     {
+      parameters.declare<std::string>("print_type","The type string for what i'm to print... int, double, bool, string.","double");
     }
 
     static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
-      inputs.declare<double> ("in", "what to print");
+      std::string print_type = parameters.get<std::string>("print_type");
+
+      pfs.declares[print_type](inputs);
     }
 
     int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
-      std::cout << "***** " << inputs.get<double> ("in") << " ***** " << this << std::endl;
+      pfs.processes[inputs.at("in")->type_name()](inputs,outputs);
+      std::cout << this << std::endl;
       return ecto::OK;
     }
   };
+
+  Printer::PrintFunctions Printer::pfs;
 
   template<typename T>
   struct Generate
@@ -501,7 +536,8 @@ namespace ecto_test
 BOOST_PYTHON_MODULE(ecto_test)
 {
   using namespace ecto_test;
-  ecto::wrap<Printer>("Printer", "A printer of doubles...");
+  ecto::wrap<Printer>("Printer", "A printer of int, double, string, bool. "
+      "Use the print_type parameter to specify type. Default is double.");
   ecto::wrap<Generate<double> >("Generate", "A generator module.");
   ecto::wrap<SharedPass>("SharedPass", "A shared pointer pass through");
   ecto::wrap<Multiply>("Multiply", "Multiply an input with a constant");
