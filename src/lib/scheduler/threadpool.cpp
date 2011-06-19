@@ -246,7 +246,8 @@ namespace ecto {
         } catch (const exception& e) {
           std::cout << "main thread caught:" << boost::diagnostic_information(e) << std::endl;
           workserv.stop();
-          // std::set<runandjoin::ptr>().swap(runners);
+          // rethrow:  python interpreter will catch.
+          throw;
         }
         return 0;
       }
