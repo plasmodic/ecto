@@ -13,6 +13,12 @@
 #    This file will define the following variables:
 #      - ecto_LIBRARIES                 : The list of libraries to link against.
 #      - ecto_INCLUDE_DIRS              : The ecto include directories
+#    These macros:
+#      set_ecto_install_package_name(package_name) #default is ""
+#	   ectomodule(module_name ${srcs})
+#	   link_ecto(module_name ${libs})
+#	   install_ecto_module(module_name)
+#
 # ==============================================================================
 find_package(Boost COMPONENTS
  python

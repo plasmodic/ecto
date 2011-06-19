@@ -85,7 +85,7 @@ ecto at a glance
 		p = hello_ecto.Printer(str="default")
 		
 		#connect outputs to inputs
-		plasm.connect(r, "output", p, "str")
+		plasm.connect(r["output] >> p["str"])
 		
 		#an execution loop
 		print "Enter input, q to quit"
@@ -109,5 +109,4 @@ ecto at a glance
 			0->2 [headlabel="str" taillabel="output"];
 		}
 
-        
     * Each module is self documenting by design.
