@@ -1,6 +1,6 @@
 find_package(GTest)
 
-if(NOT GTest_FOUND)
+if(NOT GTEST_FOUND)
 return()
 endif()
 
