@@ -8,6 +8,7 @@ endmacro()
 
 foreach(file
     test_addergraph
+    test_blackbox
     test_doc
     test_dual_line_plasm
     test_handles

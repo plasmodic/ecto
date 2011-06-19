@@ -14,8 +14,7 @@ def test_plasm():
     #test the old syntax.
     p.connect(scatter, "out_0000", gather, "in_0000")
     
-    plasm.connect(
-                  scatter[:] >> gather[:],
+    plasm.connect(scatter[:] >> gather[:],
                   scatter2[:] >> gather2[:]
                   )
     

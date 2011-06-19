@@ -68,8 +68,14 @@ namespace ecto
   std::string module::gen_doc(const std::string& doc) const
   {
     std::stringstream ss;
+
     ss << name() << " (ecto::module)\n";
-    ss << "================================================================================\n";
+    for(int i = 0,end = ss.str().size(); i < end;++i)
+    {
+      ss << "=";
+
+    }
+    ss << "\n";
     ss << "\n" << doc << "\n\n";
     parameters.print_doc(ss, "Parameters");
     inputs.print_doc(ss, "Inputs");

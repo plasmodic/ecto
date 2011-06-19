@@ -61,6 +61,7 @@ INSTALL(FILES ${CMAKE_BINARY_DIR}/unix_install/ectoConfig.cmake
 #python support
 set(ecto_PYTHON_FILES
   python/ecto/__init__.py
+  python/ecto/blackbox.py
   python/ecto/doc.py
   python/ecto/module.py
   python/ecto/xdot.py

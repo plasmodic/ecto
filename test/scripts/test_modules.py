@@ -21,13 +21,7 @@ def test_modules_01():
 def test_modules_spec():
     g = ecto_test.Generate(start=0, step=2)
     x = g["out"]
-    assert x.keys[0] == "out"
-    print x
     x = g["out","out"]
-    assert x.keys[0] == "out"
-    assert x.keys[1] == "out"
-    assert x.keys[:] == ("out","out")
-    print x
     try:
         x = g[2.0]
         assert False, "should have thrown"

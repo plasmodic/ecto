@@ -119,6 +119,9 @@ public:
    */
   void print_doc(std::ostream& out, const std::string& tendrils_name) const;
 
+  typedef boost::shared_ptr<tendrils> ptr;
+  typedef boost::shared_ptr<const tendrils> const_ptr;
+
 private:
   typedef std::map<std::string, tendril::ptr> map_t;
   mutable boost::mutex mtx;

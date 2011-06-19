@@ -106,120 +106,195 @@ namespace ecto
 
     struct TendrilSpecification
     {
-      module::ptr mod;
-      bp::tuple keys;
-      std::vector<std::string> keys_str;
+      module::ptr mod_input, mod_output;
+      std::string key;
+
       TendrilSpecification()
       {
       }
-      TendrilSpecification(module::ptr mod, bp::tuple keys) :
-          mod(mod), keys(keys)
+      bool check(module::ptr mod, const std::string& key)
       {
-        int size = bp::len(keys);
-        for (int i = 0; i < size; i++)
+        if (key.empty())
+          return true;
+        if (mod->inputs.find(key) == mod->inputs.end()
+            && mod->outputs.find(key) == mod->outputs.end()
+            && mod->parameters.find(key) == mod->parameters.end())
         {
-          bp::object o = keys[i];
-          bp::extract<std::string> e(o);
-          if (e.check())
-          {
-            std::string key = e();
-            if (mod->inputs.find(key) == mod->inputs.end()
-                && mod->outputs.find(key) == mod->outputs.end())
-            {
-              throw std::runtime_error(
-                  "The module does not contain any inputs or outputs by the given name: "
-                      + key);
-            }
-            keys_str.push_back(e());
-          }
-          else
-            throw std::runtime_error("The tuple must contain only str types!.");
+          return false;
+        }
+        return true;
+      }
+      TendrilSpecification(module::ptr mod_in, module::ptr mod_out,
+                           const std::string& key) :
+          mod_input(mod_in), mod_output(mod_out), key(key)
+      {
+        if (!check(mod_in, key) && !check(mod_out, key))
+        {
+          throw std::runtime_error(
+              "The module does not contain any inputs or outputs or parameters by the given name: "
+              + key);
+        }
+      }
+      TendrilSpecification(module::ptr mod, const std::string& key) :
+          mod_input(mod), mod_output(mod), key(key)
+      {
+        if (!check(mod, key))
+        {
+          throw std::runtime_error(
+              "The module does not contain any inputs or outputs or parameters by the given name: "
+              + key);
+        }
+      }
+      tendril::ptr toTendril(int t)
+      {
+        switch(t)
+        {
+          case 0:
+            return mod_output->outputs.at(key);
+          case 1:
+            return mod_input->inputs.at(key);
+          case 2:
+            return mod_input->parameters.at(key);
+          default:
+            return tendril::ptr();
         }
       }
       bp::str __str__()
       {
-        bp::str str = bp::str(mod->name());
-        str += ",[";
-        int size = bp::len(keys);
-        for (int i = 0; i < size; i++)
-        {
-          str += "'";
-          str += bp::str(keys[i]);
-          str += "'";
-          if (i < size - 1)
-            str += ',';
-        }
-        str += "]";
-
+        bp::str str = bp::str(mod_input->name());
+        str += ", " + bp::str(key);
         return str;
       }
     };
 
-    TendrilSpecification getitem_str(module::ptr mod, bp::str key)
+    struct TendrilSpecifications
     {
-      return TendrilSpecification(mod, bp::make_tuple(key));
+      typedef std::vector<TendrilSpecification> Vector;
+      TendrilSpecifications()
+      {
+      }
+      TendrilSpecifications(Vector vts) :
+          vts(vts)
+      {
+      }
+      TendrilSpecifications(bp::list l)
+      {
+        bp::stl_input_iterator<const TendrilSpecification&> begin(l), end;
+        std::copy(begin, end, std::back_inserter(vts));
+      }
+
+      TendrilSpecification toSpec()
+      {
+        if (vts.size() != 1)
+             {
+               throw std::runtime_error(
+                   "This specification must be of length one. e.g. module['only one key']");
+             }
+        return vts.front();
+      }
+
+      static tendrils::ptr toTendrils(bp::dict d, int tt)
+      {
+        bp::list keys = d.keys();
+        bp::stl_input_iterator<std::string> begin(keys), end;
+        tendrils::ptr ts(new tendrils);
+
+        while (begin != end)
+        {
+          std::string key = *begin;
+          TendrilSpecifications spec = bp::extract<TendrilSpecifications>(
+              d.get(bp::str(key)));
+          (*ts)[key] = spec.toSpec().toTendril(tt);
+          ++begin;
+
+        }
+        return ts;
+
+      }
+      Vector vts;
+    }
+    ;
+
+    TendrilSpecifications getitem_str(module::ptr mod, const std::string& key)
+    {
+      return TendrilSpecifications::Vector(1, TendrilSpecification(mod, key));
     }
 
-    TendrilSpecification getitem_tuple(module::ptr mod, bp::tuple keys)
+    TendrilSpecifications getitem_tuple(module::ptr mod, bp::tuple keys)
     {
-      return TendrilSpecification(mod, keys);
+      int end = bp::len(keys);
+      TendrilSpecifications l;
+      l.vts.reserve(end);
+      for (int i = 0; i != end; ++i)
+      {
+        bp::extract<std::string> se(keys[i]);
+        if (se.check())
+          l.vts.push_back(TendrilSpecification(mod, se()));
+        else
+          throw std::runtime_error("All items must be str's");
+      }
+      return l;
     }
 
-    TendrilSpecification getitem_list(module::ptr mod, bp::list keys)
+    TendrilSpecifications getitem_list(module::ptr mod, bp::list keys)
     {
       bp::tuple t(keys);
-      return TendrilSpecification(mod, t);
+      return getitem_tuple(mod, t);
     }
 
-    TendrilSpecification getitem_slice(module::ptr mod, bp::slice s)
+    TendrilSpecifications getitem_slice(module::ptr mod, bp::slice s)
     {
 
       if (s == bp::slice())
       {
-        return TendrilSpecification(mod, bp::tuple());
+        return TendrilSpecifications::Vector(1, TendrilSpecification(mod, ""));
       }
       else
       {
         throw std::runtime_error("Slice is only valid if its the [:] form...");
       }
     }
-    TendrilSpecification expand(module::ptr mod, const tendrils& t)
+    TendrilSpecifications expand(module::ptr mod, const tendrils& t)
     {
-      bp::list x;
+      TendrilSpecifications l;
+
       BOOST_FOREACH(const tendrils::value_type& pair, t)
-      {
-        x.append(bp::str(pair.first));
-      }
-      return TendrilSpecification(mod, bp::tuple(x));
+          {
+            l.vts.push_back(TendrilSpecification(mod, pair.first));
+          }
+      return l;
     }
-    bp::list rshift_spec(TendrilSpecification lhs,
-                         TendrilSpecification rhs)
+    bp::list rshift_spec(TendrilSpecifications& lhs, TendrilSpecifications& rhs)
     {
       bp::list result;
-      if(lhs.keys_str.size() == 0)
+      if (lhs.vts.size() == 1 && lhs.vts.front().key.empty())
       {
-        lhs = expand(lhs.mod,lhs.mod->outputs);
+        lhs = expand(lhs.vts.front().mod_output,
+                     lhs.vts.front().mod_output->outputs);
       }
-      if(rhs.keys_str.size() == 0)
+      if (rhs.vts.size() == 1 && rhs.vts.front().key.empty())
       {
-        rhs = expand(rhs.mod,rhs.mod->inputs);
+        rhs = expand(rhs.vts.front().mod_input,
+                     rhs.vts.front().mod_input->inputs);
       }
       //the spec must be the same size...
-      if (lhs.keys_str.size() != rhs.keys_str.size())
+      if (lhs.vts.size() != rhs.vts.size())
       {
         std::string msg = boost::str(
             boost::format(
                 "Specification mismatch... len(lhs) != len(rhs) -> %d != %d")
-                % lhs.keys_str.size() % rhs.keys_str.size());
+            % lhs.vts.size()
+            % rhs.vts.size());
         throw std::runtime_error(msg);
       }
-      for (size_t i = 0, end = lhs.keys_str.size(); i < end; i++)
+      for (size_t i = 0, end = lhs.vts.size(); i < end; i++)
       {
+        TendrilSpecification out = lhs.vts[i], in = rhs.vts[i];
         //check types, this will also assert on not found...
-        lhs.mod->outputs.at(lhs.keys_str[i])->compatible_type(
-            *rhs.mod->inputs.at(rhs.keys_str[i]));
+        out.mod_output->outputs.at(out.key)->compatible_type(
+            *in.mod_input->inputs.at(in.key));
         result.append(
-            bp::make_tuple(lhs.mod, lhs.keys_str[i], rhs.mod, rhs.keys_str[i]));
+            bp::make_tuple(out.mod_output, out.key, in.mod_input, in.key));
       }
       return result;
     }
@@ -254,11 +329,16 @@ namespace ecto
       m_base.def("__getitem__", getitem_slice);
 
       bp::class_<TendrilSpecification> ts("TendrilSpecification");
-      ts.def_readwrite("module", &TendrilSpecification::mod);
-      ts.def_readwrite("keys", &TendrilSpecification::keys);
-      ts.def("__rshift__", rshift_spec);
-      ts.def("__str__", &TendrilSpecification::__str__);
+      ts.def_readwrite("module_input", &TendrilSpecification::mod_input);
+      ts.def_readwrite("module_output", &TendrilSpecification::mod_output);
+      ts.def_readwrite("key", &TendrilSpecification::key);
 
+      bp::class_<TendrilSpecifications> vts("TendrilSpecifications",
+                                            bp::init<bp::list>());
+      vts.def("to_tendrils", &TendrilSpecifications::toTendrils);
+      vts.staticmethod("to_tendrils");
+      vts.def("to_spec",&TendrilSpecifications::toSpec);
+      vts.def("__rshift__", rshift_spec);
     }
 
   }
