@@ -19,9 +19,6 @@ set_target_properties(ecto PROPERTIES
   INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/lib"
   )
 
-set(ECTO_VERSION 1.0.1)
-set(ECTO_SOVERSION 1.0)
-
 set_target_properties(ecto PROPERTIES
             VERSION ${ECTO_VERSION}
             SOVERSION ${ECTO_SOVERSION}

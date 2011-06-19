@@ -1,0 +1,12 @@
+#pragma once
+
+//
+//  ECTO_VERSION % 100 is the patch level
+//  ECTO_VERSION / 100 % 1000 is the minor version
+//  ECTO_VERSION / 100000 is the major version
+
+#define ECTO_VERSION @ECTO_VERSION_NUMBER@
+
+//readable version of the library name.
+#define ECTO_VERSION_STRING "ecto @ECTO_VERSION@ @ECTO_CODE_NAME@"
+

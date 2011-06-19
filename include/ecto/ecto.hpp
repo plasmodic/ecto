@@ -35,6 +35,7 @@
 #include <boost/format.hpp>
 
 //ecto includes
+#include <ecto/version.hpp>
 #include <ecto/module.hpp>
 #include <ecto/tendril.hpp>
 #include <ecto/tendrils.hpp>
