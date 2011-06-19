@@ -317,48 +317,6 @@ namespace ecto_test
     int n_, x_;
   };
 
-  template<typename ValueT>
-  struct Gather
-  {
-    typedef ValueT value_type;
-
-    static void declare_params(ecto::tendrils& p)
-    {
-      p.declare<int> ("n", "N to gather", 2);
-    }
-
-    static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
-    {
-      int n = parameters.get<int> ("n");
-      for (int ii = 0; ii < n; ii++)
-        {
-          inputs.declare<value_type> (str(boost::format("in_%04d") % ii),
-                                      "An " + ecto::name_of<value_type>() + "input.");
-        }
-      outputs.declare<value_type> ("out", "The sum of all inputs.");
-    }
-
-    void configure(tendrils& parameters, tendrils& inputs, tendrils& outputs)
-    {
-      n_ = parameters.get<int> ("n");
-    }
-
-    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
-    {
-      //SHOW();
-      value_type& out = outputs.get<value_type> ("out");
-      out = 0;
-      typedef std::pair<std::string, ecto::tendril::ptr> pp;
-      BOOST_FOREACH(const pp& in,inputs)
-              {
-                out += in.second->get<value_type> ();
-              }
-      return ecto::OK;
-    }
-
-    int n_;
-  };
-
   boost::shared_ptr<ecto::tendril> makePodTendril()
   {
     boost::shared_ptr<ecto::tendril> p;
@@ -380,8 +338,6 @@ BOOST_PYTHON_MODULE(ecto_test)
   ecto::wrap<SharedPass>("SharedPass", "A shared pointer pass through");
 
   ecto::wrap<Scatter>("Scatter", "Scatter a value...");
-  ecto::wrap<Gather<int> >("Gather", "Gather a scattered value...");
-  ecto::wrap<Gather<double> >("Gather_double", "Gather a scattered value...");
   ecto::wrap<HandleHolder>("HandleHolder","Holds on to handles...");
   ecto::wrap<DontAllocateMe>("DontAllocateMe", "Don't allocate me, feel free to inspect.");
   ecto::wrap<DontCallMeFromTwoThreads>("DontCallMeFromTwoThreads",

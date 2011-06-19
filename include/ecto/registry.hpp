@@ -61,8 +61,10 @@ namespace ecto {
 #define ECTO_MODULE(MODULE, TYPE, NAME, DOCSTRING)                      \
   ECTO_MODULETAG(MODULE)                                                \
   namespace {                                                           \
-    typedef ::ecto::registry::registrator< ::ecto::tag::MODULE,TYPE> r_t; \
-    template<> const r_t& r_t::inst(r_t(NAME, DOCSTRING));              \
+    template<>                                                          \
+    const ::ecto::registry::registrator< ::ecto::tag::MODULE,TYPE>&     \
+    ::ecto::registry::registrator< ::ecto::tag::MODULE,TYPE>::inst      \
+    (::ecto::registry::registrator< ::ecto::tag::MODULE,TYPE>(NAME, DOCSTRING)); \
   }
   
 #define ECTO_REGISTRY(MODULE)                                           \

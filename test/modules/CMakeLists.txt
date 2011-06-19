@@ -4,5 +4,6 @@ ectomodule(ecto_test
   Quitter.cpp
   Increment.cpp
   Printer.cpp
+  Gather.cpp
   ecto_test.cpp
 )
