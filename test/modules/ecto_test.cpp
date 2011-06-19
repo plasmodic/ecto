@@ -331,9 +331,9 @@ ECTO_REGISTRY(ecto_test);
 
 BOOST_PYTHON_MODULE(ecto_test)
 {
-  using namespace ecto_test;
   ECTO_REGISTER(ecto_test);
 
+  using namespace ecto_test;
   ecto::wrap<Generate<double> >("Generate", "A generator module.");
   ecto::wrap<SharedPass>("SharedPass", "A shared pointer pass through");
 
