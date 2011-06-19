@@ -148,59 +148,6 @@ namespace ecto_test
   };
   boost::mutex DontCallMeFromTwoThreads::mtx;
 
-  struct Printer
-  {
-    struct PrintFunctions
-    {
-      template <typename T>
-      static void declare(ecto::tendrils&inputs)
-      {
-        inputs.declare<T> ("in", "what to print");
-      }
-
-      template <typename T>
-      static void process(const ecto::tendrils&inputs,ecto::tendrils&outputs)
-      {
-        std::cout << "***** " << inputs.get<T> ("in") << " ***** ";
-      }
-
-      std::map<std::string, boost::function<void(ecto::tendrils&inputs)> > declares;
-      std::map<std::string, boost::function<void(const ecto::tendrils&inputs,ecto::tendrils&outputs)> > processes;
-      PrintFunctions()
-      {
-        declares["int"] = &declare<int>;
-        declares["double"] = &declare<double>;
-        declares["string"] = &declare<std::string>;
-        declares["bool"] = &declare<bool>;
-        processes[ecto::name_of<int>()] = &process<int>;
-        processes[ecto::name_of<double>()] = &process<double>;
-        processes[ecto::name_of<std::string>()] = &process<std::string>;
-        processes[ecto::name_of<bool>()] = &process<bool>;
-      }
-    };
-    static PrintFunctions pfs;
-    static void declare_params(tendrils& parameters)
-    {
-      parameters.declare<std::string>("print_type","The type string for what i'm to print... int, double, bool, string.","double");
-    }
-
-    static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
-    {
-      std::string print_type = parameters.get<std::string>("print_type");
-
-      pfs.declares[print_type](inputs);
-    }
-
-    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
-    {
-      pfs.processes[inputs.at("in")->type_name()](inputs,outputs);
-      std::cout << this << std::endl;
-      return ecto::OK;
-    }
-  };
-
-  Printer::PrintFunctions Printer::pfs;
-
   template<typename T>
   struct Generate
   {
@@ -226,71 +173,6 @@ namespace ecto_test
     {
       outputs.get<T> ("out") += step_;
       return 0;
-    }
-  };
-
-  struct Quitter
-  {
-    static void declare_params(tendrils& params)
-    {
-      params.declare<std::string> ("str", "The default string to print", "EXIT");
-    }
-
-    static void declare_io(const tendrils& params, tendrils& in, tendrils& out)
-    {
-      in.declare<std::string> ("str", "The input string to listen to.", "");
-    }
-
-    void configure(tendrils& parms, tendrils& inputs, tendrils& outputs)
-    {
-      stop_word_ = parms.get<std::string> ("str");
-    }
-
-    int process(const tendrils& in, tendrils& /*out*/)
-    {
-      if (in.get<std::string> ("str") == stop_word_)
-        return ecto::QUIT;
-      return ecto::OK;
-    }
-    std::string stop_word_;
-  };
-
-  struct Increment
-  {
-    double amount_;
-    unsigned delay_ms_;
-    static void declare_params(ecto::tendrils& p)
-    {
-      p.declare<double> ("amount", "Amount to increment by.", 1.0);
-      p.declare<unsigned> ("delay", "How long it takes to increment in milliseconds", 0);
-    }
-
-    static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
-    {
-      inputs.declare<double> ("in", "input");
-      outputs.declare<double> ("out", "output");
-    }
-
-    void configure(tendrils& parms, tendrils& inputs, tendrils& outputs)
-    {
-      amount_ = parms.get<double> ("amount");
-      delay_ms_ = parms.get<unsigned> ("delay");
-    }
-
-    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
-    {
-      if (delay_ms_ > 0)
-        {
-          boost::asio::io_service s;
-          boost::asio::deadline_timer dt(s);
-          dt.expires_from_now(boost::posix_time::milliseconds(delay_ms_));
-          dt.wait();
-        }
-      double in = inputs.get<double> ("in");
-      double result = in + amount_;
-      // std::cout << this << " incrementer: " << in << " ==> " << result << std::endl;
-      outputs.get<double> ("out") = result;
-      return ecto::OK;
     }
   };
 
@@ -494,16 +376,12 @@ BOOST_PYTHON_MODULE(ecto_test)
   using namespace ecto_test;
   ECTO_REGISTER(ecto_test);
 
-  ecto::wrap<Printer>("Printer", "A printer of int, double, string, bool. "
-      "Use the print_type parameter to specify type. Default is double.");
   ecto::wrap<Generate<double> >("Generate", "A generator module.");
   ecto::wrap<SharedPass>("SharedPass", "A shared pointer pass through");
 
-  ecto::wrap<Increment>("Increment", "Increment input by some amount");
   ecto::wrap<Scatter>("Scatter", "Scatter a value...");
   ecto::wrap<Gather<int> >("Gather", "Gather a scattered value...");
   ecto::wrap<Gather<double> >("Gather_double", "Gather a scattered value...");
-  ecto::wrap<Quitter>("Quitter", "Will quit the graph on an appropriate input.");
   ecto::wrap<HandleHolder>("HandleHolder","Holds on to handles...");
   ecto::wrap<DontAllocateMe>("DontAllocateMe", "Don't allocate me, feel free to inspect.");
   ecto::wrap<DontCallMeFromTwoThreads>("DontCallMeFromTwoThreads",
