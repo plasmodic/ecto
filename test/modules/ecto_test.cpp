@@ -28,6 +28,7 @@
  */
 
 #include <ecto/ecto.hpp>
+#include <ecto/registry.hpp>
 #include <iostream>
 #include <boost/format.hpp>
 #include <boost/foreach.hpp>
@@ -254,33 +255,6 @@ namespace ecto_test
     std::string stop_word_;
   };
 
-  struct Multiply
-  {
-    double factor_;
-
-    static void declare_params(ecto::tendrils& p)
-    {
-      p.declare<double> ("factor", "A factor to multiply by.", 3.14);
-    }
-
-    static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
-    {
-      inputs.declare<double> ("in", "multly in by factor");
-      outputs.declare<double> ("out", "the result of in * factor");
-    }
-
-    void configure(tendrils& parms, tendrils& inputs, tendrils& outputs)
-    {
-      factor_ = parms.get<double> ("factor");
-    }
-
-    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
-    {
-      outputs.get<double> ("out") = inputs.get<double> ("in") * factor_;
-      return ecto::OK;
-    }
-  };
-
   struct Increment
   {
     double amount_;
@@ -316,26 +290,6 @@ namespace ecto_test
       double result = in + amount_;
       // std::cout << this << " incrementer: " << in << " ==> " << result << std::endl;
       outputs.get<double> ("out") = result;
-      return ecto::OK;
-    }
-  };
-
-  struct Add
-  {
-    static void declare_params(ecto::tendrils& p)
-    {
-    }
-
-    static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
-    {
-      inputs.declare<double> ("left", "left input");
-      inputs.declare<double> ("right", "right input");
-      outputs.declare<double> ("out", "output");
-    }
-
-    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
-    {
-      outputs.get<double> ("out") = inputs.get<double> ("left") + inputs.get<double> ("right");
       return ecto::OK;
     }
   };
@@ -533,15 +487,18 @@ namespace ecto_test
 
 }
 
+ECTO_REGISTRY(ecto_test);
+
 BOOST_PYTHON_MODULE(ecto_test)
 {
   using namespace ecto_test;
+  ECTO_REGISTER(ecto_test);
+
   ecto::wrap<Printer>("Printer", "A printer of int, double, string, bool. "
       "Use the print_type parameter to specify type. Default is double.");
   ecto::wrap<Generate<double> >("Generate", "A generator module.");
   ecto::wrap<SharedPass>("SharedPass", "A shared pointer pass through");
-  ecto::wrap<Multiply>("Multiply", "Multiply an input with a constant");
-  ecto::wrap<Add>("Add", "Add two numbers");
+
   ecto::wrap<Increment>("Increment", "Increment input by some amount");
   ecto::wrap<Scatter>("Scatter", "Scatter a value...");
   ecto::wrap<Gather<int> >("Gather", "Gather a scattered value...");
