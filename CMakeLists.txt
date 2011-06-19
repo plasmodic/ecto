@@ -7,6 +7,7 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 set(ECTO_VERSION 1.0.1)
 set(ECTO_SOVERSION 1.0)
 set(ECTO_VERSION_NUMBER 100001)
+SET(ECTO_CODE_NAME "mold spore (alpha)")
 configure_file( ${CMAKE_SOURCE_DIR}/cmake/version.hpp.in ${CMAKE_BINARY_DIR}/include/ecto/version.hpp )
 include_directories(${CMAKE_BINARY_DIR}/include)
 
