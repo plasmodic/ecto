@@ -3,7 +3,6 @@
 
 #install headers
 set(ecto_HEADERS
-  include/ecto/blackbox.hpp
   include/ecto/ecto.hpp
   include/ecto/graph_types.hpp
   include/ecto/log.hpp
