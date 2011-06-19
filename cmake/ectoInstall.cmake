@@ -12,6 +12,7 @@ set(ecto_HEADERS
   include/ecto/tendril.hpp
   include/ecto/tendrils.hpp
   include/ecto/util.hpp
+  ${CMAKE_BINARY_DIR}/include/ecto/vershion.hpp
   )
 
 set(ecto_scheduler_HEADERS

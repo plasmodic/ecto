@@ -4,6 +4,12 @@ project(ecto)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 
+set(ECTO_VERSION 1.0.1)
+set(ECTO_SOVERSION 1.0)
+set(ECTO_VERSION_NUMBER 100001)
+configure_file( ${CMAKE_SOURCE_DIR}/cmake/version.hpp.in ${CMAKE_BINARY_DIR}/include/ecto/version.hpp )
+include_directories(${CMAKE_BINARY_DIR}/include)
+
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
 execute_process(COMMAND mkdir -p ${LIBRARY_OUTPUT_PATH}/ecto)
@@ -30,7 +36,7 @@ message(STATUS "To setup your python path for ecto you may source:"
 
 set(ecto_PYTHONPATH ${LIBRARY_OUTPUT_PATH} ${CMAKE_SOURCE_DIR}/python)
 
-set(ecto_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/include)
+set(ecto_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/include ${CMAKE_BINARY_DIR}/include)
 set(ecto_LIBRARIES ecto)
 set(ecto_LIBRARIES_DIR ${LIBRARY_OUTPUT_PATH})
  
