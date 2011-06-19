@@ -92,6 +92,8 @@ elseif(WIN32)
     set(PYTHON_PACKAGES_PATH "${PYTHON_PATH}/Lib/site-packages" CACHE PATH "Where to install the python packages.")
 endif()
 
+set(ecto_module_PYTHON_INSTALL ${PYTHON_PACKAGES_PATH} CACHE PATH "The path where modules will be installed." )
+
 #this is where usermodules may be installed to
 macro(set_ecto_install_package_name package_name)
   set(ecto_module_PYTHON_INSTALL ${PYTHON_PACKAGES_PATH}/${package_name})
