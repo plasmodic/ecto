@@ -70,10 +70,10 @@ namespace ecto
     std::stringstream ss;
 
     ss << name() << " (ecto::module)\n";
+    //create an underline that is the size of the name...
     for(int i = 0,end = ss.str().size(); i < end;++i)
     {
       ss << "=";
-
     }
     ss << "\n";
     ss << "\n" << doc << "\n\n";
