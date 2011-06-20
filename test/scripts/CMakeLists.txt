@@ -17,6 +17,7 @@ foreach(file
     test_plasm
     test_python_module
     test_reconnect
+    test_random
     test_shared_pass
     test_small_plasms
     test_strands
