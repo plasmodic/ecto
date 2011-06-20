@@ -45,18 +45,33 @@
 namespace ecto
 {
 
+  /**
+   * \class The spore is a typed handle for tendrils, making holding onto tendrils a bit easier.
+   */
   template<typename T>
   struct spore
   {
+    /**
+     * Allocates a spore that doesn't point to anything.
+     */
     spore()
     {
     }
+
+    /**
+     * implicit constructor from a tendril ptr. Needs to be a shared_ptr, as the spore holds a
+     * weak_ptr, and uses this to ensure that the spore always points to valid tendril.
+     */
     spore(tendril::ptr t) :
         tendril_(t)
     {
       t->enforce_type<T>();
     }
 
+    /**
+     * Grab a pointer to the tendril that gave birth to this spore.
+     * @return non const pointer to tendril
+     */
     inline tendril::ptr p()
     {
       tendril::ptr _p = tendril_.lock();
@@ -64,7 +79,10 @@ namespace ecto
         throw std::logic_error("This spore points to nothing.");
       return _p;
     }
-
+    /**
+     * Grab a pointer to the tendril that gave birth to this spore. const overload.
+     * @return const pointer to tendril
+     */
     inline tendril::const_ptr p() const
     {
       tendril::const_ptr _p = tendril_.lock();
@@ -73,6 +91,12 @@ namespace ecto
       return _p;
     }
 
+    /**
+     * Set a typed callback, that will be called when ever the tendril value is changed by the
+     * user.
+     * @param cb The callback
+     * @return ref to this spore, for chaining.
+     */
     spore<T>& set_callback(boost::function<void(T)> cb)
     {
       p()->set_callback(cb);
@@ -140,6 +164,20 @@ namespace ecto
     {
       tendril::const_ptr _p = p();
       return _p->read<T>();
+    }
+    /**
+     * Cast operator for convenience.
+     */
+    operator tendril::ptr()
+    {
+      return p();
+    }
+    /**
+     * Cast operator for convenience.
+     */
+    operator tendril::const_ptr() const
+    {
+      return p();
     }
   private:
     boost::weak_ptr<tendril> tendril_;
