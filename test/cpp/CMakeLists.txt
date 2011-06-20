@@ -7,6 +7,7 @@ endif()
 add_executable(ecto-test
   main.cpp
   tendril.cpp
+  spore.cpp
   )
 
 target_link_libraries(ecto-test

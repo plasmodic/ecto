@@ -1,6 +1,5 @@
 #include <gtest/gtest.h>
 #include <ecto/ecto.hpp>
-#include <ecto/tendril.hpp>
 
 TEST(TendrilTest, Dirtiness)
 {

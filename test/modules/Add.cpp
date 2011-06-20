@@ -35,10 +35,6 @@ namespace ecto_test
 {
   struct Add
   {
-    static void declare_params(ecto::tendrils& p)
-    {
-    }
-
     static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
       inputs.declare<double> ("left", "left input");
@@ -46,11 +42,19 @@ namespace ecto_test
       outputs.declare<double> ("out", "output");
     }
 
+    void configure(tendrils& p, tendrils& i, tendrils& o)
+    {
+      out_ = o.at("out");
+      left_ = i.at("left");
+      right_ = i.at("right");
+    }
+
     int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
-      outputs.get<double> ("out") = inputs.get<double> ("left") + inputs.get<double> ("right");
+      *out_ = *left_ + *right_;
       return ecto::OK;
     }
+    ecto::spore<double> out_, left_, right_;
   };
 }
 

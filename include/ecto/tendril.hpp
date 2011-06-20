@@ -143,9 +143,9 @@ namespace ecto
     template<typename T>
     void set_default_val(const T& val = T())
     {
-      default_ = true;
       if(!user_supplied_) //user supplied?
       {
+        default_ = true;
         holder_.reset(new holder<T>(val));
       }
     }

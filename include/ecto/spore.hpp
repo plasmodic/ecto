@@ -95,6 +95,11 @@ namespace ecto
       return p()->user_supplied();
     }
 
+    bool has_default() const
+    {
+      return p()->has_default();
+    }
+
     T* operator->()
     {
       return &(tendril_.lock()->get<T>());
