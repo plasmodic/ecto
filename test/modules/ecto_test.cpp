@@ -148,34 +148,6 @@ namespace ecto_test
   };
   boost::mutex DontCallMeFromTwoThreads::mtx;
 
-  template<typename T>
-  struct Generate
-  {
-    T step_;
-
-    static void declare_params(tendrils& parameters)
-    {
-      parameters.declare<T> ("step", "The step with which i generate integers.", 2);
-      parameters.declare<T> ("start", "My starting value", 0);
-    }
-
-    static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
-    {
-      outputs.declare<T> ("out", "output", parameters.get<T> ("start") - parameters.get<T> ("step"));
-    }
-
-    void configure(tendrils& parameters, tendrils& inputs, tendrils& outputs)
-    {
-      step_ = parameters.get<T> ("step");
-    }
-
-    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
-    {
-      outputs.get<T> ("out") += step_;
-      return 0;
-    }
-  };
-
   struct ParameterWatcher
   {
     double value_;
@@ -334,7 +306,6 @@ BOOST_PYTHON_MODULE(ecto_test)
   ECTO_REGISTER(ecto_test);
 
   using namespace ecto_test;
-  ecto::wrap<Generate<double> >("Generate", "A generator module.");
   ecto::wrap<SharedPass>("SharedPass", "A shared pointer pass through");
 
   ecto::wrap<Scatter>("Scatter", "Scatter a value...");
