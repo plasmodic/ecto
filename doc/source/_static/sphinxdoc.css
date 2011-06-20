@@ -32,8 +32,13 @@ div.documentwrapper {
 }
 
 img.logo {
-    /* height: 100px; */
-    width: 210px;
+    display: block;
+    margin-left: auto;
+    /* margin-right: auto;*/
+    height: 100px;
+    /* width: 150px; */
+    /* align: center;*/ 
+/*    padding: 10px;*/
 }
 div.document {
     background-color: white;
@@ -217,14 +222,14 @@ a.headerlink:hover {
 cite, code, tt {
     font-family: 'Consolas', 'Deja Vu Sans Mono',
                  'Bitstream Vera Sans Mono', monospace;
-    font-size: 0.95em;
+    /* font-size: 1.0em;*/
     letter-spacing: 0.01em;
 }
 
 
 tt {
     color: #222;
-    font-size: 12px;
+    /* font-size: 13px; */
 }
 
 tt.descname, tt.descclassname, tt.xref {
@@ -245,13 +250,18 @@ a tt:hover {
     color: #2491CF;
 }
 
+tt.docutils.literal {
+    font-family: Courier, monospace;
+    font-size: 14px;
+}
+
 pre {
-    font-family: 'Consolas', 'Deja Vu Sans Mono',
-                 'Bitstream Vera Sans Mono', monospace;
-    font-size: 12px;
+    font-family: Courier, monospace; /*'Consolas', 'Deja Vu Sans Mono',
+                 'Bitstream Vera Sans Mono', monospace;*/
+    /* font-size: 19px; */
     letter-spacing: 0.015;
     padding: 0.8em;
-/*    border: 1px solid #e0e0e0;*/
+    border: 1px solid #e0e0e0;
     background-color: #eeeeef;
     border-left: 2px solid red;
 }
