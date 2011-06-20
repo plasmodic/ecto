@@ -38,92 +38,114 @@
 
 namespace ecto
 {
-/**
- * \brief The tendrils are a collection for the ecto::tendril class, addressable by a string key.
- */
-class tendrils: public std::map<std::string, tendril::ptr>, boost::noncopyable
-{
-public:
-
-  template<typename T>
-  tendril::ptr declare(const std::string& name, const std::string& doc = "TODO: doc str me.", const T& default_val = T())
+  /**
+   * \brief The tendrils are a collection for the ecto::tendril class, addressable by a string key.
+   */
+  class tendrils: public std::map<std::string, tendril::ptr>, boost::noncopyable
   {
-    map_t::iterator it = find(name);
-    //if there are no exiting tendrils by the given name,
-    //just add it.
-    if (it == end())
+  public:
+
+    template<typename T>
+    spore<T> declare(const std::string& name)
+    {
+      tendril::ptr t( new tendril(tendril::make_tendril<T>()));
+      map_t::iterator it = find(name);
+      //if there are no exiting tendrils by the given name,
+      //just add it.
+      if (it == end())
       {
-        insert(std::make_pair(name, tendril::ptr(new tendril(default_val, doc))));
+        insert(std::make_pair(name, t));
       }
-    else // we want to just return the existing tendril (so that modules preconnected don't get messed up)...
+      else // we want to just return the existing tendril (so that modules preconnected don't get messed up)...
       {
         //there is already an existing tendril with the given name
         //check if the types are the same
-        if (!it->second->is_type<T> ())
-          {
-            std::stringstream ss;
-            ss << "Your types aren't the same, this could lead to very undefined behavior...";
-            ss << " old type = " << it->second->type_name() << " new type = " << name_of<T> () << std::endl;
-            throw std::logic_error(ss.str());
-          }
+        if (!it->second->is_type<T>())
+        {
+          std::stringstream ss;
+          ss << "Your types aren't the same, this could lead to very undefined behavior...";
+          ss << " old type = " << it->second->type_name() << " new type = "
+             << name_of<T>() << std::endl;
+          throw std::logic_error(ss.str());
+        }
         else
-          {
-            it->second = tendril::ptr(new tendril(default_val, doc));
-          }
+        {
+          it->second = t;
+        }
       }
-    return at(name);
+      return at(name);
+    }
 
-  }
+//    template<typename T>
+//    tendril::ptr declare(const std::string& name, const T& default_val)
+//    {
+//      tendril::ptr t = declare<T>(name);
+//      t->set_default_val<T>(default_val);
+//      return t;
+//    }
 
-  /**
-   * \brief get the given type that is stored at the given key.  Will throw if there is a type mismatch.
-   * @tparam T The compile time type to attempt to get from the tendrils.
-   * @param name The key value
-   * @return A const reference to the value, no copy is done.
-   */
-  template<typename T>
-  const T& get(const std::string& name) const
-  {
-    return at(name)->get<T> ();
-  }
+    template<typename T>
+    spore<T> declare(const std::string& name, const std::string& doc)
+    {
+      return declare<T>(name).set_doc(doc);
+    }
 
-  /**
-   * \brief get the given type that is stored at the given key.  Will throw if there is a type mismatch.
-   * @tparam T The compile time type to attempt to get from the tendrils.
-   * @param name The key value
-   * @return A reference to the value, no copy is done.
-   */
-  template<typename T>
-  T& get(const std::string& name)
-  {
-    return at(name)->get<T> ();
-  }
+    template<typename T>
+    tendril::ptr declare(const std::string& name, const std::string& doc,
+                         const T& default_val)
+    {
+      return declare<T>(name).set_default_val(doc);
+    }
 
-  /**
-   * \brief Grabs the tendril at the key.
-   * @param name The key for the desired tendril.
-   * @return A reference to the tendril.
-   */
-  tendril::const_ptr at(const std::string& name) const;
-  /**
-   * \brief Grabs the tendril at the key.
-   * @param name The key for the desired tendril.
-   * @return A reference to the tendril.
-   */
-  tendril::ptr at(const std::string& name);
+    /**
+     * \brief get the given type that is stored at the given key.  Will throw if there is a type mismatch.
+     * @tparam T The compile time type to attempt to get from the tendrils.
+     * @param name The key value
+     * @return A const reference to the value, no copy is done.
+     */
+    template<typename T>
+    const T& get(const std::string& name) const
+    {
+      return at(name)->get<T>();
+    }
 
-  /**
-   * \brief Print the tendrils documentation string, in rst format.
-   * @param out The stream to print to.
-   * @param tendrils_name The name used as a label, for the tendrils.
-   */
-  void print_doc(std::ostream& out, const std::string& tendrils_name) const;
+    /**
+     * \brief get the given type that is stored at the given key.  Will throw if there is a type mismatch.
+     * @tparam T The compile time type to attempt to get from the tendrils.
+     * @param name The key value
+     * @return A reference to the value, no copy is done.
+     */
+    template<typename T>
+    T& get(const std::string& name)
+    {
+      return at(name)->get<T>();
+    }
 
-  typedef boost::shared_ptr<tendrils> ptr;
-  typedef boost::shared_ptr<const tendrils> const_ptr;
+    /**
+     * \brief Grabs the tendril at the key.
+     * @param name The key for the desired tendril.
+     * @return A reference to the tendril.
+     */
+    tendril::const_ptr at(const std::string& name) const;
+    /**
+     * \brief Grabs the tendril at the key.
+     * @param name The key for the desired tendril.
+     * @return A reference to the tendril.
+     */
+    tendril::ptr at(const std::string& name);
 
-private:
-  typedef std::map<std::string, tendril::ptr> map_t;
-  mutable boost::mutex mtx;
-};
+    /**
+     * \brief Print the tendrils documentation string, in rst format.
+     * @param out The stream to print to.
+     * @param tendrils_name The name used as a label, for the tendrils.
+     */
+    void print_doc(std::ostream& out, const std::string& tendrils_name) const;
+
+    typedef boost::shared_ptr<tendrils> ptr;
+    typedef boost::shared_ptr<const tendrils> const_ptr;
+
+  private:
+    typedef std::map<std::string, tendril::ptr> map_t;
+    mutable boost::mutex mtx;
+  };
 }

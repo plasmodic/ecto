@@ -52,7 +52,7 @@ dochash = subprocess.Popen('git log -n1 --pretty=format:%H'.split(),
                            stdout=subprocess.PIPE).communicate()[0]
 
 print "dochash=", dochash
-copyright = u'2010, Troy D. Straszheim -- ' + ' Version ' + dochash + ", " + ' '.join(lastmod.split(' ')[:4])
+copyright = u'2011,  Willow Garage, Inc -- ' + ' Version ' + dochash + ", " + ' '.join(lastmod.split(' ')[:4])
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -189,8 +189,8 @@ htmlhelp_basename = 'ecto-cmakedoc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'ecto.tex', ur'Ecto',
-   ur'troy d. straszheim', 'manual'),
+  ('index', 'ecto.tex', ur'ecto',
+   ur'Troy D. Straszheim, Ethan A. Rublee', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of

@@ -11,7 +11,7 @@ namespace ecto
   }
 
   tendril::tendril() 
-    : holder_(new holder<none> (none())), dirty_(false)
+    : holder_(new holder<none> (none())), dirty_(false), default_(false)
   {
     //impl_ is never not initialized
   }
@@ -19,7 +19,7 @@ namespace ecto
   tendril::~tendril() { }
 
   tendril::tendril(const tendril& rhs) 
-    : holder_(rhs.holder_), doc_(rhs.doc_), dirty_(false)
+    : holder_(rhs.holder_), doc_(rhs.doc_), dirty_(false), default_(rhs.default_)
   { }
 
   tendril& tendril::operator=(const tendril& rhs)
@@ -29,6 +29,7 @@ namespace ecto
     holder_ = rhs.holder_;
     doc_ = rhs.doc_;
     dirty_ = rhs.dirty_;
+    default_ = rhs.default_;
     return *this;
   }
 
@@ -51,7 +52,7 @@ namespace ecto
     : holder_(impl), dirty_(true)
   { }
 
-  void tendril::setDoc(const std::string& doc_str)
+  void tendril::set_doc(const std::string& doc_str)
   {
     doc_ = doc_str;
   }
@@ -83,5 +84,13 @@ namespace ecto
         holder_->setPython(o);
       }
     dirty_ = true;
+  }
+  void tendril::trigger_callback()
+  {
+    if (dirty())
+    {
+      holder_->trigger_callback();
+    }
+    mark_clean();
   }
 }

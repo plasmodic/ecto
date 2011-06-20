@@ -81,9 +81,20 @@ namespace ecto
      */
     template<typename T>
     tendril(const T& t, const std::string& doc) :
-      holder_(new holder<T> (t)), dirty_(false)
+      holder_(new holder<T> (t)), dirty_(false), default_(true)
     {
-      setDoc(doc);
+      set_doc(doc);
+    }
+
+    template<typename T>
+    static tendril make_tendril()
+    {
+      tendril t;
+      t.holder_.reset(new holder<T>(T()));
+      t.dirty_ = false;
+      t.default_ = false;
+      t.doc_ = "TODO docstring me, please.";
+      return t;
     }
 
     /**
@@ -127,8 +138,18 @@ namespace ecto
      * \brief The doc for this tendril is runtime defined, so you may want to update it.
      * @param doc_str A human readable description of the tendril.
      */
-    void setDoc(const std::string& doc_str);
+    void set_doc(const std::string& doc_str);
 
+    template<typename T>
+    void set_default_val(const T& val = T())
+    {
+      default_ = true;
+      if(!dirty_) //user supplied?
+      {
+        get<T>() = val;
+        dirty_ = false;
+      }
+    }
     /**
      * Given T this will get the type from the tendril, also enforcing type with an exception.
      * @return a const reference to the value of the tendril (no copies)
@@ -217,10 +238,27 @@ namespace ecto
       return dirty_;
     }
 
+    bool clean() const
+    {
+      return !dirty_;
+    }
+
+    bool user_supplied() const
+    {
+      return user_supplied_;
+    }
+
+    bool has_default() const
+    {
+      return default_;
+    }
+
     //! A none type for tendril when the tendril is uninitialized.
     struct none
     {
     };
+
+  private:
 
     // ############################### NVI ####################################
     struct holder_base
@@ -290,10 +328,20 @@ namespace ecto
       T t;
       boost::function<void(T)> cb;
     };
+    void mark_dirty()
+    {
+      dirty_ = true;
+      user_supplied_ = true;
+    }
+    void mark_clean()
+    {
+      dirty_ = false;
+    }
     tendril(holder_base::ptr impl);
     boost::shared_ptr<holder_base> holder_;
     std::string doc_;
-    bool dirty_;
+    bool dirty_,default_, user_supplied_;
+  public:
 
     template<typename T>
     tendril& set_callback(boost::function<void(T)> cb)
@@ -306,15 +354,7 @@ namespace ecto
       return *this;
     }
 
-    void trigger_callback()
-    {
-      if (dirty_)
-        {
-          //std::cout << "calling callback : " << type_name() << std::endl;
-          holder_->trigger_callback();
-        }
-      dirty_ = false;
-    }
+    void trigger_callback();
 
   };
 
@@ -346,9 +386,26 @@ namespace ecto
       return *this;
     }
 
-    void set_doc(const std::string& doc)
+    spore<T>& set_doc(const std::string& doc)
     {
-      p()->setDoc(doc);
+      p()->set_doc(doc);
+      return *this;
+    }
+
+    spore<T>& set_default_val(const T& val)
+    {
+      p()->set_default_val(val);
+      return *this;
+    }
+
+    bool dirty() const
+    {
+      return p()->dirty();
+    }
+
+    bool user_supplied() const
+    {
+      return p()->user_supplied();
     }
 
     T* operator->()

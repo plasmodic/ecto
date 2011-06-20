@@ -26,7 +26,7 @@ std::string tendril_doc(tendril::ptr t)
 
 void tendril_set_doc(tendril::ptr t, const std::string& doc)
 {
-  return t->setDoc(doc);
+  return t->set_doc(doc);
 }
 
 bp::object tendril_get_val(tendril::ptr t)
@@ -42,7 +42,7 @@ void tendril_set_val(tendril::ptr t, bp::object val)
 void wrapConnection(){
   bp::class_<tendril,boost::shared_ptr<tendril> >("Tendril")
     .def("__init__", bp::make_constructor(tendril_ctr))
-    .add_property("doc",tendril_doc,&tendril::setDoc)
+    .add_property("doc",tendril_doc,&tendril::set_doc)
     .add_property("type_name",tendril_type_name )
     .add_property("val", tendril_get_val,tendril_set_val)
     .def("get",tendril_get_val)
