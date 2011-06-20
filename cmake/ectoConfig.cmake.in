@@ -13,6 +13,12 @@
 #    This file will define the following variables:
 #      - ecto_LIBRARIES                 : The list of libraries to link against.
 #      - ecto_INCLUDE_DIRS              : The ecto include directories
+#    These macros:
+#      set_ecto_install_package_name(package_name) #default is ""
+#	   ectomodule(module_name ${srcs})
+#	   link_ecto(module_name ${libs})
+#	   install_ecto_module(module_name)
+#
 # ==============================================================================
 find_package(Boost COMPONENTS
  python
@@ -85,6 +91,8 @@ elseif(WIN32)
     get_filename_component(PYTHON_PATH "[HKEY_LOCAL_MACHINE\\SOFTWARE\\Python\\PythonCore\\${PYTHON_VERSION_MAJOR_MINOR}\\InstallPath]" ABSOLUTE CACHE)
     set(PYTHON_PACKAGES_PATH "${PYTHON_PATH}/Lib/site-packages" CACHE PATH "Where to install the python packages.")
 endif()
+
+set(ecto_module_PYTHON_INSTALL ${PYTHON_PACKAGES_PATH} CACHE PATH "The path where modules will be installed." )
 
 #this is where usermodules may be installed to
 macro(set_ecto_install_package_name package_name)

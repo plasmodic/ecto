@@ -8,20 +8,18 @@ def test_doc():
     gather = ecto_test.Gather(n=3)
     gather2 = ecto_test.Gather(n=3)
     plasm = ecto.Plasm()
-    for t,f in zip(gather.inputs.keys(), scatter.outputs.keys()):
-        plasm.connect(scatter, f, gather, t)
-    for t,f in zip(gather2.inputs.keys(), scatter.outputs.keys()[3:]):
-        plasm.connect(scatter, f, gather2, t)
-    sched = ecto.schedulers.Singlethreaded(plasm)
-    sched.execute(niter=1)
+    plasm.connect(
+                  scatter["out_0000","out_0001","out_0002"] >> gather[:],
+                  scatter["out_0003","out_0004","out_0005"] >> gather2[:]
+                  )
+    plasm.execute()
     result = gather.outputs.out
     assert(result == 9) # 3 * 3
-    
-    ecto.print_module_doc(scatter)
-    ecto.print_module_doc(gather)
+    assert scatter.__doc__ != None
+    print scatter.__doc__
+    print gather.__doc__
     print plasm.viz()
-    
-    #ecto.view_plasm(plasm)
+
 def test_inspection():
     ecto.list_ecto_module(ecto_test)
     ecto.list_ecto_module(pyecto)

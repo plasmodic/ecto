@@ -27,7 +27,7 @@ namespace ecto {
       while (inbegin != inend)
         {
           edge::ptr e = graph[*inbegin];
-          m->inputs.at(e->to_port).copy_value(e->front());
+          m->inputs.at(e->to_port)->copy_value(e->front());
           e->pop_front();
           ++inbegin;
         }
@@ -39,7 +39,7 @@ namespace ecto {
       while (outbegin != outend)
         {
           edge::ptr e = graph[*outbegin];
-          e->push_back(m->outputs.at(e->from_port));
+          e->push_back(*m->outputs.at(e->from_port));
           ++outbegin;
         }
 

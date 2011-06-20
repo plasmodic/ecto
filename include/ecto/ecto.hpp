@@ -35,12 +35,14 @@
 #include <boost/format.hpp>
 
 //ecto includes
+#include <ecto/version.hpp>
 #include <ecto/module.hpp>
 #include <ecto/tendril.hpp>
 #include <ecto/tendrils.hpp>
 #include <ecto/plasm.hpp>
 #include <ecto/util.hpp>
 #include <ecto/python/raw_constructor.hpp>
+
 #include <iostream>
 #include <sstream>
 
@@ -52,30 +54,6 @@
  */
 namespace ecto
 {
-  /**
-   * \internal
-   */
-  template<typename T>
-  struct doc
-  {
-    static std::string doc_str; //!<a doc string for humans to read in python.
-    static std::string name; //!< the name for this type.
-    //! get the doc
-    static std::string getDoc()
-    {
-      return doc_str;
-    }
-    //! get the name
-    static std::string getName()
-    {
-      return name;
-    }
-  };
-  template<typename T>
-  std::string doc<T>::doc_str;
-  template<typename T>
-  std::string doc<T>::name;
-
   template<typename T>
   boost::shared_ptr<ecto::module_<T> > inspect(boost::python::tuple args,
                                                boost::python::dict kwargs)
@@ -94,7 +72,7 @@ namespace ecto
     if (bp::len(args) == 0)
       {
         // generate default name == type
-        std::string defaultname = str(boost::format("%s") % m->type());
+        std::string defaultname = boost::str(boost::format("%s") % m->type());
         m->name(defaultname);
       }
     else 
@@ -122,7 +100,7 @@ namespace ecto
           {
             std::string valstring =
               bp::extract<std::string>(value.attr("__repr__")());
-            m->parameters.at(keystring).set(value);
+            m->parameters.at(keystring)->set(value);
           }
       }
     m->declare_io();
@@ -134,7 +112,7 @@ namespace ecto
   std::string module_doc(std::string doc)
   {
     ecto::module::ptr m = ecto::inspect_module<T>();
-    std::string defaultname = str(boost::format("%s") % m->type());
+    std::string defaultname = boost::str(boost::format("%s") % m->type());
     m->name(defaultname);
     return m->gen_doc(doc);
   }
@@ -167,17 +145,13 @@ namespace ecto
     boost::python::class_<module_t, boost::python::bases<module>,
         boost::shared_ptr<module_t>, boost::noncopyable>
         m(name, module_doc<UserModule> (doc_str).c_str());
-    typedef doc<UserModule> docT;
-    docT::name = name;
-    docT::doc_str = doc_str;
-
     m.def("__init__",
           boost::python::raw_constructor(&raw_construct<UserModule> ));
     m.def("inspect", &inspect<UserModule> );
     m.staticmethod("inspect");
-    m.def("doc", &docT::getDoc).staticmethod("doc");
     m.def("name", (std::string (module_t::*)() const) &module_t::name);
     m.def("type_name", (std::string (module_t::*)() const) &module_t::type);
   }
 }
 
+#include <ecto/registry.hpp>

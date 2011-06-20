@@ -74,7 +74,7 @@ namespace ecto
    //determine the io
    static void declare_io(const tendrils& params, tendrils& in, tendrils& out);
    //called right after allocation of the module, exactly once.
-   void configure(tendrils& params);
+   void configure(tendrils& params, tendrils& inputs, tendrils& outputs);
    //called at every execution of the graph
    int process(const tendrils& in, tendrils& out);
    //called right before the destructor of the module, a good place to do
@@ -166,7 +166,8 @@ namespace ecto
     virtual void dispatch_declare_params(tendrils& t) = 0;
     virtual void dispatch_declare_io(const tendrils& params, tendrils& inputs,
                                      tendrils& outputs) = 0;
-    virtual void dispatch_configure(tendrils& params) = 0;
+    virtual void dispatch_configure(tendrils& params, tendrils& inputs,
+                                    tendrils& outputs) = 0;
     virtual ReturnCode
     dispatch_process(const tendrils& inputs, tendrils& outputs) = 0;
     virtual void dispatch_destroy() = 0;
@@ -297,23 +298,25 @@ namespace ecto
       declare_io(int_<has_f<Module>::declare_io> (), params, inputs, outputs);
     }
 
-    void configure(not_implemented, const tendrils& params)
+    void configure(not_implemented, tendrils&, tendrils& , tendrils&)
     {
     }
 
-    void configure(implemented, tendrils& params)
+    void configure(implemented, tendrils& params, tendrils& inputs,
+                   tendrils& outputs)
     {
-      thiz->configure(params);
+      thiz->configure(params,inputs,outputs);
     }
 
-    void dispatch_configure(tendrils& params)
+    void dispatch_configure(tendrils& params, tendrils& inputs,
+                            tendrils& outputs)
     {
       //the module may not be allocated here, so check pointer.
       if (!thiz)
         {
           thiz.reset(new Module);
         }
-      configure(int_<has_f<Module>::configure> (), params);
+      configure(int_<has_f<Module>::configure> (), params,inputs,outputs);
     }
 
     ReturnCode process(not_implemented, const tendrils& inputs,
@@ -330,7 +333,7 @@ namespace ecto
     ReturnCode dispatch_process(const tendrils& inputs, tendrils& outputs)
     {
       if (!thiz)
-        dispatch_configure(parameters);
+        dispatch_configure(parameters,this->inputs,outputs);
       return process(int_<has_f<Module>::process> (), inputs, outputs);
     }
 
@@ -363,7 +366,7 @@ namespace ecto
           parameters.begin();
       while (it != end)
         {
-          it->second.copy_value(oit->second);
+          it->second->copy_value(*oit->second);
           ++oit;
           ++it;
         }

@@ -1,6 +1,7 @@
 import ecto
 
 class MyModule(ecto.Module):
+    """ A python module that does not much."""
     def __init__(self, *args, **kwargs):
         ecto.Module.__init__(self, **kwargs)
     

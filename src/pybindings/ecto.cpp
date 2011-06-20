@@ -2,6 +2,7 @@
 
 namespace bp = boost::python;
 
+//forward declare all modules.
 namespace ecto {
   namespace py {
     void wrapTendrils();
@@ -12,7 +13,6 @@ namespace ecto {
     void wrapStrand();
   }
 }
-
 
 BOOST_PYTHON_MODULE(ecto)
 {

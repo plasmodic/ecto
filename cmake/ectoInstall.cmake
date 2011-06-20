@@ -3,16 +3,17 @@
 
 #install headers
 set(ecto_HEADERS
-  include/ecto/blackbox.hpp
   include/ecto/ecto.hpp
   include/ecto/graph_types.hpp
   include/ecto/log.hpp
   include/ecto/module.hpp
   include/ecto/plasm.hpp
+  include/ecto/spore.hpp
   include/ecto/strand.hpp
   include/ecto/tendril.hpp
   include/ecto/tendrils.hpp
   include/ecto/util.hpp
+  ${CMAKE_BINARY_DIR}/include/ecto/version.hpp
   )
 
 set(ecto_scheduler_HEADERS
@@ -61,6 +62,7 @@ INSTALL(FILES ${CMAKE_BINARY_DIR}/unix_install/ectoConfig.cmake
 #python support
 set(ecto_PYTHON_FILES
   python/ecto/__init__.py
+  python/ecto/blackbox.py
   python/ecto/doc.py
   python/ecto/module.py
   python/ecto/xdot.py

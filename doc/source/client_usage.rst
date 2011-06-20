@@ -43,7 +43,7 @@ If you have a look at the file this is all it does:
 
 Samples
 -----------------------------------
-You may want to checkout the samples, at https://github.com/ethanrublee/ecto_samples
+You may find sample of ecto usage in the samples directory.
 
 An Example
 -----------------------------------
@@ -69,7 +69,8 @@ Here is the clients CMakeLists.txt
     #  ${MY_EXTRA_LIBS}
     #)
     
-  
+    #generates an install target for your module (puts it in the python dist folder)
+    install_ecto_module(hello_ecto)
   
 C++ Code
 ***********************************
@@ -98,7 +99,7 @@ An example implementation of an ecto module:
         in.declare<std::string> ("str", "The string to print.", parms.get<std::string> ("str"));
       }
     
-      void configure(tendrils& params)
+      void configure(tendrils& params, tendrils& in, tendrils& out)
       {
         str_ = params.get<std::string> ("str");
       }

@@ -103,7 +103,10 @@ namespace ecto
     /**
      * \brief Execute using a predefined scheduler.
      */
-    int execute(unsigned niter);
+    int execute(unsigned niter = 1);
+
+    typedef boost::shared_ptr<plasm> ptr;
+    typedef boost::shared_ptr<const plasm> const_ptr;
 		
   private:
     //TODO expose the nodes and edges to the world.

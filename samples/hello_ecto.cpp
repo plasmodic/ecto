@@ -33,69 +33,74 @@
 namespace hello_ecto
 {
 
-using ecto::tendrils;
+  using ecto::tendrils;
 
-/* BOILER_PLATE_MODULE
-struct MyModule
-{
-  static void declare_params(tendrils& params);
-  static void declare_io(const tendrils& params, tendrils& in, tendrils& out);
-  void configure(tendrils& params);
-  int process(const tendrils& in, tendrils& out);
-  void destroy();
-};
-*/
+  /* BOILER_PLATE_MODULE
+   struct MyModule
+   {
+   static void declare_params(tendrils& params);
+   static void declare_io(const tendrils& params, tendrils& in, tendrils& out);
+   void configure(tendrils& params, tendrils& inputs, tendrils& outputs);
+   int process(const tendrils& in, tendrils& out);
+   void destroy();
+   };
+   */
 
-struct Printer
-{
-  static void declare_params(tendrils& params)
+  struct Printer
   {
-    params.declare<std::string> ("str", "The default string to print", "hello");
-  }
+    static void declare_params(tendrils& params)
+    {
+      params.declare<std::string> ("str", "The default string to print", "hello");
+    }
 
-  static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
-  {
-    in.declare<std::string> ("str", "The string to print.", parms.get<std::string> ("str"));
-  }
+    static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
+    {
+      in.declare<std::string> ("str", "The string to print.", parms.get<std::string> ("str"));
+    }
 
-  Printer(): str_()
-  {
-  }
-  
-  void configure(tendrils& params)
-  {
-    str_ = params.get<std::string> ("str");
-  }
+    void configure(tendrils& params, tendrils& inputs, tendrils& outputs)
+    {
+      str_ = inputs.at("str");
+    }
 
-  int process(const tendrils& in, tendrils& /*out*/)
-  {
-    std::cout << in.get<std::string> ("str") << std::endl;
-    return 0;
-  }
-  std::string str_;
-};
+    int process(const tendrils& in, tendrils& /*out*/)
+    {
+      std::cout << str_() << std::endl;
+      return ecto::OK;
+    }
+    ecto::spore<std::string> str_;
+  };
 
-struct Reader
-{
-  static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
+  struct Reader
   {
-    out.declare<std::string> ("output", "Output from standard in");
-  }
+    static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
+    {
+      out.declare<std::string> ("output", "Output from standard in");
+    }
 
-  int process(const tendrils& in, tendrils& out)
-  {
-    std::string s;
-    std::cin >> s;
-    out.get<std::string> ("output") = s;
-    return ecto::OK;
-  }
-};
+    void configure(tendrils& params, tendrils& inputs, tendrils& outputs)
+    {
+      output_ = outputs.at("output");
+    }
+
+    int process(const tendrils& in, tendrils& out)
+    {
+      std::string s;
+      std::cin >> s;
+      *output_ = s;
+      return ecto::OK;
+    }
+    ecto::spore<std::string> output_;
+  };
 
 }
+ECTO_REGISTRY(hello_ecto);
 
 BOOST_PYTHON_MODULE(hello_ecto)
 {
-  using namespace hello_ecto;
-  ecto::wrap<Printer>("Printer", "Prints a string input to standard output.");
-  ecto::wrap<Reader>("Reader", "Reads input from standard input.");
+  ECTO_REGISTER(hello_ecto);
 }
+
+ECTO_MODULE(hello_ecto, hello_ecto::Printer, "Printer", "Prints a string input to standard output.");
+ECTO_MODULE(hello_ecto, hello_ecto::Reader, "Reader", "Reads input from standard input.");
+

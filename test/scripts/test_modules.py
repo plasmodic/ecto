@@ -18,6 +18,47 @@ def test_modules_01():
     for out in s.outputs:
         print out[1].val
         assert(out[1].val == 3)
+def test_modules_spec():
+    g = ecto_test.Generate(start=0, step=2)
+    x = g["out"]
+    x = g["out","out"]
+    try:
+        x = g[2.0]
+        assert False, "should have thrown"
+    except TypeError, e:
+        print e
+    try:
+        x = g["out",2.0]
+        assert False, "should have thrown"
+    except RuntimeError, e:
+        print e
+    try:
+        x = g["out","and","about"]
+        assert False, "should have thrown"
+    except RuntimeError, e:
+        print e
+    
+    scatter = ecto_test.Scatter(n=3, x=3)
+    gather = ecto_test.Gather(n=3)
+    a = scatter[scatter.outputs.keys()]
+    b = gather[gather.inputs.keys()]
+    print a,b
+    print a >> b
+    plasm = ecto.Plasm()
+    plasm.connect(a>>b)
+    plasm.execute(1)
+    result = gather.outputs.out
+    print result
+    assert(result == 9) # 3 * 3
+    
+    connections = scatter[:] >> gather[:]
+    assert(len(connections) == 3)
+    try:
+        scatter[1:-1]
+        assert False, "[1:-1] should not work..."
+    except RuntimeError,e:
+        print e
+        
 
 def noarg(x):
     ecto_test.Generate(start=0, n=3, step=2)
@@ -65,11 +106,7 @@ def type_and_instance_names():
     assert m2.type_name() == "ecto_test::Generate<double>"
     
 def not_allocable():
-    try:
-        d = ecto_test.DontAllocateMe()
-        assert False, "that should have thrown"
-    except:
-        print "threw, okay"
+    d = ecto_test.DontAllocateMe()
 
 def test_modules_wrong_args():
     not_allocable()
@@ -86,3 +123,4 @@ def test_modules_wrong_args():
 if __name__ == '__main__':
     test_modules_01()
     test_modules_wrong_args()
+    test_modules_spec()

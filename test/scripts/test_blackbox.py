@@ -1,48 +1,67 @@
 #!/usr/bin/env python
 import ecto, ecto.schedulers
 import ecto_test
-
-class BlackBox(ecto.Module):
-    def __init__(self, *args, **kwargs):
-        ecto.Module.__init__(self, **kwargs)
-        self.generate = ecto_test.Generate.inspect(None,None)
-        
-    @staticmethod
-    def declare_params(params):
-        params.declare("text", "a param.","hello there")
-        generate = ecto_test.Generate.inspect(None,None)
-        params = generate.par
-
-    @staticmethod
-    def declare_io(params, inputs, outputs):
-        inputs.declare("input","aye", 2)
-        outputs.declare("out", "i'll give you this", "hello")
+           
+class MyModule(ecto.BlackBox):
+    def __init__(self, start, step):
+        ecto.BlackBox.__init__(self)
+        self.generate = ecto_test.Generate(start=start, step=step)
+        self.inc = ecto_test.Increment()
+        self.printer = ecto_test.Printer()
+    def expose_outputs(self):
+        return {
+                "out":self.inc["out"]
+               }
+    def expose_parameters(self):
+        return {
+                "start":self.generate["start"],
+                "step":self.generate["step"]
+                }
+    def connections(self):
+        return [
+                self.generate["out"] >> self.inc["in"],
+                self.inc["out"] >> self.printer["in"]
+               ]
+class MyModule2(ecto.BlackBox):
+    def __init__(self, start, step):
+        ecto.BlackBox.__init__(self)
+        self.generate = ecto_test.Generate(start=start, step=step)
+        self.inc = ecto_test.Increment()
+    def expose_outputs(self):
+        return {
+                "out":self.inc["out"]
+               }
+    def expose_parameters(self):
+        return {
+                "start":self.generate["start"],
+                "step":self.generate["step"]
+                }
+    def connections(self):
+        return [
+                self.generate["out"] >> self.inc["in"],
+               ]
     
-    def configure(self,params):
-        self.text = params.text
-
-    def process(self,inputs, outputs):
-        c = int(inputs.input)
-        outputs.out = c * self.text
-
-def black_box():
-    plasm = ecto.Plasm()
-    x =
-        
-def make_plasm(plasm):
-    generate = ecto_test.Generate(start=1, step=3.0)
-    inc = ecto_test.Increment()
-    plasm.connect(generate, "out", inc, "in")
-    plasm.inc = inc
-    return plasm
-
 def test_blackbox():
-    plasm = make_plasm(ecto.Plasm())
-    sched = ecto.schedulers.Singlethreaded(plasm)
-    
-    sched.execute(niter=10)
-        
-    print plasm.inc.outputs.out
+    mm = MyModule(start=10, step=3)
+    inc = ecto_test.Increment()
+    plasm = ecto.Plasm()
+    print mm.outputs.out
+    assert mm.outputs.out == 0
+    plasm.connect(mm.connections())
+    print mm["out", "out"]
+    plasm.connect(mm["out"] >> inc["in"])    
+    plasm.execute(11)
+    print mm.outputs.out
+    print mm.parameters.start
+    print mm.parameters.step
+    assert mm.outputs.out == 41 # 10 + 10*3 + 1
+    try:
+        print mm.inputs.input
+        assert False, "Should have thrown, input does not exist!!!"
+    except RuntimeError, e:
+        print e
+    #single item in connections list.
+    mm = MyModule2(start=10,step=3)
     
 if __name__ == '__main__':
     test_blackbox()

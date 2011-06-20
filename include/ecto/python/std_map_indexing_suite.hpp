@@ -117,7 +117,7 @@ return incref(tuple.attr("__iter__")().ptr());
         {
           bp::list t;
           for(typename Container::const_iterator it = x.begin(); it != x.end(); it++)
-            t.append(make_tuple(it->first, it->second));
+            t.append(bp::make_tuple(it->first, it->second));
           return t;
         }
 
@@ -177,7 +177,7 @@ return incref(tuple.attr("__iter__")().ptr());
             const_iterator it = x.begin();
             object result;
             if (it != x.end()) {
-                result = make_tuple(it->first,it->second);
+                result = boost::python::make_tuple(it->first,it->second);
                 x.erase(it->first);
                 return result;
             }
@@ -274,7 +274,7 @@ return incref(tuple.attr("__iter__")().ptr());
 
           result_type operator()(value_type const& x) const 
           { 
-            return make_tuple(x.first,x.second); 
+            return  boost::python::make_tuple(x.first,x.second);
           }
         };
 

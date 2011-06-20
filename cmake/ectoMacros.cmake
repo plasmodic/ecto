@@ -22,3 +22,11 @@ macro(link_ecto NAME)
     ${ARGN}
   )
 endmacro()
+
+macro( install_ecto_module name)
+#this is the python extension
+install(TARGETS ${name}_ectomodule
+  LIBRARY DESTINATION ${ecto_module_PYTHON_INSTALL} COMPONENT main
+  )
+endmacro()
+

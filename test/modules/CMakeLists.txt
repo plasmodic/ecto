@@ -1,0 +1,11 @@
+ectomodule(ecto_test
+  Add.cpp
+  Multiply.cpp
+  Quitter.cpp
+  Increment.cpp
+  Printer.cpp
+  Gather.cpp
+  Generate.cpp
+  Uniform01.cpp
+  ecto_test.cpp
+)

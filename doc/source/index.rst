@@ -1,13 +1,14 @@
 ecto
-================================
+====
+
 ecto is a dynamically configurable *Directed Acyclic processing Graph* **(DAG)** framework.  
-Users may write reusable ecto::modules which 
-become the nodes in the DAG, or ecto::plasm.  Modules may be written 
-in c++ as boost::python extensions, or in pure python, 
-and python is used for the declaration of the DAG.
+Users may write reusable ``ecto::module``\ s which 
+become the nodes in the DAG, or ``ecto::plasm``.  Modules may be written 
+in c++ as ``boost::python`` extensions, or in pure python, 
+and python is used to construct the DAG.
 
 Contents:
-================================
+=========
 
 .. toctree::
    :maxdepth: 2
@@ -19,9 +20,11 @@ Contents:
    tendrils
    module
    plasm
+   schedulers
    
 ecto at a glance
----------------------------------
+----------------
+
     * Simple processing node interface for building your own modules.
     
     .. code-block:: c++
@@ -32,7 +35,7 @@ ecto at a glance
         {
           static void declare_params(tendrils& params);
           static void declare_io(const tendrils& params, tendrils& in, tendrils& out);
-          void configure(tendrils& params);
+          void configure(tendrils& params, tendrils& in, tendrils& out);
           int process(const tendrils& in, tendrils& out);
           void destroy();
         };
@@ -47,8 +50,7 @@ ecto at a glance
         {
             params.declare<Foo>("foo","Foo is for spam. This is a doc string", 
             					Foo(3.14));
-            params.declare<std::string>("str", "str is a standard string.",
-            							"default");
+            params.declare<std::string>("str", "str is a standard string.", "default");
         }
     
     * Python is used as the plugin architecture of ecto. Exposing your modules to python is dead simple.
@@ -85,7 +87,7 @@ ecto at a glance
 		p = hello_ecto.Printer(str="default")
 		
 		#connect outputs to inputs
-		plasm.connect(r, "output", p, "str")
+		plasm.connect(r["output] >> p["str"])
 		
 		#an execution loop
 		print "Enter input, q to quit"
@@ -109,5 +111,4 @@ ecto at a glance
 			0->2 [headlabel="str" taillabel="output"];
 		}
 
-        
     * Each module is self documenting by design.
