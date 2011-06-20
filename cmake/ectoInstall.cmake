@@ -8,11 +8,12 @@ set(ecto_HEADERS
   include/ecto/log.hpp
   include/ecto/module.hpp
   include/ecto/plasm.hpp
+  include/ecto/spore.hpp
   include/ecto/strand.hpp
   include/ecto/tendril.hpp
   include/ecto/tendrils.hpp
   include/ecto/util.hpp
-  ${CMAKE_BINARY_DIR}/include/ecto/vershion.hpp
+  ${CMAKE_BINARY_DIR}/include/ecto/version.hpp
   )
 
 set(ecto_scheduler_HEADERS

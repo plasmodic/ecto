@@ -11,16 +11,19 @@ namespace py
 
 tendril::ptr tendril_ctr()
 {
+  SHOW();
   return boost::shared_ptr<tendril>(new tendril(bp::object(),"A pythonic tendril."));
 }
 
 std::string tendril_type_name(tendril::ptr t)
 {
+  SHOW();
   return t->type_name();
 }
 
 std::string tendril_doc(tendril::ptr t)
 {
+  SHOW();
   return t->doc();
 }
 

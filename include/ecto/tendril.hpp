@@ -81,19 +81,19 @@ namespace ecto
      */
     template<typename T>
     tendril(const T& t, const std::string& doc) :
-      holder_(new holder<T> (t)), dirty_(false), default_(true)
+      holder_(new holder<T> (t)), doc_(doc), dirty_(false), default_(true), user_supplied_(false)
     {
-      set_doc(doc);
     }
 
     template<typename T>
-    static tendril make_tendril()
+    static tendril::ptr make_tendril()
     {
-      tendril t;
-      t.holder_.reset(new holder<T>(T()));
-      t.dirty_ = false;
-      t.default_ = false;
-      t.doc_ = "TODO docstring me, please.";
+      holder_base::ptr h(new holder<T>(T()));
+      tendril::ptr t(new tendril(h));
+      t->dirty_ = false;
+      t->default_ = false;
+      t->doc_ = "TODO docstring me, please.";
+      t->user_supplied_ = false;
       return t;
     }
 
@@ -144,10 +144,9 @@ namespace ecto
     void set_default_val(const T& val = T())
     {
       default_ = true;
-      if(!dirty_) //user supplied?
+      if(!user_supplied_) //user supplied?
       {
-        get<T>() = val;
-        dirty_ = false;
+        holder_.reset(new holder<T>(val));
       }
     }
     /**
@@ -172,7 +171,7 @@ namespace ecto
     {
       //throws on failure
       enforce_type<T> ();
-      dirty_ = true; // likely changed..
+      mark_dirty(); // likely changed..
       //cast a void pointer to this type.
       return *static_cast<T*> (holder_->get());
     }
@@ -358,74 +357,6 @@ namespace ecto
 
   };
 
-  template<typename T>
-  struct spore
-  {
-    spore()
-    {
-    }
-    spore(tendril::ptr t) :
-      tendril_(t)
-    {
-      t->enforce_type<T> ();
-    }
-
-    inline tendril::ptr p()
-    {
-      return tendril_.lock();
-    }
-
-    inline tendril::const_ptr p() const
-    {
-      return tendril_.lock();
-    }
-
-    spore<T>& set_callback(boost::function<void(T)> cb)
-    {
-      p()->set_callback(cb);
-      return *this;
-    }
-
-    spore<T>& set_doc(const std::string& doc)
-    {
-      p()->set_doc(doc);
-      return *this;
-    }
-
-    spore<T>& set_default_val(const T& val)
-    {
-      p()->set_default_val(val);
-      return *this;
-    }
-
-    bool dirty() const
-    {
-      return p()->dirty();
-    }
-
-    bool user_supplied() const
-    {
-      return p()->user_supplied();
-    }
-
-    T* operator->()
-    {
-      return &(tendril_.lock()->get<T>());
-    }
-    const T* operator->() const
-    {
-      return &(tendril_.lock()->get<T>());
-    }
-    const T& operator*() const
-    {
-      return tendril_.lock()->get<T>();
-    }
-    T& operator*()
-    {
-      return tendril_.lock()->get<T>();
-    }
-    boost::weak_ptr<tendril> tendril_;
-  };
 
   template<typename T>
   bool tendril::holder_base::check(tendril::holder_base& i)

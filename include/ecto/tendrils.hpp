@@ -28,6 +28,7 @@
  */
 #pragma once
 #include <ecto/tendril.hpp>
+#include <ecto/spore.hpp>
 #include <boost/thread.hpp>
 
 #include <string>
@@ -48,7 +49,7 @@ namespace ecto
     template<typename T>
     spore<T> declare(const std::string& name)
     {
-      tendril::ptr t( new tendril(tendril::make_tendril<T>()));
+      tendril::ptr t(tendril::make_tendril<T>());
       map_t::iterator it = find(name);
       //if there are no exiting tendrils by the given name,
       //just add it.
@@ -76,14 +77,6 @@ namespace ecto
       return at(name);
     }
 
-//    template<typename T>
-//    tendril::ptr declare(const std::string& name, const T& default_val)
-//    {
-//      tendril::ptr t = declare<T>(name);
-//      t->set_default_val<T>(default_val);
-//      return t;
-//    }
-
     template<typename T>
     spore<T> declare(const std::string& name, const std::string& doc)
     {
@@ -91,10 +84,10 @@ namespace ecto
     }
 
     template<typename T>
-    tendril::ptr declare(const std::string& name, const std::string& doc,
+    spore<T> declare(const std::string& name, const std::string& doc,
                          const T& default_val)
     {
-      return declare<T>(name).set_default_val(doc);
+      return declare<T>(name,doc).set_default_val(default_val);
     }
 
     /**
