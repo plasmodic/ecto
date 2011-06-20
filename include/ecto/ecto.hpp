@@ -154,3 +154,4 @@ namespace ecto
   }
 }
 
+#include <ecto/registry.hpp>

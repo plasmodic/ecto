@@ -58,22 +58,17 @@ namespace hello_ecto
       in.declare<std::string> ("str", "The string to print.", parms.get<std::string> ("str"));
     }
 
-    Printer() :
-      str_()
-    {
-    }
-
     void configure(tendrils& params, tendrils& inputs, tendrils& outputs)
     {
-      str_ = params.get<std::string> ("str");
+      str_ = inputs.at("str");
     }
 
     int process(const tendrils& in, tendrils& /*out*/)
     {
-      std::cout << in.get<std::string> ("str") << std::endl;
-      return 0;
+      std::cout << str_() << std::endl;
+      return ecto::OK;
     }
-    std::string str_;
+    ecto::spore<std::string> str_;
   };
 
   struct Reader
@@ -83,20 +78,29 @@ namespace hello_ecto
       out.declare<std::string> ("output", "Output from standard in");
     }
 
+    void configure(tendrils& params, tendrils& inputs, tendrils& outputs)
+    {
+      output_ = outputs.at("output");
+    }
+
     int process(const tendrils& in, tendrils& out)
     {
       std::string s;
       std::cin >> s;
-      out.get<std::string> ("output") = s;
+      *output_ = s;
       return ecto::OK;
     }
+    ecto::spore<std::string> output_;
   };
 
 }
+ECTO_REGISTRY(hello_ecto);
 
 BOOST_PYTHON_MODULE(hello_ecto)
 {
-  using namespace hello_ecto;
-  ecto::wrap<Printer>("Printer", "Prints a string input to standard output.");
-  ecto::wrap<Reader>("Reader", "Reads input from standard input.");
+  ECTO_REGISTER(hello_ecto);
 }
+
+ECTO_MODULE(hello_ecto, hello_ecto::Printer, "Printer", "Prints a string input to standard output.");
+ECTO_MODULE(hello_ecto, hello_ecto::Reader, "Reader", "Reads input from standard input.");
+
