@@ -32,7 +32,7 @@ namespace ecto
     tendrils::iterator begin = parameters.begin(), end = parameters.end();
     while (begin != end)
       {
-        begin->second->trigger_callback();
+        begin->second->notify();
         ++begin;
       }
 

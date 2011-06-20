@@ -92,7 +92,7 @@ namespace ecto
     }
     mark_dirty();
   }
-  void tendril::trigger_callback()
+  void tendril::notify()
   {
     if (dirty())
     {

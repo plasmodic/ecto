@@ -99,7 +99,13 @@ namespace ecto
     template<typename T>
     const T& get(const std::string& name) const
     {
-      return at(name)->get<T>();
+      return at(name)->read<T>();
+    }
+
+    template<typename T>
+    const T& read(const std::string& name) const
+    {
+      return at(name)->read<T>();
     }
 
     /**

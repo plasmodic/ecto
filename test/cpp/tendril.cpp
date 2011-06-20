@@ -12,11 +12,12 @@ TEST(TendrilTest, Dirtiness)
 
   EXPECT_FALSE(t.dirty());
   EXPECT_EQ(t.doc(), "docstring");
-  EXPECT_EQ(t.get<float>(), 0.5f);
+  EXPECT_EQ(t.read<float>(), 0.5f);
+  EXPECT_FALSE(t.dirty());
   EXPECT_EQ(t.type_name(), "float");
   t.get<float>() = 0.75f;
   EXPECT_TRUE(t.dirty());
-  EXPECT_EQ(t.get<float>(), 0.75f);
+  EXPECT_EQ(t.read<float>(), 0.75f);
 }
 
 TEST(TendrilTest, Defaultness)

@@ -59,17 +59,29 @@ namespace ecto
 
     inline tendril::ptr p()
     {
-      return tendril_.lock();
+      tendril::ptr _p = tendril_.lock();
+      if (!_p)
+        throw std::logic_error("This spore points to nothing.");
+      return _p;
     }
 
     inline tendril::const_ptr p() const
     {
-      return tendril_.lock();
+      tendril::const_ptr _p = tendril_.lock();
+      if (!_p)
+        throw std::logic_error("This spore points to nothing.");
+      return _p;
     }
 
     spore<T>& set_callback(boost::function<void(T)> cb)
     {
       p()->set_callback(cb);
+      return *this;
+    }
+
+    spore<T>& notify()
+    {
+      p()->notify();
       return *this;
     }
 
@@ -102,20 +114,34 @@ namespace ecto
 
     T* operator->()
     {
-      return &(tendril_.lock()->get<T>());
+      tendril::ptr _p = p();
+      return &(_p->get<T>());
     }
     const T* operator->() const
     {
-      return &(tendril_.lock()->get<T>());
+      tendril::const_ptr _p = p();
+      return &(_p->read<T>());
     }
     const T& operator*() const
     {
-      return tendril_.lock()->get<T>();
+      tendril::const_ptr _p = p();
+      return _p->read<T>();
     }
     T& operator*()
     {
-      return tendril_.lock()->get<T>();
+      tendril::ptr _p = p();
+      return _p->get<T>();
     }
+    /**
+     * This is the const read operation, as opposed to the derefence which is not necessarily const.
+     * @return const ref, no copies...
+     */
+    const T& operator()() const
+    {
+      tendril::const_ptr _p = p();
+      return _p->read<T>();
+    }
+  private:
     boost::weak_ptr<tendril> tendril_;
   };
 }

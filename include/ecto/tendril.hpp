@@ -156,14 +156,13 @@ namespace ecto
     template<typename T>
     inline const T& get() const
     {
-      //throws on failure
-      enforce_type<T> ();
-      //cast a void pointer to this type.
-      return *static_cast<const T*> (holder_->get());
+      return read<T>();
     }
 
     /**
      * Given T this will get the type from the tendril, also enforcing type with an exception.
+     * It is assumed if this is called that the value will be changed, and therefore dirty.
+     * If it is not intended to change the tendril, then one should call the read<T> function explicitly.
      * @return a reference to the value of the tendril (no copies)
      */
     template<typename T>
@@ -176,6 +175,17 @@ namespace ecto
       return *static_cast<T*> (holder_->get());
     }
 
+    /**\brief Read only access to the tendril.
+     * @return a const reference to the value of the tendril (no copies)
+     */
+    template<typename T>
+    inline const T& read() const
+    {
+      //throws on failure
+      enforce_type<T> ();
+      //cast a void pointer to this type.
+      return *static_cast<const T*> (holder_->get());
+    }
     /**
      * \brief runtime check if the tendril is of the given type.
      * @return true if it is the type.
@@ -353,7 +363,10 @@ namespace ecto
       return *this;
     }
 
-    void trigger_callback();
+    /**
+     * \brief Notify the callback, only if this is dirty.
+     */
+    void notify();
 
   };
 
