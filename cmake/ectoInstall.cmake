@@ -8,6 +8,7 @@ set(ecto_HEADERS
   include/ecto/log.hpp
   include/ecto/module.hpp
   include/ecto/plasm.hpp
+  include/ecto/registry.hpp
   include/ecto/spore.hpp
   include/ecto/strand.hpp
   include/ecto/tendril.hpp
