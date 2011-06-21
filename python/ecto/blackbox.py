@@ -32,8 +32,10 @@ class BlackBox(object):
             return (self.generate["out"] >> self.inc["in"])
         
     """
-    def __init__(self):
+    def __init__(self, plasm):
         self.tendrils = None
+        self._plasm = plasm
+        self._is_plasm_connected = False
     def _get_spec(self,key):
         """ Constructs a TendrilSpecification given a single str key.
         If the same key exists in the inputs and the outputs, a dichotomous spec is generated,
@@ -68,6 +70,10 @@ class BlackBox(object):
                 l.append(self._get_spec(x))
         else:
             raise TypeError( "May only use a tuple, list, or single string")
+        
+        if self._plasm and not self._is_plasm_connected:
+            self._plasm.connect(self.connections())
+            self._is_plasm_connected = True
         return ecto.TendrilSpecifications(l)
      
     def _getTendrils(self, name):
@@ -88,6 +94,15 @@ class BlackBox(object):
             return self._getTendrils(name)
         else:
             return object.__getattr__(self, name)
+    
+    def viz(self):
+        """ Display the graph viz of the Blackbox
+        """
+        
+    def view(self):
+        """ Display a GUI with the content of the
+        """
+        
     def expose_outputs(self):
         """ The outputs of a BlackBox should specified by returning a dictionary of string keys to TendrilsSpecifictation.
         {"output":self.mymodule["out_0001"]}
@@ -104,6 +119,7 @@ class BlackBox(object):
         """ The parameters of a BlackBox should specified by returning a dictionary of string keys to TendrilsSpecifictation.
         {"param_01":self.mymodule["foo_param"]}
         """
+        return {}
     
     def connections(self):
         """This is where one should declare the graph, as a tuple of tuples, where each element 
