@@ -67,7 +67,7 @@ namespace ecto {
     (::ecto::registry::registrator< ::ecto::tag::MODULE,TYPE>(NAME, DOCSTRING)); \
   }
   
-#define ECTO_REGISTRY(MODULE)                                           \
+#define ECTO_INSTANTIATE_REGISTRY(MODULE)                               \
   ECTO_MODULETAG(MODULE)                                                \
   template class ::ecto::registry::module_registry< ::ecto::tag::MODULE>;
 
