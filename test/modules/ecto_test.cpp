@@ -299,11 +299,11 @@ namespace ecto_test
 
 }
 
-ECTO_REGISTRY(ecto_test);
+// ECTO_REGISTRY(ecto_test);
 
-BOOST_PYTHON_MODULE(ecto_test)
+ECTO_DEFINE_MODULE(ecto_test)
 {
-  ECTO_REGISTER(ecto_test);
+  //  ECTO_REGISTER(ecto_test);
 
   using namespace ecto_test;
   ecto::wrap<SharedPass>("SharedPass", "A shared pointer pass through");

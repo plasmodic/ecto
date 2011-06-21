@@ -45,8 +45,9 @@ namespace ecto
     {
       holder_ = rhs.holder_->clone();
     }
-    else if (compatible_type(rhs))
+    else
     {
+      enforce_compatible_type(rhs);
       *holder_ = *rhs.holder_;
     }
     mark_dirty();

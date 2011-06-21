@@ -51,9 +51,40 @@ TEST(TendrilTest, Defaultness)
   }
 }
 
-//TEST(TendrilTest, Raw)
-//{
-//  ecto::
-//  ecto::tendril t();
-//
-//}
+TEST(TendrilTest, PointerNess)
+{
+  ecto::tendril a(0.5f, "A float"), b,c;
+  b = a;
+  c = a;
+  c.get<float>() = 3.14;
+  EXPECT_EQ(a.read<float>(),c.read<float>());
+  EXPECT_EQ(a.read<float>(),b.read<float>());
+  EXPECT_EQ(&a.read<float>(),&c.read<float>());
+  EXPECT_EQ(&a.read<float>(),&b.read<float>());
+}
+
+TEST(TendrilTest, Copyness)
+{
+  ecto::tendril a(0.5f, "A float"), b,c;
+  b.copy_value(a);
+  c.copy_value(b);
+  c.get<float>() = 3.14;
+  EXPECT_NE(a.read<float>(),c.read<float>());
+  EXPECT_EQ(a.read<float>(),b.read<float>());
+  EXPECT_NE(&a.read<float>(),&c.read<float>());
+  EXPECT_NE(&a.read<float>(),&b.read<float>());
+  //self copy should be ok
+  c.copy_value(a);
+
+}
+
+TEST(TendrilTest, Typeness)
+{
+  ecto::tendril a(0.5f, "A float"), b(0.5,"A double."), c;
+  EXPECT_THROW(b.copy_value(a), std::logic_error);
+  EXPECT_NO_THROW(c = a);
+  EXPECT_THROW(c.copy_value(b), std::logic_error);
+  EXPECT_NO_THROW(c = b);
+  EXPECT_THROW(c.copy_value(a), std::logic_error);
+}
+

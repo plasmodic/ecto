@@ -29,75 +29,46 @@
 
 #include <ecto/ecto.hpp>
 #include <iostream>
+#include <queue>
 
 namespace hello_ecto
 {
-
   using ecto::tendrils;
 
-  /* BOILER_PLATE_MODULE
-   struct MyModule
-   {
-   static void declare_params(tendrils& params);
-   static void declare_io(const tendrils& params, tendrils& in, tendrils& out);
-   void configure(tendrils& params, tendrils& inputs, tendrils& outputs);
-   int process(const tendrils& in, tendrils& out);
-   void destroy();
-   };
-   */
-
-  struct Printer
+  struct Delay
   {
     static void declare_params(tendrils& params)
     {
-      params.declare<std::string> ("str", "The default string to print", "hello");
+      params.declare<ecto::tendril::ptr>("value", "Value to delay");
     }
 
     static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
     {
-      in.declare<std::string> ("str", "The string to print.", parms.get<std::string> ("str"));
-    }
-
-    void configure(tendrils& params, tendrils& inputs, tendrils& outputs)
-    {
-      str_ = inputs.at("str");
-    }
-
-    int process(const tendrils& in, tendrils& /*out*/)
-    {
-      std::cout << str_() << std::endl;
-      return ecto::OK;
-    }
-    ecto::spore<std::string> str_;
-  };
-
-  struct Reader
-  {
-    static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
-    {
-      out.declare<std::string> ("output", "Output from standard in");
-    }
-
-    void configure(tendrils& params, tendrils& inputs, tendrils& outputs)
-    {
-      output_ = outputs.at("output");
+      in["input"].reset(new ecto::tendril);
+      out["output"].reset(new ecto::tendril);
+      in.at("input")->set_doc("The input tendril, can assume any type.");
+      out.at("output")->set_doc("The out tendril, can assume any type.");
+      ecto::tendril::ptr value = parms.get<ecto::tendril::ptr>("value");
+      if (value) // default value is none..
+      {
+        in.at("input")->copy_value(*value);
+        out.at("output")->copy_value(*value);
+      }
     }
 
     int process(const tendrils& in, tendrils& out)
     {
-      std::string s;
-      std::cin >> s;
-      *output_ = s;
+      buffer_.push(ecto::tendril());
+      buffer_.back().copy_value(*in.at("input"));
+      out.at("output")->copy_value(buffer_.front());
+      if (buffer_.size() > 1)
+      {
+        buffer_.pop();
+      }
       return ecto::OK;
     }
-    ecto::spore<std::string> output_;
+    std::queue<ecto::tendril> buffer_;
   };
-
 }
 
-ECTO_DEFINE_MODULE(hello_ecto)
-{ }
-
-ECTO_MODULE(hello_ecto, hello_ecto::Printer, "Printer", "Prints a string input to standard output.");
-ECTO_MODULE(hello_ecto, hello_ecto::Reader, "Reader", "Reads input from standard input.");
-
+ECTO_MODULE(hello_ecto, hello_ecto::Delay, "Delay", "Delay node.");
