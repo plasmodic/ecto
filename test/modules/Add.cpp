@@ -28,7 +28,6 @@
  */
 
 #include <ecto/ecto.hpp>
-#include <ecto/registry.hpp>
 
 using ecto::tendrils;
 namespace ecto_test
@@ -49,7 +48,7 @@ namespace ecto_test
       right_ = i.at("right");
     }
 
-    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
+    int process(const ecto::tendrils& /*inputs*/, ecto::tendrils& /*outputs*/)
     {
       *out_ = *left_ + *right_;
       return ecto::OK;

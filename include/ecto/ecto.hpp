@@ -154,7 +154,6 @@ namespace ecto
   }
 }
 
-
 #define ECTO_DEFINE_MODULE(modname)             \
   ECTO_INSTANTIATE_REGISTRY(modname)            \
   void init_module_##name##_rest() ;            \
@@ -163,3 +162,6 @@ namespace ecto
     init_module_##name##_rest();                \
   }                                             \
   void init_module_##name##_rest()
+
+#include <ecto/registry.hpp>
+

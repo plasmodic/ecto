@@ -18,8 +18,7 @@ def mygraph():
     
     #connect outputs to inputs
     plasm.connect(
-                  r["output"] >> p1["str"],
-                  r["output"] >> p2["str"]
+                  r["output"] >> (p1["str"], p2["str"])
                   )
     
     if debug:
