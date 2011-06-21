@@ -6,8 +6,8 @@ project(ecto_samples)
     
 ectomodule(hello_ecto
     hello_ecto.cpp
+    hello_delay.cpp
 )
-
 #optionally link against other libs
 #ecto_link(hello_ecto
 #  ${MY_EXTRA_LIBS}
