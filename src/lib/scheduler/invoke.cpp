@@ -39,7 +39,9 @@ namespace ecto {
       while (outbegin != outend)
         {
           edge::ptr e = graph[*outbegin];
-          e->push_back(*m->outputs.at(e->from_port));
+          tendril t;
+          t.copy_value(*m->outputs.at(e->from_port));
+          e->push_back(t);
           ++outbegin;
         }
 
