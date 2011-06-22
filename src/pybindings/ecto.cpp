@@ -1,4 +1,5 @@
 #include <boost/python.hpp>
+#include <ecto/ecto.hpp>
 
 namespace bp = boost::python;
 
@@ -14,14 +15,17 @@ namespace ecto {
   }
 }
 
+ECTO_INSTANTIATE_REGISTRY(ecto)
+ 
 BOOST_PYTHON_MODULE(ecto)
 {
-  //wrap all modules
   ecto::py::wrapConnection();
   ecto::py::wrapPlasm();
   ecto::py::wrapModule();
   ecto::py::wrapTendrils();
   ecto::py::wrapSchedulers();
   ecto::py::wrapStrand();
+
+  ECTO_REGISTER(ecto)
 }
 

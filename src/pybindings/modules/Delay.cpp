@@ -31,7 +31,7 @@
 #include <iostream>
 #include <queue>
 
-namespace hello_ecto
+namespace ecto
 {
   using ecto::tendrils;
 
@@ -74,4 +74,5 @@ namespace hello_ecto
 
 }
 
-ECTO_MODULE(hello_ecto, hello_ecto::Delay, "Delay", "Delay node.");
+ECTO_MODULE(ecto, ecto::Delay, "Delay", 
+            "Delay node.");
