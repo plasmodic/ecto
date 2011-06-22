@@ -156,12 +156,12 @@ namespace ecto
 
 #define ECTO_DEFINE_MODULE(modname)             \
   ECTO_INSTANTIATE_REGISTRY(modname)            \
-  void init_module_##name##_rest() ;            \
+  void init_module_##modname##_rest() ;         \
   BOOST_PYTHON_MODULE(modname) {                \
     ECTO_REGISTER(modname);                     \
-    init_module_##name##_rest();                \
+    init_module_##modname##_rest();             \
   }                                             \
-  void init_module_##name##_rest()
+  void init_module_##modname##_rest()
 
 #include <ecto/registry.hpp>
 
