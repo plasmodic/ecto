@@ -37,7 +37,7 @@ namespace ecto
   {
     static void declare_params(tendrils& params)
     {
-      params.declare<ecto::tendril::ptr>("value", "Value to delay");
+      params.declare<ecto::tendril::ptr>("value", "Value to output");
     }
 
     static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
