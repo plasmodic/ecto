@@ -66,11 +66,7 @@ namespace ecto
      * \brief destructor, will deallocate the value held.
      */
     ~tendril();
-    /**
-     * \brief Copy the tendril by pointer.
-     * @param rhs the tendril to copy from
-     */
-    tendril(const tendril& rhs);
+
 
     /**
      * \brief A templated convenience constructor for creating a tendril
@@ -98,7 +94,13 @@ namespace ecto
     }
 
     /**
-     * \brief Copies the tendril by pointer, so that the two tendrils will point to the same
+     * \brief Copy the tendril by value.
+     * @param rhs the tendril to copy from
+     */
+    tendril(const tendril& rhs);
+
+    /**
+     * \brief Copies the tendril by value, so that the two tendrils will point to the same
      *  data.
      * @param rhs
      * @return this
@@ -267,6 +269,18 @@ namespace ecto
     {
     };
 
+    /**
+     * Register a typed callback with the tendril... Will throw on wrong type.
+     * @param cb May be called by the notify function, if the tendril is dirty.
+     * @return  this
+     */
+    template<typename T>
+    tendril& set_callback(boost::function<void(T)> cb);
+    /**
+     * \brief Notify the callback, only if this is dirty.
+     */
+    void notify();
+
   private:
 
     // ############################### NVI ####################################
@@ -337,6 +351,7 @@ namespace ecto
       T t;
       boost::function<void(T)> cb;
     };
+    static holder_base::ptr none_holder_;
     void mark_dirty()
     {
       dirty_ = true;
@@ -350,23 +365,6 @@ namespace ecto
     boost::shared_ptr<holder_base> holder_;
     std::string doc_;
     bool dirty_,default_, user_supplied_;
-  public:
-
-    template<typename T>
-    tendril& set_callback(boost::function<void(T)> cb)
-    {
-      typedef holder<T> holder_t;
-      enforce_type<T> ();
-      holder_base* hb = holder_.get();
-      holder_t* ht = dynamic_cast<holder_t*> (hb);
-      ht->cb = cb;
-      return *this;
-    }
-
-    /**
-     * \brief Notify the callback, only if this is dirty.
-     */
-    void notify();
 
   };
 
@@ -476,6 +474,18 @@ namespace ecto
     tendril::holder_base::ptr p(new holder<T> (t));
     return p;
   }
+
+  template<typename T>
+  tendril& tendril::set_callback(boost::function<void(T)> cb)
+  {
+    typedef holder<T> holder_t;
+    enforce_type<T> ();
+    holder_base* hb = holder_.get();
+    holder_t* ht = dynamic_cast<holder_t*> (hb);
+    ht->cb = cb;
+    return *this;
+  }
+
 }
 
 template<typename T>
