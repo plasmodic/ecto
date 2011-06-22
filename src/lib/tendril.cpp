@@ -28,6 +28,13 @@ namespace ecto
   {
   }
 
+
+  tendril::tendril(holder_base::ptr impl) :
+      holder_(impl), dirty_(false), default_(false), user_supplied_(false)
+  {
+  }
+
+
   tendril& tendril::operator=(const tendril& rhs)
   {
     if (this == &rhs)
@@ -55,10 +62,6 @@ namespace ecto
     mark_dirty();
   }
 
-  tendril::tendril(holder_base::ptr impl) :
-      holder_(impl), dirty_(false), default_(false), user_supplied_(false)
-  {
-  }
 
   void tendril::set_doc(const std::string& doc_str)
   {

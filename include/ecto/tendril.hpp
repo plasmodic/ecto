@@ -51,6 +51,11 @@ namespace ecto
    *
    * Each tendril is a type erasing holder for any instance of any type,
    * and allows introspection including its value, type, and doc string.
+   *
+   * The tendril operates as a value holder, so treat it as such. If you would like to pass it around without copies,
+   * construct a pointer to tendril, perhaps with the make_tendril<T>() function.
+   *
+   * Items held by the tendril must be copy constructable and copiable.
    */
   class tendril
   {
@@ -59,18 +64,18 @@ namespace ecto
     typedef boost::shared_ptr<const tendril> const_ptr;
     /**
      * \brief default constructor, creates a tendril that is initialized with the
-     * tendril::none type.
+     * tendril::none type. This should be fairly cheap.
      */
     tendril();
     /**
-     * \brief destructor, will deallocate the value held.
+     * \brief Will deallocate the value held.
      */
     ~tendril();
 
 
     /**
-     * \brief A templated convenience constructor for creating a tendril
-     * that hides the given type.
+     * \brief A a convenience constructor for creating a tendril
+     * that holds the given type.
      * @tparam T The type to hide in this tendril
      * @param t default value for t
      * @param doc a documentation string
@@ -86,10 +91,6 @@ namespace ecto
     {
       holder_base::ptr h(new holder<T>(T()));
       tendril::ptr t(new tendril(h));
-      t->dirty_ = false;
-      t->default_ = false;
-      t->doc_ = "TODO docstring me, please.";
-      t->user_supplied_ = false;
       return t;
     }
 
@@ -142,6 +143,10 @@ namespace ecto
      */
     void set_doc(const std::string& doc_str);
 
+    /**
+     * \brief This sets the default value of the tendril. This is a
+     * @param val
+     */
     template<typename T>
     void set_default_val(const T& val = T())
     {
@@ -220,7 +225,6 @@ namespace ecto
       if (!compatible_type(rhs))
         {
           throw std::logic_error(std::string(type_name() + " is not a " + rhs.type_name()).c_str());
-
         }
     }
 
@@ -238,27 +242,20 @@ namespace ecto
      * @return A copy of the underlying object as a boost python object, will be None type if the conversion fails.
      */
     boost::python::object extract() const;
+
     /**
      * \brief Set this tendril's value from the python object. This will copy the value
      * @param o a python object holding a type compatible_type with this tendril. Will throw if the types are not compatible_type.
      */
     void set(boost::python::object o);
 
-    bool dirty() const
-    {
-      return dirty_;
-    }
-
-    bool clean() const
-    {
-      return !dirty_;
-    }
-
+    //! The value that this tendril holds was supplied by the user at some point.
     bool user_supplied() const
     {
       return user_supplied_;
     }
 
+    //! The tendril was initialized with default value.
     bool has_default() const
     {
       return default_;
@@ -276,10 +273,23 @@ namespace ecto
      */
     template<typename T>
     tendril& set_callback(boost::function<void(T)> cb);
-    /**
-     * \brief Notify the callback, only if this is dirty.
-     */
+
+    //! Notify the callback, only if this is dirty.
     void notify();
+
+
+    //! The tendril has likely been modified since the last time that notify has beend called.
+    bool dirty() const
+    {
+      return dirty_;
+    }
+
+    //! The tendril has notified its callback if one was registered since it was changed.
+    bool clean() const
+    {
+      return !dirty_;
+    }
+
 
   private:
 

@@ -20,11 +20,13 @@ def mygraph():
     val = r.outputs["output"]
     print val
     
-    delay = hello_ecto.Delay(value= r.outputs["output"])
+    delay = hello_ecto.Delay(type_of=r.outputs["output"], default_value = "()")
+    
+    (sink,source) = make_teleport(r.output["output"])
     
     #connect outputs to inputs
     plasm.connect(
-                  r["output"] >> (p1["str"], delay["input"]),
+                  r["output"] >> delay["input"],
                   delay["output"] >> p2["str"]
                   )
     
