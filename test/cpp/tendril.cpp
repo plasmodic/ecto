@@ -102,11 +102,12 @@ TEST(TendrilTest, BoostPyness)
     EXPECT_THROW(
         {
           dt.copy_value(bpt);
-        }, ecto::except::ValueNone);
+        }, ecto::except::ValueNone
+   );
   }
   {
     ecto::tendril bpt(bp::object(), "A bp object"), bpt2(bp::object(), "another bp::object");
-    EXPECT_TRUE( bpt.get<bp::object>() == bp::object());
+    EXPECT_FALSE( bpt.get<bp::object>());
   }
 
 }
