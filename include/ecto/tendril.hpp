@@ -81,11 +81,13 @@ namespace ecto
      * @param doc a documentation string
      */
     template<typename T>
-    tendril(const T& t, const std::string& doc) :
-      holder_(new holder<T> (t)), doc_(doc), dirty_(false), default_(true),
-          user_supplied_(false)
-    {
-    }
+    tendril(const T& t, const std::string& doc) 
+      : holder_(new holder<T> (t))
+      , doc_(doc)
+      , dirty_(false)
+      , default_(true)
+      , user_supplied_(false)
+    { }
 
     template<typename T>
     static tendril::ptr make_tendril()
@@ -455,7 +457,8 @@ namespace ecto
   }
 
   template<typename T>
-  void tendril::holder<T>::copy_to(holder_base& holder) const
+  void 
+  tendril::holder<T>::copy_to(holder_base& holder) const
   {
     if (holder_base::check<T>(holder))
       holder.getT<T> () = t;
@@ -464,8 +467,8 @@ namespace ecto
   }
 
   template<>
-  inline void tendril::holder<boost::python::object>::copy_to(
-                                                              holder_base& holder) const
+  inline void 
+  tendril::holder<boost::python::object>::copy_to(holder_base& holder) const
   {
     if(t)
       holder.setPython(t);

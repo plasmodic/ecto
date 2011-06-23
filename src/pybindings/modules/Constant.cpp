@@ -31,6 +31,8 @@
 #include <iostream>
 #include <queue>
 
+#define MEH(X) std::cout << X << " " << __PRETTY_FUNCTION__ << std::endl;
+
 namespace bp = boost::python;
 namespace ecto
 {
@@ -38,42 +40,20 @@ namespace ecto
 
   struct Constant
   {
-    spore<bp::object> value, out;
-
     static void declare_params(tendrils& params)
     {
-      params.declare<bp::object>("value", "Value to output");
+      params.declare<bp::object>("value", "Value to output" /*, TODO:  user-provided value is required */);
     }
 
     static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
     {
-      if(parms.get<bp::object>("value") == bp::object())
-        {
-          std::cout << "Constant: no param supplied\n";
-          return;
-        }
-      out.declare<bp::object> ("output", "Any type, constant.",
+      // copy supplied value of 
+      out.declare<bp::object> ("out", "Any type, constant.",
                                parms.get<bp::object> ("value"));
     }
 
-    void configure(tendrils& p, tendrils& i, tendrils& o)
-    {
-      value = p.at("value");
-      out = o.at("out");
-    }
-
-    int process(const tendrils& i, tendrils& o)
-    {
-      std::cout << "value type=" << ((tendril::ptr)value)->type_name() << "\n";
-      std::cout << "out type=" << ((tendril::ptr)out)->type_name() << "\n";
-      tendril::ptr value_tp = value.tendril_ptr();
-      tendril::ptr out_tp = out.tendril_ptr();
-      out_tp->copy_value(*value_tp);
-      std::cout << "Constant::process done." << std::endl;
-      return ecto::OK;
-    }
   };
 }
 
 ECTO_MODULE(ecto, ecto::Constant, "Constant",
-    "Constant node always outputs same value.");
+            "Constant node always outputs same value.");

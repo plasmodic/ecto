@@ -7,19 +7,23 @@ def test_constant():
     print "test running.."
     plasm = ecto.Plasm()
     c = ecto.Constant(value=0.50505)
-    pr = ecto_test.Printer(print_type="double")
+    m = ecto_test.Multiply(factor=3.3335)
+    print ">>>>DOC>>>>", c.__doc__
+    pr = ecto_test.Printer()
 
     p = ecto.Plasm()
 
-    plasm.connect(c[:] >> pr[:])
+    plasm.connect(c[:] >> m[:],
+                  m[:] >> pr[:]
+                  )
 
     print plasm.viz()
     plasm.execute()
 
-    assert c.outputs.out == 0.50505
+    assert m.outputs.out == (0.50505 * 3.3335)
     plasm.execute()
 
-    assert c.outputs.out == 0.50505
+    assert m.outputs.out == (0.50505 * 3.3335)
 
 if __name__ == '__main__':
     test_constant()
