@@ -4,6 +4,7 @@
 #install headers
 set(ecto_HEADERS
   include/ecto/ecto.hpp
+  include/ecto/except.hpp
   include/ecto/graph_types.hpp
   include/ecto/log.hpp
   include/ecto/module.hpp

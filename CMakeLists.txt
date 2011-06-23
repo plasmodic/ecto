@@ -22,8 +22,7 @@ execute_process(COMMAND ln -sf ${CMAKE_SOURCE_DIR}/python/ecto/__init__.py
 include(${CMAKE_SOURCE_DIR}/cmake/ectoMacros.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/ectoFindDeps.cmake)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wall -Wl,--no-undefined")
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -DBOOST_DISABLE_ASSERTS")
+add_definitions (" -Werror -Wall -Wl,--no-undefined")
 
 include_directories(
   ${CMAKE_SOURCE_DIR}/include

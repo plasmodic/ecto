@@ -26,54 +26,59 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+#pragma once
+#include <stdexcept>
+#include <string>
+#include <sstream>
+#include <ecto/util.hpp>
 
-#include <ecto/ecto.hpp>
-#include <iostream>
-#include <queue>
-
-namespace bp = boost::python;
 namespace ecto
 {
-  namespace bp = boost::python;
-
-  struct Constant
+  namespace except
   {
-    spore<bp::object> value, out;
-
-    static void declare_params(tendrils& params)
+    struct TypeMismatch: std::exception
     {
-      params.declare<bp::object>("value", "Value to output");
-    }
+      std::string msg_;
 
-    static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
-    {
-      if(parms.get<bp::object>("value") == bp::object())
+    public:
+      /** Takes a character string describing the error.  */
+      explicit
+      TypeMismatch(const std::string& arg);
+
+      virtual
+      ~TypeMismatch() throw ();
+
+      /** Returns a C-style character string describing the general cause of
+       *  the current error (the same string passed to the ctor).  */
+      virtual const char*
+      what() const throw ();
+
+      template<typename T1, typename T2>
+      static TypeMismatch make(const std::string& msg = "")
+      {
+        return TypeMismatch(
+                            msg + "::" + ecto::name_of<T1>() + " != "
+                                + ecto::name_of<T2>());
+      }
+    };
+
+    struct ValueNone: std::exception
         {
-          std::cout << "Constant: no param supplied\n";
-          return;
-        }
-      out.declare<bp::object> ("output", "Any type, constant.",
-                               parms.get<bp::object> ("value"));
-    }
+          std::string msg_;
 
-    void configure(tendrils& p, tendrils& i, tendrils& o)
-    {
-      value = p.at("value");
-      out = o.at("out");
-    }
+        public:
+          /** Takes a character string describing the error.  */
+          explicit
+          ValueNone(const std::string& arg);
 
-    int process(const tendrils& i, tendrils& o)
-    {
-      std::cout << "value type=" << ((tendril::ptr)value)->type_name() << "\n";
-      std::cout << "out type=" << ((tendril::ptr)out)->type_name() << "\n";
-      tendril::ptr value_tp = value.tendril_ptr();
-      tendril::ptr out_tp = out.tendril_ptr();
-      out_tp->copy_value(*value_tp);
-      std::cout << "Constant::process done." << std::endl;
-      return ecto::OK;
-    }
-  };
+          virtual
+          ~ValueNone() throw ();
+
+          /** Returns a C-style character string describing the general cause of
+           *  the current error (the same string passed to the ctor).  */
+          virtual const char*
+          what() const throw ();
+
+        };
+  }
 }
-
-ECTO_MODULE(ecto, ecto::Constant, "Constant",
-    "Constant node always outputs same value.");
