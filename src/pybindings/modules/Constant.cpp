@@ -31,9 +31,6 @@
 #include <iostream>
 #include <queue>
 
-#define MEH(X) std::cout << X << " " << __PRETTY_FUNCTION__ << std::endl;
-
-namespace bp = boost::python;
 namespace ecto
 {
   namespace bp = boost::python;
