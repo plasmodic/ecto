@@ -35,6 +35,7 @@
 #include <boost/bind.hpp>
 
 #include <ecto/util.hpp> //name_of
+#include <ecto/except.hpp>
 #include <stdexcept>
 #include <string>
 #include <set>
@@ -72,7 +73,6 @@ namespace ecto
      */
     ~tendril();
 
-
     /**
      * \brief A a convenience constructor for creating a tendril
      * that holds the given type.
@@ -82,14 +82,15 @@ namespace ecto
      */
     template<typename T>
     tendril(const T& t, const std::string& doc) :
-      holder_(new holder<T> (t)), doc_(doc), dirty_(false), default_(true), user_supplied_(false)
+      holder_(new holder<T> (t)), doc_(doc), dirty_(false), default_(true),
+          user_supplied_(false)
     {
     }
 
     template<typename T>
     static tendril::ptr make_tendril()
     {
-      holder_base::ptr h(new holder<T>(T()));
+      holder_base::ptr h(new holder<T> (T()));
       tendril::ptr t(new tendril(h));
       return t;
     }
@@ -150,10 +151,10 @@ namespace ecto
     template<typename T>
     void set_default_val(const T& val = T())
     {
-      if(!user_supplied_) //user supplied?
+      if (!user_supplied_) //user supplied?
       {
         default_ = true;
-        holder_.reset(new holder<T>(val));
+        holder_.reset(new holder<T> (val));
       }
     }
     /**
@@ -163,7 +164,7 @@ namespace ecto
     template<typename T>
     inline const T& get() const
     {
-      return read<T>();
+      return read<T> ();
     }
 
     /**
@@ -217,15 +218,16 @@ namespace ecto
     {
       if (same_type(rhs))
         return true;
-      return is_type<boost::python::object> () || rhs.is_type<boost::python::object> ();
+      return is_type<boost::python::object> () || rhs.is_type<
+          boost::python::object> ();
     }
 
     inline void enforce_compatible_type(const tendril& rhs) const
     {
       if (!compatible_type(rhs))
-        {
-          throw std::logic_error(std::string(type_name() + " is not a " + rhs.type_name()).c_str());
-        }
+      {
+        throw except::TypeMismatch(type_name() + " is not a " + rhs.type_name());
+      }
     }
 
     /**
@@ -235,7 +237,7 @@ namespace ecto
     inline void enforce_type() const
     {
       if (!is_type<T> ())
-        throw std::logic_error(std::string(type_name() + " is not a " + name_of<T> ()).c_str());
+        throw except::TypeMismatch(type_name() + " is not a " + name_of<T> ());
     }
     /**
      * \brief Get the boost::python version of the object (by value)
@@ -277,7 +279,6 @@ namespace ecto
     //! Notify the callback, only if this is dirty.
     void notify();
 
-
     //! The tendril has likely been modified since the last time that notify has beend called.
     bool dirty() const
     {
@@ -289,7 +290,6 @@ namespace ecto
     {
       return !dirty_;
     }
-
 
   private:
 
@@ -317,8 +317,6 @@ namespace ecto
       getT() const
       {
         void* tval = const_cast<holder_base*> (this)->get();
-        if (tval == NULL)
-          throw std::logic_error(type_name() + " is not safe when getting by type");
         return *static_cast<T*> (tval);
       }
 
@@ -326,12 +324,7 @@ namespace ecto
       T&
       getT()
       {
-        void* tval = get();
-
-        if (tval == NULL)
-          throw std::logic_error(type_name() + " is not safe when getting by type");
-
-        return *static_cast<T*> (tval);
+        return *static_cast<T*> (get());
       }
 
       //convenience functions for checking types
@@ -374,10 +367,9 @@ namespace ecto
     tendril(holder_base::ptr impl);
     boost::shared_ptr<holder_base> holder_;
     std::string doc_;
-    bool dirty_,default_, user_supplied_;
+    bool dirty_, default_, user_supplied_;
 
   };
-
 
   template<typename T>
   bool tendril::holder_base::check(tendril::holder_base& i)
@@ -386,10 +378,14 @@ namespace ecto
   }
 
   template<typename T>
-  void tendril::holder_base::checkThrow(tendril::holder_base& i) throw (std::logic_error)
+  void tendril::holder_base::checkThrow(tendril::holder_base& i)
+                                                                 throw (std::logic_error)
   {
     if (!check<T> (i))
-      throw std::logic_error(std::string(i.type_name() + " is not a " + name_of<T> ()).c_str());
+      throw std::logic_error(
+                             std::string(
+                                         i.type_name() + " is not a "
+                                             + name_of<T> ()).c_str());
   }
 
   template<typename T>
@@ -418,13 +414,6 @@ namespace ecto
     return &t;
   }
 
-  template<>
-  inline void*
-  tendril::holder<boost::python::object>::get()
-  {
-    return NULL; //unsafe to dereference the boost python object.
-  }
-
   template<typename T>
   void tendril::holder<T>::setPython(boost::python::object o)
   {
@@ -432,11 +421,14 @@ namespace ecto
     if (get_T.check())
       t = get_T();
     else
-      throw std::logic_error("Could not convert python object to type : " + type_name());
+      throw std::logic_error(
+                             "Could not convert python object to type : "
+                                 + type_name());
   }
 
   template<>
-  inline void tendril::holder<boost::python::object>::setPython(boost::python::object o)
+  inline void tendril::holder<boost::python::object>::setPython(
+                                                                boost::python::object o)
   {
     t = o;
   }
@@ -445,14 +437,14 @@ namespace ecto
   boost::python::object tendril::holder<T>::getPython() const
   {
     try
-      {
-        boost::python::object o(t);
-        return o;
-      } catch (const boost::python::error_already_set&)
-      {
-        //silently handle no python wrapping
-        PyErr_Clear(); //Need to clear the error or python craps out. Try commenting out and running the doc tests.
-      }
+    {
+      boost::python::object o(t);
+      return o;
+    } catch (const boost::python::error_already_set&)
+    {
+      //silently handle no python wrapping
+      PyErr_Clear(); //Need to clear the error or python craps out. Try commenting out and running the doc tests.
+    }
     return boost::python::object();
   }
 
@@ -465,17 +457,20 @@ namespace ecto
   template<typename T>
   void tendril::holder<T>::copy_to(holder_base& holder) const
   {
-    void* tval = holder.get();
-    if (tval != NULL)
-      *static_cast<T*> (tval) = t;
+    if (holder_base::check<T>(holder))
+      holder.getT<T> () = t;
     else
       holder.setPython(getPython());
   }
 
   template<>
-  inline void tendril::holder<boost::python::object>::copy_to(holder_base& holder) const
+  inline void tendril::holder<boost::python::object>::copy_to(
+                                                              holder_base& holder) const
   {
-    holder.setPython(t);
+    if(t)
+      holder.setPython(t);
+    else
+      throw except::ValueNone("The python value is None, will not copy!.");
   }
 
   template<typename T>

@@ -26,31 +26,59 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+#pragma once
+#include <stdexcept>
+#include <string>
+#include <sstream>
+#include <ecto/util.hpp>
 
-#include <ecto/ecto.hpp>
-#include <iostream>
-#include <queue>
-
-namespace bp = boost::python;
 namespace ecto
 {
-  struct Constant
+  namespace except
   {
-    static void declare_params(tendrils& params)
+    struct TypeMismatch: std::exception
     {
-      params.declare<bp::object> ("value", "Value to output");
-    }
+      std::string msg_;
 
-    static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
-    {
-      if(parms.get<bp::object>("value") == bp::object())
-        return;
-      out.declare<bp::object> ("output", "Any type, constant.",
-                               parms.get<bp::object> ("value"));
-    }
-  };
+    public:
+      /** Takes a character string describing the error.  */
+      explicit
+      TypeMismatch(const std::string& arg);
 
+      virtual
+      ~TypeMismatch() throw ();
+
+      /** Returns a C-style character string describing the general cause of
+       *  the current error (the same string passed to the ctor).  */
+      virtual const char*
+      what() const throw ();
+
+      template<typename T1, typename T2>
+      static TypeMismatch make(const std::string& msg = "")
+      {
+        return TypeMismatch(
+                            msg + "::" + ecto::name_of<T1>() + " != "
+                                + ecto::name_of<T2>());
+      }
+    };
+
+    struct ValueNone: std::exception
+        {
+          std::string msg_;
+
+        public:
+          /** Takes a character string describing the error.  */
+          explicit
+          ValueNone(const std::string& arg);
+
+          virtual
+          ~ValueNone() throw ();
+
+          /** Returns a C-style character string describing the general cause of
+           *  the current error (the same string passed to the ctor).  */
+          virtual const char*
+          what() const throw ();
+
+        };
+  }
 }
-
-ECTO_MODULE(ecto, ecto::Constant, "Constant",
-    "Constant node always outputs same value.");
