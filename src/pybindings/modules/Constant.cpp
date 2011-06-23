@@ -33,25 +33,39 @@
 
 namespace ecto
 {
+  namespace bp = boost::python;
+
   struct Constant
   {
+    spore<bp::object> value, out;
+
     static void declare_params(tendrils& params)
     {
-      params.declare<ecto::tendril::ptr>("value", "Value to output");
+      params.declare<bp::object>("value", "Value to output");
     }
 
     static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
     {
-      out["output"].reset(new ecto::tendril);
-      out.at("output")->set_doc("The out tendril, can assume any type.");
-      ecto::tendril::ptr value = parms.get<ecto::tendril::ptr>("value");
-      if (value) // default value is none..
-      {
-        out.at("output")->copy_value(*value);
-      }
+      out.declare<bp::object>("out", "out. box.");
+    }
+
+    void configure(tendrils& p, tendrils& i, tendrils& o)
+    {
+      value = p.at("value");
+      out = o.at("out");
+    }
+
+    int process(const tendrils& i, tendrils& o)
+    {
+      std::cout << "value type=" << ((tendril::ptr)value)->type_name() << "\n";
+      std::cout << "out type=" << ((tendril::ptr)out)->type_name() << "\n";
+      tendril::ptr value_tp = value.tendril_ptr();
+      tendril::ptr out_tp = out.tendril_ptr();
+      out_tp->copy_value(*value_tp);
+      std::cout << "Constant::process done." << std::endl;
+      return ecto::OK;
     }
   };
-
 }
 
 ECTO_MODULE(ecto, ecto::Constant, "Constant", 

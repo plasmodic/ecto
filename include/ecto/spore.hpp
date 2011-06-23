@@ -179,6 +179,17 @@ namespace ecto
     {
       return p();
     }
+
+    tendril::ptr tendril_ptr()
+    {
+      return p();
+    }
+
+    tendril::const_ptr tendril_ptr() const
+    {
+      return p();
+    }
+
   private:
     boost::weak_ptr<tendril> tendril_;
   };

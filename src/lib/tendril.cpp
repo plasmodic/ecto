@@ -68,8 +68,8 @@ namespace ecto
     doc_ = doc_str;
   }
 
-  tendril::holder_base& tendril::holder_base::operator=(
-      const tendril::holder_base& rhs)
+  tendril::holder_base& 
+  tendril::holder_base::operator=(const tendril::holder_base& rhs)
   {
     if (this == &rhs)
       return *this;

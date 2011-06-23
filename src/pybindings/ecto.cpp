@@ -19,6 +19,8 @@ ECTO_INSTANTIATE_REGISTRY(ecto)
  
 BOOST_PYTHON_MODULE(ecto)
 {
+  bp::class_<ecto::tendril::none>("no_value");
+
   ecto::py::wrapConnection();
   ecto::py::wrapPlasm();
   ecto::py::wrapModule();
@@ -26,6 +28,8 @@ BOOST_PYTHON_MODULE(ecto)
   ecto::py::wrapSchedulers();
   ecto::py::wrapStrand();
 
-  ECTO_REGISTER(ecto)
+  ECTO_REGISTER(ecto);
+
+    
 }
 

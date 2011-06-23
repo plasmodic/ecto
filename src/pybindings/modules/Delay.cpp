@@ -74,5 +74,4 @@ namespace ecto
 
 }
 
-ECTO_MODULE(ecto, ecto::Delay, "Delay", 
-            "Delay node.");
+ECTO_MODULE(ecto, ecto::Delay, "Delay", "Delay node.");

@@ -78,6 +78,7 @@ namespace ecto_test
 
     int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
+      std::cout << "printer: input has type " << inputs.at("in")->type_name() << "\n";
       pfs.processes[inputs.at("in")->type_name()](inputs,outputs);
       std::cout << this << std::endl;
       return ecto::OK;
