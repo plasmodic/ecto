@@ -11,14 +11,23 @@ def mygraph():
     #instantiate processing modules
     r = hello_ecto.Reader()
     
+    
+    
     #notice the keyword args, these get mapped
     #as parameters
     p1 = hello_ecto.Printer(str="default")
     p2 = hello_ecto.Printer(str="default")
+    val = r.outputs["output"]
+    print val
+    
+    delay = hello_ecto.Delay(type_of=r.outputs["output"], default_value = "()")
+    
+    (sink,source) = make_teleport(r.output["output"])
     
     #connect outputs to inputs
     plasm.connect(
-                  r["output"] >> (p1["str"], p2["str"])
+                  r["output"] >> delay["input"],
+                  delay["output"] >> p2["str"]
                   )
     
     if debug:

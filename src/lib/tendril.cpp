@@ -2,6 +2,8 @@
 
 namespace ecto
 {
+
+  boost::shared_ptr<tendril::holder_base> tendril::none_holder_(new holder<none>(none()));
   namespace
   {
     bool isBoostPython(const tendril& t)
@@ -11,7 +13,7 @@ namespace ecto
   }
 
   tendril::tendril() :
-      holder_(new holder<none>(none())), dirty_(false), default_(false), user_supplied_(false)
+      holder_(none_holder_), dirty_(false), default_(false), user_supplied_(false)
   {
     //impl_ is never not initialized
   }
@@ -21,16 +23,23 @@ namespace ecto
   }
 
   tendril::tendril(const tendril& rhs) :
-      holder_(rhs.holder_), doc_(rhs.doc_), dirty_(false), default_(
+      holder_(rhs.holder_->clone()), doc_(rhs.doc_), dirty_(false), default_(
           rhs.default_), user_supplied_(rhs.user_supplied_)
   {
   }
+
+
+  tendril::tendril(holder_base::ptr impl) :
+      holder_(impl), dirty_(false), default_(false), user_supplied_(false)
+  {
+  }
+
 
   tendril& tendril::operator=(const tendril& rhs)
   {
     if (this == &rhs)
       return *this;
-    holder_ = rhs.holder_;
+    holder_ = rhs.holder_->clone();
     doc_ = rhs.doc_;
     dirty_ = rhs.dirty_;
     default_ = rhs.default_;
@@ -45,17 +54,14 @@ namespace ecto
     {
       holder_ = rhs.holder_->clone();
     }
-    else if (compatible_type(rhs))
+    else
     {
+      enforce_compatible_type(rhs);
       *holder_ = *rhs.holder_;
     }
     mark_dirty();
   }
 
-  tendril::tendril(holder_base::ptr impl) :
-      holder_(impl), dirty_(false), default_(false), user_supplied_(false)
-  {
-  }
 
   void tendril::set_doc(const std::string& doc_str)
   {

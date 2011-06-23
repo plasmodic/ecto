@@ -21,6 +21,7 @@ Contents:
    module
    plasm
    schedulers
+   autoregister
    
 ecto at a glance
 ----------------

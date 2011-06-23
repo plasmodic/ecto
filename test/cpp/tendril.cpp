@@ -51,16 +51,16 @@ TEST(TendrilTest, Defaultness)
   }
 }
 
-TEST(TendrilTest, PointerNess)
+TEST(TendrilTest, NonPointerNess)
 {
   ecto::tendril a(0.5f, "A float"), b,c;
   b = a;
   c = a;
   c.get<float>() = 3.14;
-  EXPECT_EQ(a.read<float>(),c.read<float>());
+  EXPECT_NE(a.read<float>(),c.read<float>());
   EXPECT_EQ(a.read<float>(),b.read<float>());
-  EXPECT_EQ(&a.read<float>(),&c.read<float>());
-  EXPECT_EQ(&a.read<float>(),&b.read<float>());
+  EXPECT_NE(&a.read<float>(),&c.read<float>());
+  EXPECT_NE(&a.read<float>(),&b.read<float>());
 }
 
 TEST(TendrilTest, Copyness)
