@@ -233,10 +233,17 @@ namespace ecto {
         workserv.reset();
         mainserv.reset();
 
+        //
+        // initialize stats
+        //
         starttime = pt::microsec_clock::universal_time();
         int64_t start_ticks = profile::read_tsc();
         reset_times(graph);
 
+
+        //
+        // start per-node threads
+        //
         graph_t::vertex_iterator begin, end;
         for (tie(begin, end) = vertices(graph);
              begin != end;
@@ -256,6 +263,7 @@ namespace ecto {
             runners.insert(rj);
           }
 
+        // run main service
         try {
           mainserv.run();
         } catch (const exception& e) {
@@ -264,6 +272,9 @@ namespace ecto {
           throw;
         }
 
+        //
+        //  print stats
+        //
         pt::time_duration elapsed = pt::microsec_clock::universal_time() - starttime;
         int64_t elapsed_ticks = profile::read_tsc() - start_ticks;
 
@@ -276,15 +287,18 @@ namespace ecto {
             double this_percentage = 100.0 * ((double)m->stats.total_ticks / elapsed_ticks);
             total_percentage += this_percentage;
         
-            std::cout << str(boost::format(">>> %25s calls: %u  cpu ticks: %12lu (%lf%%)")
+            std::cout << str(boost::format(">>> %25s  calls: %u  Hz: %3.2f  cpu ticks: %12lu (%lf%%)")
                              % m->name()
                              % m->stats.ncalls 
+                             % (double(m->stats.ncalls) / (elapsed.total_milliseconds() / 1000.0))
                              % m->stats.total_ticks 
                              % this_percentage)
                       << "\n";
           }
               
         std::cout << "**********************************************"
+                  << "\ncpu freq:         " << (elapsed_ticks / (elapsed.total_milliseconds() / 1000.0)) / 10.0e+9 
+                  << " GHz"
                   << "\nthreads:          " << nthreads
                   << "\nelapsed time:     " << elapsed 
                   << "\ncpu ticks:        " << elapsed_ticks 
@@ -293,7 +307,7 @@ namespace ecto {
         std::cout << str(boost::format("\npercentage total: %f%%\nper-thread:       %f%%\n")
                          % total_percentage
                          % (total_percentage / nthreads))
-                  << "\n";
+          ;
         return 0;
       }
 
