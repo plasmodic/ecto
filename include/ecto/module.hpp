@@ -37,6 +37,7 @@
 #include <ecto/tendrils.hpp>
 #include <ecto/strand.hpp>
 #include <ecto/util.hpp>
+#include <ecto/profile.hpp>
 
 #include <map>
 
@@ -161,6 +162,8 @@ namespace ecto
     tendrils inputs; //!< Inputs, inboxes, always have a valid value ( may be NULL )
     tendrils outputs; //!< Outputs, outboxes, always have a valid value ( may be NULL )
     boost::optional<strand> strand_;
+
+    profile::stats_type stats;
 
   protected:
     virtual void dispatch_declare_params(tendrils& t) = 0;
@@ -327,6 +330,7 @@ namespace ecto
 
     ReturnCode process(implemented, const tendrils& inputs, tendrils& outputs)
     {
+      profile::stats_collector coll(stats);
       return ReturnCode(thiz->process(inputs, outputs));
     }
 
