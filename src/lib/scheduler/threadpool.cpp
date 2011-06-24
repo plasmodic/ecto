@@ -44,6 +44,7 @@ namespace ecto {
     {
       typedef boost::function<bool(unsigned)> respawn_cb_t;
 
+
       struct propagator
       {
         asio::io_service &from, &to;
@@ -184,8 +185,7 @@ namespace ecto {
               {
                 std::cout << "Module " << g[vd]->name() << " returned not okay. Stopping everything." 
                           << std::endl; 
-                context.workserv.stop();
-                context.mainserv.stop();
+                context.stop_asap();
                 return;
               }
           } catch (const std::exception& e) {
@@ -242,12 +242,25 @@ namespace ecto {
           }
       }
 
+      static void sigint_static_thunk(int) 
+      {
+        std::cout << "*** SIGINT received, stopping everything. ***" << std::endl;
+        std::cout << "*** You may need to hit ^C again when back in the interpreter thread. ***" << std::endl;
+        sigint_handler();
+        PyErr_SetInterrupt();
+      }
+      static boost::function<void()> sigint_handler;
+      
+
       int execute(unsigned nthreads, impl::respawn_cb_t respawn, graph_t& graph)
       {
         namespace asio = boost::asio;
 
         workserv.reset();
         mainserv.reset();
+
+        signal(SIGINT, &sigint_static_thunk);
+        sigint_handler = boost::bind(&impl::stop_asap, this);
 
         //
         // initialize stats
@@ -281,6 +294,7 @@ namespace ecto {
         // run main service
         try {
           mainserv.run();
+          PyErr_CheckSignals();
         } catch (const exception& e) {
           workserv.stop();
           // rethrow:  python interpreter will catch.
@@ -333,6 +347,12 @@ namespace ecto {
         invokers_t().swap(invokers);
       }
 
+      void stop_asap() 
+      {
+        mainserv.stop();
+        workserv.stop();
+      }
+
       typedef std::map<graph_t::vertex_descriptor, invoker::ptr> invokers_t;
       invokers_t invokers;
       boost::asio::io_service mainserv, workserv;
@@ -344,6 +364,7 @@ namespace ecto {
       
 
     };
+
 
     threadpool::threadpool(plasm& p)
       : graph(p.graph()), impl_(new impl)
@@ -360,5 +381,22 @@ namespace ecto {
     {
       return impl_->execute(nthreads, boost::phoenix::arg_names::arg1 < ncalls, graph);
     }
+
+    boost::function<void()> threadpool::impl::sigint_handler;
   }
 }
+
+
+/*
+namespace {
+  void forward_sigint(int) 
+  {
+    PyErr_SetInterrupt();
+    PyErr_CheckSignals();
+  }
+}
+
+
+signal(SIGINT, &forward_sigint);
+
+*/

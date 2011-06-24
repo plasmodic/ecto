@@ -29,7 +29,5 @@ BOOST_PYTHON_MODULE(ecto)
   ecto::py::wrapStrand();
 
   ECTO_REGISTER(ecto);
-
-    
 }
 
