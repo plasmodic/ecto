@@ -147,33 +147,46 @@ namespace ecto {
           : context(context_), /*dt(context.workserv),*/ g(g_), vd(vd_), n_calls(0), respawn(respawn_)
         { }
 
+        template <typename Handler>
+        void post(Handler h)
+        {
+          module::ptr m = g[vd];
+          if (m->strand_)
+            {
+              const ecto::strand& skey = *(m->strand_);
+              boost::shared_ptr<asio::io_service::strand>& strand_p = context.strands[skey];
+              if (!strand_p) {
+                strand_p.reset(new boost::asio::io_service::strand(context.workserv));
+              }
+              strand_p->post(h);
+            }
+          else
+            context.workserv.post(h);
+        }
+
         void async_wait_for_input()
         {
           ECTO_LOG_DEBUG("%s async_wait_for_input", this);
           namespace asio = boost::asio;
 
+          if (context.stop) {
+            post(bind(&invoker::destroy, this));
+            return;
+          }
+            
           if (inputs_ready()) {
             ECTO_LOG_DEBUG("%s inputs ready", this);
-            module::ptr m = g[vd];
-            if (m->strand_)
-              {
-                const ecto::strand& skey = *(m->strand_);
-                boost::shared_ptr<asio::io_service::strand>& strand_p = context.strands[skey];
-                if (!strand_p) {
-                  strand_p.reset(new boost::asio::io_service::strand(context.workserv));
-                }
-                strand_p->post(bind(&invoker::invoke, this));
-              }
-            else
-              {
-                context.workserv.post(bind(&invoker::invoke, this));
-              }
+            post(bind(&invoker::invoke, this));
           } else {
-            //            ECTO_LOG_DEBUG("%s wait", this);
-            //            dt.expires_from_now(boost::posix_time::milliseconds(0));
-            //            dt.wait();
             context.workserv.post(bind(&invoker::async_wait_for_input, this));
           }
+        }
+
+        void destroy()
+        {
+          module::ptr m = g[vd];
+          // FIXME: not catching exceptions possibly thrown by destroy
+          m->destroy();
         }
 
         void invoke()
@@ -255,6 +268,8 @@ namespace ecto {
       int execute(unsigned nthreads, impl::respawn_cb_t respawn, graph_t& graph)
       {
         namespace asio = boost::asio;
+
+        stop = false;
 
         workserv.reset();
         mainserv.reset();
@@ -349,8 +364,7 @@ namespace ecto {
 
       void stop_asap() 
       {
-        mainserv.stop();
-        workserv.stop();
+        stop = true;
       }
 
       typedef std::map<graph_t::vertex_descriptor, invoker::ptr> invokers_t;
@@ -361,8 +375,7 @@ namespace ecto {
                            ecto::strand_hash> strands;
 
       pt::ptime starttime;
-      
-
+      bool stop;
     };
 
 
