@@ -74,6 +74,16 @@ namespace ecto {
         }
       };
 
+      struct stopper 
+      {
+        typedef void result_type;
+
+        void operator()(asio::io_service& serv) const
+        {
+          serv.stop();
+        }
+      };
+
 
       struct runandjoin
       {
@@ -171,7 +181,13 @@ namespace ecto {
           try {
             int j = ecto::scheduler::invoke_process(g, vd);
             if (j != ecto::OK)
-              abort();
+              {
+                std::cout << "Module " << g[vd]->name() << " returned not okay. Stopping everything." 
+                          << std::endl; 
+                context.workserv.stop();
+                context.mainserv.stop();
+                return;
+              }
           } catch (const std::exception& e) {
             context.mainserv.post(thrower(boost::current_exception()));
             return;
@@ -239,7 +255,6 @@ namespace ecto {
         starttime = pt::microsec_clock::universal_time();
         int64_t start_ticks = profile::read_tsc();
         reset_times(graph);
-
 
         //
         // start per-node threads

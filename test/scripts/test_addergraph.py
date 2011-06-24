@@ -54,12 +54,12 @@ def test_plasm(nlevels, nthreads, niter):
     assert outnode.outputs.out == shouldbe
 
 if __name__ == '__main__':
-    test_plasm(1, 1, 1)
-    test_plasm(1, 1, 2)
-    test_plasm(5, 1, 1)
-    test_plasm(5, 2, 1)
-    test_plasm(5, 5, 5)
-    test_plasm(6, 6, 6)
+    #test_plasm(1, 1, 1)
+    #test_plasm(1, 1, 2)
+    #test_plasm(5, 1, 1)
+    #test_plasm(5, 2, 1)
+    #test_plasm(5, 5, 5)
+    test_plasm(6, 6, 6000)
 #    test_plasm(8, 1, 5)
 #    test_plasm(9, 64, 100)
 #    test_plasm(10, 8, 10)

@@ -2,6 +2,7 @@ ectomodule(ecto_test
   Add.cpp
   Multiply.cpp
   Quitter.cpp
+  QuitAfter.cpp
   Increment.cpp
   Printer.cpp
   Gather.cpp

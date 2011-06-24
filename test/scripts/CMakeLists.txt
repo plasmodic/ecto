@@ -16,6 +16,7 @@ foreach(file
     test_modules
     test_parameter_callbacks
     test_plasm
+    test_process_return_values
     test_python_module
     test_reconnect
     test_random
