@@ -43,7 +43,7 @@ namespace ecto
     public:
       /** Takes a character string describing the error.  */
       explicit
-      TypeMismatch(const std::string& arg);
+      TypeMismatch(const std::string& arg = "");
 
       virtual
       ~TypeMismatch() throw ();
@@ -67,7 +67,7 @@ namespace ecto
     public:
       /** Takes a character string describing the error.  */
       explicit
-      ValueNone(const std::string& arg);
+      ValueNone(const std::string& arg = "");
 
       virtual
       ~ValueNone() throw ();
@@ -86,7 +86,7 @@ namespace ecto
     public:
       /** Takes a character string describing the error.  */
       explicit
-      ValueRequired(const std::string& arg);
+      ValueRequired(const std::string& arg = "");
 
       virtual
       ~ValueRequired() throw ();

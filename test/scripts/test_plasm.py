@@ -14,6 +14,13 @@ def test_plasm():
     #test the old syntax.
     p.connect(scatter, "out_0000", gather, "in_0000")
 
+    try:
+        p2 = ecto.Plasm()
+        p2.connect(gather["out"] >> ecto_test.Printer(print_type="double")["in"])
+        assert False, "Should not work as there is a type mismatch..."
+    except ecto.TypeMismatch, e:
+        print e
+    
     plasm.connect(scatter[:] >> gather[:],
                   scatter2[:] >> gather2[:],
                   gather["out"] >> ecto_test.Printer(print_type="int")["in"]

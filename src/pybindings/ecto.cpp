@@ -12,6 +12,7 @@ namespace ecto {
     void wrapModule();
     void wrapSchedulers();
     void wrapStrand();
+    void wrap_except();
   }
 }
 
@@ -27,6 +28,7 @@ BOOST_PYTHON_MODULE(ecto)
   ecto::py::wrapTendrils();
   ecto::py::wrapSchedulers();
   ecto::py::wrapStrand();
+  ecto::py::wrap_except();
 
   ECTO_REGISTER(ecto);
 }

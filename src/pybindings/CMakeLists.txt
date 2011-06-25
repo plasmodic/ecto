@@ -1,5 +1,6 @@
 ectomodule(ecto
   ecto.cpp
+  except.cpp
   plasm.cpp
   tendril.cpp
   tendrils.cpp
