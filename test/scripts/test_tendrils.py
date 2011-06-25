@@ -6,15 +6,15 @@ def test_tendrils():
     t = ecto.Tendrils()
     t.declare("Hello","doc str",6)
     assert t.Hello == 6
-    print t["Hello"].doc
+    assert t["Hello"] == 6
     t.declare("x","a number", "str")
     assert len(t) == 2
-    assert t["x"].val == "str"
+    assert t["x"] == "str"
     assert t.x == "str"
     #test the redeclare
     t.declare("Hello","new doc", "you")
     assert t.Hello == "you"
-    assert t["Hello"].doc == "new doc"
+    assert t.at("Hello").doc == "new doc"
     try:
         #read error
         t.nonexistant = 1
@@ -25,7 +25,7 @@ def test_tendrils():
         #index error
         print t["nonexistant"]
         assert False
-    except KeyError,e:
+    except RuntimeError,e:
         print "good:",e
 
     assert len(t.keys()) == 2
@@ -40,7 +40,7 @@ def test_tendrils():
     t.x = 11
     assert x != 11
     #by reference
-    x = t["x"]
+    x = t.at("x")
     t.x =13
     assert x.val == 13
     x.val = 15
