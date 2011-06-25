@@ -136,6 +136,17 @@ namespace ecto
       return p()->has_default();
     }
 
+    void set_required()
+    {
+      p()->set_required();
+    }
+
+    bool is_required() const
+    {
+      return p()->is_required();
+    }
+
+
     T* operator->()
     {
       tendril::ptr _p = p();

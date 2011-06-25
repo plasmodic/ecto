@@ -1,6 +1,6 @@
 #include <ecto/module.hpp>
 #include <ecto/util.hpp>
-
+#include <ecto/except.hpp>
 namespace ecto
 {
   module::module()
@@ -23,7 +23,7 @@ namespace ecto
 
   void module::configure()
   {
-    dispatch_configure(parameters,inputs,outputs);
+    dispatch_configure(parameters, inputs, outputs);
   }
 
   ReturnCode module::process()
@@ -31,19 +31,19 @@ namespace ecto
     //trigger all parameter change callbacks...
     tendrils::iterator begin = parameters.begin(), end = parameters.end();
     while (begin != end)
-      {
-        begin->second->notify();
-        ++begin;
-      }
+    {
+      begin->second->notify();
+      ++begin;
+    }
 
     try
-      {
-        return dispatch_process(inputs, outputs);
-      } catch (std::exception& e)
-      {
-        throw std::runtime_error("Module " + name() + " threw\n" + e.what());
-      }
+    {
+      return dispatch_process(inputs, outputs);
+    } catch (std::exception& e)
+    {
+      throw std::runtime_error("Module " + name() + " threw\n" + e.what());
     }
+  }
 
   std::string module::type() const
   {
@@ -71,7 +71,7 @@ namespace ecto
 
     ss << name() << " (ecto::module)\n";
     //create an underline that is the size of the name...
-    for(int i = 0,end = ss.str().size(); i < end;++i)
+    for (int i = 0, end = ss.str().size(); i < end; ++i)
     {
       ss << "=";
     }
@@ -81,6 +81,20 @@ namespace ecto
     inputs.print_doc(ss, "Inputs");
     outputs.print_doc(ss, "Outputs");
     return ss.str();
+  }
+
+  void module::verify_params() const
+  {
+
+    tendrils::const_iterator it = parameters.begin(), end(parameters.end());
+    while (it != end)
+    {
+      if (it->second->is_required() && !it->second->user_supplied())
+      {
+        throw except::ValueRequired(it->first + " must be supplied with a value during initialization.");
+      }
+      ++it;
+    }
   }
 
 }

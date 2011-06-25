@@ -1,8 +1,44 @@
 #include <ecto/tendrils.hpp>
 #include <boost/algorithm/string.hpp>
-
+#include <boost/function.hpp>
+#include <map>
+#include <iostream>
 namespace ecto
 {
+  struct PrintFunctions
+  {
+    template <typename T>
+    static void print(std::ostream& out,const tendril& x)
+    {
+      out << x.read<T>();
+    }
+
+    typedef std::map<std::string, boost::function<void(std::ostream& out,const tendril& x)> > ProcMap;
+    ProcMap processes;
+    PrintFunctions()
+    {
+      processes[ecto::name_of<int>()] = &print<int>;
+      processes[ecto::name_of<float>()] = &print<double>;
+      processes[ecto::name_of<double>()] = &print<double>;
+      processes[ecto::name_of<bool>()] = &print<bool>;
+      processes[ecto::name_of<std::string>()] = &print<std::string>;
+    }
+
+    void print_tendril(std::ostream& out, const tendril& t) const
+    {
+      ProcMap::const_iterator it = processes.find(t.type_name());
+      if(it != processes.end())
+      {
+        it->second(out,t);
+      }
+      else
+      {
+        out << t.type_name() << "(?)";
+      }
+    }
+  };
+
+  const PrintFunctions pf;
 
   struct print_tendril
   {
@@ -12,13 +48,15 @@ namespace ecto
     }
     void operator()(const std::pair<std::string, ecto::tendril::ptr>& tp)
     {
+      std::stringstream tss;
+      pf.print_tendril(tss,*tp.second);
       //default value
-      std::string defval = "??? Todo FIXME";
-      //            boost::python::extract<std::string>(
-      //                                                boost::python::str(
-      //                                                                   tp.second->extract()));
-      ss << " - " << tp.first << " [" << tp.second->type_name()
-          << "] default = " << defval << "\n";
+
+      ss << " - " << tp.first << " [" << tp.second->type_name() << "]";
+      ss << (tp.second->has_default() ? (" default = " + tss.str()) : "");
+      ss << (tp.second->is_required() ? " REQUIRED " : "");
+      ss << "\n";
+
       std::string docstr = tp.second->doc();
       std::vector<std::string> doc_lines;
       std::string doc_str = tp.second->doc();

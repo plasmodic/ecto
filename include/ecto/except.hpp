@@ -56,29 +56,47 @@ namespace ecto
       template<typename T1, typename T2>
       static TypeMismatch make(const std::string& msg = "")
       {
-        return TypeMismatch(
-                            msg + "::" + ecto::name_of<T1>() + " != "
-                                + ecto::name_of<T2>());
+        return TypeMismatch(msg + "::" + ecto::name_of<T1>() + " != " + ecto::name_of<T2>());
       }
     };
 
     struct ValueNone: std::exception
-        {
-          std::string msg_;
+    {
+      std::string msg_;
 
-        public:
-          /** Takes a character string describing the error.  */
-          explicit
-          ValueNone(const std::string& arg);
+    public:
+      /** Takes a character string describing the error.  */
+      explicit
+      ValueNone(const std::string& arg);
 
-          virtual
-          ~ValueNone() throw ();
+      virtual
+      ~ValueNone() throw ();
 
-          /** Returns a C-style character string describing the general cause of
-           *  the current error (the same string passed to the ctor).  */
-          virtual const char*
-          what() const throw ();
+      /** Returns a C-style character string describing the general cause of
+       *  the current error (the same string passed to the ctor).  */
+      virtual const char*
+      what() const throw ();
 
-        };
+    };
+
+    struct ValueRequired: std::exception
+    {
+      std::string msg_;
+
+    public:
+      /** Takes a character string describing the error.  */
+      explicit
+      ValueRequired(const std::string& arg);
+
+      virtual
+      ~ValueRequired() throw ();
+
+      /** Returns a C-style character string describing the general cause of
+       *  the current error (the same string passed to the ctor).  */
+      virtual const char*
+      what() const throw ();
+
+    };
+
   }
 }

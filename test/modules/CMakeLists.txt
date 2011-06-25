@@ -8,6 +8,8 @@ ectomodule(ecto_test
   Printer.cpp
   Gather.cpp
   Generate.cpp
+  RequiredParam.cpp
+  
   Uniform01.cpp
   ecto_test.cpp
 )

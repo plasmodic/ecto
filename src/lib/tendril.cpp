@@ -13,26 +13,35 @@ namespace ecto
   }
 
   tendril::tendril() :
-      holder_(none_holder_), dirty_(false), default_(false), user_supplied_(false)
+      holder_(none_holder_)
+    , dirty_(false)
+    , default_(false)
+    , user_supplied_(false)
+    , required_(false)
   {
     //impl_ is never not initialized
   }
 
   tendril::~tendril()
-  {
-  }
+  {}
 
   tendril::tendril(const tendril& rhs) :
-      holder_(rhs.holder_->clone()), doc_(rhs.doc_), dirty_(false), default_(
-          rhs.default_), user_supplied_(rhs.user_supplied_)
-  {
-  }
+      holder_(rhs.holder_->clone())
+    , doc_(rhs.doc_)
+    , dirty_(false)
+    , default_(rhs.default_)
+    , user_supplied_(rhs.user_supplied_)
+    , required_(false)
+  {}
 
 
   tendril::tendril(holder_base::ptr impl) :
-      holder_(impl), dirty_(false), default_(false), user_supplied_(false)
-  {
-  }
+      holder_(impl)
+    , dirty_(false)
+    , default_(false)
+    , user_supplied_(false)
+    , required_(false)
+  {}
 
 
   tendril& tendril::operator=(const tendril& rhs)
@@ -81,12 +90,14 @@ namespace ecto
   {
   }
 
-  boost::python::object tendril::extract() const
+  boost::python::object
+  tendril::extract() const
   {
     return holder_->getPython();
   }
 
-  void tendril::set(boost::python::object o)
+  void
+  tendril::set(boost::python::object o)
   {
     if (is_type<none>())
     {

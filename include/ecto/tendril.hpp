@@ -44,7 +44,6 @@
 
 namespace ecto
 {
-
   /**
    * \brief A tendril is the slender, winding organ of the
    * ecto::module that gives it its awesome type erasure and uber
@@ -87,6 +86,7 @@ namespace ecto
       , dirty_(false)
       , default_(true)
       , user_supplied_(false)
+      , required_(false)
     { }
 
     template<typename T>
@@ -159,6 +159,16 @@ namespace ecto
         holder_.reset(new holder<T> (val));
       }
     }
+
+    void set_required()
+    {
+      required_ = true;
+    }
+    bool is_required() const
+    {
+      return required_;
+    }
+
     /**
      * Given T this will get the type from the tendril, also enforcing type with an exception.
      * @return a const reference to the value of the tendril (no copies)
@@ -369,7 +379,7 @@ namespace ecto
     tendril(holder_base::ptr impl);
     boost::shared_ptr<holder_base> holder_;
     std::string doc_;
-    bool dirty_, default_, user_supplied_;
+    bool dirty_, default_, user_supplied_,required_;
 
   };
 

@@ -35,5 +35,22 @@ namespace ecto
     {
       return msg_.c_str();
     }
+
+
+    /** Takes a character string describing the error.  */
+    ValueRequired::ValueRequired(const std::string& msg):msg_(msg)
+    {
+
+    }
+
+    ValueRequired::~ValueRequired() throw(){}
+
+    /** Returns a C-style character string describing the general cause of
+     *  the current error (the same string passed to the ctor).  */
+    const char*
+    ValueRequired::what() const throw ()
+    {
+      return msg_.c_str();
+    }
   }
 }

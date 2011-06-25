@@ -122,6 +122,7 @@ namespace ecto
                                                      boost::python::dict kwargs)
   {
     boost::shared_ptr<ecto::module_<T> > m = inspect<T> (args, kwargs);
+    m->verify_params();
     return m;
   }
 
