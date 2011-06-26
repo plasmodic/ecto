@@ -9,7 +9,7 @@ ectomodule(ecto_test
   Gather.cpp
   Generate.cpp
   RequiredParam.cpp
-  
+  Passthrough.cpp
   Uniform01.cpp
   ecto_test.cpp
 )

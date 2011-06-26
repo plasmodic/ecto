@@ -230,7 +230,7 @@ namespace ecto
     {
       if (same_type(rhs))
         return true;
-      return is_type<none>() || is_type<boost::python::object> () || rhs.is_type<boost::python::object> ();
+      return is_type<none>() || rhs.is_type<none>() || is_type<boost::python::object> () || rhs.is_type<boost::python::object> ();
     }
 
     inline void enforce_compatible_type(const tendril& rhs) const
