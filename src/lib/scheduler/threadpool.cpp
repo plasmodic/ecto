@@ -331,17 +331,17 @@ namespace ecto {
             double this_percentage = 100.0 * ((double)m->stats.total_ticks / elapsed_ticks);
             total_percentage += this_percentage;
         
-            std::cout << str(boost::format(">>> %25s  calls: %u  Hz: %3.2f  cpu ticks: %12lu (%lf%%)")
+            std::cout << str(boost::format(">>> %25s  calls: %u  Hz: %3.2f  cpu ticks: %12lu (%04.2lf%%)")
                              % m->name()
                              % m->stats.ncalls 
-                             % (double( m->stats.ncalls)/(elapsed.total_milliseconds() / 1000.0))
+                             % (double(m->stats.ncalls) / (elapsed.total_microseconds() / 1e+06))
                              % m->stats.total_ticks 
                              % this_percentage)
                       << "\n";
           }
               
         std::cout << "**********************************************"
-                  << "\ncpu freq:         " << (elapsed_ticks / (elapsed.total_milliseconds() / 1000.0)) / 1.0e+9
+                  << "\ncpu freq:         " << (elapsed_ticks / (elapsed.total_milliseconds() / 1000.0)) / 1e+9 
                   << " GHz"
                   << "\nthreads:          " << nthreads
                   << "\nelapsed time:     " << elapsed 
@@ -349,9 +349,7 @@ namespace ecto {
                   << "\ncpu ticks per second: " << elapsed.ticks_per_second();
           ;
 
-        std::cout << str(boost::format("\npercentage total: %f%%\nper-thread:       %f%%\n")
-                         % total_percentage
-                         % (total_percentage / nthreads))
+        std::cout << str(boost::format("\nin process():     %.2f%%\n") % (total_percentage / nthreads))
           ;
         return 0;
       }
