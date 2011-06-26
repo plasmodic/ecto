@@ -13,6 +13,8 @@ namespace ecto
       static void translate(const ExceptionType & x)
       {
         PyErr_SetObject(Exc_Type_, bp::object(x).ptr());
+        PyErr_SetString(Exc_Type_, x.what());
+
       }
       static PyObject* Exc_Type_;
     };

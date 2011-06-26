@@ -1,5 +1,5 @@
 #pragma once
-
+#include <cstring>//size_t
 namespace ecto {
   namespace profile {
 
@@ -26,5 +26,8 @@ namespace ecto {
       }
     };
 
+    double elapsed_time(const stats_type& stats);
+    double period(const stats_type& stats);
+    double frequency(const stats_type& stats);
  }
 }

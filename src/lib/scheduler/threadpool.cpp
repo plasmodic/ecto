@@ -334,18 +334,19 @@ namespace ecto {
             std::cout << str(boost::format(">>> %25s  calls: %u  Hz: %3.2f  cpu ticks: %12lu (%lf%%)")
                              % m->name()
                              % m->stats.ncalls 
-                             % (double(m->stats.ncalls) / (elapsed.total_milliseconds() / 1000.0))
+                             % (double( m->stats.ncalls)/(elapsed.total_milliseconds() / 1000.0))
                              % m->stats.total_ticks 
                              % this_percentage)
                       << "\n";
           }
               
         std::cout << "**********************************************"
-                  << "\ncpu freq:         " << (elapsed_ticks / (elapsed.total_milliseconds() / 1000.0)) / 10.0e+9 
+                  << "\ncpu freq:         " << (elapsed_ticks / (elapsed.total_milliseconds() / 1000.0)) / 1.0e+9
                   << " GHz"
                   << "\nthreads:          " << nthreads
                   << "\nelapsed time:     " << elapsed 
-                  << "\ncpu ticks:        " << elapsed_ticks 
+                  << "\ncpu ticks:        " << elapsed_ticks
+                  << "\ncpu ticks per second: " << elapsed.ticks_per_second();
           ;
 
         std::cout << str(boost::format("\npercentage total: %f%%\nper-thread:       %f%%\n")
