@@ -81,11 +81,11 @@ def novel_sets(g):
     g.inputs.declare("in2","doc","hello")
     assert g.inputs.in2 == "hello"
 
-def do_fail(x,args = None):
+def do_fail(x,exception_type = RuntimeError ,args = None):
     try:
         x(args)
         assert False
-    except RuntimeError,e:
+    except exception_type,e:
         print "good, caught error:", e
         
 def too_many_positionalargs(_):
@@ -112,9 +112,9 @@ def test_modules_wrong_args():
     not_allocable()
     do_fail(noarg)
     g = ecto_test.Generate()
-    do_fail(wrong_type,g)
-    do_fail(already_set,g)
-    do_fail(too_many_positionalargs)
+    do_fail(wrong_type,ecto.TypeMismatch,g)
+    do_fail(already_set,RuntimeError,g)
+    do_fail(too_many_positionalargs, RuntimeError)
     novel_sets(g)
     right_type(g)
 

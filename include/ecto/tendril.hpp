@@ -343,7 +343,7 @@ namespace ecto
       static bool inline check(holder_base& i);
 
       template<typename T>
-      static inline void checkThrow(holder_base& i) throw (std::logic_error);
+      static inline void checkThrow(holder_base& i) throw (except::TypeMismatch);
     };
 
     template<typename T>
@@ -390,10 +390,10 @@ namespace ecto
 
   template<typename T>
   void tendril::holder_base::checkThrow(tendril::holder_base& i)
-                                                                 throw (std::logic_error)
+                                                                 throw (except::TypeMismatch)
   {
     if (!check<T> (i))
-      throw std::logic_error(
+      throw except::TypeMismatch(
                              std::string(
                                          i.type_name() + " is not a "
                                              + name_of<T> ()).c_str());
