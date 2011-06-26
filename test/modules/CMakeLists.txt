@@ -6,10 +6,13 @@ ectomodule(ecto_test
   FlagOnDestroy.cpp
   Increment.cpp
   Printer.cpp
+  Ping.cpp
+  Throttle.cpp
+  Sleep.cpp
+  Metrics.cpp
   Gather.cpp
   Generate.cpp
   RequiredParam.cpp
-  
   Uniform01.cpp
   ecto_test.cpp
 )
