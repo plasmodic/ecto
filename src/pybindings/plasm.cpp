@@ -19,18 +19,6 @@ namespace ecto
       return p.viz();
     }
 
-    static bp::dict getModules(plasm& p)
-    {
-      throw std::logic_error("not implemented");
-      return bp::dict();
-    }
-
-    static bp::list getEdges(plasm& p)
-    {
-      throw std::logic_error("not implemented");
-      return bp::list();
-    }
-
     template<typename T>
     static void list_assign(std::list<T>& l, bp::object o)
     {
@@ -72,8 +60,7 @@ namespace ecto
         bp::tuple x = *(begin++);
         module::ptr from = bp::extract<module::ptr>(x[0]);
         module::ptr to = bp::extract<module::ptr>(x[2]);
-        std::string output = bp::extract<std::string>(x[1]), input =
-            bp::extract<std::string>(x[3]);
+        std::string output = bp::extract<std::string>(x[1]), input = bp::extract<std::string>(x[3]);
         p.connect(from, output, to, input);
       }
     }
@@ -83,7 +70,17 @@ namespace ecto
       plasm::ptr p = bp::extract<plasm::ptr>(args[i++]);
       for (int end = bp::len(args); i < end; i++)
       {
-        plasm_connect_list(*p, bp::list(args[i]));
+        bp::list l;
+        try
+        {
+          l = bp::list(args[i]);
+        } catch (const boost::python::error_already_set&)
+        {
+          PyErr_Clear(); //Need to clear the error or python craps out. Try commenting out and running the doc tests.
+          throw std::runtime_error(
+              "Did you mean plasm.connect(moduleA['out'] >> moduleB['in']), or plasm.connect(moduleA,'out',moduleB,'in')?");
+        }
+        plasm_connect_list(*p, l);
       }
       return i;
     }
@@ -109,31 +106,22 @@ namespace ecto
     {
       using bp::arg;
 
-      bp::class_<plasm, boost::shared_ptr<plasm>, boost::noncopyable> p(
-          "Plasm");
-      p.def("insert", &plasm::insert, bp::args("module"),
-            "insert module into the graph");
+      bp::class_<plasm, boost::shared_ptr<plasm>, boost::noncopyable> p("Plasm");
+      p.def("insert", &plasm::insert, bp::args("module"), "insert module into the graph");
 
       p.def("connect", &plasm_connect_list, bp::args("connection_list"));
       p.def("connect", bp::raw_function(plasm_connect_args, 2));
-      p.def("disconnect", &plasm::disconnect,
-            bp::args("from_module", "output_name", "to_module", "intput_name"));
-      p.def("connect", &plasm::connect,
-            bp::args("from_module", "output_name", "to_module", "intput_name"));
+      p.def("connect", &plasm::connect, bp::args("from_module", "output_name", "to_module", "intput_name"));
+      p.def("disconnect", &plasm::disconnect, bp::args("from_module", "output_name", "to_module", "intput_name"));
       p.def(
           "execute",
           &plasm::execute,
-          execute_overloads(
-              bp::args("niter"),
-              "Executes the graph in topological order. Every node will be executed."));
+          execute_overloads(bp::args("niter"),
+                            "Executes the graph in topological order. Every node will be executed."));
 
-      p.def("viz", wrapViz,
-            "Get a graphviz string representation of the plasm.");
-      p.def(
-          "connections",
-          plasm_get_connections,
-          "Grabs a the current list based description of the graph. "
-          "Its a list of tuples (from_module, output_key, to_module, input_key)");
+      p.def("viz", wrapViz, "Get a graphviz string representation of the plasm.");
+      p.def("connections", plasm_get_connections, "Grabs a the current list based description of the graph. "
+            "Its a list of tuples (from_module, output_key, to_module, input_key)");
 
     }
 
