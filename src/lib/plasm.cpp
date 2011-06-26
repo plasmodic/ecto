@@ -105,6 +105,17 @@ namespace ecto
     impl_->scheduler.reset(new ecto::scheduler::singlethreaded(*this));
   }
 
+  plasm::~plasm()
+  {
+    //call destroy on all modules.
+//    plasm::impl::ModuleVertexMap::iterator it = impl_->mv_map.begin();
+//    while (it != impl_->mv_map.end())
+//    {
+//      it->first->destroy();
+//      ++it;
+//    }
+  }
+
   void plasm::insert(module::ptr mod)
   {
     impl_->insert_module(mod);

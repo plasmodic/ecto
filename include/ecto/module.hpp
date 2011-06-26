@@ -174,7 +174,7 @@ namespace ecto
     virtual void dispatch_configure(tendrils& params, tendrils& inputs,
                                     tendrils& outputs) = 0;
     virtual ReturnCode
-    dispatch_process(const tendrils& inputs, tendrils& outputs) = 0;
+    dispatch_process(tendrils& inputs, tendrils& outputs) = 0;
     virtual void dispatch_destroy() = 0;
     virtual std::string dispatch_name() const = 0;
     virtual ptr dispatch_make() const
@@ -183,7 +183,6 @@ namespace ecto
     }
 
   private:
-
     std::string instance_name;
   };
 
@@ -324,19 +323,19 @@ namespace ecto
       configure(int_<has_f<Module>::configure> (), params,inputs,outputs);
     }
 
-    ReturnCode process(not_implemented, const tendrils& inputs,
-                       tendrils& outputs)
+    ReturnCode process(not_implemented, const tendrils& ,
+                       const tendrils& )
     {
       return OK;
     }
 
-    ReturnCode process(implemented, const tendrils& inputs, tendrils& outputs)
+    ReturnCode process(implemented, tendrils& inputs, tendrils& outputs)
     {
       profile::stats_collector coll(stats);
       return ReturnCode(thiz->process(inputs, outputs));
     }
 
-    ReturnCode dispatch_process(const tendrils& inputs, tendrils& outputs)
+    ReturnCode dispatch_process(tendrils& inputs, tendrils& outputs)
     {
       if (!thiz)
         dispatch_configure(parameters,this->inputs,outputs);
@@ -349,7 +348,7 @@ namespace ecto
 
     void destroy(implemented)
     {
-      thiz->destroy();
+        thiz->destroy();
     }
 
     void dispatch_destroy()

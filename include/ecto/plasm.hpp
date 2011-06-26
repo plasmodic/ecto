@@ -58,6 +58,7 @@ namespace ecto
   {
   public:
     plasm();
+    ~plasm();
 
     /**
      * \brief insert the module into the graph so that it may be executed by a scheduler.
