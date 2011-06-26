@@ -7,13 +7,15 @@ namespace ecto
 {
   struct PrintFunctions
   {
-    template <typename T>
-    static void print(std::ostream& out,const tendril& x)
+    template<typename T>
+    static void
+    print(std::ostream& out, const tendril& x)
     {
       out << x.read<T>();
     }
 
-    typedef std::map<std::string, boost::function<void(std::ostream& out,const tendril& x)> > ProcMap;
+    typedef std::map<std::string, boost::function<void
+    (std::ostream& out, const tendril& x)> > ProcMap;
     ProcMap processes;
     PrintFunctions()
     {
@@ -24,12 +26,13 @@ namespace ecto
       processes[ecto::name_of<std::string>()] = &print<std::string>;
     }
 
-    void print_tendril(std::ostream& out, const tendril& t) const
+    void
+    print_tendril(std::ostream& out, const tendril& t) const
     {
       ProcMap::const_iterator it = processes.find(t.type_name());
-      if(it != processes.end())
+      if (it != processes.end())
       {
-        it->second(out,t);
+        it->second(out, t);
       }
       else
       {
@@ -42,14 +45,16 @@ namespace ecto
 
   struct print_tendril
   {
-    print_tendril(std::ostream& ss) :
-      ss(ss)
+    print_tendril(std::ostream& ss)
+        :
+          ss(ss)
     {
     }
-    void operator()(const std::pair<std::string, ecto::tendril::ptr>& tp)
+    void
+    operator()(const std::pair<std::string, ecto::tendril::ptr>& tp)
     {
       std::stringstream tss;
-      pf.print_tendril(tss,*tp.second);
+      pf.print_tendril(tss, *tp.second);
       //default value
 
       ss << " - " << tp.first << " [" << tp.second->type_name() << "]";
@@ -68,7 +73,8 @@ namespace ecto
     std::ostream& ss;
   };
 
-  void tendrils::print_doc(std::ostream& out, const std::string& tendrils_name) const
+  void
+  tendrils::print_doc(std::ostream& out, const std::string& tendrils_name) const
   {
     boost::mutex::scoped_lock lock(mtx);
     if (empty())
@@ -78,7 +84,8 @@ namespace ecto
     std::for_each(begin(), end(), print_tendril(out));
   }
 
-  tendril::const_ptr tendrils::at(const std::string& name) const
+  tendril::const_ptr
+  tendrils::at(const std::string& name) const
   {
     boost::mutex::scoped_lock lock(mtx);
     map_t::const_iterator it = find(name);
@@ -87,7 +94,8 @@ namespace ecto
     return it->second;
   }
 
-  tendril::ptr tendrils::at(const std::string& name)
+  tendril::ptr
+  tendrils::at(const std::string& name)
   {
     boost::mutex::scoped_lock lock(mtx);
     map_t::iterator it = find(name);
@@ -95,4 +103,34 @@ namespace ecto
       throw std::logic_error(name + " does not exist!");
     return it->second;
   }
+
+  tendril::ptr
+  tendrils::declare(const std::string& name, tendril::ptr t)
+  {
+    map_t::iterator it = find(name);
+    //if there are no exiting tendrils by the given name,
+    //just add it.
+    if (it == end())
+    {
+      insert(std::make_pair(name, t));
+    }
+    else // we want to just return the existing tendril (so that modules preconnected don't get messed up)...
+    {
+      //there is already an existing tendril with the given name
+      //check if the types are the same
+      if (!it->second->same_type(*t))
+      {
+        std::stringstream ss;
+        ss << "Your types aren't the same, this could lead to very undefined behavior...";
+        ss << " old type = " << it->second->type_name() << " new type = " << t->type_name() << std::endl;
+        throw except::TypeMismatch(ss.str());
+      }
+      else
+      {
+        it->second = t;
+      }
+    }
+    return at(name);
+  }
+
 }
