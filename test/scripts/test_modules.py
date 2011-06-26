@@ -87,8 +87,7 @@ def do_fail(x,exception_type = RuntimeError ,args = None):
         assert False
     except exception_type,e:
         print "good, caught error:", e
-    finally:
-        print "unknown exception"
+
         
 def too_many_positionalargs(_):
     ecto_test.Generate("foo", "bar")
@@ -114,8 +113,8 @@ def test_modules_wrong_args():
     not_allocable()
     do_fail(noarg)
     g = ecto_test.Generate()
-    do_fail(wrong_type,ecto.TypeMismatch,g)
-    do_fail(already_set,Exception,g)
+    do_fail(wrong_type,RuntimeError,g)
+    do_fail(already_set,RuntimeError,g)
     do_fail(too_many_positionalargs, RuntimeError)
     novel_sets(g)
     right_type(g)

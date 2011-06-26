@@ -18,7 +18,7 @@ def test_plasm():
         p2 = ecto.Plasm()
         p2.connect(gather["out"] >> ecto_test.Printer(print_type="double")["in"])
         assert False, "Should not work as there is a type mismatch..."
-    except ecto.TypeMismatch, e:
+    except RuntimeError, e:
         print e
     
     try:
