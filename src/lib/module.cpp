@@ -1,8 +1,27 @@
 #include <ecto/module.hpp>
 #include <ecto/util.hpp>
 #include <ecto/except.hpp>
+#define CATCH_ALL() \
+catch (ecto::except::EctoException& e) \
+{ \
+  e << "\tModule : " + name() + "\n\tFunction: " + __FUNCTION__; \
+  throw; \
+} catch (std::exception& e) \
+{ \
+  except::EctoException ee("Original Exception: " +name_of(typeid(e))); \
+  ee << "\tWhat   :" + std::string(e.what()); \
+  ee << "\tModule : " + name() + "\n\tFunction: " + __FUNCTION__; \
+  throw ee; \
+} \
+catch (...) \
+{ \
+  except::EctoException ee("Threw unknown exception type!"); \
+  ee << "\tModule : " + name() + "\n\tFunction: " + __FUNCTION__; \
+  throw ee; \
+}
 namespace ecto
 {
+
   module::module()
   {
   }
@@ -11,22 +30,35 @@ namespace ecto
   {
   }
 
-  void module::declare_params()
+  void
+  module::declare_params()
   {
-    dispatch_declare_params(parameters);
+    try
+    {
+      dispatch_declare_params(parameters);
+    } CATCH_ALL()
   }
 
-  void module::declare_io()
+  void
+  module::declare_io()
   {
-    dispatch_declare_io(parameters, inputs, outputs);
+    try
+    {
+      dispatch_declare_io(parameters, inputs, outputs);
+    } CATCH_ALL()
   }
 
-  void module::configure()
+  void
+  module::configure()
   {
-    dispatch_configure(parameters, inputs, outputs);
+    try
+    {
+      dispatch_configure(parameters, inputs, outputs);
+    } CATCH_ALL()
   }
 
-  ReturnCode module::process()
+  ReturnCode
+  module::process()
   {
     //trigger all parameter change callbacks...
     tendrils::iterator begin = parameters.begin(), end = parameters.end();
@@ -39,33 +71,35 @@ namespace ecto
     try
     {
       return dispatch_process(inputs, outputs);
-    } catch (std::exception& e)
-    {
-      throw std::runtime_error("Module " + name() + " threw\n" + e.what());
-    }
+    } CATCH_ALL()
   }
 
-  std::string module::type() const
+  std::string
+  module::type() const
   {
     return dispatch_name();
   }
 
-  void module::name(const std::string& name)
+  void
+  module::name(const std::string& name)
   {
     instance_name = name;
   }
 
-  std::string module::name() const
+  std::string
+  module::name() const
   {
     return instance_name.size() ? instance_name : dispatch_name();
   }
 
-  void module::destroy()
+  void
+  module::destroy()
   {
     dispatch_destroy();
   }
 
-  std::string module::gen_doc(const std::string& doc) const
+  std::string
+  module::gen_doc(const std::string& doc) const
   {
     std::stringstream ss;
 
@@ -83,7 +117,8 @@ namespace ecto
     return ss.str();
   }
 
-  void module::verify_params() const
+  void
+  module::verify_params() const
   {
 
     tendrils::const_iterator it = parameters.begin(), end(parameters.end());

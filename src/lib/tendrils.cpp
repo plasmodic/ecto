@@ -18,7 +18,7 @@ namespace ecto
     PrintFunctions()
     {
       processes[ecto::name_of<int>()] = &print<int>;
-      processes[ecto::name_of<float>()] = &print<double>;
+      processes[ecto::name_of<float>()] = &print<float>;
       processes[ecto::name_of<double>()] = &print<double>;
       processes[ecto::name_of<bool>()] = &print<bool>;
       processes[ecto::name_of<std::string>()] = &print<std::string>;

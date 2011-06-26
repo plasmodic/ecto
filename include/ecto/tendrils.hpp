@@ -102,6 +102,12 @@ namespace ecto
       return at(name)->read<T>();
     }
 
+    /**
+     * \brief Performs a non ambiguous read operation on the value held at the given name.
+     * This should be the preferred method of reading a value if the intent is to not change it.
+     * @param name The key that the tendril is stored at.
+     * @return A const reference to the value, no copy is done.
+     */
     template<typename T>
     const T& read(const std::string& name) const
     {

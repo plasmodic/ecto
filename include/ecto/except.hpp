@@ -31,24 +31,36 @@
 #include <string>
 #include <sstream>
 #include <ecto/util.hpp>
+#include <boost/exception/all.hpp>
 
 namespace ecto
 {
   namespace except
   {
-    struct TypeMismatch: std::exception
+    struct EctoException: std::exception
     {
       std::string msg_;
     public:
-      explicit
-      TypeMismatch(const std::string& arg = "");
+      EctoException(const std::string& msg);
 
       virtual
-      ~TypeMismatch() throw ();
+      ~EctoException() throw ();
 
-      virtual const char*
+      EctoException&
+      operator<<(const std::string& msg) throw ();
+
+      EctoException&
+      operator<<(EctoException& e) throw ();
+
+      const char*
       what() const throw ();
+    };
 
+    struct TypeMismatch: EctoException
+    {
+    public:
+      explicit
+      TypeMismatch(const std::string& arg = "");
       template<typename T1, typename T2>
       static TypeMismatch
       make(const std::string& msg = "")
@@ -57,36 +69,18 @@ namespace ecto
       }
     };
 
-    struct ValueNone: std::exception
+    struct ValueNone: EctoException
     {
-      std::string msg_;
-
     public:
       explicit
       ValueNone(const std::string& arg = "");
-
-      virtual
-      ~ValueNone() throw ();
-
-      virtual const char*
-      what() const throw ();
-
     };
 
-    struct ValueRequired: std::exception
+    struct ValueRequired: EctoException
     {
-      std::string msg_;
-
     public:
       explicit
       ValueRequired(const std::string& arg = "");
-
-      virtual
-      ~ValueRequired() throw ();
-
-      virtual const char*
-      what() const throw ();
-
     };
 
   }
