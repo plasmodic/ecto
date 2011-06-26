@@ -1,5 +1,7 @@
 #pragma once
 #include <cstring>//size_t
+#include <stdint.h>
+
 namespace ecto {
   namespace profile {
 

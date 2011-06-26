@@ -62,7 +62,6 @@ namespace ecto_test
 
     int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
-      std::cout << "usleep(" << sleep_usec << ")\n";
       usleep(sleep_usec);
       *out = *in;
       return 0;
