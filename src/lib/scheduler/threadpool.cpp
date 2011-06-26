@@ -341,16 +341,14 @@ namespace ecto {
           }
               
         std::cout << "**********************************************"
-                  << "\ncpu freq:         " << (elapsed_ticks / (elapsed.total_milliseconds() / 1000.0)) / 10.0e+9 
+                  << "\ncpu freq:         " << (elapsed_ticks / (elapsed.total_milliseconds() / 1000.0)) / 1e+9 
                   << " GHz"
                   << "\nthreads:          " << nthreads
                   << "\nelapsed time:     " << elapsed 
                   << "\ncpu ticks:        " << elapsed_ticks 
           ;
 
-        std::cout << str(boost::format("\npercentage total: %f%%\nper-thread:       %f%%\n")
-                         % total_percentage
-                         % (total_percentage / nthreads))
+        std::cout << str(boost::format("\nin process():     %.2f%%\n") % (total_percentage / nthreads))
           ;
         return 0;
       }
