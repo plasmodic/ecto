@@ -85,6 +85,19 @@ TEST(TendrilTest, Typeness)
   EXPECT_THROW(c.copy_value(b), ecto::except::TypeMismatch);
   EXPECT_NO_THROW(c = b);
   EXPECT_THROW(c.copy_value(a),ecto::except::TypeMismatch);
+  ecto::tendril n1(ecto::tendril::none(),"A none"), n2(ecto::tendril::none(),"Another none"), n3;
+  n2.copy_value(n1);
+  n1.copy_value(n2);
+  n1 = n2;
+  n2 = n1;
+  n1.copy_value(b);
+  n2.copy_value(n1);
+  EXPECT_EQ(n2.get<double>(),0.5);
+  EXPECT_THROW(n2.copy_value(a), ecto::except::TypeMismatch);
+
+  EXPECT_THROW(b.copy_value(n3), ecto::except::ValueNone);
+
+
 }
 
 namespace bp = boost::python;

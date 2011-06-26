@@ -425,6 +425,13 @@ namespace ecto
     return &t;
   }
 
+  template<>
+  inline void*
+  tendril::holder<tendril::none>::get()
+  {
+    throw ecto::except::ValueNone("You may not get the value of a tendril that holds a tendril::none.");
+  }
+
   template<typename T>
   void tendril::holder<T>::setPython(boost::python::object o)
   {
@@ -432,7 +439,7 @@ namespace ecto
     if (get_T.check())
       t = get_T();
     else
-      throw std::logic_error(
+      throw ecto::except::TypeMismatch(
                              "Could not convert python object to type : "
                                  + type_name());
   }
@@ -484,6 +491,14 @@ namespace ecto
     else
       throw except::ValueNone("The python value is None, will not copy!.");
   }
+
+  template<>
+  inline void
+  tendril::holder<tendril::none>::copy_to(holder_base& holder) const
+  {
+    throw ecto::except::ValueNone("You may not copy the value of a tendril that holds a tendril::none.");
+  }
+
 
   template<typename T>
   tendril::holder_base::ptr tendril::holder<T>::clone() const
