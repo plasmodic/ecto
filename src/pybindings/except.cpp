@@ -1,4 +1,5 @@
 #include <ecto/ecto.hpp>
+#include <boost/python/errors.hpp>
 namespace bp = boost::python;
 using namespace ecto::except;
 namespace ecto
