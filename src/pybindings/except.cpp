@@ -6,7 +6,6 @@ namespace ecto
 
   namespace py
   {
-    PyObject * pyValueNone, *pyTypeMismatch, *pyValueRequired;
     template<typename ExceptionType>
     struct Translate_
     {
@@ -14,7 +13,7 @@ namespace ecto
       {
         PyErr_SetObject(Exc_Type_, bp::object(x).ptr());
         PyErr_SetString(Exc_Type_, x.what());
-
+        bp::throw_error_already_set();
       }
       static PyObject* Exc_Type_;
     };
@@ -32,6 +31,7 @@ namespace ecto
 
     void wrap_except()
     {
+      register_exception<EctoException>("EctoException");
       register_exception<ValueNone>("ValueNone");
       register_exception<TypeMismatch>("TypeMismatch");
       register_exception<ValueRequired>("ValueRequired");

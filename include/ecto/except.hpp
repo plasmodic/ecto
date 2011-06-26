@@ -41,7 +41,7 @@ namespace ecto
     {
       std::string msg_;
     public:
-      EctoException(const std::string& msg);
+      EctoException(const std::string& msg = "");
 
       virtual
       ~EctoException() throw ();
