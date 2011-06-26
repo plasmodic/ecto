@@ -14,7 +14,6 @@ namespace ecto
       {
         PyErr_SetObject(Exc_Type_, bp::object(x).ptr());
         PyErr_SetString(Exc_Type_, x.what());
-        bp::throw_error_already_set();
       }
       static PyObject* Exc_Type_;
     };
