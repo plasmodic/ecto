@@ -1,5 +1,5 @@
 #pragma once
-#include <cstring>//size_t
+#include <boost/integer.hpp>//int64_t
 namespace ecto {
   namespace profile {
 
