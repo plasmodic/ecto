@@ -42,7 +42,7 @@ struct NotExist
     in.declare<double> ("d");
     in.declare<ExceptionalModule1> ("c");
     in.declare<std::string> ("e");
-    out.declare<std::string>("a");
+    out.declare<std::string> ("a");
 
   }
   int
@@ -79,6 +79,13 @@ struct ProcessException
 };
 TEST(Exceptions, ExceptionalModules)
 {
+  try
+  {
+    create_module<ExceptionalModule1> ();
+  } catch (except::EctoException& e)
+  {
+    std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
+  }
   EXPECT_THROW(create_module<ExceptionalModule1>(), ecto::except::TypeMismatch);
 }
 TEST(Exceptions, ExceptionUnknownException)
@@ -95,6 +102,10 @@ TEST(Exceptions, ExceptionUnknownException)
 
 TEST(Exceptions, ProcessException)
 {
+  std::string stre("Original Exception: std::logic_error\n"
+    "  What   : A standard exception\n"
+    "  Module : ProcessException\n"
+    "  Function: process");
   module::ptr m = create_module<ProcessException> ();
   EXPECT_THROW(
       try
@@ -104,6 +115,10 @@ TEST(Exceptions, ProcessException)
       catch (except::EctoException& e)
       {
         std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
+        if(stre != e.msg_)
+        {
+          throw std::runtime_error("Got :" + e.msg_ +"\nExpected :" +stre);
+        }
         throw e;
       }
       ,
@@ -112,10 +127,12 @@ TEST(Exceptions, ProcessException)
 
 TEST(Exceptions, NotExist)
 {
-  std::string stre("'a' does not exist in this tendrils object. Possible keys are:  'c':type(ExceptionalModule1) 'd':type(double) 'e':type(std::string)\n"
-"  Hint   : 'a' does exist in parameters (type == int) outputs (type == std::string)\n"
-"  Module : NotExist\n"
-"  Function: process");
+  std::string
+      stre(
+           "'a' does not exist in this tendrils object. Possible keys are:  'c':type(ExceptionalModule1) 'd':type(double) 'e':type(std::string)\n"
+             "  Hint   : 'a' does exist in parameters (type == int) outputs (type == std::string)\n"
+             "  Module : NotExist\n"
+             "  Function: process");
 
   module::ptr m = create_module<NotExist> ();
   EXPECT_THROW(
@@ -127,7 +144,9 @@ TEST(Exceptions, NotExist)
       {
         std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
         if(stre != e.msg_)
+        {
           throw std::runtime_error("Got :" + e.msg_ +"\nExpected :" +stre);
+        }
         throw e;
       }
       ,
@@ -136,6 +155,10 @@ TEST(Exceptions, NotExist)
 
 TEST(Exceptions, WrongType)
 {
+  std::string stre("double is not a int\n"
+"  Hint : 'd' is of type: double\n"
+"  Module : WrongType\n"
+"  Function: process");
   module::ptr m = create_module<WrongType> ();
   EXPECT_THROW(
       try
@@ -145,6 +168,10 @@ TEST(Exceptions, WrongType)
       catch (except::EctoException& e)
       {
         std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
+        if(stre != e.msg_)
+        {
+          throw std::runtime_error("Got :" + e.msg_ +"\nExpected :" +stre);
+        }
         throw e;
       }
       ,
