@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 #include <ecto/ecto.hpp>
 
+#define STRINGDIDLY(A) std::string(#A)
+
 using namespace ecto;
 struct ExceptionalModule1
 {
@@ -110,6 +112,11 @@ TEST(Exceptions, ProcessException)
 
 TEST(Exceptions, NotExist)
 {
+  std::string stre("'a' does not exist in this tendrils object. Possible keys are:  'c':type(ExceptionalModule1) 'd':type(double) 'e':type(std::string)\n"
+"  Hint   : 'a' does exist in parameters (type == int) outputs (type == std::string)\n"
+"  Module : NotExist\n"
+"  Function: process");
+
   module::ptr m = create_module<NotExist> ();
   EXPECT_THROW(
       try
@@ -119,6 +126,8 @@ TEST(Exceptions, NotExist)
       catch (except::EctoException& e)
       {
         std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
+        if(stre != e.msg_)
+          throw std::runtime_error("Got :" + e.msg_ +"\nExpected :" +stre);
         throw e;
       }
       ,
