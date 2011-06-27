@@ -38,6 +38,10 @@ struct NotExist
   declare_io(const tendrils& p, tendrils& in, tendrils& out)
   {
     in.declare<double> ("d");
+    in.declare<ExceptionalModule1> ("c");
+    in.declare<std::string> ("e");
+    out.declare<std::string>("a");
+
   }
   int
   process(tendrils& in, tendrils& out)

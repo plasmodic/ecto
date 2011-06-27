@@ -36,17 +36,24 @@ namespace ecto
   void
   auto_suggest(except::NonExistant& e, const module& m)
   {
+    std::string p_type, i_type, o_type;
     bool in_p = m.parameters.find(e.key) != m.parameters.end();
+    if(in_p) p_type = m.parameters.find(e.key)->second->type_name();
+
     bool in_i = m.inputs.find(e.key) != m.inputs.end();
+    if(in_i) i_type = m.inputs.find(e.key)->second->type_name();
+
     bool in_o = m.outputs.find(e.key) != m.outputs.end();
+    if(in_o) o_type = m.outputs.find(e.key)->second->type_name();
+
     if (in_p || in_i || in_o)
     {
-      e << ("  Hint   : '" + e.key + "' does exist in " + (in_p ? "parameters " : "") + (in_i ? "inputs " : "")
-          + (in_o ? "outputs" : ""));
+      e << ("  Hint   : '" + e.key + "' does exist in " + (in_p ? "parameters (type == " +p_type +") " : "") + (in_i ? "inputs (type == " +i_type +") "  : "")
+          + (in_o ? "outputs (type == " +o_type +")" : ""));
     }
     else
     {
-      e << ("  Hint   : '" + e.key + "' does not exist in module: " + m.name());
+      e << ("  Hint   : '" + e.key + "' does not exist in module.");
     }
   }
   module::module()

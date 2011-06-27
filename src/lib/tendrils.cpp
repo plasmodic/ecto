@@ -100,7 +100,7 @@ namespace ecto
   void doesnt_exist(const tendrils& t, const std::string& name)
   {
     std::stringstream ss;
-    ss << "'" << name << "' does not exist in this tendrils object. Possible keys are:\n";
+    ss << "'" << name << "' does not exist in this tendrils object. Possible keys are: ";
     std::for_each(t.begin(),t.end(),print_tendril_simple(ss));
     throw except::NonExistant(name,ss.str());
   }
