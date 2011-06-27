@@ -7,8 +7,8 @@ struct ExceptionalModule1
   static void
   declare_params(tendrils& p)
   {
-    p.declare<double>("d");
-    p.declare<float>("f").set_default_val(p.get<float>("d"));
+    p.declare<double> ("d");
+    p.declare<float> ("f").set_default_val(p.get<float> ("d"));
   }
 };
 
@@ -17,15 +17,51 @@ struct ExceptionUnknownException
   static void
   declare_params(tendrils& p)
   {
-    p.declare<double>("d");
+    p.declare<double> ("d");
   }
   static void
   declare_io(const tendrils& p, tendrils& in, tendrils& out)
   {
-    in.declare<double>("d");
+    in.declare<double> ("d");
     throw "A string";
   }
 };
+
+struct NotExist
+{
+  static void
+  declare_params(tendrils& p)
+  {
+    p.declare<int> ("a");
+  }
+  static void
+  declare_io(const tendrils& p, tendrils& in, tendrils& out)
+  {
+    in.declare<double> ("d");
+  }
+  int
+  process(tendrils& in, tendrils& out)
+  {
+    in.get<double> ("a");
+    return 0;
+  }
+};
+
+struct WrongType
+{
+  static void
+  declare_io(const tendrils& p, tendrils& in, tendrils& out)
+  {
+    in.declare<double> ("d");
+  }
+  int
+  process(tendrils& in, tendrils& out)
+  {
+    in.get<int> ("d");
+    return 0;
+  }
+};
+
 struct ProcessException
 {
   int
@@ -43,7 +79,7 @@ TEST(Exceptions, ExceptionUnknownException)
 {
   try
   {
-    create_module<ExceptionUnknownException>();
+    create_module<ExceptionUnknownException> ();
   } catch (except::EctoException& e)
   {
     std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
@@ -53,16 +89,51 @@ TEST(Exceptions, ExceptionUnknownException)
 
 TEST(Exceptions, ProcessException)
 {
-  module::ptr m = create_module<ProcessException>();
+  module::ptr m = create_module<ProcessException> ();
   EXPECT_THROW(
-  try
-  {
-    m->process();
-  } catch (except::EctoException& e)
-  {
-    std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
-    throw e;
-  }
-  ,
-  ecto::except::EctoException);
+      try
+      {
+        m->process();
+      }
+      catch (except::EctoException& e)
+      {
+        std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
+        throw e;
+      }
+      ,
+      ecto::except::EctoException);
+}
+
+TEST(Exceptions, NotExist)
+{
+  module::ptr m = create_module<NotExist> ();
+  EXPECT_THROW(
+      try
+      {
+        m->process();
+      }
+      catch (except::EctoException& e)
+      {
+        std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
+        throw e;
+      }
+      ,
+      ecto::except::EctoException);
+}
+
+TEST(Exceptions, WrongType)
+{
+  module::ptr m = create_module<WrongType> ();
+  EXPECT_THROW(
+      try
+      {
+        m->process();
+      }
+      catch (except::EctoException& e)
+      {
+        std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
+        throw e;
+      }
+      ,
+      ecto::except::EctoException);
 }

@@ -83,5 +83,15 @@ namespace ecto
       ValueRequired(const std::string& arg = "");
     };
 
+    struct NonExistant: EctoException
+    {
+
+    public:
+      explicit
+      NonExistant(const std::string& key, const std::string& arg = "");
+      ~NonExistant() throw ();
+      std::string key;
+    };
+
   }
 }

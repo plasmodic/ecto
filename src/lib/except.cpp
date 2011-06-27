@@ -5,9 +5,8 @@ namespace ecto
   namespace except
   {
 
-    EctoException::EctoException(const std::string& msg)
-        :
-          msg_(msg)
+    EctoException::EctoException(const std::string& msg) :
+      msg_(msg)
     {
     }
     EctoException::~EctoException() throw ()
@@ -32,27 +31,30 @@ namespace ecto
       return msg_.c_str();
     }
 
-    TypeMismatch::TypeMismatch(const std::string& msg)
-        :
-          EctoException(msg)
+    TypeMismatch::TypeMismatch(const std::string& msg) :
+      EctoException(msg)
     {
 
     }
 
-    ValueNone::ValueNone(const std::string& msg)
-        :
-          EctoException(msg)
+    ValueNone::ValueNone(const std::string& msg) :
+      EctoException(msg)
     {
 
     }
 
     /** Takes a character string describing the error.  */
-    ValueRequired::ValueRequired(const std::string& msg)
-        :
-          EctoException(msg)
+    ValueRequired::ValueRequired(const std::string& msg) :
+      EctoException(msg)
     {
 
     }
+
+    NonExistant::NonExistant(const std::string& key,const std::string& msg) :
+      EctoException(msg),key(key)
+    {
+    }
+    NonExistant::~NonExistant() throw (){}
 
   }
 }

@@ -263,6 +263,10 @@ namespace ecto
   template<class Module>
   struct module_: module
   {
+    ~module_()
+    {
+      dispatch_destroy();
+    }
   protected:
     template<int I>
     struct int_
@@ -348,7 +352,10 @@ namespace ecto
 
     void destroy(implemented)
     {
+      //destroy only called once, then destructor.
+      if(thiz)
         thiz->destroy();
+      thiz.reset();
     }
 
     void dispatch_destroy()
@@ -378,6 +385,8 @@ namespace ecto
       m->declare_io();
       return m;
     }
+
+
     boost::shared_ptr<Module> thiz;
     static const std::string MODULE_TYPE_NAME;
   };

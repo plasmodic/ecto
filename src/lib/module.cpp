@@ -6,27 +6,49 @@
  * Catch all and pass on exception.
  */
 #define CATCH_ALL() \
+catch (ecto::except::NonExistant& e) \
+{ \
+  auto_suggest(e,*this); \
+  e << "  Module : " + name() + "\n  Function: " + __FUNCTION__; \
+  throw; \
+} \
 catch (ecto::except::EctoException& e) \
 { \
-  e << "\tModule : " + name() + "\n\tFunction: " + __FUNCTION__; \
+  e << "  Module : " + name() + "\n  Function: " + __FUNCTION__; \
   throw; \
 } catch (std::exception& e) \
 { \
   except::EctoException ee("Original Exception: " +name_of(typeid(e))); \
-  ee << "\tWhat   :" + std::string(e.what()); \
-  ee << "\tModule : " + name() + "\n\tFunction: " + __FUNCTION__; \
+  ee << "  What   : " + std::string(e.what()); \
+  ee << "  Module : " + name() + "\n  Function: " + __FUNCTION__; \
   throw ee; \
 } \
 catch (...) \
 { \
   except::EctoException ee("Threw unknown exception type!"); \
-  ee << "\tModule : " + name() + "\n\tFunction: " + __FUNCTION__; \
+  ee << "  Module : " + name() + "\n  Function: " + __FUNCTION__; \
   throw ee; \
 }
 
 namespace ecto
 {
 
+  void
+  auto_suggest(except::NonExistant& e, const module& m)
+  {
+    bool in_p = m.parameters.find(e.key) != m.parameters.end();
+    bool in_i = m.inputs.find(e.key) != m.inputs.end();
+    bool in_o = m.outputs.find(e.key) != m.outputs.end();
+    if (in_p || in_i || in_o)
+    {
+      e << ("  Hint   : '" + e.key + "' does exist in " + (in_p ? "parameters " : "") + (in_i ? "inputs " : "")
+          + (in_o ? "outputs" : ""));
+    }
+    else
+    {
+      e << ("  Hint   : '" + e.key + "' does not exist in module: " + m.name());
+    }
+  }
   module::module()
   {
   }
@@ -41,7 +63,7 @@ namespace ecto
     try
     {
       dispatch_declare_params(parameters);
-    } CATCH_ALL()
+    }CATCH_ALL()
   }
 
   void
@@ -50,7 +72,7 @@ namespace ecto
     try
     {
       dispatch_declare_io(parameters, inputs, outputs);
-    } CATCH_ALL()
+    }CATCH_ALL()
   }
 
   void
@@ -59,7 +81,7 @@ namespace ecto
     try
     {
       dispatch_configure(parameters, inputs, outputs);
-    } CATCH_ALL()
+    }CATCH_ALL()
   }
 
   ReturnCode
@@ -76,7 +98,7 @@ namespace ecto
     try
     {
       return dispatch_process(inputs, outputs);
-    } CATCH_ALL()
+    }CATCH_ALL()
   }
 
   void
@@ -85,7 +107,7 @@ namespace ecto
     try
     {
       dispatch_destroy();
-    } CATCH_ALL()
+    }CATCH_ALL()
   }
 
   std::string
@@ -105,8 +127,6 @@ namespace ecto
   {
     return instance_name.size() ? instance_name : dispatch_name();
   }
-
-
 
   std::string
   module::gen_doc(const std::string& doc) const

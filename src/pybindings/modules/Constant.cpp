@@ -39,7 +39,7 @@ namespace ecto
   {
     static void declare_params(tendrils& params)
     {
-      params.declare<bp::object>("value", "Value to output" /*, TODO:  user-provided value is required */);
+      params.declare<bp::object>("value", "Value to output").set_required();
     }
 
     static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)

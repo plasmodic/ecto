@@ -34,10 +34,11 @@
 using ecto::tendrils;
 namespace ecto_test
 {
+
   struct FlagOnDestroy
   {
     ecto::spore<double> outbox;
-
+    static int count;
     static void declare_io(const tendrils& params, tendrils& in, tendrils& out)
     {
       in.declare<double> ("in", "An inbox");
@@ -52,10 +53,11 @@ namespace ecto_test
     void destroy() 
     {
       *outbox = 1.0;
+      count++;
     }
 
   };
-
+  int FlagOnDestroy::count = 0;
 }
 
 ECTO_MODULE(ecto_test, ecto_test::FlagOnDestroy, "FlagOnDestroy", "Sets output 'true' when destroy called");
