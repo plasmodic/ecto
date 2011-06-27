@@ -330,12 +330,13 @@ namespace ecto {
             module::ptr m = graph[*begin];
             double this_percentage = 100.0 * ((double)m->stats.total_ticks / elapsed_ticks);
             total_percentage += this_percentage;
-        
-            std::cout << str(boost::format(">>> %25s  calls: %u  Hz: %3.2f  cpu ticks: %12lu (%04.2lf%%)")
+            double hz = (double(m->stats.ncalls) / (elapsed.total_microseconds() / 1e+06));
+            double theo_hz = hz *(100/this_percentage);
+            std::cout << str(boost::format(">>> %25s  calls: %u  Hz(theo max): %3.2f Hz(real): %3.2f  cpu load: (%04.2lf%%)")
                              % m->name()
                              % m->stats.ncalls 
-                             % (double(m->stats.ncalls) / (elapsed.total_microseconds() / 1e+06))
-                             % m->stats.total_ticks 
+                             % theo_hz
+                             % hz
                              % this_percentage)
                       << "\n";
           }
