@@ -1,6 +1,10 @@
 #include <ecto/module.hpp>
 #include <ecto/util.hpp>
 #include <ecto/except.hpp>
+
+/**
+ * Catch all and pass on exception.
+ */
 #define CATCH_ALL() \
 catch (ecto::except::EctoException& e) \
 { \
@@ -19,6 +23,7 @@ catch (...) \
   ee << "\tModule : " + name() + "\n\tFunction: " + __FUNCTION__; \
   throw ee; \
 }
+
 namespace ecto
 {
 
@@ -74,6 +79,15 @@ namespace ecto
     } CATCH_ALL()
   }
 
+  void
+  module::destroy()
+  {
+    try
+    {
+      dispatch_destroy();
+    } CATCH_ALL()
+  }
+
   std::string
   module::type() const
   {
@@ -92,11 +106,7 @@ namespace ecto
     return instance_name.size() ? instance_name : dispatch_name();
   }
 
-  void
-  module::destroy()
-  {
-    dispatch_destroy();
-  }
+
 
   std::string
   module::gen_doc(const std::string& doc) const
