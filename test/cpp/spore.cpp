@@ -74,15 +74,16 @@ TEST(SporeTest, Default)
 template<typename T>
 struct cbs
 {
-  cbs() :
-      count(0), val(0)
-  {
-  }
+  cbs() 
+    : count(0), val(0)
+  { }
+
   void operator()(const T& new_val)
   {
     val = new_val;
     count++;
   }
+
   int count;
   T val;
 };

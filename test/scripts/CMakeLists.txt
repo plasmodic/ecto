@@ -9,12 +9,17 @@ endmacro()
 foreach(file
     test_addergraph
     test_blackbox
+    test_constant
+    test_destroy_called
     test_doc
     test_dual_line_plasm
     test_handles
     test_modules
+    # test_metrics
     test_parameter_callbacks
+    test_passthrough
     test_plasm
+    test_process_return_values
     test_python_module
     test_reconnect
     test_random

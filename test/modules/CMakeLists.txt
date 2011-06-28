@@ -2,10 +2,18 @@ ectomodule(ecto_test
   Add.cpp
   Multiply.cpp
   Quitter.cpp
+  QuitAfter.cpp
+  FlagOnDestroy.cpp
   Increment.cpp
   Printer.cpp
+  Ping.cpp
+  Throttle.cpp
+  Sleep.cpp
+  Metrics.cpp
   Gather.cpp
   Generate.cpp
+  RequiredParam.cpp
+  Passthrough.cpp
   Uniform01.cpp
   ecto_test.cpp
 )

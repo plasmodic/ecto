@@ -23,6 +23,7 @@
 #include <boost/spirit/home/phoenix/core.hpp>
 #include <boost/spirit/home/phoenix/operator.hpp>
 #include <boost/exception/all.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
 
 namespace ecto {
 
@@ -36,6 +37,8 @@ namespace ecto {
 
   namespace scheduler {
     namespace asio = boost::asio;
+
+    namespace pt = boost::posix_time;
 
     struct threadpool::impl 
     {
@@ -68,8 +71,17 @@ namespace ecto {
 
         void operator()() const
         {
-          std::cout << "thrower is rethrowing" << std::endl;
           rethrow_exception(eptr);
+        }
+      };
+
+      struct stopper 
+      {
+        typedef void result_type;
+
+        void operator()(asio::io_service& serv) const
+        {
+          serv.stop();
         }
       };
 
@@ -87,26 +99,22 @@ namespace ecto {
 
         ~runandjoin() {
           runner.join();
-          std::cout << this << " " << __PRETTY_FUNCTION__ << "\n";
         }
 
         void joinit() 
         {
-          std::cout << this << " " << __PRETTY_FUNCTION__ << "\n";
           runner.join();
         }
 
         template <typename Work>
         void impl(Work w)
         {
-          std::cout << __PRETTY_FUNCTION__ << "\n";
+          //          std::cout << __PRETTY_FUNCTION__ << "\n";
           try {
             w();
           } catch (const boost::exception& e) {
-            std::cout << "runandjoin caught:" << diagnostic_information(e) << std::endl;
             w.post(thrower(boost::current_exception()));
           } catch (const std::exception& e) {
-            // std::cout << "runandjoin caught:" << diagnostic_information(e) << std::endl;
             w.post(thrower(boost::current_exception()));
           }
           w.post(bind(&runandjoin::joinit, this));
@@ -115,7 +123,6 @@ namespace ecto {
         template <typename Work>
         void run(Work w)
         {
-          std::cout << this << " " << __PRETTY_FUNCTION__ << "\n";
           thread* newthread = new thread(bind(&runandjoin::impl<Work>, this, w));
           newthread->swap(runner);
         }
@@ -127,7 +134,7 @@ namespace ecto {
 
         threadpool::impl& context;
 
-        boost::asio::deadline_timer dt;
+        // boost::asio::deadline_timer dt;
         graph_t& g;
         graph_t::vertex_descriptor vd;
         unsigned n_calls;
@@ -137,43 +144,63 @@ namespace ecto {
                 graph_t& g_, 
                 graph_t::vertex_descriptor vd_,
                 respawn_cb_t respawn_)
-          : context(context_), dt(context.workserv), g(g_), vd(vd_), n_calls(0), respawn(respawn_)
+          : context(context_), /*dt(context.workserv),*/ g(g_), vd(vd_), n_calls(0), respawn(respawn_)
         { }
+
+        template <typename Handler>
+        void post(Handler h)
+        {
+          module::ptr m = g[vd];
+          if (m->strand_)
+            {
+              const ecto::strand& skey = *(m->strand_);
+              boost::shared_ptr<asio::io_service::strand>& strand_p = context.strands[skey];
+              if (!strand_p) {
+                strand_p.reset(new boost::asio::io_service::strand(context.workserv));
+              }
+              strand_p->post(h);
+            }
+          else
+            context.workserv.post(h);
+        }
 
         void async_wait_for_input()
         {
           ECTO_LOG_DEBUG("%s async_wait_for_input", this);
           namespace asio = boost::asio;
 
+          if (context.stop) {
+            post(bind(&invoker::destroy, this));
+            return;
+          }
+            
           if (inputs_ready()) {
             ECTO_LOG_DEBUG("%s inputs ready", this);
-            module::ptr m = g[vd];
-            if (m->strand_)
-              {
-                const ecto::strand& skey = *(m->strand_);
-                boost::shared_ptr<asio::io_service::strand>& strand_p = context.strands[skey];
-                if (!strand_p) {
-                  strand_p.reset(new boost::asio::io_service::strand(context.workserv));
-                }
-                strand_p->post(bind(&invoker::invoke, this));
-              }
-            else
-              {
-                context.workserv.post(bind(&invoker::invoke, this));
-              }
+            post(bind(&invoker::invoke, this));
           } else {
-            ECTO_LOG_DEBUG("%s wait", this);
-            dt.expires_from_now(boost::posix_time::milliseconds(1));
-            dt.wait();
             context.workserv.post(bind(&invoker::async_wait_for_input, this));
           }
+        }
+
+        void destroy()
+        {
+          module::ptr m = g[vd];
+          // FIXME: not catching exceptions possibly thrown by destroy
+          m->destroy();
         }
 
         void invoke()
         {
           ECTO_LOG_DEBUG("%s invoke", this);
           try {
-            ecto::scheduler::invoke_process(g, vd);
+            int j = ecto::scheduler::invoke_process(g, vd);
+            if (j != ecto::OK)
+              {
+                std::cout << "Module " << g[vd]->name() << " returned not okay. Stopping everything." 
+                          << std::endl; 
+                context.stop_asap();
+                return;
+              }
           } catch (const std::exception& e) {
             context.mainserv.post(thrower(boost::current_exception()));
             return;
@@ -215,13 +242,51 @@ namespace ecto {
         ~invoker() { ECTO_LOG_DEBUG("%s ~invoker", this); }
       }; // struct invoker
 
+      void reset_times(graph_t& graph)
+      {
+        graph_t::vertex_iterator begin, end;
+        for (tie(begin, end) = vertices(graph);
+             begin != end;
+             ++begin)
+          {
+            module::ptr m = graph[*begin];
+            m->stats.ncalls = 0;
+            m->stats.total_ticks = 0;
+          }
+      }
+
+      static void sigint_static_thunk(int) 
+      {
+        std::cout << "*** SIGINT received, stopping everything. ***" << std::endl;
+        std::cout << "*** You may need to hit ^C again when back in the interpreter thread. ***" << std::endl;
+        sigint_handler();
+        PyErr_SetInterrupt();
+      }
+      static boost::function<void()> sigint_handler;
+      
+
       int execute(unsigned nthreads, impl::respawn_cb_t respawn, graph_t& graph)
       {
         namespace asio = boost::asio;
 
+        stop = false;
+
         workserv.reset();
         mainserv.reset();
 
+        signal(SIGINT, &sigint_static_thunk);
+        sigint_handler = boost::bind(&impl::stop_asap, this);
+
+        //
+        // initialize stats
+        //
+        starttime = pt::microsec_clock::universal_time();
+        int64_t start_ticks = profile::read_tsc();
+        reset_times(graph);
+
+        //
+        // start per-node threads
+        //
         graph_t::vertex_iterator begin, end;
         for (tie(begin, end) = vertices(graph);
              begin != end;
@@ -241,14 +306,52 @@ namespace ecto {
             runners.insert(rj);
           }
 
+        // run main service
         try {
           mainserv.run();
+          PyErr_CheckSignals();
         } catch (const exception& e) {
-          std::cout << "main thread caught:" << boost::diagnostic_information(e) << std::endl;
           workserv.stop();
           // rethrow:  python interpreter will catch.
           throw;
         }
+
+        //
+        //  print stats
+        //
+        pt::time_duration elapsed = pt::microsec_clock::universal_time() - starttime;
+        int64_t elapsed_ticks = profile::read_tsc() - start_ticks;
+
+        double total_percentage = 0.0;
+
+        std::cout << "****************************************\n";
+        for (tie(begin, end) = vertices(graph); begin != end; ++begin)
+          {
+            module::ptr m = graph[*begin];
+            double this_percentage = 100.0 * ((double)m->stats.total_ticks / elapsed_ticks);
+            total_percentage += this_percentage;
+            double hz = (double(m->stats.ncalls) / (elapsed.total_microseconds() / 1e+06));
+            double theo_hz = hz *(100/this_percentage);
+            std::cout << str(boost::format(">>> %25s  calls: %u  Hz(theo max): %3.2f Hz(real): %3.2f  cpu load: (%04.2lf%%)")
+                             % m->name()
+                             % m->stats.ncalls 
+                             % theo_hz
+                             % hz
+                             % this_percentage)
+                      << "\n";
+          }
+              
+        std::cout << "**********************************************"
+                  << "\ncpu freq:         " << (elapsed_ticks / (elapsed.total_milliseconds() / 1000.0)) / 1e+9 
+                  << " GHz"
+                  << "\nthreads:          " << nthreads
+                  << "\nelapsed time:     " << elapsed 
+                  << "\ncpu ticks:        " << elapsed_ticks
+                  << "\ncpu ticks per second: " << elapsed.ticks_per_second();
+          ;
+
+        std::cout << str(boost::format("\nin process():     %.2f%%\n") % (total_percentage / nthreads))
+          ;
         return 0;
       }
 
@@ -259,6 +362,11 @@ namespace ecto {
         invokers_t().swap(invokers);
       }
 
+      void stop_asap() 
+      {
+        stop = true;
+      }
+
       typedef std::map<graph_t::vertex_descriptor, invoker::ptr> invokers_t;
       invokers_t invokers;
       boost::asio::io_service mainserv, workserv;
@@ -266,7 +374,10 @@ namespace ecto {
                            boost::shared_ptr<boost::asio::io_service::strand>,
                            ecto::strand_hash> strands;
 
+      pt::ptime starttime;
+      bool stop;
     };
+
 
     threadpool::threadpool(plasm& p)
       : graph(p.graph()), impl_(new impl)
@@ -283,5 +394,22 @@ namespace ecto {
     {
       return impl_->execute(nthreads, boost::phoenix::arg_names::arg1 < ncalls, graph);
     }
+
+    boost::function<void()> threadpool::impl::sigint_handler;
   }
 }
+
+
+/*
+namespace {
+  void forward_sigint(int) 
+  {
+    PyErr_SetInterrupt();
+    PyErr_CheckSignals();
+  }
+}
+
+
+signal(SIGINT, &forward_sigint);
+
+*/

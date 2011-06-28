@@ -36,7 +36,8 @@ def build_addergraph(nlevels):
     assert len(prevlevel) == 1
     final_adder = prevlevel[0]
     printer = ecto_test.Printer("printy!")
-    plasm.connect(final_adder, "out", printer, "in")
+    #plasm.connect(final_adder, "out", printer, "in")
+
     return (plasm, final_adder)
 
 def test_plasm(nlevels, nthreads, niter):
@@ -54,12 +55,12 @@ def test_plasm(nlevels, nthreads, niter):
     assert outnode.outputs.out == shouldbe
 
 if __name__ == '__main__':
-    test_plasm(1, 1, 1)
-    test_plasm(1, 1, 2)
-    test_plasm(5, 1, 1)
-    test_plasm(5, 2, 1)
-    test_plasm(5, 5, 5)
-    test_plasm(6, 6, 6)
+    #test_plasm(1, 1, 1)
+    #test_plasm(1, 1, 2)
+    #test_plasm(5, 1, 1)
+    #test_plasm(5, 2, 1)
+    #test_plasm(5, 5, 5)
+    test_plasm(6, 6, 6000)
 #    test_plasm(8, 1, 5)
 #    test_plasm(9, 64, 100)
 #    test_plasm(10, 8, 10)

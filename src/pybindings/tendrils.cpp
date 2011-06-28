@@ -55,11 +55,11 @@ namespace ecto
       bp::class_<tendrils, boost::shared_ptr<tendrils>, boost::noncopyable>("Tendrils")
         .def(bp::std_map_indexing_suite<tendrils, false>())
         .def("declare", &setTendril)
-        .def("get", &getTendril)
         .def("__str__", &strTendril)
         .def("__getattr__", &tendril_get)
         .def("__setattr__", &tendril_set)
-        //.def("__getitem__", &tendril_at)
+        .def("__getitem__", &tendril_get)
+        .def("at",tendril_at)
         ;
     }
   }

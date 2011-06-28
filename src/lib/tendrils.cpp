@@ -1,61 +1,158 @@
 #include <ecto/tendrils.hpp>
 #include <boost/algorithm/string.hpp>
-
+#include <boost/function.hpp>
+#include <map>
+#include <iostream>
 namespace ecto
 {
-
-struct print_tendril
-{
-  print_tendril(std::ostream& ss) :
-    ss(ss)
+  struct PrintFunctions
   {
-  }
-  void operator()(const std::pair<std::string, ecto::tendril::ptr>& tp)
+    template<typename T>
+    static void
+    print(std::ostream& out, const tendril& x)
+    {
+      out << x.read<T>();
+    }
+
+    typedef std::map<std::string, boost::function<void
+    (std::ostream& out, const tendril& x)> > ProcMap;
+    ProcMap processes;
+    PrintFunctions()
+    {
+      processes[ecto::name_of<int>()] = &print<int>;
+      processes[ecto::name_of<float>()] = &print<float>;
+      processes[ecto::name_of<double>()] = &print<double>;
+      processes[ecto::name_of<bool>()] = &print<bool>;
+      processes[ecto::name_of<std::string>()] = &print<std::string>;
+    }
+
+    void
+    print_tendril(std::ostream& out, const tendril& t) const
+    {
+      ProcMap::const_iterator it = processes.find(t.type_name());
+      if (it != processes.end())
+      {
+        it->second(out, t);
+      }
+      else
+      {
+        out << t.type_name() << "(?)";
+      }
+    }
+  };
+
+  const PrintFunctions pf;
+  struct print_tendril_simple
+    {
+    print_tendril_simple(std::ostream& ss)
+          :
+            ss(ss)
+      {
+      }
+      void
+      operator()(const std::pair<std::string, ecto::tendril::ptr>& tp)
+      {
+        ss << " '" << tp.first << "':type(" << tp.second->type_name() << ")";
+      }
+      std::ostream& ss;
+    };
+  struct print_tendril
   {
-    //default value
-    std::string
-        defval =
-            boost::python::extract<std::string>(
-                                                boost::python::str(
-                                                                   tp.second->extract()));
-    ss << " - " << tp.first << " [" << tp.second->type_name() << "] default = "
-        << defval << "\n";
-    std::string docstr = tp.second->doc();
-    std::vector<std::string> doc_lines;
-    std::string doc_str = tp.second->doc();
-    boost::split(doc_lines, doc_str, boost::is_any_of("\n"));
-    for (size_t i = 0; i < doc_lines.size(); ++i)
-      ss << "    " << doc_lines[i] << "\n";
-    ss << "\n";
+    print_tendril(std::ostream& ss)
+        :
+          ss(ss)
+    {
+    }
+    void
+    operator()(const std::pair<std::string, ecto::tendril::ptr>& tp)
+    {
+      std::stringstream tss;
+      pf.print_tendril(tss, *tp.second);
+      //default value
+
+      ss << " - " << tp.first << " [" << tp.second->type_name() << "]";
+      ss << (tp.second->has_default() ? (" default = " + tss.str()) : "");
+      ss << (tp.second->is_required() ? " REQUIRED " : "");
+      ss << "\n";
+
+      std::string docstr = tp.second->doc();
+      std::vector<std::string> doc_lines;
+      std::string doc_str = tp.second->doc();
+      boost::split(doc_lines, doc_str, boost::is_any_of(std::string("\n")));//get rid of warning on earlier versions of boost std::string("\n")
+      for (size_t i = 0; i < doc_lines.size(); ++i)
+        ss << "    " << doc_lines[i] << "\n";
+      ss << "\n";
+    }
+    std::ostream& ss;
+  };
+
+  void
+  tendrils::print_doc(std::ostream& out, const std::string& tendrils_name) const
+  {
+    boost::mutex::scoped_lock lock(mtx);
+    if (empty())
+      return;
+    out << tendrils_name << "\n";
+    out << "---------------------------------\n\n";
+    std::for_each(begin(), end(), print_tendril(out));
   }
-  std::ostream& ss;
-};
 
-void tendrils::print_doc(std::ostream& out, const std::string& tendrils_name) const
-{
-  boost::mutex::scoped_lock lock(mtx);
-  if (empty())
-    return;
-  out << tendrils_name << "\n";
-  out << "---------------------------------\n\n";
-  std::for_each(begin(), end(), print_tendril(out));
-}
+  void doesnt_exist(const tendrils& t, const std::string& name)
+  {
+    std::stringstream ss;
+    ss << "'" << name << "' does not exist in this tendrils object. Possible keys are: ";
+    std::for_each(t.begin(),t.end(),print_tendril_simple(ss));
+    throw except::NonExistant(name,ss.str());
+  }
 
-tendril::const_ptr tendrils::at(const std::string& name) const
-{
-  boost::mutex::scoped_lock lock(mtx);
-  map_t::const_iterator it = find(name);
-  if (it == end())
-    throw std::logic_error(name + " does not exist!");
-  return it->second;
-}
+  tendril::const_ptr
+  tendrils::at(const std::string& name) const
+  {
+    boost::mutex::scoped_lock lock(mtx);
+    map_t::const_iterator it = find(name);
+    if (it == end())
+      doesnt_exist(*this,name);
+    return it->second;
+  }
 
-tendril::ptr tendrils::at(const std::string& name)
-{
-  boost::mutex::scoped_lock lock(mtx);
-  map_t::iterator it = find(name);
-  if (it == end())
-    throw std::logic_error(name + " does not exist!");
-  return it->second;
-}
+
+  tendril::ptr
+  tendrils::at(const std::string& name)
+  {
+    boost::mutex::scoped_lock lock(mtx);
+    map_t::iterator it = find(name);
+    if (it == end())
+      doesnt_exist(*this,name);
+    return it->second;
+  }
+
+  tendril::ptr
+  tendrils::declare(const std::string& name, tendril::ptr t)
+  {
+    map_t::iterator it = find(name);
+    //if there are no exiting tendrils by the given name,
+    //just add it.
+    if (it == end())
+    {
+      insert(std::make_pair(name, t));
+    }
+    else // we want to just return the existing tendril (so that modules preconnected don't get messed up)...
+    {
+      //there is already an existing tendril with the given name
+      //check if the types are the same
+      if (!it->second->same_type(*t))
+      {
+        std::stringstream ss;
+        ss << "Your types aren't the same, this could lead to very undefined behavior...";
+        ss << " old type = " << it->second->type_name() << " new type = " << t->type_name() << std::endl;
+        throw except::TypeMismatch(ss.str());
+      }
+      else
+      {
+        it->second = t;
+      }
+    }
+    return at(name);
+  }
+
 }

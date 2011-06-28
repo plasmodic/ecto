@@ -8,7 +8,7 @@ class Module(_module_base):
         _module_base.declare_params(self)
 
         for k, v in kwargs.iteritems():
-            self.params[k].set(v)
+            self.params.at(k).set(v)
 
         _module_base.declare_io(self)
         _module_base.configure(self)

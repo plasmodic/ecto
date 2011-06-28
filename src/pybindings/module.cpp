@@ -46,7 +46,7 @@ namespace ecto
           config(boost::ref(params));
       }
 
-      ReturnCode dispatch_process(const tendrils& inputs, tendrils& outputs)
+      ReturnCode dispatch_process(tendrils& inputs, tendrils& outputs)
       {
         SHOW();
         if (bp::override proc = this->get_override("process"))

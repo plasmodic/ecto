@@ -46,48 +46,45 @@ namespace ecto
   {
   public:
 
+    /**
+     * \brief Declare a tendril of a certain type, with only a name, no doc, or default values.
+     * @tparam T the type of tendril to declare.
+     * @param name The key for the tendril. Must be unique.
+     * @return A typed holder for the tendril.
+     */
     template<typename T>
-    spore<T> declare(const std::string& name)
+    spore<T>
+    declare(const std::string& name)
     {
       tendril::ptr t(tendril::make_tendril<T>());
-      map_t::iterator it = find(name);
-      //if there are no exiting tendrils by the given name,
-      //just add it.
-      if (it == end())
-      {
-        insert(std::make_pair(name, t));
-      }
-      else // we want to just return the existing tendril (so that modules preconnected don't get messed up)...
-      {
-        //there is already an existing tendril with the given name
-        //check if the types are the same
-        if (!it->second->is_type<T>())
-        {
-          std::stringstream ss;
-          ss << "Your types aren't the same, this could lead to very undefined behavior...";
-          ss << " old type = " << it->second->type_name() << " new type = "
-             << name_of<T>() << std::endl;
-          throw std::logic_error(ss.str());
-        }
-        else
-        {
-          it->second = t;
-        }
-      }
-      return at(name);
+      return declare(name, t);
     }
 
+    /**
+     * @see tendrils::declare
+     * @param name @see tendrils::declare
+     * @param doc The doc string for the tendril.
+     * @return @see tendrils::declare
+     */
     template<typename T>
-    spore<T> declare(const std::string& name, const std::string& doc)
+    spore<T>
+    declare(const std::string& name, const std::string& doc)
     {
       return declare<T>(name).set_doc(doc);
     }
 
+    /**
+     * @see tendrils::declare
+     * @param name @see tendrils::declare
+     * @param doc @see tendrils::declare
+     * @param default_val A default value for the tendril.
+     * @return @see tendrils::declare
+     */
     template<typename T>
-    spore<T> declare(const std::string& name, const std::string& doc,
-                         const T& default_val)
+    spore<T>
+    declare(const std::string& name, const std::string& doc, const T& default_val)
     {
-      return declare<T>(name,doc).set_default_val(default_val);
+      return declare<T>(name, doc).set_default_val(default_val);
     }
 
     /**
@@ -97,15 +94,37 @@ namespace ecto
      * @return A const reference to the value, no copy is done.
      */
     template<typename T>
-    const T& get(const std::string& name) const
+    const T&
+    get(const std::string& name) const
     {
-      return at(name)->read<T>();
+      try
+      {
+          return at(name)->read<T>();
+      }catch(except::TypeMismatch& e)
+      {
+        e << std::string("  Hint : " ) + "'"+name+"' is of type: " + at(name)->type_name();
+        throw e;
+      }
     }
 
+    /**
+     * \brief Performs a non ambiguous read operation on the value held at the given name.
+     * This should be the preferred method of reading a value if the intent is to not change it.
+     * @param name The key that the tendril is stored at.
+     * @return A const reference to the value, no copy is done.
+     */
     template<typename T>
-    const T& read(const std::string& name) const
+    const T&
+    read(const std::string& name) const
     {
-      return at(name)->read<T>();
+      try
+      {
+          return at(name)->read<T>();
+      }catch(except::TypeMismatch& e)
+      {
+        e << std::string("  Hint : " ) + "'"+name+"' is of type: " + at(name)->type_name();
+        throw e;
+      }
     }
 
     /**
@@ -115,9 +134,17 @@ namespace ecto
      * @return A reference to the value, no copy is done.
      */
     template<typename T>
-    T& get(const std::string& name)
+    T&
+    get(const std::string& name)
     {
-      return at(name)->get<T>();
+      try
+      {
+        return at(name)->get<T>();
+      }catch(except::TypeMismatch& e)
+      {
+        e << std::string("  Hint : " )+ "'"+name+"' is of type: " + at(name)->type_name();
+        throw e;
+      }
     }
 
     /**
@@ -125,25 +152,37 @@ namespace ecto
      * @param name The key for the desired tendril.
      * @return A reference to the tendril.
      */
-    tendril::const_ptr at(const std::string& name) const;
+    tendril::const_ptr
+    at(const std::string& name) const;
     /**
      * \brief Grabs the tendril at the key.
      * @param name The key for the desired tendril.
      * @return A reference to the tendril.
      */
-    tendril::ptr at(const std::string& name);
+    tendril::ptr
+    at(const std::string& name);
 
     /**
      * \brief Print the tendrils documentation string, in rst format.
      * @param out The stream to print to.
      * @param tendrils_name The name used as a label, for the tendrils.
      */
-    void print_doc(std::ostream& out, const std::string& tendrils_name) const;
+    void
+    print_doc(std::ostream& out, const std::string& tendrils_name) const;
 
     typedef boost::shared_ptr<tendrils> ptr;
     typedef boost::shared_ptr<const tendrils> const_ptr;
 
   private:
+    /**
+     * Runtime declare function.
+     * @param name
+     * @param t
+     * @return
+     */
+    tendril::ptr
+    declare(const std::string& name, tendril::ptr t);
+
     typedef std::map<std::string, tendril::ptr> map_t;
     mutable boost::mutex mtx;
   };

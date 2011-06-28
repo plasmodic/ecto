@@ -19,8 +19,8 @@ namespace ecto {
 
     struct edge
     {
-      edge(const std::string& fp, const std::string& tp) :
-        from_port(fp), to_port(tp)
+      edge(const std::string& fp, const std::string& tp) 
+        : from_port(fp), to_port(tp)
       { }
 
       std::string from_port, to_port;

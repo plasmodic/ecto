@@ -3,8 +3,8 @@ import ecto, ecto.schedulers
 import ecto_test
            
 class MyModule(ecto.BlackBox):
-    def __init__(self, start, step):
-        ecto.BlackBox.__init__(self)
+    def __init__(self,plasm, start, step):
+        ecto.BlackBox.__init__(self,plasm)
         self.generate = ecto_test.Generate(start=start, step=step)
         self.inc = ecto_test.Increment()
         self.printer = ecto_test.Printer()
@@ -23,8 +23,8 @@ class MyModule(ecto.BlackBox):
                 self.inc["out"] >> self.printer["in"]
                ]
 class MyModule2(ecto.BlackBox):
-    def __init__(self, start, step):
-        ecto.BlackBox.__init__(self)
+    def __init__(self,plasm, start, step):
+        ecto.BlackBox.__init__(self,plasm)
         self.generate = ecto_test.Generate(start=start, step=step)
         self.inc = ecto_test.Increment()
     def expose_outputs(self):
@@ -42,12 +42,11 @@ class MyModule2(ecto.BlackBox):
                ]
     
 def test_blackbox():
-    mm = MyModule(start=10, step=3)
-    inc = ecto_test.Increment()
     plasm = ecto.Plasm()
+    mm = MyModule(plasm,start=10, step=3)
+    inc = ecto_test.Increment()
     print mm.outputs.out
     assert mm.outputs.out == 0
-    plasm.connect(mm.connections())
     print mm["out", "out"]
     plasm.connect(mm["out"] >> inc["in"])    
     plasm.execute(11)
@@ -61,7 +60,7 @@ def test_blackbox():
     except RuntimeError, e:
         print e
     #single item in connections list.
-    mm = MyModule2(start=10,step=3)
+    mm = MyModule2(plasm,start=10,step=3)
     
 if __name__ == '__main__':
     test_blackbox()

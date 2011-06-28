@@ -37,6 +37,7 @@
 #include <ecto/tendrils.hpp>
 #include <ecto/strand.hpp>
 #include <ecto/util.hpp>
+#include <ecto/profile.hpp>
 
 #include <map>
 
@@ -155,12 +156,16 @@ namespace ecto
      */
     std::string gen_doc(const std::string& doc = "A module...") const;
 
+    void verify_params() const;
+
     ptr clone() const;
 
     tendrils parameters; //!< Parameters
     tendrils inputs; //!< Inputs, inboxes, always have a valid value ( may be NULL )
     tendrils outputs; //!< Outputs, outboxes, always have a valid value ( may be NULL )
     boost::optional<strand> strand_;
+
+    profile::stats_type stats;
 
   protected:
     virtual void dispatch_declare_params(tendrils& t) = 0;
@@ -169,7 +174,7 @@ namespace ecto
     virtual void dispatch_configure(tendrils& params, tendrils& inputs,
                                     tendrils& outputs) = 0;
     virtual ReturnCode
-    dispatch_process(const tendrils& inputs, tendrils& outputs) = 0;
+    dispatch_process(tendrils& inputs, tendrils& outputs) = 0;
     virtual void dispatch_destroy() = 0;
     virtual std::string dispatch_name() const = 0;
     virtual ptr dispatch_make() const
@@ -178,7 +183,6 @@ namespace ecto
     }
 
   private:
-
     std::string instance_name;
   };
 
@@ -259,6 +263,10 @@ namespace ecto
   template<class Module>
   struct module_: module
   {
+    ~module_()
+    {
+      dispatch_destroy();
+    }
   protected:
     template<int I>
     struct int_
@@ -319,18 +327,19 @@ namespace ecto
       configure(int_<has_f<Module>::configure> (), params,inputs,outputs);
     }
 
-    ReturnCode process(not_implemented, const tendrils& inputs,
-                       tendrils& outputs)
+    ReturnCode process(not_implemented, const tendrils& ,
+                       const tendrils& )
     {
       return OK;
     }
 
-    ReturnCode process(implemented, const tendrils& inputs, tendrils& outputs)
+    ReturnCode process(implemented, tendrils& inputs, tendrils& outputs)
     {
+      profile::stats_collector coll(stats);
       return ReturnCode(thiz->process(inputs, outputs));
     }
 
-    ReturnCode dispatch_process(const tendrils& inputs, tendrils& outputs)
+    ReturnCode dispatch_process(tendrils& inputs, tendrils& outputs)
     {
       if (!thiz)
         dispatch_configure(parameters,this->inputs,outputs);
@@ -343,7 +352,10 @@ namespace ecto
 
     void destroy(implemented)
     {
-      thiz->destroy();
+      //destroy only called once, then destructor.
+      if(thiz)
+        thiz->destroy();
+      thiz.reset();
     }
 
     void dispatch_destroy()
@@ -373,6 +385,8 @@ namespace ecto
       m->declare_io();
       return m;
     }
+
+
     boost::shared_ptr<Module> thiz;
     static const std::string MODULE_TYPE_NAME;
   };

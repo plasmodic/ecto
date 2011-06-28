@@ -28,68 +28,45 @@
  */
 
 #include <ecto/ecto.hpp>
-#include <iostream>
-#include <queue>
+#include <ecto/spore.hpp>
+#include <ecto/registry.hpp>
 
-namespace hello_ecto
+using ecto::tendrils;
+using ecto::spore;
+
+namespace ecto_test
 {
-  using ecto::tendrils;
-
-  struct Delay
+  struct RequiredParam
   {
+    spore<double> x_, in_, out_;
     static void declare_params(tendrils& params)
     {
-      params.declare<ecto::tendril::ptr>("value", "Value to delay");
+      params.declare<double> ("x", "A required parameter.").set_required();
     }
 
-    static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
+    static void declare_io(const tendrils& params, tendrils& in, tendrils& out)
     {
-      in["input"].reset(new ecto::tendril);
-      out["output"].reset(new ecto::tendril);
-      in.at("input")->set_doc("The input tendril, can assume any type.");
-      out.at("output")->set_doc("The out tendril, can assume any type.");
-      ecto::tendril::ptr value = parms.get<ecto::tendril::ptr>("value");
-      if (value) // default value is none..
-      {
-        in.at("input")->copy_value(*value);
-        out.at("output")->copy_value(*value);
-      }
+      in.declare<double> ("in", "an input", 2.1253);
+      out.declare<double> ("out", "The input + x", 0.0);
+    }
+
+    void configure(tendrils& params, tendrils& in, tendrils& out)
+    {
+      x_ = params.at("x");
+      in_ = in.at("in");
+      out_ = out.at("out");
     }
 
     int process(const tendrils& in, tendrils& out)
     {
-      delay_n_ = 1;
-      buffer_.push(ecto::tendril());
-      buffer_.back().copy_value(*in.at("input"));
-      out.at("output")->copy_value(buffer_.front());
-      if (buffer_.size() > delay_n_)
-      {
-        buffer_.pop();
-      }
-      return ecto::OK;
-    }
-    size_t delay_n_;
-    std::queue<ecto::tendril> buffer_;
-  };
-
-  struct ConstanstValue
-  {
-    static void declare_params(tendrils& params)
-    {
-      params.declare<ecto::tendril::ptr>("value", "Value to delay");
+      *out_ = *x_ + *in_;
+      return 0;
     }
 
-    static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
-    {
-      out["output"].reset(new ecto::tendril);
-      out.at("output")->set_doc("The out tendril, can assume any type.");
-      ecto::tendril::ptr value = parms.get<ecto::tendril::ptr>("value");
-      if (value) // default value is none..
-      {
-        out.at("output")->copy_value(*value);
-      }
-    }
   };
+
 }
 
-ECTO_MODULE(hello_ecto, hello_ecto::Delay, "Delay", "Delay node.");
+ECTO_MODULE(ecto_test, ecto_test::RequiredParam, "RequiredParam", "Required parameter")
+;
+

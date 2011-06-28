@@ -1,11 +1,13 @@
 ectomodule(ecto
   ecto.cpp
+  except.cpp
   plasm.cpp
   tendril.cpp
   tendrils.cpp
   module.cpp
   schedulers.cpp
   strand.cpp
+  modules/Constant.cpp
   )
 
 set_target_properties(ecto_ectomodule PROPERTIES

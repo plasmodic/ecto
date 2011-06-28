@@ -1,0 +1,27 @@
+Source: ecto
+Priority: extra
+Maintainer: Ethan Rublee <erublee@willowgarage.com>
+Build-Depends: debhelper, cmake (>= 2.8), 
+    libboost-python-dev, libboost-filesystem-dev, 
+    libboost-system-dev, libboost-thread-dev, python-nose, python-gobject, python-gtk2, libgtest-dev
+Standards-Version: 3.9.1
+Section: libs
+Homepage: http://plasmodic.org/
+Vcs-Git: git://github.com/plasmodic/ecto.git
+Vcs-Browser: https://github.com/plasmodic/ecto
+
+Package: ecto0.1-dev
+Section: libdevel
+Architecture: any
+Depends: ecto0.1 (= ${binary:Version})
+Description: ecto
+    ecto is a dynamically configurable Directed Acyclic processing Graph framework.
+    These are the development files for ecto.
+
+Package: ecto0.1
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: ecto
+    ecto is a dynamically configurable Directed Acyclic processing Graph framework.
+    These are the development files for ecto.
