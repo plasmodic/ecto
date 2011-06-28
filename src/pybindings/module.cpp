@@ -125,11 +125,11 @@ namespace ecto
       {
         if (!check(mod_in, key))
           throw std::runtime_error(
-          "The module " + mod_in->name() + " does not contain any inputs or outputs or parameters by the given name: "
+          "The module " + mod_in->name() + " does not contain any input or parameter by the given name: "
               + key);
         if (!check(mod_out, key))
           throw std::runtime_error(
-          "The module " + mod_out->name() + " does not contain any inputs or outputs or parameters by the given name: "
+          "The module " + mod_out->name() + " does not contain any output or parameter by the given name: "
               + key);
       }
       TendrilSpecification(module::ptr mod, const std::string& key) :
