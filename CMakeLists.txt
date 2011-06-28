@@ -9,6 +9,9 @@ set(ECTO_SOVERSION 0.1)
 set(ECTO_VERSION_NUMBER 000101) #000.000.00
 
 SET(ECTO_CODE_NAME "mold spore (alpha)")
+
+set(include_prefix include/ecto-${ECTO_VERSION})
+
 configure_file( ${CMAKE_SOURCE_DIR}/cmake/version.hpp.in ${CMAKE_BINARY_DIR}/include/ecto/version.hpp )
 include_directories(${CMAKE_BINARY_DIR}/include)
 
@@ -45,8 +48,6 @@ set(ECTO_CONFIG_PATH  ${CMAKE_SOURCE_DIR}/cmake)
 
 configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoConfig.cmake.in 
   ${CMAKE_BINARY_DIR}/ectoConfig.cmake @ONLY)
-
-
 
 include(cmake/ectoInstall.cmake)
 

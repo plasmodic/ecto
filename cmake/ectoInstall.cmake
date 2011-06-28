@@ -9,6 +9,7 @@ set(ecto_HEADERS
   include/ecto/log.hpp
   include/ecto/module.hpp
   include/ecto/plasm.hpp
+  include/ecto/profile.hpp
   include/ecto/registry.hpp
   include/ecto/spore.hpp
   include/ecto/strand.hpp
@@ -31,7 +32,7 @@ set (ecto_PYTHON_HEADERS
   include/ecto/python/std_map_indexing_suite.hpp
   include/ecto/python/std_vector_indexing_suite.hpp
   )
-set(include_prefix include/ecto-${ECTO_VERSION})
+
 INSTALL(FILES ${ecto_HEADERS}
         DESTINATION ${include_prefix}/ecto
         COMPONENT main
@@ -48,9 +49,10 @@ INSTALL(FILES ${ecto_PYTHON_HEADERS}
         )
 
 #create an ectoConfig.cmake for easy find_package(ecto)
-set(ecto_INCLUDE_DIRS ${CMAKE_INSTALL_PREFIX}/include)
-set(ecto_LIBRARIES ${CMAKE_INSTALL_PREFIX}/libecto.so.${ECTO_VERSION})
+set(ecto_INCLUDE_DIRS ${CMAKE_INSTALL_PREFIX}/${include_prefix})
 set(ecto_LIBRARIES_DIR ${CMAKE_INSTALL_PREFIX}/lib)
+set(ecto_LIBRARIES ${ecto_LIBRARIES_DIR}/libecto.so.${ECTO_VERSION})
+
 set(ecto_PYTHON_INSTALL ${PYTHON_PACKAGES_PATH} )
 set(ecto_PYTHONPATH ${CMAKE_INSTALL_PREFIX}/${ecto_PYTHON_INSTALL})
 set(ECTO_CONFIG_PATH  ${CMAKE_INSTALL_PREFIX}/share/ecto-${ECTO_VERSION})
