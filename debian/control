@@ -1,7 +1,7 @@
 Source: ecto
 Priority: extra
 Maintainer: Ethan Rublee <erublee@willowgarage.com>
-Build-Depends: debhelper (>= 7), cmake (>= 2.8), 
+Build-Depends: debhelper, cmake (>= 2.8), 
     libboost-python-dev, libboost-filesystem-dev, 
     libboost-system-dev, libboost-thread-dev, python-nose, python-gobject, python-gtk2, libgtest-dev
 Standards-Version: 3.9.1
