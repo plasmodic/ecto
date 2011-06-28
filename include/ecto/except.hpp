@@ -61,6 +61,7 @@ namespace ecto
     public:
       explicit
       TypeMismatch(const std::string& arg = "");
+      ~TypeMismatch() throw (){}
       template<typename T1, typename T2>
       static TypeMismatch
       make(const std::string& msg = "")
@@ -74,6 +75,8 @@ namespace ecto
     public:
       explicit
       ValueNone(const std::string& arg = "");
+      ~ValueNone() throw (){}
+
     };
 
     struct ValueRequired: EctoException
@@ -81,6 +84,7 @@ namespace ecto
     public:
       explicit
       ValueRequired(const std::string& arg = "");
+      ~ValueRequired() throw (){}
     };
 
     struct NonExistant: EctoException

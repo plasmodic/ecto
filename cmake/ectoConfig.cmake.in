@@ -41,7 +41,7 @@ set_target_properties(${NAME}_ectomodule
 target_link_libraries(${NAME}_ectomodule
   ${Boost_LIBRARIES}
   ${PYTHON_LIBRARIES}
-  ecto
+  @ecto_LIBRARIES@
 )
 
 endmacro()

@@ -4,9 +4,10 @@ project(ecto)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 
-set(ECTO_VERSION 1.0.1)
-set(ECTO_SOVERSION 1.0)
-set(ECTO_VERSION_NUMBER 100001)
+set(ECTO_VERSION 0.1.0)
+set(ECTO_SOVERSION 0.1)
+set(ECTO_VERSION_NUMBER 000101) #000.000.00
+
 SET(ECTO_CODE_NAME "mold spore (alpha)")
 configure_file( ${CMAKE_SOURCE_DIR}/cmake/version.hpp.in ${CMAKE_BINARY_DIR}/include/ecto/version.hpp )
 include_directories(${CMAKE_BINARY_DIR}/include)
@@ -37,7 +38,7 @@ message(STATUS "To setup your python path for ecto you may source:"
 set(ecto_PYTHONPATH ${LIBRARY_OUTPUT_PATH} ${CMAKE_SOURCE_DIR}/python)
 
 set(ecto_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/include ${CMAKE_BINARY_DIR}/include)
-set(ecto_LIBRARIES ecto)
+set(ecto_LIBRARIES ${LIBRARY_OUTPUT_PATH}/libecto.so.${ECTO_VERSION})
 set(ecto_LIBRARIES_DIR ${LIBRARY_OUTPUT_PATH})
  
 set(ECTO_CONFIG_PATH  ${CMAKE_SOURCE_DIR}/cmake)
