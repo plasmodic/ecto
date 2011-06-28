@@ -66,6 +66,7 @@ target_link_libraries(${NAME}_ectomodule
   ${PYTHON_LIBRARIES}
   ecto
 )
+ros_link_libraries(${NAME}_ectomodule)
 endmacro()
 
 # ==============================================================================
