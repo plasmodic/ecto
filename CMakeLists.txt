@@ -1,16 +1,18 @@
 cmake_minimum_required(VERSION 2.8)
 project(ecto)
 
+set(ECTO_MAJOR_VERSION 0)
+set(ECTO_MINOR_VERSION 1)
+set(ECTO_PATCH_VERSION 0)
+set(ECTO_SOVERSION ${ECTO_MAJOR_VERSION}.${ECTO_MINOR_VERSION})
+set(ECTO_VERSION ${ECTO_MAJOR_VERSION}.${ECTO_MINOR_VERSION}.${ECTO_PATCH_VERSION})
+SET(ECTO_CODE_NAME "mold spore (alpha)")
+
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 
-set(ECTO_VERSION 0.1.0)
-set(ECTO_SOVERSION 0.1)
-set(ECTO_VERSION_NUMBER 000101) #000.000.00
-
-SET(ECTO_CODE_NAME "mold spore (alpha)")
-
 set(include_prefix include/ecto-${ECTO_VERSION})
+set(share_prefix share/ecto-${ECTO_VERSION})
 
 configure_file( ${CMAKE_SOURCE_DIR}/cmake/version.hpp.in ${CMAKE_BINARY_DIR}/include/ecto/version.hpp )
 include_directories(${CMAKE_BINARY_DIR}/include)
@@ -48,6 +50,9 @@ set(ECTO_CONFIG_PATH  ${CMAKE_SOURCE_DIR}/cmake)
 
 configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoConfig.cmake.in 
   ${CMAKE_BINARY_DIR}/ectoConfig.cmake @ONLY)
+
+configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoConfig-version.cmake.in 
+  ${CMAKE_BINARY_DIR}/ectoConfig-version.cmake @ONLY)
 
 include(cmake/ectoInstall.cmake)
 

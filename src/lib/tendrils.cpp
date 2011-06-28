@@ -78,7 +78,7 @@ namespace ecto
       std::string docstr = tp.second->doc();
       std::vector<std::string> doc_lines;
       std::string doc_str = tp.second->doc();
-      boost::split(doc_lines, doc_str, boost::is_any_of("\n"));
+      boost::split(doc_lines, doc_str, boost::is_any_of(std::string("\n")));//get rid of warning on earlier versions of boost std::string("\n")
       for (size_t i = 0; i < doc_lines.size(); ++i)
         ss << "    " << doc_lines[i] << "\n";
       ss << "\n";
