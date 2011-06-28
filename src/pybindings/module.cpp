@@ -123,22 +123,22 @@ namespace ecto
       TendrilSpecification(module::ptr mod_in, module::ptr mod_out, const std::string& key) :
         mod_input(mod_in), mod_output(mod_out), key(key)
       {
-        if (!check(mod_in, key) && !check(mod_out, key))
-          {
-            throw std::runtime_error(
-                                     "The module does not contain any inputs or outputs or parameters by the given name: "
-                                         + key);
-          }
+        if (!check(mod_in, key))
+          throw std::runtime_error(
+          "The module " + mod_in->name() + " does not contain any inputs or outputs or parameters by the given name: "
+              + key);
+        if (!check(mod_out, key))
+          throw std::runtime_error(
+          "The module " + mod_out->name() + " does not contain any inputs or outputs or parameters by the given name: "
+              + key);
       }
       TendrilSpecification(module::ptr mod, const std::string& key) :
         mod_input(mod), mod_output(mod), key(key)
       {
         if (!check(mod, key))
-          {
-            throw std::runtime_error(
-                                     "The module does not contain any inputs or outputs or parameters by the given name: "
-                                         + key);
-          }
+          throw std::runtime_error(
+              "The module " + mod->name() + " does not contain any inputs or outputs or parameters by the given name: "
+              + key);
       }
       tendril::ptr toTendril(int t)
       {
