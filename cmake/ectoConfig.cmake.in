@@ -50,7 +50,7 @@ endmacro()
 # ==============================================================================
 
 macro(ectorosmodule NAME)
-rosbuild_add_library(${NAME}_ectomodule SHARED
+rosbuild_add_library(${NAME}_ectomodule 
   ${ARGN}
   )
 
@@ -61,12 +61,12 @@ set_target_properties(${NAME}_ectomodule
   )
 
 rosbuild_add_boost_directories()
+
 target_link_libraries(${NAME}_ectomodule
   ${Boost_LIBRARIES}
   ${PYTHON_LIBRARIES}
   ecto
 )
-ros_link_libraries(${NAME}_ectomodule)
 endmacro()
 
 # ==============================================================================
