@@ -65,7 +65,7 @@ rosbuild_add_boost_directories()
 target_link_libraries(${NAME}_ectomodule
   ${Boost_LIBRARIES}
   ${PYTHON_LIBRARIES}
-  ecto
+  @ecto_LIBRARIES@
 )
 endmacro()
 
