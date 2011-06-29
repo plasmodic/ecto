@@ -39,7 +39,7 @@ ecto at a glance
           static void declare_params(tendrils& params);
           static void declare_io(const tendrils& params, tendrils& in, tendrils& out);
           void configure(tendrils& params, tendrils& in, tendrils& out);
-          int process(const tendrils& in, tendrils& out);
+          int process(tendrils& in, tendrils& out);
           void destroy();
         };
 
@@ -73,9 +73,9 @@ ecto at a glance
     * The plasm (DAG) executes in compiled code.
     * Python is used for declaring the processing graph, or as its known to ecto, the *plasm*.
     
-    .. code-block:: py
+	
+	.. code-block:: python
     
-		#!/usr/bin/env python
 		import ecto #ecto core library
 		import hello_ecto #a user library, that has a few ecto modules
 		
