@@ -9,6 +9,7 @@ add_executable(ecto-test
   tendril.cpp
   spore.cpp
   exceptions.cpp
+  graph.cpp
   )
 
 target_link_libraries(ecto-test
