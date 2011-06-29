@@ -27,6 +27,8 @@ find_package(Boost COMPONENTS
 
 find_package(PythonLibs REQUIRED)
 
+# ==============================================================================
+
 macro(ectomodule NAME)
 add_library(${NAME}_ectomodule SHARED
   ${ARGN}
@@ -43,8 +45,32 @@ target_link_libraries(${NAME}_ectomodule
   ${PYTHON_LIBRARIES}
   @ecto_LIBRARIES@
 )
-
 endmacro()
+
+# ==============================================================================
+
+macro(ectorosmodule NAME)
+rosbuild_add_library(${NAME}_ectomodule 
+  ${ARGN}
+  )
+
+set_target_properties(${NAME}_ectomodule
+  PROPERTIES
+  OUTPUT_NAME ${NAME}
+  PREFIX ""
+  )
+
+rosbuild_add_boost_directories()
+
+target_link_libraries(${NAME}_ectomodule
+  ${Boost_LIBRARIES}
+  ${PYTHON_LIBRARIES}
+  @ecto_LIBRARIES@
+)
+endmacro()
+
+# ==============================================================================
+
 macro(link_ecto NAME)
 target_link_libraries(${NAME}_ectomodule
  ${ARGN}
