@@ -11,4 +11,5 @@ plasm.insert(printer)
 #introspection
 print printer.__doc__
 print plasm.viz()
-ecto.view_plasm(plasm)
+#displays a graphiz rendering
+#ecto.view_plasm(plasm)

@@ -14,6 +14,8 @@ Contents:
    :maxdepth: 2
    
    building
+   tutorial
+   autoregister
    client_usage
    auto_docs
    tendril
