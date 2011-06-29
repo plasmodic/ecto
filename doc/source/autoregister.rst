@@ -35,7 +35,7 @@ In a single place inside the shared library (e.g. ``module.cpp``, call
   
   ECTO_DEFINE_MODULE(ecto_test)
   {
-    // additional bindings go here
+    // additional boost::python or ecto bindings go here
   }
 
 
