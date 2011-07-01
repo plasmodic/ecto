@@ -97,7 +97,14 @@ namespace ecto
     const T&
     get(const std::string& name) const
     {
-      return at(name)->read<T>();
+      try
+      {
+          return at(name)->read<T>();
+      }catch(except::TypeMismatch& e)
+      {
+        e << std::string("  Hint : " ) + "'"+name+"' is of type: " + at(name)->type_name();
+        throw e;
+      }
     }
 
     /**
@@ -110,7 +117,14 @@ namespace ecto
     const T&
     read(const std::string& name) const
     {
-      return at(name)->read<T>();
+      try
+      {
+          return at(name)->read<T>();
+      }catch(except::TypeMismatch& e)
+      {
+        e << std::string("  Hint : " ) + "'"+name+"' is of type: " + at(name)->type_name();
+        throw e;
+      }
     }
 
     /**
@@ -123,7 +137,14 @@ namespace ecto
     T&
     get(const std::string& name)
     {
-      return at(name)->get<T>();
+      try
+      {
+        return at(name)->get<T>();
+      }catch(except::TypeMismatch& e)
+      {
+        e << std::string("  Hint : " )+ "'"+name+"' is of type: " + at(name)->type_name();
+        throw e;
+      }
     }
 
     /**

@@ -16,11 +16,6 @@ target_link_libraries(ecto
   ${ECTO_DEP_LIBS}
   )
   
-# Additional target properties
-set_target_properties(ecto PROPERTIES
-  INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/lib"
-  )
-
 set_target_properties(ecto PROPERTIES
             VERSION ${ECTO_VERSION}
             SOVERSION ${ECTO_SOVERSION}
@@ -29,6 +24,6 @@ set_target_properties(ecto PROPERTIES
 #install the main shared lib
 install(TARGETS ecto
   LIBRARY DESTINATION lib
-  COMPONENT ecto
+  COMPONENT main
   )
 

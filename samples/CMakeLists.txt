@@ -22,3 +22,5 @@ install(PROGRAMS ecto_doc.py
   DESTINATION bin
   COMPONENT ecto_python
   )
+
+add_subdirectory(tutorial)

@@ -9,7 +9,9 @@ unit, reducing recompile times.
 
 .. c:macro:: ECTO_MODULE(pymodule_name, cell_type_name, "CellTypeName", "Cell Docstring")
 
-Mark each ecto module as such with the ``ECTO_MODULE`` macro::
+Mark each ecto module as such with the ``ECTO_MODULE`` macro
+
+.. code-block:: c++
 
   struct Add {
     int process(const ecto::tendrils& inputs, ...)
@@ -27,15 +29,16 @@ e.g. in a file Add.cpp that contains the code above.
 
 .. c:macro:: ECTO_DEFINE_MODULE(pymodule_name)
 
-In a single place inside the shared library (e.g. ``module.cpp``, call
-``ECTO_DEFINE_MODULE``::
+In a single place inside the shared library (e.g. ``module.cpp``), call
+``ECTO_DEFINE_MODULE``
+
+.. code-block:: c++
 
   #include <ecto/ecto.hpp>
-  #include <ecto/register.hpp>
   
   ECTO_DEFINE_MODULE(ecto_test)
   {
-    // additional bindings go here
+    // additional boost::python or ecto bindings go here
   }
 
 
