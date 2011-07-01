@@ -257,8 +257,11 @@ namespace ecto {
 
       static void sigint_static_thunk(int) 
       {
-        std::cout << "*** SIGINT received, stopping everything. ***" << std::endl;
-        std::cout << "*** You may need to hit ^C again when back in the interpreter thread. ***" << std::endl;
+        std::cerr << "*** SIGINT received, stopping work queues.\n"
+                  << "*** If you are stuck here, you may need to hit ^C again\n"
+                  << "*** when back in the interpreter thread.\n" 
+                  << "*** or Ctrl-\\ (backslash) for a hard stop.\n"
+                  << std::endl;
         sigint_handler();
         PyErr_SetInterrupt();
       }
