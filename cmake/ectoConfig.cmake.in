@@ -92,11 +92,16 @@ foreach(p ${ecto_PYTHONPATH_})
         set(ecto_PYTHONPATH "${p}")
     endif()
 endforeach()
-set(ecto_user_PYTHONPATH ${CMAKE_BINARY_DIR})
+
+if(ecto_user_PYTHONPATH)
+#do nothing already set
+else()
+endif()
+    
+set(ecto_user_PYTHONPATH ${CMAKE_BINARY_DIR} CACHE PATH "The path where users expect ecto user modules to be located")
 configure_file(@ECTO_CONFIG_PATH@/python_path.sh.user.in 
   ${CMAKE_BINARY_DIR}/python_path.sh
   )
-  
 
 #detect the python version and install directories
 find_package(PythonInterp REQUIRED)
