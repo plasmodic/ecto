@@ -28,29 +28,35 @@
  */
 
 #include <ecto/ecto.hpp>
-#include <iostream>
-#include <queue>
+#include <ecto/registry.hpp>
 
-namespace ecto
+using ecto::tendrils;
+namespace ecto_test
 {
-  namespace bp = boost::python;
-
-  struct Constant
+  struct RequiredIO
   {
-    static void declare_params(tendrils& params)
+    double factor_;
+
+    static void declare_params(ecto::tendrils& p) { }
+
+    static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
-      params.declare<bp::object>("value", "Value to output").required(true);
+      inputs.declare<double> ("in", "required input")
+        .required(true);
+        
+      outputs.declare<double> ("out", "required output")
+        .required(true);
     }
 
-    static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
-    {
-      // copy supplied value of 
-      out.declare<bp::object> ("out", "Any type, constant.",
-                               parms.get<bp::object> ("value"));
-    }
+    void configure(tendrils& parms, tendrils& inputs, tendrils& outputs) { }
 
+    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
+    {
+      outputs.get<double> ("out") = inputs.get<double> ("in");
+      return ecto::OK;
+    }
   };
 }
 
-ECTO_MODULE(ecto, ecto::Constant, "Constant",
-            "Constant node always outputs same value.");
+ECTO_MODULE(ecto_test, ecto_test::RequiredIO, "RequiredIO", "RequiredIO test module");
+

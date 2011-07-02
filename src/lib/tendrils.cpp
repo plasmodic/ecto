@@ -72,7 +72,7 @@ namespace ecto
 
       ss << " - " << tp.first << " [" << tp.second->type_name() << "]";
       ss << (tp.second->has_default() ? (" default = " + tss.str()) : "");
-      ss << (tp.second->is_required() ? " REQUIRED " : "");
+      ss << (tp.second->required() ? " REQUIRED " : "");
       ss << "\n";
 
       std::string docstr = tp.second->doc();

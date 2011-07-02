@@ -17,6 +17,7 @@ namespace ecto {
     
     struct singlethreaded 
     {
+      plasm& plasm_;
       ecto::graph::graph_t& graph;
       
       singlethreaded(plasm&);

@@ -122,6 +122,7 @@ namespace ecto
       p.def("viz", wrapViz, "Get a graphviz string representation of the plasm.");
       p.def("connections", plasm_get_connections, "Grabs a the current list based description of the graph. "
             "Its a list of tuples (from_module, output_key, to_module, input_key)");
+      p.def("check", &plasm::check);
 
     }
 

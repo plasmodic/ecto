@@ -169,13 +169,12 @@ namespace ecto
       }
     }
 
-    void
-    set_required()
+    void required(bool b)
     {
-      required_ = true;
+      required_ = b;
     }
-    bool
-    is_required() const
+
+    bool required() const
     {
       return required_;
     }

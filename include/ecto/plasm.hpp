@@ -99,6 +99,8 @@ namespace ecto
      */
     std::string viz() const;
 
+    void check() const;
+
     graph::graph_t& graph();
 
     /**

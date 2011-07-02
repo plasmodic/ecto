@@ -21,7 +21,7 @@ namespace ecto {
   namespace scheduler {
 
     singlethreaded::singlethreaded(plasm& p) 
-      : graph(p.graph()) 
+      : plasm_(p), graph(p.graph()) 
     { }
 
     int 
@@ -34,8 +34,12 @@ namespace ecto {
     {
       if (!stack.empty()) //will be empty if this needs to be computed.
         return;
+
+      // do a typecheck
+
       boost::topological_sort(graph, std::back_inserter(stack));
       std::reverse(stack.begin(), stack.end());
+      plasm_.check();
     }
 
     int singlethreaded::execute()

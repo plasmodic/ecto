@@ -161,7 +161,7 @@ namespace ecto
     tendrils::const_iterator it = parameters.begin(), end(parameters.end());
     while (it != end)
     {
-      if (it->second->is_required() && !it->second->user_supplied())
+      if (it->second->required() && !it->second->user_supplied())
       {
         throw except::ValueRequired(it->first + " must be supplied with a value during initialization.");
       }

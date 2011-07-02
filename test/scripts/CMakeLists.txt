@@ -22,6 +22,8 @@ foreach(file
     test_process_return_values
     test_python_module
     test_reconnect
+    test_required_io
+    test_required_param
     test_random
     test_shared_pass
     test_small_plasms

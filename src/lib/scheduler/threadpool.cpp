@@ -259,7 +259,7 @@ namespace ecto {
       {
         std::cerr << "*** SIGINT received, stopping work queues.\n"
                   << "*** If you are stuck here, you may need to hit ^C again\n"
-                  << "*** when back in the interpreter thread.\n" 
+                  << "*** when back in the interpreter thread.\n"
                   << "*** or Ctrl-\\ (backslash) for a hard stop.\n"
                   << std::endl;
         sigint_handler();
@@ -383,18 +383,20 @@ namespace ecto {
 
 
     threadpool::threadpool(plasm& p)
-      : graph(p.graph()), impl_(new impl)
+      : plasm_(p), graph(p.graph()), impl_(new impl)
     { }
 
     namespace phx = boost::phoenix;
 
     int threadpool::execute(unsigned nthreads)
     {
+      plasm_.check();
       return impl_->execute(nthreads, phx::val(true), graph);
     }
 
     int threadpool::execute(unsigned nthreads, unsigned ncalls)
     {
+      plasm_.check();
       return impl_->execute(nthreads, boost::phoenix::arg_names::arg1 < ncalls, graph);
     }
 

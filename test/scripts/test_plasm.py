@@ -17,13 +17,17 @@ def test_plasm():
     try:
         p2 = ecto.Plasm()
         p2.connect(gather["out"] >> ecto_test.Printer(print_type="double")["in"])
+        p2.check()
         assert False, "Should not work as there is a type mismatch..."
     except RuntimeError, e:
-        print e
+        print ">>>", e
+        assert str(e) == "type mismatch:  'ecto_test::Gather<int>.outputs.out' of type 'int' is connected to'ecto_test::Printer.inputs.in' of type 'double'"
+        print e, "(threw as expected)"
     
     try:
         p2 = ecto.Plasm()
         p2.connect(gather["out"],ecto_test.Printer(print_type="double")["in"])
+        # p2.check()
         assert False, "Should not work."
     except RuntimeError, e:
         print e

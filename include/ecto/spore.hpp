@@ -136,14 +136,14 @@ namespace ecto
       return p()->has_default();
     }
 
-    void set_required()
+    void required(bool b)
     {
-      p()->set_required();
+      p()->required(b);
     }
 
-    bool is_required() const
+    bool required() const
     {
-      return p()->is_required();
+      return p()->required();
     }
 
 

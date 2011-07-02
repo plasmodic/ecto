@@ -41,7 +41,7 @@ namespace ecto_test
     spore<double> x_, in_, out_;
     static void declare_params(tendrils& params)
     {
-      params.declare<double> ("x", "A required parameter.").set_required();
+      params.declare<double> ("x", "A required parameter.").required(true);
     }
 
     static void declare_io(const tendrils& params, tendrils& in, tendrils& out)
