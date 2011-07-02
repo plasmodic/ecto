@@ -46,3 +46,5 @@ set(ecto_module_PYTHON_INSTALL ${ecto_module_PYTHON_INSTALL_base})
 macro(set_ecto_install_package_name package_name)
   set(ecto_module_PYTHON_INSTALL ${ecto_module_PYTHON_INSTALL_base}/${package_name})
 endmacro()
+
+set(ecto_PYTHON_INSTALL ${PYTHON_PACKAGES_PATH})

@@ -9,81 +9,30 @@
 #    find_package(ecto REQUIRED)
 #    ectomodule(mymodule src/module.cpp)
 #    ecto_link(mymodule ${MY_LIB_DEPS})
+#    install_ecto_module(mymodule)
 #
 #    This file will define the following variables:
 #      - ecto_LIBRARIES                 : The list of libraries to link against.
 #      - ecto_INCLUDE_DIRS              : The ecto include directories
 #    These macros:
-#      set_ecto_install_package_name(package_name) #default is ""
-#	   ectomodule(module_name ${srcs})
-#	   link_ecto(module_name ${libs})
-#	   install_ecto_module(module_name)
+#      set_ecto_install_package_name(package_name) #default is "" you may specify other
+#	   ectomodule(module_name ${srcs}) #This creates a single ecto module 
+#                                      #shared library loadable from python,
+#                                      #will add includes, links to bare necessities and mangles the target name with ${name}_ectomodule
+#	   link_ecto(module_name ${libs})  #Link to additional libraries
+#	   install_ecto_module(module_name) #install your target a python system path.
 #
+#    Generated files:
+#      In your build directory, a python_path.sh will be generated which you may source to setup your PYTHONPATH to
+#      properly find ecto and your own ecto modules. The variable: ecto_user_PYTHONPATH is looked at when generating
+#      this file. ecto_user_PYTHONPATH defaults to the LIBRARY_OUTPUT_DIRECTORY  This variable will be prepended to your
+#      python path in the form PYTHONPATH=${ecto_user_PYTHONPATH}:<path to ecto>:PYTHONPATH
 # ==============================================================================
-find_package(Boost COMPONENTS
- python
- REQUIRED
-)
-
-find_package(PythonLibs REQUIRED)
-
-# ==============================================================================
-
-macro(ectomodule NAME)
-add_library(${NAME}_ectomodule SHARED
-  ${ARGN}
-  )
-
-set_target_properties(${NAME}_ectomodule
-  PROPERTIES
-  OUTPUT_NAME ${NAME}
-  PREFIX ""
-  )
-
-target_link_libraries(${NAME}_ectomodule
-  ${Boost_LIBRARIES}
-  ${PYTHON_LIBRARIES}
-  @ecto_LIBRARIES@
-)
-endmacro()
-
-# ==============================================================================
-
-macro(ectorosmodule NAME)
-rosbuild_add_library(${NAME}_ectomodule 
-  ${ARGN}
-  )
-
-set_target_properties(${NAME}_ectomodule
-  PROPERTIES
-  OUTPUT_NAME ${NAME}
-  PREFIX ""
-  )
-
-rosbuild_add_boost_directories()
-
-target_link_libraries(${NAME}_ectomodule
-  ${Boost_LIBRARIES}
-  ${PYTHON_LIBRARIES}
-  @ecto_LIBRARIES@
-)
-endmacro()
-
-# ==============================================================================
-
-macro(link_ecto NAME)
-target_link_libraries(${NAME}_ectomodule
- ${ARGN}
-)
-endmacro()
-
+get_filename_component(SELF_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+include(${SELF_DIR}/ectoMacros.cmake)
 set(ecto_INCLUDE_DIRS @ecto_INCLUDE_DIRS@)
 set(ecto_LIBRARIES @ecto_LIBRARIES@)
-INCLUDE_DIRECTORIES(${ecto_INCLUDE_DIRS} 
-  ${PYTHON_INCLUDE_PATH}
-  ${Boost_INCLUDE_DIRS}
-)
-link_directories(@ecto_LIBRARIES_DIR@)
+ # ============== Python Path ===================================================
 set(ecto_PYTHONPATH_ @ecto_PYTHONPATH@ )
 foreach(p ${ecto_PYTHONPATH_})
     if(ecto_PYTHONPATH)
@@ -93,50 +42,38 @@ foreach(p ${ecto_PYTHONPATH_})
     endif()
 endforeach()
 
-if(ecto_user_PYTHONPATH)
-#do nothing already set
-else()
+if(NOT ecto_user_PYTHONPATH)
+    set(ecto_user_PYTHONPATH ${LIBRARY_OUTPUT_DIRECTORY})
 endif()
     
-set(ecto_user_PYTHONPATH ${CMAKE_BINARY_DIR} CACHE PATH "The path where users expect ecto user modules to be located")
 configure_file(@ECTO_CONFIG_PATH@/python_path.sh.user.in 
   ${CMAKE_BINARY_DIR}/python_path.sh
   )
 
 #detect the python version and install directories
-find_package(PythonInterp REQUIRED)
-
-execute_process(COMMAND ${PYTHON_EXECUTABLE} --version
-          ERROR_VARIABLE PYTHON_VERSION_FULL
-          OUTPUT_STRIP_TRAILING_WHITESPACE)
-          
-string(REGEX MATCH "[0-9].[0-9]" PYTHON_VERSION_MAJOR_MINOR "${PYTHON_VERSION_FULL}")
-
-if(UNIX)
-    if(APPLE)
-        set(PYTHON_PACKAGES_PATH lib/python${PYTHON_VERSION_MAJOR_MINOR}/site-packages CACHE PATH "Where to install the python packages.")
-    else() #debian based assumed, install to the dist-packages.
-        set(PYTHON_PACKAGES_PATH lib/python${PYTHON_VERSION_MAJOR_MINOR}/dist-packages CACHE PATH "Where to install the python packages.")
+if(NOT PYTHON_PACKAGES_PATH)
+    find_package(PythonInterp REQUIRED)
+    
+    execute_process(COMMAND ${PYTHON_EXECUTABLE} --version
+              ERROR_VARIABLE PYTHON_VERSION_FULL
+              OUTPUT_STRIP_TRAILING_WHITESPACE)
+              
+    string(REGEX MATCH "[0-9].[0-9]" PYTHON_VERSION_MAJOR_MINOR "${PYTHON_VERSION_FULL}")
+    
+    if(UNIX)
+        if(APPLE)
+            set(PYTHON_PACKAGES_PATH lib/python${PYTHON_VERSION_MAJOR_MINOR}/site-packages CACHE PATH "Where to install the python packages.")
+        else() #debian based assumed, install to the dist-packages.
+            set(PYTHON_PACKAGES_PATH lib/python${PYTHON_VERSION_MAJOR_MINOR}/dist-packages CACHE PATH "Where to install the python packages.")
+        endif()
+    elseif(WIN32)
+        get_filename_component(PYTHON_PATH "[HKEY_LOCAL_MACHINE\\SOFTWARE\\Python\\PythonCore\\${PYTHON_VERSION_MAJOR_MINOR}\\InstallPath]" ABSOLUTE CACHE)
+        set(PYTHON_PACKAGES_PATH "${PYTHON_PATH}/Lib/site-packages" CACHE PATH "Where to install the python packages.")
     endif()
-elseif(WIN32)
-    get_filename_component(PYTHON_PATH "[HKEY_LOCAL_MACHINE\\SOFTWARE\\Python\\PythonCore\\${PYTHON_VERSION_MAJOR_MINOR}\\InstallPath]" ABSOLUTE CACHE)
-    set(PYTHON_PACKAGES_PATH "${PYTHON_PATH}/Lib/site-packages" CACHE PATH "Where to install the python packages.")
+    
+    set(ecto_module_PYTHON_INSTALL ${PYTHON_PACKAGES_PATH} CACHE PATH "The path where modules will be installed." )
 endif()
 
-set(ecto_module_PYTHON_INSTALL ${PYTHON_PACKAGES_PATH} CACHE PATH "The path where modules will be installed." )
-
-#this is where usermodules may be installed to
-macro(set_ecto_install_package_name package_name)
-  set(ecto_module_PYTHON_INSTALL ${PYTHON_PACKAGES_PATH}/${package_name})
-endmacro()
-
-macro( install_ecto_module name)
-#this is the python extension
-install(TARGETS ${name}_ectomodule
-  LIBRARY DESTINATION ${ecto_module_PYTHON_INSTALL} COMPONENT main
-  )
-endmacro()
 
 
 message(STATUS "ecto === Source the python_path.sh in your build folder to setup your python path.")
-  

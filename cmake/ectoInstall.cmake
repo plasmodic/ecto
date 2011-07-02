@@ -54,16 +54,18 @@ set(ecto_LIBRARIES_DIR ${CMAKE_INSTALL_PREFIX}/lib)
 set(ecto_LIBRARIES ${ecto_LIBRARIES_DIR}/libecto.so.${ECTO_VERSION})
 
 #FIXME make the python install path reflect the version for side by side...
-set(ecto_PYTHON_INSTALL ${PYTHON_PACKAGES_PATH})
 set(ecto_PYTHONPATH ${CMAKE_INSTALL_PREFIX}/${ecto_PYTHON_INSTALL})
 set(ECTO_CONFIG_PATH  ${CMAKE_INSTALL_PREFIX}/${share_prefix})
 configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoConfig.cmake.in 
   ${CMAKE_BINARY_DIR}/unix_install/ectoConfig.cmake @ONLY)
 configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoConfig-version.cmake.in 
   ${CMAKE_BINARY_DIR}/unix_install/ectoConfig-version.cmake @ONLY)
-  
+configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoMacros.cmake
+  ${CMAKE_BINARY_DIR}/unix_install/ectoMacros.cmake @ONLY)
+    
 #install the ectoConfig.cmake and ectoConfig-version.cmake
-INSTALL(FILES 
+INSTALL(FILES
+  ${CMAKE_BINARY_DIR}/unix_install/ectoMacros.cmake
   ${CMAKE_BINARY_DIR}/unix_install/ectoConfig.cmake
   ${CMAKE_BINARY_DIR}/unix_install/ectoConfig-version.cmake
   DESTINATION ${ECTO_CONFIG_PATH}
