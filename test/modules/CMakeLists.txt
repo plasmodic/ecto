@@ -12,6 +12,7 @@ ectomodule(ecto_test
   Metrics.cpp
   Gather.cpp
   Generate.cpp
+  RequiredInput.cpp
   RequiredParam.cpp
   Passthrough.cpp
   Uniform01.cpp

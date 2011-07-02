@@ -168,5 +168,20 @@ namespace ecto
       ++it;
     }
   }
+  
+  void
+  module::verify_inputs() const
+  {
+
+    tendrils::const_iterator it = inputs.begin(), end(inputs.end());
+    while (it != end)
+    {
+      if (it->second->is_required() && !it->second->user_supplied())
+      {
+        throw except::ValueRequired(it->first + " must be connected.");
+      }
+      ++it;
+    }
+  }
 
 }
