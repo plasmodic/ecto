@@ -1,5 +1,5 @@
 ectomodule(tutorial
     tutorial.cpp
-    t0.cpp
-    t01.cpp
+    t000.cpp
+    t001.cpp
 )
