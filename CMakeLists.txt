@@ -14,7 +14,7 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 set(include_prefix include/ecto-${ECTO_VERSION})
 set(share_prefix share/ecto-${ECTO_VERSION})
 
-configure_file( ${CMAKE_SOURCE_DIR}/cmake/version.hpp.in ${CMAKE_BINARY_DIR}/include/ecto/version.hpp )
+configure_file(${CMAKE_SOURCE_DIR}/cmake/version.hpp.in ${CMAKE_BINARY_DIR}/include/ecto/version.hpp)
 include_directories(${CMAKE_BINARY_DIR}/include)
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
