@@ -40,7 +40,7 @@ namespace ecto_test
 
     static void declare_io(const tendrils& params, tendrils& in, tendrils& out)
     {
-      in.declare<double> ("in", "an input").set_required();
+      in.declare<double> ("in", "an input").required(true);
       out.declare<double> ("out", "The input + x", 0.0);
     }
 

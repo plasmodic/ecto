@@ -176,7 +176,7 @@ namespace ecto
     tendrils::const_iterator it = inputs.begin(), end(inputs.end());
     while (it != end)
     {
-      if (it->second->is_required() && !it->second->user_supplied())
+      if (it->second->required() && !it->second->user_supplied())
       {
         throw except::ValueRequired(it->first + " must be connected.");
       }
