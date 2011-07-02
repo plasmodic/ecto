@@ -157,6 +157,7 @@ namespace ecto
     std::string gen_doc(const std::string& doc = "A module...") const;
 
     void verify_params() const;
+    void verify_inputs() const;
 
     ptr clone() const;
 

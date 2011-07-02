@@ -31,6 +31,8 @@ namespace ecto {
           e->pop_front();
           ++inbegin;
         }
+      //verify that all inputs have been set.
+      m->verify_inputs();
 
       int val = m->process();
 
