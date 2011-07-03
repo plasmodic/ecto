@@ -60,5 +60,5 @@ namespace ecto_test
   int FlagOnDestroy::count = 0;
 }
 
-ECTO_MODULE(ecto_test, ecto_test::FlagOnDestroy, "FlagOnDestroy", "Sets output 'true' when destroy called");
+ECTO_CELL(ecto_test, ecto_test::FlagOnDestroy, "FlagOnDestroy", "Sets output 'true' when destroy called");
 

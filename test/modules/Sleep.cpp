@@ -69,5 +69,5 @@ namespace ecto_test
   };
 }
 
-ECTO_MODULE(ecto_test, ecto_test::Sleep, "Sleep", "Sleep for a bit while in process");
+ECTO_CELL(ecto_test, ecto_test::Sleep, "Sleep", "Sleep for a bit while in process");
 

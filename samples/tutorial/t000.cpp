@@ -18,4 +18,4 @@ namespace tutorial
 }
 
 //register our cell with the existing ecto cell 'tutorial' that is declared in tutorial.cpp
-ECTO_MODULE(tutorial, tutorial::Printer01, "Printer01", "Prints 'Hello' to standard output.");
+ECTO_CELL(tutorial, tutorial::Printer01, "Printer01", "Prints 'Hello' to standard output.");

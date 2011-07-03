@@ -52,5 +52,5 @@ namespace ecto
   };
 }
 
-ECTO_MODULE(ecto, ecto::Constant, "Constant",
+ECTO_CELL(ecto, ecto::Constant, "Constant",
             "Constant node always outputs same value.");

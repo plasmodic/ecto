@@ -67,6 +67,6 @@ namespace ecto_test
 
 }
 
-ECTO_MODULE(ecto_test, ecto_test::RequiredParam, "RequiredParam", "Required parameter")
+ECTO_CELL(ecto_test, ecto_test::RequiredParam, "RequiredParam", "Required parameter")
 ;
 

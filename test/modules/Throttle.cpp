@@ -83,5 +83,5 @@ namespace ecto_test
   };
 }
 
-ECTO_MODULE(ecto_test, ecto_test::Throttle, "Throttle", "Throttle to a certain Hz frequency");
+ECTO_CELL(ecto_test, ecto_test::Throttle, "Throttle", "Throttle to a certain Hz frequency");
 

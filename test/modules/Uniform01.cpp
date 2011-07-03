@@ -86,5 +86,5 @@ namespace ecto_test
   };
 }
 
-ECTO_MODULE(ecto_test, ecto_test::Uniform01, "Uniform01", "Generate random doubles uniformly distributed on [0, 1)");
+ECTO_CELL(ecto_test, ecto_test::Uniform01, "Uniform01", "Generate random doubles uniformly distributed on [0, 1)");
 

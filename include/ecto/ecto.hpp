@@ -58,12 +58,12 @@ namespace ecto
   boost::shared_ptr<ecto::cell_<T> > inspect(boost::python::tuple args,
                                                boost::python::dict kwargs)
   {
-    typedef ecto::cell_<T> module_t;
+    typedef ecto::cell_<T> cell_t;
 
     namespace bp = boost::python;
 
     //SHOW();
-    boost::shared_ptr<module_t> mm(new module_t());
+    boost::shared_ptr<cell_t> mm(new cell_t());
     ecto::cell * m = mm.get();
     
     if (bp::len(args) > 1)
@@ -79,7 +79,7 @@ namespace ecto
       {
         bp::extract<std::string> e(args[0]);
         if (! e.check())
-          throw std::runtime_error("Non-keyword argument (instance name) not converible to string.");
+          throw std::runtime_error("Non-keyword argument (instance name) not convertible to string.");
         m->name(e());
       }
     m->declare_params();
@@ -93,7 +93,6 @@ namespace ecto
         if (keystring == "strand")
           {
             ecto::strand s = bp::extract<ecto::strand>(value);
-            std::cout << "setting strand " << s.id() << "\n";
             m->strand_ = s;
           }
         else 
@@ -109,21 +108,21 @@ namespace ecto
 
   //this adds the autodoc to the cell. TODO remove python duplication...
   template<typename T>
-  std::string module_doc(std::string doc)
+  std::string cell_doc(std::string doc)
   {
-    ecto::cell::ptr m = ecto::inspect_cell<T>();
-    std::string defaultname = boost::str(boost::format("%s") % m->type());
-    m->name(defaultname);
-    return m->gen_doc(doc);
+    ecto::cell::ptr c = ecto::inspect_cell<T>();
+    std::string defaultname = boost::str(boost::format("%s") % c->type());
+    c->name(defaultname);
+    return c->gen_doc(doc);
   }
 
   template<typename T>
   boost::shared_ptr<ecto::cell_<T> > raw_construct(boost::python::tuple args,
                                                      boost::python::dict kwargs)
   {
-    boost::shared_ptr<ecto::cell_<T> > m = inspect<T> (args, kwargs);
-    m->verify_params();
-    return m;
+    boost::shared_ptr<ecto::cell_<T> > c = inspect<T> (args, kwargs);
+    c->verify_params();
+    return c;
   }
 
   /**
@@ -133,25 +132,25 @@ namespace ecto
    * This should be the preferred method of exposing user
    * modules to the outside world.
    *
-   * @tparam UserModule A client cell type that implements the idium of an ecto::cell.
+   * @tparam UserCell A client cell type that implements the idium of an ecto::cell.
    * @param name The name of the cell, this will be the symbolic name exposed
    *        to python or other plugin systems.
    * @param doc_str A highlevel description of your cell.
    */
-  template<typename UserModule>
-  void wrap(const char* name, std::string doc_str = "A module...")
+  template<typename UserCell>
+  void wrap(const char* name, std::string doc_str = "An ecto::cell...")
   {
-    typedef ecto::cell_<UserModule> module_t;
+    typedef ecto::cell_<UserCell> cell_t;
     //SHOW();
-    boost::python::class_<module_t, boost::python::bases<cell>,
-        boost::shared_ptr<module_t>, boost::noncopyable>
-        m(name, module_doc<UserModule> (doc_str).c_str());
+    boost::python::class_<cell_t, boost::python::bases<cell>,
+        boost::shared_ptr<cell_t>, boost::noncopyable>
+        m(name, cell_doc<UserCell> (doc_str).c_str());
     m.def("__init__",
-          boost::python::raw_constructor(&raw_construct<UserModule> ));
-    m.def("inspect", &inspect<UserModule> );
+          boost::python::raw_constructor(&raw_construct<UserCell> ));
+    m.def("inspect", &inspect<UserCell> );
     m.staticmethod("inspect");
-    m.def("name", (std::string (module_t::*)() const) &module_t::name);
-    m.def("type_name", (std::string (module_t::*)() const) &module_t::type);
+    m.def("name", (std::string (cell_t::*)() const) &cell_t::name);
+    m.def("type_name", (std::string (cell_t::*)() const) &cell_t::type);
   }
 }
 

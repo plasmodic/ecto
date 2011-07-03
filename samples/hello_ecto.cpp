@@ -98,6 +98,6 @@ namespace hello_ecto
 ECTO_DEFINE_MODULE(hello_ecto)
 { }
 
-ECTO_MODULE(hello_ecto, hello_ecto::Printer, "Printer", "Prints a string input to standard output.");
-ECTO_MODULE(hello_ecto, hello_ecto::Reader, "Reader", "Reads input from standard input.");
+ECTO_CELL(hello_ecto, hello_ecto::Printer, "Printer", "Prints a string input to standard output.");
+ECTO_CELL(hello_ecto, hello_ecto::Reader, "Reader", "Reads input from standard input.");
 

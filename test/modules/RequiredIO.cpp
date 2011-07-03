@@ -58,5 +58,5 @@ namespace ecto_test
   };
 }
 
-ECTO_MODULE(ecto_test, ecto_test::RequiredIO, "RequiredIO", "RequiredIO test module");
+ECTO_CELL(ecto_test, ecto_test::RequiredIO, "RequiredIO", "RequiredIO test module");
 

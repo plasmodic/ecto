@@ -47,5 +47,5 @@ namespace tutorial
 }
 
 //register our cell with the existing ecto cell 'tutorial' that is declared in tutorial.cpp
-ECTO_MODULE(tutorial, tutorial::Printer02, "Printer02", "Prints a string to standard output.");
-ECTO_MODULE(tutorial, tutorial::Reader01, "Reader01",  "Reads a string from standard input.");
+ECTO_CELL(tutorial, tutorial::Printer02, "Printer02", "Prints a string to standard output.");
+ECTO_CELL(tutorial, tutorial::Reader01, "Reader01",  "Reads a string from standard input.");

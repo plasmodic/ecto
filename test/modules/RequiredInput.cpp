@@ -60,6 +60,6 @@ namespace ecto_test
 
 }
 
-ECTO_MODULE(ecto_test, ecto_test::RequiredInput, "RequiredInput", "Required input.")
+ECTO_CELL(ecto_test, ecto_test::RequiredInput, "RequiredInput", "Required input.")
 ;
 

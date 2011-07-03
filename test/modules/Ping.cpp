@@ -60,5 +60,5 @@ namespace ecto_test
   };
 }
 
-ECTO_MODULE(ecto_test, ecto_test::Ping, "Ping", "Ping as fast as you can, send the current time downstream");
+ECTO_CELL(ecto_test, ecto_test::Ping, "Ping", "Ping as fast as you can, send the current time downstream");
 

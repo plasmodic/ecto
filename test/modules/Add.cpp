@@ -57,5 +57,5 @@ namespace ecto_test
   };
 }
 
-ECTO_MODULE(ecto_test, ecto_test::Add, "Add", "Add two doubles");
+ECTO_CELL(ecto_test, ecto_test::Add, "Add", "Add two doubles");
 

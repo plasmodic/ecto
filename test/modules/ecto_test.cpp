@@ -299,13 +299,10 @@ namespace ecto_test
 
 }
 
-// ECTO_REGISTRY(ecto_test);
-
+using namespace ecto_test;
 ECTO_DEFINE_MODULE(ecto_test)
 {
-  //  ECTO_REGISTER(ecto_test);
-
-  using namespace ecto_test;
+  boost::python::def("make_pod_tendril", ecto_test::makePodTendril);
   ecto::wrap<SharedPass>("SharedPass", "A shared pointer pass through");
 
   ecto::wrap<Scatter>("Scatter", "Scatter a value...");
@@ -315,5 +312,4 @@ ECTO_DEFINE_MODULE(ecto_test)
                                        "Throws if process called concurrently from two threads.");
   ecto::wrap<NoPythonBindings>("NoPythonBindings", "This uses something that is bound to python!");
   ecto::wrap<ParameterWatcher>("ParameterWatcher", "Uses parameter change callbacks.");
-  boost::python::def("make_pod_tendril", ecto_test::makePodTendril);
 }

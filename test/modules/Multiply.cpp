@@ -61,5 +61,5 @@ namespace ecto_test
   };
 }
 
-ECTO_MODULE(ecto_test, ecto_test::Multiply, "Multiply", "Multiply an input by a constant");
+ECTO_CELL(ecto_test, ecto_test::Multiply, "Multiply", "Multiply an input by a constant");
 

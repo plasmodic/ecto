@@ -70,5 +70,5 @@ namespace ecto_test
 
 }
 
-ECTO_MODULE(ecto_test, ecto_test::QuitAfter, "QuitAfter", "Quits the graph after so many ticks");
+ECTO_CELL(ecto_test, ecto_test::QuitAfter, "QuitAfter", "Quits the graph after so many ticks");
 

@@ -61,5 +61,5 @@ namespace ecto_test
 
 }
 
-ECTO_MODULE(ecto_test, ecto_test::Quitter, "Quitter", "Will quit the graph on some certain input");
+ECTO_CELL(ecto_test, ecto_test::Quitter, "Quitter", "Will quit the graph on some certain input");
 

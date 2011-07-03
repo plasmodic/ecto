@@ -86,7 +86,7 @@ namespace ecto {
 
 #define ECTO_MODULETAG(MODULE) namespace ecto { namespace tag { struct MODULE; } }
 
-#define ECTO_MODULE(MODULE, TYPE, NAME, DOCSTRING)                      \
+#define ECTO_CELL(MODULE, TYPE, NAME, DOCSTRING)                      \
   ECTO_MODULETAG(MODULE)                                                \
   namespace {                                                           \
     template<>                                                          \

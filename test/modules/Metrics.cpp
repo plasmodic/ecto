@@ -83,6 +83,6 @@ namespace ecto_test
   };
 }
 
-ECTO_MODULE(ecto_test, ecto_test::Metrics, "Metrics", 
+ECTO_CELL(ecto_test, ecto_test::Metrics, "Metrics", 
             "Calcluate bandwidth and latency based on timestamps received from an upstream ping.");
 

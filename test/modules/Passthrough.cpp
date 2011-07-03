@@ -54,4 +54,4 @@ namespace ecto
   };
 }
 
-ECTO_MODULE(ecto_test, ecto::PassthroughAny, "PassthroughAny", "Constant node always outputs same value.");
+ECTO_CELL(ecto_test, ecto::PassthroughAny, "PassthroughAny", "Constant node always outputs same value.");

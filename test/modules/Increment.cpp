@@ -74,5 +74,5 @@ namespace ecto_test
   };
 }
 
-ECTO_MODULE(ecto_test, ecto_test::Increment, "Increment", "Increment input by some amount");
+ECTO_CELL(ecto_test, ecto_test::Increment, "Increment", "Increment input by some amount");
 

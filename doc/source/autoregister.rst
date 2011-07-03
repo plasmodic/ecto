@@ -7,9 +7,9 @@ unit, reducing recompile times.
 
 
 
-.. c:macro:: ECTO_MODULE(pymodule_name, cell_type_name, "CellTypeName", "Cell Docstring")
+.. c:macro:: ECTO_CELL(pymodule_name, cell_type_name, "CellTypeName", "Cell Docstring")
 
-Mark each ecto module as such with the ``ECTO_MODULE`` macro
+Mark each ecto module as such with the ``ECTO_CELL`` macro
 
 .. code-block:: c++
 
@@ -18,7 +18,7 @@ Mark each ecto module as such with the ``ECTO_MODULE`` macro
     // ...
   };
 
-  ECTO_MODULE(ecto_test, Add, "Add", "Add two doubles");
+  ECTO_CELL(ecto_test, Add, "Add", "Add two doubles");
 
 Where the arguments are 1. Python module name, but not as a
 string, 2. Type of module, 3.  string name of module, 4. docstring for

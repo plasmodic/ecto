@@ -88,7 +88,7 @@ namespace ecto_test
   Printer::PrintFunctions Printer::pfs;
 }
 
-ECTO_MODULE(ecto_test, ecto_test::Printer, "Printer", 
+ECTO_CELL(ecto_test, ecto_test::Printer, "Printer", 
             "A printer of int, double, string, bool. "
             "Use the print_type parameter to specify type.  Default is double");
 

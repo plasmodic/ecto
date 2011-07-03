@@ -77,6 +77,6 @@ namespace ecto_test
   };
 }
 
-ECTO_MODULE(ecto_test, ecto_test::Gather<int>, "Gather", "Gather ints");
-ECTO_MODULE(ecto_test, ecto_test::Gather<double>, "Gather_double", "Gather doubles");
+ECTO_CELL(ecto_test, ecto_test::Gather<int>, "Gather", "Gather ints");
+ECTO_CELL(ecto_test, ecto_test::Gather<double>, "Gather_double", "Gather doubles");
 
