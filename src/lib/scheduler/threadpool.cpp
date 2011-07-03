@@ -406,17 +406,3 @@ namespace ecto {
   }
 }
 
-
-/*
-namespace {
-  void forward_sigint(int) 
-  {
-    PyErr_SetInterrupt();
-    PyErr_CheckSignals();
-  }
-}
-
-
-signal(SIGINT, &forward_sigint);
-
-*/
