@@ -39,8 +39,8 @@ at a glance
         };
 
     
-    * Inputs, outputs and parameters are templated, and type erasing, giving typesafety and the ability to use your
-      own data types..
+    * Inputs, outputs and parameters are templated, and type erasing,
+      giving typesafety and the ability to use your own data types..
       
     .. code-block:: c++
         
@@ -51,22 +51,25 @@ at a glance
             params.declare<std::string>("str", "str is a standard string.", "default");
         }
     
-    * Python is used as the plugin architecture of ecto. Exposing your modules to python is dead simple.
-      The use of boost::python means that the python bindings for your data types are an optional powerful tool.
+    * Python is used as the plugin architecture of ecto. 
+      Exposing your modules to python is dead simple.
+      The use of boost::python means that the python bindings for your data types are an
+      optional powerful tool.
       
     .. code-block:: c++
-        
-        BOOST_PYTHON_MODULE(hello_ecto)
+    
+	ECTO_MODULE(hello_ecto)
         {
           ecto::wrap<Printer>("Printer", "Prints a string input to standard output.");
           ecto::wrap<Reader>("Reader", "Reads input from standard input.");
         }
         
-    * ecto forces your modules to be somewhat self documenting, and allows full
+    * ecto forces your cells to be self documenting, and allows full
       introspection from python and c++, including
       type names, docstrings and variable names.
     * The plasm (DAG) executes in compiled code.
-    * Python is used for declaring the processing graph, or as its known to ecto, the *plasm*.
+    * Python is used for declaring the processing graph, 
+      or as its known to ecto, the *plasm*.
     
 	
 	.. code-block:: python
