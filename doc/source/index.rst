@@ -7,14 +7,10 @@ become the nodes in the DAG, or ``ecto::plasm``.  Modules may be written
 in c++ as ``boost::python`` extensions, or in pure python, 
 and python is used to construct the DAG.
 
-Contents:
-=========
-
 .. toctree::
    :maxdepth: 2
    
    building
-   tutorial
    autoregister
    client_usage
    auto_docs
