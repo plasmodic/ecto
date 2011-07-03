@@ -34,12 +34,10 @@ namespace ecto {
     {
       if (!stack.empty()) //will be empty if this needs to be computed.
         return;
-
-      // do a typecheck
-
+      //check this plasm for correctness.
+      plasm_.check();
       boost::topological_sort(graph, std::back_inserter(stack));
       std::reverse(stack.begin(), stack.end());
-      plasm_.check();
     }
 
     int singlethreaded::execute()
@@ -61,7 +59,6 @@ namespace ecto {
     int singlethreaded::execute(unsigned j)
     {
       compute_stack();
-
       for (unsigned r=0; r<j; ++r)
         for (size_t k = 0; k < stack.size(); ++k)
           {

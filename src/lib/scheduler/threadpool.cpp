@@ -390,12 +390,14 @@ namespace ecto {
 
     int threadpool::execute(unsigned nthreads)
     {
+      //check this plasm for correctness.
       plasm_.check();
       return impl_->execute(nthreads, phx::val(true), graph);
     }
 
     int threadpool::execute(unsigned nthreads, unsigned ncalls)
     {
+      //check this plasm for correctness.
       plasm_.check();
       return impl_->execute(nthreads, boost::phoenix::arg_names::arg1 < ncalls, graph);
     }
