@@ -8,10 +8,8 @@ set(ECTO_SOVERSION ${ECTO_MAJOR_VERSION}.${ECTO_MINOR_VERSION})
 set(ECTO_VERSION ${ECTO_MAJOR_VERSION}.${ECTO_MINOR_VERSION}.${ECTO_PATCH_VERSION})
 SET(ECTO_CODE_NAME "mold spore (alpha)")
 
-set(RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-
+set(RUNTIME_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
+set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 
 set(include_prefix include/ecto-${ECTO_VERSION})
 set(share_prefix share/ecto-${ECTO_VERSION})
@@ -21,10 +19,10 @@ include_directories(${CMAKE_BINARY_DIR}/include)
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
-execute_process(COMMAND mkdir -p ${LIBRARY_OUTPUT_DIRECTORY}/ecto)
+execute_process(COMMAND mkdir -p ${LIBRARY_OUTPUT_PATH}/ecto)
 
 execute_process(COMMAND ln -sf ${CMAKE_SOURCE_DIR}/python/ecto/__init__.py
-  WORKING_DIRECTORY ${LIBRARY_OUTPUT_DIRECTORY}/ecto
+  WORKING_DIRECTORY ${LIBRARY_OUTPUT_PATH}/ecto
   )
 
 include(${CMAKE_SOURCE_DIR}/cmake/ectoMacros.cmake)
@@ -42,17 +40,18 @@ configure_file(${CMAKE_SOURCE_DIR}/cmake/python_path.sh.in
 message(STATUS "To setup your python path for ecto you may source:"
   " ${CMAKE_BINARY_DIR}/python_path.sh")
 
-set(ecto_PYTHONPATH ${LIBRARY_OUTPUT_DIRECTORY} ${CMAKE_SOURCE_DIR}/python)
+set(ecto_PYTHONPATH ${LIBRARY_OUTPUT_PATH} ${CMAKE_SOURCE_DIR}/python)
 set(ecto_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/include ${CMAKE_BINARY_DIR}/include)
-set(ecto_LIBRARIES ${LIBRARY_OUTPUT_DIRECTORY}/libecto.so.${ECTO_VERSION})
+set(ecto_LIBRARIES ${LIBRARY_OUTPUT_PATH}/libecto.so.${ECTO_VERSION})
 set(ECTO_CONFIG_PATH  ${CMAKE_SOURCE_DIR}/cmake)
-
 configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoConfig.cmake.in 
   ${CMAKE_BINARY_DIR}/ectoConfig.cmake @ONLY)
 configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoConfig-version.cmake.in 
   ${CMAKE_BINARY_DIR}/ectoConfig-version.cmake @ONLY)
 configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoMacros.cmake
   ${CMAKE_BINARY_DIR}/ectoMacros.cmake @ONLY)
+  
+set(ecto_LIBRARIES ecto)
 
 add_subdirectory(src)
 

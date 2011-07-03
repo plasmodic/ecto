@@ -1,2 +1,2 @@
 #source me to get the python path for ecto setup
-export PYTHONPATH=${LIBRARY_OUTPUT_DIRECTORY}:${CMAKE_SOURCE_DIR}/python:$PYTHONPATH
+export PYTHONPATH=${LIBRARY_OUTPUT_PATH}:${CMAKE_SOURCE_DIR}/python:$PYTHONPATH
