@@ -44,7 +44,6 @@
 
 namespace ecto
 {
-
   /**
    * \class spore
    * \brief The spore is a typed handle for tendrils, making holding onto tendrils a bit easier.

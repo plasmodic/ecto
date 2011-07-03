@@ -1,4 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
+#put this before project so that it gets picked up.
+set(CMAKE_BUILD_TYPE "RelWithDebInfo" CACHE STRING "The build type.")
+
 project(ecto)
 
 set(ECTO_MAJOR_VERSION 0)
@@ -28,7 +31,19 @@ execute_process(COMMAND ln -sf ${CMAKE_SOURCE_DIR}/python/ecto/__init__.py
 include(${CMAKE_SOURCE_DIR}/cmake/ectoMacros.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/ectoFindDeps.cmake)
 
-add_definitions (" -Werror -Wall -Wl,--no-undefined")
+set(ANAL_FLAGS "")
+option(USE_ANAL_FLAGS "Use extra flags that help catch programming errors and prevent a build up of warnings" ON)
+if(USE_ANAL_FLAGS)
+    if(UNIX)
+        set(ANAL_FLAGS " -Werror -Wall -Wl,--no-undefined")
+    elseif(WIN32)
+        set(ANAL_FLAGS "")
+    elseif(APPLE)
+        set(ANAL_FLAGS "")
+    endif()
+endif()
+
+add_definitions (${ANAL_FLAGS})
 
 include_directories(
   ${CMAKE_SOURCE_DIR}/include
@@ -72,3 +87,9 @@ if(BUILD_SAMPLES)
 endif()
 
 add_subdirectory(cmake)
+
+message(STATUS "Building ecto version: ${ECTO_VERSION}")
+message(STATUS "Building ecto code name: ${ECTO_CODE_NAME}")
+string(TOUPPER "CMAKE_CXX_FLAGS_${CMAKE_BUILD_TYPE}" flags_) 
+message(STATUS "flags: ${ANAL_FLAGS} ${${flags_}}")
+
