@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <ecto/ecto.hpp>
+#include <ecto/plasm.hpp>
 
 #define STRINGDIDLY(A) std::string(#A)
 

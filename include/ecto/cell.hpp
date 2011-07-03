@@ -66,21 +66,21 @@ namespace ecto
    * For a client's cell to satisfy the ecto::cell idium, it must
    * look similar to the following definition.
    * @code
-   struct MyModule
+   struct MyEctoCell
    {
-   //called first thing, the user should declare their parameters in this
-   //free standing function.
-   static void declare_params(tendrils& params);
-   //declare inputs and outputs here. The parameters may be used to
-   //determine the io
-   static void declare_io(const tendrils& params, tendrils& in, tendrils& out);
-   //called right after allocation of the cell, exactly once.
-   void configure(tendrils& params, tendrils& inputs, tendrils& outputs);
-   //called at every execution of the graph
-   int process(const tendrils& in, tendrils& out);
-   //called right before the destructor of the cell, a good place to do
-   //critical cleanup work.
-   void destroy();
+     //called first thing, the user should declare their parameters in this
+     //free standing function.
+     static void declare_params(tendrils& params);
+     //declare inputs and outputs here. The parameters may be used to
+     //determine the io
+     static void declare_io(const tendrils& params, tendrils& in, tendrils& out);
+     //called right after allocation of the cell, exactly once.
+     void configure(tendrils& params, tendrils& inputs, tendrils& outputs);
+     //called at every execution of the graph
+     int process(const tendrils& in, tendrils& out);
+     //called right before the destructor of the cell, a good place to do
+     //critical cleanup work.
+     void destroy();
    };
    * @endcode
    *

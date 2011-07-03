@@ -1,6 +1,7 @@
 #include <ecto/ecto.hpp>
 #include <ecto/cell.hpp>
 
+#include <boost/foreach.hpp>
 #include <boost/python.hpp>
 #include <boost/python/raw_function.hpp>
 #include <boost/python/iterator.hpp>

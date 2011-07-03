@@ -20,7 +20,7 @@ Contents:
    auto_docs
    tendril
    tendrils
-   module
+   cell
    plasm
    schedulers
    autoregister

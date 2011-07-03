@@ -27,19 +27,16 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #pragma once
+//do not include this in ecto lib files, only in client modules
+
 //boost python first.
 #include <boost/python.hpp>
-//boost stuff
 #include <boost/shared_ptr.hpp>
-//do not include this in ecto lib files, only in client modules
 #include <boost/format.hpp>
 
 //ecto includes
 #include <ecto/version.hpp>
 #include <ecto/cell.hpp>
-#include <ecto/tendril.hpp>
-#include <ecto/tendrils.hpp>
-#include <ecto/plasm.hpp>
 #include <ecto/util.hpp>
 #include <ecto/python/raw_constructor.hpp>
 
