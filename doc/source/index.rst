@@ -19,9 +19,8 @@ and python is used to construct the DAG.
    cell
    plasm
    schedulers
-   autoregister
-   
-ecto at a glance
+
+at a glance
 ----------------
 
     * Simple processing node interface for building your own modules.
@@ -30,7 +29,7 @@ ecto at a glance
     
         #include <ecto/ecto.hpp>
         using ecto::tendrils;
-        struct MyModule
+        struct MyCell
         {
           static void declare_params(tendrils& params);
           static void declare_io(const tendrils& params, tendrils& in, tendrils& out);
@@ -45,7 +44,7 @@ ecto at a glance
       
     .. code-block:: c++
         
-        void MyModule::declare_params(tendrils& params)
+        void MyCell::declare_params(tendrils& params)
         {
             params.declare<Foo>("foo","Foo is for spam. This is a doc string", 
             					Foo(3.14));
