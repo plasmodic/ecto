@@ -46,7 +46,8 @@ namespace ecto
 {
 
   /**
-   * \class The spore is a typed handle for tendrils, making holding onto tendrils a bit easier.
+   * \class spore
+   * \brief The spore is a typed handle for tendrils, making holding onto tendrils a bit easier.
    */
   template<typename T>
   struct spore
