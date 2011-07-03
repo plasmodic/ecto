@@ -10,22 +10,17 @@ The following is a sketch of a user ecto cell.
 
   struct MyEctoCell
   {
-    //called first thing, the user should declare their parameters in this
-    //free standing function.
     static void declare_params(tendrils& params);
-    //declare inputs and outputs here. The parameters may be used to
-    //determine the io
     static void declare_io(const tendrils& params, tendrils& in, tendrils& out);
-    //called right after allocation of the cell, exactly once.
     void configure(tendrils& params, tendrils& in, tendrils& out);
-    //called at every execution of the graph
     int process(const tendrils& in, tendrils& out);
-    //called right before the destructor of the cell, a good place to do
-    //critical cleanup work.
     void destroy();
   };
   
-A user's cell need not implement all of these functions.
+The purpose of this interface is to expose as much information about what the cell does to ecto, while providing
+the implementer with a graceful degradation of functionality and form.  An ``ecto::cell`` can be thought of
+as having any number of inputs, outputs, and parameters, and each instance has a state, which is retained over each
+instance's lifetime.
   
 life cycle of an ecto cell
 ----------------------------

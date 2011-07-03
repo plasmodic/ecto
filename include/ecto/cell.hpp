@@ -57,8 +57,8 @@ namespace ecto
 
   /**
    * \brief ecto::cell is the non virtual interface to the basic building
-   * block of ecto graphs.  This interface should never be the parent of a
-   * client modules, but may be used for polymorphic access to client modules.
+   * block of ecto graphs.  This interface should never be the parent of
+   * client cell, but may be used for polymorphic access to client cells.
    *
    * Clients should expose their code to this interface through
    * ecto::wrap, or ecto::create_cell<T>().
