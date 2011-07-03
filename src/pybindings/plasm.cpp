@@ -1,5 +1,5 @@
 #include <ecto/plasm.hpp>
-#include <ecto/module.hpp>
+#include <ecto/cell.hpp>
 
 #include <boost/python.hpp>
 #include <boost/python/raw_function.hpp>
@@ -58,8 +58,8 @@ namespace ecto
       while (begin != end)
       {
         bp::tuple x = *(begin++);
-        module::ptr from = bp::extract<module::ptr>(x[0]);
-        module::ptr to = bp::extract<module::ptr>(x[2]);
+        cell::ptr from = bp::extract<cell::ptr>(x[0]);
+        cell::ptr to = bp::extract<cell::ptr>(x[2]);
         std::string output = bp::extract<std::string>(x[1]), input = bp::extract<std::string>(x[3]);
         p.connect(from, output, to, input);
       }
@@ -94,7 +94,7 @@ namespace ecto
       {
         source = boost::source(*begin, g);
         sink = boost::target(*begin, g);
-        module::ptr to = g[sink], from = g[source];
+        cell::ptr to = g[sink], from = g[source];
         std::string to_port = g[*begin]->to_port;
         std::string from_port = g[*begin]->from_port;
         result.append(bp::make_tuple(from, from_port, to, to_port));

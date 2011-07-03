@@ -68,7 +68,9 @@ configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoMacros.cmake
   
 set(ecto_LIBRARIES ecto)
 
+add_subdirectory(include)
 add_subdirectory(src)
+add_subdirectory(cmake)
 
 option(BUILD_TEST "Build tests" ON)
 if(BUILD_TEST)
@@ -85,8 +87,6 @@ option(BUILD_SAMPLES "Build samples." ON)
 if(BUILD_SAMPLES)
   add_subdirectory(samples)
 endif()
-
-add_subdirectory(cmake)
 
 message(STATUS "Building ecto version: ${ECTO_VERSION}")
 message(STATUS "Building ecto code name: ${ECTO_CODE_NAME}")

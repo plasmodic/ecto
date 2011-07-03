@@ -40,9 +40,9 @@
 
 namespace ecto
 {
-  //forward declare module so we don't get affected by its header
-  class module;
-  typedef boost::shared_ptr<module> module_ptr;
+  //forward declare cell so we don't get affected by its header
+  class cell;
+  typedef boost::shared_ptr<cell> cell_ptr;
 
   //forward declare schedulers for friendliness.
   namespace scheduler
@@ -62,23 +62,23 @@ namespace ecto
     ~plasm();
 
     /**
-     * \brief insert the module into the graph so that it may be executed by a scheduler.
+     * \brief insert the cell into the graph so that it may be executed by a scheduler.
      *
-     * @param mod The module to insert into the graph.
+     * @param mod The cell to insert into the graph.
      */
     void
-    insert(module_ptr mod);
+    insert(cell_ptr mod);
 
     /**
-     * \brief connect one module to another, and populate the plasms graph accordingly.
+     * \brief connect one cell to another, and populate the plasms graph accordingly.
      * This will throw on a type mismatch.
-     * @param from  The from module
-     * @param output The output key of the from module
-     * @param to The to module
-     * @param input The input key from the to module.
+     * @param from  The from cell
+     * @param output The output key of the from cell
+     * @param to The to cell
+     * @param input The input key from the to cell.
      */
     void
-    connect(module_ptr from, const std::string& output, module_ptr to, const std::string& input);
+    connect(cell_ptr from, const std::string& output, cell_ptr to, const std::string& input);
 
     /**
      * Disconnect a tendril from another tendril.
@@ -89,7 +89,7 @@ namespace ecto
      * @param input
      */
     void
-    disconnect(module_ptr from, const std::string& output, module_ptr to, const std::string& input);
+    disconnect(cell_ptr from, const std::string& output, cell_ptr to, const std::string& input);
     /**
      * \brief output graphviz to a stream.
      * @param out the output stream. Graphviz will be in plain text format.
@@ -97,7 +97,7 @@ namespace ecto
     void
     viz(std::ostream& out) const;
     /**
-     * \brief Get a std::string graphiz of the module.
+     * \brief Get a std::string graphiz of the cell.
      * @return
      */
     std::string

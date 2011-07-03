@@ -1,6 +1,6 @@
 #include <ecto/plasm.hpp>
 #include <ecto/tendril.hpp>
-#include <ecto/module.hpp>
+#include <ecto/cell.hpp>
 
 #include <string>
 #include <map>

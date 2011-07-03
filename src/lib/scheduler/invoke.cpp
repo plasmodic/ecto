@@ -1,6 +1,6 @@
 #include <ecto/plasm.hpp>
 #include <ecto/tendril.hpp>
-#include <ecto/module.hpp>
+#include <ecto/cell.hpp>
 
 #include <string>
 #include <map>
@@ -20,7 +20,7 @@ namespace ecto {
     int 
     invoke_process(graph_t& graph, graph_t::vertex_descriptor vd)
     {
-      module::ptr m = graph[vd];
+      cell::ptr m = graph[vd];
 
       graph_t::in_edge_iterator inbegin, inend;
       tie(inbegin, inend) = boost::in_edges(vd, graph);

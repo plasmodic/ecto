@@ -40,7 +40,7 @@
 #include <boost/unordered_map.hpp>
 #include <boost/thread.hpp>
 
-#include <ecto/module.hpp>
+#include <ecto/cell.hpp>
 
 namespace ecto {
   namespace graph {
@@ -86,7 +86,7 @@ namespace ecto {
     typedef boost::adjacency_list<boost::vecS, // OutEdgeList...
                                   boost::vecS, // VertexList
                                   boost::bidirectionalS, // Directed
-                                  module::ptr, // vertex property
+                                  cell::ptr, // vertex property
                                   edge::ptr> // edge property
     graph_t;
   

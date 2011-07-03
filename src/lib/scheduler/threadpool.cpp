@@ -11,7 +11,7 @@
 
 #include <ecto/plasm.hpp>
 #include <ecto/tendril.hpp>
-#include <ecto/module.hpp>
+#include <ecto/cell.hpp>
 #include <ecto/log.hpp>
 #include <ecto/strand.hpp>
 
@@ -150,7 +150,7 @@ namespace ecto {
         template <typename Handler>
         void post(Handler h)
         {
-          module::ptr m = g[vd];
+          cell::ptr m = g[vd];
           if (m->strand_)
             {
               const ecto::strand& skey = *(m->strand_);
@@ -184,7 +184,7 @@ namespace ecto {
 
         void destroy()
         {
-          module::ptr m = g[vd];
+          cell::ptr m = g[vd];
           // FIXME: not catching exceptions possibly thrown by destroy
           m->destroy();
         }
@@ -249,7 +249,7 @@ namespace ecto {
              begin != end;
              ++begin)
           {
-            module::ptr m = graph[*begin];
+            cell::ptr m = graph[*begin];
             m->stats.ncalls = 0;
             m->stats.total_ticks = 0;
           }
@@ -330,7 +330,7 @@ namespace ecto {
         std::cout << "****************************************\n";
         for (tie(begin, end) = vertices(graph); begin != end; ++begin)
           {
-            module::ptr m = graph[*begin];
+            cell::ptr m = graph[*begin];
             double this_percentage = 100.0 * ((double)m->stats.total_ticks / elapsed_ticks);
             total_percentage += this_percentage;
             double hz = (double(m->stats.ncalls) / (elapsed.total_microseconds() / 1e+06));

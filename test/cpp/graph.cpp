@@ -25,7 +25,7 @@ struct Module2
 TEST(Plasm, Viz)
 {
   ecto::plasm p;
-  ecto::module::ptr m1 = ecto::create_module<Module1>(), m2 = ecto::create_module<Module2>();
+  ecto::cell::ptr m1 = ecto::create_cell<Module1>(), m2 = ecto::create_cell<Module2>();
   p.connect(m1,"d",m2,"d");
   std::cout << p.viz() << std::endl;
 }

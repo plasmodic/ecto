@@ -1,6 +1,6 @@
 #include <ecto/ecto.hpp>
 
-//Defines a top level ecto python module with the name 'tutorial'
+//Defines a top level ecto python cell with the name 'tutorial'
 //Note that the shared library must be called tutorial.so
 //In CMake this is acheived using the ecto specific macro:
 //ectomodule(tutorial

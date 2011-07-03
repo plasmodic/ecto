@@ -1,5 +1,5 @@
 #include <ecto/ecto.hpp>
-#include <ecto/module.hpp>
+#include <ecto/cell.hpp>
 
 #include <boost/python.hpp>
 #include <boost/python/raw_function.hpp>
@@ -22,7 +22,7 @@ namespace ecto
 #define SHOW() do{}while(false)
 #endif
 
-    struct modwrap: module, bp::wrapper<module>
+    struct modwrap: cell, bp::wrapper<cell>
     {
 
       void dispatch_declare_params(tendrils& params)
@@ -88,28 +88,28 @@ namespace ecto
       }
     };
 
-    const tendrils& inputs(module& mod)
+    const tendrils& inputs(cell& mod)
     {
       return mod.inputs;
     }
-    tendrils& outputs(module& mod)
+    tendrils& outputs(cell& mod)
     {
       return mod.outputs;
     }
-    tendrils& params(module& mod)
+    tendrils& params(cell& mod)
     {
       return mod.parameters;
     }
 
     struct TendrilSpecification
     {
-      module::ptr mod_input, mod_output;
+      cell::ptr mod_input, mod_output;
       std::string key;
 
       TendrilSpecification()
       {
       }
-      bool check(module::ptr mod, const std::string& key)
+      bool check(cell::ptr mod, const std::string& key)
       {
         if (key.empty())
           return true;
@@ -120,7 +120,7 @@ namespace ecto
           }
         return true;
       }
-      TendrilSpecification(module::ptr mod_in, module::ptr mod_out, const std::string& key) :
+      TendrilSpecification(cell::ptr mod_in, cell::ptr mod_out, const std::string& key) :
         mod_input(mod_in), mod_output(mod_out), key(key)
       {
         if (!check(mod_in, key))
@@ -132,7 +132,7 @@ namespace ecto
           "The module " + mod_out->name() + " does not contain any output or parameter by the given name: "
               + key);
       }
-      TendrilSpecification(module::ptr mod, const std::string& key) :
+      TendrilSpecification(cell::ptr mod, const std::string& key) :
         mod_input(mod), mod_output(mod), key(key)
       {
         if (!check(mod, key))
@@ -207,12 +207,12 @@ namespace ecto
       Vector vts;
     };
 
-    TendrilSpecifications getitem_str(module::ptr mod, const std::string& key)
+    TendrilSpecifications getitem_str(cell::ptr mod, const std::string& key)
     {
       return TendrilSpecifications::Vector(1, TendrilSpecification(mod, key));
     }
 
-    TendrilSpecifications getitem_tuple(module::ptr mod, bp::tuple keys)
+    TendrilSpecifications getitem_tuple(cell::ptr mod, bp::tuple keys)
     {
       int end = bp::len(keys);
       TendrilSpecifications l;
@@ -228,13 +228,13 @@ namespace ecto
       return l;
     }
 
-    TendrilSpecifications getitem_list(module::ptr mod, bp::list keys)
+    TendrilSpecifications getitem_list(cell::ptr mod, bp::list keys)
     {
       bp::tuple t(keys);
       return getitem_tuple(mod, t);
     }
 
-    TendrilSpecifications getitem_slice(module::ptr mod, bp::slice s)
+    TendrilSpecifications getitem_slice(cell::ptr mod, bp::slice s)
     {
 
       if (s == bp::slice())
@@ -246,7 +246,7 @@ namespace ecto
           throw std::runtime_error("Slice is only valid if its the [:] form...");
         }
     }
-    TendrilSpecifications expand(module::ptr mod, const tendrils& t)
+    TendrilSpecifications expand(cell::ptr mod, const tendrils& t)
     {
       TendrilSpecifications l;
 
@@ -300,22 +300,22 @@ namespace ecto
     void wrapModule()
     {
       //use private names so that python people know these are internal
-      bp::class_<module, boost::shared_ptr<module>, boost::noncopyable>("_module_cpp", bp::no_init);
+      bp::class_<cell, boost::shared_ptr<cell>, boost::noncopyable>("_module_cpp", bp::no_init);
 
       bp::class_<modwrap, boost::shared_ptr<modwrap>, boost::noncopyable> m_base("_module_base" /*bp::no_init*/);
-      m_base.def("declare_params", &module::declare_params);
-      m_base.def("declare_io", ((void(module::*)()) &module::declare_io));
-      m_base .def("configure", ((void(module::*)()) &module::configure));
-      m_base .def("process", (void(module::*)()) &module::process);
-      m_base .def("destroy", &module::destroy);
+      m_base.def("declare_params", &cell::declare_params);
+      m_base.def("declare_io", ((void(cell::*)()) &cell::declare_io));
+      m_base .def("configure", ((void(cell::*)()) &cell::configure));
+      m_base .def("process", (void(cell::*)()) &cell::process);
+      m_base .def("destroy", &cell::destroy);
 
       m_base.add_property("inputs", make_function(&inputs, bp::return_internal_reference<>()));
       m_base.add_property("outputs", make_function(outputs, bp::return_internal_reference<>()));
       m_base.add_property("params", make_function(params, bp::return_internal_reference<>()));
-      m_base.def("type", &module::type);
-      m_base.def("name", (std::string(module::*)() const) &module::name);
+      m_base.def("type", &cell::type);
+      m_base.def("name", (std::string(cell::*)() const) &cell::name);
       m_base .def("doc", &modwrap::doc);
-      m_base.def("gen_doc", &module::gen_doc);
+      m_base.def("gen_doc", &cell::gen_doc);
       m_base.def("__getitem__", getitem_str);
       m_base.def("__getitem__", getitem_tuple);
       m_base.def("__getitem__", getitem_list);

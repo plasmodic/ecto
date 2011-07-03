@@ -1,6 +1,6 @@
 #include <ecto/plasm.hpp>
 #include <ecto/tendril.hpp>
-#include <ecto/module.hpp>
+#include <ecto/cell.hpp>
 #include <ecto/graph_types.hpp>
 #include <ecto/scheduler/singlethreaded.hpp>
 
@@ -35,10 +35,10 @@ namespace ecto
     {
     }
 
-    //insert a module into the graph, will retrieve the
+    //insert a cell into the graph, will retrieve the
     //vertex descriptor if its already in the graph...
     graph_t::vertex_descriptor
-    insert_module(module::ptr m)
+    insert_module(cell::ptr m)
     {
       //use the vertex map to look up the graphviz descriptor (reverse lookup)
       ModuleVertexMap::iterator it = mv_map.find(m);
@@ -50,7 +50,7 @@ namespace ecto
     }
 
     void
-    connect(module::ptr from, std::string output, module::ptr to, std::string input)
+    connect(cell::ptr from, std::string output, cell::ptr to, std::string input)
     {
       //connect does all sorts of type checking so that connections are always valid.
       tendril::ptr from_port, to_port;
@@ -119,15 +119,15 @@ namespace ecto
     }
 
     void
-    disconnect(module::ptr from, std::string output, module::ptr to, std::string input)
+    disconnect(cell::ptr from, std::string output, cell::ptr to, std::string input)
     {
       graph_t::vertex_descriptor fromv = insert_module(from), tov = insert_module(to);
       boost::remove_edge(fromv, tov, graph);
     }
 
-    //the module to vertex mapping
-    //unordered_map so that module ptr works as a key...
-    typedef boost::unordered_map<ecto::module::ptr, graph_t::vertex_descriptor> ModuleVertexMap;
+    //the cell to vertex mapping
+    //unordered_map so that cell ptr works as a key...
+    typedef boost::unordered_map<ecto::cell::ptr, graph_t::vertex_descriptor> ModuleVertexMap;
     ModuleVertexMap mv_map;
     graph_t graph;
     boost::shared_ptr<ecto::scheduler::singlethreaded> scheduler;
@@ -145,13 +145,13 @@ namespace ecto
   }
 
   void
-  plasm::insert(module::ptr mod)
+  plasm::insert(cell::ptr mod)
   {
     impl_->insert_module(mod);
   }
 
   void
-  plasm::connect(module::ptr from, const std::string& output, module::ptr to, const std::string& input)
+  plasm::connect(cell::ptr from, const std::string& output, cell::ptr to, const std::string& input)
   {
     impl_->connect(from, output, to, input);
   }
@@ -171,7 +171,7 @@ namespace ecto
   }
 
   void
-  plasm::disconnect(module_ptr from, const std::string& output, module_ptr to, const std::string& input)
+  plasm::disconnect(cell_ptr from, const std::string& output, cell_ptr to, const std::string& input)
   {
     impl_->disconnect(from, output, to, input);
   }
@@ -196,7 +196,7 @@ namespace ecto
     tie(begin, end) = boost::vertices(g);
     while (begin != end)
     {
-      module::ptr m = g[*begin];
+      cell::ptr m = g[*begin];
       std::set<std::string> in_connected, out_connected;
 
       //verify all required inputs are connected
@@ -205,7 +205,7 @@ namespace ecto
       while (b_in != e_in)
       {
         edge::ptr in_edge = g[*b_in];
-        module::ptr from_module = g[source(*b_in, g)];
+        cell::ptr from_module = g[source(*b_in, g)];
         in_connected.insert(in_edge->to_port);
         ++b_in;
       }

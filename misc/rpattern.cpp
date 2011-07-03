@@ -96,14 +96,14 @@ struct module
   static void declare_param(tendril& t, tendril& u)
   {
     t = tendril(3.14159f, &module::f_changed);
-    //u = tendril(std::string("DEFAULT"), &module::g_changed);
+    //u = tendril(std::string("DEFAULT"), &cell::g_changed);
   }
 
   void set_callbacks() {
     
   }
 
-  //  module() : {
+  //  cell() : {
   //
   //  }
 
@@ -208,7 +208,7 @@ int main(int, char**)
 
   std::cout << __PRETTY_FUNCTION__ << "\n";
   tendril t, u;
-  //module::declare_param(t);
+  //cell::declare_param(t);
   module m;
 
   t.set(777.777f, &m);

@@ -1,7 +1,7 @@
 #include <boost/python.hpp>
 
 #include <ecto/ecto.hpp>
-#include <ecto/module.hpp>
+#include <ecto/cell.hpp>
 
 #include <ecto/python/std_map_indexing_suite.hpp>
 

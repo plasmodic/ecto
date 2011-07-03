@@ -81,23 +81,23 @@ TEST(Exceptions, ExceptionalModules)
 {
   try
   {
-    create_module<ExceptionalModule1> ();
+    create_cell<ExceptionalModule1> ();
   } catch (except::EctoException& e)
   {
     std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
   }
-  EXPECT_THROW(create_module<ExceptionalModule1>(), ecto::except::TypeMismatch);
+  EXPECT_THROW(create_cell<ExceptionalModule1>(), ecto::except::TypeMismatch);
 }
 TEST(Exceptions, ExceptionUnknownException)
 {
   try
   {
-    create_module<ExceptionUnknownException> ();
+    create_cell<ExceptionUnknownException> ();
   } catch (except::EctoException& e)
   {
     std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
   }
-  EXPECT_THROW(create_module<ExceptionUnknownException>(), ecto::except::EctoException);
+  EXPECT_THROW(create_cell<ExceptionUnknownException>(), ecto::except::EctoException);
 }
 
 TEST(Exceptions, ProcessException)
@@ -106,7 +106,7 @@ TEST(Exceptions, ProcessException)
     "  What   : A standard exception\n"
     "  Module : ProcessException\n"
     "  Function: process");
-  module::ptr m = create_module<ProcessException> ();
+  cell::ptr m = create_cell<ProcessException> ();
   EXPECT_THROW(
       try
       {
@@ -134,7 +134,7 @@ TEST(Exceptions, NotExist)
              "  Module : NotExist\n"
              "  Function: process");
 
-  module::ptr m = create_module<NotExist> ();
+  cell::ptr m = create_cell<NotExist> ();
   EXPECT_THROW(
       try
       {
@@ -159,7 +159,7 @@ TEST(Exceptions, WrongType)
 "  Hint : 'd' is of type: double\n"
 "  Module : WrongType\n"
 "  Function: process");
-  module::ptr m = create_module<WrongType> ();
+  cell::ptr m = create_cell<WrongType> ();
   EXPECT_THROW(
       try
       {

@@ -56,14 +56,14 @@ namespace ecto
   };
 
   /**
-   * \brief ecto::module is the non virtual interface to the basic building
+   * \brief ecto::cell is the non virtual interface to the basic building
    * block of ecto graphs.  This interface should never be the parent of a
    * client modules, but may be used for polymorphic access to client modules.
    *
    * Clients should expose their code to this interface through
-   * ecto::wrap, or ecto::create_module<T>().
+   * ecto::wrap, or ecto::create_cell<T>().
    *
-   * For a client's module to satisfy the ecto::module idium, it must
+   * For a client's cell to satisfy the ecto::cell idium, it must
    * look similar to the following definition.
    * @code
    struct MyModule
@@ -74,11 +74,11 @@ namespace ecto
    //declare inputs and outputs here. The parameters may be used to
    //determine the io
    static void declare_io(const tendrils& params, tendrils& in, tendrils& out);
-   //called right after allocation of the module, exactly once.
+   //called right after allocation of the cell, exactly once.
    void configure(tendrils& params, tendrils& inputs, tendrils& outputs);
    //called at every execution of the graph
    int process(const tendrils& in, tendrils& out);
-   //called right before the destructor of the module, a good place to do
+   //called right before the destructor of the cell, a good place to do
    //critical cleanup work.
    void destroy();
    };
@@ -87,16 +87,16 @@ namespace ecto
    * It is important to note that all functions have are optional and they all have
    * default implementations.
    */
-  struct module: boost::noncopyable
+  struct cell: boost::noncopyable
   {
-    typedef boost::shared_ptr<module> ptr; //!< A convenience pointer typedef
+    typedef boost::shared_ptr<cell> ptr; //!< A convenience pointer typedef
 
-    module();
-    virtual ~module();
+    cell();
+    virtual ~cell();
 
     /**
      * \brief Dispatches parameter declaration code. After this code, the parameters
-     * for the module will be set to their defaults.
+     * for the cell will be set to their defaults.
      */
     void declare_params();
     /**
@@ -108,13 +108,13 @@ namespace ecto
 
     /**
      * \brief Given initialized parameters,inputs, and outputs, this will dispatch the client
-     * configuration code.  This will allocated an instace of the clients module, so this
+     * configuration code.  This will allocated an instace of the clients cell, so this
      * should not be called during introspection.
      */
     void configure();
 
     /**
-     * \brief Dispatches the process function for the client module.  This should only
+     * \brief Dispatches the process function for the client cell.  This should only
      * be called from one thread at a time.
      *
      * Also, this function may throw exceptions...
@@ -125,7 +125,7 @@ namespace ecto
     ReturnCode process();
 
     /**
-     * \brief This should be called at the end of life for the module, and signals immenent destruction.
+     * \brief This should be called at the end of life for the cell, and signals immenent destruction.
      *
      * Will dispatch the clients destroy code. After this call, do not call any other functions.
      */
@@ -149,9 +149,9 @@ namespace ecto
     void name(const std::string&);
 
     /**
-     * \brief Generate an Restructured Text doc string for the module. Includes documentation for all parameters,
+     * \brief Generate an Restructured Text doc string for the cell. Includes documentation for all parameters,
      * inputs, outputs.
-     * @param doc The highest level documentation for the module.
+     * @param doc The highest level documentation for the cell.
      * @return A nicely formatted doc string.
      */
     std::string gen_doc(const std::string& doc = "A module...") const;
@@ -258,13 +258,13 @@ namespace ecto
   };
 
   /**
-   * \brief module_<T> is for registering an arbitrary class
-   * with the the module NVI. This adds a barrier between client code and the module.
+   * \brief cell_<T> is for registering an arbitrary class
+   * with the the cell NVI. This adds a barrier between client code and the cell.
    */
-  template<class Module>
-  struct module_: module
+  template<class Cell>
+  struct cell_: cell
   {
-    ~module_()
+    ~cell_()
     {
       dispatch_destroy();
     }
@@ -282,13 +282,13 @@ namespace ecto
 
     static void declare_params(implemented, tendrils& params)
     {
-      Module::declare_params(params);
+      Cell::declare_params(params);
     }
 
     void dispatch_declare_params(tendrils& params)
     {
       //this is a none static function. for virtuality.
-      declare_params(int_<has_f<Module>::declare_params> (), params);
+      declare_params(int_<has_f<Cell>::declare_params> (), params);
     }
 
     static void declare_io(not_implemented, const tendrils& params,
@@ -298,13 +298,13 @@ namespace ecto
     static void declare_io(implemented, const tendrils& params,
                            tendrils& inputs, tendrils& outputs)
     {
-      Module::declare_io(params, inputs, outputs);
+      Cell::declare_io(params, inputs, outputs);
     }
 
     void dispatch_declare_io(const tendrils& params, tendrils& inputs,
                              tendrils& outputs)
     {
-      declare_io(int_<has_f<Module>::declare_io> (), params, inputs, outputs);
+      declare_io(int_<has_f<Cell>::declare_io> (), params, inputs, outputs);
     }
 
     void configure(not_implemented, tendrils&, tendrils& , tendrils&)
@@ -320,12 +320,12 @@ namespace ecto
     void dispatch_configure(tendrils& params, tendrils& inputs,
                             tendrils& outputs)
     {
-      //the module may not be allocated here, so check pointer.
+      //the cell may not be allocated here, so check pointer.
       if (!thiz)
         {
-          thiz.reset(new Module);
+          thiz.reset(new Cell);
         }
-      configure(int_<has_f<Module>::configure> (), params,inputs,outputs);
+      configure(int_<has_f<Cell>::configure> (), params,inputs,outputs);
     }
 
     ReturnCode process(not_implemented, const tendrils& ,
@@ -344,7 +344,7 @@ namespace ecto
     {
       if (!thiz)
         dispatch_configure(parameters,this->inputs,outputs);
-      return process(int_<has_f<Module>::process> (), inputs, outputs);
+      return process(int_<has_f<Cell>::process> (), inputs, outputs);
     }
 
     void destroy(not_implemented)
@@ -361,7 +361,7 @@ namespace ecto
 
     void dispatch_destroy()
     {
-      destroy(int_<has_f<Module>::destroy> ());
+      destroy(int_<has_f<Cell>::destroy> ());
     }
 
     std::string dispatch_name() const
@@ -369,9 +369,9 @@ namespace ecto
       return MODULE_TYPE_NAME;
     }
 
-    module::ptr dispatch_make() const
+    cell::ptr dispatch_make() const
     {
-      module::ptr m(new module_<Module> ());
+      cell::ptr m(new cell_<Cell> ());
       m->declare_params();
       //copy all of the parameters by value.
       tendrils::iterator it = m->parameters.begin();
@@ -388,38 +388,38 @@ namespace ecto
     }
 
 
-    boost::shared_ptr<Module> thiz;
+    boost::shared_ptr<Cell> thiz;
     static const std::string MODULE_TYPE_NAME;
   };
 
-  template<typename Module>
-  const std::string module_<Module>::MODULE_TYPE_NAME = ecto::name_of<Module>();
+  template<typename Cell>
+  const std::string cell_<Cell>::MODULE_TYPE_NAME = ecto::name_of<Cell>();
 
   /**
-   * Creates a module from type T that has not been configured, so therefore,
+   * Creates a cell from type T that has not been configured, so therefore,
    * not allocated.  This only calls the static functions associated with parameter and
    * input/output declaration.
    *
-   * @return A module::ptr that is initialized as far as default params,inputs,outputs go.
+   * @return A cell::ptr that is initialized as far as default params,inputs,outputs go.
    */
   template<typename T>
-  module::ptr inspect_module()
+  cell::ptr inspect_cell()
   {
-    module::ptr p(new module_<T> ());
+    cell::ptr p(new cell_<T> ());
     p->declare_params();
     p->declare_io();
     return p;
   }
 
   /**
-   * Create a module from an type that has all of the proper interface functions defined.
-   * This will call configure in the module.
-   * @return A module ptr.
+   * Create a cell from an type that has all of the proper interface functions defined.
+   * This will call configure in the cell.
+   * @return A cell ptr.
    */
   template<typename T>
-  module::ptr create_module()
+  cell::ptr create_cell()
   {
-    module::ptr p = inspect_module<T> ();
+    cell::ptr p = inspect_cell<T> ();
     return p;
   }
 

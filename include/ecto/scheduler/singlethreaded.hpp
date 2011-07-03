@@ -28,7 +28,7 @@
  */
 #include <ecto/plasm.hpp>
 #include <ecto/tendril.hpp>
-#include <ecto/module.hpp>
+#include <ecto/cell.hpp>
 #include <ecto/graph_types.hpp>
 
 #include <string>

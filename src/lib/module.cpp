@@ -1,4 +1,4 @@
-#include <ecto/module.hpp>
+#include <ecto/cell.hpp>
 #include <ecto/util.hpp>
 #include <ecto/except.hpp>
 
@@ -34,7 +34,7 @@ namespace ecto
 {
 
   void
-  auto_suggest(except::NonExistant& e, const module& m)
+  auto_suggest(except::NonExistant& e, const cell& m)
   {
     std::string p_type, i_type, o_type;
     bool in_p = m.parameters.find(e.key) != m.parameters.end();
@@ -56,16 +56,16 @@ namespace ecto
       e << ("  Hint   : '" + e.key + "' does not exist in module.");
     }
   }
-  module::module()
+  cell::cell()
   {
   }
 
-  module::~module()
+  cell::~cell()
   {
   }
 
   void
-  module::declare_params()
+  cell::declare_params()
   {
     try
     {
@@ -74,7 +74,7 @@ namespace ecto
   }
 
   void
-  module::declare_io()
+  cell::declare_io()
   {
     try
     {
@@ -83,7 +83,7 @@ namespace ecto
   }
 
   void
-  module::configure()
+  cell::configure()
   {
     try
     {
@@ -92,7 +92,7 @@ namespace ecto
   }
 
   ReturnCode
-  module::process()
+  cell::process()
   {
     //trigger all parameter change callbacks...
     tendrils::iterator begin = parameters.begin(), end = parameters.end();
@@ -109,7 +109,7 @@ namespace ecto
   }
 
   void
-  module::destroy()
+  cell::destroy()
   {
     try
     {
@@ -118,25 +118,25 @@ namespace ecto
   }
 
   std::string
-  module::type() const
+  cell::type() const
   {
     return dispatch_name();
   }
 
   void
-  module::name(const std::string& name)
+  cell::name(const std::string& name)
   {
     instance_name = name;
   }
 
   std::string
-  module::name() const
+  cell::name() const
   {
     return instance_name.size() ? instance_name : dispatch_name();
   }
 
   std::string
-  module::gen_doc(const std::string& doc) const
+  cell::gen_doc(const std::string& doc) const
   {
     std::stringstream ss;
 
@@ -155,7 +155,7 @@ namespace ecto
   }
 
   void
-  module::verify_params() const
+  cell::verify_params() const
   {
 
     tendrils::const_iterator it = parameters.begin(), end(parameters.end());
@@ -170,7 +170,7 @@ namespace ecto
   }
   
   void
-  module::verify_inputs() const
+  cell::verify_inputs() const
   {
 
     tendrils::const_iterator it = inputs.begin(), end(inputs.end());

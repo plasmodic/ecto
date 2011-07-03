@@ -36,7 +36,7 @@
 
 //ecto includes
 #include <ecto/version.hpp>
-#include <ecto/module.hpp>
+#include <ecto/cell.hpp>
 #include <ecto/tendril.hpp>
 #include <ecto/tendrils.hpp>
 #include <ecto/plasm.hpp>
@@ -55,16 +55,16 @@
 namespace ecto
 {
   template<typename T>
-  boost::shared_ptr<ecto::module_<T> > inspect(boost::python::tuple args,
+  boost::shared_ptr<ecto::cell_<T> > inspect(boost::python::tuple args,
                                                boost::python::dict kwargs)
   {
-    typedef ecto::module_<T> module_t;
+    typedef ecto::cell_<T> module_t;
 
     namespace bp = boost::python;
 
     //SHOW();
     boost::shared_ptr<module_t> mm(new module_t());
-    ecto::module * m = mm.get();
+    ecto::cell * m = mm.get();
     
     if (bp::len(args) > 1)
       throw std::runtime_error("Only one non-keyword argument allowed, this will specify instance name");
@@ -107,43 +107,43 @@ namespace ecto
     return mm;
   }
 
-  //this adds the autodoc to the module. TODO remove python duplication...
+  //this adds the autodoc to the cell. TODO remove python duplication...
   template<typename T>
   std::string module_doc(std::string doc)
   {
-    ecto::module::ptr m = ecto::inspect_module<T>();
+    ecto::cell::ptr m = ecto::inspect_cell<T>();
     std::string defaultname = boost::str(boost::format("%s") % m->type());
     m->name(defaultname);
     return m->gen_doc(doc);
   }
 
   template<typename T>
-  boost::shared_ptr<ecto::module_<T> > raw_construct(boost::python::tuple args,
+  boost::shared_ptr<ecto::cell_<T> > raw_construct(boost::python::tuple args,
                                                      boost::python::dict kwargs)
   {
-    boost::shared_ptr<ecto::module_<T> > m = inspect<T> (args, kwargs);
+    boost::shared_ptr<ecto::cell_<T> > m = inspect<T> (args, kwargs);
     m->verify_params();
     return m;
   }
 
   /**
-   * \brief Takes a user module, UserModule, that follows the ecto::module idium and exposes
+   * \brief Takes a user cell, UserModule, that follows the ecto::cell idium and exposes
    * it to python or other plugin architecture.
 
    * This should be the preferred method of exposing user
    * modules to the outside world.
    *
-   * @tparam UserModule A client module type that implements the idium of an ecto::module.
-   * @param name The name of the module, this will be the symbolic name exposed
+   * @tparam UserModule A client cell type that implements the idium of an ecto::cell.
+   * @param name The name of the cell, this will be the symbolic name exposed
    *        to python or other plugin systems.
-   * @param doc_str A highlevel description of your module.
+   * @param doc_str A highlevel description of your cell.
    */
   template<typename UserModule>
   void wrap(const char* name, std::string doc_str = "A module...")
   {
-    typedef ecto::module_<UserModule> module_t;
+    typedef ecto::cell_<UserModule> module_t;
     //SHOW();
-    boost::python::class_<module_t, boost::python::bases<module>,
+    boost::python::class_<module_t, boost::python::bases<cell>,
         boost::shared_ptr<module_t>, boost::noncopyable>
         m(name, module_doc<UserModule> (doc_str).c_str());
     m.def("__init__",

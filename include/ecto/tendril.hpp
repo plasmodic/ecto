@@ -46,7 +46,7 @@ namespace ecto
 {
   /**
    * \brief A tendril is the slender, winding organ of the
-   * ecto::module that gives it its awesome type erasure and uber
+   * ecto::cell that gives it its awesome type erasure and uber
    * flexibility.
    *
    * Each tendril is a type erasing holder for any instance of any type,
