@@ -42,10 +42,11 @@ if(BUILD_DOC_SPHINX)
     
     if(SPHINX_BUILD)
         message(STATUS "Found sphinx-build : ${SPHINX_BUILD}")
+        file(GLOB rsts ${CMAKE_CURRENT_SOURCE_DIR}/source/*.rst)
         add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/doc
                            COMMAND make html BUILDDIR=${CMAKE_CURRENT_BINARY_DIR}/doc
                            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-                           DEPENDS ecto                           
+                           DEPENDS ${rsts}
                            )
         add_custom_target(sphinx_doc
             DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/doc
@@ -55,7 +56,7 @@ if(BUILD_DOC_SPHINX)
             add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/doc/latex/ecto.pdf
                                COMMAND make latexpdf BUILDDIR=${CMAKE_CURRENT_BINARY_DIR}/doc
                                WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-                               DEPENDS ecto                           
+                               DEPENDS ${rsts}
                                )
             add_custom_target(sphinx_doc_pdf
                     DEPENDS  ${CMAKE_CURRENT_BINARY_DIR}/doc/latex/ecto.pdf

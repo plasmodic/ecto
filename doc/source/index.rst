@@ -2,7 +2,7 @@ ecto
 ====
 
 ecto is a dynamically configurable *Directed Acyclic processing Graph* **(DAG)** framework.  
-Users may write reusable ``ecto::module``\ s which 
+Users may write reusable ``ecto::cell``\ s which 
 become the nodes in the DAG, or ``ecto::plasm``.  Modules may be written 
 in c++ as ``boost::python`` extensions, or in pure python, 
 and python is used to construct the DAG.
@@ -114,4 +114,4 @@ ecto at a glance
 			0->2 [headlabel="str" taillabel="output"];
 		}
 
-    * Each module is self documenting by design.
+    * Each cell is self documenting by design.
