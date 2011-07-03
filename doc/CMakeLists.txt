@@ -1,11 +1,11 @@
 # add a target to generate API documentation with Doxygen
 #add doc to all
-option(BUILD_DOC_ALL "Build the documentation with everything else." ON)
+option(BUILD_DOC_ALL "Build the documentation with everything else." OFF)
 option(BUILD_DOC_DOXYGEN "Build the c++ api documentation with doxygen, not mutually exclusive." ON)
 option(BUILD_DOC_SPHINX "Build the user documentation with sphinx-build, not mutually exclusive." ON)
 option(BUILD_DOC_SPHINX_PDF "Build user documentation into a standalone pdf with latex." ON)
 
-option(INTALL_DOC "Install the documentation." ON)
+option(INSTALL_DOC "Install the documentation." OFF)
 
 if(BUILD_DOC_ALL)
     message(STATUS "The all target will also build documentation, set BUILD_DOC_ALL to OFF to prevent this.")
@@ -53,30 +53,35 @@ if(BUILD_DOC_SPHINX)
         )
         if(BUILD_DOC_SPHINX_PDF)
             add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/doc/latex/ecto.pdf
-                               COMMAND make latexpdf BUILDDIR=${CMAKE_CURRENT_BINARY_DIR}/doc/latex
+                               COMMAND make latexpdf BUILDDIR=${CMAKE_CURRENT_BINARY_DIR}/doc
                                WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                                DEPENDS ecto                           
                                )
-            add_dependencies(sphinx_doc ${CMAKE_CURRENT_BINARY_DIR}/doc/latex/ecto.pdf)
+            add_custom_target(sphinx_doc_pdf
+                    DEPENDS  ${CMAKE_CURRENT_BINARY_DIR}/doc/latex/ecto.pdf
+                    COMMENT "Generating pdf of documentation with Sphinx and latex." VERBATIM
+                )
+            add_dependencies(doc sphinx_doc_pdf)
+            
         endif()
 
         add_dependencies(doc sphinx_doc)
     endif()
 endif()
 
-if(INTALL_DOC)
+if(INSTALL_DOC)
     install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/doc
             DESTINATION share/doc/ecto-${ECTO_VERSION}
-            COMPONENT main
+            COMPONENT doc
             )
     install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/api
             DESTINATION share/doc/ecto-${ECTO_VERSION}
-            COMPONENT main
+            COMPONENT doc
             )
     if(BUILD_DOC_SPHINX_PDF)
         install(FILES  ${CMAKE_CURRENT_BINARY_DIR}/doc/latex/ecto.pdf
             DESTINATION share/doc/ecto-${ECTO_VERSION}
-            COMPONENT main
+            COMPONENT doc
             )
     endif()
 endif()

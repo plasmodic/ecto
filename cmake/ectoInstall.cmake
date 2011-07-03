@@ -37,8 +37,3 @@ install(FILES ${CMAKE_SOURCE_DIR}/cmake/python_path.sh.user.in
         DESTINATION ${share_prefix} COMPONENT main
   )
 
-add_custom_target(checkinstall
-            COMMAND checkinstall -y --pkgname=ecto-${ECTO_VERSION} make install
-            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-            COMMENT "checkinstall." VERBATIM
-        )
