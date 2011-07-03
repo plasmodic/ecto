@@ -17,7 +17,6 @@ def test_plasm():
     try:
         p2 = ecto.Plasm()
         p2.connect(gather["out"] >> ecto_test.Printer(print_type="double")["in"])
-        p2.check()
         assert False, "Should not work as there is a type mismatch..."
     except RuntimeError, e:
         print ">>>", e
@@ -27,7 +26,6 @@ def test_plasm():
     try:
         p2 = ecto.Plasm()
         p2.connect(gather["out"],ecto_test.Printer(print_type="double")["in"])
-        # p2.check()
         assert False, "Should not work."
     except RuntimeError, e:
         print e

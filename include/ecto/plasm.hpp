@@ -44,15 +44,16 @@ namespace ecto
   class module;
   typedef boost::shared_ptr<module> module_ptr;
 
-
   //forward declare schedulers for friendliness.
-  namespace scheduler {
+  namespace scheduler
+  {
     class singlethreaded;
-  };
+  }
 
   /**
-   * \brief The plasm is the graph structure of ecto, responsible for keeping track
-   * of the connectivity between module and their inputs and outputs.
+   * \brief The plasm helps construct the graph structure in ecto.
+   * It enforces several invariants that are necessary for scheduling DAGs and
+   * is used by all the ecto::schedulers to enable exectution of modules that are connected in the graph.
    */
   class plasm: boost::noncopyable
   {
@@ -65,7 +66,8 @@ namespace ecto
      *
      * @param mod The module to insert into the graph.
      */
-    void insert(module_ptr mod);
+    void
+    insert(module_ptr mod);
 
     /**
      * \brief connect one module to another, and populate the plasms graph accordingly.
@@ -75,8 +77,8 @@ namespace ecto
      * @param to The to module
      * @param input The input key from the to module.
      */
-    void connect(module_ptr from, const std::string& output, 
-                 module_ptr to, const std::string& input);
+    void
+    connect(module_ptr from, const std::string& output, module_ptr to, const std::string& input);
 
     /**
      * Disconnect a tendril from another tendril.
@@ -86,34 +88,46 @@ namespace ecto
      * @param to
      * @param input
      */
-    void disconnect(module_ptr from, const std::string& output, 
-                    module_ptr to, const std::string& input);
+    void
+    disconnect(module_ptr from, const std::string& output, module_ptr to, const std::string& input);
     /**
      * \brief output graphviz to a stream.
      * @param out the output stream. Graphviz will be in plain text format.
      */
-    void viz(std::ostream& out) const;
+    void
+    viz(std::ostream& out) const;
     /**
      * \brief Get a std::string graphiz of the module.
      * @return
      */
-    std::string viz() const;
+    std::string
+    viz() const;
 
-    void check() const;
+    /**
+     * \brief check that all constraints on the graph are satisified.
+     * This will throw on errors in the graph, including, if required inputs are not connected
+     * if required outputs are not connected, if there are cycles, etc...
+     */
+    void
+    check() const;
 
-    graph::graph_t& graph();
+    /**
+     * \brief Get the underlying boost graph that this plasm has constructed.
+     * @return
+     */
+    graph::graph_t&
+    graph();
 
     /**
      * \brief Execute using a predefined scheduler.
      */
-    int execute(unsigned niter = 1);
+    int
+    execute(unsigned niter = 1);
 
     typedef boost::shared_ptr<plasm> ptr;
     typedef boost::shared_ptr<const plasm> const_ptr;
-		
-  private:
-    //TODO expose the nodes and edges to the world.
 
+  private:
     class impl;
     boost::shared_ptr<impl> impl_;
     friend class plasm_wrapper;
