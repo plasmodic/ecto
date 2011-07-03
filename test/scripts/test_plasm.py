@@ -16,12 +16,22 @@ def test_plasm():
 
     try:
         p2 = ecto.Plasm()
+        p2.connect(scatter, "out_0000", gather, "idn_0001")
+        assert False, "Should not work ..."
+    except RuntimeError, e:
+        print ">>>",e
+        assert str(e) == ''''idn_0001' does not exist in this tendrils object. Possible keys are:  'in_0000':type(int) 'in_0001':type(int) 'in_0002':type(int)
+'ecto_test::Scatter.inputs.out_0000' does not exist.'''
+        print "(threw as expected)"
+        
+    try:
+        p2 = ecto.Plasm()
         p2.connect(gather["out"] >> ecto_test.Printer(print_type="double")["in"])
         assert False, "Should not work as there is a type mismatch..."
     except RuntimeError, e:
-        print ">>>", e
+        print ">>>",e
         assert str(e) == "type mismatch:  'ecto_test::Gather<int>.outputs.out' of type 'int' is connected to'ecto_test::Printer.inputs.in' of type 'double'"
-        print e, "(threw as expected)"
+        print "(threw as expected)"
     
     try:
         p2 = ecto.Plasm()
