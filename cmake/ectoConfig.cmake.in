@@ -64,10 +64,10 @@ foreach(p ${ecto_PYTHONPATH_})
 endforeach()
 
 if(NOT ecto_user_PYTHONPATH)
-    set(ecto_user_PYTHONPATH ${LIBRARY_OUTPUT_DIRECTORY})
+    set(ecto_user_PYTHONPATH ${LIBRARY_OUTPUT_PATH})
 endif()
     
-configure_file(@ECTO_CONFIG_PATH@/python_path.sh.user.in 
+configure_file(${SELF_DIR}/python_path.sh.user.in 
   ${CMAKE_BINARY_DIR}/python_path.sh
   )
 
