@@ -70,6 +70,27 @@ struct WrongType
   }
 };
 
+struct ParameterCBExcept
+{
+  static void
+  declare_params(tendrils& p)
+  {
+    p.declare<double> ("x");
+  }
+  void xcb(double x)
+  {
+    std::cout << "called back***" << std::endl;
+    throw std::runtime_error("I'm a bad callback, and I like it that way.");
+  }
+  void
+  configure(tendrils& p,tendrils& in, tendrils& out)
+  {
+    std::cout << "configurated ***" << std::endl;
+    spore<double> x = p.at("x");
+    x.set_callback(boost::bind(&ParameterCBExcept::xcb,this,_1));
+  }
+};
+
 struct ProcessException
 {
   int
@@ -187,6 +208,36 @@ TEST(Exceptions, WrongType_sched)
 "  Module : WrongType\n"
 "  Function: process");
   cell::ptr m = create_cell<WrongType> ();
+  plasm p;
+  p.insert(m);
+  scheduler::threadpool sched(p);
+  EXPECT_THROW(
+      try
+      {
+        sched.execute(8,1);
+      }
+      catch (except::EctoException& e)
+      {
+        std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
+        if(stre != e.msg_)
+        {
+          throw std::runtime_error("Got :" + e.msg_ +"\nExpected :" +stre);
+        }
+        throw e;
+      }
+      ,
+      ecto::except::EctoException);
+}
+
+TEST(Exceptions, ParameterCBExcept_sched)
+{
+  std::string stre("Original Exception: std::runtime_error\n"
+"  What   : I'm a bad callback, and I like it that way.\n"
+"  Module : ParameterCBExcept\n"
+"  Function: Parameter Callback for 'x'"
+);
+  cell::ptr m = create_cell<ParameterCBExcept> ();
+  m->parameters.get<double>("x") = 5.1;
   plasm p;
   p.insert(m);
   scheduler::threadpool sched(p);

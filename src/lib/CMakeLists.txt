@@ -1,7 +1,7 @@
 add_library(ecto SHARED
   tendril.cpp
   tendrils.cpp
-  module.cpp
+  cell.cpp
   plasm.cpp
   util.cpp
   log.cpp

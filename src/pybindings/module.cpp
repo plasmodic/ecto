@@ -57,6 +57,10 @@ namespace ecto
         return OK;
       }
 
+      void init()
+      {
+      }
+
       void dispatch_destroy()
       {
         SHOW();

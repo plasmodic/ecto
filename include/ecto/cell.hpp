@@ -169,6 +169,7 @@ namespace ecto
     profile::stats_type stats;
 
   protected:
+    virtual void init() = 0;
     virtual void dispatch_declare_params(tendrils& t) = 0;
     virtual void dispatch_declare_io(const tendrils& params, tendrils& inputs,
                                      tendrils& outputs) = 0;
@@ -356,12 +357,12 @@ namespace ecto
       //destroy only called once, then destructor.
       if(thiz)
         thiz->destroy();
-      thiz.reset();
     }
 
     void dispatch_destroy()
     {
       destroy(int_<has_f<Cell>::destroy> ());
+      thiz.reset();
     }
 
     std::string dispatch_name() const
@@ -386,7 +387,13 @@ namespace ecto
       m->declare_io();
       return m;
     }
-
+    void init()
+    {
+      if(!thiz)
+      {
+        cell::configure();
+      }
+    }
 
     boost::shared_ptr<Cell> thiz;
     static const std::string MODULE_TYPE_NAME;

@@ -95,19 +95,26 @@ namespace ecto
   ReturnCode
   cell::process()
   {
-    try
-      {
+    init();//this should call configure FIXME make cleaner life cycle //only once.
     //trigger all parameter change callbacks...
     tendrils::iterator begin = parameters.begin(), end = parameters.end();
     while (begin != end)
     {
-      begin->second->notify();
+      try
+      {
+        begin->second->notify();
+      } catch (const std::exception& e)
+      {
+        except::EctoException ee("Original Exception: " + name_of(typeid(e)));
+        ee << "  What   : " + std::string(e.what());
+        ee << "  Module : " + name() + "\n  Function: Parameter Callback for '" + begin->first + "'";
+        boost::throw_exception(ee);
+      }
       ++begin;
     }
-//      }CATCH_ALL()
-//
-//    try
-//    {
+
+    try
+    {
       return dispatch_process(inputs, outputs);
     }CATCH_ALL()
   }
