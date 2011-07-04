@@ -31,7 +31,6 @@
 #include <string>
 #include <sstream>
 #include <ecto/util.hpp>
-#include <boost/exception/all.hpp>
 
 namespace ecto
 {

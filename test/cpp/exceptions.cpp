@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
 #include <ecto/ecto.hpp>
+#include <ecto/plasm.hpp>
+#include <ecto/scheduler/threadpool.hpp>
 
 #define STRINGDIDLY(A) std::string(#A)
 
@@ -86,7 +88,7 @@ TEST(Exceptions, ExceptionalModules)
   {
     std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
   }
-  EXPECT_THROW(create_cell<ExceptionalModule1>(), ecto::except::TypeMismatch);
+  EXPECT_THROW(create_cell<ExceptionalModule1>(), ecto::except::EctoException);
 }
 TEST(Exceptions, ExceptionUnknownException)
 {
@@ -164,6 +166,34 @@ TEST(Exceptions, WrongType)
       try
       {
         m->process();
+      }
+      catch (except::EctoException& e)
+      {
+        std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
+        if(stre != e.msg_)
+        {
+          throw std::runtime_error("Got :" + e.msg_ +"\nExpected :" +stre);
+        }
+        throw e;
+      }
+      ,
+      ecto::except::EctoException);
+}
+
+TEST(Exceptions, WrongType_sched)
+{
+  std::string stre("double is not a int\n"
+"  Hint : 'd' is of type: double\n"
+"  Module : WrongType\n"
+"  Function: process");
+  cell::ptr m = create_cell<WrongType> ();
+  plasm p;
+  p.insert(m);
+  scheduler::threadpool sched(p);
+  EXPECT_THROW(
+      try
+      {
+        sched.execute(8,1);
       }
       catch (except::EctoException& e)
       {
