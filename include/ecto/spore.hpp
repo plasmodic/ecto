@@ -87,7 +87,7 @@ namespace ecto
     {
       tendril::const_ptr _p = tendril_.lock();
       if (!_p)
-        throw std::logic_error("This spore points to nothing.");
+        throw std::logic_error("This spore points to nothing. Type name:" + name_of<T>());
       return _p;
     }
 
