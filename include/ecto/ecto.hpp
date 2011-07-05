@@ -36,6 +36,7 @@
 
 //ecto includes
 #include <ecto/version.hpp>
+#include <ecto/abi.hpp>
 #include <ecto/cell.hpp>
 #include <ecto/util.hpp>
 #include <ecto/python/raw_constructor.hpp>

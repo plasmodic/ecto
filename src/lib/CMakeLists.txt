@@ -1,4 +1,5 @@
 add_library(ecto SHARED
+  abi.cpp
   tendril.cpp
   tendrils.cpp
   cell.cpp
