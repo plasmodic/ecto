@@ -11,19 +11,16 @@ namespace py
 
 tendril::ptr tendril_ctr()
 {
-  SHOW();
   return boost::shared_ptr<tendril>(new tendril(bp::object(),"A pythonic tendril."));
 }
 
 std::string tendril_type_name(tendril::ptr t)
 {
-  SHOW();
   return t->type_name();
 }
 
 std::string tendril_doc(tendril::ptr t)
 {
-  SHOW();
   return t->doc();
 }
 
@@ -41,16 +38,41 @@ void tendril_set_val(tendril::ptr t, bp::object val)
 {
   t->set(val);
 }
+bool tendril_user_supplied(tendril::ptr t)
+{
+  return t->user_supplied();
+}
 
+bool tendril_has_default(tendril::ptr t)
+{
+  return t->has_default();
+}
+
+bool tendril_dirty(tendril::ptr t)
+{
+  return t->dirty();
+}
+
+bool tendril_required(tendril::ptr t)
+{
+  return t->required();
+}
 void wrapConnection(){
-  bp::class_<tendril,boost::shared_ptr<tendril> >("Tendril")
-    .def("__init__", bp::make_constructor(tendril_ctr))
-    .add_property("doc",tendril_doc,&tendril::set_doc)
-    .add_property("type_name",tendril_type_name )
-    .add_property("val", tendril_get_val,tendril_set_val)
-    .def("get",tendril_get_val)
-    .def("set",tendril_set_val)
-    ;
+  bp::class_<tendril,boost::shared_ptr<tendril> > Tendril_("Tendril", "The Tendril is the slendor winding organ of ecto.\n"
+      "It is a type erasing holder with meta data that enable introspection.");
+    Tendril_.def("__init__", bp::make_constructor(tendril_ctr));
+    Tendril_.add_property("doc",tendril_doc,&tendril::set_doc, "A doc string that describes the purpose of this tendril.");
+    Tendril_.add_property("type_name",tendril_type_name, "The type of the value held by the tendril." );
+    Tendril_.add_property("val", tendril_get_val,tendril_set_val, "The value held by the tendril.\n"
+        "It requires boost::python bindings to be accessible from python.\n"
+        "If none are available it will be None.");
+    Tendril_.add_property("user_supplied",tendril_user_supplied, "Has the value been set by the user?");
+    Tendril_.add_property("has_default",tendril_has_default, "Does the tendril have an explicit default value?\n"
+        "Remember that the implicit default is always the default constructed type.");
+    Tendril_.add_property("required",tendril_required, "Is this tendril required to be connected?");
+    Tendril_.add_property("dirty",tendril_dirty, "Has the tendril changed since the last time?");
+    Tendril_.def("get",tendril_get_val);
+    Tendril_.def("set",tendril_set_val);
 }
 
 }
