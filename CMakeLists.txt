@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 #put this before project so that it gets picked up.
-set(CMAKE_BUILD_TYPE "RelWithDebInfo" CACHE STRING "The build type.")
+set(CMAKE_BUILD_TYPE "Release" CACHE STRING "The build type.")
 
 project(ecto)
 
@@ -68,7 +68,6 @@ configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoMacros.cmake
   
 set(ecto_LIBRARIES ecto)
 
-add_subdirectory(include)
 add_subdirectory(python/ecto)
 add_subdirectory(src)
 add_subdirectory(cmake)
