@@ -57,9 +57,13 @@ namespace ecto_test
     boost::scoped_ptr<impl> pimpl_;
     ecto::spore<double> out_;
 
+    unsigned ncalls;
+
     static void declare_params(tendrils& parameters)
     {
       parameters.declare<unsigned> ("seed", "Seed.  By default the RNG is seeded from the system time.");
+      parameters.declare<unsigned> ("ncalls", "Call this many times, return only the last. "
+                                    "Used to generate CPU load in testing.", 1);
     }
 
     static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
@@ -76,11 +80,13 @@ namespace ecto_test
         pimpl_.reset(new impl(*seed_));
       else
         pimpl_.reset(new impl(static_cast<unsigned>(std::time(0))));
+      ncalls=parameters.get<unsigned>("ncalls");
     }
 
     int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
-      *out_ = (*pimpl_)();
+      for (unsigned j=0; j<ncalls; ++j)
+        *out_ = (*pimpl_)();
       return ecto::OK;
     }
   };

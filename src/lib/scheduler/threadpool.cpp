@@ -335,7 +335,7 @@ namespace ecto {
             total_percentage += this_percentage;
             double hz = (double(m->stats.ncalls) / (elapsed.total_microseconds() / 1e+06));
             double theo_hz = hz *(100/this_percentage);
-            std::cout << str(boost::format(">>> %25s  calls: %u  Hz(theo max): %3.2f Hz(real): %3.2f  cpu load: (%04.2lf%%)")
+            std::cout << str(boost::format(">>> %25s  calls: %u  Hz(theo max): %10.2f Hz(real): %3.2f  cpu load: (%04.2lf%%)")
                              % m->name()
                              % m->stats.ncalls 
                              % theo_hz
@@ -387,6 +387,18 @@ namespace ecto {
     { }
 
     namespace phx = boost::phoenix;
+
+    int threadpool::execute()
+    {
+      //check this plasm for correctness.
+      plasm_.check();
+      std::size_t nthreads = plasm_.size(), hwc = boost::thread::hardware_concurrency();
+      
+      if (nthreads > hwc) nthreads = hwc;
+
+      std::cout << "Threadpool executing in " << nthreads << " threads.\n";
+      return impl_->execute(nthreads, phx::val(true), graph);
+    }
 
     int threadpool::execute(unsigned nthreads)
     {

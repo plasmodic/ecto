@@ -49,6 +49,10 @@ namespace ecto {
     {
       threadpool(plasm&);
 
+      /**
+         Use one thread per cell, up to hardware_concurrency.
+       */
+      int execute(); 
       int execute(unsigned nthreads);
       int execute(unsigned nthreads, unsigned maxcalls);
       

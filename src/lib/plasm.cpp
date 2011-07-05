@@ -188,6 +188,12 @@ namespace ecto
     return impl_->scheduler->execute(niter);
   }
 
+  std::size_t 
+  plasm::size() const
+  {
+    return num_vertices(impl_->graph);
+  }
+
   void
   plasm::check() const
   {

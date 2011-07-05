@@ -1,6 +1,8 @@
 #include <boost/python.hpp>
 #include <ecto/ecto.hpp>
 
+#include <boost/thread.hpp>
+
 namespace bp = boost::python;
 
 //forward declare all modules.
@@ -13,6 +15,7 @@ namespace ecto {
     void wrapSchedulers();
     void wrapStrand();
     void wrap_except();
+
   }
 }
 
@@ -29,6 +32,8 @@ BOOST_PYTHON_MODULE(ecto)
   ecto::py::wrapSchedulers();
   ecto::py::wrapStrand();
   ecto::py::wrap_except();
+
+  bp::def("hardware_concurrency", &boost::thread::hardware_concurrency);
 
   ECTO_REGISTER(ecto);
 }

@@ -19,6 +19,7 @@ BOOST_PYTHON_MODULE(schedulers)
   {
     bp::class_<threadpool, boost::noncopyable> d("Threadpool", bp::init<ecto::plasm&>());
     d
+      .def("execute", (int (threadpool::*)())&threadpool::execute)
       .def("execute", (int (threadpool::*)(unsigned))&threadpool::execute,
            arg("nthreads"))
       .def("execute", (int (threadpool::*)(unsigned, unsigned))&threadpool::execute,

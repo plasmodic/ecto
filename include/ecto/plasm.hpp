@@ -119,6 +119,12 @@ namespace ecto
     graph();
 
     /**
+     * \brief Return the number of cells in the plasm (vertices in the graph)
+     * 
+     */
+    std::size_t size() const;
+
+    /**
      * \brief Execute using a predefined scheduler.
      */
     int
