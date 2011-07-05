@@ -40,8 +40,21 @@ namespace ecto {
       std::reverse(stack.begin(), stack.end());
     }
 
+    static bool interupt;
+    static void sigint_static_thunk(int)
+    {
+      std::cerr << "*** SIGINT received, stopping graph execution.\n"
+                << "*** If you are stuck here, you may need to hit ^C again\n"
+                << "*** when back in the interpreter thread.\n"
+                << "*** or Ctrl-\\ (backslash) for a hard stop.\n"
+                << std::endl;
+      interupt = true;
+    }
+
     int singlethreaded::execute()
     {
+      interupt = false;
+      signal(SIGINT, &sigint_static_thunk);
       //compute ordering
       compute_stack();
       while(true) {
@@ -51,6 +64,7 @@ namespace ecto {
             size_t retval = invoke_process(stack[k]);
             if (retval)
               return retval;
+            if(interupt) return interupt;
           }
       }
       return 0;
@@ -58,6 +72,9 @@ namespace ecto {
 
     int singlethreaded::execute(unsigned j)
     {
+      interupt = false;
+      signal(SIGINT, &sigint_static_thunk);
+
       compute_stack();
       for (unsigned r=0; r<j; ++r)
         for (size_t k = 0; k < stack.size(); ++k)
@@ -66,6 +83,7 @@ namespace ecto {
             size_t retval = invoke_process(stack[k]);
             if (retval)
               return retval;
+            if(interupt) return interupt;
           }
       return 0;
     }
