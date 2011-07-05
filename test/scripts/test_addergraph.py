@@ -6,8 +6,7 @@ import sys
 def build_addergraph(nlevels):
     
     plasm = ecto.Plasm()
-    generators = [ecto_test.Generate("Generator 0_%u" % x, step=1.0, start=0.0)
-                  for x in range(2**nlevels)]
+
     prevlevel = [ecto_test.Add("Adder 0_%u" % x) for x in range(2**(nlevels-1))]
     for adder in prevlevel:
         plasm.connect(

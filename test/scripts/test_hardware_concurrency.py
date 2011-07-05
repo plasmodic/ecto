@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+#
+#  This script really just generates load, not actually used in testing
+#
 import ecto
 import ecto_test
 import sys
@@ -6,8 +9,6 @@ import sys
 def build_crunchgraph(nlevels, ncalls):
     
     plasm = ecto.Plasm()
-    generators = [ecto_test.Uniform01("Uniform01 0_%u" % x, ncalls=ncalls)
-                  for x in range(2**nlevels)]
     prevlevel = [ecto_test.Add("Adder 0_%u" % x) for x in range(2**(nlevels-1))]
     for adder in prevlevel:
         plasm.connect(ecto_test.Uniform01(ncalls=ncalls)["out"] >> adder["left"],
@@ -40,10 +41,6 @@ def build_crunchgraph(nlevels, ncalls):
 def test_plasm(nlevels, ncalls, niter):
     (plasm, outnode) = build_crunchgraph(nlevels, ncalls)
 
-    #o = open('graph.dot', 'w')
-    #print >>o, plasm.viz()
-    #o.close()
-    #print "\n", plasm.viz(), "\n"
     sched = ecto.schedulers.Threadpool(plasm)
     sched.execute()
     print "RESULT:", outnode.outputs.out
