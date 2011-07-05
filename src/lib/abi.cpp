@@ -8,7 +8,6 @@ namespace ecto {
     }
     verifier::verifier(unsigned header_version)
     {
-      std::cerr << header_version << " ?!=? " << ECTO_ABI_VERSION << std::endl;
       if (!flagged && header_version != ECTO_ABI_VERSION)
         {
           std::cerr << "***************** WARNING *****************\n"
