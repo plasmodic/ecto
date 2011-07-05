@@ -28,11 +28,19 @@
  */
 #pragma once
 
-#define ECTO_MAJOR_VERSION @ECTO_MAJOR_VERSION@
-#define ECTO_MINOR_VERSION @ECTO_MINOR_VERSION@
-#define ECTO_PATCH_VERSION @ECTO_PATCH_VERSION@
+#include <ecto/version.hpp>
 
-//readable version of the library name.
-#define ECTO_VERSION_STRING "ecto @ECTO_VERSION@ @ECTO_CODE_NAME@"
+namespace ecto {
+  namespace abi {
 
+#define ECTO_ABI_VERSION   1
 
+    struct verifier {
+      verifier(unsigned);
+    };
+
+    namespace { 
+      verifier verify(ECTO_ABI_VERSION);
+    }
+  }
+}
