@@ -22,7 +22,7 @@ if __name__ == '__main__':
         
         ecto_cells = []
         for module_name,x in ms:
-            print "..",module_name
+            print "..",module_name +'\n'
             ecto_cells += ecto.list_ecto_module(x)
         #print ecto_cells
         
