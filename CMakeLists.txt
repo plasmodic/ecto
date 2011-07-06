@@ -51,7 +51,11 @@ include_directories(
   )
   
 configure_file(${CMAKE_SOURCE_DIR}/cmake/python_path.sh.in 
-  ${CMAKE_BINARY_DIR}/python_path.sh)
+  ${CMAKE_BINARY_DIR}/python_path.sh @ONLY@)
+
+#copy the python_path.sh.user.in for users that are not installing ecto.
+file(COPY ${CMAKE_SOURCE_DIR}/cmake/python_path.sh.user.in DESTINATION ${CMAKE_BINARY_DIR})
+  
 message(STATUS "To setup your python path for ecto you may source:"
   " ${CMAKE_BINARY_DIR}/python_path.sh")
 
