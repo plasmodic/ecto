@@ -8,6 +8,7 @@ ectomodule(ecto
   schedulers.cpp
   strand.cpp
   modules/Constant.cpp
+  modules/Passthrough.cpp
   )
 
 set_target_properties(ecto_ectomodule PROPERTIES
