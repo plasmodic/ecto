@@ -1,4 +1,8 @@
-Building
+Get ecto
+========
+ecto is may be gotten in any of the following ways:
+* From source here: https://github.com/plasmodic/ecto 
+    
 ================================
 Using a standard cmake build system:
 

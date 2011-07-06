@@ -10,7 +10,7 @@ and python is used to construct the DAG.
 .. toctree::
    :maxdepth: 2
    
-   building
+   get_ecto
    autoregister
    client_usage
    auto_docs
