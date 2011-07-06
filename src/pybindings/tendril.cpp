@@ -58,7 +58,8 @@ bool tendril_required(tendril::ptr t)
   return t->required();
 }
 void wrapConnection(){
-  bp::class_<tendril,boost::shared_ptr<tendril> > Tendril_("Tendril", "The Tendril is the slendor winding organ of ecto.\n"
+  bp::class_<tendril,boost::shared_ptr<tendril> > Tendril_("Tendril", 
+      "The Tendril is the slendor winding organ of ecto.\n"
       "It is a type erasing holder with meta data that enable introspection.");
     Tendril_.def("__init__", bp::make_constructor(tendril_ctr));
     Tendril_.add_property("doc",tendril_doc,&tendril::set_doc, "A doc string that describes the purpose of this tendril.");
@@ -71,8 +72,10 @@ void wrapConnection(){
         "Remember that the implicit default is always the default constructed type.");
     Tendril_.add_property("required",tendril_required, "Is this tendril required to be connected?");
     Tendril_.add_property("dirty",tendril_dirty, "Has the tendril changed since the last time?");
-    Tendril_.def("get",tendril_get_val);
-    Tendril_.def("set",tendril_set_val);
+    Tendril_.def("get",tendril_get_val, "Gets the python value of the object.\n"
+    "May be None if python bindings for the type held do not have boost::python bindings available from the current scope."
+    );
+    Tendril_.def("set",tendril_set_val, "Assuming the value held by the tendril has boost::python bindings,\nthis will copy the value of the given python object into the value held by the tendril.");
 }
 
 }
