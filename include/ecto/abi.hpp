@@ -33,7 +33,7 @@
 namespace ecto {
   namespace abi {
 
-#define ECTO_ABI_VERSION   1
+#define ECTO_ABI_VERSION   2
 
     struct verifier {
       verifier(unsigned);
