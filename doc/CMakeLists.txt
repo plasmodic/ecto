@@ -1,10 +1,10 @@
 # add a target to generate API documentation with Doxygen
 #add doc to all
-option(BUILD_DOC_ALL "Build the documentation with everything else." ON)
+option(BUILD_DOC_ALL "Build the documentation with everything else." OFF)
 option(BUILD_DOC_DOXYGEN "Build the c++ api documentation with doxygen, not mutually exclusive." ON)
 option(BUILD_DOC_SPHINX "Build the user documentation with sphinx-build, not mutually exclusive." ON)
 option(BUILD_DOC_SPHINX_PDF "Build user documentation into a standalone pdf with latex." OFF)
-option(INSTALL_DOC "Install the documentation." ON)
+option(INSTALL_DOC "Install the documentation." OFF)
 
 if(BUILD_DOC_ALL)
     message(STATUS "The all target will also build documentation, set BUILD_DOC_ALL to OFF to prevent this.")
@@ -91,4 +91,4 @@ if(INSTALL_DOC)
             )
     endif()
 endif()
-        
+
