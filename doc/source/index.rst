@@ -2,18 +2,18 @@ ecto
 ====
 
 ecto is a dynamically configurable *Directed Acyclic processing Graph* **(DAG)** framework.  
-Users may write reusable ``ecto::cell``\ s which 
-become the nodes in the DAG, or ``ecto::plasm``.  Modules may be written 
-in c++ as ``boost::python`` extensions, or in pure python, 
-and python is used to construct the DAG.
+ecto provides a lightweight plugin archictecture, graph constructures, and scheduling algorithms
+to enable rapid development of DAGs. ecto may be useful for perception, audio processing,
+or robotics pipelines.
 
 .. toctree::
    :maxdepth: 2
    
    at_a_glance
    get_ecto
-   autoregister
    client_usage
+   glossary
+   autoregister
    auto_docs
    tendril
    tendrils

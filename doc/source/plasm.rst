@@ -3,4 +3,6 @@
 plasm
 =====
 
-The plasm is the *DAG* structure of ecto
+from the Greek *plasma*, meaning "something formed or molded"
+Think ectoplasm or protoplasm. Leading naturally to slime molds.
+
