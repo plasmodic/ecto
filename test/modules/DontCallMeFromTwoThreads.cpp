@@ -78,63 +78,7 @@ namespace ecto_test
   };
   boost::mutex DontCallMeFromTwoThreads::mtx;
 
-
-
-  //
-  // No instances of this one are callable from more than one thread 
-  // due to magic (FIXME)
-  //
-  struct CantCallMeFromTwoThreads
-  {
-    static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
-    {
-      inputs.declare<double> ("in");
-      outputs.declare<double> ("out");
-    }
-
-    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
-    {
-      boost::asio::io_service s;
-      boost::asio::deadline_timer dt(s);
-
-      // try to rock
-      if (mtx.try_lock())
-        {
-          // we got the rock... i.e. we are rocking
-          std::cout << this << " got the lock." << std::endl;
-          // wait a bit so's we can be sure there will be collisions
-          dt.expires_from_now(boost::posix_time::milliseconds(250));
-          dt.wait();
-
-          double value = inputs.get<double> ("in");
-          std::cout << "nonconcurrent node @ " << this << " moving " << value << std::endl;
-          // do yer thing
-          outputs.get<double> ("out") = value;
-
-          // unrock
-          std::cout << this << " done with the lock." << std::endl;
-          mtx.unlock();
-        }
-      else
-        {
-          std::cout << this << " did NOT get the lock, I'm going to throw about this." << std::endl;
-          BOOST_THROW_EXCEPTION(std::runtime_error("AAAAGH NO LOCK HEEEEEELP"));
-          assert(false && "we should NOT be here");
-          // throw std::logic_error("Didn't get the lock... this means we were called from two threads.  Baaad.");
-        }
-      return ecto::OK;
-
-    }
-    static boost::mutex mtx;
-  };
-  boost::mutex CantCallMeFromTwoThreads::mtx;
-
 }
-
 ECTO_CELL(ecto_test, ecto_test::DontCallMeFromTwoThreads, "DontCallMeFromTwoThreads", 
           "Throws if process called concurrently from two threads.");
-
-ECTO_CELL(ecto_test, ecto_test::CantCallMeFromTwoThreads, "CantCallMeFromTwoThreads", 
-          "Throws if process called concurrently from two threads, but you shouldn't."
-          " be able to provoke this crash because (FIXME)");
 
