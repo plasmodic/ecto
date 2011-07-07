@@ -600,27 +600,36 @@ operator<<(ecto::tendril& t, boost::function1<void, T> cb)
 }
 
 template<typename T>
-ecto::tendril& operator<<=(ecto::tendril& rhs,const T& val)
+void operator<<=(ecto::tendril& rhs,const T& val)
 {
-  return rhs.get<T>() = val;
-  return rhs;
+  rhs.get<T>() = val;
 }
 
 template<typename T>
-const ecto::tendril::ptr& operator<<=(const ecto::tendril::ptr& rhs,const T& val)
+void operator<<=(const ecto::tendril::ptr& rhs,const T& val)
 {
   rhs->get<T>() = val;
-  return rhs;
 }
 
 template<typename T>
-T& operator<<=(T& rhs,const ecto::tendril& t)
+void operator<<=(T& rhs,const ecto::tendril& t)
 {
-  return rhs = t.read<T>();
+  rhs = t.read<T>();
 }
 
 template<typename T>
-T& operator<<=(T& rhs,const ecto::tendril::ptr& tp)
+void operator<<=(T& rhs,const ecto::tendril::ptr& tp)
 {
-  return rhs = tp->read<T>();
+  rhs = tp->read<T>();
+}
+
+template<typename T>
+void operator<<=(ecto::tendril& rhs,const ecto::tendril& t)
+{
+  rhs.copy_value(t);
+}
+
+inline void operator<<=(const ecto::tendril::ptr& rhs,const ecto::tendril::ptr& tp)
+{
+  rhs->copy_value(*tp);
 }
