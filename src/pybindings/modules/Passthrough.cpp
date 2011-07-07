@@ -26,21 +26,32 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#pragma once
 
-#include <ecto/version.hpp>
+#include <ecto/ecto.hpp>
 
-namespace ecto {
-  namespace abi {
+namespace ecto
+{
+  namespace bp = boost::python;
 
-#define ECTO_ABI_VERSION   2
-
-    struct verifier {
-      verifier(unsigned);
-    };
-
-    namespace { 
-      verifier verify(ECTO_ABI_VERSION);
+  struct Passthrough
+  {
+    static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
+    {
+      in.declare<ecto::tendril::none>("in", "Any type");
+      out.declare<ecto::tendril::none>("out", "Any type");
     }
-  }
+    void configure(const tendrils& parms, tendrils& in, tendrils& out)
+    {
+      in_ = in.at("in");
+      out_ = out.at("out");
+    }
+    int process(tendrils& in, tendrils& out)
+    {
+      out_->copy_value(*in_);
+      return ecto::OK;
+    }
+    tendril::ptr in_, out_;
+  };
 }
+
+ECTO_CELL(ecto, ecto::Passthrough, "Passthrough", "Passes through any type.");

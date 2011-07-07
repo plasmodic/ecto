@@ -71,11 +71,16 @@ class BlackBox(object):
         else:
             raise TypeError( "May only use a tuple, list, or single string")
         
+        self.connect()
+        return ecto.TendrilSpecifications(l)
+    
+    def connect(self):
+        ''' Connect oneself to the plasm.
+        '''
         if self._plasm and not self._is_plasm_connected:
             self._plasm.connect(self.connections())
             self._is_plasm_connected = True
-        return ecto.TendrilSpecifications(l)
-     
+    
     def _getTendrils(self, name):
         """ The blackbox should look like a module, so it needs to have the parameters, inputs, outputs as
         member fields.

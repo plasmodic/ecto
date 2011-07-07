@@ -37,3 +37,13 @@ install(FILES ${CMAKE_SOURCE_DIR}/cmake/python_path.sh.user.in
         DESTINATION ${share_prefix} COMPONENT main
   )
 
+INSTALL(DIRECTORY ${CMAKE_SOURCE_DIR}/include/ecto
+        DESTINATION ${include_prefix}
+        COMPONENT main
+        )
+        
+INSTALL(FILES ${CMAKE_BINARY_DIR}/include/ecto/version.hpp
+        DESTINATION ${include_prefix}/ecto
+        COMPONENT main
+        )
+
