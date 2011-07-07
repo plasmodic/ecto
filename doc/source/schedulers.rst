@@ -16,3 +16,12 @@ are ready and its outputs are clear, so in a multicelled plasm
 multiple 'ticks' of data may be in flow at the same time.
 
 
+
+Threadpool
+==========
+
+Threadpool has several overloads of execute().  The nullary one will
+spawn one worker thread per node in the graph, up a maximum of the
+hardware concurrency.
+
+
