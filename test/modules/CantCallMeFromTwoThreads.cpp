@@ -33,8 +33,15 @@
 using ecto::tendrils;
 namespace ecto_test
 {
-  struct DontCallMeFromTwoThreads
+  //
+  // This module will throw if two instances' process() methods are
+  // called concurrently; this cannot happen due to it being marked
+  // with ECTO_THREAD_UNSAFEdue to magic (FIXME)
+  //
+  struct CantCallMeFromTwoThreads
   {
+    const static bool thread_unsafe = true;
+
     static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
       inputs.declare<double> ("in");
@@ -76,9 +83,12 @@ namespace ecto_test
     }
     static boost::mutex mtx;
   };
-  boost::mutex DontCallMeFromTwoThreads::mtx;
+  boost::mutex CantCallMeFromTwoThreads::mtx;
 
 }
-ECTO_CELL(ecto_test, ecto_test::DontCallMeFromTwoThreads, "DontCallMeFromTwoThreads", 
-          "Throws if process called concurrently from two threads.");
+
+ECTO_THREAD_UNSAFE(ecto_test::CantCallMeFromTwoThreads);
+ECTO_CELL(ecto_test, ecto_test::CantCallMeFromTwoThreads, "CantCallMeFromTwoThreads", 
+          "Throws if process called concurrently from two threads, but you shouldn't."
+          " be able to provoke this crash because (FIXME)");
 

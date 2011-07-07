@@ -40,6 +40,7 @@
 #include <ecto/cell.hpp>
 #include <ecto/util.hpp>
 #include <ecto/python/raw_constructor.hpp>
+#include <ecto/is_threadsafe.hpp>
 
 #include <iostream>
 #include <sstream>
@@ -114,11 +115,38 @@ namespace ecto
     return c->gen_doc(doc);
   }
 
+  //
+  //  Handle strandization of 
+  //
+  template <typename T, typename U = typename ecto::detail::is_thread_unsafe<T>::type >
+  struct deduce_with_strand
+  {
+    void operator()(boost::shared_ptr<ecto::cell_<T> > p) const 
+    { 
+      std::cout << __PRETTY_FUNCTION__ << "\n";
+    }
+  };
+
+  template <typename T>
+  struct deduce_with_strand<T, boost::mpl::true_>
+  {
+    void operator()(boost::shared_ptr<ecto::cell_<T> > p) const
+    {
+      std::cout << __PRETTY_FUNCTION__ << "\n";
+      p->strand_ = deduce_with_strand::strand_;
+    }
+    static ecto::strand strand_;
+  };
+
+  template <typename T> ecto::strand deduce_with_strand<T, boost::mpl::true_>::strand_;
+
+
   template<typename T>
   boost::shared_ptr<ecto::cell_<T> > raw_construct(boost::python::tuple args,
-                                                     boost::python::dict kwargs)
+                                                   boost::python::dict kwargs)
   {
     boost::shared_ptr<ecto::cell_<T> > c = inspect<T> (args, kwargs);
+    deduce_with_strand<T>()(c); 
     c->verify_params();
     return c;
   }

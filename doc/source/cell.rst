@@ -58,3 +58,13 @@ The ecto cell goes through a few states during its lifetime.
   function is called by the system to allow any nasty cleanup that
   should occur, that may not take place in the cell's destructor.
 		
+
+Inherently thread-unsafe cells
+------------------------------
+
+Some cell types may be inherently thread-unsafe (e.g. they access
+global/static state without locking); and therefore no two cell
+instances of this same type should ever run concurrently.  See
+:cmacro:`ECTO_THREAD_UNSAFE`.
+
+
