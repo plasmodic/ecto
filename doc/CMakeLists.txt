@@ -6,6 +6,9 @@ option(BUILD_DOC_SPHINX "Build the user documentation with sphinx-build, not mut
 option(BUILD_DOC_SPHINX_PDF "Build user documentation into a standalone pdf with latex." OFF)
 option(INSTALL_DOC "Install the documentation." OFF)
 
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Makefile.in 
+  ${CMAKE_CURRENT_BINARY_DIR}/Makefile.sphinx)
+
 if(BUILD_DOC_ALL)
     message(STATUS "The all target will also build documentation, set BUILD_DOC_ALL to OFF to prevent this.")
     set(build_doc_with_all ALL)
@@ -55,8 +58,9 @@ if(BUILD_DOC_SPHINX)
         )
         if(BUILD_DOC_SPHINX_PDF)
             add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/doc/latex/ecto.pdf
-                               COMMAND make latexpdf BUILDDIR=${CMAKE_CURRENT_BINARY_DIR}/doc
-                               WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                               COMMAND ${CMAKE_MAKE_PROGRAM} -f Makefile.sphinx latexpdf 
+                               BUILDDIR=${CMAKE_CURRENT_BINARY_DIR}/doc
+                               WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
                                DEPENDS ${rsts}
                                )
             add_custom_target(sphinx_doc_pdf
@@ -67,7 +71,17 @@ if(BUILD_DOC_SPHINX)
             
         endif()
 
-        add_dependencies(doc sphinx_doc)
+        add_custom_target(html)
+        add_custom_command(TARGET html
+          COMMAND ${CMAKE_MAKE_PROGRAM} -f Makefile.sphinx html
+          BUILDDIR=${CMAKE_CURRENT_BINARY_DIR}/doc
+          WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+          DEPENDS ${rsts}
+          )
+        add_custom_target(sphinx_doc_pdf
+          DEPENDS  ${CMAKE_CURRENT_BINARY_DIR}/doc/latex/ecto.pdf
+          COMMENT "Generating pdf of documentation with Sphinx and latex." VERBATIM
+          )
     endif()
 endif()
 
