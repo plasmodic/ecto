@@ -13,6 +13,7 @@ or robotics pipelines.
    get_ecto
    client_usage
    glossary
+   ecto_1_2_3
    autoregister
    auto_docs
    tendril
