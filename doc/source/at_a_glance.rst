@@ -35,12 +35,12 @@ at a glance
       optional powerful tool.
       
     .. code-block:: c++
-    //ecto registration
-    ECTO_DEFINE_MODULE(hello_ecto){}
-	ECTO_CELL(hello_ecto, Printer, "Printer", "Prints a string input to standard output.");
-	ECTO_CELL(hello_ecto, Reader, "Reader", "Reads input from standard input.");
-	
-        
+    
+        //ecto registration
+        ECTO_DEFINE_MODULE(hello_ecto){}
+        ECTO_CELL(hello_ecto, Printer, "Printer", "Prints a string input to standard output.");
+        ECTO_CELL(hello_ecto, Reader, "Reader", "Reads input from standard input.");
+	       
     * ecto forces your cells to be self documenting, and allows full
       introspection from python and c++, including
       type names, docstrings and variable names.
