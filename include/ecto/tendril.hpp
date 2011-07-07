@@ -115,6 +115,14 @@ namespace ecto
     tendril&
     operator=(const tendril& rhs);
 
+    template<typename T>
+    tendril&
+    operator=(const T& value)
+    {
+      get<T>() = value;
+      return *this;
+    }
+
     /**
      * \brief Copies the value of the given tendril into this one.
      * @param rhs
@@ -589,4 +597,30 @@ operator<<(ecto::tendril& t, boost::function1<void, T> cb)
 {
   t.set_callback(cb);
   return t;
+}
+
+template<typename T>
+ecto::tendril& operator<<=(ecto::tendril& rhs,const T& val)
+{
+  return rhs.get<T>() = val;
+  return rhs;
+}
+
+template<typename T>
+const ecto::tendril::ptr& operator<<=(const ecto::tendril::ptr& rhs,const T& val)
+{
+  rhs->get<T>() = val;
+  return rhs;
+}
+
+template<typename T>
+T& operator<<=(T& rhs,const ecto::tendril& t)
+{
+  return rhs = t.read<T>();
+}
+
+template<typename T>
+T& operator<<=(T& rhs,const ecto::tendril::ptr& tp)
+{
+  return rhs = tp->read<T>();
 }
