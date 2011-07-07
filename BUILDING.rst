@@ -1,1 +1,1 @@
-doc/source/building.rst
+doc/source/get_ecto.rst
