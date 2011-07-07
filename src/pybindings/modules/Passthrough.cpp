@@ -37,8 +37,8 @@ namespace ecto
   {
     static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
     {
-      in.declare<ecto::tendril::none>("in", "Any type");
-      out.declare<ecto::tendril::none>("out", "Any type");
+      in.declare<tendril::none>("in", "Any type");
+      out.declare<tendril::none>("out", "Any type");
     }
     void configure(const tendrils& parms, tendrils& in, tendrils& out)
     {
@@ -47,7 +47,7 @@ namespace ecto
     }
     int process(tendrils& in, tendrils& out)
     {
-      out_->copy_value(*in_);
+      out_ <<= in_;
       return ecto::OK;
     }
     tendril::ptr in_, out_;
