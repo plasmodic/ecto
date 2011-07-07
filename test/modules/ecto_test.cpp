@@ -32,7 +32,6 @@
 #include <iostream>
 #include <boost/format.hpp>
 #include <boost/foreach.hpp>
-#include <boost/asio.hpp>
 #include <boost/exception/all.hpp>
 
 using ecto::tendrils;
@@ -102,51 +101,6 @@ namespace ecto_test
       throw std::logic_error("I shouldn't be allocated");
     }
   };
-
-  struct DontCallMeFromTwoThreads
-  {
-    static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
-    {
-      inputs.declare<double> ("in");
-      outputs.declare<double> ("out");
-    }
-
-    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
-    {
-      boost::asio::io_service s;
-      boost::asio::deadline_timer dt(s);
-
-      // try to rock
-      if (mtx.try_lock())
-        {
-          // we got the rock... i.e. we are rocking
-          std::cout << this << " got the lock." << std::endl;
-          // wait a bit so's we can be sure there will be collisions
-          dt.expires_from_now(boost::posix_time::milliseconds(250));
-          dt.wait();
-
-          double value = inputs.get<double> ("in");
-          std::cout << "nonconcurrent node @ " << this << " moving " << value << std::endl;
-          // do yer thing
-          outputs.get<double> ("out") = value;
-
-          // unrock
-          std::cout << this << " done with the lock." << std::endl;
-          mtx.unlock();
-        }
-      else
-        {
-          std::cout << this << " did NOT get the lock, I'm going to throw about this." << std::endl;
-          BOOST_THROW_EXCEPTION(std::runtime_error("AAAAGH NO LOCK HEEEEEELP"));
-          assert(false && "we should NOT be here");
-          // throw std::logic_error("Didn't get the lock... this means we were called from two threads.  Baaad.");
-        }
-      return ecto::OK;
-
-    }
-    static boost::mutex mtx;
-  };
-  boost::mutex DontCallMeFromTwoThreads::mtx;
 
   struct ParameterWatcher
   {
@@ -308,8 +262,6 @@ ECTO_DEFINE_MODULE(ecto_test)
   ecto::wrap<Scatter>("Scatter", "Scatter a value...");
   ecto::wrap<HandleHolder>("HandleHolder","Holds on to handles...");
   ecto::wrap<DontAllocateMe>("DontAllocateMe", "Don't allocate me, feel free to inspect.");
-  ecto::wrap<DontCallMeFromTwoThreads>("DontCallMeFromTwoThreads",
-                                       "Throws if process called concurrently from two threads.");
   ecto::wrap<NoPythonBindings>("NoPythonBindings", "This uses something that is bound to python!");
   ecto::wrap<ParameterWatcher>("ParameterWatcher", "Uses parameter change callbacks.");
 }

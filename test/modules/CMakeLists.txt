@@ -1,5 +1,6 @@
 ectomodule(ecto_test
   Add.cpp
+  DontCallMeFromTwoThreads.cpp
   Multiply.cpp
   Quitter.cpp
   QuitAfter.cpp
