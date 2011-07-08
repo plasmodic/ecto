@@ -47,13 +47,24 @@ namespace ecto {
     {
       plasm& plasm_;
       ecto::graph::graph_t& graph;
+      boost::thread runthread;
+      bool running_;
       
       singlethreaded(plasm&);
 
       int invoke_process(ecto::graph::graph_t::vertex_descriptor vd);
       void compute_stack();
       int execute();
+      void execute_async();
       int execute(unsigned niter);
+      void execute_async(unsigned niter);
+
+      void stop();
+      bool running() const;
+      void wait();
+
+    private:
+
       std::vector<ecto::graph::graph_t::vertex_descriptor> stack;
     };
   }

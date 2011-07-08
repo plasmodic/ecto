@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import ecto
 import ecto_test
-import sys
+import sys, time
 
 
 def test_random():
@@ -13,8 +13,10 @@ def test_random():
     plasm.connect(uni, "out", printer, "in")
     
     sched = ecto.schedulers.Singlethreaded(plasm)
-    sched.execute(10)
-
+    sched.execute(100000)
+    while sched.running():
+        print "."
+        time.sleep(0.1)
 
 if __name__ == '__main__':
     test_random()

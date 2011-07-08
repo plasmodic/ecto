@@ -26,6 +26,7 @@ def test_plasm(nthreads, niter, n_nodes, incdelay):
     print "\n", plasm.viz(), "\n"
     sched = ecto.schedulers.Threadpool(plasm)
     sched.execute(nthreads, niter)
+        
     print "RESULT:", inc.outputs.out
     shouldbe = float(n_nodes + niter - 1)
     print "expected:", shouldbe
