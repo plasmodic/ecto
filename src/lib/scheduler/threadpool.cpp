@@ -123,7 +123,7 @@ namespace ecto {
         template <typename Work>
         void run(Work w)
         {
-          thread* newthread = new thread(bind(&runandjoin::impl<Work>, this, w));
+          boost::scoped_ptr<thread> newthread(new thread(bind(&runandjoin::impl<Work>, this, w)));
           newthread->swap(runner);
         }
       };
