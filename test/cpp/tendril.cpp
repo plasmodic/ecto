@@ -153,4 +153,8 @@ TEST(TendrilTest, SyntacticSugar)
   ts["z"] << z;
   EXPECT_THROW(ts["z"] >> y;,ecto::except::TypeMismatch);
   EXPECT_THROW(ts["z"] << x;,ecto::except::TypeMismatch);
+
+  EXPECT_THROW(ts["w"] >> x;,std::runtime_error);
+  EXPECT_THROW(ts["t"] << x;,std::runtime_error);
+
 }

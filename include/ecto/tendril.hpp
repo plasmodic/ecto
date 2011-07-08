@@ -608,6 +608,7 @@ void operator<<(ecto::tendril& rhs,const T& val)
 template<typename T>
 void operator<<(const ecto::tendril::ptr& rhs,const T& val)
 {
+  if(!rhs) throw std::runtime_error("Your tendril be null!");
   rhs->get<T>() = val;
 }
 
@@ -620,5 +621,6 @@ void operator>>(const ecto::tendril& rhs,T& val)
 template<typename T>
 void operator>>(const ecto::tendril::ptr& rhs,T& val)
 {
+  if(!rhs) throw std::runtime_error("Your tendril be null!");
   val = rhs->read<T>();
 }
