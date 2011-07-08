@@ -74,7 +74,7 @@ if(BUILD_DOC_SPHINX)
         add_custom_target(html)
         add_custom_command(TARGET html
           COMMAND ${CMAKE_MAKE_PROGRAM} -f Makefile.sphinx html
-          BUILDDIR=${CMAKE_CURRENT_BINARY_DIR}/doc
+          BUILDDIR=${CMAKE_CURRENT_BINARY_DIR}/html
           WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
           DEPENDS ${rsts}
           )

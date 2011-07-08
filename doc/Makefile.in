@@ -6,7 +6,9 @@ SPHINXOPTS    = \
 	-D version=@ECTO_MAJOR_VERSION@.@ECTO_MINOR_VERSION@ \
 	-D release=@ECTO_VERSION@
 
-SPHINXBUILD   = sphinx-build
+#	-D 'breathe_projects=dict("ecto":"@CMAKE_CURRENT_BINARY_DIR@/api/xml/")'
+
+SPHINXBUILD   = DOXYGEN_XML_DIR=@CMAKE_CURRENT_BINARY_DIR@/api/xml sphinx-build
 PAPER         =
 BUILDDIR      = @CMAKE_CURRENT_BINARY_DIR@/build
 
