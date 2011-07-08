@@ -14,9 +14,6 @@ def test_random():
     
     sched = ecto.schedulers.Singlethreaded(plasm)
     sched.execute(100000)
-    while sched.running():
-        print "."
-        time.sleep(0.1)
 
 if __name__ == '__main__':
     test_random()
