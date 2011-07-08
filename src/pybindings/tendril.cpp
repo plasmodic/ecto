@@ -31,12 +31,29 @@ void tendril_set_doc(tendril::ptr t, const std::string& doc)
 
 bp::object tendril_get_val(tendril::ptr t)
 {
+  t->notify();
   return t->extract();
 }
 
+struct Setter
+{
+  Setter(tendril::ptr ot, bp::object obj)
+  {
+    lt = ot;
+    t = *ot;
+    t.set(obj);
+  }
+  void operator()()
+  {
+    lt->copy_value(t);
+  }
+  tendril::ptr lt;
+  tendril t;
+};
+
 void tendril_set_val(tendril::ptr t, bp::object val)
 {
-  t->set(val);
+  t->queue(Setter(t,val));
 }
 bool tendril_user_supplied(tendril::ptr t)
 {

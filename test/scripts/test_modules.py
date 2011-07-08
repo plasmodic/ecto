@@ -9,9 +9,9 @@ def test_modules_01():
     g.process()
     assert g.outputs.out == 2
     g.configure()
-    g.outputs.out = 7.0
+    g.outputs.out = 7.0 #no effect
     g.process()
-    assert  g.outputs.out == 9
+    assert  g.outputs.out == 4.0
     s = ecto_test.Scatter(n = 4, x=3)
     s.process()
     assert(len(s.outputs) == 4)
@@ -68,6 +68,7 @@ def wrong_type(g):
 
 def right_type(g):
     g.outputs.out = 24.5
+    g.outputs.notify() #as python manip is unsafe.
     assert g.outputs.out == 24.5
 
 def already_set(g):

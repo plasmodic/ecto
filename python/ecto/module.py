@@ -9,7 +9,7 @@ class Module(_module_base):
 
         for k, v in kwargs.iteritems():
             self.params.at(k).set(v)
-
+        self.params.notify()
         _module_base.declare_io(self)
         _module_base.configure(self)
         if self.__doc__ is None:

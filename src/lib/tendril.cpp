@@ -98,7 +98,7 @@ namespace ecto
   void tendril::queue(FnT fn)
   {
     boost::mutex::scoped_lock lock(mtx_);
-    queue_.push_back(fn);
+    queue_.push_front(fn);
   }
 
   void tendril::exec_queue()

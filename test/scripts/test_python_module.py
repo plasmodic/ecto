@@ -9,6 +9,8 @@ def test_python_module():
     assert mod.text == "spam"
     assert mod.params.text == "spam"
     mod.process(mod.inputs,mod.outputs)
+    mod.outputs.notify()
+    print mod.outputs.out
     assert mod.outputs.out == "spam"*2
 
 def test_python_module_plasm():

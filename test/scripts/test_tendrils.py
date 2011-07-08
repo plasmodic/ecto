@@ -41,9 +41,15 @@ def test_tendrils():
     assert x != 11
     #by reference
     x = t.at("x")
-    t.x =13
+    t.x = 13
     assert x.val == 13
-    x.val = 15
+    
+    t.x = 17
+    assert t.x != 17
+    t.x = 199
+    t.x = 15
+    t.notify()
+    print t.x
     assert t.x == 15
     
 if __name__ == '__main__':

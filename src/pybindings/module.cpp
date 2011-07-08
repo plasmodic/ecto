@@ -28,32 +28,38 @@ namespace ecto
 
       void dispatch_declare_params(tendrils& params)
       {
-        SHOW();
         if (bp::override init = this->get_override("declare_params"))
           init(boost::ref(params));
       }
 
       void dispatch_declare_io(const tendrils&params, tendrils& inputs, tendrils& outputs)
       {
-        SHOW();
         if (bp::override declare_io = this->get_override("declare_io"))
           declare_io(boost::ref(params), boost::ref(inputs), boost::ref(outputs));
       }
 
       void dispatch_configure(tendrils& params, tendrils& inputs, tendrils& outputs)
       {
-        SHOW();
         if (bp::override config = this->get_override("configure"))
           config(boost::ref(params));
       }
 
+      struct YouveBeenServed
+      {
+        void operator()(tendrils::value_type& t)
+        {
+          t.second->notify();
+        }
+      };
+
       ReturnCode dispatch_process(tendrils& inputs, tendrils& outputs)
       {
-        SHOW();
+        std::for_each(inputs.begin(),inputs.end(), YouveBeenServed());
         if (bp::override proc = this->get_override("process"))
           {
             proc(boost::ref(inputs), boost::ref(outputs));
           }
+        std::for_each(outputs.begin(),outputs.end(),YouveBeenServed());
         return OK;
       }
 
@@ -63,14 +69,12 @@ namespace ecto
 
       void dispatch_destroy()
       {
-        SHOW();
         if (bp::override dest = this->get_override("destroy"))
           dest();
       }
 
       std::string dispatch_name() const
       {
-        SHOW();
         bp::reference_existing_object::apply<modwrap*>::type converter;
         PyObject* obj = converter(this);
         bp::object real_obj = bp::object(bp::handle<>(obj));
@@ -81,7 +85,6 @@ namespace ecto
 
       static std::string doc(modwrap* mod)
       {
-        SHOW();
         bp::reference_existing_object::apply<modwrap*>::type converter;
         PyObject* obj = converter(mod);
         bp::object real_obj = bp::object(bp::handle<>(obj));
