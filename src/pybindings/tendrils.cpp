@@ -39,9 +39,24 @@ namespace ecto
         return t.extract();
       }
 
+      struct Setter
+      {
+        Setter(tendril::ptr ot, bp::object obj)
+        {
+          lt = ot;
+          t = *ot;
+          t.set(obj);
+        }
+        void operator()()
+        {
+          lt->copy_value(t);
+        }
+        tendril::ptr lt;
+        tendril t;
+      };
       void tendril_set(tendrils& ts, const std::string& name, bp::object obj)
       {
-        ts.at(name)->set(obj);
+        ts.at(name)->queue(Setter(ts.at(name),obj));
       }
 
       tendril::ptr tendril_at(tendrils& ts, const std::string& name)

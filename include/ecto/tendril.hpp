@@ -33,6 +33,7 @@
 #include <boost/weak_ptr.hpp>
 #include <boost/function.hpp>
 #include <boost/bind.hpp>
+#include <boost/thread/mutex.hpp>
 
 #include <ecto/util.hpp> //name_of
 #include <ecto/except.hpp>
@@ -41,6 +42,7 @@
 #include <set>
 #include <sstream>
 #include <cstring>
+#include <deque>
 
 namespace ecto
 {
@@ -317,8 +319,10 @@ namespace ecto
      */
     template<typename T>
     tendril&
-    set_callback(boost::function1<void, T> cb);
+    set_callback(typename boost::function<void(T)> cb);
 
+    void queue(boost::function<void()> job);
+    void exec_queue();
     //! Notify the callback, only if this is dirty.
     void
     notify();
@@ -447,6 +451,9 @@ namespace ecto
     boost::shared_ptr<holder_base> holder_;
     std::string doc_;
     bool dirty_, default_, user_supplied_, required_;
+    typedef boost::function<void()> FnT;
+    std::deque<FnT> queue_;
+    boost::mutex mtx_;
 
   };
 
@@ -579,7 +586,7 @@ namespace ecto
 
   template<typename T>
   tendril&
-  tendril::set_callback(boost::function1<void, T> cb)
+  tendril::set_callback(boost::function<void(T)> cb)
   {
     typedef holder<T> holder_t;
     enforce_type<T>();

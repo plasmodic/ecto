@@ -1,5 +1,4 @@
 #include <ecto/tendril.hpp>
-
 namespace ecto
 {
 
@@ -96,6 +95,22 @@ namespace ecto
     return holder_->getPython();
   }
 
+  void tendril::queue(FnT fn)
+  {
+    boost::mutex::scoped_lock lock(mtx_);
+    queue_.push_back(fn);
+  }
+
+  void tendril::exec_queue()
+  {
+    boost::mutex::scoped_lock lock(mtx_);
+    while(!queue_.empty())
+    {
+      queue_.back()();
+      queue_.pop_back();
+    }
+  }
+
   void
   tendril::set(boost::python::object o)
   {
@@ -111,6 +126,7 @@ namespace ecto
   }
   void tendril::notify()
   {
+    exec_queue();
     if (dirty())
     {
       holder_->trigger_callback();
