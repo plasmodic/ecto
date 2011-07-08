@@ -23,7 +23,7 @@ namespace tutorial
     void
     configure(tendrils& params, tendrils& /*in*/, tendrils& /*out*/)
     {
-      prefix_ <<= params.at("prefix");
+      params["prefix"] >> prefix_;
     }
     
     int

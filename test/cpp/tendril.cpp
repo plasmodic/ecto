@@ -123,3 +123,34 @@ TEST(TendrilTest, BoostPyness)
   }
 
 }
+
+TEST(TendrilTest, SyntacticSugar)
+{
+  int x = 2;
+  float y = 3.14;
+  std::string z = "z";
+
+  ecto::tendril tx(x,"doc"),ty(y,"doc"),tz(z,"doc");
+  tz >> z;
+  tz << z;
+  ty >> y;
+  ty << y;
+  tx << x;
+  tx >> x;
+  EXPECT_THROW(tx >> y;,ecto::except::TypeMismatch);
+  EXPECT_THROW(tx << z;,ecto::except::TypeMismatch);
+
+
+  ecto::tendrils ts;
+  ts.declare<int>("x");
+  ts.declare<float>("y");
+  ts.declare<std::string>("z");
+  ts["x"] >> x;
+  ts["x"] << x;
+  ts["y"] >> y;
+  ts["y"] << y;
+  ts["z"] >> z;
+  ts["z"] << z;
+  EXPECT_THROW(ts["z"] >> y;,ecto::except::TypeMismatch);
+  EXPECT_THROW(ts["z"] << x;,ecto::except::TypeMismatch);
+}
