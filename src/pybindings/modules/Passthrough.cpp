@@ -42,12 +42,12 @@ namespace ecto
     }
     void configure(const tendrils& parms, tendrils& in, tendrils& out)
     {
-      in_ = in.at("in");
-      out_ = out.at("out");
+      in_ = in["in"];
+      out_ = out["out"];
     }
     int process(tendrils& in, tendrils& out)
     {
-      out_ <<= in_;
+      out_ << in_;
       return ecto::OK;
     }
     tendril::ptr in_, out_;
