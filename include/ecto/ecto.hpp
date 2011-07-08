@@ -123,7 +123,6 @@ namespace ecto
   {
     void operator()(boost::shared_ptr<ecto::cell_<T> > p) const 
     { 
-      std::cout << __PRETTY_FUNCTION__ << "\n";
     }
   };
 
@@ -132,7 +131,6 @@ namespace ecto
   {
     void operator()(boost::shared_ptr<ecto::cell_<T> > p) const
     {
-      std::cout << __PRETTY_FUNCTION__ << "\n";
       p->strand_ = deduce_with_strand::strand_;
     }
     static ecto::strand strand_;
