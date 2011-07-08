@@ -121,7 +121,18 @@ TEST(TendrilTest, BoostPyness)
     ecto::tendril bpt(bp::object(), "A bp object"), bpt2(bp::object(), "another bp::object");
     EXPECT_FALSE( bpt.get<bp::object>());
   }
+}
 
+TEST(TendrilTest, BoostPyDefaultness)
+{
+  ecto::tendrils ts;
+  ts.declare<boost::python::object>("x","A bp object");
+  bp::object x;
+  ts["x"] >> x;
+  //if(x == bp::object())
+  //{
+  //  std::cout << "x is none" << std::endl;
+  //}
 }
 
 TEST(TendrilTest, SyntacticSugar)
