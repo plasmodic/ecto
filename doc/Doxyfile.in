@@ -31,7 +31,7 @@ PROJECT_NAME = ecto
 # This could be handy for archiving the generated documentation or
 # if some version control system is used.
 
-PROJECT_NUMBER = 0.0.1
+PROJECT_NUMBER = @ECTO_VERSION@
 
 # The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute)
 # base path where the generated documentation will be put.
@@ -226,7 +226,7 @@ EXTENSION_MAPPING =
 # func(std::string) {}). This also make the inheritance and collaboration
 # diagrams that involve STL classes more complete and accurate.
 
-BUILTIN_STL_SUPPORT = YES
+BUILTIN_STL_SUPPORT = NO
 
 # If you use Microsoft's C++/CLI language, you should set this option to YES to
 # enable parsing support.
@@ -1242,7 +1242,7 @@ MAN_LINKS = NO
 # generate an XML file that captures the structure of
 # the code including all documentation.
 
-GENERATE_XML = NO
+GENERATE_XML = YES
 
 # The XML_OUTPUT tag is used to specify where the XML pages will be put.
 # If a relative path is entered the value of OUTPUT_DIRECTORY will be

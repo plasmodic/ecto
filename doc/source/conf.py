@@ -16,7 +16,10 @@ import sys, os, subprocess
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-sys.path.append(os.path.abspath('.'))
+sys.path += [os.path.abspath('.')]
+
+breathe_default_project = 'ecto'
+breathe_projects = dict(ecto=os.environ['DOXYGEN_XML_DIR'])
 
 # -- General configuration -----------------------------------------------------
 
@@ -24,7 +27,7 @@ sys.path.append(os.path.abspath('.'))
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest', 
               'sphinx.ext.todo', 'sphinx.ext.coverage', 'sphinx.ext.pngmath', 
-              'sphinx.ext.viewcode']
+              'sphinx.ext.viewcode', 'breathe']
 # extensions = ['sphinx.ext.ifconfig', 'sphinx.ext.todo'] #, 'cmake']
 todo_include_todos = True
 
@@ -214,3 +217,5 @@ rst_epilog="""
 
 
 """
+
+# print "BREATHE_PROJECTS=", breathe_projects

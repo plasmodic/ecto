@@ -1,5 +1,6 @@
 tendril
-============================================
+=======
+
 A tendril is the slender, winding organ of the
 ecto::cell that gives it its awesome type erasure and uber
 flexibility.
@@ -37,7 +38,8 @@ python api
 
 
 spore
-======
+=====
+
 A spore is a typed handle for a tendril. It is best used in conjunction with tendrils.
 
 .. code-block:: c++
@@ -53,3 +55,7 @@ A spore is a typed handle for a tendril. It is best used in conjunction with ten
 	spore<Bar> foo = outputs.at("foo");
 	foo->spam("hello");
 	foo().const_func();
+
+
+.. doxygenclass:: ecto::tendril
+
