@@ -137,13 +137,25 @@ namespace ecto
   void
   cell::name(const std::string& name)
   {
-    instance_name = name;
+    instance_name_ = name;
   }
 
   std::string
   cell::name() const
   {
-    return instance_name.size() ? instance_name : dispatch_name();
+    return instance_name_.size() ? instance_name_ : dispatch_name();
+  }
+
+  void
+  cell::short_doc(const std::string& short_doc)
+  {
+    short_doc_ = short_doc;
+  }
+
+  std::string
+  cell::short_doc() const
+  {
+    return short_doc_;
   }
 
   std::string

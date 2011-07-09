@@ -95,7 +95,7 @@ namespace ecto
     return holder_->getPython();
   }
 
-  void tendril::queue(FnT fn)
+  void tendril::enqueue(FnT fn)
   {
     boost::mutex::scoped_lock lock(mtx_);
     queue_.push_front(fn);

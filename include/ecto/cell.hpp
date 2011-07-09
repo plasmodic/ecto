@@ -149,6 +149,16 @@ namespace ecto
     void name(const std::string&);
 
     /**
+     * \brief Set the short_doc_ of the instance.
+     */
+    std::string short_doc() const;
+
+    /**
+     * \brief Set the short_doc_ of the instance.
+     */
+    void short_doc(const std::string&);
+
+    /**
      * \brief Generate an Restructured Text doc string for the cell. Includes documentation for all parameters,
      * inputs, outputs.
      * @param doc The highest level documentation for the cell.
@@ -185,7 +195,7 @@ namespace ecto
     }
 
   private:
-    std::string instance_name;
+    std::string instance_name_,short_doc_;
   };
 
   /**
@@ -367,7 +377,7 @@ namespace ecto
 
     std::string dispatch_name() const
     {
-      return MODULE_TYPE_NAME;
+      return CELL_TYPE_NAME;
     }
 
     cell::ptr dispatch_make() const
@@ -396,11 +406,16 @@ namespace ecto
     }
 
     boost::shared_ptr<Cell> thiz;
-    static const std::string MODULE_TYPE_NAME;
+    static const std::string CELL_TYPE_NAME;
+  public:
+    static std::string SHORT_DOC;
   };
 
   template<typename Cell>
-  const std::string cell_<Cell>::MODULE_TYPE_NAME = ecto::name_of<Cell>();
+  std::string cell_<Cell>::SHORT_DOC;
+
+  template<typename Cell>
+  const std::string cell_<Cell>::CELL_TYPE_NAME = ecto::name_of<Cell>();
 
   /**
    * Creates a cell from type T that has not been configured, so therefore,

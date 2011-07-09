@@ -165,6 +165,7 @@ namespace ecto
   void wrap(const char* name, std::string doc_str = "An ecto::cell...")
   {
     typedef ecto::cell_<UserCell> cell_t;
+    ecto::cell_<UserCell>::SHORT_DOC = doc_str;
     //SHOW();
     boost::python::class_<cell_t, boost::python::bases<cell>,
         boost::shared_ptr<cell_t>, boost::noncopyable>
@@ -175,6 +176,7 @@ namespace ecto
     m.staticmethod("inspect");
     m.def("name", (std::string (cell_t::*)() const) &cell_t::name);
     m.def("type_name", (std::string (cell_t::*)() const) &cell_t::type);
+    m.add_static_property("short_doc",ecto::cell_<UserCell>::SHORT_DOC, "A short doc string.");
   }
 }
 

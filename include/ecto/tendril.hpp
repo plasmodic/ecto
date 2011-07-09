@@ -109,8 +109,10 @@ namespace ecto
     tendril(const tendril& rhs);
 
     /**
-     * \brief Copies the tendril by value, so that the two tendrils will point to the same
-     *  data.
+     * \brief Copies the tendril by value, so that the two tendrils will hold the same data.
+     * This is an explicit copy, and the tendrils will hold any shared references after this
+     * call.  The type of this tendril is ignored, so this may be used to completely override,
+     * existing types.  All fields are copied, docs, dirtiness, etc...
      * @param rhs
      * @return this
      */
@@ -321,7 +323,7 @@ namespace ecto
     tendril&
     set_callback(typename boost::function<void(T)> cb);
 
-    void queue(boost::function<void()> job);
+    void enqueue(boost::function<void()> job);
     void exec_queue();
     //! Notify the callback, only if this is dirty.
     void

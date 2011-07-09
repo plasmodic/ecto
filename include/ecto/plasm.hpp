@@ -125,6 +125,12 @@ namespace ecto
     std::size_t size() const;
 
     /**
+     * \brief Grab a set of all the cells from the plasm.
+     * @return a set of cells.
+     */
+    std::vector<cell::ptr> cells() const;
+
+    /**
      * \brief Execute using a predefined scheduler.
      */
     int

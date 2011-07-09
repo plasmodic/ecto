@@ -2,6 +2,8 @@
 
 #include <boost/python.hpp>
 
+#include <setter.hpp>
+
 namespace bp = boost::python;
 
 namespace ecto
@@ -35,25 +37,9 @@ bp::object tendril_get_val(tendril::ptr t)
   return t->extract();
 }
 
-struct Setter
-{
-  Setter(tendril::ptr ot, bp::object obj)
-  {
-    lt = ot;
-    t = *ot;
-    t.set(obj);
-  }
-  void operator()()
-  {
-    lt->copy_value(t);
-  }
-  tendril::ptr lt;
-  tendril t;
-};
-
 void tendril_set_val(tendril::ptr t, bp::object val)
 {
-  t->queue(Setter(t,val));
+  t->enqueue(Setter(t,val));
 }
 bool tendril_user_supplied(tendril::ptr t)
 {
