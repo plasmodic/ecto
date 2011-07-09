@@ -1,3 +1,4 @@
+
 /*
  * Copyright (c) 2011, Willow Garage, Inc.
  * All rights reserved.
@@ -29,44 +30,46 @@
 
 #include <ecto/ecto.hpp>
 #include <ecto/registry.hpp>
-#include <boost/date_time/posix_time/posix_time.hpp>
 
 using ecto::tendrils;
 namespace ecto_test
 {
-  namespace pt = boost::posix_time;
-
-  struct Sleep
+  struct ParameterWatcher
   {
-    ecto::spore<double> sleep_sec;
-    ecto::spore<pt::ptime> in, out;
+    double value_;
 
-    static void declare_params(tendrils& parameters)
+    static void declare_params(ecto::tendrils& p)
     {
-      parameters.declare<double> ("seconds", "sleep this many seconds", 1.0);
+      p.declare<double> ("value", "I use this value", 1.0).required(true);
     }
 
     static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
-      inputs.declare<pt::ptime> ("in", "input");
-      outputs.declare<pt::ptime> ("out", "output");
+      inputs.declare<double> ("input", "input");
+      outputs.declare<double> ("output", "output");
+      outputs.declare<double> ("value", "the parameter.");
     }
 
-    void configure(tendrils& parameters, tendrils& inputs, tendrils& outputs)
+    void onvalue_change(double v)
     {
-      sleep_sec = parameters.at("seconds");
-      in = inputs.at("in");
-      out = outputs.at("out");
+      std::cout << "old value: " << value_ << std::endl;
+      std::cout << "new value: " << v << std::endl;
+      value_ = v;
+    }
+
+    void configure(tendrils& parms, tendrils& inputs, tendrils& outputs)
+    {
+      parms.at("value")->set_callback<double> (boost::bind(&ParameterWatcher::onvalue_change, this, _1));
     }
 
     int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
-      usleep(sleep_sec()*1.0e6);
-      *out = *in;
-      return 0;
+      outputs.get<double> ("output") = inputs.get<double> ("input") * value_;
+      outputs.get<double> ("value") = value_;
+      return ecto::OK;
     }
   };
 }
 
-ECTO_CELL(ecto_test, ecto_test::Sleep, "Sleep", "Sleep for a bit while in process");
+ECTO_CELL(ecto_test, ecto_test::ParameterWatcher, "ParameterWatcher", "Uses parameter change callbacks.");
 

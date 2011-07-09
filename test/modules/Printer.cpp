@@ -72,13 +72,11 @@ namespace ecto_test
     static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
       std::string print_type = parameters.get<std::string>("print_type");
-
       pfs.declares[print_type](inputs);
     }
 
     int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
-      std::cout << "printer: input has type " << inputs.at("in")->type_name() << "\n";
       pfs.processes[inputs.at("in")->type_name()](inputs,outputs);
       std::cout << this << std::endl;
       return ecto::OK;
