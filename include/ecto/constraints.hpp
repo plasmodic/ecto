@@ -1,6 +1,7 @@
 #pragma once
 #include <ecto/util.hpp>
 #include <boost/shared_ptr.hpp>
+#include <numeric>
 namespace ecto
 {
   namespace constraints
@@ -14,8 +15,12 @@ namespace ecto
       std::string
       key() const
       {
-        return name_of(typeid(this));
+        return name_of(typeid(*this));
       }
+
+      virtual
+      boost::python::object
+      extract() const = 0;
 
       virtual
       boost::shared_ptr<constraint_base>
@@ -29,9 +34,17 @@ namespace ecto
       ~constraint()
       {
       }
-      T value() const{
+
+      const T& value() const{
         return val_;
       }
+
+      boost::python::object
+      extract() const
+      {
+        return boost::python::object(val_);
+      }
+
       T val_;
       typedef boost::shared_ptr<constraint<T> > ptr;
     };
@@ -67,7 +80,7 @@ namespace ecto
     {
     };
 
-    inline Required_ Required(bool val)
+    inline Required_ Required(bool val = false)
     {
       Required_ c;
       c.val_ = val;
@@ -78,23 +91,9 @@ namespace ecto
     {
     };
 
-    inline Dynamic_ Dynamic(bool val)
+    inline Dynamic_ Dynamic(bool val = false)
     {
       Dynamic_ c;
-      c.val_ = val;
-      return c;
-    }
-
-    template<typename T>
-    struct Default_: constriaint_cloner_<Default_<T>,T>
-    {
-    };
-
-    template<typename T>
-    Default_<T>
-    Default(const T& val)
-    {
-      Default_<T> c;
       c.val_ = val;
       return c;
     }
@@ -106,7 +105,7 @@ namespace ecto
 
     template<typename T>
     Min_<T>
-    Min(const T& val)
+    Min(const T& val = std::numeric_limits<T>::min())
     {
       Min_<T> c;
       c.val_ = val;
@@ -120,7 +119,7 @@ namespace ecto
 
     template<typename T>
     Max_<T>
-    Max(const T& val)
+    Max(const T& val = std::numeric_limits<T>::max())
     {
       Max_<T> c;
       c.val_ = val;

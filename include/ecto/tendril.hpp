@@ -86,12 +86,11 @@ namespace ecto
     tendril(const T& t, const std::string& doc)
         :
           holder_(new holder<T>(t)),
-          doc_(doc),
           dirty_(false),
           default_(true),
-          user_supplied_(false),
-          required_(false)
+          user_supplied_(false)
     {
+      set_doc(doc);
     }
 
     template<typename T>
@@ -154,10 +153,10 @@ namespace ecto
      * @return A very descriptive human readable string of whatever
      * the tendril is holding on to.
      */
-    inline const std::string&
+    inline std::string
     doc() const
     {
-      return doc_;
+      return constrained<std::string>(constraints::Doc("TODO: Doc me."));
     }
 
     /**
@@ -184,12 +183,12 @@ namespace ecto
 
     void required(bool b)
     {
-      required_ = b;
+      constrain(constraints::Required(b));
     }
 
     bool required() const
     {
-      return required_;
+      return constrained<bool>(constraints::Required(false));;
     }
 
     /**
@@ -344,11 +343,17 @@ namespace ecto
       return !dirty_;
     }
 
-    void add_constraint(constraints::ptr c);
+
+
+    tendril& constrain(constraints::ptr c);
+    inline tendril& constrain(const constraints::constraint_base& c)
+    {
+      return constrain(c.clone());
+    }
     constraints::ptr get_constraint(const std::string& key) const;
 
     template <typename T>
-    T constrained(const constraints::constraint<T>& _c) const
+    const T& constrained(const constraints::constraint<T>& _c) const
     {
       constraints::ptr cp = get_constraint(_c.key());
       if(!cp)
@@ -464,8 +469,7 @@ namespace ecto
     }
     tendril(holder_base::ptr impl);
     boost::shared_ptr<holder_base> holder_;
-    std::string doc_;
-    bool dirty_, default_, user_supplied_, required_;
+    bool dirty_, default_, user_supplied_;
     typedef boost::function<void()> FnT;
     std::deque<FnT> queue_;
     boost::mutex mtx_;
@@ -613,49 +617,42 @@ namespace ecto
 
 }
 
-template<typename T>
-ecto::tendril&
-operator<<(ecto::tendril& t, boost::function<void(T)> cb)
-{
-  t.set_callback(cb);
-  return t;
-}
-
-
-inline ecto::tendril& operator<<(ecto::tendril& rhs,const ecto::constraints::constraint_base& constraint)
-{
-  rhs.add_constraint(constraint.clone());
-  return rhs;
-}
+//ecto::tendril&
+//operator<<(ecto::tendril& rhs,const ecto::constraints::constraint_base& constraint);
+//
+//template<typename T>
+//ecto::tendril&
+//operator<<(ecto::tendril& t, boost::function<void(T)> cb)
+//{
+//  t.set_callback(cb);
+//  return t;
+//}
 
 template<typename T>
-const ecto::tendril& operator>>(const ecto::tendril& rhs,ecto::constraints::constraint<T>& constraint)
-{
-  constraint.val_ = rhs.constrained(constraint);
-  return rhs;
-}
-
-template<typename T>
-void operator<<(ecto::tendril& rhs,const T& val)
+void
+operator<<(ecto::tendril& rhs,const T& val)
 {
   rhs.get<T>() = val;
 }
 
 template<typename T>
-void operator<<(const ecto::tendril::ptr& rhs,const T& val)
+void
+operator<<(const ecto::tendril::ptr& rhs,const T& val)
 {
   if(!rhs) throw std::runtime_error("Your tendril be null!");
   rhs->get<T>() = val;
 }
 
 template<typename T>
-void operator>>(const ecto::tendril& rhs,T& val)
+void
+operator>>(const ecto::tendril& rhs,T& val)
 {
   val = rhs.read<T>();
 }
 
 template<typename T>
-void operator>>(const ecto::tendril::ptr& rhs,T& val)
+void
+operator>>(const ecto::tendril::ptr& rhs,T& val)
 {
   if(!rhs) throw std::runtime_error("Your tendril be null!");
   val = rhs->read<T>();

@@ -42,6 +42,7 @@ def test_tendrils():
     #by reference
     x = t.at("x")
     t.x = 13
+    t.notify()
     assert x.val == 13
     
     t.x = 17

@@ -107,3 +107,33 @@ TEST(SporeTest, Callbacks)
     EXPECT_EQ(c.val, 3.14);
   }
 }
+
+using ecto::constraints::Min;
+using ecto::constraints::Max;
+using ecto::constraints::Required;
+
+TEST(SporeTest, Constraints)
+{
+  {
+    tendril::ptr p = tendril::make_tendril<double>();
+    spore<double> d = p; //p has to stay in scope...
+    d.constrain(Min<double>())
+     .constrain(Max<double>(10))
+     .constrain(Required(true));
+
+    EXPECT_TRUE(std::numeric_limits<double>::min() == d.constrained(Min<double>()));
+    EXPECT_TRUE(10 == d.constrained(Max<double>()));
+    EXPECT_TRUE(d.constrained(Required()));
+
+    cbs<double> c;
+    d.set_callback(boost::ref(c));
+    d.notify();
+    EXPECT_EQ(c.count, 0);
+    EXPECT_EQ(c.val, 0);
+
+    *d = 3.14;
+    d.notify();
+    EXPECT_EQ(c.count, 1);
+    EXPECT_EQ(c.val, 3.14);
+  }
+}

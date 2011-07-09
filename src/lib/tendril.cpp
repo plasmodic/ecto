@@ -16,7 +16,6 @@ namespace ecto
     , dirty_(false)
     , default_(false)
     , user_supplied_(false)
-    , required_(false)
   {
     //impl_ is never not initialized
   }
@@ -26,11 +25,10 @@ namespace ecto
 
   tendril::tendril(const tendril& rhs) :
       holder_(rhs.holder_->clone())
-    , doc_(rhs.doc_)
     , dirty_(false)
     , default_(rhs.default_)
     , user_supplied_(rhs.user_supplied_)
-    , required_(false)
+    , constraints_(rhs.constraints_)
   {}
 
 
@@ -39,7 +37,6 @@ namespace ecto
     , dirty_(false)
     , default_(false)
     , user_supplied_(false)
-    , required_(false)
   {}
 
 
@@ -48,9 +45,9 @@ namespace ecto
     if (this == &rhs)
       return *this;
     holder_ = rhs.holder_->clone();
-    doc_ = rhs.doc_;
     dirty_ = rhs.dirty_;
     default_ = rhs.default_;
+    constraints_ = rhs.constraints_;
     return *this;
   }
 
@@ -73,7 +70,7 @@ namespace ecto
 
   void tendril::set_doc(const std::string& doc_str)
   {
-    doc_ = doc_str;
+    constrain(constraints::Doc(doc_str));
   }
 
   tendril::holder_base& 
@@ -133,13 +130,22 @@ namespace ecto
     }
     mark_clean();
   }
-  void tendril::add_constraint(constraints::ptr c)
+  tendril& tendril::constrain(constraints::ptr c)
   {
     constraints_[c->key()] = c;
+    return *this;
   }
   constraints::ptr tendril::get_constraint(const std::string& key) const
   {
     if(constraints_.count(key)) return constraints_.find(key)->second;
     return constraints::ptr();
   }
+
 }
+
+//ecto::tendril&
+//operator<<(ecto::tendril& rhs,const ecto::constraints::constraint_base& constraint)
+//{
+//  rhs.add_constraint(constraint.clone());
+//  return rhs;
+//}

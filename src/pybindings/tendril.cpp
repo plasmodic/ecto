@@ -59,6 +59,21 @@ bool tendril_required(tendril::ptr t)
 {
   return t->required();
 }
+
+bp::object tendril_constrained(tendril::ptr t, const std::string& key)
+{
+  ecto::constraints::ptr cp = t->get_constraint(key);
+  if(cp)
+    return cp->extract();
+  else
+    return bp::object();
+}
+struct Constraints
+{
+
+};
+
+using namespace ecto::constraints;
 void wrapConnection(){
   bp::class_<tendril,boost::shared_ptr<tendril> > Tendril_("Tendril", 
       "The Tendril is the slendor winding organ of ecto.\n"
@@ -78,8 +93,16 @@ void wrapConnection(){
     "May be None if python bindings for the type held do not have boost::python bindings available from the current scope."
     );
     Tendril_.def("set",tendril_set_val, "Assuming the value held by the tendril has boost::python bindings,\nthis will copy the value of the given python object into the value held by the tendril.");
-}
+    Tendril_.def("constrained",tendril_constrained, "Get a dict of constraints.");
+    Tendril_.def("notify",&tendril::notify, "Force updates.");
 
+    bp::scope constraints = bp::class_<Constraints>("constraints");
+    constraints.attr("Min") = Min<double>().key();
+    constraints.attr("Max") = Max<double>().key();
+    constraints.attr("Required") = Max<double>().key();
+    constraints.attr("Min") = Max<double>().key();
+
+}
 }
 }
 

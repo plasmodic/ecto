@@ -201,6 +201,20 @@ namespace ecto
       return p();
     }
 
+    ecto::spore<T>&
+    constrain(const ecto::constraints::constraint_base& constraint)
+    {
+      p()->constrain(constraint);
+      return *this;
+    }
+
+    template<typename ConstrainType>
+    const ConstrainType&
+    constrained(const ecto::constraints::constraint<ConstrainType>& constraint)
+    {
+      return p()->constrained(constraint);
+    }
+
   private:
     boost::weak_ptr<tendril> tendril_;
   };

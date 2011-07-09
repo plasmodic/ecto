@@ -169,3 +169,25 @@ TEST(TendrilTest, SyntacticSugar)
   EXPECT_THROW(ts["t"] << x;,std::runtime_error);
 
 }
+
+using namespace ecto::constraints;
+TEST(TendrilTest, Constraints)
+{
+  int x = 2;
+  float y = 3.14;
+  std::string z = "z";
+
+  ecto::tendril tx(x,"doc x"),ty(y,"doc y"),tz(z,"doc z");
+  EXPECT_FALSE(tx.constrained(Required()));
+  tx.required(true);
+  EXPECT_TRUE(tx.constrained(Required()));
+  tx.constrain(Required(false));
+  EXPECT_FALSE(tx.constrained(Required()));
+  tx.constrain(Required(true));
+  EXPECT_TRUE(tx.constrained(Required()));
+
+  std::cout << tx.doc() << std::endl;
+  std::cout << tx.constrained(Required(false)) << std::endl;
+  std::cout << tx.constrained(Required(false)) << std::endl;
+
+}
