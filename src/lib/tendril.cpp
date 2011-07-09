@@ -133,4 +133,13 @@ namespace ecto
     }
     mark_clean();
   }
+  void tendril::add_constraint(constraints::ptr c)
+  {
+    constraints_[c->key()] = c;
+  }
+  constraints::ptr tendril::get_constraint(const std::string& key) const
+  {
+    if(constraints_.count(key)) return constraints_.find(key)->second;
+    return constraints::ptr();
+  }
 }

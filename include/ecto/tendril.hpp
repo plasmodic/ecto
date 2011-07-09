@@ -37,6 +37,7 @@
 
 #include <ecto/util.hpp> //name_of
 #include <ecto/except.hpp>
+#include <ecto/constraints.hpp>
 #include <stdexcept>
 #include <string>
 #include <set>
@@ -343,6 +344,18 @@ namespace ecto
       return !dirty_;
     }
 
+    void add_constraint(constraints::ptr c);
+    constraints::ptr get_constraint(const std::string& key) const;
+
+    template <typename T>
+    T constrained(const constraints::constraint<T>& _c) const
+    {
+      constraints::ptr cp = get_constraint(_c.key());
+      if(!cp)
+        return _c.value();
+      return dynamic_cast<constraints::constraint<T>&>(*cp).value();
+    }
+
   private:
 
     // ############################### NVI ####################################
@@ -456,7 +469,7 @@ namespace ecto
     typedef boost::function<void()> FnT;
     std::deque<FnT> queue_;
     boost::mutex mtx_;
-
+    std::map<std::string,constraints::ptr> constraints_;
   };
 
   template<typename T>
@@ -606,6 +619,20 @@ operator<<(ecto::tendril& t, boost::function<void(T)> cb)
 {
   t.set_callback(cb);
   return t;
+}
+
+
+inline ecto::tendril& operator<<(ecto::tendril& rhs,const ecto::constraints::constraint_base& constraint)
+{
+  rhs.add_constraint(constraint.clone());
+  return rhs;
+}
+
+template<typename T>
+const ecto::tendril& operator>>(const ecto::tendril& rhs,ecto::constraints::constraint<T>& constraint)
+{
+  constraint.val_ = rhs.constrained(constraint);
+  return rhs;
 }
 
 template<typename T>
