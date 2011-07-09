@@ -33,7 +33,6 @@ void tendril_set_doc(tendril::ptr t, const std::string& doc)
 
 bp::object tendril_get_val(tendril::ptr t)
 {
-  t->notify();
   return t->extract();
 }
 
