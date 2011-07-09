@@ -108,7 +108,7 @@ namespace ecto_test
 
     static void declare_params(ecto::tendrils& p)
     {
-      p.declare<double> ("value", "I use this value", 1.0);
+      p.declare<double> ("value", "I use this value", 1.0).required(true);
     }
 
     static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
@@ -116,7 +116,6 @@ namespace ecto_test
       inputs.declare<double> ("input", "input");
       outputs.declare<double> ("output", "output");
       outputs.declare<double> ("value", "the parameter.");
-
     }
 
     void onvalue_change(double v)
@@ -134,6 +133,7 @@ namespace ecto_test
 
     int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
+      std::cout << inputs.get<double> ("input") * value_ << " value << " << std::endl;
       outputs.get<double> ("output") = inputs.get<double> ("input") * value_;
       outputs.get<double> ("value") = value_;
       return ecto::OK;

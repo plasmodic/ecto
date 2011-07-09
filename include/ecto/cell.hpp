@@ -194,8 +194,18 @@ namespace ecto
       return ptr();
     }
 
+    virtual std::string dispatch_short_doc() const
+    {
+      return "";
+    }
+
+    virtual void dispatch_short_doc(const std::string&)
+    {
+    }
+
+
   private:
-    std::string instance_name_,short_doc_;
+    std::string instance_name_;
   };
 
   /**
@@ -378,6 +388,14 @@ namespace ecto
     std::string dispatch_name() const
     {
       return CELL_TYPE_NAME;
+    }
+    std::string dispatch_short_doc() const
+    {
+      return SHORT_DOC;
+    }
+
+    void dispatch_short_doc(const std::string&)
+    {
     }
 
     cell::ptr dispatch_make() const

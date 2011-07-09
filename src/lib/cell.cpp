@@ -149,13 +149,13 @@ namespace ecto
   void
   cell::short_doc(const std::string& short_doc)
   {
-    short_doc_ = short_doc;
+    dispatch_short_doc(short_doc);
   }
 
   std::string
   cell::short_doc() const
   {
-    return short_doc_;
+    return dispatch_short_doc();
   }
 
   std::string

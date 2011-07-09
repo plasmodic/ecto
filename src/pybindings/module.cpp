@@ -323,6 +323,7 @@ namespace ecto
       m_base.def("type", &cell::type);
       m_base.def("name", (std::string(cell::*)() const) &cell::name);
       m_base.def("doc", &modwrap::doc);
+      m_base.def("short_doc",(std::string(cell::*)() const) &cell::short_doc);
       m_base.def("gen_doc", &cell::gen_doc);
       m_base.def("__getitem__", getitem_str);
       m_base.def("__getitem__", getitem_tuple);

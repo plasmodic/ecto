@@ -14,24 +14,40 @@ class Form(QDialog):
         self.plasm = plasm
         self.setWindowTitle("Dynamic Reconfigure")
         # Create widgets
-        self.edit = QLineEdit("Write my name here")
-        self.button = QPushButton("Show Greetings")
-        # Create layout and add widgets
-        layout = QVBoxLayout()
-        layout.addWidget(self.edit)
-        layout.addWidget(self.button)
+        self.button = QPushButton("Commit.")
         # Set dialog layout
-        self.setLayout(layout)
         # Add button signal to greetings slot
-        self.button.clicked.connect(self.greetings)
+        self.button.clicked.connect(self.commit)
         # Greets the user
         self.generate_dialogs()
     def generate_dialogs(self):
+        self.edits = []
+        vlayout = QVBoxLayout()
         for x in self.plasm.cells():
-            print x.name(),x.doc()
-    def greetings(self):
-        print ("Hello %s" % self.edit.text())
+            print x.name(),x.short_doc()
+            vlayout.addWidget(QLabel(x.name()))
+            vlayout.addWidget(QLabel("Parameters"))
+            for p in x.params:
+                name = p.key()
+                param = p.data()
+                print name,param.doc, param.type_name, param.val
+                label = QLabel(name)
+                edit = QLineEdit(str(param.val))
+                hlayout = QHBoxLayout()
+                hlayout.addWidget(label)
+                hlayout.addWidget(edit)
+                vlayout.addLayout(hlayout)
+                self.edits.append((edit,x,name))
+        vlayout.addWidget(self.button)
+        self.setLayout(vlayout)
         
+    def commit(self):
+        for edit,cell,param_name in self.edits:
+            t = type(cell.params[param_name])
+            cell.params.__setattr__(param_name,t(edit.text()))
+    def update_vals(self):
+        pass
+
 def test_parameter_callbacks():
     generate = ecto_test.Generate()
     param_watcher = ecto_test.ParameterWatcher(value=2)
@@ -49,6 +65,9 @@ def test_parameter_callbacks():
     # Create and show the form
     form = Form(plasm)
     form.show()
+    #timer = QTimer(app)
+    #timer.timeout.connect(form.update_vals)
+    #timer.start()
     # Run the main Qt loop
     sys.exit(app.exec_())
 

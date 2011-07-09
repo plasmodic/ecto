@@ -176,7 +176,6 @@ namespace ecto
     m.staticmethod("inspect");
     m.def("name", (std::string (cell_t::*)() const) &cell_t::name);
     m.def("type_name", (std::string (cell_t::*)() const) &cell_t::type);
-    m.add_static_property("short_doc",ecto::cell_<UserCell>::SHORT_DOC, "A short doc string.");
   }
 }
 
