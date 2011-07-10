@@ -1,3 +1,4 @@
+#include <boost/scoped_ptr.hpp>
 #include <ecto/plasm.hpp>
 #include <ecto/tendril.hpp>
 #include <ecto/cell.hpp>
@@ -17,6 +18,9 @@
 namespace ecto {
 
   using namespace ecto::graph;
+  using boost::scoped_ptr;
+  using boost::thread;
+  using boost::bind;
 
   namespace scheduler {
 
@@ -40,7 +44,7 @@ namespace ecto {
       std::reverse(stack.begin(), stack.end());
     }
 
-    static bool interupt;
+    static bool interrupted;
     static void sigint_static_thunk(int)
     {
       std::cerr << "*** SIGINT received, stopping graph execution.\n"
@@ -48,44 +52,76 @@ namespace ecto {
                 << "*** when back in the interpreter thread.\n"
                 << "*** or Ctrl-\\ (backslash) for a hard stop.\n"
                 << std::endl;
-      interupt = true;
+      interrupted = true;
+    }
+
+    void singlethreaded::execute_async() 
+    {
+      running_ = true;
+      scoped_ptr<thread> tmp(new thread(bind(&singlethreaded::execute, this)));
+      tmp->swap(runthread);
     }
 
     int singlethreaded::execute()
     {
-      interupt = false;
+      running_ = true;
+      interrupted = false;
       signal(SIGINT, &sigint_static_thunk);
       //compute ordering
       compute_stack();
-      while(true) {
+      while(running_) {
         for (size_t k = 0; k < stack.size(); ++k)
           {
             //need to check the return val of a process here, non zero means exit...
             size_t retval = invoke_process(stack[k]);
             if (retval)
               return retval;
-            if(interupt) return interupt;
+            if(interrupted) return true;
           }
       }
       return 0;
     }
 
+    void singlethreaded::execute_async(unsigned niter) {
+      running_ = true;
+      scoped_ptr<thread> tmp(new thread(bind(&singlethreaded::execute, this, niter)));
+      tmp->swap(runthread);
+    }
+
     int singlethreaded::execute(unsigned j)
     {
-      interupt = false;
+      running_ = true;
+      interrupted = false;
       signal(SIGINT, &sigint_static_thunk);
 
       compute_stack();
-      for (unsigned r=0; r<j; ++r)
+      for (unsigned r=0; r<j && running_; ++r)
         for (size_t k = 0; k < stack.size(); ++k)
           {
             //need to check the return val of a process here, non zero means exit...
             size_t retval = invoke_process(stack[k]);
             if (retval)
               return retval;
-            if(interupt) return interupt;
+            if(interrupted) return true;
           }
+      running_ = false;
       return 0;
     }
+
+    void singlethreaded::stop() {
+      running_ = false;
+      runthread.join();
+    }
+
+    bool singlethreaded::running() const {
+      return running_;
+    }
+
+    void singlethreaded::wait() {
+      while(running_)
+        usleep(10);
+      runthread.join();
+    }
+
   }
 }
