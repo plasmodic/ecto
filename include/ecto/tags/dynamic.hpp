@@ -2,10 +2,10 @@
 #include <ecto/tags.hpp>
 namespace ecto
 {
-  namespace constraints
+  namespace tags
   {
 
-    struct Dynamic_: constraint_cloner<Dynamic_, bool>
+    struct Dynamic_: tag_CRTP_<Dynamic_, bool>
     {
     };
 

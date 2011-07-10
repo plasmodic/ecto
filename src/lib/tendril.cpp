@@ -33,7 +33,7 @@ namespace ecto
     , dirty_(false)
     , default_(rhs.default_)
     , user_supplied_(rhs.user_supplied_)
-    , constraints_(rhs.constraints_)
+    , tags_(rhs.tags_)
     , pycopy_to_(rhs.pycopy_to_)
     , pycopy_from_(rhs.pycopy_from_)
 
@@ -46,7 +46,7 @@ namespace ecto
     holder_ = rhs.holder_;
     dirty_ = rhs.dirty_;
     default_ = rhs.default_;
-    constraints_ = rhs.constraints_;
+    tags_ = rhs.tags_;
     pycopy_from_ = rhs.pycopy_from_;
     pycopy_to_ = rhs.pycopy_to_;
     return *this;
@@ -75,7 +75,7 @@ namespace ecto
       }
       else if (is_type<boost::python::object>())
       {
-        rhs.extract(get<boost::python::object>());
+        rhs.sample(get<boost::python::object>());
       }
       else
       {
@@ -88,7 +88,7 @@ namespace ecto
 
   void tendril::set_doc(const std::string& doc_str)
   {
-    constrain(constraints::Doc(doc_str));
+    tag(tags::Doc(doc_str));
   }
 
   void tendril::enqueue_oneshot(TendrilJob job)
@@ -141,21 +141,21 @@ namespace ecto
     }
     mark_clean();
   }
-  tendril& tendril::constrain(constraints::ptr c)
+  tendril& tendril::tag(tags::ptr c)
   {
-    constraints_[c->key()] = c;
+    tags_[c->key()] = c;
     return *this;
   }
-  constraints::ptr tendril::get_constraint(const std::string& key) const
+  tags::ptr tendril::get_tag(const std::string& key) const
   {
-    if(constraints_.count(key)) return constraints_.find(key)->second;
-    return constraints::ptr();
+    if(tags_.count(key)) return tags_.find(key)->second;
+    return tags::ptr();
   }
 
   std::string
   tendril::doc() const
   {
-    return constrained<std::string>(constraints::Doc("TODO: Doc me."));
+    return tagged(tags::Doc("TODO: Doc me."));
   }
 
   std::string
@@ -167,13 +167,13 @@ namespace ecto
   bool
   tendril::required() const
   {
-    return constrained<bool>(constraints::Required(false));
+    return tagged(tags::Required(false));
   }
 
   void
   tendril::required(bool b)
   {
-    constrain(constraints::Required(b));
+    tag(tags::Required(b));
   }
 
   bool
@@ -202,9 +202,9 @@ namespace ecto
   }
 
   tendril&
-  tendril::constrain(const constraints::constraint_base& c)
+  tendril::tag(const tags::tags_base& c)
   {
-    return constrain(c.clone());
+    return tag(c.clone());
   }
 
   bool
@@ -244,7 +244,7 @@ namespace ecto
     dirty_ = false;
   }
 
-  void tendril::extract(boost::python::object& obj) const
+  void tendril::sample(boost::python::object& obj) const
   {
     (*pycopy_to_)(const_cast<tendril&>(*this),const_cast<boost::python::object&>(obj));
   }

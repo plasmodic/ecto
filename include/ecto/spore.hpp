@@ -202,17 +202,17 @@ namespace ecto
     }
 
     ecto::spore<T>&
-    constrain(const ecto::constraints::constraint_base& constraint)
+    constrain(const ecto::tags::tags_base& constraint)
     {
-      p()->constrain(constraint);
+      p()->tag(constraint);
       return *this;
     }
 
     template<typename ConstrainType>
     const ConstrainType&
-    constrained(const ecto::constraints::constraint<ConstrainType>& constraint)
+    constrained(const ecto::tags::tag_<ConstrainType>& constraint)
     {
-      return p()->constrained(constraint);
+      return p()->tagged(constraint);
     }
 
   private:

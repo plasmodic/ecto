@@ -104,7 +104,7 @@ namespace ecto
     viz() const;
 
     /**
-     * \brief check that all constraints on the graph are satisified.
+     * \brief check that all tags on the graph are satisified.
      * This will throw on errors in the graph, including, if required inputs are not connected
      * if required outputs are not connected, if there are cycles, etc...
      */

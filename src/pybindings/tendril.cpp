@@ -43,7 +43,7 @@ struct ObjectSetter
 bp::object tendril_get_val(tendril::ptr t)
 {
   bp::object o;
-  t->extract(o);
+  t->sample(o);
   return o;
 }
 
@@ -73,7 +73,7 @@ bool tendril_required(tendril::ptr t)
 
 bp::object tendril_constrained(tendril::ptr t, const std::string& key)
 {
-  ecto::constraints::ptr cp = t->get_constraint(key);
+  ecto::tags::ptr cp = t->get_tag(key);
   if(cp)
     return cp->extract();
   else
@@ -84,7 +84,7 @@ struct Constraints
 
 };
 
-using namespace ecto::constraints;
+using namespace ecto::tags;
 void wrapConnection(){
   bp::class_<tendril,boost::shared_ptr<tendril> > Tendril_("Tendril", 
       "The Tendril is the slendor winding organ of ecto.\n"

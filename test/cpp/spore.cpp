@@ -111,9 +111,9 @@ TEST(SporeTest, Callbacks)
   }
 }
 
-using ecto::constraints::Min;
-using ecto::constraints::Max;
-using ecto::constraints::Required;
+using ecto::tags::Min;
+using ecto::tags::Max;
+using ecto::tags::Required;
 
 TEST(SporeTest, Constraints)
 {

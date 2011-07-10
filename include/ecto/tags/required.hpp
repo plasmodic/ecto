@@ -2,10 +2,10 @@
 #include <ecto/tags.hpp>
 namespace ecto
 {
-  namespace constraints
+  namespace tags
   {
 
-    struct Required_: constraint_cloner<Required_, bool>
+    struct Required_: tag_CRTP_<Required_, bool>
     {
     };
 

@@ -2,11 +2,11 @@
 #include <ecto/tags.hpp>
 namespace ecto
 {
-  namespace constraints
+  namespace tags
   {
 
     template<typename T>
-    struct Max_: constraint_cloner<Max_<T>, T>
+    struct Max_: tag_CRTP_<Max_<T>, T>
     {
     };
 

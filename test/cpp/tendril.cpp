@@ -171,7 +171,7 @@ TEST(TendrilTest, SyntacticSugar)
 
 }
 
-using namespace ecto::constraints;
+using namespace ecto::tags;
 TEST(TendrilTest, Constraints)
 {
   int x = 2;
@@ -179,16 +179,16 @@ TEST(TendrilTest, Constraints)
   std::string z = "z";
 
   ecto::tendril tx(x,"doc x"),ty(y,"doc y"),tz(z,"doc z");
-  EXPECT_FALSE(tx.constrained(Required()));
+  EXPECT_FALSE(tx.tagged(Required()));
   tx.required(true);
-  EXPECT_TRUE(tx.constrained(Required()));
-  tx.constrain(Required(false));
-  EXPECT_FALSE(tx.constrained(Required()));
-  tx.constrain(Required(true));
-  EXPECT_TRUE(tx.constrained(Required()));
+  EXPECT_TRUE(tx.tagged(Required()));
+  tx.tag(Required(false));
+  EXPECT_FALSE(tx.tagged(Required()));
+  tx.tag(Required(true));
+  EXPECT_TRUE(tx.tagged(Required()));
 
   std::cout << tx.doc() << std::endl;
-  std::cout << tx.constrained(Required(false)) << std::endl;
-  std::cout << tx.constrained(Required(false)) << std::endl;
+  std::cout << tx.tagged(Required(false)) << std::endl;
+  std::cout << tx.tagged(Required(false)) << std::endl;
 
 }

@@ -313,20 +313,19 @@ namespace ecto
     bool
     clean() const;
 
-    tendril& constrain(constraints::ptr c);
-    tendril& constrain(const constraints::constraint_base& c);
-    constraints::ptr get_constraint(const std::string& key) const;
-
+    tendril& tag(tags::ptr c);
+    tendril& tag(const tags::tags_base& c);
+    tags::ptr get_tag(const std::string& key) const;
     template <typename T>
-    const T& constrained(const constraints::constraint<T>& _c) const
+    const T& tagged(const tags::tag_<T>& _c) const
     {
-      constraints::ptr cp = get_constraint(_c.key());
+      tags::ptr cp = get_tag(_c.key());
       if(!cp)
         return _c.value();
-      return dynamic_cast<constraints::constraint<T>&>(*cp).value();
+      return dynamic_cast<tags::tag_<T>&>(*cp).value();
     }
 
-    void extract(boost::python::object&) const;
+    void sample(boost::python::object&) const;
     void set(const boost::python::object&);
   private:
 
@@ -372,7 +371,7 @@ namespace ecto
     bool dirty_, default_, user_supplied_;
     std::vector<TendrilJob> jobs_onetime_,jobs_persistent_;
     boost::mutex mtx_;
-    std::map<std::string,constraints::ptr> constraints_;
+    tags::tags tags_;
     PyCopier_base* pycopy_to_,* pycopy_from_;
   };
 

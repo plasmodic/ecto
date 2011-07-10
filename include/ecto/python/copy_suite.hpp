@@ -51,7 +51,7 @@ namespace boost { namespace python {
              Copyable *newCopyable(new Copyable(bp::extract<const Copyable &>(copyable)));
              bp::object result(bp::detail::new_reference(managingPyObject(newCopyable)));
          
-             bp::extract<bp::dict>(result.attr("__dict__"))().update(
+             bp::sample<bp::dict>(result.attr("__dict__"))().update(
                  copyable.attr("__dict__"));
          
              return result;
@@ -72,8 +72,8 @@ namespace boost { namespace python {
              size_t copyableId = (size_t)(copyable.ptr());
              memo[copyableId] = result;
          
-             bp::extract<bp::dict>(result.attr("__dict__"))().update(
-                 deepcopy(bp::extract<bp::dict>(copyable.attr("__dict__"))(),memo));
+             bp::sample<bp::dict>(result.attr("__dict__"))().update(
+                 deepcopy(bp::sample<bp::dict>(copyable.attr("__dict__"))(),memo));
          
              return result;
          }
