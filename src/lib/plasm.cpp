@@ -213,6 +213,13 @@ namespace ecto
     std::transform(impl_->mv_map.begin(), impl_->mv_map.end(), std::back_inserter(c), impl::CVMtoCell());
     return c;
   }
+  void plasm::configure_all()
+  {
+    BOOST_FOREACH(impl::ModuleVertexMap::value_type& x, impl_->mv_map)
+    {
+      x.first->configure();
+    }
+  }
 
   void
   plasm::check() const

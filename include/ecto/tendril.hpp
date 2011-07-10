@@ -313,16 +313,14 @@ namespace ecto
     bool
     clean() const;
 
-    tendril& tag(tags::ptr c);
+    tags::tags& tags();
     tendril& tag(const tags::tags_base& c);
-    tags::ptr get_tag(const std::string& key) const;
+    tags::ptr get_tag(const char* key) const;
+
     template <typename T>
     const T& tagged(const tags::tag_<T>& _c) const
     {
-      tags::ptr cp = get_tag(_c.key());
-      if(!cp)
-        return _c.value();
-      return dynamic_cast<tags::tag_<T>&>(*cp).value();
+      return tags_.tagged(_c);
     }
 
     void sample(boost::python::object&) const;

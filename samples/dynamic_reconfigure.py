@@ -28,16 +28,20 @@ class Form(QDialog):
             vlayout.addWidget(QLabel(x.name()))
             vlayout.addWidget(QLabel("Parameters"))
             for p in x.params:
-                name = p.key()
-                param = p.data()
-                print name,param.doc, param.type_name, param.val
-                label = QLabel(name)
-                edit = QLineEdit(str(param.val))
-                hlayout = QHBoxLayout()
-                hlayout.addWidget(label)
-                hlayout.addWidget(edit)
-                vlayout.addLayout(hlayout)
-                self.edits.append((edit,x,name))
+                dynamic = p.data().tagged(ecto.Tags.Dynamic)
+                if dynamic:
+                    name = p.key()
+                    param = p.data()
+                    print name,param.doc, param.type_name, param.val
+                    label = QLabel(name)
+                    edit = QLineEdit(str(param.val))
+                    hlayout = QHBoxLayout()
+                    hlayout.addWidget(label)
+                    hlayout.addWidget(edit)
+                    vlayout.addLayout(hlayout)
+                    self.edits.append((edit,x,name))
+                else:
+                    print p.key(), " is not tagged dynamically reconfigurable."
         vlayout.addWidget(self.button)
         self.setLayout(vlayout)
         

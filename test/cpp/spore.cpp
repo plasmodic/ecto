@@ -111,22 +111,20 @@ TEST(SporeTest, Callbacks)
   }
 }
 
-using ecto::tags::Min;
-using ecto::tags::Max;
-using ecto::tags::Required;
+namespace tags = ecto::tags;
 
 TEST(SporeTest, Constraints)
 {
   {
     tendril::ptr p = tendril::make_tendril<double>();
     spore<double> d = p; //p has to stay in scope...
-    d.constrain(Min<double>())
-     .constrain(Max<double>(10))
-     .constrain(Required(true));
+    d.tags() << tags::Min()
+             << tags::Max(10)
+             << tags::Required(true);
 
-    EXPECT_TRUE(std::numeric_limits<double>::min() == d.constrained(Min<double>()));
-    EXPECT_TRUE(10 == d.constrained(Max<double>()));
-    EXPECT_TRUE(d.constrained(Required()));
+    EXPECT_TRUE(std::numeric_limits<double>::min() == d.tagged(tags::Min()));
+    EXPECT_TRUE(10 == d.tagged(tags::Max()));
+    EXPECT_TRUE(d.tagged(tags::Required()));
 
     cbs<double> c;
     d.set_callback(boost::ref(c));

@@ -3,6 +3,8 @@
 #include <ecto/util.hpp>
 #include <boost/shared_ptr.hpp>
 #include <numeric>
+#include <map>
+#include <string>
 namespace ecto
 {
   namespace tags
@@ -13,10 +15,10 @@ namespace ecto
       ~tags_base()
       {
       }
-      std::string
+      const char*
       key() const
       {
-        return name_of(typeid(*this));
+        return typeid(*this).name();
       }
 
       virtual
@@ -66,8 +68,25 @@ namespace ecto
       }
     };
 
-    struct tags : std::map<std::string, ptr>
+    struct tags
     {
+      void tag(ptr c);
+      void tag(const tags_base& c);
+      ptr get_tag(const char * key) const;
+      ptr get_tag(const tags_base& c) const;
+      template <typename T>
+      const T& tagged(const tag_<T>& _c) const
+      {
+        ptr cp = get_tag(_c);
+        if(!cp)
+          return _c.value();
+        return dynamic_cast<tag_<T>&>(*cp).value();
+      }
+      tags& operator<<(const tags_base& c);
+      tags& operator<<(const tags& c);
+    private:
+      typedef std::map<std::string, ptr> tag_map;
+      tag_map tags_;
     };
 
   }

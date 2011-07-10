@@ -10,11 +10,10 @@ namespace ecto
     {
     };
 
-    template<typename T>
-    Min_<T>
-    Min(const T& val = std::numeric_limits<T>::min())
+    Min_<double>
+    Min(double val = std::numeric_limits<double>::min())
     {
-      Min_<T> c;
+      Min_<double> c;
       c.val_ = val;
       return c;
     }

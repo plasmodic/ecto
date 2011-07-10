@@ -125,9 +125,9 @@ namespace ecto
     ReturnCode process();
 
     /**
-     * \brief This should be called at the end of life for the cell, and signals immenent destruction.
+     * \brief This should be called at the end of life for the cell, and signals imminent destruction.
      *
-     * Will dispatch the clients destroy code. After this call, do not call any other functions.
+     * Will dispatch the client's destroy code. After this call, do not call any other functions.
      */
     void destroy();
 
@@ -343,10 +343,11 @@ namespace ecto
     {
       //the cell may not be allocated here, so check pointer.
       if (!thiz)
-        {
-          thiz.reset(new Cell);
-        }
-      configure(int_<has_f<Cell>::configure> (), params,inputs,outputs);
+      {
+        thiz.reset(new Cell);
+        //configure is only called once.
+        configure(int_<has_f<Cell>::configure> (), params,inputs,outputs);
+      }
     }
 
     ReturnCode process(not_implemented, const tendrils& ,
@@ -363,8 +364,7 @@ namespace ecto
 
     ReturnCode dispatch_process(tendrils& inputs, tendrils& outputs)
     {
-      if (!thiz)
-        dispatch_configure(parameters,this->inputs,outputs);
+      dispatch_configure(parameters,this->inputs,outputs);
       return process(int_<has_f<Cell>::process> (), inputs, outputs);
     }
 

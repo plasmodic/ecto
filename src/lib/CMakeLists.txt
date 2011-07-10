@@ -8,6 +8,7 @@ add_library(ecto SHARED
   log.cpp
   except.cpp
   profile.cpp
+  tags.cpp
   scheduler/invoke.cpp
   scheduler/singlethreaded.cpp
   scheduler/threadpool.cpp

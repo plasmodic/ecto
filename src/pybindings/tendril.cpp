@@ -71,15 +71,15 @@ bool tendril_required(tendril::ptr t)
   return t->required();
 }
 
-bp::object tendril_constrained(tendril::ptr t, const std::string& key)
+bp::object tendril_tagged(tendril::ptr t, const std::string& key)
 {
-  ecto::tags::ptr cp = t->get_tag(key);
+  ecto::tags::ptr cp = t->get_tag(key.c_str());
   if(cp)
     return cp->extract();
   else
     return bp::object();
 }
-struct Constraints
+struct Tags
 {
 
 };
@@ -104,15 +104,15 @@ void wrapConnection(){
     "May be None if python bindings for the type held do not have boost::python bindings available from the current scope."
     );
     Tendril_.def("set",tendril_set_val, "Assuming the value held by the tendril has boost::python bindings,\nthis will copy the value of the given python object into the value held by the tendril.");
-    Tendril_.def("constrained",tendril_constrained, "Get a particular constraint.");
+    Tendril_.def("tagged",tendril_tagged, "Get a particular tag.");
     Tendril_.def("notify",&tendril::notify, "Force updates.");
 
-    bp::scope constraints = bp::class_<Constraints>("constraints");
-    constraints.attr("Min") = Min<double>().key();
-    constraints.attr("Max") = Max<double>().key();
-    constraints.attr("Required") = Required().key();
-    constraints.attr("Doc") = Doc("").key();
-    constraints.attr("Dynamic") = Dynamic().key();
+    bp::scope tags_class = bp::class_<Tags>("Tags");
+    tags_class.attr("Min") = Min().key();
+    tags_class.attr("Max") = Max().key();
+    tags_class.attr("Required") = Required().key();
+    tags_class.attr("Doc") = Doc("").key();
+    tags_class.attr("Dynamic") = Dynamic().key();
 
 
 }

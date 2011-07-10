@@ -10,11 +10,10 @@ namespace ecto
     {
     };
 
-    template<typename T>
-    Max_<T>
-    Max(const T& val = std::numeric_limits<T>::max())
+    Max_<double>
+    Max(double val = std::numeric_limits<double>::max())
     {
-      Max_<T> c;
+      Max_<double> c;
       c.val_ = val;
       return c;
     }

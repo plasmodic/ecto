@@ -131,6 +131,11 @@ namespace ecto
     std::vector<cell::ptr> cells() const;
 
     /**
+     * \brief Calls configure on all modules, if configure has not already been called.
+     */
+    void configure_all();
+
+    /**
      * \brief Execute using a predefined scheduler.
      */
     int

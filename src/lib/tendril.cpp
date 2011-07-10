@@ -1,6 +1,7 @@
 #include <ecto/tendril.hpp>
 #include <ecto/tags/doc.hpp>
 #include <ecto/tags/required.hpp>
+#include <ecto/tags/dynamic.hpp>
 #include <boost/python.hpp>
 namespace ecto
 {
@@ -88,7 +89,7 @@ namespace ecto
 
   void tendril::set_doc(const std::string& doc_str)
   {
-    tag(tags::Doc(doc_str));
+    tags_ << tags::Doc(doc_str);
   }
 
   void tendril::enqueue_oneshot(TendrilJob job)
@@ -100,6 +101,7 @@ namespace ecto
   {
     boost::mutex::scoped_lock lock(mtx_);
     jobs_persistent_.push_back(job);
+    tag(tags::Dynamic(true));//likely that the tendril supports dynamic update.
   }
 
   struct exec
@@ -141,15 +143,22 @@ namespace ecto
     }
     mark_clean();
   }
-  tendril& tendril::tag(tags::ptr c)
+
+  tags::tags& tendril::tags()
   {
-    tags_[c->key()] = c;
+    return tags_;
+  }
+
+  tendril&
+  tendril::tag(const tags::tags_base& c)
+  {
+    tags_ << c;
     return *this;
   }
-  tags::ptr tendril::get_tag(const std::string& key) const
+
+  tags::ptr tendril::get_tag(const char * key) const
   {
-    if(tags_.count(key)) return tags_.find(key)->second;
-    return tags::ptr();
+    return tags_.get_tag(key);
   }
 
   std::string
@@ -173,7 +182,7 @@ namespace ecto
   void
   tendril::required(bool b)
   {
-    tag(tags::Required(b));
+    tags_ << tags::Required(b);
   }
 
   bool
@@ -201,11 +210,7 @@ namespace ecto
     return !dirty_;
   }
 
-  tendril&
-  tendril::tag(const tags::tags_base& c)
-  {
-    return tag(c.clone());
-  }
+
 
   bool
   tendril::same_type(const tendril& rhs) const

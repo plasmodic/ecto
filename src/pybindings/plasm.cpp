@@ -141,6 +141,8 @@ namespace ecto
             "Its a list of tuples (from_cell, output_key, to_cell, input_key)");
       p.def("cells", plasm_get_cells, "Grabs the current set of cells that are in the plasm.");
       p.def("check", &plasm::check);
+      p.def("configure_all", &plasm::configure_all);
+
 
     }
 
