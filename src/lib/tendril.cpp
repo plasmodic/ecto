@@ -89,7 +89,7 @@ namespace ecto
 
   void tendril::set_doc(const std::string& doc_str)
   {
-    tags_ << tags::Doc(doc_str);
+    tags_ % tags::Doc(doc_str);
   }
 
   void tendril::enqueue_oneshot(TendrilJob job)
@@ -152,7 +152,7 @@ namespace ecto
   tendril&
   tendril::tag(const tags::tags_base& c)
   {
-    tags_ << c;
+    tags_ % c;
     return *this;
   }
 
@@ -182,7 +182,7 @@ namespace ecto
   void
   tendril::required(bool b)
   {
-    tags_ << tags::Required(b);
+    tags_ % tags::Required(b);
   }
 
   bool

@@ -28,7 +28,7 @@ namespace ecto
       return get_tag(c.key());
     }
     tags&
-    tags::operator<<(const tags_base& c)
+    tags::operator%(const tags_base& c)
     {
       tag(c);
       return *this;
@@ -51,7 +51,7 @@ namespace ecto
     };
 
     tags&
-    tags::operator<<(const tags& c)
+    tags::operator%(const tags& c)
     {
       std::for_each(c.tags_.begin(), c.tags_.end(), inserter(*this));
       return *this;

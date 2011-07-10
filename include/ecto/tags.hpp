@@ -82,8 +82,8 @@ namespace ecto
           return _c.value();
         return dynamic_cast<tag_<T>&>(*cp).value();
       }
-      tags& operator<<(const tags_base& c);
-      tags& operator<<(const tags& c);
+      tags& operator%(const tags_base& c);
+      tags& operator%(const tags& c);
       typedef std::map<std::string, ptr> tag_map;
       tag_map tags_;
     };

@@ -73,8 +73,8 @@ namespace ecto_test
       parameters.declare<std::string>("print_type")
           .set_default_val("double")
           .tags()
-          << tags::Doc("The type string for what i'm to print... int, double, bool, string.")
-          << tags::Dynamic(false)
+          % tags::Doc("The type string for what i'm to print... int, double, bool, string.")
+          % tags::Dynamic(false)
           //<< tags::PossibleValues("int|double|string|bool")
           ;
     }

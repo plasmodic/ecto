@@ -54,14 +54,14 @@ namespace ecto
    * The tendril operates as a value holder, so treat it as such. If you would like to pass it around without copies,
    * construct a pointer to tendril, perhaps with the make_tendril<T>() function.
    *
-   * Items held by the tendril must be copy constructable and copiable.
+   * Items held by the tendril must be copy constructible and copiable.
    */
   class tendril
   {
   public:
     typedef boost::shared_ptr<tendril> ptr;
     typedef boost::shared_ptr<const tendril> const_ptr;
-    typedef boost::function1<void,tendril&> TendrilJob;
+    typedef boost::function<void(tendril&)> TendrilJob;
     /**
      * \brief Creates a tendril that is initialized with the
      * tendril::none type. This should be fairly cheap.
@@ -290,7 +290,7 @@ namespace ecto
      */
     template<typename T>
     tendril&
-    set_callback(boost::function1<void,T> cb, bool oneshot = false)
+    set_callback(typename boost::function<void(T)> cb, bool oneshot = false)
     {
       typedef Caller<T> CallerT;
       enforce_type<T>();

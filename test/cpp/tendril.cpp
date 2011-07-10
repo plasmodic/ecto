@@ -172,7 +172,7 @@ TEST(TendrilTest, SyntacticSugar)
 }
 
 using namespace ecto::tags;
-TEST(TendrilTest, Constraints)
+TEST(TendrilTest, Tags)
 {
   int x = 2;
   float y = 3.14;

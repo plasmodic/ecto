@@ -47,9 +47,9 @@ namespace ecto_test
     static void declare_params(tendrils& parameters)
     {
       parameters.declare<double> ("seconds", "sleep this many seconds", 1.0).tags()
-          << tags::Dynamic(true)
-          << tags::Min(0)
-          << tags::Max(100)
+          % tags::Dynamic(true)
+          % tags::Min(0)
+          % tags::Max(100)
       ;
     }
 

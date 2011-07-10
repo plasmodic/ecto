@@ -97,7 +97,7 @@ namespace ecto
      * @param cb The callback
      * @return ref to this spore, for chaining.
      */
-    spore<T>& set_callback(boost::function1<void,T> cb)
+    spore<T>& set_callback(typename boost::function<void(T)> cb)
     {
       p()->set_callback(cb, false);
       return *this;

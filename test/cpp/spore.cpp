@@ -113,14 +113,14 @@ TEST(SporeTest, Callbacks)
 
 namespace tags = ecto::tags;
 
-TEST(SporeTest, Constraints)
+TEST(SporeTest, Tags)
 {
   {
     tendril::ptr p = tendril::make_tendril<double>();
     spore<double> d = p; //p has to stay in scope...
-    d.tags() << tags::Min()
-             << tags::Max(10)
-             << tags::Required(true);
+    d.tags() % tags::Min()
+             % tags::Max(10)
+             % tags::Required(true);
 
     EXPECT_TRUE(std::numeric_limits<double>::min() == d.tagged(tags::Min()));
     EXPECT_TRUE(10 == d.tagged(tags::Max()));

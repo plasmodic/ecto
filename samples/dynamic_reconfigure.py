@@ -24,6 +24,7 @@ class SlideSetter():
         nval =int(float(val)*self.scalar)
         if(nval !=self.slide.value()):
             self.slide.setValue(nval)
+
 class TendrilPoster():
     def __init__(self,tendril):
         self.tendril = tendril
