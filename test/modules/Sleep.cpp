@@ -31,6 +31,9 @@
 #include <ecto/registry.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <ecto/tags/dynamic.hpp>
+#include <ecto/tags/min.hpp>
+#include <ecto/tags/max.hpp>
+
 using ecto::tendrils;
 namespace ecto_test
 {
@@ -45,7 +48,9 @@ namespace ecto_test
     {
       parameters.declare<double> ("seconds", "sleep this many seconds", 1.0).tags()
           << tags::Dynamic(true)
-          ;
+          << tags::Min(0)
+          << tags::Max(100)
+      ;
     }
 
     static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)

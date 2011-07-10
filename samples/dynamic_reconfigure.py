@@ -6,6 +6,33 @@ import time
 import sys
 from PySide.QtCore import *
 from PySide.QtGui import *
+import decimal
+
+class TextSetter():
+    def __init__(self,text,scalar):
+        self.text = text
+        self.scalar = scalar
+    def onChange(self, val):
+        x = float(val)/self.scalar
+        self.text.setText(str(x))
+
+class SlideSetter():
+    def __init__(self,slide,scalar):
+        self.slide = slide
+        self.scalar = scalar
+    def onChange(self, val):
+        nval =int(float(val)*self.scalar)
+        if(nval !=self.slide.value()):
+            self.slide.setValue(nval)
+class TendrilPoster():
+    def __init__(self,tendril):
+        self.tendril = tendril
+    def onChange(self, val):
+        #use the type info from the tendril to
+        #cast the incoming value to the correct
+        #explicit type.
+        t = type(self.tendril.val)
+        self.tendril.set(t(val))
 
 class Form(QDialog):
      
@@ -13,45 +40,54 @@ class Form(QDialog):
         super(Form, self).__init__(parent)
         self.plasm = plasm
         self.setWindowTitle("Dynamic Reconfigure")
-        # Create widgets
-        self.button = QPushButton("Commit.")
-        # Set dialog layout
-        # Add button signal to greetings slot
-        self.button.clicked.connect(self.commit)
         plasm.configure_all()
-        # Greets the user
         self.generate_dialogs()
+        
     def generate_dialogs(self):
         self.edits = []
         vlayout = QVBoxLayout()
         for x in self.plasm.cells():
             for p in x.params:
                 param_layouts = []
-                dynamic = p.data().tagged(ecto.Tags.Dynamic)
-                if dynamic:
+                tags = p.data().tags()
+                if ecto.Tags.Dynamic in tags and tags[ecto.Tags.Dynamic]:
                     name = p.key()
                     param = p.data()
                     label = QLabel(name)
                     edit = QLineEdit(str(param.val))
+                    edit.textChanged.connect(TendrilPoster(param).onChange)
+                    v = QVBoxLayout()
                     hlayout = QHBoxLayout()
                     hlayout.addWidget(label)
                     hlayout.addWidget(edit)
-                    param_layouts.append(hlayout)
+                    v.addLayout(hlayout)
+                    if type(param.val) in (float,int):
+                        if ecto.Tags.Min in tags and ecto.Tags.Max in tags:
+                            slider = QSlider(Qt.Horizontal)
+                            min = tags[ecto.Tags.Min]
+                            max = tags[ecto.Tags.Max]
+                            scalar = 1000.0/(max - min) 
+                            slider.setMinimum(min * scalar)
+                            slider.setMaximum(max * scalar)
+                            edit.setValidator(QDoubleValidator(min,max,10,None))
+                            slider.setTickInterval(1)
+                            slider.valueChanged.connect(TextSetter(edit,scalar).onChange)
+                            edit.editingFinished.connect(SlideSetter(slider,scalar).onChange)
+                            v.addWidget(slider)
+                        elif ecto.Tags.Min in tags:
+                            min = tags[ecto.Tags.Min]
+                            edit.setValidator(QDoubleValidator(min,decimal.Infinity,10,None))
+                        elif ecto.Tags.Max in tags:
+                            max = tags[ecto.Tags.Max]
+                            edit.setValidator(QDoubleValidator(-decimal.Infinity,max,10,None))
+                    param_layouts.append(v)
                     self.edits.append((edit,x,name))
                 if len(param_layouts) > 0:
                     vlayout.addWidget(QLabel(x.name()))
                     vlayout.addWidget(QLabel("Parameters"))
                     for x in param_layouts:
                         vlayout.addLayout(x)
-        vlayout.addWidget(self.button)
         self.setLayout(vlayout)
-        
-    def commit(self):
-        for edit,cell,param_name in self.edits:
-            t = type(cell.params[param_name])
-            cell.params.__setattr__(param_name,t(edit.text()))
-    def update_vals(self):
-        pass
 
 def test_parameter_callbacks():
     generate = ecto_test.Generate()

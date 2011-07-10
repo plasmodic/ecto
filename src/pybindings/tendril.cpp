@@ -7,6 +7,8 @@
 #include <ecto/tags/doc.hpp>
 #include <ecto/tags/dynamic.hpp>
 
+#include <boost/foreach.hpp>
+
 #include "setter.hpp"
 
 namespace bp = boost::python;
@@ -79,12 +81,24 @@ bp::object tendril_tagged(tendril::ptr t, const std::string& key)
   else
     return bp::object();
 }
+namespace tags = ecto::tags;
+
+bp::dict tendril_tags(tendril::ptr t)
+{
+  bp::dict ts;
+  typedef std::map<std::string, tags::ptr>::value_type vtype;
+  BOOST_FOREACH(const vtype& x, t->tags().tags_)
+  {
+    ts[x.first] = x.second->extract();
+  }
+  return ts;
+}
+
 struct Tags
 {
 
 };
 
-using namespace ecto::tags;
 void wrapConnection(){
   bp::class_<tendril,boost::shared_ptr<tendril> > Tendril_("Tendril", 
       "The Tendril is the slendor winding organ of ecto.\n"
@@ -105,14 +119,15 @@ void wrapConnection(){
     );
     Tendril_.def("set",tendril_set_val, "Assuming the value held by the tendril has boost::python bindings,\nthis will copy the value of the given python object into the value held by the tendril.");
     Tendril_.def("tagged",tendril_tagged, "Get a particular tag.");
+    Tendril_.def("tags",tendril_tags, "Get a dict of tags, 'key':value.");
     Tendril_.def("notify",&tendril::notify, "Force updates.");
 
     bp::scope tags_class = bp::class_<Tags>("Tags");
-    tags_class.attr("Min") = Min().key();
-    tags_class.attr("Max") = Max().key();
-    tags_class.attr("Required") = Required().key();
-    tags_class.attr("Doc") = Doc("").key();
-    tags_class.attr("Dynamic") = Dynamic().key();
+    tags_class.attr("Min") = tags::Min().key();
+    tags_class.attr("Max") = tags::Max().key();
+    tags_class.attr("Required") = tags::Required().key();
+    tags_class.attr("Doc") = tags::Doc("").key();
+    tags_class.attr("Dynamic") = tags::Dynamic().key();
 
 
 }

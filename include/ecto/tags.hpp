@@ -84,7 +84,6 @@ namespace ecto
       }
       tags& operator<<(const tags_base& c);
       tags& operator<<(const tags& c);
-    private:
       typedef std::map<std::string, ptr> tag_map;
       tag_map tags_;
     };
