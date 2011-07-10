@@ -37,7 +37,7 @@
 
 #include <ecto/util.hpp> //name_of
 #include <ecto/except.hpp>
-#include <ecto/constraints.hpp>
+#include <ecto/tags.hpp>
 #include <stdexcept>
 #include <string>
 #include <set>
@@ -119,14 +119,6 @@ namespace ecto
     tendril&
     operator=(const tendril& rhs);
 
-    template<typename T>
-    tendril&
-    operator=(const T& value)
-    {
-      get<T>() = value;
-      return *this;
-    }
-
     /**
      * \brief Copies the value of the given tendril into this one.
      * @param rhs
@@ -153,11 +145,8 @@ namespace ecto
      * @return A very descriptive human readable string of whatever
      * the tendril is holding on to.
      */
-    inline std::string
-    doc() const
-    {
-      return constrained<std::string>(constraints::Doc("TODO: Doc me."));
-    }
+    std::string
+    doc() const;
 
     /**
      * \brief The doc for this tendril is runtime defined, so you may want to update it.
@@ -181,15 +170,9 @@ namespace ecto
       }
     }
 
-    void required(bool b)
-    {
-      constrain(constraints::Required(b));
-    }
+    void required(bool b);
 
-    bool required() const
-    {
-      return constrained<bool>(constraints::Required(false));;
-    }
+    bool required() const;
 
     /**
      * Given T this will get the type from the tendril, also enforcing type with an exception.
@@ -247,29 +230,14 @@ namespace ecto
      * @param rhs The tendril to test against.
      * @return true if they are the same type.
      */
-    inline bool
-    same_type(const tendril& rhs) const
-    {
-      return type_name() == rhs.type_name();
-    }
+    bool
+    same_type(const tendril& rhs) const;
 
-    inline bool
-    compatible_type(const tendril& rhs) const
-    {
-      if (same_type(rhs))
-        return true;
-      return is_type<none>() || rhs.is_type<none>() || is_type<boost::python::object>()
-             || rhs.is_type<boost::python::object>();
-    }
+    bool
+    compatible_type(const tendril& rhs) const;
 
-    inline void
-    enforce_compatible_type(const tendril& rhs) const
-    {
-      if (!compatible_type(rhs))
-      {
-        throw except::TypeMismatch(type_name() + " is not a " + rhs.type_name());
-      }
-    }
+    void
+    enforce_compatible_type(const tendril& rhs) const;
 
     /**
      * \brief runtime check if the tendril is of the given type, this will throw.
@@ -297,17 +265,11 @@ namespace ecto
 
     //! The value that this tendril holds was supplied by the user at some point.
     bool
-    user_supplied() const
-    {
-      return user_supplied_;
-    }
+    user_supplied() const;
 
     //! The tendril was initialized with default value.
     bool
-    has_default() const
-    {
-      return default_;
-    }
+    has_default() const;
 
     //! A none type for tendril when the tendril is uninitialized.
     struct none
@@ -331,25 +293,14 @@ namespace ecto
 
     //! The tendril has likely been modified since the last time that notify has beend called.
     bool
-    dirty() const
-    {
-      return dirty_;
-    }
+    dirty() const;
 
     //! The tendril has notified its callback if one was registered since it was changed.
     bool
-    clean() const
-    {
-      return !dirty_;
-    }
-
-
+    clean() const;
 
     tendril& constrain(constraints::ptr c);
-    inline tendril& constrain(const constraints::constraint_base& c)
-    {
-      return constrain(c.clone());
-    }
+    tendril& constrain(const constraints::constraint_base& c);
     constraints::ptr get_constraint(const std::string& key) const;
 
     template <typename T>
@@ -451,22 +402,17 @@ namespace ecto
       }
 
       T t; //!< value holder
-      boost::function1<void, T> cb; //!< On change callback.
+      boost::function<void(T)> cb; //!< On change callback.
     };
 
     static holder_base::ptr none_holder_;
 
     void
-    mark_dirty()
-    {
-      dirty_ = true;
-      user_supplied_ = true;
-    }
+    mark_dirty();
+
     void
-    mark_clean()
-    {
-      dirty_ = false;
-    }
+    mark_clean();
+
     tendril(holder_base::ptr impl);
     boost::shared_ptr<holder_base> holder_;
     bool dirty_, default_, user_supplied_;
@@ -616,17 +562,6 @@ namespace ecto
   }
 
 }
-
-//ecto::tendril&
-//operator<<(ecto::tendril& rhs,const ecto::constraints::constraint_base& constraint);
-//
-//template<typename T>
-//ecto::tendril&
-//operator<<(ecto::tendril& t, boost::function<void(T)> cb)
-//{
-//  t.set_callback(cb);
-//  return t;
-//}
 
 template<typename T>
 void

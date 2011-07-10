@@ -1,4 +1,5 @@
 #include <ecto/tendril.hpp>
+#include <ecto/common_tags.hpp>
 namespace ecto
 {
 
@@ -139,6 +140,92 @@ namespace ecto
   {
     if(constraints_.count(key)) return constraints_.find(key)->second;
     return constraints::ptr();
+  }
+
+  std::string
+  tendril::doc() const
+  {
+    return constrained<std::string>(constraints::Doc("TODO: Doc me."));
+  }
+
+  void
+  tendril::required(bool b)
+  {
+    constrain(constraints::Required(b));
+  }
+
+  bool
+  tendril::required() const
+  {
+    return constrained<bool>(constraints::Required(false));;
+  }
+
+  bool
+  tendril::user_supplied() const
+  {
+    return user_supplied_;
+  }
+
+  bool
+  tendril::has_default() const
+  {
+    return default_;
+  }
+
+  bool
+  tendril::dirty() const
+  {
+    return dirty_;
+  }
+
+  //! The tendril has notified its callback if one was registered since it was changed.
+  bool
+  tendril::clean() const
+  {
+    return !dirty_;
+  }
+
+  tendril&
+  tendril::constrain(const constraints::constraint_base& c)
+  {
+    return constrain(c.clone());
+  }
+
+  bool
+  tendril::same_type(const tendril& rhs) const
+  {
+    return type_name() == rhs.type_name();
+  }
+
+  bool
+  tendril::compatible_type(const tendril& rhs) const
+  {
+    if (same_type(rhs))
+      return true;
+    return is_type<none>() || rhs.is_type<none>() || is_type<boost::python::object>()
+           || rhs.is_type<boost::python::object>();
+  }
+
+  void
+  tendril::enforce_compatible_type(const tendril& rhs) const
+  {
+    if (!compatible_type(rhs))
+    {
+      throw except::TypeMismatch(type_name() + " is not a " + rhs.type_name());
+    }
+  }
+
+
+  void
+  tendril::mark_dirty()
+  {
+    dirty_ = true;
+    user_supplied_ = true;
+  }
+  void
+  tendril::mark_clean()
+  {
+    dirty_ = false;
   }
 
 }

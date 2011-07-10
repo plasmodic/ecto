@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <ecto/ecto.hpp>
+#include <ecto/common_tags.hpp>
 
 using ecto::tendril;
 using ecto::spore;

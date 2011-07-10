@@ -1,7 +1,6 @@
 #include <ecto/tendril.hpp>
-
+#include <ecto/common_tags.hpp>
 #include <boost/python.hpp>
-
 #include <setter.hpp>
 
 namespace bp = boost::python;
@@ -93,14 +92,16 @@ void wrapConnection(){
     "May be None if python bindings for the type held do not have boost::python bindings available from the current scope."
     );
     Tendril_.def("set",tendril_set_val, "Assuming the value held by the tendril has boost::python bindings,\nthis will copy the value of the given python object into the value held by the tendril.");
-    Tendril_.def("constrained",tendril_constrained, "Get a dict of constraints.");
+    Tendril_.def("constrained",tendril_constrained, "Get a particular constraint.");
     Tendril_.def("notify",&tendril::notify, "Force updates.");
 
     bp::scope constraints = bp::class_<Constraints>("constraints");
     constraints.attr("Min") = Min<double>().key();
     constraints.attr("Max") = Max<double>().key();
-    constraints.attr("Required") = Max<double>().key();
-    constraints.attr("Min") = Max<double>().key();
+    constraints.attr("Required") = Required().key();
+    constraints.attr("Doc") = Doc("").key();
+    constraints.attr("Dynamic") = Dynamic().key();
+
 
 }
 }

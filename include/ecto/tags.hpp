@@ -50,7 +50,7 @@ namespace ecto
     };
 
     template<typename T, typename U>
-    struct constriaint_cloner_: constraint<U>
+    struct constraint_cloner: constraint<U>
     {
       boost::shared_ptr<constraint_base>
       clone() const
@@ -64,67 +64,6 @@ namespace ecto
       }
     };
 
-    struct Doc_: constriaint_cloner_<Doc_,std::string>
-    {
-
-    };
-
-    inline Doc_ Doc(const std::string& val)
-    {
-      Doc_ c;
-      c.val_ = val;
-      return c;
-    }
-
-    struct Required_: constriaint_cloner_<Required_,bool>
-    {
-    };
-
-    inline Required_ Required(bool val = false)
-    {
-      Required_ c;
-      c.val_ = val;
-      return c;
-    }
-
-    struct Dynamic_: constriaint_cloner_<Dynamic_,bool>
-    {
-    };
-
-    inline Dynamic_ Dynamic(bool val = false)
-    {
-      Dynamic_ c;
-      c.val_ = val;
-      return c;
-    }
-
-    template<typename T>
-    struct Min_: constriaint_cloner_<Min_<T>,T>
-    {
-    };
-
-    template<typename T>
-    Min_<T>
-    Min(const T& val = std::numeric_limits<T>::min())
-    {
-      Min_<T> c;
-      c.val_ = val;
-      return c;
-    }
-
-    template<typename T>
-    struct Max_: constriaint_cloner_<Max_<T>,T>
-    {
-    };
-
-    template<typename T>
-    Max_<T>
-    Max(const T& val = std::numeric_limits<T>::max())
-    {
-      Max_<T> c;
-      c.val_ = val;
-      return c;
-    }
   }
 }
 
