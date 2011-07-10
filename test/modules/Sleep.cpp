@@ -30,12 +30,12 @@
 #include <ecto/ecto.hpp>
 #include <ecto/registry.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
-
+#include <ecto/tags/dynamic.hpp>
 using ecto::tendrils;
 namespace ecto_test
 {
   namespace pt = boost::posix_time;
-
+  namespace tags = ecto::tags;
   struct Sleep
   {
     ecto::spore<double> sleep_sec;
@@ -43,7 +43,9 @@ namespace ecto_test
 
     static void declare_params(tendrils& parameters)
     {
-      parameters.declare<double> ("seconds", "sleep this many seconds", 1.0);
+      parameters.declare<double> ("seconds", "sleep this many seconds", 1.0).tags()
+          << tags::Dynamic(true)
+          ;
     }
 
     static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)

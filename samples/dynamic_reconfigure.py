@@ -18,30 +18,31 @@ class Form(QDialog):
         # Set dialog layout
         # Add button signal to greetings slot
         self.button.clicked.connect(self.commit)
+        plasm.configure_all()
         # Greets the user
         self.generate_dialogs()
     def generate_dialogs(self):
         self.edits = []
         vlayout = QVBoxLayout()
         for x in self.plasm.cells():
-            print x.name(),x.short_doc()
-            vlayout.addWidget(QLabel(x.name()))
-            vlayout.addWidget(QLabel("Parameters"))
             for p in x.params:
+                param_layouts = []
                 dynamic = p.data().tagged(ecto.Tags.Dynamic)
                 if dynamic:
                     name = p.key()
                     param = p.data()
-                    print name,param.doc, param.type_name, param.val
                     label = QLabel(name)
                     edit = QLineEdit(str(param.val))
                     hlayout = QHBoxLayout()
                     hlayout.addWidget(label)
                     hlayout.addWidget(edit)
-                    vlayout.addLayout(hlayout)
+                    param_layouts.append(hlayout)
                     self.edits.append((edit,x,name))
-                else:
-                    print p.key(), " is not tagged dynamically reconfigurable."
+                if len(param_layouts) > 0:
+                    vlayout.addWidget(QLabel(x.name()))
+                    vlayout.addWidget(QLabel("Parameters"))
+                    for x in param_layouts:
+                        vlayout.addLayout(x)
         vlayout.addWidget(self.button)
         self.setLayout(vlayout)
         
