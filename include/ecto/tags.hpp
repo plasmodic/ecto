@@ -27,6 +27,7 @@ namespace ecto
       boost::shared_ptr<constraint_base>
       clone() const = 0;
     };
+
     typedef boost::shared_ptr<constraint_base> ptr;
     template<typename T>
     struct constraint: constraint_base

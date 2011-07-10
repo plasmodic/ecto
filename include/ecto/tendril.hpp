@@ -30,17 +30,15 @@
 #include <boost/python.hpp>
 #include <boost/scoped_ptr.hpp>
 #include <boost/shared_ptr.hpp>
-#include <boost/weak_ptr.hpp>
 #include <boost/function.hpp>
 #include <boost/thread/mutex.hpp>
 #include <boost/any.hpp>
+
 #include <ecto/util.hpp> //name_of
 #include <ecto/except.hpp>
 #include <ecto/tags.hpp>
-#include <stdexcept>
+
 #include <string>
-#include <set>
-#include <sstream>
 #include <cstring>
 
 namespace ecto
@@ -65,7 +63,7 @@ namespace ecto
     typedef boost::shared_ptr<const tendril> const_ptr;
     typedef boost::function1<void,tendril&> TendrilJob;
     /**
-     * \brief default constructor, creates a tendril that is initialized with the
+     * \brief Creates a tendril that is initialized with the
      * tendril::none type. This should be fairly cheap.
      */
     tendril();
@@ -200,6 +198,17 @@ namespace ecto
       enforce_type<T>();
       //cast a void pointer to this type.
       val = boost::any_cast<const T&>(holder_);
+    }
+
+    template<typename T>
+    void
+    set(const T& val)
+    {
+      //throws on failure
+      enforce_type<T>();
+      //cast a void pointer to this type.
+      boost::any_cast<T&>(holder_) = val;
+      mark_dirty(); //definitely changed
     }
 
     /**

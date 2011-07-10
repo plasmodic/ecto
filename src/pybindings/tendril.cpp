@@ -1,7 +1,13 @@
-#include <ecto/tendril.hpp>
-#include <ecto/common_tags.hpp>
 #include <boost/python.hpp>
-#include <setter.hpp>
+
+#include <ecto/tendril.hpp>
+#include <ecto/tags/min.hpp>
+#include <ecto/tags/max.hpp>
+#include <ecto/tags/required.hpp>
+#include <ecto/tags/doc.hpp>
+#include <ecto/tags/dynamic.hpp>
+
+#include "setter.hpp"
 
 namespace bp = boost::python;
 

@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <ecto/ecto.hpp>
-#include <ecto/common_tags.hpp>
+#include <ecto/tags/required.hpp>
 TEST(TendrilTest, Dirtiness)
 {
   {

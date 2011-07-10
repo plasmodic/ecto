@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 #include <ecto/ecto.hpp>
-#include <ecto/common_tags.hpp>
+#include <ecto/tags/min.hpp>
+#include <ecto/tags/max.hpp>
+#include <ecto/tags/required.hpp>
 
 using ecto::tendril;
 using ecto::spore;

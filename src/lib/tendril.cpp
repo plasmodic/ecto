@@ -1,5 +1,6 @@
 #include <ecto/tendril.hpp>
-#include <ecto/common_tags.hpp>
+#include <ecto/tags/doc.hpp>
+#include <ecto/tags/required.hpp>
 #include <boost/python.hpp>
 namespace ecto
 {
@@ -157,12 +158,6 @@ namespace ecto
     return constrained<std::string>(constraints::Doc("TODO: Doc me."));
   }
 
-  void
-  tendril::required(bool b)
-  {
-    constrain(constraints::Required(b));
-  }
-
   std::string
   tendril::type_name() const
   {
@@ -173,6 +168,12 @@ namespace ecto
   tendril::required() const
   {
     return constrained<bool>(constraints::Required(false));
+  }
+
+  void
+  tendril::required(bool b)
+  {
+    constrain(constraints::Required(b));
   }
 
   bool
