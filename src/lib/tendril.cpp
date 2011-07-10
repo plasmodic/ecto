@@ -58,21 +58,29 @@ namespace ecto
     if (is_type<none>())
     {
       holder_ = rhs.holder_;
+      pycopy_from_ = rhs.pycopy_from_;
+      pycopy_to_ = rhs.pycopy_to_;
     }
     else
     {
       enforce_compatible_type(rhs);
-      if(rhs.is_type<none>())
+      if (rhs.is_type<none>())
       {
         throw ecto::except::ValueNone("You may not copy the value of a tendril that holds a tendril::none.");
-      }else if (rhs.is_type<boost::python::object>())
+      }
+      else if (rhs.is_type<boost::python::object>())
       {
-        set(rhs.get<boost::python::object>());
-      }else
+        set(rhs.read<boost::python::object>());
+      }
+      else if (is_type<boost::python::object>())
+      {
+        rhs.extract(get<boost::python::object>());
+      }
+      else
+      {
         holder_ = rhs.holder_;
+      }
     }
-    pycopy_from_ = rhs.pycopy_from_;
-    pycopy_to_ = rhs.pycopy_to_;
     mark_dirty();
   }
 
