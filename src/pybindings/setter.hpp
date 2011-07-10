@@ -12,16 +12,15 @@ using ecto::tendril;
 
 struct Setter
 {
-  Setter(tendril::ptr ot, bp::object obj):lt(ot)
+  Setter(tendril::ptr ot, bp::object obj)
   {
-    t.copy_value(*ot);//grabs type info.
-    t.set(obj);//copy value from the bp object.
+    proxy.copy_value(*ot);//grabs type info.
+    proxy.set(obj);//copy value from the bp object.
   }
-  void operator()()
+  void operator()(tendril& t)
   {
-    lt->copy_value(t);
+    t.copy_value(proxy);
   }
-  tendril::ptr lt;
-  tendril t;
+  tendril proxy;
 };
 }

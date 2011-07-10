@@ -28,13 +28,12 @@
  */
 #pragma once
 #include <boost/python.hpp>
-#include <boost/python/type_id.hpp>
+#include <boost/scoped_ptr.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/weak_ptr.hpp>
 #include <boost/function.hpp>
-#include <boost/bind.hpp>
 #include <boost/thread/mutex.hpp>
-
+#include <boost/any.hpp>
 #include <ecto/util.hpp> //name_of
 #include <ecto/except.hpp>
 #include <ecto/tags.hpp>
@@ -43,7 +42,6 @@
 #include <set>
 #include <sstream>
 #include <cstring>
-#include <deque>
 
 namespace ecto
 {
@@ -65,6 +63,7 @@ namespace ecto
   public:
     typedef boost::shared_ptr<tendril> ptr;
     typedef boost::shared_ptr<const tendril> const_ptr;
+    typedef boost::function1<void,tendril&> TendrilJob;
     /**
      * \brief default constructor, creates a tendril that is initialized with the
      * tendril::none type. This should be fairly cheap.
@@ -75,6 +74,9 @@ namespace ecto
      */
     ~tendril();
 
+    tendril(const tendril& rhs);
+    tendril& operator=(const tendril& rhs);
+
     /**
      * \brief A a convenience constructor for creating a tendril
      * that holds the given type.
@@ -83,41 +85,18 @@ namespace ecto
      * @param doc a documentation string
      */
     template<typename T>
-    tendril(const T& t, const std::string& doc)
-        :
-          holder_(new holder<T>(t)),
-          dirty_(false),
-          default_(true),
-          user_supplied_(false)
-    {
-      set_doc(doc);
-    }
+    tendril(const T& t, const std::string& doc);
 
     template<typename T>
     static tendril::ptr
     make_tendril()
     {
-      holder_base::ptr h(new holder<T>(T()));
-      tendril::ptr t(new tendril(h));
+      tendril::ptr t(new tendril());
+      t->holder_ = T();
+      t->pycopy_to_ = ToPython<T>::Copier.get();
+      t->pycopy_from_ = FromPython<T>::Copier.get();
       return t;
     }
-
-    /**
-     * \brief Copy the tendril by value.
-     * @param rhs the tendril to copy from
-     */
-    tendril(const tendril& rhs);
-
-    /**
-     * \brief Copies the tendril by value, so that the two tendrils will hold the same data.
-     * This is an explicit copy, and the tendrils will hold any shared references after this
-     * call.  The type of this tendril is ignored, so this may be used to completely override,
-     * existing types.  All fields are copied, docs, dirtiness, etc...
-     * @param rhs
-     * @return this
-     */
-    tendril&
-    operator=(const tendril& rhs);
 
     /**
      * \brief Copies the value of the given tendril into this one.
@@ -133,11 +112,8 @@ namespace ecto
      * @return the unmangled name, e.g. "cv::Mat", or
      * "pcl::PointCloud<pcl::PointXYZ>"
      */
-    inline const std::string&
-    type_name() const
-    {
-      return holder_->type_name();
-    }
+    std::string
+    type_name() const;
 
     /**
      * \brief A doc string for this tendril, "foo is for the input
@@ -163,10 +139,11 @@ namespace ecto
     void
     set_default_val(const T& val = T())
     {
+      enforce_type<T>();
       if (!user_supplied_) //user supplied?
       {
         default_ = true;
-        holder_.reset(new holder<T>(val));
+        holder_ = val;
       }
     }
 
@@ -199,7 +176,7 @@ namespace ecto
       enforce_type<T>();
       mark_dirty(); // likely changed..
       //cast a void pointer to this type.
-      return *static_cast<T*>(holder_->get());
+      return boost::any_cast<T&>(holder_);
     }
 
     /**\brief Read only access to the tendril.
@@ -212,17 +189,28 @@ namespace ecto
       //throws on failure
       enforce_type<T>();
       //cast a void pointer to this type.
-      return *static_cast<const T*>(holder_->get());
+      return  boost::any_cast<const T&>(holder_);
     }
+
+    template<typename T>
+    void
+    sample(T& val) const
+    {
+      //throws on failure
+      enforce_type<T>();
+      //cast a void pointer to this type.
+      val = boost::any_cast<const T&>(holder_);
+    }
+
     /**
      * \brief runtime check if the tendril is of the given type.
      * @return true if it is the type.
      */
     template<typename T>
-    inline bool
+    bool
     is_type() const
     {
-      return holder_base::check<T>(*holder_);
+      return 0 == std::strcmp(holder_.type().name(), typeid(T).name());
     }
 
     /**
@@ -249,19 +237,6 @@ namespace ecto
       if (!is_type<T>())
         throw except::TypeMismatch(type_name() + " is not a " + name_of<T>());
     }
-    /**
-     * \brief Get the boost::python version of the object (by value)
-     * @return A copy of the underlying object as a boost python object, will be None type if the conversion fails.
-     */
-    boost::python::object
-    extract() const;
-
-    /**
-     * \brief Set this tendril's value from the python object. This will copy the value
-     * @param o a python object holding a type compatible_type with this tendril. Will throw if the types are not compatible_type.
-     */
-    void
-    set(boost::python::object o);
 
     //! The value that this tendril holds was supplied by the user at some point.
     bool
@@ -276,6 +251,29 @@ namespace ecto
     {
     };
 
+    void enqueue_oneshot(TendrilJob job);
+    void enqueue_persistent(TendrilJob job);
+
+    void exec_oneshots();
+    void exec_persistent();
+
+    template<typename T>
+    struct Caller
+    {
+      typedef typename boost::function<void(T)> CbT;
+      Caller(CbT cb)
+          :
+            cb(cb)
+      {
+      }
+      void
+      operator()(tendril& t)
+      {
+        cb(t.get<T>());
+      }
+      CbT cb;
+    };
+
     /**
      * Register a typed callback with the tendril... Will throw on wrong type.
      * @param cb May be called by the notify function, if the tendril is dirty.
@@ -283,10 +281,17 @@ namespace ecto
      */
     template<typename T>
     tendril&
-    set_callback(typename boost::function<void(T)> cb);
+    set_callback(boost::function1<void,T> cb, bool oneshot = false)
+    {
+      typedef Caller<T> CallerT;
+      enforce_type<T>();
+      if(oneshot)
+        enqueue_oneshot(CallerT(cb));
+      else
+        enqueue_persistent(CallerT(cb));
+      return *this;
+    }
 
-    void enqueue(boost::function<void()> job);
-    void exec_queue();
     //! Notify the callback, only if this is dirty.
     void
     notify();
@@ -312,255 +317,73 @@ namespace ecto
       return dynamic_cast<constraints::constraint<T>&>(*cp).value();
     }
 
+    void extract(boost::python::object&) const;
+    void set(const boost::python::object&);
   private:
 
-    // ############################### NVI ####################################
-    struct holder_base
+    struct PyCopier_base
     {
-      typedef boost::shared_ptr<holder_base> ptr;
-
-      holder_base()
-      {
-      }
-      holder_base&
-      operator=(const holder_base& rhs);
       virtual
-      ~holder_base();
-      virtual const std::string&
-      type_name() const = 0;
-      virtual void*
-      get() = 0;
-      virtual bool
-      is_type(std::type_info const& ti) const = 0;
-      virtual void
-      setPython(boost::python::object o) = 0;
-      virtual boost::python::object
-      getPython() const = 0;
-      virtual void
-      copy_to(holder_base& holder) const = 0;
-      virtual ptr
-      clone() const = 0;
-      virtual void
-      trigger_callback() = 0;
-
-      template<typename T>
-      const T&
-      getT() const
-      {
-        void* tval = const_cast<holder_base*>(this)->get();
-        return *static_cast<T*>(tval);
-      }
-
-      template<typename T>
-      T&
-      getT()
-      {
-        return *static_cast<T*>(get());
-      }
-
-      //convenience functions for checking types
-      template<typename T>
-      static bool inline
-      check(holder_base& i);
-
-      template<typename T>
-      static inline void
-      checkThrow(holder_base& i) throw (except::TypeMismatch);
+      void operator()(tendril& t, boost::python::object& obj) = 0;
     };
 
     template<typename T>
-    struct holder: holder_base
+    struct ToPython: PyCopier_base
     {
-      holder(const T& t);
-
-      const std::string&
-      type_name() const;
-
-      bool
-      is_type(std::type_info const& ti) const;
-
-      void*
-      get();
-
+      static boost::scoped_ptr<PyCopier_base> Copier;
       void
-      setPython(boost::python::object o);
-
-      boost::python::object
-      getPython() const;
-
-      void
-      copy_to(holder_base& holder) const;
-
-      boost::shared_ptr<holder_base>
-      clone() const;
-
-      void
-      trigger_callback()
+      operator()(tendril& t, boost::python::object& obj)
       {
-        if (cb)
-          cb(t);
+        const T& v = t.read<T>();
+        boost::python::object o(v);
+        obj = o;
       }
-
-      T t; //!< value holder
-      boost::function<void(T)> cb; //!< On change callback.
     };
 
-    static holder_base::ptr none_holder_;
+    template<typename T>
+    struct FromPython: PyCopier_base
+    {
+      static boost::scoped_ptr<PyCopier_base> Copier;
+      void
+      operator()(tendril& t, boost::python::object& obj)
+      {
+        boost::python::extract<T> get_T(obj);
+        if (get_T.check())
+          t.get<T>() = get_T();
+        else
+          throw ecto::except::TypeMismatch("Could not convert python object to type : " + t.type_name());
+      }
+    };
 
     void
     mark_dirty();
-
     void
     mark_clean();
-
-    tendril(holder_base::ptr impl);
-    boost::shared_ptr<holder_base> holder_;
+    boost::any holder_;
     bool dirty_, default_, user_supplied_;
-    typedef boost::function<void()> FnT;
-    std::deque<FnT> queue_;
+    std::vector<TendrilJob> jobs_onetime_,jobs_persistent_;
     boost::mutex mtx_;
     std::map<std::string,constraints::ptr> constraints_;
+    PyCopier_base* pycopy_to_,* pycopy_from_;
   };
 
   template<typename T>
-  bool
-  tendril::holder_base::check(tendril::holder_base& i)
-  {
-    return i.is_type(typeid(T));
-  }
-
-  template<typename T>
-  void
-  tendril::holder_base::checkThrow(tendril::holder_base& i) throw (except::TypeMismatch)
-  {
-    if (!check<T>(i))
-      throw except::TypeMismatch(std::string(i.type_name() + " is not a " + name_of<T>()).c_str());
-  }
-
-  template<typename T>
-  tendril::holder<T>::holder(const T& t)
+  tendril::tendril(const T& t, const std::string& doc)
       :
-        t(t)
+        holder_(t),
+        dirty_(false),
+        default_(true),
+        user_supplied_(false)
   {
+    set_doc(doc);
+    pycopy_to_ = ToPython<T>::Copier.get();
+    pycopy_from_ = FromPython<T>::Copier.get();
   }
 
   template<typename T>
-  const std::string&
-  tendril::holder<T>::type_name() const
-  {
-    static const std::string name = name_of<T>();
-    return name;
-  }
-
+  boost::scoped_ptr<tendril::PyCopier_base> tendril::ToPython<T>::Copier(new ToPython<T>());
   template<typename T>
-  bool
-  tendril::holder<T>::is_type(const std::type_info& ti) const
-  {
-    return std::strcmp(typeid(T).name(), ti.name()) == 0;
-  }
-
-  template<typename T>
-  void*
-  tendril::holder<T>::get()
-  {
-    return &t;
-  }
-
-  template<>
-  inline void*
-  tendril::holder<tendril::none>::get()
-  {
-    throw ecto::except::ValueNone("You may not get the value of a tendril that holds a tendril::none.");
-  }
-
-  template<typename T>
-  void
-  tendril::holder<T>::setPython(boost::python::object o)
-  {
-    boost::python::extract<T> get_T(o);
-    if (get_T.check())
-      t = get_T();
-    else
-      throw ecto::except::TypeMismatch("Could not convert python object to type : " + type_name());
-  }
-
-  template<>
-  inline void
-  tendril::holder<boost::python::object>::setPython(boost::python::object o)
-  {
-    t = o;
-  }
-
-  template<typename T>
-  boost::python::object
-  tendril::holder<T>::getPython() const
-  {
-    try
-    {
-      boost::python::object o(t);
-      return o;
-    } catch (const boost::python::error_already_set&)
-    {
-      //silently handle no python wrapping
-      PyErr_Clear(); //Need to clear the error or python craps out. Try commenting out and running the doc tests.
-    }
-    return boost::python::object();
-  }
-
-  template<>
-  inline boost::python::object
-  tendril::holder<boost::python::object>::getPython() const
-  {
-    return t;
-  }
-
-  template<typename T>
-  void
-  tendril::holder<T>::copy_to(holder_base& holder) const
-  {
-    if (holder_base::check<T>(holder))
-      holder.getT<T>() = t;
-    else
-      holder.setPython(getPython());
-  }
-
-  template<>
-  inline void
-  tendril::holder<boost::python::object>::copy_to(holder_base& holder) const
-  {
-    if (t)
-      holder.setPython(t);
-    else
-      throw except::ValueNone("The python value is None, will not copy!.");
-  }
-
-  template<>
-  inline void
-  tendril::holder<tendril::none>::copy_to(holder_base& holder) const
-  {
-    throw ecto::except::ValueNone("You may not copy the value of a tendril that holds a tendril::none.");
-  }
-
-  template<typename T>
-  tendril::holder_base::ptr
-  tendril::holder<T>::clone() const
-  {
-    tendril::holder_base::ptr p(new holder<T>(t));
-    return p;
-  }
-
-  template<typename T>
-  tendril&
-  tendril::set_callback(boost::function<void(T)> cb)
-  {
-    typedef holder<T> holder_t;
-    enforce_type<T>();
-    holder_base* hb = holder_.get();
-    holder_t* ht = dynamic_cast<holder_t*>(hb);
-    ht->cb = cb;
-    return *this;
-  }
-
+  boost::scoped_ptr<tendril::PyCopier_base> tendril::FromPython<T>::Copier(new FromPython<T>());
 }
 
 template<typename T>

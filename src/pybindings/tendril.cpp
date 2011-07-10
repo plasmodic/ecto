@@ -30,14 +30,20 @@ void tendril_set_doc(tendril::ptr t, const std::string& doc)
   return t->set_doc(doc);
 }
 
+struct ObjectSetter
+{
+
+};
 bp::object tendril_get_val(tendril::ptr t)
 {
-  return t->extract();
+  bp::object o;
+  t->extract(o);
+  return o;
 }
 
 void tendril_set_val(tendril::ptr t, bp::object val)
 {
-  t->enqueue(Setter(t,val));
+  t->enqueue_oneshot(Setter(t,val));
 }
 bool tendril_user_supplied(tendril::ptr t)
 {

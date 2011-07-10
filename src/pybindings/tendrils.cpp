@@ -21,7 +21,9 @@ namespace ecto
 
       bp::object getTendril(tendrils& t, const std::string& name)
       {
-        return t[name]->extract();
+        bp::object o;
+        t[name]->extract(o);
+        return o;
       }
 
       std::string strTendril(const tendrils& t)
@@ -37,12 +39,14 @@ namespace ecto
       bp::object tendril_get(const tendrils& ts, const std::string& name)
       {
         const tendril& t = *ts.at(name);
-        return t.extract();
+        bp::object o;
+        t.extract(o);
+        return o;
       }
 
       void tendril_set(tendrils& ts, const std::string& name, bp::object obj)
       {
-        ts.at(name)->enqueue(Setter(ts.at(name),obj));
+        ts.at(name)->enqueue_oneshot(Setter(ts.at(name),obj));
       }
 
       void tendrils_notify(tendrils& ts)

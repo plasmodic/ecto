@@ -1,4 +1,5 @@
 #pragma once
+#include <boost/python.hpp>
 #include <ecto/util.hpp>
 #include <boost/shared_ptr.hpp>
 #include <numeric>

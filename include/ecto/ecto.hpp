@@ -96,8 +96,6 @@ namespace ecto
           }
         else 
           {
-            std::string valstring =
-              bp::extract<std::string>(value.attr("__repr__")());
             m->parameters.at(keystring)->set(value);
           }
       }

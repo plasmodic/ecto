@@ -115,7 +115,7 @@ TEST(TendrilTest, BoostPyness)
     EXPECT_THROW(
         {
           dt.copy_value(bpt);
-        }, ecto::except::ValueNone
+        }, ecto::except::TypeMismatch
    );
   }
   {
