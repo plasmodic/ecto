@@ -13,7 +13,7 @@ def test_random():
     plasm.connect(uni, "out", printer, "in")
     
     sched = ecto.schedulers.Singlethreaded(plasm)
-    sched.execute(100000)
+    sched.execute(niter=100000)
     while sched.running():
         print "."
         time.sleep(0.1)

@@ -22,7 +22,7 @@ def test_required_param():
     printer = ecto_test.Printer("Printy")
     plasm.connect(gen[:] >> req[:],
                    req[:] >> printer[:])
-    plasm.execute(3)
+    plasm.execute(niter=3)
     assert req.outputs.out == 6.2
 
 if __name__ == '__main__':
