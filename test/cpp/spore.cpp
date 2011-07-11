@@ -3,6 +3,7 @@
 #include <ecto/tags/min.hpp>
 #include <ecto/tags/max.hpp>
 #include <ecto/tags/required.hpp>
+#include <ecto/tags/enumeration.hpp>
 
 using ecto::tendril;
 using ecto::spore;
@@ -137,4 +138,24 @@ TEST(SporeTest, Tags)
     EXPECT_EQ(c.count, 1);
     EXPECT_EQ(c.val, 3.14);
   }
+}
+template <typename T, size_t size>
+void printz(T(&array)[size])
+{
+  for(size_t i = 0; i < size; ++i)
+  {
+    std::cout << array[i] << std::endl;
+  }
+}
+TEST(SporeTest, Enumeration)
+{
+  std::string Values[] =
+  { "Hello", "No Way", "Howdy do?" };
+
+  std::cout << sizeof(Values) / sizeof(std::string) << std::endl;
+  printz(Values);
+
+  tendril::ptr p = tendril::make_tendril<std::string>();
+  spore<std::string> d = p;
+  d.tags() % tags::Enumerate(Values);
 }

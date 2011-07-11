@@ -190,5 +190,5 @@ TEST(TendrilTest, Tags)
   std::cout << tx.doc() << std::endl;
   std::cout << tx.tagged(Required(false)) << std::endl;
   std::cout << tx.tagged(Required(false)) << std::endl;
-
 }
+

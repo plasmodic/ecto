@@ -6,6 +6,7 @@
 #include <ecto/tags/required.hpp>
 #include <ecto/tags/doc.hpp>
 #include <ecto/tags/dynamic.hpp>
+#include <ecto/tags/enumeration.hpp>
 
 #include <boost/foreach.hpp>
 
@@ -128,8 +129,9 @@ void wrapConnection(){
     tags_class.attr("Required") = tags::Required().key();
     tags_class.attr("Doc") = tags::Doc("").key();
     tags_class.attr("Dynamic") = tags::Dynamic().key();
-
-
+    tags_class.attr("EnumerationStr") = tags::Enumerate<std::string>().key();
+    tags_class.attr("EnumerationInt") = tags::Enumerate<int>().key();
+    tags_class.attr("EnumerationFloat") = tags::Enumerate<float>().key();
 }
 }
 }

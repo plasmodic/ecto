@@ -204,10 +204,18 @@ namespace ecto
     void
     set(const T& val)
     {
-      //throws on failure
-      enforce_type<T>();
-      //cast a void pointer to this type.
-      boost::any_cast<T&>(holder_) = val;
+      if(is_type<none>()) //handle none case.
+      {
+        holder_ = val;
+        pycopy_to_ = ToPython<T>::Copier.get();
+        pycopy_from_ = FromPython<T>::Copier.get();
+      }else
+      {
+        //throws on failure
+        enforce_type<T>();
+        //cast a void pointer to this type.
+        boost::any_cast<T&>(holder_) = val;
+      }
       mark_dirty(); //definitely changed
     }
 
@@ -396,7 +404,7 @@ template<typename T>
 void
 operator<<(ecto::tendril& rhs,const T& val)
 {
-  rhs.get<T>() = val;
+  rhs.set(val);
 }
 
 template<typename T>
@@ -404,14 +412,29 @@ void
 operator<<(const ecto::tendril::ptr& rhs,const T& val)
 {
   if(!rhs) throw std::runtime_error("Your tendril be null!");
-  rhs->get<T>() = val;
+  rhs->set(val);
+}
+
+template<>
+inline void
+operator<<(ecto::tendril& rhs,const ecto::tendril& val)
+{
+  rhs.copy_value(val);
+}
+
+template<>
+inline void
+operator<<(const ecto::tendril::ptr& rhs,const ecto::tendril::ptr& val)
+{
+  if(!rhs) throw std::runtime_error("Your tendril be null!");
+  rhs->copy_value(*val);
 }
 
 template<typename T>
 void
 operator>>(const ecto::tendril& rhs,T& val)
 {
-  val = rhs.read<T>();
+  rhs.sample(val);
 }
 
 template<typename T>
@@ -419,5 +442,5 @@ void
 operator>>(const ecto::tendril::ptr& rhs,T& val)
 {
   if(!rhs) throw std::runtime_error("Your tendril be null!");
-  val = rhs->read<T>();
+  rhs->sample(val);
 }
