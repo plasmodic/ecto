@@ -1,14 +1,16 @@
 cell
-======
-The cell is the basic unit of work for the ecto **DAG**.
+====
 
-anatomy of an an ecto cell
-----------------------------
+The cell is the basic unit of work for the ecto :ref:`DAG`.
+
+
+Anatomy of an an ecto cell
+--------------------------
 The following is a sketch of a user ecto cell.
 
 .. code-block:: c++
 
-  struct MyEctoCell
+  struct MyCell
   {
     static void declare_params(tendrils& params);
     static void declare_io(const tendrils& params, tendrils& in, tendrils& out);
@@ -17,47 +19,41 @@ The following is a sketch of a user ecto cell.
     void destroy();
   };
   
-The purpose of this interface is to expose as much information about what the cell does to ecto, while providing
-the implementer with a graceful degradation of functionality and form.  An ``ecto::cell`` can be thought of
-as having any number of inputs, outputs, and parameters, and each instance has a state, which is retained over each
-instance's lifetime.
+The purpose of this interface is to expose as much information about
+what the cell does to ecto, while providing the implementer with a
+graceful degradation of functionality and form.  An ``ecto::cell`` can
+be thought of as having any number of inputs, outputs, and parameters.
   
-life cycle of an ecto cell
-----------------------------
+Life cycle of an ecto cell
+--------------------------
 
-The ecto cell goes through a few states during its lifetime.
+The ecto cell goes through a few states during its lifetime.  
 
-* Parameters declared
-  This happens in a static function, before user cells are allocated.
-
-  **This function must succeed without incident**
+* ``MyCell::declare_params()`` is called once per cell (maybe more) *before*
+  user cells are allocated; herein the user communicates the cell's
+  parameters, doc strings, default values and constraints to the
+  system.  It must succeed without incident.
                                                 		
-* Inputs and Outputs declared 
+* ``MyCell::declare_io()`` is called once per cell (maybe more), before
+  allocation, to describe to the system the inputs and outputs of the
+  cell, given the set of parameters supplied.  This function also must
+  succeed without incident.
 
-  Given parameters that have been declared and optionally set by an
-  external user, the cell may declare inputs and outputs. Again this
-  happens in a static function so that the cell need not be
-  allocated.
+* ``MyCell::MyCell()``.  The cell will be default constructed.  There
+  is currently no facility for providing arguments to a cell's
+  constructor.
 
-  **This function must succeed without incident**
+* ``MyCell::configure()`` will be called after the cell has been
+  allocated. At this time the user should cache parameters or register
+  parameter change callbacks. This will only be called once.
 
-* Cell allocated and configurated
-
-  Shortly after the cell has been allocated, the configure function
-  will be called. At this time the user should cache parameters or
-  register parameter change callbacks. This will only be called once
-  under normal circumstance.
-
-* Processing
-
-  The process call will be called at every execution of the graph.
+* ``MyCell::process()`` called some number of times.  If the
+  user-supplied values for parameters change, any registered parameter
+  change callbacks will be called first.
 	
-* End of life 
+* ``MyCell::destroy()`` will be called once, after the graph is done
+  executing, before deallocation.
 
-  The cell is about to be deallocated, and the destroy
-  function is called by the system to allow any nasty cleanup that
-  should occur, that may not take place in the cell's destructor.
-		
 
 Inherently thread-unsafe cells
 ------------------------------

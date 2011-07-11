@@ -185,7 +185,11 @@ namespace ecto
   int
   plasm::execute(unsigned niter)
   {
-    return impl_->scheduler->execute(niter);
+    impl_->scheduler->execute(niter);
+    while (impl_->scheduler->running())
+      usleep(10);
+
+    return 0;
   }
 
   std::size_t 
