@@ -116,7 +116,7 @@ def dynamic_reconfigure_execute(plasm):
     form = DynamicReconfigureForm(plasm)
     form.show()
     # Run the main Qt loop
-    sys.exit(app.exec_())
+    return app.exec_()
 
 def test_parameter_callbacks():
     generate = ecto_test.Generate()
@@ -128,11 +128,8 @@ def test_parameter_callbacks():
                   param_watcher['output'] >> printer[:]
                   )
     plasm.insert(sleep)
-    ecto.view_plasm(plasm)
-    dynamic_reconfigure_execute(plasm)
+    return dynamic_reconfigure_execute(plasm)
 
 if __name__ == '__main__':
-    test_parameter_callbacks()
-
-
+    sys.exit(test_parameter_callbacks())
 
