@@ -135,7 +135,7 @@ namespace ecto
         ptr cp = get_tag(_c);
         if(!cp)
           return _c.value();
-        return dynamic_cast<tag_<T>&>(*cp).value();
+        return static_cast<tag_<T>*>(cp.get())->value();
       }
 
       /**
