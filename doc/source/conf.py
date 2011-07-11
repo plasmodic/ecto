@@ -16,7 +16,12 @@ import sys, os, subprocess
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-sys.path += [os.path.abspath('.')]
+#
+# TDS:  the only way to get parameters in to this script is via env variables,
+# see the generated Makefile.in that knows where things are
+#
+sys.path += [os.path.abspath('.'), os.environ['ECTODOC_BINDIR'], os.environ['ECTODOC_PYTHONPATH']]
+print "SYS.PATH===", sys.path
 
 breathe_default_project = 'ecto'
 breathe_projects = dict(ecto=os.environ['DOXYGEN_XML_DIR'])
