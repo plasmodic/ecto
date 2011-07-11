@@ -131,6 +131,14 @@ namespace ecto
     ModuleVertexMap mv_map;
     graph_t graph;
     boost::shared_ptr<ecto::scheduler::singlethreaded> scheduler;
+    struct CVMtoCell
+    {
+      cell::ptr
+      operator()(const ModuleVertexMap::value_type& v)
+      {
+        return v.first;
+      }
+    };
   };
 
   plasm::plasm()
@@ -196,6 +204,21 @@ namespace ecto
   plasm::size() const
   {
     return num_vertices(impl_->graph);
+  }
+
+  std::vector<cell::ptr>
+  plasm::cells() const
+  {
+    std::vector<cell::ptr> c;
+    std::transform(impl_->mv_map.begin(), impl_->mv_map.end(), std::back_inserter(c), impl::CVMtoCell());
+    return c;
+  }
+  void plasm::configure_all()
+  {
+    BOOST_FOREACH(impl::ModuleVertexMap::value_type& x, impl_->mv_map)
+    {
+      x.first->configure();
+    }
   }
 
   void

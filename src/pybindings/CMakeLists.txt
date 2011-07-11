@@ -1,14 +1,15 @@
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 ectomodule(ecto
   ecto.cpp
   except.cpp
   plasm.cpp
   tendril.cpp
   tendrils.cpp
-  module.cpp
+  cell.cpp
   schedulers.cpp
   strand.cpp
-  modules/Constant.cpp
-  modules/Passthrough.cpp
+  cells/Constant.cpp
+  cells/Passthrough.cpp
   )
 
 set_target_properties(ecto_ectomodule PROPERTIES

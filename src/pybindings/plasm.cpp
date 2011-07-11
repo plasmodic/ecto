@@ -78,7 +78,7 @@ namespace ecto
         {
           PyErr_Clear(); //Need to clear the error or python craps out. Try commenting out and running the doc tests.
           throw std::runtime_error(
-              "Did you mean plasm.connect(moduleA['out'] >> moduleB['in']), or plasm.connect(moduleA,'out',moduleB,'in')?");
+              "Did you mean plasm.connect(cellA['out'] >> cellB['in']), or plasm.connect(cellA,'out',cellB,'in')?");
         }
         plasm_connect_list(*p, l);
       }
@@ -101,18 +101,35 @@ namespace ecto
       }
       return result;
     }
+
+      struct bplistappender
+      {
+        bplistappender(bp::list&l):l(l){}
+        void operator()(ecto::cell::ptr c)
+        {
+          l.append(c);
+        }
+        bp::list& l;
+      };
+    static bp::list plasm_get_cells(plasm& p)
+    {
+      bp::list l;
+      std::vector<cell::ptr> cells = p.cells();
+      std::for_each(cells.begin(),cells.end(),bplistappender(l));
+      return l;
+    }
     BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( execute_overloads , plasm::execute , 0,1)
     static void wrap()
     {
       using bp::arg;
 
       bp::class_<plasm, boost::shared_ptr<plasm>, boost::noncopyable> p("Plasm");
-      p.def("insert", &plasm::insert, bp::args("module"), "insert module into the graph");
+      p.def("insert", &plasm::insert, bp::args("cell"), "insert cell into the graph");
 
       p.def("connect", &plasm_connect_list, bp::args("connection_list"));
       p.def("connect", bp::raw_function(plasm_connect_args, 2));
-      p.def("connect", &plasm::connect, bp::args("from_module", "output_name", "to_module", "intput_name"));
-      p.def("disconnect", &plasm::disconnect, bp::args("from_module", "output_name", "to_module", "intput_name"));
+      p.def("connect", &plasm::connect, bp::args("from_cell", "output_name", "to_cell", "intput_name"));
+      p.def("disconnect", &plasm::disconnect, bp::args("from_cell", "output_name", "to_cell", "intput_name"));
       p.def(
           "execute",
           &plasm::execute,
@@ -120,9 +137,12 @@ namespace ecto
                             "Executes the graph in topological order. Every node will be executed."));
 
       p.def("viz", wrapViz, "Get a graphviz string representation of the plasm.");
-      p.def("connections", plasm_get_connections, "Grabs a the current list based description of the graph. "
-            "Its a list of tuples (from_module, output_key, to_module, input_key)");
+      p.def("connections", plasm_get_connections, "Grabs the current list based description of the graph. "
+            "Its a list of tuples (from_cell, output_key, to_cell, input_key)");
+      p.def("cells", plasm_get_cells, "Grabs the current set of cells that are in the plasm.");
       p.def("check", &plasm::check);
+      p.def("configure_all", &plasm::configure_all);
+
 
     }
 

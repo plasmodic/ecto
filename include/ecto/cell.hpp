@@ -125,9 +125,9 @@ namespace ecto
     ReturnCode process();
 
     /**
-     * \brief This should be called at the end of life for the cell, and signals immenent destruction.
+     * \brief This should be called at the end of life for the cell, and signals imminent destruction.
      *
-     * Will dispatch the clients destroy code. After this call, do not call any other functions.
+     * Will dispatch the client's destroy code. After this call, do not call any other functions.
      */
     void destroy();
 
@@ -147,6 +147,16 @@ namespace ecto
      * \brief Set the name of the instance.
      */
     void name(const std::string&);
+
+    /**
+     * \brief Set the short_doc_ of the instance.
+     */
+    std::string short_doc() const;
+
+    /**
+     * \brief Set the short_doc_ of the instance.
+     */
+    void short_doc(const std::string&);
 
     /**
      * \brief Generate an Restructured Text doc string for the cell. Includes documentation for all parameters,
@@ -184,8 +194,18 @@ namespace ecto
       return ptr();
     }
 
+    virtual std::string dispatch_short_doc() const
+    {
+      return "";
+    }
+
+    virtual void dispatch_short_doc(const std::string&)
+    {
+    }
+
+
   private:
-    std::string instance_name;
+    std::string instance_name_;
   };
 
   /**
@@ -323,10 +343,11 @@ namespace ecto
     {
       //the cell may not be allocated here, so check pointer.
       if (!thiz)
-        {
-          thiz.reset(new Cell);
-        }
-      configure(int_<has_f<Cell>::configure> (), params,inputs,outputs);
+      {
+        thiz.reset(new Cell);
+        //configure is only called once.
+        configure(int_<has_f<Cell>::configure> (), params,inputs,outputs);
+      }
     }
 
     ReturnCode process(not_implemented, const tendrils& ,
@@ -343,8 +364,7 @@ namespace ecto
 
     ReturnCode dispatch_process(tendrils& inputs, tendrils& outputs)
     {
-      if (!thiz)
-        dispatch_configure(parameters,this->inputs,outputs);
+      dispatch_configure(parameters,this->inputs,outputs);
       return process(int_<has_f<Cell>::process> (), inputs, outputs);
     }
 
@@ -367,7 +387,15 @@ namespace ecto
 
     std::string dispatch_name() const
     {
-      return MODULE_TYPE_NAME;
+      return CELL_TYPE_NAME;
+    }
+    std::string dispatch_short_doc() const
+    {
+      return SHORT_DOC;
+    }
+
+    void dispatch_short_doc(const std::string&)
+    {
     }
 
     cell::ptr dispatch_make() const
@@ -396,11 +424,16 @@ namespace ecto
     }
 
     boost::shared_ptr<Cell> thiz;
-    static const std::string MODULE_TYPE_NAME;
+    static const std::string CELL_TYPE_NAME;
+  public:
+    static std::string SHORT_DOC;
   };
 
   template<typename Cell>
-  const std::string cell_<Cell>::MODULE_TYPE_NAME = ecto::name_of<Cell>();
+  std::string cell_<Cell>::SHORT_DOC;
+
+  template<typename Cell>
+  const std::string cell_<Cell>::CELL_TYPE_NAME = ecto::name_of<Cell>();
 
   /**
    * Creates a cell from type T that has not been configured, so therefore,

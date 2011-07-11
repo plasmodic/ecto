@@ -72,7 +72,7 @@ configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoMacros.cmake
   
 set(ecto_LIBRARIES ecto)
 
-add_subdirectory(python/ecto)
+add_subdirectory(python)
 add_subdirectory(src)
 add_subdirectory(cmake)
 

@@ -248,7 +248,7 @@ return incref(tuple.attr("__iter__")().ptr());
             
         }
         
-        // set up operators to extract the key, value, or a tuple from a std::pair 
+        // set up operators to sample the key, value, or a tuple from a std::pair 
         struct iterkeys
         {
           typedef key_type result_type;
