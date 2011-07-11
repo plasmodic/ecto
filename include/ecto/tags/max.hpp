@@ -10,6 +10,7 @@ namespace ecto
     {
     };
 
+    inline
     Max_<double>
     Max(double val = std::numeric_limits<double>::max())
     {

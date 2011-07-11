@@ -30,8 +30,14 @@
 
 #include <ecto/ecto.hpp>
 #include <ecto/registry.hpp>
+#include <ecto/tags/required.hpp>
+#include <ecto/tags/min.hpp>
+#include <ecto/tags/max.hpp>
+#include <ecto/tags/dynamic.hpp>
+
 
 using ecto::tendrils;
+namespace tags = ecto::tags;
 namespace ecto_test
 {
   struct ParameterWatcher
@@ -40,7 +46,11 @@ namespace ecto_test
 
     static void declare_params(ecto::tendrils& p)
     {
-      p.declare<double> ("value", "I use this value", 1.0).required(true);
+      p.declare<double> ("value", "I use this value", 1.0)
+          .tags() % tags::Required(true)
+                  % tags::Min(-50)
+                  % tags::Max(50)
+                  % tags::Dynamic(true);
     }
 
     static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
@@ -62,10 +72,12 @@ namespace ecto_test
       parms.at("value")->set_callback<double>(boost::bind(&ParameterWatcher::onvalue_change, this, _1));
     }
 
-    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
+    int process(ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
-      outputs.get<double> ("output") = inputs.get<double> ("input") * value_;
-      outputs.get<double> ("value") = value_;
+      double in;
+      inputs["input"] >> in;
+      outputs["output"] << in * value_;
+      outputs["value"] << value_;
       return ecto::OK;
     }
   };

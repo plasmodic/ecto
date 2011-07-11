@@ -23,7 +23,7 @@ namespace ecto
 #define SHOW() do{}while(false)
 #endif
 
-    struct modwrap: cell, bp::wrapper<cell>
+    struct cellwrap: cell, bp::wrapper<cell>
     {
 
       void dispatch_declare_params(tendrils& params)
@@ -75,7 +75,7 @@ namespace ecto
 
       std::string dispatch_name() const
       {
-        bp::reference_existing_object::apply<modwrap*>::type converter;
+        bp::reference_existing_object::apply<cellwrap*>::type converter;
         PyObject* obj = converter(this);
         bp::object real_obj = bp::object(bp::handle<>(obj));
         bp::object n = real_obj.attr("__class__").attr("__name__");
@@ -83,9 +83,9 @@ namespace ecto
         return nm;
       }
 
-      static std::string doc(modwrap* mod)
+      static std::string doc(cellwrap* mod)
       {
-        bp::reference_existing_object::apply<modwrap*>::type converter;
+        bp::reference_existing_object::apply<cellwrap*>::type converter;
         PyObject* obj = converter(mod);
         bp::object real_obj = bp::object(bp::handle<>(obj));
         bp::object n = real_obj.attr("__class__").attr("__doc__");
@@ -310,7 +310,7 @@ namespace ecto
       //use private names so that python people know these are internal
       bp::class_<cell, boost::shared_ptr<cell>, boost::noncopyable>("_module_cpp", bp::no_init);
 
-      bp::class_<modwrap, boost::shared_ptr<modwrap>, boost::noncopyable> m_base("_module_base" /*bp::no_init*/);
+      bp::class_<cellwrap, boost::shared_ptr<cellwrap>, boost::noncopyable> m_base("_module_base" /*bp::no_init*/);
       m_base.def("declare_params", &cell::declare_params);
       m_base.def("declare_io", ((void(cell::*)()) &cell::declare_io));
       m_base.def("configure", ((void(cell::*)()) &cell::configure));
@@ -322,7 +322,7 @@ namespace ecto
       m_base.add_property("params", make_function(params, bp::return_internal_reference<>()));
       m_base.def("type", &cell::type);
       m_base.def("name", (std::string(cell::*)() const) &cell::name);
-      m_base.def("doc", &modwrap::doc);
+      m_base.def("doc", &cellwrap::doc);
       m_base.def("short_doc",(std::string(cell::*)() const) &cell::short_doc);
       m_base.def("gen_doc", &cell::gen_doc);
       m_base.def("__getitem__", getitem_str);

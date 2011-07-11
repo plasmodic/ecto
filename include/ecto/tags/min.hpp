@@ -10,6 +10,7 @@ namespace ecto
     {
     };
 
+    inline
     Min_<double>
     Min(double val = std::numeric_limits<double>::min())
     {

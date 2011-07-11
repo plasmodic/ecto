@@ -5,11 +5,11 @@ ectomodule(ecto
   plasm.cpp
   tendril.cpp
   tendrils.cpp
-  module.cpp
+  cell.cpp
   schedulers.cpp
   strand.cpp
-  modules/Constant.cpp
-  modules/Passthrough.cpp
+  cells/Constant.cpp
+  cells/Passthrough.cpp
   )
 
 set_target_properties(ecto_ectomodule PROPERTIES
