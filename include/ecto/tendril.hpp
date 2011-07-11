@@ -174,7 +174,7 @@ namespace ecto
       enforce_type<T>();
       mark_dirty(); // likely changed..
       //cast a void pointer to this type.
-      return boost::any_cast<T&>(holder_);
+      return *boost::unsafe_any_cast<T>(&holder_);
     }
 
     /**\brief Read only access to the tendril.
@@ -187,7 +187,7 @@ namespace ecto
       //throws on failure
       enforce_type<T>();
       //cast a void pointer to this type.
-      return  boost::any_cast<const T&>(holder_);
+      return   *boost::unsafe_any_cast<T>(&holder_);
     }
 
     template<typename T>
@@ -197,7 +197,7 @@ namespace ecto
       //throws on failure
       enforce_type<T>();
       //cast a void pointer to this type.
-      val = boost::any_cast<const T&>(holder_);
+      val =  *boost::unsafe_any_cast<T>(&holder_);
     }
 
     template<typename T>
@@ -214,7 +214,7 @@ namespace ecto
         //throws on failure
         enforce_type<T>();
         //cast a void pointer to this type.
-        boost::any_cast<T&>(holder_) = val;
+        *boost::unsafe_any_cast<T>(&holder_) = val;
       }
       mark_dirty(); //definitely changed
     }
@@ -330,9 +330,6 @@ namespace ecto
     {
       return tags_.tagged(_c);
     }
-
-    void sample(boost::python::object&) const;
-    void set(const boost::python::object&);
   private:
 
     struct PyCopier_base
@@ -398,6 +395,10 @@ namespace ecto
   boost::scoped_ptr<tendril::PyCopier_base> tendril::ToPython<T>::Copier(new ToPython<T>());
   template<typename T>
   boost::scoped_ptr<tendril::PyCopier_base> tendril::FromPython<T>::Copier(new FromPython<T>());
+  template<>
+  void tendril::sample<boost::python::object>(boost::python::object&) const;
+  template<>
+  void tendril::set<boost::python::object>(const boost::python::object&);
 }
 
 template<typename T>

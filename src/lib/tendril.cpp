@@ -248,13 +248,13 @@ namespace ecto
   {
     dirty_ = false;
   }
-
-  void tendril::sample(boost::python::object& obj) const
+  template<>
+  void tendril::sample<boost::python::object>(boost::python::object& obj) const
   {
     (*pycopy_to_)(const_cast<tendril&>(*this),const_cast<boost::python::object&>(obj));
   }
-
-  void tendril::set(const boost::python::object& obj)
+  template<>
+  void tendril::set<boost::python::object>(const boost::python::object& obj)
   {
     (*pycopy_from_)(const_cast<tendril&>(*this),const_cast<boost::python::object&>(obj));
   }
