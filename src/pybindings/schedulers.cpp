@@ -12,8 +12,12 @@ BOOST_PYTHON_MODULE(schedulers)
     bp::class_<singlethreaded, boost::noncopyable> d("Singlethreaded", bp::init<ecto::plasm&>());
     d
       .def("execute", (int (singlethreaded::*)())&singlethreaded::execute)
-      .def("execute", (int (singlethreaded::*)(unsigned))&singlethreaded::execute,
-           arg("niter"))
+      .def("execute_async", (void (singlethreaded::*)())&singlethreaded::execute_async)
+      .def("execute", (int (singlethreaded::*)(unsigned))&singlethreaded::execute, arg("niter"))
+      .def("execute_async", (void (singlethreaded::*)(unsigned))&singlethreaded::execute_async, arg("niter"))
+      .def("stop", &singlethreaded::stop)
+      .def("running", &singlethreaded::running)
+      .def("wait", &singlethreaded::wait)
       ;
   }
   {
