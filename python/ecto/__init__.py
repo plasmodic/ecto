@@ -55,6 +55,9 @@ def load_pybindings(name, path):
         if not k.startswith("_"):
             thismod.__dict__[k] = v
 
+print ">>> NAME=", __name__, "<<<"
+print ">>> PATH=", __path__, "<<<"
+
 load_pybindings(__name__, __path__)
 
 from pkgutil import extend_path
