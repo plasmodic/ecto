@@ -9,28 +9,59 @@ some think a plasm should have a *metabolism* or *Krebs Cycle*
 instead, but there were no motivating name collisions (as with
 'node').
 
-The singlethreaded scheduler does *not* necessarily behave the same
-way as the threadpool scheduler does if given one thread: the
-threadpool scheduler allows each cell to run as soon as it its inputs
-are ready and its outputs are clear, so in a multicelled plasm
-multiple 'ticks' of data may be in flow at the same time.
+All schedulers should implement a basic interface for construction and
+execution (the same as the interface as the Singlethreaded scheduler
+implements); scheduler-specific functions and parameters may exist
+outside this set.
 
+Singlethreaded
+--------------
 
-.. autoclass:: ecto.schedulers.Singlethreaded
-   :members:
+.. class:: ecto.schedulers.Singlethreaded
 
+   Singlethreaded scheduler.  This class will execute the cells in the
+   plasm in topological order in a single thread.
 
+   .. method:: __init__(plasm)
 
+      Construct one around a plasm
+
+   .. method:: execute(niter)
+
+      Execute the graph, niter times, or forever if niter is not
+      specified.  This call will blocks until the execution is finished.
+
+   .. method:: execute_async(niter)
+
+      Execute the graph, niter times, or forever if niter is not
+      specified.  This call starts an execution thread in the
+      background and returns immediately.
+
+   .. method:: running()
+
+      Returns true if the execution started by execute_async() is still running.
+
+   .. method:: stop()
+
+      Stops the background graph execution at the end of the current process() call.
+
+   .. method:: wait()
+
+      Blocks until the execution started by the last call to
+      execute_async() is finished.
+
+                  
 Threadpool
-==========
+----------
 
 Threadpool has several overloads of execute().  The nullary one will
 spawn one worker thread per node in the graph, up a maximum of the
 hardware concurrency.
 
 
-.. autoclass:: ecto.schedulers.Threadpool
-   :members:
+*FIXME* document me once we've got async execution in.
+
+
 
 
 
