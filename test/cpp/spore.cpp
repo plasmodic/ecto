@@ -1,9 +1,6 @@
 #include <gtest/gtest.h>
 #include <ecto/ecto.hpp>
-#include <ecto/tags/min.hpp>
-#include <ecto/tags/max.hpp>
-#include <ecto/tags/required.hpp>
-#include <ecto/tags/enumeration.hpp>
+
 
 using ecto::tendril;
 using ecto::spore;
@@ -112,33 +109,6 @@ TEST(SporeTest, Callbacks)
   }
 }
 
-namespace tags = ecto::tags;
-
-TEST(SporeTest, Tags)
-{
-  {
-    tendril::ptr p = tendril::make_tendril<double>();
-    spore<double> d = p; //p has to stay in scope...
-    d.tags() % tags::Min()
-             % tags::Max(10)
-             % tags::Required(true);
-
-    EXPECT_TRUE(std::numeric_limits<double>::min() == d.tagged(tags::Min()));
-    EXPECT_TRUE(10 == d.tagged(tags::Max()));
-    EXPECT_TRUE(d.tagged(tags::Required()));
-
-    cbs<double> c;
-    d.set_callback(boost::ref(c));
-    d.notify();
-    EXPECT_EQ(c.count, 0);
-    EXPECT_EQ(c.val, 0);
-
-    *d = 3.14;
-    d.notify();
-    EXPECT_EQ(c.count, 1);
-    EXPECT_EQ(c.val, 3.14);
-  }
-}
 template <typename T, size_t size>
 void printz(T(&array)[size])
 {
@@ -157,5 +127,4 @@ TEST(SporeTest, Enumeration)
 
   tendril::ptr p = tendril::make_tendril<std::string>();
   spore<std::string> d = p;
-  d.tags() % tags::Enumerate(Values);
 }

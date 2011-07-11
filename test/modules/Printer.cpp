@@ -29,11 +29,8 @@
 
 #include <ecto/ecto.hpp>
 #include <ecto/registry.hpp>
-#include <ecto/tags/doc.hpp>
-#include <ecto/tags/dynamic.hpp>
 
 using ecto::tendrils;
-namespace tags = ecto::tags;
 namespace ecto_test
 {
   struct Printer
@@ -70,12 +67,8 @@ namespace ecto_test
     static PrintFunctions pfs;
     static void declare_params(tendrils& parameters)
     {
-      parameters.declare<std::string>("print_type")
+      parameters.declare<std::string>("print_type","The type string for what i'm to print... int, double, bool, string.")
           .set_default_val("double")
-          .tags()
-          % tags::Doc("The type string for what i'm to print... int, double, bool, string.")
-          % tags::Dynamic(false)
-          //<< tags::PossibleValues("int|double|string|bool")
           ;
     }
 

@@ -36,7 +36,6 @@
 
 #include <ecto/util.hpp> //name_of
 #include <ecto/except.hpp>
-#include <ecto/tags.hpp>
 
 #include <string>
 #include <cstring>
@@ -321,15 +320,6 @@ namespace ecto
     bool
     clean() const;
 
-    tags::tags& tags();
-    tendril& tag(const tags::tags_base& c);
-    tags::ptr get_tag(const char* key) const;
-
-    template <typename T>
-    const T& tagged(const tags::tag_<T>& _c) const
-    {
-      return tags_.tagged(_c);
-    }
   private:
 
     struct PyCopier_base
@@ -371,10 +361,10 @@ namespace ecto
     void
     mark_clean();
     boost::any holder_;
-    bool dirty_, default_, user_supplied_;
+    std::string doc_;
+    bool dirty_, default_, user_supplied_, required_;
     std::vector<TendrilJob> jobs_onetime_,jobs_persistent_;
     boost::mutex mtx_;
-    tags::tags tags_;
     PyCopier_base* pycopy_to_,* pycopy_from_;
   };
 

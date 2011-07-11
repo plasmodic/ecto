@@ -1,6 +1,5 @@
 #include <gtest/gtest.h>
 #include <ecto/ecto.hpp>
-#include <ecto/tags/required.hpp>
 TEST(TendrilTest, Dirtiness)
 {
   {
@@ -169,26 +168,5 @@ TEST(TendrilTest, SyntacticSugar)
   EXPECT_THROW(ts["w"] >> x;,std::runtime_error);
   EXPECT_THROW(ts["t"] << x;,std::runtime_error);
 
-}
-
-using namespace ecto::tags;
-TEST(TendrilTest, Tags)
-{
-  int x = 2;
-  float y = 3.14;
-  std::string z = "z";
-
-  ecto::tendril tx(x,"doc x"),ty(y,"doc y"),tz(z,"doc z");
-  EXPECT_FALSE(tx.tagged(Required()));
-  tx.required(true);
-  EXPECT_TRUE(tx.tagged(Required()));
-  tx.tag(Required(false));
-  EXPECT_FALSE(tx.tagged(Required()));
-  tx.tag(Required(true));
-  EXPECT_TRUE(tx.tagged(Required()));
-
-  std::cout << tx.doc() << std::endl;
-  std::cout << tx.tagged(Required(false)) << std::endl;
-  std::cout << tx.tagged(Required(false)) << std::endl;
 }
 

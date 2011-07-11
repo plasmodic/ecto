@@ -1,7 +1,4 @@
 #include <ecto/tendril.hpp>
-#include <ecto/tags/doc.hpp>
-#include <ecto/tags/required.hpp>
-#include <ecto/tags/dynamic.hpp>
 #include <boost/python.hpp>
 namespace ecto
 {
@@ -17,9 +14,11 @@ namespace ecto
   tendril::tendril()
   :
       holder_(tendril::none())
+    , doc_()
     , dirty_(false)
     , default_(false)
     , user_supplied_(false)
+    , required_(false)
   {
     pycopy_to_ = ToPython<none>::Copier.get();
     pycopy_from_ = FromPython<none>::Copier.get();
@@ -31,10 +30,11 @@ namespace ecto
 
   tendril::tendril(const tendril& rhs) :
       holder_(rhs.holder_)
+    , doc_(rhs.doc_)
     , dirty_(false)
     , default_(rhs.default_)
     , user_supplied_(rhs.user_supplied_)
-    , tags_(rhs.tags_)
+    , required_(rhs.required_)
     , pycopy_to_(rhs.pycopy_to_)
     , pycopy_from_(rhs.pycopy_from_)
 
@@ -45,9 +45,10 @@ namespace ecto
     if (this == &rhs)
       return *this;
     holder_ = rhs.holder_;
+    doc_ = rhs.doc_;
     dirty_ = rhs.dirty_;
     default_ = rhs.default_;
-    tags_ = rhs.tags_;
+    required_ = rhs.required_;
     pycopy_from_ = rhs.pycopy_from_;
     pycopy_to_ = rhs.pycopy_to_;
     return *this;
@@ -89,7 +90,7 @@ namespace ecto
 
   void tendril::set_doc(const std::string& doc_str)
   {
-    tags_ % tags::Doc(doc_str);
+    doc_ = doc_str;
   }
 
   void tendril::enqueue_oneshot(TendrilJob job)
@@ -101,7 +102,6 @@ namespace ecto
   {
     boost::mutex::scoped_lock lock(mtx_);
     jobs_persistent_.push_back(job);
-    tag(tags::Dynamic(true));//likely that the tendril supports dynamic update.
   }
 
   struct exec
@@ -144,27 +144,10 @@ namespace ecto
     mark_clean();
   }
 
-  tags::tags& tendril::tags()
-  {
-    return tags_;
-  }
-
-  tendril&
-  tendril::tag(const tags::tags_base& c)
-  {
-    tags_ % c;
-    return *this;
-  }
-
-  tags::ptr tendril::get_tag(const char * key) const
-  {
-    return tags_.get_tag(key);
-  }
-
   std::string
   tendril::doc() const
   {
-    return tagged(tags::Doc("TODO: Doc me."));
+    return doc_;
   }
 
   std::string
@@ -176,13 +159,13 @@ namespace ecto
   bool
   tendril::required() const
   {
-    return tagged(tags::Required(false));
+    return required_;
   }
 
   void
   tendril::required(bool b)
   {
-    tags_ % tags::Required(b);
+    required_ = b;
   }
 
   bool

@@ -1,12 +1,6 @@
 #include <boost/python.hpp>
 
 #include <ecto/tendril.hpp>
-#include <ecto/tags/min.hpp>
-#include <ecto/tags/max.hpp>
-#include <ecto/tags/required.hpp>
-#include <ecto/tags/doc.hpp>
-#include <ecto/tags/dynamic.hpp>
-#include <ecto/tags/enumeration.hpp>
 
 #include <boost/foreach.hpp>
 
@@ -74,32 +68,6 @@ bool tendril_required(tendril::ptr t)
   return t->required();
 }
 
-bp::object tendril_tagged(tendril::ptr t, const std::string& key)
-{
-  ecto::tags::ptr cp = t->get_tag(key.c_str());
-  if(cp)
-    return cp->extract();
-  else
-    return bp::object();
-}
-namespace tags = ecto::tags;
-
-bp::dict tendril_tags(tendril::ptr t)
-{
-  bp::dict ts;
-  typedef std::map<std::string, tags::ptr>::value_type vtype;
-  BOOST_FOREACH(const vtype& x, t->tags().tags_)
-  {
-    ts[x.first] = x.second->extract();
-  }
-  return ts;
-}
-
-struct Tags
-{
-
-};
-
 void wrapConnection(){
   bp::class_<tendril,boost::shared_ptr<tendril> > Tendril_("Tendril", 
       "The Tendril is the slendor winding organ of ecto.\n"
@@ -119,19 +87,8 @@ void wrapConnection(){
     "May be None if python bindings for the type held do not have boost::python bindings available from the current scope."
     );
     Tendril_.def("set",tendril_set_val, "Assuming the value held by the tendril has boost::python bindings,\nthis will copy the value of the given python object into the value held by the tendril.");
-    Tendril_.def("tagged",tendril_tagged, "Get a particular tag.");
-    Tendril_.def("tags",tendril_tags, "Get a dict of tags, 'key':value.");
     Tendril_.def("notify",&tendril::notify, "Force updates.");
 
-    bp::scope tags_class = bp::class_<Tags>("Tags");
-    tags_class.attr("Min") = tags::Min().key();
-    tags_class.attr("Max") = tags::Max().key();
-    tags_class.attr("Required") = tags::Required().key();
-    tags_class.attr("Doc") = tags::Doc("").key();
-    tags_class.attr("Dynamic") = tags::Dynamic().key();
-    tags_class.attr("EnumerationStr") = tags::Enumerate<std::string>().key();
-    tags_class.attr("EnumerationInt") = tags::Enumerate<int>().key();
-    tags_class.attr("EnumerationFloat") = tags::Enumerate<float>().key();
 }
 }
 }

@@ -201,25 +201,6 @@ namespace ecto
       return p();
     }
 
-    ecto::spore<T>&
-    tag(const ecto::tags::tags_base& constraint)
-    {
-      p()->tag(constraint);
-      return *this;
-    }
-
-    tags::tags& tags()
-    {
-      return p()->tags();
-    }
-
-    template<typename ConstrainType>
-    const ConstrainType&
-    tagged(const ecto::tags::tag_<ConstrainType>& constraint)
-    {
-      return p()->tagged(constraint);
-    }
-
   private:
     boost::weak_ptr<tendril> tendril_;
   };
