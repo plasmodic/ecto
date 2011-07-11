@@ -104,7 +104,7 @@ namespace ecto
     viz() const;
 
     /**
-     * \brief check that all constraints on the graph are satisified.
+     * \brief check that all tags on the graph are satisified.
      * This will throw on errors in the graph, including, if required inputs are not connected
      * if required outputs are not connected, if there are cycles, etc...
      */
@@ -123,6 +123,17 @@ namespace ecto
      * 
      */
     std::size_t size() const;
+
+    /**
+     * \brief Grab a set of all the cells from the plasm.
+     * @return a set of cells.
+     */
+    std::vector<cell::ptr> cells() const;
+
+    /**
+     * \brief Calls configure on all modules, if configure has not already been called.
+     */
+    void configure_all();
 
     /**
      * \brief Execute using a predefined scheduler.

@@ -4,7 +4,8 @@
 #include <ecto/cell.hpp>
 
 #include <ecto/python/std_map_indexing_suite.hpp>
-
+#include <boost/foreach.hpp>
+#include <setter.hpp>
 namespace bp = boost::python;
 
 namespace ecto
@@ -20,7 +21,9 @@ namespace ecto
 
       bp::object getTendril(tendrils& t, const std::string& name)
       {
-        return t[name]->extract();
+        bp::object o;
+        t[name]->sample(o);
+        return o;
       }
 
       std::string strTendril(const tendrils& t)
@@ -36,12 +39,22 @@ namespace ecto
       bp::object tendril_get(const tendrils& ts, const std::string& name)
       {
         const tendril& t = *ts.at(name);
-        return t.extract();
+        bp::object o;
+        t.sample(o);
+        return o;
       }
 
       void tendril_set(tendrils& ts, const std::string& name, bp::object obj)
       {
-        ts.at(name)->set(obj);
+        ts.at(name)->enqueue_oneshot(Setter(ts.at(name),obj));
+      }
+
+      void tendrils_notify(tendrils& ts)
+      {
+        BOOST_FOREACH(tendrils::value_type& val, ts)
+        {
+          val.second->notify();
+        }
       }
 
       tendril::ptr tendril_at(tendrils& ts, const std::string& name)
@@ -60,6 +73,7 @@ namespace ecto
         .def("__setattr__", &tendril_set)
         .def("__getitem__", &tendril_get)
         .def("at",tendril_at)
+        .def("notify",tendrils_notify)
         ;
     }
   }

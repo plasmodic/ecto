@@ -102,44 +102,6 @@ namespace ecto_test
     }
   };
 
-  struct ParameterWatcher
-  {
-    double value_;
-
-    static void declare_params(ecto::tendrils& p)
-    {
-      p.declare<double> ("value", "I use this value", 1.0);
-    }
-
-    static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
-    {
-      inputs.declare<double> ("input", "input");
-      outputs.declare<double> ("output", "output");
-      outputs.declare<double> ("value", "the parameter.");
-
-    }
-
-    void onvalue_change(double v)
-    {
-      SHOW();
-      std::cout << "old value: " << value_ << std::endl;
-      std::cout << "new value: " << v << std::endl;
-      value_ = v;
-    }
-
-    void configure(tendrils& parms, tendrils& inputs, tendrils& outputs)
-    {
-      parms.at("value")->set_callback<double> (boost::bind(&ParameterWatcher::onvalue_change, this, _1));
-    }
-
-    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
-    {
-      outputs.get<double> ("output") = inputs.get<double> ("input") * value_;
-      outputs.get<double> ("value") = value_;
-      return ecto::OK;
-    }
-  };
-
   struct HandleHolder
   {
     ecto::spore<double> value_, input_, output_, param_val_;
@@ -258,10 +220,8 @@ ECTO_DEFINE_MODULE(ecto_test)
 {
   boost::python::def("make_pod_tendril", ecto_test::makePodTendril);
   ecto::wrap<SharedPass>("SharedPass", "A shared pointer pass through");
-
   ecto::wrap<Scatter>("Scatter", "Scatter a value...");
   ecto::wrap<HandleHolder>("HandleHolder","Holds on to handles...");
   ecto::wrap<DontAllocateMe>("DontAllocateMe", "Don't allocate me, feel free to inspect.");
   ecto::wrap<NoPythonBindings>("NoPythonBindings", "This uses something that is bound to python!");
-  ecto::wrap<ParameterWatcher>("ParameterWatcher", "Uses parameter change callbacks.");
 }

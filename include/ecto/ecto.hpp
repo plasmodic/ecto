@@ -96,8 +96,6 @@ namespace ecto
           }
         else 
           {
-            std::string valstring =
-              bp::extract<std::string>(value.attr("__repr__")());
             m->parameters.at(keystring)->set(value);
           }
       }
@@ -165,6 +163,7 @@ namespace ecto
   void wrap(const char* name, std::string doc_str = "An ecto::cell...")
   {
     typedef ecto::cell_<UserCell> cell_t;
+    ecto::cell_<UserCell>::SHORT_DOC = doc_str;
     //SHOW();
     boost::python::class_<cell_t, boost::python::bases<cell>,
         boost::shared_ptr<cell_t>, boost::noncopyable>
