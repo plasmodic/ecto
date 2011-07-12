@@ -41,7 +41,7 @@ namespace ecto
           free(demangled);
         }
         it->second = rv;
-        std::cout << "looking up id for : " << rv << " inserted " << size_t(it->second.c_str()) << std::endl;
+        //std::cout << "looking up id for : " << rv << " inserted " << size_t(it->second.c_str()) << std::endl;
       }
       return it->second;
     }
