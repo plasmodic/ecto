@@ -328,7 +328,8 @@ namespace ecto {
 
         double total_percentage = 0.0;
 
-        std::cout << "****************************************\n";
+        std::cout << "------------------------------------------------------------------------------\n";
+        std::cout << str(boost::format("* %25s   %-7s %-10s %-10s %-6s\n") % "Cell Name" % "Calls" % "Hz(theo max)" % "Hz(observed)" % "load (%)");
         for (tie(begin, end) = vertices(graph); begin != end; ++begin)
           {
             cell::ptr m = graph[*begin];
@@ -336,7 +337,7 @@ namespace ecto {
             total_percentage += this_percentage;
             double hz = (double(m->stats.ncalls) / (elapsed.total_microseconds() / 1e+06));
             double theo_hz = hz *(100/this_percentage);
-            std::cout << str(boost::format(">>> %25s  calls: %u  Hz(theo max): %10.2f Hz(real): %3.2f  cpu load: (%04.2lf%%)")
+            std::cout << str(boost::format("* %25s   %-7u %-12.2f %-12.2f %-8.2lf")
                              % m->name()
                              % m->stats.ncalls 
                              % theo_hz
@@ -345,13 +346,13 @@ namespace ecto {
                       << "\n";
           }
               
-        std::cout << "**********************************************"
+        std::cout << "------------------------------------------------------------------------------"
                   << "\ncpu freq:         " << (elapsed_ticks / (elapsed.total_milliseconds() / 1000.0)) / 1e+9 
                   << " GHz"
                   << "\nthreads:          " << nthreads
                   << "\nelapsed time:     " << elapsed 
                   << "\ncpu ticks:        " << elapsed_ticks
-                  << "\ncpu ticks per second: " << elapsed.ticks_per_second();
+                  << "\ncpu ticks/second: " << elapsed.ticks_per_second();
           ;
 
         std::cout << str(boost::format("\nin process():     %.2f%%\n") % (total_percentage / nthreads))
