@@ -49,7 +49,7 @@ namespace ecto
  * @param ti The type_info to look up unmangled name for.
  * @return The unmangled name. e.g. cv::Mat or pcl::PointCloud<pcl::PointXYZ>
  */
-std::string name_of(const std::type_info &ti);
+const std::string& name_of(const std::type_info &ti);
 
 /**
  * \brief Get the unmangled type name of a type.
@@ -57,9 +57,9 @@ std::string name_of(const std::type_info &ti);
  * @return The unmangled name of the given type.
  */
 template<typename T>
-std::string name_of()
+const std::string& name_of()
 {
-  return name_of(typeid(T));
+  static const std::string& name_cache =  name_of(typeid(T));
+  return name_cache;
 }
-
 }
