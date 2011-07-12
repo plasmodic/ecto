@@ -16,7 +16,7 @@ foreach(file
     test_dual_line_plasm
     test_handles
     test_modules
-    # test_metrics
+    #test_metrics
     test_parameter_callbacks
     test_passthrough
     test_plasm

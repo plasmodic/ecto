@@ -58,4 +58,5 @@ A spore is a typed handle for a tendril. It is best used in conjunction with ten
 
 
 .. doxygenclass:: ecto::tendril
+    :members:
 

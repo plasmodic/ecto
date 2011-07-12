@@ -63,22 +63,23 @@ namespace ecto_test
         processes[ecto::name_of<bool>()] = &process<bool>;
       }
     };
+
     static PrintFunctions pfs;
     static void declare_params(tendrils& parameters)
     {
-      parameters.declare<std::string>("print_type","The type string for what i'm to print... int, double, bool, string.","double");
+      parameters.declare<std::string>("print_type","The type string for what i'm to print... int, double, bool, string.")
+          .set_default_val("double")
+          ;
     }
 
     static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
       std::string print_type = parameters.get<std::string>("print_type");
-
       pfs.declares[print_type](inputs);
     }
 
     int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
-      std::cout << "printer: input has type " << inputs.at("in")->type_name() << "\n";
       pfs.processes[inputs.at("in")->type_name()](inputs,outputs);
       std::cout << this << std::endl;
       return ecto::OK;

@@ -44,11 +44,10 @@ def list_ecto_module(pymodule):
                     raise ValueError("A module's doc string may not be None.")
                 l.append(m)
     return l
-    
+
 def view_plasm(plasm):
     window = PlasmDotView()
     x = plasm.viz()
     window.set_dotcode(x)
     window.connect('destroy', gtk.main_quit)
     gtk.main()
-    

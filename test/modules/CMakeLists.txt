@@ -18,6 +18,7 @@ ectomodule(ecto_test
   RequiredParam.cpp
   RequiredIO.cpp
   Passthrough.cpp
+  ParameterWatcher.cpp
   Uniform01.cpp
   ecto_test.cpp
 )
