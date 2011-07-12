@@ -29,17 +29,17 @@ def test_dual_line_plasm(nlevels):
     o.close()
     print "\n", plasm.viz(), "\n"
     sched = ecto.schedulers.Threadpool(plasm)
-    sched.execute(nthreads=int(nlevels/2), niter=1)
+    sched.execute(niter=1, nthreads=int(nlevels/2))
     result = add.outputs.out
     print "result=", result
     assert(result == nlevels * 2)
 
-    sched.execute(nthreads=int(nlevels/2), niter=2)
+    sched.execute(niter=2, nthreads=int(nlevels/2))
     result = add.outputs.out
     print "iter2 result=", result
     assert result == (nlevels + 2) * 2
 
-    sched.execute(nthreads=int(nlevels/2), niter=3)
+    sched.execute(niter=3, nthreads=int(nlevels/2))
     result = add.outputs.out
     print "iter3 result=", result
     assert result == (nlevels + 5) * 2

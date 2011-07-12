@@ -15,7 +15,7 @@ def do_one(quitcount, runcount, nthreads, expect):
                   destroyer[:] >> quitafter[:])
     
     sched = ecto.schedulers.Threadpool(plasm)
-    sched.execute(nthreads=nthreads, niter=runcount)
+    sched.execute(niter=runcount, nthreads=nthreads)
     
     print "actual out:", destroyer.outputs.out
     assert destroyer.outputs.out == expect

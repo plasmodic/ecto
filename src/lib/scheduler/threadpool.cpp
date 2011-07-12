@@ -273,6 +273,7 @@ namespace ecto {
         namespace asio = boost::asio;
 
         stop = false;
+        running = true;
 
         workserv.reset();
         mainserv.reset();
@@ -355,6 +356,7 @@ namespace ecto {
 
         std::cout << str(boost::format("\nin process():     %.2f%%\n") % (total_percentage / nthreads))
           ;
+        running = false;
         return 0;
       }
 
@@ -378,7 +380,15 @@ namespace ecto {
                            ecto::strand_hash> strands;
 
       pt::ptime starttime;
-      bool stop;
+      bool stop, running;
+      
+      impl() {
+        stop = false;
+        running = false;
+      }
+
+      // MEH
+
     };
 
 
@@ -388,30 +398,44 @@ namespace ecto {
 
     namespace phx = boost::phoenix;
 
-    int threadpool::execute()
+    int threadpool::execute(unsigned ncalls, unsigned nthreadsarg)
     {
+      unsigned nthreads = 
+        nthreadsarg == 0 
+        ? std::min((unsigned)plasm_.size(), boost::thread::hardware_concurrency())
+        : nthreadsarg;
+
       //check this plasm for correctness.
       plasm_.check();
-      std::size_t nthreads = plasm_.size(), hwc = boost::thread::hardware_concurrency();
-      
-      if (nthreads > hwc) nthreads = hwc;
 
       std::cout << "Threadpool executing in " << nthreads << " threads.\n";
-      return impl_->execute(nthreads, phx::val(true), graph);
+
+      if (ncalls == 0)
+        return impl_->execute(nthreads, phx::val(true), graph);
+      else
+        return impl_->execute(nthreads, boost::phoenix::arg_names::arg1 < ncalls, graph);
     }
 
-    int threadpool::execute(unsigned nthreads)
+    void threadpool::execute_async(unsigned ncalls, unsigned nthreadsarg)
     {
-      //check this plasm for correctness.
-      plasm_.check();
-      return impl_->execute(nthreads, phx::val(true), graph);
+      impl_->running = true;
+      boost::scoped_ptr<boost::thread> tmp(new thread(bind(&threadpool::execute, this, ncalls, nthreadsarg)));
+      tmp->swap(runthread);
     }
 
-    int threadpool::execute(unsigned nthreads, unsigned ncalls)
+    void threadpool::stop()
     {
-      //check this plasm for correctness.
-      plasm_.check();
-      return impl_->execute(nthreads, boost::phoenix::arg_names::arg1 < ncalls, graph);
+      impl_->stop_asap();
+    }
+
+    void threadpool::wait()
+    {
+      runthread.join();
+    }
+
+    bool threadpool::running() const
+    {
+      return impl_->running;
     }
 
     boost::function<void()> threadpool::impl::sigint_handler;
