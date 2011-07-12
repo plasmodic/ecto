@@ -382,6 +382,11 @@ namespace ecto {
       pt::ptime starttime;
       bool stop, running;
       
+      impl() {
+        stop = false;
+        running = false;
+      }
+
       // MEH
 
     };
