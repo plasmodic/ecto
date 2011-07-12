@@ -13,44 +13,37 @@ namespace ecto
 
   tendril::tendril()
   :
-      holder_(tendril::none())
-    , doc_()
+     doc_()
     , dirty_(false)
     , default_(false)
     , user_supplied_(false)
     , required_(false)
   {
-    pycopy_to_ = ToPython<none>::Copier.get();
-    pycopy_from_ = FromPython<none>::Copier.get();
-    //impl_ is never not initialized
+    set_holder<none>(none());
   }
 
   tendril::~tendril()
   {}
 
   tendril::tendril(const tendril& rhs) :
-      holder_(rhs.holder_)
-    , doc_(rhs.doc_)
+     doc_(rhs.doc_)
     , dirty_(false)
     , default_(rhs.default_)
     , user_supplied_(rhs.user_supplied_)
     , required_(rhs.required_)
-    , pycopy_to_(rhs.pycopy_to_)
-    , pycopy_from_(rhs.pycopy_from_)
-
-  {}
+  {
+    copy_holder(rhs);
+  }
 
   tendril& tendril::operator=(const tendril& rhs)
   {
     if (this == &rhs)
       return *this;
-    holder_ = rhs.holder_;
+    copy_holder(rhs);
     doc_ = rhs.doc_;
     dirty_ = rhs.dirty_;
     default_ = rhs.default_;
     required_ = rhs.required_;
-    pycopy_from_ = rhs.pycopy_from_;
-    pycopy_to_ = rhs.pycopy_to_;
     return *this;
   }
 
@@ -58,11 +51,9 @@ namespace ecto
   {
     if (this == &rhs)
       return;
-    if (is_type<none>())
+    if (is_type<none>() || same_type(rhs))
     {
-      holder_ = rhs.holder_;
-      pycopy_from_ = rhs.pycopy_from_;
-      pycopy_to_ = rhs.pycopy_to_;
+      copy_holder(rhs);
     }
     else
     {
@@ -78,10 +69,6 @@ namespace ecto
       else if (is_type<boost::python::object>())
       {
         rhs.sample(get<boost::python::object>());
-      }
-      else
-      {
-        holder_ = rhs.holder_;
       }
     }
     mark_dirty();
@@ -153,7 +140,7 @@ namespace ecto
   std::string
   tendril::type_name() const
   {
-   return name_of(holder_.type());
+   return type_ID_;
   }
 
   bool
@@ -198,7 +185,7 @@ namespace ecto
   bool
   tendril::same_type(const tendril& rhs) const
   {
-    return type_name() == rhs.type_name();
+    return rhs.type_ID_ == type_ID_;
   }
 
   bool
@@ -240,6 +227,15 @@ namespace ecto
   void tendril::set<boost::python::object>(const boost::python::object& obj)
   {
     (*pycopy_from_)(const_cast<tendril&>(*this),const_cast<boost::python::object&>(obj));
+    mark_dirty();
+  }
+
+  void tendril::copy_holder(const tendril& rhs)
+  {
+    holder_ = rhs.holder_;
+    type_ID_ = rhs.type_ID_;
+    pycopy_from_ = rhs.pycopy_from_;
+    pycopy_to_ = rhs.pycopy_to_;
   }
 
 }
