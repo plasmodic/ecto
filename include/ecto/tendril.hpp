@@ -89,9 +89,7 @@ namespace ecto
     make_tendril()
     {
       tendril::ptr t(new tendril());
-      t->holder_ = T();
-      t->pycopy_to_ = ToPython<T>::Copier.get();
-      t->pycopy_from_ = FromPython<T>::Copier.get();
+      t->set_holder<T>();
       return t;
     }
 
@@ -140,7 +138,7 @@ namespace ecto
       if (!user_supplied_) //user supplied?
       {
         default_ = true;
-        holder_ = val;
+        set_holder<T>(val);
       }
     }
 
@@ -205,9 +203,7 @@ namespace ecto
     {
       if(is_type<none>()) //handle none case.
       {
-        holder_ = val;
-        pycopy_to_ = ToPython<T>::Copier.get();
-        pycopy_from_ = FromPython<T>::Copier.get();
+        set_holder<T>(val);
       }else
       {
         //throws on failure
@@ -226,7 +222,7 @@ namespace ecto
     bool
     is_type() const
     {
-      return 0 == std::strcmp(holder_.type().name(), typeid(T).name());
+      return name_of<T>().c_str() == type_ID_;
     }
 
     /**
@@ -356,11 +352,21 @@ namespace ecto
       }
     };
 
+    template<typename T>
+    void set_holder(const T& t = T())
+    {
+      holder_ = t;
+      type_ID_ = name_of<T>().c_str();
+      pycopy_to_ = ToPython<T>::Copier.get();
+      pycopy_from_ = FromPython<T>::Copier.get();
+    }
+    void copy_holder(const tendril& rhs);
     void
     mark_dirty();
     void
     mark_clean();
     boost::any holder_;
+    const char* type_ID_;
     std::string doc_;
     bool dirty_, default_, user_supplied_, required_;
     std::vector<TendrilJob> jobs_onetime_,jobs_persistent_;
@@ -371,14 +377,12 @@ namespace ecto
   template<typename T>
   tendril::tendril(const T& t, const std::string& doc)
       :
-        holder_(t),
         dirty_(false),
         default_(true),
         user_supplied_(false)
   {
+    set_holder<T>(t);
     set_doc(doc);
-    pycopy_to_ = ToPython<T>::Copier.get();
-    pycopy_from_ = FromPython<T>::Copier.get();
   }
 
   template<typename T>
