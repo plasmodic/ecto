@@ -352,7 +352,7 @@ namespace ecto {
                   << "\nthreads:          " << nthreads
                   << "\nelapsed time:     " << elapsed 
                   << "\ncpu ticks:        " << elapsed_ticks
-                  << "\ncpu ticks per second: " << elapsed.ticks_per_second();
+                  << "\ncpu ticks/second: " << elapsed.ticks_per_second();
           ;
 
         std::cout << str(boost::format("\nin process():     %.2f%%\n") % (total_percentage / nthreads))
