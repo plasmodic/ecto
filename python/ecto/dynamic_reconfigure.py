@@ -45,46 +45,30 @@ class TendrilPoster():
         except ValueError, e:
             print e
             
-def widgetizeParameter_Numbers(param, tags, edit, layout):
-    if ecto.Tags.Min in tags and ecto.Tags.Max in tags:
-        slider = QSlider(Qt.Horizontal)
-        min = tags[ecto.Tags.Min]
-        max = tags[ecto.Tags.Max]
-        scalar = 1000.0 / (max - min)
-        slider.setMinimum(min * scalar)
-        slider.setMaximum(max * scalar)
-        edit.setValidator(QDoubleValidator(min, max, 10, None))
-        slider.setTickInterval(1)
-        slider.valueChanged.connect(TextSetter(edit, scalar).onChange)
-        edit.textChanged.connect(SlideSetter(slider, scalar).onChange)
-        layout.addWidget(slider)
-    elif ecto.Tags.Min in tags:
-        min = tags[ecto.Tags.Min]
-        edit.setValidator(QDoubleValidator(min, decimal.Infinity, 10, None))
-    elif ecto.Tags.Max in tags:
-        max = tags[ecto.Tags.Max]
-        edit.setValidator(QDoubleValidator(-decimal.Infinity, max, 10, None))
+def widgetizeParameter_Numbers(param, edit, layout):
+    if type(param.val) in (int,):
+        edit.setValidator(QIntegerValidator(None))
+    else:
+        edit.setValidator(QDoubleValidator(None))
         
 def populateParameterKnobs(cell):
     for p in cell.params:
         name = p.key()
         param = p.data()
         param_layouts = []
-        tags = param.tags()
-        if ecto.Tags.Dynamic in tags and tags[ecto.Tags.Dynamic]:
-            label = QLabel(name)
-            edit = QLineEdit(str(param.val))
-            #register an change callback to the tendril.
-            #lil bit of layout
-            v = QVBoxLayout()
-            h = QHBoxLayout()
-            h.addWidget(label)
-            h.addWidget(edit)#all tendrils get an edit box?
-            v.addLayout(h)
-            if type(param.val) in (float, int):
-                widgetizeParameter_Numbers(param,tags, edit, v)
-            edit.textChanged.connect(TendrilPoster(param).onChange)
-            param_layouts.append(v)
+        label = QLabel(name)
+        edit = QLineEdit(str(param.val))
+        #register an change callback to the tendril.
+        #lil bit of layout
+        v = QVBoxLayout()
+        h = QHBoxLayout()
+        h.addWidget(label)
+        h.addWidget(edit)#all tendrils get an edit box?
+        v.addLayout(h)
+        if type(param.val) in (float, int):
+            widgetizeParameter_Numbers(param,edit, v)
+        edit.textChanged.connect(TendrilPoster(param).onChange)
+        param_layouts.append(v)
     return param_layouts
     
 class DynamicReconfigureForm(QDialog):
