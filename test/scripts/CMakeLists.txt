@@ -8,7 +8,7 @@ endmacro()
 
 foreach(file
     test_addergraph
-    test_async
+    test_async_execution
     test_blackbox
     test_constant
     test_destroy_called

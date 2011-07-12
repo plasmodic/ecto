@@ -12,7 +12,7 @@ def test_nodelay():
     plasm.connect(ping[:] >> metrics[:])
     
     sched = ecto.schedulers.Threadpool(plasm)
-    sched.execute(1, 10000)
+    sched.execute(niter=10000, nthreads=1)
     print "Hz:", metrics.outputs.hz, " Latency in seconds: %f" % metrics.outputs.latency_seconds
 
     # these are kinda loose
@@ -29,7 +29,7 @@ def test_20hz():
                   throttle[:] >> metrics[:])
     
     sched = ecto.schedulers.Threadpool(plasm)
-    sched.execute(1, 100)
+    sched.execute(niter=100, nthreads=1)
     print "Hz:", metrics.outputs.hz, " Latency in seconds: %f" % metrics.outputs.latency_seconds
 
     # these are kinda loose
@@ -84,7 +84,7 @@ def test_tp(niter, n_nodes):
     (plasm, metrics) = makeplasm(n_nodes)
 
     sched = ecto.schedulers.Threadpool(plasm)
-    sched.execute(n_nodes, niter)
+    sched.execute(niter=niter, nthreads=n_nodes)
     print "Hz:", metrics.outputs.hz, " Latency in seconds:", metrics.outputs.latency_seconds
     assert n_nodes * 0.95 < metrics.outputs.hz < n_nodes * 1.05
     assert 0.9 < metrics.outputs.latency_seconds < 1.1

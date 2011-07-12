@@ -55,55 +55,32 @@ namespace ecto {
       interrupted = true;
     }
 
-    void singlethreaded::execute_async() 
-    {
-      running_ = true;
-      scoped_ptr<thread> tmp(new thread(bind(&singlethreaded::execute, this)));
-      tmp->swap(runthread);
-    }
-
-    int singlethreaded::execute()
-    {
-      running_ = true;
-      interrupted = false;
-      signal(SIGINT, &sigint_static_thunk);
-      //compute ordering
-      compute_stack();
-      while(running_) {
-        for (size_t k = 0; k < stack.size(); ++k)
-          {
-            //need to check the return val of a process here, non zero means exit...
-            size_t retval = invoke_process(stack[k]);
-            if (retval)
-              return retval;
-            if(interrupted) return true;
-          }
-      }
-      return 0;
-    }
-
     void singlethreaded::execute_async(unsigned niter) {
       running_ = true;
       scoped_ptr<thread> tmp(new thread(bind(&singlethreaded::execute, this, niter)));
       tmp->swap(runthread);
     }
 
-    int singlethreaded::execute(unsigned j)
+    int singlethreaded::execute(unsigned niter)
     {
       running_ = true;
       interrupted = false;
       signal(SIGINT, &sigint_static_thunk);
 
       compute_stack();
-      for (unsigned r=0; r<j && running_; ++r)
-        for (size_t k = 0; k < stack.size(); ++k)
-          {
-            //need to check the return val of a process here, non zero means exit...
-            size_t retval = invoke_process(stack[k]);
-            if (retval)
-              return retval;
-            if(interrupted) return true;
-          }
+      unsigned cur_iter = 0;
+      while(niter == 0 || cur_iter < niter)
+        {
+          for (size_t k = 0; k < stack.size(); ++k)
+            {
+              //need to check the return val of a process here, non zero means exit...
+              size_t retval = invoke_process(stack[k]);
+              if (retval)
+                return retval;
+              if(interrupted) return true;
+            }
+          ++cur_iter;
+        }
       running_ = false;
       return 0;
     }

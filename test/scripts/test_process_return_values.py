@@ -16,7 +16,7 @@ def do_one(N, nthreads):
     (gen, plasm) = makeplasm(N)
 
     sched = ecto.schedulers.Threadpool(plasm)
-    sched.execute(nthreads=nthreads, niter=N+100)
+    sched.execute(niter=N+100, nthreads=nthreads)
     
     print "N-threaded actual out: ", gen.outputs.out, " N:", N
     assert N >= (gen.outputs.out - nthreads)

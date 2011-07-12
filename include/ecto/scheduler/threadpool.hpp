@@ -52,16 +52,19 @@ namespace ecto {
       /**
          Use one thread per cell, up to hardware_concurrency.
        */
-      int execute(); 
-      int execute(unsigned nthreads);
-      int execute(unsigned nthreads, unsigned maxcalls);
+      int execute(unsigned niter=0, unsigned nthreads=0);
+      void execute_async(unsigned niter=0, unsigned nthreads=0);
+
+      void stop();
+      bool running() const;
+      void wait();
       
       plasm& plasm_;
       ecto::graph::graph_t& graph;
       
       struct impl;
       boost::shared_ptr<impl> impl_;
-
-    };
+      boost::thread runthread;
+   };
   }
 }
