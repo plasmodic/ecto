@@ -56,7 +56,7 @@ namespace ecto_test
 
     int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
-      outputs.get<T> ("out") += step_();
+      outputs.get<T> ("out") += step_.read();
       return 0;
     }
   };

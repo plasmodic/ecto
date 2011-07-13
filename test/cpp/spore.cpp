@@ -9,12 +9,12 @@ TEST(SporeTest, LifeTime)
   {
     spore<double> d = tendril::make_tendril<double>();
     EXPECT_ANY_THROW(*d);
-    EXPECT_ANY_THROW(d());
+    EXPECT_ANY_THROW(d.read());
   }
   {
     spore<double> d;
     EXPECT_ANY_THROW(*d);
-    EXPECT_ANY_THROW(d());
+    EXPECT_ANY_THROW(d.read());
   }
   {
     tendril::ptr p = tendril::make_tendril<double>();
@@ -55,7 +55,7 @@ TEST(SporeTest, Default)
     EXPECT_FALSE(d.dirty());
     EXPECT_TRUE(d.has_default());
 
-    EXPECT_EQ(d(), 1.41421356);
+    EXPECT_EQ(d.read(), 1.41421356);
     EXPECT_FALSE(d.dirty());
 
     EXPECT_EQ(*d, 1.41421356);
@@ -67,7 +67,7 @@ TEST(SporeTest, Default)
     EXPECT_TRUE(d.dirty());
     EXPECT_TRUE(d.user_supplied());
     EXPECT_TRUE(d.has_default());
-    EXPECT_EQ(d(), 3.14);
+    EXPECT_EQ(d.read(), 3.14);
 
   }
 }

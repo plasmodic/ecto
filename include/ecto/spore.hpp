@@ -136,9 +136,10 @@ namespace ecto
       return p()->has_default();
     }
 
-    void required(bool b)
+    spore<T>& required(bool b)
     {
       p()->required(b);
+      return *this;
     }
 
     bool required() const
@@ -171,7 +172,7 @@ namespace ecto
      * This is the const read operation, as opposed to the derefence which is not necessarily const.
      * @return const ref, no copies...
      */
-    const T& operator()() const
+    const T& read() const
     {
       tendril::const_ptr _p = p();
       return _p->read<T>();

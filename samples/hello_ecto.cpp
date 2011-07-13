@@ -65,7 +65,7 @@ namespace hello_ecto
 
     int process(const tendrils& in, tendrils& /*out*/)
     {
-      std::cout << str_() << std::endl;
+      std::cout << str_.read() << std::endl;
       return ecto::OK;
     }
     ecto::spore<std::string> str_;
