@@ -434,6 +434,14 @@ operator>>(const ecto::tendril& rhs,T& val)
 
 template<typename T>
 void
+operator>>(const ecto::tendril::const_ptr& rhs,T& val)
+{
+  if(!rhs) throw std::runtime_error("Your tendril be null!");
+  rhs->sample(val);
+}
+
+template<typename T>
+void
 operator>>(const ecto::tendril::ptr& rhs,T& val)
 {
   if(!rhs) throw std::runtime_error("Your tendril be null!");
