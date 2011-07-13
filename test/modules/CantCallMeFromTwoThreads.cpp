@@ -59,7 +59,7 @@ namespace ecto_test
           // we got the rock... i.e. we are rocking
           std::cout << this << " got the lock." << std::endl;
           // wait a bit so's we can be sure there will be collisions
-          dt.expires_from_now(boost::posix_time::milliseconds(250));
+          dt.expires_from_now(boost::posix_time::milliseconds(10));
           dt.wait();
 
           double value = inputs.get<double> ("in");

@@ -10,8 +10,8 @@ def makeplasm():
     plasm = ecto.Plasm()
     
     ping = ecto_test.Ping("Ping")
-    sleep0 = ecto_test.Sleep("Sleep_0", seconds=1.0)
-    sleep1 = ecto_test.Sleep("Sleep_1", seconds=1.0)
+    sleep0 = ecto_test.Sleep("Sleep_0", seconds=0.1)
+    sleep1 = ecto_test.Sleep("Sleep_1", seconds=0.1)
 
     plasm.connect(ping[:] >> sleep0[:],
                   sleep0[:] >> sleep1[:])
@@ -31,20 +31,20 @@ def sthreaded():
     
     assert not s.running()
     etime = time.time()
-    assert 6.2 > etime - stime >= 6.0
+    assert 0.62 > etime - stime >= 0.6
     print "elapsed:", etime-stime
     stime = time.time()
     s.execute_async(niter=3)
     assert s.running()
     nloops = 0
     while s.running():
-        time.sleep(0.1)
+        time.sleep(0.01)
         nloops = nloops + 1
     
     assert not s.running()
     assert nloops >= 59
     etime = time.time()
-    assert 6.2 > etime - stime >= 6.0
+    assert 0.62 > etime - stime >= 0.6
     print "elapsed:", etime-stime
 
     stime = time.time()
@@ -54,7 +54,7 @@ def sthreaded():
     s.wait()
     assert not s.running()
     etime = time.time()
-    assert 6.2 > etime - stime >= 6.0
+    assert 0.62 > etime - stime >= 0.6
 
     
 def tpool0():
@@ -68,22 +68,22 @@ def tpool0():
     etime = time.time()
     assert not s.running()
     print "elapsed:", etime - stime
-    assert etime - stime >= 4.0
+    assert etime - stime >= 0.4
 
     stime = time.time()
     s.execute_async(niter=3)
-    time.sleep(0.1)
+    time.sleep(0.01)
     assert s.running()
     nloops = 0
     while s.running():
-        time.sleep(0.1)
+        time.sleep(0.01)
         nloops = nloops + 1
 
     assert not s.running()
     assert nloops >= 39
     etime = time.time()
     print "elapsed:", etime-stime
-    assert 4.1 > etime - stime >= 4.0
+    assert 0.41 > etime - stime >= 0.4
 
 def tpool1():
 
@@ -93,19 +93,19 @@ def tpool1():
 
     stime = time.time()
     s.execute_async(niter=3)
-    time.sleep(0.1)
+    time.sleep(0.01)
     assert s.running()
     nloops = 0
     while s.running():
         nloops = nloops + 1
-        time.sleep(0.1)
+        time.sleep(0.01)
 
     print "nloops=", nloops
     assert not s.running()
     assert nloops >= 39
     etime = time.time()
     print "elapsed:", etime-stime
-    assert 4.1 > etime - stime >= 4.0
+    assert 0.41 > etime - stime >= 0.4
 
 def tpool2():
     p = makeplasm()
@@ -114,13 +114,13 @@ def tpool2():
 
     stime = time.time()
     s.execute_async(niter=3)
-    time.sleep(0.1)
+    time.sleep(0.01)
     assert s.running()
     s.wait()
     assert not s.running()
     etime = time.time()
     print "elapsed:", etime-stime
-    assert 4.1 > (etime - stime) > 4.0
+    assert 0.41 > (etime - stime) > 0.4
 
 sthreaded()
 

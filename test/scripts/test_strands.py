@@ -86,7 +86,7 @@ def shouldfail():
     sched = ecto.schedulers.Threadpool(plasm)
     try:
         print "about to execute... this should throw"
-        sched.execute(nthreads=10, niter=10)
+        sched.execute(nthreads=4, niter=4)
         assert False, "that should have thrown"
     except RuntimeError, e:
         print "good, python caught error", e
@@ -94,10 +94,10 @@ def shouldfail():
 shouldfail()
 print "shouldfail passed"
 
-test_implicit_strands(5, ecto.schedulers.Threadpool, lambda s: s.execute(nthreads=5, niter=5), expect=5.0)
-test_implicit_strands(5, ecto.schedulers.Singlethreaded, lambda s: s.execute(niter=5), expect=5.0)
+test_implicit_strands(4, ecto.schedulers.Threadpool, lambda s: s.execute(nthreads=4, niter=4), expect=4.0)
+test_implicit_strands(4, ecto.schedulers.Singlethreaded, lambda s: s.execute(niter=4), expect=4.0)
 
-test_strands(5, ecto.schedulers.Singlethreaded, lambda s: s.execute(niter=5), expect=5.0)
-test_strands(5, ecto.schedulers.Threadpool, lambda s: s.execute(nthreads=5, niter=5), expect=5.0)
+test_strands(4, ecto.schedulers.Singlethreaded, lambda s: s.execute(niter=4), expect=4.0)
+test_strands(4, ecto.schedulers.Threadpool, lambda s: s.execute(nthreads=4, niter=4), expect=4.0)
 
 
