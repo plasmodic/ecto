@@ -148,7 +148,7 @@ namespace ecto
   }
 
   /**
-   * \brief Takes a user cell, UserModule, that follows the ecto::cell idium and exposes
+   * \brief Takes a user cell, UserModule, that follows the ecto::cell idiom and exposes
    * it to python or other plugin architecture.
 
    * This should be the preferred method of exposing user
@@ -174,6 +174,7 @@ namespace ecto
     m.staticmethod("inspect");
     m.def("name", (std::string (cell_t::*)() const) &cell_t::name);
     m.def("type_name", (std::string (cell_t::*)() const) &cell_t::type);
+    m.def_readonly("short_doc", &cell_t::SHORT_DOC);
   }
 }
 
