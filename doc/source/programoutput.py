@@ -70,8 +70,8 @@ class ProgramOutputDirective(rst.Directive):
 
     def run(self):
         node = program_output()
-        node['modname'] = self.arguments[0]
-        node['celltype'] = self.arguments[1]
+        node.modname = modname = self.arguments[0]
+        node.celltype = celltype = self.arguments[1]
 
         # a-la Index(Directive) inside sphinx
         env = self.state.document.settings.env
@@ -81,11 +81,12 @@ class ProgramOutputDirective(rst.Directive):
         indexnode = addnodes.index()
         indexnode['entries'] = ne = []
         indexnode['inline'] = False
-        ne.append(('single', 'Cell ; ' + self.arguments[1], 
-                   targetid, 'Cell ; ' + self.arguments[1]))
+        s = 'Cell; ' + celltype + ' (module ' + modname + ')'
+        ne.append(('single', s, targetid, s))
 
-        ne.append(('single', self.arguments[1] + ' (ecto cell)', 
-                   targetid, self.arguments[1] + ' (ecto cell)'))
+        modfirstindexarg = celltype + ' (ecto cell in module ' + modname + ')'
+        ne.append(('single', modfirstindexarg, 
+                   targetid, modfirstindexarg))
 
         return [indexnode, node]
 
@@ -139,7 +140,10 @@ def docize(mod):
                         type_name = v.type_name,
                         required = v.required)
             if v.has_default:
-                d[k]['default'] = v.val
+                try:
+                    default = str(v.val)
+                except TypeError, e:
+                    default = '[not visible from python]'
 
             para += [nodes.strong(k, k), nodes.literal('', '   '), 
                      nodes.emphasis('', '   type: '), nodes.literal('', v.type_name + " ")]
@@ -149,7 +153,7 @@ def docize(mod):
             para += nodes.emphasis('', 'required')
             para += nodes.literal('', '   ')
             if v.has_default:
-                para += [nodes.emphasis('', " default: "), nodes.literal('', str(v.val))]
+                para += [nodes.emphasis('', " default: "), nodes.literal('', default)]
             else:
                 para += nodes.emphasis('', ' no default value')
             entry += nodes.paragraph('', v.doc)
@@ -191,11 +195,9 @@ def docize(mod):
 def run_programs(app, doctree):
 
     for node in doctree.traverse(program_output):
-        celltype = node['celltype']
-        modname = node['modname']
-        m = __import__(modname)
+        m = __import__(node.modname)
 
-        new_node = docize(m.__dict__[celltype])
+        new_node = docize(m.__dict__[node.celltype])
         # new_node['language'] = 'text'
         node.replace_self(new_node)
 
