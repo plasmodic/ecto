@@ -45,6 +45,7 @@ from docutils import nodes
 from docutils.parsers import rst
 from docutils.parsers.rst.directives import flag, unchanged
 
+import ecto
 
 class program_output(nodes.Element):
     pass
@@ -98,6 +99,76 @@ def xtract(mod):
 
     return d
 
+def docize(mod):
+    d = {}
+    inst = mod.inspect((),{})
+
+    def gettendril(name, tendrils):
+        d = {}
+
+        if len(tendrils) == 0:
+            return nodes.paragraph()
+
+        section = nodes.section()
+        section += nodes.subtitle(text=name)
+        # section.index(name)
+        #para = nodes.paragraph()
+        lst = nodes.bullet_list()
+        section += lst
+
+        for k, v in tendrils:
+            entry = nodes.list_item()
+            lst += entry
+            para = nodes.paragraph()
+            entry += para
+            d[k] = dict(doc=v.doc,
+                        type_name = v.type_name,
+                        required = v.required)
+            if v.has_default:
+                d[k]['default'] = v.val
+
+            para += [nodes.strong(k, k), nodes.Text(" (" + v.type_name + ") ")]
+            if v.required:
+                para += nodes.emphasis('', 'required')
+            if v.has_default:
+                para += nodes.Text(" default: " + str(v.val))
+            else:
+                para += nodes.Text(' (no default)')
+            entry += nodes.paragraph('', v.doc)
+
+        return section
+
+
+    d['name'] = mod.__name__
+    d['short_doc'] = mod.short_doc
+    #d['params'] = gettendril(inst.params)
+    #d['inputs'] = gettendril(inst.inputs)
+    #d['outputs'] = gettendril(inst.outputs)
+
+    # d['spect'] = inst.
+    cell = nodes.section()
+    cell += nodes.subtitle(text=mod.__name__, rawtest=mod.__name__)
+    para = nodes.paragraph(text=mod.short_doc)
+    cell += para
+    params = nodes.section()
+    params += nodes.subtitle(text="parameters")
+    cell += gettendril('Parameters', inst.params)
+    cell += gettendril('Inputs', inst.inputs)
+    cell += gettendril('Outputs', inst.outputs)
+
+    #inputs = nodes.section()
+    #inputs += nodes.subtitle(text="inputs")
+
+    #params += nodes.paragraph()
+    #para += params
+    #para += nodes.subtitle(text="inputs")
+    #para += nodes.subtitle(text="outputs")
+    #st = nodes.subtitle(mod.__name__, mod.__name__, nodes.paragraph())
+    #short = nodes.paragraph(mod.short_doc, mod.short_doc, st, nodes.paragraph())
+
+    return cell # nodes.compound('', short, )
+
+
 def run_programs(app, doctree):
 
     for node in doctree.traverse(program_output):
@@ -109,7 +180,10 @@ def run_programs(app, doctree):
 
         print "OUTPUT:", output
 
-        new_node = nodes.paragraph(output, output)
+        new_node = docize(m.__dict__[celltype])
+        # new_node = nodes.subtitle(celltype, celltype, nodes.paragraph("boo", "boo"), nodes.paragraph("2boo", "2boo"))
+        #nodes.paragraph(output, output)]
+        #)
         new_node['language'] = 'text'
         node.replace_self(new_node)
 

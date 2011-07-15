@@ -32,7 +32,7 @@ breathe_projects = dict(ecto=os.environ['DOXYGEN_XML_DIR'])
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest', 
               'sphinx.ext.todo', 'sphinx.ext.coverage', 'sphinx.ext.pngmath', 
-              'sphinx.ext.viewcode', 'breathe', 'ectodoc', 'programoutput']
+              'sphinx.ext.viewcode', 'breathe', 'programoutput']
 # extensions = ['sphinx.ext.ifconfig', 'sphinx.ext.todo'] #, 'cmake']
 todo_include_todos = True
 
