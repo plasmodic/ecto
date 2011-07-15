@@ -92,8 +92,8 @@ namespace ecto
     boost::mutex::scoped_lock lock(mtx);
     if (empty())
       return;
-    out << tendrils_name << "\n";
-    out << "---------------------------------\n\n";
+    out << tendrils_name << ":\n";
+    // out << "---------------------------------\n\n";
     std::for_each(begin(), end(), print_tendril(out));
   }
 

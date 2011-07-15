@@ -22,3 +22,6 @@ or robotics pipelines.
    plasm
    schedulers
    api
+   ecto_cells
+   ecto_test_cells
+   
