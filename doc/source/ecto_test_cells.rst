@@ -5,6 +5,10 @@ Module ecto_test
 
 .. ectocell:: ecto_test Add
 
+
+See :ref:`donk donk <ecto_test_Scatter>` as well.
+
+
 .. ectocell:: ecto_test CantCallMeFromTwoThreads
 
 .. ectocell:: ecto_test DontAllocateMe
@@ -20,6 +24,9 @@ Module ecto_test
 .. ectocell:: ecto_test Generate
 
 .. ectocell:: ecto_test HandleHolder
+
+.. _sometargethere:
+
 
 .. ectocell:: ecto_test Increment
 

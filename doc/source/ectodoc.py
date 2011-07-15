@@ -76,7 +76,7 @@ class EctoDocDirective(rst.Directive):
         # a-la Index(Directive) inside sphinx
         env = self.state.document.settings.env
         targetid = 'index-%s' % env.new_serialno('index')
-        targetnode = nodes.target('', '', ids=[targetid])
+        targetnode = nodes.target('', '', ids=[targetid, node.modname + "_" + node.celltype])
         self.state.document.note_explicit_target(targetnode)
         indexnode = addnodes.index()
         indexnode['entries'] = ne = []
@@ -169,6 +169,12 @@ def docize(mod):
 
     # d['spect'] = inst.
     cell = nodes.section()
+    cell['ids'].append(mod.__name__)
+    cell['names'].append(mod.__name__)
+    #targ = nodes.label(mod.__name__, mod.__name__ + "target")
+    #targ.tagname = mod.__name__
+    #cell += targ
+    #cell = targ
     # cell += nodes.raw('.. index:: ' + mod.__name__, '.. index:: ' + mod.__name__)
     cell += nodes.subtitle(text=mod.__name__, rawtest=mod.__name__)
     para = nodes.paragraph(text=mod.short_doc)
