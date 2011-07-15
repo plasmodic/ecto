@@ -45,6 +45,8 @@ from docutils import nodes
 from docutils.parsers import rst
 from docutils.parsers.rst.directives import flag, unchanged
 
+from sphinx import addnodes
+
 import ecto
 
 class program_output(nodes.Element):
@@ -71,7 +73,21 @@ class ProgramOutputDirective(rst.Directive):
         node['modname'] = self.arguments[0]
         node['celltype'] = self.arguments[1]
 
-        return [node]
+        # a-la Index(Directive) inside sphinx
+        env = self.state.document.settings.env
+        targetid = 'index-%s' % env.new_serialno('index')
+        targetnode = nodes.target('', '', ids=[targetid])
+        self.state.document.note_explicit_target(targetnode)
+        indexnode = addnodes.index()
+        indexnode['entries'] = ne = []
+        indexnode['inline'] = False
+        ne.append(('single', 'Cell ; ' + self.arguments[1], 
+                   targetid, 'Cell ; ' + self.arguments[1]))
+
+        ne.append(('single', self.arguments[1] + ' (ecto cell)', 
+                   targetid, self.arguments[1] + ' (ecto cell)'))
+
+        return [indexnode, node]
 
 
 def xtract(mod):
@@ -111,8 +127,6 @@ def docize(mod):
 
         section = nodes.section()
         section += nodes.subtitle(text=name)
-        # section.index(name)
-        #para = nodes.paragraph()
         lst = nodes.bullet_list()
         section += lst
 
@@ -127,26 +141,31 @@ def docize(mod):
             if v.has_default:
                 d[k]['default'] = v.val
 
-            para += [nodes.strong(k, k), nodes.Text(" (" + v.type_name + ") ")]
-            if v.required:
-                para += nodes.emphasis('', 'required')
+            para += [nodes.strong(k, k), nodes.literal('', '   '), 
+                     nodes.emphasis('', '   type: '), nodes.literal('', v.type_name + " ")]
+            para += nodes.literal('', '   ')
+            if not v.required:
+                para += nodes.emphasis('', ' not ')
+            para += nodes.emphasis('', 'required')
+            para += nodes.literal('', '   ')
             if v.has_default:
-                para += nodes.Text(" default: " + str(v.val))
+                para += [nodes.emphasis('', " default: "), nodes.literal('', str(v.val))]
             else:
-                para += nodes.Text(' (no default)')
+                para += nodes.emphasis('', ' no default value')
             entry += nodes.paragraph('', v.doc)
 
         return section
 
-
     d['name'] = mod.__name__
     d['short_doc'] = mod.short_doc
-    #d['params'] = gettendril(inst.params)
-    #d['inputs'] = gettendril(inst.inputs)
-    #d['outputs'] = gettendril(inst.outputs)
+
+    # d['params'] = gettendril(inst.params)
+    # d['inputs'] = gettendril(inst.inputs)
+    # d['outputs'] = gettendril(inst.outputs)
 
     # d['spect'] = inst.
     cell = nodes.section()
+    # cell += nodes.raw('.. index:: ' + mod.__name__, '.. index:: ' + mod.__name__)
     cell += nodes.subtitle(text=mod.__name__, rawtest=mod.__name__)
     para = nodes.paragraph(text=mod.short_doc)
     cell += para
@@ -175,24 +194,17 @@ def run_programs(app, doctree):
         celltype = node['celltype']
         modname = node['modname']
         m = __import__(modname)
-        d = xtract(m.__dict__[celltype])
-        output = str(d)
-
-        print "OUTPUT:", output
 
         new_node = docize(m.__dict__[celltype])
-        # new_node = nodes.subtitle(celltype, celltype, nodes.paragraph("boo", "boo"), nodes.paragraph("2boo", "2boo"))
-        #nodes.paragraph(output, output)]
-        #)
-        new_node['language'] = 'text'
+        # new_node['language'] = 'text'
         node.replace_self(new_node)
 
 
 def setup(app):
-    app.add_config_value('programoutput_use_ansi', False, 'env')
-    app.add_config_value('programoutput_prompt_template',
-                         '$ %(command)s\n%(output)s', 'env')
-    app.add_directive('program-output', ProgramOutputDirective)
+    #app.add_config_value('programoutput_use_ansi', False, 'env')
+    #app.add_config_value('programoutput_prompt_template',
+    #                     '$ %(command)s\n%(output)s', 'env')
+    #app.add_directive('program-output', ProgramOutputDirective)
     app.add_directive('ectocell', ProgramOutputDirective)
     # app.connect('builder-inited', init_cache)
     app.connect('doctree-read', run_programs)
