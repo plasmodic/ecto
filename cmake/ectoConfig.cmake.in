@@ -54,7 +54,7 @@ find_package(PythonLibs REQUIRED)
 #    )
 
 # ============== Python Path ===================================================
-macro( ecto_python_env_gen ECTO_MODULES_PATH )
+macro( ecto_python_env_gen )
     set(ecto_PYTHONPATH_ @ecto_PYTHONPATH@ )
     foreach(p ${ecto_PYTHONPATH_})
         if(ecto_PYTHONPATH)
@@ -64,7 +64,7 @@ macro( ecto_python_env_gen ECTO_MODULES_PATH )
         endif()
     endforeach()
     set(ecto_user_PYTHONPATH )
-    foreach(path ${ECTO_MODULES_PATH})
+    foreach(path ${ARGV})
         set(ecto_user_PYTHONPATH "${ecto_user_PYTHONPATH}:${path}")
     endforeach()
     configure_file(${SELF_DIR}/python_path.sh.user.in 
