@@ -119,9 +119,7 @@ namespace ecto
   template <typename T, typename U = typename ecto::detail::is_thread_unsafe<T>::type >
   struct deduce_with_strand
   {
-    void operator()(boost::shared_ptr<ecto::cell_<T> > p) const 
-    { 
-    }
+    void operator()(boost::shared_ptr<ecto::cell_<T> > p) const { }
   };
 
   template <typename T>

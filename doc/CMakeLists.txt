@@ -48,7 +48,7 @@ if(SPHINX_BUILD)
     COMMAND ${CMAKE_MAKE_PROGRAM} -f Makefile.sphinx html
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
     )
-  add_dependencies(html doxygen)
+  # add_dependencies(html doxygen)
   add_dependencies(doc html)
 endif()
   

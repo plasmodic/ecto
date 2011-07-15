@@ -6,7 +6,7 @@ ecto provides a lightweight plugin archictecture, graph constructures, and sched
 to enable rapid development of DAGs. ecto may be useful for perception, audio processing,
 or robotics pipelines.
 
-.. toctree::
+.. toctree: :
    :maxdepth: 2
    
    at_a_glance
@@ -22,3 +22,16 @@ or robotics pipelines.
    plasm
    schedulers
    api
+
+
+.. ectoimport: ecto_test
+
+.. autoectomodule: ecto_test
+
+.. autoectocell:evett: ecto_test.Multiply
+
+   stuffinside
+
+.. ectocell:: ecto_test Multiply
+
+.. program-output: ecto_test.Multiply
