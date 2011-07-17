@@ -1,4 +1,3 @@
-#include <boost/scoped_ptr.hpp>
 #include <ecto/plasm.hpp>
 #include <ecto/tendril.hpp>
 #include <ecto/cell.hpp>
@@ -13,6 +12,10 @@
 #include <ecto/plasm.hpp>
 #include <ecto/scheduler/invoke.hpp>
 #include <ecto/scheduler/singlethreaded.hpp>
+
+#include <boost/thread.hpp>
+#include <boost/scoped_ptr.hpp>
+#include <boost/date_time/posix_time/posix_time_duration.hpp>
 
 
 namespace ecto {
@@ -65,8 +68,9 @@ namespace ecto {
     {
       running_ = true;
       interrupted = false;
+#if !defined(_WIN32)
       signal(SIGINT, &sigint_static_thunk);
-
+#endif
       compute_stack();
       unsigned cur_iter = 0;
       while(niter == 0 || cur_iter < niter)
@@ -96,7 +100,7 @@ namespace ecto {
 
     void singlethreaded::wait() {
       while(running_)
-        usleep(10);
+		  boost::this_thread::sleep(boost::posix_time::microseconds(10));
       runthread.join();
     }
 

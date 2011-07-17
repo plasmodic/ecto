@@ -36,7 +36,7 @@ namespace ecto
 {
   namespace except
   {
-    struct EctoException: std::exception
+    struct ECTO_EXPORT EctoException: std::exception
     {
       std::string msg_;
     public:
@@ -55,7 +55,7 @@ namespace ecto
       what() const throw ();
     };
 
-    struct TypeMismatch: EctoException
+    struct ECTO_EXPORT TypeMismatch: EctoException
     {
     public:
       explicit
@@ -69,7 +69,7 @@ namespace ecto
       }
     };
 
-    struct ValueNone: EctoException
+    struct ECTO_EXPORT ValueNone: EctoException
     {
     public:
       explicit
@@ -78,7 +78,7 @@ namespace ecto
 
     };
 
-    struct ValueRequired: EctoException
+    struct ECTO_EXPORT ValueRequired: EctoException
     {
     public:
       explicit
@@ -86,7 +86,7 @@ namespace ecto
       ~ValueRequired() throw (){}
     };
 
-    struct NonExistant: EctoException
+    struct ECTO_EXPORT NonExistant: EctoException
     {
 
     public:

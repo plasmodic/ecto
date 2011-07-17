@@ -27,17 +27,34 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #pragma once
-#include <typeinfo>
-#include <string>
-#include <vector>
 #include <iostream>
-#include <stdint.h>
-
 #include <typeinfo>
 #include <string>
+
+/* Cmake will define MyLibrary_EXPORTS on Windows when it
+configures to build a shared library. If you are going to use
+another build system on windows or create the visual studio
+projects by hand you need to define MyLibrary_EXPORTS when
+building a DLL on windows.
+*/
+// We are using the Visual Studio Compiler and building Shared libraries
+
+#if defined (_WIN32) 
+  #if defined(ecto_EXPORTS)
+    #define  ECTO_EXPORT __declspec(dllexport)
+  #else
+    #define  ECTO_EXPORT __declspec(dllimport)
+  #endif /* MyLibrary_EXPORTS */
+#else /* defined (_WIN32) */
+ #define ECTO_EXPORT
+#endif
 
 #if !defined(DISABLE_SHOW)
-#define SHOW() std::cout << __PRETTY_FUNCTION__ << "\n"
+	#if defined(_WIN32)
+		#define SHOW() std::cout << __FUNCSIG__ << "\n"
+	#else
+		#define SHOW() std::cout << __PRETTY_FUNCTION__ << "\n"
+	#endif
 #else
 #define SHOW() do{}while(false)
 #endif
@@ -62,4 +79,5 @@ const std::string& name_of()
   static const std::string& name_cache =  name_of(typeid(T));
   return name_cache;
 }
+
 }

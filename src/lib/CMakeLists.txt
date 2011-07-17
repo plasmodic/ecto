@@ -22,9 +22,10 @@ set_target_properties(ecto PROPERTIES
             SOVERSION ${ECTO_SOVERSION}
             )
 
+
 #install the main shared lib
 install(TARGETS ecto
-  LIBRARY DESTINATION lib
+  DESTINATION lib
   COMPONENT main
   )
 

@@ -14,11 +14,21 @@ include_directories(
   ${Boost_INCLUDE_DIRS}
   )
 
-set(ECTO_DEP_LIBS 
-  ${Boost_LIBRARIES}
-  ${PYTHON_LIBRARIES}
-  ${CMAKE_THREAD_LIBS_INIT}
-)
+if(WIN32)
+	link_directories(${Boost_LIBRARY_DIRS})
+	set(ECTO_DEP_LIBS 
+		${PYTHON_LIBRARIES}
+		${CMAKE_THREAD_LIBS_INIT}
+		CACHE STRING "Libraries dependencies" FORCE
+	)
+else()
+	set(ECTO_DEP_LIBS 
+	  ${Boost_LIBRARIES}
+	  ${PYTHON_LIBRARIES}
+	  ${CMAKE_THREAD_LIBS_INIT}
+	  CACHE STRING "Libraries dependencies" FORCE
+	)
+endif()
 
 #detect the python version and install directories
 find_package(PythonInterp REQUIRED)

@@ -29,13 +29,14 @@
 #pragma once
 
 #include <ecto/version.hpp>
+#include <ecto/util.hpp>
 
 namespace ecto {
   namespace abi {
 
 #define ECTO_ABI_VERSION   4
 
-    struct verifier {
+    struct ECTO_EXPORT verifier {
       verifier(unsigned);
     };
 

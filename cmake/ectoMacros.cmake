@@ -1,3 +1,16 @@
+if(WIN32)
+	link_directories(${Boost_LIBRARY_DIRS})
+	set(ECTO_MODULE_DEP_LIBS 
+		${PYTHON_LIBRARIES}
+		CACHE STRING "Ecto user module libraries dependencies" FORCE
+	)
+else()
+	set(ECTO_MODULE_DEP_LIBS
+	  ${Boost_LIBRARIES}
+	  ${PYTHON_LIBRARIES}
+	  CACHE STRING "Ecto user module libraries dependencies" FORCE
+	)
+endif()
 
 macro(ectomodule NAME)
     #these are required includes for every ecto module
@@ -18,8 +31,7 @@ macro(ectomodule NAME)
       )
     
     target_link_libraries(${NAME}_ectomodule
-      ${Boost_LIBRARIES}
-      ${PYTHON_LIBRARIES}
+      ${ECTO_MODULE_DEP_LIBS}
       ${ecto_LIBRARIES}
     )
 endmacro()
@@ -68,7 +80,8 @@ endmacro()
 macro( install_ecto_module name )
     #this is the python extension
     install(TARGETS ${name}_ectomodule
-      LIBRARY DESTINATION ${ecto_module_PYTHON_INSTALL} COMPONENT main
+      DESTINATION ${ecto_module_PYTHON_INSTALL}
+	  COMPONENT main
       )
 endmacro()
 # ==============================================================================

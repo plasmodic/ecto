@@ -37,8 +37,8 @@
 #include <ecto/util.hpp> //name_of
 #include <ecto/except.hpp>
 
+#include <vector>
 #include <string>
-#include <cstring>
 
 namespace ecto
 {
