@@ -4,6 +4,7 @@ if(NOT GTEST_FOUND)
 return()
 endif()
 
+include_directories(${GTEST_INCLUDE_DIRS})
 add_executable(ecto-test
   main.cpp
   tendril.cpp
