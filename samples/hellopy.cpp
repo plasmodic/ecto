@@ -26,22 +26,17 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#pragma once
 
-#include <ecto/version.hpp>
-#include <ecto/util.hpp>
+#include <boost/python.hpp>
+#include <iostream>
 
-namespace ecto {
-  namespace abi {
+char const* greet()
+{
+   return "hello, world";
+}
 
-#define ECTO_ABI_VERSION   5
-
-    struct ECTO_EXPORT verifier {
-      verifier(unsigned);
-    };
-
-    namespace { 
-      verifier verify(ECTO_ABI_VERSION);
-    }
-  }
+BOOST_PYTHON_MODULE(hellopy)
+{
+    using namespace boost::python;
+    def("greet", greet);
 }

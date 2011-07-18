@@ -1,3 +1,17 @@
+if(WIN32)
+	link_directories(${Boost_LIBRARY_DIRS})
+	set(ECTO_MODULE_DEP_LIBS 
+		${PYTHON_LIBRARIES}
+		${Boost_PYTHON_LIBRARY}
+		CACHE STRING "Ecto user module libraries dependencies" FORCE
+	)
+else()
+	set(ECTO_MODULE_DEP_LIBS
+	  ${Boost_LIBRARIES}
+	  ${PYTHON_LIBRARIES}
+	  CACHE STRING "Ecto user module libraries dependencies" FORCE
+	)
+endif()
 
 macro(ectomodule NAME)
     #these are required includes for every ecto module
@@ -10,16 +24,28 @@ macro(ectomodule NAME)
     add_library(${NAME}_ectomodule SHARED
       ${ARGN}
       )
-    
-    set_target_properties(${NAME}_ectomodule
-      PROPERTIES
-      OUTPUT_NAME ${NAME}
-      PREFIX ""
-      )
+	if(UNIX)
+		set_target_properties(${NAME}_ectomodule
+		  PROPERTIES
+		  OUTPUT_NAME ${NAME}
+		  PREFIX ""
+		  )
+	elseif(WIN32)
+		execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "import distutils.sysconfig; print distutils.sysconfig.get_config_var('SO')"
+						RESULT_VARIABLE PYTHON_PY_PROCESS
+						OUTPUT_VARIABLE PY_SUFFIX
+						OUTPUT_STRIP_TRAILING_WHITESPACE)
+		set_target_properties(${NAME}_ectomodule
+		  PROPERTIES
+		  OUTPUT_NAME ${NAME}
+		  PREFIX ""
+		  SUFFIX ${PY_SUFFIX}
+		  )
+		message(STATUS "Using PY_SUFFIX = ${PY_SUFFIX}")
+	endif()
     
     target_link_libraries(${NAME}_ectomodule
-      ${Boost_LIBRARIES}
-      ${PYTHON_LIBRARIES}
+      ${ECTO_MODULE_DEP_LIBS}
       ${ecto_LIBRARIES}
     )
 endmacro()
@@ -68,7 +94,8 @@ endmacro()
 macro( install_ecto_module name )
     #this is the python extension
     install(TARGETS ${name}_ectomodule
-      LIBRARY DESTINATION ${ecto_module_PYTHON_INSTALL} COMPONENT main
+      DESTINATION ${ecto_module_PYTHON_INSTALL}
+	  COMPONENT main
       )
 endmacro()
 # ==============================================================================

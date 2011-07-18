@@ -74,7 +74,8 @@ namespace ecto_test
       if (mustwait_usec > 0)
         {
           std::cout << "Throttle usleep(" << mustwait_usec << ")\n";
-          usleep(mustwait_usec);
+          boost::this_thread::sleep(boost::posix_time::microseconds(mustwait_usec));
+
         }
       *out = *in;
       prevtime = pt::microsec_clock::universal_time();

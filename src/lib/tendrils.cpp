@@ -14,16 +14,16 @@ namespace ecto
       out << x.read<T>();
     }
 
-    typedef std::map<std::string, boost::function<void
-    (std::ostream& out, const tendril& x)> > ProcMap;
+	typedef boost::function<void(std::ostream& out, const tendril& x)> function_t;
+    typedef std::map<std::string,function_t> ProcMap;
     ProcMap processes;
     PrintFunctions()
     {
-      processes[ecto::name_of<int>()] = &print<int>;
-      processes[ecto::name_of<float>()] = &print<float>;
-      processes[ecto::name_of<double>()] = &print<double>;
-      processes[ecto::name_of<bool>()] = &print<bool>;
-      processes[ecto::name_of<std::string>()] = &print<std::string>;
+      processes[ecto::name_of<int>()] = function_t(&PrintFunctions::print<int>);
+      processes[ecto::name_of<float>()] = function_t(&PrintFunctions::print<float>);
+      processes[ecto::name_of<double>()] = function_t(&PrintFunctions::print<double>);
+      processes[ecto::name_of<bool>()] = function_t(&PrintFunctions::print<bool>);
+      processes[ecto::name_of<std::string>()] = function_t(&PrintFunctions::print<std::string>);
     }
 
     void

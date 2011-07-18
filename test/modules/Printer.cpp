@@ -49,18 +49,20 @@ namespace ecto_test
         std::cout << "***** " << inputs.get<T> ("in") << " ***** ";
       }
 
-      std::map<std::string, boost::function<void(ecto::tendrils&inputs)> > declares;
-      std::map<std::string, boost::function<void(const ecto::tendrils&inputs,ecto::tendrils&outputs)> > processes;
+	  typedef boost::function<void(ecto::tendrils&inputs)> declare_fn_t;
+	  typedef boost::function<void(const ecto::tendrils&inputs,ecto::tendrils&outputs)> process_fn_t;
+      std::map<std::string, declare_fn_t > declares;
+      std::map<std::string, process_fn_t > processes;
       PrintFunctions()
       {
-        declares["int"] = &declare<int>;
-        declares["double"] = &declare<double>;
-        declares["string"] = &declare<std::string>;
-        declares["bool"] = &declare<bool>;
-        processes[ecto::name_of<int>()] = &process<int>;
-        processes[ecto::name_of<double>()] = &process<double>;
-        processes[ecto::name_of<std::string>()] = &process<std::string>;
-        processes[ecto::name_of<bool>()] = &process<bool>;
+        declares["int"] = declare_fn_t(&declare<int>);
+        declares["double"] = declare_fn_t(&declare<double>);
+        declares["string"] = declare_fn_t(&declare<std::string>);
+        declares["bool"] = declare_fn_t(&declare<bool>);
+        processes[ecto::name_of<int>()] = process_fn_t(&process<int>);
+        processes[ecto::name_of<double>()] = process_fn_t(&process<double>);
+        processes[ecto::name_of<std::string>()] = process_fn_t(&process<std::string>);
+        processes[ecto::name_of<bool>()] = process_fn_t(&process<bool>);
       }
     };
 

@@ -1,4 +1,11 @@
-add_library(ecto SHARED
+#this helps with visual studio projects.
+file(GLOB ecto_HEADERS
+	${CMAKE_SOURCE_DIR}/include/ecto/*.hpp
+	${CMAKE_SOURCE_DIR}/include/ecto/*/*.hpp
+	)
+source_group("Headers" FILES ${ecto_HEADERS})
+
+add_library(ecto_cpp SHARED
   abi.cpp
   tendril.cpp
   tendrils.cpp
@@ -11,20 +18,28 @@ add_library(ecto SHARED
   scheduler/invoke.cpp
   scheduler/singlethreaded.cpp
   scheduler/threadpool.cpp
+  ${ecto_HEADERS}
   )
   
-target_link_libraries(ecto
+target_link_libraries(ecto_cpp
   ${ECTO_DEP_LIBS}
   )
-  
-set_target_properties(ecto PROPERTIES
+
+if(UNIX)
+set_target_properties(ecto_cpp PROPERTIES
             VERSION ${ECTO_VERSION}
             SOVERSION ${ECTO_SOVERSION}
             )
+elseif(WIN32)
+#set_target_properties(ecto_cpp PROPERTIES
+#            VERSION ${ECTO_VERSION}
+#            SOVERSION ${ECTO_SOVERSION}
+#            )
+endif()
 
 #install the main shared lib
-install(TARGETS ecto
-  LIBRARY DESTINATION lib
+install(TARGETS ecto_cpp
+  DESTINATION lib
   COMPONENT main
   )
 

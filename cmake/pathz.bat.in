@@ -1,0 +1,3 @@
+set PYTHONPATH=@LIBRARY_OUTPUT_PATH@;@CMAKE_SOURCE_DIR@/python;%PYTHONPATH%
+:: make sure that boost, gtest, and C:\Python26 are in your path
+set PATH=@LIBRARY_OUTPUT_PATH@;@CMAKE_SOURCE_DIR@/python;%PATH%

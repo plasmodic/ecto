@@ -30,8 +30,8 @@
 #include <boost/format.hpp>
 
 namespace ecto {
-  void log(const std::string& msg);
-  extern boost::mutex log_mtx;
+  ECTO_EXPORT void log(const std::string& msg);
+  extern ECTO_EXPORT boost::mutex log_mtx;
 }
 
 #if 0
