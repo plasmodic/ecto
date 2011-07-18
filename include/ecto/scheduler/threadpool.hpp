@@ -45,7 +45,7 @@ namespace ecto {
 
   namespace scheduler {
     
-    struct threadpool 
+    struct ECTO_EXPORT threadpool 
     {
       threadpool(plasm&);
 

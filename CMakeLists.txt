@@ -61,7 +61,12 @@ message(STATUS "To setup your python path for ecto you may source:"
 
 set(ecto_PYTHONPATH ${LIBRARY_OUTPUT_PATH} ${CMAKE_SOURCE_DIR}/python)
 set(ecto_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/include ${CMAKE_BINARY_DIR}/include)
-set(ecto_LIBRARIES ${LIBRARY_OUTPUT_PATH}/libecto.so.${ECTO_VERSION})
+if(UNIX)
+	set(ecto_LIBRARIES ${LIBRARY_OUTPUT_PATH}/libecto_cpp.so.${ECTO_VERSION})
+elsif(WIN32)
+	set(ecto_LIBRARIES ${LIBRARY_OUTPUT_PATH}/ecto_cpp.dll)
+endif()
+
 set(ECTO_CONFIG_PATH  ${CMAKE_SOURCE_DIR}/cmake)
 configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoConfig.cmake.in 
   ${CMAKE_BINARY_DIR}/ectoConfig.cmake @ONLY)
@@ -70,7 +75,7 @@ configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoConfig-version.cmake.in
 configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoMacros.cmake
   ${CMAKE_BINARY_DIR}/ectoMacros.cmake @ONLY)
   
-set(ecto_LIBRARIES ecto)
+set(ecto_LIBRARIES ecto_cpp)
 
 add_subdirectory(python)
 add_subdirectory(src)

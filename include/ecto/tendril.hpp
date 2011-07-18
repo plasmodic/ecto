@@ -390,8 +390,10 @@ namespace ecto
   template<typename T>
   boost::scoped_ptr<tendril::PyCopier_base> tendril::FromPython<T>::Copier(new FromPython<T>());
   template<>
+  ECTO_EXPORT
   void tendril::sample<boost::python::object>(boost::python::object&) const;
   template<>
+  ECTO_EXPORT
   void tendril::set<boost::python::object>(const boost::python::object&);
 }
 

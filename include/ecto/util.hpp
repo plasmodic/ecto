@@ -40,7 +40,7 @@ building a DLL on windows.
 // We are using the Visual Studio Compiler and building Shared libraries
 
 #if defined (_WIN32) 
-  #if defined(ecto_EXPORTS)
+  #if defined(ecto_cpp_EXPORTS)
     #define  ECTO_EXPORT __declspec(dllexport)
   #else
     #define  ECTO_EXPORT __declspec(dllimport)
