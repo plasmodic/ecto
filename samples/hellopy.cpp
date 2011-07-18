@@ -26,58 +26,17 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#pragma once
+
+#include <boost/python.hpp>
 #include <iostream>
-#include <typeinfo>
-#include <string>
 
-/* Cmake will define MyLibrary_EXPORTS on Windows when it
-configures to build a shared library. If you are going to use
-another build system on windows or create the visual studio
-projects by hand you need to define MyLibrary_EXPORTS when
-building a DLL on windows.
-*/
-// We are using the Visual Studio Compiler and building Shared libraries
-
-#if defined (_WIN32) 
-  #if defined(ecto_cpp_EXPORTS)
-    #define  ECTO_EXPORT __declspec(dllexport)
-  #else
-    #define  ECTO_EXPORT __declspec(dllimport)
-  #endif /* MyLibrary_EXPORTS */
-#else /* defined (_WIN32) */
- #define ECTO_EXPORT
-#endif
-
-#if !defined(DISABLE_SHOW)
-	#if defined(_WIN32)
-		#define SHOW() std::cout << __FUNCSIG__ << "\n"
-	#else
-		#define SHOW() std::cout << __PRETTY_FUNCTION__ << "\n"
-	#endif
-#else
-#define SHOW() do{}while(false)
-#endif
-
-namespace ecto
+char const* greet()
 {
-/**
- * \brief Get the unmangled type name of a type_info object.
- * @param ti The type_info to look up unmangled name for.
- * @return The unmangled name. e.g. cv::Mat or pcl::PointCloud<pcl::PointXYZ>
- */
-ECTO_EXPORT const std::string& name_of(const std::type_info &ti);
-
-/**
- * \brief Get the unmangled type name of a type.
- * @tparam T the type that one wants a name for.
- * @return The unmangled name of the given type.
- */
-template<typename T>
-const std::string& name_of()
-{
-  static const std::string& name_cache =  name_of(typeid(T));
-  return name_cache;
+   return "hello, world";
 }
 
+BOOST_PYTHON_MODULE(hellopy)
+{
+    using namespace boost::python;
+    def("greet", greet);
 }

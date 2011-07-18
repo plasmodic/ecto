@@ -19,6 +19,7 @@ if(WIN32)
 	set(ECTO_DEP_LIBS 
 		${PYTHON_LIBRARIES}
 		${CMAKE_THREAD_LIBS_INIT}
+		${Boost_PYTHON_LIBRARY}
 		CACHE STRING "Libraries dependencies" FORCE
 	)
 else()
