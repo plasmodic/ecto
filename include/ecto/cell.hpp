@@ -224,28 +224,28 @@ namespace ecto
     
     // SFINAE eliminates this when the type of arg is invalid
     template<class U>
-    static yes test_declare_params(BOOST_TYPEOF(&U::declare_params));
+    static yes test_declare_params(BOOST_TYPEOF_TPL(&U::declare_params));
     // overload resolution prefers anything at all over "..."
     template<class U>
     static no test_declare_params(...);
 
     template<class U>
-    static yes test_declare_io(BOOST_TYPEOF(&U::declare_io));
+    static yes test_declare_io(BOOST_TYPEOF_TPL(&U::declare_io));
     template<class U>
     static no test_declare_io(...);
 
     template<class U>
-    static yes test_configure(BOOST_TYPEOF(&U::configure));
+    static yes test_configure(BOOST_TYPEOF_TPL(&U::configure));
     template<class U>
     static no test_configure(...);
 
     template<class U>
-    static yes test_process(BOOST_TYPEOF(&U::process));
+    static yes test_process(BOOST_TYPEOF_TPL(&U::process));
     template<class U>
     static no test_process(...);
 
     template<class U>
-    static yes test_destroy(BOOST_TYPEOF(&U::destroy));
+    static yes test_destroy(BOOST_TYPEOF_TPL(&U::destroy));
     template<class U>
     static no test_destroy(...);
 
