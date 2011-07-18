@@ -63,7 +63,7 @@ set(ecto_PYTHONPATH ${LIBRARY_OUTPUT_PATH} ${CMAKE_SOURCE_DIR}/python)
 set(ecto_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/include ${CMAKE_BINARY_DIR}/include)
 if(UNIX)
 	set(ecto_LIBRARIES ${LIBRARY_OUTPUT_PATH}/libecto_cpp.so.${ECTO_VERSION})
-elsif(WIN32)
+elseif(WIN32)
 	set(ecto_LIBRARIES ${LIBRARY_OUTPUT_PATH}/ecto_cpp.dll)
 endif()
 

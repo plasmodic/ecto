@@ -30,7 +30,7 @@ set_target_properties(ecto_cpp PROPERTIES
             VERSION ${ECTO_VERSION}
             SOVERSION ${ECTO_SOVERSION}
             )
-elsif(WIN32)
+elseif(WIN32)
 #set_target_properties(ecto_cpp PROPERTIES
 #            VERSION ${ECTO_VERSION}
 #            SOVERSION ${ECTO_SOVERSION}

@@ -13,7 +13,7 @@ add_executable(ecto-test
   )
 
 target_link_libraries(ecto-test
-  ecto
+  ecto_cpp
   ${GTEST_LIBRARIES}
   ${ECTO_DEP_LIBS}
   )

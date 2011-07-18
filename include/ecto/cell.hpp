@@ -33,6 +33,7 @@
 #include <boost/function.hpp>
 #include <boost/bind.hpp>
 #include <boost/optional.hpp>
+#include <boost/typeof/std/utility.hpp>
 
 #include <ecto/tendril.hpp>
 #include <ecto/tendrils.hpp>
@@ -220,39 +221,37 @@ namespace ecto
   {
     typedef char yes;
     typedef char (&no)[2];
-
-	template <class T, typename R, R (T::*)(...)> struct tfm{ }; 
-
+    
     // SFINAE eliminates this when the type of arg is invalid
     template<class U>
-    static yes test_declare_params(tfm<U,void,&U::declare_params>*);
+    static yes test_declare_params(BOOST_TYPEOF(&U::declare_params));
     // overload resolution prefers anything at all over "..."
     template<class U>
     static no test_declare_params(...);
 
     template<class U>
-    static yes test_declare_io(tfm<U,void,&U::declare_io>* );
+    static yes test_declare_io(BOOST_TYPEOF(&U::declare_io));
     template<class U>
     static no test_declare_io(...);
 
     template<class U>
-    static yes test_configure(tfm<U,void,&U::configure>*);
+    static yes test_configure(BOOST_TYPEOF(&U::configure));
     template<class U>
     static no test_configure(...);
 
     template<class U>
-    static yes test_process(tfm<U,int,&U::process>* );
+    static yes test_process(BOOST_TYPEOF(&U::process));
     template<class U>
     static no test_process(...);
 
     template<class U>
-    static yes test_destroy(tfm<U,void,&U::destroy>*);
+    static yes test_destroy(BOOST_TYPEOF(&U::destroy));
     template<class U>
     static no test_destroy(...);
 
     enum
     {
-	      declare_params = sizeof(test_declare_params<T> (0)) == sizeof(yes)
+        declare_params = sizeof(test_declare_params<T> (0)) == sizeof(yes)
     };
     enum
     {
