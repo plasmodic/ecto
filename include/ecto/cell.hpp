@@ -32,6 +32,8 @@
 #include <boost/noncopyable.hpp>
 #include <boost/function.hpp>
 #include <boost/bind.hpp>
+#include <boost/optional.hpp>
+#include <boost/typeof/std/utility.hpp>
 
 #include <ecto/tendril.hpp>
 #include <ecto/tendrils.hpp>
@@ -87,7 +89,7 @@ namespace ecto
    * It is important to note that all functions have are optional and they all have
    * default implementations.
    */
-  struct cell: boost::noncopyable
+  struct ECTO_EXPORT cell: boost::noncopyable
   {
     typedef boost::shared_ptr<cell> ptr; //!< A convenience pointer typedef
 
@@ -208,6 +210,7 @@ namespace ecto
     std::string instance_name_;
   };
 
+  
   /**
    * \brief Helper class for determining if client modules have function
    * implementations or not.
@@ -218,62 +221,53 @@ namespace ecto
   {
     typedef char yes;
     typedef char (&no)[2];
-
-    template<long I> struct S
-    {
-    };
-
+    
     // SFINAE eliminates this when the type of arg is invalid
     template<class U>
-    static yes test_declare_params(S<sizeof(&U::declare_params)> );
+    static yes test_declare_params(BOOST_TYPEOF_TPL(&U::declare_params));
     // overload resolution prefers anything at all over "..."
     template<class U>
     static no test_declare_params(...);
 
     template<class U>
-    static yes test_declare_io(S<sizeof(&U::declare_io)> );
+    static yes test_declare_io(BOOST_TYPEOF_TPL(&U::declare_io));
     template<class U>
     static no test_declare_io(...);
 
     template<class U>
-    static yes test_configure(S<sizeof(&U::configure)> );
+    static yes test_configure(BOOST_TYPEOF_TPL(&U::configure));
     template<class U>
     static no test_configure(...);
 
     template<class U>
-    static yes test_process(S<sizeof(&U::process)> );
+    static yes test_process(BOOST_TYPEOF_TPL(&U::process));
     template<class U>
     static no test_process(...);
 
     template<class U>
-    static yes test_destroy(S<sizeof(&U::destroy)> );
+    static yes test_destroy(BOOST_TYPEOF_TPL(&U::destroy));
     template<class U>
     static no test_destroy(...);
 
-    void existent_fn();
-    static void existent_static_fn();
-    const static S<sizeof(&has_f<T>::existent_fn)> sarg;
-    const static S<sizeof(&has_f<T>::existent_static_fn)> ssarg;
-
     enum
     {
-      declare_params = sizeof(test_declare_params<T> (ssarg)) == sizeof(yes)
+        declare_params = sizeof(test_declare_params<T> (0)) == sizeof(yes)
     };
     enum
     {
-      declare_io = sizeof(test_declare_io<T> (ssarg)) == sizeof(yes)
+      declare_io = sizeof(test_declare_io<T> (0)) == sizeof(yes)
     };
     enum
     {
-      configure = sizeof(test_configure<T> (sarg)) == sizeof(yes)
+      configure = sizeof(test_configure<T> (0)) == sizeof(yes)
     };
     enum
     {
-      process = sizeof(test_process<T> (sarg)) == sizeof(yes)
+      process = sizeof(test_process<T> (0)) == sizeof(yes)
     };
     enum
     {
-      destroy = sizeof(test_destroy<T> (sarg)) == sizeof(yes)
+      destroy = sizeof(test_destroy<T> (0)) == sizeof(yes)
     };
 
   };

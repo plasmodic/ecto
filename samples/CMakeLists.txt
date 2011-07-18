@@ -8,6 +8,28 @@ ectomodule(hello_ecto
     hello_ecto.cpp
 )
 
+  #these are required includes for every ecto module
+include_directories(
+${PYTHON_INCLUDE_PATH}
+${Boost_INCLUDE_DIRS}
+)
+
+add_library(hellopy SHARED
+hellopy.cpp
+)
+set_target_properties(hellopy
+  PROPERTIES
+  OUTPUT_NAME hellopy
+  PREFIX ""
+  SUFFIX .pyd
+  )
+link_directories(${PYTHON_LIBRARY_DIRS})
+target_link_libraries(hellopy
+${PYTHON_LIBRARIES}
+${CMAKE_THREAD_LIBS_INIT}
+${Boost_PYTHON_LIBRARY}
+)
+
 #optionally link against other libs
 #ecto_link(hello_ecto
 #  ${MY_EXTRA_LIBS}

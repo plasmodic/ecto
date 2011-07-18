@@ -43,7 +43,7 @@ namespace ecto {
 
   namespace scheduler {
     
-    struct singlethreaded 
+    struct ECTO_EXPORT singlethreaded 
     {
       singlethreaded(plasm&);
 

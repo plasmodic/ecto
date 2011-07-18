@@ -5,6 +5,7 @@
 #include <ecto/scheduler/singlethreaded.hpp>
 
 #include <boost/format.hpp>
+#include <boost/date_time/posix_time/posix_time_duration.hpp>
 
 #include <string>
 #include <map>
@@ -195,7 +196,7 @@ namespace ecto
   {
     impl_->scheduler->execute(niter);
     while (impl_->scheduler->running())
-      usleep(10);
+		boost::this_thread::sleep(boost::posix_time::microseconds(10));
 
     return 0;
   }
@@ -246,7 +247,7 @@ namespace ecto
       for (tendrils::const_iterator b_tend = m->inputs.begin(), e_tend = m->inputs.end(); b_tend != e_tend; ++b_tend)
       {
 
-        if (b_tend->second->required() and in_connected.count(b_tend->first) == 0)
+        if (b_tend->second->required() && in_connected.count(b_tend->first) == 0)
         {
           std::string s = str(boost::format("in module %s, input port '%s' is required"
                                             " but not connected")
@@ -268,7 +269,7 @@ namespace ecto
 
       for (tendrils::const_iterator b_tend = m->outputs.begin(), e_tend = m->outputs.end(); b_tend != e_tend; ++b_tend)
       {
-        if (b_tend->second->required() and out_connected.count(b_tend->first) == 0)
+        if (b_tend->second->required() && out_connected.count(b_tend->first) == 0)
         {
           std::string s = str(boost::format("in module %s, output port '%s' is required"
                                             " but not connected")

@@ -1,5 +1,7 @@
 #include <ecto/profile.hpp>
+#if !defined(_WIN32)
 #include <unistd.h>
+#endif
 
 namespace ecto {
   namespace profile {
@@ -68,10 +70,10 @@ namespace ecto {
     }
  
 #else
-#warning Unable to determine how to talk to cpu instruction counter, internal instrumentation will not work
-    
+  
     unsigned long read_tsc(void)
     {
+     //todo FIXME.
       return 0;
     }
 
@@ -79,8 +81,12 @@ namespace ecto {
 
     double elapsed_time(const stats_type& stats)
     {
+#if !defined(_WIN32)
       double ticks_second = static_cast<double>(sysconf(_SC_CLK_TCK));
       return stats.total_ticks / ticks_second;
+#else
+	  return 1.0;
+#endif
     }
 
     double period(const stats_type& stats)

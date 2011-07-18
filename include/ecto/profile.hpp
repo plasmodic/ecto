@@ -27,19 +27,21 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #pragma once
-#include <boost/integer.hpp>//int64_t
+#include <stdint.h>//int64_t
+#include <ecto/util.hpp>
+
 namespace ecto {
   namespace profile {
 
     unsigned long read_tsc(void);
 
-    struct stats_type
+    struct ECTO_EXPORT stats_type
     {
       unsigned ncalls;
       int64_t total_ticks;
     };
 
-    struct stats_collector
+    struct ECTO_EXPORT stats_collector
     {
       int64_t start;
       stats_type& stats;
@@ -54,8 +56,8 @@ namespace ecto {
       }
     };
 
-    double elapsed_time(const stats_type& stats);
-    double period(const stats_type& stats);
-    double frequency(const stats_type& stats);
+    ECTO_EXPORT double elapsed_time(const stats_type& stats);
+    ECTO_EXPORT double period(const stats_type& stats);
+    ECTO_EXPORT double frequency(const stats_type& stats);
  }
 }
