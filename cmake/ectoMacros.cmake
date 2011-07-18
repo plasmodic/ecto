@@ -1,19 +1,16 @@
-if(WIN32)
-	link_directories(${Boost_LIBRARY_DIRS})
-	set(ECTO_MODULE_DEP_LIBS 
-		${PYTHON_LIBRARIES}
-		${Boost_PYTHON_LIBRARY}
-		CACHE STRING "Ecto user module libraries dependencies" FORCE
-	)
-else()
-	set(ECTO_MODULE_DEP_LIBS
-	  ${Boost_LIBRARIES}
-	  ${PYTHON_LIBRARIES}
-	  CACHE STRING "Ecto user module libraries dependencies" FORCE
-	)
-endif()
-
 macro(ectomodule NAME)
+    if(WIN32)
+    	link_directories(${Boost_LIBRARY_DIRS})
+    	set(ECTO_MODULE_DEP_LIBS 
+    		${PYTHON_LIBRARIES}
+    		${Boost_PYTHON_LIBRARY}
+    	)
+    else()
+    	set(ECTO_MODULE_DEP_LIBS
+    	  ${Boost_LIBRARIES}
+    	  ${PYTHON_LIBRARIES}
+    	)
+    endif()
     #these are required includes for every ecto module
     include_directories(
       ${ecto_INCLUDE_DIRS} 
@@ -53,6 +50,18 @@ endmacro()
 # ==============================================================================
 
 macro(ectorosmodule NAME)
+    if(WIN32)
+    	link_directories(${Boost_LIBRARY_DIRS})
+    	set(ECTO_MODULE_DEP_LIBS 
+    		${PYTHON_LIBRARIES}
+    		${Boost_PYTHON_LIBRARY}
+    	)
+    else()
+    	set(ECTO_MODULE_DEP_LIBS
+    	  ${Boost_LIBRARIES}
+    	  ${PYTHON_LIBRARIES}
+    	)
+    endif()
     include_directories(
       ${ecto_INCLUDE_DIRS} 
       ${PYTHON_INCLUDE_PATH}
@@ -70,8 +79,7 @@ macro(ectorosmodule NAME)
     )
     
     target_link_libraries(${NAME}_ectomodule
-      ${Boost_LIBRARIES}
-      ${PYTHON_LIBRARIES}
+      ${ECTO_MODULE_DEP_LIBS}
       ${ecto_LIBRARIES}
     )
 endmacro()
