@@ -36,7 +36,8 @@ namespace ecto
 {
   namespace except
   {
-    struct ECTO_EXPORT EctoException: std::exception
+
+	struct ECTO_EXPORT EctoException: std::exception
     {
       std::string msg_;
     public:

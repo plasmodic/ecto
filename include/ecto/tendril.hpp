@@ -55,7 +55,7 @@ namespace ecto
    *
    * Items held by the tendril must be copy constructible and copiable.
    */
-  class tendril
+  class ECTO_EXPORT tendril
   {
   public:
     typedef boost::shared_ptr<tendril> ptr;

@@ -70,10 +70,10 @@ namespace ecto {
     }
  
 #else
-#pragma warning "Unable to determine how to talk to cpu instruction counter, internal instrumentation will not work"
-    
+  
     unsigned long read_tsc(void)
     {
+     //todo FIXME.
       return 0;
     }
 
