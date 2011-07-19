@@ -12,22 +12,22 @@ namespace bp = boost::python;
 using bp::arg;
 namespace ecto
 {
-  struct plasm_wrapper
+  namespace plasm_wrapper
   {
-    static std::string wrapViz(const ecto::plasm& p)
+    std::string wrapViz(const ecto::plasm& p)
     {
       return p.viz();
     }
 
     template<typename T>
-    static void list_assign(std::list<T>& l, bp::object o)
+    void list_assign(std::list<T>& l, bp::object o)
     {
       // Turn a Python sequence into an STL input range
       bp::stl_input_iterator<T> begin(o), end;
       l.assign(begin, end);
     }
 
-    static bp::list sanitize_connection_list(bp::list connections)
+    bp::list sanitize_connection_list(bp::list connections)
     {
       int len = bp::len(connections);
       bp::list tuples;
@@ -51,7 +51,7 @@ namespace ecto
       }
       return tuples;
     }
-    static void plasm_connect_list(plasm& p, bp::list connections)
+    void plasm_connect_list(plasm& p, bp::list connections)
     {
       connections = sanitize_connection_list(connections);
       bp::stl_input_iterator<bp::tuple> begin(connections), end;
@@ -64,7 +64,7 @@ namespace ecto
         p.connect(from, output, to, input);
       }
     }
-    static int plasm_connect_args(boost::python::tuple args, bp::dict kw)
+    int plasm_connect_args(boost::python::tuple args, bp::dict kw)
     {
       int i = 0;
       plasm::ptr p = bp::extract<plasm::ptr>(args[i++]);
@@ -84,7 +84,7 @@ namespace ecto
       }
       return i;
     }
-    static bp::list plasm_get_connections(plasm& p)
+    bp::list plasm_get_connections(plasm& p)
     {
       bp::list result;
       const ecto::graph::graph_t& g = p.graph();
@@ -111,7 +111,7 @@ namespace ecto
         }
         bp::list& l;
       };
-    static bp::list plasm_get_cells(plasm& p)
+    bp::list plasm_get_cells(plasm& p)
     {
       bp::list l;
       std::vector<cell::ptr> cells = p.cells();
@@ -119,7 +119,12 @@ namespace ecto
       return l;
     }
     BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( execute_overloads , plasm::execute , 0,1)
-    static void wrap()
+
+    plasm::ptr make_plasm() {
+      return plasm::ptr(new plasm);
+    }
+
+    void wrap()
     {
       using bp::arg;
 

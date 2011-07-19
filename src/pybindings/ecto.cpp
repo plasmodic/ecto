@@ -34,6 +34,8 @@ namespace ecto {
     }
 
     void unlog_to_file() {
+      std::cout.flush();
+      std::cerr.flush();
       log_file.close();
       assert(stdout_orig);
       assert(stderr_orig);

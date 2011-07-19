@@ -27,9 +27,17 @@ namespace ecto {
 
   namespace scheduler {
 
+    singlethreaded::singlethreaded(plasm::ptr p) 
+      : plasm_(p), graph(p->graph()) 
+    {       
+      assert(plasm_);
+    }
+
     singlethreaded::singlethreaded(plasm& p) 
-      : plasm_(p), graph(p.graph()) 
-    { }
+      : plasm_(p.shared_from_this()), graph(plasm_->graph()) 
+    {       
+      assert(plasm_);
+    }
 
     int 
     singlethreaded::invoke_process(graph_t::vertex_descriptor vd)
@@ -42,7 +50,7 @@ namespace ecto {
       if (!stack.empty()) //will be empty if this needs to be computed.
         return;
       //check this plasm for correctness.
-      plasm_.check();
+      plasm_->check();
       boost::topological_sort(graph, std::back_inserter(stack));
       std::reverse(stack.begin(), stack.end());
     }

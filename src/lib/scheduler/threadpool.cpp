@@ -394,8 +394,12 @@ namespace ecto {
     };
 
 
+    threadpool::threadpool(plasm::ptr p)
+      : plasm_(p), graph(p->graph()), impl_(new impl)
+    { }
+
     threadpool::threadpool(plasm& p)
-      : plasm_(p), graph(p.graph()), impl_(new impl)
+      : plasm_(p.shared_from_this()), graph(plasm_->graph()), impl_(new impl)
     { }
 
     namespace phx = boost::phoenix;
@@ -404,11 +408,11 @@ namespace ecto {
     {
       unsigned nthreads = 
         nthreadsarg == 0 
-        ? std::min((unsigned)plasm_.size(), boost::thread::hardware_concurrency())
+        ? std::min((unsigned)plasm_->size(), boost::thread::hardware_concurrency())
         : nthreadsarg;
 
       //check this plasm for correctness.
-      plasm_.check();
+      plasm_->check();
 
       std::cout << "Threadpool executing in " << nthreads << " threads.\n";
 

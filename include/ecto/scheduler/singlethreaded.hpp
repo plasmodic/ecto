@@ -45,6 +45,7 @@ namespace ecto {
     
     struct ECTO_EXPORT singlethreaded 
     {
+      singlethreaded(plasm::ptr);
       singlethreaded(plasm&);
 
       int execute(unsigned niter=0);
@@ -59,7 +60,7 @@ namespace ecto {
       int invoke_process(ecto::graph::graph_t::vertex_descriptor vd);
       void compute_stack();
 
-      plasm& plasm_;
+      plasm::ptr plasm_;
       ecto::graph::graph_t& graph;
       boost::thread runthread;
       bool running_;

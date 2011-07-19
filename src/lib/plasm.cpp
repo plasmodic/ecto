@@ -142,16 +142,10 @@ namespace ecto
     };
   };
 
-  plasm::plasm()
-      :
-        impl_(new impl)
-  {
-    impl_->scheduler.reset(new ecto::scheduler::singlethreaded(*this));
-  }
+  plasm::plasm() : impl_(new impl) { }
 
-  plasm::~plasm()
-  {
-  }
+
+  plasm::~plasm() { }
 
   void
   plasm::insert(cell::ptr mod)
@@ -194,9 +188,11 @@ namespace ecto
   int
   plasm::execute(unsigned niter)
   {
+    if (!impl_->scheduler)
+      impl_->scheduler.reset(new ecto::scheduler::singlethreaded(shared_from_this()));
     impl_->scheduler->execute(niter);
     while (impl_->scheduler->running())
-		boost::this_thread::sleep(boost::posix_time::microseconds(10));
+      boost::this_thread::sleep(boost::posix_time::microseconds(10));
 
     return 0;
   }
