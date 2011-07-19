@@ -277,8 +277,9 @@ namespace ecto {
 
         workserv.reset();
         mainserv.reset();
-
+#if !defined(_WIN32)
         signal(SIGINT, &sigint_static_thunk);
+#endif
         sigint_handler = boost::bind(&impl::stop_asap, this);
 
         //

@@ -42,7 +42,7 @@ namespace ecto
   /**
    * \brief The tendrils are a collection for the ecto::tendril class, addressable by a string key.
    */
-  class tendrils: public std::map<std::string, tendril::ptr>, boost::noncopyable
+  class ECTO_EXPORT tendrils: public std::map<std::string, tendril::ptr>, boost::noncopyable
   {
   public:
 

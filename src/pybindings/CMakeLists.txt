@@ -18,6 +18,7 @@ set_target_properties(ecto_ectomodule PROPERTIES
 
 #this is the python extension
 install(TARGETS ecto_ectomodule
-  LIBRARY DESTINATION ${ecto_PYTHON_INSTALL} COMPONENT ecto_python
+  DESTINATION ${ecto_PYTHON_INSTALL}
+  COMPONENT main
   )
 

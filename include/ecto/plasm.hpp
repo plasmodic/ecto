@@ -55,7 +55,7 @@ namespace ecto
    * It enforces several invariants that are necessary for scheduling DAGs and
    * is used by all the ecto::schedulers to enable exectution of modules that are connected in the graph.
    */
-  class plasm: boost::noncopyable
+  class ECTO_EXPORT plasm: boost::noncopyable
   {
   public:
     plasm();

@@ -88,12 +88,12 @@ namespace ecto {
 
 #define ECTO_CELL(MODULE, TYPE, NAME, DOCSTRING)                      \
   ECTO_MODULETAG(MODULE)                                                \
-  namespace {                                                           \
+  namespace ecto{ namespace registry {                                                          \
     template<>                                                          \
     const ::ecto::registry::registrator< ::ecto::tag::MODULE,TYPE>&     \
     ::ecto::registry::registrator< ::ecto::tag::MODULE,TYPE>::inst      \
     (::ecto::registry::registrator< ::ecto::tag::MODULE,TYPE>(NAME, DOCSTRING)); \
-  }
+  } }
   
 #define ECTO_INSTANTIATE_REGISTRY(MODULE)                               \
   ECTO_MODULETAG(MODULE)                                                \

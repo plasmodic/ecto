@@ -37,7 +37,7 @@ if(USE_ANAL_FLAGS)
     if(UNIX)
         set(ANAL_FLAGS " -Werror -Wall -Wl,--no-undefined")
     elseif(WIN32)
-        set(ANAL_FLAGS "")
+        set(ANAL_FLAGS "/D _CRT_SECURE_NO_WARNINGS /D BOOST_HAS_STDINT_H /wd4099 /wd4101 /wd4996 /wd4251 /wd4305 /D _WIN32_WINNT=0x0501")
     elseif(APPLE)
         set(ANAL_FLAGS "")
     endif()
@@ -49,19 +49,32 @@ include_directories(
   ${CMAKE_SOURCE_DIR}/include
   ${CMAKE_SOURCE_DIR}/src
   )
-  
-configure_file(${CMAKE_SOURCE_DIR}/cmake/python_path.sh.in 
-  ${CMAKE_BINARY_DIR}/python_path.sh @ONLY@)
 
-#copy the python_path.sh.user.in for users that are not installing ecto.
-file(COPY ${CMAKE_SOURCE_DIR}/cmake/python_path.sh.user.in DESTINATION ${CMAKE_BINARY_DIR})
+if(UNIX)
+  configure_file(${CMAKE_SOURCE_DIR}/cmake/python_path.sh.in 
+    ${CMAKE_BINARY_DIR}/python_path.sh @ONLY@)
+  #copy the python_path.sh.user.in for users that are not installing ecto.
+  file(COPY ${CMAKE_SOURCE_DIR}/cmake/python_path.sh.user.in DESTINATION ${CMAKE_BINARY_DIR})
+  message(STATUS "To setup your python path for ecto you may source:"
+    " ${CMAKE_BINARY_DIR}/python_path.sh")
+elseif(WIN32)
+  configure_file(${CMAKE_SOURCE_DIR}/cmake/pathz.bat.in 
+    ${CMAKE_BINARY_DIR}/pathz.bat @ONLY@)
+  message(STATUS "To setup your pathz for ecto you should run:"
+    "${CMAKE_BINARY_DIR}/pathz.bat")
+endif()
+
   
-message(STATUS "To setup your python path for ecto you may source:"
-  " ${CMAKE_BINARY_DIR}/python_path.sh")
+
 
 set(ecto_PYTHONPATH ${LIBRARY_OUTPUT_PATH} ${CMAKE_SOURCE_DIR}/python)
 set(ecto_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/include ${CMAKE_BINARY_DIR}/include)
-set(ecto_LIBRARIES ${LIBRARY_OUTPUT_PATH}/libecto.so.${ECTO_VERSION})
+if(UNIX)
+  set(ecto_LIBRARIES ${LIBRARY_OUTPUT_PATH}/libecto_cpp.so.${ECTO_VERSION})
+elseif(WIN32)
+  set(ecto_LIBRARIES ${LIBRARY_OUTPUT_PATH}/ecto_cpp.dll)
+endif()
+
 set(ECTO_CONFIG_PATH  ${CMAKE_SOURCE_DIR}/cmake)
 configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoConfig.cmake.in 
   ${CMAKE_BINARY_DIR}/ectoConfig.cmake @ONLY)
@@ -70,7 +83,7 @@ configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoConfig-version.cmake.in
 configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoMacros.cmake
   ${CMAKE_BINARY_DIR}/ectoMacros.cmake @ONLY)
   
-set(ecto_LIBRARIES ecto)
+set(ecto_LIBRARIES ecto_cpp)
 
 add_subdirectory(python)
 add_subdirectory(src)

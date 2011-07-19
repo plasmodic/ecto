@@ -60,7 +60,7 @@ namespace ecto_test
 
     int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
-      usleep(sleep_sec.read()*1.0e6);
+      boost::this_thread::sleep(boost::posix_time::microseconds(int64_t(sleep_sec.read()*1.0e6)));
       *out = *in;
       return 0;
     }

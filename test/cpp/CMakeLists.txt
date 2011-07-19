@@ -4,6 +4,7 @@ if(NOT GTEST_FOUND)
 return()
 endif()
 
+include_directories(${GTEST_INCLUDE_DIRS})
 add_executable(ecto-test
   main.cpp
   tendril.cpp
@@ -13,7 +14,7 @@ add_executable(ecto-test
   )
 
 target_link_libraries(ecto-test
-  ecto
+  ecto_cpp
   ${GTEST_LIBRARIES}
   ${ECTO_DEP_LIBS}
   )
