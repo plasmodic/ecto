@@ -11,12 +11,9 @@ plasm.connect(gen[:] >> inc[:],
               inc[:] >> printer[:])
   
 sched = ecto.schedulers.Threadpool(plasm)
-ecto.log_to_file("ectolog.txt");
+ecto.log_to_file("ectolog.txt")
 sched.execute_async(niter=100)
     
 from IPython.Shell import IPShellEmbed
 ipshell = IPShellEmbed()
 ipshell()
-
-
-  
