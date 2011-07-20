@@ -18,10 +18,6 @@ namespace ecto
 {
   namespace py
   {
-#if 1
-#undef SHOW
-#define SHOW() do{}while(false)
-#endif
 
     struct cellwrap: cell, bp::wrapper<cell>
     {
@@ -63,9 +59,7 @@ namespace ecto
         return OK;
       }
 
-      void init()
-      {
-      }
+      void init() { }
 
       void dispatch_destroy()
       {
@@ -114,9 +108,8 @@ namespace ecto
       cell::ptr mod_input, mod_output;
       std::string key;
 
-      TendrilSpecification()
-      {
-      }
+      TendrilSpecification() { }
+
       bool check(cell::ptr mod, const std::string& key)
       {
         if (key.empty())
@@ -128,8 +121,9 @@ namespace ecto
           }
         return true;
       }
-      TendrilSpecification(cell::ptr mod_in, cell::ptr mod_out, const std::string& key) :
-        mod_input(mod_in), mod_output(mod_out), key(key)
+
+      TendrilSpecification(cell::ptr mod_in, cell::ptr mod_out, const std::string& key) 
+        : mod_input(mod_in), mod_output(mod_out), key(key)
       {
         if (!check(mod_in, key))
           throw std::runtime_error(
@@ -140,14 +134,16 @@ namespace ecto
           "The module " + mod_out->name() + " does not contain any output or parameter by the given name: "
               + key);
       }
-      TendrilSpecification(cell::ptr mod, const std::string& key) :
-        mod_input(mod), mod_output(mod), key(key)
+
+      TendrilSpecification(cell::ptr mod, const std::string& key) 
+        : mod_input(mod), mod_output(mod), key(key)
       {
         if (!check(mod, key))
           throw std::runtime_error(
               "The module " + mod->name() + " does not contain any inputs or outputs or parameters by the given name: "
               + key);
       }
+
       tendril::ptr toTendril(int t)
       {
         switch (t)
@@ -173,13 +169,11 @@ namespace ecto
     struct TendrilSpecifications
     {
       typedef std::vector<TendrilSpecification> Vector;
-      TendrilSpecifications()
-      {
-      }
-      TendrilSpecifications(Vector vts) :
-        vts(vts)
-      {
-      }
+
+      TendrilSpecifications() { }
+
+      TendrilSpecifications(Vector vts) : vts(vts) { }
+
       TendrilSpecifications(bp::list l)
       {
         bp::stl_input_iterator<const TendrilSpecification&> begin(l), end;
@@ -254,6 +248,7 @@ namespace ecto
           throw std::runtime_error("Slice is only valid if its the [:] form...");
         }
     }
+
     TendrilSpecifications expand(cell::ptr mod, const tendrils& t)
     {
       TendrilSpecifications l;
@@ -279,9 +274,8 @@ namespace ecto
       //the spec must be the same size...
       if (lhs.vts.size() != rhs.vts.size())
         {
-          std::string msg = boost::str(
-                                       boost::format("Specification mismatch... len(lhs) != len(rhs) -> %d != %d")
-                                           % lhs.vts.size() % rhs.vts.size());
+          std::string msg = boost::str(boost::format("Specification mismatch... len(lhs) != len(rhs) -> %d != %d")
+                                       % lhs.vts.size() % rhs.vts.size());
           throw std::runtime_error(msg);
         }
       for (size_t i = 0, end = lhs.vts.size(); i < end; i++)
@@ -293,6 +287,7 @@ namespace ecto
         }
       return result;
     }
+
     bp::list rshift_spec_tuples(TendrilSpecifications& lhs, bp::tuple& rhs)
     {
       bp::list result;
