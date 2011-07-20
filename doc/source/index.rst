@@ -16,6 +16,7 @@ or robotics pipelines.
    ecto_1_2_3
    autoregister
    auto_docs
+   ipython
    tendril
    tendrils
    cell
