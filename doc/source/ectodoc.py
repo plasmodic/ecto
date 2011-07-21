@@ -49,7 +49,7 @@ from sphinx import addnodes
 
 import ecto
 
-class program_output(nodes.Element):
+class ectodoc(nodes.Element):
     pass
 
 
@@ -60,7 +60,7 @@ def _slice(value):
     return tuple((parts + [None]*2)[:2])
 
 
-class ProgramOutputDirective(rst.Directive):
+class EctoDocDirective(rst.Directive):
     has_content = False
     final_argument_whitespace = True
     required_arguments = 2
@@ -69,14 +69,14 @@ class ProgramOutputDirective(rst.Directive):
                        ellipsis=_slice, extraargs=unchanged)
 
     def run(self):
-        node = program_output()
+        node = ectodoc()
         node.modname = modname = self.arguments[0]
         node.celltype = celltype = self.arguments[1]
 
         # a-la Index(Directive) inside sphinx
         env = self.state.document.settings.env
         targetid = 'index-%s' % env.new_serialno('index')
-        targetnode = nodes.target('', '', ids=[targetid])
+        targetnode = nodes.target('', '', ids=[targetid, node.modname + "_" + node.celltype])
         self.state.document.note_explicit_target(targetnode)
         indexnode = addnodes.index()
         indexnode['entries'] = ne = []
@@ -169,6 +169,12 @@ def docize(mod):
 
     # d['spect'] = inst.
     cell = nodes.section()
+    cell['ids'].append(mod.__name__)
+    cell['names'].append(mod.__name__)
+    #targ = nodes.label(mod.__name__, mod.__name__ + "target")
+    #targ.tagname = mod.__name__
+    #cell += targ
+    #cell = targ
     # cell += nodes.raw('.. index:: ' + mod.__name__, '.. index:: ' + mod.__name__)
     cell += nodes.subtitle(text=mod.__name__, rawtest=mod.__name__)
     para = nodes.paragraph(text=mod.short_doc)
@@ -192,9 +198,9 @@ def docize(mod):
     return cell # nodes.compound('', short, )
 
 
-def run_programs(app, doctree):
+def do_ectodoc(app, doctree):
 
-    for node in doctree.traverse(program_output):
+    for node in doctree.traverse(ectodoc):
         m = __import__(node.modname)
 
         new_node = docize(m.__dict__[node.celltype])
@@ -206,7 +212,7 @@ def setup(app):
     #app.add_config_value('programoutput_use_ansi', False, 'env')
     #app.add_config_value('programoutput_prompt_template',
     #                     '$ %(command)s\n%(output)s', 'env')
-    #app.add_directive('program-output', ProgramOutputDirective)
-    app.add_directive('ectocell', ProgramOutputDirective)
+    #app.add_directive('program-output', EctoDocDirective)
+    app.add_directive('ectocell', EctoDocDirective)
     # app.connect('builder-inited', init_cache)
-    app.connect('doctree-read', run_programs)
+    app.connect('doctree-read', do_ectodoc)

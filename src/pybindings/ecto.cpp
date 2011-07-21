@@ -26,7 +26,6 @@ namespace ecto {
       log_file.close();
       log_rdbuf = 0;
       std::cout << "Redirecting C++ cout/cerr to '" << fname << "'\n";
-      assert(!log_rdbuf);
       log_file.open(fname.c_str());
       stdout_orig = std::cout.rdbuf();
       stderr_orig = std::cerr.rdbuf();
