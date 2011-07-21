@@ -10,6 +10,7 @@
 
 namespace bp = boost::python;
 using bp::arg;
+
 namespace ecto
 {
   namespace plasm_wrapper
@@ -64,6 +65,7 @@ namespace ecto
         p.connect(from, output, to, input);
       }
     }
+
     int plasm_connect_args(boost::python::tuple args, bp::dict kw)
     {
       int i = 0;
@@ -84,6 +86,7 @@ namespace ecto
       }
       return i;
     }
+
     bp::list plasm_get_connections(plasm& p)
     {
       bp::list result;
@@ -102,15 +105,14 @@ namespace ecto
       return result;
     }
 
-      struct bplistappender
-      {
-        bplistappender(bp::list&l):l(l){}
-        void operator()(ecto::cell::ptr c)
-        {
-          l.append(c);
-        }
-        bp::list& l;
-      };
+    struct bplistappender
+    {
+      bplistappender(bp::list&l) : l(l) { }
+
+      void operator()(ecto::cell::ptr c) { l.append(c); }
+      bp::list& l;
+    };
+
     bp::list plasm_get_cells(plasm& p)
     {
       bp::list l;
@@ -119,10 +121,6 @@ namespace ecto
       return l;
     }
     BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( execute_overloads , plasm::execute , 0,1)
-
-    plasm::ptr make_plasm() {
-      return plasm::ptr(new plasm);
-    }
 
     void wrap()
     {
@@ -133,13 +131,13 @@ namespace ecto
 
       p.def("connect", &plasm_connect_list, bp::args("connection_list"));
       p.def("connect", bp::raw_function(plasm_connect_args, 2));
-      p.def("connect", &plasm::connect, bp::args("from_cell", "output_name", "to_cell", "intput_name"));
-      p.def("disconnect", &plasm::disconnect, bp::args("from_cell", "output_name", "to_cell", "intput_name"));
-      p.def(
-          "execute",
-          &plasm::execute,
-          execute_overloads(bp::args("niter"),
-                            "Executes the graph in topological order. Every node will be executed."));
+      p.def("connect", &plasm::connect, bp::args("from_cell", "output_name", 
+                                                 "to_cell", "intput_name"));
+      p.def("disconnect", &plasm::disconnect, bp::args("from_cell", "output_name", 
+                                                       "to_cell", "intput_name"));
+      p.def("execute", &plasm::execute,
+            execute_overloads(bp::args("niter"),
+                              "Executes the graph in topological order. Every node will be executed."));
 
       p.def("viz", wrapViz, "Get a graphviz string representation of the plasm.");
       p.def("connections", plasm_get_connections, "Grabs the current list based description of the graph. "
@@ -147,11 +145,10 @@ namespace ecto
       p.def("cells", plasm_get_cells, "Grabs the current set of cells that are in the plasm.");
       p.def("check", &plasm::check);
       p.def("configure_all", &plasm::configure_all);
-
-
     }
 
   };
+
   namespace py
   {
     void wrapPlasm()
