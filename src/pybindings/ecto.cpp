@@ -16,6 +16,7 @@ namespace ecto {
     void wrapSchedulers();
     void wrapStrand();
     void wrap_except();
+    void wrap_ether();
 
     namespace {
       std::ofstream log_file;
@@ -52,7 +53,6 @@ ECTO_INSTANTIATE_REGISTRY(ecto)
  
 
 
-
 BOOST_PYTHON_MODULE(ecto)
 {
   bp::class_<ecto::tendril::none>("no_value");
@@ -71,7 +71,7 @@ BOOST_PYTHON_MODULE(ecto)
   // your cout/cerr
   bp::def("log_to_file", &ecto::py::log_to_file);
   bp::def("unlog_to_file", &ecto::py::unlog_to_file);
-
   ECTO_REGISTER(ecto);
+  ecto::py::wrap_ether();
 }
 

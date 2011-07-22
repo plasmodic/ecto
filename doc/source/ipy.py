@@ -16,6 +16,3 @@ sched.execute_async(niter=100)
 from IPython.Shell import IPShellEmbed
 ipshell = IPShellEmbed()
 ipshell()
-
-
-  

@@ -28,23 +28,38 @@
  */
 
 #include <ecto/ecto.hpp>
-
 namespace ecto
 {
-  namespace bp = boost::python;
-
-  struct Passthrough
+  struct TrueEveryN
   {
-    static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
+    static void
+    declare_params(tendrils& p)
     {
-      in.declare<tendril::none>("in", "Any type");
-      out.declare<tendril::none>("out", "Any type");
+      p.declare<int>("n", "Will be true at every iteration where count%n == 0", 2);
+      p.declare<int>("count", "Initial value of counter, will be incremented at every call to process.", 0);
+
     }
-    void configure(const tendrils& parms, tendrils& in, tendrils& out)
+    static void
+    declare_io(const tendrils& p, tendrils& in, tendrils& out)
     {
-      out["out"] = in["in"];
+      out.declare<bool>("flag");
     }
+    void
+    configure(tendrils&p, tendrils&in, tendrils&out)
+    {
+      n_ = p["n"];
+      count_ = p["count"];
+      flag_ = out["flag"];
+    }
+    int
+    process(tendrils& in, tendrils& out)
+    {
+      *flag_ = (*count_)++ % (*n_) == 0;
+      return ecto::OK;
+    }
+    spore<bool> flag_;
+    spore<int> count_, n_;
   };
 }
 
-ECTO_CELL(ecto, ecto::Passthrough, "Passthrough", "Passes through any type.");
+ECTO_CELL(ecto, ecto::TrueEveryN, "TrueEveryN", "Will give a true result every n executions.");
