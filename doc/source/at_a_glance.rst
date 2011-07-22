@@ -1,5 +1,6 @@
 at a glance
 ----------------
+A brief run down of ecto is in order.
 
     * Simple processing node interface for building your own modules.
     
