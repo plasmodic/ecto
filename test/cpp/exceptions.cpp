@@ -208,8 +208,8 @@ TEST(Exceptions, WrongType_sched)
 "  Module : WrongType\n"
 "  Function: process");
   cell::ptr m = create_cell<WrongType> ();
-  plasm p;
-  p.insert(m);
+  plasm::ptr p(new plasm);
+  p->insert(m);
   scheduler::threadpool sched(p);
   EXPECT_THROW(
       try
@@ -238,8 +238,8 @@ TEST(Exceptions, ParameterCBExcept_sched)
 );
   cell::ptr m = create_cell<ParameterCBExcept> ();
   m->parameters.get<double>("x") = 5.1;
-  plasm p;
-  p.insert(m);
+  plasm::ptr p(new plasm);
+  p->insert(m);
   scheduler::threadpool sched(p);
   EXPECT_THROW(
       try

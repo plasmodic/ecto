@@ -54,12 +54,14 @@ TEST(Plasm, Viz)
 
 TEST(Plasm, Passthrough)
 {
-  ecto::plasm p;
-  ecto::cell::ptr m1 = ecto::create_cell<Module1>(), m2 = ecto::create_cell<Module2>(), pass = ecto::create_cell<Passthrough>();
+  ecto::plasm::ptr p(new ecto::plasm);
+  ecto::cell::ptr m1 = ecto::create_cell<Module1>(), 
+    m2 = ecto::create_cell<Module2>(), 
+    pass = ecto::create_cell<Passthrough>();
   m1->outputs["d"] << 5.0;
-  p.connect(m1,"d",pass,"in");
-  p.connect(pass,"out",m2,"d");
-  p.execute(1);
+  p->connect(m1,"d",pass,"in");
+  p->connect(pass,"out",m2,"d");
+  p->execute(1);
   double out;
   m2->inputs["d"] >> out;
   EXPECT_TRUE(out == 5.0);

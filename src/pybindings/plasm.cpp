@@ -10,24 +10,25 @@
 
 namespace bp = boost::python;
 using bp::arg;
+
 namespace ecto
 {
-  struct plasm_wrapper
+  namespace plasm_wrapper
   {
-    static std::string wrapViz(const ecto::plasm& p)
+    std::string wrapViz(const ecto::plasm& p)
     {
       return p.viz();
     }
 
     template<typename T>
-    static void list_assign(std::list<T>& l, bp::object o)
+    void list_assign(std::list<T>& l, bp::object o)
     {
       // Turn a Python sequence into an STL input range
       bp::stl_input_iterator<T> begin(o), end;
       l.assign(begin, end);
     }
 
-    static bp::list sanitize_connection_list(bp::list connections)
+    bp::list sanitize_connection_list(bp::list connections)
     {
       int len = bp::len(connections);
       bp::list tuples;
@@ -51,7 +52,7 @@ namespace ecto
       }
       return tuples;
     }
-    static void plasm_connect_list(plasm& p, bp::list connections)
+    void plasm_connect_list(plasm& p, bp::list connections)
     {
       connections = sanitize_connection_list(connections);
       bp::stl_input_iterator<bp::tuple> begin(connections), end;
@@ -64,7 +65,8 @@ namespace ecto
         p.connect(from, output, to, input);
       }
     }
-    static int plasm_connect_args(boost::python::tuple args, bp::dict kw)
+
+    int plasm_connect_args(boost::python::tuple args, bp::dict kw)
     {
       int i = 0;
       plasm::ptr p = bp::extract<plasm::ptr>(args[i++]);
@@ -84,7 +86,8 @@ namespace ecto
       }
       return i;
     }
-    static bp::list plasm_get_connections(plasm& p)
+
+    bp::list plasm_get_connections(plasm& p)
     {
       bp::list result;
       const ecto::graph::graph_t& g = p.graph();
@@ -102,16 +105,15 @@ namespace ecto
       return result;
     }
 
-      struct bplistappender
-      {
-        bplistappender(bp::list&l):l(l){}
-        void operator()(ecto::cell::ptr c)
-        {
-          l.append(c);
-        }
-        bp::list& l;
-      };
-    static bp::list plasm_get_cells(plasm& p)
+    struct bplistappender
+    {
+      bplistappender(bp::list&l) : l(l) { }
+
+      void operator()(ecto::cell::ptr c) { l.append(c); }
+      bp::list& l;
+    };
+
+    bp::list plasm_get_cells(plasm& p)
     {
       bp::list l;
       std::vector<cell::ptr> cells = p.cells();
@@ -119,7 +121,8 @@ namespace ecto
       return l;
     }
     BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( execute_overloads , plasm::execute , 0,1)
-    static void wrap()
+
+    void wrap()
     {
       using bp::arg;
 
@@ -128,13 +131,13 @@ namespace ecto
 
       p.def("connect", &plasm_connect_list, bp::args("connection_list"));
       p.def("connect", bp::raw_function(plasm_connect_args, 2));
-      p.def("connect", &plasm::connect, bp::args("from_cell", "output_name", "to_cell", "intput_name"));
-      p.def("disconnect", &plasm::disconnect, bp::args("from_cell", "output_name", "to_cell", "intput_name"));
-      p.def(
-          "execute",
-          &plasm::execute,
-          execute_overloads(bp::args("niter"),
-                            "Executes the graph in topological order. Every node will be executed."));
+      p.def("connect", &plasm::connect, bp::args("from_cell", "output_name", 
+                                                 "to_cell", "intput_name"));
+      p.def("disconnect", &plasm::disconnect, bp::args("from_cell", "output_name", 
+                                                       "to_cell", "intput_name"));
+      p.def("execute", &plasm::execute,
+            execute_overloads(bp::args("niter"),
+                              "Executes the graph in topological order. Every node will be executed."));
 
       p.def("viz", wrapViz, "Get a graphviz string representation of the plasm.");
       p.def("connections", plasm_get_connections, "Grabs the current list based description of the graph. "
@@ -142,11 +145,10 @@ namespace ecto
       p.def("cells", plasm_get_cells, "Grabs the current set of cells that are in the plasm.");
       p.def("check", &plasm::check);
       p.def("configure_all", &plasm::configure_all);
-
-
     }
 
   };
+
   namespace py
   {
     void wrapPlasm()

@@ -47,6 +47,8 @@ namespace ecto {
     
     struct ECTO_EXPORT threadpool 
     {
+      // shared ptr is used to guarantee lifetimes
+      threadpool(plasm::ptr);
       threadpool(plasm&);
 
       /**
@@ -59,7 +61,7 @@ namespace ecto {
       bool running() const;
       void wait();
       
-      plasm& plasm_;
+      plasm::ptr plasm_;
       ecto::graph::graph_t& graph;
       
       struct impl;
