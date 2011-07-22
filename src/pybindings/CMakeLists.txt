@@ -9,6 +9,7 @@ ectomodule(ecto
   schedulers.cpp
   strand.cpp
   cells/Constant.cpp
+  cells/If.cpp
   cells/Passthrough.cpp
   )
 
