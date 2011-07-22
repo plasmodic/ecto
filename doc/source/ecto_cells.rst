@@ -4,20 +4,30 @@ Builtin Ecto Cells
 ==================
 Ecto contains a few cells that are generally useful for Ecto graph construction.
 
-Constant
---------
+Convenience cells
+-----------------
+The are cells that may be generally useful in your ecto graphs and tend to be
+weakly typed.
+
 .. ectocell:: ecto Constant
 
-Passthrough
------------
 .. ectocell:: ecto Passthrough
 
-If
----
-The If cell is useful when you would like to conditionally execute a single cell
+Conditional Execution
+---------------------
+The If cell enables you to conditionally execute a single cell
 based on an input flag.
 
 .. ectocell:: ecto If
+
+An example of using the If cell for condition execution of a cell. Notice that cell that is
+encased in an If is **not added to the graph**.
+
+.. literalinclude:: conditional.py
+
+The above sample uses the build in cell:
+
+.. ectocell:: ecto TrueEveryN
 
 Entanglement
 ------------
