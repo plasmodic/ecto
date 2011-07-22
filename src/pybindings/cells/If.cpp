@@ -37,15 +37,16 @@ namespace ecto
   {
     static void declare_params(tendrils& p)
     {
-      p.declare<cell::ptr>("cell","Cell to conditionally execute.").required(true);
+      p.declare<cell::ptr>("cell","Cell to conditionally execute.  The inputs and outputs of this cell will be"
+          " replicated to the If cell.").required(true);
     }
     static void declare_io(const tendrils& p, tendrils& in, tendrils& out)
     {
+      in.declare<bool>("__test__","The test value. If this is true then cell::process() is called, else, not.", false);
       cell::ptr c;
       p.at("cell") >> c;
       if(!c)
         return;//handle default well.
-      in.declare<bool>("__test__","The test value.", false);
       in.insert(c->inputs.begin(),c->inputs.end());
       out.insert(c->outputs.begin(),c->outputs.end());
     }
@@ -68,4 +69,4 @@ namespace ecto
   };
 }
 
-ECTO_CELL(ecto, ecto::If, "If", "An If true, process, else, don't.");
+ECTO_CELL(ecto, ecto::If, "If", "If true, process, else, don't.");

@@ -1,6 +1,6 @@
 # Makefile for Sphinx documentation
 #
-
+export PYTHONPATH = @LIBRARY_OUTPUT_PATH@:@CMAKE_SOURCE_DIR@/python
 # You can set these variables from the command line.
 SPHINXOPTS    = \
 	-D version=@ECTO_MAJOR_VERSION@.@ECTO_MINOR_VERSION@ \

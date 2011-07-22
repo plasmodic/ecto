@@ -15,7 +15,7 @@ The following is a sketch of a user ecto cell.
     static void declare_params(tendrils& params);
     static void declare_io(const tendrils& params, tendrils& in, tendrils& out);
     void configure(tendrils& params, tendrils& in, tendrils& out);
-    int process(const tendrils& in, tendrils& out);
+    int process(tendrils& in, tendrils& out);
     void destroy();
   };
   
