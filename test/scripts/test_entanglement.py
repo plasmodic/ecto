@@ -12,7 +12,7 @@ def test_feedback():
                   g[:] >> add['right'],
                   add[:] >> sink[:]
                   )
-    ecto.view_plasm(plasm)
+    #ecto.view_plasm(plasm)
     plasm.execute(niter=1)
     assert add.outputs.out == 1 # 0 + 1 = 1
     plasm.execute(niter=1)
