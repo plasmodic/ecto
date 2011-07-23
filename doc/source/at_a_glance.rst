@@ -1,5 +1,6 @@
 at a glance
 ----------------
+A brief run down of ecto is in order.
 
     * Simple processing node interface for building your own modules.
     
@@ -24,8 +25,7 @@ at a glance
         
         void MyCell::declare_params(tendrils& params)
         {
-            params.declare<Foo>("foo","Foo is for spam. This is a doc string", 
-            					Foo(3.14));
+            params.declare<Foo>("foo","Foo is for spam. This is a doc string", Foo(3.14));
             params.declare<std::string>("str", "str is a standard string.", "default");
         }
     

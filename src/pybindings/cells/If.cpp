@@ -28,23 +28,45 @@
  */
 
 #include <ecto/ecto.hpp>
-
+#include <boost/foreach.hpp>
 namespace ecto
 {
   namespace bp = boost::python;
 
-  struct Passthrough
+  struct If
   {
-    static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
+    static void declare_params(tendrils& p)
     {
-      in.declare<tendril::none>("in", "Any type");
-      out.declare<tendril::none>("out", "Any type");
+      p.declare<cell::ptr>("cell","Cell to conditionally execute.  The inputs and outputs of this cell will be"
+          " replicated to the If cell.").required(true);
     }
-    void configure(const tendrils& parms, tendrils& in, tendrils& out)
+    static void declare_io(const tendrils& p, tendrils& in, tendrils& out)
     {
-      out["out"] = in["in"];
+      in.declare<bool>("__test__","The test value. If this is true then cell::process() is called, else, not.", false);
+      cell::ptr c;
+      p.at("cell") >> c;
+      if(!c)
+        return;//handle default well.
+      in.insert(c->inputs.begin(),c->inputs.end());
+      out.insert(c->outputs.begin(),c->outputs.end());
     }
+    void configure(tendrils& p, tendrils& in, tendrils& out)
+    {
+      p["cell"] >> c_;
+      c_->configure();
+      test_ = in.at("__test__");
+    }
+    int process(tendrils& in, tendrils& out)
+    {
+      if(*test_)
+      {
+        return c_->process();
+      }
+      return ecto::OK;
+    }
+    cell::ptr c_;
+    spore<bool> test_;
   };
 }
 
-ECTO_CELL(ecto, ecto::Passthrough, "Passthrough", "Passes through any type.");
+ECTO_CELL(ecto, ecto::If, "If", "If true, process, else, don't.");

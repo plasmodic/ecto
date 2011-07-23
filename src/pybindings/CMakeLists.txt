@@ -9,7 +9,10 @@ ectomodule(ecto
   schedulers.cpp
   strand.cpp
   cells/Constant.cpp
+  cells/ether.cpp
+  cells/If.cpp
   cells/Passthrough.cpp
+  cells/TrueEveryN.cpp
   )
 
 set_target_properties(ecto_ectomodule PROPERTIES

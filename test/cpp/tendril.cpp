@@ -94,7 +94,7 @@ TEST(TendrilTest, Typeness)
   n2.copy_value(n1);
   EXPECT_EQ(n2.get<double>(),0.5);
   EXPECT_THROW(n2.copy_value(a), ecto::except::TypeMismatch);
-  EXPECT_THROW(b.copy_value(n3), ecto::except::ValueNone);
+  //EXPECT_THROW(b.copy_value(n3), ecto::except::ValueNone);
 
 
 }

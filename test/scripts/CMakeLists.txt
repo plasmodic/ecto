@@ -14,6 +14,8 @@ foreach(file
     test_destroy_called
     test_doc
     test_dual_line_plasm
+    test_entanglement
+    test_If
     test_handles
     test_modules
     #test_metrics

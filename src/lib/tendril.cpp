@@ -60,7 +60,7 @@ namespace ecto
       enforce_compatible_type(rhs);
       if (rhs.is_type<none>())
       {
-        throw ecto::except::ValueNone("You may not copy the value of a tendril that holds a tendril::none.");
+        //throw ecto::except::ValueNone("You may not copy the value of a tendril that holds a tendril::none.");
       }
       else if (rhs.is_type<boost::python::object>())
       {

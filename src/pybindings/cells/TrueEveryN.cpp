@@ -27,16 +27,39 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <boost/python.hpp>
-#include <iostream>
-
-char const* greet()
+#include <ecto/ecto.hpp>
+namespace ecto
 {
-   return "hello, world";
+  struct TrueEveryN
+  {
+    static void
+    declare_params(tendrils& p)
+    {
+      p.declare<int>("n", "Will be true at every iteration where count%n == 0", 2);
+      p.declare<int>("count", "Initial value of counter, will be incremented at every call to process.", 0);
+
+    }
+    static void
+    declare_io(const tendrils& p, tendrils& in, tendrils& out)
+    {
+      out.declare<bool>("flag");
+    }
+    void
+    configure(tendrils&p, tendrils&in, tendrils&out)
+    {
+      n_ = p["n"];
+      count_ = p["count"];
+      flag_ = out["flag"];
+    }
+    int
+    process(tendrils& in, tendrils& out)
+    {
+      *flag_ = (*count_)++ % (*n_) == 0;
+      return ecto::OK;
+    }
+    spore<bool> flag_;
+    spore<int> count_, n_;
+  };
 }
 
-BOOST_PYTHON_MODULE(hellopy)
-{
-    using namespace boost::python;
-    def("greet", greet);
-}
+ECTO_CELL(ecto, ecto::TrueEveryN, "TrueEveryN", "Will give a true result every n executions.");

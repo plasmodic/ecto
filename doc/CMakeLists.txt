@@ -2,7 +2,6 @@
 # add doc to all
 
 option(INSTALL_DOC "Install the documentation." OFF)
-
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Makefile.in 
   ${CMAKE_CURRENT_BINARY_DIR}/Makefile.sphinx)
 
@@ -31,11 +30,10 @@ find_program(SPHINX_BUILD sphinx-build)
 
 if(SPHINX_BUILD)
   message(STATUS "Found sphinx-build : ${SPHINX_BUILD}")
-
+  set(ENV{PYTHONPATH} @LIBRARY_OUTPUT_PATH@:@CMAKE_SOURCE_DIR@/python:$ENV{PYTHONPATH})
   add_custom_target(pdf
     COMMENT "Generating pdf of documentation with Sphinx and latex." VERBATIM
     )
-
   add_custom_command(TARGET pdf
     COMMAND ${CMAKE_MAKE_PROGRAM} -f Makefile.sphinx latexpdf
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
