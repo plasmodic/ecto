@@ -24,7 +24,8 @@ or robotics pipelines.
    cell
    plasm
    schedulers
-   api
+   black_box
    ecto_cells
    ecto_test_cells
+   api
    
