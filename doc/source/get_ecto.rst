@@ -151,8 +151,9 @@ Docs may be generated from the source in the following manner.
 
 	cd build
 	make doc #for all documentaition
-	make sphinx_doc #for sphinx (prefer this for usage docs)
-	make doxygen_doc #for c++ api docs
+	make html #for sphinx (prefer this for usage docs)
+	make pdf #sphinx pdf manual
+	make doxygen #for c++ api docs
 	ccmake . #edit doc options.
 
 Tests

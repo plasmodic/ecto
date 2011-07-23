@@ -9,7 +9,18 @@ Convenience cells
 The are cells that may be generally useful in your ecto graphs and tend to be
 weakly typed.
 
+Constant
+^^^^^^^^
+This cell takes a python parameter that becomes a constant output. As long as
+this python type is convertable to a c++ type(through python bindings or basic types),
+it may be connected to cells written in c++.
+
 .. ectocell:: ecto Constant
+
+Passthrough
+^^^^^^^^^^^
+Passthrough is mostly useful from within a :ref:`black_box` to connect
+multiple inputs to one cell, which then becomes a singular input for the BlackBox.
 
 .. ectocell:: ecto Passthrough
 
@@ -25,7 +36,7 @@ encased in an If is **not added to the graph**.
 
 .. literalinclude:: conditional.py
 
-The above sample uses the build in cell:
+The above sample uses the built in cell:
 
 .. ectocell:: ecto TrueEveryN
 

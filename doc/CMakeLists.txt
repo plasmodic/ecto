@@ -38,15 +38,18 @@ if(SPHINX_BUILD)
     COMMAND ${CMAKE_MAKE_PROGRAM} -f Makefile.sphinx latexpdf
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
     )
-  add_dependencies(pdf doxygen)
-  add_dependencies(doc pdf)
-
   add_custom_target(html)
   add_custom_command(TARGET html
     COMMAND ${CMAKE_MAKE_PROGRAM} -f Makefile.sphinx html
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
     )
-  # add_dependencies(html doxygen)
+  #dependencies for sphinx, html must be built for the sphinx to not error out.
+  #also all modules should be built so that the sphinx ectodoc stuff works.
+  add_dependencies(html ecto_cpp ecto_ectomodule ecto_test_ectomodule)
+  add_dependencies(pdf ecto_cpp ecto_ectomodule ecto_test_ectomodule)
+  add_dependencies(html doxygen)
+  add_dependencies(pdf doxygen)
+  add_dependencies(doc pdf)
   add_dependencies(doc html)
 endif()
   
