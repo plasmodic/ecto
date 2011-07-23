@@ -1,46 +1,26 @@
 import ecto
            
 class BlackBox(object):
-    """
-    The BlackBox may be used as an abstraction idium within ecto, to declare reusable plasms.
+    '''
+    The BlackBox may be used as an encapsulation idium within ecto, to declare reusable plasms.
     
     Users should inherit from BlackBox, and likely will wish to implement a few functions that
     describe their reusable plasm.
-    
-    Lets look at a simple example:
-    
-    #your class should inherit from BlackBox
-    class MyModule(ecto.BlackBox):
-        
-        #During initialization, one should allocate all necessary modules
-        #and may want to accept parameters in the constructor to initialize said modules.
-        def __init__(self, start, step):
-            ecto.BlackBox.__init__(self)
-            self.generate = ecto_test.Generate(start=start, step=step)
-            self.inc = ecto_test.Increment()
-        
-        def expose_outputs(self):
-            return {
-                    "out":self.inc["out"]
-                   }
-        def expose_parameters(self):
-            return {
-                    "start":self.generate["start"],
-                    "step":self.generate["step"]
-                    }
-        def connections(self):
-            return (self.generate["out"] >> self.inc["in"])
-        
-    """
+    '''
+
     def __init__(self, plasm):
+        ''' The BlackBox must be created with the plasm it is intended to be connected
+        to.
+        '''
         self.tendrils = None
         self._plasm = plasm
         self._is_plasm_connected = False
+
     def _get_spec(self,key):
-        """ Constructs a TendrilSpecification given a single str key.
+        ''' Constructs a TendrilSpecification given a single str key.
         If the same key exists in the inputs and the outputs, a dichotomous spec is generated,
         otherwise, a spec is just retrieve from the mapping. 
-        """
+        '''
         i = self.expose_inputs()
         o = self.expose_outputs()
         p = self.expose_parameters()
@@ -59,9 +39,9 @@ class BlackBox(object):
             raise RuntimeError(key + " does not exist!")
         
     def __getitem__(self, key):
-        """ This acts just like any other module when asking for a spec,
+        ''' This acts just like any other module when asking for a spec,
         e.g. spec = m["key1","key2"]
-        """
+        '''
         l = []
         if type(key) == str:
             l.append(self._get_spec(key))
@@ -82,9 +62,9 @@ class BlackBox(object):
             self._is_plasm_connected = True
     
     def _getTendrils(self, name):
-        """ The blackbox should look like a module, so it needs to have the parameters, inputs, outputs as
+        ''' The blackbox should look like a module, so it needs to have the parameters, inputs, outputs as
         member fields.
-        """
+        '''
         if self.tendrils is None:
             #transforms the TendrilsSpecifications to actual tendrils.
             self.tendrils = { 
@@ -101,33 +81,33 @@ class BlackBox(object):
             return object.__getattr__(self, name)
     
     def viz(self):
-        """ Display the graph viz of the Blackbox
-        """
+        ''' Display the graph viz of the Blackbox
+        '''
         
     def view(self):
-        """ Display a GUI with the content of the
-        """
+        ''' Display a GUI with the content of the
+        '''
         
     def expose_outputs(self):
-        """ The outputs of a BlackBox should specified by returning a dictionary of string keys to TendrilsSpecifictation.
+        ''' The outputs of a BlackBox should specified by returning a dictionary of string keys to TendrilsSpecifictation.
         {"output":self.mymodule["out_0001"]}
-        """
+        '''
         return {}
     
     def expose_inputs(self):
-        """ The inputs of a BlackBox should specified by returning a dictionary of string keys to TendrilsSpecifictation.
+        ''' The inputs of a BlackBox should specified by returning a dictionary of string keys to TendrilsSpecifictation.
         {"input":self.mymodule["in_0001"]}
-        """
+        '''
         return {}
     
     def expose_parameters(self):
-        """ The parameters of a BlackBox should specified by returning a dictionary of string keys to TendrilsSpecifictation.
+        ''' The parameters of a BlackBox should specified by returning a dictionary of string keys to TendrilsSpecifictation.
         {"param_01":self.mymodule["foo_param"]}
-        """
+        '''
         return {}
     
     def connections(self):
-        """This is where one should declare the graph, as a tuple of tuples, where each element 
+        '''This is where one should declare the graph, as a tuple of tuples, where each element 
         is (module_inst, 'output_key', module_inst, 'input_key')
-        """
+        '''
         raise NotImplementedError("All BlackBox's must implement at least the connections function....")
