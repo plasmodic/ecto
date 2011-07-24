@@ -11,11 +11,11 @@ endif()
 #FIXME make the python install path reflect the version for side by side...
 set(ecto_PYTHONPATH ${CMAKE_INSTALL_PREFIX}/${ecto_PYTHON_INSTALL})
 set(ECTO_CONFIG_PATH  ${CMAKE_INSTALL_PREFIX}/${share_prefix})
-configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoConfig.cmake.in 
+configure_file(${ecto_SOURCE_DIR}/cmake/ectoConfig.cmake.in 
   ${CMAKE_BINARY_DIR}/unix_install/ectoConfig.cmake @ONLY)
-configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoConfig-version.cmake.in 
+configure_file(${ecto_SOURCE_DIR}/cmake/ectoConfig-version.cmake.in 
   ${CMAKE_BINARY_DIR}/unix_install/ectoConfig-version.cmake @ONLY)
-configure_file(${CMAKE_SOURCE_DIR}/cmake/ectoMacros.cmake
+configure_file(${ecto_SOURCE_DIR}/cmake/ectoMacros.cmake
   ${CMAKE_BINARY_DIR}/unix_install/ectoMacros.cmake @ONLY)
     
 #install the ectoConfig.cmake and ectoConfig-version.cmake
@@ -29,18 +29,18 @@ INSTALL(FILES
 
 #install python stuff
 #python support
-configure_file(${CMAKE_SOURCE_DIR}/cmake/python_path.sh.inst.in 
+configure_file(${ecto_SOURCE_DIR}/cmake/python_path.sh.inst.in 
   ${CMAKE_BINARY_DIR}/unix_install/python_path.sh
   )
 
 install(FILES ${CMAKE_BINARY_DIR}/unix_install/python_path.sh
         DESTINATION ${share_prefix} COMPONENT main
   )
-install(FILES ${CMAKE_SOURCE_DIR}/cmake/python_path.sh.user.in
+install(FILES ${ecto_SOURCE_DIR}/cmake/python_path.sh.user.in
         DESTINATION ${share_prefix} COMPONENT main
   )
 
-INSTALL(DIRECTORY ${CMAKE_SOURCE_DIR}/include/ecto
+INSTALL(DIRECTORY ${ecto_SOURCE_DIR}/include/ecto
         DESTINATION ${include_prefix}
         COMPONENT main
         )
