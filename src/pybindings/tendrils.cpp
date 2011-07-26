@@ -14,9 +14,18 @@ namespace ecto
   {
     namespace
     {
-      void setTendril(tendrils& t, const std::string& name, const std::string& doc, bp::object o)
+      void setTendril(tendrils& t, const std::string& name, 
+                      const std::string& doc, bp::object o)
       {
         t.declare<bp::object> (name, doc, o);
+      }
+
+      bp::list tendril_members(const tendrils& t)
+      {
+        bp::list l;
+        for (tendrils::const_iterator iter = t.begin(), end = t.end(); iter != end; ++iter)
+          l.append(iter->first);
+        return l;
       }
 
       bp::object getTendril(tendrils& t, const std::string& name)
@@ -38,6 +47,9 @@ namespace ecto
 
       bp::object tendril_get(const tendrils& ts, const std::string& name)
       {
+        if (name == "__members__")
+          return tendril_members(ts);
+
         const tendril& t = *ts.at(name);
         bp::object o;
         t.sample(o);
