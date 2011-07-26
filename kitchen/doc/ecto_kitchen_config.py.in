@@ -1,0 +1,5 @@
+version='@ECTO_KITCHEN_VERSION@'
+release='@ECTO_KITCHEN_RELEASE@'
+
+breathe_default_project = 'ecto'
+breathe_projects = dict(ecto='@CMAKE_CURRENT_BINARY_DIR@/api/xml')
