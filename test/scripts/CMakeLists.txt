@@ -1,7 +1,7 @@
 macro(pytest testname)
   add_test(${testname}
     /usr/bin/env
-    PYTHONPATH=${LIBRARY_OUTPUT_PATH}:${CMAKE_SOURCE_DIR}/python:$PYTHONPATH
+    PYTHONPATH=${CMAKE_LIBRARY_OUTPUT_DIRECTORY}:${ecto_SOURCE_DIR}/python:$PYTHONPATH
     ${ARGN}
     )
 endmacro()
@@ -37,7 +37,7 @@ foreach(file
     )
     add_test(${file} 
         /usr/bin/env
-        PYTHONPATH=${LIBRARY_OUTPUT_PATH}:${CMAKE_SOURCE_DIR}/python:$PYTHONPATH
+        PYTHONPATH=${CMAKE_LIBRARY_OUTPUT_DIRECTORY}:${ecto_SOURCE_DIR}/python:$PYTHONPATH
         ${CMAKE_CURRENT_SOURCE_DIR}/${file}.py)
 
 endforeach()
