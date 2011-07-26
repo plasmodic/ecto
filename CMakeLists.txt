@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 2.8)
 #put this before project so that it gets picked up.
 set(CMAKE_BUILD_TYPE "Release" CACHE STRING "The build type.")
-
 project(ecto)
+message(STATUS "--- ${PROJECT_NAME} ---")
 
 set(ECTO_MAJOR_VERSION 0)
 set(ECTO_MINOR_VERSION 1)
@@ -11,8 +11,10 @@ set(ECTO_SOVERSION ${ECTO_MAJOR_VERSION}.${ECTO_MINOR_VERSION})
 set(ECTO_VERSION ${ECTO_MAJOR_VERSION}.${ECTO_MINOR_VERSION}.${ECTO_PATCH_VERSION})
 set(ECTO_CODE_NAME "mold spore (alpha)")
 
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
-set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
 set(include_prefix include/ecto-${ECTO_VERSION})
 set(share_prefix share/ecto-${ECTO_VERSION})
@@ -22,10 +24,10 @@ include_directories(${CMAKE_BINARY_DIR}/include)
 
 set(CMAKE_MODULE_PATH ${ecto_SOURCE_DIR}/cmake)
 
-execute_process(COMMAND mkdir -p ${LIBRARY_OUTPUT_PATH}/ecto)
+execute_process(COMMAND mkdir -p ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/ecto)
 
 execute_process(COMMAND ln -sf ${ecto_SOURCE_DIR}/python/ecto/__init__.py
-  WORKING_DIRECTORY ${LIBRARY_OUTPUT_PATH}/ecto
+  WORKING_DIRECTORY ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/ecto
   )
 
 include(${ecto_SOURCE_DIR}/cmake/ectoMacros.cmake)
@@ -51,10 +53,10 @@ include_directories(
   )
 
 if(UNIX)
-  configure_file(${ecto_SOURCE_DIR}/cmake/python_path.sh.in 
-    ${CMAKE_BINARY_DIR}/python_path.sh @ONLY@)
+  configure_file(${PROJECT_SOURCE_DIR}/cmake/python_path.sh.in 
+    ${PROJECT_BINARY_DIR}/python_path.sh @ONLY@)
   #copy the python_path.sh.user.in for users that are not installing ecto.
-  file(COPY ${ecto_SOURCE_DIR}/cmake/python_path.sh.user.in DESTINATION ${CMAKE_BINARY_DIR})
+  file(COPY ${PROJECT_SOURCE_DIR}/cmake/python_path.sh.user.in DESTINATION ${CMAKE_BINARY_DIR})
   message(STATUS "To setup your python path for ecto you may source:"
     " ${CMAKE_BINARY_DIR}/python_path.sh")
 elseif(WIN32)
@@ -67,12 +69,12 @@ endif()
   
 
 
-set(ecto_PYTHONPATH ${LIBRARY_OUTPUT_PATH} ${ecto_SOURCE_DIR}/python)
+set(ecto_PYTHONPATH ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} ${ecto_SOURCE_DIR}/python)
 set(ecto_INCLUDE_DIRS ${ecto_SOURCE_DIR}/include ${CMAKE_BINARY_DIR}/include)
 if(UNIX)
-  set(ecto_LIBRARIES ${LIBRARY_OUTPUT_PATH}/libecto_cpp.so.${ECTO_VERSION})
+  set(ecto_LIBRARIES ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libecto_cpp.so.${ECTO_VERSION})
 elseif(WIN32)
-  set(ecto_LIBRARIES ${LIBRARY_OUTPUT_PATH}/ecto_cpp.dll)
+  set(ecto_LIBRARIES ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/ecto_cpp.dll)
 endif()
 
 set(ECTO_CONFIG_PATH  ${ecto_SOURCE_DIR}/cmake)
