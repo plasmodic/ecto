@@ -154,52 +154,12 @@ namespace ecto
     inline const T&
     get() const
     {
-      return read<T>();
-    }
-
-    /**
-     * Given T this will get the type from the tendril, also enforcing type with an exception.
-     * It is assumed if this is called that the value will be changed, and therefore dirty.
-     * If it is not intended to change the tendril, then one should call the read<T> function explicitly.
-     * @return a reference to the value of the tendril (no copies)
-     */
-    template<typename T>
-    inline T&
-    get()
-    {
-      //throws on failure
       enforce_type<T>();
-      mark_dirty(); // likely changed..
-      //cast a void pointer to this type.
-      return *boost::unsafe_any_cast<T>(&holder_);
+      return *boost::unsafe_any_cast<const T>(&holder_);
     }
 
-    /**\brief Read only access to the tendril.
-     * @return a const reference to the value of the tendril (no copies)
-     */
-    template<typename T>
-    inline const T&
-    read() const
-    {
-      //throws on failure
-      enforce_type<T>();
-      //cast a void pointer to this type.
-      return   *boost::unsafe_any_cast<T>(&holder_);
-    }
-
-    template<typename T>
-    void
-    sample(T& val) const
-    {
-      //throws on failure
-      enforce_type<T>();
-      //cast a void pointer to this type.
-      val =  *boost::unsafe_any_cast<T>(&holder_);
-    }
-
-    template<typename T>
-    void
-    set(const T& val)
+    template <typename T> 
+      void operator<<(const T& val)
     {
       if(is_type<none>()) //handle none case.
       {
@@ -212,6 +172,18 @@ namespace ecto
         *boost::unsafe_any_cast<T>(&holder_) = val;
       }
       mark_dirty(); //definitely changed
+    }
+
+    void operator<<(const boost::python::object& obj)
+    {
+      assert(0);
+    }
+
+    ecto::tendril&
+      operator<<(const ecto::tendril& rhs)
+    {
+      copy_value(rhs);
+      return *this;
     }
 
     /**
@@ -259,8 +231,9 @@ namespace ecto
     has_default() const;
 
     //! A none type for tendril when the tendril is uninitialized.
-    struct none
-    {
+    struct none { 
+      none& operator=(const none&) { return *this; }
+      const none& operator=(const none&) const { return *this; } // funny const assignment operator
     };
 
     void enqueue_oneshot(TendrilJob job);
@@ -318,27 +291,28 @@ namespace ecto
 
   private:
 
+#if 0
     struct PyCopier_base
     {
       virtual
-      void operator()(tendril& t, boost::python::object& obj) = 0;
+      void operator()(const tendril& t, boost::python::object& obj) = 0;
     };
 
     template<typename T>
-    struct ToPython: PyCopier_base
+    struct ToPython : PyCopier_base
     {
       static boost::scoped_ptr<PyCopier_base> Copier;
       void
-      operator()(tendril& t, boost::python::object& obj)
+      operator()(const tendril& t, boost::python::object& obj)
       {
-        const T& v = t.read<T>();
+        const T& v = t.get<T>();
         boost::python::object o(v);
         obj = o;
       }
     };
 
     template<typename T>
-    struct FromPython: PyCopier_base
+    struct FromPython : PyCopier_base
     {
       static boost::scoped_ptr<PyCopier_base> Copier;
       void
@@ -351,101 +325,63 @@ namespace ecto
           throw ecto::except::TypeMismatch("Could not convert python object to type : " + t.type_name());
       }
     };
+#endif
 
     template<typename T>
     void set_holder(const T& t = T())
     {
       holder_ = t;
       type_ID_ = name_of<T>().c_str();
-      pycopy_to_ = ToPython<T>::Copier.get();
-      pycopy_from_ = FromPython<T>::Copier.get();
+      // pycopy_to_ = ToPython<T>::Copier.get();
+      // pycopy_from_ = FromPython<T>::Copier.get();
     }
+
     void copy_holder(const tendril& rhs);
-    void
-    mark_dirty();
-    void
-    mark_clean();
+    void mark_dirty();
+    void mark_clean();
+
     boost::any holder_;
     const char* type_ID_;
     std::string doc_;
     bool dirty_, default_, user_supplied_, required_;
     std::vector<TendrilJob> jobs_onetime_,jobs_persistent_;
     boost::mutex mtx_;
-    PyCopier_base* pycopy_to_,* pycopy_from_;
+    //    PyCopier_base* pycopy_to_,* pycopy_from_;
+
+  public:
+
+    template <typename T>
+      void operator>>(T& val) const
+    {
+      enforce_type<T>();
+      val = *boost::unsafe_any_cast<T>(&holder_);
+    }
+
+
+    template<typename T>
+      friend void
+      operator>>(ecto::tendril::const_ptr rhs, T& val)
+    {
+      *rhs >> val;
+    }
+
+    template<typename T>
+      friend void
+      operator<<(ecto::tendril::ptr rhs, const T& val)
+    {
+      *rhs << val;
+    }
+
   };
 
   template<typename T>
   tendril::tendril(const T& t, const std::string& doc)
-      :
-        dirty_(false),
-        default_(true),
-        user_supplied_(false)
+    : dirty_(false),
+      default_(true),
+      user_supplied_(false)
   {
     set_holder<T>(t);
     set_doc(doc);
   }
-
-  template<typename T>
-  boost::scoped_ptr<tendril::PyCopier_base> tendril::ToPython<T>::Copier(new ToPython<T>());
-  template<typename T>
-  boost::scoped_ptr<tendril::PyCopier_base> tendril::FromPython<T>::Copier(new FromPython<T>());
-  template<>
-  ECTO_EXPORT
-  void tendril::sample<boost::python::object>(boost::python::object&) const;
-  template<>
-  ECTO_EXPORT
-  void tendril::set<boost::python::object>(const boost::python::object&);
 }
 
-template<typename T>
-void
-operator<<(ecto::tendril& rhs,const T& val)
-{
-  rhs.set(val);
-}
-
-template<typename T>
-void
-operator<<(const ecto::tendril::ptr& rhs,const T& val)
-{
-  if(!rhs) throw std::runtime_error("Your tendril be null!");
-  rhs->set(val);
-}
-
-template<>
-inline void
-operator<<(ecto::tendril& rhs,const ecto::tendril& val)
-{
-  rhs.copy_value(val);
-}
-
-template<>
-inline void
-operator<<(const ecto::tendril::ptr& rhs,const ecto::tendril::ptr& val)
-{
-  if(!rhs) throw std::runtime_error("Your tendril be null!");
-  rhs->copy_value(*val);
-}
-
-template<typename T>
-void
-operator>>(const ecto::tendril& rhs,T& val)
-{
-  rhs.sample(val);
-}
-
-template<typename T>
-void
-operator>>(const ecto::tendril::const_ptr& rhs,T& val)
-{
-  if(!rhs) throw std::runtime_error("Your tendril be null!");
-  rhs->sample(val);
-}
-
-template<typename T>
-void
-operator>>(const ecto::tendril::ptr& rhs,T& val)
-{
-  if(!rhs) throw std::runtime_error("Your tendril be null!");
-  rhs->sample(val);
-}

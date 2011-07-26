@@ -33,7 +33,7 @@ TEST(SporeTest, NoDefault)
     EXPECT_FALSE(d.dirty());
     EXPECT_FALSE(d.has_default());
 
-    *d = 3.14;
+    d << 3.14;
     EXPECT_TRUE(d.dirty());
     EXPECT_TRUE(d.user_supplied());
     EXPECT_FALSE(d.has_default());
@@ -63,7 +63,7 @@ TEST(SporeTest, Default)
     d.notify();
     EXPECT_FALSE(d.dirty());
 
-    *d = 3.14;
+    d << 3.14;
     EXPECT_TRUE(d.dirty());
     EXPECT_TRUE(d.user_supplied());
     EXPECT_TRUE(d.has_default());
@@ -102,7 +102,7 @@ TEST(SporeTest, Callbacks)
     EXPECT_EQ(c.count, 0);
     EXPECT_EQ(c.val, 0);
 
-    *d = 3.14;
+    d << 3.14d;
     d.notify();
     EXPECT_EQ(c.count, 1);
     EXPECT_EQ(c.val, 3.14);

@@ -134,7 +134,7 @@ namespace ecto
      * @return A reference to the value, no copy is done.
      */
     template<typename T>
-    T&
+      const T&
     get(const std::string& name)
     {
       try

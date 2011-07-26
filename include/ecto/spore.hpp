@@ -153,21 +153,26 @@ namespace ecto
       tendril::ptr _p = p();
       return &(_p->get<T>());
     }
+
     const T* operator->() const
     {
       tendril::const_ptr _p = p();
-      return &(_p->read<T>());
+      return &(_p->get<const T>());
     }
-    const T& operator*() const
-    {
-      tendril::const_ptr _p = p();
-      return _p->read<T>();
-    }
+
+#if 0
     T& operator*()
     {
       tendril::ptr _p = p();
       return _p->get<T>();
     }
+#endif
+    const T& operator*() const
+    {
+      tendril::const_ptr _p = p();
+      return _p->get<const T>();
+    }
+
     /**
      * This is the const read operation, as opposed to the derefence which is not necessarily const.
      * @return const ref, no copies...
@@ -175,8 +180,9 @@ namespace ecto
     const T& read() const
     {
       tendril::const_ptr _p = p();
-      return _p->read<T>();
+      return _p->get<T>();
     }
+
     /**
      * Cast operator for convenience.
      */

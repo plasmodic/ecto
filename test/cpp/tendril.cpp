@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <ecto/ecto.hpp>
+
 TEST(TendrilTest, Dirtiness)
 {
   {
@@ -9,14 +10,15 @@ TEST(TendrilTest, Dirtiness)
 
   ecto::tendril t(0.5f, "docstring");
 
-  EXPECT_FALSE(t.dirty());
-  EXPECT_EQ(t.doc(), "docstring");
-  EXPECT_EQ(t.read<float>(), 0.5f);
-  EXPECT_FALSE(t.dirty());
   EXPECT_EQ(t.type_name(), "float");
-  t.get<float>() = 0.75f;
+  EXPECT_EQ(t.doc(), "docstring");
+
+  EXPECT_FALSE(t.dirty());
+  EXPECT_EQ(t.get<float>(), 0.5f);
+  EXPECT_FALSE(t.dirty());
+  t << 0.75f;
   EXPECT_TRUE(t.dirty());
-  EXPECT_EQ(t.read<float>(), 0.75f);
+  EXPECT_EQ(t.get<float>(), 0.75f);
 }
 
 TEST(TendrilTest, Defaultness)
@@ -33,7 +35,7 @@ TEST(TendrilTest, Defaultness)
     EXPECT_FALSE(meh.dirty());
     EXPECT_FALSE(meh.user_supplied());
     EXPECT_TRUE(meh.has_default());
-    meh.get<float>() = 2.0f;
+    meh << 2.0f;
     EXPECT_TRUE(meh.has_default());
     EXPECT_TRUE(meh.user_supplied());
     EXPECT_TRUE(meh.dirty());
@@ -43,7 +45,7 @@ TEST(TendrilTest, Defaultness)
     EXPECT_FALSE(meh->dirty());
     EXPECT_FALSE(meh->user_supplied());
     EXPECT_FALSE(meh->has_default());
-    meh->get<float>() = 2.0f;
+    *meh << 2.0f;
     EXPECT_FALSE(meh->has_default());
     EXPECT_TRUE(meh->user_supplied());
     EXPECT_TRUE(meh->dirty());
@@ -55,11 +57,11 @@ TEST(TendrilTest, NonPointerNess)
   ecto::tendril a(0.5f, "A float"), b, c;
   b = a;
   c = a;
-  c.get<float> () = 3.14;
-  EXPECT_NE(a.read<float>(),c.read<float>());
-  EXPECT_EQ(a.read<float>(),b.read<float>());
-  EXPECT_NE(&a.read<float>(),&c.read<float>());
-  EXPECT_NE(&a.read<float>(),&b.read<float>());
+  c << 3.14f;
+  EXPECT_NE(a.get<float>(),c.get<float>());
+  EXPECT_EQ(a.get<float>(),b.get<float>());
+  EXPECT_NE(&a.get<float>(),&c.get<float>());
+  EXPECT_NE(&a.get<float>(),&b.get<float>());
 }
 
 TEST(TendrilTest, Copyness)
@@ -67,11 +69,11 @@ TEST(TendrilTest, Copyness)
   ecto::tendril a(0.5f, "A float"), b, c;
   b.copy_value(a);
   c.copy_value(b);
-  c.get<float> () = 3.14;
-  EXPECT_NE(a.read<float>(),c.read<float>());
-  EXPECT_EQ(a.read<float>(),b.read<float>());
-  EXPECT_NE(&a.read<float>(),&c.read<float>());
-  EXPECT_NE(&a.read<float>(),&b.read<float>());
+  c << 3.14f;
+  EXPECT_NE(a.get<float>(),c.get<float>());
+  EXPECT_EQ(a.get<float>(),b.get<float>());
+  EXPECT_NE(&a.get<float>(),&c.get<float>());
+  EXPECT_NE(&a.get<float>(),&b.get<float>());
   //self copy should be ok
   c.copy_value(a);
 
@@ -125,10 +127,12 @@ TEST(TendrilTest, BoostPyness)
 
 TEST(TendrilTest, BoostPyDefaultness)
 {
+#if 0
   ecto::tendrils ts;
   ts.declare<boost::python::object>("x","A bp object");
   bp::object x;
   ts["x"] >> x;
+#endif
   //if(x == bp::object())
   //{
   //  std::cout << "x is none" << std::endl;

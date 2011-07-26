@@ -11,7 +11,7 @@ namespace ecto
     static void
     print(std::ostream& out, const tendril& x)
     {
-      out << x.read<T>();
+      out << x.get<T>();
     }
 
 	typedef boost::function<void(std::ostream& out, const tendril& x)> function_t;

@@ -251,7 +251,7 @@ namespace ecto
 
     enum
     {
-        declare_params = sizeof(test_declare_params<T> (0)) == sizeof(yes)
+      declare_params = sizeof(test_declare_params<T> (0)) == sizeof(yes)
     };
     enum
     {

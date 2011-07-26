@@ -237,7 +237,7 @@ TEST(Exceptions, ParameterCBExcept_sched)
 "  Function: Parameter Callback for 'x'"
 );
   cell::ptr m = create_cell<ParameterCBExcept> ();
-  m->parameters.get<double>("x") = 5.1;
+  m->parameters["x"] << 5.1;
   plasm::ptr p(new plasm);
   p->insert(m);
   scheduler::threadpool sched(p);

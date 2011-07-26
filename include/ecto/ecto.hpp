@@ -96,7 +96,7 @@ namespace ecto
           }
         else 
           {
-            m->parameters.at(keystring)->set(value);
+            m->parameters.at(keystring) << value;
           }
       }
     m->declare_io();
