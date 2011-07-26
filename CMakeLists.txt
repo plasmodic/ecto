@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 2.8)
 set(CMAKE_BUILD_TYPE "Release" CACHE STRING "The build type.")
 project(ecto)
 
+message("HERE IS NEW STUFF")
 set(ECTO_MAJOR_VERSION 0)
 set(ECTO_MINOR_VERSION 1)
 set(ECTO_PATCH_VERSION 0)
