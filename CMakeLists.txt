@@ -3,8 +3,6 @@ cmake_minimum_required(VERSION 2.8)
 set(CMAKE_BUILD_TYPE "Release" CACHE STRING "The build type.")
 project(ecto)
 
-message(STATUS "+++ ${PROJECT_NAME} +++")
-
 set(ECTO_MAJOR_VERSION 0)
 set(ECTO_MINOR_VERSION 1)
 set(ECTO_PATCH_VERSION 0)
@@ -56,13 +54,17 @@ if(UNIX)
     ${PROJECT_BINARY_DIR}/python_path.sh @ONLY@)
   #copy the python_path.sh.user.in for users that are not installing ecto.
   file(COPY ${PROJECT_SOURCE_DIR}/cmake/python_path.sh.user.in DESTINATION ${CMAKE_BINARY_DIR})
-  message(STATUS "To setup your python path for ecto you may source:"
-    " ${CMAKE_BINARY_DIR}/python_path.sh")
+  if (NOT ecto_kitchen_SOURCE_DIR)
+    message(STATUS "To setup your python path for ecto you may source:"
+      " ${CMAKE_BINARY_DIR}/python_path.sh")
+  endif()
 elseif(WIN32)
   configure_file(${ecto_SOURCE_DIR}/cmake/pathz.bat.in 
     ${CMAKE_BINARY_DIR}/pathz.bat @ONLY@)
-  message(STATUS "To setup your pathz for ecto you should run:"
-    "${CMAKE_BINARY_DIR}/pathz.bat")
+  if(NOT ecto_kitchen_SOURCE_DIR)
+    message(STATUS "To setup your pathz for ecto you should run:"
+      "${CMAKE_BINARY_DIR}/pathz.bat")
+  endif()
 endif()
 
   

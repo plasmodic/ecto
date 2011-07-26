@@ -79,7 +79,9 @@ macro( ecto_python_env_gen )
       ${PROJECT_BINARY_DIR}/python_path.sh
       )
     file(RELATIVE_PATH nice_path_ ${CMAKE_BINARY_DIR} ${PROJECT_BINARY_DIR}/python_path.sh)
-    message(STATUS "To setup your python path for *${PROJECT_NAME}* you may source: ${nice_path_}")
+    if (NOT ecto_kitchen_SOURCE_DIR)
+      message(STATUS "To setup your python path for *${PROJECT_NAME}* you may source: ${nice_path_}")
+    endif()
 endmacro()
 
 #detect the python version and install directories
