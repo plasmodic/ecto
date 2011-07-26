@@ -1,6 +1,6 @@
 # Makefile for Sphinx documentation
 #
-export PYTHONPATH = @LIBRARY_OUTPUT_PATH@:@CMAKE_SOURCE_DIR@/python
+export PYTHONPATH = @CMAKE_LIBRARY_OUTPUT_DIRECTORY@:@ecto_SOURCE_DIR@/python
 # You can set these variables from the command line.
 SPHINXOPTS    = \
 	-D version=@ECTO_MAJOR_VERSION@.@ECTO_MINOR_VERSION@ \
@@ -8,8 +8,8 @@ SPHINXOPTS    = \
 
 SPHINXBUILD   = \
 	DOXYGEN_XML_DIR=@CMAKE_CURRENT_BINARY_DIR@/api/xml \
-	ECTODOC_BINDIR=@LIBRARY_OUTPUT_PATH@ \
-	ECTODOC_PYTHONPATH=@CMAKE_SOURCE_DIR@/python \
+	ECTODOC_BINDIR=@CMAKE_LIBRARY_OUTPUT_DIRECTORY@ \
+	ECTODOC_PYTHONPATH=@ecto_SOURCE_DIR@/python \
 	sphinx-build
 
 PAPER         =

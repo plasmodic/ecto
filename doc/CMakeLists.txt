@@ -1,3 +1,7 @@
+if(ecto_kitchen_SOURCE_DIR)
+  return()
+endif()
+
 # add a target to generate API documentation with Doxygen
 # add doc to all
 
