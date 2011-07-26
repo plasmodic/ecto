@@ -4,7 +4,7 @@ Ecto Kitchen
 The Ecto Kitchen is a place to get cooking with ecto.
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 1
    
    README.rst
 
