@@ -45,12 +45,12 @@ namespace ecto
     static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
     {
       // copy supplied value of 
-      out.declare<bp::object> ("out", "Any type, constant.",
-                               parms.get<bp::object> ("value"));
+      bp::object obj = parms.get<bp::object> ("value");
+      out.declare<bp::object> ("out", "Any type, constant.", obj);
     }
 
   };
 }
 
 ECTO_CELL(ecto, ecto::Constant, "Constant",
-            "Constant node always outputs same value.");
+          "Constant node always outputs same value.");

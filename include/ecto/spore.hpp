@@ -167,12 +167,14 @@ namespace ecto
       return _p->get<T>();
     }
 #endif
+
     const T& operator*() const
     {
       tendril::const_ptr _p = p();
       return _p->get<const T>();
     }
 
+#if 0
     /**
      * This is the const read operation, as opposed to the derefence which is not necessarily const.
      * @return const ref, no copies...
@@ -182,6 +184,7 @@ namespace ecto
       tendril::const_ptr _p = p();
       return _p->get<T>();
     }
+#endif
 
     /**
      * Cast operator for convenience.

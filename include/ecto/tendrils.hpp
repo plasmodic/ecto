@@ -93,13 +93,13 @@ namespace ecto
      * @param name The key value
      * @return A const reference to the value, no copy is done.
      */
-    template<typename T>
+    template <typename T>
     const T&
     get(const std::string& name) const
     {
       try
       {
-          return at(name)->read<T>();
+        return at(name)->get<T>();
       }catch(except::TypeMismatch& e)
       {
         e << std::string("  Hint : " ) + "'"+name+"' is of type: " + at(name)->type_name();
@@ -113,15 +113,14 @@ namespace ecto
      * @param name The key that the tendril is stored at.
      * @return A const reference to the value, no copy is done.
      */
-    template<typename T>
+    template <typename T>
     const T&
     read(const std::string& name) const
     {
       try
       {
           return at(name)->read<T>();
-      }catch(except::TypeMismatch& e)
-      {
+      } catch(except::TypeMismatch& e) {
         e << std::string("  Hint : " ) + "'"+name+"' is of type: " + at(name)->type_name();
         throw e;
       }
@@ -133,14 +132,14 @@ namespace ecto
      * @param name The key value
      * @return A reference to the value, no copy is done.
      */
-    template<typename T>
-      const T&
+    template <typename T>
+      T&
     get(const std::string& name)
     {
       try
       {
         return at(name)->get<T>();
-      }catch(except::TypeMismatch& e)
+      } catch(except::TypeMismatch& e)
       {
         e << std::string("  Hint : " )+ "'"+name+"' is of type: " + at(name)->type_name();
         throw e;

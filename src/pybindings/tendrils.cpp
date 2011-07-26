@@ -31,7 +31,8 @@ namespace ecto
       bp::object getTendril(tendrils& t, const std::string& name)
       {
         bp::object o;
-        t[name]->sample(o);
+        tendril::ptr tp = t[name];
+        *tp >> o;
         return o;
       }
 
@@ -52,7 +53,7 @@ namespace ecto
 
         const tendril& t = *ts.at(name);
         bp::object o;
-        t.sample(o);
+        t >> o;
         return o;
       }
 

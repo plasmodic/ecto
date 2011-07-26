@@ -87,7 +87,7 @@ namespace hello_ecto
     {
       std::string s;
       std::cin >> s;
-      *output_ = s;
+      output_ << s;
       return ecto::OK;
     }
     ecto::spore<std::string> output_;

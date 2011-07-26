@@ -50,7 +50,7 @@ namespace ecto_test
 
     int process(const ecto::tendrils& /*inputs*/, ecto::tendrils& /*outputs*/)
     {
-      *out_ = *left_ + *right_;
+      out_ << (*left_ + *right_);
       return ecto::OK;
     }
     ecto::spore<double> out_, left_, right_;

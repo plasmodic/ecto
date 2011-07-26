@@ -176,7 +176,7 @@ namespace ecto
 
     void operator<<(const boost::python::object& obj)
     {
-      assert(0);
+      (*frompy_convert)(*this, obj);
     }
 
     ecto::tendril&
@@ -194,7 +194,8 @@ namespace ecto
     bool
     is_type() const
     {
-      return name_of<T>().c_str() == type_ID_;
+      const char* ourname = name_of<T>().c_str();
+      return ourname == type_ID_;
     }
 
     /**
@@ -291,6 +292,20 @@ namespace ecto
 
   private:
 
+    template<typename T>
+    inline const T& unsafe_get() const
+    {
+      return *boost::unsafe_any_cast<const T>(&holder_);
+    }
+
+    template<typename T>
+    inline T& unsafe_get()
+    {
+      return *boost::unsafe_any_cast<const T>(&holder_);
+    }
+
+
+
 #if 0
     struct PyCopier_base
     {
@@ -310,23 +325,48 @@ namespace ecto
         obj = o;
       }
     };
+#endif
+
+    struct FromPythonBase 
+    {
+      virtual void operator()(tendril& t, const boost::python::object& o) const = 0;
+    };
 
     template<typename T>
-    struct FromPython : PyCopier_base
+    struct FromPython : FromPythonBase
     {
-      static boost::scoped_ptr<PyCopier_base> Copier;
+      static FromPython<T> copier;
+
       void
-      operator()(tendril& t, boost::python::object& obj)
+      operator()(tendril& t, const boost::python::object& obj) const
       {
         boost::python::extract<T> get_T(obj);
         if (get_T.check())
-          t.get<T>() = get_T();
+          t << get_T();
         else
           throw ecto::except::TypeMismatch("Could not convert python object to type : " + t.type_name());
       }
     };
-#endif
+    
+    struct ToPythonBase 
+    {
+      virtual void operator()(boost::python::object& o, const tendril& t) const = 0;
+    };
 
+    template<typename T>
+    struct ToPython : ToPythonBase
+    {
+      static ToPython<T> copier;
+
+      void
+      operator()(boost::python::object& o, const tendril& t) const
+      {
+        const T& v = t.unsafe_get<T>();
+        boost::python::object obj(v);
+        o = obj;
+      }
+    };
+    
     template<typename T>
     void set_holder(const T& t = T())
     {
@@ -346,6 +386,8 @@ namespace ecto
     bool dirty_, default_, user_supplied_, required_;
     std::vector<TendrilJob> jobs_onetime_,jobs_persistent_;
     boost::mutex mtx_;
+    FromPythonBase* frompy_convert;
+    ToPythonBase* topy_convert;
     //    PyCopier_base* pycopy_to_,* pycopy_from_;
 
   public:
@@ -357,28 +399,61 @@ namespace ecto
       val = *boost::unsafe_any_cast<T>(&holder_);
     }
 
+    void operator>>(ecto::tendril::ptr rhs) const
+    {
+      rhs->copy_value(*this);
+    }
+
+    void operator>>(ecto::tendril& rhs) const
+    {
+      rhs.copy_value(*this);
+    }
 
     template<typename T>
       friend void
       operator>>(ecto::tendril::const_ptr rhs, T& val)
     {
+      if (!rhs)
+        throw std::runtime_error("Attempt to convert from tendril which is null");
       *rhs >> val;
     }
 
     template<typename T>
       friend void
-      operator<<(ecto::tendril::ptr rhs, const T& val)
+      operator<<(ecto::tendril::ptr lhs, const T& rhs)
     {
-      *rhs << val;
+      if (!lhs)
+        throw std::runtime_error("Attempt to convert into tendril which is null");
+      *lhs << rhs;
+    }
+
+
+    friend void
+      operator<<(ecto::tendril::ptr lhs, const ecto::tendril& rhs)
+    {
+      if (!lhs)
+        throw std::runtime_error("Attempt to convert into tendril which is null");
+      lhs->copy_value(rhs);
+    }
+
+    friend void
+      operator<<(ecto::tendril::ptr lhs, const ecto::tendril::ptr& rhs)
+    {
+      *lhs << *rhs;
     }
 
   };
 
+  template <typename T> tendril::FromPython<T> tendril::FromPython<T>::copier;
+  template <typename T> tendril::ToPython<T> tendril::ToPython<T>::copier;
+
   template<typename T>
   tendril::tendril(const T& t, const std::string& doc)
-    : dirty_(false),
-      default_(true),
-      user_supplied_(false)
+    : dirty_(false)
+    , default_(true)
+    , user_supplied_(false)
+    , frompy_convert(&FromPython<T>::copier)
+    , topy_convert(&ToPython<T>::copier)
   {
     set_holder<T>(t);
     set_doc(doc);

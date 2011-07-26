@@ -174,3 +174,18 @@ TEST(TendrilTest, SyntacticSugar)
 
 }
 
+TEST(TendrilTest, Nones)
+{
+  ecto::tendril::ptr a = ecto::tendril::make_tendril<ecto::tendril::none>();
+  ecto::tendril::ptr b = ecto::tendril::make_tendril<ecto::tendril::none>();
+  EXPECT_TRUE(a->same_type(*b));
+  EXPECT_TRUE(b->same_type(*a));
+  a << b;
+  std::cout << "a type: " << a->type_name() << "\n";
+  std::cout << "b type: " << b->type_name() << "\n";
+  EXPECT_TRUE(a->same_type(*b));
+  EXPECT_TRUE(b->same_type(*a));
+  a >> b;
+  EXPECT_TRUE(a->same_type(*b));
+  EXPECT_TRUE(b->same_type(*a));
+}
