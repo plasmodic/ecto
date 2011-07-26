@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import ecto #this must be imported before other ecto based python modules
 import tutorial #this is our ecto module
 
