@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 2.8)
 #put this before project so that it gets picked up.
 set(CMAKE_BUILD_TYPE "Release" CACHE STRING "The build type.")
 project(ecto)
-message(STATUS "--- ${PROJECT_NAME} ---")
+
+message(STATUS "+++ ${PROJECT_NAME} +++")
 
 set(ECTO_MAJOR_VERSION 0)
 set(ECTO_MINOR_VERSION 1)
