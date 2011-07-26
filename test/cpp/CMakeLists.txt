@@ -5,6 +5,7 @@ return()
 endif()
 
 include_directories(${GTEST_INCLUDE_DIRS})
+
 add_executable(ecto-test
   main.cpp
   tendril.cpp
@@ -19,5 +20,5 @@ target_link_libraries(ecto-test
   ${ECTO_DEP_LIBS}
   )
 
-add_test(gtest_units ${EXECUTABLE_OUTPUT_PATH}/ecto-test)
+add_test(gtest_units ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/ecto-test)
 
