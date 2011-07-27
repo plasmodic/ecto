@@ -127,16 +127,15 @@ TEST(TendrilTest, BoostPyness)
 
 TEST(TendrilTest, BoostPyDefaultness)
 {
-#if 0
   ecto::tendrils ts;
   ts.declare<boost::python::object>("x","A bp object");
   bp::object x;
   ts["x"] >> x;
-#endif
-  //if(x == bp::object())
-  //{
-  //  std::cout << "x is none" << std::endl;
-  //}
+
+  if(x == bp::object())
+  {
+    std::cout << "x is none" << std::endl;
+  }
 }
 
 TEST(TendrilTest, SyntacticSugar)
@@ -188,4 +187,24 @@ TEST(TendrilTest, Nones)
   a >> b;
   EXPECT_TRUE(a->same_type(*b));
   EXPECT_TRUE(b->same_type(*a));
+}
+
+
+TEST(TendrilTest, ConvertersCopied)
+{
+  ecto::tendril::ptr a = ecto::tendril::make_tendril<ecto::tendril::none>();
+  ecto::tendril::ptr b = ecto::tendril::make_tendril<double>();
+  EXPECT_FALSE(a->same_type(*b));
+  EXPECT_FALSE(b->same_type(*a));
+  *a = *b;
+  EXPECT_TRUE(a->same_type(*b));
+  EXPECT_TRUE(b->same_type(*a));
+  boost::python::object obj(3.1415);
+  *a << obj;
+  EXPECT_EQ(a->get<double>(), 3.1415);
+  boost::python::object obj2;
+  *a >> obj2;
+  boost::python::extract<double> e(obj2);
+  EXPECT_TRUE(e.check());
+  EXPECT_EQ(e(), 3.1415);
 }

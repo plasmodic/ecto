@@ -42,7 +42,7 @@ namespace ecto
   /**
    * \brief The tendrils are a collection for the ecto::tendril class, addressable by a string key.
    */
-  class ECTO_EXPORT tendrils: public std::map<std::string, tendril::ptr>, boost::noncopyable
+  class ECTO_EXPORT tendrils : public std::map<std::string, tendril::ptr>, boost::noncopyable
   {
   public:
 
@@ -107,6 +107,7 @@ namespace ecto
       }
     }
 
+#if 0
     /**
      * \brief Performs a non ambiguous read operation on the value held at the given name.
      * This should be the preferred method of reading a value if the intent is to not change it.
@@ -119,13 +120,13 @@ namespace ecto
     {
       try
       {
-          return at(name)->read<T>();
+          return at(name)->get<T>();
       } catch(except::TypeMismatch& e) {
         e << std::string("  Hint : " ) + "'"+name+"' is of type: " + at(name)->type_name();
         throw e;
       }
     }
-
+#endif
     /**
      * \brief get the given type that is stored at the given key.  Will throw if there is a type mismatch.
      * @tparam T The compile time type to attempt to get from the tendrils.

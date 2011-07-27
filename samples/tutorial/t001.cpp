@@ -17,7 +17,7 @@ namespace tutorial
     int
     process(const tendrils& in, tendrils& /*out*/)
     {
-      std::cout << in.read<std::string>("input") << std::endl;
+      std::cout << in.get<std::string>("input") << std::endl;
       return ecto::OK;
     }
   };
@@ -36,7 +36,7 @@ namespace tutorial
     {
       std::string s;
       std::cin >> s;
-      out.get<std::string>("output") << s;
+      out.get<std::string>("output") = s;
       //add a quit condition
       if(s == "q")
         return ecto::QUIT;

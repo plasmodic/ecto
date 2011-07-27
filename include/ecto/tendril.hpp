@@ -158,6 +158,14 @@ namespace ecto
       return *boost::unsafe_any_cast<const T>(&holder_);
     }
 
+    template<typename T>
+    inline T&
+    get() 
+    {
+      enforce_type<T>();
+      return *boost::unsafe_any_cast<T>(&holder_);
+    }
+
     template <typename T> 
       void operator<<(const T& val)
     {
@@ -176,7 +184,10 @@ namespace ecto
 
     void operator<<(const boost::python::object& obj)
     {
-      (*frompy_convert)(*this, obj);
+      if (is_type<boost::python::object>())
+        holder_ = obj;
+      else
+        (*frompy_convert)(*this, obj);
     }
 
     ecto::tendril&
@@ -353,7 +364,7 @@ namespace ecto
       virtual void operator()(boost::python::object& o, const tendril& t) const = 0;
     };
 
-    template<typename T>
+    template <typename T>
     struct ToPython : ToPythonBase
     {
       static ToPython<T> copier;
@@ -367,13 +378,13 @@ namespace ecto
       }
     };
     
-    template<typename T>
+    template <typename T>
     void set_holder(const T& t = T())
     {
       holder_ = t;
       type_ID_ = name_of<T>().c_str();
-      // pycopy_to_ = ToPython<T>::Copier.get();
-      // pycopy_from_ = FromPython<T>::Copier.get();
+      topy_convert = &ToPython<T>::copier;
+      frompy_convert = &FromPython<T>::copier;
     }
 
     void copy_holder(const tendril& rhs);
@@ -399,6 +410,11 @@ namespace ecto
       val = *boost::unsafe_any_cast<T>(&holder_);
     }
 
+    void operator>>(boost::python::object& obj) const
+    {
+      (*topy_convert)(obj, *this); 
+    }
+
     void operator>>(ecto::tendril::ptr rhs) const
     {
       rhs->copy_value(*this);
@@ -411,11 +427,36 @@ namespace ecto
 
     template<typename T>
       friend void
+      operator>>(ecto::tendril::ptr rhs, T& val)
+    {
+      if (!rhs)
+        throw std::runtime_error("Attempt to convert from tendril which is null");
+      *rhs >> val;
+    }
+
+    template<typename T>
+      friend void
       operator>>(ecto::tendril::const_ptr rhs, T& val)
     {
       if (!rhs)
         throw std::runtime_error("Attempt to convert from tendril which is null");
       *rhs >> val;
+    }
+
+    friend void
+    operator>>(ecto::tendril::ptr rhs, boost::python::object& obj)
+    {
+      if (!rhs)
+        throw std::runtime_error("Attempt to convert from tendril which is null");
+      *rhs >> obj;
+    }
+
+    friend void
+      operator>>(ecto::tendril::const_ptr rhs, boost::python::object& obj)
+    {
+      if (!rhs)
+        throw std::runtime_error("Attempt to convert from tendril which is null");
+      *rhs >> obj;
     }
 
     template<typename T>

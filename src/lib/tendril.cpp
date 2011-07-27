@@ -46,6 +46,8 @@ namespace ecto
     dirty_ = rhs.dirty_;
     default_ = rhs.default_;
     required_ = rhs.required_;
+    frompy_convert = rhs.frompy_convert;
+    topy_convert = rhs.topy_convert;
     return *this;
   }
 
@@ -220,28 +222,10 @@ namespace ecto
     dirty_ = false;
   }
 
-#if 0
-  template<>
-  void tendril::sample<boost::python::object>(boost::python::object& obj) const
-  {
-    assert(0);
-    //    (*pycopy_to_)(const_cast<tendril&>(*this),const_cast<boost::python::object&>(obj));
-  }
-  template<>
-  void tendril::set<boost::python::object>(const boost::python::object& obj)
-  {
-    assert(0);
-    //    (*pycopy_from_)(const_cast<tendril&>(*this),const_cast<boost::python::object&>(obj));
-    mark_dirty();
-  }
-#endif
-
   void tendril::copy_holder(const tendril& rhs)
   {
     holder_ = rhs.holder_;
     type_ID_ = rhs.type_ID_;
-    // pycopy_from_ = rhs.pycopy_from_;
-    // pycopy_to_ = rhs.pycopy_to_;
   }
 
 }

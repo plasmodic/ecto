@@ -54,7 +54,7 @@ namespace ecto
     int
     process(tendrils& in, tendrils& out)
     {
-      *flag_ = (*count_)++ % (*n_) == 0;
+      *flag_ = ((*count_)++ % (*n_) == 0);
       return ecto::OK;
     }
     spore<bool> flag_;
