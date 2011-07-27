@@ -1,0 +1,19 @@
+digraph state_machine {
+0[label="Allocated",shape=circle];
+1[label="Parameters Declared",shape=circle];
+3[label="Configured",shape=circle];
+4[label="Deallocated",shape=circle];
+t34[label="destroy():void",shape=rectangle,color=green,style=filled];
+t01[label="initialize():params",shape=rectangle,color=green,style=filled];
+t12[label="configure(params):(inputs,outputs)",shape=rectangle,color=green,style=filled];
+t33_0 [label="reconfigure(params):void",shape=rectangle,color=green,style=filled];
+t33_1 [label="process(params,inputs,outputs):void",shape=rectangle,color=green,style=filled];
+tstop_1 [label="finish():void",shape=rectangle,color=yellow,style=filled];
+3->t34->4;
+3->tstop_1->t34;
+0->t01->1;
+1->t12->3;
+3->t33_0->3;
+3->t33_1->3;
+3->t12;
+}
