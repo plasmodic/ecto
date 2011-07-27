@@ -65,6 +65,9 @@ namespace ecto
     spore(tendril::ptr t) :
         tendril_(t)
     {
+      if(!t){
+        throw std::logic_error("This tendril is null.");
+      }
       t->enforce_type<T>();
     }
 
