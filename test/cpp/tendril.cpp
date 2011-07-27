@@ -285,6 +285,27 @@ TEST(TendrilTest, Nones)
   a >> b;
   EXPECT_TRUE(a->same_type(*b));
   EXPECT_TRUE(b->same_type(*a));
+
+  // you can assign anything to a none tendril, it changes type
+  a << 7.05;
+  EXPECT_TRUE(a->is_type<double>());
+  EXPECT_EQ(a->get<double>(), 7.05);
+
+  // note: now a is a double, you can't assign a string to it
+  std::string s("ess");
+  EXPECT_THROW(a << s, ecto::except::TypeMismatch);
+
+  // assignment makes it a vanilla none again
+  a = b;
+  EXPECT_TRUE(a->is_type<ecto::tendril::none>());
+  EXPECT_TRUE(a->same_type(*b));
+  EXPECT_TRUE(b->same_type(*a));
+
+  // bp object with a string in it
+  boost::python::object obj(s);
+  
+  a << obj;
+  EXPECT_TRUE(a->is_type<boost::python::object>());
 }
 
 

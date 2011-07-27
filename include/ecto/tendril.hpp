@@ -179,6 +179,8 @@ namespace ecto
     {
       if (is_type<boost::python::object>())
         holder_ = obj;
+      else if (is_type<none>())
+        set_holder(obj);
       else
         (*converter)(*this, obj);
     }
@@ -253,10 +255,9 @@ namespace ecto
     {
       typedef typename boost::function<void(T)> CbT;
       Caller(CbT cb)
-          :
-            cb(cb)
-      {
-      }
+        : cb(cb)
+      { }
+
       void
       operator()(tendril& t)
       {
@@ -315,10 +316,10 @@ namespace ecto
       virtual void operator()(boost::python::object& o, const tendril& t) const = 0;
     };
     
-    template <typename T>
+    template <typename T,  typename _=void>
     struct ConverterImpl : Converter
     {
-      static ConverterImpl<T> instance;
+      static ConverterImpl<T, _> instance;
 
       void
       operator()(tendril& t, const boost::python::object& obj) const
@@ -336,6 +337,24 @@ namespace ecto
         const T& v = t.unsafe_get<T>();
         boost::python::object obj(v);
         o = obj;
+      }
+    };
+
+    template <typename _>
+    struct ConverterImpl<none, _> : Converter
+    {
+      static ConverterImpl<none, _> instance;
+
+      void
+      operator()(tendril& t, const boost::python::object& obj) const
+      {
+        t << obj;
+      }
+
+      void
+      operator()(boost::python::object& o, const tendril& t) const
+      {
+        o = boost::python::object();
       }
     };
 
@@ -362,7 +381,7 @@ namespace ecto
   public:
 
     template <typename T>
-      void operator>>(T& val) const
+    void operator>>(T& val) const
     {
       enforce_type<T>();
       val = *boost::unsafe_any_cast<T>(&holder_);
@@ -443,7 +462,9 @@ namespace ecto
 
   };
 
-  template <typename T> tendril::ConverterImpl<T> tendril::ConverterImpl<T>::instance;
+  template <typename T, typename _> tendril::ConverterImpl<T,_> tendril::ConverterImpl<T,_>::instance;
+
+  template <typename _> tendril::ConverterImpl<tendril::none,_> tendril::ConverterImpl<tendril::none,_>::instance;
 
   template<typename T>
   tendril::tendril(const T& t, const std::string& doc)
