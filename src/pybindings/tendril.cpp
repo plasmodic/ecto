@@ -48,6 +48,10 @@ void tendril_set_val(tendril::ptr t, bp::object val)
 {
   t->enqueue_oneshot(Setter(t,val));
 }
+void tendril_copy_val(tendril::ptr t, tendril::ptr tv)
+{
+  t->copy_value(*tv);
+}
 bool tendril_user_supplied(tendril::ptr t)
 {
   return t->user_supplied();
@@ -87,6 +91,8 @@ void wrapConnection(){
     "May be None if python bindings for the type held do not have boost::python bindings available from the current scope."
     );
     Tendril_.def("set",tendril_set_val, "Assuming the value held by the tendril has boost::python bindings,\nthis will copy the value of the given python object into the value held by the tendril.");
+    Tendril_.def("copy_value",tendril_copy_val, "Copy from one tendril to the other.");
+
     Tendril_.def("notify",&tendril::notify, "Force updates.");
 
 }
