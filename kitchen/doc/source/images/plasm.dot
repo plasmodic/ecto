@@ -1,0 +1,13 @@
+digraph G {
+0[label="hello_ecto::Reader",fillcolor=green, style="rounded,filled"];
+1[label="hello_ecto::Printer",fillcolor=green, style="rounded,filled"];
+2[label="output", shape=invhouse];
+3[label="str", shape=house];
+4[label="hello_ecto::Printer",fillcolor=green, style="rounded,filled"];
+5[label="str", shape=house];
+0->2 ;
+2->3 ;
+3->1 ;
+2->5 ;
+5->4 ;
+}
