@@ -17,8 +17,7 @@ namespace ecto
     , default_(false)
     , user_supplied_(false)
     , required_(false)
-    , frompy_convert(&FromPython<none>::copier)
-    , topy_convert(&ToPython<none>::copier)
+    , converter(&ConverterImpl<none>::instance)
   {
     set_holder<none>(none());
   }
@@ -31,8 +30,7 @@ namespace ecto
      , default_(rhs.default_)
      , user_supplied_(rhs.user_supplied_)
      , required_(rhs.required_)
-     , frompy_convert(rhs.frompy_convert)
-     , topy_convert(rhs.topy_convert)
+     , converter(rhs.converter)
   {
     copy_holder(rhs);
   }
@@ -46,8 +44,7 @@ namespace ecto
     dirty_ = rhs.dirty_;
     default_ = rhs.default_;
     required_ = rhs.required_;
-    frompy_convert = rhs.frompy_convert;
-    topy_convert = rhs.topy_convert;
+    converter = rhs.converter;
     return *this;
   }
 
@@ -74,7 +71,7 @@ namespace ecto
       {
         //*this << rhs;
         //rhs.sample(get<boost::python::object>());
-        (*rhs.topy_convert)(*boost::unsafe_any_cast<boost::python::object>(&holder_), rhs);
+        (*rhs.converter)(*boost::unsafe_any_cast<boost::python::object>(&holder_), rhs);
       }
     }
     mark_dirty();

@@ -50,7 +50,7 @@ void tendril_set_val(tendril::ptr t, bp::object val)
 }
 void tendril_copy_val(tendril::ptr t, tendril::ptr tv)
 {
-  t->copy_value(*tv);
+  t << *tv;
 }
 bool tendril_user_supplied(tendril::ptr t)
 {

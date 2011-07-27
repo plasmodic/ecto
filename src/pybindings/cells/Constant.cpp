@@ -42,10 +42,11 @@ namespace ecto
       params.declare<bp::object>("value", "Value to output").required(true);
     }
 
-    static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
+    static void declare_io(const tendrils& params, tendrils& in, tendrils& out)
     {
       // copy supplied value of 
-      bp::object obj = parms.get<bp::object> ("value");
+      bp::object obj = params.get<bp::object> ("value");
+
       out.declare<bp::object> ("out", "Any type, constant.", obj);
     }
 

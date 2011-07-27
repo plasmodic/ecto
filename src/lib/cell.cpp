@@ -164,11 +164,6 @@ namespace ecto
     std::stringstream ss;
 
     ss << name() << " (ecto::module):\n";
-    //create an underline that is the size of the name...
-    //for (int i = 0, end = ss.str().size(); i < end; ++i)
-    //    {
-    //      ss << "=";
-    //    }
     ss << "\n";
     ss << "\n" << doc << "\n\n";
     parameters.print_doc(ss, "Parameters");
@@ -180,13 +175,12 @@ namespace ecto
   void
   cell::verify_params() const
   {
-
     tendrils::const_iterator it = parameters.begin(), end(parameters.end());
     while (it != end)
     {
       if (it->second->required() && !it->second->user_supplied())
       {
-        throw except::ValueRequired(it->first + " must be supplied with a value during initialization.");
+        throw except::ValueRequired("parameter '" + it->first + "' must be supplied with a value during initialization.");
       }
       ++it;
     }
@@ -201,7 +195,7 @@ namespace ecto
     {
       if (it->second->required() && !it->second->user_supplied())
       {
-        throw except::ValueRequired(it->first + " must be connected.");
+        throw except::ValueRequired("'input' " + it->first + "' must be connected.");
       }
       ++it;
     }
