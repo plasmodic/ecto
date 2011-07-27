@@ -94,13 +94,6 @@ namespace ecto
     }
 
     /**
-     * \brief Copies the value of the given tendril into this one.
-     * @param rhs
-     */
-    void
-    copy_value(const tendril& rhs);
-
-    /**
      * \brief This is an unmangled type name for what ever tendril is
      * holding.
      *
@@ -190,12 +183,7 @@ namespace ecto
         (*frompy_convert)(*this, obj);
     }
 
-    ecto::tendril&
-      operator<<(const ecto::tendril& rhs)
-    {
-      copy_value(rhs);
-      return *this;
-    }
+    ecto::tendril& operator<<(const ecto::tendril& rhs);
 
     /**
      * \brief runtime check if the tendril is of the given type.
@@ -246,7 +234,13 @@ namespace ecto
     struct none { 
       none& operator=(const none&) { return *this; }
       const none& operator=(const none&) const { return *this; } // funny const assignment operator
+      friend bool operator==(const none&, const none&) { return true; }
+      friend std::ostream& operator<<(std::ostream& os, const none&) 
+      { 
+        os << "ecto::tendril::none"; return os;
+      }
     };
+
 
     void enqueue_oneshot(TendrilJob job);
     void enqueue_persistent(TendrilJob job);
@@ -417,12 +411,12 @@ namespace ecto
 
     void operator>>(ecto::tendril::ptr rhs) const
     {
-      rhs->copy_value(*this);
+      *rhs << *this;
     }
 
     void operator>>(ecto::tendril& rhs) const
     {
-      rhs.copy_value(*this);
+      rhs << *this;
     }
 
     template<typename T>
@@ -474,7 +468,7 @@ namespace ecto
     {
       if (!lhs)
         throw std::runtime_error("Attempt to convert into tendril which is null");
-      lhs->copy_value(rhs);
+      *lhs << rhs;
     }
 
     friend void

@@ -21,13 +21,14 @@ TEST(TendrilTest, Dirtiness)
   EXPECT_EQ(t.get<float>(), 0.75f);
 }
 
-TEST(TendrilTest, Defaultness)
+TEST(TendrilTest, Constructors)
 {
   {
     ecto::tendril meh;
     EXPECT_FALSE(meh.dirty());
     EXPECT_FALSE(meh.user_supplied());
     EXPECT_FALSE(meh.has_default());
+    EXPECT_TRUE(meh.is_type<ecto::tendril::none>());
   }
 
   {
@@ -35,10 +36,14 @@ TEST(TendrilTest, Defaultness)
     EXPECT_FALSE(meh.dirty());
     EXPECT_FALSE(meh.user_supplied());
     EXPECT_TRUE(meh.has_default());
+    EXPECT_TRUE(meh.is_type<float>());
+
     meh << 2.0f;
+
     EXPECT_TRUE(meh.has_default());
     EXPECT_TRUE(meh.user_supplied());
     EXPECT_TRUE(meh.dirty());
+    EXPECT_TRUE(meh.is_type<float>());
   }
   {
     ecto::tendril::ptr meh = ecto::tendril::make_tendril<float>();
@@ -67,62 +72,155 @@ TEST(TendrilTest, NonPointerNess)
 TEST(TendrilTest, Copyness)
 {
   ecto::tendril a(0.5f, "A float"), b, c;
-  b.copy_value(a);
-  c.copy_value(b);
+  b << a;
+  c << b;
   c << 3.14f;
   EXPECT_NE(a.get<float>(),c.get<float>());
   EXPECT_EQ(a.get<float>(),b.get<float>());
   EXPECT_NE(&a.get<float>(),&c.get<float>());
   EXPECT_NE(&a.get<float>(),&b.get<float>());
   //self copy should be ok
-  c.copy_value(a);
+  c << a;
 
 }
 
 TEST(TendrilTest, Typeness)
 {
   ecto::tendril a(0.5f, "A float"), b(0.5, "A double."), c;
-  EXPECT_THROW(b.copy_value(a), ecto::except::TypeMismatch);
+  EXPECT_THROW(b << a, ecto::except::TypeMismatch);
   EXPECT_NO_THROW(c = a);
-  EXPECT_THROW(c.copy_value(b), ecto::except::TypeMismatch);
+  EXPECT_THROW(c << b, ecto::except::TypeMismatch);
   EXPECT_NO_THROW(c = b);
-  EXPECT_THROW(c.copy_value(a),ecto::except::TypeMismatch);
+  EXPECT_THROW(c << a,ecto::except::TypeMismatch);
   ecto::tendril n1(ecto::tendril::none(),"A none"), n2(ecto::tendril::none(),"Another none"), n3;
-  n2.copy_value(n1);
-  n1.copy_value(n2);
+  n2 << n1;
+  n1 << n2;
   n1 = n2;
   n2 = n1;
-  n1.copy_value(b);
-  n2.copy_value(n1);
+  n1 << b;
+  n2 << n1;
   EXPECT_EQ(n2.get<double>(),0.5);
-  EXPECT_THROW(n2.copy_value(a), ecto::except::TypeMismatch);
+  EXPECT_THROW(n2 << a, ecto::except::TypeMismatch);
   //EXPECT_THROW(b.copy_value(n3), ecto::except::ValueNone);
+}
 
+TEST(TendrilTest, AssignmentOfPODS)
+{
+  ecto::tendril a(0.005f, "A float");
+  EXPECT_TRUE(a.is_type<float>());
+  EXPECT_EQ(a.get<float>(), 0.005f);
 
+  ecto::tendril b(500.0, "some double");
+  EXPECT_TRUE(b.is_type<double>());
+  EXPECT_EQ(b.get<double>(), 500.0);
+
+  ecto::tendril c;
+  EXPECT_TRUE(c.is_type<ecto::tendril::none>());
+
+  // nothing is mutated on throwing conversion
+  EXPECT_THROW(b << a, ecto::except::TypeMismatch);
+  EXPECT_TRUE(a.is_type<float>());
+  EXPECT_EQ(a.get<float>(), 0.005f);
+  EXPECT_TRUE(b.is_type<double>());
+  EXPECT_EQ(b.get<double>(), 500.0);
+
+  // assignee takes on the type and value of the assigned 
+  EXPECT_NO_THROW(c = a);
+  EXPECT_TRUE(a.is_type<float>());
+  EXPECT_EQ(a.get<float>(), 0.005f);
+  EXPECT_TRUE(c.is_type<float>());
+  EXPECT_EQ(c.get<float>(), 0.005f);
+
+  // again nothing is mutated on throwing conversion
+  EXPECT_THROW(c << b, ecto::except::TypeMismatch);
+  EXPECT_TRUE(b.is_type<double>());
+  EXPECT_EQ(b.get<double>(), 500.0);
+  EXPECT_TRUE(c.is_type<float>());
+  EXPECT_EQ(c.get<float>(), 0.005f);
+
+  // again assignment suceeds
+  EXPECT_NO_THROW(c = b);
+  EXPECT_TRUE(b.is_type<double>());
+  EXPECT_EQ(b.get<double>(), 500.0);
+  EXPECT_TRUE(c.is_type<double>());
+  EXPECT_EQ(c.get<double>(), 500.0);
+
+  // same as above
+  EXPECT_THROW(c << a,ecto::except::TypeMismatch);
+}
+
+TEST(TendrilTest, AssignmentOfNone)
+{
+  ecto::tendril n1(ecto::tendril::none(),"A none");
+  ecto::tendril n2(ecto::tendril::none(),"Another none");
+  
+  ecto::tendril n3;
+  n2 << n1;
+  EXPECT_EQ(n1.get<ecto::tendril::none>(), n2.get<ecto::tendril::none>());
+  n1 << n2;
+  EXPECT_EQ(n1.get<ecto::tendril::none>(), n2.get<ecto::tendril::none>());
+
+  n1 = n2;
+  n2 = n1;
+
+  ecto::tendril _500(500.0, "five hundred");
+
+  n1 << _500;
+  EXPECT_TRUE(n1.is_type<double>());
+  EXPECT_TRUE(_500.is_type<double>());
+  EXPECT_EQ(n1.get<double>(), 500.0);
+  EXPECT_EQ(_500.get<double>(), 500.0);
+  
 }
 
 namespace bp = boost::python;
-TEST(TendrilTest, BoostPyness)
+TEST(TendrilTest, Python2PODConversion)
 {
-  ecto::tendril bpt(bp::object(2.0), "A bp object");
-  ecto::tendril dt(2.0, "A double");
+  ecto::tendril bpt(bp::object(2.05), "A bp object");
+  ecto::tendril dt(7.05, "A double");
 
-  dt.copy_value(bpt);
-  bpt.copy_value(dt);
+  // tendril(bp::object) autoconverts from tendril(nonobject)
+  dt << bpt;
+  EXPECT_EQ(2.05, dt.get<double>());
 
-  {
-    ecto::tendril bpt(bp::object(), "A bp object");
-    ecto::tendril dt(2.0, "A double");
-    EXPECT_THROW(
-        {
-          dt.copy_value(bpt);
-        }, ecto::except::TypeMismatch
-   );
-  }
-  {
-    ecto::tendril bpt(bp::object(), "A bp object"), bpt2(bp::object(), "another bp::object");
-    EXPECT_FALSE( bpt.get<bp::object>());
-  }
+  // can be overwritten thereafter
+  dt << 7.05;
+  EXPECT_EQ(dt.get<double>(), 7.05);
+
+  // copyee is not mutated
+  double value = bp::extract<double>(bpt.get<boost::python::object>());
+  EXPECT_EQ(value, 2.05);
+
+  // dt has not lost its internal type
+  EXPECT_THROW( dt << std::string("NOTADOUBLE"), ecto::except::TypeMismatch);
+
+  // but we can't autoconvert from None
+  bpt << bp::object();
+  EXPECT_THROW(dt << bpt, ecto::except::TypeMismatch);
+}
+
+TEST(TendrilTest, POD2PythonConversion)
+{
+  ecto::tendril bpt(bp::object(2.05), "A bp object");
+  ecto::tendril dt(7.05, "A double");
+
+  EXPECT_EQ(bp::extract<double>(bpt.get<boost::python::object>()), 2.05);
+  EXPECT_TRUE(bpt.is_type<bp::object>());
+
+  bpt << dt;
+
+  // bpt is still a bp::object
+  EXPECT_TRUE(bpt.is_type<bp::object>());
+
+  // dt is still a double
+  EXPECT_TRUE(dt.is_type<double>());
+
+  // double was copied correctly into dt
+  EXPECT_EQ(bp::extract<double>(bpt.get<boost::python::object>()), 7.05);
+
+  // dt was not mutated
+  EXPECT_EQ(dt.get<double>(), 7.05);
+
 }
 
 TEST(TendrilTest, BoostPyDefaultness)

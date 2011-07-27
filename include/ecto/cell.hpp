@@ -402,7 +402,7 @@ namespace ecto
           parameters.begin();
       while (it != end)
         {
-          it->second->copy_value(*oit->second);
+          it->second << *oit->second;
           ++oit;
           ++it;
         }

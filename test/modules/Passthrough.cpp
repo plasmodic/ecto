@@ -47,7 +47,7 @@ namespace ecto
     }
     int process(tendrils& in, tendrils& out)
     {
-      out_->copy_value(*in_);
+      *out_ = *in_;
       return ecto::OK;
     }
     tendril::ptr in_, out_;

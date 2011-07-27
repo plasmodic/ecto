@@ -51,10 +51,10 @@ namespace ecto
     return *this;
   }
 
-  void tendril::copy_value(const tendril& rhs)
+  ecto::tendril& tendril::operator<<(const tendril& rhs)
   {
     if (this == &rhs)
-      return;
+      return *this;
     if (is_type<none>() || same_type(rhs))
     {
       copy_holder(rhs);
@@ -78,6 +78,7 @@ namespace ecto
       }
     }
     mark_dirty();
+    return *this;
   }
 
 
