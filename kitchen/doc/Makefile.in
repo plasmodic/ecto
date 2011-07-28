@@ -8,7 +8,7 @@
 SPHINXOPTS = \
 	-D version=@ECTO_KITCHEN_VERSION@ \
 	-D release=@ECTO_KITCHEN_VERSION@ \
-	-a -E
+	-a -E -w -W
 
 SPHINXBUILD = . @CMAKE_BINARY_DIR@/python_path.sh && sphinx-build
 
@@ -49,15 +49,15 @@ links:
 	[ -h $(BUILDDIR)/source/pcl ] || ln -sf @ecto_pcl_SOURCE_DIR@/doc/source $(BUILDDIR)/source/pcl
 	[ -h $(BUILDDIR)/source/ros ] || ln -sf @ecto_ros_SOURCE_DIR@/doc/source $(BUILDDIR)/source/ros
 
-	ln -sf @ecto_kitchen_SOURCE_DIR@/doc/source/conf.py $(BUILDDIR)/source
-	ln -sf @ecto_kitchen_SOURCE_DIR@/doc/source/breathe $(BUILDDIR)/source
-	ln -sf @ecto_kitchen_SOURCE_DIR@/doc/source/ecto_theme $(BUILDDIR)/source
-	ln -sf @ecto_kitchen_SOURCE_DIR@/doc/source/ectodoc.py $(BUILDDIR)/source
-	ln -sf @ecto_kitchen_SOURCE_DIR@/doc/source/index.rst $(BUILDDIR)/source
-	ln -sf @ecto_kitchen_SOURCE_DIR@/doc/source/README.rst $(BUILDDIR)/source
-	ln -sf @ecto_kitchen_SOURCE_DIR@/doc/source/_static $(BUILDDIR)/source
-	ln -sf @ecto_kitchen_SOURCE_DIR@/doc/source/_templates $(BUILDDIR)/source
-	ln -sf @ecto_kitchen_SOURCE_DIR@/doc/source/art $(BUILDDIR)/source
+	ln -sf @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source/conf.py $(BUILDDIR)/source
+	ln -sf @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source/breathe $(BUILDDIR)/source
+	ln -sf @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source/ecto_theme $(BUILDDIR)/source
+	ln -sf @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source/ectodoc.py $(BUILDDIR)/source
+	ln -sf @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source/index.rst $(BUILDDIR)/source
+	ln -sf @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source/README.rst $(BUILDDIR)/source
+	ln -sf @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source/_static $(BUILDDIR)/source
+	ln -sf @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source/_templates $(BUILDDIR)/source
+	ln -sf @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source/art $(BUILDDIR)/source
 	ln -sf @CMAKE_CURRENT_BINARY_DIR@/ecto_kitchen_config.py $(BUILDDIR)/source
 
 clean:
