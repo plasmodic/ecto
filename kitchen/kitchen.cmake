@@ -37,7 +37,7 @@ macro(check_hashbangs SCRIPTDIR)
   file(GLOB_RECURSE _python_scripts ${CMAKE_CURRENT_SOURCE_DIR}/${SCRIPTDIR}/*.py)
   foreach(file ${_python_scripts})
     add_custom_command(TARGET check_hashbangs
-      COMMAND ${ecto_kitchen_SOURCE_DIR}/util/check_python_script_hashbang.sh ${file}
+      COMMAND ${ecto_kitchen_SOURCE_DIR}/ecto/kitchen/util/check_python_script_hashbang.sh ${file}
       )
   endforeach()
 endmacro()
