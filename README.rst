@@ -8,4 +8,6 @@ architecture, graph constructs and scheduling algorithms suitable for
 computer vision, perception, audio processing and robotics pipelines.
 
 See the ecto kitchen (http://github.com/plasmodic/ecto_kitchen) to get
-started.
+started or see the online docs at http://plasmodic.org
+
+
