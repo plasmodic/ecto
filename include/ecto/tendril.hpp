@@ -271,7 +271,8 @@ namespace ecto
     /**
      * Register a typed callback with the tendril... Will throw on wrong type.
      * @param cb May be called by the notify function, if the tendril is dirty.
-     * @return  this
+     * @param oneshot do only once
+     * @return  this 
      */
     template<typename T>
     tendril&

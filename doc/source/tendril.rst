@@ -5,19 +5,35 @@ tendril
 
 The ``tendril`` is a type-erased value container, essentially a
 `boost::any`_ (in fact, implemented with ``boost::any``) augmented
-with certain conversion rules, conversion operators, introspection
-capabilities and the like.  (in fact , each tendril contains a
-boost::any), with the ability to automatically perform certain
-conversions between the held types.
+with certain conversion rules, operators, introspection capabilities,
+docstrings and the like.  
 
 Overview
 --------
 
 You will primarily encounter the ``tendril`` as the right hand side of
 the mappings which are the ``tendrils`` objects passed to ecto cell
-functions.
+functions, that is, a tendrils object is essentially a map of
+``std::string`` -> ``shared_ptr<tendril>``.  Each ecto cell has
+associated with it three sets of tendrils: parameters, input, and
+output.  The scheduler copies data between one cell's output tendril
+and the input tendril of another cell.
 
+.. literalinclude:: src/Example01.cpp
+   :language: cpp
+   :start-after: using
+   :end-before: ECTO_CELL
 
+See :download:`src/Example01.cpp`
+
+A script like this,
+
+.. literalinclude:: src/Example01.py
+   :language: py
+
+Will output,
+
+.. program-output:: Example01.py
 
 python api
 ----------

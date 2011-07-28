@@ -8,9 +8,9 @@
 SPHINXOPTS = \
 	-D version=@ECTO_KITCHEN_VERSION@ \
 	-D release=@ECTO_KITCHEN_VERSION@ \
-	-a -E -w -W
+	-a -E 
 
-SPHINXBUILD = . @CMAKE_BINARY_DIR@/python_path.sh && sphinx-build
+SPHINXBUILD = . @CMAKE_BINARY_DIR@/python_path.sh && PATH=@ecto_SOURCE_DIR@/doc/source/src:$$PATH sphinx-build
 
 PAPER         = letter
 BUILDDIR      = @CMAKE_CURRENT_BINARY_DIR@
@@ -49,6 +49,7 @@ links:
 	[ -h $(BUILDDIR)/source/pcl ] || ln -sf @ecto_pcl_SOURCE_DIR@/doc/source $(BUILDDIR)/source/pcl
 	[ -h $(BUILDDIR)/source/ros ] || ln -sf @ecto_ros_SOURCE_DIR@/doc/source $(BUILDDIR)/source/ros
 
+	ln -sf @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source/programoutput.py $(BUILDDIR)/source
 	ln -sf @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source/conf.py $(BUILDDIR)/source
 	ln -sf @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source/breathe $(BUILDDIR)/source
 	ln -sf @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source/ecto_theme $(BUILDDIR)/source
