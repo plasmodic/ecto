@@ -188,7 +188,7 @@ TEST(TendrilTest, Python2PODConversion)
   EXPECT_EQ(dt.get<double>(), 7.05);
 
   // copyee is not mutated
-  double value = bp::extract<double>(bpt.get<boost::python::object>());
+  double value = bp::extract<double>(bpt.get<bp::object>());
   EXPECT_EQ(value, 2.05);
 
   // dt has not lost its internal type
@@ -204,7 +204,7 @@ TEST(TendrilTest, POD2PythonConversion)
   ecto::tendril bpt(bp::object(2.05), "A bp object");
   ecto::tendril dt(7.05, "A double");
 
-  EXPECT_EQ(bp::extract<double>(bpt.get<boost::python::object>()), 2.05);
+  EXPECT_EQ(bp::extract<double>(bpt.get<bp::object>()), 2.05);
   EXPECT_TRUE(bpt.is_type<bp::object>());
 
   bpt << dt;
@@ -216,7 +216,7 @@ TEST(TendrilTest, POD2PythonConversion)
   EXPECT_TRUE(dt.is_type<double>());
 
   // double was copied correctly into dt
-  EXPECT_EQ(bp::extract<double>(bpt.get<boost::python::object>()), 7.05);
+  EXPECT_EQ(bp::extract<double>(bpt.get<bp::object>()), 7.05);
 
   // dt was not mutated
   EXPECT_EQ(dt.get<double>(), 7.05);
@@ -226,7 +226,7 @@ TEST(TendrilTest, POD2PythonConversion)
 TEST(TendrilTest, BoostPyDefaultness)
 {
   ecto::tendrils ts;
-  ts.declare<boost::python::object>("x","A bp object");
+  ts.declare<bp::object>("x","A bp object");
   bp::object x;
   ts["x"] >> x;
 
@@ -307,13 +307,13 @@ TEST(TendrilTest, Nones)
   EXPECT_TRUE(b->same_type(*a));
 
   // bp object with a string in it
-  boost::python::object obj(s);
+  bp::object obj(s);
   
   a << obj;
-  EXPECT_TRUE(a->is_type<boost::python::object>());
+  EXPECT_TRUE(a->is_type<bp::object>());
 }
 
-TEST(TendrilTest, ConversionTable)
+TEST(TendrilTest, ConversionTableNoneColumn)
 {
   using ecto::tendril;
   tendril none_;
@@ -324,13 +324,45 @@ TEST(TendrilTest, ConversionTable)
   }
 
   { // object << none
-    tendril object_(boost::python::object(3.14159), "pyobj");
+    tendril object_(bp::object(3.14159), "pyobj");
     EXPECT_THROW(object_ << none_, ecto::except::ValueNone);
   }
 
   { // double << none
     tendril double_(3.14159, "double");
     EXPECT_THROW(double_ << none_, ecto::except::ValueNone);
+  }
+}
+
+
+TEST(TendrilTest, ConversionTablePythonColumn)
+{
+  using ecto::tendril;
+  tendril pypi_(bp::object(3.1415), "py pi");
+
+  { // none << object
+    tendril none_;
+    none_ << pypi_;
+    bp::object rt = none_.get<bp::object>();
+    EXPECT_EQ(bp::extract<double>(rt), 3.1415);
+  }
+
+  { // object << object
+    tendril o2(bp::object(7.777), "sevens");
+    o2 << pypi_;
+    bp::object rt = o2.get<bp::object>();
+    EXPECT_EQ(bp::extract<double>(rt), 3.1415);
+  }
+
+  { // double << object (compatible)
+    tendril double_(5.555, "double");
+    double_ << pypi_;
+    EXPECT_EQ(double_.get<double>(), 3.1415);
+  }
+
+  { // double << object (incompatible)
+    tendril string_(std::string("oops"), "double");
+    EXPECT_THROW(string_ << pypi_, ecto::except::TypeMismatch);
   }
 }
 
@@ -344,12 +376,12 @@ TEST(TendrilTest, ConvertersCopied)
   *a = *b;
   EXPECT_TRUE(a->same_type(*b));
   EXPECT_TRUE(b->same_type(*a));
-  boost::python::object obj(3.1415);
+  bp::object obj(3.1415);
   *a << obj;
   EXPECT_EQ(a->get<double>(), 3.1415);
-  boost::python::object obj2;
+  bp::object obj2;
   *a >> obj2;
-  boost::python::extract<double> e(obj2);
+  bp::extract<double> e(obj2);
   EXPECT_TRUE(e.check());
   EXPECT_EQ(e(), 3.1415);
 }

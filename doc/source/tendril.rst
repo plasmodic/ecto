@@ -57,12 +57,12 @@ when one tendril or type is inserted to another.
 |            |                     |                |            |            |
 +------------+---------------------+----------------+------------+------------+
 |``T``       |ValueNone error      |``T`` via       |assignment  |TypeMismatch|
-|            |                     |extract<>       |            |error       |
-|            |                     |                |            |            |
+|            |                     |extract<> or    |            |error       |
+|            |                     |conversion error|            |            |
 +------------+---------------------+----------------+------------+------------+
 |``U``       |ValueNone error      |``U`` via       |TypeMismatch|assignment  |
-|            |                     |extract<>       |error       |            |
-|            |                     |                |            |            |
+|            |                     |extract<> or    |error       |            |
+|            |                     |conversion error|            |            |
 +------------+---------------------+----------------+------------+------------+
 
 
