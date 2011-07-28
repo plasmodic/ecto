@@ -2,15 +2,6 @@
 #include <boost/python.hpp>
 namespace ecto
 {
-
-  namespace
-  {
-    bool isBoostPython(const tendril& t)
-    {
-      return t.is_type<boost::python::object>();
-    }
-  }
-
   tendril::tendril()
     : doc_()
     , dirty_(false)
@@ -22,18 +13,16 @@ namespace ecto
     set_holder<none>(none());
   }
 
-  tendril::~tendril(){ }
-
   tendril::tendril(const tendril& rhs) 
-     : doc_(rhs.doc_)
-     , dirty_(false)
-     , default_(rhs.default_)
-     , user_supplied_(rhs.user_supplied_)
-     , required_(rhs.required_)
-     , converter(rhs.converter)
-  {
-    copy_holder(rhs);
-  }
+    : holder_(rhs.holder_)
+    , type_ID_(rhs.type_ID_)
+    , doc_(rhs.doc_)
+    , dirty_(false)
+    , default_(rhs.default_)
+    , user_supplied_(rhs.user_supplied_)
+    , required_(rhs.required_)
+    , converter(rhs.converter)
+  { }
 
   tendril& tendril::operator=(const tendril& rhs)
   {
@@ -48,6 +37,10 @@ namespace ecto
     return *this;
   }
 
+  tendril::~tendril(){ }
+
+
+
   ecto::tendril& tendril::operator<<(const tendril& rhs)
   {
     if (this == &rhs)
@@ -61,7 +54,7 @@ namespace ecto
       enforce_compatible_type(rhs);
       if (rhs.is_type<none>())
       {
-        //throw ecto::except::ValueNone("You may not copy the value of a tendril that holds a tendril::none.");
+        throw ecto::except::ValueNone("You may not copy the value of a tendril that holds a tendril::none.");
       }
       else if (rhs.is_type<boost::python::object>())
       {
@@ -69,8 +62,6 @@ namespace ecto
       }
       else if (is_type<boost::python::object>())
       {
-        //*this << rhs;
-        //rhs.sample(get<boost::python::object>());
         (*rhs.converter)(*boost::unsafe_any_cast<boost::python::object>(&holder_), rhs);
       }
     }

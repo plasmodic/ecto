@@ -57,18 +57,21 @@ namespace ecto
    */
   class ECTO_EXPORT tendril
   {
+
   public:
+
     typedef boost::shared_ptr<tendril> ptr;
+
     typedef boost::shared_ptr<const tendril> const_ptr;
-    typedef boost::function<void(tendril&)> TendrilJob;
+
+    typedef boost::function< void(tendril&) > TendrilJob;
+
     /**
      * \brief Creates a tendril that is initialized with the
      * tendril::none type. This should be fairly cheap.
      */
     tendril();
-    /**
-     * \brief Will deallocate the value held.
-     */
+
     ~tendril();
 
     tendril(const tendril& rhs);
@@ -81,9 +84,16 @@ namespace ecto
      * @param t default value for t
      * @param doc a documentation string
      */
-    template<typename T>
-    tendril(const T& t, const std::string& doc);
-
+    template <typename T>
+    tendril (const T& t, const std::string& doc)
+      : dirty_(false)
+      , default_(true)
+      , user_supplied_(false)
+      , converter(&ConverterImpl<T>::instance)
+    {
+      set_holder<T>(t);
+      set_doc(doc);
+    }
 
     /**
      * \brief This is an unmangled type name for what ever tendril is
@@ -470,16 +480,6 @@ namespace ecto
 
   template <typename _> tendril::ConverterImpl<tendril::none,_> tendril::ConverterImpl<tendril::none,_>::instance;
 
-  template<typename T>
-  tendril::tendril(const T& t, const std::string& doc)
-    : dirty_(false)
-    , default_(true)
-    , user_supplied_(false)
-    , converter(&ConverterImpl<T>::instance)
-  {
-    set_holder<T>(t);
-    set_doc(doc);
-  }
 
 }
 

@@ -273,15 +273,18 @@ TEST(TendrilTest, SyntacticSugar)
 
 TEST(TendrilTest, Nones)
 {
-  ecto::tendril::ptr a = ecto::make_tendril<ecto::tendril::none>();
-  ecto::tendril::ptr b = ecto::make_tendril<ecto::tendril::none>();
-  EXPECT_TRUE(a->is_type<ecto::tendril::none>());
+  using ecto::tendril;
+  using ecto::make_tendril;
+
+  tendril::ptr a = make_tendril<tendril::none>();
+  tendril::ptr b = make_tendril<tendril::none>();
+  EXPECT_TRUE(a->is_type<tendril::none>());
   EXPECT_TRUE(a->same_type(*b));
   EXPECT_TRUE(b->same_type(*a));
   a << b;
   std::cout << "a type: " << a->type_name() << "\n";
   std::cout << "b type: " << b->type_name() << "\n";
-  EXPECT_TRUE(a->is_type<ecto::tendril::none>());
+  EXPECT_TRUE(a->is_type<tendril::none>());
   EXPECT_TRUE(a->same_type(*b));
   EXPECT_TRUE(b->same_type(*a));
   a >> b;
@@ -299,7 +302,7 @@ TEST(TendrilTest, Nones)
 
   // assignment makes it a vanilla none again
   a = b;
-  EXPECT_TRUE(a->is_type<ecto::tendril::none>());
+  EXPECT_TRUE(a->is_type<tendril::none>());
   EXPECT_TRUE(a->same_type(*b));
   EXPECT_TRUE(b->same_type(*a));
 
@@ -308,6 +311,27 @@ TEST(TendrilTest, Nones)
   
   a << obj;
   EXPECT_TRUE(a->is_type<boost::python::object>());
+}
+
+TEST(TendrilTest, ConversionTable)
+{
+  using ecto::tendril;
+  tendril none_;
+
+  { // none << none
+    tendril othernone_;
+    othernone_ << none_;
+  }
+
+  { // object << none
+    tendril object_(boost::python::object(3.14159), "pyobj");
+    EXPECT_THROW(object_ << none_, ecto::except::ValueNone);
+  }
+
+  { // double << none
+    tendril double_(3.14159, "double");
+    EXPECT_THROW(double_ << none_, ecto::except::ValueNone);
+  }
 }
 
 
