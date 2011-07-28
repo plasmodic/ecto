@@ -31,8 +31,9 @@ based on an input flag.
 
 .. ectocell:: ecto If
 
-An example of using the If cell for condition execution of a cell. Notice that cell that is
-encased in an If is **not added to the graph**.
+An example of using the If cell for condition execution of a
+cell. Notice that cell that is encased in an If is **not added to the
+graph**, it is passed to the ``If`` cell as a **parameter**.  
 
 .. literalinclude:: conditional.py
 
@@ -42,15 +43,19 @@ The above sample uses the built in cell:
 
 Entanglement
 ------------
-To support feedback loops, asynchronous execution of graphs, and conditional execution,
-ecto supplies a concept of entangled cells, which allow communication of values without
-breaking the acyclic or synchronous nature of graph execution.
+
+To support feedback loops, asynchronous execution of graphs, and
+conditional execution, ecto supplies a concept of entangled cells,
+which allow communication of values without breaking the acyclic or
+synchronous nature of graph execution.
 
 .. autofunction:: ecto.EntangledPair
 
-  EntangledPair is useful when you would like to feed the output of one cell into the input of
-  another cell, without creating a cycle in the graph. Keep in mind that the first execution of the
-  graph will result in the default value of the whatever the source is connected to being used.
+  EntangledPair is useful when you would like to feed the output of
+  one cell into the input of another cell, without creating a cycle in
+  the graph. Keep in mind that the first execution of the graph will
+  result in the default value of the whatever the source is connected
+  to being used.
 
 Here is an example of using the EntangledPair for feedback in a graph.
 

@@ -1,6 +1,8 @@
 # add a target to generate API documentation with Doxygen
 # add doc to all
 
+project(kitchen_doc)
+
 option(INSTALL_DOC "Install the documentation." OFF)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Makefile.in 
   ${CMAKE_CURRENT_BINARY_DIR}/Makefile.sphinx

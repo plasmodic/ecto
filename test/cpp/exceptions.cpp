@@ -100,6 +100,7 @@ struct ProcessException
     return ecto::OK;
   }
 };
+
 TEST(Exceptions, ExceptionalModules)
 {
   try

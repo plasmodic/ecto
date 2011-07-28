@@ -42,7 +42,7 @@ namespace ecto
   /**
    * \brief The tendrils are a collection for the ecto::tendril class, addressable by a string key.
    */
-  class ECTO_EXPORT tendrils: public std::map<std::string, tendril::ptr>, boost::noncopyable
+  class ECTO_EXPORT tendrils : public std::map<std::string, tendril::ptr>, boost::noncopyable
   {
   public:
 
@@ -56,7 +56,7 @@ namespace ecto
     spore<T>
     declare(const std::string& name)
     {
-      tendril::ptr t(tendril::make_tendril<T>());
+      tendril::ptr t(make_tendril<T>());
       return declare(name, t);
     }
 
@@ -102,25 +102,6 @@ namespace ecto
         return at(name)->get<T>();
       }catch(except::TypeMismatch& e)
       {
-        e << std::string("  Hint : " ) + "'"+name+"' is of type: " + at(name)->type_name();
-        throw e;
-      }
-    }
-
-    /**
-     * \brief Performs a non ambiguous read operation on the value held at the given name.
-     * This should be the preferred method of reading a value if the intent is to not change it.
-     * @param name The key that the tendril is stored at.
-     * @return A const reference to the value, no copy is done.
-     */
-    template <typename T>
-    const T&
-    read(const std::string& name) const
-    {
-      try
-      {
-          return at(name)->read<T>();
-      } catch(except::TypeMismatch& e) {
         e << std::string("  Hint : " ) + "'"+name+"' is of type: " + at(name)->type_name();
         throw e;
       }

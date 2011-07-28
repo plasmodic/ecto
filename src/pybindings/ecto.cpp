@@ -51,7 +51,7 @@ namespace ecto {
 
 ECTO_INSTANTIATE_REGISTRY(ecto)
  
-
+void dummy() { std::cout << __PRETTY_FUNCTION__ << "\n"; }
 
 BOOST_PYTHON_MODULE(ecto)
 {
@@ -66,6 +66,9 @@ BOOST_PYTHON_MODULE(ecto)
   ecto::py::wrap_except();
 
   bp::def("hardware_concurrency", &boost::thread::hardware_concurrency);
+
+  // for setting breakpoints
+  bp::def("dummy", &dummy);
 
   // use this if you're embedding ipython and dont want to see
   // your cout/cerr

@@ -1,3 +1,6 @@
+
+add_subdirectory(source/src)
+
 if(ecto_kitchen_SOURCE_DIR)
   return()
 endif()

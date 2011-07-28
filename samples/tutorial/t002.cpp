@@ -29,7 +29,7 @@ namespace tutorial
     int
     process(const tendrils& in, tendrils& /*out*/)
     {
-      std::cout << prefix_ << " >>> " << in.read<std::string>("input") << std::endl;
+      std::cout << prefix_ << " >>> " << in.get<std::string>("input") << std::endl;
       return ecto::OK;
     }
     

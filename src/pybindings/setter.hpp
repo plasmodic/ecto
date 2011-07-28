@@ -14,12 +14,12 @@ struct Setter
 {
   Setter(tendril::ptr ot, bp::object obj)
   {
-    proxy.copy_value(*ot);//grabs type info.
+    proxy = *ot;
     proxy << obj;//copy value from the bp object.
   }
   void operator()(tendril& t)
   {
-    t.copy_value(proxy);
+    t << proxy;
   }
   tendril proxy;
 };

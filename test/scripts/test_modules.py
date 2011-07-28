@@ -9,6 +9,9 @@ def test_modules_01():
     g.process()
     assert g.outputs.out == 2
     g.configure()
+    print type(g.outputs)
+    print type(g.outputs.out)
+    print g.outputs.out
     g.outputs.out = 7.0 #no effect
     g.process()
     assert  g.outputs.out == 4.0

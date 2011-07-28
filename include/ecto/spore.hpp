@@ -163,13 +163,11 @@ namespace ecto
       return &(_p->get<const T>());
     }
 
-#if 0
     T& operator*()
     {
       tendril::ptr _p = p();
       return _p->get<T>();
     }
-#endif
 
     const T& operator*() const
     {

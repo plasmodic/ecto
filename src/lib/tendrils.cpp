@@ -56,6 +56,7 @@ namespace ecto
       }
       std::ostream& ss;
     };
+
   struct print_tendril
   {
     print_tendril(std::ostream& ss)

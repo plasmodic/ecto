@@ -21,13 +21,14 @@ TEST(TendrilTest, Dirtiness)
   EXPECT_EQ(t.get<float>(), 0.75f);
 }
 
-TEST(TendrilTest, Defaultness)
+TEST(TendrilTest, Constructors)
 {
   {
     ecto::tendril meh;
     EXPECT_FALSE(meh.dirty());
     EXPECT_FALSE(meh.user_supplied());
     EXPECT_FALSE(meh.has_default());
+    EXPECT_TRUE(meh.is_type<ecto::tendril::none>());
   }
 
   {
@@ -35,13 +36,17 @@ TEST(TendrilTest, Defaultness)
     EXPECT_FALSE(meh.dirty());
     EXPECT_FALSE(meh.user_supplied());
     EXPECT_TRUE(meh.has_default());
+    EXPECT_TRUE(meh.is_type<float>());
+
     meh << 2.0f;
+
     EXPECT_TRUE(meh.has_default());
     EXPECT_TRUE(meh.user_supplied());
     EXPECT_TRUE(meh.dirty());
+    EXPECT_TRUE(meh.is_type<float>());
   }
   {
-    ecto::tendril::ptr meh = ecto::tendril::make_tendril<float>();
+    ecto::tendril::ptr meh = ecto::make_tendril<float>();
     EXPECT_FALSE(meh->dirty());
     EXPECT_FALSE(meh->user_supplied());
     EXPECT_FALSE(meh->has_default());
@@ -67,76 +72,168 @@ TEST(TendrilTest, NonPointerNess)
 TEST(TendrilTest, Copyness)
 {
   ecto::tendril a(0.5f, "A float"), b, c;
-  b.copy_value(a);
-  c.copy_value(b);
+  b << a;
+  c << b;
   c << 3.14f;
   EXPECT_NE(a.get<float>(),c.get<float>());
   EXPECT_EQ(a.get<float>(),b.get<float>());
   EXPECT_NE(&a.get<float>(),&c.get<float>());
   EXPECT_NE(&a.get<float>(),&b.get<float>());
   //self copy should be ok
-  c.copy_value(a);
+  c << a;
 
 }
 
 TEST(TendrilTest, Typeness)
 {
   ecto::tendril a(0.5f, "A float"), b(0.5, "A double."), c;
-  EXPECT_THROW(b.copy_value(a), ecto::except::TypeMismatch);
+  EXPECT_THROW(b << a, ecto::except::TypeMismatch);
   EXPECT_NO_THROW(c = a);
-  EXPECT_THROW(c.copy_value(b), ecto::except::TypeMismatch);
+  EXPECT_THROW(c << b, ecto::except::TypeMismatch);
   EXPECT_NO_THROW(c = b);
-  EXPECT_THROW(c.copy_value(a),ecto::except::TypeMismatch);
+  EXPECT_THROW(c << a,ecto::except::TypeMismatch);
   ecto::tendril n1(ecto::tendril::none(),"A none"), n2(ecto::tendril::none(),"Another none"), n3;
-  n2.copy_value(n1);
-  n1.copy_value(n2);
+  n2 << n1;
+  n1 << n2;
   n1 = n2;
   n2 = n1;
-  n1.copy_value(b);
-  n2.copy_value(n1);
+  n1 << b;
+  n2 << n1;
   EXPECT_EQ(n2.get<double>(),0.5);
-  EXPECT_THROW(n2.copy_value(a), ecto::except::TypeMismatch);
+  EXPECT_THROW(n2 << a, ecto::except::TypeMismatch);
   //EXPECT_THROW(b.copy_value(n3), ecto::except::ValueNone);
+}
 
+TEST(TendrilTest, AssignmentOfPODS)
+{
+  ecto::tendril a(0.005f, "A float");
+  EXPECT_TRUE(a.is_type<float>());
+  EXPECT_EQ(a.get<float>(), 0.005f);
 
+  ecto::tendril b(500.0, "some double");
+  EXPECT_TRUE(b.is_type<double>());
+  EXPECT_EQ(b.get<double>(), 500.0);
+
+  ecto::tendril c;
+  EXPECT_TRUE(c.is_type<ecto::tendril::none>());
+
+  // nothing is mutated on throwing conversion
+  EXPECT_THROW(b << a, ecto::except::TypeMismatch);
+  EXPECT_TRUE(a.is_type<float>());
+  EXPECT_EQ(a.get<float>(), 0.005f);
+  EXPECT_TRUE(b.is_type<double>());
+  EXPECT_EQ(b.get<double>(), 500.0);
+
+  // assignee takes on the type and value of the assigned 
+  EXPECT_NO_THROW(c = a);
+  EXPECT_TRUE(a.is_type<float>());
+  EXPECT_EQ(a.get<float>(), 0.005f);
+  EXPECT_TRUE(c.is_type<float>());
+  EXPECT_EQ(c.get<float>(), 0.005f);
+
+  // again nothing is mutated on throwing conversion
+  EXPECT_THROW(c << b, ecto::except::TypeMismatch);
+  EXPECT_TRUE(b.is_type<double>());
+  EXPECT_EQ(b.get<double>(), 500.0);
+  EXPECT_TRUE(c.is_type<float>());
+  EXPECT_EQ(c.get<float>(), 0.005f);
+
+  // again assignment suceeds
+  EXPECT_NO_THROW(c = b);
+  EXPECT_TRUE(b.is_type<double>());
+  EXPECT_EQ(b.get<double>(), 500.0);
+  EXPECT_TRUE(c.is_type<double>());
+  EXPECT_EQ(c.get<double>(), 500.0);
+
+  // same as above
+  EXPECT_THROW(c << a,ecto::except::TypeMismatch);
+}
+
+TEST(TendrilTest, AssignmentOfNone)
+{
+  ecto::tendril n1(ecto::tendril::none(),"A none");
+  ecto::tendril n2(ecto::tendril::none(),"Another none");
+  
+  ecto::tendril n3;
+  n2 << n1;
+  EXPECT_EQ(n1.get<ecto::tendril::none>(), n2.get<ecto::tendril::none>());
+  n1 << n2;
+  EXPECT_EQ(n1.get<ecto::tendril::none>(), n2.get<ecto::tendril::none>());
+
+  n1 = n2;
+  n2 = n1;
+
+  ecto::tendril _500(500.0, "five hundred");
+
+  n1 << _500;
+  EXPECT_TRUE(n1.is_type<double>());
+  EXPECT_TRUE(_500.is_type<double>());
+  EXPECT_EQ(n1.get<double>(), 500.0);
+  EXPECT_EQ(_500.get<double>(), 500.0);
+  
 }
 
 namespace bp = boost::python;
-TEST(TendrilTest, BoostPyness)
+TEST(TendrilTest, Python2PODConversion)
 {
-  ecto::tendril bpt(bp::object(2.0), "A bp object");
-  ecto::tendril dt(2.0, "A double");
+  ecto::tendril bpt(bp::object(2.05), "A bp object");
+  ecto::tendril dt(7.05, "A double");
 
-  dt.copy_value(bpt);
-  bpt.copy_value(dt);
+  // tendril(bp::object) autoconverts from tendril(nonobject)
+  dt << bpt;
+  EXPECT_EQ(2.05, dt.get<double>());
 
-  {
-    ecto::tendril bpt(bp::object(), "A bp object");
-    ecto::tendril dt(2.0, "A double");
-    EXPECT_THROW(
-        {
-          dt.copy_value(bpt);
-        }, ecto::except::TypeMismatch
-   );
-  }
-  {
-    ecto::tendril bpt(bp::object(), "A bp object"), bpt2(bp::object(), "another bp::object");
-    EXPECT_FALSE( bpt.get<bp::object>());
-  }
+  // can be overwritten thereafter
+  dt << 7.05;
+  EXPECT_EQ(dt.get<double>(), 7.05);
+
+  // copyee is not mutated
+  double value = bp::extract<double>(bpt.get<bp::object>());
+  EXPECT_EQ(value, 2.05);
+
+  // dt has not lost its internal type
+  EXPECT_THROW( dt << std::string("NOTADOUBLE"), ecto::except::TypeMismatch);
+
+  // but we can't autoconvert from None
+  bpt << bp::object();
+  EXPECT_THROW(dt << bpt, ecto::except::TypeMismatch);
+}
+
+TEST(TendrilTest, POD2PythonConversion)
+{
+  ecto::tendril bpt(bp::object(2.05), "A bp object");
+  ecto::tendril dt(7.05, "A double");
+
+  EXPECT_EQ(bp::extract<double>(bpt.get<bp::object>()), 2.05);
+  EXPECT_TRUE(bpt.is_type<bp::object>());
+
+  bpt << dt;
+
+  // bpt is still a bp::object
+  EXPECT_TRUE(bpt.is_type<bp::object>());
+
+  // dt is still a double
+  EXPECT_TRUE(dt.is_type<double>());
+
+  // double was copied correctly into dt
+  EXPECT_EQ(bp::extract<double>(bpt.get<bp::object>()), 7.05);
+
+  // dt was not mutated
+  EXPECT_EQ(dt.get<double>(), 7.05);
+
 }
 
 TEST(TendrilTest, BoostPyDefaultness)
 {
-#if 0
   ecto::tendrils ts;
-  ts.declare<boost::python::object>("x","A bp object");
+  ts.declare<bp::object>("x","A bp object");
   bp::object x;
   ts["x"] >> x;
-#endif
-  //if(x == bp::object())
-  //{
-  //  std::cout << "x is none" << std::endl;
-  //}
+
+  if(x == bp::object())
+  {
+    std::cout << "x is none" << std::endl;
+  }
 }
 
 TEST(TendrilTest, SyntacticSugar)
@@ -176,16 +273,149 @@ TEST(TendrilTest, SyntacticSugar)
 
 TEST(TendrilTest, Nones)
 {
-  ecto::tendril::ptr a = ecto::tendril::make_tendril<ecto::tendril::none>();
-  ecto::tendril::ptr b = ecto::tendril::make_tendril<ecto::tendril::none>();
+  using ecto::tendril;
+  using ecto::make_tendril;
+
+  tendril::ptr a = make_tendril<tendril::none>();
+  tendril::ptr b = make_tendril<tendril::none>();
+  EXPECT_TRUE(a->is_type<tendril::none>());
   EXPECT_TRUE(a->same_type(*b));
   EXPECT_TRUE(b->same_type(*a));
   a << b;
   std::cout << "a type: " << a->type_name() << "\n";
   std::cout << "b type: " << b->type_name() << "\n";
+  EXPECT_TRUE(a->is_type<tendril::none>());
   EXPECT_TRUE(a->same_type(*b));
   EXPECT_TRUE(b->same_type(*a));
   a >> b;
   EXPECT_TRUE(a->same_type(*b));
   EXPECT_TRUE(b->same_type(*a));
+
+  // you can assign anything to a none tendril, it changes type
+  a << 7.05;
+  EXPECT_TRUE(a->is_type<double>());
+  EXPECT_EQ(a->get<double>(), 7.05);
+
+  // note: now a is a double, you can't assign a string to it
+  std::string s("ess");
+  EXPECT_THROW(a << s, ecto::except::TypeMismatch);
+
+  // assignment makes it a vanilla none again
+  a = b;
+  EXPECT_TRUE(a->is_type<tendril::none>());
+  EXPECT_TRUE(a->same_type(*b));
+  EXPECT_TRUE(b->same_type(*a));
+
+  // bp object with a string in it
+  bp::object obj(s);
+  
+  a << obj;
+  EXPECT_TRUE(a->is_type<bp::object>());
+}
+
+TEST(TendrilTest, ConversionTableFromNoneColumn)
+{
+  using ecto::tendril;
+  tendril none_;
+
+  { // none << none
+    tendril othernone_;
+    othernone_ << none_;
+  }
+
+  { // object << none
+    tendril object_(bp::object(3.14159), "pyobj");
+    EXPECT_THROW(object_ << none_, ecto::except::ValueNone);
+  }
+
+  { // double << none
+    tendril double_(3.14159, "double");
+    EXPECT_THROW(double_ << none_, ecto::except::ValueNone);
+  }
+}
+
+
+TEST(TendrilTest, ConversionTableFromPyObjectColumn)
+{
+  using ecto::tendril;
+  tendril pypi_(bp::object(3.1415), "py pi");
+
+  { // none << object
+    tendril none_;
+    none_ << pypi_;
+    bp::object rt = none_.get<bp::object>();
+    EXPECT_EQ(bp::extract<double>(rt), 3.1415);
+  }
+
+  { // object << object
+    tendril o2(bp::object(7.777), "sevens");
+    o2 << pypi_;
+    bp::object rt = o2.get<bp::object>();
+    EXPECT_EQ(bp::extract<double>(rt), 3.1415);
+  }
+
+  { // double << object (compatible)
+    tendril double_(5.555, "double");
+    double_ << pypi_;
+    EXPECT_EQ(double_.get<double>(), 3.1415);
+  }
+
+  { // double << object (incompatible)
+    tendril string_(std::string("oops"), "double");
+    EXPECT_THROW(string_ << pypi_, ecto::except::TypeMismatch);
+  }
+}
+
+TEST(TendrilTest, ConversionTableFromUDTColumn)
+{
+  using ecto::tendril;
+  tendril udt_(std::string("STRINGY"), "py pi");
+
+  { // none << udt
+    tendril none_;
+    none_ << udt_;
+    std::string s = none_.get<std::string>();
+    EXPECT_EQ(s, "STRINGY");
+  }
+
+  { // object << udt
+    tendril o2(bp::object(7.777), "sevens");
+    o2 << udt_;
+    bp::object rt = o2.get<bp::object>();
+    std::string xtracted = bp::extract<std::string>(rt);
+    EXPECT_EQ(xtracted, std::string("STRINGY"));
+  }
+
+  { // string << udt (compatible)
+    tendril string_(std::string("NOTSTRINGY"), "is other string");
+    string_ << udt_;
+    EXPECT_EQ(string_.get<std::string>(), std::string("STRINGY"));
+    // not the same string
+    EXPECT_NE(&(string_.get<std::string>()), &(udt_.get<std::string>()));
+  }
+
+  { // double << udt (incompatible)
+    tendril double_(3.1415, "double");
+    EXPECT_THROW(double_ << udt_, ecto::except::TypeMismatch);
+  }
+}
+
+
+TEST(TendrilTest, ConvertersCopied)
+{
+  ecto::tendril::ptr a = ecto::make_tendril<ecto::tendril::none>();
+  ecto::tendril::ptr b = ecto::make_tendril<double>();
+  EXPECT_FALSE(a->same_type(*b));
+  EXPECT_FALSE(b->same_type(*a));
+  *a = *b;
+  EXPECT_TRUE(a->same_type(*b));
+  EXPECT_TRUE(b->same_type(*a));
+  bp::object obj(3.1415);
+  *a << obj;
+  EXPECT_EQ(a->get<double>(), 3.1415);
+  bp::object obj2;
+  *a >> obj2;
+  bp::extract<double> e(obj2);
+  EXPECT_TRUE(e.check());
+  EXPECT_EQ(e(), 3.1415);
 }
