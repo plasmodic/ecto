@@ -313,7 +313,7 @@ TEST(TendrilTest, Nones)
   EXPECT_TRUE(a->is_type<bp::object>());
 }
 
-TEST(TendrilTest, ConversionTableNoneColumn)
+TEST(TendrilTest, ConversionTableFromNoneColumn)
 {
   using ecto::tendril;
   tendril none_;
@@ -335,7 +335,7 @@ TEST(TendrilTest, ConversionTableNoneColumn)
 }
 
 
-TEST(TendrilTest, ConversionTablePythonColumn)
+TEST(TendrilTest, ConversionTableFromPyObjectColumn)
 {
   using ecto::tendril;
   tendril pypi_(bp::object(3.1415), "py pi");
@@ -363,6 +363,40 @@ TEST(TendrilTest, ConversionTablePythonColumn)
   { // double << object (incompatible)
     tendril string_(std::string("oops"), "double");
     EXPECT_THROW(string_ << pypi_, ecto::except::TypeMismatch);
+  }
+}
+
+TEST(TendrilTest, ConversionTableFromUDTColumn)
+{
+  using ecto::tendril;
+  tendril udt_(std::string("STRINGY"), "py pi");
+
+  { // none << udt
+    tendril none_;
+    none_ << udt_;
+    std::string s = none_.get<std::string>();
+    EXPECT_EQ(s, "STRINGY");
+  }
+
+  { // object << udt
+    tendril o2(bp::object(7.777), "sevens");
+    o2 << udt_;
+    bp::object rt = o2.get<bp::object>();
+    std::string xtracted = bp::extract<std::string>(rt);
+    EXPECT_EQ(xtracted, std::string("STRINGY"));
+  }
+
+  { // string << udt (compatible)
+    tendril string_(std::string("NOTSTRINGY"), "is other string");
+    string_ << udt_;
+    EXPECT_EQ(string_.get<std::string>(), std::string("STRINGY"));
+    // not the same string
+    EXPECT_NE(&(string_.get<std::string>()), &(udt_.get<std::string>()));
+  }
+
+  { // double << udt (incompatible)
+    tendril double_(3.1415, "double");
+    EXPECT_THROW(double_ << udt_, ecto::except::TypeMismatch);
   }
 }
 
