@@ -46,7 +46,7 @@ TEST(TendrilTest, Constructors)
     EXPECT_TRUE(meh.is_type<float>());
   }
   {
-    ecto::tendril::ptr meh = ecto::tendril::make_tendril<float>();
+    ecto::tendril::ptr meh = ecto::make_tendril<float>();
     EXPECT_FALSE(meh->dirty());
     EXPECT_FALSE(meh->user_supplied());
     EXPECT_FALSE(meh->has_default());
@@ -273,13 +273,15 @@ TEST(TendrilTest, SyntacticSugar)
 
 TEST(TendrilTest, Nones)
 {
-  ecto::tendril::ptr a = ecto::tendril::make_tendril<ecto::tendril::none>();
-  ecto::tendril::ptr b = ecto::tendril::make_tendril<ecto::tendril::none>();
+  ecto::tendril::ptr a = ecto::make_tendril<ecto::tendril::none>();
+  ecto::tendril::ptr b = ecto::make_tendril<ecto::tendril::none>();
+  EXPECT_TRUE(a->is_type<ecto::tendril::none>());
   EXPECT_TRUE(a->same_type(*b));
   EXPECT_TRUE(b->same_type(*a));
   a << b;
   std::cout << "a type: " << a->type_name() << "\n";
   std::cout << "b type: " << b->type_name() << "\n";
+  EXPECT_TRUE(a->is_type<ecto::tendril::none>());
   EXPECT_TRUE(a->same_type(*b));
   EXPECT_TRUE(b->same_type(*a));
   a >> b;
@@ -311,8 +313,8 @@ TEST(TendrilTest, Nones)
 
 TEST(TendrilTest, ConvertersCopied)
 {
-  ecto::tendril::ptr a = ecto::tendril::make_tendril<ecto::tendril::none>();
-  ecto::tendril::ptr b = ecto::tendril::make_tendril<double>();
+  ecto::tendril::ptr a = ecto::make_tendril<ecto::tendril::none>();
+  ecto::tendril::ptr b = ecto::make_tendril<double>();
   EXPECT_FALSE(a->same_type(*b));
   EXPECT_FALSE(b->same_type(*a));
   *a = *b;

@@ -16,8 +16,8 @@ the mappings which are the ``tendrils`` objects passed to ecto cell
 functions, that is, a tendrils object is essentially a map of
 ``std::string`` -> ``shared_ptr<tendril>``.  Each ecto cell has
 associated with it three sets of tendrils: parameters, input, and
-output.  The scheduler copies data between one cell's output tendril
-and the input tendril of another cell.
+output.  The *scheduler*, external to the cell, copies data between
+one cell's output tendril and the input tendril of another cell.
 
 .. literalinclude:: src/Example01.cpp
    :language: cpp
@@ -34,6 +34,38 @@ A script like this,
 Will output,
 
 .. program-output:: Example01.py
+
+
+The table below explains (somewhat) the type conversions that happen
+when one tendril or type is inserted to another.
+
+
+.. rubric:: Tendril Conversions
+
++------------+----------------+----------------+------------+------------+
+|        FROM|                |                |            |            |
+|            |                |python          |            |            |
+|TO          |``none``        |object          |``T``       |``U``       |
++------------+----------------+----------------+------------+------------+
+|``none``    |assignment      |python          |``T``       |``U``       |
+|            |                |object          |            |            |
+|            |                |                |            |            |
++------------+----------------+----------------+------------+------------+
+|python      |python object   |assignment      |python      |python      |
+|object      |(containing     |                |object      |object      |
+|            |None)           |                |            |            |
+|            |                |                |            |            |
++------------+----------------+----------------+------------+------------+
+|``T``       |TypeMismatch    |``T`` via       |assignment  |TypeMismatch|
+|            |error           |extract<>       |            |error       |
+|            |                |                |            |            |
++------------+----------------+----------------+------------+------------+
+|``U``       |TypeMismatch    |``U`` via       |TypeMismatch|assignment  |
+|            |error           |extract<>       |error       |            |
+|            |                |                |            |            |
++------------+----------------+----------------+------------+------------+
+
+
 
 python api
 ----------

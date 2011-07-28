@@ -84,14 +84,6 @@ namespace ecto
     template<typename T>
     tendril(const T& t, const std::string& doc);
 
-    template<typename T>
-    static tendril::ptr
-    make_tendril()
-    {
-      tendril::ptr t(new tendril());
-      t->set_holder<T>();
-      return t;
-    }
 
     /**
      * \brief This is an unmangled type name for what ever tendril is
@@ -160,7 +152,8 @@ namespace ecto
     }
 
     template <typename T> 
-      void operator<<(const T& val)
+    void 
+    operator<<(const T& val)
     {
       if(is_type<none>()) //handle none case.
       {
@@ -463,6 +456,14 @@ namespace ecto
       *lhs << *rhs;
     }
 
+    template<typename T>
+    friend
+    tendril::ptr make_tendril()
+    {
+      tendril::ptr t(new tendril());
+      t->set_holder<T>();
+      return t;
+    }
   };
 
   template <typename T, typename _> tendril::ConverterImpl<T,_> tendril::ConverterImpl<T,_>::instance;
@@ -479,5 +480,6 @@ namespace ecto
     set_holder<T>(t);
     set_doc(doc);
   }
+
 }
 

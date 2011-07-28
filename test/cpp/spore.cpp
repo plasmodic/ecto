@@ -2,12 +2,12 @@
 #include <ecto/ecto.hpp>
 
 
-using ecto::tendril;
-using ecto::spore;
+using namespace ecto;
+
 TEST(SporeTest, LifeTime)
 {
   {
-    spore<double> d = tendril::make_tendril<double>();
+    spore<double> d = make_tendril<double>();
     EXPECT_ANY_THROW(*d);
   }
   {
@@ -15,7 +15,7 @@ TEST(SporeTest, LifeTime)
     EXPECT_ANY_THROW(*d);
   }
   {
-    tendril::ptr p = tendril::make_tendril<double>();
+    tendril::ptr p = make_tendril<double>();
     spore<double> d = p; //p has to stay in scope...
     EXPECT_TRUE(d.p());
   }
@@ -23,7 +23,7 @@ TEST(SporeTest, LifeTime)
 
 TEST(SporeTest, NoDefault)
 {
-  tendril::ptr p = tendril::make_tendril<double>();
+  tendril::ptr p = make_tendril<double>();
   spore<double> d = p; //p has to stay in scope...
   EXPECT_FALSE(d.user_supplied());
   EXPECT_FALSE(d.dirty());
@@ -42,7 +42,7 @@ TEST(SporeTest, NoDefault)
 
 TEST(SporeTest, Default)
 {
-  tendril::ptr p = tendril::make_tendril<double>();
+  tendril::ptr p = make_tendril<double>();
   EXPECT_FALSE(p->dirty());
 
   spore<double> d = p; //p has to stay in scope...
@@ -82,7 +82,7 @@ struct cbs
 
 TEST(SporeTest, Callbacks)
 {
-  tendril::ptr p = tendril::make_tendril<double>();
+  tendril::ptr p = make_tendril<double>();
   spore<double> d = p; //p has to stay in scope...
   d.set_default_val(1.41421356);
 
@@ -115,15 +115,15 @@ TEST(SporeTest, Enumeration)
   std::cout << sizeof(Values) / sizeof(std::string) << std::endl;
   printz(Values);
 
-  tendril::ptr p = tendril::make_tendril<std::string>();
+  tendril::ptr p = make_tendril<std::string>();
   spore<std::string> d = p;
 }
 
 TEST(SporeTest, Expressions)
 {
-  tendril::ptr ta = tendril::make_tendril<double>(),
-    tb = tendril::make_tendril<double>(),
-    tc = tendril::make_tendril<double>()
+  tendril::ptr ta = make_tendril<double>(),
+    tb = make_tendril<double>(),
+    tc = make_tendril<double>()
     ;
 
   spore<double> a(ta), b(tb), c(tc);

@@ -56,7 +56,7 @@ namespace ecto
     spore<T>
     declare(const std::string& name)
     {
-      tendril::ptr t(tendril::make_tendril<T>());
+      tendril::ptr t(make_tendril<T>());
       return declare(name, t);
     }
 
@@ -107,26 +107,6 @@ namespace ecto
       }
     }
 
-#if 0
-    /**
-     * \brief Performs a non ambiguous read operation on the value held at the given name.
-     * This should be the preferred method of reading a value if the intent is to not change it.
-     * @param name The key that the tendril is stored at.
-     * @return A const reference to the value, no copy is done.
-     */
-    template <typename T>
-    const T&
-    read(const std::string& name) const
-    {
-      try
-      {
-          return at(name)->get<T>();
-      } catch(except::TypeMismatch& e) {
-        e << std::string("  Hint : " ) + "'"+name+"' is of type: " + at(name)->type_name();
-        throw e;
-      }
-    }
-#endif
     /**
      * \brief get the given type that is stored at the given key.  Will throw if there is a type mismatch.
      * @tparam T The compile time type to attempt to get from the tendrils.
