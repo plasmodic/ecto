@@ -14,6 +14,7 @@ struct Setter
 {
   Setter(tendril::ptr ot, bp::object obj)
   {
+    proxy = *ot;
     proxy << obj;//copy value from the bp object.
   }
   void operator()(tendril& t)

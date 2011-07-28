@@ -228,6 +228,8 @@ namespace ecto
     bool
     user_supplied() const;
 
+    void user_supplied(bool v);
+
     //! The tendril was initialized with default value.
     bool
     has_default() const;

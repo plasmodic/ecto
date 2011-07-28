@@ -55,13 +55,14 @@ namespace ecto
 {
   template<typename T>
   boost::shared_ptr<ecto::cell_<T> > inspect(boost::python::tuple args,
-                                               boost::python::dict kwargs)
+                                             boost::python::dict kwargs)
   {
     typedef ecto::cell_<T> cell_t;
 
     namespace bp = boost::python;
 
     //SHOW();
+    // TDS: fixme is this bare pointer stuff necessary?
     boost::shared_ptr<cell_t> mm(new cell_t());
     ecto::cell * m = mm.get();
     
@@ -96,7 +97,9 @@ namespace ecto
           }
         else 
           {
-            m->parameters.at(keystring) << value;
+            tendril::ptr tp = m->parameters.at(keystring);
+            *tp << value;
+            tp->user_supplied(true);
           }
       }
     m->declare_io();
@@ -167,7 +170,7 @@ namespace ecto
         boost::shared_ptr<cell_t>, boost::noncopyable>
         m(name, cell_doc<UserCell> (doc_str).c_str());
     m.def("__init__",
-          boost::python::raw_constructor(&raw_construct<UserCell> ));
+          boost::python::raw_constructor(&raw_construct<UserCell>));
     m.def("inspect", &inspect<UserCell> );
     m.staticmethod("inspect");
     m.def("name", (std::string (cell_t::*)() const) &cell_t::name);

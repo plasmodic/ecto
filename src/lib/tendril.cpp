@@ -165,6 +165,12 @@ namespace ecto
     return user_supplied_;
   }
 
+  void
+  tendril::user_supplied(bool b)
+  {
+    user_supplied_ = b;
+  }
+
   bool
   tendril::has_default() const
   {

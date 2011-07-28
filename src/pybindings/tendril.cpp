@@ -40,7 +40,7 @@ struct ObjectSetter
 bp::object tendril_get_val(tendril::ptr t)
 {
   bp::object o;
-  o << t;
+  t >> o;
   return o;
 }
 
