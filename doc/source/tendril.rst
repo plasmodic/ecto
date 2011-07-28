@@ -1,9 +1,23 @@
 tendril
 =======
 
-A tendril is the slender, winding organ of the
-ecto::cell that gives it its awesome type erasure and uber
-flexibility.
+.. _boost::any: http://www.boost.org/doc/libs/1_47_0/doc/html/any.html
+
+The ``tendril`` is a type-erased value container, essentially a
+`boost::any`_ (in fact, implemented with ``boost::any``) augmented
+with certain conversion rules, conversion operators, introspection
+capabilities and the like.  (in fact , each tendril contains a
+boost::any), with the ability to automatically perform certain
+conversions between the held types.
+
+Overview
+--------
+
+You will primarily encounter the ``tendril`` as the right hand side of
+the mappings which are the ``tendrils`` objects passed to ecto cell
+functions.
+
+
 
 python api
 ----------
@@ -14,6 +28,8 @@ c++ api
 -------
 .. doxygenclass:: ecto::tendril
     :members:
+
+
 
 spore
 =====
