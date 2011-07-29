@@ -1,15 +1,18 @@
 Ecto Kitchen
 ============
 
-The Ecto Kitchen is a place to get cooking with ecto.
+The Ecto Kitchen is a "superproject" containing ecto itself and other
+projects that use ecto.
 
 .. toctree::
    :maxdepth: 1
    
    README.rst
 
-   ecto/index.rst
-   pcl/index.rst
-   opencv/index.rst
-   ros/index.rst
-   
+.. include:: index_generated.rst
+
+
+.. toctree:: 
+   :maxdepth: 1
+
+   git

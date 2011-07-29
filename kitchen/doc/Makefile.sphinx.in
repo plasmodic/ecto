@@ -5,6 +5,8 @@
 
 # You can set these variables from the command line.
 
+include @CMAKE_CURRENT_BINARY_DIR@/sphinxconf.mk
+
 SPHINXOPTS = \
 	-D version=@ECTO_KITCHEN_VERSION@ \
 	-D release=@ECTO_KITCHEN_VERSION@ \
@@ -42,24 +44,19 @@ help:
 	@echo "  doctest    to run all doctests embedded in the documentation (if enabled)"
 
 links:
-	rm -rf $(BUILDDIR)/source
-	mkdir -p $(BUILDDIR)/source
-	[ -h $(BUILDDIR)/source/ecto ] || ln -sf @ecto_SOURCE_DIR@/doc/source $(BUILDDIR)/source/ecto
-	[ -h $(BUILDDIR)/source/opencv ] || ln -sf @ecto_opencv_SOURCE_DIR@/doc/source $(BUILDDIR)/source/opencv
-	[ -h $(BUILDDIR)/source/pcl ] || ln -sf @ecto_pcl_SOURCE_DIR@/doc/source $(BUILDDIR)/source/pcl
-	[ -h $(BUILDDIR)/source/ros ] || ln -sf @ecto_ros_SOURCE_DIR@/doc/source $(BUILDDIR)/source/ros
+	rsync -va --delete @ecto_kitchen_SOURCE_DIR@/doc/source $(BUILDDIR)/
+	rsync -va @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source $(BUILDDIR)/
+	echo ".. toctree::" > $(BUILDDIR)/source/index_generated.rst
+	echo "   :maxdepth: 1" >> $(BUILDDIR)/source/index_generated.rst
+	echo "" >> $(BUILDDIR)/source/index_generated.rst
 
-	ln -sf @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source/programoutput.py $(BUILDDIR)/source
-	ln -sf @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source/conf.py $(BUILDDIR)/source
-	ln -sf @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source/breathe $(BUILDDIR)/source
-	ln -sf @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source/ecto_theme $(BUILDDIR)/source
-	ln -sf @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source/ectodoc.py $(BUILDDIR)/source
-	ln -sf @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source/index.rst $(BUILDDIR)/source
-	ln -sf @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source/README.rst $(BUILDDIR)/source
-	ln -sf @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source/_static $(BUILDDIR)/source
-	ln -sf @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source/_templates $(BUILDDIR)/source
-	ln -sf @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source/art $(BUILDDIR)/source
-	ln -sf @CMAKE_CURRENT_BINARY_DIR@/ecto_kitchen_config.py $(BUILDDIR)/source
+	@for k in @KITCHEN_PROJECTS_STR@ ; do \
+	[ -h $(BUILDDIR)/source/$$k ] || \
+	ln -sfv @ecto_kitchen_SOURCE_DIR@/$$k/doc/source $(BUILDDIR)/source/$$k ; \
+	echo "   $$k/index.rst" >> $(BUILDDIR)/source/index_generated.rst ; \
+	done
+
+	cp @CMAKE_CURRENT_BINARY_DIR@/ecto_kitchen_config.py $(BUILDDIR)/source
 
 clean:
 	-rm -rf $(BUILDDIR)/*
@@ -118,7 +115,7 @@ epub:
 	@echo
 	@echo "Build finished. The epub file is in $(BUILDDIR)/epub."
 
-latex:
+latex: links
 	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex
 	@echo
 	@echo "Build finished; the LaTeX files are in $(BUILDDIR)/latex."
@@ -156,3 +153,7 @@ doctest:
 	$(SPHINXBUILD) -b doctest $(ALLSPHINXOPTS) $(BUILDDIR)/doctest
 	@echo "Testing of doctests in the sources finished, look at the " \
 	      "results in $(BUILDDIR)/doctest/output.txt."
+
+info:
+	@echo "okay, i do nothing"
+	@echo "builddir is $(BINDIR)"

@@ -29,8 +29,6 @@ macro(init_ecto_kitchen)
     build_as_standalones.sh
     @ONLY)
 
-  add_subdirectory(ecto/kitchen/doc ${ecto_kitchen_BINARY_DIR}/doc)
-
   string(REPLACE ";" " " KITCHEN_PROJECTS_STR "${KITCHEN_PROJECTS}")
   message("Initializing kitchen with projects ${KITCHEN_PROJECTS_STR}")
   configure_file(${ecto_kitchen_SOURCE_DIR}/ecto/kitchen/util/python_path.sh.in
@@ -39,6 +37,8 @@ macro(init_ecto_kitchen)
     )
   message(STATUS "To set up your python path you may source the file 'python_path.sh'")
   message(STATUS "  in the build directory.")
+
+  add_subdirectory(ecto/kitchen/doc ${ecto_kitchen_BINARY_DIR}/doc)
 
   macro(check_hashbangs SCRIPTDIR)
     file(GLOB_RECURSE _python_scripts ${CMAKE_CURRENT_SOURCE_DIR}/${SCRIPTDIR}/*.py)

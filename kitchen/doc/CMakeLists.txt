@@ -4,7 +4,7 @@
 project(kitchen_doc)
 
 option(INSTALL_DOC "Install the documentation." OFF)
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Makefile.in 
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Makefile.sphinx.in 
   ${CMAKE_CURRENT_BINARY_DIR}/Makefile.sphinx
   @ONLY)
 
@@ -58,6 +58,8 @@ if(SPHINX_BUILD)
   add_dependencies(pdf doxygen)
   add_dependencies(doc pdf)
   add_dependencies(doc html)
+
+
 endif()
   
 if(INSTALL_DOC)
