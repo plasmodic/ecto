@@ -7,7 +7,10 @@ def test_feedback():
     plasm = ecto.Plasm()
     g = ecto_test.Generate("Generator", step=1.0, start=1.0)
     add = ecto_test.Add()
+
     source,sink = ecto.EntangledPair()
+    source.outputs.out = 0
+
     plasm.connect(source[:] >> add['left'],
                   g[:] >> add['right'],
                   add[:] >> sink[:]
@@ -21,6 +24,7 @@ def test_feedback():
     assert add.outputs.out == 6 # 3 + 3 = 6
     plasm.execute(niter=1)
     assert add.outputs.out == 10 # 6 + 4 = 10
+
 if __name__ == '__main__':
     test_feedback()
 

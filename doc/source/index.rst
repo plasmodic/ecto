@@ -6,7 +6,11 @@ ecto provides a lightweight plugin archictecture, graph constructures, and sched
 to enable rapid development of DAGs. ecto may be useful for perception, audio processing,
 or robotics pipelines.
 
-.. rubric:: IRC:  ``#ecto`` on ``irc.oftc.net``
+.. rubric:: IRC
+
+Drop in on us on ``#ecto`` on ``irc.oftc.net``
+
+.. rubric:: Table of Contents
 
 .. toctree::
    :maxdepth: 2
@@ -27,4 +31,11 @@ or robotics pipelines.
    ecto_cells
    ecto_test_cells
    api
+
+.. rubric:: Appendices
+
+.. toctree::
+   :maxdepth: 2
    
+   git
+
