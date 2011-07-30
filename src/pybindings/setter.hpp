@@ -20,6 +20,7 @@ struct Setter
   void operator()(tendril& t)
   {
     t << proxy;
+    t.dirty(true);
   }
   tendril proxy;
 };

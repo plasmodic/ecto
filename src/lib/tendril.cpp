@@ -65,7 +65,8 @@ namespace ecto
         (*rhs.converter)(*boost::unsafe_any_cast<boost::python::object>(&holder_), rhs);
       }
     }
-    mark_dirty();
+    dirty(true);
+    user_supplied(true);
     return *this;
   }
 
@@ -123,7 +124,7 @@ namespace ecto
     {
       exec_persistent();
     }
-    mark_clean();
+    dirty(false);
   }
 
   std::string
@@ -174,7 +175,12 @@ namespace ecto
     return dirty_;
   }
 
-  //! The tendril has notified its callback if one was registered since it was changed.
+  void
+  tendril::dirty(bool dirty)
+  {
+    dirty_ = dirty;
+  }
+
   bool
   tendril::clean() const
   {
@@ -205,17 +211,17 @@ namespace ecto
     }
   }
 
-  void
-  tendril::mark_dirty()
-  {
-    dirty_ = true;
-    user_supplied_ = true;
-  }
-  void
-  tendril::mark_clean()
-  {
-    dirty_ = false;
-  }
+//  void
+//  tendril::mark_dirty()
+//  {
+//    dirty_ = true;
+//    user_supplied_ = true;
+//  }
+//  void
+//  tendril::mark_clean()
+//  {
+//    dirty_ = false;
+//  }
 
   void tendril::copy_holder(const tendril& rhs)
   {

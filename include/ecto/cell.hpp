@@ -177,7 +177,6 @@ namespace ecto
     tendrils inputs; //!< Inputs, inboxes, always have a valid value ( may be NULL )
     tendrils outputs; //!< Outputs, outboxes, always have a valid value ( may be NULL )
     boost::optional<strand> strand_;
-
     profile::stats_type stats;
 
   protected:
@@ -204,8 +203,6 @@ namespace ecto
     virtual void dispatch_short_doc(const std::string&)
     {
     }
-
-
   private:
     std::string instance_name_;
   };
@@ -338,7 +335,23 @@ namespace ecto
       //the cell may not be allocated here, so check pointer.
       if (!thiz)
       {
-        thiz.reset(new Cell);
+        try
+        {
+          thiz.reset(new Cell);
+        }
+        catch (std::exception& e)
+        {
+          except::EctoException ee("Original Exception: " +name_of(typeid(e)));
+          ee << "  What   : " + std::string(e.what());
+          ee << "  Module : " + name() + "\n  in constructor of: " + name_of<Cell>();
+          boost::throw_exception(ee); \
+        }
+        catch (...)
+        {
+          except::EctoException ee("Threw unknown exception type!");
+          ee << "  Module : " + name() + "\n  in constructor of: " + name_of<Cell>();
+          boost::throw_exception(ee);
+        }
         //configure is only called once.
         configure(int_<has_f<Cell>::configure> (), params,inputs,outputs);
       }

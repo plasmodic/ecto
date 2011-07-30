@@ -100,6 +100,7 @@ namespace ecto
             tendril::ptr tp = m->parameters[keystring];
             *tp << value;
             tp->user_supplied(true);
+            tp->dirty(true);
           }
       }
     m->declare_io();

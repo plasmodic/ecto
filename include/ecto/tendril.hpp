@@ -78,7 +78,7 @@ namespace ecto
     tendril& operator=(const tendril& rhs);
 
     /**
-     * \brief A a convenience constructor for creating a tendril
+     * \brief A convenience constructor for creating a tendril
      * that holds the given type.
      * @tparam T The type to hide in this tendril
      * @param t default value for t
@@ -155,7 +155,7 @@ namespace ecto
 
     template<typename T>
     inline T&
-    get() 
+    get()
     {
       enforce_type<T>();
       return *boost::unsafe_any_cast<T>(&holder_);
@@ -175,17 +175,24 @@ namespace ecto
         //cast a void pointer to this type.
         *boost::unsafe_any_cast<T>(&holder_) = val;
       }
-      mark_dirty(); //definitely changed
+      dirty(true);
+      user_supplied(true);
     }
 
     void operator<<(const boost::python::object& obj)
     {
       if (is_type<boost::python::object>())
+      {
         holder_ = obj;
+      }
       else if (is_type<none>())
+      {
         set_holder(obj);
+      }
       else
         (*converter)(*this, obj);
+      dirty(true);
+      user_supplied(true);
     }
 
     ecto::tendril& operator<<(const ecto::tendril& rhs);
@@ -298,6 +305,10 @@ namespace ecto
     bool
     dirty() const;
 
+    //! Set the tendril dirty, implying that the value has changed.
+    void
+    dirty(bool);
+
     //! The tendril has notified its callback if one was registered since it was changed.
     bool
     clean() const;
@@ -371,10 +382,7 @@ namespace ecto
       type_ID_ = name_of<T>().c_str();
       converter = &ConverterImpl<T>::instance;
     }
-
     void copy_holder(const tendril& rhs);
-    void mark_dirty();
-    void mark_clean();
 
     boost::any holder_;
     const char* type_ID_;
