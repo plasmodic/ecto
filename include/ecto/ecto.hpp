@@ -97,7 +97,7 @@ namespace ecto
           }
         else 
           {
-            tendril::ptr tp = m->parameters.at(keystring);
+            tendril::ptr tp = m->parameters[keystring];
             *tp << value;
             tp->user_supplied(true);
           }

@@ -44,6 +44,13 @@ namespace ecto
     {
       out["out"] = in["in"];
     }
+
+    int process(tendrils& in, tendrils& out)
+    {
+      out["out"] << in["in"];
+      return ecto::OK;
+    }
+
   };
 }
 

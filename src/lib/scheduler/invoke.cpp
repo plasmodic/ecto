@@ -28,7 +28,7 @@ namespace ecto {
         {
           edge::ptr e = graph[*inbegin];
           tendril& from = e->front();
-          tendril& to = *(m->inputs.at(e->to_port));
+          tendril& to = *(m->inputs[e->to_port]);
           to << from;
           e->pop_front();
           ++inbegin;
@@ -43,7 +43,7 @@ namespace ecto {
       while (outbegin != outend)
         {
           edge::ptr e = graph[*outbegin];
-          e->push_back(*m->outputs.at(e->from_port));//copy everything... value, docs, user_defined, etc...
+          e->push_back(*m->outputs[e->from_port]);//copy everything... value, docs, user_defined, etc...
           ++outbegin;
         }
 

@@ -91,41 +91,32 @@ namespace ecto
   tendrils::print_doc(std::ostream& out, const std::string& tendrils_name) const
   {
     boost::mutex::scoped_lock lock(mtx);
-    if (empty())
+    if (storage.empty())
       return;
     out << tendrils_name << ":\n";
     // out << "---------------------------------\n\n";
-    std::for_each(begin(), end(), print_tendril(out));
+    std::for_each(storage.begin(), storage.end(), print_tendril(out));
   }
 
-  void doesnt_exist(const tendrils& t, const std::string& name)
+  void 
+  tendrils::doesnt_exist(const std::string& name) const
   {
     std::stringstream ss;
     ss << "'" << name << "' does not exist in this tendrils object. Possible keys are: ";
-    std::for_each(t.begin(),t.end(),print_tendril_simple(ss));
+    std::for_each(begin(),end(),print_tendril_simple(ss));
     throw except::NonExistant(name,ss.str());
   }
 
-  tendril::const_ptr
-  tendrils::at(const std::string& name) const
-  {
-    boost::mutex::scoped_lock lock(mtx);
-    map_t::const_iterator it = find(name);
-    if (it == end())
-      doesnt_exist(*this,name);
-    return it->second;
-  }
-
-
   tendril::ptr
-  tendrils::at(const std::string& name)
+  tendrils::operator[](const std::string& name) const
   {
     boost::mutex::scoped_lock lock(mtx);
-    map_t::iterator it = find(name);
+    map_t::const_iterator it = storage.find(name);
     if (it == end())
-      doesnt_exist(*this,name);
+      doesnt_exist(name);
     return it->second;
   }
+
 
   tendril::ptr
   tendrils::declare(const std::string& name, tendril::ptr t)
@@ -135,7 +126,7 @@ namespace ecto
     //just add it.
     if (it == end())
     {
-      insert(std::make_pair(name, t));
+      storage.insert(std::make_pair(name, t));
     }
     else // we want to just return the existing tendril (so that modules preconnected don't get messed up)...
     {
@@ -153,7 +144,7 @@ namespace ecto
         it->second = t;
       }
     }
-    return at(name);
+    return storage.at(name);
   }
 
 }

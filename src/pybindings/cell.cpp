@@ -149,11 +149,11 @@ namespace ecto
         switch (t)
           {
           case 0:
-            return mod_output->outputs.at(key);
+            return mod_output->outputs[key];
           case 1:
-            return mod_input->inputs.at(key);
+            return mod_input->inputs[key];
           case 2:
-            return mod_input->parameters.at(key);
+            return mod_input->parameters[key];
           default:
             return tendril::ptr();
           }
@@ -282,7 +282,7 @@ namespace ecto
         {
           TendrilSpecification out = lhs.vts[i], in = rhs.vts[i];
           //check types, this will also assert on not found...
-          out.mod_output->outputs.at(out.key)->compatible_type(*in.mod_input->inputs.at(in.key));
+          out.mod_output->outputs[out.key]->compatible_type(*in.mod_input->inputs[in.key]);
           result.append(bp::make_tuple(out.mod_output, out.key, in.mod_input, in.key));
         }
       return result;

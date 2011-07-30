@@ -57,7 +57,7 @@ namespace ecto
       tendril::ptr from_port, to_port;
       try
       {
-        from_port = from->outputs.at(output);
+        from_port = from->outputs[output];
       } catch (ecto::except::EctoException& e)
       {
         e << boost::str(boost::format("'%s.outputs.%s' does not exist.") % from->name() % output);
@@ -65,7 +65,7 @@ namespace ecto
       }
       try
       {
-        to_port = to->inputs.at(input);
+        to_port = to->inputs[input];
       } catch (ecto::except::EctoException& e)
       {
         e << boost::str(boost::format("'%s.inputs.%s' does not exist.") % from->name() % output);

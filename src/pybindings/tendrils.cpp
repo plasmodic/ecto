@@ -51,7 +51,7 @@ namespace ecto
         if (name == "__members__")
           return tendril_members(ts);
 
-        const tendril& t = *ts.at(name);
+        const tendril& t = *ts[name];
         bp::object o;
         t >> o;
         return o;
@@ -59,7 +59,7 @@ namespace ecto
 
       void tendril_set(tendrils& ts, const std::string& name, bp::object obj)
       {
-        tendril::ptr tp = ts.at(name);
+        tendril::ptr tp = ts[name];
         
         tp->enqueue_oneshot(Setter(tp,obj));
       }
@@ -74,7 +74,7 @@ namespace ecto
 
       tendril::ptr tendril_at(tendrils& ts, const std::string& name)
       {
-        return ts.at(name);
+        return ts[name];
       }
     }
 

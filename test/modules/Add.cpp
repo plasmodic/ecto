@@ -43,9 +43,9 @@ namespace ecto_test
 
     void configure(tendrils& p, tendrils& i, tendrils& o)
     {
-      out_ = o.at("out");
-      left_ = i.at("left");
-      right_ = i.at("right");
+      out_ = o["out"];
+      left_ = i["left"];
+      right_ = i["right"];
     }
 
     int process(const ecto::tendrils& /*inputs*/, ecto::tendrils& /*outputs*/)

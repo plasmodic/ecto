@@ -54,9 +54,7 @@ namespace ecto
     /**
      * Allocates a spore that doesn't point to anything.
      */
-    spore()
-    {
-    }
+    spore() { }
 
     /**
      * implicit constructor from a tendril ptr. Needs to be a shared_ptr, as the spore holds a

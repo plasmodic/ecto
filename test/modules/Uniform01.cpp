@@ -73,8 +73,8 @@ namespace ecto_test
 
     void configure(tendrils& parameters, tendrils& inputs, tendrils& outputs)
     {
-      out_ = outputs.at("out");
-      ecto::spore<unsigned> seed_ = parameters.at("seed");
+      out_ = outputs["out"];
+      ecto::spore<unsigned> seed_ = parameters["seed"];
       // if the user supplied a seed, use it, else use the system time
       if (seed_.user_supplied()) 
         pimpl_.reset(new impl(*seed_));

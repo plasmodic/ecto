@@ -60,7 +60,7 @@ namespace hello_ecto
 
     void configure(tendrils& params, tendrils& inputs, tendrils& outputs)
     {
-      str_ = inputs.at("str");
+      str_ = inputs["str"];
     }
 
     int process(const tendrils& in, tendrils& /*out*/)
@@ -80,7 +80,7 @@ namespace hello_ecto
 
     void configure(tendrils& params, tendrils& inputs, tendrils& outputs)
     {
-      output_ = outputs.at("output");
+      output_ = outputs["output"];
     }
 
     int process(const tendrils& in, tendrils& out)

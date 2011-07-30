@@ -249,8 +249,8 @@ TEST(TendrilTest, SyntacticSugar)
   ty << y;
   tx << x;
   tx >> x;
-  EXPECT_THROW(tx >> y;,ecto::except::TypeMismatch);
-  EXPECT_THROW(tx << z;,ecto::except::TypeMismatch);
+  EXPECT_THROW(tx >> y;, ecto::except::TypeMismatch);
+  EXPECT_THROW(tx << z;, ecto::except::TypeMismatch);
 
 
   ecto::tendrils ts;
@@ -263,11 +263,11 @@ TEST(TendrilTest, SyntacticSugar)
   ts["y"] << y;
   ts["z"] >> z;
   ts["z"] << z;
-  EXPECT_THROW(ts["z"] >> y;,ecto::except::TypeMismatch);
-  EXPECT_THROW(ts["z"] << x;,ecto::except::TypeMismatch);
+  EXPECT_THROW(ts["z"] >> y;, ecto::except::TypeMismatch);
+  EXPECT_THROW(ts["z"] << x;, ecto::except::TypeMismatch);
 
-  EXPECT_THROW(ts["w"] >> x;,std::runtime_error);
-  EXPECT_THROW(ts["t"] << x;,std::runtime_error);
+  EXPECT_THROW(ts["w"] >> x;, ecto::except::NonExistant);
+  EXPECT_THROW(ts["t"] << x;, ecto::except::NonExistant);
 
 }
 

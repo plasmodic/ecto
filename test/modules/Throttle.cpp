@@ -58,8 +58,8 @@ namespace ecto_test
     {
       period_usec = 1e+06 / parameters.get<double>("rate");
       
-      in = inputs.at("in");
-      out = outputs.at("out");
+      in = inputs["in"];
+      out = outputs["out"];
       prevtime = pt::microsec_clock::universal_time() - pt::hours(24);
     }
 

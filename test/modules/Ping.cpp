@@ -49,7 +49,7 @@ namespace ecto_test
 
     void configure(tendrils& parameters, tendrils& inputs, tendrils& outputs) 
     { 
-      out = outputs.at("out");
+      out = outputs["out"];
     }
 
     int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)

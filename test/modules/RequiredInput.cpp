@@ -46,8 +46,8 @@ namespace ecto_test
 
     void configure(tendrils& params, tendrils& in, tendrils& out)
     {
-      in_ = in.at("in");
-      out_ = out.at("out");
+      in_ = in["in"];
+      out_ = out["out"];
     }
 
     int process(const tendrils& in, tendrils& out)

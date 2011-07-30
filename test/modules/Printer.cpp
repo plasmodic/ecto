@@ -82,7 +82,7 @@ namespace ecto_test
 
     int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
-      pfs.processes[inputs.at("in")->type_name()](inputs,outputs);
+      pfs.processes[inputs["in"]->type_name()](inputs,outputs);
       std::cout << this << std::endl;
       return ecto::OK;
     }

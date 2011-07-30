@@ -53,9 +53,9 @@ namespace ecto_test
 
     void configure(tendrils& parameters, tendrils& inputs, tendrils& outputs)
     {
-      sleep_sec = parameters.at("seconds");
-      in = inputs.at("in");
-      out = outputs.at("out");
+      sleep_sec = parameters["seconds"];
+      in = inputs["in"];
+      out = outputs["out"];
     }
 
     int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)

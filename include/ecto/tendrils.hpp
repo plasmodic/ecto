@@ -42,9 +42,45 @@ namespace ecto
   /**
    * \brief The tendrils are a collection for the ecto::tendril class, addressable by a string key.
    */
-  class ECTO_EXPORT tendrils : public std::map<std::string, tendril::ptr>, boost::noncopyable
+  class ECTO_EXPORT tendrils : boost::noncopyable
   {
+    typedef std::map<std::string, tendril::ptr> map_t;
+    map_t storage;
+
   public:
+
+    typedef map_t::iterator iterator;
+    typedef map_t::const_iterator const_iterator;
+    typedef map_t::value_type value_type;
+    typedef map_t::key_type key_type;
+    typedef map_t::size_type size_type;
+    typedef map_t::difference_type difference_type;
+    typedef map_t::key_compare key_compare;
+    
+    iterator begin() { return storage.begin(); }
+    const_iterator begin() const { return storage.begin(); }
+    iterator end() { return storage.end(); }
+    const_iterator end() const { return storage.end(); }
+
+    iterator find(const std::string& name) { return storage.find(name); }
+    const_iterator find(const std::string& name) const { return storage.find(name); }
+
+    void clear() { storage.clear(); }
+
+    size_type size() const { return storage.size(); }
+
+    void erase(iterator pos) { storage.erase(pos); }
+    void erase(const key_type& k) { storage.erase(k); }
+
+    template <typename InputIterator>
+    void 
+    insert(InputIterator first, InputIterator last)
+    {
+      storage.insert(first, last);
+    }
+    
+    key_compare key_comp() const { return storage.key_comp(); }
+      
 
     /**
      * \brief Declare a tendril of a certain type, with only a name, no doc, or default values.
@@ -99,10 +135,13 @@ namespace ecto
     {
       try
       {
-        return at(name)->get<T>();
+        const_iterator iter = storage.find(name);
+        if (iter == end()) 
+          doesnt_exist(name);
+        return iter->second->get<T>();
       }catch(except::TypeMismatch& e)
       {
-        e << std::string("  Hint : " ) + "'"+name+"' is of type: " + at(name)->type_name();
+        e << std::string("  Hint : " ) + "'"+name+"' is of type: " + storage.at(name)->type_name();
         throw e;
       }
     }
@@ -119,10 +158,13 @@ namespace ecto
     {
       try
       {
-        return at(name)->get<T>();
+        const_iterator iter = storage.find(name);
+        if (iter == end()) 
+          doesnt_exist(name);
+        return iter->second->get<T>();
       } catch(except::TypeMismatch& e)
       {
-        e << std::string("  Hint : " )+ "'"+name+"' is of type: " + at(name)->type_name();
+        e << std::string("  Hint : " )+ "'"+name+"' is of type: " + storage.at(name)->type_name();
         throw e;
       }
     }
@@ -132,15 +174,8 @@ namespace ecto
      * @param name The key for the desired tendril.
      * @return A reference to the tendril.
      */
-    tendril::const_ptr
-    at(const std::string& name) const;
-    /**
-     * \brief Grabs the tendril at the key.
-     * @param name The key for the desired tendril.
-     * @return A reference to the tendril.
-     */
-    tendril::ptr
-    at(const std::string& name);
+    tendril::ptr operator[](const std::string& name) const;
+
 
     /**
      * \brief Print the tendrils documentation string, in rst format.
@@ -163,7 +198,8 @@ namespace ecto
     tendril::ptr
     declare(const std::string& name, tendril::ptr t);
 
-    typedef std::map<std::string, tendril::ptr> map_t;
+    void doesnt_exist(const std::string& name) const;
+
     mutable boost::mutex mtx;
   };
 }

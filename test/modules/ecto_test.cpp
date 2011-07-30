@@ -129,11 +129,11 @@ namespace ecto_test
 
     void configure(tendrils& parms, tendrils& inputs, tendrils& outputs)
     {
-      value_ = parms.at("value");
+      value_ = parms["value"];
       value_.set_callback(boost::bind(&HandleHolder::onvalue_change, this, _1));
-      output_ = outputs.at("output");
-      input_ = inputs.at("input");
-      param_val_ = outputs.at("value");
+      output_ = outputs["output"];
+      input_ = inputs["input"];
+      param_val_ = outputs["value"];
     }
 
     int process(const ecto::tendrils&, ecto::tendrils&)

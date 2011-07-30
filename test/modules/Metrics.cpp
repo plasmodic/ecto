@@ -58,10 +58,10 @@ namespace ecto_test
 
     void configure(tendrils& parameters, tendrils& inputs, tendrils& outputs)
     {
-      queue_size = parameters.at("queue_size");
-      hz = outputs.at("hz");
-      latency_seconds = outputs.at("latency_seconds");
-      in = inputs.at("in");
+      queue_size = parameters["queue_size"];
+      hz = outputs["hz"];
+      latency_seconds = outputs["latency_seconds"];
+      in = inputs["in"];
     }
 
     int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)

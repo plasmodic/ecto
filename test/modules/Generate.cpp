@@ -51,7 +51,7 @@ namespace ecto_test
 
     void configure(tendrils& parameters, tendrils& inputs, tendrils& outputs)
     {
-      step_ = parameters.at("step");
+      step_ = parameters["step"];
     }
 
     int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)

@@ -47,7 +47,7 @@ namespace ecto_test
 
     void configure(const tendrils& params, tendrils& in, tendrils& out)
     {
-      outbox = out.at("out");
+      outbox = out["out"];
     }
 
     void destroy() 

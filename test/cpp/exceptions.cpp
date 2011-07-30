@@ -45,8 +45,8 @@ struct NotExist
     in.declare<ExceptionalModule1> ("c");
     in.declare<std::string> ("e");
     out.declare<std::string> ("a");
-
   }
+
   int
   process(tendrils& in, tendrils& out)
   {
@@ -86,7 +86,7 @@ struct ParameterCBExcept
   configure(tendrils& p,tendrils& in, tendrils& out)
   {
     std::cout << "configurated ***" << std::endl;
-    spore<double> x = p.at("x");
+    spore<double> x = p["x"];
     x.set_callback(boost::bind(&ParameterCBExcept::xcb,this,_1));
   }
 };
@@ -123,6 +123,8 @@ TEST(Exceptions, ExceptionUnknownException)
   }
   EXPECT_THROW(create_cell<ExceptionUnknownException>(), ecto::except::EctoException);
 }
+
+#define MEH(x, y) x
 
 TEST(Exceptions, ProcessException)
 {

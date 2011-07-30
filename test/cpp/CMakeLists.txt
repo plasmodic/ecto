@@ -9,6 +9,7 @@ include_directories(${GTEST_INCLUDE_DIRS})
 add_executable(ecto-test
   main.cpp
   tendril.cpp
+  tendrils.cpp
   spore.cpp
   exceptions.cpp
   graph.cpp

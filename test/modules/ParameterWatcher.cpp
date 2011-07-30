@@ -59,7 +59,7 @@ namespace ecto_test
 
     void configure(tendrils& parms, tendrils& inputs, tendrils& outputs)
     {
-      parms.at("value")->set_callback<double>(boost::bind(&ParameterWatcher::onvalue_change, this, _1));
+      parms["value"]->set_callback<double>(boost::bind(&ParameterWatcher::onvalue_change, this, _1));
     }
 
     int process(ecto::tendrils& inputs, ecto::tendrils& outputs)

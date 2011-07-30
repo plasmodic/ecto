@@ -49,7 +49,7 @@ namespace ecto
                        "The test value. If this is true then "
                        " cell::process() is called.", false);
       cell::ptr c;
-      p.at("cell") >> c;
+      p["cell"] >> c;
       if(!c)
         return;//handle default well.
       in.insert(c->inputs.begin(), c->inputs.end());
@@ -60,7 +60,7 @@ namespace ecto
     {
       p["cell"] >> c_;
       c_->configure();
-      test_ = in.at("__test__");
+      test_ = in["__test__"];
     }
 
     int process(tendrils& in, tendrils& out)
