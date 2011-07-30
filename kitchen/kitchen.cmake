@@ -9,7 +9,12 @@ macro(init_ecto_kitchen)
   message("PROJECTS: ${ARGN}")
   set(KITCHEN_PROJECTS "ecto;${ARGN}")
 
-  set(ECTO_KITCHEN_VERSION 11.07.0)
+  set(ECTO_KITCHEN_VERSION 11.07.0) 
+  if(NOT ecto_kitchen_SOURCE_DIR)
+    set(ecto_kitchen_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+    set(ecto_kitchen_BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR})
+  endif()
+
   set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib)
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
   enable_testing()
