@@ -15,8 +15,8 @@ namespace ecto {
     void wrapModule();
     void wrapSchedulers();
     void wrapStrand();
+    void wrapDelay();
     void wrap_except();
-    void wrap_ether();
 
     namespace {
       std::ofstream log_file;
@@ -65,6 +65,8 @@ BOOST_PYTHON_MODULE(ecto)
   ecto::py::wrapStrand();
   ecto::py::wrap_except();
 
+  ecto::py::wrapDelay();
+
   bp::def("hardware_concurrency", &boost::thread::hardware_concurrency);
 
   // for setting breakpoints
@@ -75,6 +77,5 @@ BOOST_PYTHON_MODULE(ecto)
   bp::def("log_to_file", &ecto::py::log_to_file);
   bp::def("unlog_to_file", &ecto::py::unlog_to_file);
   ECTO_REGISTER(ecto);
-  ecto::py::wrap_ether();
 }
 

@@ -177,7 +177,8 @@ namespace ecto
     /**
      * \brief Grabs the tendril at the key.
      * @param name The key for the desired tendril.
-     * @return A reference to the tendril.
+     * @return A shared pointer to the tendril.
+     * this throws if the key is not in the tendrils object
      */
     tendril::ptr operator[](const std::string& name) const;
 

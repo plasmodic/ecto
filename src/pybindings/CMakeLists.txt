@@ -9,7 +9,7 @@ ectomodule(ecto
   schedulers.cpp
   strand.cpp
   cells/Constant.cpp
-  cells/ether.cpp
+  cells/Delay.cpp
   cells/If.cpp
   cells/Passthrough.cpp
   cells/TrueEveryN.cpp

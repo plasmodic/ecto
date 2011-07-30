@@ -86,9 +86,9 @@ namespace ecto {
 
 #define ECTO_MODULETAG(MODULE) namespace ecto { namespace tag { struct MODULE; } }
 
-#define ECTO_CELL(MODULE, TYPE, NAME, DOCSTRING)                      \
+#define ECTO_CELL(MODULE, TYPE, NAME, DOCSTRING)                        \
   ECTO_MODULETAG(MODULE)                                                \
-  namespace ecto{ namespace registry {                                                          \
+  namespace ecto{ namespace registry {                                  \
     template<>                                                          \
     const ::ecto::registry::registrator< ::ecto::tag::MODULE,TYPE>&     \
     ::ecto::registry::registrator< ::ecto::tag::MODULE,TYPE>::inst      \

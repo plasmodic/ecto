@@ -57,6 +57,7 @@ namespace ecto
    *
    * Items held by the tendril must be copy constructible and copiable.
    */
+  
   class ECTO_EXPORT tendril
   {
   public:
@@ -479,10 +480,13 @@ namespace ecto
     }
   };
 
-  template <typename T, typename _> tendril::ConverterImpl<T,_> tendril::ConverterImpl<T,_>::instance;
+  template <typename T, typename _> 
+  tendril::ConverterImpl<T,_> 
+  tendril::ConverterImpl<T,_>::instance;
 
-  template <typename _> tendril::ConverterImpl<tendril::none,_> tendril::ConverterImpl<tendril::none,_>::instance;
-
+  template <typename _> 
+  tendril::ConverterImpl<tendril::none,_> 
+  tendril::ConverterImpl<tendril::none,_>::instance;
 
 }
 

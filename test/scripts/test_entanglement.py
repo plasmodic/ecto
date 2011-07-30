@@ -8,21 +8,26 @@ def test_feedback():
     g = ecto_test.Generate("Generator", step=1.0, start=1.0)
     add = ecto_test.Add()
 
-    source,sink = ecto.EntangledPair()
-    source.outputs.out = 0
+    printy = ecto_test.Printer()
 
-    plasm.connect(source[:] >> add['left'],
+    delay = ecto.Delay(default=0.0, qsize=1)
+    
+    plasm.connect(delay.source[:] >> (add['left'], printy[:]),
                   g[:] >> add['right'],
-                  add[:] >> sink[:]
+                  add[:] >> delay.sink[:]
                   )
-    #ecto.view_plasm(plasm)
+    # ecto.view_plasm(plasm)
     plasm.execute(niter=1)
+    print add.outputs.out
     assert add.outputs.out == 1 # 0 + 1 = 1
     plasm.execute(niter=1)
+    print add.outputs.out
     assert add.outputs.out == 3 # 1 + 2 = 3
     plasm.execute(niter=1)
+    print add.outputs.out
     assert add.outputs.out == 6 # 3 + 3 = 6
     plasm.execute(niter=1)
+    print add.outputs.out
     assert add.outputs.out == 10 # 6 + 4 = 10
 
 if __name__ == '__main__':

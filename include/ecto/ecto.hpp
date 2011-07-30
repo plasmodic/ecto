@@ -161,22 +161,34 @@ namespace ecto
    *        to python or other plugin systems.
    * @param doc_str A highlevel description of your cell.
    */
-  template<typename UserCell>
-  void wrap(const char* name, std::string doc_str = "An ecto::cell...")
+  template <typename Impl>
+  struct cell_wrapper
   {
-    typedef ecto::cell_<UserCell> cell_t;
-    ecto::cell_<UserCell>::SHORT_DOC = doc_str;
-    //SHOW();
-    boost::python::class_<cell_t, boost::python::bases<cell>,
-        boost::shared_ptr<cell_t>, boost::noncopyable>
-        m(name, cell_doc<UserCell> (doc_str).c_str());
+    typedef typename 
+    boost::python::class_<ecto::cell_<Impl>, 
+                          boost::python::bases<cell>,
+                          boost::shared_ptr<ecto::cell_<Impl> >, 
+                          boost::noncopyable>
+    type;
+  };
+
+  template <typename Impl>
+  typename cell_wrapper<Impl>::type 
+  wrap(const char* name, std::string doc_str = "An ecto::cell...")
+  {
+    typedef ecto::cell_<Impl> cell_t;
+    ecto::cell_<Impl>::SHORT_DOC = doc_str;
+
+    typename cell_wrapper<Impl>::type 
+      m(name, cell_doc<Impl> (doc_str).c_str());
     m.def("__init__",
-          boost::python::raw_constructor(&raw_construct<UserCell>));
-    m.def("inspect", &inspect<UserCell> );
+          boost::python::raw_constructor(&raw_construct<Impl>));
+    m.def("inspect", &inspect<Impl> );
     m.staticmethod("inspect");
     m.def("name", (std::string (cell_t::*)() const) &cell_t::name);
     m.def("type_name", (std::string (cell_t::*)() const) &cell_t::type);
     m.def_readonly("short_doc", &cell_t::SHORT_DOC);
+    return m;
   }
 }
 
