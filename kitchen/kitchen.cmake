@@ -2,6 +2,9 @@
 # The ecto kitchen macro
 #
 macro(init_ecto_kitchen)
+
+  add_definitions(-Wall)
+
   if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/ecto)
     MESSAGE(FATAL_ERROR "Expecting ecto as a subdirectory of your toplevel project!")
   endif()

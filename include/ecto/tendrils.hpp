@@ -79,6 +79,11 @@ namespace ecto
       storage.insert(first, last);
     }
     
+    std::pair<iterator, bool> insert(const value_type &v)
+    {
+      return storage.insert(v);
+    }
+
     key_compare key_comp() const { return storage.key_comp(); }
       
 
