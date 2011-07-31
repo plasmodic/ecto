@@ -435,3 +435,15 @@ TEST(TendrilTest, ConvertersCopied)
   EXPECT_TRUE(e.check());
   EXPECT_EQ(e(), 3.1415);
 }
+
+TEST(TendrilTest, Nullptr)
+{
+  ecto::tendril::ptr a, b;
+  try
+  {
+    a << b;
+  } catch (std::runtime_error& e)
+  {
+    EXPECT_TRUE(std::string("Attempt to convert into tendril which is null") == e.what());
+  }
+}
