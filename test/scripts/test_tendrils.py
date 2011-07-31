@@ -42,14 +42,12 @@ def test_tendrils():
     #by reference
     x = t.at("x")
     t.x = 13
-    t.notify()
     assert x.val == 13
     
     t.x = 17
-    assert t.x != 17
+    assert t.x == 17
     t.x = 199
     t.x = 15
-    t.notify()
     print t.x
     assert t.x == 15
     

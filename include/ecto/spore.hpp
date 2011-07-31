@@ -100,7 +100,7 @@ namespace ecto
      */
     spore<T>& set_callback(typename boost::function<void(T)> cb)
     {
-      p()->set_callback(cb, false);
+      p()->set_callback(cb);
       return *this;
     }
 
@@ -177,18 +177,6 @@ namespace ecto
       tendril::const_ptr _p = p();
       return _p->get<const T>();
     }
-
-#if 0
-    /**
-     * This is the const read operation, as opposed to the derefence which is not necessarily const.
-     * @return const ref, no copies...
-     */
-    const T& read() const
-    {
-      tendril::const_ptr _p = p();
-      return _p->get<T>();
-    }
-#endif
 
     /**
      * Cast operator for convenience.

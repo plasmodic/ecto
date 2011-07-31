@@ -51,9 +51,9 @@ building a DLL on windows.
 
 #if !defined(DISABLE_SHOW)
 	#if defined(_WIN32)
-		#define SHOW() std::cout << __FUNCSIG__ << "\n"
+		#define SHOW() std::cout << __FUNCSIG__ << std::endl;//for flush.
 	#else
-		#define SHOW() std::cout << __PRETTY_FUNCTION__ << "\n"
+		#define SHOW() std::cout << __PRETTY_FUNCTION__ << std::endl;//for flush.
 	#endif
 #else
 #define SHOW() do{}while(false)

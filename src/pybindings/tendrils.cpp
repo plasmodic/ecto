@@ -59,9 +59,10 @@ namespace ecto
 
       void tendril_set(tendrils& ts, const std::string& name, bp::object obj)
       {
-        tendril::ptr tp = ts[name];
-        
-        tp->enqueue_oneshot(Setter(tp,obj));
+        tendril::ptr t = ts[name];
+        t << obj;
+        t->dirty(true);
+        t->user_supplied(true);
       }
 
       void tendrils_notify(tendrils& ts)

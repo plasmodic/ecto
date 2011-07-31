@@ -32,6 +32,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
 #include <boost/thread/mutex.hpp>
+#include <boost/signals2.hpp>
 #include <boost/any.hpp>
 
 #include <ecto/util.hpp> //name_of
@@ -57,13 +58,9 @@ namespace ecto
    */
   class ECTO_EXPORT tendril
   {
-
   public:
-
     typedef boost::shared_ptr<tendril> ptr;
-
     typedef boost::shared_ptr<const tendril> const_ptr;
-
     typedef boost::function< void(tendril&) > TendrilJob;
 
     /**
@@ -248,13 +245,6 @@ namespace ecto
       }
     };
 
-
-    void enqueue_oneshot(TendrilJob job);
-    void enqueue_persistent(TendrilJob job);
-
-    void exec_oneshots();
-    void exec_persistent();
-
     template<typename T>
     struct Caller
     {
@@ -271,6 +261,11 @@ namespace ecto
       CbT cb;
     };
 
+    template<typename Signature>
+    boost::signals2::connection connect(Signature slot)
+    {
+      return jobs_.connect(slot);
+    }
     /**
      * Register a typed callback with the tendril... Will throw on wrong type.
      * @param cb Will be called by the notify function, if the tendril is dirty.
@@ -279,14 +274,11 @@ namespace ecto
      */
     template<typename T>
     tendril&
-    set_callback(typename boost::function<void(T)> cb, bool oneshot = false)
+    set_callback(typename boost::function<void(T)> cb)
     {
       typedef Caller<T> CallerT;
       enforce_type<T>();
-      if(oneshot)
-        enqueue_oneshot(CallerT(cb));
-      else
-        enqueue_persistent(CallerT(cb));
+      connect(CallerT(cb));
       return *this;
     }
 
@@ -381,12 +373,10 @@ namespace ecto
     const char* type_ID_;
     std::string doc_;
     bool dirty_, default_, user_supplied_, required_;
-    std::vector<TendrilJob> jobs_onetime_,jobs_persistent_;
-    boost::mutex mtx_;
+    typedef boost::signals2::signal<void(tendril&)> job_signal_t;
+    job_signal_t jobs_;
     Converter* converter;
-
   public:
-
     template <typename T>
     void operator>>(T& val) const
     {

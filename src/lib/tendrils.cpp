@@ -145,5 +145,4 @@ namespace ecto
     }
     return storage.at(name);
   }
-
 }

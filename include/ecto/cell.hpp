@@ -180,6 +180,7 @@ namespace ecto
     profile::stats_type stats;
 
   protected:
+
     virtual void init() = 0;
     virtual void dispatch_declare_params(tendrils& t) = 0;
     virtual void dispatch_declare_io(const tendrils& params, tendrils& inputs,

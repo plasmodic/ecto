@@ -12,9 +12,9 @@ def test_modules_01():
     print type(g.outputs)
     print type(g.outputs.out)
     print g.outputs.out
-    g.outputs.out = 7.0 #no effect
+    g.outputs.out = 7.0
     g.process()
-    assert  g.outputs.out == 4.0
+    assert  g.outputs.out == 9
     s = ecto_test.Scatter(n = 4, x=3)
     s.process()
     assert(len(s.outputs) == 4)

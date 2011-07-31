@@ -3,7 +3,7 @@
 #include <ecto/except.hpp>
 #include <boost/exception/all.hpp>
 
-/**
+/*
  * Catch all and pass on exception.
  */
 #define CATCH_ALL() \
@@ -28,12 +28,11 @@ catch (...) \
 { \
   except::EctoException ee("Threw unknown exception type!"); \
   ee << "  Module : " + name() + "\n  Function: " + __FUNCTION__; \
-   boost::throw_exception(ee); \
+  boost::throw_exception(ee); \
 }
 
 namespace ecto
 {
-
   void
   auto_suggest(except::NonExistant& e, const cell& m)
   {
@@ -95,9 +94,10 @@ namespace ecto
   ReturnCode
   cell::process()
   {
-    init();//this should call configure FIXME make cleaner life cycle //only once.
+    init();
     //trigger all parameter change callbacks...
     tendrils::iterator begin = parameters.begin(), end = parameters.end();
+
     while (begin != end)
     {
       try
@@ -162,7 +162,6 @@ namespace ecto
   cell::gen_doc(const std::string& doc) const
   {
     std::stringstream ss;
-
     ss << name() << " (ecto::module):\n";
     ss << "\n";
     ss << "\n" << doc << "\n\n";
@@ -189,7 +188,6 @@ namespace ecto
   void
   cell::verify_inputs() const
   {
-
     tendrils::const_iterator it = inputs.begin(), end(inputs.end());
     while (it != end)
     {

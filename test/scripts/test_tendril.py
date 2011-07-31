@@ -3,12 +3,13 @@ import ecto
 import ecto_test
 
 def test_tendril():
+    print "here"
     tendril = ecto.Tendril()
     tendril.set(5)
     t = ecto.Tendril()
     t.val = 5
-    t.notify()
-    tendril.notify()
+    #t.notify()
+    #tendril.notify()
     assert t.val == t.get()
     assert t.val == 5
     assert tendril.val == t.val

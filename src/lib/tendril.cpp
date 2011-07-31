@@ -75,53 +75,11 @@ namespace ecto
     doc_ = doc_str;
   }
 
-  void tendril::enqueue_oneshot(TendrilJob job)
-  {
-    boost::mutex::scoped_lock lock(mtx_);
-    jobs_onetime_.push_back(job);
-  }
-  void tendril::enqueue_persistent(TendrilJob job)
-  {
-    boost::mutex::scoped_lock lock(mtx_);
-    jobs_persistent_.push_back(job);
-  }
-
-  struct exec
-  {
-    exec(tendril&t):t(t){}
-    void operator()(tendril::TendrilJob& job)
-    {
-      job(t);
-    }
-    tendril& t;
-  };
-
-  template<typename JobQue>
-  void
-  execute(tendril& t, JobQue& q)
-  {
-    std::for_each(q.begin(), q.end(), exec(t));
-  }
-
-  void tendril::exec_oneshots()
-  {
-    boost::mutex::scoped_lock lock(mtx_);
-    execute(*this,jobs_onetime_);
-    jobs_onetime_.clear();
-  }
-
-  void tendril::exec_persistent()
-  {
-    boost::mutex::scoped_lock lock(mtx_);
-    execute(*this,jobs_persistent_);
-  }
-
   void tendril::notify()
   {
-    exec_oneshots();
     if (dirty())
     {
-      exec_persistent();
+      jobs_(*this);
     }
     dirty(false);
   }
@@ -209,18 +167,6 @@ namespace ecto
       throw except::TypeMismatch(type_name() + " is not a " + rhs.type_name());
     }
   }
-
-//  void
-//  tendril::mark_dirty()
-//  {
-//    dirty_ = true;
-//    user_supplied_ = true;
-//  }
-//  void
-//  tendril::mark_clean()
-//  {
-//    dirty_ = false;
-//  }
 
   void tendril::copy_holder(const tendril& rhs)
   {
