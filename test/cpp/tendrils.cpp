@@ -16,9 +16,11 @@ TEST(TendrilMap, Reference)
 {
   tendrils t;
   t.declare<bool>("bool", "booly an", true);
-
+  t.declare<std::string>("foo","A str", "bar");
   t["bool"].reset();
   EXPECT_TRUE(t["bool"]); //not by reference
+  t["bool"] = t["foo"];
+  EXPECT_TRUE(t["bool"]->is_type<bool>());
 }
 
 
