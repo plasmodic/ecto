@@ -21,6 +21,7 @@ struct Setter
   {
     t << proxy;
     t.dirty(true);
+    t.user_supplied(true);
   }
   tendril proxy;
 };

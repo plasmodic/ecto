@@ -117,6 +117,16 @@ namespace ecto
     return it->second;
   }
 
+  tendril::ptr&
+  tendrils::operator[](const std::string& name)
+  {
+    boost::mutex::scoped_lock lock(mtx);
+    map_t::iterator it = storage.find(name);
+    if (it == end())
+      doesnt_exist(name);
+    return it->second;
+  }
+
 
   tendril::ptr
   tendrils::declare(const std::string& name, tendril::ptr t)

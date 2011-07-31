@@ -65,7 +65,6 @@ namespace ecto
         (*rhs.converter)(*boost::unsafe_any_cast<boost::python::object>(&holder_), rhs);
       }
     }
-    dirty(true);
     user_supplied(true);
     return *this;
   }

@@ -17,8 +17,13 @@ TEST(TendrilTest, Dirtiness)
   EXPECT_EQ(t.get<float>(), 0.5f);
   EXPECT_FALSE(t.dirty());
   t << 0.75f;
-  EXPECT_TRUE(t.dirty());
+  EXPECT_FALSE(t.dirty());
   EXPECT_EQ(t.get<float>(), 0.75f);
+
+  t.dirty(true);
+  EXPECT_TRUE(t.dirty());
+  t.notify();
+  EXPECT_FALSE(t.dirty());
 }
 
 TEST(TendrilTest, Constructors)
@@ -41,19 +46,30 @@ TEST(TendrilTest, Constructors)
     meh << 2.0f;
 
     EXPECT_TRUE(meh.has_default());
+    EXPECT_TRUE(meh.is_type<float>());
+
+    EXPECT_TRUE(meh.get<float>()==2.0f);
+
+    meh.user_supplied(true);
+    meh.dirty(true);
+    //user_supplied and dirty are explicit states.
     EXPECT_TRUE(meh.user_supplied());
     EXPECT_TRUE(meh.dirty());
-    EXPECT_TRUE(meh.is_type<float>());
+
+    meh.notify();
+    EXPECT_TRUE(meh.user_supplied());
+    EXPECT_FALSE(meh.dirty());
   }
   {
     ecto::tendril::ptr meh = ecto::make_tendril<float>();
     EXPECT_FALSE(meh->dirty());
     EXPECT_FALSE(meh->user_supplied());
     EXPECT_FALSE(meh->has_default());
-    *meh << 2.0f;
+    meh << 2.0f;
+    EXPECT_TRUE(meh->get<float>()==2.0f);
     EXPECT_FALSE(meh->has_default());
-    EXPECT_TRUE(meh->user_supplied());
-    EXPECT_TRUE(meh->dirty());
+    EXPECT_FALSE(meh->user_supplied());
+    EXPECT_FALSE(meh->dirty());
   }
 }
 

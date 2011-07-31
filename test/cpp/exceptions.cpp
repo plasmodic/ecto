@@ -241,6 +241,7 @@ TEST(Exceptions, ParameterCBExcept_sched)
 );
   cell::ptr m = create_cell<ParameterCBExcept> ();
   m->parameters["x"] << 5.1;
+  m->parameters["x"]->dirty(true);
   plasm::ptr p(new plasm);
   p->insert(m);
   scheduler::threadpool sched(p);

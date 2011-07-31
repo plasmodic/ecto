@@ -130,11 +130,8 @@ namespace ecto
     set_default_val(const T& val = T())
     {
       enforce_type<T>();
-      if (!user_supplied_) //user supplied?
-      {
-        default_ = true;
-        set_holder<T>(val);
-      }
+      default_ = true;
+      set_holder<T>(val);
     }
 
     void required(bool b);
@@ -175,8 +172,6 @@ namespace ecto
         //cast a void pointer to this type.
         *boost::unsafe_any_cast<T>(&holder_) = val;
       }
-      dirty(true);
-      user_supplied(true);
     }
 
     void operator<<(const boost::python::object& obj)
@@ -191,8 +186,6 @@ namespace ecto
       }
       else
         (*converter)(*this, obj);
-      dirty(true);
-      user_supplied(true);
     }
 
     ecto::tendril& operator<<(const ecto::tendril& rhs);
@@ -280,7 +273,7 @@ namespace ecto
 
     /**
      * Register a typed callback with the tendril... Will throw on wrong type.
-     * @param cb May be called by the notify function, if the tendril is dirty.
+     * @param cb Will be called by the notify function, if the tendril is dirty.
      * @param oneshot do only once
      * @return  this 
      */
@@ -471,6 +464,10 @@ namespace ecto
     friend void
     operator<<(ecto::tendril::ptr lhs, const ecto::tendril::ptr& rhs)
     {
+      if (!lhs)
+        throw std::runtime_error("Attempt to convert into tendril which is null");
+      if (!rhs)
+        throw std::runtime_error("Attempt to convert into tendril which is null");
       *lhs << *rhs;
     }
 

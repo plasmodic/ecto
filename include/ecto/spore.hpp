@@ -127,6 +127,11 @@ namespace ecto
       return p()->dirty();
     }
 
+    void dirty(bool d)
+    {
+      return p()->dirty(d);
+    }
+
     bool user_supplied() const
     {
       return p()->user_supplied();

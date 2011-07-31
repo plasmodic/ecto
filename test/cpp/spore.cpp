@@ -30,13 +30,12 @@ TEST(SporeTest, NoDefault)
   EXPECT_FALSE(d.has_default());
 
   d << 3.14;
-  EXPECT_TRUE(d.dirty());
-  EXPECT_TRUE(d.user_supplied());
+  EXPECT_FALSE(d.dirty());
+  EXPECT_FALSE(d.user_supplied());
   EXPECT_FALSE(d.has_default());
 
-  //since the user already supplied a value this should be false...
   d.set_default_val(10);
-  EXPECT_FALSE(d.has_default());
+  EXPECT_TRUE(d.has_default());
 
 }
 
@@ -60,8 +59,8 @@ TEST(SporeTest, Default)
   EXPECT_FALSE(d.dirty());
 
   d << 3.14;
-  EXPECT_TRUE(d.dirty());
-  EXPECT_TRUE(d.user_supplied());
+  EXPECT_FALSE(d.dirty());
+  EXPECT_FALSE(d.user_supplied());
   EXPECT_TRUE(d.has_default());
 }
 
@@ -93,6 +92,7 @@ TEST(SporeTest, Callbacks)
   EXPECT_EQ(c.val, 0);
 
   d << 3.14;
+  d.dirty(true); //dirtiness is explicit
   d.notify();
   EXPECT_EQ(c.count, 1);
   EXPECT_EQ(c.val, 3.14);
