@@ -4,6 +4,8 @@
 #include <utility>
 #include <deque>
 
+#include "cygwin_asio.hpp"
+
 #include <boost/make_shared.hpp>
 #include <boost/asio.hpp>
 #include <boost/thread.hpp>
