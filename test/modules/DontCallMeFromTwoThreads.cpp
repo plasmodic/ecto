@@ -28,6 +28,7 @@
  */
 
 #include <ecto/ecto.hpp>
+#include "cygwin_asio.hpp"
 #include <boost/asio.hpp>
 
 using ecto::tendrils;
