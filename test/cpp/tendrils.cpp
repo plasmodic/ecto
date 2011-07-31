@@ -12,4 +12,13 @@ TEST(TendrilMap, Const)
   EXPECT_TRUE(tp);
 }
 
+TEST(TendrilMap, Reference)
+{
+  tendrils t;
+  t.declare<bool>("bool", "booly an", true);
+
+  t["bool"].reset();
+  EXPECT_TRUE(t["bool"]); //not by reference
+}
+
 

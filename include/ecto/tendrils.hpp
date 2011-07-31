@@ -180,7 +180,6 @@ namespace ecto
      * @return A reference to the tendril.
      */
     tendril::ptr operator[](const std::string& name) const;
-    tendril::ptr& operator[](const std::string& name);
 
 
     /**
