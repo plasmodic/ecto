@@ -4,10 +4,7 @@ namespace ecto
 {
   tendril::tendril()
     : doc_()
-    , dirty_(false)
-    , default_(false)
-    , user_supplied_(false)
-    , required_(false)
+    , flags_()
     , converter(&ConverterImpl<none>::instance)
   {
     set_holder<none>(none());
@@ -17,10 +14,7 @@ namespace ecto
     : holder_(rhs.holder_)
     , type_ID_(rhs.type_ID_)
     , doc_(rhs.doc_)
-    , dirty_(false)
-    , default_(rhs.default_)
-    , user_supplied_(rhs.user_supplied_)
-    , required_(rhs.required_)
+    , flags_(rhs.flags_)
     , converter(rhs.converter)
   { }
 
@@ -30,9 +24,7 @@ namespace ecto
       return *this;
     copy_holder(rhs);
     doc_ = rhs.doc_;
-    dirty_ = rhs.dirty_;
-    default_ = rhs.default_;
-    required_ = rhs.required_;
+    flags_ = rhs.flags_;
     converter = rhs.converter;
     return *this;
   }
@@ -99,49 +91,49 @@ namespace ecto
   bool
   tendril::required() const
   {
-    return required_;
+    return flags_[REQUIRED];
   }
 
   void
   tendril::required(bool b)
   {
-    required_ = b;
+    flags_[REQUIRED] = b;
   }
 
   bool
   tendril::user_supplied() const
   {
-    return user_supplied_;
+    return flags_[USER_SUPPLIED];
   }
 
   void
   tendril::user_supplied(bool b)
   {
-    user_supplied_ = b;
+    flags_[USER_SUPPLIED] = b;
   }
 
   bool
   tendril::has_default() const
   {
-    return default_;
+    return flags_[DEFAULT_VALUE];
   }
 
   bool
   tendril::dirty() const
   {
-    return dirty_;
+    return flags_[DIRTY];
   }
 
   void
   tendril::dirty(bool dirty)
   {
-    dirty_ = dirty;
+    flags_[DIRTY] = dirty;
   }
 
   bool
   tendril::clean() const
   {
-    return !dirty_;
+    return !flags_[DIRTY];
   }
 
   bool

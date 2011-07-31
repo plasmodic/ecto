@@ -5,7 +5,7 @@
 
 #include <ecto/python/std_map_indexing_suite.hpp>
 #include <boost/foreach.hpp>
-#include <setter.hpp>
+
 namespace bp = boost::python;
 
 namespace ecto

@@ -40,6 +40,7 @@
 
 #include <vector>
 #include <string>
+#include <bitset>
 
 namespace ecto
 {
@@ -63,6 +64,14 @@ namespace ecto
     typedef boost::shared_ptr<const tendril> const_ptr;
     typedef boost::function< void(tendril&) > TendrilJob;
 
+    enum {
+      DEFAULT_VALUE=0,
+      DIRTY,
+      USER_SUPPLIED,
+      REQUIRED,
+      N_FLAGS
+    };
+
     /**
      * \brief Creates a tendril that is initialized with the
      * tendril::none type. This should be fairly cheap.
@@ -83,11 +92,10 @@ namespace ecto
      */
     template <typename T>
     tendril (const T& t, const std::string& doc)
-      : dirty_(false)
-      , default_(true)
-      , user_supplied_(false)
+      : flags_()
       , converter(&ConverterImpl<T>::instance)
     {
+      flags_[DEFAULT_VALUE]=true;
       set_holder<T>(t);
       set_doc(doc);
     }
@@ -127,7 +135,7 @@ namespace ecto
     set_default_val(const T& val = T())
     {
       enforce_type<T>();
-      default_ = true;
+      flags_[DEFAULT_VALUE] = true;
       set_holder<T>(val);
     }
 
@@ -372,7 +380,7 @@ namespace ecto
     boost::any holder_;
     const char* type_ID_;
     std::string doc_;
-    bool dirty_, default_, user_supplied_, required_;
+    std::bitset<N_FLAGS> flags_;
     typedef boost::signals2::signal<void(tendril&)> job_signal_t;
     job_signal_t jobs_;
     Converter* converter;
