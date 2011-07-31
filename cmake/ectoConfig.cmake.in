@@ -50,17 +50,6 @@ find_package(Boost COMPONENTS
   )
 find_package(PythonLibs REQUIRED)
 
-#list(APPEND ecto_LIBRARIES
-#  ${Boost_LIBRARIES}
-#  ${PYTHON_LIBRARIES}
-#  ${CMAKE_THREAD_LIBS_INIT}
-#)
-
-#list(APPEND ecto_INCLUDE_DIRS
-#    ${PYTHON_INCLUDE_PATH}
-#    ${Boost_INCLUDE_DIRS}
-#    )
-
 # ============== Python Path ===================================================
 macro( ecto_python_env_gen )
     set(ecto_PYTHONPATH_ @ecto_PYTHONPATH@ )
@@ -107,7 +96,4 @@ if(NOT PYTHON_PACKAGES_PATH)
     
     set(ecto_module_PYTHON_INSTALL ${PYTHON_PACKAGES_PATH} CACHE PATH "The path where modules will be installed." )
 endif()
-
-
-
 

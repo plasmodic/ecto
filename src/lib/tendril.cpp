@@ -156,7 +156,7 @@ namespace ecto
   {
     if (!compatible_type(rhs))
     {
-      throw except::TypeMismatch(type_name() + " is not a " + rhs.type_name());
+      throw except::TypeMismatch(type_name() + " is not compatible with " + rhs.type_name());
     }
   }
 

@@ -23,7 +23,7 @@ namespace ecto
   };
 
   bp::tuple
-  entangled_pair(const std::string& source_name="EntagledSource", const std::string& sink_name = "EntagledSink")
+  entangled_pair(tendril::ptr value,const std::string& source_name="EntagledSource", const std::string& sink_name = "EntagledSink")
   {
     bp::tuple p;
     cell::ptr source, sink;
@@ -31,17 +31,23 @@ namespace ecto
     source->name(source_name);
     sink = ecto::create_cell<EtherSink>();
     sink->name(sink_name);
+    sink->inputs["in"] << *value;
     source->outputs["out"] = sink->inputs["in"];
     p = bp::make_tuple(source, sink);
     return p;
   }
-  BOOST_PYTHON_FUNCTION_OVERLOADS(entangled_pair_overloads, entangled_pair, 0, 2)
+  BOOST_PYTHON_FUNCTION_OVERLOADS(entangled_pair_overloads, entangled_pair, 1,3)
   namespace py
   {
+    using bp::arg;
     void
     wrap_ether()
     {
-      bp::def("EntangledPair", entangled_pair,entangled_pair_overloads());
+      bp::def("EntangledPair", entangled_pair,
+              entangled_pair_overloads((arg("value"), arg("source_name"), arg("sink_name")), //args
+                  "Constructs a pair of entangled cells. Useful for " //
+                  "teleportation of tendrils without constructing edges in a graph."//doc str
+                  ));
     }
   }
 }

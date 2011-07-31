@@ -28,20 +28,35 @@
  */
 
 #include <ecto/ecto.hpp>
-
 namespace ecto
 {
-  namespace bp = boost::python;
-
-  struct Passthrough
+  struct Counter
   {
-    static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
+    static void
+    declare_params(tendrils& p)
     {
-      in.declare<tendril::none>("in", "Any type");
-      out.declare<tendril::none>("out", "Any type");
-      out["out"] = in["in"];
+      p.declare<int>("count", "Initial value of counter, will be incremented at every call to process.", 0);
     }
+    static void
+    declare_io(const tendrils& p, tendrils& in, tendrils& out)
+    {
+      in.declare<tendril::none>("input","Any input, counts the number of executions.");
+      out.declare<int>("count","The count of input.",p.get<int>("count"));
+    }
+    void
+    configure(tendrils&p, tendrils&in, tendrils&out)
+    {
+      count_ = out["count"];
+    }
+    int
+    process(tendrils& /*in*/, tendrils& /*out*/)
+    {
+      ++(*count_);
+      return ecto::OK;
+    }
+    spore<int> count_;
   };
 }
 
-ECTO_CELL(ecto, ecto::Passthrough, "Passthrough", "Passes through any type.");
+ECTO_CELL(ecto, ecto::Counter, "Counter", "Gives an execution count. Useful for counting the number of times that an output of another cell"
+    " is valid.");
