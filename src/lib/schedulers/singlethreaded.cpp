@@ -69,6 +69,7 @@ namespace ecto {
 
     void singlethreaded::execute_async(unsigned niter) {
       running_ = true;
+      //compute_stack(); //FIXME hack for python based tendrils.
       scoped_ptr<thread> tmp(new thread(bind(&singlethreaded::execute, this, niter)));
       tmp->swap(runthread);
     }
