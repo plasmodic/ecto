@@ -27,14 +27,52 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #pragma once
-
+#include <ecto/plasm.hpp>
+#include <ecto/tendril.hpp>
+#include <ecto/cell.hpp>
 #include <ecto/graph_types.hpp>
+#include <ecto/strand.hpp>
+
+#include <string>
+#include <map>
+#include <set>
+#include <utility>
+#include <deque>
+
+
 
 namespace ecto {
-  namespace scheduler {
 
-    int 
-    invoke_process(graph::graph_t& graph, graph::graph_t::vertex_descriptor vd);
+  namespace schedulers {
+    
+    struct ECTO_EXPORT threadpool 
+    {
+      // shared ptr is used to guarantee lifetimes
+      threadpool(plasm::ptr);
+      threadpool(plasm&);
+      ~threadpool();
 
+      /**
+         Use one thread per cell, up to hardware_concurrency.
+       */
+      int execute(unsigned niter=0, unsigned nthreads=0);
+      void execute_async(unsigned niter=0, unsigned nthreads=0);
+
+      void stop();
+      bool running() const;
+      void wait();
+      
+      plasm::ptr plasm_;
+      ecto::graph::graph_t& graph;
+      
+      struct impl;
+      boost::shared_ptr<impl> impl_;
+      boost::thread runthread;
+
+    private:
+      
+      int execute_impl(unsigned niter, unsigned nthreads);
+
+   };
   }
 }

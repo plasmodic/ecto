@@ -26,21 +26,46 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#pragma once
-#include <boost/format.hpp>
+#include <ecto/plasm.hpp>
+#include <ecto/tendril.hpp>
+#include <ecto/cell.hpp>
+#include <ecto/graph_types.hpp>
+
+#include <string>
+#include <map>
+#include <set>
+#include <utility>
+#include <deque>
+
+
 
 namespace ecto {
-  ECTO_EXPORT void log(const std::string& msg);
-  extern ECTO_EXPORT boost::mutex log_mtx;
-}
 
-#if defined(ECTO_LOG_ON)
-#define ECTO_LOG_DEBUG(fmt, args)                                       \
-  do {                                                                  \
-    log_mtx.lock();                                                     \
-    log(str(boost::format(fmt) % args));                                \
-    log_mtx.unlock();                                                   \
-  } while (false)
-#else
-#define ECTO_LOG_DEBUG(fmg, args) do { } while (false)
-#endif
+  namespace schedulers {
+    
+    struct ECTO_EXPORT singlethreaded 
+    {
+      singlethreaded(plasm::ptr);
+      singlethreaded(plasm&);
+
+      int execute(unsigned niter=0);
+      void execute_async(unsigned niter=0);
+
+      void stop();
+      bool running() const;
+      void wait();
+
+    private:
+
+      int invoke_process(ecto::graph::graph_t::vertex_descriptor vd);
+      void compute_stack();
+
+      plasm::ptr plasm_;
+      ecto::graph::graph_t& graph;
+      boost::thread runthread;
+      bool running_;
+      
+      std::vector<ecto::graph::graph_t::vertex_descriptor> stack;
+    };
+  }
+}

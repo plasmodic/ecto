@@ -30,6 +30,9 @@
 #include <boost/noncopyable.hpp>
 
 namespace ecto {
+
+  struct cell;
+
   namespace registry {
 
     template <typename T>
@@ -70,6 +73,7 @@ namespace ecto {
         : name_(name), docstring_(docstring) 
       { 
         module_registry<Module>::instance().add(boost::ref(*this));
+        register_factory_fn(name, &ecto::create_cell<T>);
       }
 
       void operator()() const 
@@ -79,6 +83,12 @@ namespace ecto {
       const static registrator& inst;
 
     };
+    
+    boost::shared_ptr<cell> create(const std::string& name);
+    typedef boost::function<boost::shared_ptr<cell>()> ffn_t;
+
+    void register_factory_fn(const std::string& name, ffn_t fn);
+
   }
 }
 

@@ -107,7 +107,7 @@ namespace ecto
     throw except::NonExistant(name,ss.str());
   }
 
-  tendril::ptr
+  const tendril::ptr&
   tendrils::operator[](const std::string& name) const
   {
     boost::mutex::scoped_lock lock(mtx);
@@ -115,6 +115,16 @@ namespace ecto
     if (it == end())
       doesnt_exist(name);
     return it->second;
+  }
+
+  tendril_ptr_ref
+  tendrils::operator[](const std::string& name)
+  {
+    boost::mutex::scoped_lock lock(mtx);
+    map_t::iterator it = storage.find(name);
+    if (it == end())
+      doesnt_exist(name);
+    return tendril_ptr_ref(it->second);
   }
 
   tendril::ptr

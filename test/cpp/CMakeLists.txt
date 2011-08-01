@@ -13,12 +13,16 @@ add_executable(ecto-test
   spore.cpp
   exceptions.cpp
   graph.cpp
+  threadpool.cpp
   )
 
 target_link_libraries(ecto-test
   ecto_cpp
   ${GTEST_LIBRARIES}
   ${ECTO_DEP_LIBS}
+  # this is so that we can create cells that are in the test lib w/o 
+  # python importing them
+  ecto_test_ectomodule 
   )
 
 add_test(gtest_units ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/ecto-test)

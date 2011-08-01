@@ -2,7 +2,7 @@
 #include <ecto/tendril.hpp>
 #include <ecto/cell.hpp>
 #include <ecto/graph_types.hpp>
-#include <ecto/scheduler/singlethreaded.hpp>
+#include <ecto/schedulers/singlethreaded.hpp>
 
 #include <boost/format.hpp>
 #include <boost/date_time/posix_time/posix_time_duration.hpp>
@@ -131,7 +131,7 @@ namespace ecto
     typedef boost::unordered_map<ecto::cell::ptr, graph_t::vertex_descriptor> ModuleVertexMap;
     ModuleVertexMap mv_map;
     graph_t graph;
-    boost::shared_ptr<ecto::scheduler::singlethreaded> scheduler;
+    boost::shared_ptr<ecto::schedulers::singlethreaded> scheduler;
     struct CVMtoCell
     {
       cell::ptr
@@ -189,7 +189,7 @@ namespace ecto
   plasm::execute(unsigned niter)
   {
     if (!impl_->scheduler)
-      impl_->scheduler.reset(new ecto::scheduler::singlethreaded(shared_from_this()));
+      impl_->scheduler.reset(new ecto::schedulers::singlethreaded(shared_from_this()));
     impl_->scheduler->execute(niter);
     while (impl_->scheduler->running())
       boost::this_thread::sleep(boost::posix_time::microseconds(10));

@@ -9,12 +9,13 @@ endmacro()
 foreach(file
     test_addergraph
     test_async_execution
+    test_async_execution_harsh
     test_blackbox
     test_constant
     test_destroy_called
     test_doc
     test_dual_line_plasm
-    #test_entanglement FIXME
+    test_entanglement
     test_If
     test_handles
     test_modules

@@ -45,7 +45,7 @@ namespace ecto
   typedef boost::shared_ptr<cell> cell_ptr;
 
   //forward declare schedulers for friendliness.
-  namespace scheduler
+  namespace schedulers
   {
     class singlethreaded;
   }

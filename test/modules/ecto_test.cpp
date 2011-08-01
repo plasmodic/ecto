@@ -29,6 +29,7 @@
 
 #include <ecto/ecto.hpp>
 #include <ecto/registry.hpp>
+#include <ecto/schedulers/threadpool.hpp>
 #include <iostream>
 #include <boost/format.hpp>
 #include <boost/foreach.hpp>
@@ -215,13 +216,18 @@ namespace ecto_test
 
 }
 
+
 using namespace ecto_test;
+namespace bp = boost::python;
+
 ECTO_DEFINE_MODULE(ecto_test)
 {
-  boost::python::def("make_pod_tendril", ecto_test::makePodTendril);
+  bp::def("make_pod_tendril", ecto_test::makePodTendril);
+
   ecto::wrap<SharedPass>("SharedPass", "A shared pointer pass through");
   ecto::wrap<Scatter>("Scatter", "Scatter a value...");
   ecto::wrap<HandleHolder>("HandleHolder","Holds on to handles...");
   ecto::wrap<DontAllocateMe>("DontAllocateMe", "Don't allocate me, feel free to inspect.");
   ecto::wrap<NoPythonBindings>("NoPythonBindings", "This uses something that is bound to python!");
+
 }

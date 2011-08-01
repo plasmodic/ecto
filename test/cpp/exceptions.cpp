@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <ecto/ecto.hpp>
 #include <ecto/plasm.hpp>
-#include <ecto/scheduler/threadpool.hpp>
+#include <ecto/schedulers/threadpool.hpp>
 
 #define STRINGDIDLY(A) std::string(#A)
 
@@ -213,7 +213,7 @@ TEST(Exceptions, WrongType_sched)
   cell::ptr m = create_cell<WrongType> ();
   plasm::ptr p(new plasm);
   p->insert(m);
-  scheduler::threadpool sched(p);
+  schedulers::threadpool sched(p);
   EXPECT_THROW(
       try
       {
@@ -244,7 +244,7 @@ TEST(Exceptions, ParameterCBExcept_sched)
   m->parameters["x"]->dirty(true);
   plasm::ptr p(new plasm);
   p->insert(m);
-  scheduler::threadpool sched(p);
+  schedulers::threadpool sched(p);
   EXPECT_THROW(
       try
       {

@@ -10,8 +10,8 @@
 
 #include <ecto/graph_types.hpp>
 #include <ecto/plasm.hpp>
-#include <ecto/scheduler/invoke.hpp>
-#include <ecto/scheduler/singlethreaded.hpp>
+#include <ecto/schedulers/invoke.hpp>
+#include <ecto/schedulers/singlethreaded.hpp>
 
 #include <boost/thread.hpp>
 #include <boost/scoped_ptr.hpp>
@@ -25,7 +25,7 @@ namespace ecto {
   using boost::thread;
   using boost::bind;
 
-  namespace scheduler {
+  namespace schedulers {
 
     singlethreaded::singlethreaded(plasm::ptr p) 
       : plasm_(p), graph(p->graph()) 
@@ -42,7 +42,7 @@ namespace ecto {
     int 
     singlethreaded::invoke_process(graph_t::vertex_descriptor vd)
     {
-      return ecto::scheduler::invoke_process(graph, vd);
+      return ecto::schedulers::invoke_process(graph, vd);
     }
 
     void singlethreaded::compute_stack()
@@ -51,6 +51,7 @@ namespace ecto {
         return;
       //check this plasm for correctness.
       plasm_->check();
+      plasm_->configure_all();
       boost::topological_sort(graph, std::back_inserter(stack));
       std::reverse(stack.begin(), stack.end());
     }
@@ -81,7 +82,7 @@ namespace ecto {
 #endif
       compute_stack();
       unsigned cur_iter = 0;
-      while(niter == 0 || cur_iter < niter)
+      while((niter == 0 || cur_iter < niter) && running_)
         {
           for (size_t k = 0; k < stack.size(); ++k)
             {
@@ -99,6 +100,7 @@ namespace ecto {
 
     void singlethreaded::stop() {
       running_ = false;
+      runthread.interrupt();
       runthread.join();
     }
 

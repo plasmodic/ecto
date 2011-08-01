@@ -8,8 +8,6 @@ macro(init_ecto_kitchen)
   if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/ecto)
     MESSAGE(FATAL_ERROR "Expecting ecto as a subdirectory of your toplevel project!")
   endif()
-
-  message("PROJECTS: ${ARGN}")
   set(KITCHEN_PROJECTS "ecto;${ARGN}")
 
   set(ECTO_KITCHEN_VERSION 11.07.0) 
@@ -38,7 +36,7 @@ macro(init_ecto_kitchen)
     @ONLY)
 
   string(REPLACE ";" " " KITCHEN_PROJECTS_STR "${KITCHEN_PROJECTS}")
-  message("Initializing kitchen with projects ${KITCHEN_PROJECTS_STR}")
+  message(STATUS "Initializing kitchen with projects ${KITCHEN_PROJECTS_STR}")
   configure_file(${ecto_kitchen_SOURCE_DIR}/ecto/kitchen/util/python_path.sh.in
     ${CMAKE_BINARY_DIR}/python_path.sh
     @ONLY

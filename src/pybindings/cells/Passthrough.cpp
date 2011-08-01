@@ -39,18 +39,8 @@ namespace ecto
     {
       in.declare<tendril::none>("in", "Any type");
       out.declare<tendril::none>("out", "Any type");
-    }
-    void configure(const tendrils& parms, tendrils& in, tendrils& out)
-    {
       out["out"] = in["in"];
     }
-
-    int process(tendrils& in, tendrils& out)
-    {
-      out["out"] << in["in"];
-      return ecto::OK;
-    }
-
   };
 }
 

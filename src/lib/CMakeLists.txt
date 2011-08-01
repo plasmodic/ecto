@@ -15,9 +15,10 @@ add_library(ecto_cpp SHARED
   log.cpp
   except.cpp
   profile.cpp
-  scheduler/invoke.cpp
-  scheduler/singlethreaded.cpp
-  scheduler/threadpool.cpp
+  registry.cpp
+  schedulers/invoke.cpp
+  schedulers/singlethreaded.cpp
+  schedulers/threadpool.cpp
   ${ecto_HEADERS}
   )
   

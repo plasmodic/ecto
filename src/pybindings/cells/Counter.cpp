@@ -26,46 +26,37 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#include <ecto/plasm.hpp>
-#include <ecto/tendril.hpp>
-#include <ecto/cell.hpp>
-#include <ecto/graph_types.hpp>
 
-#include <string>
-#include <map>
-#include <set>
-#include <utility>
-#include <deque>
-
-
-
-namespace ecto {
-
-  namespace scheduler {
-    
-    struct ECTO_EXPORT singlethreaded 
+#include <ecto/ecto.hpp>
+namespace ecto
+{
+  struct Counter
+  {
+    static void
+    declare_params(tendrils& p)
     {
-      singlethreaded(plasm::ptr);
-      singlethreaded(plasm&);
-
-      int execute(unsigned niter=0);
-      void execute_async(unsigned niter=0);
-
-      void stop();
-      bool running() const;
-      void wait();
-
-    private:
-
-      int invoke_process(ecto::graph::graph_t::vertex_descriptor vd);
-      void compute_stack();
-
-      plasm::ptr plasm_;
-      ecto::graph::graph_t& graph;
-      boost::thread runthread;
-      bool running_;
-      
-      std::vector<ecto::graph::graph_t::vertex_descriptor> stack;
-    };
-  }
+      p.declare<int>("count", "Initial value of counter, will be incremented at every call to process.", 0);
+    }
+    static void
+    declare_io(const tendrils& p, tendrils& in, tendrils& out)
+    {
+      in.declare<tendril::none>("input","Any input, counts the number of executions.");
+      out.declare<int>("count","The count of input.",p.get<int>("count"));
+    }
+    void
+    configure(tendrils&p, tendrils&in, tendrils&out)
+    {
+      count_ = out["count"];
+    }
+    int
+    process(tendrils& /*in*/, tendrils& /*out*/)
+    {
+      ++(*count_);
+      return ecto::OK;
+    }
+    spore<int> count_;
+  };
 }
+
+ECTO_CELL(ecto, ecto::Counter, "Counter", "Gives an execution count. Useful for counting the number of times that an output of another cell"
+    " is valid.");

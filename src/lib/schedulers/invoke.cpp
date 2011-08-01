@@ -15,7 +15,7 @@ namespace ecto {
 
   using namespace ecto::graph;
 
-  namespace scheduler {
+  namespace schedulers {
 
     int 
     invoke_process(graph_t& graph, graph_t::vertex_descriptor vd)

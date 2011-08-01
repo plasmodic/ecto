@@ -1,6 +1,6 @@
 #include <boost/python.hpp>
-#include <ecto/scheduler/singlethreaded.hpp>
-#include <ecto/scheduler/threadpool.hpp>
+#include <ecto/schedulers/singlethreaded.hpp>
+#include <ecto/schedulers/threadpool.hpp>
 
 namespace bp = boost::python;
 
@@ -25,7 +25,7 @@ namespace ecto {
       bp::scope().attr("schedulers") = schedulers_module;
       bp::scope schedulers_scope = schedulers_module;
       
-      using namespace ecto::scheduler;
+      using namespace ecto::schedulers;
       using bp::arg;
       bp::class_<singlethreaded, boost::noncopyable>("Singlethreaded", bp::init<ecto::plasm::ptr>())
         .def(bp::init<ecto::plasm&>())

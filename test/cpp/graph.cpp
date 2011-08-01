@@ -34,15 +34,8 @@ namespace {
     }
     void configure(const tendrils& parms, tendrils& in, tendrils& out)
     {
-      in_ = in["in"];
-      out_ = out["out"];
+      out["out"] = in["in"];
     }
-    int process(tendrils& in, tendrils& out)
-    {
-      out_ << in_;
-      return ecto::OK;
-    }
-    tendril::ptr in_, out_;
   };
 
 }

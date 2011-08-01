@@ -1,3 +1,12 @@
+// #define ECTO_THREADPOOL_DEBUG
+
+#if defined(ECTO_THREADPOOL_DEBUG)
+#define ECTO_LOG_ON
+#define ECTO_USLEEP() usleep(500000)
+#else
+#define ECTO_USLEEP()
+#endif
+
 #include <string>
 #include <map>
 #include <set>
@@ -17,8 +26,8 @@
 
 #include <ecto/graph_types.hpp>
 #include <ecto/plasm.hpp>
-#include <ecto/scheduler/invoke.hpp>
-#include <ecto/scheduler/threadpool.hpp>
+#include <ecto/schedulers/invoke.hpp>
+#include <ecto/schedulers/threadpool.hpp>
 
 #include <boost/spirit/home/phoenix/core.hpp>
 #include <boost/spirit/home/phoenix/operator.hpp>
@@ -35,98 +44,86 @@ namespace ecto {
   using boost::exception;
   using boost::exception_ptr;
 
-  namespace scheduler {
+  namespace schedulers {
     namespace asio = boost::asio;
 
     namespace pt = boost::posix_time;
 
+    struct propagator
+    {
+      asio::io_service &from, &to;
+      asio::io_service::work work;
+
+      propagator(asio::io_service& from_, asio::io_service& to_) 
+        : from(from_), to(to_), work(to) { }
+
+      void operator()() {
+        from.run();
+      }
+
+      template <typename Handler>
+      void post(Handler h)
+      {
+        to.post(h);
+      }
+    };
+
+
+    struct thrower
+    {
+      exception_ptr eptr;
+      thrower(exception_ptr eptr_) : eptr(eptr_) { }
+
+      void operator()() const
+      {
+        rethrow_exception(eptr);
+      }
+    };
+
+    struct runandjoin
+    {
+      typedef shared_ptr<runandjoin> ptr;
+
+      thread runner;
+
+      runandjoin() 
+      { 
+        runner.join();
+      }
+
+      ~runandjoin() {
+        runner.join();
+      }
+
+      void joinit() 
+      {
+        runner.join();
+      }
+
+      template <typename Work>
+      void impl(Work w)
+      {
+        try {
+          w();
+        } catch (const boost::exception& e) {
+          w.post(thrower(boost::current_exception()));
+        } catch (const std::exception& e) {
+          w.post(thrower(boost::current_exception()));
+        }
+        w.post(bind(&runandjoin::joinit, this));
+      }
+
+      template <typename Work>
+      void run(Work w)
+      {
+        boost::scoped_ptr<thread> newthread(new thread(bind(&runandjoin::impl<Work>, this, w)));
+        newthread->swap(runner);
+      }
+    };
+
     struct threadpool::impl 
     {
       typedef boost::function<bool(unsigned)> respawn_cb_t;
-
-
-      struct propagator
-      {
-        asio::io_service &from, &to;
-        asio::io_service::work work;
-
-        propagator(asio::io_service& from_, asio::io_service& to_) 
-          : from(from_), to(to_), work(to) { }
-
-        void operator()() {
-          from.run();
-        }
-
-        template <typename Handler>
-        void post(Handler h)
-        {
-          to.post(h);
-        }
-      };
-
-      struct thrower
-      {
-        exception_ptr eptr;
-        thrower(exception_ptr eptr_) : eptr(eptr_) { }
-
-        void operator()() const
-        {
-          rethrow_exception(eptr);
-        }
-      };
-
-      struct stopper 
-      {
-        typedef void result_type;
-
-        void operator()(asio::io_service& serv) const
-        {
-          serv.stop();
-        }
-      };
-
-
-      struct runandjoin
-      {
-        typedef shared_ptr<runandjoin> ptr;
-
-        thread runner;
-
-        runandjoin() 
-        { 
-          runner.join();
-        }
-
-        ~runandjoin() {
-          runner.join();
-        }
-
-        void joinit() 
-        {
-          runner.join();
-        }
-
-        template <typename Work>
-        void impl(Work w)
-        {
-          //          std::cout << __PRETTY_FUNCTION__ << "\n";
-          try {
-            w();
-          } catch (const boost::exception& e) {
-            w.post(thrower(boost::current_exception()));
-          } catch (const std::exception& e) {
-            w.post(thrower(boost::current_exception()));
-          }
-          w.post(bind(&runandjoin::joinit, this));
-        }
-
-        template <typename Work>
-        void run(Work w)
-        {
-          boost::scoped_ptr<thread> newthread(new thread(bind(&runandjoin::impl<Work>, this, w)));
-          newthread->swap(runner);
-        }
-      };
 
       struct invoker : boost::noncopyable
       {
@@ -134,7 +131,6 @@ namespace ecto {
 
         threadpool::impl& context;
 
-        // boost::asio::deadline_timer dt;
         graph_t& g;
         graph_t::vertex_descriptor vd;
         unsigned n_calls;
@@ -144,7 +140,7 @@ namespace ecto {
                 graph_t& g_, 
                 graph_t::vertex_descriptor vd_,
                 respawn_cb_t respawn_)
-          : context(context_), /*dt(context.workserv),*/ g(g_), vd(vd_), n_calls(0), respawn(respawn_)
+          : context(context_), g(g_), vd(vd_), n_calls(0), respawn(respawn_)
         { }
 
         template <typename Handler>
@@ -167,6 +163,7 @@ namespace ecto {
         void async_wait_for_input()
         {
           ECTO_LOG_DEBUG("%s async_wait_for_input", this);
+          ECTO_USLEEP();
           namespace asio = boost::asio;
 
           if (context.stop) {
@@ -186,14 +183,14 @@ namespace ecto {
         {
           cell::ptr m = g[vd];
           // FIXME: not catching exceptions possibly thrown by destroy
-          m->destroy();
+          //m->destroy();
         }
 
         void invoke()
         {
           ECTO_LOG_DEBUG("%s invoke", this);
           try {
-            int j = ecto::scheduler::invoke_process(g, vd);
+            int j = ecto::schedulers::invoke_process(g, vd);
             if (j != ecto::OK)
               {
                 std::cout << "Module " << g[vd]->name() << " returned not okay. Stopping everything." 
@@ -272,8 +269,7 @@ namespace ecto {
       {
         namespace asio = boost::asio;
 
-        stop = false;
-        running = true;
+        boost::mutex::scoped_lock running(running_mtx);
 
         workserv.reset();
         mainserv.reset();
@@ -358,7 +354,6 @@ namespace ecto {
 
         std::cout << str(boost::format("\nin process():     %.2f%%\n") % (total_percentage / nthreads))
           ;
-        running = false;
         return 0;
       }
 
@@ -374,6 +369,19 @@ namespace ecto {
         stop = true;
       }
 
+      impl()
+      {
+        stop = false;
+      }
+
+      bool running() 
+      {
+        boost::mutex::scoped_lock lock(running_mtx, boost::defer_lock);
+        return !lock.try_lock();
+      }
+
+    private:
+
       typedef std::map<graph_t::vertex_descriptor, invoker::ptr> invokers_t;
       invokers_t invokers;
       boost::asio::io_service mainserv, workserv;
@@ -382,30 +390,49 @@ namespace ecto {
                            ecto::strand_hash> strands;
 
       pt::ptime starttime;
-      bool stop, running;
+      bool stop;
       
-      impl() {
-        stop = false;
-        running = false;
-      }
-
-      // MEH
+      boost::mutex running_mtx;
 
     };
+
+    //////////////////////////////////////////////////////////////
+    // the outward-facing class
+    //////////////////////////////////////////////////////////////
 
 
     threadpool::threadpool(plasm::ptr p)
       : plasm_(p), graph(p->graph()), impl_(new impl)
-    { }
+    { 
+      ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);
+    }
 
     threadpool::threadpool(plasm& p)
       : plasm_(p.shared_from_this()), graph(plasm_->graph()), impl_(new impl)
-    { }
+    { 
+      ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);
+    }
 
+    threadpool::~threadpool()
+    {
+      ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);
+      //      if (runthread.joinable())
+      if (running())
+        {
+          std::cerr << "*** YOU ARE ATTEMPTING TO DESTROY A RUNNING SCHEDULER  ***\n"
+                    << "*** I can't throw, as I'm in a destructor.             ***\n"
+                    << "*** You should stop() and wait() on this schedulers.   ***\n"
+                    << "*** I'm going to try doing that myself now.            ***\n";
+          stop();
+        }
+      wait();
+    }
     namespace phx = boost::phoenix;
 
-    int threadpool::execute(unsigned ncalls, unsigned nthreadsarg)
+    int threadpool::execute_impl(unsigned ncalls, unsigned nthreadsarg)
     {
+      ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);
+
       unsigned nthreads = 
         nthreadsarg == 0 
         ? std::min((unsigned)plasm_->size(), boost::thread::hardware_concurrency())
@@ -413,6 +440,7 @@ namespace ecto {
 
       //check this plasm for correctness.
       plasm_->check();
+      plasm_->configure_all();
 
       std::cout << "Threadpool executing in " << nthreads << " threads.\n";
 
@@ -422,26 +450,50 @@ namespace ecto {
         return impl_->execute(nthreads, boost::phoenix::arg_names::arg1 < ncalls, graph);
     }
 
+    int threadpool::execute(unsigned ncalls, unsigned nthreadsarg)
+    {
+      ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);
+      if (impl_->running())
+        throw std::runtime_error("threadpool scheduler already running");
+      return execute_impl(ncalls, nthreadsarg);
+    }
+
     void threadpool::execute_async(unsigned ncalls, unsigned nthreadsarg)
     {
-      impl_->running = true;
-      boost::scoped_ptr<boost::thread> tmp(new thread(bind(&threadpool::execute, this, ncalls, nthreadsarg)));
-      tmp->swap(runthread);
+      ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);
+
+      if (impl_->running())
+        throw std::runtime_error("threadpool scheduler already running");
+
+      if (runthread.joinable())
+        throw std::runtime_error("Attempt to execute_async on unjoined schedulers... call wait() if you want to execute again");
+
+      boost::function<void()> fn = boost::bind(&threadpool::execute_impl, this, ncalls, nthreadsarg);
+
+      boost::thread tmp(fn);
+      tmp.swap(runthread);
+
+      // spin until e's locked
+      while(!impl_->running())
+        usleep(1);
     }
 
     void threadpool::stop()
     {
+      ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);
       impl_->stop_asap();
     }
 
     void threadpool::wait()
     {
+      ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);
       runthread.join();
     }
 
     bool threadpool::running() const
     {
-      return impl_->running;
+      ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);
+      return impl_->running();
     }
 
     boost::function<void()> threadpool::impl::sigint_handler;

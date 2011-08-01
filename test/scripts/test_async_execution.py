@@ -78,12 +78,13 @@ def tpool0():
     while s.running():
         time.sleep(0.01)
         nloops = nloops + 1
+    etime = time.time()
 
     assert not s.running()
+    print "nloops=", nloops
     assert nloops >= 39
-    etime = time.time()
     print "elapsed:", etime-stime
-    assert 0.41 > etime - stime >= 0.4
+    assert 0.41 > (etime - stime) >= 0.4
 
 def tpool1():
 
@@ -92,8 +93,8 @@ def tpool1():
     s = ecto.schedulers.Threadpool(p)
 
     stime = time.time()
+    assert not s.running()
     s.execute_async(niter=3)
-    time.sleep(0.01)
     assert s.running()
     nloops = 0
     while s.running():

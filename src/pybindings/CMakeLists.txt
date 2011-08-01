@@ -10,6 +10,8 @@ ectomodule(ecto
   strand.cpp
   cells/Constant.cpp
   cells/Delay.cpp
+  cells/Counter.cpp
+  cells/ether.cpp
   cells/If.cpp
   cells/Passthrough.cpp
   cells/TrueEveryN.cpp
