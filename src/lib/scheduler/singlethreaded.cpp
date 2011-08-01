@@ -51,6 +51,7 @@ namespace ecto {
         return;
       //check this plasm for correctness.
       plasm_->check();
+      plasm_->configure_all();
       boost::topological_sort(graph, std::back_inserter(stack));
       std::reverse(stack.begin(), stack.end());
     }
@@ -81,7 +82,7 @@ namespace ecto {
 #endif
       compute_stack();
       unsigned cur_iter = 0;
-      while(niter == 0 || cur_iter < niter)
+      while((niter == 0 || cur_iter < niter) && running_)
         {
           for (size_t k = 0; k < stack.size(); ++k)
             {
@@ -99,6 +100,7 @@ namespace ecto {
 
     void singlethreaded::stop() {
       running_ = false;
+      runthread.interrupt();
       runthread.join();
     }
 

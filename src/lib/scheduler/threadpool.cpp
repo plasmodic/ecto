@@ -109,7 +109,6 @@ namespace ecto {
         template <typename Work>
         void impl(Work w)
         {
-          //          std::cout << __PRETTY_FUNCTION__ << "\n";
           try {
             w();
           } catch (const boost::exception& e) {
@@ -186,7 +185,7 @@ namespace ecto {
         {
           cell::ptr m = g[vd];
           // FIXME: not catching exceptions possibly thrown by destroy
-          m->destroy();
+          //m->destroy();
         }
 
         void invoke()
@@ -413,6 +412,7 @@ namespace ecto {
 
       //check this plasm for correctness.
       plasm_->check();
+      plasm_->configure_all();
 
       std::cout << "Threadpool executing in " << nthreads << " threads.\n";
 
