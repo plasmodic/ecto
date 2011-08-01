@@ -460,6 +460,9 @@ namespace ecto {
 
     void threadpool::execute_async(unsigned ncalls, unsigned nthreadsarg)
     {
+      PyEval_InitThreads();
+      assert(PyEval_ThreadsInitialized());
+      
       ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);
 
       if (impl_->running())

@@ -40,6 +40,7 @@
 #include <ecto/strand.hpp>
 #include <ecto/util.hpp>
 #include <ecto/profile.hpp>
+#include <ecto/is_threadsafe.hpp>
 
 #include <map>
 
@@ -279,6 +280,9 @@ namespace ecto
   {
     typedef boost::shared_ptr<cell_<Impl> > ptr;
 
+    typedef typename detail::python_mutex<Impl>::type gil_mtx_t;
+    gil_mtx_t gil_mtx;
+
     ~cell_()
     {
       dispatch_destroy();
@@ -329,6 +333,7 @@ namespace ecto
     void configure(implemented, tendrils& params, tendrils& inputs,
                    tendrils& outputs)
     {
+      gil_mtx_t gillock();
       impl->configure(params,inputs,outputs);
     }
 
@@ -368,8 +373,11 @@ namespace ecto
 
     ReturnCode process(implemented, tendrils& inputs, tendrils& outputs)
     {
+      gil_mtx_t gillock;
+      ReturnCode code;
       profile::stats_collector coll(stats);
-      return ReturnCode(impl->process(inputs, outputs));
+      code = ReturnCode(impl->process(inputs, outputs));
+      return code;
     }
 
     ReturnCode dispatch_process(tendrils& inputs, tendrils& outputs)

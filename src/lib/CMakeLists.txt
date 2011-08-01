@@ -14,6 +14,7 @@ add_library(ecto_cpp SHARED
   util.cpp
   log.cpp
   except.cpp
+  needs_gil.cpp
   profile.cpp
   registry.cpp
   schedulers/invoke.cpp
