@@ -2,6 +2,7 @@
 #include <ecto/util.hpp>
 #include <ecto/except.hpp>
 #include <boost/exception/all.hpp>
+#include <boost/thread.hpp>
 
 /*
  * Catch all and pass on exception.
@@ -23,6 +24,10 @@ catch (ecto::except::EctoException& e) \
   ee << "  What   : " + std::string(e.what()); \
   ee << "  Module : " + name() + "\n  Function: " + __FUNCTION__; \
   boost::throw_exception(ee); \
+} \
+catch (boost::thread_interrupted& e) \
+{ \
+  throw e; \
 } \
 catch (...) \
 { \
@@ -112,11 +117,17 @@ namespace ecto
       }
       ++begin;
     }
-
     try
     {
-      return dispatch_process(inputs, outputs);
-    }CATCH_ALL()
+      try
+      {
+        return dispatch_process(inputs, outputs);
+      }CATCH_ALL()
+    }catch (boost::thread_interrupted& e)
+    {
+      return ecto::QUIT;
+    }
+
   }
 
   void
