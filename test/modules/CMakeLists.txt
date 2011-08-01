@@ -11,6 +11,7 @@ ectomodule(ecto_test
   Ping.cpp
   Throttle.cpp
   Sleep.cpp
+  SleepPyObjectAbuser.cpp
   Metrics.cpp
   Gather.cpp
   Generate.cpp
