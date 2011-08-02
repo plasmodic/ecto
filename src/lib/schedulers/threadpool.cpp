@@ -2,7 +2,7 @@
 
 #if defined(ECTO_THREADPOOL_DEBUG)
 #define ECTO_LOG_ON
-#define ECTO_USLEEP() usleep(50000)
+#define ECTO_USLEEP() /* usleep(50000) */
 #else
 #define ECTO_USLEEP()
 #endif
