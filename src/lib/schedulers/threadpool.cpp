@@ -1,4 +1,4 @@
-#define ECTO_THREADPOOL_DEBUG
+// #define ECTO_THREADPOOL_DEBUG
 
 #if defined(ECTO_THREADPOOL_DEBUG)
 #define ECTO_LOG_ON
