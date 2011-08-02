@@ -34,10 +34,11 @@ def tpool(Scheduler):
     print "execute_async"
     #this is where it fails.
     #bp::stl_input_iterator<double> begin(list_o_sleeps),end;
-    time.sleep(5)
     print "time.sleep(5)"
-    s.stop()
-    print "s.stop()"
+    time.sleep(5)
+    print "done sleeping.  interrupting..."
+    s.interrupt()
+    print "done interrupting.  waiting..."
     s.wait()
     print "s.wait()"
 

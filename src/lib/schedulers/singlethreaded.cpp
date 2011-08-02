@@ -99,10 +99,12 @@ namespace ecto {
       return 0;
     }
 
-    void singlethreaded::stop() {
-      running_ = false;
+    void singlethreaded::interrupt() {
       runthread.interrupt();
       runthread.join();
+    }
+    void singlethreaded::stop() {
+      running_ = false;
     }
 
     bool singlethreaded::running() const {
@@ -111,7 +113,7 @@ namespace ecto {
 
     void singlethreaded::wait() {
       while(running_)
-		  boost::this_thread::sleep(boost::posix_time::microseconds(10));
+        boost::this_thread::sleep(boost::posix_time::microseconds(10));
       runthread.join();
     }
 

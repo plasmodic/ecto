@@ -1,8 +1,8 @@
-// #define ECTO_THREADPOOL_DEBUG
+#define ECTO_THREADPOOL_DEBUG
 
 #if defined(ECTO_THREADPOOL_DEBUG)
 #define ECTO_LOG_ON
-#define ECTO_USLEEP() usleep(500000)
+#define ECTO_USLEEP() usleep(50000)
 #else
 #define ECTO_USLEEP()
 #endif
@@ -100,6 +100,14 @@ namespace ecto {
         runner.join();
       }
 
+      void interrupt() 
+      {
+        ECTO_LOG_DEBUG("interrupting %p", this);
+        runner.interrupt();
+        runner.join();
+        ECTO_LOG_DEBUG("interrupt    %p done", this);
+      }
+
       template <typename Work>
       void impl(Work w)
       {
@@ -162,6 +170,7 @@ namespace ecto {
 
         void async_wait_for_input()
         {
+          boost::this_thread::interruption_point();
           ECTO_LOG_DEBUG("%s async_wait_for_input", this);
           ECTO_USLEEP();
           namespace asio = boost::asio;
@@ -181,6 +190,7 @@ namespace ecto {
 
         void destroy()
         {
+          boost::this_thread::interruption_point();
           cell::ptr m = g[vd];
           // FIXME: not catching exceptions possibly thrown by destroy
           //m->destroy();
@@ -188,6 +198,7 @@ namespace ecto {
 
         void invoke()
         {
+          boost::this_thread::interruption_point();
           ECTO_LOG_DEBUG("%s invoke", this);
           try {
             int j = ecto::schedulers::invoke_process(g, vd);
@@ -298,7 +309,6 @@ namespace ecto {
             workserv.post(boost::bind(&impl::invoker::async_wait_for_input, ip));
           }
 
-        std::set<runandjoin::ptr> runners;
         for (unsigned j=0; j<nthreads; ++j)
           {
             ECTO_LOG_DEBUG("%s Start thread %u", this % j);
@@ -380,6 +390,17 @@ namespace ecto {
         return !lock.try_lock();
       }
 
+      void interrupt()
+      {
+        stop = true;
+        for (std::set<runandjoin::ptr>::iterator iter = runners.begin();
+             iter != runners.end(); ++iter)
+          {
+            std::cout << "interrupting a runanjoin...\n";
+            (*iter)->interrupt();
+          }
+      }
+
     private:
 
       typedef std::map<graph_t::vertex_descriptor, invoker::ptr> invokers_t;
@@ -389,6 +410,7 @@ namespace ecto {
                            boost::shared_ptr<boost::asio::io_service::strand>,
                            ecto::strand_hash> strands;
 
+      std::set<runandjoin::ptr> runners;
       pt::ptime starttime;
       bool stop;
       
@@ -491,6 +513,12 @@ namespace ecto {
     {
       ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);
       runthread.join();
+    }
+
+    void threadpool::interrupt()
+    {
+      ECTO_LOG_DEBUG("threadpool interrupting %p", this);
+      impl_->interrupt();
     }
 
     bool threadpool::running() const

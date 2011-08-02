@@ -59,6 +59,7 @@ namespace ecto {
       void execute_async(unsigned niter=0, unsigned nthreads=0);
 
       void stop();
+      void interrupt();
       bool running() const;
       void wait();
       

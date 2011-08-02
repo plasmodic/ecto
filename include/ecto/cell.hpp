@@ -281,7 +281,6 @@ namespace ecto
     typedef boost::shared_ptr<cell_<Impl> > ptr;
 
     typedef typename detail::python_mutex<Impl>::type gil_mtx_t;
-    gil_mtx_t gil_mtx;
 
     ~cell_()
     {

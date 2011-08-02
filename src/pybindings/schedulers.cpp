@@ -35,6 +35,7 @@ namespace ecto {
         .def("execute_async", &execute_async0<singlethreaded>)
         .def("execute_async", &execute_async1<singlethreaded>, arg("niter"))
 
+        .def("interrupt", &singlethreaded::interrupt)
         .def("stop", &singlethreaded::stop)
         .def("running", &singlethreaded::running)
         .def("wait", &singlethreaded::wait)
@@ -54,6 +55,7 @@ namespace ecto {
         .def("execute_async", &execute_async2<threadpool>, (arg("niter"), arg("nthreads")))
 
         .def("stop", &threadpool::stop)
+        .def("interrupt", &threadpool::interrupt)
         .def("running", &threadpool::running)
         .def("wait", &threadpool::wait)
         ;
