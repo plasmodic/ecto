@@ -333,8 +333,16 @@ namespace ecto
                    tendrils& outputs)
     {
       boost::this_thread::interruption_point();
-      gil_mtx_t gillock();
       impl->configure(params,inputs,outputs);
+      for (tendrils::iterator iter = inputs.begin(); iter != inputs.end(); ++iter)
+        if (iter->second->is_type<boost::python::object>())
+          throw std::runtime_error("you can't use a python object as an input");
+
+      for (tendrils::iterator iter = outputs.begin(); iter != outputs.end(); ++iter)
+        if (iter->second->is_type<boost::python::object>())
+          throw std::runtime_error("you can't use a python object as an output");
+
+
     }
 
     void dispatch_configure(tendrils& params, tendrils& inputs,
@@ -373,7 +381,6 @@ namespace ecto
 
     ReturnCode process(implemented, tendrils& inputs, tendrils& outputs)
     {
-      gil_mtx_t gillock;
       ReturnCode code;
       profile::stats_collector coll(stats);
       code = ReturnCode(impl->process(inputs, outputs));
