@@ -206,7 +206,7 @@ namespace ecto {
               {
                 std::cout << "Module " << g[vd]->name() << " returned not okay. Stopping everything." 
                           << std::endl; 
-                context.stop_asap();
+                context.interrupt();
                 return;
               }
           } catch (const std::exception& e) {
@@ -321,9 +321,8 @@ namespace ecto {
         try {
           mainserv.run();
           PyErr_CheckSignals();
-        } catch (const exception& e) {
+        } catch (const boost::exception& e) {
           workserv.stop();
-          // rethrow:  python interpreter will catch.
           throw;
         }
 
@@ -445,8 +444,8 @@ namespace ecto {
           std::cerr << "*** YOU ARE ATTEMPTING TO DESTROY A RUNNING SCHEDULER  ***\n"
                     << "*** I can't throw, as I'm in a destructor.             ***\n"
                     << "*** You should stop() and wait() on this schedulers.   ***\n"
-                    << "*** I'm going to try doing that myself now.            ***\n";
-          stop();
+                    << "*** I'm going to interrupt() things...                 ***\n";
+          interrupt();
         }
       wait();
     }
@@ -482,7 +481,6 @@ namespace ecto {
 
     int threadpool::execute(unsigned ncalls, unsigned nthreadsarg)
     {
-      /*
       boost::mutex::scoped_lock lock(iface_mtx);
       PyEval_InitThreads();
       assert(PyEval_ThreadsInitialized());
@@ -492,10 +490,6 @@ namespace ecto {
       int j;
       j = execute_impl(ncalls, nthreadsarg);
       return j;
-      */
-      execute_async(ncalls, nthreadsarg);
-      wait();
-      return 0;
     }
 
     void threadpool::execute_async(unsigned ncalls, unsigned nthreadsarg)
