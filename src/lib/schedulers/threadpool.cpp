@@ -1,8 +1,8 @@
-// #define ECTO_THREADPOOL_DEBUG
+#define ECTO_THREADPOOL_DEBUG
 
 #if defined(ECTO_THREADPOOL_DEBUG)
 #define ECTO_LOG_ON
-#define ECTO_USLEEP() usleep(50000)
+#define ECTO_USLEEP() usleep(500000)
 #else
 #define ECTO_USLEEP()
 #endif
@@ -171,7 +171,7 @@ namespace ecto {
         void async_wait_for_input()
         {
           boost::this_thread::interruption_point();
-          ECTO_LOG_DEBUG("%s async_wait_for_input", this);
+          //ECTO_LOG_DEBUG("%s async_wait_for_input", this);
           ECTO_USLEEP();
           namespace asio = boost::asio;
 
@@ -482,6 +482,7 @@ namespace ecto {
 
     int threadpool::execute(unsigned ncalls, unsigned nthreadsarg)
     {
+      /*
       boost::mutex::scoped_lock lock(iface_mtx);
       PyEval_InitThreads();
       assert(PyEval_ThreadsInitialized());
@@ -489,10 +490,12 @@ namespace ecto {
       if (impl_->running())
         throw std::runtime_error("threadpool scheduler already running");
       int j;
-      //Py_BEGIN_ALLOW_THREADS;
       j = execute_impl(ncalls, nthreadsarg);
-      //Py_END_ALLOW_THREADS;
       return j;
+      */
+      execute_async(ncalls, nthreadsarg);
+      wait();
+      return 0;
     }
 
     void threadpool::execute_async(unsigned ncalls, unsigned nthreadsarg)
@@ -515,7 +518,7 @@ namespace ecto {
       tmp.swap(runthread);
 
       // spin until e's locked
-      ECTO_LOG_DEBUG("waiting for running() to become true", "");
+      ECTO_LOG_DEBUG("%s", "waiting for running() to become true");
       while(!impl_->running())
         {
           usleep(10);

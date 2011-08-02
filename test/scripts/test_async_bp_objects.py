@@ -22,11 +22,11 @@ def makeplasm():
 
 def async(s):
     print "s.execute_async"
-    s.execute_async(niter=10)
+    s.execute_async(niter=5)
 
 def sync(s):
     print "s.execute"
-    s.execute(niter=10)
+    s.execute(niter=5)
     print "s.execute DONE"
     
 def nada(s):
@@ -65,11 +65,11 @@ def doemall(Sched):
     tpool(Sched, async, interrupt_and_wait)
     tpool(Sched, async, interrupt)
     tpool(Sched, async, nada)
-    tpool(Sched, sync, nada) #SEGFAULT
-    tpool(Sched, sync, interrupt) #SEG
-    tpool(Sched, sync, interrupt_and_wait) #SEG
+    tpool(Sched, sync, nada)
+    tpool(Sched, sync, interrupt)
+    tpool(Sched, sync, interrupt_and_wait)
     tpool(Sched, sync, waitonly)
     
 doemall(ecto.schedulers.Singlethreaded)
-#doemall(ecto.schedulers.Threadpool)
+doemall(ecto.schedulers.Threadpool)
 
