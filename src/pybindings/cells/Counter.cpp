@@ -35,28 +35,33 @@ namespace ecto
     static void
     declare_params(tendrils& p)
     {
-      p.declare<int>("count", "Initial value of counter, will be incremented at every call to process.", 0);
+      p.declare<unsigned>("count", "Initial value of counter, will be incremented at every call to process.", 0);
+      p.declare<unsigned>("every","print every this many frames", std::numeric_limits<unsigned>::max());
     }
     static void
     declare_io(const tendrils& p, tendrils& in, tendrils& out)
     {
       in.declare<tendril::none>("input","Any input, counts the number of executions.");
-      out.declare<int>("count","The count of input.",p.get<int>("count"));
+      out.declare<unsigned>("count","The count of input.", p.get<unsigned>("count"));
     }
     void
     configure(tendrils&p, tendrils&in, tendrils&out)
     {
       count_ = out["count"];
+      every_ = p["every"];
     }
     int
     process(tendrils& /*in*/, tendrils& /*out*/)
     {
       ++(*count_);
+      if (*count_ % *every_ == 0)
+        std::cout << "Counter: " << *count_ << "\n";
       return ecto::OK;
     }
-    spore<int> count_;
+    spore<unsigned> count_, every_;
   };
 }
 
-ECTO_CELL(ecto, ecto::Counter, "Counter", "Gives an execution count. Useful for counting the number of times that an output of another cell"
-    " is valid.");
+ECTO_CELL(ecto, ecto::Counter, "Counter", 
+          "Gives an execution count. Useful for counting the number of times that an output of another cell"
+          " is valid.  Prints progress every so many frames.");
