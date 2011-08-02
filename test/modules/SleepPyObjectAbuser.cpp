@@ -45,20 +45,20 @@ namespace ecto_test
 
     static void declare_params(tendrils& parameters)
     {
-      SHOW();
+      //SHOW();
       parameters.declare<bp::object>("list_o_sleeps", "A sequence of sleeps.");
     }
 
     static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
-      SHOW();
+      //      SHOW();
       inputs.declare<pt::ptime> ("in", "input");
       outputs.declare<pt::ptime> ("out", "output");
     }
 
     void configure(tendrils& parameters, tendrils& inputs, tendrils& outputs)
     {
-      SHOW();
+      //      SHOW();
       boost::this_thread::sleep(boost::posix_time::milliseconds(100));//sleep for making sure we're out of the python thread.
       bp::object list_o_sleeps;
       parameters["list_o_sleeps"] >> list_o_sleeps;
@@ -71,12 +71,12 @@ namespace ecto_test
 
     int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
-      SHOW();
+      //      SHOW();
       if(list_o_sleeps_.empty()) return ecto::OK;
       if(current_idx == list_o_sleeps_.size())
         current_idx = 0;
       double sleep_time = list_o_sleeps_[current_idx++];
-      std::cout << "Sleeping for : " <<  sleep_time << std::endl;
+      // std::cout << "Sleeping for : " <<  sleep_time << std::endl;
       boost::this_thread::sleep(boost::posix_time::microseconds(int64_t(sleep_time*1.0e6)));
       *out = *in;
       return 0;
@@ -120,5 +120,6 @@ namespace ecto_test
 ECTO_THREAD_UNSAFE(ecto_test::SleepPyObjectAbuser);
 ECTO_NEEDS_PYTHON_GIL(ecto_test::SleepPyObjectAbuser);
 
-ECTO_CELL(ecto_test, ecto_test::SleepPyObjectAbuser, "SleepPyObjectAbuser", "Sleep for a bit while in process, according to a list of sleep times.");
+ECTO_CELL(ecto_test, ecto_test::SleepPyObjectAbuser, "SleepPyObjectAbuser", 
+          "Sleep for a bit while in process, according to a list of sleep times.");
 

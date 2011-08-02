@@ -20,36 +20,56 @@ def makeplasm():
 
     return plasm
 
-def non_async(Scheduler):
-    print "non_async"
-    p = makeplasm()
-    s = Scheduler(p)
-    s.execute(10)
+def async(s):
+    print "s.execute_async"
+    s.execute_async(niter=10)
+
+def sync(s):
+    print "s.execute"
+    s.execute(niter=10)
+    print "s.execute DONE"
     
-def tpool(Scheduler):
+def nada(s):
+    print "nada"
+
+def waitonly(s):
+    print "waitonly"
+    s.wait()
+
+
+def interrupt(s):
+    print "interrupt"
+    s.interrupt()
+
+def interrupt_and_wait(s):
+    print "interrupt_and_wait"
+    s.interrupt()
+    s.wait()
+
+def tpool(Scheduler, go, afterwards, sleepdur=0.1):
     print "tpool"
     p = makeplasm()
     s = Scheduler(p)
-    s.execute_async()
-    print "execute_async"
+    go(s)
     #this is where it fails.
     #bp::stl_input_iterator<double> begin(list_o_sleeps),end;
-    print "time.sleep(5)"
-    time.sleep(5)
-    print "done sleeping.  interrupting..."
-    s.interrupt()
-    print "done interrupting.  waiting..."
-    s.wait()
-    print "s.wait()"
+    print "time.sleep(", sleepdur, ")"
+    stime = time.time()
+    time.sleep(sleepdur)
+    afterwards(s)
+    etime = time.time()
+    print "elapsed", etime-stime
 
+def doemall(Sched):
+    tpool(Sched, async, waitonly)
+    tpool(Sched, async, interrupt_and_wait)
+    tpool(Sched, async, interrupt)
+    tpool(Sched, async, nada)
+    tpool(Sched, sync, nada) #SEGFAULT
+    tpool(Sched, sync, interrupt) #SEG
+    tpool(Sched, sync, interrupt_and_wait) #SEG
+    tpool(Sched, sync, waitonly)
+    
+doemall(ecto.schedulers.Singlethreaded)
+#doemall(ecto.schedulers.Threadpool)
 
-
-print "async(Threadpool):"
-tpool(Scheduler=ecto.schedulers.Threadpool)
-
-print "non_async(Singlethreaded):"
-non_async(Scheduler=ecto.schedulers.Singlethreaded)
-print "async(Singlethreaded):"
-tpool(Scheduler=ecto.schedulers.Singlethreaded)
-print "non_async(Threadpool):"
-non_async(Scheduler=ecto.schedulers.Threadpool)

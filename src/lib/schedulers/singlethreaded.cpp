@@ -1,3 +1,6 @@
+#include <Python.h>
+#undef DISABLE_SHOW
+#include <ecto/util.hpp>
 #include <ecto/plasm.hpp>
 #include <ecto/tendril.hpp>
 #include <ecto/cell.hpp>
@@ -72,66 +75,85 @@ namespace ecto {
       interrupted = true;
     }
 
-    void singlethreaded::execute_async(unsigned niter) {
+    void singlethreaded::execute_async(unsigned niter) 
+    {
+      PyEval_InitThreads();
+      assert(PyEval_ThreadsInitialized());
+
       boost::mutex::scoped_lock l(iface_mtx);
-      running_ = true;
-      //compute_stack(); //FIXME hack for python based tendrils.
+      // compute_stack(); //FIXME hack for python based tendrils.
       scoped_ptr<thread> tmp(new thread(bind(&singlethreaded::execute_impl, this, niter)));
       tmp->swap(runthread);
+      while(!running()) usleep(5);
     }
 
     int singlethreaded::execute(unsigned niter)
     {
       boost::mutex::scoped_lock l(iface_mtx);
-      return execute_impl(niter);
+      int j;
+      j = execute_impl(niter);
+      return j;
     }
 
     int singlethreaded::execute_impl(unsigned niter)
     {
-      running_ = true;
       interrupted = false;
 #if !defined(_WIN32)
       signal(SIGINT, &sigint_static_thunk);
 #endif
       compute_stack();
-      unsigned cur_iter = 0;
-      while((niter == 0 || cur_iter < niter) && running_)
-        {
-          for (size_t k = 0; k < stack.size(); ++k)
-            {
-              //need to check the return val of a process here, non zero means exit...
-              size_t retval = invoke_process(stack[k]);
-              if (retval)
-                return retval;
-              if(interrupted) return true;
-            }
-          ++cur_iter;
-        }
-      running_ = false;
-      return 0;
+      {
+        boost::mutex::scoped_lock yes_running(running_mtx);
+
+        unsigned cur_iter = 0;
+        while((niter == 0 || cur_iter < niter))
+          {
+            for (size_t k = 0; k < stack.size() && !interrupted; ++k)
+              {
+                //need to check the return val of a process here, non zero means exit...
+                size_t retval = invoke_process(stack[k]);
+                if (retval)
+                  return retval;
+                boost::this_thread::interruption_point();
+              }
+            ++cur_iter;
+          }
+      }
+      return interrupted;
     }
 
     void singlethreaded::interrupt() {
+      SHOW();
       boost::mutex::scoped_lock l(iface_mtx);
+      Py_BEGIN_ALLOW_THREADS
+      interrupted = true;
       runthread.interrupt();
+      usleep(1000);
       runthread.join();
-      running_ = false;
+      Py_END_ALLOW_THREADS
     }
     void singlethreaded::stop() {
+      SHOW();
       boost::mutex::scoped_lock l(iface_mtx);
-      running_ = false;
+      interrupted = true;
     }
 
     bool singlethreaded::running() const {
-      boost::mutex::scoped_lock l(iface_mtx);
-      return running_;
+      boost::mutex::scoped_lock l2(running_mtx, boost::defer_lock);
+      if (l2.try_lock())
+        return false;
+      else
+        return true;
     }
 
     void singlethreaded::wait() {
+      SHOW();
       boost::mutex::scoped_lock l(iface_mtx);
-      while(running_)
+      Py_BEGIN_ALLOW_THREADS
+      while(running())
         boost::this_thread::sleep(boost::posix_time::microseconds(10));
       runthread.join();
+      Py_END_ALLOW_THREADS
     }
 
   }

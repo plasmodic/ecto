@@ -399,6 +399,7 @@ namespace ecto {
             std::cout << "interrupting a runanjoin...\n";
             (*iter)->interrupt();
           }
+        std::cout << "done interrupting.\n";
       }
 
     private:
@@ -464,7 +465,14 @@ namespace ecto {
       plasm_->check();
       plasm_->configure_all();
 
-      std::cout << "Threadpool executing in " << nthreads << " threads.\n";
+      std::cout << "Threadpool executing ";
+
+      if (ncalls == 0)
+        std::cout << "[unlimited]";
+      else
+        std::cout << ncalls;
+    
+      std::cout << " ticks in " << nthreads << " threads.\n";
 
       if (ncalls == 0)
         return impl_->execute(nthreads, phx::val(true), graph);
@@ -475,10 +483,16 @@ namespace ecto {
     int threadpool::execute(unsigned ncalls, unsigned nthreadsarg)
     {
       boost::mutex::scoped_lock lock(iface_mtx);
+      PyEval_InitThreads();
+      assert(PyEval_ThreadsInitialized());
       ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);
       if (impl_->running())
         throw std::runtime_error("threadpool scheduler already running");
-      return execute_impl(ncalls, nthreadsarg);
+      int j;
+      //Py_BEGIN_ALLOW_THREADS;
+      j = execute_impl(ncalls, nthreadsarg);
+      //Py_END_ALLOW_THREADS;
+      return j;
     }
 
     void threadpool::execute_async(unsigned ncalls, unsigned nthreadsarg)
@@ -504,7 +518,7 @@ namespace ecto {
       ECTO_LOG_DEBUG("waiting for running() to become true", "");
       while(!impl_->running())
         {
-          usleep(1);
+          usleep(10);
         }
     }
 
@@ -519,14 +533,18 @@ namespace ecto {
     {
       boost::mutex::scoped_lock lock(iface_mtx);
       ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);
+      Py_BEGIN_ALLOW_THREADS
       runthread.join();
+      Py_END_ALLOW_THREADS
     }
 
     void threadpool::interrupt()
     {
       boost::mutex::scoped_lock lock(iface_mtx);
+      Py_BEGIN_ALLOW_THREADS
       ECTO_LOG_DEBUG("threadpool interrupting %p", this);
       impl_->interrupt();
+      Py_END_ALLOW_THREADS
     }
 
     bool threadpool::running() const

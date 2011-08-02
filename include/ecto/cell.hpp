@@ -332,6 +332,7 @@ namespace ecto
     void configure(implemented, tendrils& params, tendrils& inputs,
                    tendrils& outputs)
     {
+      boost::this_thread::interruption_point();
       gil_mtx_t gillock();
       impl->configure(params,inputs,outputs);
     }
@@ -382,6 +383,7 @@ namespace ecto
     ReturnCode dispatch_process(tendrils& inputs, tendrils& outputs)
     {
       dispatch_configure(parameters,this->inputs,outputs);
+      boost::this_thread::interruption_point();
       return process(int_<has_f<Impl>::process> (), inputs, outputs);
     }
 

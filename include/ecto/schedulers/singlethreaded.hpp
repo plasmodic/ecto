@@ -67,10 +67,11 @@ namespace ecto {
       plasm::ptr plasm_;
       ecto::graph::graph_t& graph;
       boost::thread runthread;
-      bool running_;
       
       std::vector<ecto::graph::graph_t::vertex_descriptor> stack;
       mutable boost::mutex iface_mtx;
+      mutable boost::mutex running_mtx;
+
     };
   }
 }
