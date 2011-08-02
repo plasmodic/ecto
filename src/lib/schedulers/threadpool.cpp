@@ -86,25 +86,23 @@ namespace ecto {
 
       thread runner;
 
-      runandjoin() 
-      { 
-        runner.join();
-      }
+      runandjoin() { }
 
       ~runandjoin() {
-        runner.join();
+        if (runner.joinable())
+          runner.join();
       }
 
-      void joinit() 
+      void join() 
       {
-        runner.join();
+        if (runner.joinable())
+          runner.join();
       }
 
       void interrupt() 
       {
         ECTO_LOG_DEBUG("interrupting %p", this);
         runner.interrupt();
-        runner.join();
         ECTO_LOG_DEBUG("interrupt    %p done", this);
       }
 
@@ -118,7 +116,7 @@ namespace ecto {
         } catch (const std::exception& e) {
           w.post(thrower(boost::current_exception()));
         }
-        w.post(bind(&runandjoin::joinit, this));
+        w.post(bind(&runandjoin::join, this));
       }
 
       template <typename Work>
@@ -175,10 +173,7 @@ namespace ecto {
           ECTO_USLEEP();
           namespace asio = boost::asio;
 
-          if (context.stop) {
-            post(bind(&invoker::destroy, this));
-            return;
-          }
+          if (context.stop) return;
             
           if (inputs_ready()) {
             ECTO_LOG_DEBUG("%s inputs ready", this);
@@ -186,14 +181,6 @@ namespace ecto {
           } else {
             context.workserv.post(bind(&invoker::async_wait_for_input, this));
           }
-        }
-
-        void destroy()
-        {
-          boost::this_thread::interruption_point();
-          cell::ptr m = g[vd];
-          // FIXME: not catching exceptions possibly thrown by destroy
-          //m->destroy();
         }
 
         void invoke()
@@ -401,6 +388,18 @@ namespace ecto {
         std::cout << "done interrupting.\n";
       }
 
+      void join()
+      {
+        stop = true;
+        for (std::set<runandjoin::ptr>::iterator iter = runners.begin();
+             iter != runners.end(); ++iter)
+          {
+            std::cout << "joining a runanjoin...\n";
+            (*iter)->join();
+          }
+        std::cout << "done interrupting.\n";
+      }
+
     private:
 
       typedef std::map<graph_t::vertex_descriptor, invoker::ptr> invokers_t;
@@ -445,8 +444,8 @@ namespace ecto {
                     << "*** I can't throw, as I'm in a destructor.             ***\n"
                     << "*** You should stop() and wait() on this schedulers.   ***\n"
                     << "*** I'm going to interrupt() things...                 ***\n";
-          interrupt();
         }
+      interrupt();
       wait();
     }
     namespace phx = boost::phoenix;
@@ -530,18 +529,17 @@ namespace ecto {
     {
       boost::mutex::scoped_lock lock(iface_mtx);
       ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);
-      Py_BEGIN_ALLOW_THREADS
-      runthread.join();
-      Py_END_ALLOW_THREADS
+      impl_->join();
+      if (runthread.joinable())
+        runthread.join();
     }
 
     void threadpool::interrupt()
     {
       boost::mutex::scoped_lock lock(iface_mtx);
-      Py_BEGIN_ALLOW_THREADS
       ECTO_LOG_DEBUG("threadpool interrupting %p", this);
       impl_->interrupt();
-      Py_END_ALLOW_THREADS
+      runthread.interrupt();
     }
 
     bool threadpool::running() const

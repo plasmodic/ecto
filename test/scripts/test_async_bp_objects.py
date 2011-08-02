@@ -10,13 +10,9 @@ def makeplasm():
     ping = ecto_test.Ping("Ping")
     sleep0 = ecto_test.SleepPyObjectAbuser(list_o_sleeps=[random.random() * 0.1 for i in range(1,10)])
     sleep1 = ecto_test.SleepPyObjectAbuser(list_o_sleeps=[random.random() * 0.1 for i in range(1,10)])
-    sleep2 = ecto_test.SleepPyObjectAbuser(list_o_sleeps=[random.random() * 0.1 for i in range(1,10)])
-    sleep3 = ecto_test.SleepPyObjectAbuser(list_o_sleeps=[random.random() * 0.1 for i in range(1,10)])
 
     plasm.connect(ping[:] >> sleep0[:],
-                  sleep0[:] >> sleep1[:],
-                  sleep1[:] >> sleep2[:],
-                  sleep2[:] >> sleep3[:])
+                  sleep0[:] >> sleep1[:])
 
     return plasm
 
@@ -72,4 +68,3 @@ def doemall(Sched):
     
 doemall(ecto.schedulers.Threadpool)
 doemall(ecto.schedulers.Singlethreaded)
-

@@ -36,7 +36,7 @@ def nada(s):
 
 def bang(Sched):
     for i in range(10):
-        print "executing(Singlethreaded):",i
+        print "executing [%d] %s " %(i, Sched)
         invoke(Sched, nada)
         invoke(Sched, stoponly)
         invoke(Sched, interruptonly)
