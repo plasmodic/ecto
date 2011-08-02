@@ -13,7 +13,7 @@ foreach(file
     test_async_execution_harsh
     test_blackbox
     test_constant
-    test_destroy_called
+    # test_destroy_called  # we're rm-ing destroy until we know what it is good for
     test_doc
     test_dual_line_plasm
     test_entanglement
