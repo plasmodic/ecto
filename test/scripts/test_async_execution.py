@@ -98,6 +98,7 @@ def tpool():
     high = median*1.2
 
     print "lowest acceptable:", low, "highest acceptable:", high
+    print "runtime:", runtime, "asynctime", asynctime, "waittime", waittime
     assert high > runtime > low
     assert high > asynctime > low
     assert high > waittime > low

@@ -390,7 +390,6 @@ namespace ecto {
 
       void join()
       {
-        stop = true;
         for (std::set<runandjoin::ptr>::iterator iter = runners.begin();
              iter != runners.end(); ++iter)
           {
