@@ -47,6 +47,7 @@ namespace ecto {
     {
       singlethreaded(plasm::ptr);
       singlethreaded(plasm&);
+      ~singlethreaded();
 
       int execute(unsigned niter=0);
       void execute_async(unsigned niter=0);
@@ -58,6 +59,8 @@ namespace ecto {
 
     private:
 
+      int execute_impl(unsigned niter);
+
       int invoke_process(ecto::graph::graph_t::vertex_descriptor vd);
       void compute_stack();
 
@@ -67,6 +70,7 @@ namespace ecto {
       bool running_;
       
       std::vector<ecto::graph::graph_t::vertex_descriptor> stack;
+      mutable boost::mutex iface_mtx;
     };
   }
 }

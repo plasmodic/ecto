@@ -71,11 +71,13 @@ def tpool():
         return elapsed
 
     def justrun(s):
+        print "just run it"
         s.execute(**kwargs)
 
     runtime = bang(justrun)
 
     def asyncit(s):
+        print "async and wait on running() == false"
         s.execute_async(**kwargs)
         while s.running():
             pass
@@ -83,6 +85,7 @@ def tpool():
     asynctime = bang(asyncit)
 
     def waitit(s):
+        print "async and wait()"
         s.execute_async(**kwargs)
         s.wait()
     
@@ -114,12 +117,36 @@ def tpool_interrupt():
     assert etime-stime > 0.1
     assert 0.4 > etime-stime
 
-sthreaded()
+def tpool_throw_on_double_execute():
+    p = makeplasm()
+    s = ecto.schedulers.Threadpool(p)
+
+    stime = time.time()
+    s.execute_async()
+    try: 
+        s.execute()
+    except Exception, e:
+        assert e.message == "threadpool scheduler already running"
+        print "as expected:", e.message
+
+def tpool_wait_on_nothing():
+    p = makeplasm()
+    s = ecto.schedulers.Threadpool(p)
+
+    stime = time.time()
+    s.wait()
+    etime = time.time()
+    print etime-stime
+    assert 0.01 > etime-stime
 
 if ecto.hardware_concurrency() > 1:
-    tpool_interrupt()
     tpool()
+    tpool_wait_on_nothing()
+    tpool_throw_on_double_execute()
+    tpool_interrupt()
 else:
     print "threadpool async execution tests disabled due to lack of hardware concurrency"
+
+sthreaded()
 
 print "okay."

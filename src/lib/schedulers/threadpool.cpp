@@ -1,8 +1,8 @@
-#define ECTO_THREADPOOL_DEBUG
+// #define ECTO_THREADPOOL_DEBUG
 
 #if defined(ECTO_THREADPOOL_DEBUG)
 #define ECTO_LOG_ON
-#define ECTO_USLEEP() /* usleep(50000) */
+#define ECTO_USLEEP() usleep(50000)
 #else
 #define ECTO_USLEEP()
 #endif
@@ -474,6 +474,7 @@ namespace ecto {
 
     int threadpool::execute(unsigned ncalls, unsigned nthreadsarg)
     {
+      boost::mutex::scoped_lock lock(iface_mtx);
       ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);
       if (impl_->running())
         throw std::runtime_error("threadpool scheduler already running");
@@ -482,6 +483,7 @@ namespace ecto {
 
     void threadpool::execute_async(unsigned ncalls, unsigned nthreadsarg)
     {
+      boost::mutex::scoped_lock lock(iface_mtx);
       PyEval_InitThreads();
       assert(PyEval_ThreadsInitialized());
       
@@ -499,30 +501,37 @@ namespace ecto {
       tmp.swap(runthread);
 
       // spin until e's locked
+      ECTO_LOG_DEBUG("waiting for running() to become true", "");
       while(!impl_->running())
-        usleep(1);
+        {
+          usleep(1);
+        }
     }
 
     void threadpool::stop()
     {
+      boost::mutex::scoped_lock lock(iface_mtx);
       ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);
       impl_->stop_asap();
     }
 
     void threadpool::wait()
     {
+      boost::mutex::scoped_lock lock(iface_mtx);
       ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);
       runthread.join();
     }
 
     void threadpool::interrupt()
     {
+      boost::mutex::scoped_lock lock(iface_mtx);
       ECTO_LOG_DEBUG("threadpool interrupting %p", this);
       impl_->interrupt();
     }
 
     bool threadpool::running() const
     {
+      boost::mutex::scoped_lock lock(iface_mtx);
       ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);
       return impl_->running();
     }

@@ -39,6 +39,11 @@ namespace ecto {
       assert(plasm_);
     }
 
+    singlethreaded::~singlethreaded()
+    {
+      interrupt();
+      wait();
+    }
     int 
     singlethreaded::invoke_process(graph_t::vertex_descriptor vd)
     {
@@ -68,13 +73,20 @@ namespace ecto {
     }
 
     void singlethreaded::execute_async(unsigned niter) {
+      boost::mutex::scoped_lock l(iface_mtx);
       running_ = true;
       //compute_stack(); //FIXME hack for python based tendrils.
-      scoped_ptr<thread> tmp(new thread(bind(&singlethreaded::execute, this, niter)));
+      scoped_ptr<thread> tmp(new thread(bind(&singlethreaded::execute_impl, this, niter)));
       tmp->swap(runthread);
     }
 
     int singlethreaded::execute(unsigned niter)
+    {
+      boost::mutex::scoped_lock l(iface_mtx);
+      return execute_impl(niter);
+    }
+
+    int singlethreaded::execute_impl(unsigned niter)
     {
       running_ = true;
       interrupted = false;
@@ -100,18 +112,23 @@ namespace ecto {
     }
 
     void singlethreaded::interrupt() {
+      boost::mutex::scoped_lock l(iface_mtx);
       runthread.interrupt();
       runthread.join();
+      running_ = false;
     }
     void singlethreaded::stop() {
+      boost::mutex::scoped_lock l(iface_mtx);
       running_ = false;
     }
 
     bool singlethreaded::running() const {
+      boost::mutex::scoped_lock l(iface_mtx);
       return running_;
     }
 
     void singlethreaded::wait() {
+      boost::mutex::scoped_lock l(iface_mtx);
       while(running_)
         boost::this_thread::sleep(boost::posix_time::microseconds(10));
       runthread.join();

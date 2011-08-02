@@ -69,6 +69,8 @@ namespace ecto {
       struct impl;
       boost::shared_ptr<impl> impl_;
       boost::thread runthread;
+      mutable boost::mutex iface_mtx;
+
 
     private:
       

@@ -17,14 +17,30 @@ def makeplasm():
 
     return plasm
 
-p = makeplasm()
-s = ecto.schedulers.Threadpool(p)
-print "execute async..."
-s.execute_async()
-print "executing."
-try:
-    print "trying execute"
-    s.execute()
-except Exception, e:
-    assert e.message == "threadpool scheduler already running"
-    print e.message
+def invoke(Scheduler, whatnext):
+    p = makeplasm()
+    s = Scheduler(p)
+    s.execute_async()
+    assert s.running()
+    time.sleep(0.05)
+    whatnext(s)
+
+def stoponly(s):
+    s.stop()
+
+def interruptonly(s):
+    s.interrupt()
+
+def nada(s):
+    pass
+
+def bang(Sched):
+    for i in range(10):
+        print "executing(Singlethreaded):",i
+        invoke(Sched, nada)
+        invoke(Sched, stoponly)
+        invoke(Sched, interruptonly)
+    
+bang(ecto.schedulers.Singlethreaded)
+bang(ecto.schedulers.Threadpool)
+
