@@ -21,5 +21,4 @@ target_link_libraries(ecto-test
   ${ECTO_DEP_LIBS}
   )
 
-add_test(gtest_units ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/ecto-test)
-
+add_test(ecto_gtest_units ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/ecto-test)
