@@ -7,10 +7,7 @@
 
 #include @CMAKE_CURRENT_BINARY_DIR@/sphinxconf.mk
 
-SPHINXOPTS = \
-	-D version=@ECTO_KITCHEN_VERSION@ \
-	-D release=@ECTO_KITCHEN_VERSION@ \
-	-a -E 
+SPHINXOPTS = -a -E 
 
 SPHINXBUILD = . @CMAKE_BINARY_DIR@/python_path.sh && PATH=@ecto_SOURCE_DIR@/doc/source/src:$$PATH sphinx-build
 

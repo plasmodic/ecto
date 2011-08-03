@@ -13,7 +13,7 @@ macro(init_ecto_kitchen)
   endif()
   set(KITCHEN_PROJECTS "ecto;${ARGN}")
 
-  set(ECTO_KITCHEN_VERSION 11.07.0) 
+  # presumbably a hack for kitchens that aren't called ecto_kitchen
   if(NOT ecto_kitchen_SOURCE_DIR)
     set(ecto_kitchen_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
     set(ecto_kitchen_BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR})

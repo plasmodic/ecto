@@ -1,8 +1,8 @@
-version='@ecto_kitchen_VERSION@'
-release='@ecto_kitchen_RELEASE@'
+version='@ecto_kitchen_GITTAG@'
 commithash='@ecto_kitchen_COMMITHASH@'
 gittag='@ecto_kitchen_GITTAG@'
 git_lastmod='@ecto_kitchen_LAST_MODIFIED@'
+github_url='@ecto_kitchen_GITHUB_URL@'
 
 breathe_default_project = 'ecto'
 breathe_projects = dict(ecto='@kitchen_doc_BINARY_DIR@/api/xml')
