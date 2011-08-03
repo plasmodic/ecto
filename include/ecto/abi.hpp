@@ -34,7 +34,7 @@
 namespace ecto {
   namespace abi {
 
-#define ECTO_ABI_VERSION   5
+#define ECTO_ABI_VERSION   6
 
     struct ECTO_EXPORT verifier {
       verifier(unsigned);
