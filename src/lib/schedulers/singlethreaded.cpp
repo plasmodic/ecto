@@ -1,5 +1,5 @@
 #include <Python.h>
-#undef DISABLE_SHOW
+#define DISABLE_SHOW
 #include <ecto/util.hpp>
 #include <ecto/plasm.hpp>
 #include <ecto/tendril.hpp>
@@ -125,12 +125,10 @@ namespace ecto {
     void singlethreaded::interrupt() {
       SHOW();
       boost::mutex::scoped_lock l(iface_mtx);
-      Py_BEGIN_ALLOW_THREADS
       interrupted = true;
       runthread.interrupt();
       usleep(1000);
       runthread.join();
-      Py_END_ALLOW_THREADS
     }
     void singlethreaded::stop() {
       SHOW();
@@ -149,11 +147,9 @@ namespace ecto {
     void singlethreaded::wait() {
       SHOW();
       boost::mutex::scoped_lock l(iface_mtx);
-      Py_BEGIN_ALLOW_THREADS
       while(running())
         boost::this_thread::sleep(boost::posix_time::microseconds(10));
       runthread.join();
-      Py_END_ALLOW_THREADS
     }
 
   }

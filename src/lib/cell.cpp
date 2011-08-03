@@ -7,34 +7,35 @@
 /*
  * Catch all and pass on exception.
  */
-#define CATCH_ALL() \
-catch (ecto::except::NonExistant& e) \
-{ \
-  auto_suggest(e,*this); \
-  e << "  Module : " + name() + "\n  Function: " + __FUNCTION__; \
-  boost::throw_exception(e); \
-} \
-catch (ecto::except::EctoException& e) \
-{ \
-  e << "  Module : " + name() + "\n  Function: " + __FUNCTION__; \
-  boost::throw_exception(e); \
-} catch (std::exception& e) \
-{ \
-  except::EctoException ee("Original Exception: " +name_of(typeid(e))); \
-  ee << "  What   : " + std::string(e.what()); \
-  ee << "  Module : " + name() + "\n  Function: " + __FUNCTION__; \
-  boost::throw_exception(ee); \
-} \
-catch (boost::thread_interrupted& e) \
-{ \
-  throw e; \
-} \
-catch (...) \
-{ \
-  except::EctoException ee("Threw unknown exception type!"); \
-  ee << "  Module : " + name() + "\n  Function: " + __FUNCTION__; \
-  boost::throw_exception(ee); \
-}
+#define CATCH_ALL()                                                     \
+  catch (const boost::thread_interrupted&)                              \
+    {                                                                   \
+      throw;                                                            \
+    }                                                                   \
+  catch (ecto::except::NonExistant& e)                                  \
+    {                                                                   \
+      auto_suggest(e,*this);                                            \
+      e << "  Module : " + name() + "\n  Function: " + __FUNCTION__;    \
+      boost::throw_exception(e);                                        \
+    }                                                                   \
+  catch (ecto::except::EctoException& e)                                \
+    {                                                                   \
+      e << "  Module : " + name() + "\n  Function: " + __FUNCTION__;    \
+      boost::throw_exception(e);                                        \
+    }                                                                   \
+  catch (std::exception& e)                                             \
+    {                                                                   \
+      except::EctoException ee("Original Exception: " +name_of(typeid(e))); \
+      ee << "  What   : " + std::string(e.what());                      \
+      ee << "  Module : " + name() + "\n  Function: " + __FUNCTION__;   \
+      boost::throw_exception(ee);                                       \
+    }                                                                   \
+  catch (...)                                                           \
+    {                                                                   \
+      except::EctoException ee("Threw unknown exception type!");        \
+      ee << "  Module : " + name() + "\n  Function: " + __FUNCTION__;   \
+      boost::throw_exception(ee);                                       \
+    }
 
 namespace ecto
 {
@@ -122,12 +123,8 @@ namespace ecto
       try
       {
         return dispatch_process(inputs, outputs);
-      }CATCH_ALL()
-    }catch (boost::thread_interrupted& e)
-    {
-      return ecto::QUIT;
-    }
-
+      } catch (const boost::thread_interrupted& e) { return ecto::QUIT; }
+    } CATCH_ALL()
   }
 
   void

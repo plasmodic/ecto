@@ -185,32 +185,37 @@ namespace ecto {
 
         void invoke()
         {
-          boost::this_thread::interruption_point();
-          ECTO_LOG_DEBUG("%s invoke", this);
           try {
-            int j = ecto::schedulers::invoke_process(g, vd);
-            if (j != ecto::OK)
-              {
-                std::cout << "Module " << g[vd]->name() << " returned not okay. Stopping everything." 
-                          << std::endl; 
-                context.stop = true;
-                //        context.interrupt();
-                context.mainserv.post(boost::bind(&threadpool::impl::interrupt, &context));
-                return;
-              }
-          } catch (const std::exception& e) {
-            context.mainserv.post(thrower(boost::current_exception()));
-            return;
-          } catch (const boost::exception& e) {
-            context.mainserv.post(thrower(boost::current_exception()));
-            return;
+            boost::this_thread::interruption_point();
+            ECTO_LOG_DEBUG("%s invoke", this);
+            try {
+              int j = ecto::schedulers::invoke_process(g, vd);
+              if (j != ecto::OK)
+                {
+                  std::cout << "Module " << g[vd]->name() << " returned not okay. Stopping everything." 
+                            << std::endl; 
+                  context.stop = true;
+                  //        context.interrupt();
+                  context.mainserv.post(boost::bind(&threadpool::impl::interrupt, &context));
+                  return;
+                }
+            } catch (const std::exception& e) {
+              context.mainserv.post(thrower(boost::current_exception()));
+              return;
+            } catch (const boost::exception& e) {
+              context.mainserv.post(thrower(boost::current_exception()));
+              return;
+            }
+            ++n_calls;
+            if (respawn(n_calls)) {
+              context.workserv.post(bind(&invoker::async_wait_for_input, this));
+            }
+            else
+              ECTO_LOG_DEBUG("n_calls (%u) reached, no respawn", n_calls);
+          } catch (const boost::thread_interrupted&) {
+            context.stop = true;
+            context.mainserv.post(boost::bind(&threadpool::impl::interrupt, &context));
           }
-          ++n_calls;
-          if (respawn(n_calls)) {
-            context.workserv.post(bind(&invoker::async_wait_for_input, this));
-          }
-          else
-            ECTO_LOG_DEBUG("n_calls (%u) reached, no respawn", n_calls);
         }
         
         bool inputs_ready()
