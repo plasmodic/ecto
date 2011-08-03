@@ -56,6 +56,7 @@ namespace ecto {
         rv = ecto::schedulers::invoke_process(graph, vd);
       } catch (const boost::thread_interrupted& e) {
         std::cout << "Interrupted\n";
+        return ecto::QUIT;
       }
       return rv;
     }
