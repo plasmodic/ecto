@@ -2,6 +2,7 @@ ectomodule(ecto_test
   Add.cpp
   CantCallMeFromTwoThreads.cpp
   DontCallMeFromTwoThreads.cpp
+  ExceptInConstructor.cpp
   Multiply.cpp
   Quitter.cpp
   QuitAfter.cpp

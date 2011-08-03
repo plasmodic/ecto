@@ -16,7 +16,6 @@ The following is a sketch of a user ecto cell.
     static void declare_io(const tendrils& params, tendrils& in, tendrils& out);
     void configure(tendrils& params, tendrils& in, tendrils& out);
     int process(tendrils& in, tendrils& out);
-    void destroy();
   };
   
 The purpose of this interface is to expose as much information about
@@ -37,23 +36,27 @@ The ecto cell goes through a few states during its lifetime.
 * ``MyCell::declare_io()`` is called once per cell (maybe more), before
   allocation, to describe to the system the inputs and outputs of the
   cell, given the set of parameters supplied.  This function also must
-  succeed without incident.
+  succeed without incident.  The implementor should be careful to handle
+  default values with grace, to prevent runtime failures.
 
 * ``MyCell::MyCell()``.  The cell will be default constructed.  There
   is currently no facility for providing arguments to a cell's
   constructor.
 
 * ``MyCell::configure()`` will be called after the cell has been
-  allocated. At this time the user should cache parameters or register
-  parameter change callbacks. This will only be called once.
+  allocated and before any call to process.  The :ref:`scheduler`s will tend
+  to call this in batch before processing is executed.
+  This function should cache :ref:`ecto::spore`s to parameters,inputs,outputs
+  or register parameter change callbacks. This will only be called once during
+  the lifetime of the cell.
 
-* ``MyCell::process()`` called some number of times.  If the
+* ``MyCell::process()`` called any number of times.  If the
   user-supplied values for parameters change, any registered parameter
-  change callbacks will be called first.
+  change callbacks will be called immediately before this function is entered.
+  Values in the parameters, inputs, and outputs will persist between calls, unless
+  changed by an outside entity. e.g. Parameter changes, or pulling input values from
+  the outputs of other cells.
 	
-* ``MyCell::destroy()`` will be called once, after the graph is done
-  executing, before deallocation.
-
 
 Inherently thread-unsafe cells
 ------------------------------
