@@ -36,6 +36,7 @@ foreach(file
     test_strands
     test_tendril
     test_tendrils
+    test_wrong_param_type
     )
     add_test(ecto_${file} 
         /usr/bin/env

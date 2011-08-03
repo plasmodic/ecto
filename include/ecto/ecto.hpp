@@ -98,7 +98,14 @@ namespace ecto
         else 
           {
             tendril::ptr tp = m->parameters[keystring];
-            *tp << value;
+            try{
+              *tp << value;
+            }catch(ecto::except::TypeMismatch& e)
+            {
+              e << std::string("Parameter: " + keystring);
+              e << std::string("Cell: " + m->name());
+              throw e;
+            }
             tp->user_supplied(true);
             tp->dirty(true);
           }
