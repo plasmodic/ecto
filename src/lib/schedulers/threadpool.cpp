@@ -193,7 +193,9 @@ namespace ecto {
               {
                 std::cout << "Module " << g[vd]->name() << " returned not okay. Stopping everything." 
                           << std::endl; 
-                context.interrupt();
+                context.stop = true;
+                //        context.interrupt();
+                context.mainserv.post(boost::bind(&threadpool::impl::interrupt, &context));
                 return;
               }
           } catch (const std::exception& e) {
@@ -379,6 +381,8 @@ namespace ecto {
       void interrupt()
       {
         stop = true;
+        mainserv.stop();
+        workserv.stop();
         for (std::set<runandjoin::ptr>::iterator iter = runners.begin();
              iter != runners.end(); ++iter)
           {
