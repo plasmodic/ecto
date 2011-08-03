@@ -81,3 +81,9 @@ const std::string& name_of()
 }
 
 }
+
+#ifdef ECTO_TRACE_EXCEPTIONS
+#define ECTO_TRACE_EXCEPTION(E) std::cout << __FILE__ << ":" << __LINE__ << " Caught Exception " << E << std::endl
+#else
+#define ECTO_TRACE_EXCEPTION(E)
+#endif

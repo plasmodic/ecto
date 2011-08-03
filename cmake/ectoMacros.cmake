@@ -25,6 +25,7 @@ macro(ectomodule NAME)
     set_target_properties(${NAME}_ectomodule
       PROPERTIES
       OUTPUT_NAME ${NAME}
+      LINK_FLAGS -shared-libgcc
       PREFIX ""
       )
   elseif(WIN32)
@@ -75,6 +76,7 @@ macro(ectorosmodule NAME)
   set_target_properties(${NAME}_ectomodule
     PROPERTIES
     OUTPUT_NAME ${NAME}
+    LINK_FLAGS -shared-libgcc
     PREFIX ""
     )
   

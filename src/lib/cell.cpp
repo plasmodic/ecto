@@ -1,3 +1,4 @@
+// #define ECTO_TRACE_EXCEPTIONS
 #include <ecto/cell.hpp>
 #include <ecto/util.hpp>
 #include <ecto/except.hpp>
@@ -10,28 +11,38 @@
 #define CATCH_ALL()                                                     \
   catch (const boost::thread_interrupted&)                              \
     {                                                                   \
+      ECTO_TRACE_EXCEPTION("const boost::thread_interrupted&");         \
       throw;                                                            \
     }                                                                   \
   catch (ecto::except::NonExistant& e)                                  \
     {                                                                   \
+      ECTO_TRACE_EXCEPTION("const ecto::except::NoneExistant&");        \
       auto_suggest(e,*this);                                            \
       e << "  Module : " + name() + "\n  Function: " + __FUNCTION__;    \
       boost::throw_exception(e);                                        \
     }                                                                   \
   catch (ecto::except::EctoException& e)                                \
     {                                                                   \
+      ECTO_TRACE_EXCEPTION("const ecto::except::EctoException&");       \
       e << "  Module : " + name() + "\n  Function: " + __FUNCTION__;    \
       boost::throw_exception(e);                                        \
     }                                                                   \
   catch (std::exception& e)                                             \
     {                                                                   \
+      ECTO_TRACE_EXCEPTION("std::exception&");                          \
       except::EctoException ee("Original Exception: " +name_of(typeid(e))); \
       ee << "  What   : " + std::string(e.what());                      \
       ee << "  Module : " + name() + "\n  Function: " + __FUNCTION__;   \
       boost::throw_exception(ee);                                       \
     }                                                                   \
+  catch (boost::exception& e)                                           \
+    {                                                                   \
+      ECTO_TRACE_EXCEPTION("boost::exception&");                        \
+      throw;                                                            \
+    }                                                                   \
   catch (...)                                                           \
     {                                                                   \
+      ECTO_TRACE_EXCEPTION("...");                                      \
       except::EctoException ee("Threw unknown exception type!");        \
       ee << "  Module : " + name() + "\n  Function: " + __FUNCTION__;   \
       boost::throw_exception(ee);                                       \
@@ -111,6 +122,7 @@ namespace ecto
         begin->second->notify();
       } catch (const std::exception& e)
       {
+        ECTO_TRACE_EXCEPTION("const std::exception& outside of CATCH ALL");
         except::EctoException ee("Original Exception: " + name_of(typeid(e)));
         ee << "  What   : " + std::string(e.what());
         ee << "  Module : " + name() + "\n  Function: Parameter Callback for '" + begin->first + "'";
@@ -123,7 +135,10 @@ namespace ecto
       try
       {
         return dispatch_process(inputs, outputs);
-      } catch (const boost::thread_interrupted& e) { return ecto::QUIT; }
+      } catch (const boost::thread_interrupted&) { 
+        ECTO_TRACE_EXCEPTION("const boost::thread_interrupted&, returning QUIT instead of rethrow");
+        return ecto::QUIT; 
+      }
     } CATCH_ALL()
   }
 

@@ -1,3 +1,4 @@
+// #define ECTO_TRACE_EXCEPTIONS
 #include <Python.h>
 #define DISABLE_SHOW
 #include <ecto/util.hpp>
@@ -50,7 +51,13 @@ namespace ecto {
     int 
     singlethreaded::invoke_process(graph_t::vertex_descriptor vd)
     {
-      return ecto::schedulers::invoke_process(graph, vd);
+      int rv;
+      try {
+        rv = ecto::schedulers::invoke_process(graph, vd);
+      } catch (const boost::thread_interrupted& e) {
+        std::cout << "Interrupted\n";
+      }
+      return rv;
     }
 
     void singlethreaded::compute_stack()
@@ -102,23 +109,20 @@ namespace ecto {
       signal(SIGINT, &sigint_static_thunk);
 #endif
       compute_stack();
-      {
-        boost::mutex::scoped_lock yes_running(running_mtx);
+      boost::mutex::scoped_lock yes_running(running_mtx);
 
-        unsigned cur_iter = 0;
-        while((niter == 0 || cur_iter < niter))
-          {
-            for (size_t k = 0; k < stack.size() && !interrupted; ++k)
-              {
-                //need to check the return val of a process here, non zero means exit...
-                size_t retval = invoke_process(stack[k]);
-                if (retval)
-                  return retval;
-                boost::this_thread::interruption_point();
-              }
-            ++cur_iter;
-          }
-      }
+      unsigned cur_iter = 0;
+      while((niter == 0 || cur_iter < niter))
+        {
+          for (size_t k = 0; k < stack.size() && !interrupted; ++k)
+            {
+              //need to check the return val of a process here, non zero means exit...
+              size_t retval = invoke_process(stack[k]);
+              if (retval)
+                return retval;
+            }
+          ++cur_iter;
+        }
       return interrupted;
     }
 

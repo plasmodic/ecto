@@ -371,7 +371,14 @@ namespace ecto
     {
       dispatch_configure(parameters,this->inputs,outputs);
       boost::this_thread::interruption_point();
-      return process(int_<has_f<Impl>::process> (), inputs, outputs);
+
+      // this is a little hacky...  there are some problems with
+      // throwing boost exceptions across shared library boundaries.
+      try {
+        return process(int_<has_f<Impl>::process> (), inputs, outputs);
+      } catch (const boost::thread_interrupted& e) {
+        return ecto::QUIT;
+      }
     }
 
     std::string dispatch_name() const
