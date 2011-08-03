@@ -53,24 +53,12 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'ecto_kitchen'
-gitcmd = 'git log -n1 --pretty=format:%cD'.split()
-print gitcmd
-
-lastmod = subprocess.Popen(gitcmd, stdout=subprocess.PIPE).communicate()[0]
-dochash = subprocess.Popen('git log -n1 --pretty=format:%H'.split(),
-                           stdout=subprocess.PIPE).communicate()[0]
-
-treehash = subprocess.Popen('git log -n1 --pretty=format:%T'.split(),
-                           stdout=subprocess.PIPE).communicate()[0]
-
-print "treehash=", treehash
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
 
-print "dochash=", dochash
 copyright = u'2011,  Willow Garage, Inc'
 
 # + ' Version ' + release + ", " + ' '.join(lastmod.split(' ')[:4])

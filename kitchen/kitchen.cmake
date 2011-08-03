@@ -5,6 +5,9 @@ macro(init_ecto_kitchen)
 
   add_definitions(-Wall -Werror)
 
+  include(ecto/kitchen/cmake/git.cmake) 
+  git_status(${PROJECT_NAME})
+
   if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/ecto)
     MESSAGE(FATAL_ERROR "Expecting ecto as a subdirectory of your toplevel project!")
   endif()
