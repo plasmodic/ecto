@@ -11,8 +11,6 @@ Module ecto_test
 
 .. ectocell:: ecto_test DontCallMeFromTwoThreads
 
-.. ectocell:: ecto_test FlagOnDestroy
-
 .. ectocell:: ecto_test Gather
 
 .. ectocell:: ecto_test Gather_double
