@@ -52,8 +52,8 @@ if(SPHINX_BUILD)
     )
   #dependencies for sphinx, html must be built for the sphinx to not error out.
   #also all modules should be built so that the sphinx ectodoc stuff works.
-  add_dependencies(html ecto_cpp ecto_ectomodule ecto_test_ectomodule)
-  add_dependencies(pdf ecto_cpp ecto_ectomodule ecto_test_ectomodule)
+  add_dependencies(html ecto ecto_ectomodule ecto_test_ectomodule)
+  add_dependencies(pdf ecto ecto_ectomodule ecto_test_ectomodule)
   add_dependencies(html doxygen)
   add_dependencies(pdf doxygen)
   add_dependencies(doc pdf)
@@ -61,7 +61,7 @@ if(SPHINX_BUILD)
 
 
 endif()
-  
+
 if(INSTALL_DOC)
   if(DOXYGEN_FOUND AND SPHINX_BUILD)
     install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/html

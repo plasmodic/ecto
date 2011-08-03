@@ -33,13 +33,13 @@ include(${ecto_SOURCE_DIR}/cmake/ectoFindDeps.cmake)
 set(ANAL_FLAGS "")
 option(USE_ANAL_FLAGS "Use extra flags that help catch programming errors and prevent a build up of warnings" ON)
 if(USE_ANAL_FLAGS)
-    if(UNIX)
-        set(ANAL_FLAGS " -Werror -Wall -Wl,--no-undefined")
-    elseif(WIN32)
-        set(ANAL_FLAGS "/D _CRT_SECURE_NO_WARNINGS /D BOOST_HAS_STDINT_H /wd4099 /wd4101 /wd4996 /wd4251 /wd4305 /D _WIN32_WINNT=0x0501")
-    elseif(APPLE)
-        set(ANAL_FLAGS "")
-    endif()
+  if(UNIX)
+    set(ANAL_FLAGS " -Werror -Wall -Wl,--no-undefined")
+  elseif(WIN32)
+    set(ANAL_FLAGS "/D _CRT_SECURE_NO_WARNINGS /D BOOST_HAS_STDINT_H /wd4099 /wd4101 /wd4996 /wd4251 /wd4305 /D _WIN32_WINNT=0x0501")
+  elseif(APPLE)
+    set(ANAL_FLAGS "")
+  endif()
 endif()
 
 add_definitions (${ANAL_FLAGS})
@@ -67,13 +67,13 @@ elseif(WIN32)
   endif()
 endif()
 
-  
+
 
 
 set(ecto_PYTHONPATH ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} ${ecto_SOURCE_DIR}/python)
 set(ecto_INCLUDE_DIRS ${ecto_SOURCE_DIR}/include ${CMAKE_BINARY_DIR}/include)
 if(UNIX)
-  set(ecto_LIBRARIES ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libecto_cpp.so.${ECTO_VERSION})
+  set(ecto_LIBRARIES ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libecto.so.${ECTO_VERSION})
 elseif(WIN32)
   set(ecto_LIBRARIES ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/ecto_cpp.dll)
 endif()
@@ -85,8 +85,8 @@ configure_file(${ecto_SOURCE_DIR}/cmake/ectoConfig-version.cmake.in
   ${CMAKE_BINARY_DIR}/ectoConfig-version.cmake @ONLY)
 configure_file(${ecto_SOURCE_DIR}/cmake/ectoMacros.cmake
   ${CMAKE_BINARY_DIR}/ectoMacros.cmake @ONLY)
-  
-set(ecto_LIBRARIES ecto_cpp)
+
+set(ecto_LIBRARIES ecto)
 
 add_subdirectory(python)
 add_subdirectory(src)

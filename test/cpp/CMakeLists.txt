@@ -1,7 +1,7 @@
 find_package(GTest)
 
 if(NOT GTEST_FOUND)
-return()
+  return()
 endif()
 
 include_directories(${GTEST_INCLUDE_DIRS})
@@ -17,7 +17,7 @@ add_executable(ecto-test
   )
 
 target_link_libraries(ecto-test
-  ecto_cpp
+  ecto
   ${GTEST_LIBRARIES}
   ${ECTO_DEP_LIBS}
   # this is so that we can create cells that are in the test lib w/o 

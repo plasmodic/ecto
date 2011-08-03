@@ -3,11 +3,13 @@
 #create an ectoConfig.cmake for easy find_package(ecto)
 set(ecto_INCLUDE_DIRS ${CMAKE_INSTALL_PREFIX}/${include_prefix})
 set(ecto_LIBRARIES_DIR ${CMAKE_INSTALL_PREFIX}/lib)
+
 if(UNIX)
-set(ecto_LIBRARIES ${ecto_LIBRARIES_DIR}/libecto_cpp.so.${ECTO_VERSION})
+  set(ecto_LIBRARIES ${ecto_LIBRARIES_DIR}/libecto.so.${ECTO_VERSION})
 elseif(WIN32)
-set(ecto_LIBRARIES ${ecto_LIBRARIES_DIR}/ecto_cpp.dll)
+  set(ecto_LIBRARIES ${ecto_LIBRARIES_DIR}/ecto_cpp.dll)
 endif()
+
 #FIXME make the python install path reflect the version for side by side...
 set(ecto_PYTHONPATH ${CMAKE_INSTALL_PREFIX}/${ecto_PYTHON_INSTALL})
 set(ECTO_CONFIG_PATH  ${CMAKE_INSTALL_PREFIX}/${share_prefix})
