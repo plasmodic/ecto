@@ -14,12 +14,11 @@ A brief run down of ecto is in order.
           static void declare_io(const tendrils& params, tendrils& in, tendrils& out);
           void configure(tendrils& params, tendrils& in, tendrils& out);
           int process(tendrils& in, tendrils& out);
-          void destroy();
         };
 
     
     * Inputs, outputs and parameters are templated, and type erasing,
-      giving typesafety and the ability to use your own data types..
+      giving runtime typesafety and the ability to use your own data types..
       
     .. code-block:: c++
         
