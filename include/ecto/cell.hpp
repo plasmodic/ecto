@@ -81,9 +81,6 @@ namespace ecto
      void configure(tendrils& params, tendrils& inputs, tendrils& outputs);
      //called at every execution of the graph
      int process(const tendrils& in, tendrils& out);
-     //called right before the destructor of the cell, a good place to do
-     //critical cleanup work.
-     void destroy();
    };
    * @endcode
    *
@@ -126,13 +123,6 @@ namespace ecto
      * exit signal.
      */
     ReturnCode process();
-
-    /**
-     * \brief This should be called at the end of life for the cell, and signals imminent destruction.
-     *
-     * Will dispatch the client's destroy code. After this call, do not call any other functions.
-     */
-    void destroy();
 
     /**
      * \brief Return the type of the child class.
@@ -190,7 +180,7 @@ namespace ecto
                                     tendrils& outputs) = 0;
     virtual ReturnCode
     dispatch_process(tendrils& inputs, tendrils& outputs) = 0;
-    virtual void dispatch_destroy() = 0;
+
     virtual std::string dispatch_name() const = 0;
     virtual ptr dispatch_make() const
     {
@@ -243,11 +233,6 @@ namespace ecto
     template<class U>
     static no test_process(...);
 
-    template<class U>
-    static yes test_destroy(BOOST_TYPEOF_TPL(&U::destroy));
-    template<class U>
-    static no test_destroy(...);
-
     enum
     {
       declare_params = sizeof(test_declare_params<T> (0)) == sizeof(yes)
@@ -263,10 +248,6 @@ namespace ecto
     enum
     {
       process = sizeof(test_process<T> (0)) == sizeof(yes)
-    };
-    enum
-    {
-      destroy = sizeof(test_destroy<T> (0)) == sizeof(yes)
     };
 
   };
@@ -284,7 +265,6 @@ namespace ecto
 
     ~cell_()
     {
-      dispatch_destroy();
     }
   protected:
     template<int I>
@@ -392,23 +372,6 @@ namespace ecto
       dispatch_configure(parameters,this->inputs,outputs);
       boost::this_thread::interruption_point();
       return process(int_<has_f<Impl>::process> (), inputs, outputs);
-    }
-
-    void destroy(not_implemented)
-    {
-    }
-
-    void destroy(implemented)
-    {
-      //destroy only called once, then destructor.
-      if(impl)
-        impl->destroy();
-    }
-
-    void dispatch_destroy()
-    {
-      destroy(int_<has_f<Impl>::destroy> ());
-      impl.reset();
     }
 
     std::string dispatch_name() const

@@ -127,15 +127,6 @@ namespace ecto
     } CATCH_ALL()
   }
 
-  void
-  cell::destroy()
-  {
-    try
-    {
-      dispatch_destroy();
-    }CATCH_ALL()
-  }
-
   std::string
   cell::type() const
   {

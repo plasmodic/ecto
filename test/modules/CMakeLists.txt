@@ -5,7 +5,6 @@ ectomodule(ecto_test
   Multiply.cpp
   Quitter.cpp
   QuitAfter.cpp
-  FlagOnDestroy.cpp
   Increment.cpp
   Printer.cpp
   Ping.cpp

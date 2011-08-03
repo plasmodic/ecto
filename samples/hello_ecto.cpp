@@ -42,7 +42,6 @@ namespace hello_ecto
    static void declare_io(const tendrils& params, tendrils& in, tendrils& out);
    void configure(tendrils& params, tendrils& inputs, tendrils& outputs);
    int process(const tendrils& in, tendrils& out);
-   void destroy();
    };
    */
 

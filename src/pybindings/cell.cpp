@@ -61,12 +61,6 @@ namespace ecto
 
       void init() { }
 
-      void dispatch_destroy()
-      {
-        if (bp::override dest = this->get_override("destroy"))
-          dest();
-      }
-
       std::string dispatch_name() const
       {
         bp::reference_existing_object::apply<cellwrap*>::type converter;
@@ -314,7 +308,6 @@ namespace ecto
       m_base.def("declare_io", ((void(cell::*)()) &cell::declare_io));
       m_base.def("configure", ((void(cell::*)()) &cell::configure));
       m_base.def("process", (void(cell::*)()) &cell::process);
-      m_base.def("destroy", &cell::destroy);
 
       m_base.add_property("inputs", make_function(&inputs, bp::return_internal_reference<>()));
       m_base.add_property("outputs", make_function(outputs, bp::return_internal_reference<>()));
