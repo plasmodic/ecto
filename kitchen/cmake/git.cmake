@@ -1,4 +1,8 @@
-find_package(Git)
+if(${CMAKE_VERSION} VERSION_LESS 2.8.3)
+  include(${CMAKE_CURRENT_LIST_DIR}/FindGit.cmake)
+else()
+  find_package(Git)
+endif()
 
 macro(git_status PROJECT)
   if (GIT_FOUND)
