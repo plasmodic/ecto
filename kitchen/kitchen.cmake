@@ -62,6 +62,6 @@ macro(init_ecto_kitchen)
     check_hashbangs(${proj}/scripts)
   endforeach()
 
-  add_test(check_hashbangs ${CMAKE_MAKE_PROGRAM} -C ${CMAKE_BINARY_DIR} check_hashbangs)
+  add_test(kitchen_check_hashbangs ${CMAKE_MAKE_PROGRAM} -C ${CMAKE_BINARY_DIR} check_hashbangs)
 
 endmacro()

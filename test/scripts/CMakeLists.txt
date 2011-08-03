@@ -1,5 +1,5 @@
 macro(pytest testname)
-  add_test(${testname}
+  add_test(ecto_${testname}
     /usr/bin/env
     PYTHONPATH=${CMAKE_LIBRARY_OUTPUT_DIRECTORY}:${ecto_SOURCE_DIR}/python:$PYTHONPATH
     ${ARGN}
@@ -37,7 +37,7 @@ foreach(file
     test_tendril
     test_tendrils
     )
-    add_test(${file} 
+    add_test(ecto_${file} 
         /usr/bin/env
         PYTHONPATH=${CMAKE_LIBRARY_OUTPUT_DIRECTORY}:${ecto_SOURCE_DIR}/python:$PYTHONPATH
         ${CMAKE_CURRENT_SOURCE_DIR}/${file}.py)
