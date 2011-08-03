@@ -391,10 +391,8 @@ namespace ecto {
         for (std::set<runandjoin::ptr>::iterator iter = runners.begin();
              iter != runners.end(); ++iter)
           {
-            std::cout << "interrupting a runanjoin...\n";
             (*iter)->interrupt();
           }
-        std::cout << "done interrupting.\n";
       }
 
       void join()
@@ -402,10 +400,8 @@ namespace ecto {
         for (std::set<runandjoin::ptr>::iterator iter = runners.begin();
              iter != runners.end(); ++iter)
           {
-            std::cout << "joining a runanjoin...\n";
             (*iter)->join();
           }
-        std::cout << "done interrupting.\n";
       }
 
     private:
@@ -545,7 +541,7 @@ namespace ecto {
     void threadpool::interrupt()
     {
       boost::mutex::scoped_lock lock(iface_mtx);
-      ECTO_LOG_DEBUG("threadpool interrupting %p", this);
+      std::cout << "threadpool attemtping to interrupt threads.\n";
       impl_->interrupt();
       runthread.interrupt();
     }
