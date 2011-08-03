@@ -30,7 +30,7 @@ namespace ecto {
           tendril& from = e->front();
           tendril& to = *(m->inputs[e->to_port]);
           to << from;
-          e->pop_front();
+          e->pop_front(); //todo Make this use a pool, instead of popping. To get rid of allocations.
           ++inbegin;
         }
       //verify that all inputs have been set.
