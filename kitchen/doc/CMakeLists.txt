@@ -36,7 +36,16 @@ endif()
 find_program(SPHINX_BUILD sphinx-build)
 
 if(SPHINX_BUILD)
+  set(REQUIRED_SPHINX_VERSION "1.0.7")
+  execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "import sphinx;print sphinx.__version__"
+    OUTPUT_VARIABLE SPHINX_VERSION
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
   message(STATUS "Found sphinx-build : ${SPHINX_BUILD}")
+  message(STATUS "sphinx version: ${SPHINX_VERSION}")
+  if("${SPHINX_VERSION}" VERSION_LESS ${REQUIRED_SPHINX_VERSION})
+        MESSAGE(WARNING "You verions of sphinx is ${SPHINX_VERSION}, required ${REQUIRED_SPHINX_VERSION}")
+  endif()
   set(ENV{PYTHONPATH} @LIBRARY_OUTPUT_PATH@:@CMAKE_SOURCE_DIR@/python:$ENV{PYTHONPATH})
   add_custom_target(pdf
     COMMENT "Generating pdf of documentation with Sphinx and latex." VERBATIM
