@@ -114,8 +114,10 @@ html_theme = 'ecto_theme'
 # documentation.
 html_theme_options = { }
 
-html_context = dict(treehash=treehash,
+html_context = dict(commithash = commithash,
                     github_location = github_location,
+                    gittag = gittag,
+                    git_lastmod = git_lastmod,
                     )
 
 # Add any paths that contain custom themes here, relative to this directory.
