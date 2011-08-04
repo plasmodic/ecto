@@ -27,6 +27,7 @@ follow will involve both C++ and Python snippets.
 .. rubric:: Topics
 
 .. toctree::
+    :maxdepth: 1
 
     cells.rst
     plasms.rst

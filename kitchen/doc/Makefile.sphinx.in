@@ -8,8 +8,9 @@
 #include @CMAKE_CURRENT_BINARY_DIR@/sphinxconf.mk
 
 SPHINXOPTS = -a -E 
-
-SPHINXBUILD = . @CMAKE_BINARY_DIR@/python_path.sh && PATH=@ecto_SOURCE_DIR@/doc/source/src:$$PATH sphinx-build
+#FIXME path needs to be settable from external projects that might want to
+#execute some code.
+SPHINXBUILD = . @CMAKE_BINARY_DIR@/python_path.sh && PATH=@ecto_SOURCE_DIR@/doc/source/src:@ecto_SOURCE_DIR@/doc/source/introduction:$$PATH sphinx-build
 
 PAPER         = letter
 BUILDDIR      = @CMAKE_CURRENT_BINARY_DIR@
