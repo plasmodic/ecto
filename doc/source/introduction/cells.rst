@@ -19,12 +19,12 @@ Let us examine a c++ construct, a common functor:
     
     A c++ function object.
 
-Functors, function objects, are a reasonable way of incapsulating self contained
+Functors, function objects, are a reasonable way of encapsulating self contained
 functionality to operate on a set of data, and mesh well with the stl algorithms.
 The operator() may be abused by templated code to give way to genericity.
 
 The ecto Cell is similar, in that it gives ecto a common unit with which to work.
-Here is the ecto equivlent of the above functor, slightly more vebose of course:
+Here is the ecto equivalent of the above functor, slightly more verbose of course:
 
 .. _cell-Printer01:
    
@@ -39,8 +39,8 @@ Here is the ecto equivlent of the above functor, slightly more vebose of course:
 
 The verbosity is a feature of ecto, in that each cell exposes as much information
 as it can to the :ref:`ectosphere`.  At runtime, ecto may ask the cell
-for documentation, types, and symantics.  These features are what enable
-the typesafety in a graph of cells, or autocompletion from an :ref:`ipython context <ipython>`.
+for documentation, types, and semantics.  These features are what enable
+the type-safety in a graph of cells, or auto-completion from an :ref:`ipython context <ipython>`.
 
 .. _examination-cell:
 
@@ -56,14 +56,14 @@ Let us look at a graphical representation of the Cell written :ref:`above <cell-
 
 .. figure:: Printer01.png
    
-   A graphical represention of a :ref:`ecto::cell`.  In ``green`` are the inputs,
-   ``blue`` parameters, ``yello`` cell type. This cell has no outputs.
+   A graphical representation of a :ref:`ecto::cell`.  In ``green`` are the inputs,
+   ``blue`` parameters, ``yellow`` cell type. This cell has no outputs.
 
 The parameters, inputs, and outputs of a cell all share the same type, :ref:`ecto::tendrils`.
 Tendrils are mappings between strings, and lazily typed objects.  These are how the
-cell comunicates with the rest of the system.  The reason for choosing a runtime
+cell communicates with the rest of the system.  The reason for choosing a runtime
 typed object like the :ref:`ecto::tendril` instead of a compile time typed object
-like a ``boost::tuple`` is that it allows for ecto to be type ignrorant, as the
+like a ``boost::tuple`` is that it allows for ecto to be type ignorant, as the
 data held by the tendril has really no effect on how a graph executes or the python
 interfaces.  Ecto is a plugin based architecture, and so can not be header only,
 strictly compile time typed.
