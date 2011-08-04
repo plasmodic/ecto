@@ -48,8 +48,8 @@ namespace ecto
       <TD PORT="i_%s" BGCOLOR="springgreen">%s</TD>
   );
 
-  const char* cell_str = STRINGY_DINGY(
-      <TD ROWSPAN="%d" COLSPAN="%d" BGCOLOR="khaki"><B>%s</B></TD>
+  const char* cell_str = 
+    STRINGY_DINGY(<TD ROWSPAN="%d" COLSPAN="%d" BGCOLOR="khaki"> %s </TD>
   );
 
   const char* param_str_1st = STRINGY_DINGY(
