@@ -203,6 +203,7 @@ namespace ecto
   ECTO_INSTANTIATE_REGISTRY(modname)            \
   void init_module_##modname##_rest() ;         \
   BOOST_PYTHON_MODULE(modname) {                \
+    boost::python::import("ecto");              \
     ECTO_REGISTER(modname);                     \
     init_module_##modname##_rest();             \
   }                                             \

@@ -20,6 +20,7 @@ foreach(file
     test_If
     test_handles
     test_modules
+    test_no_ecto_import
     # test_metrics
     test_parameter_callbacks
     test_passthrough
