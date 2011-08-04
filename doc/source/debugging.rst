@@ -8,13 +8,11 @@ Debugging things
 Running an ecto script under gdb
 --------------------------------
 
-You'll notice that you can't run a vanilla script under gdb::
+You'll notice that as such, you can't run a script under gdb::
 
   % gdb ../src/ecto/test/scripts/test_random.py                       
   GNU gdb (Ubuntu/Linaro 7.2-1ubuntu11) 7.2
-
-     [ blabber ]
-
+  [ chattiness ]
   "/ssd/ecto_kitchen/src/ecto/test/scripts/test_random.py": not in executable format: File format not recognized
 
 The trick is to run ``gdb`` on the python binary, not the script, and
@@ -116,8 +114,59 @@ up to the python interpreter itself::
   #24 0x00007ffff69d8c4d in __libc_start_main () from /lib/libc.so.6
   #25 0x00000000004199f9 in _start ()
   
+Exceptions
+----------
 
+If your problem is e.g. a segfault or a null pointer dereference, just
+running the script under gdb will get you to the point of the fault.
+If on the other hand something is throwing an exception, the program
+will exit::
 
-          
+  (gdb) r
+  Starting program: /usr/bin/python ../ecto/test/scripts/test_random.py
+  [Thread debugging using libthread_db enabled]
+  Traceback (most recent call last):
+    File "../ecto/test/scripts/test_random.py", line 22, in <module>
+      test_random()
+    File "../ecto/test/scripts/test_random.py", line 16, in test_random
+      sched.execute(niter=100)
+  RuntimeError: Original Exception: std::runtime_error
+    What   : catastrophe!
+    Module : Random
+    Function: process
+  [Inferior 1 (process 11876) exited with code 01]
+  (gdb) where
+  No stack.
 
+As you can see there is no helpful information here.  The trick is to
+``catch throw``::
 
+  (gdb) catch throw
+  Catchpoint 2 (throw)
+  (gdb) r
+  Starting program: /usr/bin/python ../ecto/test/scripts/test_random.py
+  [Thread debugging using libthread_db enabled]
+  Catchpoint 2 (exception thrown), 0x00007ffff4f0fde0 in __cxa_throw () from /usr/lib/libstdc++.so.6
+  (gdb) where
+  #0  0x00007ffff4f0fde0 in __cxa_throw () from /usr/lib/libstdc++.so.6
+  #1  0x00007fffeaa64707 in ecto_test::Uniform01::process (this=0x1033220, inputs=..., outputs=...)
+      at /home/ecto_kitchen/ecto/test/modules/Uniform01.cpp:88
+  #2  0x00007fffeaa6b330 in ecto::cell_<ecto_test::Uniform01>::process (this=0x9737b0, inputs=..., outputs=...)
+      at /home/ecto_kitchen/ecto/include/ecto/cell.hpp:366
+  #3  0x00007fffeaa6a27e in ecto::cell_<ecto_test::Uniform01>::dispatch_process (this=0x9737b0, inputs=..., outputs=...)
+      at /home/ecto_kitchen/ecto/include/ecto/cell.hpp:378
+  (gdb) up
+  #1  0x00007fffeaa64707 in ecto_test::Uniform01::process (this=0x1033220, inputs=..., outputs=...)
+      at /home/ecto_kitchen/ecto/test/modules/Uniform01.cpp:88
+  88	      throw std::runtime_error("catastrophe!");
+  (gdb) l
+  83	      ncalls=parameters.get<unsigned>("ncalls");
+  84	    }
+  85	
+  86	    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
+  87	    {
+  88	      throw std::runtime_error("catastrophe!");
+  89	
+  90	      for (unsigned j=0; j<ncalls; ++j)
+  91	        *out_ = (*pimpl_)();
+  92	      return ecto::OK;
