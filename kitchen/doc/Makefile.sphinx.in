@@ -44,7 +44,7 @@ links:
 	rsync -va --delete @ecto_kitchen_SOURCE_DIR@/doc/source $(BUILDDIR)/
 	rsync -va @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source $(BUILDDIR)/
 	echo ".. toctree::" > $(BUILDDIR)/source/index_generated.rst
-	echo "   :maxdepth: 1" >> $(BUILDDIR)/source/index_generated.rst
+	echo "   :maxdepth: 2" >> $(BUILDDIR)/source/index_generated.rst
 	echo "" >> $(BUILDDIR)/source/index_generated.rst
 
 	@for k in @KITCHEN_PROJECTS_STR@ ; do \

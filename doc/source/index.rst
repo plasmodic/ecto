@@ -1,5 +1,5 @@
-ecto
-====
+ecto: the core
+==============
 
 ecto is a dynamically configurable *Directed Acyclic processing Graph* **(DAG)** framework.  
 ecto provides a lightweight plugin archictecture, graph constructures, and scheduling algorithms
@@ -46,5 +46,4 @@ Also join the email list:
 .. toctree::
    :maxdepth: 2
    
-   git
    debugging
