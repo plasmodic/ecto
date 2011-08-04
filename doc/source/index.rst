@@ -47,4 +47,4 @@ Also join the email list:
    :maxdepth: 2
    
    git
-
+   debugging

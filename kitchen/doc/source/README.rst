@@ -1,6 +1,8 @@
 How To Get Cooking in the Ecto Kitchen
 ======================================
 
+.. highlight:: ectosh
+
 * Clone this project::
 
     % git clone git://github.com/plasmodic/ecto_kitchen.git

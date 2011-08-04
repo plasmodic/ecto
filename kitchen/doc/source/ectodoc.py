@@ -209,6 +209,24 @@ def do_ectodoc(app, doctree):
         # new_node['language'] = 'text'
         node.replace_self(new_node)
 
+from pygments.lexer import RegexLexer
+from pygments.token import *
+
+class EctoShLexer(RegexLexer):
+    name = 'Better lexer sh examples'
+    aliases = ['ectosh']
+
+    tokens = {
+        'root': [
+            (r'^(%|\>\>\>|\(gdb\))', Literal.Number.Float, 'afterprompt'),
+            (r'.+', Text),
+        ],
+        'afterprompt': [
+            (r'.*', Generic.Deleted, '#pop'),
+            (r'\n', Comment.Multiline, '#pop'),
+        ]
+    }
+
 
 def setup(app):
     #app.add_config_value('programoutput_use_ansi', False, 'env')
@@ -218,3 +236,4 @@ def setup(app):
     app.add_directive('ectocell', EctoDocDirective)
     # app.connect('builder-inited', init_cache)
     app.connect('doctree-read', do_ectodoc)
+    app.add_lexer('ectosh', EctoShLexer())
