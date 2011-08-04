@@ -19,6 +19,9 @@ def test_doc():
     print scatter.__doc__
     print gather.__doc__
     print plasm.viz()
+    #out = open("graph.dot","wt")
+    #print >>out, plasm.viz()
+    #ecto.view_plasm(plasm)
 
 def test_inspection():
     ecto.list_ecto_module(ecto_test)

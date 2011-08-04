@@ -91,42 +91,5 @@ namespace ecto {
     graph_t;
   
 
-
-
-    struct vertex_writer
-    {
-      graph_t* g;
-
-      vertex_writer(graph_t* g_) : g(g_) { }
-
-      void operator()(std::ostream& out, graph_t::vertex_descriptor vd)
-      {
-        out << "[label=\"" << (*g)[vd]->name() << "\"]";
-      }
-    };
-
-    struct edge_writer
-    {
-      graph_t* g;
-
-      edge_writer(graph_t* g_) :
-        g(g_)
-      { }
-
-      void operator()(std::ostream& out, graph_t::edge_descriptor ed)
-      {
-        out << "[headlabel=\"" << (*g)[ed]->to_port << "\" taillabel=\"" << (*g)[ed]->from_port << "\"]";
-      }
-    };
-
-    struct graph_writer
-    {
-      void operator()(std::ostream& out) const
-      {
-        out << "graph [rankdir=TB, ranksep=1]" << std::endl;
-        out << "edge [labelfontsize=8]" << std::endl;
-      }
-    };
-
   }
 }

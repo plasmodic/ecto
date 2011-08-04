@@ -6,6 +6,7 @@
 
 #include <boost/format.hpp>
 #include <boost/date_time/posix_time/posix_time_duration.hpp>
+#include <boost/regex.hpp>
 
 #include <string>
 #include <map>
@@ -29,6 +30,137 @@ namespace ecto
   } // namespace
 
   using namespace graph;
+  #define STRINGY_DINGY(A) #A
+  //see http://www.graphviz.org/content/node-shapes for reference.
+  const char* table_str = STRINGY_DINGY(
+      <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+      %s
+      <TR>
+      %s
+      %s
+      </TR>
+      %s
+      %s
+      </TABLE>
+  );
+
+  const char* input_str = STRINGY_DINGY(
+      <TD PORT="i_%s" BGCOLOR="springgreen">%s</TD>
+  );
+
+  const char* cell_str = STRINGY_DINGY(
+      <TD ROWSPAN="%d" COLSPAN="%d" BGCOLOR="khaki"><B>%s</B></TD>
+  );
+
+  const char* param_str_1st = STRINGY_DINGY(
+      <TD PORT="p_%s" BGCOLOR="lightblue">%s</TD>
+  );
+
+  const char* param_str_N = STRINGY_DINGY(
+      <TR>
+      <TD PORT="p_%s" BGCOLOR="lightblue">%s</TD>
+      </TR>
+  );
+
+  const char* output_str = STRINGY_DINGY(
+      <TD PORT="o_%s" BGCOLOR="indianred1">%s</TD>
+  );
+
+  struct vertex_writer
+  {
+    graph_t* g;
+
+    vertex_writer(graph_t* g_)
+        :
+          g(g_)
+    {
+    }
+
+    void
+    operator()(std::ostream& out, graph_t::vertex_descriptor vd)
+    {
+
+
+      cell::ptr c = (*g)[vd];
+      int n_inputs = c->inputs.size();
+      int n_outputs = c->outputs.size();
+      int n_params = c->parameters.size();
+      std::string sanitized_name = c->name();
+      //deal with html characters: ", &, <, and >
+      const boost::regex esc_lt("[<]");
+      const std::string rep_lt("&lt;");
+      const boost::regex esc_gt("[>]");
+      const std::string rep_gt("&gt;");
+
+      sanitized_name = boost::regex_replace(sanitized_name, esc_lt, rep_lt, boost::match_default);
+      sanitized_name = boost::regex_replace(sanitized_name, esc_gt, rep_gt, boost::match_default);
+
+      std::string inputs;
+      BOOST_FOREACH(const tendrils::value_type& x, c->inputs)
+          {
+            std::string key = x.first;
+            if (inputs.empty())
+              inputs = "<TR>\n";
+            inputs += boost::str(boost::format(input_str) % key % key) + "\n";
+          }
+      if (!inputs.empty())
+        inputs += "</TR>";
+
+      std::string outputs;
+      BOOST_FOREACH(const tendrils::value_type& x, c->outputs)
+          {
+            std::string key = x.first;
+            if (outputs.empty())
+              outputs = "<TR>\n";
+            outputs += boost::str(boost::format(output_str) % key % key) + "\n";
+          }
+      if (!outputs.empty())
+        outputs += "</TR>";
+
+      std::string cellrow = boost::str(
+          boost::format(cell_str) % std::max(1,n_params) % int(std::max(1,std::max(n_inputs, n_outputs))) % sanitized_name);
+      std::string p1, pN;
+      BOOST_FOREACH(const tendrils::value_type& x, c->parameters)
+          {
+            std::string key = x.first;
+            if (p1.empty())
+              p1 = boost::str(boost::format(param_str_1st) % key % key) + "\n";
+            else
+              pN += boost::str(boost::format(param_str_N) % key % key) + "\n";
+          }
+
+      std::string table = boost::str(boost::format(table_str) % inputs % cellrow % p1 % pN % outputs);
+      out << "[label=<" << table << ">]";
+    }
+  };
+
+  struct edge_writer
+  {
+    graph_t* g;
+
+    edge_writer(graph_t* g_)
+        :
+          g(g_)
+    {
+    }
+
+    void
+    operator()(std::ostream& out, graph_t::edge_descriptor ed)
+    {
+      out << "[headport=\"i_" << (*g)[ed]->to_port << "\" tailport=\"o_" << (*g)[ed]->from_port << "\"]";
+    }
+  };
+
+  struct graph_writer
+  {
+    void
+    operator()(std::ostream& out) const
+    {
+      out << "graph [rankdir=TB, ranksep=1]" << std::endl;
+      out << "edge [labelfontsize=8]" << std::endl;
+      out << "node [shape=plaintext]" << std::endl;
+    }
+  };
 
   struct plasm::impl
   {
@@ -158,6 +290,7 @@ namespace ecto
   {
     impl_->connect(from, output, to, input);
   }
+
 
   void
   plasm::viz(std::ostream& out) const

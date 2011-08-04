@@ -3,6 +3,7 @@ find_package(Threads)
 find_package(Boost COMPONENTS
   python
   thread
+  regex
   system
   REQUIRED
   )
