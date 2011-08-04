@@ -3,30 +3,26 @@
 //start
 struct Printer
 {
-  Printer(const std::string& prefix, const std::string& postfix)
+  Printer(const std::string& prefix, const std::string& suffix)
       :
         prefix_(prefix),
-        postfix_(postfix)
+        suffix_(suffix)
   {
   }
   void
   operator()(std::ostream& out, const std::string& message)
   {
-    out << prefix_ << message << postfix_;
+    out << prefix_ << message << suffix_;
   }
-  std::string prefix_, postfix_;
+  std::string prefix_, suffix_;
 };
 //end
 
 int
 main()
 {
-  Printer p("begin>>", "<<end\n");
-  while (true)
-  {
-    std::string word;
-    std::cin >> word;
-    p(std::cout, word);
-  }
+  Printer p("start>> ", "<< stop\n");
+  std::string message = "Hello Function.";
+  p(std::cout, message);
   return 0;
 }

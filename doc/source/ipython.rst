@@ -5,7 +5,7 @@ Using IPython
 
 Provided your plasm doesn't use things like ecto_opencv.imshow or
 other cells that create strange threads that conflict with ipython,
-you can use :ref:`IPython <http://ipython.scipy.org>` as a front end
+you can use IPython, http://ipython.scipy.org, as a front end
 to ecto scripts.  In short, you execute the plasm asynchronously and
 then spawn an ipython interpreter in the main python interpreter
 thread:

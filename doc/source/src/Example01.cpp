@@ -1,6 +1,6 @@
+//start
 #include <iostream>
 #include <ecto/ecto.hpp>
-#include <ecto/registry.hpp>
 
 using ecto::tendrils;
 
@@ -19,4 +19,4 @@ struct Example01
 };
 
 ECTO_CELL(ecto_examples, Example01, "Example01", "Example");
-
+//end

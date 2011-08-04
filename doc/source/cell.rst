@@ -1,3 +1,5 @@
+.. _ecto::cell:
+
 cell
 ====
 

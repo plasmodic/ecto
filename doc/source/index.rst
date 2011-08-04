@@ -10,6 +10,14 @@ or robotics pipelines.
 
 Drop in on us on ``#ecto`` on ``irc.oftc.net``
 
+.. rubric:: Email List
+
+Also join the email list:
+    
+    * site: http://groups.google.com/a/plasmodic.org/group/ecto-dev
+    * email: **ecto-dev@plasmodic.org**
+
+
 .. rubric:: Table of Contents
 
 .. toctree::
