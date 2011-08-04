@@ -1,3 +1,5 @@
+.. _ecto::tendril:
+
 tendril
 =======
 

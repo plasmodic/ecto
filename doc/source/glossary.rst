@@ -10,6 +10,8 @@ ecto
 from the Greek *ektos*, meaning "outside"
 Think ghostbusters.
 
+.. _DAG:
+
 plasm
 -----
 from the Greek *plasma*, meaning "something formed or molded"
@@ -31,5 +33,19 @@ spore
 -----
 The spore is the typed version of the tendril, and may be thought of as a handle.
 
+.. _ectosphere:
+
+ectosphere
+----------
+A colloquialism that refers to the :ref:`ectosystem` that is a loosely coupled
+collection
+of ecto cells, modules, graphs, git repositories, and unices.
+
+.. _ectosystem:
+
+ectosystem
+-----------
+Another colloquialism that imbues the idealogy of an ecosystem, symbiosis, complexity
+from entropy, etc...
 
 

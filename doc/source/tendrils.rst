@@ -1,3 +1,5 @@
+.. _ecto::tendrils:
+
 tendrils
 ============================================
 tendrils are containers for the tendril type, essentially a mapping from name to tendril.
