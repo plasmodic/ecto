@@ -44,7 +44,10 @@ if(SPHINX_BUILD)
   message(STATUS "Found sphinx-build : ${SPHINX_BUILD}")
   message(STATUS "sphinx version: ${SPHINX_VERSION}")
   if("${SPHINX_VERSION}" VERSION_LESS ${REQUIRED_SPHINX_VERSION})
-        MESSAGE(WARNING "You verions of sphinx is ${SPHINX_VERSION}, required ${REQUIRED_SPHINX_VERSION}")
+    MESSAGE(WARNING "You version of sphinx (http://sphinx.pocoo.org) is ${SPHINX_VERSION}, required ${REQUIRED_SPHINX_VERSION}")
+    if (UNIX)
+      MESSAGE(WARNING "You may be able to update with 'easy_install -U sphinx'")
+    endif()
   endif()
   set(ENV{PYTHONPATH} @LIBRARY_OUTPUT_PATH@:@CMAKE_SOURCE_DIR@/python:$ENV{PYTHONPATH})
   add_custom_target(pdf
@@ -67,7 +70,6 @@ if(SPHINX_BUILD)
   add_dependencies(pdf doxygen)
   add_dependencies(doc pdf)
   add_dependencies(doc html)
-
 
 endif()
 
