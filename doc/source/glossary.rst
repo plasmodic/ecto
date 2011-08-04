@@ -3,6 +3,8 @@
 glossary of ecto terms
 ======================
 
+.. _ecto-greek:
+
 ecto
 ----
 from the Greek *ektos*, meaning "outside"

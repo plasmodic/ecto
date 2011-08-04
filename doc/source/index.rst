@@ -15,6 +15,7 @@ Drop in on us on ``#ecto`` on ``irc.oftc.net``
 .. toctree::
    :maxdepth: 2
    
+   introduction/index.rst
    at_a_glance
    get_ecto
    client_usage
