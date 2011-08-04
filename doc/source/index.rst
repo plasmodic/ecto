@@ -39,4 +39,4 @@ Drop in on us on ``#ecto`` on ``irc.oftc.net``
    :maxdepth: 2
    
    git
-
+   debugging
