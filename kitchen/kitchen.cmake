@@ -11,7 +11,13 @@ macro(init_ecto_kitchen)
   if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/ecto)
     MESSAGE(FATAL_ERROR "Expecting ecto as a subdirectory of your toplevel project!")
   endif()
+
   set(KITCHEN_PROJECTS "ecto;${ARGN}")
+  if (NOT KITCHEN_PROJECTS)
+    message(FATAL_ERROR no kitchen projects found?!?)
+  endif()
+  string(REPLACE ";" " " KITCHEN_PROJECTS_STR "${KITCHEN_PROJECTS}")
+  message(STATUS "Initializing kitchen with projects ${KITCHEN_PROJECTS_STR}")
 
   # a hack for kitchens that aren't called ecto_kitchen
   if(NOT ecto_kitchen_SOURCE_DIR)
@@ -22,6 +28,8 @@ macro(init_ecto_kitchen)
   set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib)
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
   enable_testing()
+
+  add_subdirectory(ecto/kitchen/doc ${ecto_kitchen_BINARY_DIR}/doc)
 
   #this sets ecto_DIR so that subsequent projects may find ecto-config.cmake
   set(ecto_DIR ${CMAKE_CURRENT_BINARY_DIR})
@@ -38,16 +46,12 @@ macro(init_ecto_kitchen)
     build_as_standalones.sh
     @ONLY)
 
-  string(REPLACE ";" " " KITCHEN_PROJECTS_STR "${KITCHEN_PROJECTS}")
-  message(STATUS "Initializing kitchen with projects ${KITCHEN_PROJECTS_STR}")
   configure_file(${ecto_kitchen_SOURCE_DIR}/ecto/kitchen/util/python_path.sh.in
     ${CMAKE_BINARY_DIR}/python_path.sh
     @ONLY
     )
   message(STATUS "To set up your python path you may source the file 'python_path.sh'")
   message(STATUS "  in the build directory.")
-
-  add_subdirectory(ecto/kitchen/doc ${ecto_kitchen_BINARY_DIR}/doc)
 
   macro(check_hashbangs SCRIPTDIR)
     file(GLOB_RECURSE _python_scripts ${CMAKE_CURRENT_SOURCE_DIR}/${SCRIPTDIR}/*.py)

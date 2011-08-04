@@ -6,3 +6,10 @@ ectomodule(introduction
   nop.cpp
   interface.cpp
   )
+
+add_dependencies(html 
+  introduction_ectomodule functor
+  )
+
+
+
