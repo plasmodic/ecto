@@ -36,7 +36,7 @@ A script like this,
 Will output,
 
 .. program-output:: Example01.py
-
+   :nostderr:
 
 The table below explains (somewhat) the type conversions that happen
 when one tendril or type is inserted to another.
