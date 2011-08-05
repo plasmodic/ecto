@@ -1,4 +1,4 @@
-.. _cells-intro:
+.. _cells-overview:
 
 Cells
 =====
@@ -78,6 +78,7 @@ The most basic of cells would be:
     :start-after: //start
     :end-before: //end
 
+  .. ectocell:: ecto_overview NopCell
 
 Each cell may or may not implement the following functions:
 
@@ -137,6 +138,15 @@ to the following simplified example:
     {
       YourCell::declare_params(params_);
     }
+    
+    void configure()
+    {
+      if(!thiz_)
+      {
+        thiz_ = new YourCell();
+        thiz_->configure();
+      }
+    }
     //... dispatch other functions...
     YourCell* thiz_;
   }
@@ -168,7 +178,7 @@ script demonstrates the python interface of our cell that ecto provides for free
 
 The script, when run will give the following output:
 
-.. program-output:: doc/source/introduction/cell01.py
+.. program-output:: doc/source/overview/cell01.py
 
 .. topic:: Doc Generation
 
@@ -182,16 +192,16 @@ The script, when run will give the following output:
   Another cool aspect of documentation generation is its full integration into sphinx
   docs. Placing the following command in sphinx::
   
-    .. ectocell:: introduction Printer01
+    .. ectocell:: ecto_overview Printer01
 
   Produces:
   
-  .. ectocell:: introduction Printer01
+  .. ectocell:: ecto_overview Printer01
   
   Also from an interactive python prompt, the following should produce useful
   output::
     
-    >>> from introduction import Printer01
+    >>> from ecto_overview import Printer01
     >>> help(Printer01)
     
   For more detailed information, refer to :ref:`ectodoc`.

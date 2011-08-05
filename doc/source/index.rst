@@ -23,7 +23,11 @@ Also join the email list:
 .. toctree::
    :maxdepth: 2
    
-   introduction/index.rst
+   overview/index.rst
+   using_ecto/index.rst
+   tutorial/index.rst
+   reference/index.rst
+
    at_a_glance
    client_usage
    glossary
