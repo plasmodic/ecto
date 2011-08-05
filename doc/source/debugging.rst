@@ -165,7 +165,7 @@ As you can see there is no helpful information here.  The trick is to
   85	
   86	    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
   87	    {
-  88	      throw std::runtime_error("catastrophe!");
+  88	      throw std::runtime_error("catastrophe!");      // <-    boom!
   89	
   90	      for (unsigned j=0; j<ncalls; ++j)
   91	        *out_ = (*pimpl_)();

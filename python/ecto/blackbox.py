@@ -2,7 +2,7 @@ import ecto
            
 class BlackBox(object):
     '''
-    The BlackBox may be used as an encapsulation idium within ecto, to declare reusable plasms.
+    The BlackBox may be used as an encapsulation idiom within ecto, to declare reusable plasms.
     
     Users should inherit from BlackBox, and likely will wish to implement a few functions that
     describe their reusable plasm.
@@ -26,11 +26,9 @@ class BlackBox(object):
         p = self.expose_parameters()
         exist_i = key in i.keys()
         exist_o = key in o.keys()
-        #dichotomous spec 
+        #dichotomous spec... TDS: this is quite broken
         if exist_i and exist_o:
-            ospec = o[key]
-            ispec = i[key]
-            return ecto.TendrilSpecification(ospec.module_out, ispec.module_in, key)
+            raise RuntimeError("Currently you cannot have an input and output of a blackbox with the same key")
         elif exist_i:
             return i[key].to_spec()
         elif exist_o:
