@@ -1,3 +1,5 @@
+.. _at-a-glance:
+
 at a glance
 ----------------
 A brief run down of ecto is in order.
