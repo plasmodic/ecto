@@ -32,6 +32,10 @@ macro(init_ecto_kitchen)
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
   enable_testing()
 
+  foreach(proj ${KITCHEN_PROJECTS})
+    list(APPEND KITCHEN_PROJECTS_SOURCE_DIRS ${ecto_kitchen_SOURCE_DIR}/${proj})
+  endforeach()
+
   add_subdirectory(ecto/kitchen/doc ${ecto_kitchen_BINARY_DIR}/doc)
 
   #this sets ecto_DIR so that subsequent projects may find ecto-config.cmake

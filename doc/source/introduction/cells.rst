@@ -168,7 +168,7 @@ script demonstrates the python interface of our cell that ecto provides for free
 
 The script, when run will give the following output:
 
-.. program-output:: cell01.py
+.. program-output:: doc/source/introduction/cell01.py
 
 .. topic:: Doc Generation
 

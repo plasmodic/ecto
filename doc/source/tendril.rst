@@ -35,8 +35,8 @@ A script like this,
 
 Will output,
 
-.. program-output:: Example01.py
-   :nostderr:
+.. program-output:: doc/source/src/Example01.py
+   :prompt:
 
 
 .. _tendril-conversions:
