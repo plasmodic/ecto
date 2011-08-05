@@ -145,12 +145,16 @@ to the following simplified example:
   
 .. _SFINAE: http://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error
 
-The real implementation uses `SFINAE`_ to enable optional implementation of the interface functions.
-The macro :cmacro:`ECTO_CELL` also constructs python bindings for your cell, and
-generates RST formated doc strings from the static declaration parameter and io functions.
+The real implementation uses `SFINAE`_ to enable
+optional implementation of the interface functions.
+The macro :cmacro:`ECTO_CELL` also constructs python
+bindings for your cell, and
+generates RST formated doc strings from the
+static declaration parameter and io functions.
 The above sample
 should be referred to as the essence of the technique, rather than the exact
-implementation.  This technique adds opaqueness to the Cell implementers, and
+implementation.  This technique gives a certain amount of opaqueness to
+the client cell implementers, and
 provides ecto with a flexible entry point for implementation details.
 
 Doing work

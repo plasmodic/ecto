@@ -3,7 +3,7 @@ from introduction import Printer01
 
 print Printer01.__doc__
 
-printer = Printer01(prefix='... ',suffix=' ...\n')
+printer = Printer01(prefix='... ', suffix=' ...\n')
 
 printer.inputs.message = 'TFJ'
 
