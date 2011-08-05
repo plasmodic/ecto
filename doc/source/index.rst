@@ -28,17 +28,5 @@ Also join the email list:
    tutorial/index.rst
    examples/index.rst
    reference/index.rst
-   
-   autoregister
-   ipython
-   tendril
-   tendrils
-   cell
-   plasm
-   schedulers
-   black_box
-   ectodoc
-   ecto_cells
-   ecto_test_cells
 
 
