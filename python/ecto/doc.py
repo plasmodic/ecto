@@ -3,9 +3,7 @@
         
         @author: ethan.rublee@gmail.com (Ethan Rublee)
 '''
-import ecto, xdot
-import gtk
-import gtk.gdk
+import ecto
 import inspect
 from pydoc import ispackage
 from inspect import ismodule
@@ -27,11 +25,6 @@ def print_module_doc(m):
     print m.__doc__
     
 
-class PlasmDotView(xdot.DotWindow):
-    def __init__(self):
-        xdot.DotWindow.__init__(self)
-
-
 def list_ecto_module(pymodule):
     l = []
     for x in dir(pymodule):
@@ -46,7 +39,9 @@ def list_ecto_module(pymodule):
     return l
 
 def view_plasm(plasm):
-    window = PlasmDotView()
+    import gtk
+    import xdot
+    window = xdot.DotWindow()
     x = plasm.viz()
     window.set_dotcode(x)
     window.connect('destroy', gtk.main_quit)
