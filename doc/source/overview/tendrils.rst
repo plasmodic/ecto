@@ -1,4 +1,4 @@
-.. _tendrils-intro:
+.. _tendrils-overview:
 
 Tendrils
 ========

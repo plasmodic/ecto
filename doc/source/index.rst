@@ -26,8 +26,9 @@ Also join the email list:
    overview/index.rst
    using_ecto/index.rst
    tutorial/index.rst
+   examples/index.rst
    reference/index.rst
-   client_usage
+   
    autoregister
    ipython
    tendril
@@ -39,11 +40,5 @@ Also join the email list:
    ectodoc
    ecto_cells
    ecto_test_cells
-   api
 
-.. rubric:: Appendices
 
-.. toctree::
-   :maxdepth: 2
-   
-   debugging
