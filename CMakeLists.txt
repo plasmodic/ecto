@@ -90,6 +90,8 @@ configure_file(${ecto_SOURCE_DIR}/cmake/ectoConfig-version.cmake.in
   ${CMAKE_BINARY_DIR}/ectoConfig-version.cmake @ONLY)
 configure_file(${ecto_SOURCE_DIR}/cmake/ectoMacros.cmake
   ${CMAKE_BINARY_DIR}/ectoMacros.cmake @ONLY)
+configure_file(${ecto_SOURCE_DIR}/cmake/rosbuild_lite.cmake
+  ${CMAKE_BINARY_DIR}/rosbuild_lite.cmake @ONLY)
 
 set(ecto_LIBRARIES ecto)
 
