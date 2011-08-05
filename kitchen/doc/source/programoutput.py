@@ -36,8 +36,7 @@
 
 __version__ = '0.4.1'
 
-import sys
-import shlex
+import sys, shlex, os
 from subprocess import Popen, CalledProcessError, PIPE, STDOUT
 from collections import defaultdict
 
@@ -82,6 +81,19 @@ class ProgramOutputDirective(rst.Directive):
         return [node]
 
 
+def full_executable_path(invoked, path):
+    
+    if invoked[0] == '/':
+        return invoked
+
+    for d in path:
+        full_path = os.path.join(d, invoked)
+        if os.path.exists( full_path ):
+            return full_path
+
+    return invoked # Not found; invoking it will likely fail
+
+
 class ProgramOutputCache(defaultdict):
     """
     :class:`collections.defaultdict` sub-class, which caches program output.
@@ -100,13 +112,24 @@ class ProgramOutputCache(defaultdict):
         ``hide_stderr`` is ``True``, the standard error of the program is
         discarded, otherwise it is included in the output.
         """
-        cmd, shell, hide_stderr = key
-        proc = Popen(cmd, shell=shell, stdout=PIPE,
-                     stderr=PIPE if hide_stderr else STDOUT)
-        stdout = proc.communicate()[0].decode(
-            sys.getfilesystemencoding()).rstrip()
+        (cmd, shell, hide_stderr, path) = key
+        shell = True
+        if cmd.count(' '):
+            (bin_name, args) = cmd.split(' ', 1)
+        else:
+            bin_name = cmd
+            args = ''
+        fullpath = full_executable_path(bin_name, path)
+        cmd = fullpath + " " + args
+
+        print "program-output about to run "+ cmd
+        proc = Popen(cmd, shell=shell, stdout=PIPE, stderr=PIPE if hide_stderr else STDOUT)
+        stdout = proc.communicate()[0].decode(sys.getfilesystemencoding()).rstrip()
+
         if proc.returncode != 0:
-            raise CalledProcessError(proc.returncode, cmd)
+            print "Unable to run '" + cmd + "' returned " + str(proc.returncode)\
+                + 'stdout: ' + stdout
+            raise CalledProcessError
         self[key] = stdout
         return stdout
 
@@ -132,20 +155,13 @@ def run_programs(app, doctree):
     for node in doctree.traverse(program_output):
         command = node['command']
         cmd_bytes = command.encode(sys.getfilesystemencoding())
+        extra_args = node.get('extraargs', '').encode(sys.getfilesystemencoding())
 
-        extra_args = node.get('extraargs', '').encode(
-            sys.getfilesystemencoding())
-        if node['use_shell']:
-            cmd = cmd_bytes
-            if extra_args:
-                cmd += ' ' + extra_args
-        else:
-            cmd = shlex.split(cmd_bytes)
-            if extra_args:
-                cmd.extend(shlex.split(extra_args))
-            cmd = tuple(cmd)
+        cmd = cmd_bytes
+        if extra_args:
+            cmd += ' ' + extra_args
 
-        cache_key = (cmd, node['use_shell'], node['hide_standard_error'])
+        cache_key = (cmd, node['use_shell'], node['hide_standard_error'], tuple(app.config.programoutput_path))
         output = cache[cache_key]
 
         # replace lines with ..., if ellipsis is specified
@@ -178,6 +194,7 @@ def init_cache(app):
 
 def setup(app):
     app.add_config_value('programoutput_use_ansi', False, 'env')
+    app.add_config_value('programoutput_path', False, 'env')
     app.add_config_value('programoutput_prompt_template',
                          '$ %(command)s\n%(output)s', 'env')
     app.add_directive('program-output', ProgramOutputDirective)

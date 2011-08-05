@@ -6,3 +6,5 @@ github_url='@ecto_kitchen_GITHUB_URL@'
 
 breathe_default_project = 'ecto'
 breathe_projects = dict(ecto='@kitchen_doc_BINARY_DIR@/api/xml')
+
+programoutput_path = '@KITCHEN_PROJECTS_SOURCE_DIRS@'.split(';')

@@ -35,8 +35,8 @@ A script like this,
 
 Will output,
 
-.. program-output:: Example01.py
-   :nostderr:
+.. program-output:: doc/source/src/Example01.py
+   :prompt:
 
 The table below explains (somewhat) the type conversions that happen
 when one tendril or type is inserted to another.
