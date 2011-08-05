@@ -8,3 +8,5 @@ breathe_default_project = 'ecto'
 breathe_projects = dict(ecto='@kitchen_doc_BINARY_DIR@/api/xml')
 
 programoutput_path = '@KITCHEN_PROJECTS_SOURCE_DIRS@'.split(';')
+ectodoc_path = '@KITCHEN_PROJECTS_SOURCE_DIRS@'.split(';')
+ectoplot_cache_dir = '@kitchen_doc_BINARY_DIR@/cache'

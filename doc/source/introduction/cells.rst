@@ -104,7 +104,7 @@ However if you do implement any of the methods in the cell interface, be sure th
 their signatures match the above specification.
 
 
-A peak under the covers
+A peek under the covers
 -----------------------
 
 .. epigraph::

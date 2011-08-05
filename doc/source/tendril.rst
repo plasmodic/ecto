@@ -35,9 +35,9 @@ A script like this,
 
 Will output,
 
-.. program-output:: doc/source/src/Example01.py
+.. program-output:: src/Example01.py
    :prompt:
-
+   :in_srcdir:
 
 .. _tendril-conversions:
   

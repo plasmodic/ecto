@@ -62,11 +62,39 @@ class ProgramOutputDirective(rst.Directive):
     required_arguments = 1
 
     option_spec = dict(shell=flag, prompt=flag, nostderr=flag,
-                       ellipsis=_slice, extraargs=unchanged)
+                       in_srcdir=flag, ellipsis=_slice, extraargs=unchanged)
 
     def run(self):
+        rest = ''
+        if 'in_srcdir' in self.options:
+            document = self.state.document
+            arg0 = self.arguments[0]
+            if arg0.count(' ') > 0:
+                (filename, rest) = arg0.split(' ', 1)
+            else:
+                filename = arg0
+            env = document.settings.env
+  
+            if filename.startswith('/') or filename.startswith(os.sep):
+                rel_fn = filename[1:]
+            else:
+                docdir = os.path.dirname(env.doc2path(env.docname, base=None))
+                rel_fn = os.path.join(docdir, filename)
+            try:
+                fn = os.path.join(env.srcdir, rel_fn)
+            except UnicodeDecodeError:
+                # the source directory is a bytestring with non-ASCII characters;
+                # let's try to encode the rel_fn in the file system encoding
+                rel_fn = rel_fn.encode(sys.getfilesystemencoding())
+                fn = os.path.join(env.srcdir, rel_fn)
+        else:
+            fn = self.arguments[0]
+
         node = program_output()
-        node['command'] = self.arguments[0]
+        if len(rest) > 0:
+            fn += (' ' + rest)
+
+        node['command'] = fn
 
         if self.name == 'command-output':
             node['show_prompt'] = True

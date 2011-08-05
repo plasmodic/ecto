@@ -73,7 +73,7 @@ A brief run down of ecto is in order.
                 
     * The ecto::plasm is easily inspected using graphviz tools.
     
-    .. image:: images/plasm.png
+    .. ectoplot:: sampleplasm.py plasm
     
     .. code-block :: c++
     
