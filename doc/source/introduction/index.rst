@@ -33,18 +33,3 @@ follow will involve both C++ and Python snippets.
     plasms.rst
     tendrils.rst
     schedulers.rst
-    
-.. _plasms-intro:
-
-Plasms
-++++++
-
-.. _tendrils-intro:
-
-Tendrils
-++++++++
-
-.. _schedulers-intro:
-
-Schedulers
-++++++++++
