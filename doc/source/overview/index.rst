@@ -24,12 +24,13 @@ Python becomes the glue that is used to compose higher level processing
 graphs, or ``Plasms`` from these cells.  As such, most of the examples that will
 follow will involve both C++ and Python snippets.
 
-.. rubric:: Topics
-
 .. toctree::
     :maxdepth: 1
-
+    
+    justification.rst
+    at_a_glance
     cells.rst
     plasms.rst
     tendrils.rst
     schedulers.rst
+    glossary

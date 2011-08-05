@@ -27,10 +27,7 @@ Also join the email list:
    using_ecto/index.rst
    tutorial/index.rst
    reference/index.rst
-
-   at_a_glance
    client_usage
-   glossary
    autoregister
    ipython
    tendril
