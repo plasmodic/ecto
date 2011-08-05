@@ -38,9 +38,14 @@ Will output,
 .. program-output:: Example01.py
    :nostderr:
 
+
+.. _tendril-conversions:
+  
+Tendril Conversions
+^^^^^^^^^^^^^^^^^^^
+
 The table below explains (somewhat) the type conversions that happen
 when one tendril or type is inserted to another.
-
 
 .. rubric:: Tendril Conversions
 

@@ -169,3 +169,160 @@ script demonstrates the python interface of our cell that ecto provides for free
 The script, when run will give the following output:
 
 .. program-output:: cell01.py
+
+.. topic:: Doc Generation
+
+  Notice the line ``print Printer01.__doc__``, every ecto cell gets this for free
+  based on the docstrings that were written in the static declare_* functions.
+  This is a class level attribute, and is one of the justifications for having
+  the declare_* functions be static.  At import time, the ``__doc__`` strings are
+  generated, and it is important that you write cells that will **not** crash during
+  import.
+  
+  Another cool aspect of documentation generation is its full integration into sphinx
+  docs. Placing the following command in sphinx::
+  
+    .. ectocell:: introduction Printer01
+
+  Produces:
+  
+  .. ectocell:: introduction Printer01
+  
+  Also from an interactive python prompt, the following should produce useful
+  output::
+    
+    >>> from introduction import Printer01
+    >>> help(Printer01)
+
+Cell construction
+^^^^^^^^^^^^^^^^^
+
+Let us take a closer look at the python sample code. Take the cell construction
+line:
+
+  .. literalinclude:: cell01.py
+    :language: py
+    :lines: 6
+  
+  A typical cell constructor call from python. Notice mapping from keyword
+  arguments to the parameters declared in :ref:`cell-Printer01`.
+  
+Every Cell gets a constructor that has the following python signature::
+  
+  Cell([Cell.type_name()], [param1=...],[param2=...])
+
+The first optional non-keyword argment is the cell's instance name. The instance
+name is useful for debug and graph display purposes.  Each parameter that was
+declared by the cell may be initialized as a keyword argument.  Other advanced keyword arguments
+may exist, that are defined by ecto, such as :ref:`strand`.
+
+.. sidebar:: When is configure called?
+  
+  Your cell is not actually allocated(constructed) until a call to process or right before
+  a scheduler executes your processing graph, see :ref:`schedulers`.
+  
+  This is important, as python may be used to quickly iterate on your processing graph
+  structure, and heavy allocation (and possible crashes) will be lazily evaluated
+  when the Cell is actually used to do work.
+  
+  This may be abused for **documentation**, **prototyping**, and **GUI** applications.
+  
+The constructor of the cell calls ``declare_params``, sets the cell's parameters
+with any supplied by keyword arguments, then precedes to call ``declare_io``, with
+the parameter values set by the keyword arguments.  It is important to note that
+when the constructor returns a new cell, the constructor of the struct, e.g. ``Printer01``,
+has not yet been called, also, configure has not yet been called.
+
+The begining of a cell's life looks approximately like the following flow
+chart:
+
+  .. graphviz::
+  
+    digraph initalization
+    {
+      rankdir=TB
+      node [shape=Mrecord];
+      1 [label="python|<here>printer =|<there>Printer01(prefix='... ', suffix=' ...\\n')"];
+      2 [label="c++|static void Printer01::declare_params(params)"];
+      4 [label="c++|static void Printer01::declare_io(...)"];
+      3 [label="c++|<here>for key,value in kwargs:\n  params[key] = value"];
+      1:there -> 2 -> 3:here -> 4 -> 1:here;
+      1:there -> 3:here;
+    }
+
+  A cell is born.
+
+You might envision the contents of ``printer`` after construction as looking like:
+
+  .. graphviz::
+    
+    digraph cell
+    {
+      rankdir=LR
+      node [shape=Mrecord];
+      3 [label="printer"];
+      1 [label="Cell|<here>cell*"];
+      2 [label="Printer01|<here>NULL"];
+      3 -> 1;
+      1:here -> 2:here;
+    }
+  
+  The ``printer``, directly after construction in python, holds a cell where ``Printer01`` has not yet been allocated.
+
+Configuration and Processing
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. sidebar:: If it has a boost::python binding, life is wonderful
+  
+  You may notice the assignment of a string to tendril from **python**, even though
+  the tendril was declared with a **c++** type.  Its all good as long as you have
+  boost::python bindings. See :ref:`tendril-conversions` for an explanation.
+  
+  If you **don't** have bindings, not to worry, you just can't manipulate your
+  tendrils from python... Oh and you get python bindings for free for all the basic
+  types!
+  
+So even thought we have a shell of cell, we can still manipulate its :ref:`tendrils`.
+Lets set the input tendril, called `message`, to a custom string. Then we'll call
+process.
+
+  .. literalinclude:: cell01.py
+    :language: py
+    :lines: 8,10
+
+Now, before the call to process our Printer01 hasn't actually been allocated,
+but all of its tendrils, inputs, outputs, and parameters are accessible from python.
+
+.. _cell-sketch-python-interface:
+
+.. topic:: Cell Python Interface
+  
+  Every cell exposes a bit of functionality to python, which may be useful to
+  know.
+  
+  .. py:class:: Cell
+  
+    A sketch of the cell python interface.
+    
+    .. py:attribute:: (Tendrils)parameters
+      
+      The parameters of the cell, initialized by the cell's constructor.
+      
+    .. py:attribute:: (Tendrils)inputs
+      
+      The inputs may be initialized with dependence on the parameters but are valid
+      and free game in python.
+      
+    .. py:attribute:: (Tendrils)outputs
+      
+      Same as inputs.
+    
+    .. py:method:: configure()
+    
+      Allocates the underlying cell, say ``Printer01``, and dispatches configure.
+      Will not have any effect the second time configure is called.
+       
+    .. py:method:: process()
+    
+      May call configure if it has not already been called. Dispatches a call to
+      process in the underlying cell, e.g. ``Printer::process(...)``
+      
