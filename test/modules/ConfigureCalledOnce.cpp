@@ -28,16 +28,10 @@
  */
 
 #include <ecto/ecto.hpp>
-#include <boost/asio.hpp>
 
 using ecto::tendrils;
 namespace ecto_test
 {
-  //
-  // This module will throw if two instances' process() methods are
-  // called concurrently; this cannot happen due to it being marked
-  // with ECTO_THREAD_UNSAFEdue to magic (FIXME)
-  //
   struct ConfigureCalledOnce
   {
     ConfigureCalledOnce():count(0){}
@@ -51,7 +45,6 @@ namespace ecto_test
     }
     int count;
   };
-
 }
 
 ECTO_CELL(ecto_test, ecto_test::ConfigureCalledOnce, "ConfigureCalledOnce",
