@@ -25,7 +25,6 @@ Also join the email list:
    
    introduction/index.rst
    at_a_glance
-   get_ecto
    client_usage
    glossary
    autoregister
