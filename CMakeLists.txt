@@ -97,7 +97,7 @@ add_subdirectory(python)
 add_subdirectory(src)
 add_subdirectory(cmake)
 add_subdirectory(doc/source/src doc_examples)
-add_subdirectory(doc/source/introduction doc_introcutions)
+add_subdirectory(doc/source/introduction doc_introduction)
 
 option(BUILD_TEST "Build tests" ON)
 if(BUILD_TEST)
