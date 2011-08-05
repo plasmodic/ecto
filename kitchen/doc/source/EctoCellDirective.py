@@ -43,68 +43,6 @@ import ecto
 class ectodoc(nodes.Element):
     pass
 
-class ectoplot(nodes.Element):
-    pass
-
-class EctoPlotDirective(rst.Directive):
-    has_content = False
-    final_argument_whitespace = True
-    required_arguments = 2
-
-    #option_spec = dict(shell=flag, prompt=flag, nostderr=flag,
-    #                   ellipsis=_slice, extraargs=unchanged)
-
-    def run(self):
-        document = self.state.document
-        filename = self.arguments[0]
-        env = document.settings.env
-
-        if filename.startswith('/') or filename.startswith(os.sep):
-            rel_fn = filename[1:]
-        else:
-            docdir = path.dirname(env.doc2path(env.docname, base=None))
-            rel_fn = path.join(docdir, filename)
-        try:
-            fn = path.join(env.srcdir, rel_fn)
-        except UnicodeDecodeError:
-            # the source directory is a bytestring with non-ASCII characters;
-            # let's try to encode the rel_fn in the file system encoding
-            rel_fn = rel_fn.encode(sys.getfilesystemencoding())
-            fn = path.join(env.srcdir, rel_fn)
-
-        node = ectoplot()
-        node.filename = fn
-        node.plasmname = self.arguments[1]
-        return [node]
-
-def do_ectoplot(app, doctree):
-
-    def full_executable_path(invoked, path):
-        
-        import os
-        if invoked[0] == '/':
-            return invoked
-
-        for d in path:
-            full_path = os.path.join(d, invoked)
-            if os.path.exists( full_path ):
-                return full_path
-
-        return invoked # Not found; invoking it will likely fail
-
-    for node in doctree.traverse(ectoplot):
-
-        abspath = full_executable_path(node.filename, app.config.ectodoc_path)
-        l = {}
-
-        execfile(abspath, globals(), l)
-
-        dottxt = l[node.plasmname].viz()
-
-        n = graphviz_node()
-        n['code'] = dottxt
-        n['options'] = []
-        node.replace_self(n)
 
 def _slice(value):
     parts = [int(v.strip()) for v in value.split(',')]
@@ -112,7 +50,7 @@ def _slice(value):
         raise ValueError('too many slice parts')
     return tuple((parts + [None]*2)[:2])
 
-class EctoDocDirective(rst.Directive):
+class EctoCellDirective(rst.Directive):
     has_content = False
     final_argument_whitespace = True
     required_arguments = 2
@@ -241,30 +179,7 @@ def do_ectodoc(app, doctree):
         node.replace_self(new_node)
 
 
-from pygments.lexer import RegexLexer
-from pygments.token import *
-
-class EctoShLexer(RegexLexer):
-    name = 'Better lexer sh examples'
-    aliases = ['ectosh']
-
-    tokens = {
-        'root': [
-            (r'^(%|\>\>\>|\(gdb\))', Literal.Number.Float, 'afterprompt'),
-            (r'.+', Text),
-        ],
-        'afterprompt': [
-            (r'.*', Generic.Deleted, '#pop'),
-            (r'\n', Comment.Multiline, '#pop'),
-        ]
-    }
-
-
 def setup(app):
-    app.add_directive('ectoplot', EctoPlotDirective)
-    app.add_directive('ectocell', EctoDocDirective)
+    app.add_directive('ectocell', EctoCellDirective)
     app.add_config_value('ectodoc_path', False, 'env')
-    app.add_config_value('ectoplot_cache_dir', False, 'env')
     app.connect('doctree-read', do_ectodoc)
-    app.connect('doctree-read', do_ectoplot)
-    app.add_lexer('ectosh', EctoShLexer())
