@@ -80,35 +80,9 @@ class EctoCellDirective(rst.Directive):
 
         return [indexnode, node]
 
-
-def xtract(mod):
-    def gettendril(tendrils):
-        d = {}
-
-        for k, v in tendrils:
-            d[k] = dict(doc=v.doc,
-                        type_name = v.type_name,
-                        required = v.required)
-            if v.has_default:
-                d[k]['default'] = v.val
-        return d
-
+def docize(CellType):
     d = {}
-    inst = mod.inspect((),{})
-
-    d['name'] = mod.__name__
-    d['short_doc'] = mod.short_doc
-    d['params'] = gettendril(inst.params)
-    d['inputs'] = gettendril(inst.inputs)
-    d['outputs'] = gettendril(inst.outputs)
-
-    # d['spect'] = inst.
-
-    return d
-
-def docize(mod):
-    d = {}
-    inst = mod.inspect((),{})
+    inst = CellType.inspect((),{})
 
     def gettendril(name, tendrils):
         d = {}
@@ -150,14 +124,14 @@ def docize(mod):
 
         return section
 
-    d['name'] = mod.__name__
-    d['short_doc'] = mod.short_doc
+    d['name'] = CellType.__name__
+    d['short_doc'] = CellType.short_doc
 
-    cell = nodes.topic(text=mod.__name__)
-    cell['ids'].append(mod.__name__)
-    cell['names'].append(mod.__name__)
-    cell += nodes.title(text=mod.__name__, rawtest=mod.__name__)
-    para = nodes.paragraph(text=mod.short_doc)
+    cell = nodes.topic(text=CellType.__name__)
+    cell['ids'].append(CellType.__name__)
+    cell['names'].append(CellType.__name__)
+    cell += nodes.title(text=CellType.__name__, rawtest=CellType.__name__)
+    para = nodes.paragraph(text=CellType.short_doc)
     cell += para
     #params = nodes.rubric(text='parameters')
     # params += nodes.subtitle(text="parameters")
