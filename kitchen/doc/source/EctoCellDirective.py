@@ -40,71 +40,9 @@ from sphinx.util.osutil import ensuredir
 from sphinx.ext.graphviz import graphviz as graphviz_node
 import ecto
 
-class ectodoc(nodes.Element):
+class ectocell(nodes.Element):
     pass
 
-class ectoplot(nodes.Element):
-    pass
-
-class EctoPlotDirective(rst.Directive):
-    has_content = False
-    final_argument_whitespace = True
-    required_arguments = 2
-
-    #option_spec = dict(shell=flag, prompt=flag, nostderr=flag,
-    #                   ellipsis=_slice, extraargs=unchanged)
-
-    def run(self):
-        document = self.state.document
-        filename = self.arguments[0]
-        env = document.settings.env
-
-        if filename.startswith('/') or filename.startswith(os.sep):
-            rel_fn = filename[1:]
-        else:
-            docdir = path.dirname(env.doc2path(env.docname, base=None))
-            rel_fn = path.join(docdir, filename)
-        try:
-            fn = path.join(env.srcdir, rel_fn)
-        except UnicodeDecodeError:
-            # the source directory is a bytestring with non-ASCII characters;
-            # let's try to encode the rel_fn in the file system encoding
-            rel_fn = rel_fn.encode(sys.getfilesystemencoding())
-            fn = path.join(env.srcdir, rel_fn)
-
-        node = ectoplot()
-        node.filename = fn
-        node.plasmname = self.arguments[1]
-        return [node]
-
-def do_ectoplot(app, doctree):
-
-    def full_executable_path(invoked, path):
-        
-        import os
-        if invoked[0] == '/':
-            return invoked
-
-        for d in path:
-            full_path = os.path.join(d, invoked)
-            if os.path.exists( full_path ):
-                return full_path
-
-        return invoked # Not found; invoking it will likely fail
-
-    for node in doctree.traverse(ectoplot):
-
-        abspath = full_executable_path(node.filename, app.config.ectodoc_path)
-        l = {}
-
-        execfile(abspath, globals(), l)
-
-        dottxt = l[node.plasmname].viz()
-
-        n = graphviz_node()
-        n['code'] = dottxt
-        n['options'] = []
-        node.replace_self(n)
 
 def _slice(value):
     parts = [int(v.strip()) for v in value.split(',')]
@@ -112,7 +50,7 @@ def _slice(value):
         raise ValueError('too many slice parts')
     return tuple((parts + [None]*2)[:2])
 
-class EctoDocDirective(rst.Directive):
+class EctoCellDirective(rst.Directive):
     has_content = False
     final_argument_whitespace = True
     required_arguments = 2
@@ -121,7 +59,7 @@ class EctoDocDirective(rst.Directive):
                        ellipsis=_slice, extraargs=unchanged)
 
     def run(self):
-        node = ectodoc()
+        node = ectocell()
         node.modname = modname = self.arguments[0]
         node.celltype = celltype = self.arguments[1]
 
@@ -142,35 +80,9 @@ class EctoDocDirective(rst.Directive):
 
         return [indexnode, node]
 
-
-def xtract(mod):
-    def gettendril(tendrils):
-        d = {}
-
-        for k, v in tendrils:
-            d[k] = dict(doc=v.doc,
-                        type_name = v.type_name,
-                        required = v.required)
-            if v.has_default:
-                d[k]['default'] = v.val
-        return d
-
+def docize(CellType):
     d = {}
-    inst = mod.inspect((),{})
-
-    d['name'] = mod.__name__
-    d['short_doc'] = mod.short_doc
-    d['params'] = gettendril(inst.params)
-    d['inputs'] = gettendril(inst.inputs)
-    d['outputs'] = gettendril(inst.outputs)
-
-    # d['spect'] = inst.
-
-    return d
-
-def docize(mod):
-    d = {}
-    inst = mod.inspect((),{})
+    inst = CellType.inspect((),{})
 
     def gettendril(name, tendrils):
         d = {}
@@ -212,14 +124,14 @@ def docize(mod):
 
         return section
 
-    d['name'] = mod.__name__
-    d['short_doc'] = mod.short_doc
+    d['name'] = CellType.__name__
+    d['short_doc'] = CellType.short_doc
 
-    cell = nodes.topic(text=mod.__name__)
-    cell['ids'].append(mod.__name__)
-    cell['names'].append(mod.__name__)
-    cell += nodes.title(text=mod.__name__, rawtest=mod.__name__)
-    para = nodes.paragraph(text=mod.short_doc)
+    cell = nodes.topic(text=CellType.__name__)
+    cell['ids'].append(CellType.__name__)
+    cell['names'].append(CellType.__name__)
+    cell += nodes.title(text=CellType.__name__, rawtest=CellType.__name__)
+    para = nodes.paragraph(text=CellType.short_doc)
     cell += para
     #params = nodes.rubric(text='parameters')
     # params += nodes.subtitle(text="parameters")
@@ -230,9 +142,9 @@ def docize(mod):
     return cell
 
 
-def do_ectodoc(app, doctree):
+def do_ectocell(app, doctree):
 
-    for node in doctree.traverse(ectodoc):
+    for node in doctree.traverse(ectocell):
         c = __import__(node.modname, fromlist=[str(node.celltype)])
         if node.celltype not in c.__dict__:
             raise RuntimeError("Cell %s not found in module %s" % (node.celltype, str(c)))
@@ -241,30 +153,6 @@ def do_ectodoc(app, doctree):
         node.replace_self(new_node)
 
 
-from pygments.lexer import RegexLexer
-from pygments.token import *
-
-class EctoShLexer(RegexLexer):
-    name = 'Better lexer sh examples'
-    aliases = ['ectosh']
-
-    tokens = {
-        'root': [
-            (r'^(%|\>\>\>|\(gdb\))', Literal.Number.Float, 'afterprompt'),
-            (r'.+', Text),
-        ],
-        'afterprompt': [
-            (r'.*', Generic.Deleted, '#pop'),
-            (r'\n', Comment.Multiline, '#pop'),
-        ]
-    }
-
-
 def setup(app):
-    app.add_directive('ectoplot', EctoPlotDirective)
-    app.add_directive('ectocell', EctoDocDirective)
-    app.add_config_value('ectodoc_path', False, 'env')
-    app.add_config_value('ectoplot_cache_dir', False, 'env')
-    app.connect('doctree-read', do_ectodoc)
-    app.connect('doctree-read', do_ectoplot)
-    app.add_lexer('ectosh', EctoShLexer())
+    app.add_directive('ectocell', EctoCellDirective)
+    app.connect('doctree-read', do_ectocell)
