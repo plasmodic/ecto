@@ -29,7 +29,6 @@ Also join the email list:
    client_usage
    glossary
    autoregister
-   auto_docs
    ipython
    tendril
    tendrils
@@ -37,6 +36,7 @@ Also join the email list:
    plasm
    schedulers
    black_box
+   ectodoc
    ecto_cells
    ecto_test_cells
    api
