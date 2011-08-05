@@ -32,6 +32,8 @@
 #include <boost/date_time/posix_time/posix_time.hpp>
 
 using ecto::tendrils;
+using ecto::tendril;
+
 namespace ecto_test
 {
   namespace pt = boost::posix_time;
@@ -41,7 +43,7 @@ namespace ecto_test
   {
     unsigned period_usec;
     pt::ptime prevtime;
-    ecto::spore<pt::ptime> in, out;
+    tendril::ptr in, out;
 
     static void declare_params(tendrils& parameters)
     {
@@ -50,34 +52,29 @@ namespace ecto_test
 
     static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
-      inputs.declare<pt::ptime> ("in", "input");
-      outputs.declare<pt::ptime> ("out", "output");
+      inputs.declare<tendril::none> ("in", "input");
+      outputs.declare<tendril::none> ("out", "output");
     }
 
     void configure(tendrils& parameters, tendrils& inputs, tendrils& outputs)
     {
       period_usec = 1e+06 / parameters.get<double>("rate");
       
-      in = inputs["in"];
-      out = outputs["out"];
+      outputs["out"] = inputs["in"];
       prevtime = pt::microsec_clock::universal_time() - pt::hours(24);
     }
 
     int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
       pt::ptime now(pt::microsec_clock::universal_time());
-      // std::cout << "now: " << now << " prevtime : " <<  prevtime << "\n";
       pt::time_duration already_waited = now - prevtime;
-      std::cout << this << " already waited usec = " << already_waited << "\n";
       int mustwait_usec = period_usec - already_waited.total_microseconds();
 
       if (mustwait_usec > 0)
         {
-          std::cout << "Throttle usleep(" << mustwait_usec << ")\n";
           boost::this_thread::sleep(boost::posix_time::microseconds(mustwait_usec));
 
         }
-      *out = *in;
       prevtime = pt::microsec_clock::universal_time();
       return 0;
     }
