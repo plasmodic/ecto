@@ -63,10 +63,9 @@ def do_ectoplot(app, doctree):
 
     for node in doctree.traverse(ectoplot):
 
-        abspath = full_executable_path(node.filename, app.config.ectodoc_path)
         l = {}
 
-        execfile(abspath, globals(), l)
+        execfile(node.filename, globals(), l)
 
         dottxt = l[node.plasmname].viz()
 

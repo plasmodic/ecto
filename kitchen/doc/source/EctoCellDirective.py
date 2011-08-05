@@ -40,7 +40,7 @@ from sphinx.util.osutil import ensuredir
 from sphinx.ext.graphviz import graphviz as graphviz_node
 import ecto
 
-class ectodoc(nodes.Element):
+class ectocell(nodes.Element):
     pass
 
 
@@ -59,7 +59,7 @@ class EctoCellDirective(rst.Directive):
                        ellipsis=_slice, extraargs=unchanged)
 
     def run(self):
-        node = ectodoc()
+        node = ectocell()
         node.modname = modname = self.arguments[0]
         node.celltype = celltype = self.arguments[1]
 
@@ -168,9 +168,9 @@ def docize(mod):
     return cell
 
 
-def do_ectodoc(app, doctree):
+def do_ectocell(app, doctree):
 
-    for node in doctree.traverse(ectodoc):
+    for node in doctree.traverse(ectocell):
         c = __import__(node.modname, fromlist=[str(node.celltype)])
         if node.celltype not in c.__dict__:
             raise RuntimeError("Cell %s not found in module %s" % (node.celltype, str(c)))
@@ -181,5 +181,4 @@ def do_ectodoc(app, doctree):
 
 def setup(app):
     app.add_directive('ectocell', EctoCellDirective)
-    app.add_config_value('ectodoc_path', False, 'env')
-    app.connect('doctree-read', do_ectodoc)
+    app.connect('doctree-read', do_ectocell)
