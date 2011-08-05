@@ -1,6 +1,9 @@
 #
 # The ecto kitchen macro
 #
+
+find_package(PythonInterp)
+
 macro(init_ecto_kitchen)
 
   add_definitions(-Wall -Werror)
