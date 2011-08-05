@@ -30,6 +30,7 @@
 # ==============================================================================
 get_filename_component(SELF_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
 include(${SELF_DIR}/ectoMacros.cmake)
+include(${SELF_DIR}/rosbuild_lite.cmake)
 set(ecto_INCLUDE_DIRS @ecto_INCLUDE_DIRS@)
 
 # if we're part of an ecto kitchen, we use the target, not the path on disk

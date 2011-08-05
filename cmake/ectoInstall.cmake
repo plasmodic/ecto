@@ -19,10 +19,13 @@ configure_file(${ecto_SOURCE_DIR}/cmake/ectoConfig-version.cmake.in
   ${CMAKE_BINARY_DIR}/unix_install/ectoConfig-version.cmake @ONLY)
 configure_file(${ecto_SOURCE_DIR}/cmake/ectoMacros.cmake
   ${CMAKE_BINARY_DIR}/unix_install/ectoMacros.cmake @ONLY)
+configure_file(${ecto_SOURCE_DIR}/cmake/rosbuild_lite.cmake
+  ${CMAKE_BINARY_DIR}/unix_install/rosbuild_lite.cmake @ONLY)
     
 #install the ectoConfig.cmake and ectoConfig-version.cmake
 INSTALL(FILES
   ${CMAKE_BINARY_DIR}/unix_install/ectoMacros.cmake
+  ${CMAKE_BINARY_DIR}/unix_install/rosbuild_lite.cmake
   ${CMAKE_BINARY_DIR}/unix_install/ectoConfig.cmake
   ${CMAKE_BINARY_DIR}/unix_install/ectoConfig-version.cmake
   DESTINATION ${ECTO_CONFIG_PATH}
