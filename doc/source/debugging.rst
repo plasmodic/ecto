@@ -1,9 +1,9 @@
-.. index:: valgrind, gdb
-
 Debugging things
 ================
 
 .. highlight:: ectosh
+
+.. index:: gdb; running scripts under
 
 Running an ecto script under gdb
 --------------------------------
@@ -114,6 +114,9 @@ up to the python interpreter itself::
   #24 0x00007ffff69d8c4d in __libc_start_main () from /lib/libc.so.6
   #25 0x00000000004199f9 in _start ()
   
+
+.. index:: Exceptions; catching under gdb
+
 Exceptions
 ----------
 
@@ -170,3 +173,19 @@ As you can see there is no helpful information here.  The trick is to
   90	      for (unsigned j=0; j<ncalls; ++j)
   91	        *out_ = (*pimpl_)();
   92	      return ecto::OK;
+
+
+.. index:: Valgrind, gdb
+
+Valgrind
+--------
+
+You'll need to have a look at `what the Python devs say about this
+<http://svn.python.org/projects/python/trunk/Misc/README.valgrind>`_... in
+short, for performance reasons python deliberately does some things
+that look suspicious to valgrind but in fact are not.  So you'll need
+to use the suppressions file that comes with python, called
+`valgrind-python.supp
+<http://svn.python.org/projects/python/trunk/Misc/valgrind-python.supp>`_.
+
+
