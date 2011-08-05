@@ -158,7 +158,7 @@ the client cell implementers, and
 provides ecto with a flexible entry point for implementation details.
 
 Doing work
-----------
+++++++++++
 
 Let us take the :ref:`Printer <cell-printer01>` from above and use it from python. The following python
 script demonstrates the python interface of our cell that ecto provides for free(assuming you used the macro and followed the cell interface).
@@ -332,7 +332,7 @@ parameters have changed value, and then process is executed.
       process in the underlying cell, e.g. ``Printer::process(...)``
 
 Cell Life Cycle
-^^^^^^^^^^^^^^^^
++++++++++++++++
 
 The life cycle of cell is important to keep in mind.
   * ``declare_params`` and ``declare_io`` are static functions and will be called
