@@ -1,9 +1,9 @@
+//start
 #include <ecto/ecto.hpp>
 #include <iostream>
 #include <string>
-//start
 using ecto::tendrils;
-namespace introduction
+namespace overview
 {
   struct Printer01
   {
@@ -33,7 +33,6 @@ namespace introduction
     std::string prefix_, suffix_;
   };
 }
-//end
-
-ECTO_CELL(introduction, introduction::Printer01, "Printer01",
+ECTO_CELL(ecto_overview, overview::Printer01, "Printer01",
           "A simple stdout printer with prefix and suffix parameters.");
+//end

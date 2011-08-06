@@ -1,4 +1,4 @@
-.. _cells-intro:
+.. _cells-overview:
 
 Cells
 =====
@@ -78,6 +78,7 @@ The most basic of cells would be:
     :start-after: //start
     :end-before: //end
 
+  .. ectocell:: ecto_overview NopCell
 
 Each cell may or may not implement the following functions:
 
@@ -137,6 +138,15 @@ to the following simplified example:
     {
       YourCell::declare_params(params_);
     }
+    
+    void configure()
+    {
+      if(!thiz_)
+      {
+        thiz_ = new YourCell();
+        thiz_->configure();
+      }
+    }
     //... dispatch other functions...
     YourCell* thiz_;
   }
@@ -158,7 +168,7 @@ the client cell implementers, and
 provides ecto with a flexible entry point for implementation details.
 
 Doing work
-----------
+++++++++++
 
 Let us take the :ref:`Printer <cell-printer01>` from above and use it from python. The following python
 script demonstrates the python interface of our cell that ecto provides for free(assuming you used the macro and followed the cell interface).
@@ -168,7 +178,7 @@ script demonstrates the python interface of our cell that ecto provides for free
 
 The script, when run will give the following output:
 
-.. program-output:: doc/source/introduction/cell01.py
+.. program-output:: doc/source/overview/cell01.py
 
 .. topic:: Doc Generation
 
@@ -182,17 +192,19 @@ The script, when run will give the following output:
   Another cool aspect of documentation generation is its full integration into sphinx
   docs. Placing the following command in sphinx::
   
-    .. ectocell:: introduction Printer01
+    .. ectocell:: ecto_overview Printer01
 
   Produces:
   
-  .. ectocell:: introduction Printer01
+  .. ectocell:: ecto_overview Printer01
   
   Also from an interactive python prompt, the following should produce useful
   output::
     
-    >>> from introduction import Printer01
+    >>> from ecto_overview import Printer01
     >>> help(Printer01)
+    
+  For more detailed information, refer to :ref:`ectodoc`.
 
 Cell construction
 ^^^^^^^^^^^^^^^^^
@@ -291,6 +303,9 @@ process.
 
 Now, before the call to process our Printer01 hasn't actually been allocated,
 but all of its tendrils, inputs, outputs, and parameters are accessible from python.
+During the call to process, the Printer01 is allocated as necessary, the
+configure function is called, any :ref:`parameter-callbacks` are triggered if
+parameters have changed value, and then process is executed.
 
 .. _cell-sketch-python-interface:
 
@@ -325,4 +340,39 @@ but all of its tendrils, inputs, outputs, and parameters are accessible from pyt
     
       May call configure if it has not already been called. Dispatches a call to
       process in the underlying cell, e.g. ``Printer::process(...)``
+
+Cell Life Cycle
++++++++++++++++
+
+The life cycle of cell is important to keep in mind.
+  * ``declare_params`` and ``declare_io`` are static functions and will be called
+    in order to initialize the cell's parameters,inputs, and outputs.
+  * ``configure`` will be called once right after the construction of the
+    cell.
+  * ``process`` will be called any number of times, with parameter callbacks being triggered prior to its execution.
+  * When all references to the cell are gone, i.e. it has gone out of scope, then it may be deleted.
+
+.. graphviz::
+    
+    digraph cell_life_cycle
+    {
+      node [shape=rect];
+      1 [label="CellT::declare_params(...)"];
+      user [label="User sets params.",shape=parallelogram];
+      2 [label="CellT::declare_io(...)"];
+      3 [label="cell = new CellT()"];
+      4 [label="cell->configure(...)"];
+      5 [label="cell->process(...)"];
+      8 [label="Parameters changed?", shape=diamond];
+      6 [label="Notify change callbacks."];
+      7 [label="delete cell"];
       
+      1->user->2;
+      2-> 3 ->4->8;
+      
+      8->6 [label="True"];
+      6->5;
+      8->5 [label="False"];
+      5->8;
+      5->7[label="exit scope"];
+    }

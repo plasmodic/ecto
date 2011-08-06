@@ -30,6 +30,11 @@ execute_process(COMMAND ln -sf ${ecto_SOURCE_DIR}/python/ecto/__init__.py
 include(${ecto_SOURCE_DIR}/cmake/ectoMacros.cmake)
 include(${ecto_SOURCE_DIR}/cmake/ectoFindDeps.cmake)
 
+#FIXME Hack for standalone build
+if(NOT ecto_kitchen_SOURCE_DIR)
+  add_subdirectory(kitchen/doc doc)
+endif()
+
 set(ANAL_FLAGS "")
 option(USE_ANAL_FLAGS "Use extra flags that help catch programming errors and prevent a build up of warnings" ON)
 if(USE_ANAL_FLAGS)
@@ -85,14 +90,16 @@ configure_file(${ecto_SOURCE_DIR}/cmake/ectoConfig-version.cmake.in
   ${CMAKE_BINARY_DIR}/ectoConfig-version.cmake @ONLY)
 configure_file(${ecto_SOURCE_DIR}/cmake/ectoMacros.cmake
   ${CMAKE_BINARY_DIR}/ectoMacros.cmake @ONLY)
+configure_file(${ecto_SOURCE_DIR}/cmake/rosbuild_lite.cmake
+  ${CMAKE_BINARY_DIR}/rosbuild_lite.cmake @ONLY)
 
 set(ecto_LIBRARIES ecto)
 
 add_subdirectory(python)
 add_subdirectory(src)
 add_subdirectory(cmake)
-add_subdirectory(doc/source/src)
-add_subdirectory(doc/source/introduction)
+add_subdirectory(doc/source/src doc_examples)
+add_subdirectory(doc/source/overview doc_overview)
 
 option(BUILD_TEST "Build tests" ON)
 if(BUILD_TEST)

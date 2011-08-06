@@ -1,7 +1,7 @@
 //start
 #include <ecto/ecto.hpp>
 using ecto::tendrils;
-namespace introduction
+namespace overview
 {
   struct InterfaceCell
   {
@@ -17,15 +17,13 @@ namespace introduction
     int
     process(tendrils& in, tendrils& out);
   };
-
 }
-
-ECTO_CELL(introduction, introduction::InterfaceCell, "InterfaceCell",
+ECTO_CELL(ecto_overview, overview::InterfaceCell, "InterfaceCell",
           "A cell cell implementing the entire ecto interface");
 //end
 
 //impl_start
-namespace introduction
+namespace overview
 {
   void
   InterfaceCell::declare_params(tendrils & p)

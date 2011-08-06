@@ -3,6 +3,15 @@
 
 project(kitchen_doc)
 
+#we're not in the kitchen FIXME hack for standalone
+if(NOT ecto_kitchen_SOURCE_DIR)
+  add_custom_target(html)
+  add_custom_target(pdf)
+  add_custom_target(latex)
+  MESSAGE(WARNING "Documentation only supported in the kitchen, will be fixed soon.")
+  return()
+endif()
+
 option(INSTALL_DOC "Install the documentation." OFF)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Makefile.sphinx.in 
   ${CMAKE_CURRENT_BINARY_DIR}/Makefile.sphinx
