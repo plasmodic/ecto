@@ -1,4 +1,4 @@
-.. _plasms-intro:
+.. _plasms-overview:
 
 Plasms
 ======

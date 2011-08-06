@@ -1,4 +1,4 @@
-.. _schedulers-intro:
+.. _schedulers-overview:
 
 Schedulers
 ==========

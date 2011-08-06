@@ -1,5 +1,7 @@
 .. index:: scheduler, Singlethreaded, Threadpool
 
+.. _schedulers:
+
 schedulers
 ==========
 
