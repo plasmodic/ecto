@@ -28,8 +28,15 @@ add_custom_target(doc
 #doxygen based docs
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
-  file(GLOB_RECURSE doc_sources ${CMAKE_SOURCE_DIR}/include/*)
+  
+  #TODO FIXME the sources for doxygen are a bit messed up.
+  foreach(proj ${KITCHEN_PROJECTS})
+    file(GLOB_RECURSE _doc_sources ${CMAKE_SOURCE_DIR}/${proj}/include/*)
+    list(APPEND doc_sources ${_doc_sources})
+  endforeach()
+  string(REPLACE ";" " " doc_sources "${doc_sources}")
   configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
+  #TODO FIXME the sources for doxygen are a bit messed up.
 
   add_custom_target(doxygen
     COMMENT "Generating API documentation with Doxygen" VERBATIM
