@@ -8,7 +8,7 @@ TEST(SporeTest, LifeTime)
 {
   {
     spore<double> d = make_tendril<double>();
-    EXPECT_ANY_THROW(*d);
+    EXPECT_TRUE(d.get());
   }
   {
     spore<double> d;
@@ -16,8 +16,9 @@ TEST(SporeTest, LifeTime)
   }
   {
     tendril::ptr p = make_tendril<double>();
-    spore<double> d = p; //p has to stay in scope...
-    EXPECT_TRUE(d.p());
+    spore<double> d = p; //p does not have have to stay in scope...
+    p.reset();
+    EXPECT_TRUE(d.get());
   }
 }
 
