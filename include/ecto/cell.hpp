@@ -362,7 +362,7 @@ namespace ecto
     ReturnCode process(implemented, tendrils& inputs, tendrils& outputs)
     {
       ReturnCode code;
-      profile::stats_collector coll(stats);
+      profile::stats_collector coll(name(), stats);
       code = ReturnCode(impl->process(inputs, outputs));
       return code;
     }
