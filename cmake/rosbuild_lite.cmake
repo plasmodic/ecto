@@ -12,68 +12,70 @@ macro (rospack VAR COMMAND PACKAGE)
       )
 
     if(rospack_error)
-        message(STATUS "***")
-        message(STATUS "*** rospack ${COMMAND} ${PACKAGE} failed: ${rospack_error}")
-        message(STATUS "***")
-        set(${cachevar} "ROSPACK_${PACKAGE}_${COMMAND}-NOTFOUND" 
-          CACHE INTERNAL "rospack output for rospack ${PACKAGE} ${COMMAND}")
+      message(STATUS "***")
+      message(STATUS "*** rospack ${COMMAND} ${PACKAGE} failed: ${rospack_error}")
+      message(STATUS "***")
+      set(${cachevar} "ROSPACK_${PACKAGE}_${COMMAND}-NOTFOUND" 
+        CACHE INTERNAL "rospack output for rospack ${PACKAGE} ${COMMAND}")
     else()
-        separate_arguments(ROSPACK_SEPARATED UNIX_COMMAND ${ROSPACK_OUT})
-        set(${cachevar} ${ROSPACK_SEPARATED} CACHE INTERNAL "value")
-        set(${VAR} ${ROSPACK_SEPARATED} CACHE INTERNAL "" FORCE)
-        # message("${VAR} == ${${VAR}}")
+      separate_arguments(ROSPACK_SEPARATED UNIX_COMMAND ${ROSPACK_OUT})
+      set(${cachevar} ${ROSPACK_SEPARATED} CACHE INTERNAL "value")
+      set(${VAR} ${ROSPACK_SEPARATED} CACHE INTERNAL "" FORCE)
+      # message("${VAR} == ${${VAR}}")
     endif()
   else()
-    set(${VAR} "${${cachevar}}" CACHE INTERNAL "" FORCE)
+    set(${VAR} "${${cachevar}}")
   endif()
 endmacro()
 
 macro (find_ros_package PACKAGE)
-  rospack(${PACKAGE}_DIR find ${PACKAGE})
+  if (NOT ${PACKAGE}_DIR)
+    rospack(${PACKAGE}_DIR find ${PACKAGE})
+  endif()
 
   if(NOT ${PACKAGE}_DIR)
     message(STATUS "Could not find package ${PACKAGE} via rosmake")
-  elseif(NOT ${PACKAGE}_FOUND)
-    message(STATUS "Finding ROS package ${PACKAGE} via rospack and ROS environment variables...")
-    rospack(${PACKAGE}_INCLUDE_DIRS cflags-only-I ${PACKAGE})
+  else()
+    if(NOT ${PACKAGE}_FOUND)
+      message(STATUS "Finding ROS package ${PACKAGE} via rospack and ROS environment variables...")
+      rospack(${PACKAGE}_INCLUDE_DIRS cflags-only-I ${PACKAGE})
+      include_directories(${${PACKAGE}_INCLUDE_DIRS})
+      rospack(${PACKAGE}_DEFINITIONS cflags-only-other ${PACKAGE})
+
+      rospack(libdirs libs-only-L ${PACKAGE})
+      rospack(libnames libs-only-l ${PACKAGE})
+      
+      set(${PACKAGE}_LIBRARIES "" CACHE INTERNAL "")
+
+      foreach(libname ${ROSPACK_${PACKAGE}_libs-only-l})
+        find_library(${libname}_LIBRARY
+          NAMES ${libname}
+          PATHS ${ROSPACK_${PACKAGE}_libs-only-L}
+          NO_DEFAULT_PATH
+          )
+        find_library(${libname}_LIBRARY ${libname})
+        message("${libname}_LIBRARY ${${libname}_LIBRARY}")
+        if (NOT ${libname}_LIBRARY)
+          message(FATAL_ERROR "uh oh ${PACKAGE} ${libname} found us ${thelib}")
+        endif()
+        set(${PACKAGE}_LIBRARIES ${${PACKAGE}_LIBRARIES};${${libname}_LIBRARY})
+      endforeach()
+      set(${PACKAGE}_LIBRARIES ${${PACKAGE}_LIBRARIES} CACHE INTERNAL "" FORCE)
+    endif()
+
     include_directories(${${PACKAGE}_INCLUDE_DIRS})
-    rospack(${PACKAGE}_DEFINITIONS cflags-only-other ${PACKAGE})
-    foreach(DEF ${${PACKAGE}_DEFINITIONS})
-      add_definitions(" ${DEF}")
-    endforeach()
-    rospack(libdirs libs-only-L ${PACKAGE})
-    rospack(libnames libs-only-l ${PACKAGE})
-    set(${PACKAGE}_LIBRARIES "" CACHE STRING "libs to link against when depending on ${PACKAGE}" FORCE)
+    add_definitions(${${PACKAGE}_DEFINITIONS})
 
-    # message(STATUS "Finding libraries ${libnames}")
-    # message(STATUS "in directories    ${libdirs}")
-    #foreach(p ${libdirs})
-    #  message("bing=${p}")
-    #endforeach()
-    foreach(libname ${libnames})
-      #message("finding ${libname}")
-      find_library(${libname}_LIBRARY
-        NAMES ${libname}
-        PATHS ${libdirs}
-        NO_DEFAULT_PATH
-        )
-      find_library(${libname}_LIBRARY ${libname})
-      # message("${libname}_LIBRARY ${${libname}_LIBRARY}")
-      if (NOT ${libname}_LIBRARY)
-        message(FATAL_ERROR "uh oh ${PACKAGE} ${libname} found us ${thelib}")
-      endif()
-      list(APPEND ${PACKAGE}_LIBRARIES ${${libname}_LIBRARY})
-      # link_directories(${${PACKAGE}_LIBRARY_DIRS})
-    endforeach()
-    # message("${PACKAGE}_LIBRARIES ${${PACKAGE}_LIBRARIES}")
-  endif()
-
-
-  list(LENGTH ${PACKAGE}_LIBRARIES nlibs)
-  list(LENGTH ${PACKAGE}_INCLUDE_DIRS nincludes)
-  list(LENGTH ${PACKAGE}_DEFINITIONS ndefs)
+    message(STATUS "BING BING ${PACKAGE} ${${PACKAGE}_LIBRARIES}")
+  endif() # not PACKAGE_DIR
 
   if (${PACKAGE}_DIR)
+
+    message("${PACKAGE}_LIBRARIES ${${PACKAGE}_LIBRARIES}")
+    list(LENGTH ${PACKAGE}_LIBRARIES nlibs)
+    list(LENGTH ${PACKAGE}_INCLUDE_DIRS nincludes)
+    list(LENGTH ${PACKAGE}_DEFINITIONS ndefs)
+
     message(STATUS "+ ${PACKAGE} at ${${PACKAGE}_DIR}")
     message(STATUS "+   ${nlibs} libraries, ${nincludes} include directories, ${ndefs} compile definitions")
     set(${PACKAGE}_FOUND TRUE CACHE INTERNAL "" FORCE)
