@@ -54,7 +54,7 @@ macro (find_ros_package PACKAGE)
           NO_DEFAULT_PATH
           )
         find_library(${libname}_LIBRARY ${libname})
-        message("${libname}_LIBRARY ${${libname}_LIBRARY}")
+        # message("${libname}_LIBRARY ${${libname}_LIBRARY}")
         if (NOT ${libname}_LIBRARY)
           message(FATAL_ERROR "uh oh ${PACKAGE} ${libname} found us ${thelib}")
         endif()
@@ -66,12 +66,11 @@ macro (find_ros_package PACKAGE)
     include_directories(${${PACKAGE}_INCLUDE_DIRS})
     add_definitions(${${PACKAGE}_DEFINITIONS})
 
-    message(STATUS "BING BING ${PACKAGE} ${${PACKAGE}_LIBRARIES}")
   endif() # not PACKAGE_DIR
 
   if (${PACKAGE}_DIR)
 
-    message("${PACKAGE}_LIBRARIES ${${PACKAGE}_LIBRARIES}")
+    # message("${PACKAGE}_LIBRARIES ${${PACKAGE}_LIBRARIES}")
     list(LENGTH ${PACKAGE}_LIBRARIES nlibs)
     list(LENGTH ${PACKAGE}_INCLUDE_DIRS nincludes)
     list(LENGTH ${PACKAGE}_DEFINITIONS ndefs)
