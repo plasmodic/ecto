@@ -9,4 +9,3 @@ Ecto is easy to use. How to setup your machine and get productive follows...
     :maxdepth: 1
     
     client_usage
-    debugging

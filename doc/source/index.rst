@@ -27,6 +27,7 @@ Also join the email list:
    using_ecto/index.rst
    tutorial/index.rst
    examples/index.rst
+   techniques/index.rst
    reference/index.rst
 
 

@@ -3,8 +3,6 @@
 Reference 
 =========
 
-The dry nitty gritty, detailed in depth stuffs.
-
 .. toctree::
     :maxdepth: 1
     
@@ -19,5 +17,4 @@ The dry nitty gritty, detailed in depth stuffs.
     ectodoc
     ecto_cells
     ecto_test_cells
-    ipython
     api

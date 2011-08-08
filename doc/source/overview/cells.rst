@@ -51,7 +51,7 @@ Examination of the Cell
 A Cell defines some set of parameters, inputs and outputs statically.  And each cell
 created from this static definition holds its own state, and may operate on it's
 parameters,inputs and outputs at specific moments throughout it's lifetime. Also
-the outside world may examine and manipulate the cells :ref:`ecto::tendrils`.
+the outside world may examine and manipulate the cells :ref:`tendrils`.
 
 Let us look at a graphical representation of the Cell written :ref:`above <cell-Printer01>`:
 
@@ -60,10 +60,10 @@ Let us look at a graphical representation of the Cell written :ref:`above <cell-
    A graphical representation of a :ref:`ecto::cell`.  In ``green`` are the inputs,
    ``blue`` parameters, ``yellow`` cell type. This cell has no outputs.
 
-The parameters, inputs, and outputs of a cell all share the same type, :ref:`ecto::tendrils`.
+The parameters, inputs, and outputs of a cell all share the same type, :ref:`tendrils`.
 Tendrils are mappings between strings, and lazily typed objects.  These are how the
 cell communicates with the rest of the system.  The reason for choosing a runtime
-typed object like the :ref:`ecto::tendril` instead of a compile time typed object
+typed object like the :ref:`tendril` instead of a compile time typed object
 like a ``boost::tuple`` is that it allows for ecto to be type ignorant, as the
 data held by the tendril has really no effect on how a graph executes or the python
 interfaces.  Ecto is a plugin based architecture, and so can not be header only,
