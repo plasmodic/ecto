@@ -68,6 +68,7 @@ namespace ecto {
       ecto::graph::graph_t& graph;
       boost::thread runthread;
       
+      int last_rval;
       std::vector<ecto::graph::graph_t::vertex_descriptor> stack;
       mutable boost::mutex iface_mtx;
       mutable boost::mutex running_mtx;

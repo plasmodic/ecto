@@ -73,6 +73,8 @@ namespace ecto {
     }
 
     static bool interrupted;
+    static boost::thread single_threaded_run_thread;
+    static boost::signals2::signal<void()> interupted_sig;
     static void sigint_static_thunk(int)
     {
       std::cerr << "*** SIGINT received, stopping graph execution.\n"
@@ -92,15 +94,15 @@ namespace ecto {
       // compute_stack(); //FIXME hack for python based tendrils.
       scoped_ptr<thread> tmp(new thread(bind(&singlethreaded::execute_impl, this, niter)));
       tmp->swap(runthread);
-      while(!running()) usleep(5);
+      while(!running()) boost::this_thread::sleep(boost::posix_time::microseconds(5));
+; //TODO FIXME condition variable?
     }
 
     int singlethreaded::execute(unsigned niter)
     {
-      boost::mutex::scoped_lock l(iface_mtx);
-      int j;
-      j = execute_impl(niter);
-      return j;
+      execute_async(niter);
+      wait();
+      return last_rval;
     }
 
     int singlethreaded::execute_impl(unsigned niter)
@@ -113,17 +115,19 @@ namespace ecto {
       boost::mutex::scoped_lock yes_running(running_mtx);
 
       unsigned cur_iter = 0;
-      while((niter == 0 || cur_iter < niter))
+      while((niter == 0 || cur_iter < niter) && !interrupted)
         {
           for (size_t k = 0; k < stack.size() && !interrupted; ++k)
             {
               //need to check the return val of a process here, non zero means exit...
               size_t retval = invoke_process(stack[k]);
+              last_rval = retval;
               if (retval)
                 return retval;
             }
           ++cur_iter;
         }
+      last_rval = interrupted;
       return interrupted;
     }
 
