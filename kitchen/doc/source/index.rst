@@ -1,8 +1,8 @@
 Ecto Kitchen
 ============
 
-The Ecto Kitchen is a "superproject" containing ecto itself and other
-projects that use ecto.
+The Ecto Kitchen contains ecto itself and other projects that use
+ecto.
 
 .. toctree::
    :maxdepth: 1
