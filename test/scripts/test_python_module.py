@@ -18,7 +18,6 @@ def test_python_module_plasm():
     g = ecto_test.Generate(start = 1 , step =1)
     plasm = ecto.Plasm()
     plasm.connect(g,"out",mod,"input")
-    #print plasm.viz()
     sched = ecto.schedulers.Singlethreaded(plasm)
     for i in range(1,5):
         sched.execute(niter=1)

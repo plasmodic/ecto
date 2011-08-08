@@ -50,7 +50,6 @@ def test_plasm():
 
     #tests introspection
     viz = plasm.viz()
-    print viz
     assert(type(viz) == str)
 
     result1 = gather.outputs.out

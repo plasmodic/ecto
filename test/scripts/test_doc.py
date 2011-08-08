@@ -16,12 +16,8 @@ def test_doc():
     result = gather.outputs.out
     assert(result == 9) # 3 * 3
     assert scatter.__doc__ != None
-    print scatter.__doc__
-    print gather.__doc__
-    print plasm.viz()
-    #out = open("graph.dot","wt")
-    #print >>out, plasm.viz()
-    #ecto.view_plasm(plasm)
+    assert gather.__doc__ != None
+    assert type(plasm.viz()) == str
 
 def test_inspection():
     ecto.list_ecto_module(ecto_test)

@@ -50,6 +50,32 @@
 
 namespace ecto
 {
+  template<>
+  const std::string&
+  ReturnCodeToStr<ecto::OK>()
+  {
+    static const std::string str = "ecto::OK";
+    return str;
+  }
+  template<>
+  const std::string&
+  ReturnCodeToStr<ecto::QUIT>()
+  {
+    static const std::string str = "ecto::QUIT";
+    return str;
+  }
+
+  const std::string&
+  ReturnCodeToStr(int rval)
+  {
+    switch(rval)
+    {
+      case ecto::OK: return ReturnCodeToStr<ecto::OK>();
+      case ecto::QUIT: return ReturnCodeToStr<ecto::QUIT>();
+      default: return ReturnCodeToStr<-1>();
+    }
+  }
+
   void
   auto_suggest(except::NonExistant& e, const cell& m)
   {

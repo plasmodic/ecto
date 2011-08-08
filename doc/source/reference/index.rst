@@ -14,6 +14,7 @@ The dry nitty gritty, detailed in depth stuffs.
     cell
     plasm
     schedulers
+    strands
     black_box
     ectodoc
     ecto_cells

@@ -52,10 +52,10 @@ def makeplasm(n_nodes):
     metrics = ecto_test.Metrics("Metrics", queue_size=4)
     plasm.connect(throttle[:] >> metrics[:])
     
-    o = open('graph.dot', 'w')
-    print >>o, plasm.viz()
-    o.close()
-    print "\n", plasm.viz(), "\n"
+#    o = open('graph.dot', 'w')
+#    print >>o, plasm.viz()
+#    o.close()
+#    print "\n", plasm.viz(), "\n"
 
     return (plasm, metrics)
 
