@@ -50,13 +50,17 @@ def _slice(value):
         raise ValueError('too many slice parts')
     return tuple((parts + [None]*2)[:2])
 
-def make_ectocelldirective(modname, celltype, state):
+def make_ectocelldirective(modname, celltype, state, content=None, content_offset=0):
     node = ectocell()
+    contentnode = nodes.paragraph()
+    if content != None:
+        state.nested_parse(content, content_offset, contentnode)
     node.modname = modname
     node.celltype = celltype
+    node.content = contentnode
     env = state.document.settings.env
     targetid = 'index-%s' % env.new_serialno('index')
-    targetnode = nodes.target('', '', ids=[targetid, node.modname + "_" + node.celltype])
+    targetnode = nodes.target('', '', ids=[targetid, node.modname + "." + node.celltype])
     state.document.note_explicit_target(targetnode)
     indexnode = addnodes.index()
     indexnode['entries'] = ne = []
@@ -68,11 +72,11 @@ def make_ectocelldirective(modname, celltype, state):
     ne.append(('single', modfirstindexarg, 
                targetid, modfirstindexarg))
     
-    return [node, indexnode]
+    return [indexnode, targetnode, node]
 
 
 class EctoCellDirective(rst.Directive):
-    has_content = False
+    has_content = True
     final_argument_whitespace = True
     required_arguments = 2
 
@@ -81,9 +85,10 @@ class EctoCellDirective(rst.Directive):
 
     def run(self):
 
-        return make_ectocelldirective(self.arguments[0], self.arguments[1], self.state)
+        return make_ectocelldirective(self.arguments[0], self.arguments[1], self.state,
+                                      self.content, self.content_offset)
 
-def docize(CellType):
+def docize(CellType, content):
     d = {}
     inst = CellType.inspect((),{})
 
@@ -131,17 +136,22 @@ def docize(CellType):
     d['name'] = CellType.__name__
     d['short_doc'] = CellType.short_doc
 
-    cell = nodes.topic(text=CellType.__name__)
+    cell = nodes.section()
+    cell += nodes.title(text=CellType.__name__)
+    cell += content
+    top = nodes.topic()
+    cell += top
     cell['ids'].append(CellType.__name__)
     cell['names'].append(CellType.__name__)
-    cell += nodes.title(text=CellType.__name__, rawtest=CellType.__name__)
-    para = nodes.paragraph(text=CellType.short_doc)
-    cell += para
+    # cell += nodes.title(text=CellType.__name__, rawtest=CellType.__name__)
+    para = nodes.title(text="Brief doc")
+    para += nodes.paragraph(text=CellType.short_doc)
+    top += para
     #params = nodes.rubric(text='parameters')
     # params += nodes.subtitle(text="parameters")
-    cell += gettendril('Parameters', inst.params, True)
-    cell += gettendril('Inputs', inst.inputs, False)
-    cell += gettendril('Outputs', inst.outputs, False)
+    top += gettendril('Parameters', inst.params, True)
+    top += gettendril('Inputs', inst.inputs, False)
+    top += gettendril('Outputs', inst.outputs, False)
 
     return cell
 
@@ -153,7 +163,7 @@ def do_ectocell(app, doctree):
         if node.celltype not in c.__dict__:
             raise RuntimeError("Cell %s not found in module %s" % (node.celltype, str(c)))
 
-        new_node = docize(c.__dict__[node.celltype])
+        new_node = docize(c.__dict__[node.celltype], node.content)
         node.replace_self(new_node)
 
 

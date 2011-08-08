@@ -9,35 +9,33 @@ Convenience cells
 The are cells that may be generally useful in your ecto graphs and tend to be
 weakly typed.
 
-Constant
-^^^^^^^^
-This cell takes a python parameter that becomes a constant output. As long as
-this python type is convertable to a c++ type(through python bindings or basic types),
-it may be connected to cells written in c++.
-
 .. ectocell:: ecto Constant
 
-Passthrough
-^^^^^^^^^^^
-Passthrough is mostly useful from within a :ref:`black_box` to connect
-multiple inputs to one cell, which then becomes a singular input for the BlackBox.
+   This cell takes a python parameter that becomes a constant
+   output. As long as this python type is convertable to a c++ type
+   (through ``python`` bindings or basic types), it may be connected
+   to cells written in c++.
 
 .. ectocell:: ecto Passthrough
 
-Conditional Execution
----------------------
-The If cell enables you to conditionally execute a single cell
-based on an input flag.
+   Passthrough is mostly useful from within a :ref:`black_box` to connect
+   multiple inputs to one cell, which then becomes a singular input for the BlackBox.
+
 
 .. ectocell:: ecto If
 
-An example of using the If cell for condition execution of a
-cell. Notice that cell that is encased in an If is **not added to the
-graph**, it is passed to the ``If`` cell as a **parameter**.  
+   The If cell enables you to conditionally execute a single cell
+   based on an input flag.
 
-.. literalinclude:: conditional.py
+   An example of using the If cell for condition execution of a
+   cell. Notice that cell that is encased in an If is **not added to the
+   graph**, it is passed to the ``If`` cell as a **parameter**.  
 
-The above sample uses the built in cell:
+   .. literalinclude:: conditional.py
+
+   The above sample uses the built in cell :ref:`TrueEveryN`
+   
+.. _trueeveryn:
 
 .. ectocell:: ecto TrueEveryN
 
