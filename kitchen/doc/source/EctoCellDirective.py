@@ -68,7 +68,7 @@ def make_ectocelldirective(modname, celltype, state):
     ne.append(('single', modfirstindexarg, 
                targetid, modfirstindexarg))
     
-    return [node, indexnode]
+    return [indexnode, targetnode, node]
 
 
 class EctoCellDirective(rst.Directive):
