@@ -9,9 +9,7 @@ tendril objects hold.
 python api
 ----------
 .. autoclass:: ecto.Tendrils
-    :members:
 
 c++ api
 -------
 .. doxygenclass:: ecto::tendrils
-    :members:
