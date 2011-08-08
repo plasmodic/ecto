@@ -32,7 +32,8 @@ from ecto_kitchen_config import *
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest', 
               'sphinx.ext.todo', 'sphinx.ext.coverage', 'sphinx.ext.pngmath',
               'sphinx.ext.viewcode', 'sphinx.ext.graphviz',
-              'breathe', 'EctoShLexer', 'EctoPlotDirective', 'EctoCellDirective', 'programoutput']
+              'breathe', 'programoutput',
+              'EctoShLexer', 'EctoPlotDirective', 'EctoCellDirective', 'EctoModuleDirective']
 
 
 # extensions = ['sphinx.ext.ifconfig', 'sphinx.ext.todo'] #, 'cmake']
