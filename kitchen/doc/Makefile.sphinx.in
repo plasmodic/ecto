@@ -23,6 +23,8 @@ ALLSPHINXOPTS   = -d @CMAKE_CURRENT_BINARY_DIR@/doctrees $(PAPEROPT_$(PAPER)) $(
 
 .PHONY: help clean html dirhtml singlehtml pickle json htmlhelp qthelp devhelp epub latex latexpdf text man changes linkcheck doctest
 
+KITCHEN_INDEX = $(BUILDDIR)/source/kitchen_index.rst.generated
+
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
 	@echo "  html       to make standalone HTML files"
@@ -45,14 +47,14 @@ help:
 links:
 	rsync -va --delete @ecto_kitchen_SOURCE_DIR@/doc/source $(BUILDDIR)/
 	rsync -va @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source $(BUILDDIR)/
-	echo ".. toctree::" > $(BUILDDIR)/source/index_generated.rst
-	echo "   :maxdepth: 2" >> $(BUILDDIR)/source/index_generated.rst
-	echo "" >> $(BUILDDIR)/source/index_generated.rst
+	echo ".. toctree::" > $(KITCHEN_INDEX)
+	echo "   :maxdepth: 2" >> $(KITCHEN_INDEX)
+	echo "" >> $(KITCHEN_INDEX)
 
 	@for k in @KITCHEN_PROJECTS_STR@ ; do \
 	[ -h $(BUILDDIR)/source/$$k ] || \
 	ln -sfv @ecto_kitchen_SOURCE_DIR@/$$k/doc/source $(BUILDDIR)/source/$$k ; \
-	echo "   $$k/index.rst" >> $(BUILDDIR)/source/index_generated.rst ; \
+	echo "   $$k/index.rst" >> $(KITCHEN_INDEX) ; \
 	done
 
 	cp @CMAKE_CURRENT_BINARY_DIR@/ecto_kitchen_config.py $(BUILDDIR)/source

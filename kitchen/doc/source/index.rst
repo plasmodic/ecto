@@ -9,10 +9,13 @@ ecto.
    
    README.rst
 
-.. include:: index_generated.rst
+.. rubric:: What is in this kitchen
+
+.. include:: kitchen_index.rst.generated
 
 
 .. toctree:: 
    :maxdepth: 2
 
    kitchen/index.rst
+
