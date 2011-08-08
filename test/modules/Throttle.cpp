@@ -44,6 +44,7 @@ namespace ecto_test
     unsigned period_usec;
     pt::ptime prevtime;
     tendril::ptr in, out;
+    ecto::spore<double> rate_;
 
     static void declare_params(tendrils& parameters)
     {
@@ -58,7 +59,7 @@ namespace ecto_test
 
     void configure(tendrils& parameters, tendrils& inputs, tendrils& outputs)
     {
-      period_usec = 1e+06 / parameters.get<double>("rate");
+      rate_ = parameters["rate"];
       
       outputs["out"] = inputs["in"];
       prevtime = pt::microsec_clock::universal_time() - pt::hours(24);
@@ -66,6 +67,8 @@ namespace ecto_test
 
     int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
+      period_usec = 1e+06 / *rate_;
+
       pt::ptime now(pt::microsec_clock::universal_time());
       pt::time_duration already_waited = now - prevtime;
       int mustwait_usec = period_usec - already_waited.total_microseconds();
