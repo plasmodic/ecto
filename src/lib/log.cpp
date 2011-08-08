@@ -15,12 +15,14 @@ namespace ecto {
     std::cout << now << " " << boost::this_thread::get_id() << " " << msg << std::endl;
   }
 
-  std::ofstream processlog("processs.log");
+#if defined(ECTO_LOG_STATS)
+  std::ofstream processlog("process.log");
 
-  void log_process(const std::string& instancename, uint64_t time, bool onoff)
+  void log_process(const std::string& instancename, uint64_t time, unsigned ncalls, bool onoff)
   {
     mutex::scoped_lock lock(process_log_mtx);
-    processlog << "process " << instancename << " " << time << " " << onoff << "\n";
+    processlog << "process " << instancename << " " << time << " " << ncalls << " " << onoff << "\n";
   }
+#endif
 
 }

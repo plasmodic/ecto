@@ -31,7 +31,7 @@
 
 namespace ecto {
   ECTO_EXPORT void log(const std::string& msg);
-  ECTO_EXPORT void log_process(const std::string& name, uint64_t time, bool startstop);
+  ECTO_EXPORT void log_process(const std::string& name, uint64_t time, unsigned ncalls, bool startstop);
 
 }
 
@@ -45,9 +45,9 @@ namespace ecto {
 #endif
 
 #if defined(ECTO_LOG_STATS)
-#define ECTO_LOG_PROCESS(instancename, time, onoff) ::ecto::log_process(instancename, time, onoff)
+#define ECTO_LOG_PROCESS(instancename, time, ncalls, onoff) ::ecto::log_process(instancename, time, ncalls, onoff)
 #else
-#define ECTO_LOG_PROCESS(instancename, time, onoff)
+#define ECTO_LOG_PROCESS(instancename, time, ncalls, onoff)
   
 #endif
 

@@ -28,7 +28,6 @@
  */
 #pragma once
 #include <stdint.h>//int64_t
-#define ECTO_LOG_STATS 1
 
 #include <ecto/util.hpp>
 #include <ecto/log.hpp>
@@ -54,12 +53,12 @@ namespace ecto {
         : start(read_tsc()), stats(stats), instancename(n) 
       { 
         ++stats.ncalls;
-        ECTO_LOG_PROCESS(instancename, start, 1);
+        ECTO_LOG_PROCESS(instancename, start, stats.ncalls, 1);
       }
 
       ~stats_collector() {
         int64_t tsc = read_tsc();
-        ECTO_LOG_PROCESS(instancename, tsc, 0);
+        ECTO_LOG_PROCESS(instancename, tsc, stats.ncalls, 0);
         stats.total_ticks += (tsc - start);
       }
     };

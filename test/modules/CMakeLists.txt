@@ -8,6 +8,7 @@ ectomodule(ecto_test
   Quitter.cpp
   QuitAfter.cpp
   Increment.cpp
+  LatticeSleep.cpp
   Printer.cpp
   Ping.cpp
   Throttle.cpp
