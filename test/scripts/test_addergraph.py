@@ -41,11 +41,6 @@ def build_addergraph(nlevels):
 
 def test_plasm(nlevels, nthreads, niter):
     (plasm, outnode) = build_addergraph(nlevels)
-
-    #o = open('graph.dot', 'w')
-    #print >>o, plasm.viz()
-    #o.close()
-    #print "\n", plasm.viz(), "\n"
     sched = ecto.schedulers.Threadpool(plasm)
     sched.execute(niter, nthreads)
     print "RESULT:", outnode.outputs.out

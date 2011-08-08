@@ -24,10 +24,6 @@ def test_dual_line_plasm(nlevels):
     printer = ecto_test.Printer()
     plasm.connect(add, "out", printer, "in")
     
-    o = open('graph.dot', 'w')
-    print >>o, plasm.viz()
-    o.close()
-    print "\n", plasm.viz(), "\n"
     sched = ecto.schedulers.Threadpool(plasm)
     sched.execute(niter=1, nthreads=int(nlevels/2))
     result = add.outputs.out
