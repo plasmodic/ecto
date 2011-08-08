@@ -25,6 +25,19 @@ def print_module_doc(m):
     print m.__doc__
     
 
+def list_all_ecto_modules(pymodule):
+    '''
+    Creates a list of all cells from a python module, which are ready for doc string and other
+    types of introspection.
+    '''
+    l = []
+    for x in dir(pymodule):
+        mod = getattr(pymodule, x)
+        if inspect.isclass(mod) and issubclass(mod, ecto._module_base):
+                m = mod.inspect((), {})
+                l.append(m)
+    return l
+
 def list_ecto_module(pymodule):
     l = []
     for x in dir(pymodule):
