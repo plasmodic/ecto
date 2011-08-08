@@ -46,9 +46,9 @@ The ecto cell goes through a few states during its lifetime.
   constructor.
 
 * ``MyCell::configure()`` will be called after the cell has been
-  allocated and before any call to process.  The :ref:`scheduler`s will tend
+  allocated and before any call to process.  The :ref:`scheduler`\s will tend
   to call this in batch before processing is executed.
-  This function should cache :ref:`ecto::spore`s to parameters,inputs,outputs
+  This function should cache :ref:`ecto::spore`\s to parameters,inputs,outputs
   or register parameter change callbacks. This will only be called once during
   the lifetime of the cell.
 

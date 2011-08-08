@@ -1,4 +1,4 @@
-.. _ecto::tendril:
+.. _tendril:
 
 tendril
 =======
@@ -21,21 +21,21 @@ associated with it three sets of tendrils: parameters, input, and
 output.  The *scheduler*, external to the cell, copies data between
 one cell's output tendril and the input tendril of another cell.
 
-.. literalinclude:: src/Example01.cpp
+.. literalinclude:: ../src/Example01.cpp
    :language: cpp
    :start-after: using
    :end-before: ECTO_CELL
 
-See :download:`src/Example01.cpp`
+See :download:`../src/Example01.cpp`
 
 A script like this,
 
-.. literalinclude:: src/Example01.py
+.. literalinclude:: ../src/Example01.py
    :language: py
 
 Will output,
 
-.. program-output:: src/Example01.py
+.. program-output:: ../src/Example01.py
    :prompt:
    :in_srcdir:
 

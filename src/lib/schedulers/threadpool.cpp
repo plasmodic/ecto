@@ -189,10 +189,11 @@ namespace ecto {
             boost::this_thread::interruption_point();
             ECTO_LOG_DEBUG("%s invoke", this);
             try {
-              int j = ecto::schedulers::invoke_process(g, vd);
-              if (j != ecto::OK)
+              int rval = ecto::schedulers::invoke_process(g, vd);
+
+              if (rval != ecto::OK)
                 {
-                  std::cout << "Module " << g[vd]->name() << " returned not okay. Stopping everything." 
+                  std::cout << "Module " << g[vd]->name() << " returned " << ReturnCodeToStr(rval) <<" Stopping everything."
                             << std::endl; 
                   context.stop = true;
                   //        context.interrupt();

@@ -1,5 +1,4 @@
 #!/usr/bin/python
-
 import ecto
 import ecto_test
 
@@ -15,14 +14,5 @@ plasm.connect(gen[:] >> inc[:],
               mul[:] >> add['left'],
               inc[:] >> add['right'],
               )
-
-              
-              
-              
-              
-
-
-              
-
 
 

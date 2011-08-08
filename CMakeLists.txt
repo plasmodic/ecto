@@ -27,6 +27,13 @@ execute_process(COMMAND ln -sf ${ecto_SOURCE_DIR}/python/ecto/__init__.py
   WORKING_DIRECTORY ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/ecto
   )
 
+option(ECTO_LOG_STATS "Generate logs containing fine-grained per-cell execution timing information.  You probably don't want this."
+  OFF)
+
+if(ECTO_LOG_STATS)
+  add_definitions(-DECTO_LOG_STATS=1)
+endif()
+
 include(${ecto_SOURCE_DIR}/cmake/ectoMacros.cmake)
 include(${ecto_SOURCE_DIR}/cmake/ectoFindDeps.cmake)
 
@@ -99,7 +106,7 @@ add_subdirectory(python)
 add_subdirectory(src)
 add_subdirectory(cmake)
 add_subdirectory(doc/source/src doc_examples)
-add_subdirectory(doc/source/introduction doc_introduction)
+add_subdirectory(doc/source/overview doc_overview)
 
 option(BUILD_TEST "Build tests" ON)
 if(BUILD_TEST)

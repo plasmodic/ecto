@@ -1,5 +1,0 @@
-.. _tendrils-intro:
-
-Tendrils
-========
-

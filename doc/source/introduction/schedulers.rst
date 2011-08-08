@@ -1,4 +1,0 @@
-.. _schedulers-intro:
-
-Schedulers
-==========

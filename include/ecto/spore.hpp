@@ -57,8 +57,8 @@ namespace ecto
     spore() { }
 
     /**
-     * implicit constructor from a tendril ptr. Needs to be a shared_ptr, as the spore holds a
-     * weak_ptr, and uses this to ensure that the spore always points to valid tendril.
+     * implicit constructor from a tendril ptr. Needs to be a shared_ptr
+     * and uses this to ensure that the spore always points to valid tendril.
      */
     spore(tendril::ptr t) :
         tendril_(t)
@@ -73,23 +73,21 @@ namespace ecto
      * Grab a pointer to the tendril that gave birth to this spore.
      * @return non const pointer to tendril
      */
-    inline tendril::ptr p()
+    inline tendril::ptr get()
     {
-      tendril::ptr _p = tendril_.lock();
-      if (!_p)
+      if (!tendril_)
         throw std::logic_error("This spore points to nothing.");
-      return _p;
+      return tendril_;
     }
     /**
      * Grab a pointer to the tendril that gave birth to this spore. const overload.
      * @return const pointer to tendril
      */
-    inline tendril::const_ptr p() const
+    inline tendril::const_ptr get() const
     {
-      tendril::const_ptr _p = tendril_.lock();
-      if (!_p)
+      if (!tendril_)
         throw std::logic_error("This spore points to nothing. Type name:" + name_of<T>());
-      return _p;
+      return tendril_;
     }
 
     /**
@@ -100,81 +98,81 @@ namespace ecto
      */
     spore<T>& set_callback(typename boost::function<void(T)> cb)
     {
-      p()->set_callback(cb);
+      get()->set_callback(cb);
       return *this;
     }
 
     spore<T>& notify()
     {
-      p()->notify();
+      get()->notify();
       return *this;
     }
 
     spore<T>& set_doc(const std::string& doc)
     {
-      p()->set_doc(doc);
+      get()->set_doc(doc);
       return *this;
     }
 
     spore<T>& set_default_val(const T& val)
     {
-      p()->set_default_val(val);
+      get()->set_default_val(val);
       return *this;
     }
 
     bool dirty() const
     {
-      return p()->dirty();
+      return get()->dirty();
     }
 
     void dirty(bool d)
     {
-      return p()->dirty(d);
+      return get()->dirty(d);
     }
 
     bool user_supplied() const
     {
-      return p()->user_supplied();
+      return get()->user_supplied();
     }
 
     bool has_default() const
     {
-      return p()->has_default();
+      return get()->has_default();
     }
 
     spore<T>& required(bool b)
     {
-      p()->required(b);
+      get()->required(b);
       return *this;
     }
 
     bool required() const
     {
-      return p()->required();
+      return get()->required();
     }
 
 
     T* operator->()
     {
-      tendril::ptr _p = p();
+      tendril::ptr _p = get();
       return &(_p->get<T>());
     }
 
     const T* operator->() const
     {
-      tendril::const_ptr _p = p();
+      tendril::const_ptr _p = get();
       return &(_p->get<const T>());
     }
 
     T& operator*()
     {
-      tendril::ptr _p = p();
+      tendril::ptr _p = get();
       return _p->get<T>();
     }
 
     const T& operator*() const
     {
-      tendril::const_ptr _p = p();
+      tendril::const_ptr _p = get();
       return _p->get<const T>();
     }
 
@@ -183,27 +181,17 @@ namespace ecto
      */
     operator tendril::ptr()
     {
-      return p();
+      return get();
     }
     /**
      * Cast operator for convenience.
      */
     operator tendril::const_ptr() const
     {
-      return p();
-    }
-
-    tendril::ptr tendril_ptr()
-    {
-      return p();
-    }
-
-    tendril::const_ptr tendril_ptr() const
-    {
-      return p();
+      return get();
     }
 
   private:
-    boost::weak_ptr<tendril> tendril_;
+    boost::shared_ptr<tendril> tendril_;
   };
 }

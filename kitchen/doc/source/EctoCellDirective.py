@@ -50,6 +50,27 @@ def _slice(value):
         raise ValueError('too many slice parts')
     return tuple((parts + [None]*2)[:2])
 
+def make_ectocelldirective(modname, celltype, state):
+    node = ectocell()
+    node.modname = modname
+    node.celltype = celltype
+    env = state.document.settings.env
+    targetid = 'index-%s' % env.new_serialno('index')
+    targetnode = nodes.target('', '', ids=[targetid, node.modname + "_" + node.celltype])
+    state.document.note_explicit_target(targetnode)
+    indexnode = addnodes.index()
+    indexnode['entries'] = ne = []
+    indexnode['inline'] = False
+    s = 'Cell; ' + celltype + ' (module ' + modname + ')'
+    ne.append(('single', s, targetid, s))
+
+    modfirstindexarg = celltype + ' (ecto cell in module ' + modname + ')'
+    ne.append(('single', modfirstindexarg, 
+               targetid, modfirstindexarg))
+    
+    return [node, indexnode]
+
+
 class EctoCellDirective(rst.Directive):
     has_content = False
     final_argument_whitespace = True
@@ -59,39 +80,20 @@ class EctoCellDirective(rst.Directive):
                        ellipsis=_slice, extraargs=unchanged)
 
     def run(self):
-        node = ectocell()
-        node.modname = modname = self.arguments[0]
-        node.celltype = celltype = self.arguments[1]
 
-        # a-la Index(Directive) inside sphinx
-        env = self.state.document.settings.env
-        targetid = 'index-%s' % env.new_serialno('index')
-        targetnode = nodes.target('', '', ids=[targetid, node.modname + "_" + node.celltype])
-        self.state.document.note_explicit_target(targetnode)
-        indexnode = addnodes.index()
-        indexnode['entries'] = ne = []
-        indexnode['inline'] = False
-        s = 'Cell; ' + celltype + ' (module ' + modname + ')'
-        ne.append(('single', s, targetid, s))
-
-        modfirstindexarg = celltype + ' (ecto cell in module ' + modname + ')'
-        ne.append(('single', modfirstindexarg, 
-                   targetid, modfirstindexarg))
-
-        return [indexnode, node]
+        return make_ectocelldirective(self.arguments[0], self.arguments[1], self.state)
 
 def docize(CellType):
     d = {}
     inst = CellType.inspect((),{})
 
-    def gettendril(name, tendrils):
+    def gettendril(name, tendrils, isparam):
         d = {}
 
         if len(tendrils) == 0:
             return nodes.paragraph()
 
-        section = nodes.rubric(text=name)
-        # section += nodes.subtitle(text=name)
+        section = nodes.title(text=name)
         lst = nodes.bullet_list()
         section += lst
 
@@ -112,14 +114,16 @@ def docize(CellType):
             para += [nodes.strong(k, k), nodes.literal('', '   '), 
                      nodes.emphasis('', '   type: '), nodes.literal('', v.type_name + " ")]
             para += nodes.literal('', '   ')
-            if not v.required:
-                para += nodes.emphasis('', ' not ')
-            para += nodes.emphasis('', 'required')
-            para += nodes.literal('', '   ')
-            if v.has_default:
-                para += [nodes.emphasis('', " default: "), nodes.literal('', default)]
-            else:
-                para += nodes.emphasis('', ' no default value')
+            if isparam:
+                if not v.required:
+                    para += nodes.emphasis('', ' not ')
+                para += nodes.emphasis('', 'required')
+                para += nodes.literal('', '   ')
+                if v.has_default:
+                    para += [nodes.emphasis('', " default: "), nodes.literal('', default)]
+                else:
+                    para += nodes.emphasis('', ' no default value')
+
             entry += nodes.paragraph('', v.doc)
 
         return section
@@ -135,9 +139,9 @@ def docize(CellType):
     cell += para
     #params = nodes.rubric(text='parameters')
     # params += nodes.subtitle(text="parameters")
-    cell += gettendril('Parameters', inst.params)
-    cell += gettendril('Inputs', inst.inputs)
-    cell += gettendril('Outputs', inst.outputs)
+    cell += gettendril('Parameters', inst.params, True)
+    cell += gettendril('Inputs', inst.inputs, False)
+    cell += gettendril('Outputs', inst.outputs, False)
 
     return cell
 

@@ -1,36 +1,86 @@
-macro (rospack VAR)
-  if(NOT ${VAR}_CACHED)
-    execute_process(COMMAND /usr/bin/env rospack ${ARGN}
-      OUTPUT_VARIABLE ${VAR}
+find_program(ROSPACK_EXECUTABLE rospack DOC "the rospack executable.")
+
+macro (rospack VAR COMMAND PACKAGE)
+  set(cachevar ROSPACK_${PACKAGE}_${COMMAND})
+  set(${cachevar} "not-run-yet-NOTFOUND" CACHE INTERNAL "")
+  if(NOT ${cachevar})
+    execute_process(COMMAND ${ROSPACK_EXECUTABLE} ${COMMAND} ${PACKAGE}
+      OUTPUT_VARIABLE ROSPACK_OUT
       ERROR_VARIABLE rospack_error
       OUTPUT_STRIP_TRAILING_WHITESPACE
+      ERROR_STRIP_TRAILING_WHITESPACE
       )
+
     if(rospack_error)
-        message(STATUS "Is your path setup correctly for ROS?\nrospack failed:${rospack_error}")
+      message(STATUS "***")
+      message(STATUS "*** rospack ${COMMAND} ${PACKAGE} failed: ${rospack_error}")
+      message(STATUS "***")
+      set(${cachevar} "ROSPACK_${PACKAGE}_${COMMAND}-NOTFOUND" 
+        CACHE INTERNAL "rospack output for rospack ${PACKAGE} ${COMMAND}")
     else()
-        unset(${VAR}_NOTFOUND)
-        separate_arguments(${VAR} UNIX_COMMAND ${${VAR}})
-        set(${VAR} ${${VAR}} CACHE STRING "${VAR} value")
-        set(${VAR}_CACHED TRUE CACHE BOOL "${VAR} cached flag")
-        #message(STATUS "Found ${VAR}.")
+      separate_arguments(ROSPACK_SEPARATED UNIX_COMMAND ${ROSPACK_OUT})
+      set(${cachevar} ${ROSPACK_SEPARATED} CACHE INTERNAL "value")
+      set(${VAR} ${ROSPACK_SEPARATED} CACHE INTERNAL "" FORCE)
+      # message("${VAR} == ${${VAR}}")
     endif()
   else()
-    #message(STATUS "BANG! Using cached ${VAR}")
+    set(${VAR} "${${cachevar}}")
   endif()
 endmacro()
 
-macro (find_ros_package NAME)
-  rospack(${NAME}_INCLUDES cflags-only-I ${NAME})
-  if(rospack_error)
-  else()
-    set(${NAME}_FOUND TRUE)
-    include_directories(${${NAME}_INCLUDES})
-    rospack(${NAME}_DEFINITIONS cflags-only-other ${NAME})
-    foreach(DEF ${${NAME}_DEFINITIONS})
-      add_definitions(" ${DEF}")
-    endforeach()
-    rospack(${NAME}_LIBRARY_DIRS libs-only-L ${NAME})
-    rospack(${NAME}_LIBRARIES libs-only-l ${NAME})
-    link_directories(${${NAME}_LIBRARY_DIRS})
+macro (find_ros_package PACKAGE)
+  if (NOT ${PACKAGE}_DIR)
+    rospack(${PACKAGE}_DIR find ${PACKAGE})
   endif()
+
+  if(NOT ${PACKAGE}_DIR)
+    message(STATUS "Could not find package ${PACKAGE} via rosmake")
+  else()
+    if(NOT ${PACKAGE}_FOUND)
+      message(STATUS "Finding ROS package ${PACKAGE} via rospack and ROS environment variables...")
+      rospack(${PACKAGE}_INCLUDE_DIRS cflags-only-I ${PACKAGE})
+      include_directories(${${PACKAGE}_INCLUDE_DIRS})
+      rospack(${PACKAGE}_DEFINITIONS cflags-only-other ${PACKAGE})
+
+      rospack(libdirs libs-only-L ${PACKAGE})
+      rospack(libnames libs-only-l ${PACKAGE})
+      
+      set(${PACKAGE}_LIBRARIES "" CACHE INTERNAL "")
+
+      foreach(libname ${ROSPACK_${PACKAGE}_libs-only-l})
+        find_library(${libname}_LIBRARY
+          NAMES ${libname}
+          PATHS ${ROSPACK_${PACKAGE}_libs-only-L}
+          NO_DEFAULT_PATH
+          )
+        find_library(${libname}_LIBRARY ${libname})
+        # message("${libname}_LIBRARY ${${libname}_LIBRARY}")
+        if (NOT ${libname}_LIBRARY)
+          message(FATAL_ERROR "uh oh ${PACKAGE} ${libname} found us ${thelib}")
+        endif()
+        set(${PACKAGE}_LIBRARIES ${${PACKAGE}_LIBRARIES};${${libname}_LIBRARY})
+      endforeach()
+      set(${PACKAGE}_LIBRARIES ${${PACKAGE}_LIBRARIES} CACHE INTERNAL "" FORCE)
+    endif()
+
+    include_directories(${${PACKAGE}_INCLUDE_DIRS})
+    add_definitions(${${PACKAGE}_DEFINITIONS})
+
+  endif() # not PACKAGE_DIR
+
+  if (${PACKAGE}_DIR)
+
+    # message("${PACKAGE}_LIBRARIES ${${PACKAGE}_LIBRARIES}")
+    list(LENGTH ${PACKAGE}_LIBRARIES nlibs)
+    list(LENGTH ${PACKAGE}_INCLUDE_DIRS nincludes)
+    list(LENGTH ${PACKAGE}_DEFINITIONS ndefs)
+
+    message(STATUS "+ ${PACKAGE} at ${${PACKAGE}_DIR}")
+    message(STATUS "+   ${nlibs} libraries, ${nincludes} include directories, ${ndefs} compile definitions")
+    set(${PACKAGE}_FOUND TRUE CACHE INTERNAL "" FORCE)
+  else()
+    message(STATUS "+ ${PACKAGE}: NOT FOUND")
+    set(${PACKAGE}_FOUND FALSE CACHE INTERNAL "" FORCE)
+  endif()
+
 endmacro()

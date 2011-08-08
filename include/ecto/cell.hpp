@@ -58,6 +58,24 @@ namespace ecto
   //!< Explicit quit now.
   };
 
+  template<int RVal>
+  const std::string&
+  ReturnCodeToStr()
+  {
+    static const std::string str = "Unknown Return Value";
+    return str;
+  }
+
+  template<>
+  const std::string&
+  ReturnCodeToStr<ecto::OK>();
+  template<>
+  const std::string&
+  ReturnCodeToStr<ecto::QUIT>();
+
+  const std::string&
+  ReturnCodeToStr(int rval);
+
   /**
    * \brief ecto::cell is the non virtual interface to the basic building
    * block of ecto graphs.  This interface should never be the parent of
@@ -362,7 +380,7 @@ namespace ecto
     ReturnCode process(implemented, tendrils& inputs, tendrils& outputs)
     {
       ReturnCode code;
-      profile::stats_collector coll(stats);
+      profile::stats_collector coll(name(), stats);
       code = ReturnCode(impl->process(inputs, outputs));
       return code;
     }

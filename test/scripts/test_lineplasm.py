@@ -19,11 +19,11 @@ def test_plasm(nthreads, niter, n_nodes, incdelay):
 
     printer = ecto_test.Printer("Printy")
     plasm.connect(inc, "out", printer, "in")
-    
-    o = open('graph.dot', 'w')
-    print >>o, plasm.viz()
-    o.close()
-    print "\n", plasm.viz(), "\n"
+#    
+#    o = open('graph.dot', 'w')
+#    print >>o, plasm.viz()
+#    o.close()
+#    print "\n", plasm.viz(), "\n"
     sched = ecto.schedulers.Threadpool(plasm)
     sched.execute(niter, nthreads)
         

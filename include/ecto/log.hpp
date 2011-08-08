@@ -31,16 +31,23 @@
 
 namespace ecto {
   ECTO_EXPORT void log(const std::string& msg);
-  extern ECTO_EXPORT boost::mutex log_mtx;
+  ECTO_EXPORT void log_process(const std::string& name, uint64_t time, unsigned ncalls, bool startstop);
+
 }
 
 #if defined(ECTO_LOG_ON)
 #define ECTO_LOG_DEBUG(fmt, args)                                       \
   do {                                                                  \
-    log_mtx.lock();                                                     \
     log(str(boost::format(fmt) % args));                                \
-    log_mtx.unlock();                                                   \
   } while (false)
 #else
 #define ECTO_LOG_DEBUG(fmg, args) do { } while (false)
 #endif
+
+#if defined(ECTO_LOG_STATS)
+#define ECTO_LOG_PROCESS(instancename, time, ncalls, onoff) ::ecto::log_process(instancename, time, ncalls, onoff)
+#else
+#define ECTO_LOG_PROCESS(instancename, time, ncalls, onoff)
+  
+#endif
+

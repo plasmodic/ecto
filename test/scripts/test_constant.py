@@ -17,7 +17,6 @@ def test_constant():
                   m[:] >> pr[:]
                   )
 
-    print plasm.viz()
     plasm.execute()
 
     assert m.outputs.out == (0.50505 * 3.3335)

@@ -36,7 +36,10 @@ namespace ecto {
       //verify that all inputs have been set.
       m->verify_inputs();
 
-      int val = m->process();
+      int rval = m->process();
+
+      if(rval != ecto::OK)
+        return rval; //short circuit.
 
       graph_t::out_edge_iterator outbegin, outend;
       tie(outbegin, outend) = boost::out_edges(vd, graph);
@@ -46,8 +49,7 @@ namespace ecto {
           e->push_back(*m->outputs[e->from_port]);//copy everything... value, docs, user_defined, etc...
           ++outbegin;
         }
-
-      return val;
+      return rval;
     }
 
   }

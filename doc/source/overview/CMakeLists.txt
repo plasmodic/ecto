@@ -1,6 +1,6 @@
 add_executable(functor functor.cpp)
 
-ectomodule(introduction
+ectomodule(ecto_overview
   module.cpp
   cell.cpp
   nop.cpp
@@ -8,7 +8,7 @@ ectomodule(introduction
   )
 
 add_dependencies(html 
-  introduction_ectomodule functor
+  ecto_overview_ectomodule functor
   )
 
 

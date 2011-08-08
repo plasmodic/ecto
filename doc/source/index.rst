@@ -23,26 +23,11 @@ Also join the email list:
 .. toctree::
    :maxdepth: 2
    
-   introduction/index.rst
-   at_a_glance
-   client_usage
-   glossary
-   autoregister
-   ipython
-   tendril
-   tendrils
-   cell
-   plasm
-   schedulers
-   black_box
-   ectodoc
-   ecto_cells
-   ecto_test_cells
-   api
+   overview/index.rst
+   using_ecto/index.rst
+   tutorial/index.rst
+   examples/index.rst
+   techniques/index.rst
+   reference/index.rst
 
-.. rubric:: Appendices
 
-.. toctree::
-   :maxdepth: 2
-   
-   debugging

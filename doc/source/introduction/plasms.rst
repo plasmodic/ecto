@@ -1,5 +1,0 @@
-.. _plasms-intro:
-
-Plasms
-======
-

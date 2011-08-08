@@ -1,18 +1,21 @@
 Ecto Kitchen
 ============
 
-The Ecto Kitchen is a "superproject" containing ecto itself and other
-projects that use ecto.
+The Ecto Kitchen contains ecto itself and other projects that use
+ecto.
 
 .. toctree::
    :maxdepth: 1
    
    README.rst
 
-.. include:: index_generated.rst
+.. rubric:: What is in this kitchen
+
+.. include:: kitchen_index.rst.generated
 
 
 .. toctree:: 
-   :maxdepth: 1
+   :maxdepth: 2
 
-   git
+   kitchen/index.rst
+

@@ -25,7 +25,7 @@ which looks like this (actual output):
 Cells' docstrings should contain identical information, albeit
 surrounded with a bit of noise:
 
-.. literalinclude:: ectotest_docstring.py
+.. literalinclude:: ../ectotest_docstring.py
 
 and the output below, which is truncated for clarity as there is
 quite a bit of noise, starting with ``Methods defined here``.
@@ -43,17 +43,17 @@ Sphinx will execute the file, pull the named object out of the file
 (which must be a live plasm), get the ``graphviz`` information from
 the plasm, generate and include a graphic.  For instance this direcive::
 
-   .. ectoplot:: sampleplasm.py plasm
+   .. ectoplot:: ../sampleplasm.py plasm
 
 Will look for the file ``sampleplasm.py`` in the documentation
 directory, execute it, pull out and plot the object named plasm.  If
 that script looks like this:
 
-.. literalinclude:: sampleplasm.py
+.. literalinclude:: ../sampleplasm.py
 
 you'll get this:
 
-.. ectoplot:: sampleplasm.py plasm
+.. ectoplot:: ../sampleplasm.py plasm
 
 
 

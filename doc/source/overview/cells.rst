@@ -1,4 +1,4 @@
-.. _cells-intro:
+.. _cells-overview:
 
 Cells
 =====
@@ -27,13 +27,14 @@ The ecto Cell is similar, in that it gives ecto a common unit with which to work
 Here is the ecto equivalent of the above functor, slightly more verbose of course:
 
 .. _cell-Printer01:
-   
-   .. literalinclude:: cell.cpp
-	   :language: cpp
-	   :start-after: //start
-	   :end-before: //end
 
-   A typical :ref:`ecto::cell`.
+  .. literalinclude:: cell.cpp
+     :language: cpp
+     :start-after: //start
+     :end-before: //end
+     
+  A typical :ref:`ecto::cell`.
+
 
 
 
@@ -45,12 +46,12 @@ the type-safety in a graph of cells, or auto-completion from an :ref:`ipython co
 .. _examination-cell:
 
 Examination of the Cell
-+++++++++++++++++++++++
+-----------------------
 
 A Cell defines some set of parameters, inputs and outputs statically.  And each cell
 created from this static definition holds its own state, and may operate on it's
 parameters,inputs and outputs at specific moments throughout it's lifetime. Also
-the outside world may examine and manipulate the cells :ref:`ecto::tendrils`.
+the outside world may examine and manipulate the cells :ref:`tendrils`.
 
 Let us look at a graphical representation of the Cell written :ref:`above <cell-Printer01>`:
 
@@ -59,17 +60,17 @@ Let us look at a graphical representation of the Cell written :ref:`above <cell-
    A graphical representation of a :ref:`ecto::cell`.  In ``green`` are the inputs,
    ``blue`` parameters, ``yellow`` cell type. This cell has no outputs.
 
-The parameters, inputs, and outputs of a cell all share the same type, :ref:`ecto::tendrils`.
+The parameters, inputs, and outputs of a cell all share the same type, :ref:`tendrils`.
 Tendrils are mappings between strings, and lazily typed objects.  These are how the
 cell communicates with the rest of the system.  The reason for choosing a runtime
-typed object like the :ref:`ecto::tendril` instead of a compile time typed object
+typed object like the :ref:`tendril` instead of a compile time typed object
 like a ``boost::tuple`` is that it allows for ecto to be type ignorant, as the
 data held by the tendril has really no effect on how a graph executes or the python
 interfaces.  Ecto is a plugin based architecture, and so can not be header only,
 strictly compile time typed.
 
 Optional interface
-------------------
+^^^^^^^^^^^^^^^^^^
 
 The most basic of cells would be:
 
@@ -78,6 +79,7 @@ The most basic of cells would be:
     :start-after: //start
     :end-before: //end
 
+  .. ectocell:: ecto_overview NopCell
 
 Each cell may or may not implement the following functions:
 
@@ -90,22 +92,17 @@ Each cell may or may not implement the following functions:
      
   The cell interface functions.
   
-.. sidebar: A note on where to implement
+.. sidebar:: A note on where to implement
   
   Notice that in most examples we implement the functions for cells inline in the declaration
-  of the struct. However there is nothing stopping you from writing the implementation elsewhere:
-  
-    .. literalinclude:: interface.cpp
-     :language: cpp
-     :start-after: //impl_start
-     :end-before: //impl_end
+  of the struct. However there is nothing stopping you from writing the implementation elsewhere.
 
 However if you do implement any of the methods in the cell interface, be sure that
 their signatures match the above specification.
 
 
 A peek under the covers
------------------------
+^^^^^^^^^^^^^^^^^^^^^^^
 
 .. epigraph::
   
@@ -137,6 +134,15 @@ to the following simplified example:
     {
       YourCell::declare_params(params_);
     }
+    
+    void configure()
+    {
+      if(!thiz_)
+      {
+        thiz_ = new YourCell();
+        thiz_->configure();
+      }
+    }
     //... dispatch other functions...
     YourCell* thiz_;
   }
@@ -160,7 +166,7 @@ provides ecto with a flexible entry point for implementation details.
 Doing work
 ----------
 
-Let us take the :ref:`Printer <cell-printer01>` from above and use it from python. The following python
+Let us take the :ref:`Printer <cell-Printer01>` from above and use it from python. The following python
 script demonstrates the python interface of our cell that ecto provides for free(assuming you used the macro and followed the cell interface).
 
 .. literalinclude:: cell01.py
@@ -168,36 +174,37 @@ script demonstrates the python interface of our cell that ecto provides for free
 
 The script, when run will give the following output:
 
-.. program-output:: doc/source/introduction/cell01.py
+.. program-output:: doc/source/overview/cell01.py
 
-.. topic:: Doc Generation
+Doc Generation
+^^^^^^^^^^^^^^
+Notice the line ``print Printer01.__doc__``, every ecto cell gets this for free
+based on the docstrings that were written in the static declare_* functions.
+This is a class level attribute, and is one of the justifications for having
+the declare_* functions be static.  At import time, the ``__doc__`` strings are
+generated, and it is important that you write cells that will **not** crash during
+import.
 
-  Notice the line ``print Printer01.__doc__``, every ecto cell gets this for free
-  based on the docstrings that were written in the static declare_* functions.
-  This is a class level attribute, and is one of the justifications for having
-  the declare_* functions be static.  At import time, the ``__doc__`` strings are
-  generated, and it is important that you write cells that will **not** crash during
-  import.
-  
-  Another cool aspect of documentation generation is its full integration into sphinx
-  docs. Placing the following command in sphinx::
-  
-    .. ectocell:: introduction Printer01
+Another cool aspect of documentation generation is its full integration into sphinx
+docs. Placing the following command in sphinx::
 
-  Produces:
+  .. ectocell:: ecto_overview Printer01
+
+Produces:
+
+.. ectocell:: ecto_overview Printer01
+
+Also from an interactive python prompt, the following should produce useful
+output::
   
-  .. ectocell:: introduction Printer01
+  >>> from ecto_overview import Printer01
+  >>> help(Printer01)
   
-  Also from an interactive python prompt, the following should produce useful
-  output::
-    
-    >>> from introduction import Printer01
-    >>> help(Printer01)
-    
-  For more detailed information, refer to :ref:`ectodoc`.
+For more detailed information, refer to :ref:`ectodoc`.
 
 Cell construction
 ^^^^^^^^^^^^^^^^^
+
 
 Let us take a closer look at the python sample code. Take the cell construction
 line:
@@ -207,7 +214,7 @@ line:
     :lines: 6
   
   A typical cell constructor call from python. Notice mapping from keyword
-  arguments to the parameters declared in :ref:`cell-Printer01`.
+  arguments to the parameters declared in :ref:`Printer <cell-Printer01>`.
   
 Every Cell gets a constructor that has the following python signature::
   
@@ -216,7 +223,7 @@ Every Cell gets a constructor that has the following python signature::
 The first optional non-keyword argment is the cell's instance name. The instance
 name is useful for debug and graph display purposes.  Each parameter that was
 declared by the cell may be initialized as a keyword argument.  Other advanced keyword arguments
-may exist, that are defined by ecto, such as :ref:`strand`.
+may exist, that are defined by ecto, such as :ref:`strands`.
 
 .. sidebar:: When is configure called?
   
@@ -332,7 +339,7 @@ parameters have changed value, and then process is executed.
       process in the underlying cell, e.g. ``Printer::process(...)``
 
 Cell Life Cycle
-^^^^^^^^^^^^^^^^
+---------------
 
 The life cycle of cell is important to keep in mind.
   * ``declare_params`` and ``declare_io`` are static functions and will be called

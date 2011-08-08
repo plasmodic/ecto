@@ -32,7 +32,8 @@ from ecto_kitchen_config import *
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest', 
               'sphinx.ext.todo', 'sphinx.ext.coverage', 'sphinx.ext.pngmath',
               'sphinx.ext.viewcode', 'sphinx.ext.graphviz',
-              'breathe', 'EctoShLexer', 'EctoPlotDirective', 'EctoCellDirective', 'programoutput']
+              'breathe', 'programoutput',
+              'EctoShLexer', 'EctoPlotDirective', 'EctoCellDirective', 'EctoModuleDirective']
 
 
 # extensions = ['sphinx.ext.ifconfig', 'sphinx.ext.todo'] #, 'cmake']
@@ -129,7 +130,7 @@ html_title = 'ecto kitchen ' + version
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-html_logo = 'art/ecto2.png'
+html_logo = 'art/ecto_3x3.svg'
 
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32

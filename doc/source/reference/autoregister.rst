@@ -25,6 +25,8 @@ cell.
 This may be placed in any translation unit within the shared library,
 e.g. in a file Add.cpp that contains the code above.  
 
+.. _ecto_thread_unsafe:
+
 .. c:macro:: ECTO_THREAD_UNSAFE(CellType)
 
 Marks a cell type as thread unsafe; no two instances of this type will
