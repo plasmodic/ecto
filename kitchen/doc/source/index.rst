@@ -13,6 +13,6 @@ projects that use ecto.
 
 
 .. toctree:: 
-   :maxdepth: 1
+   :maxdepth: 2
 
-   git
+   kitchen/index.rst
