@@ -73,8 +73,6 @@ namespace ecto {
     }
 
     static bool interrupted;
-    static boost::thread single_threaded_run_thread;
-    static boost::signals2::signal<void()> interupted_sig;
     static void sigint_static_thunk(int)
     {
       std::cerr << "*** SIGINT received, stopping graph execution.\n"
@@ -94,15 +92,15 @@ namespace ecto {
       // compute_stack(); //FIXME hack for python based tendrils.
       scoped_ptr<thread> tmp(new thread(bind(&singlethreaded::execute_impl, this, niter)));
       tmp->swap(runthread);
-      while(!running()) boost::this_thread::sleep(boost::posix_time::microseconds(5));
-; //TODO FIXME condition variable?
+      while(!running()) usleep(5); //TODO FIXME condition variable?
     }
 
     int singlethreaded::execute(unsigned niter)
     {
-      execute_async(niter);
-      wait();
-      return last_rval;
+      boost::mutex::scoped_lock l(iface_mtx);
+      int j;
+      j = execute_impl(niter);
+      return j;
     }
 
     int singlethreaded::execute_impl(unsigned niter)
