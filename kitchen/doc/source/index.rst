@@ -1,3 +1,9 @@
+.. ..
+.. .. This file is ecto_SOURCE_DIR/kitchen/doc/source
+.. ..
+.. .. This is the MAIN INDEX for the kitchen, but it is located in project ecto
+.. ..
+
 Ecto Kitchen
 ============
 
@@ -9,7 +15,10 @@ ecto.
    
    README.rst
 
-.. rubric:: What is in this kitchen
+.. .. 
+.. .. This is the generated file that just contains a toctree with each 
+.. .. constituent project in it.
+.. ..
 
 .. include:: kitchen_index.rst.generated
 

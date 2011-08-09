@@ -21,7 +21,7 @@ PAPEROPT_a4     = -D latex_paper_size=a4
 PAPEROPT_letter = -D latex_paper_size=letter
 ALLSPHINXOPTS   = -d @CMAKE_CURRENT_BINARY_DIR@/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) $(BUILDDIR)/source
 
-.PHONY: help clean html dirhtml singlehtml pickle json htmlhelp qthelp devhelp epub latex latexpdf text man changes linkcheck doctest
+.PHONY: help clean links html dirhtml singlehtml pickle json htmlhelp qthelp devhelp epub latex latexpdf text man changes linkcheck doctest
 
 KITCHEN_INDEX = $(BUILDDIR)/source/kitchen_index.rst.generated
 
@@ -45,18 +45,20 @@ help:
 	@echo "  doctest    to run all doctests embedded in the documentation (if enabled)"
 
 links:
+	@echo "Constructing common doc source dir under build directory"
 	rsync -va --delete @ecto_kitchen_SOURCE_DIR@/doc/source $(BUILDDIR)/
 	rsync -va @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source $(BUILDDIR)/
-	echo ".. toctree::" > $(KITCHEN_INDEX)
-	echo "   :maxdepth: 2" >> $(KITCHEN_INDEX)
-	echo "" >> $(KITCHEN_INDEX)
-
-	@for k in @KITCHEN_PROJECTS_STR@ ; do \
+	/bin/echo ".. topic:: Constituent Projects" > $(KITCHEN_INDEX)
+	/bin/echo "" >> $(KITCHEN_INDEX)
+	/bin/echo "   .. toctree::" >> $(KITCHEN_INDEX)
+	/bin/echo "      :maxdepth: 2" >> $(KITCHEN_INDEX)
+	/bin/echo "" >> $(KITCHEN_INDEX)
+	for k in @KITCHEN_PROJECTS_STR@ ; do \
 	[ -h $(BUILDDIR)/source/$$k ] || \
 	ln -sfv @ecto_kitchen_SOURCE_DIR@/$$k/doc/source $(BUILDDIR)/source/$$k ; \
-	echo "   $$k/index.rst" >> $(KITCHEN_INDEX) ; \
+	echo "      $$k/index.rst" >> $(KITCHEN_INDEX) ; \
 	done
-
+	echo "Generated kitchen index:"
 	cp @CMAKE_CURRENT_BINARY_DIR@/ecto_kitchen_config.py $(BUILDDIR)/source
 
 clean:
@@ -158,3 +160,4 @@ doctest:
 info:
 	@echo "okay, i do nothing"
 	@echo "builddir is $(BINDIR)"
+
