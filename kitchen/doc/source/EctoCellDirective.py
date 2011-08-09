@@ -90,8 +90,9 @@ class EctoCellDirective(rst.Directive):
 
 def docize(CellType, content):
     d = {}
-    inst = CellType.inspect((),{})
-
+    def is_bp_enum(thing):
+        return 'Boost.Python.enum' in str(thing.__class__.__bases__)
+            
     def gettendril(name, tendrils, isparam):
         d = {}
 
@@ -128,6 +129,16 @@ def docize(CellType, content):
                     para += [nodes.emphasis('', " default: "), nodes.literal('', default)]
                 else:
                     para += nodes.emphasis('', ' no default value')
+            try:
+                if is_bp_enum(v.val):
+                    valpara = nodes.paragraph()
+                    valpara += nodes.emphasis('', 'Legal Values: ')
+                    for thevalue, thename in v.val.values.iteritems():
+                        valpara += nodes.literal('', "%s (%d)   " % (str(thename), thevalue))
+                    para += valpara
+            except TypeError, e:
+                pass # didn't convert to python, but okay. maybe v.val was boost::posix_time::ptime or something.
+        
 
             entry += nodes.paragraph('', v.doc)
 
@@ -149,6 +160,9 @@ def docize(CellType, content):
     top += para
     #params = nodes.rubric(text='parameters')
     # params += nodes.subtitle(text="parameters")
+
+    inst = CellType.inspect((),{})
+
     top += gettendril('Parameters', inst.params, True)
     top += gettendril('Inputs', inst.inputs, False)
     top += gettendril('Outputs', inst.outputs, False)
