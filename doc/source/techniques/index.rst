@@ -11,5 +11,5 @@ Ecto-Fu for you.
     
     ipython
     debugging
-
+    wrapping_enums
 

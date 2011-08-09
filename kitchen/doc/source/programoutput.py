@@ -62,7 +62,8 @@ class ProgramOutputDirective(rst.Directive):
     required_arguments = 1
 
     option_spec = dict(shell=flag, prompt=flag, nostderr=flag,
-                       in_srcdir=flag, ellipsis=_slice, extraargs=unchanged)
+                       in_srcdir=flag, ellipsis=_slice, extraargs=unchanged,
+                       expect_error=flag, until=unchanged)
 
     def run(self):
         rest = ''
@@ -104,6 +105,10 @@ class ProgramOutputDirective(rst.Directive):
         node['hide_standard_error'] = 'nostderr' in self.options
         node['extraargs'] = self.options.get('extraargs', '')
         node['use_shell'] = 'shell' in self.options
+        if 'until' in self.options:
+            node['until'] = self.options['until']
+            
+        node['expect_error'] = 'expect_error' in self.options
         if 'ellipsis' in self.options:
             node['strip_lines'] = self.options['ellipsis']
         return [node]
@@ -140,7 +145,7 @@ class ProgramOutputCache(defaultdict):
         ``hide_stderr`` is ``True``, the standard error of the program is
         discarded, otherwise it is included in the output.
         """
-        (cmd, shell, hide_stderr, path) = key
+        (cmd, shell, hide_stderr, path, expect_error) = key
         shell = True
         if cmd.count(' '):
             (bin_name, args) = cmd.split(' ', 1)
@@ -154,7 +159,7 @@ class ProgramOutputCache(defaultdict):
         proc = Popen(cmd, shell=shell, stdout=PIPE, stderr=PIPE if hide_stderr else STDOUT)
         stdout = proc.communicate()[0].decode(sys.getfilesystemencoding()).rstrip()
 
-        if proc.returncode != 0:
+        if proc.returncode != 0 and (not expect_error):
             print "Unable to run '" + cmd + "' returned " + str(proc.returncode)\
                 + 'stdout: ' + stdout
             raise CalledProcessError
@@ -189,7 +194,8 @@ def run_programs(app, doctree):
         if extra_args:
             cmd += ' ' + extra_args
 
-        cache_key = (cmd, node['use_shell'], node['hide_standard_error'], tuple(app.config.programoutput_path))
+        cache_key = (cmd, node['use_shell'], node['hide_standard_error'], tuple(app.config.programoutput_path),
+                     node['expect_error'])
         output = cache[cache_key]
 
         # replace lines with ..., if ellipsis is specified
@@ -198,6 +204,9 @@ def run_programs(app, doctree):
             start, stop = node['strip_lines']
             lines[start:stop] = ['...']
             output = '\n'.join(lines)
+
+        if 'until' in node:
+            output = output[:output.find(node['until'])]
 
         if node['show_prompt']:
             tmpl = app.config.programoutput_prompt_template
