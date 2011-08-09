@@ -45,25 +45,25 @@ namespace ecto
   );
 
   const char* input_str = STRINGY_DINGY(
-      <TD PORT="i_%s" BGCOLOR="springgreen">%s</TD>
+      <TD PORT="i_%s" BGCOLOR="springgreen">%s<BR/><FONT POINT-SIZE="8">%s</FONT></TD>
   );
 
   const char* cell_str = 
-    STRINGY_DINGY(<TD ROWSPAN="%d" COLSPAN="%d" BGCOLOR="khaki"> %s </TD>
+    STRINGY_DINGY(<TD ROWSPAN="%d" COLSPAN="%d" BGCOLOR="khaki">%s<BR/><FONT POINT-SIZE="8">%s</FONT></TD>
   );
 
   const char* param_str_1st = STRINGY_DINGY(
-      <TD PORT="p_%s" BGCOLOR="lightblue">%s</TD>
+      <TD PORT="p_%s" BGCOLOR="lightblue">%s<BR/><FONT POINT-SIZE="8">%s</FONT></TD>
   );
 
   const char* param_str_N = STRINGY_DINGY(
       <TR>
-      <TD PORT="p_%s" BGCOLOR="lightblue">%s</TD>
+      <TD PORT="p_%s" BGCOLOR="lightblue">%s<BR/><FONT POINT-SIZE="8">%s</FONT></TD>
       </TR>
   );
 
   const char* output_str = STRINGY_DINGY(
-      <TD PORT="o_%s" BGCOLOR="indianred1">%s</TD>
+      <TD PORT="o_%s" BGCOLOR="indianred1">%s<BR/><FONT POINT-SIZE="8">%s</FONT></TD>
   );
 
   struct vertex_writer
@@ -76,6 +76,19 @@ namespace ecto
     {
     }
 
+    std::string htmlescape(const std::string& in)
+    {
+      const boost::regex esc_lt("[<]");
+      const std::string rep_lt("&lt;");
+      const boost::regex esc_gt("[>]");
+      const std::string rep_gt("&gt;");
+
+      std::string htmlescaped_name = in;
+      htmlescaped_name = boost::regex_replace(htmlescaped_name, esc_lt, rep_lt, boost::match_default);
+      htmlescaped_name = boost::regex_replace(htmlescaped_name, esc_gt, rep_gt, boost::match_default);
+      return htmlescaped_name;
+    }
+
     void
     operator()(std::ostream& out, graph_t::vertex_descriptor vd)
     {
@@ -85,15 +98,7 @@ namespace ecto
       int n_inputs = c->inputs.size();
       int n_outputs = c->outputs.size();
       int n_params = c->parameters.size();
-      std::string sanitized_name = c->name();
-      //deal with html characters: ", &, <, and >
-      const boost::regex esc_lt("[<]");
-      const std::string rep_lt("&lt;");
-      const boost::regex esc_gt("[>]");
-      const std::string rep_gt("&gt;");
-
-      sanitized_name = boost::regex_replace(sanitized_name, esc_lt, rep_lt, boost::match_default);
-      sanitized_name = boost::regex_replace(sanitized_name, esc_gt, rep_gt, boost::match_default);
+      std::string htmlescaped_name = htmlescape(c->name());
 
       std::string inputs;
       BOOST_FOREACH(const tendrils::value_type& x, c->inputs)
@@ -101,7 +106,7 @@ namespace ecto
             std::string key = x.first;
             if (inputs.empty())
               inputs = "<TR>\n";
-            inputs += boost::str(boost::format(input_str) % key % key) + "\n";
+            inputs += boost::str(boost::format(input_str) % key % key % htmlescape(x.second->type_name())) + "\n";
           }
       if (!inputs.empty())
         inputs += "</TR>";
@@ -112,21 +117,25 @@ namespace ecto
             std::string key = x.first;
             if (outputs.empty())
               outputs = "<TR>\n";
-            outputs += boost::str(boost::format(output_str) % key % key) + "\n";
+            outputs += boost::str(boost::format(output_str) % key % key % htmlescape(x.second->type_name())) + "\n";
           }
       if (!outputs.empty())
         outputs += "</TR>";
 
       std::string cellrow = boost::str(
-          boost::format(cell_str) % std::max(1,n_params) % int(std::max(1,std::max(n_inputs, n_outputs))) % sanitized_name);
+          boost::format(cell_str) 
+          % std::max(1,n_params) 
+          % int(std::max(1,std::max(n_inputs, n_outputs))) 
+          % htmlescaped_name
+          % htmlescape(c->type()));
       std::string p1, pN;
       BOOST_FOREACH(const tendrils::value_type& x, c->parameters)
           {
             std::string key = x.first;
             if (p1.empty())
-              p1 = boost::str(boost::format(param_str_1st) % key % key) + "\n";
+              p1 = boost::str(boost::format(param_str_1st) % key % key % htmlescape(x.second->type_name())) + "\n";
             else
-              pN += boost::str(boost::format(param_str_N) % key % key) + "\n";
+              pN += boost::str(boost::format(param_str_N) % key % key % htmlescape(x.second->type_name())) + "\n";
           }
 
       std::string table = boost::str(boost::format(table_str) % inputs % cellrow % p1 % pN % outputs);
