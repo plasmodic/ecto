@@ -17,7 +17,6 @@
 
 namespace ecto
 {
-
   using namespace graph;
   #define STRINGY_DINGY(A) #A
   //see http://www.graphviz.org/content/node-shapes for reference.
@@ -222,13 +221,26 @@ namespace ecto
     return num_vertices(impl_->graph);
   }
 
+  namespace {
+    struct get_first
+    {
+      template <typename T>
+      cell::ptr
+      operator()(T& t) const
+      {
+        return t.first;
+      }
+    };
+  }
+
   std::vector<cell::ptr>
   plasm::cells() const
   {
     std::vector<cell::ptr> c;
-    std::transform(impl_->mv_map.begin(), impl_->mv_map.end(), std::back_inserter(c), impl::CVMtoCell());
+    std::transform(impl_->mv_map.begin(), impl_->mv_map.end(), std::back_inserter(c), get_first());
     return c;
   }
+
   void plasm::configure_all()
   {
     BOOST_FOREACH(impl::ModuleVertexMap::value_type& x, impl_->mv_map)

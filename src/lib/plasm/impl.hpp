@@ -23,13 +23,5 @@ namespace ecto {
     graph::graph_t graph;
     boost::shared_ptr<ecto::schedulers::singlethreaded> scheduler;
 
-    struct CVMtoCell
-    {
-      cell::ptr
-      operator()(const ModuleVertexMap::value_type& v)
-      {
-        return v.first;
-      }
-    };
   };
 }
