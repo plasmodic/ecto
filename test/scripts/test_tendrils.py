@@ -12,21 +12,22 @@ def test_tendrils():
     assert t["x"] == "str"
     assert t.x == "str"
     #test the redeclare
-    t.declare("Hello","new doc", "you")
-    assert t.Hello == "you"
-    assert t.at("Hello").doc == "new doc"
+    try:
+        t.declare("Hello","new doc", "you")
+    except RuntimeError, e:
+        assert('You can\'t redeclare a tendril!' in str(e))
     try:
         #read error
         t.nonexistant = 1
         assert False
     except RuntimeError,e:
-        print "good:",e
+        assert "'nonexistant' does not exist in this tendrils object." in str(e)
     try:
         #index error
         print t["nonexistant"]
         assert False
     except RuntimeError,e:
-        print "good:",e
+        assert "'nonexistant' does not exist in this tendrils object." in str(e)
 
     assert len(t.keys()) == 2
     assert len(t.values()) == 2

@@ -194,10 +194,7 @@ namespace ecto
             std::string key = *begin;
             TendrilSpecifications spec = bp::extract<TendrilSpecifications>(d.get(bp::str(key)));
             tendril::ptr tp = spec.toSpec().toTendril(tt);
-            if(ts->find(key) == ts->end())
-              ts->insert(std::make_pair(key, tp));
-            else
-              (*ts)[key] = tp;
+            ts->declare(key, tp);
             ++begin;
 
           }

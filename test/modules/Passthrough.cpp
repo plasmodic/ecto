@@ -35,22 +35,12 @@ namespace ecto
 
   struct PassthroughAny
   {
-    static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
+    static void
+    declare_io(const tendrils& parms, tendrils& in, tendrils& out)
     {
-      in.declare<ecto::tendril::none>("in", "Any type");
-      out.declare<ecto::tendril::none>("out", "Any type");
+      in.declare<tendril::none>("in", "Any type");
+      out.declare("out", in["in"]);
     }
-    void configure(const tendrils& parms, tendrils& in, tendrils& out)
-    {
-      in_ = in["in"];
-      out_ = out["out"];
-    }
-    int process(tendrils& in, tendrils& out)
-    {
-      *out_ = *in_;
-      return ecto::OK;
-    }
-    tendril::ptr in_, out_;
   };
 }
 

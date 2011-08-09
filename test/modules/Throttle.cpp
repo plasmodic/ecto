@@ -61,7 +61,7 @@ namespace ecto_test
     {
       rate_ = parameters["rate"];
       
-      outputs["out"] = inputs["in"];
+      outputs.declare("out",inputs["in"]);
       prevtime = pt::microsec_clock::universal_time() - pt::hours(24);
     }
 

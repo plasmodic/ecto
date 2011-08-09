@@ -7,7 +7,16 @@
 #include <boost/foreach.hpp>
 
 namespace bp = boost::python;
-
+//namespace boost { namespace python {
+//
+//    //typedef detail::final_std_map_derived_policies<ecto::tendrils, false> details;
+//    // Forward declaration
+//    void std_map_indexing_suite<ecto::tendrils,false>::set_item(ecto::tendrils& container, ecto::tendrils::key_type i, ecto::tendrils::value_type::second_type const& v)
+//    {
+//        throw std::logic_error("This don't work with tendrils");
+//    }
+//}
+//}
 namespace ecto
 {
   namespace py

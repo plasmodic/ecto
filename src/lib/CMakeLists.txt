@@ -5,12 +5,15 @@ file(GLOB ecto_HEADERS
   )
 source_group("Headers" FILES ${ecto_HEADERS})
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+
 add_library(ecto SHARED
   abi.cpp
   tendril.cpp
   tendrils.cpp
   cell.cpp
   plasm.cpp
+  plasm/impl.cpp
   util.cpp
   log.cpp
   except.cpp
