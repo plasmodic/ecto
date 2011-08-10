@@ -398,7 +398,12 @@ namespace ecto
       (*converter)(obj, *this); 
     }
 
-    void operator>>(ecto::tendril::ptr rhs) const
+    void operator>>(const ecto::tendril::ptr& rhs) const
+    {
+      *rhs << *this;
+    }
+
+    void operator>>(ecto::tendril::ptr& rhs) const
     {
       *rhs << *this;
     }
@@ -408,34 +413,38 @@ namespace ecto
       rhs << *this;
     }
 
+//    template<typename T>
+//      friend void
+//      operator>>(ecto::tendril::ptr rhs, T& val)
+//    {
+//      if (!rhs)
+//        throw std::runtime_error("Attempt to convert from tendril which is null");
+//      *rhs >> val;
+//    }
+
     template<typename T>
-      friend void
-      operator>>(ecto::tendril::ptr rhs, T& val)
+    friend void
+    operator>>(const ecto::tendril::const_ptr& rhs, T& val)
     {
       if (!rhs)
         throw std::runtime_error("Attempt to convert from tendril which is null");
       *rhs >> val;
     }
 
-    template<typename T>
+    // This is to avoid ambiguous conversion due to boost python funkiness.
+    // e.g.  ISO C++ says that these are ambiguous, even...
     friend void
-    operator>>(ecto::tendril::const_ptr rhs, T& val)
-    {
-      if (!rhs)
-        throw std::runtime_error("Attempt to convert from tendril which is null");
-      *rhs >> val;
-    }
-
-    friend void
-    operator>>(ecto::tendril::ptr rhs, boost::python::object& obj)
+    operator>>(const ecto::tendril::ptr& rhs, boost::python::object& obj)
     {
       if (!rhs)
         throw std::runtime_error("Attempt to convert from tendril which is null");
       *rhs >> obj;
     }
 
+    // This is to avoid ambiguous conversion due to boost python funkiness.
+    // e.g.  ISO C++ says that these are ambiguous, even...
     friend void
-    operator>>(ecto::tendril::const_ptr rhs, boost::python::object& obj)
+    operator>>(const ecto::tendril::const_ptr& rhs, boost::python::object& obj)
     {
       if (!rhs)
         throw std::runtime_error("Attempt to convert from tendril which is null");
@@ -444,24 +453,34 @@ namespace ecto
 
     template<typename T>
     friend void
-    operator<<(ecto::tendril::ptr lhs, const T& rhs)
+    operator<<(const ecto::tendril::ptr& lhs, const T& rhs)
     {
       if (!lhs)
         throw std::runtime_error("Attempt to convert into tendril which is null");
       *lhs << rhs;
     }
 
+//
+//    friend void
+//    operator<<(ecto::tendril::ptr lhs, const ecto::tendril& rhs)
+//    {
+//      if (!lhs)
+//        throw std::runtime_error("Attempt to convert into tendril which is null");
+//      *lhs << rhs;
+//    }
 
     friend void
-    operator<<(ecto::tendril::ptr lhs, const ecto::tendril& rhs)
+    operator<<(const ecto::tendril::ptr& lhs, const ecto::tendril::ptr& rhs)
     {
       if (!lhs)
         throw std::runtime_error("Attempt to convert into tendril which is null");
-      *lhs << rhs;
+      if (!rhs)
+        throw std::runtime_error("Attempt to convert into tendril which is null");
+      *lhs << *rhs;
     }
 
     friend void
-    operator<<(ecto::tendril::ptr lhs, const ecto::tendril::ptr& rhs)
+    operator<<(const ecto::tendril::ptr& lhs, const ecto::tendril::const_ptr& rhs)
     {
       if (!lhs)
         throw std::runtime_error("Attempt to convert into tendril which is null");

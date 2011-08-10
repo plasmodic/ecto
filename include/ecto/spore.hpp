@@ -51,6 +51,7 @@ namespace ecto
   template<typename T>
   struct spore
   {
+    typedef spore<T> this_type;
     /**
      * Allocates a spore that doesn't point to anything.
      */
@@ -63,31 +64,10 @@ namespace ecto
     spore(tendril::ptr t) :
         tendril_(t)
     {
-      if(!t){
+      if(!t)
         throw std::logic_error("This tendril is null.");
-      }
-      t->enforce_type<T>();
-    }
 
-    /**
-     * Grab a pointer to the tendril that gave birth to this spore.
-     * @return non const pointer to tendril
-     */
-    inline tendril::ptr get()
-    {
-      if (!tendril_)
-        throw std::logic_error("This spore points to nothing.");
-      return tendril_;
-    }
-    /**
-     * Grab a pointer to the tendril that gave birth to this spore. const overload.
-     * @return const pointer to tendril
-     */
-    inline tendril::const_ptr get() const
-    {
-      if (!tendril_)
-        throw std::logic_error("This spore points to nothing. Type name:" + name_of<T>());
-      return tendril_;
+      t->enforce_type<T>();
     }
 
     /**
@@ -151,7 +131,6 @@ namespace ecto
       return get()->required();
     }
 
-
     T* operator->()
     {
       tendril::ptr _p = get();
@@ -176,22 +155,35 @@ namespace ecto
       return _p->get<const T>();
     }
 
-    /**
-     * Cast operator for convenience.
-     */
-    operator tendril::ptr()
+    typedef tendril::ptr this_type::*unspecified_bool_type;
+
+    operator unspecified_bool_type() const // never throws
     {
-      return get();
-    }
-    /**
-     * Cast operator for convenience.
-     */
-    operator tendril::const_ptr() const
-    {
-      return get();
+      return tendril_ ? &this_type::tendril_ : 0;
     }
 
   private:
+
+    /**
+     * Grab a pointer to the tendril that gave birth to this spore.
+     * @return non const pointer to tendril
+     */
+    inline tendril::ptr get()
+    {
+      if (!tendril_)
+        throw std::logic_error("This spore points to nothing.");
+      return tendril_;
+    }
+    /**
+     * Grab a pointer to the tendril that gave birth to this spore. const overload.
+     * @return const pointer to tendril
+     */
+    inline tendril::const_ptr get() const
+    {
+      if (!tendril_)
+        throw std::logic_error("This spore points to nothing. Type name:" + name_of<T>());
+      return tendril_;
+    }
     boost::shared_ptr<tendril> tendril_;
   };
 }

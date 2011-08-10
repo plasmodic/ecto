@@ -6,11 +6,6 @@ namespace ecto
 {
   struct EtherSource
   {
-    static void
-    declare_io(const tendrils& parms, tendrils& in, tendrils& out)
-    {
-      out.declare<tendril::none>("out", "Any type");
-    }
   };
 
   struct EtherSink
@@ -32,7 +27,7 @@ namespace ecto
     sink = ecto::create_cell<EtherSink>();
     sink->name(sink_name);
     sink->inputs["in"] << *value;
-    source->outputs["out"] = sink->inputs["in"];
+    source->outputs.declare("out",sink->inputs["in"]);
     p = bp::make_tuple(source, sink);
     return p;
   }

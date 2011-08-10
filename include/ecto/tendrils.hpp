@@ -40,112 +40,6 @@
 namespace ecto
 {
   /**
-   * \brief a proxy class to enable type safe mutable operator[]
-   * of the tendrils collection.
-   *
-   * Looks like a tendril::ptr& except doesn't allow reset, swap, and
-   * assignment is checked on compatable type.
-   */
-  struct tendril_ptr_ref
-  {
-    explicit tendril_ptr_ref(tendril::ptr& ref)
-        :
-          tp(ref)
-    {
-    }
-
-    void
-    check_assign(const tendril::ptr& x)
-    {
-      if (tp->is_type<tendril::none>() || tp->same_type(*x))
-        tp = x;
-      else
-        throw std::logic_error(tp->type_name() + " may not be reassigned to " + x->type_name());
-    }
-
-    tendril::ptr&
-    operator=(const tendril::ptr& x)
-    {
-      if (!x)
-        throw std::logic_error("You can't assign a null tendril to tendrils[\"key\"]");
-      check_assign(x);
-      return tp;
-    }
-
-    tendril::ptr&
-    operator=(const tendril_ptr_ref& x)
-    {
-      check_assign(x.tp);
-      return tp;
-    }
-
-    operator const tendril::ptr&() const
-    {
-      return tp;
-    }
-
-    template<typename T>
-    operator spore<T>()
-    {
-      return spore<T>(tp);
-    }
-
-    tendril&
-    operator*() const
-    {
-      return *tp;
-    }
-
-    tendril *
-    operator->() const
-    {
-      return tp.get();
-    }
-
-    tendril *
-    get() const
-    {
-      return tp.get();
-    }
-
-    template<typename T>
-    friend void
-    operator<<(T lhs, const tendril_ptr_ref& rhs)
-    {
-      lhs << *(rhs.tp);
-    }
-
-    template<typename T>
-    friend void
-    operator<<(tendril_ptr_ref lhs, const T& rhs)
-    {
-      lhs.tp << rhs;
-    }
-
-    template<typename T>
-    friend void
-    operator>>(tendril_ptr_ref lhs, T& rhs)
-    {
-      lhs.tp >> rhs;
-    }
-
-    friend void
-    operator>>(tendril_ptr_ref lhs, tendril_ptr_ref rhs)
-    {
-      *(lhs.tp) >> *(rhs.tp);
-    }
-
-    friend void
-    operator<<(tendril_ptr_ref lhs, tendril_ptr_ref rhs)
-    {
-      *(lhs.tp) << *(rhs.tp);
-    }
-
-  private:
-    tendril::ptr& tp;
-  };
-
-  /**
    * \brief The tendrils are a collection for the ecto::tendril class, addressable by a string key.
    */
   class ECTO_EXPORT tendrils : boost::noncopyable
@@ -297,8 +191,7 @@ namespace ecto
      */
     const tendril::ptr& operator[](const std::string& name) const;
 
-
-    tendril_ptr_ref operator[](const std::string& name);
+    tendril::ptr& operator[](const std::string& name);
 
     /**
      * \brief Print the tendrils documentation string, in rst format.

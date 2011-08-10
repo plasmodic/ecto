@@ -117,14 +117,14 @@ namespace ecto
     return it->second;
   }
 
-  tendril_ptr_ref
+  tendril::ptr&
   tendrils::operator[](const std::string& name)
   {
     boost::mutex::scoped_lock lock(mtx);
     map_t::iterator it = storage.find(name);
     if (it == end())
       doesnt_exist(name);
-    return tendril_ptr_ref(it->second);
+    return it->second;
   }
 
   tendril::ptr
@@ -139,6 +139,9 @@ namespace ecto
     }
     else // we want to just return the existing tendril (so that modules preconnected don't get messed up)...
     {
+      //TODO Should we throw here?
+      throw std::logic_error("You can't redeclare a tendril!");
+
       //there is already an existing tendril with the given name
       //check if the types are the same
       if (!it->second->same_type(*t))
@@ -150,7 +153,7 @@ namespace ecto
       }
       else
       {
-        it->second = t;
+        *it->second = *t;
       }
     }
     return storage.at(name);

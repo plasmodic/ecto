@@ -30,11 +30,8 @@ namespace {
     static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
     {
       in.declare<tendril::none>("in", "Any type");
-      out.declare<tendril::none>("out", "Any type");
-    }
-    void configure(const tendrils& parms, tendrils& in, tendrils& out)
-    {
-      out["out"] = in["in"];
+      out.declare<tendril::none>("out", "Any type on the output...");
+      out["out"] = in["in"]; //assign the ptr.
     }
   };
 

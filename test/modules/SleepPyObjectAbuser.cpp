@@ -56,7 +56,7 @@ namespace ecto_test
       outputs.declare<pt::ptime> ("out", "output");
     }
 
-    void configure(tendrils& parameters, tendrils& inputs, tendrils& outputs)
+    void configure(const tendrils& parameters,const tendrils& inputs,const tendrils& outputs)
     {
       //      SHOW();
       boost::this_thread::sleep(boost::posix_time::milliseconds(100));//sleep for making sure we're out of the python thread.
