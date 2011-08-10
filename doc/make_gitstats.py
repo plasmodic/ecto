@@ -23,7 +23,7 @@ for rev in revs[:-2]:
         flds = line.split()
         print flds
         a, d, f = line.split()
-        print a, "added", d, "deleted"
+        # print a, "added", d, "deleted"
         try:
             added += int(a)
             deleted += int(d)
