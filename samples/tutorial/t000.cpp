@@ -8,7 +8,7 @@ namespace tutorial
   struct Printer01
   {
     int
-    process(const tendrils& /*in*/, tendrils& /*out*/)
+    process(const tendrils& /*in*/, const tendrils& /*out*/)
     {
       std::cout << "Hello" << std::endl;
       return ecto::OK;

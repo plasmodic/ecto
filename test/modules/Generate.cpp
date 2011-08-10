@@ -49,12 +49,12 @@ namespace ecto_test
       outputs.declare<T> ("out", "output", parameters.get<T> ("start") - parameters.get<T> ("step"));
     }
 
-    void configure(tendrils& parameters, tendrils& inputs, tendrils& outputs)
+    void configure(const tendrils& parameters, const tendrils& inputs, const tendrils& outputs)
     {
       step_ = parameters["step"];
     }
 
-    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
+    int process(const ecto::tendrils& inputs, const ecto::tendrils& outputs)
     {
       outputs.get<T> ("out") += *step_;
       return 0;

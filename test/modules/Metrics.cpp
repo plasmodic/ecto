@@ -56,7 +56,7 @@ namespace ecto_test
       outputs.declare<double>("latency_seconds");
     }
 
-    void configure(tendrils& parameters, tendrils& inputs, tendrils& outputs)
+    void configure(const tendrils& parameters, const tendrils& inputs, const tendrils& outputs)
     {
       queue_size = parameters["queue_size"];
       hz = outputs["hz"];
@@ -64,7 +64,7 @@ namespace ecto_test
       in = inputs["in"];
     }
 
-    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
+    int process(const ecto::tendrils& inputs, const ecto::tendrils& outputs)
     {
       pt::ptime now(pt::microsec_clock::universal_time());
       times.push_back(now);

@@ -55,17 +55,16 @@ namespace ecto_test
     {
       inputs.declare<tendril::none> ("in", "input");
       outputs.declare<tendril::none> ("out", "output");
+      outputs["out"] = inputs["in"];
     }
 
-    void configure(tendrils& parameters, tendrils& inputs, tendrils& outputs)
+    void configure(const tendrils& parameters, const tendrils& inputs, const tendrils& outputs)
     {
       rate_ = parameters["rate"];
-      
-      outputs.declare("out",inputs["in"]);
       prevtime = pt::microsec_clock::universal_time() - pt::hours(24);
     }
 
-    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
+    int process(const tendrils& inputs, const tendrils& outputs)
     {
       period_usec = 1e+06 / *rate_;
 

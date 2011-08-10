@@ -34,7 +34,7 @@ namespace ecto
           declare_io(boost::ref(params), boost::ref(inputs), boost::ref(outputs));
       }
 
-      void dispatch_configure(tendrils& params, tendrils& inputs, tendrils& outputs)
+      void dispatch_configure(const tendrils& params, const tendrils& inputs, const tendrils& outputs)
       {
         if (bp::override config = this->get_override("configure"))
           config(boost::ref(params));
@@ -42,13 +42,13 @@ namespace ecto
 
       struct YouveBeenServed
       {
-        void operator()(tendrils::value_type& t)
+        void operator()(const tendrils::value_type& t)
         {
           t.second->notify();
         }
       };
 
-      ReturnCode dispatch_process(tendrils& inputs, tendrils& outputs)
+      ReturnCode dispatch_process(const tendrils& inputs, const tendrils& outputs)
       {
         std::for_each(inputs.begin(),inputs.end(), YouveBeenServed());
         if (bp::override proc = this->get_override("process"))

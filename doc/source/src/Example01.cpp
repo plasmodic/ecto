@@ -11,7 +11,7 @@ struct Example01
     p.declare<int>("value", "Some integer");
   }
 
-  void configure(tendrils& p, tendrils& i, tendrils& o)
+  void configure(const tendrils& p, const tendrils& i, const tendrils& o)
   {
     int n = p.get<int>("value");
     std::cout << "Value of n is " << n << "\n";

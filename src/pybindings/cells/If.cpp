@@ -56,14 +56,14 @@ namespace ecto
       out.insert(c->outputs.begin(), c->outputs.end());
     }
 
-    void configure(tendrils& p, tendrils& in, tendrils& out)
+    void configure(const tendrils& p, const tendrils& in, const tendrils& out)
     {
       p["cell"] >> c_;
       c_->configure();
       test_ = in["__test__"];
     }
 
-    int process(tendrils& in, tendrils& out)
+    int process(const tendrils& in, const tendrils& out)
     {
       if(*test_)
       {

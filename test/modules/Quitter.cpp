@@ -45,12 +45,12 @@ namespace ecto_test
       in.declare<std::string> ("str", "The input string to listen to.", "");
     }
 
-    void configure(tendrils& parms, tendrils& inputs, tendrils& outputs)
+    void configure(const tendrils& parms, const tendrils& inputs, const tendrils& outputs)
     {
       stop_word_ = parms.get<std::string> ("str");
     }
 
-    int process(const tendrils& in, tendrils& /*out*/)
+    int process(const tendrils& in, const tendrils& /*out*/)
     {
       if (in.get<std::string> ("str") == stop_word_)
         return ecto::QUIT;

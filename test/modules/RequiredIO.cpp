@@ -48,9 +48,9 @@ namespace ecto_test
         .required(true);
     }
 
-    void configure(tendrils& parms, tendrils& inputs, tendrils& outputs) { }
+    void configure(const tendrils& parms, const tendrils& inputs, const tendrils& outputs) { }
 
-    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
+    int process(const ecto::tendrils& inputs, const ecto::tendrils& outputs)
     {
       outputs.get<double> ("out") = inputs.get<double> ("in");
       return ecto::OK;

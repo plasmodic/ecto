@@ -14,7 +14,7 @@ struct EnumAsEnum
     p.declare<Strategy>("strategy", "How to run our algorithm");
   }
 
-  void configure(tendrils& p, tendrils& i, tendrils& o)
+  void configure(const tendrils& p, const tendrils& i, const tendrils& o)
   {
     Strategy s = p.get<Strategy>("strategy");
     switch (s) {

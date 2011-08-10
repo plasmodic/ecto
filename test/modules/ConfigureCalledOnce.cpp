@@ -35,7 +35,7 @@ namespace ecto_test
   struct ConfigureCalledOnce
   {
     ConfigureCalledOnce():count(0){}
-    void configure(tendrils&,tendrils&,tendrils&)
+    void configure(const tendrils&,const tendrils&,const tendrils&)
     {
       SHOW();
       count++;

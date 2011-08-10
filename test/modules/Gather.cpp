@@ -55,12 +55,12 @@ namespace ecto_test
       outputs.declare<value_type> ("out", "The sum of all inputs.");
     }
 
-    void configure(tendrils& parameters, tendrils& inputs, tendrils& outputs)
+    void configure(const tendrils& parameters, const tendrils& inputs, const tendrils& outputs)
     {
       n_ = parameters.get<int> ("n");
     }
 
-    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
+    int process(const ecto::tendrils& inputs, const ecto::tendrils& outputs)
     {
       //SHOW();
       value_type& out = outputs.get<value_type> ("out");

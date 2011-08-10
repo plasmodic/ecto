@@ -45,13 +45,13 @@ namespace ecto
       out.declare<unsigned>("count","The count of input.", p.get<unsigned>("count"));
     }
     void
-    configure(tendrils&p, tendrils&in, tendrils&out)
+    configure(const tendrils&p, const tendrils&in, const tendrils&out)
     {
       count_ = out["count"];
       every_ = p["every"];
     }
     int
-    process(tendrils& /*in*/, tendrils& /*out*/)
+    process(const tendrils& /*in*/, const tendrils& /*out*/)
     {
       ++(*count_);
       if (*count_ % *every_ == 0)

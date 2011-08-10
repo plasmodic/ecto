@@ -192,12 +192,14 @@ namespace ecto
 
     virtual void init() = 0;
     virtual void dispatch_declare_params(tendrils& t) = 0;
+
     virtual void dispatch_declare_io(const tendrils& params, tendrils& inputs,
                                      tendrils& outputs) = 0;
-    virtual void dispatch_configure(tendrils& params, tendrils& inputs,
-                                    tendrils& outputs) = 0;
-    virtual ReturnCode
-    dispatch_process(tendrils& inputs, tendrils& outputs) = 0;
+
+    virtual void dispatch_configure(const tendrils& params, const tendrils& inputs,
+                                    const tendrils& outputs) = 0;
+
+    virtual ReturnCode dispatch_process(const tendrils& inputs, const tendrils& outputs) = 0;
 
     virtual std::string dispatch_name() const = 0;
     virtual ptr dispatch_make() const
@@ -323,28 +325,28 @@ namespace ecto
       declare_io(int_<has_f<Impl>::declare_io> (), params, inputs, outputs);
     }
 
-    void configure(not_implemented, tendrils&, tendrils& , tendrils&)
+    void configure(not_implemented, const tendrils&, const tendrils& , const tendrils&)
     {
     }
 
-    void configure(implemented, tendrils& params, tendrils& inputs,
-                   tendrils& outputs)
+    void configure(implemented, 
+                   const tendrils& params, const tendrils& inputs, const tendrils& outputs)
     {
       boost::this_thread::interruption_point();
       impl->configure(params,inputs,outputs);
-      for (tendrils::iterator iter = inputs.begin(); iter != inputs.end(); ++iter)
+      for (tendrils::const_iterator iter = inputs.begin(); iter != inputs.end(); ++iter)
         if (iter->second->is_type<boost::python::object>())
           throw std::runtime_error("you can't use a python object as an input");
 
-      for (tendrils::iterator iter = outputs.begin(); iter != outputs.end(); ++iter)
+      for (tendrils::const_iterator iter = outputs.begin(); iter != outputs.end(); ++iter)
         if (iter->second->is_type<boost::python::object>())
           throw std::runtime_error("you can't use a python object as an output");
 
 
     }
 
-    void dispatch_configure(tendrils& params, tendrils& inputs,
-                            tendrils& outputs)
+    void dispatch_configure(const tendrils& params, const tendrils& inputs,
+                            const tendrils& outputs)
     {
       //the cell may not be allocated here, so check pointer.
       if (!impl)
@@ -371,13 +373,12 @@ namespace ecto
       }
     }
 
-    ReturnCode process(not_implemented, const tendrils& ,
-                       const tendrils& )
+    ReturnCode process(not_implemented, const tendrils&, const tendrils&)
     {
       return OK;
     }
 
-    ReturnCode process(implemented, tendrils& inputs, tendrils& outputs)
+    ReturnCode process(implemented, const tendrils& inputs, const tendrils& outputs)
     {
       ReturnCode code;
       profile::stats_collector coll(name(), stats);
@@ -385,7 +386,7 @@ namespace ecto
       return code;
     }
 
-    ReturnCode dispatch_process(tendrils& inputs, tendrils& outputs)
+    ReturnCode dispatch_process(const tendrils& inputs, const tendrils& outputs)
     {
       dispatch_configure(parameters,this->inputs,outputs);
       boost::this_thread::interruption_point();

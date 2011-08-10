@@ -69,7 +69,7 @@ namespace ecto_test
       current_idx = 0;
     }
 
-    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
+    int process(const ecto::tendrils& inputs, const ecto::tendrils& outputs)
     {
       //      SHOW();
       if(list_o_sleeps_.empty()) return ecto::OK;

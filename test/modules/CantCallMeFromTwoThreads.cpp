@@ -48,7 +48,7 @@ namespace ecto_test
       outputs.declare<double> ("out");
     }
 
-    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
+    int process(const ecto::tendrils& inputs, const ecto::tendrils& outputs)
     {
       boost::asio::io_service s;
       boost::asio::deadline_timer dt(s);

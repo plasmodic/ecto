@@ -14,7 +14,7 @@ struct EnumAsInt
     p.declare<int>("strategy", "How to run our algorithm");
   }
 
-  void configure(tendrils& p, tendrils& i, tendrils& o)
+  void configure(const tendrils& p, const tendrils& i, const tendrils& o)
   {
     int n = p.get<int>("strategy");
     switch (n) {

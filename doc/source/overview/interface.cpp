@@ -12,10 +12,10 @@ namespace overview
     declare_io(const tendrils& params, tendrils& in, tendrils& out);
 
     void
-    configure(tendrils& params, tendrils& in, tendrils& out);
+    configure(const tendrils& params, const tendrils& in, const tendrils& out);
 
     int
-    process(tendrils& in, tendrils& out);
+    process(const tendrils& in, const tendrils& out);
   };
 }
 ECTO_CELL(ecto_overview, overview::InterfaceCell, "InterfaceCell",
@@ -38,13 +38,13 @@ namespace overview
   }
 
   void
-  InterfaceCell::configure(tendrils & p, tendrils & i, tendrils & o)
+  InterfaceCell::configure(const tendrils & p, const tendrils & i, const tendrils & o)
   {
     //....
   }
 
   int
-  InterfaceCell::process(tendrils & i, tendrils & o)
+  InterfaceCell::process(const tendrils & i, const tendrils & o)
   {
     return ecto::OK;
   }

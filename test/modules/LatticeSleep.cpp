@@ -65,12 +65,12 @@ namespace ecto_test
         }
     }
 
-    void configure(tendrils& parameters, tendrils& inputs, tendrils& outputs)
+    void configure(const tendrils& parameters, const tendrils& inputs, const tendrils& outputs)
     {
       n = parameters.get<unsigned>("n");
     }
 
-    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
+    int process(const tendrils& inputs, const tendrils& outputs)
     {
       boost::this_thread::sleep(boost::posix_time::microseconds(int64_t(uni()*1.0e6)));
       for (unsigned j=0; j<n; ++j)

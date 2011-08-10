@@ -44,15 +44,17 @@ namespace ecto_test
       }
 
       template <typename T>
-      static void process(const ecto::tendrils&inputs,ecto::tendrils&outputs)
+      static void process(const tendrils&inputs, const tendrils&outputs)
       {
         std::cout << "***** " << inputs.get<T> ("in") << " ***** ";
       }
 
-	  typedef boost::function<void(ecto::tendrils&inputs)> declare_fn_t;
-	  typedef boost::function<void(const ecto::tendrils&inputs,ecto::tendrils&outputs)> process_fn_t;
+      typedef boost::function<void(ecto::tendrils&inputs)> declare_fn_t;
+      typedef boost::function<void(const tendrils&inputs,const tendrils&outputs)> process_fn_t;
+
       std::map<std::string, declare_fn_t > declares;
       std::map<std::string, process_fn_t > processes;
+
       PrintFunctions()
       {
         declares["int"] = declare_fn_t(&declare<int>);
@@ -70,8 +72,8 @@ namespace ecto_test
     static void declare_params(tendrils& parameters)
     {
       parameters.declare<std::string>("print_type","The type string for what i'm to print... int, double, bool, string.")
-          .set_default_val("double")
-          ;
+        .set_default_val("double")
+        ;
     }
 
     static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
@@ -80,7 +82,7 @@ namespace ecto_test
       pfs.declares[print_type](inputs);
     }
 
-    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
+    int process(const tendrils& inputs, const tendrils& outputs)
     {
       pfs.processes[inputs["in"]->type_name()](inputs,outputs);
       std::cout << this << std::endl;
@@ -92,6 +94,6 @@ namespace ecto_test
 }
 
 ECTO_CELL(ecto_test, ecto_test::Printer, "Printer", 
-            "A printer of int, double, string, bool. "
-            "Use the print_type parameter to specify type.  Default is double");
+          "A printer of int, double, string, bool. "
+          "Use the print_type parameter to specify type.  Default is double");
 

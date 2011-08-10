@@ -51,14 +51,14 @@ namespace ecto_test
       outputs.declare<pt::ptime> ("out", "output");
     }
 
-    void configure(tendrils& parameters, tendrils& inputs, tendrils& outputs)
+    void configure(const tendrils& parameters, const tendrils& inputs, const tendrils& outputs)
     {
       sleep_sec = parameters["seconds"];
       in = inputs["in"];
       out = outputs["out"];
     }
 
-    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
+    int process(const ecto::tendrils& inputs, const ecto::tendrils& outputs)
     {
       boost::this_thread::sleep(boost::posix_time::microseconds(int64_t(*sleep_sec*1.0e6)));
       *out = *in;

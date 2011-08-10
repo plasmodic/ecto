@@ -19,13 +19,13 @@ namespace overview
       inputs.declare<std::string>("message", "The message to print.");
     }
     void
-    configure(tendrils& params, tendrils& inputs, tendrils& outputs)
+    configure(const tendrils& params, const tendrils& inputs, const tendrils& outputs)
     {
       params["prefix"] >> prefix_;
       params["suffix"] >> suffix_;
     }
     int
-    process(tendrils& inputs, tendrils& outputs)
+    process(const tendrils& inputs, const tendrils& outputs)
     {
       std::cout << prefix_ << inputs.get<std::string>("message") << suffix_;
       return ecto::OK;

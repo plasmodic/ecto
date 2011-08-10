@@ -45,11 +45,11 @@ namespace ecto
       out.declare<tendril::none>("out", "The delayed output");
     }
 
-    void configure(tendrils& p, tendrils& i, tendrils& o)
+    void configure(const tendrils& p, const tendrils& i, const tendrils& o)
     {
     }
 
-    int process(tendrils& in, tendrils& out)
+    int process(const tendrils& in, const tendrils& out)
     {
       boost::mutex::scoped_lock lock(mtx);
       bp::object obj = queue.back().get<bp::object>();
@@ -84,7 +84,7 @@ namespace ecto
                                 "the associated source cell");
     }
 
-    int process(tendrils& in, tendrils& out)
+    int process(const tendrils& in, const tendrils& out)
     {
       source->enqueue(in["in"]);
       return ecto::OK;
@@ -120,7 +120,7 @@ namespace ecto
       std::cout << "source=" << source.get() << "\n";
     }
 
-    void configure(tendrils& p, tendrils& i, tendrils& o)
+    void configure(const tendrils& p, const tendrils& i, const tendrils& o)
     {
       unsigned qsize = p["qsize"]->get<unsigned>();
       tendril::ptr def = p["default"];

@@ -48,7 +48,7 @@ struct NotExist
   }
 
   int
-  process(tendrils& in, tendrils& out)
+  process(const tendrils& in, const tendrils& out)
   {
     in.get<double> ("a");
     return 0;
@@ -63,7 +63,7 @@ struct WrongType
     in.declare<double> ("d");
   }
   int
-  process(tendrils& in, tendrils& out)
+  process(const tendrils& in, const tendrils& out)
   {
     in.get<int> ("d");
     return 0;
@@ -83,7 +83,7 @@ struct ParameterCBExcept
     throw std::runtime_error("I'm a bad callback, and I like it that way.");
   }
   void
-  configure(tendrils& p,tendrils& in, tendrils& out)
+  configure(const tendrils& p,const tendrils& in, const tendrils& out)
   {
     std::cout << "configurated ***" << std::endl;
     spore<double> x = p["x"];
@@ -94,7 +94,7 @@ struct ParameterCBExcept
 struct ProcessException
 {
   int
-  process(tendrils& in, tendrils& out)
+  process(const tendrils& in, const tendrils& out)
   {
     throw std::logic_error("A standard exception");
     return ecto::OK;

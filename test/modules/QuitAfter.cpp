@@ -48,12 +48,12 @@ namespace ecto_test
     QuitAfter() : N(0), current(0) { }
 
 
-    void configure(tendrils& parms, tendrils& inputs, tendrils& outputs)
+    void configure(const tendrils& parms, const tendrils& inputs, const tendrils& outputs)
     {
       N = parms.get<unsigned>("N");
     }
 
-    int process(const tendrils& in, tendrils& /*out*/)
+    int process(const tendrils& in, const tendrils& /*out*/)
     {
       if (current >= N) 
         assert(false && "This shouldn't have been called, we signaled an error already");

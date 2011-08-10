@@ -62,7 +62,7 @@ namespace ecto_test
       outputs.declare<FooPOD> ("foo", "A string to print");
     }
 
-    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
+    int process(const ecto::tendrils& inputs, const ecto::tendrils& outputs)
     {
       std::cout << inputs.get<FooPOD> ("foo").x << std::endl;
       outputs.get<FooPOD> ("foo").y = 3.14;
@@ -128,7 +128,7 @@ namespace ecto_test
       if(*value_ != v) throw std::runtime_error("The new value should equal the old value!");
     }
 
-    void configure(tendrils& parms, tendrils& inputs, tendrils& outputs)
+    void configure(const tendrils& parms, const tendrils& inputs, const tendrils& outputs)
     {
       value_ = parms["value"];
       value_.set_callback(boost::bind(&HandleHolder::onvalue_change, this, _1));
@@ -137,7 +137,7 @@ namespace ecto_test
       param_val_ = outputs["value"];
     }
 
-    int process(const ecto::tendrils&, ecto::tendrils&)
+    int process(const ecto::tendrils&, const ecto::tendrils&)
     {
       *output_ = (*input_) * (*value_);
       *param_val_ = *value_;
@@ -163,7 +163,7 @@ namespace ecto_test
       outputs.declare<int> ("value", "value", -1);
     }
 
-    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
+    int process(const ecto::tendrils& inputs, const ecto::tendrils& outputs)
     {
       outputs.get<ptr_t> ("output") = inputs.get<ptr_t> ("input");
       outputs.get<int> ("value") = *outputs.get<ptr_t> ("output");
@@ -188,13 +188,13 @@ namespace ecto_test
         }
     }
 
-    void configure(tendrils& parameters, tendrils& inputs, tendrils& outputs)
+    void configure(const tendrils& parameters, const tendrils& inputs, const tendrils& outputs)
     {
       n_ = parameters.get<int> ("n");
       x_ = parameters.get<int> ("x");
     }
 
-    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
+    int process(const ecto::tendrils& inputs, const ecto::tendrils& outputs)
     {
       for (int i = 0; i < n_; i++)
         {

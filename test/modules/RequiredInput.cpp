@@ -44,13 +44,13 @@ namespace ecto_test
       out.declare<double> ("out", "The input + x", 0.0);
     }
 
-    void configure(tendrils& params, tendrils& in, tendrils& out)
+    void configure(const tendrils& params, const tendrils& in, const tendrils& out)
     {
       in_ = in["in"];
       out_ = out["out"];
     }
 
-    int process(const tendrils& in, tendrils& out)
+    int process(const tendrils& in, const tendrils& out)
     {
       *out_ = 2 + *in_;
       return 0;

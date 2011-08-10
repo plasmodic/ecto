@@ -48,12 +48,12 @@ namespace ecto_test
       outputs.declare<double> ("out", "the result of in * factor");
     }
 
-    void configure(tendrils& parms, tendrils& inputs, tendrils& outputs)
+    void configure(const tendrils& parms, const tendrils& inputs, const tendrils& outputs)
     {
       factor_ = parms.get<double> ("factor");
     }
 
-    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
+    int process(const tendrils& inputs, const tendrils& outputs)
     {
       outputs.get<double> ("out") = inputs.get<double> ("in") * factor_;
       return ecto::OK;

@@ -21,13 +21,13 @@ namespace tutorial
     }
     
     void
-    configure(tendrils& params, tendrils& /*in*/, tendrils& /*out*/)
+    configure(const tendrils& params, const tendrils& /*in*/, const tendrils& /*out*/)
     {
       params["prefix"] >> prefix_;
     }
     
     int
-    process(const tendrils& in, tendrils& /*out*/)
+    process(const tendrils& in, const tendrils& /*out*/)
     {
       std::cout << prefix_ << " >>> " << in.get<std::string>("input") << std::endl;
       return ecto::OK;

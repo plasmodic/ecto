@@ -47,12 +47,12 @@ namespace ecto_test
       outputs.declare<pt::ptime> ("out", "output");
     }
 
-    void configure(tendrils& parameters, tendrils& inputs, tendrils& outputs) 
+    void configure(const tendrils& parameters, const tendrils& inputs, const tendrils& outputs) 
     { 
       out = outputs["out"];
     }
 
-    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
+    int process(const ecto::tendrils& inputs, const ecto::tendrils& outputs)
     {
       *out = pt::microsec_clock::universal_time();
       return 0;

@@ -50,13 +50,13 @@ namespace ecto_test
       outputs.declare<double> ("out", "output");
     }
 
-    void configure(tendrils& parms, tendrils& inputs, tendrils& outputs)
+    void configure(const tendrils& parms, const tendrils& inputs, const tendrils& outputs)
     {
       amount_ = parms.get<double> ("amount");
       delay_ms_ = parms.get<unsigned> ("delay");
     }
 
-    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
+    int process(const tendrils& inputs, const tendrils& outputs)
     {
       if (delay_ms_ > 0)
         {

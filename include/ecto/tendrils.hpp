@@ -137,12 +137,14 @@ namespace ecto
     tendril::ptr
     declare(const std::string& name, tendril::ptr t);
 
+
     /**
      * \brief get the given type that is stored at the given key.  Will throw if there is a type mismatch.
      * @tparam T The compile time type to attempt to get from the tendrils.
      * @param name The key value
      * @return A const reference to the value, no copy is done.
      */
+    /*
     template <typename T>
     const T&
     get(const std::string& name) const
@@ -159,6 +161,7 @@ namespace ecto
         throw e;
       }
     }
+    */
 
     /**
      * \brief get the given type that is stored at the given key.  Will throw if there is a type mismatch.
@@ -168,7 +171,7 @@ namespace ecto
      */
     template<typename T>
     T&
-    get(const std::string& name)
+    get(const std::string& name) const
     {
       try
       {

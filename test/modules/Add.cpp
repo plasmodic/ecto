@@ -41,14 +41,14 @@ namespace ecto_test
       outputs.declare<double> ("out", "output");
     }
 
-    void configure(tendrils& p, tendrils& i, tendrils& o)
+    void configure(const tendrils& p, const tendrils& i, const tendrils& o)
     {
       out_ = o["out"];
       left_ = i["left"];
       right_ = i["right"];
     }
 
-    int process(const ecto::tendrils& /*inputs*/, ecto::tendrils& /*outputs*/)
+    int process(const tendrils& /*inputs*/, const tendrils& /*outputs*/)
     {
       *out_ = (*left_ + *right_);
       return ecto::OK;

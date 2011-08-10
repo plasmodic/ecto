@@ -71,7 +71,7 @@ namespace ecto_test
       outputs.declare<double> ("out", "output");
     }
 
-    void configure(tendrils& parameters, tendrils& inputs, tendrils& outputs)
+    void configure(const tendrils& parameters, const tendrils& inputs, const tendrils& outputs)
     {
       out_ = outputs["out"];
       ecto::spore<unsigned> seed_ = parameters["seed"];
@@ -83,7 +83,7 @@ namespace ecto_test
       ncalls=parameters.get<unsigned>("ncalls");
     }
 
-    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
+    int process(const ecto::tendrils& inputs, const ecto::tendrils& outputs)
     {
       for (unsigned j=0; j<ncalls; ++j)
         *out_ = (*pimpl_)();

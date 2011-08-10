@@ -15,7 +15,7 @@ namespace tutorial
     }
     
     int
-    process(const tendrils& in, tendrils& /*out*/)
+    process(const tendrils& in, const tendrils& /*out*/)
     {
       std::cout << in.get<std::string>("input") << std::endl;
       return ecto::OK;
@@ -32,7 +32,7 @@ namespace tutorial
     }
     
     int
-    process(const tendrils& /*in*/, tendrils& out)
+    process(const tendrils& /*in*/, const tendrils& out)
     {
       std::string s;
       std::cin >> s;
