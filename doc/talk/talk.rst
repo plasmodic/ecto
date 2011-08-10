@@ -1,43 +1,23 @@
 .. include:: <s5defs.txt>
 
-.. class:: center
+.. image:: ecto_3x3.svg
+   :class: logo
+   :width: 75 %
+   :align: center
 
-   .. image:: ecto_4x4.svg
-      :align: center
+.. container::
+   :align: center
+   :class: logo
 
-   a framework for perception
-
-
-
-
-   troy straszheim
-
-   and
-
-   ethan rublee
+   parallel framework for perception
 
 
-ecto
-====
+.. container::
+   :align: center
+   :class: logo
 
-Yo this is a talk about ecto
+   troy straszheim and ethan rublee
 
-this slide is full
-
-full of stuff
-
-a zillion lines of codes
-
-all kinda good stuffs
-
-
-great
------
-
-:orange:`awesome` stuff
-
-all kinds of hit you see case thats how we roll we get our schmoove on
-and then we get paid cause thats why we make the big bucks
 
 the design space
 ================
@@ -50,32 +30,23 @@ the design space
 LOC
 ===
 
-Amoeba(Beta) 
+Amoeba (Beta, August 2011)
 
-Ecto core (including tests):
-7k lines C++
-2.8k  lines Python 
+Development began in earnest August 2010.
 
-Tests:
-4k lines C++
-5k lines Python
+* Ecto core:
 
+  * 7k lines C++
+  * 2.5k lines Python 
 
+* Tests:
+  * 1.8k lines C++
+  * 3.3k lines Python
 
-28k lines C++  (2k generated in ecto_ros)
-12k lines Python
+> 2k lines of handwritten .rst documentation
 
-Repo history goes to Aug 2010
-Development starts:
-
-commit 8edec7a5abcc3215ab8c351bd4b79ea63cd53a54
-Author: Troy Straszheim <straszheim@willowgarage.com>m
-Date:   Fri Mar 11 16:40:45 2011 -0800
-
-    BA *BANG*
-
-
-
+Across projects ``ecto``, ``ecto_pcl``, ``ecto_ros``, ``ecto_opencv``,
+28k lines C++, 9.5k lines Python
 
 
 
@@ -92,13 +63,26 @@ recompiling.
 
 * semantics of copying
 
+* task parallelism vs data parallelism: allow individual cells to be
+  as data-parallel as one likes.  Inherently task-parallel, where each
+  cell performs a task: individual ticks of data execute concurrently,
+  and individual tasks within the processing of that tick of data
+  execute concurrently.
+
+"The biggest sea change in software development since the OO
+revolution is knocking at the door, and its name is Concurrency."
+- Herb Sutter, "The Free Lunch Is Over", 2005
 
 goals
 =====
 
-give researchers a mental model that makes them more productive 
+give researchers a mental model that makes them more productive and
+naturally expresses task-parallelism
 
-support but don't force the use of technologies like opencl, CUDA, openmpi
+support but don't force the use of primarily data-parallel
+technologies like CUDA... even if every operation happens on a
+massively parallel coprocessor (like a gpu) you *still* need a way to
+organize them.
 
 scale to many cores w/o recompiling
 

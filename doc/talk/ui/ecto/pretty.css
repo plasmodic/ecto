@@ -1,8 +1,8 @@
 /* This file has been placed in the public domain. */
 /* Following are the presentation styles -- edit away! */
 
-html, body {margin: 0; padding: 0; font-family: courier; }
-body {background: white; color: #0f1f70;}
+html, body {margin: 0; padding: 0; font-family: arial; }
+body {background: white; color: #2f3f70;}
 :link, :visited {text-decoration: none; color: #00C;}
 #controls :active {color: #888 !important;}
 #controls :focus {outline: 1px dotted #222;}
@@ -19,19 +19,19 @@ sup {font-size: smaller; line-height: 1px;}
 .slide img.leader {display: block; margin: 0 auto;}
 .slide tt {font-size: 90%;}
 
-div#footer {font-family: courier; color: #444; 
+div#footer {font-family: arial; color: #444; 
   font-size: 0.5em; font-weight: bold; padding: 1em 0;}
 #footer h1 {display: block; padding: 0 1em;}
 #footer h2 {display: block; padding: 0.8em 1em 0;}
 
 .slide {font-size: 1.0em;}
-.slide h1 {padding-top: 0; z-index: 1; margin: 0; font: bold 150% courier;}
-.slide h2 {font: bold 120% courier; padding-top: 0.5em;}
-.slide h3 {font: bold 100% courier; padding-top: 0.5em;}
+.slide h1 {padding-top: 0; z-index: 1; margin: 0; font: bold 150% arial;}
+.slide h2 {font: bold 120% arial; padding-top: 0.5em;}
+.slide h3 {font: bold 100% arial; padding-top: 0.5em;}
 h1 abbr {font-variant: small-caps;}
 
 div#controls {position: absolute; left: 50%; bottom: 0;
-  width: 50%; text-align: right; font: bold 0.9em courier;}
+  width: 50%; text-align: right; font: bold 0.9em arial;}
 html>body div#controls {position: fixed; padding: 0 0 1em 0; top: auto;}
 div#controls form {position: absolute; bottom: 0; right: 0; width: 100%;
   margin: 0; padding: 0;}
@@ -42,12 +42,12 @@ div#controls form {position: absolute; bottom: 0; right: 0; width: 100%;
   background: #DDD; color: #222;}
 
 #currentSlide {text-align: center; font-size: 0.5em; color: #444;
-  font-family: courier; font-weight: bold;}
+  font-family: arial; font-weight: bold;}
 
 #slide0 {padding-top: 0em}
 #slide0 h1 {position: static; margin: 1em 0 0; padding: 0;
-  font: bold 2em courier; white-space: normal; background: transparent;}
-#slide0 h2 {font: bold italic 1em courier; margin: 0.25em;}
+  font: bold 2em arial; white-space: normal; background: transparent;}
+#slide0 h2 {font: bold italic 1em arial; margin: 0.25em;}
 #slide0 h3 {margin-top: 1.5em; font-size: 1.5em;}
 #slide0 h4 {margin-top: 0; font-size: 1em;}
 
@@ -64,8 +64,8 @@ img.incremental {visibility: hidden;}
 
 .slide-display {display: inline ! important;}
 
-.huge {font-family: courier; font-weight: bold; font-size: 150%;}
-.big {font-family: courier; font-weight: bold; font-size: 120%;}
+.huge {font-family: arial; font-weight: bold; font-size: 150%;}
+.big {font-family: arial; font-weight: bold; font-size: 120%;}
 .small {font-size: 75%;}
 .tiny {font-size: 50%;}
 .huge tt, .big tt, .small tt, .tiny tt {font-size: 115%;}
@@ -112,3 +112,5 @@ tt.docutils {background-color: white;}
 li:after {content: " [" attr(class) "]"; color: #F88;}
 div:before {content: "[" attr(class) "]"; color: #F88;}
 */
+
+.logo { margin: 2%; } */
