@@ -1,12 +1,8 @@
 .. include:: <s5defs.txt>
 
 
-i'm just alking about ecto
 
-.. image:: plasmodic.svg
-   :width: 1022
-   :height: 766
-   :scale: 100%
+.. image:: ecto_4x4.svg
    :align: center
 
 ecto
@@ -30,6 +26,14 @@ great
 
 all kinds of hit you see case thats how we roll we get our schmoove on
 and then we get paid cause thats why we make the big bucks
+
+the design space
+================
+
+* interprocess vs intraprocess
+* single- vs multi-threaded
+* synchronous vs asynchronous
+* compiled vs interpreted
 
 LOC
 ===

@@ -2,7 +2,7 @@
 /* Following are the presentation styles -- edit away! */
 
 html, body {margin: 0; padding: 0; font-family: courier; }
-body {background: white; color: #2f3f7f;}
+body {background: white; color: #0f1f70;}
 :link, :visited {text-decoration: none; color: #00C;}
 #controls :active {color: #888 !important;}
 #controls :focus {outline: 1px dotted #222;}
