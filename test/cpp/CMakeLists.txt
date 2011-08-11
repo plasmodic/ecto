@@ -19,6 +19,7 @@ add_executable(ecto-test
   spore.cpp
   exceptions.cpp
   graph.cpp
+  serial.cpp
   threadpool.cpp
   clone.cpp
   static.cpp
@@ -30,7 +31,28 @@ target_link_libraries(ecto-test
   ${ECTO_DEP_LIBS}
   # this is so that we can create cells that are in the test lib w/o 
   # python importing them
-  ecto_test_ectomodule 
+  ecto_test_ectomodule
+  ecto_ectomodule
   )
 
-add_test(ecto_gtest_units ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/ecto-test --gtest_output=xml:${CMAKE_BINARY_DIR}/ecto-test.xml)
+add_test(ecto_gtest_units ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/ecto-test)
+
+add_executable(plasm_loader
+  plasm_loader.cpp
+  )
+
+
+target_link_libraries(plasm_loader
+  ecto
+  ${ECTO_DEP_LIBS}
+  # this is so that we can create cells that are in the test lib w/o 
+  # python importing them
+  ecto_test_ectomodule
+  ecto_ectomodule
+)
+  
+add_test(plasm_loader
+    ${CMAKE_BINARY_DIR}/bin/plasm_loader
+    ${CMAKE_CURRENT_SOURCE_DIR}/python_graph.ecto
+    8
+)

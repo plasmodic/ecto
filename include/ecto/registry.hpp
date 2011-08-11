@@ -73,7 +73,7 @@ namespace ecto {
         : name_(name), docstring_(docstring) 
       { 
         module_registry<Module>::instance().add(boost::ref(*this));
-        register_factory_fn(name, &ecto::create_cell<T>);
+        register_factory_fn(name_of<T>(), &ecto::create_cell<T>);
       }
 
       void operator()() const 

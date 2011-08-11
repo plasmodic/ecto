@@ -14,7 +14,9 @@ namespace ecto_test
     }
     int process(const tendrils& /*inputs*/, const tendrils& /*outputs*/)
     {
+      SHOW();
       *out_ = *left_ + *right_;
+      std::cout << *out_ << std::endl;
       return ecto::OK;
     }
     spore<double> out_, left_, right_;

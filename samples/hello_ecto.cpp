@@ -77,6 +77,8 @@ namespace hello_ecto
       std::string s;
       std::cin >> s;
       *output_  = s;
+      if(s == "q")
+        return ecto::QUIT;
       return ecto::OK;
     }
     ecto::spore<std::string> output_;

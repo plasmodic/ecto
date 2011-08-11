@@ -11,9 +11,9 @@ namespace {
   plasm::ptr makeplasm()
   {
     plasm::ptr p(new plasm);
-    cell::ptr ping(registry::create("Ping"));
-    cell::ptr sleep0(registry::create("Sleep"));
-    cell::ptr sleep1(registry::create("Sleep"));
+    cell::ptr ping(registry::create("ecto_test::Ping"));
+    cell::ptr sleep0(registry::create("ecto_test::Sleep"));
+    cell::ptr sleep1(registry::create("ecto_test::Sleep"));
     sleep0->parameters["seconds"] << 0.1;
     sleep1->parameters["seconds"] << 0.1;
 

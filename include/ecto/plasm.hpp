@@ -31,6 +31,9 @@
 #include <boost/noncopyable.hpp>
 #include <boost/tuple/tuple.hpp>
 
+#include <boost/serialization/vector.hpp>
+#include <boost/serialization/map.hpp>
+
 #include <string>
 #include <map>
 #include <list>
@@ -118,6 +121,10 @@ namespace ecto
     graph::graph_t&
     graph();
 
+    const graph::graph_t&
+    graph() const;
+
+
     /**
      * \brief Return the number of cells in the plasm (vertices in the graph)
      * 
@@ -144,8 +151,21 @@ namespace ecto
     typedef boost::shared_ptr<plasm> ptr;
     typedef boost::shared_ptr<const plasm> const_ptr;
 
+    void save(std::ostream&) const;
+    void load(std::istream&);
+
+
   private:
     class impl;
     boost::shared_ptr<impl> impl_;
+
+    template<class Archive>
+    void
+    save(Archive & ar, const unsigned int version) const;
+    template<class Archive>
+    void
+    load(Archive & ar,  const unsigned int version);
+    friend class boost::serialization::access;
+    BOOST_SERIALIZATION_SPLIT_MEMBER()
   };
 }

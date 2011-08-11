@@ -34,6 +34,7 @@
 #include <boost/thread/mutex.hpp>
 #include <boost/signals2.hpp>
 #include <boost/any.hpp>
+#include <boost/serialization/split_member.hpp>
 
 #include <ecto/util.hpp> //name_of
 #include <ecto/except.hpp>
@@ -499,6 +500,16 @@ namespace ecto
       t->set_holder<T>();
       return t;
     }
+
+  private:
+    template<class Archive>
+    void
+    save(Archive & ar, const unsigned int version) const;
+    template<class Archive>
+    void
+    load(Archive & ar,  const unsigned int version);
+    friend class boost::serialization::access;
+    BOOST_SERIALIZATION_SPLIT_MEMBER()
   };
 
   template <typename T, typename _>

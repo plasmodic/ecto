@@ -17,10 +17,6 @@ namespace ecto
   namespace py
   {
     namespace bp = boost::python;
-    enum tendril_type
-    {
-      OUTPUT = 0, INPUT, PARAMETER
-    };
     struct TendrilSpecification
     {
       cell::ptr mod_input, mod_output;

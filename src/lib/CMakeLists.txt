@@ -20,6 +20,7 @@ add_library(ecto SHARED
   needs_gil.cpp
   profile.cpp
   registry.cpp
+  serialization.cpp
   schedulers/invoke.cpp
   schedulers/singlethreaded.cpp
   schedulers/threadpool.cpp

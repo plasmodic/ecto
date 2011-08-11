@@ -15,6 +15,11 @@
 #include <utility>
 #include <deque>
 
+#include <ecto/ecto.hpp>
+#include <ecto/serialization/registry.hpp>
+#include <ecto/serialization/cell.hpp>
+#include <ecto/serialization/plasm.hpp>
+
 namespace ecto
 {
   using namespace graph;
@@ -203,6 +208,12 @@ namespace ecto
     return impl_->graph;
   }
 
+  const graph::graph_t&
+  plasm::graph() const
+  {
+    return impl_->graph;
+  }
+
   int
   plasm::execute(unsigned niter)
   {
@@ -303,6 +314,18 @@ namespace ecto
 
       ++begin;
     }
+  }
+
+  void plasm::save(std::ostream& out) const
+  {
+    boost::archive::text_oarchive oa(out);
+    oa << *this;
+  }
+
+  void plasm::load(std::istream& in)
+  {
+    boost::archive::text_iarchive ia(in);
+    ia >> *this;
   }
 
 }

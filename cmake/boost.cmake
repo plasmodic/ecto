@@ -3,6 +3,7 @@ find_package(Boost COMPONENTS
   thread
   regex
   system
+  serialization
   REQUIRED
   )
 

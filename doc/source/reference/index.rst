@@ -17,6 +17,7 @@ Reference
     black_box
     static_registration.rst
     ectodoc
+    serialization
     ecto_cells
     ecto_test_cells
     api

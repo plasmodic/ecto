@@ -27,6 +27,10 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #pragma once
+#include <boost/thread.hpp>
+#include <boost/serialization/shared_ptr.hpp>
+#include <boost/serialization/map.hpp>
+
 #include <ecto/tendril.hpp>
 #include <ecto/spore.hpp>
 #include <boost/thread.hpp>
@@ -40,6 +44,10 @@
 
 namespace ecto
 {
+  enum tendril_type
+  {
+    OUTPUT = 0, INPUT, PARAMETER
+  };
   /**
    * \brief The tendrils are a collection for the ecto::tendril class, addressable by a string key.
    */
@@ -136,8 +144,8 @@ namespace ecto
     {
       spore<T> s = declare<T>(name,doc,default_val);
       {
-        Binder<CellImpl,T> binder(ptm,s);
-        sig_t::extended_slot_type slot(binder,_1,_2);
+        Binder<CellImpl,T> binder(ptm,name);
+        sig_t::extended_slot_type slot(binder,_1,_2,_3);
         boost::shared_ptr<sig_t>& sig = static_bindings_[name_of<CellImpl>().c_str()];
         if(!sig)
           sig.reset(new sig_t);
@@ -151,7 +159,7 @@ namespace ecto
     {
       boost::shared_ptr<sig_t> sig = static_bindings_[name_of<CellImpl>().c_str()];
       if(sig)
-        (*sig)(thiz);
+        (*sig)(thiz,this);
     }
 
     /**
@@ -216,7 +224,7 @@ namespace ecto
 
     storage_type storage;
     mutable boost::mutex mtx;
-    typedef boost::signals2::signal<void(void*)> sig_t;
+    typedef boost::signals2::signal<void(void*, const tendrils*)> sig_t;
     //mapped by impl type just in case this tendrils has more than one type that is using it.
     typedef std::map<const char*,boost::shared_ptr<sig_t> > sig_t_map;
     sig_t_map static_bindings_;
@@ -227,14 +235,23 @@ namespace ecto
       typedef spore<T> CellImpl::* PtrToMember;
       typedef void result_type;
       PtrToMember member_;
-      spore<T> spore_;
-      Binder(PtrToMember member, const spore<T>& s):member_(member),spore_(s){}
-      void operator()(const boost::signals2::connection &conn, void* vthiz) const
+      std::string key_;
+      Binder(PtrToMember member, const std::string& key):member_(member),key_(key){}
+      void operator()(const boost::signals2::connection &conn, void* vthiz, const tendrils* tdls) const
       {
         conn.disconnect();
         CellImpl* thiz = static_cast<CellImpl*>(vthiz);
-        (*thiz).*member_ = spore_;
+        (*thiz).*member_ = (*tdls)[key_];
       }
     };
-  };
+
+    friend class boost::serialization::access;
+    template<class Archive>
+    void
+    serialize(Archive & ar, const unsigned int version)
+    {
+      ar & storage;
+    }
+ 
+ };
 }
