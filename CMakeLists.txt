@@ -41,7 +41,6 @@ include(${ecto_SOURCE_DIR}/cmake/ectoFindDeps.cmake)
 if(NOT ecto_kitchen_SOURCE_DIR)
   add_subdirectory(kitchen/doc doc)
 endif()
-add_subdirectory(doc)
 
 set(ANAL_FLAGS "")
 option(USE_ANAL_FLAGS "Use extra flags that help catch programming errors and prevent a build up of warnings" ON)
