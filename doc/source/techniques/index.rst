@@ -12,4 +12,5 @@ Ecto-Fu for you.
     ipython
     debugging
     wrapping_enums
+    python-packages.rst
 
