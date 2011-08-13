@@ -216,6 +216,8 @@ latex_documents = [
 # If false, no module index is generated.
 #latex_use_modindex = True
 
+graphviz_output_format = 'svg'
+
 rst_epilog="""
 
 

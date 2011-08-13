@@ -1,6 +1,4 @@
-import sys
-import shlex
-import os
+import sys, shlex, os, re
 from os import path
 
 from docutils import nodes
@@ -68,10 +66,17 @@ def do_ectoplot(app, doctree):
         execfile(node.filename, globals(), l)
 
         dottxt = l[node.plasmname].viz()
+        
+        # NOT ELEGANT!  HACK!
+        # clean up message type names a bit
+        # there should be some standard way of making type names readable,
+        # and the graph shouldn't output such nastiness.
+        cre = r'boost::shared_ptr&lt;([A-Za-z0-9_]+::[A-Za-z0-9]+)_&lt;std::allocator&lt;void&gt; &gt; const&gt;'
+        dottxt = re.sub(cre, r'\1::ConstPtr', dottxt)
 
         n = graphviz_node()
         n['code'] = dottxt
-        n['options'] = []
+        n['options'] = ['-Gsize=3', '-Gdpi=68']
         node.replace_self(n)
 
 def setup(app):
