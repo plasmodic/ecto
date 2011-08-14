@@ -36,6 +36,23 @@ Lets run it:
 .. program-output:: srcs/plasms.py
    :in_srcdir:
 
+Parameters
+^^^^^^^^^^
+Look at the allocation of our cells in the script.
+
+.. literalinclude:: srcs/plasms.py
+  :language: py
+  :lines: 5,6,7
+
+The parameters that were declared in:
+
+.. literalinclude:: srcs/Add.cpp
+    :language: cpp
+    :lines: 8-12
+
+Become the keyword arguments for the cell.  The first non keyword argument is
+the cell's instance name, which is relevant for pretty looking graphs.
+
 Connections
 ^^^^^^^^^^^^
 The syntax for connecting ecto cells together in the
