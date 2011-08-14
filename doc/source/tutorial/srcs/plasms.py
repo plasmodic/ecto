@@ -13,4 +13,5 @@ plasm.connect(i1['output'] >> add['a'],
 
 sched = ecto.schedulers.Singlethreaded(plasm)
 sched.execute(niter=2)
+
 print add.outputs.output

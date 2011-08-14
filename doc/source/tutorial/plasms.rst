@@ -68,8 +68,35 @@ on the left hand side, or an input tendril on the right hand side.
 See :ref:`tendril-connections` for more details on how this operator
 works.
 
+
+Graphs
+^^^^^^
+
 The graph for this will look like:
 
-  .. ectoplot:: srcs/plasms.py plasm
+.. ectoplot:: srcs/plasms.py plasm
 
-  
+Plasms, graphs, in ecto are *Directed Acyclic Graphs* , see :ref:`DAG`. 
+The DAG is important for scheduling and determining execution order.
+It is used to describe the **happens before** relationships in cells.
+Because of the DAG construct, implicit feedback loops are not allowed,
+and can only be achieved through special purpose cells,
+see :ref:`entanglement` for more information.
+
+Execution
+^^^^^^^^^
+
+Once a plasm is constructed, it may be used with an :ref:`ecto scheduler <schedulers>`
+
+.. literalinclude:: srcs/plasms.py
+  :language: py
+  :lines: 14,15
+
+..  _topological-sort: http://en.wikipedia.org/wiki/Topological_sorting
+
+The :py:class:`ecto.schedulers.Singlethreaded` scheduler essentially
+does a `topological-sort`_
+on the graph, and then executes each cell in order.
+This repeats for the specified number of iterations,
+or indefinitely if ``niter`` is ``0``. 
+

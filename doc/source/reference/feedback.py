@@ -4,7 +4,7 @@ from ecto_test import Generate, Add
 
 g = Generate("Generator", step=1.0, start=1.0)
 add = Add()
-source,sink = ecto.EntangledPair()
+source, sink = ecto.EntangledPair(value=add.inputs.at('left'))
 
 plasm = ecto.Plasm()
 plasm.connect(source[:] >> add['left'],
@@ -12,6 +12,6 @@ plasm.connect(source[:] >> add['left'],
               add[:] >> sink[:]
               )
 
-for i in range(0,5):
+for i in range(0, 5):
     plasm.execute(niter=1)
     print add.outputs.out

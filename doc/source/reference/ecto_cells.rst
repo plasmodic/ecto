@@ -39,6 +39,8 @@ weakly typed.
 
 .. ectocell:: ecto TrueEveryN
 
+.. _entanglement:
+
 Entanglement
 ------------
 
@@ -59,3 +61,11 @@ Here is an example of using the EntangledPair for feedback in a graph.
 
 .. literalinclude:: feedback.py
 
+The output is:
+
+.. program-output:: feedback.py
+   :in_srcdir:
+
+And the graph looks like the following. Notice that there is no cycle:
+
+.. ectoplot:: feedback.py plasm
