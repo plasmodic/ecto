@@ -1,11 +1,8 @@
 #include <ecto/ecto.hpp>
-#include <iostream>
-#include <string>
 
+using ecto::tendrils;
 namespace tutorial
 {
-  using ecto::tendrils;
-
   struct Add
   {
     static void

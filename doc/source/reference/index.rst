@@ -9,6 +9,7 @@ Reference
     autoregister
     tendril
     tendrils
+    connections.rst
     cell
     plasm
     schedulers

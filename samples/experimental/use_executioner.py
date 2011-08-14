@@ -11,7 +11,7 @@ def make_executioner():
     truer = TrueEveryN(n=3, count=3)
     plasm.connect(truer['flag'] >> if_g['__test__'],
                   )
-    executer = Executer(plasm=plasm, niters=18, outputs={'out':if_g, 'flag':truer},)
+    executer = Executer(plasm=plasm, niter=18, outputs={'out':if_g, 'flag':truer},)
     return executer
 
 plasm = ecto.Plasm()

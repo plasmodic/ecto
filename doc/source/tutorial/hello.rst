@@ -15,6 +15,8 @@ So, the c++ side of things.  Ecto code structurally break down into
 
 The module code:
 
+  Download: :download:`srcs/tutorial.cpp`
+
   .. _code-module:
  
   .. literalinclude:: srcs/tutorial.cpp
@@ -22,20 +24,24 @@ The module code:
   
 The cell code:
 
+  Download: :download:`srcs/Hello.cpp`
+
   .. _code-hello:
   
-  .. literalinclude:: srcs/hello.cpp
+  .. literalinclude:: srcs/Hello.cpp
     :language: cpp
 
   Our first example.
 
-As you can see in :ref:`hello.cpp <code-hello>` this is one of the most basic ecto cells.
+As you can see in :ref:`Hello.cpp <code-hello>` this is one of the most basic ecto cells.
 
 python
 ------
 The python counter part to hello might look like:
 
 .. _code-hello-python:
+
+Download: :download:`srcs/hello.py`
 
 .. literalinclude:: srcs/hello.py
   :language: python

@@ -42,7 +42,7 @@ namespace ecto
     declare_params(tendrils& p)
     {
       p.declare<plasm::ptr>("plasm", "A plasm to execute.").required(true);
-      p.declare<int>("niters", "Number of iterations.", 0);
+      p.declare<int>("niter", "Number of iterations.", 0);
       p.declare<bp::object>("inputs", "A python dict of inputs. {'in_name':cellinst,...}");
       p.declare<bp::object>("outputs", "A python dict of outputs. {'out_name':cellinst,...}");
     }
@@ -80,7 +80,7 @@ namespace ecto
       p["plasm"] >> plasm_;
       plasm_->configure_all();
       sched_.reset(new schedulers::singlethreaded(plasm_));
-      niters = p["niters"];
+      niters = p["niter"];
     }
 
     int

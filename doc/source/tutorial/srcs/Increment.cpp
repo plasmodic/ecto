@@ -1,11 +1,8 @@
 #include <ecto/ecto.hpp>
-#include <iostream>
-#include <string>
 
+using ecto::tendrils;
 namespace tutorial
 {
-  using ecto::tendrils;
-
   struct Increment
   {
     static void
@@ -17,9 +14,7 @@ namespace tutorial
     static void
     declare_io(const tendrils& params, tendrils& /*in*/, tendrils& out)
     {
-      int start;
-      params["start"] >> start;//copies the value into a local variable
-      out.declare<int>("output", "An increasing integer", start);
+      out.declare<int>("output", "An increasing integer", params.get<int>("start"));
     }
 
     int
