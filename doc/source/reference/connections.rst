@@ -92,7 +92,7 @@ like the ones described above:
 It is useful to always have a trailing ``,`` when writing the connection,
 so that it is easy to append new connections to the function call.
 
-You may also past a vanilla python list to this function:
+You may also pass a vanilla python list to this function:
 
   >>> graph = []
   >>> graph += [ i['out'] >> add['left'],
