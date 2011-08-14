@@ -9,3 +9,5 @@ These tutorials walk through the basic usage of ecto.
     :maxdepth: 1
     
     hello.rst
+    plasms.rst
+    
