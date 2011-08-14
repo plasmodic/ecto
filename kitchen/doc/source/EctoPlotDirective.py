@@ -76,7 +76,7 @@ def do_ectoplot(app, doctree):
 
         n = graphviz_node()
         n['code'] = dottxt
-        n['options'] = ['-Gsize=3', '-Gdpi=68']
+        n['options'] = [] #'-Gsize=3', '-Gdpi=68' #hack for now as svg not working.
         node.replace_self(n)
 
 def setup(app):
