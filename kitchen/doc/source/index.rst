@@ -12,19 +12,19 @@ ecto.
 
 .. toctree::
    :maxdepth: 1
-   
+
    README.rst
 
-.. .. 
-.. .. This is the generated file that just contains a toctree with each 
+.. ..
+.. .. This is the generated file that just contains a toctree with each
 .. .. constituent project in it.
 .. ..
 
 .. include:: kitchen_index.rst.generated
 
 
-.. toctree:: 
+.. toctree::
    :maxdepth: 2
 
    kitchen/index.rst
-
+   todo.rst
