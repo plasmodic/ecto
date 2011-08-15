@@ -87,6 +87,10 @@ namespace ecto
     std::ostream& ss;
   };
 
+  //////////////////////////////////////////////////////////////////////////////
+  
+  tendrils::tendrils() { }
+
   void
   tendrils::print_doc(std::ostream& out, const std::string& tendrils_name) const
   {
@@ -111,7 +115,7 @@ namespace ecto
   tendrils::operator[](const std::string& name) const
   {
     boost::mutex::scoped_lock lock(mtx);
-    map_t::const_iterator it = storage.find(name);
+    storage_type::const_iterator it = storage.find(name);
     if (it == end())
       doesnt_exist(name);
     return it->second;
@@ -121,7 +125,7 @@ namespace ecto
   tendrils::operator[](const std::string& name)
   {
     boost::mutex::scoped_lock lock(mtx);
-    map_t::iterator it = storage.find(name);
+    storage_type::iterator it = storage.find(name);
     if (it == end())
       doesnt_exist(name);
     return it->second;
@@ -130,7 +134,7 @@ namespace ecto
   tendril::ptr
   tendrils::declare(const std::string& name, tendril::ptr t)
   {
-    map_t::iterator it = find(name);
+    storage_type::iterator it = find(name);
     //if there are no exiting tendrils by the given name,
     //just add it.
     if (it == end())

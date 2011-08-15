@@ -6,9 +6,13 @@ find_package(PythonInterp)
 
 macro(init_ecto_kitchen)
 
-  add_definitions(-Wall -Werror)
+  if (CMAKE_COMPILER_IS_GNUCC)
+    include(ecto/kitchen/cmake/gcc.cmake)
+  endif()
 
+  include(ecto/kitchen/cmake/fastidious.cmake)
   include(ecto/kitchen/cmake/git.cmake) 
+
   git_status(${PROJECT_NAME})
 
   if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/ecto)

@@ -42,20 +42,6 @@ if(NOT ecto_kitchen_SOURCE_DIR)
   add_subdirectory(kitchen/doc doc)
 endif()
 
-set(ANAL_FLAGS "")
-option(USE_ANAL_FLAGS "Use extra flags that help catch programming errors and prevent a build up of warnings" ON)
-if(USE_ANAL_FLAGS)
-  if(UNIX)
-    set(ANAL_FLAGS " -Werror -Wall -Wl,--no-undefined")
-  elseif(WIN32)
-    set(ANAL_FLAGS "/D _CRT_SECURE_NO_WARNINGS /D BOOST_HAS_STDINT_H /wd4099 /wd4101 /wd4996 /wd4251 /wd4305 /D _WIN32_WINNT=0x0501")
-  elseif(APPLE)
-    set(ANAL_FLAGS "")
-  endif()
-endif()
-
-add_definitions (${ANAL_FLAGS})
-
 include_directories(
   ${ecto_SOURCE_DIR}/include
   ${ecto_SOURCE_DIR}/src
@@ -126,5 +112,5 @@ endif()
 message(STATUS "Building ecto version: ${ECTO_VERSION}")
 message(STATUS "Building ecto code name: ${ECTO_CODE_NAME}")
 string(TOUPPER "CMAKE_CXX_FLAGS_${CMAKE_BUILD_TYPE}" flags_) 
-message(STATUS "flags: ${ANAL_FLAGS} ${${flags_}}")
+message(STATUS "flags: ${FASTIDIOUS_FLAGS} ${${flags_}}")
 

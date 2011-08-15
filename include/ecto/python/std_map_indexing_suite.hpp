@@ -191,13 +191,13 @@ return incref(tuple.attr("__iter__")().ptr());
         // create a new map with given keys, initialialized to value
         static object dict_fromkeys(object const& keys, object const& value)
         {
-            object newmap = object(Container());
-            int numkeys = extract<int>(keys.attr("__len__")());
-            for(int i=0;i<numkeys;i++) { // 'cuz python is more fun in C++...
-                newmap.attr("__setitem__")
-                  (keys.attr("__getitem__")(i),value);
-            }
-            return newmap;
+          object newmap = object(typename Container::storage_type());
+          int numkeys = extract<int>(keys.attr("__len__")());
+          for(int i=0;i<numkeys;i++) { // 'cuz python is more fun in C++...
+            newmap.attr("__setitem__")
+              (keys.attr("__getitem__")(i),value);
+          }
+          return newmap;
         }
         
 		// spice up the constructors a bit

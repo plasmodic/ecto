@@ -216,6 +216,8 @@ namespace ecto
     {
     }
   private:
+    cell(const cell&);
+
     std::string instance_name_;
   };
 
