@@ -87,7 +87,7 @@ TEST(tendrils, Declare)
   tendrils t1;
   t1.declare<int>("x", "x is an int", 3);
   EXPECT_EQ(t1.get<int>("x"), 3);
-  EXPECT_EQ(t1.size(), 1);
+  EXPECT_EQ(t1.size(), 1u);
   try
   {
     t1.declare<int>("x", "another declare", 11);

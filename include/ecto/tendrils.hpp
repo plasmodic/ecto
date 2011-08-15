@@ -44,19 +44,20 @@ namespace ecto
    */
   class ECTO_EXPORT tendrils : boost::noncopyable
   {
-    typedef std::map<std::string, tendril::ptr> map_t;
-    map_t storage;
-
   public:
 
-    typedef map_t::iterator iterator;
-    typedef map_t::const_iterator const_iterator;
-    typedef map_t::value_type value_type;
-    typedef map_t::key_type key_type;
-    typedef map_t::size_type size_type;
-    typedef map_t::difference_type difference_type;
-    typedef map_t::key_compare key_compare;
+    typedef std::map<std::string, tendril::ptr> storage_type;
+
+    typedef storage_type::iterator iterator;
+    typedef storage_type::const_iterator const_iterator;
+    typedef storage_type::value_type value_type;
+    typedef storage_type::key_type key_type;
+    typedef storage_type::size_type size_type;
+    typedef storage_type::difference_type difference_type;
+    typedef storage_type::key_compare key_compare;
     
+    tendrils();
+
     iterator begin() { return storage.begin(); }
     const_iterator begin() const { return storage.begin(); }
     iterator end() { return storage.end(); }
@@ -211,6 +212,11 @@ namespace ecto
 
     void doesnt_exist(const std::string& name) const;
 
+    storage_type storage;
+
     mutable boost::mutex mtx;
+
+    tendrils(const tendrils&);
+
   };
 }

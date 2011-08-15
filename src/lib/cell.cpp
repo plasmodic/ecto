@@ -99,13 +99,10 @@ namespace ecto
       e << ("  Hint   : '" + e.key + "' does not exist in module.");
     }
   }
-  cell::cell()
-  {
-  }
 
-  cell::~cell()
-  {
-  }
+  cell::cell() { }
+
+  cell::~cell() { }
 
   void
   cell::declare_params()

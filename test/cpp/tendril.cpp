@@ -234,9 +234,11 @@ TEST(TendrilTest, POD2PythonConversion)
   tendril bpt(bp::object(2.05), "A bp object");
   tendril dt(7.05, "A double");
 
-  EXPECT_EQ(bp::extract<double>(bpt.get<bp::object>()), 2.05);
+  {
+    bp::extract<double> extractor(bpt.get<bp::object>());
+    EXPECT_EQ(extractor(), 2.05);
+  }
   EXPECT_TRUE(bpt.is_type<bp::object>());
-
   bpt << dt;
 
   // bpt is still a bp::object
@@ -245,9 +247,11 @@ TEST(TendrilTest, POD2PythonConversion)
   // dt is still a double
   EXPECT_TRUE(dt.is_type<double>());
 
-  // double was copied correctly into dt
-  EXPECT_EQ(bp::extract<double>(bpt.get<bp::object>()), 7.05);
-
+  {
+    // double was copied correctly into dt
+    bp::extract<double> extractor(bpt.get<bp::object>());
+    EXPECT_EQ(extractor(), 7.05);
+  }
   // dt was not mutated
   EXPECT_EQ(dt.get<double>(), 7.05);
 
@@ -370,14 +374,16 @@ TEST(TendrilTest, ConversionTableFromPyObjectColumn)
     tendril none_;
     none_ << pypi_;
     bp::object rt = none_.get<bp::object>();
-    EXPECT_EQ(bp::extract<double>(rt), 3.1415);
+    bp::extract<double> extractor(rt);
+    EXPECT_EQ(extractor(), 3.1415);
   }
 
   { // object << object
     tendril o2(bp::object(7.777), "sevens");
     o2 << pypi_;
     bp::object rt = o2.get<bp::object>();
-    EXPECT_EQ(bp::extract<double>(rt), 3.1415);
+    bp::extract<double> extractor(rt);
+    EXPECT_EQ(extractor(), 3.1415);
   }
 
   { // double << object (compatible)

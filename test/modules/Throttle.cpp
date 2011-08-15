@@ -66,7 +66,7 @@ namespace ecto_test
 
     int process(const tendrils& inputs, const tendrils& outputs)
     {
-      period_usec = 1e+06 / *rate_;
+      period_usec = (unsigned) (1e+06 / *rate_);
 
       pt::ptime now(pt::microsec_clock::universal_time());
       pt::time_duration already_waited = now - prevtime;
