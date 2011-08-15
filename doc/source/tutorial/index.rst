@@ -10,4 +10,6 @@ These tutorials walk through the basic usage of ecto.
     
     hello.rst
     plasms.rst
+    lifecycle.rst
+    spores.rst
     

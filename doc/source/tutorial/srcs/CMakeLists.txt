@@ -4,3 +4,8 @@ ectomodule(tutorial
     Increment.cpp
     Add.cpp
 )
+
+
+ectomodule(ecto_lifecycle
+    LifeCycle.cpp
+)

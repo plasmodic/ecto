@@ -1,5 +1,7 @@
 .. _at-a-glance:
 
+.. todo:: Possibly remove this section in favor of a more thorough tutorial sequence.
+
 at a glance
 ----------------
 A brief run down of ecto is in order.
@@ -49,48 +51,34 @@ A brief run down of ecto is in order.
     * Python is used for declaring the processing graph,
       or as its known to ecto, the *plasm*.
 
-    .. code-block:: py
+    .. code-block:: python
 
-	    import ecto #ecto core library
-	    import hello_ecto #a user library, that has a few ecto modules
+      import ecto #ecto core library
+      import hello_ecto #a user library, that has a few ecto modules
 
-	    #instantiate a plasm, our DAG structure
-	    plasm = ecto.Plasm()
+      #instantiate a plasm, our DAG structure
+      plasm = ecto.Plasm()
 
-	    #instantiate processing modules
-	    r = hello_ecto.Reader()
+      #instantiate processing modules
+      r = hello_ecto.Reader()
 
-	    #notice the keyword args, these get mapped
-	    #as parameters
-	    p = hello_ecto.Printer(str="default")
+      #notice the keyword args, these get mapped
+      #as parameters
+      p = hello_ecto.Printer(str="default")
 
-	    #connect outputs to inputs
-	    plasm.connect(r["output] >> p["str"])
+      #connect outputs to inputs
+      plasm.connect(r["output] >> p["str"])
 
-	    #an execution loop
-	    print "Enter input, q to quit"
-	    while r.outputs.output != 'q':
-	      plasm.execute() #this executes the graph
+      #an execution loop
+      print "Enter input, q to quit"
+      while r.outputs.output != 'q':
+        plasm.execute() #this executes the graph
 
 
     * The ecto::plasm is easily inspected using graphviz tools.
 
     .. ectoplot:: ../sampleplasm.py plasm
 
-    .. todo:: Where is this graphviz from?  Do we need it here?
-
-    * Here is random graphviz completely unrelated to the graph above:
-
-    .. code-block :: perl
-
-        digraph G {
-           graph [rankdir=TB, ranksep=1]
-           edge [labelfontsize=8]
-           0[label="hello_ecto::Reader"];
-           1[label="hello_ecto::Printer"];
-           2[label="hello_ecto::Printer"];
-           0->1 [headlabel="str" taillabel="output"];
-           0->2 [headlabel="str" taillabel="output"];
-        }
-
     * Cells are self documenting by design.
+
+    .. ectocell:: hello_ecto Printer

@@ -43,7 +43,3 @@ a commit message if obvious snaffoos are in your diff.
 See http://book.git-scm.com/5_git_hooks.html for more detailed information on using
 git to help with the quality of your commits.
 
-
-
-
-
