@@ -1,7 +1,7 @@
 macro(ectomodule NAME)
   if(WIN32)
     link_directories(${Boost_LIBRARY_DIRS})
-    set(ECTO_MODULE_DEP_LIBS 
+    set(ECTO_MODULE_DEP_LIBS
       ${PYTHON_LIBRARIES}
       ${Boost_PYTHON_LIBRARY}
       )
@@ -13,11 +13,11 @@ macro(ectomodule NAME)
   endif()
   #these are required includes for every ecto module
   include_directories(
-    ${ecto_INCLUDE_DIRS} 
+    ${ecto_INCLUDE_DIRS}
     ${PYTHON_INCLUDE_PATH}
     ${Boost_INCLUDE_DIRS}
     )
-  
+
   add_library(${NAME}_ectomodule SHARED
     ${ARGN}
     )
@@ -41,7 +41,12 @@ macro(ectomodule NAME)
       )
     message(STATUS "Using PY_SUFFIX = ${PY_SUFFIX}")
   endif()
-  
+  if(APPLE)
+    set_target_properties(${NAME}_ectomodule
+      SUFFIX ".so"
+      )
+  endif()
+
   target_link_libraries(${NAME}_ectomodule
     ${ECTO_MODULE_DEP_LIBS}
     ${ecto_LIBRARIES}
@@ -53,7 +58,7 @@ endmacro()
 macro(ectorosmodule NAME)
   if(WIN32)
     link_directories(${Boost_LIBRARY_DIRS})
-    set(ECTO_MODULE_DEP_LIBS 
+    set(ECTO_MODULE_DEP_LIBS
       ${PYTHON_LIBRARIES}
       ${Boost_PYTHON_LIBRARY}
       )
@@ -64,22 +69,22 @@ macro(ectorosmodule NAME)
       )
   endif()
   include_directories(
-    ${ecto_INCLUDE_DIRS} 
+    ${ecto_INCLUDE_DIRS}
     ${PYTHON_INCLUDE_PATH}
     ${Boost_INCLUDE_DIRS}
     )
-  
-  rosbuild_add_library(${NAME}_ectomodule 
+
+  rosbuild_add_library(${NAME}_ectomodule
     ${ARGN}
     )
-  
+
   set_target_properties(${NAME}_ectomodule
     PROPERTIES
     OUTPUT_NAME ${NAME}
     LINK_FLAGS -shared-libgcc
     PREFIX ""
     )
-  
+
   target_link_libraries(${NAME}_ectomodule
     ${ECTO_MODULE_DEP_LIBS}
     ${ecto_LIBRARIES}
