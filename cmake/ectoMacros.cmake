@@ -28,6 +28,13 @@ macro(ectomodule NAME)
       LINK_FLAGS -shared-libgcc
       PREFIX ""
       )
+    if(APPLE)
+      set_target_properties(${NAME}_ectomodule
+        PROPERTIES
+        #LINK_FLAGS "-bundle -flat_namespace -undefined dynamic_lookup"
+        SUFFIX .so
+      )
+    endif(APPLE)
   elseif(WIN32)
     execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "import distutils.sysconfig; print distutils.sysconfig.get_config_var('SO')"
       RESULT_VARIABLE PYTHON_PY_PROCESS
