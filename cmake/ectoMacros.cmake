@@ -43,6 +43,7 @@ macro(ectomodule NAME)
   endif()
   if(APPLE)
     set_target_properties(${NAME}_ectomodule
+      PROPERTIES
       SUFFIX ".so"
       )
   endif()
