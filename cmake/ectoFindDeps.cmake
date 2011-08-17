@@ -8,6 +8,11 @@ find_package(Boost COMPONENTS
   REQUIRED
   )
 
+if (Boost_FOUND)
+  message(STATUS "Boost headers at ${Boost_INCLUDE_DIRS}")
+  message(STATUS "Boost libraries at ${Boost_LIBRARIES}")
+endif()
+
 find_package(PythonLibs REQUIRED)
 
 include_directories(

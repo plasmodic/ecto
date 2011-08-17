@@ -1,6 +1,7 @@
 find_package(GTest)
 
 if(NOT GTEST_FOUND)
+  message(STATUS "Disabling testing since gtest was not found.")
   return()
 endif()
 

@@ -7,9 +7,8 @@ ectomodule(ecto_overview
   interface.cpp
   )
 
-add_dependencies(html 
-  ecto_overview_ectomodule functor
-  )
-
-
-
+if(SPHINX_BUILD)
+  add_dependencies(html 
+    ecto_overview_ectomodule functor
+    )
+endif()
