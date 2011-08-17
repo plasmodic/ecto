@@ -52,8 +52,13 @@ def list_ecto_module(pymodule):
     return l
 
 def view_plasm(plasm):
-    import gtk
-    import xdot
+    try:
+        import gtk
+        import xdot
+    except ImportError, e:
+        print e
+        print "view_plasm requires gobject gtk graphviz, possibly more to run..."
+        return
     window = xdot.DotWindow()
     x = plasm.viz()
     window.set_dotcode(x)
