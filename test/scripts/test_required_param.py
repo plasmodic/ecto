@@ -18,6 +18,8 @@ def test_required_param():
         print e
         
     req = ecto_test.RequiredParam("Required", x=2.2)
+    assert req.params.at("x").required == True
+
     gen = ecto_test.Generate("Generator")
     printer = ecto_test.Printer("Printy")
     plasm.connect(gen[:] >> req[:],
