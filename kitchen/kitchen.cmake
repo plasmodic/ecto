@@ -6,12 +6,14 @@ find_package(PythonInterp)
 
 macro(init_ecto_kitchen)
 
+  option(DESKTOP_TEST "Run tests that pop things up" OFF)
+
   if (CMAKE_COMPILER_IS_GNUCC)
     include(ecto/kitchen/cmake/gcc.cmake)
   endif()
 
   include(ecto/kitchen/cmake/fastidious.cmake)
-  include(ecto/kitchen/cmake/git.cmake) 
+  include(ecto/kitchen/cmake/git.cmake)
 
   git_status(${PROJECT_NAME})
 

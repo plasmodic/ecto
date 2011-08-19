@@ -15,7 +15,7 @@ macro (rospack VAR COMMAND PACKAGE)
       message(STATUS "***")
       message(STATUS "*** rospack ${COMMAND} ${PACKAGE} failed: ${rospack_error}")
       message(STATUS "***")
-      set(${cachevar} "ROSPACK_${PACKAGE}_${COMMAND}-NOTFOUND" 
+      set(${cachevar} "ROSPACK_${PACKAGE}_${COMMAND}-NOTFOUND"
         CACHE INTERNAL "rospack output for rospack ${PACKAGE} ${COMMAND}")
     else()
       separate_arguments(ROSPACK_SEPARATED UNIX_COMMAND ${ROSPACK_OUT})
@@ -44,7 +44,7 @@ macro (find_ros_package PACKAGE)
 
       rospack(libdirs libs-only-L ${PACKAGE})
       rospack(libnames libs-only-l ${PACKAGE})
-      
+
       set(${PACKAGE}_LIBRARIES "" CACHE INTERNAL "")
 
       foreach(libname ${ROSPACK_${PACKAGE}_libs-only-l})
@@ -84,4 +84,24 @@ macro (find_ros_package PACKAGE)
     set(${PACKAGE}_FOUND FALSE CACHE INTERNAL "" FORCE)
   endif()
 
+endmacro()
+
+
+find_program(ROSMSG_EXECUTABLE rosmsg DOC "rosmsg executable")
+
+macro(rosmsg VAR CMD PACKAGE)
+  execute_process(COMMAND ${ROSMSG_EXECUTABLE} ${CMD} ${PACKAGE}
+    OUTPUT_VARIABLE ROSMSG_OUT
+    ERROR_VARIABLE rosmsg_error
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    ERROR_STRIP_TRAILING_WHITESPACE
+    )
+
+  if (rosmsg_error)
+    message(STATUS "*** rosmsg ${CMD} ${PACKAGE} failed: ${rosmsg_error}")
+  else()
+    separate_arguments(ROSPACK_SEPARATED UNIX_COMMAND ${ROSMSG_OUT})
+    set(${VAR} ${ROSPACK_SEPARATED} CACHE INTERNAL "" FORCE)
+    message("rosmsg ${VAR} == ${${VAR}}")
+  endif()
 endmacro()
