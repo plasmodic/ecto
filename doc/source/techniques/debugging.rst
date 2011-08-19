@@ -10,7 +10,7 @@ Running an ecto script under gdb
 
 You'll notice that as such, you can't run a script under gdb::
 
-  % gdb ../src/ecto/test/scripts/test_random.py                       
+  % gdb ../src/ecto/test/scripts/test_random.py
   GNU gdb (Ubuntu/Linaro 7.2-1ubuntu11) 7.2
   [ chattiness ]
   "/ssd/ecto_kitchen/src/ecto/test/scripts/test_random.py": not in executable format: File format not recognized
@@ -31,7 +31,7 @@ imports modules of ecto cells and debug those too.  Use gdb's
   For bug reporting instructions, please see:
   <http://www.gnu.org/software/gdb/bugs/>...
   Reading symbols from /usr/bin/python...(no debugging symbols found)...done.
-  (gdb) 
+  (gdb)
 
 At this point, since you haven't run the script yet, gdb won't know
 about the cells inside any of the compiled modules that the script
@@ -42,25 +42,25 @@ imports.  Run the script once to trigger the shared library loads::
   [Thread debugging using libthread_db enabled]
   ***** 0.294665 ***** 0x1031980
   ***** 0.181778 ***** 0x1031980
-  [etc]  
+  [etc]
   ***** 0.850141 ***** 0x1031980
   [Inferior 1 (process 24050) exited normally]
-  (gdb) 
+  (gdb)
 
 Now you can set breakpoints inside cells, don't forget any namespace
 that the cell lives in::
 
-  (gdb) break ecto_test::Uniform01::process(ecto::tendrils const&, ecto::tendrils&) 
+  (gdb) break ecto_test::Uniform01::process(ecto::tendrils const&, ecto::tendrils&)
   Breakpoint 1 at 0x7fffec5d6169: file /home/ecto_kitchen/ecto/test/modules/Uniform01.cpp, line 88.
   (gdb) r
   Starting program: /usr/bin/python ../ecto/test/scripts/test_random.py
   [Thread debugging using libthread_db enabled]
-  
+
   Breakpoint 1, ecto_test::Uniform01::process (this=0x1031950, inputs=..., outputs=...)
       at /home/ecto_kitchen/ecto/test/modules/Uniform01.cpp:88
   88	      for (unsigned j=0; j<ncalls; ++j)
-  (gdb) 
-  
+  (gdb)
+
 As usual ``where`` will get you your backtrace.  As you can see below,
 as you go up the stack you pass from the cell's code (the ``process``
 method)::
@@ -113,7 +113,7 @@ up to the python interpreter itself::
   #23 0x000000000041a7ff in Py_Main ()
   #24 0x00007ffff69d8c4d in __libc_start_main () from /lib/libc.so.6
   #25 0x00000000004199f9 in _start ()
-  
+
 
 .. index:: Exceptions; catching under gdb
 
@@ -165,27 +165,12 @@ As you can see there is no helpful information here.  The trick is to
   (gdb) l
   83	      ncalls=parameters.get<unsigned>("ncalls");
   84	    }
-  85	
+  85
   86	    int process(const ecto::tendrils& inputs, ecto::tendrils& outputs)
   87	    {
   88	      throw std::runtime_error("catastrophe!");      // <-    boom!
-  89	
+  89
   90	      for (unsigned j=0; j<ncalls; ++j)
   91	        *out_ = (*pimpl_)();
   92	      return ecto::OK;
-
-
-.. index:: Valgrind, gdb
-
-Valgrind
---------
-
-You'll need to have a look at `what the Python devs say about this
-<http://svn.python.org/projects/python/trunk/Misc/README.valgrind>`_... in
-short, for performance reasons python deliberately does some things
-that look suspicious to valgrind but in fact are not.  So you'll need
-to use the suppressions file that comes with python, called
-`valgrind-python.supp
-<http://svn.python.org/projects/python/trunk/Misc/valgrind-python.supp>`_.
-
 
