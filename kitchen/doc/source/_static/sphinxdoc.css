@@ -147,7 +147,7 @@ div.footer a {
 
 /* -- body styles ----------------------------------------------------------- */
 
-p {    
+p {
     margin: 0.8em 0 0.5em 0;
 }
 
@@ -361,3 +361,6 @@ li .toctree-l1 > a {
     text-decoration: plain;
 }
 
+p.graphviz > img {
+    width: 100%;
+}
