@@ -8,6 +8,7 @@ ectomodule(ecto
   cell.cpp
   schedulers.cpp
   strand.cpp
+  cells/And.cpp
   cells/Constant.cpp
   cells/Delay.cpp
   cells/Counter.cpp
