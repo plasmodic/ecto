@@ -25,6 +25,7 @@ macro(ectomodule NAME)
     set_target_properties(${NAME}_ectomodule
       PROPERTIES
       OUTPUT_NAME ${NAME}
+      COMPILE_FLAGS "${FASTIDIOUS_FLAGS}"
       LINK_FLAGS -shared-libgcc
       PREFIX ""
       )
@@ -35,6 +36,7 @@ macro(ectomodule NAME)
       OUTPUT_STRIP_TRAILING_WHITESPACE)
     set_target_properties(${NAME}_ectomodule
       PROPERTIES
+      COMPILE_FLAGS "${FASTIDIOUS_FLAGS}"
       OUTPUT_NAME ${NAME}
       PREFIX ""
       SUFFIX ${PY_SUFFIX}
@@ -47,44 +49,6 @@ macro(ectomodule NAME)
       SUFFIX ".so"
       )
   endif()
-
-  target_link_libraries(${NAME}_ectomodule
-    ${ECTO_MODULE_DEP_LIBS}
-    ${ecto_LIBRARIES}
-    )
-endmacro()
-
-# ==============================================================================
-
-macro(ectorosmodule NAME)
-  if(WIN32)
-    link_directories(${Boost_LIBRARY_DIRS})
-    set(ECTO_MODULE_DEP_LIBS
-      ${PYTHON_LIBRARIES}
-      ${Boost_PYTHON_LIBRARY}
-      )
-  else()
-    set(ECTO_MODULE_DEP_LIBS
-      ${Boost_LIBRARIES}
-      ${PYTHON_LIBRARIES}
-      )
-  endif()
-  include_directories(
-    ${ecto_INCLUDE_DIRS}
-    ${PYTHON_INCLUDE_PATH}
-    ${Boost_INCLUDE_DIRS}
-    )
-
-  rosbuild_add_library(${NAME}_ectomodule
-    ${ARGN}
-    )
-
-  set_target_properties(${NAME}_ectomodule
-    PROPERTIES
-    OUTPUT_NAME ${NAME}
-    LINK_FLAGS -shared-libgcc
-    PREFIX ""
-    )
 
   target_link_libraries(${NAME}_ectomodule
     ${ECTO_MODULE_DEP_LIBS}
