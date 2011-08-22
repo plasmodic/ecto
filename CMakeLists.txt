@@ -111,6 +111,4 @@ endif()
 
 message(STATUS "Building ecto version: ${ECTO_VERSION}")
 message(STATUS "Building ecto code name: ${ECTO_CODE_NAME}")
-string(TOUPPER "CMAKE_CXX_FLAGS_${CMAKE_BUILD_TYPE}" flags_) 
-message(STATUS "flags: ${FASTIDIOUS_FLAGS} ${${flags_}}")
 
