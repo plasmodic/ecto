@@ -31,15 +31,15 @@ namespace ecto {
 
   namespace schedulers {
 
-    singlethreaded::singlethreaded(plasm::ptr p) 
-      : plasm_(p), graph(p->graph()) 
-    {       
+    singlethreaded::singlethreaded(plasm::ptr p)
+      : plasm_(p), graph(p->graph()),stop_running(false)
+    {
       assert(plasm_);
     }
 
-    singlethreaded::singlethreaded(plasm& p) 
-      : plasm_(p.shared_from_this()), graph(plasm_->graph()) 
-    {       
+    singlethreaded::singlethreaded(plasm& p)
+      : plasm_(p.shared_from_this()), graph(plasm_->graph()),stop_running(false)
+    {
       assert(plasm_);
     }
 
@@ -48,7 +48,7 @@ namespace ecto {
       interrupt();
       wait();
     }
-    int 
+    int
     singlethreaded::invoke_process(graph_t::vertex_descriptor vd)
     {
       int rv;
@@ -72,18 +72,22 @@ namespace ecto {
       std::reverse(stack.begin(), stack.end());
     }
 
-    static bool interrupted;
-    static void sigint_static_thunk(int)
+    namespace
     {
-      std::cerr << "*** SIGINT received, stopping graph execution.\n"
-                << "*** If you are stuck here, you may need to hit ^C again\n"
-                << "*** when back in the interpreter thread.\n"
-                << "*** or Ctrl-\\ (backslash) for a hard stop.\n"
-                << std::endl;
-      interrupted = true;
+      boost::signals2::signal<void(void)> SINGLE_THREADED_SIGINT_SIGNAL;
+      void
+      sigint_static_thunk(int)
+      {
+        std::cerr << "*** SIGINT received, stopping graph execution.\n"
+                  << "*** If you are stuck here, you may need to hit ^C again\n"
+                  << "*** when back in the interpreter thread.\n" << "*** or Ctrl-\\ (backslash) for a hard stop.\n"
+                  << std::endl;
+        SINGLE_THREADED_SIGINT_SIGNAL();
+        PyErr_SetInterrupt();
+      }
     }
 
-    void singlethreaded::execute_async(unsigned niter) 
+    void singlethreaded::execute_async(unsigned niter)
     {
       PyEval_InitThreads();
       assert(PyEval_ThreadsInitialized());
@@ -92,7 +96,7 @@ namespace ecto {
       // compute_stack(); //FIXME hack for python based tendrils.
       scoped_ptr<thread> tmp(new thread(bind(&singlethreaded::execute_impl, this, niter)));
       tmp->swap(runthread);
-      while(!running()) usleep(5); //TODO FIXME condition variable?
+      while(!running()) boost::this_thread::sleep(boost::posix_time::microseconds(5)); //TODO FIXME condition variable?
     }
 
     int singlethreaded::execute(unsigned niter)
@@ -105,17 +109,20 @@ namespace ecto {
 
     int singlethreaded::execute_impl(unsigned niter)
     {
-      interrupted = false;
+      stop_running = false;
+      boost::signals2::scoped_connection interupt_connection(
+          SINGLE_THREADED_SIGINT_SIGNAL.connect(boost::bind(&singlethreaded::interrupt, this)));
 #if !defined(_WIN32)
       signal(SIGINT, &sigint_static_thunk);
 #endif
       compute_stack();
       boost::mutex::scoped_lock yes_running(running_mtx);
 
+
       unsigned cur_iter = 0;
-      while((niter == 0 || cur_iter < niter) && !interrupted)
+      while((niter == 0 || cur_iter < niter) && !stop_running)
         {
-          for (size_t k = 0; k < stack.size() && !interrupted; ++k)
+          for (size_t k = 0; k < stack.size() && !stop_running; ++k)
             {
               //need to check the return val of a process here, non zero means exit...
               size_t retval = invoke_process(stack[k]);
@@ -125,22 +132,23 @@ namespace ecto {
             }
           ++cur_iter;
         }
-      last_rval = interrupted;
-      return interrupted;
+      last_rval = stop_running;
+      return last_rval;
     }
 
     void singlethreaded::interrupt() {
-      SHOW();
       boost::mutex::scoped_lock l(iface_mtx);
-      interrupted = true;
+      SHOW();
+      stop_running = true;
       runthread.interrupt();
-      usleep(1000);
       runthread.join();
     }
+
     void singlethreaded::stop() {
-      SHOW();
       boost::mutex::scoped_lock l(iface_mtx);
-      interrupted = true;
+      SHOW();
+      stop_running = true;
+      runthread.join();
     }
 
     bool singlethreaded::running() const {

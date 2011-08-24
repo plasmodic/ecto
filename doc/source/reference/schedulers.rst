@@ -106,9 +106,22 @@ Threadpool
       Blocks until the execution started by the last call to
       execute_async() is finished.
 
+Renentrant running
+------------------
 
+The schedulers are fully reentrant, meaning, that when you stop(), and wait() on
+a scheduler it may be executed again.
 
+The following code is therefore valid for any ecto scheduler:
 
+.. code-block:: python
 
+    s = Sheduler(p)
+    s.execute_async()
+    time.sleep(0.5)
+    s.stop()
+    s.wait()
+    s.execute_async()
+    assert s.running()
 
 

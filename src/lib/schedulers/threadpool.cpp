@@ -258,32 +258,30 @@ namespace ecto {
           }
       }
 
-      static void sigint_static_thunk(int) 
+      static boost::signals2::signal<void(void)> THREADPOOL_SIGINT_SIGNAL;
+      static void sigint_static_thunk(int)
       {
-        std::cerr << "*** SIGINT received, stopping work queues.\n"
+        std::cerr << "*** SIGINT received, stopping graph execution.\n"
                   << "*** If you are stuck here, you may need to hit ^C again\n"
-                  << "*** when back in the interpreter thread.\n"
-                  << "*** or Ctrl-\\ (backslash) for a hard stop.\n"
+                  << "*** when back in the interpreter thread.\n" << "*** or Ctrl-\\ (backslash) for a hard stop.\n"
                   << std::endl;
-        sigint_handler();
+        THREADPOOL_SIGINT_SIGNAL();
         PyErr_SetInterrupt();
       }
-      static boost::function<void()> sigint_handler;
-      
 
       int execute(unsigned nthreads, impl::respawn_cb_t respawn, graph_t& graph)
       {
         namespace asio = boost::asio;
 
         boost::mutex::scoped_lock running(running_mtx);
-
+        stop = false; //reset the stop
         workserv.reset();
         mainserv.reset();
+        boost::signals2::scoped_connection interupt_connection(
+            THREADPOOL_SIGINT_SIGNAL.connect(boost::bind(&impl::stop_asap, this)));
 #if !defined(_WIN32)
         signal(SIGINT, &sigint_static_thunk);
 #endif
-        sigint_handler = boost::bind(&impl::stop_asap, this);
-
         //
         // initialize stats
         //
@@ -542,7 +540,7 @@ namespace ecto {
     void threadpool::interrupt()
     {
       boost::mutex::scoped_lock lock(iface_mtx);
-      std::cout << "threadpool attemtping to interrupt threads.\n";
+      std::cout << "threadpool attempting to interrupt threads.\n";
       impl_->interrupt();
       runthread.interrupt();
     }
@@ -554,7 +552,7 @@ namespace ecto {
       return impl_->running();
     }
 
-    boost::function<void()> threadpool::impl::sigint_handler;
+    boost::signals2::signal<void(void)> threadpool::impl::THREADPOOL_SIGINT_SIGNAL;
   }
 }
 
