@@ -11,6 +11,7 @@ foreach(file
     test_async_bp_objects
     test_async_execution
     test_async_execution_harsh
+    test_async_multiple_sched
     test_blackbox
     test_constant
     test_doc
