@@ -101,7 +101,6 @@ namespace ecto {
 
     int singlethreaded::execute(unsigned niter)
     {
-      boost::mutex::scoped_lock l(iface_mtx);
       int j;
       j = execute_impl(niter);
       return j;
@@ -109,15 +108,15 @@ namespace ecto {
 
     int singlethreaded::execute_impl(unsigned niter)
     {
-      stop_running = false;
-      boost::signals2::scoped_connection interupt_connection(
-          SINGLE_THREADED_SIGINT_SIGNAL.connect(boost::bind(&singlethreaded::interrupt, this)));
-#if !defined(_WIN32)
-      signal(SIGINT, &sigint_static_thunk);
-#endif
       compute_stack();
       boost::mutex::scoped_lock yes_running(running_mtx);
 
+      stop_running = false;
+      boost::signals2::scoped_connection interupt_connection(
+          SINGLE_THREADED_SIGINT_SIGNAL.connect(boost::bind(&singlethreaded::interrupt, this)));
+      #if !defined(_WIN32)
+            signal(SIGINT, &sigint_static_thunk);
+      #endif
 
       unsigned cur_iter = 0;
       while((niter == 0 || cur_iter < niter) && !stop_running)
