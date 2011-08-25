@@ -27,11 +27,6 @@ follow will involve both C++ and Python snippets.
 .. toctree::
     :maxdepth: 1
     
-    justification.rst
-    at_a_glance
     cells.rst
     modules.rst
-    plasms.rst
-    tendrils.rst
-    schedulers.rst
     glossary

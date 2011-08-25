@@ -37,7 +37,8 @@ And you will see the output is separated.  Try the utility ``tail`` to
 watch the output file: You can then change parameters of running cells
 in the ipython session while the scheduler is executing.
 
-
+Also see :ref:`argparsing` for enabling this in the command line in your
+scripts.
 
 .. autofunction:: ecto.log_to_file
 

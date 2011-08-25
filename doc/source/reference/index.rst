@@ -7,8 +7,8 @@ Reference
     :maxdepth: 1
     
     autoregister
+    argparse.rst
     tendril
-    tendrils
     connections.rst
     cell
     plasm
