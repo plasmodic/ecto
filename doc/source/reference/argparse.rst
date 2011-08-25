@@ -3,6 +3,10 @@
 argparse helpers
 ================
 
+.. _argparse: http://docs.python.org/library/argparse.html
+
+Requires the python `argparse`_ library.
+
 Ecto has a few helper functions for commandline parsing using
 the argparse library.  These are useful for having scripts that
 may run with multiple ecto schedulers based on command line
