@@ -45,6 +45,12 @@ def run_plasm(options, plasm):
         else:
             sched.execute(options.niter, options.nthreads)
 
+def parse_args_run_plasm(plasm, description="An ecto graph."):
+    parser = argparse.ArgumentParser(description=description)
+    scheduler_options(parser)
+    options = parser.parse_args()
+    run_plasm(options, plasm)
+
 
 if __name__ == '__main__':
     import ecto_test
