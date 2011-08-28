@@ -22,13 +22,13 @@ def use_ipython(options, sched, plasm, locals={}):
     #expose the locals to the ipython prompt.
     for key, val in locals.items():
         vars()[key] = val
-    
+
     from IPython.Shell import IPShellEmbed
     if type(sched) == ecto.schedulers.Singlethreaded:
         sched.execute_async(options.niter)
     else:
         sched.execute_async(options.niter, options.nthreads)
-    
+
     #the argv is important so that the IPShellEmbed doesn't use the global
     #Also fancy colors!!!!
     ipython_argv = ['-prompt_in1', 'Input <\\#>', '-colors', 'LightBG']
@@ -42,6 +42,8 @@ def run_plasm(options, plasm, locals={}):
         msg = "You must supply a valid scheduler type, not \'%s\'\n" % options.scheduler_type
         msg += 'Valid schedulers are:\n\t' + '\n\t'.join(possible_schedulers) + '\n'
         raise RuntimeError(msg)
+    if options.graphviz:
+        ecto.view_plasm(plasm)
     sched = ecto.schedulers.__dict__[options.scheduler_type](plasm)
     if options.ipython:
         use_ipython(options, sched, plasm, locals)
@@ -65,6 +67,9 @@ def scheduler_options(parser):
     parser.add_argument('--shell', dest='ipython', action='store_const',
                         const=True, default=False,
                         help='Bring up an ipython prompt, and execute asynchronously.')
+    parser.add_argument('--graphviz', dest='graphviz', action='store_const',
+                        const=True, default=False,
+                        help='Show the graphviz of the plasm.')
 
 def doit(plasm, description="An ecto graph.", locals={}, args=None, namespace=None):
     '''doit is a short hand for samples that will just add
