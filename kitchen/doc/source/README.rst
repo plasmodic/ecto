@@ -3,7 +3,9 @@ How To Get Cooking in the Ecto Kitchen
 
 .. highlight:: ectosh
 
-* Clone this project::
+.. rubric:: Clone the project
+
+::
 
     % git clone git://github.com/plasmodic/ecto_kitchen.git
     Cloning into ecto_kitchen...
@@ -13,7 +15,33 @@ How To Get Cooking in the Ecto Kitchen
     Receiving objects: 100% (52/52), 6.92 KiB, done.
     Resolving deltas: 100% (20/20), done.
   
-* Update the submodules::
+At this point, decide what version of the ecto_kitchen you want to
+build.  If you want to build the trunk, do nothing.  You can see which
+tagged releases are available with ``git tag -l``::
+
+  % git tag -l     
+  amoeba-beta1
+  amoeba-beta2
+  
+and check one out.  You will be in 'detached HEAD' mode... don't worry
+about the warning::
+
+  % git checkout amoeba-beta2
+  Note: checking out 'amoeba-beta2'.
+  
+  You are in 'detached HEAD' state. You can look around, make experimental
+  changes and commit them, and you can discard any commits you make in this
+  state without impacting any branches by performing another checkout.
+  
+  If you want to create a new branch to retain commits you create, you may
+  do so (now or later) by using -b with the checkout command again. Example:
+  
+    git checkout -b new_branch_name
+  
+  HEAD is now at 8a56075... tweak tweak goes the release
+  
+.. rubric:: Update submodules
+::
 
     % cd ecto_kitchen 
 
@@ -53,11 +81,13 @@ How To Get Cooking in the Ecto Kitchen
     Resolving deltas: 100% (206/206), done.
     Submodule path 'ros': checked out '10f0715db9455887934f6855edaa1ab3aea71001'
     
-* Source your ROS env (optional, modify to suit your shell)::
+.. rubric:: Source your ROS env (optional, modify to suit your shell)
+::
 
     % . /opt/ros/unstable/setup.zsh
 
-* Do the usual cmake rigamarole::
+.. rubric:: Do the usual cmake rigamarole
+::
 
     % mkdir build
   
@@ -75,7 +105,8 @@ How To Get Cooking in the Ecto Kitchen
     -- Generating done
     -- Build files have been written to: /home/troy/Projects/ecto_kitchen/build
   
-* And run make::
+.. rubric:: And run make
+::
 
     % make 
     [  0%] Building CXX object ecto/src/lib/CMakeFiles/ecto_cpp.dir/abi.cpp.o
@@ -88,11 +119,11 @@ How To Get Cooking in the Ecto Kitchen
     Linking CXX shared library ../../lib/ecto_std_msgs.so
     [100%] Built target ecto_std_msgs_ectomodule
     
-* Having built, source your python_path.sh::
+Having built, source your python_path.sh::
 
     % . ./python_path.sh
 
-* Everything should be accessible, ready to run scripts::
+Everything should be accessible, ready to run scripts::
 
     % python
     Python 2.7.1+ (r271:86832, Apr 11 2011, 18:13:53) 
@@ -101,5 +132,9 @@ How To Get Cooking in the Ecto Kitchen
     >>> import ecto, ecto_pcl, ecto_opencv.calib, ecto_ros
     >>> 
     
-* And you should be ready to go to the tutorial [FIXME WHERE IS THE TUTORIAL]
+* And you should be ready to go to the tutorial 
+
+.. todo:: where is the tutorial
+
+
 
