@@ -73,7 +73,7 @@ macro(git_status PROJECT)
       RESULT_VARIABLE ${PROJECT}_GITTAG_STATUS
       )
 
-    execute_process(COMMAND ${GIT_EXECUTABLE} describe --tags
+    execute_process(COMMAND ${GIT_EXECUTABLE} describe --tags --abbrev=0
       WORKING_DIRECTORY ${${PROJECT}_SOURCE_DIR}
       OUTPUT_VARIABLE ${PROJECT}_GITTAG_SHORT
       OUTPUT_STRIP_TRAILING_WHITESPACE
@@ -87,7 +87,8 @@ macro(git_status PROJECT)
   endif()
 
   message(STATUS "${PROJECT} commit:       ${${PROJECT}_COMMITHASH}")
-  message(STATUS "${PROJECT} tag:          ${${PROJECT}_GITTAG}")
+  message(STATUS "${PROJECT} tag (long):   ${${PROJECT}_GITTAG_LONG}")
+  message(STATUS "${PROJECT} tag (short):  ${${PROJECT}_GITTAG_SHORT}")
   message(STATUS "${PROJECT} last_mod:     ${${PROJECT}_LAST_MODIFIED}")
 
 
