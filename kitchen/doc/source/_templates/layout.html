@@ -1,6 +1,6 @@
 {% extends "!layout.html" %}
 {% block rootrellink %}
-    <li><a href="http://plasmodic.org/">plasmodic</a> &raquo;</li>
+    <li><a href="http://ecto.willowgarage.com/">ecto.willowgarage.com</a> &raquo;</li>
     {{ super() }}
 {% endblock %}
 
@@ -22,7 +22,7 @@
 {%- block footer %}
     <div class="footer">
 
-    Version <a href="{{ github_url }}/commit/{{ commithash }}">{{ gittag }}</a> at {{ git_lastmod }}<br/>
+    Version <a href="{{ github_url }}/commit/{{ commithash }}">{{ gittag_long }}</a> at {{ git_lastmod }}<br/>
     {%- if last_updated %}
       {% trans last_updated=last_updated|e %}Last updated on {{ last_updated }}.{% endtrans %}
     {%- endif %}

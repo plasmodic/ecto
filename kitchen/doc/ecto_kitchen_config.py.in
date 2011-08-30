@@ -1,6 +1,7 @@
-version='@ecto_kitchen_GITTAG@'
+version='@ecto_kitchen_GITTAG_SHORT@'
 commithash='@ecto_kitchen_COMMITHASH@'
-gittag='@ecto_kitchen_GITTAG@'
+gittag_short='@ecto_kitchen_GITTAG_SHORT@'
+gittag_long='@ecto_kitchen_GITTAG_LONG@'
 git_lastmod='@ecto_kitchen_LAST_MODIFIED@'
 github_url='@ecto_kitchen_GITHUB_URL@'
 

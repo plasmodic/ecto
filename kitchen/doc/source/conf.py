@@ -114,7 +114,8 @@ html_theme_options = { }
 
 html_context = dict(commithash = commithash,
                     github_url = github_url,
-                    gittag = gittag,
+                    gittag_long = gittag_long,
+                    gittag_short = gittag_short,
                     git_lastmod = git_lastmod,
                     )
 
@@ -123,7 +124,7 @@ html_theme_path = ['.']
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-html_title = 'ecto kitchen ' + version
+html_title = 'ecto kitchen ' + gittag_short
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #html_short_title = None

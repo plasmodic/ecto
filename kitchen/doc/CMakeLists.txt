@@ -78,6 +78,13 @@ if(SPHINX_BUILD)
     COMMAND ${CMAKE_MAKE_PROGRAM} -f Makefile.sphinx html
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
     )
+
+  add_custom_target(www-deploy)
+  add_custom_command(TARGET www-deploy
+    COMMAND ${CMAKE_MAKE_PROGRAM} -f Makefile.sphinx deploy
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+    )
+
   #dependencies for sphinx, html must be built for the sphinx to not error out.
   #also all modules should be built so that the sphinx ectodoc stuff works.
   add_dependencies(html ecto ecto_ectomodule ecto_test_ectomodule)

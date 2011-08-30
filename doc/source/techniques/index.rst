@@ -15,3 +15,8 @@ Ecto-Fu for you.
     python-packages
     valgrind
 
+<<<<<<< HEAD
+=======
+
+.. TODO:: organizing ecto projects into multiple python modules a-la
+          ``ecto_opencv``
