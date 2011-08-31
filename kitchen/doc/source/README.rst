@@ -23,8 +23,9 @@ tagged releases are available with ``git tag -l``::
   amoeba-beta1
   amoeba-beta2
   
-and check one out.  You will be in 'detached HEAD' mode... don't worry
-about the warning::
+and check one out.  See the top of this documentation to find out the
+tag corresponding with these documents.  You will be in 'detached
+HEAD' mode... don't worry about the warning::
 
   % git checkout amoeba-beta2
   Note: checking out 'amoeba-beta2'.
