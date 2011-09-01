@@ -53,22 +53,22 @@ def run_plasm(options, plasm, locals={}):
         else:
             sched.execute(options.niter, options.nthreads)
 
-def scheduler_options(parser):
+def scheduler_options(parser, default_scheduler='Singlethreaded', default_nthreads=0, default_niter=0, default_shell=False, default_graphviz=False):
     '''Creates an argument parser for ecto schedulers.  Operates inplace on the
     given parser object.
     '''
     parser.add_argument('--scheduler', metavar='SCHEDULER_TYPE',
-                        dest='scheduler_type', type=str, default='Singlethreaded',
-                   help='Scheduler may be either ' + '|'.join(possible_schedulers) + '. Default is \'Singlethreaded\'')
-    parser.add_argument('--nthreads', metavar='NUMBER_OF_THREADS', dest='nthreads', type=int, default=0,
+                        dest='scheduler_type', type=str, default=default_scheduler,
+                   help='Scheduler may be either ' + '|'.join(possible_schedulers) + '. Default is \'%s\'' % default_scheduler)
+    parser.add_argument('--nthreads', metavar='NUMBER_OF_THREADS', dest='nthreads', type=int, default=default_nthreads,
                    help='For schedulers that use threading, this specifies the number of threads, 0 defaults to hardware concurrency information.')
-    parser.add_argument('--niter', metavar='ITERATIONS', dest='niter', type=int, default=0,
-                   help='Run the graph for niter iterations. 0, default, means run until stopped by a cell or external forces.')
+    parser.add_argument('--niter', metavar='ITERATIONS', dest='niter', type=int, default=default_niter,
+                   help='Run the graph for niter iterations. 0 means run until stopped by a cell or external forces.')
     parser.add_argument('--shell', dest='ipython', action='store_const',
-                        const=True, default=False,
+                        const=True, default=default_shell,
                         help='Bring up an ipython prompt, and execute asynchronously.')
     parser.add_argument('--graphviz', dest='graphviz', action='store_const',
-                        const=True, default=False,
+                        const=True, default=default_graphviz,
                         help='Show the graphviz of the plasm.')
 
 def doit(plasm, description="An ecto graph.", locals={}, args=None, namespace=None):
