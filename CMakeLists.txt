@@ -56,7 +56,7 @@ include_directories(
   )
 
 if(UNIX)
-  configure_file(${PROJECT_SOURCE_DIR}/cmake/python_path.sh.in 
+  configure_file(${PROJECT_SOURCE_DIR}/cmake/python_path.sh.in
     ${PROJECT_BINARY_DIR}/python_path.sh @ONLY@)
   #copy the python_path.sh.user.in for users that are not installing ecto.
   file(COPY ${PROJECT_SOURCE_DIR}/cmake/python_path.sh.user.in DESTINATION ${CMAKE_BINARY_DIR})
@@ -65,7 +65,7 @@ if(UNIX)
       " ${CMAKE_BINARY_DIR}/python_path.sh")
   endif()
 elseif(WIN32)
-  configure_file(${ecto_SOURCE_DIR}/cmake/pathz.bat.in 
+  configure_file(${ecto_SOURCE_DIR}/cmake/pathz.bat.in
     ${CMAKE_BINARY_DIR}/pathz.bat @ONLY@)
   if(NOT ecto_kitchen_SOURCE_DIR)
     message(STATUS "To setup your pathz for ecto you should run:"
@@ -85,9 +85,9 @@ elseif(WIN32)
 endif()
 
 set(ECTO_CONFIG_PATH  ${ecto_SOURCE_DIR}/cmake)
-configure_file(${ecto_SOURCE_DIR}/cmake/ectoConfig.cmake.in 
+configure_file(${ecto_SOURCE_DIR}/cmake/ectoConfig.cmake.in
   ${CMAKE_BINARY_DIR}/ectoConfig.cmake @ONLY)
-configure_file(${ecto_SOURCE_DIR}/cmake/ectoConfig-version.cmake.in 
+configure_file(${ecto_SOURCE_DIR}/cmake/ectoConfig-version.cmake.in
   ${CMAKE_BINARY_DIR}/ectoConfig-version.cmake @ONLY)
 configure_file(${ecto_SOURCE_DIR}/cmake/ectoMacros.cmake
   ${CMAKE_BINARY_DIR}/ectoMacros.cmake @ONLY)
@@ -117,6 +117,6 @@ if(BUILD_doc_errata)
   add_subdirectory(doc/source doc_errata)
 endif()
 
-message(STATUS "Building ecto version: ${ECTO_VERSION}")
+message(STATUS "Building ecto version:   ${ECTO_VERSION}")
 message(STATUS "Building ecto code name: ${ECTO_CODE_NAME}")
 
