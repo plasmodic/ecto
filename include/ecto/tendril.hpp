@@ -57,7 +57,7 @@ namespace ecto
    *
    * Items held by the tendril must be copy constructible and copiable.
    */
-  
+
   class ECTO_EXPORT tendril
   {
   public:
@@ -164,8 +164,8 @@ namespace ecto
       return *boost::unsafe_any_cast<T>(&holder_);
     }
 
-    template <typename T> 
-    void 
+    template <typename T>
+    void
     operator<<(const T& val)
     {
       if(is_type<none>()) //handle none case.
@@ -244,12 +244,12 @@ namespace ecto
     has_default() const;
 
     //! A none type for tendril when the tendril is uninitialized.
-    struct none { 
+    struct none {
       none& operator=(const none&) { return *this; }
       const none& operator=(const none&) const { return *this; } // funny const assignment operator
       friend bool operator==(const none&, const none&) { return true; }
-      friend std::ostream& operator<<(std::ostream& os, const none&) 
-      { 
+      friend std::ostream& operator<<(std::ostream& os, const none&)
+      {
         os << "ecto::tendril::none"; return os;
       }
     };
@@ -278,8 +278,7 @@ namespace ecto
     /**
      * Register a typed callback with the tendril... Will throw on wrong type.
      * @param cb Will be called by the notify function, if the tendril is dirty.
-     * @param oneshot do only once
-     * @return  this 
+     * @return  this
      */
     template<typename T>
     tendril&
@@ -326,7 +325,7 @@ namespace ecto
       virtual void operator()(tendril& t, const boost::python::object& o) const = 0;
       virtual void operator()(boost::python::object& o, const tendril& t) const = 0;
     };
-    
+
     template <typename T,  typename _=void>
     struct ConverterImpl : Converter
     {
@@ -395,7 +394,7 @@ namespace ecto
 
     void operator>>(boost::python::object& obj) const
     {
-      (*converter)(obj, *this); 
+      (*converter)(obj, *this);
     }
 
     void operator>>(const ecto::tendril::ptr& rhs) const
@@ -499,12 +498,12 @@ namespace ecto
     }
   };
 
-  template <typename T, typename _> 
-  tendril::ConverterImpl<T,_> 
+  template <typename T, typename _>
+  tendril::ConverterImpl<T,_>
   tendril::ConverterImpl<T,_>::instance;
 
-  template <typename _> 
-  tendril::ConverterImpl<tendril::none,_> 
+  template <typename _>
+  tendril::ConverterImpl<tendril::none,_>
   tendril::ConverterImpl<tendril::none,_>::instance;
 
 }
