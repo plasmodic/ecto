@@ -46,8 +46,8 @@ help:
 
 links:
 	@echo "Constructing common doc source dir under build directory"
-	rsync -va --delete @ecto_kitchen_SOURCE_DIR@/doc/source $(BUILDDIR)/
-	rsync -va @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source $(BUILDDIR)/
+	rsync -va --delete @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source $(BUILDDIR)/
+	rsync -va @ecto_kitchen_SOURCE_DIR@/doc/source $(BUILDDIR)/
 	/bin/echo ".. topic:: Constituent Projects" > $(KITCHEN_INDEX)
 	/bin/echo "" >> $(KITCHEN_INDEX)
 	/bin/echo "   .. toctree::" >> $(KITCHEN_INDEX)
