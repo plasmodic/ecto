@@ -19,3 +19,5 @@ Also it may be useful to always work from the **Visual Studio Command Prompt** o
 be sure to source the ``C:\Program Files\Microsoft Visual Studio 10.0\VC\vcvarsall.bat`` before
 starting any work.
 
+http://technet.microsoft.com/en-us/sysinternals/bb896645
+

@@ -1,4 +1,3 @@
-set(FASTIDIOUS_FLAGS "" CACHE STRING "Fastidious gcc flags")
 option(USE_FASTIDIOUS_FLAGS 
   "Use extra flags that help catch programming errors and prevent a build up of warnings" ON)
 
@@ -28,3 +27,4 @@ if(USE_FASTIDIOUS_FLAGS)
     set(FASTIDIOUS_FLAGS "/D _CRT_SECURE_NO_WARNINGS /D BOOST_HAS_STDINT_H /wd4099 /wd4101 /wd4996 /wd4251 /wd4305 /D _WIN32_WINNT=0x0501")
   endif()
 endif()
+set(FASTIDIOUS_FLAGS "${FASTIDIOUS_FLAGS}" CACHE STRING "Fastidious gcc flags")

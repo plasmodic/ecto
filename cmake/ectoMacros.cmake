@@ -72,11 +72,9 @@ endmacro()
 
 # ==============================================================================
 macro( install_ecto_module name )
-  #this is the python extension
-  #message("installing ${name}_ectomodule to ${ecto_module_PYTHON_INSTALL}")
-  #install(TARGETS ${name}_ectomodule
-  #  LIBRARY DESTINATION ${ecto_module_PYTHON_INSTALL}
-  #  COMPONENT main
-  #  )
+  install(TARGETS ${name}_ectomodule
+    DESTINATION ${ecto_module_PYTHON_INSTALL}
+    COMPONENT main
+  )
 endmacro()
 # ==============================================================================
