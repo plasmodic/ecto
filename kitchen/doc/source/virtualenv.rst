@@ -6,7 +6,7 @@ Installing to a virtualenv
 Ecto kitchens maybe installed using a virtualenv. The default location of the
 virtualenv is ``/opt/ecto/PROJECT_NAME/GITTAG_SHORT``.
 
-First you should create the virtualenv for the ecto kitchen.
+First you should create the virtualenv for the ecto kitchen::
 
   % sudo make virtualenv
   New python executable in /opt/ecto/recognition_kitchen/or-alpha_0/bin/python2.7

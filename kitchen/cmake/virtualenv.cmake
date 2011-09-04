@@ -10,12 +10,9 @@ macro(setup_virtualenv PROJECT)
 
     set(VIRTUALENV_DIR  "/opt/ecto/${PROJECT}/${${PROJECT}_GITTAG_SHORT}" CACHE PATH "Virtual environment")
 
-    add_custom_target(
-      boostrap
-    )
-    add_custom_command(TARGET boostrap
+    add_custom_target(bootstrap)
+    add_custom_command(TARGET bootstrap
       COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/ecto/kitchen/cmake/bootstrap_gen.py
-      DEPENDS ${CMAKE_SOURCE_DIR}/ecto/kitchen/cmake/bootstrap_gen.py
     )
 
     add_custom_target(virtualenv)
