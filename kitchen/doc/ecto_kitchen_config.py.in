@@ -1,11 +1,11 @@
-version='@ecto_kitchen_GITTAG_SHORT@'
-commithash='@ecto_kitchen_COMMITHASH@'
-gittag_short='@ecto_kitchen_GITTAG_SHORT@'
-gittag_long='@ecto_kitchen_GITTAG_LONG@'
-git_lastmod='@ecto_kitchen_LAST_MODIFIED@'
-github_url='@ecto_kitchen_GITHUB_URL@'
+version='${${PROJECT_NAME}_GITTAG_SHORT}'
+commithash='${${PROJECT_NAME}_COMMITHASH}'
+gittag_short='${${PROJECT_NAME}_GITTAG_SHORT}'
+gittag_long='${${PROJECT_NAME}_GITTAG_LONG}'
+git_lastmod='${${PROJECT_NAME}_LAST_MODIFIED}'
+github_url='${${PROJECT_NAME}_GITHUB_URL}'
 
 breathe_default_project = 'ecto'
-breathe_projects = dict(ecto='@kitchen_doc_BINARY_DIR@/api/xml')
+breathe_projects = dict(ecto='${CMAKE_CURRENT_BINARY_DIR}/api/xml')
 
-programoutput_path = '@KITCHEN_PROJECTS_SOURCE_DIRS@'.split(';')
+programoutput_path = '${KITCHEN_PROJECTS_SOURCE_DIRS}'.split(';')

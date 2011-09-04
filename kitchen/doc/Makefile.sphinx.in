@@ -162,4 +162,4 @@ info:
 	@echo "builddir is $(BINDIR)"
 
 deploy:
-	rsync -va $(BUILDDIR)/html/ ecto.willowgarage.com:/var/www/releases/@ecto_kitchen_GITTAG_SHORT@/
+	rsync --chmod=a+r -va $(BUILDDIR)/html/ @ECTO_DOC_DEPLOY_DESTINATION@

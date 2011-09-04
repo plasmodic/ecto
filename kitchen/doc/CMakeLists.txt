@@ -1,8 +1,6 @@
 # add a target to generate API documentation with Doxygen
 # add doc to all
 
-project(kitchen_doc)
-
 #we're not in the kitchen FIXME hack for standalone
 if(NOT ecto_kitchen_SOURCE_DIR)
   add_custom_target(html)
@@ -13,13 +11,19 @@ if(NOT ecto_kitchen_SOURCE_DIR)
 endif()
 
 option(INSTALL_DOC "Install the documentation." OFF)
+
+set(ECTO_DOC_DEPLOY_DESTINATION_BASE /tmp CACHE PATH "Base path for deploying docs")
+set(ECTO_DOC_DEPLOY_DESTINATION ${ECTO_DOC_DEPLOY_DESTINATION_BASE}/${${PROJECT_NAME}_GITTAG_SHORT} CACHE PATH "Destination for deploying docs" FORCE)
+
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Makefile.sphinx.in 
   ${CMAKE_CURRENT_BINARY_DIR}/Makefile.sphinx
-  @ONLY)
+  @ONLY
+  )
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/ecto_kitchen_config.py.in
   ${CMAKE_CURRENT_BINARY_DIR}/ecto_kitchen_config.py
-  @ONLY)
+#  @ONLY
+)
 
 add_custom_target(doc
   COMMENT "Generate all documentation" VERBATIM
