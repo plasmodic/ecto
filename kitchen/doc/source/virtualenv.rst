@@ -3,7 +3,7 @@ Installing to a virtualenv
 
 .. highlight:: ectosh
 
-Ecto kitchens maybe installed using a virtualenv. The default location of the
+Ecto kitchens may be installed using a virtualenv. The default location of the
 virtualenv is ``/opt/ecto/PROJECT_NAME/GITTAG_SHORT``.
 
 First you should create the virtualenv for the ecto kitchen::
@@ -34,7 +34,7 @@ variable ``VIRTUALENV_DIR``::
 Now you may activate the environment with::
 
   % . /opt/ecto/recognition_kitchen/or-alpha_0/bin/activate
-  (or-alpha_0)% python
+  % python
   >>> ecto.version()
   'ecto amoeba-beta3'
   >>> ecto.__file__
