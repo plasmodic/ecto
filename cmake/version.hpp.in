@@ -33,6 +33,6 @@
 #define ECTO_PATCH_VERSION @ECTO_PATCH_VERSION@
 
 //readable version of the library name.
-#define ECTO_VERSION_STRING "ecto @ECTO_VERSION@ @ECTO_CODE_NAME@"
+#define ECTO_VERSION_STRING "ecto @ECTO_CODE_NAME@"
 
 

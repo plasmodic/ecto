@@ -14,12 +14,15 @@ macro(init_ecto_kitchen)
 
   include(ecto/kitchen/cmake/fastidious.cmake)
   include(ecto/kitchen/cmake/git.cmake)
+  include(ecto/kitchen/cmake/virtualenv.cmake)
 
   git_status(${PROJECT_NAME})
 
   if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/ecto)
     MESSAGE(FATAL_ERROR "Expecting ecto as a subdirectory of your toplevel project!")
   endif()
+
+  setup_virtualenv(${PROJECT_NAME})
 
   set(KITCHEN_PROJECTS "ecto;${ARGN}")
   if (NOT KITCHEN_PROJECTS)
@@ -84,5 +87,4 @@ macro(init_ecto_kitchen)
   endforeach()
 
   add_test(kitchen_check_hashbangs ${CMAKE_MAKE_PROGRAM} -C ${CMAKE_BINARY_DIR} check_hashbangs)
-
 endmacro()

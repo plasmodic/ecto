@@ -136,6 +136,3 @@ Everything should be accessible, ready to run scripts::
 * And you should be ready to go to the tutorial 
 
 .. todo:: where is the tutorial
-
-
-
