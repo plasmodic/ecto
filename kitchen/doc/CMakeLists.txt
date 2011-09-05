@@ -102,10 +102,9 @@ if(SPHINX_BUILD)
   add_dependencies(doc html)
 
   install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/html
-    DESTINATION share/doc/${${PROJECT}_GITTAG_SHORT}
+    DESTINATION share/doc/${${PROJECT_NAME}_GITTAG_SHORT}
     COMPONENT doc
   )
-
 endif()
 
 

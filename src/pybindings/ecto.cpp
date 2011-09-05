@@ -23,18 +23,6 @@ namespace ecto {
       std::ofstream log_file;
       std::streambuf* stdout_orig = 0, *stderr_orig = 0, *log_rdbuf = 0;
     }
-    void log_to_file(const std::string& fname)
-    {
-      log_file.close();
-      log_rdbuf = 0;
-      std::cout << "Redirecting C++ cout/cerr to '" << fname << "'\n";
-      log_file.open(fname.c_str());
-      stdout_orig = std::cout.rdbuf();
-      stderr_orig = std::cerr.rdbuf();
-      log_rdbuf = log_file.rdbuf();
-      std::cout.rdbuf(log_rdbuf);
-      std::cerr.rdbuf(log_rdbuf);
-    }
 
     void unlog_to_file() {
       std::cout.flush();
@@ -45,6 +33,18 @@ namespace ecto {
       std::cout.rdbuf(stdout_orig);
       std::cerr.rdbuf(stderr_orig);
       log_rdbuf = 0;
+    }
+
+    void log_to_file(const std::string& fname)
+    {
+      unlog_to_file();
+      std::cout << "Redirecting C++ cout/cerr to '" << fname << "'\n";
+      log_file.open(fname.c_str());
+      stdout_orig = std::cout.rdbuf();
+      stderr_orig = std::cerr.rdbuf();
+      log_rdbuf = log_file.rdbuf();
+      std::cout.rdbuf(log_rdbuf);
+      std::cerr.rdbuf(log_rdbuf);
     }
 
   }

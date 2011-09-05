@@ -7,6 +7,7 @@ import sys
 fname = "test_redirect.log"
 
 def make(Schedtype):
+    print 'Using :', Schedtype
     plasm = ecto.Plasm()
 
     gen = ecto_test.Generate("Gen", step=1.0, start=0.0)
