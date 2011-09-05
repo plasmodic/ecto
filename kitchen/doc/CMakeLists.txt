@@ -12,8 +12,13 @@ endif()
 
 option(INSTALL_DOC "Install the documentation." OFF)
 
-set(ECTO_DOC_DEPLOY_DESTINATION_BASE /tmp CACHE PATH "Base path for deploying docs")
-set(ECTO_DOC_DEPLOY_DESTINATION ${ECTO_DOC_DEPLOY_DESTINATION_BASE}/${${PROJECT_NAME}_GITTAG_SHORT} CACHE PATH "Destination for deploying docs" FORCE)
+set(ECTO_DOC_DEPLOY_DESTINATION_BASE /tmp
+    CACHE PATH "Base path for deploying docs"
+    )
+
+set(ECTO_DOC_DEPLOY_DESTINATION ${ECTO_DOC_DEPLOY_DESTINATION_BASE}/${${PROJECT_NAME}_GITTAG_SHORT}
+    CACHE PATH "Destination for deploying docs"
+    )
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Makefile.sphinx.in 
   ${CMAKE_CURRENT_BINARY_DIR}/Makefile.sphinx
