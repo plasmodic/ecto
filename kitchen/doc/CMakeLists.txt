@@ -10,8 +10,6 @@ if(NOT ecto_kitchen_SOURCE_DIR)
   return()
 endif()
 
-option(INSTALL_DOC "Install the documentation." OFF)
-
 set(ECTO_DOC_DEPLOY_DESTINATION_BASE /tmp
     CACHE PATH "Base path for deploying docs"
     )
@@ -103,18 +101,11 @@ if(SPHINX_BUILD)
   add_dependencies(doc pdf)
   add_dependencies(doc html)
 
+  install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/html
+    DESTINATION share/doc/${${PROJECT}_GITTAG_SHORT}
+    COMPONENT doc
+  )
+
 endif()
 
-if(INSTALL_DOC)
-  if(DOXYGEN_FOUND AND SPHINX_BUILD)
-    install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/html
-      DESTINATION share/doc/ecto-${ECTO_VERSION}
-      COMPONENT doc
-      )
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/latex/ecto.pdf
-      DESTINATION share/doc/ecto-${ECTO_VERSION}
-      COMPONENT doc
-      )
-  endif()
-endif()
 

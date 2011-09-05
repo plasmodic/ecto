@@ -1,6 +1,6 @@
 macro(setup_virtualenv PROJECT)
-  option(INSTALL_TO_VIRTUALENV ON)
-  
+  option(INSTALL_TO_VIRTUALENV "Install by default to a virtual environment" ON)
+
   if(INSTALL_TO_VIRTUALENV)
     find_program(VIRTUALENV_EXECUTABLE
       NAMES virtualenv
