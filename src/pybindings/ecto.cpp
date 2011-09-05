@@ -28,7 +28,7 @@ namespace ecto {
       std::cout.flush();
       std::cerr.flush();
       log_file.close();
-      assert(stdout_orig);
+      assert(stdout_orig); //fixme this is bad!
       assert(stderr_orig);
       std::cout.rdbuf(stdout_orig);
       std::cerr.rdbuf(stderr_orig);
@@ -37,7 +37,9 @@ namespace ecto {
 
     void log_to_file(const std::string& fname)
     {
-      unlog_to_file();
+      std::cout.flush();
+      std::cerr.flush();
+      log_file.close();
       std::cout << "Redirecting C++ cout/cerr to '" << fname << "'\n";
       log_file.open(fname.c_str());
       stdout_orig = std::cout.rdbuf();
