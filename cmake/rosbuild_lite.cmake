@@ -1,16 +1,70 @@
-find_program(ROSPACK_EXECUTABLE rospack DOC "the rospack executable.")
 option(ROS_CONFIGURE_VERBOSE OFF)
+set(ROS_ROOT_DEFAULT /opt/ros/electric/ros CACHE PATH "The default ROS_ROOT")
+set(ROS_PACKAGE_PATH_DEFAULT /opt/ros/electric/stacks CACHE PATH "The default ROS_PACKAGE_PATH")
+
+if (NOT ROS_ROOT)
+  if ("$ENV{ROS_ROOT}" STREQUAL "")
+    message("*** ROS_ROOT is not set... is your environment set correctly? Setting to default: ${ROS_ROOT_DEFAULT}")
+    set(ROS_ROOT ${ROS_ROOT_DEFAULT} CACHE PATH  "ROS_ROOT path")
+  else()
+    set(ROS_ROOT "$ENV{ROS_ROOT}" CACHE PATH  "ROS_ROOT path")
+  endif()
+endif()
+
+if (NOT ROS_PACKAGE_PATH)
+  if ("$ENV{ROS_PACKAGE_PATH}" STREQUAL "")
+    message("*** ROS_ROOT is not set... is your environment set correctly? Setting to default: ${ROS_ROOT_DEFAULT}")
+    set(ROS_PACKAGE_PATH ${ROS_PACKAGE_PATH_DEFAULT} CACHE PATH "ROS_PACKAGE_PATH path")
+  else()
+    set(ROS_PACKAGE_PATH "$ENV{ROS_PACKAGE_PATH}" CACHE PATH "ROS_PACKAGE_PATH path")
+  endif()
+endif()
+
+find_program(ROSPACK_EXECUTABLE rospack PATHS ${ROS_ROOT}/bin DOC "the rospack executable.")
+find_program(ROSMSG_EXECUTABLE rosmsg PATHS ${ROS_ROOT}/bin DOC "rosmsg executable")
+
+if (ROSPACK_EXECUTABLE)
+  set(ROS_FOUND TRUE)
+else()
+  unset(ROS_FOUND)
+endif()
+
+macro (_set_ros_env)
+  set(ORIG_ROS_ROOT $ENV{ROS_ROOT})
+  set(ORIG_ROS_PACKAGE_PATH $ENV{ROS_PACKAGE_PATH})
+  set(ORIG_PATH $ENV{PATH})
+  set(ORIG_PYTHONPATH $ENV{PYTHONPATH})
+  set(ENV{ROS_ROOT} ${ROS_ROOT})
+  set(ENV{ROS_PACKAGE_PATH} ${ROS_PACKAGE_PATH})
+  set(ENV{PATH} "${ROS_ROOT}/bin:$ENV{PATH}")
+  set(ENV{PYTHONPATH} "${ROS_ROOT}/core/roslib/src:$ENV{PYTHONPATH}")
+endmacro()
+
+macro (_unset_ros_env)
+  set(ENV{ROS_ROOT} ${ORIG_ROS_ROOT})
+  set(ENV{ROS_PACKAGE_PATH} ${ORIG_ROS_PACKAGE_PATH})
+  set(ENV{PATH} "${ORIG_PATH}")
+  set(ENV{PYTHONPATH} "${ORIG_PYTHONPATH}")
+endmacro()
+
 macro (rospack VAR COMMAND PACKAGE)
   set(cachevar ROSPACK_${PACKAGE}_${COMMAND})
   set(${cachevar} "not-run-yet-NOTFOUND" CACHE INTERNAL "")
   if(NOT ${cachevar})
-    execute_process(COMMAND ${ROSPACK_EXECUTABLE} ${COMMAND} ${PACKAGE}
-      OUTPUT_VARIABLE ROSPACK_OUT
-      ERROR_VARIABLE rospack_error
-      OUTPUT_STRIP_TRAILING_WHITESPACE
-      ERROR_STRIP_TRAILING_WHITESPACE
-      )
-
+    if (NOT ROSPACK_EXECUTABLE)
+      message(WARNING "*** rosmsg There is no rosmsg executable!")
+      set(rospack_error "ROSPACK_EXECUTABLE not found") 
+    else()
+      _set_ros_env()
+      execute_process(COMMAND ${ROSPACK_EXECUTABLE} ${COMMAND} ${PACKAGE}
+        OUTPUT_VARIABLE ROSPACK_OUT
+        ERROR_VARIABLE rospack_error
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+        ERROR_STRIP_TRAILING_WHITESPACE
+        )
+      _unset_ros_env()
+    endif()
+    
     if(rospack_error)
       message(STATUS "***")
       message(STATUS "*** rospack ${COMMAND} ${PACKAGE} failed: ${rospack_error}")
@@ -37,7 +91,7 @@ macro (find_ros_package PACKAGE)
     message(STATUS "Could not find package ${PACKAGE} via rosmake")
   else()
     if(NOT ${PACKAGE}_FOUND)
-      message(STATUS "Finding ROS package ${PACKAGE} via rospack and ROS environment variables...")
+      message(STATUS "Finding ROS package: ${PACKAGE}")
       rospack(${PACKAGE}_INCLUDE_DIRS cflags-only-I ${PACKAGE})
       include_directories(${${PACKAGE}_INCLUDE_DIRS})
       rospack(${PACKAGE}_DEFINITIONS cflags-only-other ${PACKAGE})
@@ -87,19 +141,21 @@ macro (find_ros_package PACKAGE)
 
 endmacro()
 
-
-find_program(ROSMSG_EXECUTABLE rosmsg DOC "rosmsg executable")
-
 macro(rosmsg VAR CMD PACKAGE)
-  execute_process(COMMAND ${ROSMSG_EXECUTABLE} ${CMD} ${PACKAGE}
-    OUTPUT_VARIABLE ROSMSG_OUT
-    ERROR_VARIABLE rosmsg_error
-    OUTPUT_STRIP_TRAILING_WHITESPACE
-    ERROR_STRIP_TRAILING_WHITESPACE
-    )
-
+  if (NOT ROSMSG_EXECUTABLE)
+    set(rosmsg_error "rosmsg There is no rosmsg executable!")
+  else()
+    _set_ros_env()
+    execute_process(COMMAND ${ROSMSG_EXECUTABLE} ${CMD} ${PACKAGE}
+      OUTPUT_VARIABLE ROSMSG_OUT
+      ERROR_VARIABLE rosmsg_error
+      OUTPUT_STRIP_TRAILING_WHITESPACE
+      ERROR_STRIP_TRAILING_WHITESPACE
+      )
+    _unset_ros_env()
+  endif()
   if (rosmsg_error)
-    message(STATUS "*** rosmsg ${CMD} ${PACKAGE} failed: ${rosmsg_error}")
+    message(WARNING "*** rosmsg ${CMD} ${PACKAGE} failed: ${rosmsg_error}")
   else()
     separate_arguments(ROSPACK_SEPARATED UNIX_COMMAND ${ROSMSG_OUT})
     set(${VAR} ${ROSPACK_SEPARATED} CACHE INTERNAL "" FORCE)
