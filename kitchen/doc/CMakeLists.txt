@@ -15,7 +15,7 @@ set(ECTO_DOC_DEPLOY_DESTINATION_BASE /tmp
     )
 
 set(ECTO_DOC_DEPLOY_DESTINATION ${ECTO_DOC_DEPLOY_DESTINATION_BASE}/${${PROJECT_NAME}_GITTAG_SHORT}
-    CACHE PATH "Destination for deploying docs"
+    CACHE PATH "Destination for deploying docs" FORCE
     )
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Makefile.sphinx.in 
