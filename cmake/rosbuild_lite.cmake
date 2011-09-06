@@ -61,10 +61,14 @@ macro (rospack VAR COMMAND PACKAGE)
         ERROR_VARIABLE rospack_error
         OUTPUT_STRIP_TRAILING_WHITESPACE
         ERROR_STRIP_TRAILING_WHITESPACE
+        RESULT_VARIABLE rospack_error_code
         )
       _unset_ros_env()
+      if(${rospack_error_code} EQUAL 0)
+        unset(rospack_error)
+        unset(rospack_error_code)
+      endif()
     endif()
-    
     if(rospack_error)
       message(STATUS "***")
       message(STATUS "*** rospack ${COMMAND} ${PACKAGE} failed: ${rospack_error}")
@@ -151,8 +155,13 @@ macro(rosmsg VAR CMD PACKAGE)
       ERROR_VARIABLE rosmsg_error
       OUTPUT_STRIP_TRAILING_WHITESPACE
       ERROR_STRIP_TRAILING_WHITESPACE
+      RESULT_VARIABLE rosmsg_error_code
       )
     _unset_ros_env()
+    if(${rosmsg_error_code} EQUAL 0)
+      unset(rosmsg_error)
+      unset(rosmsg_error_code)
+    endif()
   endif()
   if (rosmsg_error)
     message(WARNING "*** rosmsg ${CMD} ${PACKAGE} failed: ${rosmsg_error}")
