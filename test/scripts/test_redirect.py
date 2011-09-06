@@ -6,6 +6,8 @@ import sys
 
 fname = "test_redirect.log"
 
+#FIXME This things hangs.
+
 def make(Schedtype):
     print 'Using :', Schedtype
     plasm = ecto.Plasm()
