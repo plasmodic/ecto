@@ -31,8 +31,8 @@ def sthreaded():
     
     assert not s.running()
     etime = time.time()
-    assert 0.62 > etime - stime >= 0.6
     print "elapsed:", etime-stime
+    assert 0.62 > etime - stime >= 0.6
     stime = time.time()
     s.execute_async(niter=3)
     assert s.running()
@@ -42,10 +42,11 @@ def sthreaded():
         nloops = nloops + 1
     
     assert not s.running()
+    print "nloops=", nloops
     assert nloops >= 59
     etime = time.time()
-    assert 0.62 > etime - stime >= 0.6
     print "elapsed:", etime-stime
+    assert 0.62 > etime - stime >= 0.6
 
     stime = time.time()
     assert not s.running()
@@ -54,6 +55,7 @@ def sthreaded():
     s.wait()
     assert not s.running()
     etime = time.time()
+    print "elapsed=", etime-stime
     assert 0.62 > etime - stime >= 0.6
 
 
