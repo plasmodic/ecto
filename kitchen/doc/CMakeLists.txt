@@ -101,10 +101,11 @@ if(SPHINX_BUILD)
   add_dependencies(doc pdf)
   add_dependencies(doc html)
 
-  install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/html
-    DESTINATION share/doc/${${PROJECT_NAME}_GITTAG_SHORT}
-    COMPONENT doc
-  )
+  #disable this install because the docs aren't always built.
+  #install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/html
+  #  DESTINATION share/doc/${${PROJECT_NAME}_GITTAG_SHORT}
+  #  COMPONENT doc
+  #)
 endif()
 
 
