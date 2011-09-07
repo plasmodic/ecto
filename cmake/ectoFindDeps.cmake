@@ -45,7 +45,7 @@ execute_process(COMMAND ${PYTHON_EXECUTABLE} --version
           OUTPUT_STRIP_TRAILING_WHITESPACE)
           
 string(REGEX MATCH "[0-9].[0-9]" PYTHON_VERSION_MAJOR_MINOR "${PYTHON_VERSION_FULL}")
-
+mark_as_advanced(PYVERSIONS_EXE)
 if(UNIX)
     if(APPLE)
         set(PYTHON_PACKAGES_PATH lib/python${PYTHON_VERSION_MAJOR_MINOR}/site-packages CACHE INTERNAL "Where to install the python packages.")

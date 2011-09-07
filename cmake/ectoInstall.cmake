@@ -5,7 +5,7 @@ set(ecto_INCLUDE_DIRS ${CMAKE_INSTALL_PREFIX}/${include_prefix})
 set(ecto_LIBRARIES_DIR ${CMAKE_INSTALL_PREFIX}/lib)
 
 if(UNIX)
-  set(ecto_LIBRARIES ${ecto_LIBRARIES_DIR}/libecto.so.${ECTO_VERSION})
+  set(ecto_LIBRARIES ${ecto_LIBRARIES_DIR}/libecto.so)
 elseif(WIN32)
   set(ecto_LIBRARIES ${ecto_LIBRARIES_DIR}/ecto_cpp.dll)
 endif()
@@ -21,7 +21,7 @@ configure_file(${ecto_SOURCE_DIR}/cmake/ectoMacros.cmake
   ${CMAKE_BINARY_DIR}/unix_install/ectoMacros.cmake @ONLY)
 configure_file(${ecto_SOURCE_DIR}/cmake/rosbuild_lite.cmake
   ${CMAKE_BINARY_DIR}/unix_install/rosbuild_lite.cmake @ONLY)
-    
+
 #install the ectoConfig.cmake and ectoConfig-version.cmake
 INSTALL(FILES
   ${CMAKE_BINARY_DIR}/unix_install/ectoMacros.cmake
@@ -38,20 +38,22 @@ configure_file(${ecto_SOURCE_DIR}/cmake/python_path.sh.inst.in
   ${CMAKE_BINARY_DIR}/unix_install/python_path.sh
   )
 
+#install to root of install prefix.. /opt/ecto/ameoba/python_path.sh
 install(FILES ${CMAKE_BINARY_DIR}/unix_install/python_path.sh
-        DESTINATION ${share_prefix} COMPONENT main
+  DESTINATION ${CMAKE_INSTALL_PREFIX} COMPONENT main
   )
+
 install(FILES ${ecto_SOURCE_DIR}/cmake/python_path.sh.user.in
-        DESTINATION ${share_prefix} COMPONENT main
+  DESTINATION ${share_prefix} COMPONENT main
   )
 
 INSTALL(DIRECTORY ${ecto_SOURCE_DIR}/include/ecto
-        DESTINATION ${include_prefix}
-        COMPONENT main
-        )
-        
+  DESTINATION ${include_prefix}
+  COMPONENT main
+  )
+
 INSTALL(FILES ${CMAKE_BINARY_DIR}/include/ecto/version.hpp
-        DESTINATION ${include_prefix}/ecto
-        COMPONENT main
-        )
+  DESTINATION ${include_prefix}/ecto
+  COMPONENT main
+  )
 

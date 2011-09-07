@@ -8,10 +8,21 @@
 
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
+export CFLAGS=
+export CPPFLAGS=
+export CXXFLAGS=
+export LDFLAGS=
 
 %:
 	dh $@ 
 
 override_dh_auto_configure:
-	dh_auto_configure -- -DBUILD_TYPE=Release -DBUILD_DOC=OFF -DBUILD_TEST=ON -DBUILD_SAMPLES=OFF
+	dh_auto_configure -- \
+	-DCMAKE_INSTALL_PREFIX='/opt/ecto/amoeba' \
+	-DCMAKE_INSTALL_RPATH='/opt/ecto/amoeba/lib' \
+	-DCMAKE_INSTALL_RPATH_USE_LINK_PATH=TRUE \
+	-DCMAKE_BUILD_TYPE=RelWithDebInfo \
+	-DBUILD_DOC=OFF \
+	-DBUILD_SAMPLES=OFF \
+	-DBUILD_TEST=ON
 

@@ -20,6 +20,7 @@ endif()
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_INSTALL_RPATH ${CMAKE_INSTALL_PREFIX}/lib)
 
 set(include_prefix include/ecto-${ECTO_VERSION})
 set(share_prefix share/ecto-${ECTO_VERSION})
@@ -73,9 +74,6 @@ elseif(WIN32)
   endif()
 endif()
 
-
-
-
 set(ecto_PYTHONPATH ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} ${ecto_SOURCE_DIR}/python)
 set(ecto_INCLUDE_DIRS ${ecto_SOURCE_DIR}/include ${CMAKE_BINARY_DIR}/include)
 if(UNIX)
@@ -112,10 +110,12 @@ if(BUILD_SAMPLES)
   add_subdirectory(samples)
 endif()
 
-option(BUILD_doc_errata "Build doc errata" ON)
-if(BUILD_doc_errata)
-  add_subdirectory(doc/source doc_errata)
-endif()
+#if(BUILD_DOC)
+    option(BUILD_doc_errata "Build doc errata" ON)
+    if(BUILD_doc_errata)
+      add_subdirectory(doc/source doc_errata)
+    endif()
+#endif()
 
 message(STATUS "Building ecto version:   ${ECTO_VERSION}")
 message(STATUS "Building ecto code name: ${ECTO_CODE_NAME}")
