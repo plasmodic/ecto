@@ -1,7 +1,11 @@
 cmake_minimum_required(VERSION 2.8)
-#put this before project so that it gets picked up.
-set(CMAKE_BUILD_TYPE "Release" CACHE STRING "The build type.")
 project(ecto)
+
+if(NOT CMAKE_BUILD_TYPE)#Only do this the on the first run, if the build type hasn't been set prior
+  set(CMAKE_BUILD_TYPE RelWithDebInfo CACHE STRING
+      "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel."
+      FORCE)
+endif()
 
 set(ECTO_MAJOR_VERSION 0)
 set(ECTO_MINOR_VERSION 1)
@@ -110,12 +114,10 @@ if(BUILD_SAMPLES)
   add_subdirectory(samples)
 endif()
 
-#if(BUILD_DOC)
-    option(BUILD_doc_errata "Build doc errata" ON)
-    if(BUILD_doc_errata)
-      add_subdirectory(doc/source doc_errata)
-    endif()
-#endif()
+option(BUILD_doc_errata "Build doc errata" ON)
+if(BUILD_doc_errata)
+  add_subdirectory(doc/source doc_errata)
+endif()
 
 message(STATUS "Building ecto version:   ${ECTO_VERSION}")
 message(STATUS "Building ecto code name: ${ECTO_CODE_NAME}")
