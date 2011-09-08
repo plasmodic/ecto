@@ -35,7 +35,7 @@ macro( rosbuild_lite_init )
 
   if (NOT ROS_PACKAGE_PATH)
     if ("$ENV{ROS_PACKAGE_PATH}" STREQUAL "")
-      message(STATUS "*** ROS_PACKAGE_PATH is not set... is your environment set correctly? Setting to default: ${ROS_PACKAGE_PATH}")
+      message(STATUS "*** ROS_PACKAGE_PATH is not set... is your environment set correctly? Setting to default: ${ROS_PACKAGE_PATH_DEFAULT}")
       set(ROS_PACKAGE_PATH ${ROS_PACKAGE_PATH_DEFAULT} CACHE PATH "ROS_PACKAGE_PATH path")
     else()
       set(ROS_PACKAGE_PATH "$ENV{ROS_PACKAGE_PATH}" CACHE PATH "ROS_PACKAGE_PATH path")
