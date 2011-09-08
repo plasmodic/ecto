@@ -1,34 +1,60 @@
+#rosbuild_lite.cmake
+#
+#   A set of cmake macros that allow non rosbuild projects to use ros packages
+#
+#   rosbuild_lite_init()
+#       This finds ROSPACK_EXECUTABLE, and ROSMSG_EXECUTABLE, along with setting
+#       ROS_ROOT and ROS_PACKAGE_PATH. You may change the ros distro
+#       by setting ROS_ROOT and ROS_PACKAGE_PATH in the cmake cache.
+#       ROS_FOUND will be set to TRUE if this is successful, and will be unset
+#       otherwise.
+#
+#
+#   rospack( VAR COMMAND PACKAGE )
+#       This calls rospack and stores the result in VAR.  It uses the COMMAND
+#       as the rospack subcommand, and PACKAGE as the ros package.  The ROS_PACKAGE_PATH
+#       that is set in the cache must contain the ros package you wish to build against.
+#
+#   find_ros_package( PACKAGE )
+#       Finds a ROS package, by the name PACKAGE, it must be in the cached ROS_PACKAGE_PATH.
+#       
 option(ROS_CONFIGURE_VERBOSE OFF)
-set(ROS_ROOT_DEFAULT /opt/ros/electric/ros CACHE PATH "The default ROS_ROOT")
-set(ROS_PACKAGE_PATH_DEFAULT /opt/ros/electric/stacks CACHE PATH "The default ROS_PACKAGE_PATH")
 
-if (NOT ROS_ROOT)
-  if ("$ENV{ROS_ROOT}" STREQUAL "")
-    message("*** ROS_ROOT is not set... is your environment set correctly? Setting to default: ${ROS_ROOT_DEFAULT}")
-    set(ROS_ROOT ${ROS_ROOT_DEFAULT} CACHE PATH  "ROS_ROOT path")
-  else()
-    set(ROS_ROOT "$ENV{ROS_ROOT}" CACHE PATH  "ROS_ROOT path")
+macro( rosbuild_lite_init )
+  set(ROS_ROOT_DEFAULT /opt/ros/electric/ros CACHE PATH "The default ROS_ROOT")
+  set(ROS_PACKAGE_PATH_DEFAULT /opt/ros/electric/stacks CACHE PATH "The default ROS_PACKAGE_PATH")
+
+  if (NOT ROS_ROOT)
+    if ("$ENV{ROS_ROOT}" STREQUAL "")
+      message(STATUS "*** ROS_ROOT is not set... is your environment set correctly? Setting to default: ${ROS_ROOT_DEFAULT}")
+      set(ROS_ROOT ${ROS_ROOT_DEFAULT} CACHE PATH  "ROS_ROOT path")
+    else()
+      set(ROS_ROOT "$ENV{ROS_ROOT}" CACHE PATH  "ROS_ROOT path")
+    endif()
   endif()
-endif()
 
-if (NOT ROS_PACKAGE_PATH)
-  if ("$ENV{ROS_PACKAGE_PATH}" STREQUAL "")
-    message("*** ROS_ROOT is not set... is your environment set correctly? Setting to default: ${ROS_ROOT_DEFAULT}")
-    set(ROS_PACKAGE_PATH ${ROS_PACKAGE_PATH_DEFAULT} CACHE PATH "ROS_PACKAGE_PATH path")
-  else()
-    set(ROS_PACKAGE_PATH "$ENV{ROS_PACKAGE_PATH}" CACHE PATH "ROS_PACKAGE_PATH path")
+  if (NOT ROS_PACKAGE_PATH)
+    if ("$ENV{ROS_PACKAGE_PATH}" STREQUAL "")
+      message(STATUS "*** ROS_PACKAGE_PATH is not set... is your environment set correctly? Setting to default: ${ROS_PACKAGE_PATH}")
+      set(ROS_PACKAGE_PATH ${ROS_PACKAGE_PATH_DEFAULT} CACHE PATH "ROS_PACKAGE_PATH path")
+    else()
+      set(ROS_PACKAGE_PATH "$ENV{ROS_PACKAGE_PATH}" CACHE PATH "ROS_PACKAGE_PATH path")
+    endif()
   endif()
-endif()
 
-find_program(ROSPACK_EXECUTABLE rospack PATHS ${ROS_ROOT}/bin DOC "the rospack executable.")
-find_program(ROSMSG_EXECUTABLE rosmsg PATHS ${ROS_ROOT}/bin DOC "rosmsg executable")
+  find_program(ROSPACK_EXECUTABLE rospack PATHS ${ROS_ROOT}/bin DOC "the rospack executable.")
+  find_program(ROSMSG_EXECUTABLE rosmsg PATHS ${ROS_ROOT}/bin DOC "rosmsg executable")
 
-if (ROSPACK_EXECUTABLE)
-  set(ROS_FOUND TRUE)
-else()
-  unset(ROS_FOUND)
-endif()
+  if (ROSPACK_EXECUTABLE)
+    set(ROS_FOUND TRUE)
+  else()
+    unset(ROS_FOUND)
+  endif()
+endmacro()
 
+#attempts to set ENV variables so that ROS commands will work.
+#This appears to work well on linux, but may be questionable on
+#other platforms.
 macro (_set_ros_env)
   set(ORIG_ROS_ROOT $ENV{ROS_ROOT})
   set(ORIG_ROS_PACKAGE_PATH $ENV{ROS_PACKAGE_PATH})
@@ -40,6 +66,7 @@ macro (_set_ros_env)
   set(ENV{PYTHONPATH} "${ROS_ROOT}/core/roslib/src:$ENV{PYTHONPATH}")
 endmacro()
 
+#unset environment
 macro (_unset_ros_env)
   set(ENV{ROS_ROOT} ${ORIG_ROS_ROOT})
   set(ENV{ROS_PACKAGE_PATH} ${ORIG_ROS_PACKAGE_PATH})
@@ -97,7 +124,6 @@ macro (find_ros_package PACKAGE)
     if(NOT ${PACKAGE}_FOUND)
       message(STATUS "Finding ROS package: ${PACKAGE}")
       rospack(${PACKAGE}_INCLUDE_DIRS cflags-only-I ${PACKAGE})
-      include_directories(${${PACKAGE}_INCLUDE_DIRS})
       rospack(${PACKAGE}_DEFINITIONS cflags-only-other ${PACKAGE})
 
       rospack(libdirs libs-only-L ${PACKAGE})
@@ -168,6 +194,6 @@ macro(rosmsg VAR CMD PACKAGE)
   else()
     separate_arguments(ROSPACK_SEPARATED UNIX_COMMAND ${ROSMSG_OUT})
     set(${VAR} ${ROSPACK_SEPARATED} CACHE INTERNAL "" FORCE)
-    message("rosmsg ${VAR} == ${${VAR}}")
+    message(STATUS "rosmsg ${VAR} == ${${VAR}}")
   endif()
 endmacro()

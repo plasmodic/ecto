@@ -1,5 +1,5 @@
 macro(setup_virtualenv PROJECT)
-  option(INSTALL_TO_VIRTUALENV "Install by default to a virtual environment" ON)
+  option(INSTALL_TO_VIRTUALENV "Install by default to a virtual environment" OFF)
   option(WORK_IN_VIRTUALENV "Install by default to a virtual environment" OFF)
   if(WORK_IN_VIRTUALENV)
     if("$ENV{VIRTUAL_ENV}" STREQUAL "")
