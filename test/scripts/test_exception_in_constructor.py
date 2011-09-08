@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import ecto
 import ecto_test
-import sys
+import sys, util
 
 exceptor = ecto_test.ExceptInConstructor()
 
@@ -16,5 +16,9 @@ expected_except='''Original Exception: std::logic_error
   Function: configure'''
 try:
     plasm.execute(niter=1)
-except Exception,e:
-    assert expected_except in str(e)
+    util.fail()
+except RuntimeError, e:
+    print sys.exc_info()
+    print str(e)
+    assert "what  I hate life." in str(e)
+    assert "when  Construction" in str(e)

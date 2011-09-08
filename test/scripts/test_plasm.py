@@ -2,6 +2,8 @@
 import ecto
 import ecto_test
 
+class shouldathrown: pass
+
 def test_plasm():
     scatter = ecto_test.Scatter(n=3, x=3)
     scatter2 = ecto_test.Scatter(n=5, x=10)
@@ -17,30 +19,31 @@ def test_plasm():
     try:
         p2 = ecto.Plasm()
         p2.connect(scatter, "out_0000", gather, "idn_0001")
-        assert False, "Should not work ..."
-    except RuntimeError, e:
+        util.fail()
+    except ecto.NonExistant, e:
         print ">>>",e
-        assert str(e) == ''''idn_0001' does not exist in this tendrils object. Possible keys are:  'in_0000':type(int) 'in_0001':type(int) 'in_0002':type(int)
-'ecto_test::Scatter.inputs.out_0000' does not exist.'''
-        print "(threw as expected)"
-        
+        assert "'in_0000':type(int) 'in_0001':type(int) 'in_0002':type(int)" in str(e)
+        print "(threw as expected)\n\n"
+
     try:
         p2 = ecto.Plasm()
         p2.connect(gather["out"] >> ecto_test.Printer(print_type="double")["in"])
-        assert False, "Should not work as there is a type mismatch..."
-    except RuntimeError, e:
+        util.fail("Should not work as there is a type mismatch...")
+    except ecto.TypeMismatch, e:
+        print "type:",type(e)
         print ">>>",e
-        assert str(e) == "type mismatch:  'ecto_test::Gather<int>.outputs.out' of type 'int' is connected to'ecto_test::Printer.inputs.in' of type 'double'"
+        assert "from_typename  int" in str(e)
+        assert "to_typename  double" in str(e)
         print "(threw as expected)"
-    
+
     try:
         p2 = ecto.Plasm()
         p2.connect(gather["out"],ecto_test.Printer(print_type="double")["in"])
-        assert False, "Should not work."
+        util.fail("Should not work.")
     except RuntimeError, e:
         print e
         assert 'Did you mean' in str(e)
-        
+
     plasm.connect(scatter[:] >> gather[:],
                   scatter2[:] >> gather2[:],
                   gather["out"] >> ecto_test.Printer(print_type="int")["in"]
@@ -81,7 +84,7 @@ def bad_syntax_errors():
         plasm.connect(
                   scatter[:] >> gather2[:]
                   )
-        assert False, "Should not work as there is a size mismatch..."
+        util.fail("Should not work as there is a size mismatch...")
     except RuntimeError, e:
         print e
 

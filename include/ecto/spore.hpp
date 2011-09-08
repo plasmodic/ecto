@@ -65,7 +65,9 @@ namespace ecto
         tendril_(t)
     {
       if(!t)
-        throw std::logic_error("This tendril is null.");
+        BOOST_THROW_EXCEPTION(NullTendril()
+                              << diag_msg("creating sport with type")
+                              << spore_typename(name_of<T>()));
 
       t->enforce_type<T>();
     }
@@ -171,7 +173,7 @@ namespace ecto
     inline tendril::ptr get()
     {
       if (!tendril_)
-        throw std::logic_error("This spore points to nothing.");
+        BOOST_THROW_EXCEPTION(NullTendril());
       return tendril_;
     }
     /**
@@ -181,7 +183,10 @@ namespace ecto
     inline tendril::const_ptr get() const
     {
       if (!tendril_)
-        throw std::logic_error("This spore points to nothing. Type name:" + name_of<T>());
+        BOOST_THROW_EXCEPTION(NullTendril() 
+                              << diag_msg("access via spore")
+                              << spore_typename(name_of<T>()));
+
       return tendril_;
     }
     boost::shared_ptr<tendril> tendril_;

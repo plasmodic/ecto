@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 import ecto
 import ecto_test
+from util import fail
 import sys, time
 
 print "Hardware concurrency is", ecto.hardware_concurrency()
 
-
 def makeplasm():
     plasm = ecto.Plasm()
-    
+
     ping = ecto_test.Ping("Ping")
     sleep0 = ecto_test.Sleep("Sleep_0", seconds=0.1)
     sleep1 = ecto_test.Sleep("Sleep_1", seconds=0.1)
@@ -24,11 +24,11 @@ def sthreaded():
     s = ecto.schedulers.Singlethreaded(p)
 
     assert not s.running()
-    
+
     stime = time.time()
-    
+
     s.execute(niter=3)
-    
+
     assert not s.running()
     etime = time.time()
     print "elapsed:", etime-stime
@@ -40,7 +40,7 @@ def sthreaded():
     while s.running():
         time.sleep(0.01)
         nloops = nloops + 1
-    
+
     assert not s.running()
     print "nloops=", nloops
     assert nloops >= 59
@@ -90,7 +90,7 @@ def tpool():
         print "async and wait()"
         s.execute_async(**kwargs)
         s.wait()
-    
+
     waittime = bang(waitit)
 
     print runtime, asynctime, waittime
@@ -126,11 +126,22 @@ def tpool_throw_on_double_execute():
 
     stime = time.time()
     s.execute_async()
-    try: 
+    try:
         s.execute()
-    except Exception, e:
-        assert e.message == "threadpool scheduler already running"
-        print "as expected:", e.message
+        fail("sched already running")
+
+    except ecto.EctoException, e:
+        print e
+        assert "threadpool scheduler already running" in str(e)
+
+    try:
+        s.execute_async()
+        fail("sched already running")
+
+    except ecto.EctoException, e:
+        print e
+        assert "threadpool scheduler already running" in str(e)
+
 
 def tpool_wait_on_nothing():
     p = makeplasm()
@@ -142,10 +153,11 @@ def tpool_wait_on_nothing():
     print etime-stime
     assert 0.01 > etime-stime
 
+
 if ecto.hardware_concurrency() > 1:
     tpool()
-    tpool_wait_on_nothing()
     tpool_throw_on_double_execute()
+    tpool_wait_on_nothing()
     tpool_interrupt()
 else:
     print "threadpool async execution tests disabled due to lack of hardware concurrency"

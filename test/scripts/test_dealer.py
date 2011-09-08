@@ -20,8 +20,10 @@ def test_dealer_hetorgenious_type_fail():
     try:
         dealer = ecto.Dealer(typer=printer.inputs.at('in'), iterable=cards)
         assert False == " Should have thrown."
-    except RuntimeError, e:
-        assert str(e) == 'Could not convert python object to type : double'
+    except ecto.FailedFromPythonConversion, e:
+        print str(e)
+        assert 'cpp_typename  double' in str(e)
+
 if __name__ == '__main__':
     test_dealer(ecto.schedulers.Singlethreaded)
     test_dealer(ecto.schedulers.Threadpool)

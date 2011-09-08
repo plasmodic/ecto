@@ -276,7 +276,7 @@ TEST(SporeTest, NullAssign)
   EXPECT_THROW(
   ss = tendril::ptr();
   ,
-  std::logic_error);
+  ecto::except::NullTendril);
 }
 
 

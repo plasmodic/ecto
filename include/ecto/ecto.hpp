@@ -102,9 +102,9 @@ namespace ecto
               *tp << value;
             }catch(ecto::except::TypeMismatch& e)
             {
-              e << std::string("Parameter: " + keystring);
-              e << std::string("Cell: " + m->name());
-              throw e;
+              e << except::tendril_key(keystring);
+              e << except::cell_name(m->name());
+              throw;
             }
             tp->user_supplied(true);
             tp->dirty(true);

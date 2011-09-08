@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-import ecto, ecto.schedulers
+import sys, ecto, ecto.schedulers
 import ecto_test
-           
+
 class MyModule(ecto.BlackBox):
     def __init__(self,plasm, start, step):
         ecto.BlackBox.__init__(self,plasm)
@@ -80,8 +80,9 @@ def test_blackbox():
     assert mm.outputs.out == 41 # 10 + 10*3 + 1
     try:
         print mm.inputs.input
-        assert False, "Should have thrown, input does not exist!!!"
+        fail("should have thrown")
     except RuntimeError, e:
+        print sys.exc_info()
         print e
     #single item in connections list.
     mm = MyModule2(plasm,start=10,step=3)

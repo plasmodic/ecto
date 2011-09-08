@@ -18,6 +18,7 @@ foreach(file
     test_doc
     test_dual_line_plasm
     test_entanglement
+    test_exception
     test_exception_in_constructor
     test_If
     test_handles

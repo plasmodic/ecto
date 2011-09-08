@@ -2,6 +2,8 @@
 #include <boost/python.hpp>
 namespace ecto
 {
+  using namespace except;
+
   tendril::tendril()
     : doc_()
     , flags_()
@@ -46,7 +48,7 @@ namespace ecto
       enforce_compatible_type(rhs);
       if (rhs.is_type<none>())
       {
-        throw ecto::except::ValueNone("You may not copy the value of a tendril that holds a tendril::none.");
+        BOOST_THROW_EXCEPTION(ecto::except::ValueNone());
       }
       else if (rhs.is_type<boost::python::object>())
       {
@@ -156,7 +158,9 @@ namespace ecto
   {
     if (!compatible_type(rhs))
     {
-      throw except::TypeMismatch(type_name() + " is not compatible with " + rhs.type_name());
+      BOOST_THROW_EXCEPTION(except::TypeMismatch() << from_typename(type_name())
+                            << to_typename(rhs.type_name()));
+        ;
     }
   }
 

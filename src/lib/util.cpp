@@ -1,6 +1,7 @@
 #include <vector>
 #include <iostream>
 #include <ecto/util.hpp>
+#include <ecto/except.hpp>
 #if !defined(_WIN32)
 #include <cxxabi.h>
 #endif
@@ -33,59 +34,61 @@
 
 // extern "C"
 // char * _unDName(
-    // char * outputString,
-    // const char * name,
-    // int maxStringLength,
-    // void * (* pAlloc )(size_t),
-    // void (* pFree )(void *),
-    // unsigned short disableFlags);
-	// _unDName(0, pName, 0, malloc, free, UNDNAME_NO_ARGUMENTS | UNDNAME_32_BIT_DECODE);
+// char * outputString,
+// const char * name,
+// int maxStringLength,
+// void * (* pAlloc )(size_t),
+// void (* pFree )(void *),
+// unsigned short disableFlags);
+// _unDName(0, pName, 0, malloc, free, UNDNAME_NO_ARGUMENTS | UNDNAME_32_BIT_DECODE);
 
 namespace abi
 {
-	char* __cxa_demangle(const char * const pName,...)
-	{
-		char * name = new char[std::strlen(pName)];
-		std::strcpy(name,pName);
-		return name;
-	}
+  char* __cxa_demangle(const char * const pName,...)
+  {
+    char * name = new char[std::strlen(pName)];
+    std::strcpy(name,pName);
+    return name;
+  }
 }
 #endif
 
 namespace ecto
 {
+  using namespace ecto::except;
+
   struct type_mapping
   {
-    type_mapping()
-    {
-    }
+    type_mapping() { }
+
     const std::string&
     lookup(const std::type_info& ti)
     {
       const char* mangled = ti.name();
       if (!mangled)
-      {
-        throw std::runtime_error("Could get a type name for your type! The world must be ending.");
-      }
+        {
+          BOOST_THROW_EXCEPTION(EctoException()
+                                << diag_msg("Could get a type name for your type! The world must be ending."));
+        }
       boost::mutex::scoped_lock l(mtx);
       std::string rv;
       bool inserted;
       Hashes::iterator it;
       boost::tie(it, inserted) = hashes.insert(std::make_pair<std::string, std::string>(mangled, rv));
       if (inserted)
-      {
         {
-          int status=0;
-          char* demangled = abi::__cxa_demangle(mangled, 0, 0, &status);
-          if (status != 0)
-            rv = mangled;
-          else
-            rv = demangled;
-          free(demangled);
+          {
+            int status=0;
+            char* demangled = abi::__cxa_demangle(mangled, 0, 0, &status);
+            if (status != 0)
+              rv = mangled;
+            else
+              rv = demangled;
+            free(demangled);
+          }
+          it->second = rv;
+          //std::cout << "looking up id for : " << rv << " inserted " << size_t(it->second.c_str()) << std::endl;
         }
-        it->second = rv;
-        //std::cout << "looking up id for : " << rv << " inserted " << size_t(it->second.c_str()) << std::endl;
-      }
       return it->second;
     }
     typedef std::map<std::string, std::string> Hashes;

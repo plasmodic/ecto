@@ -1,7 +1,5 @@
 #!/usr/bin/env python
-import ecto
-import ecto_test
-import sys
+import ecto, ecto_test, sys, util
 
 
 print ecto_test.RequiredIO.__doc__
@@ -18,17 +16,20 @@ try:
     p.connect(gen[:] >> req[:])
     print "checking..."
     p.check()
-    print "checked."
+    util.fail()
 except Exception, e:
-    assert str(e) == "in module ecto_test::RequiredIO, output port 'out' is required but not connected"
+    print str(e)
+    assert "NotConnected" in str(e)
     print e, '(threw as expected)'
 
 try:
     p = ecto.Plasm()
     p.connect(req[:] >> out [:])
     p.check()
+    util.fail()
 except Exception, e:
-    assert str(e) == "in module ecto_test::RequiredIO, input port 'in' is required but not connected"
+    print str(e)
+    assert "NotConnected" in str(e)
     print e, '(threw as expected)'
 
 

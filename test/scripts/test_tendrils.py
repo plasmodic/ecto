@@ -14,24 +14,28 @@ def test_tendrils():
     #test the redeclare
     try:
         t.declare("Hello","new doc", "you")
-    except RuntimeError, e:
-        assert('You can\'t redeclare a tendril!' in str(e))
+        util.fail()
+    except ecto.TendrilRedeclaration, e:
+        print str(e)
+        assert('TendrilRedeclaration' in str(e))
     try:
         #read error
         t.nonexistant = 1
-        assert False
-    except RuntimeError,e:
-        assert "'nonexistant' does not exist in this tendrils object." in str(e)
+        util.fail()
+    except ecto.NonExistant, e:
+        print str(e)
+        assert "tendril_key  nonexistant" in str(e)
     try:
         #index error
         print t["nonexistant"]
-        assert False
-    except RuntimeError,e:
-        assert "'nonexistant' does not exist in this tendrils object." in str(e)
+        util.fail()
+    except ecto.NonExistant, e:
+        print str(e)
+        assert "tendril_key  nonexistant" in str(e)
 
     assert len(t.keys()) == 2
     assert len(t.values()) == 2
-    
+
     print t
     #by value
     _x = t.x
@@ -44,13 +48,13 @@ def test_tendrils():
     x = t.at("x")
     t.x = 13
     assert x.val == 13
-    
+
     t.x = 17
     assert t.x == 17
     t.x = 199
     t.x = 15
     print t.x
     assert t.x == 15
-    
+
 if __name__ == '__main__':
     test_tendrils()

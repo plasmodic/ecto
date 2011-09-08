@@ -148,16 +148,18 @@ namespace ecto
     T&
     get(const std::string& name) const
     {
+      const_iterator iter = storage.find(name);
       try
       {
-        const_iterator iter = storage.find(name);
         if (iter == end())
           doesnt_exist(name);
         return iter->second->get<T>();
       } catch (except::TypeMismatch& e)
       {
-        e << std::string("  Hint : ") + "'" + name + "' is of type: " + storage.at(name)->type_name();
-        throw e;
+        e << except::actualtype_hint(iter->first)
+          << except::tendril_key(name)
+          ;
+        throw;
       }
     }
 

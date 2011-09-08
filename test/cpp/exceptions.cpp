@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <ecto/ecto.hpp>
+#include <ecto/except.hpp>
 #include <ecto/plasm.hpp>
 #include <ecto/schedulers/threadpool.hpp>
 
@@ -141,11 +142,14 @@ TEST(Exceptions, ProcessException)
       catch (except::EctoException& e)
       {
         std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
+        std::cout << diagnostic_information(e) << "\n";
+        /*
         if(stre != e.msg_)
         {
           throw std::runtime_error("Got :" + e.msg_ +"\nExpected :" +stre);
         }
-        throw e;
+        */
+        throw;
       }
       ,
       ecto::except::EctoException);
@@ -161,75 +165,60 @@ TEST(Exceptions, NotExist)
              "  Function: process");
 
   cell::ptr m = create_cell<NotExist> ();
-  EXPECT_THROW(
-      try
-      {
-        m->process();
-      }
-      catch (except::EctoException& e)
-      {
-        std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
-        if(stre != e.msg_)
-        {
-          throw std::runtime_error("Got :" + e.msg_ +"\nExpected :" +stre);
-        }
-        throw e;
-      }
-      ,
-      ecto::except::EctoException);
+  try
+    {
+      m->process();
+    }
+  catch (except::NonExistant& e)
+    {
+      std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
+      //EXPECT_EQ(stre, e.msg_);
+    }
 }
 
 TEST(Exceptions, WrongType)
 {
   std::string stre("double is not a int\n"
-"  Hint : 'd' is of type: double\n"
+"  Hint : 'd' is of type double\n"
 "  Module : WrongType\n"
 "  Function: process");
   cell::ptr m = create_cell<WrongType> ();
-  EXPECT_THROW(
-      try
-      {
-        m->process();
-      }
-      catch (except::EctoException& e)
-      {
-        std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
-        if(stre != e.msg_)
-        {
-          throw std::runtime_error("Got :" + e.msg_ +"\nExpected :" +stre);
-        }
-        throw e;
-      }
-      ,
-      ecto::except::EctoException);
+  bool threw = false;
+  try
+    {
+      m->process();
+    }
+  catch (except::EctoException& e)
+    {
+      std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
+      //      EXPECT_EQ(stre, e.msg_);
+      threw = true;
+    }
+  EXPECT_TRUE(threw);
 }
 
 TEST(Exceptions, WrongType_sched)
 {
   std::string stre("double is not a int\n"
-"  Hint : 'd' is of type: double\n"
+"  Hint : 'd' is of type double\n"
 "  Module : WrongType\n"
 "  Function: process");
   cell::ptr m = create_cell<WrongType> ();
   plasm::ptr p(new plasm);
   p->insert(m);
   schedulers::threadpool sched(p);
-  EXPECT_THROW(
-      try
-      {
-        sched.execute(8,1);
-      }
-      catch (except::EctoException& e)
-      {
-        std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
-        if(stre != e.msg_)
-        {
-          throw std::runtime_error("Got :" + e.msg_ +"\nExpected :" +stre);
-        }
-        throw e;
-      }
-      ,
-      ecto::except::EctoException);
+  bool threw = false;
+  try
+    {
+      sched.execute(8,1);
+    }
+  catch (except::TypeMismatch& e)
+    {
+      std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
+      //      EXPECT_EQ(stre, e.msg_);
+      threw = true;
+    }
+  EXPECT_TRUE(threw);
 }
 
 TEST(Exceptions, ParameterCBExcept_sched)
@@ -253,11 +242,13 @@ TEST(Exceptions, ParameterCBExcept_sched)
       catch (except::EctoException& e)
       {
         std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
+        /*
         if(stre != e.msg_)
         {
           throw std::runtime_error("Got :" + e.msg_ +"\nExpected :" +stre);
         }
-        throw e;
+        */
+        throw;
       }
       ,
       ecto::except::EctoException);

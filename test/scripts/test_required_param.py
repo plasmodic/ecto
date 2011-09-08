@@ -1,7 +1,5 @@
 #!/usr/bin/env python
-import ecto
-import ecto_test
-import sys
+import ecto, ecto_test, sys, util
 
 
 def test_required_param():
@@ -13,7 +11,7 @@ def test_required_param():
     assert "2.1253" in ecto_test.RequiredParam.__doc__
     try:
         req = ecto_test.RequiredParam("Required")
-        assert False, "should have thrown"
+        util.fail()
     except RuntimeError, e:
         print e
         
