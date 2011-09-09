@@ -50,13 +50,14 @@ namespace ecto
 
       ReturnCode dispatch_process(const tendrils& inputs, const tendrils& outputs)
       {
+        int value = OK;
         std::for_each(inputs.begin(),inputs.end(), YouveBeenServed());
         if (bp::override proc = this->get_override("process"))
           {
-            proc(boost::ref(inputs), boost::ref(outputs));
+            value = proc(boost::ref(inputs), boost::ref(outputs));
           }
         std::for_each(outputs.begin(),outputs.end(),YouveBeenServed());
-        return OK;
+        return ReturnCode(value);
       }
 
       void init() { }

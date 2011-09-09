@@ -20,3 +20,4 @@ class MyModule(ecto.Module):
     def process(self,inputs, outputs):
         c = int(inputs.input)
         outputs.out = c * self.text
+        return 0
