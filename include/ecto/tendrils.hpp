@@ -138,32 +138,6 @@ namespace ecto
     tendril::ptr
     declare(const std::string& name, tendril::ptr t);
 
-
-    /**
-     * \brief get the given type that is stored at the given key.  Will throw if there is a type mismatch.
-     * @tparam T The compile time type to attempt to get from the tendrils.
-     * @param name The key value
-     * @return A const reference to the value, no copy is done.
-     */
-    /*
-    template <typename T>
-    const T&
-    get(const std::string& name) const
-    {
-      try
-      {
-        const_iterator iter = storage.find(name);
-        if (iter == end()) 
-          doesnt_exist(name);
-        return iter->second->get<T>();
-      }catch(except::TypeMismatch& e)
-      {
-        e << std::string("  Hint : " ) + "'"+name+"' is of type: " + storage.at(name)->type_name();
-        throw e;
-      }
-    }
-    */
-
     /**
      * \brief get the given type that is stored at the given key.  Will throw if there is a type mismatch.
      * @tparam T The compile time type to attempt to get from the tendrils.
