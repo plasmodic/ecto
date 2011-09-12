@@ -10,30 +10,31 @@ possible_schedulers = [ x for x in ecto.schedulers.__dict__.keys() if x[0] != '_
 
 def use_ipython(options, sched, plasm, locals={}):
     '''Launch a plasm using ipython, and a scheduler of choice.
-     
-     options are from scheduler_options
-     
-     sched is an already initialized scheduler for plasm.
-     
-     plasm to execute
-     
-     locals are a dictionary of locals to forward to the ipython shell, use locals()
+      -- options are from scheduler_options
+      -- sched is an already initialized scheduler for plasm.
+      -- plasm to execute
+      -- locals are a dictionary of locals to forward to the ipython shell, use locals()
     '''
     #expose the locals to the ipython prompt.
     for key, val in locals.items():
         vars()[key] = val
 
-    from IPython.Shell import IPShellEmbed
     if type(sched) == ecto.schedulers.Singlethreaded:
         sched.execute_async(options.niter)
     else:
         sched.execute_async(options.niter, options.nthreads)
 
-    #the argv is important so that the IPShellEmbed doesn't use the global
-    #Also fancy colors!!!!
-    ipython_argv = ['-prompt_in1', 'Input <\\#>', '-colors', 'LightBG']
-    ipshell = IPShellEmbed(ipython_argv)
-    ipshell()
+    import IPython
+    if IPython.__version__ < '0.11':
+        from IPython.Shell import IPShellEmbed
+        #the argv is important so that the IPShellEmbed doesn't use the global
+        #Also fancy colors!!!!
+        ipython_argv = ['-prompt_in1', 'Input <\\#>', '-colors', 'LightBG']
+        ipshell = IPShellEmbed(ipython_argv)
+        ipshell()
+    else:
+        from IPython import embed
+        embed() # this call anywhere in your program will start IPython
 
 def run_plasm(options, plasm, locals={}):
     ''' run the plasm given the options from the command line parser.
@@ -44,6 +45,8 @@ def run_plasm(options, plasm, locals={}):
         raise RuntimeError(msg)
     if options.graphviz:
         ecto.view_plasm(plasm)
+    if len(options.logfile) > 0:
+        ecto.log_to_file(options.logfile)
     sched = ecto.schedulers.__dict__[options.scheduler_type](plasm)
     if options.ipython:
         use_ipython(options, sched, plasm, locals)
@@ -105,6 +108,8 @@ def scheduler_options(parser, default_scheduler='Singlethreaded', default_nthrea
     parser.add_argument('--shell', dest='ipython', action='store_const',
                         const=True, default=default_shell,
                         help='Bring up an ipython prompt, and execute asynchronously.')
+    parser.add_argument('--logfile', metavar='LOGFILE', dest='logfile', type=str, default='',
+                   help='Log to the given file, use tail -f LOGFILE to see the live output. May be useful in combination with --shell')
     parser.add_argument('--graphviz', dest='graphviz', action='store_const',
                         const=True, default=default_graphviz,
                         help='Show the graphviz of the plasm.')
