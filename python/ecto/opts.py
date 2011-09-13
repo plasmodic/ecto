@@ -76,8 +76,6 @@ class CellFactory(object):
             if key.startswith(self.prefix + '_'):
                 p =  ''.join(key.split(self.prefix + '_')[:])
                 t = type(prototype.params[p])
-                print t.__dict__
-                print p, str(t(value)), t
                 params[p] = t(value)
         nkwargs = ()
         if len(cellname) > 0:
