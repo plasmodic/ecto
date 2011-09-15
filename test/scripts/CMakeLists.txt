@@ -14,6 +14,7 @@ foreach(file
     test_async_multiple_sched
     test_blackbox
     test_constant
+    test_dealer
     test_doc
     test_dual_line_plasm
     test_entanglement

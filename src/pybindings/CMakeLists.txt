@@ -11,6 +11,7 @@ ectomodule(ecto
   cells/And.cpp
   cells/Constant.cpp
   cells/Delay.cpp
+  cells/Dealer.cpp
   cells/Counter.cpp
   cells/ether.cpp
   cells/If.cpp

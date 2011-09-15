@@ -69,3 +69,29 @@ The output is:
 And the graph looks like the following. Notice that there is no cycle:
 
 .. ectoplot:: feedback.py plasm
+
+
+Dealer
+------------
+
+It may be that you have some iterable in python that you would like to
+pay out to your graph, one item at a time. Enter the Dealer, think blackjack.
+
+.. autofunction:: ecto.Dealer
+
+  The argument ``typer`` should be a tendril, which already has a type associated
+  with it. This is used to prime the dealer's type erasure, so that boost python
+  objects are converted immediately to this type.
+
+Here is an example of using the Dealer.
+
+.. literalinclude:: dealer.py
+
+The output is:
+
+.. program-output:: dealer.py
+   :in_srcdir:
+
+And the graph looks like the following. Notice that there is no cycle:
+
+.. ectoplot:: dealer.py plasm
