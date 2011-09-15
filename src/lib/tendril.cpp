@@ -164,6 +164,7 @@ namespace ecto
   {
     holder_ = rhs.holder_;
     type_ID_ = rhs.type_ID_;
+//    converter = rhs.converter;
   }
 
 }

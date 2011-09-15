@@ -451,6 +451,17 @@ TEST(TendrilTest, ConvertersCopied)
   EXPECT_EQ(e(), 3.1415);
 }
 
+
+TEST(TendrilTest, ConvertersCopied2)
+{
+  tendril::ptr a = make_tendril<tendril::none>();
+  tendril::ptr b = make_tendril<double>();
+  *a << *b; //copy the converters
+  bp::object o(2.0);
+  *a << o; //copy boost python object, should try to convert to double.
+  EXPECT_EQ(name_of<double>(), a->type_name());
+  EXPECT_EQ(2.0, a->get<double>());
+}
 TEST(TendrilTest, Nullptr)
 {
   tendril::ptr a, b;
