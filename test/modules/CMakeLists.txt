@@ -4,6 +4,7 @@ ectomodule(ecto_test
   ConfigureCalledOnce.cpp
   DontCallMeFromTwoThreads.cpp
   ExceptInConstructor.cpp
+  FileIO.cpp
   Multiply.cpp
   Quitter.cpp
   QuitAfter.cpp

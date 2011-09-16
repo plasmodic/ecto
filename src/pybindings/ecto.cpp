@@ -19,6 +19,7 @@ namespace ecto {
     void wrap_except();
     void wrap_ether();
     void wrap_dealer();
+    void wrap_python_streambuf();
 
     namespace {
       std::ofstream log_file;
@@ -75,7 +76,8 @@ BOOST_PYTHON_MODULE(ecto)
   ecto::py::wrap_except();
   ecto::py::wrapDelay();
   ecto::py::wrap_ether();
-  ecto::py:: wrap_dealer();
+  ecto::py::wrap_dealer();
+  ecto::py::wrap_python_streambuf();
 
   bp::def("hardware_concurrency", &boost::thread::hardware_concurrency);
 

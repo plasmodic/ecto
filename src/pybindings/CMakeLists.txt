@@ -7,6 +7,7 @@ ectomodule(ecto
   tendrils.cpp
   cell.cpp
   schedulers.cpp
+  streambuf.cpp
   strand.cpp
   cells/And.cpp
   cells/Constant.cpp
