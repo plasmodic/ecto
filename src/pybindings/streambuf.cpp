@@ -18,11 +18,13 @@ namespace ecto
       class_<std::ostream, boost::shared_ptr<std::ostream>, boost::noncopyable>("std_ostream", no_init);
       class_<ostream, boost::noncopyable, bases<std::ostream> > os("ostream", no_init);
       os.def(init<object&, std::size_t>((arg("python_file_obj"), arg("buffer_size") = 0)));
+      os.def_readwrite("file",&ostream::get_original_file);
 
       using ecto::py::istream;
       class_<std::istream, boost::shared_ptr<std::istream>, boost::noncopyable>("std_istream", no_init);
       class_<istream, boost::noncopyable, bases<std::istream> > is("istream", no_init);
       is.def(init<object&, std::size_t>((arg("python_file_obj"), arg("buffer_size") = 0)));
+      is.def_readwrite("file",&ostream::get_original_file);
     }
 
   }

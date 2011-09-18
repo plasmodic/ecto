@@ -226,7 +226,8 @@ class streambuf : public std::basic_streambuf<char>
       write_buffer(0),
       pos_of_read_buffer_end_in_py_file(0),
       pos_of_write_buffer_end_in_py_file(buffer_size),
-      farthest_pptr(0)
+      farthest_pptr(0),
+      file_obj(python_file_obj)
     {
       TBXX_ASSERT(buffer_size != 0);
       /* Some Python file objects (e.g. sys.stdout and sys.stdin)
@@ -426,6 +427,7 @@ class streambuf : public std::basic_streambuf<char>
       return streambuf::seekoff(sp, std::ios_base::beg, which);
     }
 
+
   private:
     bp::object py_read, py_write, py_seek, py_tell;
 
@@ -526,6 +528,7 @@ class streambuf : public std::basic_streambuf<char>
 
         ~ostream() { if (this->good()) this->flush(); }
     };
+    bp::object file_obj; //original handle
 };
 
 std::size_t streambuf::default_buffer_size = 1024;
@@ -540,9 +543,11 @@ struct streambuf_capsule
   :
     python_streambuf(python_file_obj, buffer_size)
   {}
+
+  bp::object get_original_file() const {return python_streambuf.file_obj;}
 };
 
-struct ostream : private streambuf_capsule, streambuf::ostream
+struct ostream : streambuf_capsule, streambuf::ostream
 {
   ostream(
     bp::object& python_file_obj,
@@ -570,7 +575,7 @@ struct ostream : private streambuf_capsule, streambuf::ostream
   }
 };
 
-struct istream : private streambuf_capsule, streambuf::istream
+struct istream : streambuf_capsule, streambuf::istream
 {
   istream(
     bp::object& python_file_obj,
