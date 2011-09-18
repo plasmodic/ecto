@@ -21,6 +21,7 @@ foreach(file
     test_exception_in_constructor
     test_If
     test_handles
+    test_multiprocess
     test_modules
     test_no_ecto_import
     # test_metrics
