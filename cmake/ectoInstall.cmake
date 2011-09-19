@@ -23,37 +23,25 @@ configure_file(${ecto_SOURCE_DIR}/cmake/rosbuild_lite.cmake
   ${CMAKE_BINARY_DIR}/unix_install/rosbuild_lite.cmake @ONLY)
 
 #install the ectoConfig.cmake and ectoConfig-version.cmake
-INSTALL(FILES
-  ${CMAKE_BINARY_DIR}/unix_install/ectoMacros.cmake
-  ${CMAKE_BINARY_DIR}/unix_install/rosbuild_lite.cmake
-  ${CMAKE_BINARY_DIR}/unix_install/ectoConfig.cmake
-  ${CMAKE_BINARY_DIR}/unix_install/ectoConfig-version.cmake
-  DESTINATION ${ECTO_CONFIG_PATH}
+install(DIRECTORY
+  ${CMAKE_BINARY_DIR}/unix_install/   #last component empty, so we loose the unix_install
+  DESTINATION ${share_prefix}
   COMPONENT main
   )
 
-#install python stuff
-#python support
-configure_file(${ecto_SOURCE_DIR}/cmake/python_path.sh.inst.in 
-  ${CMAKE_BINARY_DIR}/unix_install/python_path.sh
-  )
-
-#install to root of install prefix.. /opt/ecto/ameoba/python_path.sh
-install(FILES ${CMAKE_BINARY_DIR}/unix_install/python_path.sh
-  DESTINATION ${CMAKE_INSTALL_PREFIX} COMPONENT main
-  )
-
 install(FILES ${ecto_SOURCE_DIR}/cmake/python_path.sh.user.in
-  DESTINATION ${share_prefix} COMPONENT main
+  DESTINATION ${share_prefix}
+  COMPONENT main
   )
 
-INSTALL(DIRECTORY ${ecto_SOURCE_DIR}/include/ecto
+#regular headers
+install(DIRECTORY ${ecto_SOURCE_DIR}/include/ecto
   DESTINATION ${include_prefix}
   COMPONENT main
   )
 
-INSTALL(FILES ${CMAKE_BINARY_DIR}/include/ecto/version.hpp
-  DESTINATION ${include_prefix}/ecto
+#generated headers
+install(DIRECTORY ${CMAKE_BINARY_DIR}/include/ecto
+  DESTINATION ${include_prefix}
   COMPONENT main
   )
-

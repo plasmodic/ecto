@@ -12,22 +12,18 @@ set(ECTO_MINOR_VERSION 1)
 set(ECTO_PATCH_VERSION 0)
 set(ECTO_SOVERSION ${ECTO_MAJOR_VERSION}.${ECTO_MINOR_VERSION})
 set(ECTO_VERSION ${ECTO_MAJOR_VERSION}.${ECTO_MINOR_VERSION}.${ECTO_PATCH_VERSION})
+set(ECTO_CODE_NAME "amoeba") #code name must be hand coded for debian to work, unless something more clever exists
 
-if (NOT ECTO_CODE_NAME)
-  execute_process(COMMAND ${GIT_EXECUTABLE} describe --tags --abbrev=0
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    OUTPUT_VARIABLE ECTO_CODE_NAME
-    OUTPUT_STRIP_TRAILING_WHITESPACE
-    RESULT_VARIABLE ecto_GITTAG_STATUS
-    )
-endif()
+include(cmake/fastidious.cmake)
+include(cmake/git.cmake)
+git_status(ecto)
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_INSTALL_RPATH ${CMAKE_INSTALL_PREFIX}/lib)
 
-set(include_prefix include/ecto-${ECTO_VERSION})
-set(share_prefix share/ecto-${ECTO_VERSION})
+set(include_prefix include/ecto-${ECTO_CODE_NAME})
+set(share_prefix share/ecto-${ECTO_CODE_NAME})
 
 configure_file(${ecto_SOURCE_DIR}/cmake/version.hpp.in ${CMAKE_BINARY_DIR}/include/ecto/version.hpp)
 include_directories(${CMAKE_BINARY_DIR}/include)
@@ -81,7 +77,8 @@ endif()
 set(ecto_PYTHONPATH ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} ${ecto_SOURCE_DIR}/python)
 set(ecto_INCLUDE_DIRS ${ecto_SOURCE_DIR}/include ${CMAKE_BINARY_DIR}/include)
 if(UNIX)
-  set(ecto_LIBRARIES ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libecto.so.${ECTO_VERSION})
+  #don't put the soname on this guy, as it confuses the linker at runtime.
+  set(ecto_LIBRARIES ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libecto.so) 
 elseif(WIN32)
   set(ecto_LIBRARIES ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/ecto_cpp.dll)
 endif()
@@ -97,11 +94,9 @@ configure_file(${ecto_SOURCE_DIR}/cmake/rosbuild_lite.cmake
   ${CMAKE_BINARY_DIR}/rosbuild_lite.cmake @ONLY)
 
 set(ecto_LIBRARIES ecto)
-
 add_subdirectory(python)
 add_subdirectory(src)
 add_subdirectory(cmake)
-
 
 option(BUILD_TEST "Build tests" ON)
 if(BUILD_TEST)
