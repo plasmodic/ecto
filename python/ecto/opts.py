@@ -45,6 +45,8 @@ def run_plasm(options, plasm, locals={}):
         raise RuntimeError(msg)
     if options.graphviz:
         ecto.view_plasm(plasm)
+    if len(options.dotfile) > 0:
+        print >> open(options.dotfile, 'wt'), plasm.viz()
     if len(options.logfile) > 0:
         ecto.log_to_file(options.logfile)
     sched = ecto.schedulers.__dict__[options.scheduler_type](plasm)
@@ -58,38 +60,38 @@ def run_plasm(options, plasm, locals={}):
 
 class CellFactory(object):
     '''A factory for cells that are created from command line args.'''
-    def __init__(self,CellType,prefix):
+    def __init__(self, CellType, prefix):
         '''
         cellType a type of ecto cell to create
         prefix the prefix used by the parser
         '''
         self.cellType = CellType
         self.prefix = prefix
-    def __call__(self,args, cellname=''):
+    def __call__(self, args, cellname=''):
         '''
         args from a parser where cell_options was used to add arguments.
         cellname option cellname
         '''
         params = {}
-        prototype = self.cellType.inspect((),{})
-        for key,value in args.__dict__.iteritems():
+        prototype = self.cellType.inspect((), {})
+        for key, value in args.__dict__.iteritems():
             if key.startswith(self.prefix + '_'):
-                p =  ''.join(key.split(self.prefix + '_')[:])
+                p = ''.join(key.split(self.prefix + '_')[:])
                 t = type(prototype.params[p])
                 params[p] = t(value)
         nkwargs = ()
         if len(cellname) > 0:
             nkwargs = (cellname,) #tuple
-        return self.cellType(*nkwargs,**params)
+        return self.cellType(*nkwargs, **params)
 
 def cell_options(parser, CellType, prefix):
     '''Creates an argument parser group for any cell.
     '''
-    group = parser.add_argument_group('%s options'%prefix)
+    group = parser.add_argument_group('%s options' % prefix)
     c = CellType.inspect((), {})
     for x in c.params:
-        dest = '%s_%s' % (prefix,x.key())
-        group.add_argument('--%s'%dest, metavar='%s'%dest.upper(), dest=dest, type=type(x.data().get()), default=x.data().get(), help=x.data().doc)
+        dest = '%s_%s' % (prefix, x.key())
+        group.add_argument('--%s' % dest, metavar='%s' % dest.upper(), dest=dest, type=type(x.data().get()), default=x.data().get(), help=x.data().doc)
     return CellFactory(CellType, prefix)
 
 def scheduler_options(parser, default_scheduler='Singlethreaded', default_nthreads=0, default_niter=0, default_shell=False, default_graphviz=False):
@@ -111,6 +113,8 @@ def scheduler_options(parser, default_scheduler='Singlethreaded', default_nthrea
     parser.add_argument('--graphviz', dest='graphviz', action='store_const',
                         const=True, default=default_graphviz,
                         help='Show the graphviz of the plasm.')
+    parser.add_argument('--dotfile', dest='dotfile', type=str, default='',
+                        help='Output a graph in dot format to the given file. If no file is given, no output will be generated.')
 
 def doit(plasm, description="An ecto graph.", locals={}, args=None, namespace=None):
     '''doit is a short hand for samples that will just add
