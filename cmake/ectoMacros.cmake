@@ -1,3 +1,12 @@
+option(ECTO_LOG_STATS "Generate logs containing fine-grained per-cell execution timing information.  You probably don't want this."
+  OFF)
+mark_as_advanced(ECTO_LOG_STATS)
+
+if(ECTO_LOG_STATS)
+  add_definitions(-DECTO_LOG_STATS=1)
+endif()
+
+
 macro(ectomodule NAME)
   if(WIN32)
     link_directories(${Boost_LIBRARY_DIRS})
@@ -78,3 +87,26 @@ macro( install_ecto_module name )
   )
 endmacro()
 # ==============================================================================
+
+# ============== Python Path ===================================================
+macro( ecto_python_env_gen )
+    set(ecto_PYTHONPATH_ ${ecto_PYTHONPATH} )
+    foreach(p ${ecto_PYTHONPATH_})
+        if(ecto_PYTHONPATH)
+            set(ecto_PYTHONPATH "${ecto_PYTHONPATH}:${p}")
+        else()
+            set(ecto_PYTHONPATH "${p}")
+        endif()
+    endforeach()
+    set(ecto_user_PYTHONPATH )
+    foreach(path ${ARGV})
+        set(ecto_user_PYTHONPATH "${ecto_user_PYTHONPATH}:${path}")
+    endforeach()
+    configure_file(${ECTO_CONFIG_PATH}/python_path.sh.user.in 
+      ${PROJECT_BINARY_DIR}/python_path.sh
+      )
+    file(RELATIVE_PATH nice_path_ ${CMAKE_BINARY_DIR} ${PROJECT_BINARY_DIR}/python_path.sh)
+    if (NOT ecto_kitchen_SOURCE_DIR)
+      message(STATUS "To setup your python path for *${PROJECT_NAME}* you may source: ${nice_path_}")
+    endif()
+endmacro()

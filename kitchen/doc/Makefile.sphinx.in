@@ -1,11 +1,6 @@
 #
 # Makefile for Sphinx documentation
-#
-# export PYTHONPATH = @CMAKE_LIBRARY_OUTPUT_DIRECTORY@:@ecto_SOURCE_DIR@/python
-
 # You can set these variables from the command line.
-
-#include @CMAKE_CURRENT_BINARY_DIR@/sphinxconf.mk
 
 BUILDDIR      = @CMAKE_CURRENT_BINARY_DIR@
 
@@ -44,6 +39,7 @@ help:
 	@echo "  linkcheck  to check all external links for integrity"
 	@echo "  doctest    to run all doctests embedded in the documentation (if enabled)"
 
+#this is evil
 links:
 	@echo "Constructing common doc source dir under build directory"
 	rsync -va --delete @ecto_kitchen_SOURCE_DIR@/ecto/kitchen/doc/source $(BUILDDIR)/

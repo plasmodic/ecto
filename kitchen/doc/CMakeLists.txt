@@ -1,15 +1,6 @@
 # add a target to generate API documentation with Doxygen
 # add doc to all
 
-#we're not in the kitchen FIXME hack for standalone
-if(NOT ecto_kitchen_SOURCE_DIR)
-  add_custom_target(html)
-  add_custom_target(pdf)
-  add_custom_target(latex)
-  MESSAGE(WARNING "Documentation only supported in the kitchen, will be fixed soon.")
-  return()
-endif()
-
 set(ECTO_DOC_DEPLOY_DESTINATION_BASE /tmp
     CACHE PATH "Base path for deploying docs"
     )
