@@ -32,7 +32,7 @@ def sthreaded():
     assert not s.running()
     etime = time.time()
     print "elapsed:", etime-stime
-    assert 0.63 > etime - stime >= 0.6
+    assert 0.63 > etime - stime >= 0.7 #for slow vms
     stime = time.time()
     s.execute_async(niter=3)
     assert s.running()
