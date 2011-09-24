@@ -362,7 +362,7 @@ li .toctree-l1 > a {
 }
 
 <!-- THIS LOOKS HORRIBLE
-p.graphviz > img {
-    width: 100%;
-}
+	p.graphviz > img {
+	    width: 100%;
+	}
 -->
