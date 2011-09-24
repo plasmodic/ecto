@@ -26,4 +26,4 @@ target_link_libraries(ecto-test
   ecto_test_ectomodule 
   )
 
-add_test(ecto_gtest_units ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/ecto-test)
+add_test(ecto_gtest_units ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/ecto-test --gtest_output=xml:${CMAKE_BINARY_DIR}/ecto-test.xml)
