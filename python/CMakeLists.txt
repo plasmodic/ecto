@@ -1,7 +1,7 @@
 #create a soft link to our __init__.py
 #TODO FIXME is this supported on other platforms?
 execute_process(COMMAND mkdir -p ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/ecto)
-execute_process(COMMAND ln -sf ecto/__init__.py
+execute_process(COMMAND ln -sf ${CMAKE_CURRENT_SOURCE_DIR}/ecto/__init__.py
   WORKING_DIRECTORY ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/ecto
   )
 
