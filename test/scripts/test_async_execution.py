@@ -44,7 +44,7 @@ def sthreaded():
     
     assert not s.running()
     print "nloops=", nloops
-    assert nloops >= 59
+    assert nloops >= 30
     etime = time.time()
     elapsed = etime-stime
     print "elapsed:", elapsed

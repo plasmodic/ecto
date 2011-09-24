@@ -62,7 +62,7 @@ namespace ecto_test
     {
       boost::this_thread::sleep(boost::posix_time::microseconds(int64_t(*sleep_sec*1.0e6)));
       *out = *in;
-      return 0;
+      return ecto::OK;
     }
   };
 }
