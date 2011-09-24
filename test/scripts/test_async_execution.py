@@ -31,8 +31,9 @@ def sthreaded():
     
     assert not s.running()
     etime = time.time()
-    print "elapsed:", etime-stime
-    assert 0.63 > etime - stime <= 0.7 #for slow vms
+    elapsed = etime-stime
+    print "elapsed:", elapsed
+    assert 0.6 < elapsed and elapsed <= 0.7 #for slow vms
     stime = time.time()
     s.execute_async(niter=3)
     assert s.running()
@@ -45,8 +46,9 @@ def sthreaded():
     print "nloops=", nloops
     assert nloops >= 59
     etime = time.time()
-    print "elapsed:", etime-stime
-    assert 0.63 > etime - stime >= 0.6
+    elapsed = etime-stime
+    print "elapsed:", elapsed
+    assert 0.6 < elapsed and elapsed <= 0.7 #for slow vms
 
     stime = time.time()
     assert not s.running()
@@ -55,8 +57,9 @@ def sthreaded():
     s.wait()
     assert not s.running()
     etime = time.time()
-    print "elapsed=", etime-stime
-    assert 0.63 > etime - stime >= 0.6
+    elapsed = etime-stime
+    print "elapsed:", elapsed
+    assert 0.6 < elapsed and elapsed <= 0.7 #for slow vms
 
 
 kwargs = dict(niter=10)
