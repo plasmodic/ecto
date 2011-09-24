@@ -1,3 +1,6 @@
+macro(init_docs PROJECT CODE_NAME)
+
+endmacro()
 
 # add a target to generate API documentation with Doxygen
 # add doc to all
@@ -12,12 +15,14 @@ set(ECTO_DOC_DEPLOY_DESTINATION ${ECTO_DOC_DEPLOY_DESTINATION_BASE}/${${PROJECT_
 set(DOC_SOURCE_DIRS
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${ecto_SOURCE_DIR}/samples
-    ${ecto_SOURCE_DIR})
-configure_file(doc.in/doc_config.py.in
+    ${ecto_SOURCE_DIR}
+    )
+
+configure_file(doc_config.py.in
   ${CMAKE_CURRENT_BINARY_DIR}/doc_config.py
 )
 
-add_custom_target(doc 
+add_custom_target(doc
   COMMENT "Generate all documentation" VERBATIM
   )
 
@@ -33,7 +38,7 @@ if(DOXYGEN_FOUND)
     list(APPEND doc_sources ${_doc_sources})
   endforeach()
   string(REPLACE ";" " " doc_sources "${doc_sources}")
-  configure_file(doc.in/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
+  configure_file(Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
   #TODO FIXME the sources for doxygen are a bit messed up.
   add_custom_target(doxygen
     COMMENT "Generating API documentation with Doxygen" VERBATIM
@@ -69,9 +74,13 @@ if(SPHINX_BUILD)
     sphinx-build  ${CMAKE_CURRENT_SOURCE_DIR}/source ${CMAKE_CURRENT_BINARY_DIR}/html
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
     )
-
   add_dependencies(html doxygen)
   add_dependencies(doc html)
+  add_custom_target(www-deploy)
+  add_custom_command(TARGET www-deploy
+    COMMAND rsync --perms --chmod=a+rX -va  ${CMAKE_CURRENT_BINARY_DIR}/html/ ${ECTO_DOC_DEPLOY_DESTINATION}
+  )
+  add_dependencies(www-deploy doc)
 endif()
 
 

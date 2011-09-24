@@ -1,3 +1,0 @@
-To generate api docs, use cmake. make doc
-
-For sphinx docs, use cmake, and run : make sphinx_doc

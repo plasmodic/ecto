@@ -1,4 +1,4 @@
-ecto
+Ecto
 ====
 
 Ecto is a hybrid C++/Python development framework for constructing and maintaining
