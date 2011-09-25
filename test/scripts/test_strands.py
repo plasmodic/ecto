@@ -77,7 +77,7 @@ def shouldfail():
     try:
         print "about to execute... this should throw"
         sched.execute(nthreads=4, niter=4)
-        assert False, "that should have thrown"
+        util.fail()
     except RuntimeError, e:
         print "good, python caught error", e
 

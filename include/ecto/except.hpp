@@ -31,71 +31,59 @@
 #include <string>
 #include <sstream>
 #include <ecto/util.hpp>
+#include <boost/optional.hpp>
+#include <boost/exception/all.hpp>
+
+#include <boost/preprocessor/cat.hpp>
+#include <boost/preprocessor/stringize.hpp>
+#include <boost/preprocessor/seq/for_each.hpp>
 
 namespace ecto
 {
   namespace except
   {
-
-	struct ECTO_EXPORT EctoException: std::exception
+    struct EctoException : virtual std::exception, virtual boost::exception
     {
-      std::string msg_;
-    public:
-      EctoException(const std::string& msg = "");
-
-      virtual
-      ~EctoException() throw ();
-
-      EctoException&
-      operator<<(const std::string& msg) throw ();
-
-      EctoException&
-      operator<<(EctoException& e) throw ();
-
-      const char*
-      what() const throw ();
+      virtual const char* what() const throw();
+      virtual const char* type_name() const throw() { return "EctoException"; }
     };
 
-    struct ECTO_EXPORT TypeMismatch: EctoException
-    {
-    public:
-      explicit
-      TypeMismatch(const std::string& arg = "");
-      ~TypeMismatch() throw (){}
-      template<typename T1, typename T2>
-      static TypeMismatch
-      make(const std::string& msg = "")
-      {
-        return TypeMismatch(msg + "::" + ecto::name_of<T1>() + " != " + ecto::name_of<T2>());
-      }
+#define ECTO_EXCEPTIONS                         \
+    (TypeMismatch)(ValueNone)(ValueRequired)    \
+    (NonExistant)(FailedFromPythonConversion)   \
+    (TendrilRedeclaration)(CellException)       \
+    (NotConnected)(AlreadyConnected)(NullTendril)
+
+    // here, what() actually returns the type name,  the errinfo tag stuff
+    // is used for the more illuminating error information
+#define ECTO_DECLARE_EXCEPTION(r, data, T)                              \
+    struct T : virtual EctoException                                    \
+    {                                                                   \
+      const char* what() const throw();                                 \
     };
 
-    struct ECTO_EXPORT ValueNone: EctoException
-    {
-    public:
-      explicit
-      ValueNone(const std::string& arg = "");
-      ~ValueNone() throw (){}
+    BOOST_PP_SEQ_FOR_EACH(ECTO_DECLARE_EXCEPTION, ~, ECTO_EXCEPTIONS);
 
-    };
+    std::string diagnostic_string(const EctoException&);
 
-    struct ECTO_EXPORT ValueRequired: EctoException
-    {
-    public:
-      explicit
-      ValueRequired(const std::string& arg = "");
-      ~ValueRequired() throw (){}
-    };
-
-    struct ECTO_EXPORT NonExistant: EctoException
-    {
-
-    public:
-      explicit
-      NonExistant(const std::string& key, const std::string& arg = "");
-      ~NonExistant() throw ();
-      std::string key;
-    };
-
+    boost::optional<std::string> diagnostic_string(const EctoException& e,
+                                                   const std::string& tag);
   }
 }
+
+#define ECTO_EXCEPTION_TAG_NAMES                                        \
+  (from_typename)(to_typename)(from_key)(to_key)                        \
+  (from_cell)(to_cell)(cpp_typename)(pyobject_repr)(actualtype_hint)    \
+  (spore_typename)(diag_msg)(actualkeys_hint)(tendril_key)(cell_name)   \
+  (function_name)(hint)(which_tendrils)(prev_typename)(cur_typename)    \
+  (type)(what)(when)
+
+#define ECTO_EXCEPTION_TAG_DECL(r, data, NAME)                          \
+  namespace ecto {                                                      \
+    namespace except {                                                  \
+      typedef boost::error_info<BOOST_PP_CAT(struct tag_, NAME),        \
+                                std::string> NAME;                      \
+    }                                                                   \
+  }                                                                     \
+
+BOOST_PP_SEQ_FOR_EACH(ECTO_EXCEPTION_TAG_DECL, ~, ECTO_EXCEPTION_TAG_NAMES)

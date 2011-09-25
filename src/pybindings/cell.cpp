@@ -121,22 +121,25 @@ namespace ecto
         : mod_input(mod_in), mod_output(mod_out), key(key)
       {
         if (!check(mod_in, key))
-          throw std::runtime_error(
-          "The module " + mod_in->name() + " does not contain any input or parameter by the given name: "
-              + key);
+          BOOST_THROW_EXCEPTION(EctoException()
+                                << diag_msg("no input or parameter found")
+                                << tendril_key(key)
+                                << cell_name(mod_in->name()));
         if (!check(mod_out, key))
-          throw std::runtime_error(
-          "The module " + mod_out->name() + " does not contain any output or parameter by the given name: "
-              + key);
+          BOOST_THROW_EXCEPTION(EctoException()
+                                << diag_msg("no output or parameter found")
+                                << tendril_key(key)
+                                << cell_name(mod_in->name()));
       }
 
       TendrilSpecification(cell::ptr mod, const std::string& key) 
         : mod_input(mod), mod_output(mod), key(key)
       {
         if (!check(mod, key))
-          throw std::runtime_error(
-              "The module " + mod->name() + " does not contain any inputs or outputs or parameters by the given name: "
-              + key);
+          BOOST_THROW_EXCEPTION(EctoException()
+                                << diag_msg("no inputs or outputs found")
+                                << tendril_key(key)
+                                << cell_name(mod->name()));
       }
 
       tendril::ptr toTendril(int t)
@@ -179,7 +182,8 @@ namespace ecto
       {
         if (vts.size() != 1)
           {
-            throw std::runtime_error("This specification must be of length one. e.g. module['only one key']");
+            BOOST_THROW_EXCEPTION(EctoException()
+                                  << diag_msg("This specification must be of length one. e.g. module['only one key']"));
           }
         return vts.front();
       }

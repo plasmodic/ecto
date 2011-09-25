@@ -91,9 +91,9 @@ TEST(tendrils, Declare)
   try
   {
     t1.declare<int>("x", "another declare", 11);
-  } catch (std::exception& e)
+  } catch (ecto::except::TendrilRedeclaration& e)
   {
-    EXPECT_NE(std::string(e.what()).find("You can't redeclare a tendril!"), std::string::npos);
+    std::cout << diagnostic_information(e) << "\n";
   }
 
   //should still be valid after throw.
@@ -145,16 +145,18 @@ TEST(tendrils, SyntacticSugarness)
   try
   {
     t1["s"] << t2["f"];
-  } catch (std::exception& e)
+  } catch (ecto::except::TypeMismatch& e)
   {
-    EXPECT_NE(std::string(e.what()).find("std::string is not compatible with SpamFoo"), std::string::npos);
+    std::cout << diagnostic_information(e);
+    //    EXPECT_NE(std::string(e.what()).find("std::string is not compatible with SpamFoo"), std::string::npos);
   }
   try
   {
     t1["s"] >> t2["f"];
-  } catch (std::exception& e)
+  } catch (ecto::except::TypeMismatch& e)
   {
-    EXPECT_NE(std::string(e.what()).find("SpamFoo is not compatible with std::string"), std::string::npos);
+    std::cout << diagnostic_information(e);
+    //    EXPECT_NE(std::string(e.what()).find("SpamFoo is not compatible with std::string"), std::string::npos);
   }
 }
 

@@ -36,7 +36,7 @@ def test_reconnect():
     plasm.connect(g, "out", m2 , "in")
     try:
         plasm.connect(m2,"out",m,"in")
-        assert(False) #reconnection bad...
+        util.fail("reconnection bad...")
     except RuntimeError,e:
         pass
         #print "Reconnect caught: ",e
@@ -44,7 +44,7 @@ def test_reconnect():
     plasm.connect(m, "out", gather , "in_0001")
     try:
         plasm.connect(m2, "out", gather , "in_0001")
-        assert(False)
+        util.fail()
     except RuntimeError,e:
         pass
     plasm.disconnect(m, "out", gather , "in_0001")

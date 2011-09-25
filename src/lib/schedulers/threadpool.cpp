@@ -76,6 +76,7 @@ namespace ecto {
 
       void operator()() const
       {
+        ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);
         rethrow_exception(eptr);
       }
     };
@@ -112,8 +113,10 @@ namespace ecto {
         try {
           w();
         } catch (const boost::exception& e) {
+          ECTO_LOG_DEBUG("post thrower(boost::exception) %s", __PRETTY_FUNCTION__);
           w.post(thrower(boost::current_exception()));
         } catch (const std::exception& e) {
+          ECTO_LOG_DEBUG("post thrower (std::exception) %s", __PRETTY_FUNCTION__);
           w.post(thrower(boost::current_exception()));
         }
         w.post(bind(&runandjoin::join, this));
@@ -201,9 +204,11 @@ namespace ecto {
                   return;
                 }
             } catch (const std::exception& e) {
+              ECTO_LOG_DEBUG("post thrower std::exception %s", __PRETTY_FUNCTION__);
               context.mainserv.post(thrower(boost::current_exception()));
               return;
             } catch (const boost::exception& e) {
+              ECTO_LOG_DEBUG("post thrower boost::exception %s", __PRETTY_FUNCTION__);
               context.mainserv.post(thrower(boost::current_exception()));
               return;
             }
@@ -488,7 +493,8 @@ namespace ecto {
       assert(PyEval_ThreadsInitialized());
       ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);
       if (impl_->running())
-        throw std::runtime_error("threadpool scheduler already running");
+        BOOST_THROW_EXCEPTION(EctoException()
+                              << diag_msg("threadpool scheduler already running"));
       int j;
       j = execute_impl(ncalls, nthreadsarg);
       return j;
@@ -503,10 +509,12 @@ namespace ecto {
       ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);
 
       if (impl_->running())
-        throw std::runtime_error("threadpool scheduler already running");
+        BOOST_THROW_EXCEPTION(EctoException()
+                              << diag_msg("threadpool scheduler already running"));
 
       if (runthread.joinable())
-        throw std::runtime_error("Attempt to execute_async on unjoined schedulers... call wait() if you want to execute again");
+        BOOST_THROW_EXCEPTION(EctoException() 
+                              << diag_msg("Attempt to execute_async on unjoined schedulers... call wait() if you want to execute again"));
 
       boost::function<void()> fn = boost::bind(&threadpool::execute_impl, this, ncalls, nthreadsarg);
 

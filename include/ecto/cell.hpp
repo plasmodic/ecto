@@ -46,7 +46,6 @@
 
 namespace ecto
 {
-
   /**
    * \brief Return values for modules' process functions. These
    * are appropriate for non exceptional behavior.
@@ -338,11 +337,11 @@ namespace ecto
       impl->configure(params,inputs,outputs);
       for (tendrils::const_iterator iter = inputs.begin(); iter != inputs.end(); ++iter)
         if (iter->second->is_type<boost::python::object>())
-          throw std::runtime_error("you can't use a python object as an input");
+          BOOST_THROW_EXCEPTION(std::runtime_error("you can't use a python object as an input"));
 
       for (tendrils::const_iterator iter = outputs.begin(); iter != outputs.end(); ++iter)
         if (iter->second->is_type<boost::python::object>())
-          throw std::runtime_error("you can't use a python object as an output");
+          BOOST_THROW_EXCEPTION(std::runtime_error("you can't use a python object as an output"));
 
 
     }
@@ -353,22 +352,22 @@ namespace ecto
       //the cell may not be allocated here, so check pointer.
       if (!impl)
       {
-        try
-        {
+        try {
           impl.reset(new Impl);
         }
         catch (std::exception& e)
         {
-          except::EctoException ee("Original Exception: " +name_of(typeid(e)));
-          ee << "  What   : " + std::string(e.what());
-          ee << "  Module : " + name() + "\n  in constructor of: " + name_of<Impl>();
-          boost::throw_exception(ee); \
+          BOOST_THROW_EXCEPTION(except::CellException() 
+                                << except::when("Construction")
+                                << except::what(e.what())
+                                << except::cell_name(name()));
         }
         catch (...)
         {
-          except::EctoException ee("Threw unknown exception type!");
-          ee << "  Module : " + name() + "\n  in constructor of: " + name_of<Impl>();
-          boost::throw_exception(ee);
+          BOOST_THROW_EXCEPTION(except::CellException() 
+                                << except::when("Construction")
+                                << except::what("(unknown exception)")
+                                << except::cell_name(name()));
         }
         //configure is only called once.
         configure(int_<has_f<Impl>::configure> (), params,inputs,outputs);

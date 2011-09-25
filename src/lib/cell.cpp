@@ -1,4 +1,5 @@
-// #define ECTO_TRACE_EXCEPTIONS
+#include <cassert>
+#define ECTO_TRACE_EXCEPTIONS
 #include <ecto/cell.hpp>
 #include <ecto/util.hpp>
 #include <ecto/except.hpp>
@@ -16,36 +17,42 @@
     }                                                                   \
   catch (ecto::except::NonExistant& e)                                  \
     {                                                                   \
-      ECTO_TRACE_EXCEPTION("const ecto::except::NoneExistant&");        \
-      auto_suggest(e,*this);                                            \
-      e << "  Module : " + name() + "\n  Function: " + __FUNCTION__;    \
-      boost::throw_exception(e);                                        \
+      ECTO_TRACE_EXCEPTION("const ecto::except::NonExistant&");         \
+      const std::string* key =                                          \
+        boost::get_error_info<except::tendril_key>(e);                  \
+      assert(key && "NonExistant was thrown w/o stating what it is that doesn't exist."); \
+      e << except::hint(auto_suggest(*key, *this))                      \
+        << except::cell_name(name())                                    \
+        << except::function_name(__FUNCTION__)                          \
+        ;                                                               \
+      throw;                                                            \
     }                                                                   \
   catch (ecto::except::EctoException& e)                                \
     {                                                                   \
       ECTO_TRACE_EXCEPTION("const ecto::except::EctoException&");       \
-      e << "  Module : " + name() + "\n  Function: " + __FUNCTION__;    \
-      boost::throw_exception(e);                                        \
+      e << except::cell_name(name())                                    \
+        << except::function_name(__FUNCTION__)                          \
+        ;                                                               \
+      throw;                                                            \
     }                                                                   \
   catch (std::exception& e)                                             \
     {                                                                   \
       ECTO_TRACE_EXCEPTION("std::exception&");                          \
-      except::EctoException ee("Original Exception: " +name_of(typeid(e))); \
-      ee << "  What   : " + std::string(e.what());                      \
-      ee << "  Module : " + name() + "\n  Function: " + __FUNCTION__;   \
-      boost::throw_exception(ee);                                       \
+      BOOST_THROW_EXCEPTION(except::CellException()                     \
+                            << except::type(name_of(typeid(e)))         \
+                            << except::what(e.what())                   \
+                            << except::cell_name(name())                \
+                            << except::function_name(__FUNCTION__))     \
+        ;                                                               \
     }                                                                   \
-  catch (boost::exception& e)                                           \
-    {                                                                   \
-      ECTO_TRACE_EXCEPTION("boost::exception&");                        \
-      throw;                                                            \
-    }                                                                   \
-  catch (...)                                                           \
+  catch(...)                                                            \
     {                                                                   \
       ECTO_TRACE_EXCEPTION("...");                                      \
-      except::EctoException ee("Threw unknown exception type!");        \
-      ee << "  Module : " + name() + "\n  Function: " + __FUNCTION__;   \
-      boost::throw_exception(ee);                                       \
+      BOOST_THROW_EXCEPTION(except::CellException()                     \
+                            << except::what("(unknown exception)")      \
+                            << except::cell_name(name())                \
+                            << except::function_name(__FUNCTION__))     \
+        ;                                                               \
     }
 
 namespace ecto
@@ -76,28 +83,24 @@ namespace ecto
     }
   }
 
-  void
-  auto_suggest(except::NonExistant& e, const cell& m)
+  std::string
+  auto_suggest(const std::string& key, const cell& m)
   {
-    std::string p_type, i_type, o_type;
-    bool in_p = m.parameters.find(e.key) != m.parameters.end();
-    if(in_p) p_type = m.parameters.find(e.key)->second->type_name();
+    std::string p_type, i_type, o_type, msg;
+    bool in_p = m.parameters.find(key) != m.parameters.end();
+    if(in_p) p_type = m.parameters.find(key)->second->type_name();
 
-    bool in_i = m.inputs.find(e.key) != m.inputs.end();
-    if(in_i) i_type = m.inputs.find(e.key)->second->type_name();
+    bool in_i = m.inputs.find(key) != m.inputs.end();
+    if(in_i) i_type = m.inputs.find(key)->second->type_name();
 
-    bool in_o = m.outputs.find(e.key) != m.outputs.end();
-    if(in_o) o_type = m.outputs.find(e.key)->second->type_name();
+    bool in_o = m.outputs.find(key) != m.outputs.end();
+    if(in_o) o_type = m.outputs.find(key)->second->type_name();
 
     if (in_p || in_i || in_o)
-    {
-      e << ("  Hint   : '" + e.key + "' does exist in " + (in_p ? "parameters (type == " +p_type +") " : "") + (in_i ? "inputs (type == " +i_type +") "  : "")
-          + (in_o ? "outputs (type == " +o_type +")" : ""));
-    }
+      return "\n  Hint   : '" + key + "' does exist in " + (in_p ? "parameters (type == " +p_type +") " : "") + (in_i ? "inputs (type == " +i_type +") "  : "")
+          + (in_o ? "outputs (type == " +o_type +")" : "");
     else
-    {
-      e << ("  Hint   : '" + e.key + "' does not exist in module.");
-    }
+      return "  Hint   : '" + key + "' does not exist in module.";
   }
 
   cell::cell() { }
@@ -146,10 +149,13 @@ namespace ecto
       } catch (const std::exception& e)
       {
         ECTO_TRACE_EXCEPTION("const std::exception& outside of CATCH ALL");
-        except::EctoException ee("Original Exception: " + name_of(typeid(e)));
-        ee << "  What   : " + std::string(e.what());
-        ee << "  Module : " + name() + "\n  Function: Parameter Callback for '" + begin->first + "'";
-        boost::throw_exception(ee);
+        BOOST_THROW_EXCEPTION(except::CellException()
+                              << except::type(name_of(typeid(e))) 
+                              << except::what(e.what()) 
+                              << except::cell_name(name()) 
+                              << except::function_name(__FUNCTION__) 
+                              << except::when("While triggering param change callbacks")) 
+          ;
       }
       ++begin;
     }
@@ -216,7 +222,8 @@ namespace ecto
     {
       if (it->second->required() && !it->second->user_supplied())
       {
-        throw except::ValueRequired("parameter '" + it->first + "' must be supplied with a value during initialization.");
+        BOOST_THROW_EXCEPTION(except::ValueRequired()
+                              << except::tendril_key(it->first));
       }
       ++it;
     }
@@ -230,7 +237,8 @@ namespace ecto
     {
       if (it->second->required() && !it->second->user_supplied())
       {
-        throw except::ValueRequired("'input' " + it->first + "' must be connected.");
+        BOOST_THROW_EXCEPTION(except::NotConnected()
+                              << except::tendril_key(it->first));
       }
       ++it;
     }

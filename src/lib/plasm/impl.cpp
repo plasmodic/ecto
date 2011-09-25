@@ -2,6 +2,8 @@
 
 namespace ecto {
 
+  using namespace except;
+
   using graph::graph_t;
   using graph::edge;
 
@@ -40,36 +42,39 @@ namespace ecto {
   {
     //connect does all sorts of type checking so that connections are always valid.
     tendril::ptr from_port, to_port;
-    try
-      {
-        from_port = from->outputs[output];
-      } catch (ecto::except::EctoException& e)
-      {
-        e << boost::str(boost::format("'%s.outputs.%s' does not exist.") % from->name() % output);
-        throw;
-      }
-    try
-      {
-        to_port = to->inputs[input];
-      } catch (ecto::except::EctoException& e)
-      {
-        e << boost::str(boost::format("'%s.inputs.%s' does not exist.") % from->name() % output);
-        throw;
-      }
+    try {
+      from_port = from->outputs[output];
+    }
+    catch (ecto::NonExistant& e) {
+      e << cell_name(from->name())
+        << tendril_key(output)
+        << which_tendrils("outputs")
+        ;
+      throw;
+    }
+
+    try {
+      to_port = to->inputs[input];
+    }
+    catch (ecto::NonExistant& e) {
+      e << cell_name(from->name())
+        << tendril_key(input)
+        << which_tendrils("inputs")
+        ;
+      throw;
+    }
     //throw if the types are bad... Don't allow erroneous graph construction
     //also this is more local to the error.
     if (!to_port->compatible_type(*from_port))
       {
         std::string s;
-        s = boost::str(boost::format("type mismatch:  '%s.outputs.%s' of type '%s' is connected to"
-                                     "'%s.inputs.%s' of type '%s'")
-                       % from->name()
-                       % output
-                       % from_port->type_name()
-                       % to->name()
-                       % input
-                       % to_port->type_name());
-        throw ecto::except::TypeMismatch(s);
+        BOOST_THROW_EXCEPTION(TypeMismatch()
+                               << from_typename(from_port->type_name())
+                               << from_key(output)
+                               << from_cell(from->name())
+                               << to_typename(to_port->type_name())
+                               << to_key(input)
+                               << to_cell(to->name()));
       }
 
     graph_t::vertex_descriptor fromv = insert_module(from), tov = insert_module(to);
@@ -84,12 +89,10 @@ namespace ecto {
         edge::ptr e = graph[*inbegin];
         if (e->to_port == new_edge->to_port)
           {
-            std::string s;
-            s = boost::str(
-                           boost::format("graph error: '%s.inputs.%s' is already connected, this is considered an error!")
-                           % to->name()
-                           % to);
-            throw except::EctoException(s);
+            BOOST_THROW_EXCEPTION(AlreadyConnected()
+                                  << cell_name(to->name())
+                                  << tendril_key(e->to_port)
+                                  );
           }
         ++inbegin;
       }
@@ -99,8 +102,12 @@ namespace ecto {
     tie(ed, added) = boost::add_edge(fromv, tov, new_edge, graph);
     if (!added)
       {
-        throw std::runtime_error(
-                                 "failed to connect " + from->name() + ":" + output + " with " + to->name() + ":" + input);
+        BOOST_THROW_EXCEPTION(EctoException()
+                              << diag_msg("plasm failed to connect cell input/outputs")
+                              << from_cell(from->name())
+                              << from_key(output)
+                              << to_cell(to->name())
+                              << to_key(input));
       }
   }
 

@@ -273,14 +273,11 @@ namespace ecto
 
       for (tendrils::const_iterator b_tend = m->inputs.begin(), e_tend = m->inputs.end(); b_tend != e_tend; ++b_tend)
       {
-
         if (b_tend->second->required() && in_connected.count(b_tend->first) == 0)
         {
-          std::string s = str(boost::format("in module %s, input port '%s' is required"
-                                            " but not connected")
-                              % m->name()
-                              % b_tend->first);
-          throw except::EctoException(s);
+          BOOST_THROW_EXCEPTION(except::NotConnected()
+                                << except::tendril_key(b_tend->first)
+                                << except::cell_name(m->name()));
         }
       }
 
@@ -298,11 +295,9 @@ namespace ecto
       {
         if (b_tend->second->required() && out_connected.count(b_tend->first) == 0)
         {
-          std::string s = str(boost::format("in module %s, output port '%s' is required"
-                                            " but not connected")
-                              % m->name()
-                              % b_tend->first);
-          throw except::EctoException(s);
+          BOOST_THROW_EXCEPTION(except::NotConnected()
+                                << except::tendril_key(b_tend->first)
+                                << except::cell_name(m->name()));
         }
       }
 

@@ -226,7 +226,12 @@ TEST(TendrilTest, Python2PODConversion)
 
   // but we can't autoconvert from None
   bpt << bp::object();
-  EXPECT_THROW(dt << bpt, except::TypeMismatch);
+  try {
+    dt << bpt;
+    FAIL();
+  } catch (except::FailedFromPythonConversion& tm) {
+    std::cout << diagnostic_information(tm) << "\n";
+  }
 }
 
 TEST(TendrilTest, POD2PythonConversion)
@@ -394,7 +399,12 @@ TEST(TendrilTest, ConversionTableFromPyObjectColumn)
 
   { // double << object (incompatible)
     tendril string_(std::string("oops"), "double");
-    EXPECT_THROW(string_ << pypi_, except::TypeMismatch);
+    try {
+      string_ << pypi_;
+      FAIL();
+    } catch (except::FailedFromPythonConversion &e) {
+      std::cout << diagnostic_information(e) << "\n";
+    }
   }
 }
 
@@ -468,8 +478,8 @@ TEST(TendrilTest, Nullptr)
   try
   {
     a << b;
-  } catch (std::runtime_error& e)
+  } catch (ecto::except::NullTendril& e)
   {
-    EXPECT_TRUE(std::string("Attempt to convert into tendril which is null") == e.what());
+    std::cout << boost::diagnostic_information(e) << "\n";
   }
 }

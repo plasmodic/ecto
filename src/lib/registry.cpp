@@ -24,7 +24,9 @@ namespace ecto {
       if (iter != cellmap.end())
         return iter->second();
       else
-        throw std::runtime_error("Could not find cell " + name); 
+        BOOST_THROW_EXCEPTION(EctoException()
+                              << diag_msg("Could not find cell")
+                              << cell_name(name)); 
     }
 
 

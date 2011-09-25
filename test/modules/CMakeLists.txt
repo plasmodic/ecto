@@ -3,6 +3,7 @@ ectomodule(ecto_test
   CantCallMeFromTwoThreads.cpp
   ConfigureCalledOnce.cpp
   DontCallMeFromTwoThreads.cpp
+  EmitAndAccept.cpp
   ExceptInConstructor.cpp
   FileIO.cpp
   Multiply.cpp

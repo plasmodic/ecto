@@ -37,6 +37,7 @@
 
 #include <ecto/util.hpp> //name_of
 #include <ecto/except.hpp>
+#include <ecto/python/repr.hpp>
 
 #include <vector>
 #include <string>
@@ -58,8 +59,11 @@ namespace ecto
    * Items held by the tendril must be copy constructible and copiable.
    */
 
+  using namespace ecto::except;
+
   class ECTO_EXPORT tendril
   {
+
   public:
     typedef boost::shared_ptr<tendril> ptr;
     typedef boost::shared_ptr<const tendril> const_ptr;
@@ -230,7 +234,9 @@ namespace ecto
     enforce_type() const
     {
       if (!is_type<T>())
-        throw except::TypeMismatch(type_name() + " is not a " + name_of<T>());
+        BOOST_THROW_EXCEPTION(except::TypeMismatch() 
+                              << except::from_typename(type_name())
+                              << except::to_typename(name_of<T>()));
     }
 
     //! The value that this tendril holds was supplied by the user at some point.
@@ -338,7 +344,9 @@ namespace ecto
         if (get_T.check())
           t << get_T();
         else
-          throw ecto::except::TypeMismatch("Could not convert python object to type : " + t.type_name());
+          BOOST_THROW_EXCEPTION(except::FailedFromPythonConversion()
+                                << except::pyobject_repr(ecto::py::repr(obj))
+                                << except::cpp_typename(t.type_name()));
       }
 
       void
@@ -412,21 +420,14 @@ namespace ecto
       rhs << *this;
     }
 
-//    template<typename T>
-//      friend void
-//      operator>>(ecto::tendril::ptr rhs, T& val)
-//    {
-//      if (!rhs)
-//        throw std::runtime_error("Attempt to convert from tendril which is null");
-//      *rhs >> val;
-//    }
-
     template<typename T>
     friend void
     operator>>(const ecto::tendril::const_ptr& rhs, T& val)
     {
       if (!rhs)
-        throw std::runtime_error("Attempt to convert from tendril which is null");
+        BOOST_THROW_EXCEPTION(NullTendril()
+                              << from_typename("(null)")
+                              << to_typename(name_of<T>()));
       *rhs >> val;
     }
 
@@ -436,7 +437,9 @@ namespace ecto
     operator>>(const ecto::tendril::ptr& rhs, boost::python::object& obj)
     {
       if (!rhs)
-        throw std::runtime_error("Attempt to convert from tendril which is null");
+        BOOST_THROW_EXCEPTION(NullTendril() 
+                              << from_typename("(null)")
+                              << to_typename("(python object)"));
       *rhs >> obj;
     }
 
@@ -446,7 +449,9 @@ namespace ecto
     operator>>(const ecto::tendril::const_ptr& rhs, boost::python::object& obj)
     {
       if (!rhs)
-        throw std::runtime_error("Attempt to convert from tendril which is null");
+        BOOST_THROW_EXCEPTION(NullTendril() 
+                              << from_typename("(null)")
+                              << to_typename("(python object)"));
       *rhs >> obj;
     }
 
@@ -455,26 +460,23 @@ namespace ecto
     operator<<(const ecto::tendril::ptr& lhs, const T& rhs)
     {
       if (!lhs)
-        throw std::runtime_error("Attempt to convert into tendril which is null");
+        BOOST_THROW_EXCEPTION(NullTendril() 
+                              << to_typename("(null)")
+                              << from_typename(name_of<T>()));
       *lhs << rhs;
     }
-
-//
-//    friend void
-//    operator<<(ecto::tendril::ptr lhs, const ecto::tendril& rhs)
-//    {
-//      if (!lhs)
-//        throw std::runtime_error("Attempt to convert into tendril which is null");
-//      *lhs << rhs;
-//    }
 
     friend void
     operator<<(const ecto::tendril::ptr& lhs, const ecto::tendril::ptr& rhs)
     {
       if (!lhs)
-        throw std::runtime_error("Attempt to convert into tendril which is null");
+        BOOST_THROW_EXCEPTION(NullTendril() 
+                              << to_typename("(null)")
+                              << from_typename(rhs ? rhs->type_name() : "(null)"));
       if (!rhs)
-        throw std::runtime_error("Attempt to convert into tendril which is null");
+        BOOST_THROW_EXCEPTION(NullTendril()
+                              << to_typename(lhs->type_name())
+                              << from_typename("(null)"));
       *lhs << *rhs;
     }
 
@@ -482,9 +484,13 @@ namespace ecto
     operator<<(const ecto::tendril::ptr& lhs, const ecto::tendril::const_ptr& rhs)
     {
       if (!lhs)
-        throw std::runtime_error("Attempt to convert into tendril which is null");
+        BOOST_THROW_EXCEPTION(NullTendril() 
+                              << to_typename("(null)")
+                              << from_typename(rhs->type_name()));
       if (!rhs)
-        throw std::runtime_error("Attempt to convert into tendril which is null");
+        BOOST_THROW_EXCEPTION(NullTendril() 
+                              << to_typename(lhs->type_name())
+                              << from_typename("(null)"));
       *lhs << *rhs;
     }
 

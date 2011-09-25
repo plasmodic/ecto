@@ -43,27 +43,24 @@ namespace ecto
 
   const PrintFunctions pf;
   struct print_tendril_simple
-    {
+  {
     print_tendril_simple(std::ostream& ss)
-          :
-            ss(ss)
-      {
-      }
-      void
-      operator()(const std::pair<std::string, ecto::tendril::ptr>& tp)
-      {
-        ss << " '" << tp.first << "':type(" << tp.second->type_name() << ")";
-      }
-      std::ostream& ss;
-    };
+      : ss(ss)
+    { }
+    void
+    operator()(const std::pair<std::string, ecto::tendril::ptr>& tp)
+    {
+      ss << " '" << tp.first << "':type(" << tp.second->type_name() << ")";
+    }
+    std::ostream& ss;
+  };
 
   struct print_tendril
   {
     print_tendril(std::ostream& ss)
-        :
-          ss(ss)
-    {
-    }
+      : ss(ss)
+    { }
+
     void
     operator()(const std::pair<std::string, ecto::tendril::ptr>& tp)
     {
@@ -88,7 +85,7 @@ namespace ecto
   };
 
   //////////////////////////////////////////////////////////////////////////////
-  
+
   tendrils::tendrils() { }
 
   void
@@ -102,13 +99,14 @@ namespace ecto
     std::for_each(storage.begin(), storage.end(), print_tendril(out));
   }
 
-  void 
+  void
   tendrils::doesnt_exist(const std::string& name) const
   {
     std::stringstream ss;
-    ss << "'" << name << "' does not exist in this tendrils object. Possible keys are: ";
     std::for_each(begin(),end(),print_tendril_simple(ss));
-    throw except::NonExistant(name,ss.str());
+    BOOST_THROW_EXCEPTION(except::NonExistant()
+                          << except::tendril_key(name)
+                          << except::actualkeys_hint(ss.str()));
   }
 
   const tendril::ptr&
@@ -141,24 +139,14 @@ namespace ecto
     {
       storage.insert(std::make_pair(name, t));
     }
-    else // we want to just return the existing tendril (so that modules preconnected don't get messed up)...
+    else // we want to just return the existing tendril (so that
+         // modules preconnected don't get messed up)...
     {
-      //TODO Should we throw here?
-      throw std::logic_error("You can't redeclare a tendril!");
-
-      //there is already an existing tendril with the given name
-      //check if the types are the same
-      if (!it->second->same_type(*t))
-      {
-        std::stringstream ss;
-        ss << "Your types aren't the same, this could lead to very undefined behavior...";
-        ss << " old type = " << it->second->type_name() << " new type = " << t->type_name() << std::endl;
-        throw except::TypeMismatch(ss.str());
-      }
-      else
-      {
-        *it->second = *t;
-      }
+        BOOST_THROW_EXCEPTION(except::TendrilRedeclaration()
+                              << except::tendril_key(name)
+                              << except::prev_typename(it->second->type_name())
+                              << except::cur_typename(t->type_name()));
+          ;
     }
     return storage.at(name);
   }
