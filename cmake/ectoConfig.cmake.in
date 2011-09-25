@@ -32,7 +32,7 @@ get_filename_component(SELF_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
 include(${SELF_DIR}/ectoMacros.cmake)
 include(${SELF_DIR}/rosbuild_lite.cmake)
 set(ecto_INCLUDE_DIRS @ecto_INCLUDE_DIRS@)
-
+set(ECTO_CONFIG_PATH ${SELF_DIR})
 # if we're part of an ecto kitchen, we use the target, not the path on disk
 # so that cmake can calculate dependencies correctly
 if (ecto_kitchen_SOURCE_DIR)

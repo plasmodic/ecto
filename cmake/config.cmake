@@ -18,5 +18,8 @@ configure_file(${ecto_SOURCE_DIR}/cmake/ectoMacros.cmake
 configure_file(${ecto_SOURCE_DIR}/cmake/rosbuild_lite.cmake
   ${CMAKE_BINARY_DIR}/rosbuild_lite.cmake @ONLY)
 
+#copy the python_path.sh.user.in for users that are not installing ecto.
+file(COPY ${PROJECT_SOURCE_DIR}/cmake/python_path.sh.user.in DESTINATION ${CMAKE_BINARY_DIR})
+
 #set this back for our libs to pick it up as
 set(ecto_LIBRARIES ecto)

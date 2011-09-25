@@ -91,17 +91,15 @@ endmacro()
 # ============== Python Path ===================================================
 macro( ecto_python_env_gen )
     set(ecto_PYTHONPATH_ ${ecto_PYTHONPATH} )
-    foreach(p ${ecto_PYTHONPATH_})
-        if(ecto_PYTHONPATH)
-            set(ecto_PYTHONPATH "${ecto_PYTHONPATH}:${p}")
-        else()
-            set(ecto_PYTHONPATH "${p}")
-        endif()
-    endforeach()
     set(ecto_user_PYTHONPATH )
-    foreach(path ${ARGV})
-        set(ecto_user_PYTHONPATH "${ecto_user_PYTHONPATH}:${path}")
-    endforeach()
+    list(APPEND ecto_user_PYTHONPATH  ${ecto_PYTHONPATH})
+    list(APPEND ecto_user_PYTHONPATH  ${ARGN})
+    #transform the cmake list to a sh path list
+    string(REPLACE ";" ":"
+        ecto_user_PYTHONPATH
+        "${ecto_user_PYTHONPATH}"
+    )
+
     configure_file(${ECTO_CONFIG_PATH}/python_path.sh.user.in 
       ${PROJECT_BINARY_DIR}/python_path.sh
       )
