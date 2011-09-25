@@ -29,12 +29,22 @@ from ecto_kitchen_config import *
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest',
-              'sphinx.ext.todo', 'sphinx.ext.coverage', 'sphinx.ext.pngmath',
-              'sphinx.ext.viewcode', 'sphinx.ext.graphviz',
-              'breathe', 'programoutput',
-              'EctoShLexer', 'EctoPlotDirective', 'EctoCellDirective', 'EctoModuleDirective']
+extensions = ['sphinx.ext.autodoc',
+              'sphinx.ext.doctest',
+              'sphinx.ext.todo',
+              'sphinx.ext.coverage',
+              'sphinx.ext.pngmath',
+              'sphinx.ext.viewcode',
+              'sphinx.ext.graphviz']
 
+extensions += [
+              'ecto.sphinx.breathe',
+              'ecto.sphinx.programoutput',
+              'ecto.sphinx.EctoShLexer',
+              'ecto.sphinx.EctoPlotDirective',
+              'ecto.sphinx.EctoCellDirective',
+              'ecto.sphinx.EctoModuleDirective'
+              ]
 
 # extensions = ['sphinx.ext.ifconfig', 'sphinx.ext.todo'] #, 'cmake']
 todo_include_todos = True
