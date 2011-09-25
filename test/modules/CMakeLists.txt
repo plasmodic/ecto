@@ -26,4 +26,4 @@ ectomodule(ecto_test
   Uniform01.cpp
   ecto_test.cpp
 )
-install_ecto_module(ecto_test)
+#install_ecto_module(ecto_test)
