@@ -32,9 +32,3 @@ option(BUILD_SAMPLES "Build samples." ON)
 if(BUILD_SAMPLES)
   add_subdirectory(samples)
 endif()
-
-option(BUILD_doc_errata "Build doc errata" ON)
-if(BUILD_doc_errata)
-  add_subdirectory(doc/source doc_errata)
-endif()
-

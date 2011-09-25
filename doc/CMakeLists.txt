@@ -49,3 +49,5 @@ if(SPHINX_BUILD)
   add_dependencies(www-deploy doc)
 endif()
 
+#these are used by the docs.
+add_subdirectory(source doc_errata)
