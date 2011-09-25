@@ -5,7 +5,12 @@ if(NOT GTEST_FOUND)
   return()
 endif()
 
-include_directories(${GTEST_INCLUDE_DIRS})
+include_directories(
+    ${GTEST_INCLUDE_DIRS}
+    ${ecto_INCLUDE_DIRS}
+    ${PYTHON_INCLUDE_PATH}
+    ${Boost_INCLUDE_DIRS}
+)
 
 add_executable(ecto-test
   main.cpp
