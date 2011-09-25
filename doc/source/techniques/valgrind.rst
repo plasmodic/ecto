@@ -22,7 +22,9 @@ that look suspicious to valgrind but in fact are not.  So you'll need
 to use the suppressions file that comes with python, called
 `valgrind-python.supp
 <http://svn.python.org/projects/python/trunk/Misc/valgrind-python.supp>`_.
-Download that via that link and save it.
+Download that via that link and **READ THE FILE**, there are some
+suppressions you need to uncomment in there, if you don't intend to
+rebuild python itself.
 
 
 Running ecto under valgrind
