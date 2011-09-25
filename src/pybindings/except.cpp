@@ -41,9 +41,6 @@ namespace ecto
                                                        ::translate);
     }
 
-    std::string bazoom() {
-      return "BAZOOM";
-    }
     void
     wrap_except()
     {
