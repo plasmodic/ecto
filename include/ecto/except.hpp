@@ -45,13 +45,11 @@ namespace ecto
     struct EctoException : virtual std::exception, virtual boost::exception
     {
       virtual const char* what() const throw();
-      virtual const char* type_name() const throw() { return "EctoException"; }
     };
 
-#define ECTO_EXCEPTIONS                         \
-    (TypeMismatch)(ValueNone)(ValueRequired)    \
-    (NonExistant)(FailedFromPythonConversion)   \
-    (TendrilRedeclaration)(CellException)       \
+#define ECTO_EXCEPTIONS                                                 \
+    (TypeMismatch)(ValueNone)(ValueRequired)(NonExistant)               \
+    (FailedFromPythonConversion)(TendrilRedeclaration)(CellException)   \
     (NotConnected)(AlreadyConnected)(NullTendril)
 
     // here, what() actually returns the type name,  the errinfo tag stuff
@@ -78,12 +76,13 @@ namespace ecto
   (function_name)(hint)(which_tendrils)(prev_typename)(cur_typename)    \
   (type)(what)(when)
 
-#define ECTO_EXCEPTION_TAG_DECL(r, data, NAME)                          \
-  namespace ecto {                                                      \
-    namespace except {                                                  \
-      typedef boost::error_info<BOOST_PP_CAT(struct tag_, NAME),        \
-                                std::string> NAME;                      \
-    }                                                                   \
-  }                                                                     \
+    #define ECTO_EXCEPTION_TAG_DECL(r, data, NAME)                      \
+    typedef boost::error_info<BOOST_PP_CAT(struct tag_, NAME),          \
+                              std::string> NAME;                        \
 
-BOOST_PP_SEQ_FOR_EACH(ECTO_EXCEPTION_TAG_DECL, ~, ECTO_EXCEPTION_TAG_NAMES)
+namespace ecto {
+  namespace except {
+    BOOST_PP_SEQ_FOR_EACH(ECTO_EXCEPTION_TAG_DECL, ~, ECTO_EXCEPTION_TAG_NAMES)
+  }
+}
+
