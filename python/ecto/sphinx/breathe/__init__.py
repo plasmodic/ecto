@@ -1,9 +1,10 @@
+import os
+import sys
+sys.path.append(os.path.join(os.path.dirname(__file__), os.path.pardir))
 
 from docutils import nodes
 from docutils.parsers.rst.directives import unchanged_required, unchanged, flag
 
-import os
-import sys
 import copy
 import fnmatch
 import re
@@ -677,7 +678,7 @@ class PathHandler(object):
 
     def includes_directory(self, file_path):
 
-        return bool( file_path.count( self.sep ) )
+        return bool(file_path.count(self.sep))
 
 
 # Setup
