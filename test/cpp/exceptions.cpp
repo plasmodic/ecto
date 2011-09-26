@@ -7,6 +7,14 @@
 #define STRINGDIDLY(A) std::string(#A)
 
 using namespace ecto;
+
+struct InConstructorExcept
+{
+  InConstructorExcept() {
+    throw std::logic_error("no.... I do not want to live.");
+  }
+};
+
 struct ExceptionalModule1
 {
   static void
@@ -223,11 +231,6 @@ TEST(Exceptions, WrongType_sched)
 
 TEST(Exceptions, ParameterCBExcept_sched)
 {
-  std::string stre("Original Exception: std::runtime_error\n"
-"  What   : I'm a bad callback, and I like it that way.\n"
-"  Module : ParameterCBExcept\n"
-"  Function: Parameter Callback for 'x'"
-);
   cell::ptr m = create_cell<ParameterCBExcept> ();
   m->parameters["x"] << 5.1;
   m->parameters["x"]->dirty(true);
@@ -241,15 +244,31 @@ TEST(Exceptions, ParameterCBExcept_sched)
       }
       catch (except::EctoException& e)
       {
-        std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
-        /*
-        if(stre != e.msg_)
-        {
-          throw std::runtime_error("Got :" + e.msg_ +"\nExpected :" +stre);
-        }
-        */
+        std::cout << "Good, threw an exception:\n" << ecto::except::diagnostic_string(e) << std::endl;
         throw;
       }
       ,
       ecto::except::EctoException);
+}
+
+TEST(Exceptions, ConstructorExcept)
+{
+  cell::ptr m = create_cell<InConstructorExcept>();
+  plasm::ptr p(new plasm);
+  p->insert(m);
+  schedulers::threadpool sched(p);
+  try
+    {
+      sched.execute(8,1);
+      FAIL();
+    }
+  catch (except::EctoException& e)
+    {
+      std::cout << "Good, threw an exception:\n"
+                << ecto::except::diagnostic_string(e)
+                << std::endl;
+      const std::string* what = boost::get_error_info<ecto::except::what>(e);
+      EXPECT_TRUE(what);
+      EXPECT_EQ(*what, std::string("no.... I do not want to live."));
+    }
 }
