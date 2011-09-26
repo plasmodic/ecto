@@ -1,0 +1,55 @@
+digraph ecto {
+graph [rankdir=LR, ranksep=0]
+node [shape=plaintext]
+0[label=<<FONT POINT-SIZE="6"><TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TR>
+  <TD PORT="p_start" BGCOLOR="lightblue">start</TD>
+  <TD PORT="p_step" BGCOLOR="lightblue">step</TD>
+</TR>
+<TR>
+  <TD ROWSPAN="1" COLSPAN="2" BGCOLOR="khaki"><FONT POINT-SIZE="18">e</FONT></TD>
+  <TD PORT="o_out" BGCOLOR="indianred1">out</TD>
+</TR>
+</TABLE></FONT>>];
+
+1[label=<<FONT POINT-SIZE="6"><TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TR>
+  <TD BORDER="0"> </TD>
+</TR>
+<TR>
+  <TD BGCOLOR="springgreen" PORT="i_in">in</TD>
+  <TD ROWSPAN="1" COLSPAN="1" BGCOLOR="khaki"><FONT POINT-SIZE="18">c</FONT></TD>
+  <TD PORT="o_out" BGCOLOR="indianred1">out</TD>
+</TR>
+</TABLE></FONT>>];
+
+2[label=<<FONT POINT-SIZE="6"><TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TR>
+  <TD BORDER="0"> </TD>
+  <TD PORT="p_start" BGCOLOR="lightblue">n</TD>
+</TR>
+<TR>
+  <TD BGCOLOR="springgreen" PORT="i_in">in</TD>
+  <TD ROWSPAN="1" COLSPAN="1" BGCOLOR="khaki"><FONT POINT-SIZE="18">t</FONT></TD>
+  <TD PORT="o_out" BGCOLOR="indianred1">out</TD>
+</TR>
+</TABLE></FONT>>];
+
+3[label=<<FONT POINT-SIZE="6"><TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TR>
+  <TD BORDER="0"> </TD>
+</TR>
+<TR>
+  <TD BGCOLOR="springgreen" PORT="i_a">a</TD>
+  <TD ROWSPAN="2" COLSPAN="1" BGCOLOR="khaki"><FONT POINT-SIZE="18">o</FONT></TD>
+</TR>
+<TR>
+  <TD BGCOLOR="springgreen" PORT="i_b">b</TD>
+</TR>
+</TABLE></FONT>>];
+0->1 [headport="i_in" tailport="o_out"];
+1->2 [headport="i_in" tailport="o_out"];
+0->3 [headport="i_b" tailport="o_out"];
+2->3 [headport="i_a" tailport="o_out"];
+}
+

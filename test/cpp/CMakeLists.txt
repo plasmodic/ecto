@@ -5,7 +5,12 @@ if(NOT GTEST_FOUND)
   return()
 endif()
 
-include_directories(${GTEST_INCLUDE_DIRS})
+include_directories(
+    ${GTEST_INCLUDE_DIRS}
+    ${ecto_INCLUDE_DIRS}
+    ${PYTHON_INCLUDE_PATH}
+    ${Boost_INCLUDE_DIRS}
+)
 
 add_executable(ecto-test
   main.cpp
@@ -26,4 +31,4 @@ target_link_libraries(ecto-test
   ecto_test_ectomodule 
   )
 
-add_test(ecto_gtest_units ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/ecto-test)
+add_test(ecto_gtest_units ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/ecto-test --gtest_output=xml:${CMAKE_BINARY_DIR}/ecto-test.xml)

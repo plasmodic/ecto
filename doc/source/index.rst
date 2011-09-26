@@ -1,10 +1,14 @@
-ecto: the core
-==============
+Ecto
+====
 
-ecto is a dynamically configurable *Directed Acyclic processing Graph* **(DAG)** framework.
-ecto provides a lightweight plugin archictecture, graph constructures, and scheduling algorithms
-to enable rapid development of DAGs. ecto may be useful for perception, audio processing,
-or robotics pipelines.
+Ecto is a hybrid C++/Python development framework for constructing efficient
+processing pipelines.  In Ecto, pipelines are defined in terms of processing
+units, ``Cells``, connected by data paths, ``Tendrils``,
+that form *Directed Acyclic Graphs*, ``Plasms``. Cells are typically written
+in C++, tendrils may be any type, and plasms may be scheduled in a variety of
+clever ways. Python is uses as the graph DSL.
+
+Ecto may be found useful in domains such as perception, audio, or robotics.
 
 .. rubric:: IRC
 
@@ -12,16 +16,15 @@ Drop in on us on ``#ecto`` on ``irc.oftc.net``
 
 .. rubric:: Email List
 
-Also join the email list:
+Also feel free to join the email list:
 
-    * site: http://groups.google.com/a/plasmodic.org/group/ecto-dev
-    * email: **ecto-dev@plasmodic.org**
-
+* site: http://groups.google.com/a/plasmodic.org/group/ecto-dev
+* email: **ecto-dev@plasmodic.org**
 
 .. rubric:: Table of Contents
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    overview/index.rst
    using_ecto/index.rst

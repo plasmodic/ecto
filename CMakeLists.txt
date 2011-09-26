@@ -1,102 +1,26 @@
 cmake_minimum_required(VERSION 2.8)
 project(ecto)
 
-if(NOT CMAKE_BUILD_TYPE)#Only do this the on the first run, if the build type hasn't been set prior
-  set(CMAKE_BUILD_TYPE RelWithDebInfo CACHE STRING
-      "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel."
-      FORCE)
-endif()
-
-set(ECTO_MAJOR_VERSION 0)
-set(ECTO_MINOR_VERSION 1)
-set(ECTO_PATCH_VERSION 0)
-set(ECTO_SOVERSION ${ECTO_MAJOR_VERSION}.${ECTO_MINOR_VERSION})
-set(ECTO_VERSION ${ECTO_MAJOR_VERSION}.${ECTO_MINOR_VERSION}.${ECTO_PATCH_VERSION})
-set(ECTO_CODE_NAME "amoeba") #code name must be hand coded for debian to work, unless something more clever exists
-
-include(cmake/fastidious.cmake)
-include(cmake/git.cmake)
-git_status(ecto)
-
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_INSTALL_RPATH ${CMAKE_INSTALL_PREFIX}/lib)
-
-set(include_prefix include/ecto-${ECTO_CODE_NAME})
-set(share_prefix share/ecto-${ECTO_CODE_NAME})
-
-configure_file(${ecto_SOURCE_DIR}/cmake/version.hpp.in ${CMAKE_BINARY_DIR}/include/ecto/version.hpp)
-include_directories(${CMAKE_BINARY_DIR}/include)
-
 set(CMAKE_MODULE_PATH ${ecto_SOURCE_DIR}/cmake)
 
-execute_process(COMMAND mkdir -p ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/ecto)
+include(cmake/buildtype.cmake)
+include(cmake/version.cmake)
+include(cmake/fastidious.cmake)
+include(cmake/git.cmake)
+include(cmake/ectoMacros.cmake)
+include(cmake/ectoFindDeps.cmake)
+include(cmake/config.cmake)
 
-execute_process(COMMAND ln -sf ${ecto_SOURCE_DIR}/python/ecto/__init__.py
-  WORKING_DIRECTORY ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/ecto
-  )
+git_status(ecto)
+ecto_python_env_gen()
 
-option(ECTO_LOG_STATS "Generate logs containing fine-grained per-cell execution timing information.  You probably don't want this."
-  OFF)
-
-if(ECTO_LOG_STATS)
-  add_definitions(-DECTO_LOG_STATS=1)
-endif()
-
-include(${ecto_SOURCE_DIR}/cmake/ectoMacros.cmake)
-include(${ecto_SOURCE_DIR}/cmake/ectoFindDeps.cmake)
-
-#FIXME Hack for standalone build
-if(NOT ecto_kitchen_SOURCE_DIR)
-  add_subdirectory(kitchen/doc doc)
-endif()
-
-include_directories(
-  ${ecto_SOURCE_DIR}/include
-  ${ecto_SOURCE_DIR}/src
-  )
-
-if(UNIX)
-  configure_file(${PROJECT_SOURCE_DIR}/cmake/python_path.sh.in
-    ${PROJECT_BINARY_DIR}/python_path.sh @ONLY@)
-  #copy the python_path.sh.user.in for users that are not installing ecto.
-  file(COPY ${PROJECT_SOURCE_DIR}/cmake/python_path.sh.user.in DESTINATION ${CMAKE_BINARY_DIR})
-  if (NOT ecto_kitchen_SOURCE_DIR)
-    message(STATUS "To setup your python path for ecto you may source:"
-      " ${CMAKE_BINARY_DIR}/python_path.sh")
-  endif()
-elseif(WIN32)
-  configure_file(${ecto_SOURCE_DIR}/cmake/pathz.bat.in
-    ${CMAKE_BINARY_DIR}/pathz.bat @ONLY@)
-  if(NOT ecto_kitchen_SOURCE_DIR)
-    message(STATUS "To setup your pathz for ecto you should run:"
-      "${CMAKE_BINARY_DIR}/pathz.bat")
-  endif()
-endif()
-
-set(ecto_PYTHONPATH ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} ${ecto_SOURCE_DIR}/python)
-set(ecto_INCLUDE_DIRS ${ecto_SOURCE_DIR}/include ${CMAKE_BINARY_DIR}/include)
-if(UNIX)
-  #don't put the soname on this guy, as it confuses the linker at runtime.
-  set(ecto_LIBRARIES ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libecto.so) 
-elseif(WIN32)
-  set(ecto_LIBRARIES ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/ecto_cpp.dll)
-endif()
-
-set(ECTO_CONFIG_PATH  ${ecto_SOURCE_DIR}/cmake)
-configure_file(${ecto_SOURCE_DIR}/cmake/ectoConfig.cmake.in
-  ${CMAKE_BINARY_DIR}/ectoConfig.cmake @ONLY)
-configure_file(${ecto_SOURCE_DIR}/cmake/ectoConfig-version.cmake.in
-  ${CMAKE_BINARY_DIR}/ectoConfig-version.cmake @ONLY)
-configure_file(${ecto_SOURCE_DIR}/cmake/ectoMacros.cmake
-  ${CMAKE_BINARY_DIR}/ectoMacros.cmake @ONLY)
-configure_file(${ecto_SOURCE_DIR}/cmake/rosbuild_lite.cmake
-  ${CMAKE_BINARY_DIR}/rosbuild_lite.cmake @ONLY)
-
-set(ecto_LIBRARIES ecto)
-add_subdirectory(python)
+include_directories(include)
 add_subdirectory(src)
 add_subdirectory(cmake)
+add_subdirectory(python)
+add_subdirectory(doc)
 
 option(BUILD_TEST "Build tests" ON)
 if(BUILD_TEST)
@@ -108,12 +32,3 @@ option(BUILD_SAMPLES "Build samples." ON)
 if(BUILD_SAMPLES)
   add_subdirectory(samples)
 endif()
-
-option(BUILD_doc_errata "Build doc errata" ON)
-if(BUILD_doc_errata)
-  add_subdirectory(doc/source doc_errata)
-endif()
-
-message(STATUS "Building ecto version:   ${ECTO_VERSION}")
-message(STATUS "Building ecto code name: ${ECTO_CODE_NAME}")
-
