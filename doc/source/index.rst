@@ -32,4 +32,5 @@ Also feel free to join the email list:
    examples/index.rst
    techniques/index.rst
    reference/index.rst
+   cmake.rst
 
