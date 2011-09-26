@@ -24,10 +24,10 @@ macro(init_ecto_kitchen)
 
   setup_virtualenv(${PROJECT_NAME})
 
-  set(KITCHEN_PROJECTS "ecto;${ARGN}")
   if (NOT KITCHEN_PROJECTS)
-    message(FATAL_ERROR no kitchen projects found?!?)
+    set(KITCHEN_PROJECTS "ecto;${ARGN}")
   endif()
+
   string(REPLACE ";" " " KITCHEN_PROJECTS_STR "${KITCHEN_PROJECTS}")
   message(STATUS "Initializing kitchen with projects ${KITCHEN_PROJECTS_STR}")
 
