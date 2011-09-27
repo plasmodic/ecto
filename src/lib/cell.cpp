@@ -1,5 +1,4 @@
 #include <cassert>
-#define ECTO_TRACE_EXCEPTIONS
 #include <ecto/cell.hpp>
 #include <ecto/util.hpp>
 #include <ecto/except.hpp>

@@ -355,15 +355,17 @@ namespace ecto
         try {
           impl.reset(new Impl);
         }
-        catch (std::exception& e)
+        catch (const std::exception& e)
         {
-          BOOST_THROW_EXCEPTION(except::CellException() 
+          ECTO_TRACE_EXCEPTION("const std::exception&");
+          BOOST_THROW_EXCEPTION(except::CellException()
                                 << except::when("Construction")
-                                << except::what(e.what())
-                                << except::cell_name(name()));
+                                << except::type(name_of(typeid(e)))
+                                << except::what(e.what()));
         }
         catch (...)
         {
+          ECTO_TRACE_EXCEPTION("...");
           BOOST_THROW_EXCEPTION(except::CellException() 
                                 << except::when("Construction")
                                 << except::what("(unknown exception)")

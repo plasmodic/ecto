@@ -1,5 +1,18 @@
+// HACK!  We need access to the internal map so we can print Sensible
+//        error messages; the map-of-typeid scheme that boost exception
+//        uses internally is a PITA when dealing with cross-shared-library 
+//        exceptions.
+#include <ecto/util.hpp>
+#define private public // hooah!
+#include <boost/exception/exception.hpp>
+#include <boost/exception/info.hpp>
+#undef private
+#include <boost/exception/all.hpp> 
+
 #include <ecto/except.hpp>
+#include <boost/exception/diagnostic_information.hpp>
 #include <boost/format.hpp>
+
 
 using boost::format;
 
@@ -8,6 +21,8 @@ namespace ecto
   namespace except
   {
 
+    namespace ed = ::boost::exception_detail;
+
 #define MAKEWHAT(r, data, NAME)                 \
     const char* NAME::what() const throw() { return BOOST_PP_STRINGIZE(NAME); }
 
@@ -15,23 +30,34 @@ namespace ecto
 
     const char* EctoException::what() const throw() { return "EctoException"; }
 
-    std::string diagnostic_string(const EctoException& e)
+    std::string
+    diagnostic_string(const EctoException& e)
     {
-      std::string s;
       format fmt("%25s  %s\n");
+      std::ostringstream tmp;
+#ifdef ECTO_TRACE_EXCEPTIONS
+      char const * const * f=::boost::get_error_info< ::boost::throw_file>(e);
+      tmp << str(fmt % "File" % (f ? *f : "(unknown)"));
+      int const * l=::boost::get_error_info< ::boost::throw_line>(e);
+      tmp << str(fmt % "Line" % (l ? *l : -1));
+      
+      char const * const * fn=::boost::get_error_info< ::boost::throw_function>(e);
+      tmp << str(fmt % "Throw in function" % (fn ? *fn : "(unknown)"));
+      tmp << '\n';
+#endif
+      // tmp << str(fmt % "Exception type" % name_of(typeid(e)));
 
-      s += str(fmt % "Exception Type" % e.what());
+      const std::exception& se = dynamic_cast<const std::exception&>(e);
+      tmp << str(fmt % "exception_type" % se.what());
 
-#define APPEND_ERRINFO(r, data, TAG)                                    \
-      {                                                                 \
-        const std::string* the_s =                                      \
-          boost::get_error_info<TAG>(e);                                \
-        if (the_s)                                                      \
-          s += str(fmt % BOOST_PP_STRINGIZE(TAG) % the_s->c_str());     \
-      }                                                                 \
-
-      BOOST_PP_SEQ_FOR_EACH(APPEND_ERRINFO, ~, ECTO_EXCEPTION_TAG_NAMES);
-      return s;
+      if( char const * s=ed::get_diagnostic_information(e
+#if BOOST_VERSION > 104000
+                                                        , "MEH"
+#endif 
+                                                        ))
+        if( *s )
+          tmp << s;
+      return tmp.str();
     }
 
     boost::optional<std::string>

@@ -21,7 +21,4 @@ endif()
 
 message(STATUS "Boost version ${Boost_VERSION}")
 
-if (${Boost_VERSION} VERSION_EQUAL "1.40.0")
-  include_directories(${ecto_SOURCE_DIR}/patches)
-endif()
 

@@ -61,25 +61,29 @@ building a DLL on windows.
 
 namespace ecto
 {
-/**
- * \brief Get the unmangled type name of a type_info object.
- * @param ti The type_info to look up unmangled name for.
- * @return The unmangled name. e.g. cv::Mat or pcl::PointCloud<pcl::PointXYZ>
- */
-ECTO_EXPORT const std::string& name_of(const std::type_info &ti);
+  /**
+   * \brief Get the unmangled type name of a type_info object.
+   * @param ti The type_info to look up unmangled name for.
+   * @return The unmangled name. e.g. cv::Mat or pcl::PointCloud<pcl::PointXYZ>
+   */
+  ECTO_EXPORT const std::string& name_of(const std::type_info &ti);
 
-/**
- * \brief Get the unmangled type name of a type.
- * @tparam T the type that one wants a name for.
- * @return The unmangled name of the given type.
- */
-template<typename T>
-const std::string& name_of()
-{
-  static const std::string& name_cache =  name_of(typeid(T));
-  return name_cache;
-}
+  /**
+   * \brief Demangle the given name.
+   */
+  ECTO_EXPORT const std::string& name_of(const std::string& name);
 
+  /**
+   * \brief Get the unmangled type name of a type.
+   * @tparam T the type that one wants a name for.
+   * @return The unmangled name of the given type.
+   */
+  template<typename T>
+  const std::string& name_of()
+  {
+    static const std::string& name_cache =  name_of(typeid(T));
+    return name_cache;
+  }
 }
 
 #ifdef ECTO_TRACE_EXCEPTIONS
