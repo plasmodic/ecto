@@ -1,4 +1,4 @@
-add_executable(functor functor.cpp)
+#add_executable(functor functor.cpp)
 
 ectomodule(ecto_overview
   module.cpp
