@@ -67,7 +67,7 @@ class EctoModuleDirective(rst.Directive):
         m = sys.modules[modname]
         for name, obj in m.__dict__.iteritems():
 
-            if hasattr(obj, '__mro__') and ecto._module_base in obj.__mro__:
+            if hasattr(obj, '__mro__') and ecto._cell_base in obj.__mro__:
                 nodes += make_ectocelldirective(modname, name, self.state)
 
         return nodes
