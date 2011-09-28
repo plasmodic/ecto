@@ -116,7 +116,7 @@ def scheduler_options(parser, default_scheduler='Singlethreaded', default_nthrea
     parser.add_argument('--dotfile', dest='dotfile', type=str, default='',
                         help='Output a graph in dot format to the given file. If no file is given, no output will be generated.')
 
-def doit(plasm, description="An ecto graph.", locals={}, args=None, namespace=None):
+def doit(plasm, description="An ecto graph.", locals={}, args=None, namespace=None, default_scheduler='Singlethreaded', default_nthreads=0, default_niter=0, default_shell=False, default_graphviz=False):
     '''doit is a short hand for samples that will just add
     ecto scheduler options, and nothing else.
        
@@ -124,7 +124,9 @@ def doit(plasm, description="An ecto graph.", locals={}, args=None, namespace=No
         shell. Suggest either vars() or locals() to do this.
     '''
     parser = argparse.ArgumentParser(description=description)
-    scheduler_options(parser)
+    scheduler_options(parser, default_scheduler=default_scheduler,
+              default_nthreads=default_nthreads, default_niter=default_niter,
+              default_shell=default_shell, default_graphviz=default_graphviz)
     options = parser.parse_args(args, namespace)
     run_plasm(options, plasm, locals)
 

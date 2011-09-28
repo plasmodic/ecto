@@ -1,9 +1,9 @@
 import ecto
 
-class MyModule(ecto.Module):
+class MyModule(ecto.Cell):
     """ A python module that does not much."""
     def __init__(self, *args, **kwargs):
-        ecto.Module.__init__(self, **kwargs)
+        ecto.Cell.__init__(self, **kwargs)
     
     @staticmethod
     def declare_params(params):

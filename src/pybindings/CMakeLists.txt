@@ -10,6 +10,7 @@ ectomodule(ecto
   streambuf.cpp
   strand.cpp
   cells/And.cpp
+  cells/BlackBox.cpp
   cells/Constant.cpp
   cells/Delay.cpp
   cells/Dealer.cpp

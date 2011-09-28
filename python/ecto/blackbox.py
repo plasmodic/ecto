@@ -8,7 +8,7 @@ class BlackBox(object):
     describe their reusable plasm.
     '''
 
-    def __init__(self, plasm):
+    def __init__(self, plasm=None):
         ''' The BlackBox must be created with the plasm it is intended to be connected
         to.
         '''

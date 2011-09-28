@@ -33,7 +33,7 @@ def list_all_ecto_modules(pymodule):
     l = []
     for x in dir(pymodule):
         mod = getattr(pymodule, x)
-        if inspect.isclass(mod) and issubclass(mod, ecto._module_base):
+        if inspect.isclass(mod) and issubclass(mod, ecto._cell_base):
                 m = mod.inspect((), {})
                 l.append(m)
     return l
@@ -42,7 +42,7 @@ def list_ecto_module(pymodule):
     l = []
     for x in dir(pymodule):
         mod = getattr(pymodule, x)
-        if inspect.isclass(mod) and issubclass(mod, ecto._module_base):
+        if inspect.isclass(mod) and issubclass(mod, ecto._cell_base):
                 m = mod.inspect((), {})
                 if m.__doc__ != None :
                     print m.__doc__

@@ -22,6 +22,10 @@ add_executable(ecto-test
   threadpool.cpp
   )
 
+set_target_properties(ecto-test
+  PROPERTIES
+  COMPILE_FLAGS "-fpic -fprofile-arcs -ftest-coverage -O0"
+)
 target_link_libraries(ecto-test
   ecto
   ${GTEST_LIBRARIES}
@@ -29,6 +33,7 @@ target_link_libraries(ecto-test
   # this is so that we can create cells that are in the test lib w/o 
   # python importing them
   ecto_test_ectomodule 
+  gcov
   )
 
 add_test(ecto_gtest_units ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/ecto-test --gtest_output=xml:${CMAKE_BINARY_DIR}/ecto-test.xml)
