@@ -53,7 +53,7 @@ namespace ecto
       if( char const * s=ed::get_diagnostic_information(e
 #if BOOST_VERSION > 104000
                                                         , "MEH"
-#endif 
+#endif
                                                         ))
         if( *s )
           tmp << s;
