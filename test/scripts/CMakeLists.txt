@@ -13,7 +13,7 @@ foreach(file
     test_async_execution_harsh
     test_async_multiple_sched
     test_blackbox
-    test_black_box_2
+    test_black_box2
     test_constant
     test_dealer
     test_doc
