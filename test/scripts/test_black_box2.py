@@ -3,8 +3,10 @@ import sys, ecto, ecto.schedulers
 import ecto_test
 
 class MyBlackBox(ecto.BlackBox):
+    ''' A simple black box that doesn't really do anything.
+    '''
     def __init__(self, start, step, fail=False):
-        ecto.BlackBox.__init__(self)
+        ecto.BlackBox.__init__(self,niter=2)
         self.generate = ecto_test.Generate(start=start, step=step)
         self.inc = ecto_test.Increment()
         self.printer = ecto_test.Printer()
@@ -24,25 +26,21 @@ class MyBlackBox(ecto.BlackBox):
                 self.generate["out"] >> self.inc["in"],
                 self.inc["out"] >> self.printer["in"]
                ]
-    def cell(self):
-        plasm = ecto.Plasm()
-        plasm.connect(self.connections())
-        if self.fail:
-            plasm.insert(ecto_test.ExceptInConstructor())
-        return ecto.create_black_box(plasm, niter=2, parameters=self.expose_parameters(), outputs=self.expose_outputs())
 
 def test_bb(options):
-    mm = MyBlackBox(start=10, step=3).cell()
+    mm = MyBlackBox(start=10, step=3)
     plasm = ecto.Plasm()
     plasm.insert(mm)
     options.niter = 5
     run_plasm(options, plasm)
+    print mm.outputs.out
     assert mm.outputs.out == 38
     run_plasm(options, plasm)
     assert mm.outputs.out == 68
 
 def test_bb_fail(options):
-    mm = MyBlackBox(start=10, step=3,fail=True).cell()
+    mm = MyBlackBox(start=10, step=3,fail=True)
+    print mm.__doc__
     plasm = ecto.Plasm()
     plasm.insert(mm)
     try:

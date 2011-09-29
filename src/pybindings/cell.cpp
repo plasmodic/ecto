@@ -114,7 +114,9 @@ namespace ecto
       m_base.add_property("outputs", make_function(outputs, bp::return_internal_reference<>()));
       m_base.add_property("params", make_function(params, bp::return_internal_reference<>()));
       m_base.def("type", &cell::type);
-      m_base.def("name", (std::string(cell::*)() const) &cell::name);
+      m_base.def("name",(((std::string(cell::*)() const) &cell::name)));
+      m_base.def("name",(((void(cell::*)(const std::string&)) &cell::name)));
+
       m_base.def("doc", &cellwrap::doc);
       m_base.def("short_doc",(std::string(cell::*)() const) &cell::short_doc);
       m_base.def("gen_doc", &cell::gen_doc);

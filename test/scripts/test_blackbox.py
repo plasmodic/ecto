@@ -71,19 +71,18 @@ def test_blackbox():
     inc = ecto_test.Increment()
     print mm.outputs.out
     assert mm.outputs.out == 0
-    print mm["out", "out"]
-    plasm.connect(mm["out"] >> inc["in"])    
+    plasm.connect(mm["out"] >> inc["in"])
     plasm.execute(11)
     print mm.outputs.out
     print mm.parameters.start
     print mm.parameters.step
+    print mm.outputs.out
     assert mm.outputs.out == 41 # 10 + 10*3 + 1
     try:
         print mm.inputs.input
         fail("should have thrown")
-    except RuntimeError, e:
-        print sys.exc_info()
-        print e
+    except ecto.EctoException, e:
+        pass
     #single item in connections list.
     mm = MyModule2(plasm,start=10,step=3)
     
@@ -92,11 +91,10 @@ def test_blackbox2():
     sii = SameInAndOut(plasm)
     gen = ecto_test.Generate()
     pr = ecto_test.Printer()
-
-    plasm.connect(gen[:] >> sii['name'],
-                  sii['name'] >> pr[:])
+    plasm.connect(gen[:] >> sii['same'],
+                  sii['same'] >> pr[:])
 
 
 if __name__ == '__main__':
     test_blackbox()
-    # test_blackbox2()  # this is currently broken, q.v. #100
+    test_blackbox2()  # this is currently broken, q.v. #100

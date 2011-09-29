@@ -120,6 +120,13 @@ namespace ecto
       std::for_each(cells.begin(),cells.end(),bplistappender(l));
       return l;
     }
+
+    void plasm_insert(plasm& p, bp::object bb)
+    {
+      bp::object cbp = bb.attr("_cell");
+      cell::ptr c =  bp::extract<cell::ptr>(cbp);
+      p.insert(c);
+    }
     BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( execute_overloads , plasm::execute , 0,1)
 
     void wrap()
@@ -127,7 +134,8 @@ namespace ecto
       using bp::arg;
 
       bp::class_<plasm, boost::shared_ptr<plasm>, boost::noncopyable> p("Plasm");
-      p.def("insert", &plasm::insert, bp::args("cell"), "insert cell into the graph");
+      p.def("insert", &plasm_insert, bp::args("cell"), "insert a black box into the graph");
+      p.def("insert", &plasm::insert, bp::args("cell"), "insert cell into the graph");//order is important here.
 
       p.def("connect", &plasm_connect_list, bp::args("connection_list"));
       p.def("connect", bp::raw_function(plasm_connect_args, 2));
