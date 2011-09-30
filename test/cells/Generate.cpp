@@ -36,27 +36,30 @@ namespace ecto_test
   template<typename T>
   struct Generate
   {
-    ecto::spore<T> step_; //so that it receives updates dynamically.
+    ecto::spore<T> step_,start_,out_; //so that it receives updates dynamically.
 
     static void declare_params(tendrils& parameters)
     {
       parameters.declare<T> ("step", "The step with which i generate integers.", 2);
-      parameters.declare<T> ("start", "My starting value", 0);
+      parameters.declare<T> ("start", "My starting value.", 0);
     }
 
     static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
-      outputs.declare<T> ("out", "output", parameters.get<T> ("start") - parameters.get<T> ("step"));
+      outputs.declare<T> ("out", "The starting value + (step * iterations).");
     }
 
     void configure(const tendrils& parameters, const tendrils& inputs, const tendrils& outputs)
     {
+      start_ = parameters["start"];
       step_ = parameters["step"];
+      out_ = outputs["out"];
+      *out_ = *start_ - *step_;
     }
 
     int process(const ecto::tendrils& inputs, const ecto::tendrils& outputs)
     {
-      outputs.get<T> ("out") += *step_;
+      *out_ += *step_;
       return 0;
     }
   };

@@ -129,7 +129,7 @@ namespace ecto
       ts.def_readwrite("module_input", &TendrilSpecification::mod_input);
       ts.def_readwrite("module_output", &TendrilSpecification::mod_output);
       ts.def_readwrite("key", &TendrilSpecification::key);
-
+      ts.def("to_tendril",&TendrilSpecification::toTendril);
       bp::class_<TendrilSpecifications> vts("TendrilSpecifications", bp::init<bp::list>());
       vts.def("to_tendrils", &TendrilSpecifications::toTendrils);
       vts.staticmethod("to_tendrils");
@@ -137,6 +137,12 @@ namespace ecto
       vts.def("__rshift__", rshift_spec);
       vts.def("__rshift__", rshift_spec_tuples);
 
+      bp::enum_<tendril_type>("tendril_type")
+          .value("INPUT",INPUT)
+          .value("OUTPUT",OUTPUT)
+          .value("PARAMETER",PARAMETER)
+          .export_values()
+          ;
     }
 
   }

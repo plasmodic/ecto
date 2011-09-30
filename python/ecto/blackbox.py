@@ -8,20 +8,49 @@ class BlackBox(object):
     describe their reusable plasm.
     '''
 
-    def __init__(self, plasm=None, niter=1):
+    def __init__(self, *args, **kwargs):
         ''' The BlackBox must be created with the plasm it is intended to be connected
         to.
         '''
         self._cell = None
         self._is_plasm_connected = False
-        self.niter = niter
+        self.niter = kwargs.get('niter', 1)
+        self._parameters = ecto.Tendrils()
+        self.declare_params(self._parameters)
+        for key, value in self._parameters.iteritems():
+            value.val = kwargs.get(key, value.val)
+
+        self.init_cells(self._parameters)
+
+        cellparams = self.expose_parameters()
+        
+        self._connect()
+        
+        #forward all of the parameters to our cell.
+        for key, value in self._parameters.iteritems():
+            self._cell.params.declare(key, value)
+
+        #assign any kwargs to our parameters
+        for key, value in self._cell.params.iteritems():
+            value.val = kwargs.get(key, value.val)
+
+        self._cell.name(self.__class__.__name__)
+        self._gen_doc()
+        if len(args) > 0:
+            self._cell.name(args[0])
 
     def __getitem__(self, key):
         ''' This acts just like any other module when asking for a spec,
-        e.g. spec = m["key1","key2"]
+        e.g. spec = m['key1','key2']
         '''
         self._connect()
         return self._cell[key]
+
+    def _gen_doc(self):
+        short_doc = ''
+        if self.__doc__:
+            short_doc = self.__doc__
+        self.__doc__ = self._cell.gen_doc(short_doc)
 
     def _connect(self):
         ''' Connect oneself to the plasm.
@@ -29,26 +58,21 @@ class BlackBox(object):
         if not self._is_plasm_connected:
             self._is_plasm_connected = True
             self._cell = self._create_cell()
-            self._cell.name(self.__class__.__name__)
-            short_doc = ''
-            if self.__doc__:
-                short_doc = self.__doc__
-            self.__doc__ = self._cell.gen_doc(short_doc)
 
     def __getattribute__(self, *args, **kwargs):
         if args[0] in ('__doc__', '_cell'):
-            object.__getattribute__(self, "_connect")()
+            object.__getattribute__(self, '_connect')()
         return object.__getattribute__(self, *args, **kwargs)
 
     def __getattr__(self, name):
-        if name in ("outputs", "inputs", "params", "parameters"):
-            self._connect()
-            if name in "parameters" :
-                name = "params"
+        if name in ('parameters',):
+            name = 'params'
+        if name in dir(self._cell):
             return getattr(self._cell, name)
         else:
             raise AttributeError(self, name)
-
+    def __dir__(self):
+        return ['outputs', 'inputs', 'params'] + self.__dict__.keys()
 
     def viz(self):
         ''' Display the graph viz of the Blackbox
@@ -59,20 +83,23 @@ class BlackBox(object):
         '''
 
     def expose_outputs(self):
-        ''' The outputs of a BlackBox should specified by returning a dictionary of string keys to TendrilsSpecifictation.
-        {"output":self.mymodule["out_0001"]}
+        ''' The outputs of a BlackBox should specified by returning a dictionary
+         of string keys to TendrilsSpecifictation.
+        {'output':self.mymodule['out_0001']}
         '''
         return {}
 
     def expose_inputs(self):
-        ''' The inputs of a BlackBox should specified by returning a dictionary of string keys to TendrilsSpecifictation.
-        {"input":self.mymodule["in_0001"]}
+        ''' The inputs of a BlackBox should specified by returning a dictionary
+        of string keys to TendrilsSpecifictation.
+        {'input':self.mymodule['in_0001']}
         '''
         return {}
 
     def expose_parameters(self):
-        ''' The parameters of a BlackBox should specified by returning a dictionary of string keys to TendrilsSpecifictation.
-        {"param_01":self.mymodule["foo_param"]}
+        ''' The parameters of a BlackBox should specified by returning a
+        dictionary of string keys to TendrilsSpecifictation.
+        {'param_01':self.mymodule['foo_param']}
         '''
         return {}
 
@@ -82,8 +109,23 @@ class BlackBox(object):
         '''
         raise NotImplementedError("All BlackBox's must implement at least the connections function....")
 
+
+    def declare_params(self, parameters):
+        pass
+
+    def init_cells(self, parameters):
+        raise NotImplementedError('Initialize all your cells.')
+
     def _create_cell(self):
         plasm = ecto.Plasm()
-        plasm.connect(self.connections())
+        connections = self.connections()
+        for x in connections:
+            if not getattr(x, '__iter__', False):
+                plasm.insert(x)
+            else:
+                plasm.connect(x)
         return ecto.create_black_box(plasm, niter=self.niter, parameters=self.expose_parameters(), inputs=self.expose_inputs(), outputs=self.expose_outputs())
 
+    @classmethod
+    def inspect(cls, *args, **kwargs):
+        return cls()

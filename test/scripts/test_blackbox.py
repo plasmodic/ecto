@@ -3,11 +3,14 @@ import sys, ecto, ecto.schedulers
 import ecto_test
 
 class MyModule(ecto.BlackBox):
-    def __init__(self,plasm, start, step):
-        ecto.BlackBox.__init__(self,plasm)
-        self.generate = ecto_test.Generate(start=start, step=step)
+    def __init__(self, *args, **kwargs):
+        ecto.BlackBox.__init__(self, *args, **kwargs)
+
+    def init_cells(self, parameters):
+        self.generate = ecto_test.Generate()
         self.inc = ecto_test.Increment()
         self.printer = ecto_test.Printer()
+
     def expose_outputs(self):
         return {
                 "out":self.inc["out"]
@@ -24,30 +27,37 @@ class MyModule(ecto.BlackBox):
                ]
 
 class MyModule2(ecto.BlackBox):
-    def __init__(self,plasm, start, step):
-        ecto.BlackBox.__init__(self,plasm)
-        self.generate = ecto_test.Generate(start=start, step=step)
+    def __init__(self, *args, **kwargs):
+        ecto.BlackBox.__init__(self, *args, **kwargs)
+
+    def init_cells(self, parameters):
+        self.generate = ecto_test.Generate()
         self.inc = ecto_test.Increment()
+
     def expose_outputs(self):
         return {
                 "out":self.inc["out"]
                }
+
     def expose_parameters(self):
         return {
                 "start":self.generate["start"],
                 "step":self.generate["step"]
                 }
+
     def connections(self):
         return [
                 self.generate["out"] >> self.inc["in"],
                ]
-    
+
 #
 # verify that blackbox can have same in and out
 #
 class SameInAndOut(ecto.BlackBox):
-    def __init__(self,plasm):
-        ecto.BlackBox.__init__(self,plasm)
+    def __init__(self, *args, **kwargs):
+        ecto.BlackBox.__init__(self, *args, **kwargs)
+
+    def init_cells(self, parameters):
         self.passthrough = ecto.Passthrough()
         self.inc = ecto_test.Increment()
 
@@ -59,15 +69,14 @@ class SameInAndOut(ecto.BlackBox):
         return {
                 "same":self.inc["out"]
                }
-
     def connections(self):
         return [
                 self.passthrough["out"] >> self.inc["in"],
                ]
-    
+
 def test_blackbox():
     plasm = ecto.Plasm()
-    mm = MyModule(plasm,start=10, step=3)
+    mm = MyModule(start=10, step=3)
     inc = ecto_test.Increment()
     print mm.outputs.out
     assert mm.outputs.out == 0
@@ -84,11 +93,11 @@ def test_blackbox():
     except ecto.EctoException, e:
         pass
     #single item in connections list.
-    mm = MyModule2(plasm,start=10,step=3)
-    
+    mm = MyModule2(start=10, step=3)
+
 def test_blackbox2():
     plasm = ecto.Plasm()
-    sii = SameInAndOut(plasm)
+    sii = SameInAndOut()
     gen = ecto_test.Generate()
     pr = ecto_test.Printer()
     plasm.connect(gen[:] >> sii['same'],
