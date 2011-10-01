@@ -21,6 +21,7 @@ add_executable(ecto-test
   graph.cpp
   threadpool.cpp
   clone.cpp
+  static.cpp
   )
 
 target_link_libraries(ecto-test

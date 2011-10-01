@@ -30,6 +30,7 @@
 #include <ecto/tendril.hpp>
 #include <ecto/spore.hpp>
 #include <boost/thread.hpp>
+#include <boost/signals2.hpp>
 
 #include <string>
 #include <sstream>
@@ -129,6 +130,30 @@ namespace ecto
       return declare<T>(name, doc).set_default_val(default_val);
     }
 
+    template<typename T, typename CellImpl>
+    spore<T>
+    declare(spore<T> CellImpl::* ptm, const std::string& name, const std::string& doc = "", const T& default_val = T())
+    {
+      spore<T> s = declare<T>(name,doc,default_val);
+      {
+        Binder<CellImpl,T> binder(ptm,s);
+        sig_t::extended_slot_type slot(binder,_1,_2);
+        boost::shared_ptr<sig_t>& sig = static_bindings_[name_of<CellImpl>().c_str()];
+        if(!sig)
+          sig.reset(new sig_t);
+        sig->connect_extended(slot);
+      }
+      return s;
+    }
+
+    template<typename CellImpl>
+    void realize_potential(CellImpl* thiz)
+    {
+      boost::shared_ptr<sig_t> sig = static_bindings_[name_of<CellImpl>().c_str()];
+      if(sig)
+        (*sig)(thiz);
+    }
+
     /**
      * Runtime declare function.
      * @param name
@@ -187,12 +212,29 @@ namespace ecto
   private:
 
     void doesnt_exist(const std::string& name) const;
-
-    storage_type storage;
-
-    mutable boost::mutex mtx;
-
     tendrils(const tendrils&);
 
+    storage_type storage;
+    mutable boost::mutex mtx;
+    typedef boost::signals2::signal<void(void*)> sig_t;
+    //mapped by impl type just in case this tendrils has more than one type that is using it.
+    typedef std::map<const char*,boost::shared_ptr<sig_t> > sig_t_map;
+    sig_t_map static_bindings_;
+
+    template <typename CellImpl, typename T>
+    struct Binder
+    {
+      typedef spore<T> CellImpl::* PtrToMember;
+      typedef void result_type;
+      PtrToMember member_;
+      spore<T> spore_;
+      Binder(PtrToMember member, const spore<T>& s):member_(member),spore_(s){}
+      void operator()(const boost::signals2::connection &conn, void* vthiz) const
+      {
+        conn.disconnect();
+        CellImpl* thiz = static_cast<CellImpl*>(vthiz);
+        (*thiz).*member_ = spore_;
+      }
+    };
   };
 }

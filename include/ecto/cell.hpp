@@ -368,7 +368,15 @@ namespace ecto
       try{
         bool initialized = impl;
         if(!initialized)
+        {
           impl.reset(new Impl);
+          Impl* i=impl.get();
+          //these handle finalizing the registration of spores that
+          //were registered at static time.
+          parameters.realize_potential(i);
+          inputs.realize_potential(i);
+          outputs.realize_potential(i);
+        }
         return initialized;
       }
       catch (const std::exception& e)
