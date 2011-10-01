@@ -53,24 +53,14 @@ namespace ecto
   enum ReturnCode
   {
     OK = 0, //!< Everything A OK.
-    QUIT = 1,
-  //!< Explicit quit now.
+    QUIT = 1, //!< Explicit quit now.
+    BREAK = 2, //!< Stop execution in my scope, jump to outer scope
+    CONTINUE = 3, //!< Stop executino in my scope, jump to top of scope
+    UNKNOWN = -1 //!< Unknown return code.
   };
 
-  template<int RVal>
-  const std::string&
-  ReturnCodeToStr()
-  {
-    static const std::string str = "Unknown Return Value";
-    return str;
-  }
-
-  template<>
-  const std::string&
-  ReturnCodeToStr<ecto::OK>();
-  template<>
-  const std::string&
-  ReturnCodeToStr<ecto::QUIT>();
+#define ECTO_RETURN_VALUES                                                \
+    (OK)(QUIT)(CONTINUE)(BREAK)(UNKNOWN)                                  \
 
   const std::string&
   ReturnCodeToStr(int rval);

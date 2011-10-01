@@ -4,6 +4,9 @@
 #include <ecto/except.hpp>
 #include <boost/exception/all.hpp>
 #include <boost/thread.hpp>
+#include <boost/preprocessor/cat.hpp>
+#include <boost/preprocessor/stringize.hpp>
+#include <boost/preprocessor/seq/for_each.hpp>
 
 /*
  * Catch all and pass on exception.
@@ -56,29 +59,16 @@
 
 namespace ecto
 {
-  template<>
-  const std::string&
-  ReturnCodeToStr<ecto::OK>()
-  {
-    static const std::string str = "ecto::OK";
-    return str;
-  }
-  template<>
-  const std::string&
-  ReturnCodeToStr<ecto::QUIT>()
-  {
-    static const std::string str = "ecto::QUIT";
-    return str;
-  }
 
   const std::string&
   ReturnCodeToStr(int rval)
   {
     switch(rval)
     {
-      case ecto::OK: return ReturnCodeToStr<ecto::OK>();
-      case ecto::QUIT: return ReturnCodeToStr<ecto::QUIT>();
-      default: return ReturnCodeToStr<-1>();
+#define RETURN_NAME(r, data, NAME)                                    \
+case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return x;}
+      BOOST_PP_SEQ_FOR_EACH(RETURN_NAME, ~, ECTO_RETURN_VALUES)
+      default:{ static std::string r = "Unknown return value."; return r;}
     }
   }
 
