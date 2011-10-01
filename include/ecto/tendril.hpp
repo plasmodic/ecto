@@ -157,7 +157,7 @@ namespace ecto
     get() const
     {
       enforce_type<T>();
-      return *boost::unsafe_any_cast<const T>(&holder_);
+      return unsafe_get<T>();
     }
 
     template<typename T>
@@ -165,7 +165,7 @@ namespace ecto
     get()
     {
       enforce_type<T>();
-      return *boost::unsafe_any_cast<T>(&holder_);
+      return unsafe_get<T>();
     }
 
     template <typename T>
@@ -178,9 +178,7 @@ namespace ecto
       }else
       {
         //throws on failure
-        enforce_type<T>();
-        //cast a void pointer to this type.
-        *boost::unsafe_any_cast<T>(&holder_) = val;
+        get<T>() = val;
       }
     }
 
@@ -323,7 +321,7 @@ namespace ecto
     template<typename T>
     inline T& unsafe_get()
     {
-      return *boost::unsafe_any_cast<const T>(&holder_);
+      return *boost::unsafe_any_cast<T>(&holder_);
     }
 
     struct Converter
@@ -352,7 +350,7 @@ namespace ecto
       void
       operator()(boost::python::object& o, const tendril& t) const
       {
-        const T& v = t.unsafe_get<T>();
+        const T& v = t.get<T>();
         boost::python::object obj(v);
         o = obj;
       }
@@ -396,8 +394,7 @@ namespace ecto
     template <typename T>
     void operator>>(T& val) const
     {
-      enforce_type<T>();
-      val = *boost::unsafe_any_cast<T>(&holder_);
+      val = get<T>();
     }
 
     void operator>>(boost::python::object& obj) const

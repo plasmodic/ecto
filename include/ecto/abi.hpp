@@ -34,8 +34,7 @@
 namespace ecto {
   namespace abi {
 
-// ameoba-beta0 abi version, if this bumps bump beta0->beta1 !!!!!
-#define ECTO_ABI_VERSION   8
+#define ECTO_ABI_VERSION   9
 
     struct ECTO_EXPORT verifier {
       verifier(unsigned);
