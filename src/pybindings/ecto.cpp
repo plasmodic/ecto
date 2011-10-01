@@ -15,7 +15,6 @@ namespace ecto {
     void wrapModule();
     void wrapSchedulers();
     void wrapStrand();
-    void wrapDelay();
     void wrap_except();
     void wrap_ether();
     void wrap_dealer();
@@ -75,7 +74,6 @@ BOOST_PYTHON_MODULE(ecto)
   ecto::py::wrapSchedulers();
   ecto::py::wrapStrand();
   ecto::py::wrap_except();
-  ecto::py::wrapDelay();
   ecto::py::wrap_ether();
   ecto::py::wrap_dealer();
   ecto::py::wrap_black_box();

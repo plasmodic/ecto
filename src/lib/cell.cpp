@@ -127,16 +127,27 @@ namespace ecto
   void
   cell::configure()
   {
+    bool initialized = true;
+    initialized = init();
+    if(initialized) return;
     try
     {
       dispatch_configure(parameters, inputs, outputs);
+
+//      for (tendrils::const_iterator iter = inputs.begin(); iter != inputs.end(); ++iter)
+//        if (iter->second->is_type<boost::python::object>())
+//          BOOST_THROW_EXCEPTION(std::runtime_error("you can't use a python object as an input"));
+//
+//      for (tendrils::const_iterator iter = outputs.begin(); iter != outputs.end(); ++iter)
+//        if (iter->second->is_type<boost::python::object>())
+//          BOOST_THROW_EXCEPTION(std::runtime_error("you can't use a python object as an output"));
     }CATCH_ALL()
   }
 
   ReturnCode
   cell::process()
   {
-    init();
+    configure();
     //trigger all parameter change callbacks...
     tendrils::iterator begin = parameters.begin(), end = parameters.end();
 
@@ -162,6 +173,7 @@ namespace ecto
     {
       try
       {
+        profile::stats_collector coll(name(), stats);
         return dispatch_process(inputs, outputs);
       } catch (const boost::thread_interrupted&) { 
         ECTO_TRACE_EXCEPTION("const boost::thread_interrupted&, returning QUIT instead of rethrow");
@@ -241,6 +253,24 @@ namespace ecto
       }
       ++it;
     }
+  }
+
+  cell::ptr
+  cell::clone() const
+  {
+    cell::ptr c = dispatch_clone();
+    c->declare_params();
+    //copy all of the parameters by value.
+    tendrils::iterator it = c->parameters.begin();
+    tendrils::const_iterator end = c->parameters.end(), oit = parameters.begin();
+    while (it != end)
+    {
+      it->second << *oit->second;
+      ++oit;
+      ++it;
+    }
+    c->declare_io();
+    return c;
   }
 
 }

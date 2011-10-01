@@ -184,12 +184,13 @@ namespace ecto
     tendrils parameters; //!< Parameters
     tendrils inputs; //!< Inputs, inboxes, always have a valid value ( may be NULL )
     tendrils outputs; //!< Outputs, outboxes, always have a valid value ( may be NULL )
-    boost::optional<strand> strand_;
-    profile::stats_type stats;
+
+    boost::optional<strand> strand_; //!< The strand that this cell should be executed in.
+    profile::stats_type stats; //!< For collecting execution statistics for process.
 
   protected:
 
-    virtual void init() = 0;
+    virtual bool init() = 0;
     virtual void dispatch_declare_params(tendrils& t) = 0;
 
     virtual void dispatch_declare_io(const tendrils& params, tendrils& inputs,
@@ -201,10 +202,8 @@ namespace ecto
     virtual ReturnCode dispatch_process(const tendrils& inputs, const tendrils& outputs) = 0;
 
     virtual std::string dispatch_name() const = 0;
-    virtual ptr dispatch_make() const
-    {
-      return ptr();
-    }
+
+    virtual ptr dispatch_clone() const = 0;
 
     virtual std::string dispatch_short_doc() const
     {
@@ -306,7 +305,6 @@ namespace ecto
 
     void dispatch_declare_params(tendrils& params)
     {
-      //this is a none static function. for virtuality.
       declare_params(int_<has_f<Impl>::declare_params> (), params);
     }
 
@@ -333,47 +331,13 @@ namespace ecto
     void configure(implemented, 
                    const tendrils& params, const tendrils& inputs, const tendrils& outputs)
     {
-      boost::this_thread::interruption_point();
       impl->configure(params,inputs,outputs);
-      for (tendrils::const_iterator iter = inputs.begin(); iter != inputs.end(); ++iter)
-        if (iter->second->is_type<boost::python::object>())
-          BOOST_THROW_EXCEPTION(std::runtime_error("you can't use a python object as an input"));
-
-      for (tendrils::const_iterator iter = outputs.begin(); iter != outputs.end(); ++iter)
-        if (iter->second->is_type<boost::python::object>())
-          BOOST_THROW_EXCEPTION(std::runtime_error("you can't use a python object as an output"));
-
-
     }
 
     void dispatch_configure(const tendrils& params, const tendrils& inputs,
                             const tendrils& outputs)
     {
-      //the cell may not be allocated here, so check pointer.
-      if (!impl)
-      {
-        try {
-          impl.reset(new Impl);
-        }
-        catch (const std::exception& e)
-        {
-          ECTO_TRACE_EXCEPTION("const std::exception&");
-          BOOST_THROW_EXCEPTION(except::CellException()
-                                << except::when("Construction")
-                                << except::type(name_of(typeid(e)))
-                                << except::what(e.what()));
-        }
-        catch (...)
-        {
-          ECTO_TRACE_EXCEPTION("...");
-          BOOST_THROW_EXCEPTION(except::CellException() 
-                                << except::when("Construction")
-                                << except::what("(unknown exception)")
-                                << except::cell_name(name()));
-        }
-        //configure is only called once.
-        configure(int_<has_f<Impl>::configure> (), params,inputs,outputs);
-      }
+      configure(int_<has_f<Impl>::configure> (), params,inputs,outputs);
     }
 
     ReturnCode process(not_implemented, const tendrils&, const tendrils&)
@@ -383,24 +347,12 @@ namespace ecto
 
     ReturnCode process(implemented, const tendrils& inputs, const tendrils& outputs)
     {
-      ReturnCode code;
-      profile::stats_collector coll(name(), stats);
-      code = ReturnCode(impl->process(inputs, outputs));
-      return code;
+      return ReturnCode(impl->process(inputs, outputs));
     }
 
     ReturnCode dispatch_process(const tendrils& inputs, const tendrils& outputs)
     {
-      dispatch_configure(parameters,this->inputs,outputs);
-      boost::this_thread::interruption_point();
-
-      // this is a little hacky...  there are some problems with
-      // throwing boost exceptions across shared library boundaries.
-      try {
         return process(int_<has_f<Impl>::process> (), inputs, outputs);
-      } catch (const boost::thread_interrupted& e) {
-        return ecto::QUIT;
-      }
     }
 
     std::string dispatch_name() const
@@ -416,39 +368,54 @@ namespace ecto
     {
     }
 
-    cell::ptr dispatch_make() const
+    cell::ptr dispatch_clone() const
     {
-      cell::ptr m(new cell_<Impl> ());
-      m->declare_params();
-      //copy all of the parameters by value.
-      tendrils::iterator it = m->parameters.begin();
-      tendrils::const_iterator end = m->parameters.end(), oit =
-          parameters.begin();
-      while (it != end)
-        {
-          it->second << *oit->second;
-          ++oit;
-          ++it;
-        }
-      m->declare_io();
-      return m;
+      return cell::ptr(new cell_<Impl> ());
     }
-    void init()
+
+    bool init()
     {
-      if(!impl)
+      try{
+        bool initialized = impl;
+        if(!initialized)
+          impl.reset(new Impl);
+        return initialized;
+      }
+      catch (const std::exception& e)
       {
-        cell::configure();
+        ECTO_TRACE_EXCEPTION("const std::exception&");
+        BOOST_THROW_EXCEPTION(except::CellException()
+                              << except::when("Construction")
+                              << except::type(name_of(typeid(e)))
+                              << except::cell_name(name())
+                              << except::what(e.what()));
+      }
+      catch (...)
+      {
+        ECTO_TRACE_EXCEPTION("...");
+        BOOST_THROW_EXCEPTION(except::CellException()
+                              << except::when("Construction")
+                              << except::what("(unknown exception)")
+                              << except::cell_name(name()));
       }
     }
 
-    static const std::string CELL_TYPE_NAME;
   public:
     boost::shared_ptr<Impl> impl;
     static std::string SHORT_DOC;
+    static std::string CELL_NAME; //!< The python name for the cell.
+    static std::string MODULE_NAME; //!< The module that the cell is part of.
+    static const std::string CELL_TYPE_NAME;
   };
 
   template<typename Impl>
   std::string cell_<Impl>::SHORT_DOC;
+
+  template<typename Impl>
+  std::string cell_<Impl>::CELL_NAME;
+
+  template<typename Impl>
+  std::string cell_<Impl>::MODULE_NAME;
 
   template<typename Impl>
   const std::string cell_<Impl>::CELL_TYPE_NAME = ecto::name_of<Impl>();

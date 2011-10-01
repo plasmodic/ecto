@@ -22,6 +22,7 @@ namespace ecto
 
     struct cellwrap: cell, bp::wrapper<cell>
     {
+      cellwrap():initialized_(false){}
 
       void dispatch_declare_params(tendrils& params)
       {
@@ -61,7 +62,12 @@ namespace ecto
         return ReturnCode(value);
       }
 
-      void init() { }
+      bool init()
+      {
+        bool initialized = initialized_;
+        initialized_ = false;
+        return initialized;
+      }
 
       std::string dispatch_name() const
       {
@@ -84,6 +90,13 @@ namespace ecto
           return get_str();
         return "No Doc str.";
       }
+
+      cell::ptr dispatch_clone() const
+      {
+        throw std::logic_error("Clone is not implemented!");
+        return cell::ptr();
+      }
+      bool initialized_;
     };
 
     const tendrils& inputs(cell& mod)
