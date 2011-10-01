@@ -1,109 +1,95 @@
 #!/usr/bin/env python
 import sys, ecto, ecto.schedulers
 import ecto_test
+from util import fail
 
-class MyModule(ecto.BlackBox):
-    def __init__(self, *args, **kwargs):
-        ecto.BlackBox.__init__(self, *args, **kwargs)
+class MyBlackBox(ecto.BlackBox):
+    ''' A simple black box that doesn't really do anything.
+    '''
+    #You must have class variables for any cells which you would like to
+    #forward inputs,outputs,params
+    #The names of these class variables are assumed to stay consistent
+    #and are used when forward declaring.
+    #These class level variables are type names, and should be transformed into
+    #instances in the configure method.
+    gen = ecto_test.Generate
+    inc = ecto_test.Increment
 
-    def init_cells(self, parameters):
-        self.generate = ecto_test.Generate()
-        self.inc = ecto_test.Increment()
+    def declare_params(self, p):
+        p.declare("fail", "Should i fail or should i go.", False)
+        p.forward("amount", cell_name='inc')
+        p.forward_all(cell_name='gen') #carte blanche forward all of the parameters.
+
+    def declare_io(self, p, i, o):
+        #forward one element
+        o.forward('value', cell_name='inc', cell_key='out', doc='New docs')
+
+    def configure(self, p, i, o):
+        self.fail = p.fail
+        #You must transform instance versions of the class cell types in this
+        #function.
+        self.gen = self.gen() #custom overriding can occur here.
+        self.inc = self.inc()
         self.printer = ecto_test.Printer()
 
-    def expose_outputs(self):
-        return {
-                "out":self.inc["out"]
-               }
-    def expose_parameters(self):
-        return {
-                "start":self.generate["start"],
-                "step":self.generate["step"]
-                }
     def connections(self):
-        return [
-                self.generate["out"] >> self.inc["in"],
+        graph = [
+                self.gen["out"] >> self.inc["in"],
                 self.inc["out"] >> self.printer["in"]
                ]
+        if self.fail:
+            graph += [ ecto_test.ExceptInConstructor() ]
+        return graph
 
-class MyModule2(ecto.BlackBox):
-    def __init__(self, *args, **kwargs):
-        ecto.BlackBox.__init__(self, *args, **kwargs)
-
-    def init_cells(self, parameters):
-        self.generate = ecto_test.Generate()
-        self.inc = ecto_test.Increment()
-
-    def expose_outputs(self):
-        return {
-                "out":self.inc["out"]
-               }
-
-    def expose_parameters(self):
-        return {
-                "start":self.generate["start"],
-                "step":self.generate["step"]
-                }
-
-    def connections(self):
-        return [
-                self.generate["out"] >> self.inc["in"],
-               ]
-
-#
-# verify that blackbox can have same in and out
-#
-class SameInAndOut(ecto.BlackBox):
-    def __init__(self, *args, **kwargs):
-        ecto.BlackBox.__init__(self, *args, **kwargs)
-
-    def init_cells(self, parameters):
-        self.passthrough = ecto.Passthrough()
-        self.inc = ecto_test.Increment()
-
-    def expose_inputs(self):
-        return {
-                "same":self.passthrough["in"]
-               }
-    def expose_outputs(self):
-        return {
-                "same":self.inc["out"]
-               }
-    def connections(self):
-        return [
-                self.passthrough["out"] >> self.inc["in"],
-               ]
-
-def test_blackbox():
+def test_bb(options):
+    mm = MyBlackBox(start=10, step=3, amount=2, niter=2)
     plasm = ecto.Plasm()
-    mm = MyModule(start=10, step=3)
-    inc = ecto_test.Increment()
-    print mm.outputs.out
-    assert mm.outputs.out == 0
-    plasm.connect(mm["out"] >> inc["in"])
-    plasm.execute(11)
-    print mm.outputs.out
-    print mm.parameters.start
-    print mm.parameters.step
-    print mm.outputs.out
-    assert mm.outputs.out == 41 # 10 + 10*3 + 1
+    plasm.insert(mm)
+    options.niter = 5
+    run_plasm(options, plasm)
+    assert mm.outputs.value == 39
+    run_plasm(options, plasm)
+    assert mm.outputs.value == 69
+
+def test_bb_fail(options):
+    mm = MyBlackBox("MaMaMa", start=10, step=3, fail=True)
+    print mm.__doc__
+    assert 'fail' in  mm.__doc__
+    assert mm.name() == 'MaMaMa'
+    plasm = ecto.Plasm()
+    plasm.insert(mm)
     try:
-        print mm.inputs.input
-        fail("should have thrown")
-    except ecto.EctoException, e:
-        pass
-    #single item in connections list.
-    mm = MyModule2(start=10, step=3)
+        run_plasm(options, plasm)
+        fail()
+    except ecto.CellException, e:
+        print "Good:"
+        print str(e)
+        assert "ecto_test::ExceptInConstructor" in str(e)
 
-def test_blackbox2():
-    plasm = ecto.Plasm()
-    sii = SameInAndOut()
-    gen = ecto_test.Generate()
-    pr = ecto_test.Printer()
-    plasm.connect(gen[:] >> sii['same'],
-                  sii['same'] >> pr[:])
+def test_command_line_args():
+    import argparse
+    from ecto.opts import cell_options
+    parser = argparse.ArgumentParser()
+    bb_factory = cell_options(parser, MyBlackBox, 'bb')
+    parser.print_help()
 
+def test_command_line_args2():
+    import argparse
+    from ecto.opts import cell_options
+    parser = argparse.ArgumentParser()
+    bb_factory = cell_options(parser, MyBlackBox, 'bb')
+    args = parser.parse_args(['--bb_start', '102'])
+    mm = bb_factory(args)
+    
+    assert mm.params.start == 102
 
 if __name__ == '__main__':
-    test_blackbox()
-    test_blackbox2()  # this is currently broken, q.v. #100
+    test_command_line_args()
+    test_command_line_args2()
+    from ecto.opts import scheduler_options, run_plasm
+    import argparse
+    parser = argparse.ArgumentParser()
+    scheduler_options(parser)
+    options = parser.parse_args()
+    test_bb(options)
+    test_bb_fail(options)

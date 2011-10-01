@@ -20,4 +20,3 @@ class Cell(_cell_base):
         m = cls()
         return m
 
-Module = Cell

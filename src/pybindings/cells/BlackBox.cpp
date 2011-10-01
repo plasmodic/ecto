@@ -42,25 +42,18 @@ namespace ecto
 
     struct BlackBox
     {
-
+      typedef schedulers::singlethreaded scheduler_t;
       static void
-      extract(bp::dict d, tendrils& ts, tendril_type tt)
+      shallow_merge(const tendrils& fts, tendrils& ts)
       {
-        if (!d || d == bp::object())
-          return;
-        bp::list l = d.items();
-        for (int j = 0, end = bp::len(l); j < end; ++j)
-        {
-          bp::object key = l[j][0];
-          bp::object value = l[j][1];
-
-          std::string key_str = bp::extract<std::string>(key); //the remapped tendril name
-          TendrilSpecifications spec = bp::extract<TendrilSpecifications>(value); //the tendril to remap.
-
-          tendril::ptr t = spec.toSpec().toTendril(tt); //get a tendril from the spec.
-          ts.declare(key_str, t);
-        }
+        std::string key;
+        tendril::ptr t;
+        BOOST_FOREACH(boost::tie(key,t), fts)
+            {
+              ts.declare(key, t);
+            }
       }
+
       int
       process(const tendrils& /*in*/, const tendrils& /*out*/)
       {
@@ -69,7 +62,7 @@ namespace ecto
           if (!sched_)
           {
             plasm_->configure_all();
-            sched_.reset(new schedulers::singlethreaded(plasm_));
+            sched_.reset(new scheduler_t(plasm_));
           }
           if (niter_ > 0)
           {
@@ -81,27 +74,26 @@ namespace ecto
         {
           //need to provide a little bit of info about the originator of the exception
           //TODO enable stack trace
-          boost::optional<std::string> o(except::diagnostic_string(e,"cell_name"));
-          if(o)
-            e << ecto::except::diag_msg("Originally from ~> "+o.get());
+          boost::optional<std::string> o(except::diagnostic_string(e, "cell_name"));
+          if (o)
+            e << ecto::except::diag_msg("Originally from ~> " + o.get());
           throw;
         }
         return ecto::OK;
       }
       plasm::ptr plasm_;
-      boost::shared_ptr<schedulers::singlethreaded> sched_;
+      boost::shared_ptr<scheduler_t> sched_;
       int niter_;
     };
 
     cell::ptr
-    create_black_box(plasm::ptr plasm, int niter, bp::dict params, bp::dict inputs, bp::dict outputs)
+    create_black_box(plasm::ptr plasm, int niter, const tendrils& p, const tendrils& i, const tendrils& o)
     {
       cell_<BlackBox>::ptr black_box = create_cell<BlackBox>();
       cell::ptr base(black_box);
-      BlackBox::extract(params, base->parameters, PARAMETER);
-      BlackBox::extract(inputs, base->inputs, INPUT);
-      BlackBox::extract(outputs, base->outputs, OUTPUT);
-
+      BlackBox::shallow_merge(p, base->parameters);
+      BlackBox::shallow_merge(i, base->inputs);
+      BlackBox::shallow_merge(o, base->outputs);
       base->configure(); //This causes the impl to be created
       black_box->impl->plasm_ = plasm; //initialize a few thangs
       black_box->impl->niter_ = niter;
@@ -119,8 +111,8 @@ namespace ecto
     wrap_black_box()
     {
       bp::def("create_black_box", create_black_box, //fnc
-              (arg("plasm"), arg("niter") = 0, arg("parameters") = bp::dict(), //
-              arg("inputs") = bp::dict(), arg("outputs") = bp::dict()), //args
+              (arg("plasm"), arg("niter"), arg("parameters"), //
+              arg("inputs"), arg("outputs")), //args
               "Constructs a BlackBox." //doc str
               );
     }

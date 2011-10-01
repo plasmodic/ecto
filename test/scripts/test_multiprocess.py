@@ -8,11 +8,8 @@ import StringIO
 
 #http://docs.python.org/library/multiprocessing.html
 
-class Sender(ecto.Module):
+class Sender(ecto.Cell):
     """ A python module that does not much."""
-    def __init__(self, *args, **kwargs):
-        ecto.Module.__init__(self, **kwargs)
-
     @staticmethod
     def declare_params(params):
         params.declare("conn", "A pipe connection.", None)
