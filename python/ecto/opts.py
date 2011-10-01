@@ -3,9 +3,9 @@ Set of helper functions for ecto scripts, that expose a few common args for
 the schedulers.
 '''
 
-import argparse
 import ecto
 from copy import copy
+
 
 possible_schedulers = [ x for x in ecto.schedulers.__dict__.keys() if x[0] != '_']
 
@@ -61,21 +61,21 @@ def run_plasm(options, plasm, locals={}):
 
 class CellFactory(object):
     '''A factory for cells that are created from command line args.'''
-    def __init__(self, CellType, prefix):
+    def __init__(self, CellType, CellProtoType, prefix):
         '''
         cellType a type of ecto cell to create
         prefix the prefix used by the parser
         '''
         self.cellType = CellType
+        self.cellProtoType = CellProtoType
         self.prefix = prefix
     def __call__(self, args, cellname=''):
         '''
         args from a parser where cell_options was used to add arguments.
         cellname option cellname
         '''
-        import copy
         params = {}
-        prototype = self.cellType.inspect((), {})
+        prototype = self.cellProtoType
         for key, value in args.__dict__.iteritems():
             if key.startswith(self.prefix + '_'):
                 p = ''.join(key.split(self.prefix + '_')[:])
@@ -86,12 +86,55 @@ class CellFactory(object):
             nkwargs = (cellname,) #tuple
         return self.cellType(*nkwargs, **params)
 
+class CellYamlFactory(object):
+    '''A factory for cells that are created from command line args.'''
+    def __init__(self, CellOrCellType, prefix):
+        cell_type, cell = _cell_type_instance(CellOrCellType)
+        self.cell_type = cell_type
+        self.cell = cell
+        self.prefix = prefix
+        params = cell.params
+        c = {}
+        for x in params:
+            c[x.key()] = x.data().get()
+            c[x.key()+'__doc__'] = x.data().doc
+        self.params = c
+
+    def dump(self, stream=None):
+        from yaml import dump
+        return dump({self.prefix:self.params}, default_flow_style=False,stream=stream)
+
+    def load(self, parsed, cellname=''):
+        params = parsed[self.prefix]
+        nkwargs = ()
+        params_clean = {}
+        for x in self.cell.params:
+            if x.key() in params:
+                params_clean[x.key()] = params[x.key()]
+        if len(cellname) > 0:
+            nkwargs = (cellname,) #tuple
+        cell = self.cell_type(*nkwargs, **params_clean)
+        return cell
+
+def _cell_type_instance(CellOrCellType):
+    c = CellOrCellType
+    cell_type = CellOrCellType
+    if isinstance(cell_type, object.__class__):
+        c = cell_type.inspect((), {})
+    else:
+        cell_type = c.__class__
+    return (cell_type, c)
+
+
+
 def cell_options(parser, CellType, prefix):
     '''Creates an argument parser group for any cell.
+    CellType may be either a __class__ type, or an instance object.
     '''
     group = parser.add_argument_group('%s options' % prefix)
-    c = CellType.inspect((), {})
-    params = c.params
+    cell_type, cell = _cell_type_instance(CellType)
+
+    params = cell.params
     for x in params:
         dest = '%s_%s' % (prefix, x.key())
         group.add_argument('--%s' % dest, metavar='%s' % dest.upper(),
@@ -99,7 +142,7 @@ def cell_options(parser, CellType, prefix):
                            default=x.data().get(),
                            help=x.data().doc + ' ... (default: %(default)s)'
                            )
-    factory = CellFactory(CellType, prefix)
+    factory = CellFactory(cell_type, cell, prefix)
     return factory
 
 def scheduler_options(parser, default_scheduler='Singlethreaded',
@@ -156,6 +199,7 @@ def doit(plasm, description="An ecto graph.", locals={}, args=None, namespace=No
         Use locals to forward any local variables to the ipython
         shell. Suggest either vars() or locals() to do this.
     '''
+    import argparse
     parser = argparse.ArgumentParser(description=description)
     scheduler_options(parser, default_scheduler=default_scheduler,
               default_nthreads=default_nthreads, default_niter=default_niter,
@@ -165,15 +209,26 @@ def doit(plasm, description="An ecto graph.", locals={}, args=None, namespace=No
 
 if __name__ == '__main__':
     import ecto_test
+    import yaml
+    import argparse
     parser = argparse.ArgumentParser(description='My awesome program thing.')
     parser.add_argument('-i,--input', metavar='IMAGE_FILE', dest='imagefile',
                         type=str, default='', help='an image file to load.')
     group = parser.add_argument_group('ecto scheduler options')
-    scheduler_options(group)
+    scheduler_options(group, default_niter=2)
 
+
+    multiply_factory = cell_options(parser, ecto_test.Multiply, prefix='mult')
+    const_factory = cell_options(parser, ecto.Constant(value=0.50505), prefix='const')
+
+    #parser.print_help()
     options = parser.parse_args()
-    c = ecto.Constant(value=0.50505)
-    m = ecto_test.Multiply(factor=3.3335)
+
+    c = const_factory(options)
+    m = multiply_factory(options)
+    cyaml = CellYamlFactory(c,'const')
+    print cyaml.dump()
+    c = cyaml.load(yaml.load(cyaml.dump()))
     pr = ecto_test.Printer()
     plasm = ecto.Plasm()
     plasm.connect(c[:] >> m[:],

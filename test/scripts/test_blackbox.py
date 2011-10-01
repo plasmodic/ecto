@@ -75,17 +75,27 @@ def test_command_line_args():
 
 def test_command_line_args2():
     import argparse
-    from ecto.opts import cell_options
+    from ecto.opts import cell_options, CellYamlFactory
+    import yaml
     parser = argparse.ArgumentParser()
     bb_factory = cell_options(parser, MyBlackBox, 'bb')
     args = parser.parse_args(['--bb_start', '102'])
     mm = bb_factory(args)
-    
     assert mm.params.start == 102
+
+def test_yaml():
+    from ecto.opts import CellYamlFactory
+    import yaml
+    bb_yaml = CellYamlFactory(MyBlackBox(start=54), 'bb')
+    bb_yaml.dump(sys.stdout)
+    mm = bb_yaml.load(yaml.load(bb_yaml.dump()), 'bb')
+    print mm.params.start
+    assert mm.params.start == 54
 
 if __name__ == '__main__':
     test_command_line_args()
     test_command_line_args2()
+    test_yaml()
     from ecto.opts import scheduler_options, run_plasm
     import argparse
     parser = argparse.ArgumentParser()

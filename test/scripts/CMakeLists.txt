@@ -25,6 +25,7 @@ foreach(file
     test_multiprocess
     test_modules
     test_no_ecto_import
+    test_options
     # test_metrics
     test_parameter_callbacks
     test_passthrough
