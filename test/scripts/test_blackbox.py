@@ -64,7 +64,7 @@ def test_bb_fail(options):
     except ecto.CellException, e:
         print "Good:"
         print str(e)
-        assert "ecto_test::ExceptInConstructor" in str(e)
+        assert "I hate life" in str(e)
 
 def test_command_line_args():
     import argparse

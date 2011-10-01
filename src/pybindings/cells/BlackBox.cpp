@@ -57,28 +57,17 @@ namespace ecto
       int
       process(const tendrils& /*in*/, const tendrils& /*out*/)
       {
-        try
+        if (!sched_)
         {
-          if (!sched_)
-          {
-            plasm_->configure_all();
-            sched_.reset(new scheduler_t(plasm_));
-          }
-          if (niter_ > 0)
-          {
-            return sched_->execute(niter_);
-          }
-          else
-            sched_->execute(0);
-        } catch (except::CellException& e)
-        {
-          //need to provide a little bit of info about the originator of the exception
-          //TODO enable stack trace
-          boost::optional<std::string> o(except::diagnostic_string(e, "cell_name"));
-          if (o)
-            e << ecto::except::diag_msg("Originally from ~> " + o.get());
-          throw;
+          plasm_->configure_all();
+          sched_.reset(new scheduler_t(plasm_));
         }
+        if (niter_ > 0)
+        {
+          return sched_->execute(niter_);
+        }
+        else
+          sched_->execute(0);
         return ecto::OK;
       }
       plasm::ptr plasm_;
