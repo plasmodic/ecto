@@ -13,11 +13,11 @@ def test_fileO(Scheduler, file_like_object, realfile=False):
     dealer = ecto.Dealer(typer=printer.inputs.at('input'), iterable=cards)
     plasm.connect(dealer['out'] >> printer['input'])
     sched = Scheduler(plasm)
-    sched.execute()
-#    sched.execute_async()
-#    import time
-#    time.sleep(0.1)
-#    sched.wait()
+    #sched.execute()
+    sched.execute_async()
+    import time
+    time.sleep(0.1)
+    sched.wait()
     if not realfile:
         file_like_object.seek(0)
         result = ''.join([x for x in file_like_object])

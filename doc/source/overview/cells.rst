@@ -242,42 +242,6 @@ the parameter values set by the keyword arguments.  It is important to note that
 when the constructor returns a new cell, the constructor of the struct, e.g. ``Printer01``,
 has not yet been called, also, configure has not yet been called.
 
-The begining of a cell's life looks approximately like the following flow
-chart:
-
-  .. graphviz::
-  
-    digraph initalization
-    {
-      rankdir=TB
-      node [shape=Mrecord];
-      1 [label="python|<here>printer =|<there>Printer01(prefix='... ', suffix=' ...\\n')"];
-      2 [label="c++|static void Printer01::declare_params(params)"];
-      4 [label="c++|static void Printer01::declare_io(...)"];
-      3 [label="c++|<here>for key,value in kwargs:\n  params[key] = value"];
-      1:there -> 2 -> 3:here -> 4 -> 1:here;
-      1:there -> 3:here;
-    }
-
-  A cell is born.
-
-You might envision the contents of ``printer`` after construction as looking like:
-
-  .. graphviz::
-    
-    digraph cell
-    {
-      rankdir=LR
-      node [shape=Mrecord];
-      3 [label="printer"];
-      1 [label="Cell|<here>cell*"];
-      2 [label="Printer01|<here>NULL"];
-      3 -> 1;
-      1:here -> 2:here;
-    }
-  
-  The ``printer``, directly after construction in python, holds a cell where ``Printer01`` has not yet been allocated.
-
 Configuration and Processing
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. sidebar:: If it has a boost::python binding, life is wonderful
@@ -286,9 +250,9 @@ Configuration and Processing
   the tendril was declared with a **c++** type.  Its all good as long as you have
   boost::python bindings. See :ref:`tendril-conversions` for an explanation.
   
-  If you **don't** have bindings, not to worry, you just can't manipulate your
-  tendrils from python... Oh and you get python bindings for free for all the basic
-  types!
+  If you **don't** have bindings, not to worry, you just won't be able to
+  manipulate your tendrils from python... Oh and you get python bindings
+  for free for all the basic types.
   
 So even thought we have a shell of cell, we can still manipulate its :ref:`tendrils`.
 Lets set the input tendril, called `message`, to a custom string. Then we'll call
