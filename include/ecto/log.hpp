@@ -38,7 +38,7 @@ namespace ecto {
 #if defined(ECTO_LOG_ON)
 #define ECTO_LOG_DEBUG(fmt, args)                                       \
   do {                                                                  \
-    log(str(boost::format(fmt) % args));                                \
+    ::ecto::log(str(boost::format(fmt) % args));                        \
   } while (false)
 #else
 #define ECTO_LOG_DEBUG(fmg, args) do { } while (false)
