@@ -5,7 +5,7 @@
 #include <iostream>
 namespace ecto
 {
-  struct PrintFunctions
+  namespace
   {
     template<typename T>
     static void
@@ -14,22 +14,36 @@ namespace ecto
       out << x.get<T>();
     }
 
-	typedef boost::function<void(std::ostream& out, const tendril& x)> function_t;
-    typedef std::map<std::string,function_t> ProcMap;
+    template<>
+    void
+    print<boost::python::api::object>(std::ostream& out, const tendril& x)
+    {
+      namespace bp = boost::python;
+      bp::object o;
+      x >> o;
+      out << std::string( bp::extract<std::string>(bp::str(o)));
+    }
+  }
+  struct PrintFunctions
+  {
+
+    typedef boost::function<void(std::ostream& out, const tendril& x)> function_t;
+    typedef std::map<const char*,function_t> ProcMap;
     ProcMap processes;
     PrintFunctions()
     {
-      processes[ecto::name_of<int>()] = function_t(&PrintFunctions::print<int>);
-      processes[ecto::name_of<float>()] = function_t(&PrintFunctions::print<float>);
-      processes[ecto::name_of<double>()] = function_t(&PrintFunctions::print<double>);
-      processes[ecto::name_of<bool>()] = function_t(&PrintFunctions::print<bool>);
-      processes[ecto::name_of<std::string>()] = function_t(&PrintFunctions::print<std::string>);
+      processes[ecto::name_of<int>().c_str()] = function_t(print<int>);
+      processes[ecto::name_of<float>().c_str()] = function_t(print<float>);
+      processes[ecto::name_of<double>().c_str()] = function_t(print<double>);
+      processes[ecto::name_of<bool>().c_str()] = function_t(print<bool>);
+      processes[ecto::name_of<std::string>().c_str()] = function_t(print<std::string>);
+      processes[ecto::name_of<boost::python::api::object>().c_str()] = function_t(print<boost::python::api::object>);
     }
 
     void
     print_tendril(std::ostream& out, const tendril& t) const
     {
-      ProcMap::const_iterator it = processes.find(t.type_name());
+      ProcMap::const_iterator it = processes.find(t.type_id());
       if (it != processes.end())
       {
         it->second(out, t);
@@ -64,6 +78,12 @@ namespace ecto
     void
     operator()(const std::pair<std::string, ecto::tendril::ptr>& tp)
     {
+      //TODO
+      //EAR: Seems like we would like to have the ability to customize the
+      //  str representation and type_name for any tendril?
+      //  Also these seem like they belong in the tendril itself.
+      //  This could go into a type registry system. All the more reason for us to have one.
+
       std::stringstream tss;
       pf.print_tendril(tss, *tp.second);
       //default value

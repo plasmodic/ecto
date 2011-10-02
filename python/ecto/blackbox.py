@@ -1,12 +1,14 @@
 import ecto
 
-class _SpecialTendrils(object):
+class BlackBoxTendrils(object):
+    '''These look like tendrils with a few extra bits of functionality for BlackBoxes.
+    '''
     tt_key = {ecto.tendril_type.INPUT:'inputs', ecto.tendril_type.PARAMETER:'params', ecto.tendril_type.OUTPUT:'outputs'}
 
     def __init__(self, bb, tendril_type):
         self._tendrils = ecto.Tendrils()
         self.tt = tendril_type
-        self.tt_key = _SpecialTendrils.tt_key[self.tt]
+        self.tt_key = BlackBoxTendrils.tt_key[self.tt]
         self.bb = bb
         self.forwards = {}
 
@@ -43,6 +45,10 @@ class _SpecialTendrils(object):
             self.forwards[cell_name] = l
 
     def forward_all(self, cell_name):
+        '''
+        Given the name of a class variable that is a cell, forward declare all
+        its tendrils (params, inputs,outputs depending on context).
+        '''
         inst = self._get_cell_template(cell_name)
         for key, val in getattr(inst, self.tt_key):
             self._append(cell_name, key, key)
@@ -66,7 +72,7 @@ class _SpecialTendrils(object):
             ctendrils = getattr(cell, self.tt_key)
             for key, cell_key in keys:
                 tendrils.declare(key, ctendrils.at(cell_key))
-                setattr(tendrils, key, self._tendrils[key])#set the cells to parameters.
+                tendrils.at(key).copy_value(self._tendrils.at(key))#set the cells to parameters.
         for key, tendril in self._tendrils:
             if not key in tendrils:
                 tendrils.declare(key, tendril)
@@ -87,9 +93,9 @@ class BlackBox(object):
         '''
         self.niter = kwargs.get('niter', 1)
 
-        self._params = _SpecialTendrils(self, ecto.tendril_type.PARAMETER)
-        self._inputs = _SpecialTendrils(self, ecto.tendril_type.INPUT)
-        self._outputs = _SpecialTendrils(self, ecto.tendril_type.OUTPUT)
+        self._params = BlackBoxTendrils(self, ecto.tendril_type.PARAMETER)
+        self._inputs = BlackBoxTendrils(self, ecto.tendril_type.INPUT)
+        self._outputs = BlackBoxTendrils(self, ecto.tendril_type.OUTPUT)
 
         self.declare_params(self._params)
 

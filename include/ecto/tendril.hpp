@@ -115,6 +115,7 @@ namespace ecto
      */
     std::string
     type_name() const;
+    const char* type_id() const {return type_ID_;}
 
     /**
      * \brief A doc string for this tendril, "foo is for the input
@@ -500,7 +501,6 @@ namespace ecto
       t->set_holder<T>();
       return t;
     }
-
   private:
     template<class Archive>
     void
