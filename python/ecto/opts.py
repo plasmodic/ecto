@@ -11,10 +11,12 @@ possible_schedulers = [ x for x in ecto.schedulers.__dict__.keys() if x[0] != '_
 
 def use_ipython(options, sched, plasm, locals={}):
     '''Launch a plasm using ipython, and a scheduler of choice.
-      -- options are from scheduler_options
-      -- sched is an already initialized scheduler for plasm.
-      -- plasm to execute
-      -- locals are a dictionary of locals to forward to the ipython shell, use locals()
+
+       Keyword arguments:
+       options -- are from scheduler_options
+       sched -- is an already initialized scheduler for plasm.
+       plasm -- The graph to execute
+       locals -- are a dictionary of locals to forward to the ipython shell, use locals()
     '''
     #expose the locals to the ipython prompt.
     for key, val in locals.items():
@@ -87,8 +89,16 @@ class CellFactory(object):
         return self.cellType(*nkwargs, **params)
 
 class CellYamlFactory(object):
-    '''A factory for cells that are created from command line args.'''
+    '''A factory to go between cells and YAML files
+    
+    :param CellOrCellType: The prototype to base the factory off of.
+    :type CellOrCellType: Cell Class, or Cell Instance
+    :param prefix: The top level key for the parameters dict for this factory
+    :type prefix: str
+    '''
+        
     def __init__(self, CellOrCellType, prefix):
+        
         cell_type, cell = _cell_type_instance(CellOrCellType)
         self.cell_type = cell_type
         self.cell = cell
@@ -101,18 +111,29 @@ class CellYamlFactory(object):
         self.params = c
 
     def dump(self, stream=None):
+        '''Dump YAML for this factory.
+        
+        :param stream: A stream like object to print the YAML to.
+        :returns: The string YAML representation of the prototype used to initialize the factory.
+        '''
         from yaml import dump
         return dump({self.prefix:self.params}, default_flow_style=False,stream=stream)
 
-    def load(self, parsed, cellname=''):
+    def load(self, parsed, cell_name=''):
+        '''Create a cell from a parsed bit of YAML.
+        
+        :param parsed: A dictionary that has been parsed from a YAML file.
+        :param cell_name: will be used as the cell's instance name.
+        :returns: A brand new instance of a cell, modeled after whatever is in the YAML
+        '''
         params = parsed[self.prefix]
         nkwargs = ()
         params_clean = {}
         for x in self.cell.params:
             if x.key() in params:
                 params_clean[x.key()] = params[x.key()]
-        if len(cellname) > 0:
-            nkwargs = (cellname,) #tuple
+        if len(cell_name) > 0:
+            nkwargs = (cell_name,) #tuple
         cell = self.cell_type(*nkwargs, **params_clean)
         return cell
 

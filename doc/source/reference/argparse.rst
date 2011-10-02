@@ -1,7 +1,7 @@
 .. _argparsing:
 
-argparse helpers
-================
+Command line helpers
+====================
 
 .. _argparse: http://docs.python.org/library/argparse.html
 
@@ -13,7 +13,7 @@ may run with multiple ecto schedulers based on command line
 args.
 
 sample
--------
+------
 
 A sample of using argparse with ecto.
 
@@ -56,6 +56,25 @@ ipython shell.
 
 Notice how the shell has access to the local variables declared
 in the script.
+
+Exposing cells to the parser
+----------------------------
+You can also automatically expose any of the parameters in a Cell like object
+to the argparse parser.
+
+.. literalinclude:: sample_opts2.py
+   :language: python
+
+The help looks like:
+
+.. program-output:: sample_opts2.py --help
+    :in_srcdir:
+
+
+.. autofunction:: ecto.opts.cell_options
+   
+   cell_options returns a cell factory. The cell factory can be used to produce
+   an instance of a cell based on the arguments parsed.
 
 helper functions
 ----------------

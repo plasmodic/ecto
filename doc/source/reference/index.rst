@@ -1,6 +1,6 @@
 .. _reference:
 
-Reference 
+Reference
 =========
 
 .. toctree::
@@ -8,6 +8,7 @@ Reference
     
     autoregister
     argparse.rst
+    yaml.rst
     tendril
     connections.rst
     cell
