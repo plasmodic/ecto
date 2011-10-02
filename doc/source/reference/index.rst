@@ -11,11 +11,11 @@ Reference
     yaml.rst
     tendril
     connections.rst
-    cell
     plasm
     schedulers
     strands
     black_box
+    static_registration.rst
     ectodoc
     ecto_cells
     ecto_test_cells
