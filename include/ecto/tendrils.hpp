@@ -48,6 +48,8 @@ namespace ecto
   {
     OUTPUT = 0, INPUT, PARAMETER
   };
+
+
   /**
    * \brief The tendrils are a collection for the ecto::tendril class, addressable by a string key.
    */
@@ -138,28 +140,36 @@ namespace ecto
       return declare<T>(name, doc).set_default_val(default_val);
     }
 
+    /**
+      Sig is a function object that looks like:
+      struct Callback
+      {
+        typedef void result_type;
+        void operator()(const boost::signals2::connection &conn, void* cookie, const tendrils* tdls) const
+        {
+          conn.disconnect();//for one time callbacks
+          //do your thang.
+        }
+      };
+
+      This will be called by realize_potential(cookie). Typically cookie is of type CellImplementation.
+
+     Convenience function for static registration of pointer to members that are of type spore<T>
+     */
     template<typename T, typename CellImpl>
     spore<T>
-    declare(spore<T> CellImpl::* ptm, const std::string& name, const std::string& doc = "", const T& default_val = T())
+    declare(spore<T> CellImpl::* ptm, const std::string& name, const std::string& doc = "",
+            const typename spore<T>::value_type& default_val = typename spore<T>::value_type())
     {
-      spore<T> s = declare<T>(name,doc,default_val);
-      {
-        Binder<CellImpl,T> binder(ptm,name);
-        sig_t::extended_slot_type slot(binder,_1,_2,_3);
-        boost::shared_ptr<sig_t>& sig = static_bindings_[name_of<CellImpl>().c_str()];
-        if(!sig)
-          sig.reset(new sig_t);
-        sig->connect_extended(slot);
-      }
-      return s;
+      sig_t::extended_slot_type slot(spore_assign(ptm,name),_1,_2,_3);
+      static_bindings_.connect_extended(slot);
+      return declare<T>(name,doc,default_val);
     }
 
-    template<typename CellImpl>
-    void realize_potential(CellImpl* thiz)
+    template<typename CookieType>
+    void realize_potential(CookieType* cookie)
     {
-      boost::shared_ptr<sig_t> sig = static_bindings_[name_of<CellImpl>().c_str()];
-      if(sig)
-        (*sig)(thiz,this);
+      static_bindings_(cookie,this);
     }
 
     /**
@@ -225,25 +235,7 @@ namespace ecto
     storage_type storage;
     mutable boost::mutex mtx;
     typedef boost::signals2::signal<void(void*, const tendrils*)> sig_t;
-    //mapped by impl type just in case this tendrils has more than one type that is using it.
-    typedef std::map<const char*,boost::shared_ptr<sig_t> > sig_t_map;
-    sig_t_map static_bindings_;
-
-    template <typename CellImpl, typename T>
-    struct Binder
-    {
-      typedef spore<T> CellImpl::* PtrToMember;
-      typedef void result_type;
-      PtrToMember member_;
-      std::string key_;
-      Binder(PtrToMember member, const std::string& key):member_(member),key_(key){}
-      void operator()(const boost::signals2::connection &conn, void* vthiz, const tendrils* tdls) const
-      {
-        conn.disconnect();
-        CellImpl* thiz = static_cast<CellImpl*>(vthiz);
-        (*thiz).*member_ = (*tdls)[key_];
-      }
-    };
+    sig_t static_bindings_;
 
     friend class boost::serialization::access;
     template<class Archive>
@@ -254,4 +246,47 @@ namespace ecto
     }
  
  };
+
+  /**
+   * Implementation of a spore assignment functor used for static time registration.
+   */
+  template<typename CellImpl, typename T>
+  struct spore_assign_impl
+  {
+    typedef spore<T> CellImpl::* PtrToMember; // the member pointer type
+    typedef void result_type; //result type for function object
+
+    spore_assign_impl(PtrToMember member, const std::string& key)
+        :
+          member_(member),
+          key_(key)
+    {
+    }
+
+    void
+    operator()(const boost::signals2::connection &conn, void* vthiz, const tendrils* tdls) const
+    {
+      conn.disconnect();//this is a one time callback.
+      CellImpl* thiz = static_cast<CellImpl*>(vthiz);
+      (*thiz).*member_ = (*tdls)[key_];
+    }
+
+    PtrToMember member_;
+    std::string key_;
+  };
+
+
+  /**
+   * Constructs a function object used for static time registration of a pointer to member ecto::spore<T>
+   * and a ecto::tendrils object.
+   * @param ptm A pointer to an ecto::spore<T> member of your cell impl.
+   * @param name The corresponding key in the ecto::tendrils object.
+   * @return A function object appropriate for static time registration.
+   */
+  template<typename CellImpl, typename T>
+  static spore_assign_impl<CellImpl, T>
+  spore_assign(spore<T> CellImpl::* ptm, const std::string& name)
+  {
+    return spore_assign_impl<CellImpl, T>(ptm, name);
+  }
 }

@@ -1,5 +1,7 @@
 #include <ecto/ecto.hpp>
 
+using ecto::tendrils;
+using ecto::spore;
 struct SporeCell
 {
   static void declare_io(const tendrils& p, tendrils& i, tendrils& o)
