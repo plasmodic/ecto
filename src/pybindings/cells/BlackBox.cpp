@@ -57,17 +57,32 @@ namespace ecto
       int
       process(const tendrils& /*in*/, const tendrils& /*out*/)
       {
+        //FIXME
+        //TODO Scheduler is a pain here. Need to expose as a scope so that exceptions are informative.
         if (!sched_)
         {
-          plasm_->configure_all();
+          try
+          {
+            plasm_->configure_all();
+
+          } catch (ecto::except::EctoException& e)
+          {
+            throw std::runtime_error(ecto::except::diagnostic_string(e));
+          }
           sched_.reset(new scheduler_t(plasm_));
         }
-        if (niter_ > 0)
+        try
         {
-          return sched_->execute(niter_);
+          if (niter_ > 0)
+          {
+            return sched_->execute(niter_);
+          }
+          else
+            sched_->execute(0);
+        } catch (ecto::except::EctoException& e)
+        {
+          throw std::runtime_error(ecto::except::diagnostic_string(e));
         }
-        else
-          sched_->execute(0);
         return ecto::OK;
       }
       plasm::ptr plasm_;
