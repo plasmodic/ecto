@@ -52,6 +52,10 @@ namespace ecto
   struct spore
   {
     typedef spore<T> this_type;
+    typedef T value_type;
+    typedef T& reference_type;
+    typedef T* pointer_type;
+    typedef const T* const_pointer_type;
     /**
      * Allocates a spore that doesn't point to anything.
      */
@@ -133,25 +137,25 @@ namespace ecto
       return get()->required();
     }
 
-    T* operator->()
+    pointer_type operator->()
     {
       tendril::ptr _p = get();
       return &(_p->get<T>());
     }
 
-    const T* operator->() const
+    const_pointer_type operator->() const
     {
       tendril::const_ptr _p = get();
       return &(_p->get<const T>());
     }
 
-    T& operator*()
+    reference_type operator*()
     {
       tendril::ptr _p = get();
       return _p->get<T>();
     }
 
-    const T& operator*() const
+    const_pointer_type operator*() const
     {
       tendril::const_ptr _p = get();
       return _p->get<const T>();
