@@ -12,7 +12,6 @@ class BlackBoxTendrils(object):
         self.bb = bb
         self.forwards = {}
 
-
     def __getattribute__(self, name):
         #forward to the member _tendrils
         if name != '_tendrils' and name in dir(self._tendrils):
@@ -20,24 +19,24 @@ class BlackBoxTendrils(object):
         else:
             return object.__getattribute__(self, name)
 
-    def _get_cell_type(self, cell_name):
+    def __get_cell_type(self, cell_name):
         cell_type = getattr(self.bb.__class__, cell_name, False)
         if not cell_type:
             raise RuntimeError("You must have a class variable called " + cell_name + " in your BlackBox.")
         return cell_type
 
-    def _get_cell_template(self, cell_name):
-        cell_type = self._get_cell_type(cell_name)
+    def __get_cell_template(self, cell_name):
+        cell_type = self.__get_cell_type(cell_name)
         return cell_type.inspect((), {})
 
-    def _get_cell(self, cell_name):
+    def __get_cell(self, cell_name):
         cell = getattr(self.bb, cell_name)
         cell_type = getattr(self.bb.__class__, cell_name)
         if not isinstance(cell, cell_type):
             raise RuntimeError("You must have a member variable of type " + self.bb.__class__.__name__ + " called " + cell_name)
         return cell
 
-    def _append(self, cell_name, key, cell_key):
+    def __append(self, cell_name, key, cell_key):
         l = [(key, cell_key)]
         if cell_name in self.forwards :
             self.forwards[cell_name] += l
@@ -49,26 +48,26 @@ class BlackBoxTendrils(object):
         Given the name of a class variable that is a cell, forward declare all
         its tendrils (params, inputs,outputs depending on context).
         '''
-        inst = self._get_cell_template(cell_name)
+        inst = self.__get_cell_template(cell_name)
         for key, val in getattr(inst, self.tt_key):
-            self._append(cell_name, key, key)
+            self.__append(cell_name, key, key)
             self._tendrils.declare(key, val)
 
     def forward(self, key, cell_name, cell_key=None, doc=None):
-        inst = self._get_cell_template(cell_name)
+        inst = self.__get_cell_template(cell_name)
         tendrils = getattr(inst, self.tt_key)
         if not cell_key:
             cell_key = key
         tendril = tendrils.at(cell_key)
         if doc:
             tendril.doc = doc
-        self._append(cell_name, key, cell_key)
+        self.__append(cell_name, key, cell_key)
         self._tendrils.declare(key, tendril)
 
     def solidify_forward_declares(self):
         tendrils = ecto.Tendrils()
         for cell_name, keys in self.forwards.iteritems():
-            cell = self._get_cell(cell_name)
+            cell = self.__get_cell(cell_name)
             ctendrils = getattr(cell, self.tt_key)
             for key, cell_key in keys:
                 tendrils.declare(key, ctendrils.at(cell_key))
@@ -92,22 +91,23 @@ class BlackBox(object):
         to.
         '''
         self.niter = kwargs.get('niter', 1)
+        self._cell = None
 
-        self._params = BlackBoxTendrils(self, ecto.tendril_type.PARAMETER)
-        self._inputs = BlackBoxTendrils(self, ecto.tendril_type.INPUT)
-        self._outputs = BlackBoxTendrils(self, ecto.tendril_type.OUTPUT)
+        self.__params = BlackBoxTendrils(self, ecto.tendril_type.PARAMETER)
+        self.__inputs = BlackBoxTendrils(self, ecto.tendril_type.INPUT)
+        self.__outputs = BlackBoxTendrils(self, ecto.tendril_type.OUTPUT)
 
-        self.declare_params(self._params)
+        self.declare_params(self.__params)
 
         #set the parameters from the kwargs.
-        for key, value in self._params.iteritems():
+        for key, value in self.__params.iteritems():
             value.val = kwargs.get(key, value.val)
 
-        self.declare_io(self._params, self._inputs, self._outputs)
-        self._configure(self._params, self._inputs, self._outputs)
-        self._connect()
+        self.declare_io(self.__params, self.__inputs, self.__outputs)
+        self.__configure(self.__params, self.__inputs, self.__outputs)
+        self.__connect()
         self._cell.name(self.__class__.__name__)
-        self._gen_doc()
+        self.__gen_doc()
         if len(args) > 0:
             self._cell.name(args[0])
 
@@ -117,13 +117,13 @@ class BlackBox(object):
         '''
         return self._cell[key]
 
-    def _gen_doc(self):
+    def __gen_doc(self):
         short_doc = ''
         if self.__doc__:
             short_doc = self.__doc__
         self.__doc__ = self._cell.gen_doc(short_doc)
 
-    def _connect(self):
+    def __connect(self):
         ''' Connect oneself to the plasm.
         '''
         plasm = ecto.Plasm()
@@ -135,9 +135,9 @@ class BlackBox(object):
                 plasm.connect(x)
         self._cell = ecto.create_black_box(plasm,
                                            niter=self.niter,
-                                           parameters=self._params._tendrils,
-                                           inputs=self._inputs._tendrils,
-                                           outputs=self._outputs._tendrils)
+                                           parameters=self.__params._tendrils,
+                                           inputs=self.__inputs._tendrils,
+                                           outputs=self.__outputs._tendrils)
 
     def __getattribute__(self, *args, **kwargs):
         return object.__getattribute__(self, *args, **kwargs)
@@ -194,7 +194,7 @@ class BlackBox(object):
         '''
         pass
 
-    def _configure(self, p, i, o):
+    def __configure(self, p, i, o):
         self.configure(p, i, o)
         #take  all of the forward declares and make them point to the actual
         #underlying stuffs.
