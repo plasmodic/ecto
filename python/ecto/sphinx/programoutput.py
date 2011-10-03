@@ -162,7 +162,7 @@ class ProgramOutputCache(defaultdict):
         if proc.returncode != 0 and (not expect_error):
             print "Unable to run '" + cmd + "' returned " + str(proc.returncode)\
                 + 'stdout: ' + stdout
-            raise CalledProcessError
+            raise CalledProcessError(proc.returncode,cmd)
         self[key] = stdout
         return stdout
 
