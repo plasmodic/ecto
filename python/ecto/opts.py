@@ -4,8 +4,6 @@ the schedulers.
 '''
 
 import ecto
-from copy import copy
-
 
 possible_schedulers = [ x for x in ecto.schedulers.__dict__.keys() if x[0] != '_']
 
@@ -42,6 +40,7 @@ def use_ipython(options, sched, plasm, locals={}):
 def run_plasm(options, plasm, locals={}):
     ''' run the plasm given the options from the command line parser.
     '''
+    global possible_schedulers
     if options.scheduler_type not in possible_schedulers:
         msg = "You must supply a valid scheduler type, not \'%s\'\n" % options.scheduler_type
         msg += 'Valid schedulers are:\n\t' + '\n\t'.join(possible_schedulers) + '\n'
@@ -174,8 +173,9 @@ def scheduler_options(parser, default_scheduler='Singlethreaded',
     '''Creates an argument parser for ecto schedulers.  Operates inplace on the
     given parser object.
     '''
-    parser.add_argument('--scheduler', metavar='SCHEDULER_TYPE',
-                        dest='scheduler_type', type=str, default=default_scheduler,
+    parser.add_argument('--scheduler',
+                        dest='scheduler_type',
+                        default=default_scheduler,
                         choices=possible_schedulers,
                         help='The scheduler to execute the plasm with. (default: %(default)s)'
                         )
