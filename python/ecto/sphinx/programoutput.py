@@ -206,7 +206,9 @@ def run_programs(app, doctree):
             output = '\n'.join(lines)
 
         if 'until' in node:
-            output = output[:output.find(node['until'])]
+            index = output.find(node['until'])
+            if index >= 0:
+	        output = output[:index]
 
         if node['show_prompt']:
             tmpl = app.config.programoutput_prompt_template
