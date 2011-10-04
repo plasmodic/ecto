@@ -35,7 +35,7 @@
 namespace ecto {
 
   namespace py {
-    void wrap_impl(const std::string&, const std::string&, const std::string&);
+    void postregistration(const std::string&, const std::string&, const std::string&);
   }
 
   struct cell;
@@ -57,9 +57,7 @@ namespace ecto {
       { 
         declare_io(p, i, o); 
       }
-
     };
-
 
     template <typename ModuleTag>
     struct module_registry : boost::noncopyable
@@ -95,22 +93,25 @@ namespace ecto {
       const char* name_;
       const char* docstring_;
 
+      typedef ::ecto::cell_<T> cell_t;
+
       explicit registrator(const char* name, const char* docstring) 
         : name_(name), docstring_(docstring) 
       { 
+        // this fires the construction of proper python classes at import time
         module_registry<Module>::instance().add(boost::ref(*this));
+
+        // this registers the functions needed to do the construction above
         entry_t e;
         e.construct = &ecto::create_cell<T>;
-        typedef ::ecto::cell_<T> cell_t;
         e.declare_params = (void (*)(tendrils&)) &cell_t::declare_params;
         e.declare_io = (void (*)(const tendrils&, tendrils&, tendrils&)) &cell_t::declare_io;
-        
         register_factory_fn(name_of<T>(), e);
       }
 
       void operator()() const 
       {
-        ecto::py::wrap_impl(name_, docstring_, name_of<T>());
+        ecto::py::postregistration(name_, docstring_, name_of<T>());
       }
       const static registrator& inst;
     };

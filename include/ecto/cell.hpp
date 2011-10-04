@@ -442,14 +442,6 @@ namespace ecto
    *
    * @return A cell::ptr that is initialized as far as default params,inputs,outputs go.
    */
-  template<typename Impl>
-  void inspect_cell(typename cell_<Impl>::ptr p)
-  {
-    std::cout << __PRETTY_FUNCTION__ << "\n";
-    cell::ptr base(p);
-    base->declare_params();
-    base->declare_io();
-  }
 
   template<typename Impl>
   typename cell_<Impl>::ptr create_cell()

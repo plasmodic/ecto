@@ -7,9 +7,9 @@ namespace bp = boost::python;
 namespace ecto {
   namespace py {
 
-    void wrap_impl(const std::string& name,
-                   const std::string& docstr,
-                   const std::string& cpp_typename)
+    void postregistration(const std::string& name,
+                          const std::string& docstr,
+                          const std::string& cpp_typename)
     {
       bp::object thismodule = bp::import("ecto");
       bp::object dict__ = getattr(thismodule, "__dict__");

@@ -262,5 +262,4 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
     c->declare_io();
     return c;
   }
-
 }
