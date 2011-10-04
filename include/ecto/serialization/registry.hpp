@@ -60,9 +60,7 @@ namespace ecto
       operator()(Archive& ar, tendril& t) const
       {
         if (!t.is_type<T>())
-        {
-          t << tendril(T(), ""); //don't want to loose docs.
-        }
+          t << tendril(T(), ""); //don't want to lose docs.
         ar >> t.get<T>();
       }
     };
