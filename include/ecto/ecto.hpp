@@ -32,7 +32,6 @@
 //boost python first.
 #include <boost/python.hpp>
 #include <boost/shared_ptr.hpp>
-#include <boost/format.hpp>
 
 //ecto includes
 #include <ecto/version.hpp>
@@ -54,6 +53,8 @@
  */
 namespace ecto
 {
+  void inspect_impl(ecto::cell*, const boost::python::tuple& args, const boost::python::dict& kwargs);
+
   template<typename T>
   boost::shared_ptr<ecto::cell_<T> > inspect(boost::python::tuple args,
                                              boost::python::dict kwargs)
@@ -65,53 +66,7 @@ namespace ecto
     //SHOW();
     // TDS: fixme is this bare pointer stuff necessary?
     boost::shared_ptr<cell_t> mm(new cell_t());
-    ecto::cell * m = mm.get();
-    
-    if (bp::len(args) > 1)
-      throw std::runtime_error("Only one non-keyword argument allowed, this will specify instance name");
-
-    if (bp::len(args) == 0)
-      {
-        // generate default name == type
-        std::string defaultname = boost::str(boost::format("%s") % m->type());
-        m->name(defaultname);
-      }
-    else 
-      {
-        bp::extract<std::string> e(args[0]);
-        if (! e.check())
-          throw std::runtime_error("Non-keyword argument (instance name) not convertible to string.");
-        m->name(e());
-      }
-    m->declare_params();
-
-    bp::list l = kwargs.items();
-    for (int j = 0; j < bp::len(l); ++j)
-      {
-        bp::object key = l[j][0];
-        bp::object value = l[j][1];
-        std::string keystring = bp::extract<std::string>(key);
-        if (keystring == "strand")
-          {
-            ecto::strand s = bp::extract<ecto::strand>(value);
-            m->strand_ = s;
-          }
-        else 
-          {
-            tendril::ptr tp = m->parameters[keystring];
-            try{
-              *tp << value;
-            }catch(ecto::except::TypeMismatch& e)
-            {
-              e << except::tendril_key(keystring);
-              e << except::cell_name(m->name());
-              throw;
-            }
-            tp->user_supplied(true);
-            tp->dirty(true);
-          }
-      }
-    m->declare_io();
+    inspect_impl(mm.get(), args, kwargs);
     return mm;
   }
 
@@ -120,8 +75,7 @@ namespace ecto
   std::string cell_doc(std::string doc)
   {
     ecto::cell::ptr c = ecto::inspect_cell<T>();
-    std::string defaultname = boost::str(boost::format("%s") % c->type());
-    c->name(defaultname);
+    c->name(c->type());
     return c->gen_doc(doc);
   }
 
