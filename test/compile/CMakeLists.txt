@@ -13,6 +13,7 @@ macro(add_compile_fail_test FILENAME)
 
 endmacro()
 
+
 macro(add_compile_pass_test FILENAME)
   add_library(compile_pass_${FILENAME} 
     SHARED
@@ -32,4 +33,9 @@ add_compile_fail_test(redeclare)
 add_compile_pass_test(tendril_static_time_correct)
 add_compile_pass_test(tendril_static_time_correct2)
 add_compile_fail_test(tendril_static_time_nonspore)
+
+# expect "module_must_be_named_compile_fail_wrong_cell_module_namex"
+add_compile_fail_test(wrong_cell_module_name)
+# expect "module_must_be_named_whatshouldinameyou"
+add_compile_fail_test(wrong_module_name)
 

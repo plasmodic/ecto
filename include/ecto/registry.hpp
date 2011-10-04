@@ -95,8 +95,8 @@ namespace ecto {
 //  namespace ecto { namespace tag { struct MODULE; } }                 
 
 #define ECTO_MODULETAG(MODULE) namespace ecto { namespace tag { struct MODULE; } }
-
 #define ECTO_CELL(MODULE, TYPE, NAME, DOCSTRING)                        \
+  ECTO_ASSERT_MODULE_NAME(MODULE)                                       \
   ECTO_MODULETAG(MODULE)                                                \
   namespace ecto{ namespace registry {                                  \
     template<>                                                          \

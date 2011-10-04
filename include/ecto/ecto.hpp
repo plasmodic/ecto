@@ -199,16 +199,20 @@ namespace ecto
     return m;
   }
 }
+#define ECTO_ASSERT_MODULE_NAME(MODULE)                               \
+template <unsigned X>  void module_must_be_named_##MODULE();          \
+extern template void module_must_be_named_##MODULE<MODULE##_ectomodule_EXPORTS>();
 
-#define ECTO_DEFINE_MODULE(modname)             \
-  ECTO_INSTANTIATE_REGISTRY(modname)            \
-  void init_module_##modname##_rest() ;         \
-  BOOST_PYTHON_MODULE(modname) {                \
-    boost::python::import("ecto");              \
-    ECTO_REGISTER(modname);                     \
-    init_module_##modname##_rest();             \
-  }                                             \
-  void init_module_##modname##_rest()
+#define ECTO_DEFINE_MODULE(MODULE)             \
+  ECTO_ASSERT_MODULE_NAME(MODULE)              \
+  ECTO_INSTANTIATE_REGISTRY(MODULE)            \
+  void init_module_##MODULE##_rest() ;         \
+  BOOST_PYTHON_MODULE(MODULE) {                \
+    boost::python::import("ecto");             \
+    ECTO_REGISTER(MODULE);                     \
+    init_module_##MODULE##_rest();             \
+  }                                            \
+  void init_module_##MODULE##_rest()
 
 #include <ecto/registry.hpp>
 
