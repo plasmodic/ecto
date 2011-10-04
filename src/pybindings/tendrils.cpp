@@ -65,6 +65,8 @@ namespace ecto
       {
         if (name == "__members__")
           return tendril_members(ts);
+        if (name == "__objclass__")
+          return bp::object();
         const tendril& t = *ts[name];
         bp::object o;
         t >> o;

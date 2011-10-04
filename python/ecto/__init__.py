@@ -23,7 +23,7 @@ class EctoCellBase(object):
     pass
 
 def cellinit(cpptype):
-    def impl(self):
+    def impl(self, *args, **kwargs):
         c = _create_cell(cpptype)
         self.inputs = c.inputs
         self.outputs = c.outputs
@@ -39,6 +39,9 @@ def postregister(cellname, cpptypename, docstring, inmodule):
     print c.inputs, c.outputs, c.params
     thistype = type(cellname, (EctoCellBase,), 
                     dict(__doc__ = docstring, 
+                         inputs = c.inputs,
+                         outputs = c.outputs,
+                         params = c.params,
                          __init__ = cellinit(cpptypename)))
     inmodule.__dict__[cellname] = thistype
     
