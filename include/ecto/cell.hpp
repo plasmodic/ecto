@@ -435,6 +435,7 @@ namespace ecto
     return p;
   }
 
+#if 0
   /**
    * Create a cell from an type that has all of the proper interface functions defined.
    * This will call configure in the cell.
@@ -446,5 +447,5 @@ namespace ecto
     typename cell_<Impl>::ptr p = inspect_cell<Impl>();
     return p;
   }
-
+#endif
 }//namespace ecto

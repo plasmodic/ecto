@@ -32,7 +32,7 @@ namespace ecto
   cell::ptr
   createDealer(tendril::ptr typer, bp::object iterable)
   {
-    cell_<Dealer>::ptr dealer = ecto::create_cell<Dealer>();
+    cell_<Dealer>::ptr dealer = ecto::inspect_cell<Dealer>();
     cell::ptr base(dealer);
     base->configure();
     if (!iterable || iterable == bp::object())

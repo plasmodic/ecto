@@ -134,11 +134,12 @@ namespace ecto
   };
 
   template <typename Impl>
-  typename cell_wrapper<Impl>::type 
+  void //typename cell_wrapper<Impl>::type 
   wrap(const char* name, std::string doc_str)
   {
     namespace bp = boost::python;
 
+#if 0
     typedef ecto::cell_<Impl> cell_t;
     ecto::cell_<Impl>::SHORT_DOC = doc_str;
 
@@ -151,14 +152,15 @@ namespace ecto
     m.def("name", (std::string (cell_t::*)() const) &cell_t::name);
     m.def("type_name", (std::string (cell_t::*)() const) &cell_t::type);
     m.def_readonly("short_doc", &cell_t::SHORT_DOC);
-
-    
+#endif
     bp::object thismodule = bp::import("ecto");
     bp::object dict__ = getattr(thismodule, "__dict__");
     bp::object pr = dict__["postregister"];
-    pr(name, bp::scope());
+    pr(name, name_of<Impl>(), doc_str, bp::scope());
 
+#if 0
     return m;
+#endif
   }
 }
 

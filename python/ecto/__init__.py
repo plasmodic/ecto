@@ -21,12 +21,15 @@ import platform, sys
 
 #import inspect
 
-def postregister(cellname, inmodule):
-    print "POSTREGISTER OF", cellname, "in", inmodule
+def postregister(cellname, cpptypename, docstring, inmodule):
+    print "POSTREGISTER OF", cellname, "(", cpptypename, ") in", inmodule
+    print "doc:", docstring
     cellclass = sys.modules['ecto'].__dict__[cellname]
     print cellclass
     m = cellclass.inspect((), {})
     print m.inputs, m.outputs, m.params
+    ding = _create_cell(cpptypename)
+    print "ding!", ding
 
 if platform.system().startswith('freebsd'):
         # C++ modules are extremely fragile when loaded with RTLD_LOCAL,

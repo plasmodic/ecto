@@ -7,14 +7,13 @@ namespace ecto {
 
   namespace registry {
 
-
-
     namespace {
       std::map<std::string, ffn_t> cellmap;
     }
 
     void register_factory_fn(const std::string& name, ffn_t fn)
     {
+      std::cout << "registering ffn for " << name << "\n";
       cellmap[name] = fn;
     }
     
