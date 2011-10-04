@@ -60,8 +60,6 @@ namespace ecto
    * Items held by the tendril must be copy constructible and copiable.
    */
 
-  using namespace ecto::except;
-
   class ECTO_EXPORT tendril
   {
 
@@ -424,9 +422,10 @@ namespace ecto
     operator>>(const ecto::tendril::const_ptr& rhs, T& val)
     {
       if (!rhs)
-        BOOST_THROW_EXCEPTION(NullTendril()
-                              << from_typename("(null)")
-                              << to_typename(name_of<T>()));
+        BOOST_THROW_EXCEPTION(except::
+NullTendril()
+                              << except::from_typename("(null)")
+                              << except::to_typename(name_of<T>()));
       *rhs >> val;
     }
 
@@ -436,9 +435,9 @@ namespace ecto
     operator>>(const ecto::tendril::ptr& rhs, boost::python::object& obj)
     {
       if (!rhs)
-        BOOST_THROW_EXCEPTION(NullTendril() 
-                              << from_typename("(null)")
-                              << to_typename("(python object)"));
+        BOOST_THROW_EXCEPTION(except::NullTendril() 
+                              << except::from_typename("(null)")
+                              << except::to_typename("(python object)"));
       *rhs >> obj;
     }
 
@@ -448,9 +447,9 @@ namespace ecto
     operator>>(const ecto::tendril::const_ptr& rhs, boost::python::object& obj)
     {
       if (!rhs)
-        BOOST_THROW_EXCEPTION(NullTendril() 
-                              << from_typename("(null)")
-                              << to_typename("(python object)"));
+        BOOST_THROW_EXCEPTION(except::NullTendril() 
+                              << except::from_typename("(null)")
+                              << except::to_typename("(python object)"));
       *rhs >> obj;
     }
 
@@ -459,9 +458,9 @@ namespace ecto
     operator<<(const ecto::tendril::ptr& lhs, const T& rhs)
     {
       if (!lhs)
-        BOOST_THROW_EXCEPTION(NullTendril() 
-                              << to_typename("(null)")
-                              << from_typename(name_of<T>()));
+        BOOST_THROW_EXCEPTION(except::NullTendril() 
+                              << except::to_typename("(null)")
+                              << except::from_typename(name_of<T>()));
       *lhs << rhs;
     }
 
@@ -469,13 +468,13 @@ namespace ecto
     operator<<(const ecto::tendril::ptr& lhs, const ecto::tendril::ptr& rhs)
     {
       if (!lhs)
-        BOOST_THROW_EXCEPTION(NullTendril() 
-                              << to_typename("(null)")
-                              << from_typename(rhs ? rhs->type_name() : "(null)"));
+        BOOST_THROW_EXCEPTION(except::NullTendril() 
+                              << except::to_typename("(null)")
+                              << except::from_typename(rhs ? rhs->type_name() : "(null)"));
       if (!rhs)
-        BOOST_THROW_EXCEPTION(NullTendril()
-                              << to_typename(lhs->type_name())
-                              << from_typename("(null)"));
+        BOOST_THROW_EXCEPTION(except::NullTendril()
+                              << except::to_typename(lhs->type_name())
+                              << except::from_typename("(null)"));
       *lhs << *rhs;
     }
 
@@ -483,13 +482,13 @@ namespace ecto
     operator<<(const ecto::tendril::ptr& lhs, const ecto::tendril::const_ptr& rhs)
     {
       if (!lhs)
-        BOOST_THROW_EXCEPTION(NullTendril() 
-                              << to_typename("(null)")
-                              << from_typename(rhs->type_name()));
+        BOOST_THROW_EXCEPTION(except::NullTendril() 
+                              << except::to_typename("(null)")
+                              << except::from_typename(rhs->type_name()));
       if (!rhs)
-        BOOST_THROW_EXCEPTION(NullTendril() 
-                              << to_typename(lhs->type_name())
-                              << from_typename("(null)"));
+        BOOST_THROW_EXCEPTION(except::NullTendril() 
+                              << except::to_typename(lhs->type_name())
+                              << except::from_typename("(null)"));
       *lhs << *rhs;
     }
 

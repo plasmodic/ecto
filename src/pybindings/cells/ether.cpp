@@ -1,4 +1,4 @@
-#include <ecto/ecto.hpp>
+#include <ecto/python.hpp>
 #include <boost/weak_ptr.hpp>
 #include <boost/python/overloads.hpp>
 namespace bp = boost::python;
@@ -22,9 +22,9 @@ namespace ecto
   {
     bp::tuple p;
     cell::ptr source, sink;
-    source = ecto::create_cell<EtherSource>();
+    source = ecto::inspect_cell<EtherSource>();
     source->name(source_name);
-    sink = ecto::create_cell<EtherSink>();
+    sink = ecto::inspect_cell<EtherSink>();
     sink->name(sink_name);
     sink->inputs["in"] << *value;
     source->outputs.declare("out",sink->inputs["in"]);

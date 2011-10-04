@@ -44,6 +44,8 @@ namespace ecto {
   using boost::exception;
   using boost::exception_ptr;
 
+  using namespace ecto::except;
+
   namespace schedulers {
     namespace asio = boost::asio;
 

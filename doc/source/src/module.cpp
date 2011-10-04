@@ -1,4 +1,5 @@
 #include <ecto/ecto.hpp>
+#include <ecto/python.hpp>
 
 #include <boost/python.hpp>
 

@@ -1,5 +1,6 @@
 #include <ecto/ecto.hpp>
 #include <iostream>
+
 using ecto::tendrils;
 namespace lifecycle
 {
@@ -43,5 +44,7 @@ namespace lifecycle
   };
 }
 
-ECTO_DEFINE_MODULE(ecto_lifecycle){}
+ECTO_DEFINE_MODULE(ecto_lifecycle)
+{ }
+
 ECTO_CELL(ecto_lifecycle, lifecycle::LifeCycle, "LifeCycle", "Chirps on each stage of life.");

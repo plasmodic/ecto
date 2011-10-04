@@ -69,9 +69,9 @@ namespace ecto
         tendril_(t)
     {
       if(!t)
-        BOOST_THROW_EXCEPTION(NullTendril()
-                              << diag_msg("creating sport with type")
-                              << spore_typename(name_of<T>()));
+        BOOST_THROW_EXCEPTION(except::NullTendril()
+                              << except::diag_msg("creating sport with type")
+                              << except::spore_typename(name_of<T>()));
 
       t->enforce_type<T>();
     }
@@ -177,7 +177,7 @@ namespace ecto
     inline tendril::ptr get()
     {
       if (!tendril_)
-        BOOST_THROW_EXCEPTION(NullTendril());
+        BOOST_THROW_EXCEPTION(except::NullTendril());
       return tendril_;
     }
     /**
@@ -187,9 +187,9 @@ namespace ecto
     inline tendril::const_ptr get() const
     {
       if (!tendril_)
-        BOOST_THROW_EXCEPTION(NullTendril() 
-                              << diag_msg("access via spore")
-                              << spore_typename(name_of<T>()));
+        BOOST_THROW_EXCEPTION(except::NullTendril() 
+                              << except::diag_msg("access via spore")
+                              << except::spore_typename(name_of<T>()));
 
       return tendril_;
     }

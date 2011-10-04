@@ -1,5 +1,6 @@
 #include <boost/python.hpp>
 #include <ecto/ecto.hpp>
+#include <ecto/registry.hpp>
 
 #include <boost/thread.hpp>
 
@@ -13,6 +14,7 @@ namespace ecto {
     void wrapConnection();
     void wrapPlasm();
     void wrapModule();
+    void wrapRegistry();
     void wrapSchedulers();
     void wrapStrand();
     void wrap_except();
@@ -70,6 +72,7 @@ BOOST_PYTHON_MODULE(ecto)
   ecto::py::wrapConnection();
   ecto::py::wrapPlasm();
   ecto::py::wrapModule();
+  ecto::py::wrapRegistry();
   ecto::py::wrapTendrils();
   ecto::py::wrapSchedulers();
   ecto::py::wrapStrand();

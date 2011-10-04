@@ -56,8 +56,10 @@ namespace ecto
 {
   namespace except
   {
-    template <class T>
-    struct wrap { };
+    namespace detail {
+      template <class T>
+      struct wrap { };
+    }
 
     class error_info_container_impl 
       : public ::boost::exception_detail::error_info_container
@@ -148,7 +150,7 @@ namespace ecto
 
 #define ECTO_EXCEPTION_TAG_DECL(r, data, NAME)                          \
     struct BOOST_PP_CAT(tag_, NAME);                                    \
-    typedef ::boost::error_info<wrap<BOOST_PP_CAT(tag_, NAME)>,         \
+    typedef ::boost::error_info<detail::wrap<BOOST_PP_CAT(tag_, NAME)>,         \
                                 std::string> NAME;                      \
 
     BOOST_PP_SEQ_FOR_EACH(ECTO_EXCEPTION_TAG_DECL, ~, ECTO_EXCEPTION_TAG_NAMES);
@@ -162,7 +164,7 @@ namespace boost {
 
 #define ECTO_EXCEPTION_TAG_TYPE_NAME_DECL(r, data, NAME)                \
   template <> inline char const*                                        \
-  tag_type_name< ::ecto::except::wrap< BOOST_PP_CAT(::ecto::except::tag_, NAME)> >() { \
+  tag_type_name< ::ecto::except::detail::wrap< BOOST_PP_CAT(::ecto::except::tag_, NAME)> >() { \
     return BOOST_PP_STRINGIZE(NAME);                                    \
   }
   BOOST_PP_SEQ_FOR_EACH(ECTO_EXCEPTION_TAG_TYPE_NAME_DECL, ~, ECTO_EXCEPTION_TAG_NAMES);
@@ -186,9 +188,9 @@ namespace boost {
   template <class E,class Tag,class T>
   inline
   E const &
-  operator<<( E const & x, error_info< ::ecto::except::wrap<Tag>, T> const & v )
+  operator<<( E const & x, error_info< ::ecto::except::detail::wrap<Tag>, T> const & v )
   {
-    typedef error_info< ::ecto::except::wrap<Tag>, T> error_info_tag_t;
+    typedef error_info< ::ecto::except::detail::wrap<Tag>, T> error_info_tag_t;
     ::boost::shared_ptr<error_info_tag_t> p( new error_info_tag_t(v) );
     exception_detail::refcount_ptr<exception_detail::error_info_container>& c 
       = exception_detail::get_info< ::ecto::except::HACK_HACK_HACK>::get(x);

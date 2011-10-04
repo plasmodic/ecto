@@ -14,10 +14,53 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>
 # 
-"""
-"""
 
-import platform, sys
+import platform, sys 
+
+#import inspect
+
+class EctoCellBase(object):
+    pass
+
+def cellinit(cpptype):
+    def impl(self, *args, **kwargs):
+        c = _create_cell(cpptype)
+        self.inputs = c.inputs
+        self.outputs = c.outputs
+        self.params = c.params
+    return impl
+
+def cell_print_tendrils(tendril):
+    s = ""
+    for x in tendril:
+        value = str(x.data().get())
+        s += " - " + x.key() + " [%s]" % x.data().type_name + " default = %s\n" % value
+        docstr = str(x.data().doc)
+        doclines = docstr.splitlines()
+        if doclines :
+            for docline in doclines:
+                s +=  "    " + docline + "\n"
+        s +=  "\n"
+    return s
+
+def postregister(cellname, cpptypename, docstring, inmodule):
+    print "POSTREGISTER OF", cellname, "(", cpptypename, ") in", inmodule
+    print "doc:", docstring
+
+    c = _create_cell(cpptypename)
+    print "ding!", c
+    print c.inputs, c.outputs, c.params
+    thistype = type(cellname, (EctoCellBase,), 
+                    dict(__doc__ = docstring + "\n\n" 
+                         + "Parameters:\n" + cell_print_tendrils(c.params)
+                         + "Inputs:\n"+ cell_print_tendrils(c.inputs) 
+                         + "Outputs:\n" + cell_print_tendrils(c.outputs), 
+                         inputs = c.inputs,
+                         outputs = c.outputs,
+                         params = c.params,
+                         __init__ = cellinit(cpptypename)))
+    inmodule.__dict__[cellname] = thistype
+    
 
 if platform.system().startswith('freebsd'):
         # C++ modules are extremely fragile when loaded with RTLD_LOCAL,
@@ -63,3 +106,6 @@ __path__ = extend_path(__path__, __name__)
 from doc import *
 from cell import *
 from blackbox import *
+
+
+

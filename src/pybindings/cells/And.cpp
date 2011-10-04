@@ -29,6 +29,7 @@
 
 #include <ecto/ecto.hpp>
 #include <boost/format.hpp>
+
 namespace ecto
 {
   namespace bp = boost::python;

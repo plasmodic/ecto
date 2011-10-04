@@ -46,11 +46,15 @@ namespace ecto
             key(key)
       {
         if (!check(mod_in, key))
-          BOOST_THROW_EXCEPTION(
-              EctoException() << diag_msg("no input or parameter found") << tendril_key(key) << cell_name(mod_in->name()));
+          BOOST_THROW_EXCEPTION(except::EctoException() 
+                                << except::diag_msg("no input or parameter found") 
+                                << except::tendril_key(key) 
+                                << except::cell_name(mod_in->name()));
         if (!check(mod_out, key))
-          BOOST_THROW_EXCEPTION(
-              EctoException() << diag_msg("no output or parameter found") << tendril_key(key) << cell_name(mod_in->name()));
+          BOOST_THROW_EXCEPTION(except::EctoException() 
+                                << except::diag_msg("no output or parameter found") 
+                                << except::tendril_key(key) 
+                                << except::cell_name(mod_in->name()));
       }
 
       TendrilSpecification(cell::ptr mod, const std::string& key)
@@ -60,8 +64,10 @@ namespace ecto
             key(key)
       {
         if (!check(mod, key))
-          BOOST_THROW_EXCEPTION(
-              EctoException() << diag_msg("no inputs or outputs found") << tendril_key(key) << cell_name(mod->name()));
+          BOOST_THROW_EXCEPTION(except::EctoException() 
+                                << except::diag_msg("no inputs or outputs found") 
+                                << except::tendril_key(key) 
+                                << except::cell_name(mod->name()));
       }
 
       tendril::ptr
@@ -113,8 +119,9 @@ namespace ecto
       {
         if (vts.size() != 1)
         {
-          BOOST_THROW_EXCEPTION(
-              EctoException() << diag_msg("This specification must be of length one. e.g. module['only one key']"));
+          BOOST_THROW_EXCEPTION(except::EctoException() 
+                                << except::diag_msg("This specification must be of length one. "
+                                                    "e.g. module['only_one_key']"));
         }
         return vts.front();
       }

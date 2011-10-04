@@ -39,7 +39,7 @@ namespace {
 TEST(Plasm, Viz)
 {
   ecto::plasm p;
-  ecto::cell::ptr m1 = ecto::create_cell<Module1>(), m2 = ecto::create_cell<Module2>();
+  ecto::cell::ptr m1 = ecto::inspect_cell<Module1>(), m2 = ecto::inspect_cell<Module2>();
   p.connect(m1,"d",m2,"d");
   std::cout << p.viz() << std::endl;
 }
@@ -47,8 +47,8 @@ TEST(Plasm, Viz)
 TEST(Plasm, Passthrough)
 {
   ecto::plasm::ptr p(new ecto::plasm);
-  ecto::cell::ptr m1 = ecto::create_cell<Module1>(), 
-    m2 = ecto::create_cell<Module2>(), 
+  ecto::cell::ptr m1 = ecto::inspect_cell<Module1>(), 
+    m2 = ecto::inspect_cell<Module2>(), 
     pass = ecto::create_cell<Passthrough>();
   m1->outputs["d"] << 5.0;
   p->connect(m1,"d",pass,"in");
