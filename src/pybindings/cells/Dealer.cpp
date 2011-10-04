@@ -36,7 +36,7 @@ namespace ecto
     cell::ptr base(dealer);
     base->configure();
     if (!iterable || iterable == bp::object())
-      return cell::ptr();
+      return dealer;
     size_t end = bp::len(iterable);
     for (size_t j = 0; j < end; ++j)
     {
@@ -54,7 +54,7 @@ namespace ecto
     void
     wrap_dealer()
     {
-      bp::def("Dealer", createDealer, (arg("typer"), arg("iterable")), //args
+      bp::def("Dealer", createDealer, (arg("typer"), arg("iterable") = bp::object()), //args
               "Constructs a Dealer with the type determined by `typer` and the the python iterable." //doc str
               );
     }
