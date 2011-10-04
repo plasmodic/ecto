@@ -17,7 +17,7 @@ namespace {
 }
 TEST(Clone, Clone1)
 {
-  ecto::cell::ptr m1 = ecto::create_cell<A>();
+  ecto::cell::ptr m1(new cell_<A>);
   m1->parameters["x"] << std::string("Hello");
   m1->parameters["d"] << 7.0;
 

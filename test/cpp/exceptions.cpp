@@ -114,23 +114,23 @@ TEST(Exceptions, ExceptionalModules)
 {
   try
   {
-    create_cell<ExceptionalModule1> ();
+    cell* p = new cell_<ExceptionalModule1>;
   } catch (except::EctoException& e)
   {
     std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
   }
-  EXPECT_THROW(create_cell<ExceptionalModule1>(), ecto::except::EctoException);
+  EXPECT_THROW(new cell_<ExceptionalModule1>, ecto::except::EctoException);
 }
 TEST(Exceptions, ExceptionUnknownException)
 {
   try
   {
-    create_cell<ExceptionUnknownException> ();
+    new cell_<ExceptionUnknownException>;
   } catch (except::EctoException& e)
   {
     std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
   }
-  EXPECT_THROW(create_cell<ExceptionUnknownException>(), ecto::except::EctoException);
+  EXPECT_THROW(new cell_<ExceptionUnknownException>, ecto::except::EctoException);
 }
 
 #define MEH(x, y) x
@@ -141,7 +141,7 @@ TEST(Exceptions, ProcessException)
     "  What   : A standard exception\n"
     "  Module : ProcessException\n"
     "  Function: process");
-  cell::ptr m = create_cell<ProcessException> ();
+  cell::ptr m(new cell_<ProcessException>);
   EXPECT_THROW(
       try
       {
@@ -172,7 +172,7 @@ TEST(Exceptions, NotExist)
              "  Module : NotExist\n"
              "  Function: process");
 
-  cell::ptr m = create_cell<NotExist> ();
+  cell::ptr m(new cell_<NotExist>);
   try
     {
       m->process();
@@ -190,7 +190,7 @@ TEST(Exceptions, WrongType)
 "  Hint : 'd' is of type double\n"
 "  Module : WrongType\n"
 "  Function: process");
-  cell::ptr m = create_cell<WrongType> ();
+  cell::ptr m(new cell_<WrongType>);
   bool threw = false;
   try
     {
@@ -211,7 +211,7 @@ TEST(Exceptions, WrongType_sched)
 "  Hint : 'd' is of type double\n"
 "  Module : WrongType\n"
 "  Function: process");
-  cell::ptr m = create_cell<WrongType> ();
+  cell::ptr m(new cell_<WrongType>);
   plasm::ptr p(new plasm);
   p->insert(m);
   schedulers::threadpool sched(p);
@@ -231,7 +231,7 @@ TEST(Exceptions, WrongType_sched)
 
 TEST(Exceptions, ParameterCBExcept_sched)
 {
-  cell::ptr m = create_cell<ParameterCBExcept> ();
+  cell::ptr m(new cell_<ParameterCBExcept>);
   m->parameters["x"] << 5.1;
   m->parameters["x"]->dirty(true);
   plasm::ptr p(new plasm);
@@ -253,7 +253,7 @@ TEST(Exceptions, ParameterCBExcept_sched)
 
 TEST(Exceptions, ConstructorExcept)
 {
-  cell::ptr m = create_cell<InConstructorExcept>();
+  cell::ptr m(new cell_<InConstructorExcept>);
   plasm::ptr p(new plasm);
   p->insert(m);
   schedulers::threadpool sched(p);

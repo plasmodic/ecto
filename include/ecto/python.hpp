@@ -114,35 +114,6 @@ namespace ecto
   }
 #endif
 
-  /**
-   * \brief Takes a user cell, UserModule, that follows the ecto::cell idiom and exposes
-   * it to python or other plugin architecture.
-
-   * This should be the preferred method of exposing user
-   * modules to the outside world.
-   *
-   * @tparam UserCell A client cell type that implements the idium of an ecto::cell.
-   * @param name The name of the cell, this will be the symbolic name exposed
-   *        to python or other plugin systems.
-   * @param doc_str A highlevel description of your cell.
-   */
-#if 0
-  template <typename Impl>
-  struct cell_wrapper
-  {
-    typedef typename 
-    boost::python::class_<ecto::cell_<Impl>, 
-                          boost::python::bases<cell>,
-                          boost::shared_ptr<ecto::cell_<Impl> >, 
-                          boost::noncopyable>
-    type;
-  };
-#endif
-
-  void wrap_impl(const std::string& name,
-                 const std::string& docstr,
-                 const std::string& cpp_typename);
-
 }
 
 #include <ecto/registry.hpp>

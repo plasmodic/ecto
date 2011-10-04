@@ -192,13 +192,13 @@ struct SporeCellConst
   spore<std::string> foo;
 };
 
-TEST(SporeTest, Semantixs)
+TEST(SporeTest, Semantics)
 {
-    cell::ptr c1 = create_cell<SporeCellConst>();
-    c1->declare_params();
-    c1->declare_io();
-    c1->configure();
-    c1->process();
+  cell::ptr c1(new cell_<SporeCellConst>);
+  c1->declare_params();
+  c1->declare_io();
+  c1->configure();
+  c1->process();
 }
 
 

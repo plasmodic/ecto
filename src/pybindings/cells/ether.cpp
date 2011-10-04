@@ -18,8 +18,8 @@ namespace ecto
   };
 
   bp::tuple
-  entangled_pair(tendril::ptr value,const std::string& source_name="EntagledSource", 
-                 const std::string& sink_name = "EntagledSink")
+  entangled_pair(tendril::ptr value,const std::string& source_name="EntangledSource", 
+                 const std::string& sink_name = "EntangledSink")
   {
     bp::tuple p;
     cell::ptr source(new cell_<EtherSource>), 
