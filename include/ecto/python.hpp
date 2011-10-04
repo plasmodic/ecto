@@ -111,6 +111,7 @@ namespace ecto
     return c;
   }
 #endif
+
   /**
    * \brief Takes a user cell, UserModule, that follows the ecto::cell idiom and exposes
    * it to python or other plugin architecture.
@@ -123,6 +124,7 @@ namespace ecto
    *        to python or other plugin systems.
    * @param doc_str A highlevel description of your cell.
    */
+#if 0
   template <typename Impl>
   struct cell_wrapper
   {
@@ -133,36 +135,12 @@ namespace ecto
                           boost::noncopyable>
     type;
   };
-
-  template <typename Impl>
-  void //typename cell_wrapper<Impl>::type 
-  wrap(const char* name, const std::string& doc_str)
-  {
-    namespace bp = boost::python;
-
-#if 0
-    typedef ecto::cell_<Impl> cell_t;
-    ecto::cell_<Impl>::SHORT_DOC = doc_str;
-
-    typename cell_wrapper<Impl>::type 
-      m(name, cell_doc<Impl> (doc_str).c_str());
-    m.def("__init__",
-          bp::raw_constructor(&raw_construct<Impl>));
-    m.def("inspect", &inspect<Impl> );
-    m.staticmethod("inspect");
-    m.def("name", (std::string (cell_t::*)() const) &cell_t::name);
-    m.def("type_name", (std::string (cell_t::*)() const) &cell_t::type);
-    m.def_readonly("short_doc", &cell_t::SHORT_DOC);
 #endif
-    bp::object thismodule = bp::import("ecto");
-    bp::object dict__ = getattr(thismodule, "__dict__");
-    bp::object pr = dict__["postregister"];
-    pr(name, name_of<Impl>(), doc_str, bp::scope());
 
-#if 0
-    return m;
-#endif
-  }
+  void wrap_impl(const std::string& name,
+                 const std::string& docstr,
+                 const std::string& cpp_typename);
+
 }
 
 #include <ecto/registry.hpp>

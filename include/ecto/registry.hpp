@@ -31,9 +31,12 @@
 #include <boost/noncopyable.hpp>
 #include <boost/function.hpp>
 #include <ecto/util.hpp>
-#include <ecto/python.hpp>
 
 namespace ecto {
+
+  namespace py {
+    void wrap_impl(const std::string&, const std::string&, const std::string&);
+  }
 
   struct cell;
 
@@ -58,7 +61,7 @@ namespace ecto {
     };
 
 
-    template <typename T>
+    template <typename ModuleTag>
     struct module_registry : boost::noncopyable
     {
       typedef boost::function<void(void)> nullary_fn_t;
@@ -107,10 +110,9 @@ namespace ecto {
 
       void operator()() const 
       {
-        ecto::wrap<T>(name_, docstring_);
+        ecto::py::wrap_impl(name_, docstring_, name_of<T>());
       }
       const static registrator& inst;
-
     };
     
     entry_t lookup(const std::string& name);

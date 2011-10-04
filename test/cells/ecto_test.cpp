@@ -224,10 +224,11 @@ ECTO_DEFINE_MODULE(ecto_test)
 {
   bp::def("make_pod_tendril", ecto_test::makePodTendril);
 
-  ecto::wrap<SharedPass>("SharedPass", "A shared pointer pass through");
+  ecto::wrap_impl("SharedPass", "A shared pointer pass through", name_of<SharedPass>());
+  /*
   ecto::wrap<Scatter>("Scatter", "Scatter a value...");
   ecto::wrap<HandleHolder>("HandleHolder","Holds on to handles...");
   ecto::wrap<DontAllocateMe>("DontAllocateMe", "Don't allocate me, feel free to inspect.");
   ecto::wrap<NoPythonBindings>("NoPythonBindings", "This uses something that is bound to python!");
-
+  */
 }

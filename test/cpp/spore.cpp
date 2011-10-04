@@ -194,7 +194,9 @@ struct SporeCellConst
 
 TEST(SporeTest, Semantixs)
 {
-    cell::ptr c1 = inspect_cell<SporeCellConst>();
+    cell::ptr c1 = create_cell<SporeCellConst>();
+    c1->declare_params();
+    c1->declare_io();
     c1->configure();
     c1->process();
 }
