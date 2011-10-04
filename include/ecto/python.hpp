@@ -100,6 +100,7 @@ namespace ecto
   template <typename T> ecto::strand deduce_with_strand<T, boost::mpl::true_>::strand_;
 
 
+#if 0
   template<typename T>
   boost::shared_ptr<ecto::cell_<T> > raw_construct(boost::python::tuple args,
                                                    boost::python::dict kwargs)
@@ -109,7 +110,7 @@ namespace ecto
     c->verify_params();
     return c;
   }
-
+#endif
   /**
    * \brief Takes a user cell, UserModule, that follows the ecto::cell idiom and exposes
    * it to python or other plugin architecture.

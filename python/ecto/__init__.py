@@ -14,22 +14,34 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>
 # 
-"""
-"""
 
 import platform, sys
 
 #import inspect
 
+class EctoCellBase(object):
+    pass
+
+def cellinit(cpptype):
+    def impl(self):
+        c = _create_cell(cpptype)
+        self.inputs = c.inputs
+        self.outputs = c.outputs
+        self.params = c.params
+    return impl
+
 def postregister(cellname, cpptypename, docstring, inmodule):
     print "POSTREGISTER OF", cellname, "(", cpptypename, ") in", inmodule
     print "doc:", docstring
-    cellclass = sys.modules['ecto'].__dict__[cellname]
-    print cellclass
-    m = cellclass.inspect((), {})
-    print m.inputs, m.outputs, m.params
-    ding = _create_cell(cpptypename)
-    print "ding!", ding
+
+    c = _create_cell(cpptypename)
+    print "ding!", c
+    print c.inputs, c.outputs, c.params
+    thistype = type(cellname, (EctoCellBase,), 
+                    dict(__doc__ = docstring, 
+                         __init__ = cellinit(cpptypename)))
+    inmodule.__dict__[cellname] = thistype
+    
 
 if platform.system().startswith('freebsd'):
         # C++ modules are extremely fragile when loaded with RTLD_LOCAL,
