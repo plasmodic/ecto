@@ -22,9 +22,7 @@ namespace ecto
       cell::ptr mod_input, mod_output;
       std::string key;
 
-      TendrilSpecification()
-      {
-      }
+      TendrilSpecification() { }
 
       bool
       check(cell::ptr mod, const std::string& key)

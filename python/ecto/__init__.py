@@ -24,10 +24,22 @@ class EctoCellBase(object):
 
 def cellinit(cpptype):
     def impl(self, *args, **kwargs):
-        c = _create_cell(cpptype)
+        e = lookup(cpptype)
+        c = e.construct()
+        e.declare_params(c.params)
+        # c.construct(args, kwargs)
+        print "c=", c
         self.inputs = c.inputs
         self.outputs = c.outputs
         self.params = c.params
+        for k, v in kwargs.iteritems():
+            print k, v
+            print ">>>", k, self.params[k], v
+            # self.params[k] = v
+            setattr(self.params, k, v)
+            # print "now:", getattr(self.params, k)
+        e.declare_io(self.params, self.inputs, self.outputs)
+    # self.params.get('k') = v
     return impl
 
 def cell_print_tendrils(tendril):
@@ -47,8 +59,9 @@ def postregister(cellname, cpptypename, docstring, inmodule):
     print "POSTREGISTER OF", cellname, "(", cpptypename, ") in", inmodule
     print "doc:", docstring
 
-    c = _create_cell(cpptypename)
-    print "ding!", c
+    e = lookup(cpptypename)
+    c = e.construct()
+    print "ding!", c, c.typename()
     print c.inputs, c.outputs, c.params
     thistype = type(cellname, (EctoCellBase,), 
                     dict(__doc__ = docstring + "\n\n" 
@@ -58,6 +71,7 @@ def postregister(cellname, cpptypename, docstring, inmodule):
                          inputs = c.inputs,
                          outputs = c.outputs,
                          params = c.params,
+                         type = c.typename,
                          __init__ = cellinit(cpptypename)))
     inmodule.__dict__[cellname] = thistype
     

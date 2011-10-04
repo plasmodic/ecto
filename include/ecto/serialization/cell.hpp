@@ -25,7 +25,8 @@ namespace boost
     {
       std::string cell_type;
       ar >> cell_type;
-      ecto::cell::ptr p = ecto::registry::create(cell_type);
+      ecto::registry::entry_t e = ecto::registry::lookup(cell_type);
+      ecto::cell::ptr p = e.construct();
       cell_.swap(p);
       std::string instance_name;
       ar >> instance_name;

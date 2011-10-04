@@ -276,50 +276,66 @@ namespace ecto
     ~cell_()
     {
     }
-  protected:
-    template<int I>
-    struct int_
-    {
-    };
+    template <int I> struct int_ { };
     typedef int_<0> not_implemented;
     typedef int_<1> implemented;
 
-    static void declare_params(not_implemented, tendrils& params)
-    {
-    }
+    // 
+    // declare_params
+    //
+    typedef int_<has_f<Impl>::declare_params> has_declare_params;
 
-    static void declare_params(implemented, tendrils& params)
+    static void declare_params(tendrils& params, not_implemented) { }
+
+    static void declare_params(tendrils& params, implemented)
     {
       Impl::declare_params(params);
     }
 
-    void dispatch_declare_params(tendrils& params)
+    static void declare_params(tendrils& params)
     {
-      declare_params(int_<has_f<Impl>::declare_params> (), params);
+      declare_params(params, has_declare_params());
     }
 
-    static void declare_io(not_implemented, const tendrils& params,
-                           tendrils& inputs, tendrils& outputs)
+    void dispatch_declare_params(tendrils& params)
     {
+      declare_params(params);
     }
-    static void declare_io(implemented, const tendrils& params,
-                           tendrils& inputs, tendrils& outputs)
+
+
+    // 
+    // declare_io
+    //
+    static void declare_io(const tendrils& params, tendrils& inputs, tendrils& outputs, not_implemented)
+    { }
+
+    static void declare_io(const tendrils& params, tendrils& inputs, tendrils& outputs, implemented)
     {
       Impl::declare_io(params, inputs, outputs);
+    }
+
+    typedef int_<has_f<Impl>::declare_io> has_declare_io;
+
+    static void declare_io(const tendrils& params, tendrils& inputs, tendrils& outputs)
+    {
+      declare_io(params, inputs, outputs, has_declare_io());
     }
 
     void dispatch_declare_io(const tendrils& params, tendrils& inputs,
                              tendrils& outputs)
     {
-      declare_io(int_<has_f<Impl>::declare_io> (), params, inputs, outputs);
+      declare_io(params, inputs, outputs);
     }
 
-    void configure(not_implemented, const tendrils&, const tendrils& , const tendrils&)
+    // 
+    // configure
+    //
+    void configure(const tendrils&, const tendrils& , const tendrils&, not_implemented)
     {
     }
 
-    void configure(implemented, 
-                   const tendrils& params, const tendrils& inputs, const tendrils& outputs)
+    void configure(const tendrils& params, const tendrils& inputs, const tendrils& outputs,
+                   implemented)
     {
       impl->configure(params,inputs,outputs);
     }
@@ -327,22 +343,25 @@ namespace ecto
     void dispatch_configure(const tendrils& params, const tendrils& inputs,
                             const tendrils& outputs)
     {
-      configure(int_<has_f<Impl>::configure> (), params,inputs,outputs);
+      configure(params, inputs, outputs, int_<has_f<Impl>::configure> ());
     }
 
-    ReturnCode process(not_implemented, const tendrils&, const tendrils&)
+    // 
+    // process
+    //
+    ReturnCode process(const tendrils&, const tendrils&, not_implemented)
     {
       return OK;
     }
 
-    ReturnCode process(implemented, const tendrils& inputs, const tendrils& outputs)
+    ReturnCode process(const tendrils& inputs, const tendrils& outputs, implemented)
     {
       return ReturnCode(impl->process(inputs, outputs));
     }
 
     ReturnCode dispatch_process(const tendrils& inputs, const tendrils& outputs)
     {
-        return process(int_<has_f<Impl>::process> (), inputs, outputs);
+      return process(inputs, outputs, int_<has_f<Impl>::process> ());
     }
 
     std::string dispatch_name() const
@@ -354,9 +373,7 @@ namespace ecto
       return SHORT_DOC;
     }
 
-    void dispatch_short_doc(const std::string&)
-    {
-    }
+    void dispatch_short_doc(const std::string&) { }
 
     cell::ptr dispatch_clone() const
     {
@@ -426,19 +443,19 @@ namespace ecto
    * @return A cell::ptr that is initialized as far as default params,inputs,outputs go.
    */
   template<typename Impl>
-  typename cell_<Impl>::ptr inspect_cell()
+  void inspect_cell(typename cell_<Impl>::ptr p)
   {
-    typename cell_<Impl>::ptr p(new cell_<Impl> ());
+    std::cout << __PRETTY_FUNCTION__ << "\n";
     cell::ptr base(p);
     base->declare_params();
     base->declare_io();
-    return p;
   }
 
   template<typename Impl>
   typename cell_<Impl>::ptr create_cell()
   {
-    typename cell_<Impl>::ptr p = inspect_cell<Impl>();
+    std::cout << __PRETTY_FUNCTION__ << "\n";
+    typename cell_<Impl>::ptr p(new cell_<Impl>);
     return p;
   }
 

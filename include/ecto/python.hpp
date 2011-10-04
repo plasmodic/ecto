@@ -136,7 +136,7 @@ namespace ecto
 
   template <typename Impl>
   void //typename cell_wrapper<Impl>::type 
-  wrap(const char* name, std::string doc_str)
+  wrap(const char* name, const std::string& doc_str)
   {
     namespace bp = boost::python;
 

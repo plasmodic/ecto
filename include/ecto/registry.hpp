@@ -39,6 +39,25 @@ namespace ecto {
 
   namespace registry {
 
+    typedef boost::function<boost::shared_ptr<cell>()> factory_fn_t;
+    typedef boost::function<void(ecto::tendrils&)> declare_params_t;
+    typedef boost::function<void(const ecto::tendrils&, ecto::tendrils&, ecto::tendrils&)> declare_io_t;
+
+    struct entry_t {
+      factory_fn_t construct;
+      declare_params_t declare_params;
+      declare_io_t declare_io;
+
+      boost::shared_ptr<cell> construct_() { return construct(); }
+      void declare_params_(ecto::tendrils& t) { declare_params(t); }
+      void declare_io_(const ecto::tendrils& p, ecto::tendrils& i, ecto::tendrils& o) 
+      { 
+        declare_io(p, i, o); 
+      }
+
+    };
+
+
     template <typename T>
     struct module_registry : boost::noncopyable
     {
@@ -77,7 +96,13 @@ namespace ecto {
         : name_(name), docstring_(docstring) 
       { 
         module_registry<Module>::instance().add(boost::ref(*this));
-        register_factory_fn(name_of<T>(), &ecto::inspect_cell<T>);
+        entry_t e;
+        e.construct = &ecto::create_cell<T>;
+        typedef ::ecto::cell_<T> cell_t;
+        e.declare_params = (void (*)(tendrils&)) &cell_t::declare_params;
+        e.declare_io = (void (*)(const tendrils&, tendrils&, tendrils&)) &cell_t::declare_io;
+        
+        register_factory_fn(name_of<T>(), e);
       }
 
       void operator()() const 
@@ -88,10 +113,9 @@ namespace ecto {
 
     };
     
+    entry_t lookup(const std::string& name);
     boost::shared_ptr<cell> create(const std::string& name);
-    typedef boost::function<boost::shared_ptr<cell>()> ffn_t;
-
-    void register_factory_fn(const std::string& name, ffn_t fn);
+    void register_factory_fn(const std::string& name, entry_t e);
 
   }
 }

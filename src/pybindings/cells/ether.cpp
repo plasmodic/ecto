@@ -22,9 +22,14 @@ namespace ecto
   {
     bp::tuple p;
     cell::ptr source, sink;
-    source = ecto::inspect_cell<EtherSource>();
+    source = ecto::create_cell<EtherSource>();
+    source->declare_params();
+    source->declare_io();
     source->name(source_name);
-    sink = ecto::inspect_cell<EtherSink>();
+
+    sink = ecto::create_cell<EtherSink>();
+    sink->declare_params();
+    sink->declare_io();
     sink->name(sink_name);
     sink->inputs["in"] << *value;
     source->outputs.declare("out",sink->inputs["in"]);

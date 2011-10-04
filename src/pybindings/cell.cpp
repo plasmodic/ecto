@@ -115,9 +115,13 @@ namespace ecto
     void wrapModule()
     {
       //use private names so that python people know these are internal
-      bp::class_<cell, boost::shared_ptr<cell>, boost::noncopyable>("_cell_cpp", bp::no_init);
+      bp::class_<cell, boost::shared_ptr<cell>, boost::noncopyable>("_cell_cpp", bp::no_init)
+        .def("type", &cell::type)
+        .def("configure", ((void(cell::*)()) &cell::configure))
+        ;
 
       bp::class_<cellwrap, boost::shared_ptr<cellwrap>, boost::noncopyable> ("_cell_base" /*bp::no_init*/)
+        .def("construct", &inspect_impl)
         .def("declare_params", &cell::declare_params)
         .def("declare_io", ((void(cell::*)()) &cell::declare_io))
         .def("configure", ((void(cell::*)()) &cell::configure))
@@ -126,7 +130,7 @@ namespace ecto
         .add_property("inputs", make_function(&inputs, bp::return_internal_reference<>()))
         .add_property("outputs", make_function(outputs, bp::return_internal_reference<>()))
         .add_property("params", make_function(params, bp::return_internal_reference<>()))
-        .def("type", &cell::type)
+        .def("typename", &cell::type)
         .def("name",(((std::string(cell::*)() const) &cell::name)))
         .def("name",(((void(cell::*)(const std::string&)) &cell::name)))
         

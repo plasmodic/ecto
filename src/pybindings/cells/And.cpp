@@ -43,11 +43,13 @@ namespace ecto
 
     static void declare_params(tendrils& p)
     {
+      std::cout << __PRETTY_FUNCTION__ << "\n";
       p.declare<unsigned int>("ninput","Number of inputs to AND together",2);
     }
 
     static void declare_io(const tendrils& p, tendrils& in, tendrils& out)
     {
+      std::cout << __PRETTY_FUNCTION__ << "\n";
       unsigned int ninput = p.get<unsigned int>("ninput");
       //inputs
       for(unsigned int i=0; i<ninput; i++){
@@ -60,6 +62,7 @@ namespace ecto
 
     void configure(const tendrils& p, const tendrils& in, const tendrils& out)
     {
+      std::cout << __PRETTY_FUNCTION__ << "\n";
       for(unsigned int i=0; i<in.size(); i++){
         inputs_.push_back(in[And::get_input_string(i)]);
       }
@@ -68,6 +71,7 @@ namespace ecto
 
     int process(const tendrils& in, const tendrils& out)
     {
+      std::cout << __PRETTY_FUNCTION__ << "\n";
       *output_ = true;
       for(unsigned int i=0; i<inputs_.size(); i++){
         *output_ = *output_ && *inputs_[i];
