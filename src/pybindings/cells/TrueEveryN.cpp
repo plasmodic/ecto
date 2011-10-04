@@ -27,7 +27,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <ecto/ecto.hpp>
+#include <ecto/python.hpp>
 namespace ecto
 {
   struct TrueEveryN

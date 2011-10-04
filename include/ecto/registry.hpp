@@ -28,6 +28,9 @@
  */
 #pragma once
 #include <boost/noncopyable.hpp>
+#include <vector>
+#include <ecto/util.hpp>
+#include <ecto/cell.hpp>
 
 namespace ecto {
 

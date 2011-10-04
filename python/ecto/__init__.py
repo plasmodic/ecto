@@ -19,6 +19,15 @@
 
 import platform, sys
 
+#import inspect
+
+def postregister(cellname, inmodule):
+    print "POSTREGISTER OF", cellname, "in", inmodule
+    cellclass = sys.modules['ecto'].__dict__[cellname]
+    print cellclass
+    m = cellclass.inspect((), {})
+    print m.inputs, m.outputs, m.params
+
 if platform.system().startswith('freebsd'):
         # C++ modules are extremely fragile when loaded with RTLD_LOCAL,
         # which is what Python uses on FreeBSD by default, and maybe other
@@ -63,3 +72,6 @@ __path__ = extend_path(__path__, __name__)
 from doc import *
 from cell import *
 from blackbox import *
+
+
+

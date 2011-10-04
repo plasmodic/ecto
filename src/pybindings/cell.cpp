@@ -151,62 +151,62 @@ namespace ecto
       vts.def("__rshift__", rshift_spec_tuples);
 
       bp::enum_<tendril_type>("tendril_type")
-          .value("INPUT",INPUT)
-          .value("OUTPUT",OUTPUT)
-          .value("PARAMETER",PARAMETER)
-          .export_values()
-          ;
+        .value("INPUT",INPUT)
+        .value("OUTPUT",OUTPUT)
+        .value("PARAMETER",PARAMETER)
+        .export_values()
+        ;
 
     }
 
-    void inspect_impl(ecto::cell* m, const boost::python::tuple& args, const boost::python::dict& kwargs)
-    {
+  }
+  void inspect_impl(ecto::cell::ptr m, const boost::python::tuple& args, const boost::python::dict& kwargs)
+  {
     
-      if (bp::len(args) > 1)
-        throw std::runtime_error("Only one non-keyword argument allowed, this will specify instance name");
+    if (bp::len(args) > 1)
+      throw std::runtime_error("Only one non-keyword argument allowed, this will specify instance name");
 
-      if (bp::len(args) == 0)
-        {
-          // generate default name == type
-          std::string defaultname = boost::str(boost::format("%s") % m->type());
-          m->name(defaultname);
-        }
-      else 
-        {
-          bp::extract<std::string> e(args[0]);
-          if (! e.check())
-            throw std::runtime_error("Non-keyword argument (instance name) not convertible to string.");
-          m->name(e());
-        }
-      m->declare_params();
+    if (bp::len(args) == 0)
+      {
+        // generate default name == type
+        std::string defaultname = boost::str(boost::format("%s") % m->type());
+        m->name(defaultname);
+      }
+    else 
+      {
+        bp::extract<std::string> e(args[0]);
+        if (! e.check())
+          throw std::runtime_error("Non-keyword argument (instance name) not convertible to string.");
+        m->name(e());
+      }
+    m->declare_params();
 
-      bp::list l = kwargs.items();
-      for (int j = 0; j < bp::len(l); ++j)
-        {
-          bp::object key = l[j][0];
-          bp::object value = l[j][1];
-          std::string keystring = bp::extract<std::string>(key);
-          if (keystring == "strand")
-            {
-              ecto::strand s = bp::extract<ecto::strand>(value);
-              m->strand_ = s;
-            }
-          else 
-            {
-              tendril::ptr tp = m->parameters[keystring];
-              try{
-                *tp << value;
-              }catch(ecto::except::TypeMismatch& e)
-                {
-                  e << except::tendril_key(keystring);
-                  e << except::cell_name(m->name());
-                  throw;
-                }
-              tp->user_supplied(true);
-              tp->dirty(true);
-            }
-        }
-      m->declare_io();
-    }
+    bp::list l = kwargs.items();
+    for (int j = 0; j < bp::len(l); ++j)
+      {
+        bp::object key = l[j][0];
+        bp::object value = l[j][1];
+        std::string keystring = bp::extract<std::string>(key);
+        if (keystring == "strand")
+          {
+            ecto::strand s = bp::extract<ecto::strand>(value);
+            m->strand_ = s;
+          }
+        else 
+          {
+            tendril::ptr tp = m->parameters[keystring];
+            try{
+              *tp << value;
+            }catch(ecto::except::TypeMismatch& e)
+              {
+                e << except::tendril_key(keystring);
+                e << except::cell_name(m->name());
+                throw;
+              }
+            tp->user_supplied(true);
+            tp->dirty(true);
+          }
+      }
+    m->declare_io();
   }
 }

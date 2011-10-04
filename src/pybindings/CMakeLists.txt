@@ -1,14 +1,16 @@
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 ectomodule(ecto
+  cell.cpp
   ecto.cpp
   except.cpp
   plasm.cpp
+  registry.cpp
+  schedulers.cpp
+  strand.cpp
+  streambuf.cpp
   tendril.cpp
   tendrils.cpp
-  cell.cpp
-  schedulers.cpp
-  streambuf.cpp
-  strand.cpp
+
   cells/And.cpp
   cells/BlackBox.cpp
   cells/Constant.cpp
