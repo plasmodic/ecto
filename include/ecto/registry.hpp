@@ -30,6 +30,7 @@
 #include <vector>
 #include <boost/noncopyable.hpp>
 #include <boost/function.hpp>
+#include <boost/make_shared.hpp>
 #include <ecto/util.hpp>
 
 namespace ecto {
@@ -103,7 +104,7 @@ namespace ecto {
 
         // this registers the functions needed to do the construction above
         entry_t e;
-        e.construct = &ecto::create_cell<T>;
+        e.construct = &boost::make_shared<ecto::cell_<T> >;// ecto::create_cell<T>;
         e.declare_params = (void (*)(tendrils&)) &cell_t::declare_params;
         e.declare_io = (void (*)(const tendrils&, tendrils&, tendrils&)) &cell_t::declare_io;
         register_factory_fn(name_of<T>(), e);

@@ -435,21 +435,5 @@ namespace ecto
   template<typename Impl>
   const std::string cell_<Impl>::CELL_TYPE_NAME = ecto::name_of<Impl>();
 
-  /**
-   * Creates a cell from type T that has not been configured, so therefore,
-   * not allocated.  This only calls the static functions associated with parameter and
-   * input/output declaration.
-   *
-   * @return A cell::ptr that is initialized as far as default params,inputs,outputs go.
-   */
-
-  template<typename Impl>
-  typename cell_<Impl>::ptr create_cell()
-  {
-    std::cout << __PRETTY_FUNCTION__ << "\n";
-    typename cell_<Impl>::ptr p(new cell_<Impl>);
-    return p;
-  }
-
 }//namespace ecto
 

@@ -73,7 +73,7 @@ namespace ecto
   template<typename T>
   std::string cell_doc(std::string doc)
   {
-    ecto::cell::ptr c = ecto::create_cell<T>();
+    ecto::cell::ptr c(new ecto::cell_<T>);
     c->declare_params();
     c->declare_io();
     c->name(c->type());
