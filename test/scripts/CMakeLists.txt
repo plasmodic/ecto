@@ -21,6 +21,7 @@ foreach(file
     test_exception
     test_exception_in_constructor
     test_If
+    test_fileIO
     test_handles
     test_multiprocess
     test_modules
