@@ -30,8 +30,12 @@ def cell_getitem(self, *args, **kwargs):
 
 def cellinit(cpptype):
     def impl(self, *args, **kwargs):
+        if len(args) > 1:
+            raise RuntimeError("Too many positional args:  only one allowed, representing cell instance name")
         e = lookup(cpptype)
         c = self.__impl = e.construct()
+        if len(args) == 1:
+            self.__impl.name(args[0])
         e.declare_params(self.__impl.params)
         # c.construct(args, kwargs)
         #print "c=", c
@@ -70,6 +74,18 @@ def cell_inspect(self, *args, **kwargs):
     c = self()
     return c.__impl
 
+def cell_process(self):
+    return self.__impl.process()
+
+def cell_configure(self):
+    return self.__impl.configure()
+
+def cell_name(self):
+    return self.__impl.name()
+
+def cell_typename(self):
+    return self.__impl.typename()
+
 def postregister(cellname, cpptypename, docstring, inmodule):
     #print "POSTREGISTER OF", cellname, "(", cpptypename, ") in", inmodule
     #print "doc:", docstring
@@ -91,7 +107,12 @@ def postregister(cellname, cpptypename, docstring, inmodule):
                          type = c.typename,
                          __init__ = cellinit(cpptypename),
                          __getitem__ = cell_getitem,
-                         inspect = cell_inspect))
+                         inspect = cell_inspect,
+                         process = cell_process,
+                         configure = cell_configure,
+                         name = cell_name,
+                         type_name = cell_typename,
+                         ))
 
     inmodule.__dict__[cellname] = thistype
     
