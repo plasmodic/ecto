@@ -69,6 +69,17 @@ namespace ecto
       p.connect(fc, fromport, tc, toport);
     }
                                 
+    void plasm_disconnect_explicit(plasm& p, 
+                                   bp::object fromcell, std::string fromport,
+                                   bp::object tocell, std::string toport)
+    {
+      bp::object fc_impl = getattr(fromcell, "__impl");
+      cell::ptr fc = bp::extract<cell::ptr>(fc_impl);
+      bp::object tc_impl = getattr(tocell, "__impl");
+      cell::ptr tc = bp::extract<cell::ptr>(tc_impl);
+      p.disconnect(fc, fromport, tc, toport);
+    }
+                                
 
     void plasm_connect_list(plasm& p, bp::list connections)
     {
@@ -171,10 +182,10 @@ namespace ecto
 
       p.def("connect", &plasm_connect_list, bp::args("connection_list"));
       p.def("connect", bp::raw_function(plasm_connect_args, 2));
-      p.def("connect", &plasm_connect_explicit, bp::args("from_cell", "output_name", 
-                                                         "to_cell", "intput_name"));
-      p.def("disconnect", &plasm::disconnect, bp::args("from_cell", "output_name", 
-                                                       "to_cell", "intput_name"));
+      p.def("connect", &plasm_connect_explicit, 
+            bp::args("from_cell", "output_name", "to_cell", "intput_name"));
+      p.def("disconnect", &plasm_disconnect_explicit, 
+            bp::args("from_cell", "output_name", "to_cell", "intput_name"));
       p.def("execute", &plasm::execute,
             execute_overloads(bp::args("niter"),
                               "Executes the graph in topological order. Every node will be executed."));
