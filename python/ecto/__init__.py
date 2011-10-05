@@ -23,9 +23,14 @@ class EctoCellBase(object):
     pass
 
 def cell_getitem(self, *args, **kwargs):
-    #print "GETITEM!", self, args, kwargs
+    print "GETITEM!", self, args, kwargs
     if len(args) == 1 and type(args[0]) == slice:
         return __getitem_slice__(self.__impl, args[0])
+    if len(args) == 1 and type(args[0]) == tuple:
+        return __getitem_tuple__(self.__impl, args[0])
+    if len(args) == 1 and type(args[0]) == list:
+        return __getitem_list__(self.__impl, args[0])
+
     return __getitem_str__(self.__impl, args[0])
 
 def cellinit(cpptype):
