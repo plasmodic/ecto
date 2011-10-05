@@ -50,6 +50,8 @@ def cellinit(cpptype):
         for k, v in kwargs.iteritems():
             if k == 'strand':
                 self.__impl._set_strand(v)
+            elif isinstance(v, _cell_cpp):
+                setattr(self.params, k, v.__impl)
             else:
                 setattr(self.params, k, v)
             # print "now:", getattr(self.params, k)
