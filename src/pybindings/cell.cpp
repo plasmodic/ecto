@@ -121,6 +121,8 @@ namespace ecto
         ;
 
       bp::class_<cellwrap, boost::shared_ptr<cellwrap>, boost::noncopyable> ("_cell_base" /*bp::no_init*/)
+        .def("_set_strand", &cell::set_strand)
+        .def("_reset_strand", &cell::reset_strand)
         .def("construct", &inspect_impl)
         .def("declare_params", &cell::declare_params)
         .def("declare_io", ((void(cell::*)()) &cell::declare_io))

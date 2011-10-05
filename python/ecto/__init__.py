@@ -39,10 +39,10 @@ def cellinit(cpptype):
         self.outputs = c.outputs
         self.params = c.params
         for k, v in kwargs.iteritems():
-            #print k, v
-            #print ">>>", k, self.params[k], v
-            # self.params[k] = v
-            setattr(self.params, k, v)
+            if k == 'strand':
+                self.__impl._set_strand(v)
+            else:
+                setattr(self.params, k, v)
             # print "now:", getattr(self.params, k)
         e.declare_io(self.params, self.inputs, self.outputs)
     # self.params.get('k') = v

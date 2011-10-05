@@ -39,8 +39,7 @@
 #include <ecto/cell.hpp>
 #include <ecto/util.hpp>
 #include <ecto/python/raw_constructor.hpp>
-#include <ecto/is_threadsafe.hpp>
-//#include <ecto/serialization.hpp>
+#include <ecto/traits.hpp>
 
 #include <iostream>
 #include <sstream>
@@ -53,7 +52,8 @@
  */
 namespace ecto
 {
-  void inspect_impl(ecto::cell::ptr, const boost::python::tuple& args, const boost::python::dict& kwargs);
+  void inspect_impl(ecto::cell::ptr, 
+                    const boost::python::tuple& args, const boost::python::dict& kwargs);
 
   template<typename T>
   boost::shared_ptr<ecto::cell_<T> > inspect(boost::python::tuple args,
@@ -79,41 +79,6 @@ namespace ecto
     c->name(c->type());
     return c->gen_doc(doc);
   }
-
-  //
-  //  Handle strandization of 
-  //
-  template <typename T, typename U = typename ecto::detail::is_thread_unsafe<T>::type >
-  struct deduce_with_strand
-  {
-    void operator()(boost::shared_ptr<ecto::cell_<T> > p) const { }
-  };
-
-  template <typename T>
-  struct deduce_with_strand<T, boost::mpl::true_>
-  {
-    void operator()(boost::shared_ptr<ecto::cell_<T> > p) const
-    {
-      p->strand_ = deduce_with_strand::strand_;
-    }
-    static ecto::strand strand_;
-  };
-
-  template <typename T> ecto::strand deduce_with_strand<T, boost::mpl::true_>::strand_;
-
-
-#if 0
-  template<typename T>
-  boost::shared_ptr<ecto::cell_<T> > raw_construct(boost::python::tuple args,
-                                                   boost::python::dict kwargs)
-  {
-    boost::shared_ptr<ecto::cell_<T> > c = inspect<T> (args, kwargs);
-    deduce_with_strand<T>()(c); 
-    c->verify_params();
-    return c;
-  }
-#endif
-
 }
 
 #include <ecto/registry.hpp>

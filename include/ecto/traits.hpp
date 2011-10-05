@@ -5,7 +5,7 @@
 
 namespace ecto {
   namespace detail {
-    template <typename T> struct is_thread_unsafe : boost::mpl::false_ { };
+    template <typename T> struct is_threadsafe : boost::mpl::true_ { };
     template <typename T> struct python_mutex { typedef ecto::nothing_to_lock type; };
   }
 }
@@ -14,7 +14,7 @@ namespace ecto {
 #define ECTO_THREAD_UNSAFE(T)                                           \
   namespace ecto {                                                      \
     namespace detail {                                                  \
-      template <> struct is_thread_unsafe<T> : boost::mpl::true_ { };   \
+      template <> struct is_threadsafe<T> : boost::mpl::false_ { };   \
     }                                                                   \
   }                                                                     \
 

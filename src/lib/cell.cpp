@@ -262,4 +262,13 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
     c->declare_io();
     return c;
   }
+
+  void cell::reset_strand() {
+    strand_.reset();
+  }
+
+  void cell::set_strand(ecto::strand s) {
+    strand_ = s;
+  }
+
 }

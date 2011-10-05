@@ -40,7 +40,7 @@
 #include <ecto/strand.hpp>
 #include <ecto/util.hpp>
 #include <ecto/profile.hpp>
-#include <ecto/is_threadsafe.hpp>
+#include <ecto/traits.hpp>
 
 #include <map>
 
@@ -158,6 +158,9 @@ namespace ecto
      */
     void short_doc(const std::string&);
 
+    void reset_strand();
+    void set_strand(ecto::strand);
+
     /**
      * \brief Generate an Restructured Text doc string for the cell. Includes documentation for all parameters,
      * inputs, outputs.
@@ -273,9 +276,11 @@ namespace ecto
 
     typedef typename detail::python_mutex<Impl>::type gil_mtx_t;
 
-    ~cell_()
-    {
+    cell_() {
+      init_strand(typename ecto::detail::is_threadsafe<Impl>::type());
     }
+
+    ~cell_() { }
     template <int I> struct int_ { };
     typedef int_<0> not_implemented;
     typedef int_<1> implemented;
@@ -421,6 +426,16 @@ namespace ecto
     static std::string CELL_NAME; //!< The python name for the cell.
     static std::string MODULE_NAME; //!< The module that the cell is part of.
     static const std::string CELL_TYPE_NAME;
+
+  private:
+
+    void init_strand(boost::mpl::true_) { } // threadsafe
+
+    void init_strand(boost::mpl::false_) { 
+      // thread-unsafe
+      static ecto::strand strand_;
+      cell::strand_ = strand_;
+    }
   };
 
   template<typename Impl>
