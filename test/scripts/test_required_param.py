@@ -4,16 +4,17 @@ import ecto, ecto_test, sys, util
 
 def test_required_param():
     plasm = ecto.Plasm()
-    print ecto_test.RequiredParam.__doc__
+    print "<DOC>", ecto_test.RequiredParam.__doc__, "</DOC>"
     #test
     assert "REQUIRED" in ecto_test.RequiredParam.__doc__
     #test doc default value printing printing
     assert "2.1253" in ecto_test.RequiredParam.__doc__
     try:
         req = ecto_test.RequiredParam("Required")
+        print "egh, didn't throw"
         util.fail()
     except RuntimeError, e:
-        print e
+        print "Yup, there is our throw:", e
         
     req = ecto_test.RequiredParam("Required", x=2.2)
     assert req.params.at("x").required == True

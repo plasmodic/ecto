@@ -128,6 +128,8 @@ namespace ecto
         .def("declare_io", ((void(cell::*)()) &cell::declare_io))
         .def("configure", ((void(cell::*)()) &cell::configure))
         .def("process", (void(cell::*)()) &cell::process)
+        .def("verify_params", &cell::verify_params)
+        .def("verify_inputs", &cell::verify_inputs)
 
         .add_property("inputs", make_function(&inputs, bp::return_internal_reference<>()))
         .add_property("outputs", make_function(outputs, bp::return_internal_reference<>()))

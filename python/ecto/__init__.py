@@ -54,17 +54,25 @@ def cellinit(cpptype):
                 setattr(self.params, k, v)
             # print "now:", getattr(self.params, k)
         e.declare_io(self.params, self.inputs, self.outputs)
+        self.__impl.verify_params()
     # self.params.get('k') = v
     return impl
 
 def cell_print_tendrils(tendril):
     s = ""
     for x in tendril:
+        print ">>>>>", x.data().doc
         try:
             value = str(x.data().get())
         except TypeError, e:
             value = "[unprintable]"
-        s += " - " + x.key() + " [%s]" % x.data().type_name + " default = %s\n" % value
+        s += " - " + x.key() + " [%s]" % x.data().type_name
+        if x.data().required:
+            s += " REQUIRED"
+
+        if x.data().has_default:
+            s += " default = " + value
+        s += "\n"
         docstr = str(x.data().doc)
         doclines = docstr.splitlines()
         if doclines :
