@@ -3,7 +3,9 @@ import ecto
 class BlackBoxTendrils(object):
     '''These look like tendrils with a few extra bits of functionality for BlackBoxes.
     '''
-    tt_key = {ecto.tendril_type.INPUT:'inputs', ecto.tendril_type.PARAMETER:'params', ecto.tendril_type.OUTPUT:'outputs'}
+    tt_key = { ecto.tendril_type.INPUT: 'inputs',
+               ecto.tendril_type.PARAMETER: 'params',
+               ecto.tendril_type.OUTPUT: 'outputs' }
 
     def __init__(self, bb, tendril_type):
         self._tendrils = ecto.Tendrils()
@@ -91,7 +93,7 @@ class BlackBox(object):
         to.
         '''
         self.niter = kwargs.get('niter', 1)
-        self._cell = None
+        self.__impl = None
 
         self.__params = BlackBoxTendrils(self, ecto.tendril_type.PARAMETER)
         self.__inputs = BlackBoxTendrils(self, ecto.tendril_type.INPUT)
@@ -106,22 +108,22 @@ class BlackBox(object):
         self.declare_io(self.__params, self.__inputs, self.__outputs)
         self.__configure(self.__params, self.__inputs, self.__outputs)
         self.__connect()
-        self._cell.name(self.__class__.__name__)
+        self.__impl.name(self.__class__.__name__)
         self.__gen_doc()
         if len(args) > 0:
-            self._cell.name(args[0])
+            self.__impl.name(args[0])
 
     def __getitem__(self, key):
         ''' This acts just like any other module when asking for a spec,
         e.g. spec = m['key1','key2']
         '''
-        return self._cell[key]
+        return self.__impl[key]
 
     def __gen_doc(self):
         short_doc = ''
         if self.__doc__:
             short_doc = self.__doc__
-        self.__doc__ = self._cell.gen_doc(short_doc)
+        self.__doc__ = self.__impl.gen_doc(short_doc)
 
     def __connect(self):
         ''' Connect oneself to the plasm.
@@ -133,7 +135,7 @@ class BlackBox(object):
                 plasm.insert(x)
             else:
                 plasm.connect(x)
-        self._cell = ecto.create_black_box(plasm,
+        self.__impl = ecto.create_black_box(plasm,
                                            niter=self.niter,
                                            parameters=self.__params._tendrils,
                                            inputs=self.__inputs._tendrils,
@@ -145,8 +147,10 @@ class BlackBox(object):
     def __getattr__(self, name):
         if name in ('parameters',):
             name = 'params'
-        if name not in ('_cell') and name in dir(self._cell):
-            return getattr(self._cell, name)
+        if name not in ('__impl') and name in dir(self.__impl):
+            return getattr(self.__impl, name)
+        if name == '__impl':
+            return self.__impl
         else:
             raise AttributeError(self, name)
     def __dir__(self):
