@@ -19,7 +19,6 @@ namespace ecto {
     void wrapStrand();
     void wrap_except();
     void wrap_ether();
-    void wrap_dealer();
     void wrap_black_box();
     void wrap_python_streambuf();
 
@@ -79,7 +78,6 @@ BOOST_PYTHON_MODULE(ecto)
   ecto::py::wrapStrand();
   ecto::py::wrap_except();
   ecto::py::wrap_ether();
-  ecto::py::wrap_dealer();
   ecto::py::wrap_black_box();
   ecto::py::wrap_python_streambuf();
 

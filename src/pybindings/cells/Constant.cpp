@@ -27,6 +27,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <boost/python.hpp>
 #include <ecto/ecto.hpp>
 #include <iostream>
 #include <queue>
@@ -37,9 +38,9 @@ namespace ecto
 
   struct Constant
   {
-    static void declare_params(tendrils& params)
+    static void declare_params(tendrils& p)
     {
-      params.declare<bp::object>("value", "Value to output").required(true);
+      p.declare<bp::object>("value", "Value to output").required(true);
     }
 
     static void declare_io(const tendrils& params, tendrils& in, tendrils& out)
