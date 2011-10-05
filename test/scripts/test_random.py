@@ -4,22 +4,21 @@ import ecto_test
 import sys, time
 
 
-def test_random():
-    plasm = ecto.Plasm()
+plasm = ecto.Plasm()
 
-    uni = ecto_test.Uniform01("Random", seed=17)
+uni = ecto_test.Uniform01("Random", seed=17)
+print "OTUPUTS:", uni.outputs
+printer = ecto_test.Printer("Printy")
 
-    printer = ecto_test.Printer("Printy")
-    plasm.connect(uni, "out", printer, "in")
+print ecto.version()
+
+plasm.connect(uni, "out", printer, "in")
     
-    sched = ecto.schedulers.Singlethreaded(plasm)
-    sched.execute(niter=100)
-    while sched.running():
-        print "."
-        time.sleep(0.1)
-
-if __name__ == '__main__':
-    test_random()
+sched = ecto.schedulers.Singlethreaded(plasm)
+sched.execute(niter=100)
+while sched.running():
+    print "."
+    time.sleep(0.1)
 
 
 

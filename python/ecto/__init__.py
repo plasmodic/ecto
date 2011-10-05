@@ -25,8 +25,8 @@ class EctoCellBase(object):
 def cellinit(cpptype):
     def impl(self, *args, **kwargs):
         e = lookup(cpptype)
-        c = e.construct()
-        e.declare_params(c.params)
+        c = self.__impl = e.construct()
+        e.declare_params(self.__impl.params)
         # c.construct(args, kwargs)
         print "c=", c
         self.inputs = c.inputs
@@ -45,7 +45,10 @@ def cellinit(cpptype):
 def cell_print_tendrils(tendril):
     s = ""
     for x in tendril:
-        value = str(x.data().get())
+        try:
+            value = str(x.data().get())
+        except TypeError, e:
+            value = "[unprintable]"
         s += " - " + x.key() + " [%s]" % x.data().type_name + " default = %s\n" % value
         docstr = str(x.data().doc)
         doclines = docstr.splitlines()
@@ -61,9 +64,11 @@ def postregister(cellname, cpptypename, docstring, inmodule):
 
     e = lookup(cpptypename)
     c = e.construct()
-    print "ding!", c, c.typename()
-    print c.inputs, c.outputs, c.params
-    thistype = type(cellname, (EctoCellBase,), 
+    c.declare_params()
+    c.declare_io()
+    #print "ding!", c, c.typename()
+    #print c.inputs, c.outputs, c.params
+    thistype = type(cellname, (_cell_cpp,), 
                     dict(__doc__ = docstring + "\n\n" 
                          + "Parameters:\n" + cell_print_tendrils(c.params)
                          + "Inputs:\n"+ cell_print_tendrils(c.inputs) 

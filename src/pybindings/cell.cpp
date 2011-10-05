@@ -166,8 +166,8 @@ namespace ecto
         ;
 
     }
-
   }
+
   void inspect_impl(ecto::cell::ptr m, const boost::python::tuple& args, const boost::python::dict& kwargs)
   {
     
@@ -177,8 +177,7 @@ namespace ecto
     if (bp::len(args) == 0)
       {
         // generate default name == type
-        std::string defaultname = boost::str(boost::format("%s") % m->type());
-        m->name(defaultname);
+        m->name(m->type());
       }
     else 
       {
