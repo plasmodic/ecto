@@ -9,13 +9,18 @@ def build_addergraph(nlevels):
 
     prevlevel = [ecto_test.Add("Adder 0_%u" % x) for x in range(2**(nlevels-1))]
     for adder in prevlevel:
+        gen0 = ecto_test.Generate("Generator", step=1.0, start=1.0)
+        gen1 = ecto_test.Generate("Generator", step=1.0, start=1.0)
+        conn1 = gen0["out"] >> adder["left"]
+        conn2 = gen1["out"] >> adder["right"]
+        print "conn1=", conn1
         plasm.connect(
-                      ecto_test.Generate("Generator", step=1.0, start=1.0)["out"] >> adder["left"],
-                      ecto_test.Generate("Generator", step=1.0, start=1.0)["out"] >> adder["right"]
-                      )
+            conn1,
+            conn2
+            )
 
     print "prev has", len(prevlevel)
-
+        
     for k in range(nlevels-2, -1, -1):
         print "****** k=", k, " ***********"
         thislevel = [ecto_test.Add("Adder %u_%u" % (k, x)) for x in range(2**k)]
@@ -25,10 +30,14 @@ def build_addergraph(nlevels):
         print "for...", range(2**k)
         for r in range(2**k):
             print "prev[%u] => cur[%u]" % (index, r)
-            plasm.connect(prevlevel[index]["out"] >> thislevel[r]["left"])
+            conn = prevlevel[index]["out"] >> thislevel[r]["left"]
+            print "conn=", conn
+            plasm.connect(conn)
             index += 1
             print "prev[%u] => cur[%u]" % (index, r)
-            plasm.connect(prevlevel[index]["out"]>>thislevel[r]["right"])
+            conn2 = prevlevel[index]["out"]>>thislevel[r]["right"]
+            print "conn2=", conn2
+            plasm.connect(conn2)
             index += 1
         prevlevel = thislevel
 
@@ -50,11 +59,11 @@ def test_plasm(nlevels, nthreads, niter):
 
 if __name__ == '__main__':
     #test_plasm(1, 1, 1)
-    #test_plasm(1, 1, 2)
+    test_plasm(1, 1, 2)
     #test_plasm(5, 1, 1)
     #test_plasm(5, 2, 1)
     #test_plasm(5, 5, 5)
-    test_plasm(6, 6, 6000)
+    #test_plasm(6, 6, 6000)
 #    test_plasm(8, 1, 5)
 #    test_plasm(9, 64, 100)
 #    test_plasm(10, 8, 10)

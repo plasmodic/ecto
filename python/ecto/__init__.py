@@ -22,19 +22,25 @@ import platform, sys
 class EctoCellBase(object):
     pass
 
+def cell_getitem(self, *args, **kwargs):
+    #print "GETITEM!", self, args, kwargs
+    if len(args) == 1 and type(args[0]) == slice:
+        return __getitem_slice__(self.__impl, args[0])
+    return __getitem_str__(self.__impl, args[0])
+
 def cellinit(cpptype):
     def impl(self, *args, **kwargs):
         e = lookup(cpptype)
         c = self.__impl = e.construct()
         e.declare_params(self.__impl.params)
         # c.construct(args, kwargs)
-        print "c=", c
+        #print "c=", c
         self.inputs = c.inputs
         self.outputs = c.outputs
         self.params = c.params
         for k, v in kwargs.iteritems():
-            print k, v
-            print ">>>", k, self.params[k], v
+            #print k, v
+            #print ">>>", k, self.params[k], v
             # self.params[k] = v
             setattr(self.params, k, v)
             # print "now:", getattr(self.params, k)
@@ -58,9 +64,15 @@ def cell_print_tendrils(tendril):
         s +=  "\n"
     return s
 
+@classmethod
+def cell_inspect(self, *args, **kwargs):
+    # print "cell_inspect!", self, args, kwargs
+    c = self()
+    return c.__impl
+
 def postregister(cellname, cpptypename, docstring, inmodule):
-    print "POSTREGISTER OF", cellname, "(", cpptypename, ") in", inmodule
-    print "doc:", docstring
+    #print "POSTREGISTER OF", cellname, "(", cpptypename, ") in", inmodule
+    #print "doc:", docstring
 
     e = lookup(cpptypename)
     c = e.construct()
@@ -77,7 +89,10 @@ def postregister(cellname, cpptypename, docstring, inmodule):
                          outputs = c.outputs,
                          params = c.params,
                          type = c.typename,
-                         __init__ = cellinit(cpptypename)))
+                         __init__ = cellinit(cpptypename),
+                         __getitem__ = cell_getitem,
+                         inspect = cell_inspect))
+
     inmodule.__dict__[cellname] = thistype
     
 

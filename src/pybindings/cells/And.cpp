@@ -43,13 +43,11 @@ namespace ecto
 
     static void declare_params(tendrils& p)
     {
-      std::cout << __PRETTY_FUNCTION__ << "\n";
       p.declare<unsigned int>("ninput","Number of inputs to AND together",2);
     }
 
     static void declare_io(const tendrils& p, tendrils& in, tendrils& out)
     {
-      std::cout << __PRETTY_FUNCTION__ << "\n";
       unsigned int ninput = p.get<unsigned int>("ninput");
       //inputs
       for(unsigned int i=0; i<ninput; i++){

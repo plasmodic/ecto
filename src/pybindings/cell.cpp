@@ -143,6 +143,9 @@ namespace ecto
         .def("__getitem__", getitem_slice)
         ;
 
+      bp::def("__getitem_str__", getitem_str);
+      bp::def("__getitem_slice__", getitem_slice);
+
       bp::class_<TendrilSpecification>("TendrilSpecification")
         .def_readwrite("module_input", &TendrilSpecification::mod_input)
         .def_readwrite("module_output", &TendrilSpecification::mod_output)

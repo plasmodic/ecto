@@ -91,16 +91,15 @@ namespace ecto
       for (int end = bp::len(args); i < end; i++)
       {
         bp::list l;
-        /*        try
-                  {*/
+        try
+          {
           l = bp::list(args[i]);
-          /*
-        } catch (const boost::python::error_already_set&)
+          } catch (const boost::python::error_already_set&)
         {
           PyErr_Clear(); //Need to clear the error or python craps out. Try commenting out and running the doc tests.
           throw std::runtime_error(
               "Did you mean plasm.connect(cellA['out'] >> cellB['in']), or plasm.connect(cellA,'out',cellB,'in')?");
-              }*/
+              }
         plasm_connect_list(*p, l);
       }
       return i;
@@ -156,7 +155,7 @@ namespace ecto
 
     void plasm_insert(plasm& p, bp::object bb)
     {
-      bp::object cbp = bb.attr("_cell");
+      bp::object cbp = bb.attr("__impl");
       cell::ptr c =  bp::extract<cell::ptr>(cbp);
       p.insert(c);
     }
@@ -170,8 +169,8 @@ namespace ecto
       p.def("insert", &plasm_insert, bp::args("cell"), "insert a black box into the graph");
       p.def("insert", &plasm::insert, bp::args("cell"), "insert cell into the graph");//order is important here.
 
-      //      p.def("connect", &plasm_connect_list, bp::args("connection_list"));
-      //      p.def("connect", bp::raw_function(plasm_connect_args, 2));
+      p.def("connect", &plasm_connect_list, bp::args("connection_list"));
+      p.def("connect", bp::raw_function(plasm_connect_args, 2));
       p.def("connect", &plasm_connect_explicit, bp::args("from_cell", "output_name", 
                                                          "to_cell", "intput_name"));
       p.def("disconnect", &plasm::disconnect, bp::args("from_cell", "output_name", 

@@ -16,7 +16,6 @@ namespace ecto {
 
     void register_factory_fn(const std::string& name, entry_t e)
     {
-      std::cout << "registering ffn for " << name << "\n";
       cellmap[name] = e;
     }
     
