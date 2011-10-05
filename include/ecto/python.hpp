@@ -89,6 +89,7 @@ namespace ecto
 
 #define ECTO_DEFINE_MODULE(modname)                                     \
   ECTO_INSTANTIATE_REGISTRY(modname)                                    \
+  ECTO_ASSERT_MODULE_NAME(modname)                                      \
   void init_module_##modname##_rest() ;                                 \
   BOOST_PYTHON_MODULE(modname) {                                        \
     ECTO_REGISTER(modname);                                             \
