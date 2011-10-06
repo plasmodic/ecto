@@ -29,7 +29,6 @@
 #pragma once
 //do not include this in ecto lib files, only in client modules
 
-//boost python first.
 #include <boost/python.hpp>
 #include <boost/shared_ptr.hpp>
 
@@ -38,11 +37,9 @@
 #include <ecto/abi.hpp>
 #include <ecto/cell.hpp>
 #include <ecto/util.hpp>
-#include <ecto/python/raw_constructor.hpp>
+// #include <ecto/python/raw_constructor.hpp>
 #include <ecto/traits.hpp>
-
 #include <iostream>
-#include <sstream>
 
 /**
  * \namespace ecto
@@ -55,6 +52,7 @@ namespace ecto
   void inspect_impl(ecto::cell::ptr, 
                     const boost::python::tuple& args, const boost::python::dict& kwargs);
 
+  /*
   template<typename T>
   boost::shared_ptr<ecto::cell_<T> > inspect(boost::python::tuple args,
                                              boost::python::dict kwargs)
@@ -79,6 +77,7 @@ namespace ecto
     c->name(c->type());
     return c->gen_doc(doc);
   }
+  */
 }
 
 #include <ecto/registry.hpp>

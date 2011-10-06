@@ -27,20 +27,13 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #pragma once
-#include <boost/python.hpp>
-#include <boost/python/type_id.hpp>
 #include <boost/shared_ptr.hpp>
-#include <boost/weak_ptr.hpp>
 #include <boost/function.hpp>
-#include <boost/bind.hpp>
 
 #include <ecto/util.hpp> //name_of
 #include <ecto/tendril.hpp>
 #include <stdexcept>
 #include <string>
-#include <set>
-#include <sstream>
-#include <cstring>
 
 namespace ecto
 {

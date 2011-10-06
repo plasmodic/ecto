@@ -1,6 +1,6 @@
 #include <ecto/plasm.hpp>
 #include "plasm/impl.hpp"
-#include <ecto/tendril.hpp>
+#include <ecto/tendrils.hpp>
 #include <ecto/cell.hpp>
 #include <ecto/graph_types.hpp>
 #include <ecto/schedulers/singlethreaded.hpp>
@@ -8,6 +8,7 @@
 #include <boost/format.hpp>
 #include <boost/date_time/posix_time/posix_time_duration.hpp>
 #include <boost/regex.hpp>
+#include <boost/foreach.hpp>
 
 #include <string>
 #include <map>
