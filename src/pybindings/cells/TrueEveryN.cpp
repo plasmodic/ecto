@@ -45,16 +45,16 @@ namespace ecto
       out.declare<bool>("flag");
     }
     void
-    configure(tendrils&p, tendrils&in, tendrils&out)
+    configure(const tendrils&p, const tendrils&in, const tendrils&out)
     {
       n_ = p["n"];
       count_ = p["count"];
       flag_ = out["flag"];
     }
     int
-    process(tendrils& in, tendrils& out)
+    process(const tendrils& in, const tendrils& out)
     {
-      *flag_ = (*count_)++ % (*n_) == 0;
+      *flag_ = ((*count_)++ % (*n_) == 0);
       return ecto::OK;
     }
     spore<bool> flag_;

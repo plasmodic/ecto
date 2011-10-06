@@ -33,11 +33,11 @@ div.documentwrapper {
 
 img.logo {
     display: block;
-    margin-left: auto;
+/*    margin-left: auto;*/
     /* margin-right: auto;*/
-    height: 100px;
-    /* width: 150px; */
-    /* align: center;*/ 
+    /*height: 100px;*/
+    width: 210px;
+    align: center;
 /*    padding: 10px;*/
 }
 div.document {
@@ -147,7 +147,7 @@ div.footer a {
 
 /* -- body styles ----------------------------------------------------------- */
 
-p {    
+p {
     margin: 0.8em 0 0.5em 0;
 }
 
@@ -361,3 +361,8 @@ li .toctree-l1 > a {
     text-decoration: plain;
 }
 
+<!-- THIS LOOKS HORRIBLE
+   p.graphviz > img {
+       width: 100%;
+   }
+-->

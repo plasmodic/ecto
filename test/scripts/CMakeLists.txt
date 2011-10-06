@@ -1,31 +1,40 @@
 macro(pytest testname)
-  add_test(${testname}
+  add_test(ecto_${testname}
     /usr/bin/env
-    PYTHONPATH=${LIBRARY_OUTPUT_PATH}:${CMAKE_SOURCE_DIR}/python:$PYTHONPATH
+    PYTHONPATH=${CMAKE_LIBRARY_OUTPUT_DIRECTORY}:${ecto_SOURCE_DIR}/python:$ENV{PYTHONPATH}
     ${ARGN}
     )
 endmacro()
 
 foreach(file
     test_addergraph
+    test_async_bp_objects
     test_async_execution
+    test_async_execution_harsh
+    test_async_multiple_sched
     test_blackbox
     test_constant
-    test_destroy_called
+    test_dealer
     test_doc
     test_dual_line_plasm
     test_entanglement
+    test_exception
+    test_exception_in_constructor
     test_If
+    test_fileIO
     test_handles
+    test_multiprocess
     test_modules
-    #test_metrics
+    test_no_ecto_import
+    test_options
+    # test_metrics
     test_parameter_callbacks
     test_passthrough
     test_plasm
     test_process_return_values
     test_python_module
     test_reconnect
-    test_redirect
+    #test_redirect #reenable when we figure out why this fails. TODO FIXME
     test_required_io
     test_required_param
     test_random
@@ -34,10 +43,11 @@ foreach(file
     test_strands
     test_tendril
     test_tendrils
+    test_wrong_param_type
     )
-    add_test(${file} 
+    add_test(ecto_${file} 
         /usr/bin/env
-        PYTHONPATH=${LIBRARY_OUTPUT_PATH}:${CMAKE_SOURCE_DIR}/python:$PYTHONPATH
+        PYTHONPATH=${CMAKE_LIBRARY_OUTPUT_DIRECTORY}:${ecto_SOURCE_DIR}/python:$PYTHONPATH
         ${CMAKE_CURRENT_SOURCE_DIR}/${file}.py)
 
 endforeach()

@@ -23,7 +23,6 @@ def mygraph():
     
     if debug:
         #render the DAG with dot
-        print plasm.viz()
         ecto.view_plasm(plasm)
     
     #an execution loop

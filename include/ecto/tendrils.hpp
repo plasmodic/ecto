@@ -27,9 +27,14 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #pragma once
+#include <boost/thread.hpp>
+#include <boost/serialization/shared_ptr.hpp>
+#include <boost/serialization/map.hpp>
+
 #include <ecto/tendril.hpp>
 #include <ecto/spore.hpp>
 #include <boost/thread.hpp>
+#include <boost/signals2.hpp>
 
 #include <string>
 #include <sstream>
@@ -39,12 +44,60 @@
 
 namespace ecto
 {
+  enum tendril_type
+  {
+    OUTPUT = 0, INPUT, PARAMETER
+  };
+
+
   /**
    * \brief The tendrils are a collection for the ecto::tendril class, addressable by a string key.
    */
-  class ECTO_EXPORT tendrils: public std::map<std::string, tendril::ptr>, boost::noncopyable
+  class ECTO_EXPORT tendrils : boost::noncopyable
   {
   public:
+
+    typedef std::map<std::string, tendril::ptr> storage_type;
+
+    typedef storage_type::iterator iterator;
+    typedef storage_type::const_iterator const_iterator;
+    typedef storage_type::value_type value_type;
+    typedef storage_type::key_type key_type;
+    typedef storage_type::size_type size_type;
+    typedef storage_type::difference_type difference_type;
+    typedef storage_type::key_compare key_compare;
+    
+    tendrils();
+
+    iterator begin() { return storage.begin(); }
+    const_iterator begin() const { return storage.begin(); }
+    iterator end() { return storage.end(); }
+    const_iterator end() const { return storage.end(); }
+
+    iterator find(const std::string& name) { return storage.find(name); }
+    const_iterator find(const std::string& name) const { return storage.find(name); }
+
+    void clear() { storage.clear(); }
+
+    size_type size() const { return storage.size(); }
+
+    void erase(iterator pos) { storage.erase(pos); }
+    void erase(const key_type& k) { storage.erase(k); }
+
+    template <typename InputIterator>
+    void 
+    insert(InputIterator first, InputIterator last)
+    {
+      storage.insert(first, last);
+    }
+    
+    std::pair<iterator, bool> insert(const value_type &v)
+    {
+      return storage.insert(v);
+    }
+
+    key_compare key_comp() const { return storage.key_comp(); }
+      
 
     /**
      * \brief Declare a tendril of a certain type, with only a name, no doc, or default values.
@@ -56,7 +109,7 @@ namespace ecto
     spore<T>
     declare(const std::string& name)
     {
-      tendril::ptr t(tendril::make_tendril<T>());
+      tendril::ptr t(make_tendril<T>());
       return declare(name, t);
     }
 
@@ -88,44 +141,45 @@ namespace ecto
     }
 
     /**
-     * \brief get the given type that is stored at the given key.  Will throw if there is a type mismatch.
-     * @tparam T The compile time type to attempt to get from the tendrils.
-     * @param name The key value
-     * @return A const reference to the value, no copy is done.
+      Sig is a function object that looks like:
+      struct Callback
+      {
+        typedef void result_type;
+        void operator()(const boost::signals2::connection &conn, void* cookie, const tendrils* tdls) const
+        {
+          conn.disconnect();//for one time callbacks
+          //do your thang.
+        }
+      };
+
+      This will be called by realize_potential(cookie). Typically cookie is of type CellImplementation.
+
+     Convenience function for static registration of pointer to members that are of type spore<T>
      */
-    template<typename T>
-    const T&
-    get(const std::string& name) const
+    template<typename T, typename CellImpl>
+    spore<T>
+    declare(spore<T> CellImpl::* ptm, const std::string& name, const std::string& doc = "",
+            const typename spore<T>::value_type& default_val = typename spore<T>::value_type())
     {
-      try
-      {
-          return at(name)->read<T>();
-      }catch(except::TypeMismatch& e)
-      {
-        e << std::string("  Hint : " ) + "'"+name+"' is of type: " + at(name)->type_name();
-        throw e;
-      }
+      sig_t::extended_slot_type slot(spore_assign(ptm,name),_1,_2,_3);
+      static_bindings_.connect_extended(slot);
+      return declare<T>(name,doc,default_val);
+    }
+
+    template<typename CookieType>
+    void realize_potential(CookieType* cookie)
+    {
+      static_bindings_(cookie,this);
     }
 
     /**
-     * \brief Performs a non ambiguous read operation on the value held at the given name.
-     * This should be the preferred method of reading a value if the intent is to not change it.
-     * @param name The key that the tendril is stored at.
-     * @return A const reference to the value, no copy is done.
+     * Runtime declare function.
+     * @param name
+     * @param t
+     * @return
      */
-    template<typename T>
-    const T&
-    read(const std::string& name) const
-    {
-      try
-      {
-          return at(name)->read<T>();
-      }catch(except::TypeMismatch& e)
-      {
-        e << std::string("  Hint : " ) + "'"+name+"' is of type: " + at(name)->type_name();
-        throw e;
-      }
-    }
+    tendril::ptr
+    declare(const std::string& name, tendril::ptr t);
 
     /**
      * \brief get the given type that is stored at the given key.  Will throw if there is a type mismatch.
@@ -135,32 +189,32 @@ namespace ecto
      */
     template<typename T>
     T&
-    get(const std::string& name)
+    get(const std::string& name) const
     {
+      const_iterator iter = storage.find(name);
       try
       {
-        return at(name)->get<T>();
-      }catch(except::TypeMismatch& e)
+        if (iter == end())
+          doesnt_exist(name);
+        return iter->second->get<T>();
+      } catch (except::TypeMismatch& e)
       {
-        e << std::string("  Hint : " )+ "'"+name+"' is of type: " + at(name)->type_name();
-        throw e;
+        e << except::actualtype_hint(iter->first)
+          << except::tendril_key(name)
+          ;
+        throw;
       }
     }
 
     /**
      * \brief Grabs the tendril at the key.
      * @param name The key for the desired tendril.
-     * @return A reference to the tendril.
+     * @return A shared pointer to the tendril.
+     * this throws if the key is not in the tendrils object
      */
-    tendril::const_ptr
-    at(const std::string& name) const;
-    /**
-     * \brief Grabs the tendril at the key.
-     * @param name The key for the desired tendril.
-     * @return A reference to the tendril.
-     */
-    tendril::ptr
-    at(const std::string& name);
+    const tendril::ptr& operator[](const std::string& name) const;
+
+    tendril::ptr& operator[](const std::string& name);
 
     /**
      * \brief Print the tendrils documentation string, in rst format.
@@ -174,16 +228,65 @@ namespace ecto
     typedef boost::shared_ptr<const tendrils> const_ptr;
 
   private:
-    /**
-     * Runtime declare function.
-     * @param name
-     * @param t
-     * @return
-     */
-    tendril::ptr
-    declare(const std::string& name, tendril::ptr t);
 
-    typedef std::map<std::string, tendril::ptr> map_t;
+    void doesnt_exist(const std::string& name) const;
+    tendrils(const tendrils&);
+
+    storage_type storage;
     mutable boost::mutex mtx;
+    typedef boost::signals2::signal<void(void*, const tendrils*)> sig_t;
+    sig_t static_bindings_;
+
+    friend class boost::serialization::access;
+    template<class Archive>
+    void
+    serialize(Archive & ar, const unsigned int version)
+    {
+      ar & storage;
+    }
+ 
+ };
+
+  /**
+   * Implementation of a spore assignment functor used for static time registration.
+   */
+  template<typename CellImpl, typename T>
+  struct spore_assign_impl
+  {
+    typedef spore<T> CellImpl::* PtrToMember; // the member pointer type
+    typedef void result_type; //result type for function object
+
+    spore_assign_impl(PtrToMember member, const std::string& key)
+        :
+          member_(member),
+          key_(key)
+    {
+    }
+
+    void
+    operator()(const boost::signals2::connection &conn, void* vthiz, const tendrils* tdls) const
+    {
+      conn.disconnect();//this is a one time callback.
+      CellImpl* thiz = static_cast<CellImpl*>(vthiz);
+      (*thiz).*member_ = (*tdls)[key_];
+    }
+
+    PtrToMember member_;
+    std::string key_;
   };
+
+
+  /**
+   * Constructs a function object used for static time registration of a pointer to member ecto::spore<T>
+   * and a ecto::tendrils object.
+   * @param ptm A pointer to an ecto::spore<T> member of your cell impl.
+   * @param name The corresponding key in the ecto::tendrils object.
+   * @return A function object appropriate for static time registration.
+   */
+  template<typename CellImpl, typename T>
+  static spore_assign_impl<CellImpl, T>
+  spore_assign(spore<T> CellImpl::* ptm, const std::string& name)
+  {
+    return spore_assign_impl<CellImpl, T>(ptm, name);
+  }
 }

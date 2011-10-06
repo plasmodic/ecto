@@ -1,0 +1,30 @@
+ectomodule(ecto_test
+  Add.cpp
+  CantCallMeFromTwoThreads.cpp
+  ConfigureCalledOnce.cpp
+  DontCallMeFromTwoThreads.cpp
+  EmitAndAccept.cpp
+  ExceptInConstructor.cpp
+  FileIO.cpp
+  Multiply.cpp
+  Quitter.cpp
+  QuitAfter.cpp
+  Increment.cpp
+  LatticeSleep.cpp
+  Printer.cpp
+  Ping.cpp
+  Throttle.cpp
+  Sleep.cpp
+  SleepPyObjectAbuser.cpp
+  Metrics.cpp
+  Gather.cpp
+  Generate.cpp
+  RequiredInput.cpp
+  RequiredParam.cpp
+  RequiredIO.cpp
+  Passthrough.cpp
+  ParameterWatcher.cpp
+  Uniform01.cpp
+  ecto_test.cpp
+)
+#install_ecto_module(ecto_test)

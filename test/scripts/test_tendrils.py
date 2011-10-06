@@ -12,25 +12,30 @@ def test_tendrils():
     assert t["x"] == "str"
     assert t.x == "str"
     #test the redeclare
-    t.declare("Hello","new doc", "you")
-    assert t.Hello == "you"
-    assert t.at("Hello").doc == "new doc"
+    try:
+        t.declare("Hello","new doc", "you")
+        util.fail()
+    except ecto.TendrilRedeclaration, e:
+        print str(e)
+        assert('TendrilRedeclaration' in str(e))
     try:
         #read error
         t.nonexistant = 1
-        assert False
-    except RuntimeError,e:
-        print "good:",e
+        util.fail()
+    except ecto.NonExistant, e:
+        print str(e)
+        assert "tendril_key  nonexistant" in str(e)
     try:
         #index error
         print t["nonexistant"]
-        assert False
-    except RuntimeError,e:
-        print "good:",e
+        util.fail()
+    except ecto.NonExistant, e:
+        print str(e)
+        assert "tendril_key  nonexistant" in str(e)
 
     assert len(t.keys()) == 2
     assert len(t.values()) == 2
-    
+
     print t
     #by value
     _x = t.x
@@ -42,16 +47,14 @@ def test_tendrils():
     #by reference
     x = t.at("x")
     t.x = 13
-    t.notify()
     assert x.val == 13
-    
+
     t.x = 17
-    assert t.x != 17
+    assert t.x == 17
     t.x = 199
     t.x = 15
-    t.notify()
     print t.x
     assert t.x == 15
-    
+
 if __name__ == '__main__':
     test_tendrils()

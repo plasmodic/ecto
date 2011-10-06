@@ -40,12 +40,12 @@
 #include <ecto/strand.hpp>
 #include <ecto/util.hpp>
 #include <ecto/profile.hpp>
+#include <ecto/is_threadsafe.hpp>
 
 #include <map>
 
 namespace ecto
 {
-
   /**
    * \brief Return values for modules' process functions. These
    * are appropriate for non exceptional behavior.
@@ -53,9 +53,17 @@ namespace ecto
   enum ReturnCode
   {
     OK = 0, //!< Everything A OK.
-    QUIT = 1,
-  //!< Explicit quit now.
+    QUIT = 1, //!< Explicit quit now.
+    BREAK = 2, //!< Stop execution in my scope, jump to outer scope
+    CONTINUE = 3, //!< Stop executino in my scope, jump to top of scope
+    UNKNOWN = -1 //!< Unknown return code.
   };
+
+#define ECTO_RETURN_VALUES                                                \
+    (OK)(QUIT)(CONTINUE)(BREAK)(UNKNOWN)                                  \
+
+  const std::string&
+  ReturnCodeToStr(int rval);
 
   /**
    * \brief ecto::cell is the non virtual interface to the basic building
@@ -80,9 +88,6 @@ namespace ecto
      void configure(tendrils& params, tendrils& inputs, tendrils& outputs);
      //called at every execution of the graph
      int process(const tendrils& in, tendrils& out);
-     //called right before the destructor of the cell, a good place to do
-     //critical cleanup work.
-     void destroy();
    };
    * @endcode
    *
@@ -127,13 +132,6 @@ namespace ecto
     ReturnCode process();
 
     /**
-     * \brief This should be called at the end of life for the cell, and signals imminent destruction.
-     *
-     * Will dispatch the client's destroy code. After this call, do not call any other functions.
-     */
-    void destroy();
-
-    /**
      * \brief Return the type of the child class.
      * @return A human readable non mangled name for the client class.
      */
@@ -176,25 +174,26 @@ namespace ecto
     tendrils parameters; //!< Parameters
     tendrils inputs; //!< Inputs, inboxes, always have a valid value ( may be NULL )
     tendrils outputs; //!< Outputs, outboxes, always have a valid value ( may be NULL )
-    boost::optional<strand> strand_;
 
-    profile::stats_type stats;
+    boost::optional<strand> strand_; //!< The strand that this cell should be executed in.
+    profile::stats_type stats; //!< For collecting execution statistics for process.
 
   protected:
-    virtual void init() = 0;
+
+    virtual bool init() = 0;
     virtual void dispatch_declare_params(tendrils& t) = 0;
+
     virtual void dispatch_declare_io(const tendrils& params, tendrils& inputs,
                                      tendrils& outputs) = 0;
-    virtual void dispatch_configure(tendrils& params, tendrils& inputs,
-                                    tendrils& outputs) = 0;
-    virtual ReturnCode
-    dispatch_process(tendrils& inputs, tendrils& outputs) = 0;
-    virtual void dispatch_destroy() = 0;
+
+    virtual void dispatch_configure(const tendrils& params, const tendrils& inputs,
+                                    const tendrils& outputs) = 0;
+
+    virtual ReturnCode dispatch_process(const tendrils& inputs, const tendrils& outputs) = 0;
+
     virtual std::string dispatch_name() const = 0;
-    virtual ptr dispatch_make() const
-    {
-      return ptr();
-    }
+
+    virtual ptr dispatch_clone() const = 0;
 
     virtual std::string dispatch_short_doc() const
     {
@@ -204,9 +203,9 @@ namespace ecto
     virtual void dispatch_short_doc(const std::string&)
     {
     }
-
-
   private:
+    cell(const cell&);
+
     std::string instance_name_;
   };
 
@@ -244,14 +243,9 @@ namespace ecto
     template<class U>
     static no test_process(...);
 
-    template<class U>
-    static yes test_destroy(BOOST_TYPEOF_TPL(&U::destroy));
-    template<class U>
-    static no test_destroy(...);
-
     enum
     {
-        declare_params = sizeof(test_declare_params<T> (0)) == sizeof(yes)
+      declare_params = sizeof(test_declare_params<T> (0)) == sizeof(yes)
     };
     enum
     {
@@ -265,10 +259,6 @@ namespace ecto
     {
       process = sizeof(test_process<T> (0)) == sizeof(yes)
     };
-    enum
-    {
-      destroy = sizeof(test_destroy<T> (0)) == sizeof(yes)
-    };
 
   };
 
@@ -276,12 +266,15 @@ namespace ecto
    * \brief cell_<T> is for registering an arbitrary class
    * with the the cell NVI. This adds a barrier between client code and the cell.
    */
-  template<class Cell>
+  template<class Impl>
   struct cell_: cell
   {
+    typedef boost::shared_ptr<cell_<Impl> > ptr;
+
+    typedef typename detail::python_mutex<Impl>::type gil_mtx_t;
+
     ~cell_()
     {
-      dispatch_destroy();
     }
   protected:
     template<int I>
@@ -297,13 +290,12 @@ namespace ecto
 
     static void declare_params(implemented, tendrils& params)
     {
-      Cell::declare_params(params);
+      Impl::declare_params(params);
     }
 
     void dispatch_declare_params(tendrils& params)
     {
-      //this is a none static function. for virtuality.
-      declare_params(int_<has_f<Cell>::declare_params> (), params);
+      declare_params(int_<has_f<Impl>::declare_params> (), params);
     }
 
     static void declare_io(not_implemented, const tendrils& params,
@@ -313,70 +305,44 @@ namespace ecto
     static void declare_io(implemented, const tendrils& params,
                            tendrils& inputs, tendrils& outputs)
     {
-      Cell::declare_io(params, inputs, outputs);
+      Impl::declare_io(params, inputs, outputs);
     }
 
     void dispatch_declare_io(const tendrils& params, tendrils& inputs,
                              tendrils& outputs)
     {
-      declare_io(int_<has_f<Cell>::declare_io> (), params, inputs, outputs);
+      declare_io(int_<has_f<Impl>::declare_io> (), params, inputs, outputs);
     }
 
-    void configure(not_implemented, tendrils&, tendrils& , tendrils&)
+    void configure(not_implemented, const tendrils&, const tendrils& , const tendrils&)
     {
     }
 
-    void configure(implemented, tendrils& params, tendrils& inputs,
-                   tendrils& outputs)
+    void configure(implemented, 
+                   const tendrils& params, const tendrils& inputs, const tendrils& outputs)
     {
-      thiz->configure(params,inputs,outputs);
+      impl->configure(params,inputs,outputs);
     }
 
-    void dispatch_configure(tendrils& params, tendrils& inputs,
-                            tendrils& outputs)
+    void dispatch_configure(const tendrils& params, const tendrils& inputs,
+                            const tendrils& outputs)
     {
-      //the cell may not be allocated here, so check pointer.
-      if (!thiz)
-      {
-        thiz.reset(new Cell);
-        //configure is only called once.
-        configure(int_<has_f<Cell>::configure> (), params,inputs,outputs);
-      }
+      configure(int_<has_f<Impl>::configure> (), params,inputs,outputs);
     }
 
-    ReturnCode process(not_implemented, const tendrils& ,
-                       const tendrils& )
+    ReturnCode process(not_implemented, const tendrils&, const tendrils&)
     {
       return OK;
     }
 
-    ReturnCode process(implemented, tendrils& inputs, tendrils& outputs)
+    ReturnCode process(implemented, const tendrils& inputs, const tendrils& outputs)
     {
-      profile::stats_collector coll(stats);
-      return ReturnCode(thiz->process(inputs, outputs));
+      return ReturnCode(impl->process(inputs, outputs));
     }
 
-    ReturnCode dispatch_process(tendrils& inputs, tendrils& outputs)
+    ReturnCode dispatch_process(const tendrils& inputs, const tendrils& outputs)
     {
-      dispatch_configure(parameters,this->inputs,outputs);
-      return process(int_<has_f<Cell>::process> (), inputs, outputs);
-    }
-
-    void destroy(not_implemented)
-    {
-    }
-
-    void destroy(implemented)
-    {
-      //destroy only called once, then destructor.
-      if(thiz)
-        thiz->destroy();
-    }
-
-    void dispatch_destroy()
-    {
-      destroy(int_<has_f<Cell>::destroy> ());
-      thiz.reset();
+        return process(int_<has_f<Impl>::process> (), inputs, outputs);
     }
 
     std::string dispatch_name() const
@@ -392,42 +358,65 @@ namespace ecto
     {
     }
 
-    cell::ptr dispatch_make() const
+    cell::ptr dispatch_clone() const
     {
-      cell::ptr m(new cell_<Cell> ());
-      m->declare_params();
-      //copy all of the parameters by value.
-      tendrils::iterator it = m->parameters.begin();
-      tendrils::const_iterator end = m->parameters.end(), oit =
-          parameters.begin();
-      while (it != end)
-        {
-          it->second->copy_value(*oit->second);
-          ++oit;
-          ++it;
-        }
-      m->declare_io();
-      return m;
+      return cell::ptr(new cell_<Impl> ());
     }
-    void init()
+
+    bool init()
     {
-      if(!thiz)
+      try{
+        bool initialized = impl;
+        if(!initialized)
+        {
+          impl.reset(new Impl);
+          Impl* i=impl.get();
+          //these handle finalizing the registration of spores that
+          //were registered at static time.
+          parameters.realize_potential(i);
+          inputs.realize_potential(i);
+          outputs.realize_potential(i);
+        }
+        return initialized;
+      }
+      catch (const std::exception& e)
       {
-        cell::configure();
+        ECTO_TRACE_EXCEPTION("const std::exception&");
+        BOOST_THROW_EXCEPTION(except::CellException()
+                              << except::when("Construction")
+                              << except::type(name_of(typeid(e)))
+                              << except::cell_name(name())
+                              << except::what(e.what()));
+      }
+      catch (...)
+      {
+        ECTO_TRACE_EXCEPTION("...");
+        BOOST_THROW_EXCEPTION(except::CellException()
+                              << except::when("Construction")
+                              << except::what("(unknown exception)")
+                              << except::cell_name(name()));
       }
     }
 
-    boost::shared_ptr<Cell> thiz;
-    static const std::string CELL_TYPE_NAME;
   public:
+    boost::shared_ptr<Impl> impl;
     static std::string SHORT_DOC;
+    static std::string CELL_NAME; //!< The python name for the cell.
+    static std::string MODULE_NAME; //!< The module that the cell is part of.
+    static const std::string CELL_TYPE_NAME;
   };
 
-  template<typename Cell>
-  std::string cell_<Cell>::SHORT_DOC;
+  template<typename Impl>
+  std::string cell_<Impl>::SHORT_DOC;
 
-  template<typename Cell>
-  const std::string cell_<Cell>::CELL_TYPE_NAME = ecto::name_of<Cell>();
+  template<typename Impl>
+  std::string cell_<Impl>::CELL_NAME;
+
+  template<typename Impl>
+  std::string cell_<Impl>::MODULE_NAME;
+
+  template<typename Impl>
+  const std::string cell_<Impl>::CELL_TYPE_NAME = ecto::name_of<Impl>();
 
   /**
    * Creates a cell from type T that has not been configured, so therefore,
@@ -436,12 +425,13 @@ namespace ecto
    *
    * @return A cell::ptr that is initialized as far as default params,inputs,outputs go.
    */
-  template<typename T>
-  cell::ptr inspect_cell()
+  template<typename Impl>
+  typename cell_<Impl>::ptr inspect_cell()
   {
-    cell::ptr p(new cell_<T> ());
-    p->declare_params();
-    p->declare_io();
+    typename cell_<Impl>::ptr p(new cell_<Impl> ());
+    cell::ptr base(p);
+    base->declare_params();
+    base->declare_io();
     return p;
   }
 
@@ -450,10 +440,10 @@ namespace ecto
    * This will call configure in the cell.
    * @return A cell ptr.
    */
-  template<typename T>
-  cell::ptr create_cell()
+  template<typename Impl>
+  typename cell_<Impl>::ptr create_cell()
   {
-    cell::ptr p = inspect_cell<T> ();
+    typename cell_<Impl>::ptr p = inspect_cell<Impl>();
     return p;
   }
 

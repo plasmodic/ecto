@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-import ecto
-import ecto_test
+import ecto, ecto_test, util
 
 def test_modules_01():
     g = ecto_test.Generate(start=0, step=2)
@@ -9,32 +8,36 @@ def test_modules_01():
     g.process()
     assert g.outputs.out == 2
     g.configure()
-    g.outputs.out = 7.0 #no effect
+    print type(g.outputs)
+    print type(g.outputs.out)
+    print g.outputs.out
+    g.outputs.out = 7.0
     g.process()
-    assert  g.outputs.out == 4.0
+    assert  g.outputs.out == 9
     s = ecto_test.Scatter(n = 4, x=3)
     s.process()
     assert(len(s.outputs) == 4)
     for out in s.outputs:
         print out[1].val
         assert(out[1].val == 3)
+
 def test_modules_spec():
     g = ecto_test.Generate(start=0, step=2)
     x = g["out"]
     x = g["out","out"]
     try:
         x = g[2.0]
-        assert False, "should have thrown"
+        util.fail()
     except TypeError, e:
         print e
     try:
         x = g["out",2.0]
-        assert False, "should have thrown"
+        util.fail()
     except RuntimeError, e:
         print e
     try:
         x = g["out","and","about"]
-        assert False, "should have thrown"
+        util.fail()
     except RuntimeError, e:
         print e
     
@@ -55,7 +58,7 @@ def test_modules_spec():
     assert(len(connections) == 3)
     try:
         scatter[1:-1]
-        assert False, "[1:-1] should not work..."
+        util.fail()
     except RuntimeError,e:
         print e
         
@@ -85,7 +88,7 @@ def novel_sets(g):
 def do_fail(x,exception_type = RuntimeError ,args = None):
     try:
         x(args)
-        assert False
+        util.fail()
     except exception_type,e:
         print "good, caught error:", e
 

@@ -28,11 +28,6 @@ def test_strands(nlevels, SchedType, execfn, expect):
     printer = ecto_test.Printer()
     plasm.connect(noncurr, "out", printer, "in")
     
-    o = open('graph.dot', 'w')
-    print >>o, plasm.viz()
-    o.close()
-    print "\n", plasm.viz(), "\n"
-    
     sched = SchedType(plasm)
     print "sched=", sched
     execfn(sched)
@@ -56,11 +51,6 @@ def test_implicit_strands(nlevels, SchedType, execfn, expect):
 
     printer = ecto_test.Printer()
     plasm.connect(noncurr, "out", printer, "in")
-    
-    o = open('graph.dot', 'w')
-    print >>o, plasm.viz()
-    o.close()
-    print "\n", plasm.viz(), "\n"
     
     sched = SchedType(plasm)
     print "sched=", sched
@@ -87,7 +77,7 @@ def shouldfail():
     try:
         print "about to execute... this should throw"
         sched.execute(nthreads=4, niter=4)
-        assert False, "that should have thrown"
+        util.fail()
     except RuntimeError, e:
         print "good, python caught error", e
 

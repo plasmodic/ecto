@@ -5,45 +5,37 @@
 #define STRINGDIDLY(A) std::string(#A)
 
 using namespace ecto;
-struct Module1
-{
-  static void
-  declare_io(const tendrils& p, tendrils& in, tendrils& out)
+namespace {
+  struct Module1
   {
-    SHOW();
-    out.declare<double> ("d");
-  }
-};
+    static void
+    declare_io(const tendrils& p, tendrils& in, tendrils& out)
+    {
+      SHOW();
+      out.declare<double> ("d");
+    }
+  };
 
-struct Module2
-{
-  static void
-  declare_io(const tendrils& p, tendrils& in, tendrils& out)
+  struct Module2
   {
-    in.declare<double> ("d");
-  }
-};
+    static void
+    declare_io(const tendrils& p, tendrils& in, tendrils& out)
+    {
+      in.declare<double> ("d");
+    }
+  };
 
-struct Passthrough
-{
-  static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
+  struct Passthrough
   {
-    in.declare<tendril::none>("in", "Any type");
-    out.declare<tendril::none>("out", "Any type");
-  }
-  void configure(const tendrils& parms, tendrils& in, tendrils& out)
-  {
-    in_ = in["in"];
-    out_ = out["out"];
-  }
-  int process(tendrils& in, tendrils& out)
-  {
-    out_ << in_;
-    return ecto::OK;
-  }
-  tendril::ptr in_, out_;
-};
+    static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
+    {
+      in.declare<tendril::none>("in", "Any type");
+      out.declare<tendril::none>("out", "Any type on the output...");
+      out["out"] = in["in"]; //assign the ptr.
+    }
+  };
 
+}
 TEST(Plasm, Viz)
 {
   ecto::plasm p;
@@ -68,3 +60,13 @@ TEST(Plasm, Passthrough)
   pass->outputs["out"] >> out;
   EXPECT_TRUE(out == 5.0);
 }
+
+TEST(Plasm,Registry)
+{
+  ecto::cell::ptr add = ecto::registry::create("ecto_test::Add");
+  EXPECT_TRUE(add);
+  std::cout << add->name() << std::endl;
+}
+
+
+

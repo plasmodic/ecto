@@ -37,26 +37,33 @@ namespace ecto
   {
     static void declare_params(tendrils& p)
     {
-      p.declare<cell::ptr>("cell","Cell to conditionally execute.  The inputs and outputs of this cell will be"
-          " replicated to the If cell.").required(true);
+      p.declare<cell::ptr>("cell", 
+                           "Cell to conditionally execute."
+                           " The inputs and outputs of this cell will be"
+                           " replicated to the If cell.").required(true);
     }
+
     static void declare_io(const tendrils& p, tendrils& in, tendrils& out)
     {
-      in.declare<bool>("__test__","The test value. If this is true then cell::process() is called, else, not.", false);
+      in.declare<bool>("__test__",
+                       "The test value. If this is true then "
+                       " cell::process() is called.", false);
       cell::ptr c;
-      p.at("cell") >> c;
+      p["cell"] >> c;
       if(!c)
         return;//handle default well.
-      in.insert(c->inputs.begin(),c->inputs.end());
-      out.insert(c->outputs.begin(),c->outputs.end());
+      in.insert(c->inputs.begin(), c->inputs.end());
+      out.insert(c->outputs.begin(), c->outputs.end());
     }
-    void configure(tendrils& p, tendrils& in, tendrils& out)
+
+    void configure(const tendrils& p, const tendrils& in, const tendrils& out)
     {
       p["cell"] >> c_;
       c_->configure();
-      test_ = in.at("__test__");
+      test_ = in["__test__"];
     }
-    int process(tendrils& in, tendrils& out)
+
+    int process(const tendrils& in, const tendrils& out)
     {
       if(*test_)
       {

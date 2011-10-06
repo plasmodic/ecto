@@ -28,7 +28,9 @@
  */
 #pragma once
 #include <stdint.h>//int64_t
+
 #include <ecto/util.hpp>
+#include <ecto/log.hpp>
 
 namespace ecto {
   namespace profile {
@@ -45,14 +47,19 @@ namespace ecto {
     {
       int64_t start;
       stats_type& stats;
+      const std::string& instancename;
 
-      stats_collector(stats_type& stats) : start(read_tsc()), stats(stats) 
+      stats_collector(const std::string& n, stats_type& stats) 
+        : start(read_tsc()), stats(stats), instancename(n) 
       { 
         ++stats.ncalls;
+        ECTO_LOG_PROCESS(instancename, start, stats.ncalls, 1);
       }
 
       ~stats_collector() {
-        stats.total_ticks += (read_tsc() - start);
+        int64_t tsc = read_tsc();
+        ECTO_LOG_PROCESS(instancename, tsc, stats.ncalls, 0);
+        stats.total_ticks += (tsc - start);
       }
     };
 

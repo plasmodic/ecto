@@ -1,0 +1,18 @@
+digraph G {
+graph [rankdir=TB, ranksep=1]
+edge [labelfontsize=8]
+node [shape=plaintext]
+0[label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">  <TR> <TD ROWSPAN="1" COLSPAN="1" BGCOLOR="khaki">hello_ecto::Reader<BR/><FONT POINT-SIZE="8">hello_ecto::Reader</FONT></TD>  </TR>  <TR>
+<TD PORT="o_output" BGCOLOR="indianred1">output<BR/><FONT POINT-SIZE="8">std::string</FONT></TD>
+</TR> </TABLE>>];
+1[label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR>
+<TD PORT="i_str" BGCOLOR="springgreen">str<BR/><FONT POINT-SIZE="8">std::string</FONT></TD>
+</TR> <TR> <TD ROWSPAN="1" COLSPAN="1" BGCOLOR="khaki">hello_ecto::Printer<BR/><FONT POINT-SIZE="8">hello_ecto::Printer</FONT></TD> <TD PORT="p_str" BGCOLOR="lightblue">str<BR/><FONT POINT-SIZE="8">std::string</FONT></TD>
+ </TR>   </TABLE>>];
+2[label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR>
+<TD PORT="i_str" BGCOLOR="springgreen">str<BR/><FONT POINT-SIZE="8">std::string</FONT></TD>
+</TR> <TR> <TD ROWSPAN="1" COLSPAN="1" BGCOLOR="khaki">hello_ecto::Printer<BR/><FONT POINT-SIZE="8">hello_ecto::Printer</FONT></TD> <TD PORT="p_str" BGCOLOR="lightblue">str<BR/><FONT POINT-SIZE="8">std::string</FONT></TD>
+ </TR>   </TABLE>>];
+0->1 [headport="i_str" tailport="o_output"];
+0->2 [headport="i_str" tailport="o_output"];
+}

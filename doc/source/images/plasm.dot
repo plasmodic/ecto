@@ -1,13 +1,38 @@
 digraph G {
-0[label="hello_ecto::Reader",fillcolor=green, style="rounded,filled"];
-1[label="hello_ecto::Printer",fillcolor=green, style="rounded,filled"];
-2[label="output", shape=invhouse];
-3[label="str", shape=house];
-4[label="hello_ecto::Printer",fillcolor=green, style="rounded,filled"];
-5[label="str", shape=house];
-0->2 ;
-2->3 ;
-3->1 ;
-2->5 ;
-5->4 ;
+graph [rankdir=TB, ranksep=1]
+edge [labelfontsize=8]
+node [shape=plaintext]
+0[label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">  <TR> <TD ROWSPAN="2" COLSPAN="6" BGCOLOR="khaki"><B>ecto_test::Scatter</B></TD> <TD PORT="p_n" BGCOLOR="lightblue">n</TD>
+ </TR> <TR> <TD PORT="p_x" BGCOLOR="lightblue">x</TD> </TR>
+ <TR>
+<TD PORT="o_out_0000" BGCOLOR="indianred1">out_0000</TD>
+<TD PORT="o_out_0001" BGCOLOR="indianred1">out_0001</TD>
+<TD PORT="o_out_0002" BGCOLOR="indianred1">out_0002</TD>
+<TD PORT="o_out_0003" BGCOLOR="indianred1">out_0003</TD>
+<TD PORT="o_out_0004" BGCOLOR="indianred1">out_0004</TD>
+<TD PORT="o_out_0005" BGCOLOR="indianred1">out_0005</TD>
+</TR> </TABLE>>];
+1[label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR>
+<TD PORT="i_in_0000" BGCOLOR="springgreen">in_0000</TD>
+<TD PORT="i_in_0001" BGCOLOR="springgreen">in_0001</TD>
+<TD PORT="i_in_0002" BGCOLOR="springgreen">in_0002</TD>
+</TR> <TR> <TD ROWSPAN="1" COLSPAN="3" BGCOLOR="khaki"><B>ecto_test::Gather&lt;int&gt;</B></TD> <TD PORT="p_n" BGCOLOR="lightblue">n</TD>
+ </TR>  <TR>
+<TD PORT="o_out" BGCOLOR="indianred1">out</TD>
+</TR> </TABLE>>];
+2[label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR>
+<TD PORT="i_in_0000" BGCOLOR="springgreen">in_0000</TD>
+<TD PORT="i_in_0001" BGCOLOR="springgreen">in_0001</TD>
+<TD PORT="i_in_0002" BGCOLOR="springgreen">in_0002</TD>
+</TR> <TR> <TD ROWSPAN="1" COLSPAN="3" BGCOLOR="khaki"><B>ecto_test::Gather&lt;int&gt;</B></TD> <TD PORT="p_n" BGCOLOR="lightblue">n</TD>
+ </TR>  <TR>
+<TD PORT="o_out" BGCOLOR="indianred1">out</TD>
+</TR> </TABLE>>];
+0->1 [headport="i_in_0000" tailport="o_out_0000"];
+0->1 [headport="i_in_0001" tailport="o_out_0001"];
+0->1 [headport="i_in_0002" tailport="o_out_0002"];
+0->2 [headport="i_in_0000" tailport="o_out_0003"];
+0->2 [headport="i_in_0001" tailport="o_out_0004"];
+0->2 [headport="i_in_0002" tailport="o_out_0005"];
 }
+

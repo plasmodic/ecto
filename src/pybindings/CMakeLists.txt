@@ -7,8 +7,13 @@ ectomodule(ecto
   tendrils.cpp
   cell.cpp
   schedulers.cpp
+  streambuf.cpp
   strand.cpp
+  cells/And.cpp
+  cells/BlackBox.cpp
   cells/Constant.cpp
+  cells/Dealer.cpp
+  cells/Counter.cpp
   cells/ether.cpp
   cells/If.cpp
   cells/Passthrough.cpp

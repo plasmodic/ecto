@@ -3,9 +3,7 @@
         
         @author: ethan.rublee@gmail.com (Ethan Rublee)
 '''
-import ecto, xdot
-import gtk
-import gtk.gdk
+import ecto
 import inspect
 from pydoc import ispackage
 from inspect import ismodule
@@ -27,16 +25,24 @@ def print_module_doc(m):
     print m.__doc__
     
 
-class PlasmDotView(xdot.DotWindow):
-    def __init__(self):
-        xdot.DotWindow.__init__(self)
-
+def list_all_ecto_modules(pymodule):
+    '''
+    Creates a list of all cells from a python module, which are ready for doc string and other
+    types of introspection.
+    '''
+    l = []
+    for x in dir(pymodule):
+        mod = getattr(pymodule, x)
+        if inspect.isclass(mod) and issubclass(mod, ecto._cell_base):
+                m = mod.inspect((), {})
+                l.append(m)
+    return l
 
 def list_ecto_module(pymodule):
     l = []
     for x in dir(pymodule):
         mod = getattr(pymodule, x)
-        if inspect.isclass(mod) and issubclass(mod, ecto._module_base):
+        if inspect.isclass(mod) and issubclass(mod, ecto._cell_base):
                 m = mod.inspect((), {})
                 if m.__doc__ != None :
                     print m.__doc__
@@ -46,7 +52,14 @@ def list_ecto_module(pymodule):
     return l
 
 def view_plasm(plasm):
-    window = PlasmDotView()
+    try:
+        import gtk
+        import xdot
+    except ImportError, e:
+        print e
+        print "view_plasm requires gobject gtk graphviz, possibly more to run..."
+        return
+    window = xdot.DotWindow()
     x = plasm.viz()
     window.set_dotcode(x)
     window.connect('destroy', gtk.main_quit)

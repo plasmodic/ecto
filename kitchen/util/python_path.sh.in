@@ -1,0 +1,9 @@
+#source me to get the python path for ecto setup
+for X in @KITCHEN_PROJECTS_STR@
+do
+  if [ -e @CMAKE_BINARY_DIR@/$X/python_path.sh ]
+  then
+    . @CMAKE_BINARY_DIR@/$X/python_path.sh
+  fi
+done
+

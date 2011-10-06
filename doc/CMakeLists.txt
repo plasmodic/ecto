@@ -1,68 +1,55 @@
-# add a target to generate API documentation with Doxygen
-# add doc to all
+if(NOT ecto_kitchen_SOURCE_DIR)
+    include(doc.cmake)
 
-option(INSTALL_DOC "Install the documentation." OFF)
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Makefile.in 
-  ${CMAKE_CURRENT_BINARY_DIR}/Makefile.sphinx)
-
-add_custom_target(doc
-  COMMENT "Generate all documentation" VERBATIM
-  )
-
-#doxygen based docs
-find_package(Doxygen)
-if(DOXYGEN_FOUND)
-  file(GLOB_RECURSE doc_sources ${CMAKE_SOURCE_DIR}/include/*)
-  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
-
-  add_custom_target(doxygen
-    COMMENT "Generating API documentation with Doxygen" VERBATIM
-    )
-
-  add_custom_command(TARGET doxygen
-    COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-    )
-  add_dependencies(doc doxygen)
-endif()
-
-find_program(SPHINX_BUILD sphinx-build)
-
-if(SPHINX_BUILD)
-  message(STATUS "Found sphinx-build : ${SPHINX_BUILD}")
-  set(ENV{PYTHONPATH} @LIBRARY_OUTPUT_PATH@:@CMAKE_SOURCE_DIR@/python:$ENV{PYTHONPATH})
-  add_custom_target(pdf
-    COMMENT "Generating pdf of documentation with Sphinx and latex." VERBATIM
-    )
-  add_custom_command(TARGET pdf
-    COMMAND ${CMAKE_MAKE_PROGRAM} -f Makefile.sphinx latexpdf
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-    )
-  add_custom_target(html)
-  add_custom_command(TARGET html
-    COMMAND ${CMAKE_MAKE_PROGRAM} -f Makefile.sphinx html
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-    )
-  #dependencies for sphinx, html must be built for the sphinx to not error out.
-  #also all modules should be built so that the sphinx ectodoc stuff works.
-  add_dependencies(html ecto_cpp ecto_ectomodule ecto_test_ectomodule)
-  add_dependencies(pdf ecto_cpp ecto_ectomodule ecto_test_ectomodule)
-  add_dependencies(html doxygen)
-  add_dependencies(pdf doxygen)
-  add_dependencies(doc pdf)
-  add_dependencies(doc html)
-endif()
-  
-if(INSTALL_DOC)
-  if(DOXYGEN_FOUND AND SPHINX_BUILD)
-    install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/html
-      DESTINATION share/doc/ecto-${ECTO_VERSION}
-      COMPONENT doc
+    # add a target to generate API documentation with Doxygen
+    # add doc to all
+    set(ECTO_DOC_DEPLOY_DESTINATION_BASE /tmp
+      CACHE PATH "Base path for deploying docs"
       )
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/latex/ecto.pdf
-      DESTINATION share/doc/ecto-${ECTO_VERSION}
-      COMPONENT doc
+
+    set(ECTO_DOC_DEPLOY_DESTINATION ${ECTO_DOC_DEPLOY_DESTINATION_BASE}/${${PROJECT_NAME}_GITTAG_SHORT}
+      CACHE PATH "Destination for deploying docs"
       )
-  endif()
+
+    set(DOC_SOURCE_DIRS
+      ${CMAKE_CURRENT_SOURCE_DIR}
+      ${ecto_SOURCE_DIR}/samples
+      ${ecto_SOURCE_DIR}
+      )
+
+    configure_file(doc_config.py.in
+      ${CMAKE_CURRENT_BINARY_DIR}/doc_config.py
+    )
+
+    add_custom_target(doc
+      COMMENT "Generate all documentation" VERBATIM
+      )
+
+    find_package(Doxygen)
+    if(DOXYGEN_FOUND)
+      set(DOC_SEARCH_DIRS
+        ${ecto_SOURCE_DIR}/include
+      )
+      doxygen(doxygen ${DOC_SEARCH_DIRS})
+      add_dependencies(doc doxygen)
+    endif()
+
+    find_sphinx()
+    if(SPHINX_BUILD)
+      sphinx(html ${CMAKE_CURRENT_SOURCE_DIR}/source  ${CMAKE_CURRENT_BINARY_DIR}/html
+        ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}
+        ${ecto_SOURCE_DIR}/python
+        ${CMAKE_CURRENT_BINARY_DIR}
+        )
+      add_dependencies(doc html)
+      if(DOXYGEN_FOUND)
+        add_dependencies(html doxygen)
+      endif()
+
+      deploy(www-deploy ${CMAKE_CURRENT_BINARY_DIR}/html/ ${ECTO_DOC_DEPLOY_DESTINATION})
+      add_dependencies(www-deploy doc)
+    endif()
 endif()
 
+#these are used by the docs.
+add_subdirectory(source doc_errata)

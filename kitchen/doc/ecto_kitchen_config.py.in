@@ -1,0 +1,11 @@
+version='${${PROJECT_NAME}_GITTAG_SHORT}'
+commithash='${${PROJECT_NAME}_COMMITHASH}'
+gittag_short='${${PROJECT_NAME}_GITTAG_SHORT}'
+gittag_long='${${PROJECT_NAME}_GITTAG_LONG}'
+git_lastmod='${${PROJECT_NAME}_LAST_MODIFIED}'
+github_url='${${PROJECT_NAME}_GITHUB_URL}'
+
+breathe_default_project = 'ecto'
+breathe_projects = dict(ecto='${CMAKE_CURRENT_BINARY_DIR}/api/xml')
+
+programoutput_path = '${KITCHEN_PROJECTS_SOURCE_DIRS}'.split(';')

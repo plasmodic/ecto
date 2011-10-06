@@ -1,11 +1,13 @@
 #include <ecto/plasm.hpp>
+#include "plasm/impl.hpp"
 #include <ecto/tendril.hpp>
 #include <ecto/cell.hpp>
 #include <ecto/graph_types.hpp>
-#include <ecto/scheduler/singlethreaded.hpp>
+#include <ecto/schedulers/singlethreaded.hpp>
 
 #include <boost/format.hpp>
 #include <boost/date_time/posix_time/posix_time_duration.hpp>
+#include <boost/regex.hpp>
 
 #include <string>
 #include <map>
@@ -13,133 +15,153 @@
 #include <utility>
 #include <deque>
 
+#include <ecto/ecto.hpp>
+#include <ecto/serialization/registry.hpp>
+#include <ecto/serialization/cell.hpp>
+#include <ecto/serialization/plasm.hpp>
+
 namespace ecto
 {
-  namespace
-  {
-    using boost::tie;
-    using boost::add_vertex;
-
-    graph::edge::ptr
-    make_edge(const std::string& fromport, const std::string& toport)
-    {
-      graph::edge::ptr eptr(new graph::edge(fromport, toport));
-      return eptr;
-    }
-  } // namespace
-
   using namespace graph;
+  #define STRINGY_DINGY(A) #A
+  //see http://www.graphviz.org/content/node-shapes for reference.
+  const char* table_str = STRINGY_DINGY(
+      <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+      %s
+      <TR>
+      %s
+      %s
+      </TR>
+      %s
+      %s
+      </TABLE>
+  );
 
-  struct plasm::impl
+  const char* input_str = STRINGY_DINGY(
+      <TD PORT="i_%s" BGCOLOR="springgreen">%s<BR/><FONT POINT-SIZE="8">%s</FONT></TD>
+  );
+
+  const char* cell_str = 
+    STRINGY_DINGY(<TD ROWSPAN="%d" COLSPAN="%d" BGCOLOR="khaki">%s<BR/><FONT POINT-SIZE="8">%s</FONT></TD>
+  );
+
+  const char* param_str_1st = STRINGY_DINGY(
+      <TD PORT="p_%s" BGCOLOR="lightblue">%s<BR/><FONT POINT-SIZE="8">%s</FONT></TD>
+  );
+
+  const char* param_str_N = STRINGY_DINGY(
+      <TR>
+      <TD PORT="p_%s" BGCOLOR="lightblue">%s<BR/><FONT POINT-SIZE="8">%s</FONT></TD>
+      </TR>
+  );
+
+  const char* output_str = STRINGY_DINGY(
+      <TD PORT="o_%s" BGCOLOR="indianred1">%s<BR/><FONT POINT-SIZE="8">%s</FONT></TD>
+  );
+
+  struct vertex_writer
   {
-    impl()
+    graph_t* g;
+
+    vertex_writer(graph_t* g_)
+        :
+          g(g_)
     {
     }
 
-    //insert a cell into the graph, will retrieve the
-    //vertex descriptor if its already in the graph...
-    graph_t::vertex_descriptor
-    insert_module(cell::ptr m)
+    std::string htmlescape(const std::string& in)
     {
-      //use the vertex map to look up the graphviz descriptor (reverse lookup)
-      ModuleVertexMap::iterator it = mv_map.find(m);
-      if (it != mv_map.end())
-        return it->second;
-      graph_t::vertex_descriptor d = add_vertex(m, graph);
-      mv_map.insert(std::make_pair(m, d));
-      return d;
-    }
+      const boost::regex esc_lt("[<]");
+      const std::string rep_lt("&lt;");
+      const boost::regex esc_gt("[>]");
+      const std::string rep_gt("&gt;");
 
-    void
-    connect(cell::ptr from, std::string output, cell::ptr to, std::string input)
-    {
-      //connect does all sorts of type checking so that connections are always valid.
-      tendril::ptr from_port, to_port;
-      try
-      {
-        from_port = from->outputs.at(output);
-      } catch (ecto::except::EctoException& e)
-      {
-        e << boost::str(boost::format("'%s.outputs.%s' does not exist.") % from->name() % output);
-        throw;
-      }
-      try
-      {
-        to_port = to->inputs.at(input);
-      } catch (ecto::except::EctoException& e)
-      {
-        e << boost::str(boost::format("'%s.inputs.%s' does not exist.") % from->name() % output);
-        throw;
-      }
-      //throw if the types are bad... Don't allow erroneous graph construction
-      //also this is more local to the error.
-      if (!to_port->compatible_type(*from_port))
-      {
-        std::string s;
-        s = boost::str(boost::format("type mismatch:  '%s.outputs.%s' of type '%s' is connected to"
-                                     "'%s.inputs.%s' of type '%s'")
-                       % from->name()
-                       % output
-                       % from_port->type_name()
-                       % to->name()
-                       % input
-                       % to_port->type_name());
-        throw ecto::except::TypeMismatch(s);
-      }
-
-      graph_t::vertex_descriptor fromv = insert_module(from), tov = insert_module(to);
-      edge::ptr new_edge = make_edge(output, input);
-
-      //assert that the new edge does not violate inputs that are already connected.
-      //RULE an input may only have one source.
-      graph_t::in_edge_iterator inbegin, inend;
-      tie(inbegin, inend) = boost::in_edges(tov, graph);
-      while (inbegin != inend)
-      {
-        edge::ptr e = graph[*inbegin];
-        if (e->to_port == new_edge->to_port)
-        {
-          std::string s;
-          s = boost::str(
-              boost::format("graph error: '%s.inputs.%s' is already connected, this is considered an error!")
-              % to->name()
-              % to);
-          throw except::EctoException(s);
-        }
-        ++inbegin;
-      }
-
-      bool added;
-      graph_t::edge_descriptor ed;
-      tie(ed, added) = boost::add_edge(fromv, tov, new_edge, graph);
-      if (!added)
-      {
-        throw std::runtime_error(
-            "failed to connect " + from->name() + ":" + output + " with " + to->name() + ":" + input);
-      }
+      std::string htmlescaped_name = in;
+      htmlescaped_name = boost::regex_replace(htmlescaped_name, esc_lt, rep_lt, boost::match_default);
+      htmlescaped_name = boost::regex_replace(htmlescaped_name, esc_gt, rep_gt, boost::match_default);
+      return htmlescaped_name;
     }
 
     void
-    disconnect(cell::ptr from, std::string output, cell::ptr to, std::string input)
+    operator()(std::ostream& out, graph_t::vertex_descriptor vd)
     {
-      graph_t::vertex_descriptor fromv = insert_module(from), tov = insert_module(to);
-      boost::remove_edge(fromv, tov, graph);
+
+
+      cell::ptr c = (*g)[vd];
+      int n_inputs = c->inputs.size();
+      int n_outputs = c->outputs.size();
+      int n_params = c->parameters.size();
+      std::string htmlescaped_name = htmlescape(c->name());
+
+      std::string inputs;
+      BOOST_FOREACH(const tendrils::value_type& x, c->inputs)
+          {
+            std::string key = x.first;
+            if (inputs.empty())
+              inputs = "<TR>\n";
+            inputs += boost::str(boost::format(input_str) % key % key % htmlescape(x.second->type_name())) + "\n";
+          }
+      if (!inputs.empty())
+        inputs += "</TR>";
+
+      std::string outputs;
+      BOOST_FOREACH(const tendrils::value_type& x, c->outputs)
+          {
+            std::string key = x.first;
+            if (outputs.empty())
+              outputs = "<TR>\n";
+            outputs += boost::str(boost::format(output_str) % key % key % htmlescape(x.second->type_name())) + "\n";
+          }
+      if (!outputs.empty())
+        outputs += "</TR>";
+
+      std::string cellrow = boost::str(
+          boost::format(cell_str) 
+          % std::max(1,n_params) 
+          % int(std::max(1,std::max(n_inputs, n_outputs))) 
+          % htmlescaped_name
+          % htmlescape(c->type()));
+      std::string p1, pN;
+      BOOST_FOREACH(const tendrils::value_type& x, c->parameters)
+          {
+            std::string key = x.first;
+            if (p1.empty())
+              p1 = boost::str(boost::format(param_str_1st) % key % key % htmlescape(x.second->type_name())) + "\n";
+            else
+              pN += boost::str(boost::format(param_str_N) % key % key % htmlescape(x.second->type_name())) + "\n";
+          }
+
+      std::string table = boost::str(boost::format(table_str) % inputs % cellrow % p1 % pN % outputs);
+      out << "[label=<" << table << ">]";
+    }
+  };
+
+  struct edge_writer
+  {
+    graph_t* g;
+
+    edge_writer(graph_t* g_)
+        :
+          g(g_)
+    {
     }
 
-    //the cell to vertex mapping
-    //unordered_map so that cell ptr works as a key...
-    typedef boost::unordered_map<ecto::cell::ptr, graph_t::vertex_descriptor> ModuleVertexMap;
-    ModuleVertexMap mv_map;
-    graph_t graph;
-    boost::shared_ptr<ecto::scheduler::singlethreaded> scheduler;
-    struct CVMtoCell
+    void
+    operator()(std::ostream& out, graph_t::edge_descriptor ed)
     {
-      cell::ptr
-      operator()(const ModuleVertexMap::value_type& v)
-      {
-        return v.first;
-      }
-    };
+      out << "[headport=\"i_" << (*g)[ed]->to_port << "\" tailport=\"o_" << (*g)[ed]->from_port << "\"]";
+    }
+  };
+
+  struct graph_writer
+  {
+    void
+    operator()(std::ostream& out) const
+    {
+      out << "graph [rankdir=TB, ranksep=1]" << std::endl;
+      out << "edge [labelfontsize=8]" << std::endl;
+      out << "node [shape=plaintext]" << std::endl;
+    }
   };
 
   plasm::plasm() : impl_(new impl) { }
@@ -158,6 +180,7 @@ namespace ecto
   {
     impl_->connect(from, output, to, input);
   }
+
 
   void
   plasm::viz(std::ostream& out) const
@@ -185,11 +208,17 @@ namespace ecto
     return impl_->graph;
   }
 
+  const graph::graph_t&
+  plasm::graph() const
+  {
+    return impl_->graph;
+  }
+
   int
   plasm::execute(unsigned niter)
   {
     if (!impl_->scheduler)
-      impl_->scheduler.reset(new ecto::scheduler::singlethreaded(shared_from_this()));
+      impl_->scheduler.reset(new ecto::schedulers::singlethreaded(shared_from_this()));
     impl_->scheduler->execute(niter);
     while (impl_->scheduler->running())
       boost::this_thread::sleep(boost::posix_time::microseconds(10));
@@ -203,13 +232,26 @@ namespace ecto
     return num_vertices(impl_->graph);
   }
 
+  namespace {
+    struct get_first
+    {
+      template <typename T>
+      cell::ptr
+      operator()(T& t) const
+      {
+        return t.first;
+      }
+    };
+  }
+
   std::vector<cell::ptr>
   plasm::cells() const
   {
     std::vector<cell::ptr> c;
-    std::transform(impl_->mv_map.begin(), impl_->mv_map.end(), std::back_inserter(c), impl::CVMtoCell());
+    std::transform(impl_->mv_map.begin(), impl_->mv_map.end(), std::back_inserter(c), get_first());
     return c;
   }
+
   void plasm::configure_all()
   {
     BOOST_FOREACH(impl::ModuleVertexMap::value_type& x, impl_->mv_map)
@@ -242,14 +284,11 @@ namespace ecto
 
       for (tendrils::const_iterator b_tend = m->inputs.begin(), e_tend = m->inputs.end(); b_tend != e_tend; ++b_tend)
       {
-
         if (b_tend->second->required() && in_connected.count(b_tend->first) == 0)
         {
-          std::string s = str(boost::format("in module %s, input port '%s' is required"
-                                            " but not connected")
-                              % m->name()
-                              % b_tend->first);
-          throw except::EctoException(s);
+          BOOST_THROW_EXCEPTION(except::NotConnected()
+                                << except::tendril_key(b_tend->first)
+                                << except::cell_name(m->name()));
         }
       }
 
@@ -267,16 +306,26 @@ namespace ecto
       {
         if (b_tend->second->required() && out_connected.count(b_tend->first) == 0)
         {
-          std::string s = str(boost::format("in module %s, output port '%s' is required"
-                                            " but not connected")
-                              % m->name()
-                              % b_tend->first);
-          throw except::EctoException(s);
+          BOOST_THROW_EXCEPTION(except::NotConnected()
+                                << except::tendril_key(b_tend->first)
+                                << except::cell_name(m->name()));
         }
       }
 
       ++begin;
     }
+  }
+
+  void plasm::save(std::ostream& out) const
+  {
+    boost::archive::text_oarchive oa(out);
+    oa << *this;
+  }
+
+  void plasm::load(std::istream& in)
+  {
+    boost::archive::text_iarchive ia(in);
+    ia >> *this;
   }
 
 }

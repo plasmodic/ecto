@@ -5,24 +5,49 @@
 
 #include <ecto/python/std_map_indexing_suite.hpp>
 #include <boost/foreach.hpp>
-#include <setter.hpp>
-namespace bp = boost::python;
 
+namespace bp = boost::python;
+//namespace boost { namespace python {
+//
+//    //typedef detail::final_std_map_derived_policies<ecto::tendrils, false> details;
+//    // Forward declaration
+//    void std_map_indexing_suite<ecto::tendrils,false>::set_item(ecto::tendrils& container, ecto::tendrils::key_type i, ecto::tendrils::value_type::second_type const& v)
+//    {
+//        throw std::logic_error("This don't work with tendrils");
+//    }
+//}
+//}
 namespace ecto
 {
   namespace py
   {
     namespace
     {
-      void setTendril(tendrils& t, const std::string& name, const std::string& doc, bp::object o)
+      void declareTendril(tendrils& t, const std::string& name, 
+                      const std::string& doc, bp::object o)
       {
         t.declare<bp::object> (name, doc, o);
+      }
+
+      void declareTendrilPtr(tendrils& t, const std::string& name,
+                      tendril::ptr x)
+      {
+        t.declare(name,x);
+      }
+
+      bp::list tendril_members(const tendrils& t)
+      {
+        bp::list l;
+        for (tendrils::const_iterator iter = t.begin(), end = t.end(); iter != end; ++iter)
+          l.append(iter->first);
+        return l;
       }
 
       bp::object getTendril(tendrils& t, const std::string& name)
       {
         bp::object o;
-        t[name]->sample(o);
+        tendril::ptr tp = t[name];
+        *tp >> o;
         return o;
       }
 
@@ -38,15 +63,20 @@ namespace ecto
 
       bp::object tendril_get(const tendrils& ts, const std::string& name)
       {
-        const tendril& t = *ts.at(name);
+        if (name == "__members__")
+          return tendril_members(ts);
+        const tendril& t = *ts[name];
         bp::object o;
-        t.sample(o);
+        t >> o;
         return o;
       }
 
       void tendril_set(tendrils& ts, const std::string& name, bp::object obj)
       {
-        ts.at(name)->enqueue_oneshot(Setter(ts.at(name),obj));
+        tendril::ptr t = ts[name];
+        t << obj;
+        t->dirty(true);
+        t->user_supplied(true);
       }
 
       void tendrils_notify(tendrils& ts)
@@ -59,7 +89,7 @@ namespace ecto
 
       tendril::ptr tendril_at(tendrils& ts, const std::string& name)
       {
-        return ts.at(name);
+        return ts[name];
       }
     }
 
@@ -67,7 +97,8 @@ namespace ecto
     {
       bp::class_<tendrils, boost::shared_ptr<tendrils>, boost::noncopyable>("Tendrils")
         .def(bp::std_map_indexing_suite<tendrils, false>())
-        .def("declare", &setTendril)
+        .def("declare", &declareTendril)
+        .def("declare", &declareTendrilPtr)
         .def("__str__", &strTendril)
         .def("__getattr__", &tendril_get)
         .def("__setattr__", &tendril_set)

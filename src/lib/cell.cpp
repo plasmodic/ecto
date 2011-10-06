@@ -1,69 +1,100 @@
+#include <cassert>
 #include <ecto/cell.hpp>
 #include <ecto/util.hpp>
 #include <ecto/except.hpp>
 #include <boost/exception/all.hpp>
+#include <boost/thread.hpp>
+#include <boost/preprocessor/cat.hpp>
+#include <boost/preprocessor/stringize.hpp>
+#include <boost/preprocessor/seq/for_each.hpp>
 
-/**
+/*
  * Catch all and pass on exception.
  */
-#define CATCH_ALL() \
-catch (ecto::except::NonExistant& e) \
-{ \
-  auto_suggest(e,*this); \
-  e << "  Module : " + name() + "\n  Function: " + __FUNCTION__; \
-  boost::throw_exception(e); \
-} \
-catch (ecto::except::EctoException& e) \
-{ \
-  e << "  Module : " + name() + "\n  Function: " + __FUNCTION__; \
-  boost::throw_exception(e); \
-} catch (std::exception& e) \
-{ \
-  except::EctoException ee("Original Exception: " +name_of(typeid(e))); \
-  ee << "  What   : " + std::string(e.what()); \
-  ee << "  Module : " + name() + "\n  Function: " + __FUNCTION__; \
-  boost::throw_exception(ee); \
-} \
-catch (...) \
-{ \
-  except::EctoException ee("Threw unknown exception type!"); \
-  ee << "  Module : " + name() + "\n  Function: " + __FUNCTION__; \
-   boost::throw_exception(ee); \
-}
+#define CATCH_ALL()                                                     \
+  catch (const boost::thread_interrupted&)                              \
+    {                                                                   \
+      ECTO_TRACE_EXCEPTION("const boost::thread_interrupted&");         \
+      throw;                                                            \
+    }                                                                   \
+  catch (ecto::except::NonExistant& e)                                  \
+    {                                                                   \
+      ECTO_TRACE_EXCEPTION("const ecto::except::NonExistant&");         \
+      const std::string* key =                                          \
+        boost::get_error_info<except::tendril_key>(e);                  \
+      assert(key && "NonExistant was thrown w/o stating what it is that doesn't exist."); \
+      e << except::hint(auto_suggest(*key, *this))                      \
+        << except::cell_name(name())                                    \
+        << except::function_name(__FUNCTION__)                          \
+        ;                                                               \
+      throw;                                                            \
+    }                                                                   \
+  catch (ecto::except::EctoException& e)                                \
+    {                                                                   \
+      ECTO_TRACE_EXCEPTION("const ecto::except::EctoException&");       \
+      e << except::cell_name(name())                                    \
+        << except::function_name(__FUNCTION__)                          \
+        ;                                                               \
+      throw;                                                            \
+    }                                                                   \
+  catch (std::exception& e)                                             \
+    {                                                                   \
+      ECTO_TRACE_EXCEPTION("std::exception&");                          \
+      BOOST_THROW_EXCEPTION(except::CellException()                     \
+                            << except::type(name_of(typeid(e)))         \
+                            << except::what(e.what())                   \
+                            << except::cell_name(name())                \
+                            << except::function_name(__FUNCTION__))     \
+        ;                                                               \
+    }                                                                   \
+  catch(...)                                                            \
+    {                                                                   \
+      ECTO_TRACE_EXCEPTION("...");                                      \
+      BOOST_THROW_EXCEPTION(except::CellException()                     \
+                            << except::what("(unknown exception)")      \
+                            << except::cell_name(name())                \
+                            << except::function_name(__FUNCTION__))     \
+        ;                                                               \
+    }
 
 namespace ecto
 {
 
-  void
-  auto_suggest(except::NonExistant& e, const cell& m)
+  const std::string&
+  ReturnCodeToStr(int rval)
   {
-    std::string p_type, i_type, o_type;
-    bool in_p = m.parameters.find(e.key) != m.parameters.end();
-    if(in_p) p_type = m.parameters.find(e.key)->second->type_name();
+    switch(rval)
+    {
+#define RETURN_NAME(r, data, NAME)                                    \
+case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return x;}
+      BOOST_PP_SEQ_FOR_EACH(RETURN_NAME, ~, ECTO_RETURN_VALUES)
+      default:{ static std::string r = "Unknown return value."; return r;}
+    }
+  }
 
-    bool in_i = m.inputs.find(e.key) != m.inputs.end();
-    if(in_i) i_type = m.inputs.find(e.key)->second->type_name();
+  std::string
+  auto_suggest(const std::string& key, const cell& m)
+  {
+    std::string p_type, i_type, o_type, msg;
+    bool in_p = m.parameters.find(key) != m.parameters.end();
+    if(in_p) p_type = m.parameters.find(key)->second->type_name();
 
-    bool in_o = m.outputs.find(e.key) != m.outputs.end();
-    if(in_o) o_type = m.outputs.find(e.key)->second->type_name();
+    bool in_i = m.inputs.find(key) != m.inputs.end();
+    if(in_i) i_type = m.inputs.find(key)->second->type_name();
+
+    bool in_o = m.outputs.find(key) != m.outputs.end();
+    if(in_o) o_type = m.outputs.find(key)->second->type_name();
 
     if (in_p || in_i || in_o)
-    {
-      e << ("  Hint   : '" + e.key + "' does exist in " + (in_p ? "parameters (type == " +p_type +") " : "") + (in_i ? "inputs (type == " +i_type +") "  : "")
-          + (in_o ? "outputs (type == " +o_type +")" : ""));
-    }
+      return "\n  Hint   : '" + key + "' does exist in " + (in_p ? "parameters (type == " +p_type +") " : "") + (in_i ? "inputs (type == " +i_type +") "  : "")
+          + (in_o ? "outputs (type == " +o_type +")" : "");
     else
-    {
-      e << ("  Hint   : '" + e.key + "' does not exist in module.");
-    }
-  }
-  cell::cell()
-  {
+      return "  Hint   : '" + key + "' does not exist in module.";
   }
 
-  cell::~cell()
-  {
-  }
+  cell::cell() { }
+
+  cell::~cell() { }
 
   void
   cell::declare_params()
@@ -86,18 +117,30 @@ namespace ecto
   void
   cell::configure()
   {
+    bool initialized = true;
+    initialized = init();
+    if(initialized) return;
     try
     {
       dispatch_configure(parameters, inputs, outputs);
+
+//      for (tendrils::const_iterator iter = inputs.begin(); iter != inputs.end(); ++iter)
+//        if (iter->second->is_type<boost::python::object>())
+//          BOOST_THROW_EXCEPTION(std::runtime_error("you can't use a python object as an input"));
+//
+//      for (tendrils::const_iterator iter = outputs.begin(); iter != outputs.end(); ++iter)
+//        if (iter->second->is_type<boost::python::object>())
+//          BOOST_THROW_EXCEPTION(std::runtime_error("you can't use a python object as an output"));
     }CATCH_ALL()
   }
 
   ReturnCode
   cell::process()
   {
-    init();//this should call configure FIXME make cleaner life cycle //only once.
+    configure();
     //trigger all parameter change callbacks...
     tendrils::iterator begin = parameters.begin(), end = parameters.end();
+
     while (begin != end)
     {
       try
@@ -105,27 +148,28 @@ namespace ecto
         begin->second->notify();
       } catch (const std::exception& e)
       {
-        except::EctoException ee("Original Exception: " + name_of(typeid(e)));
-        ee << "  What   : " + std::string(e.what());
-        ee << "  Module : " + name() + "\n  Function: Parameter Callback for '" + begin->first + "'";
-        boost::throw_exception(ee);
+        ECTO_TRACE_EXCEPTION("const std::exception& outside of CATCH ALL");
+        BOOST_THROW_EXCEPTION(except::CellException()
+                              << except::type(name_of(typeid(e))) 
+                              << except::what(e.what()) 
+                              << except::cell_name(name()) 
+                              << except::function_name(__FUNCTION__) 
+                              << except::when("While triggering param change callbacks")) 
+          ;
       }
       ++begin;
     }
-
     try
     {
-      return dispatch_process(inputs, outputs);
-    }CATCH_ALL()
-  }
-
-  void
-  cell::destroy()
-  {
-    try
-    {
-      dispatch_destroy();
-    }CATCH_ALL()
+      try
+      {
+        profile::stats_collector coll(name(), stats);
+        return dispatch_process(inputs, outputs);
+      } catch (const boost::thread_interrupted&) { 
+        ECTO_TRACE_EXCEPTION("const boost::thread_interrupted&, returning QUIT instead of rethrow");
+        return ecto::QUIT; 
+      }
+    } CATCH_ALL()
   }
 
   std::string
@@ -162,13 +206,7 @@ namespace ecto
   cell::gen_doc(const std::string& doc) const
   {
     std::stringstream ss;
-
     ss << name() << " (ecto::module):\n";
-    //create an underline that is the size of the name...
-    //for (int i = 0, end = ss.str().size(); i < end; ++i)
-    //    {
-    //      ss << "=";
-    //    }
     ss << "\n";
     ss << "\n" << doc << "\n\n";
     parameters.print_doc(ss, "Parameters");
@@ -180,13 +218,13 @@ namespace ecto
   void
   cell::verify_params() const
   {
-
     tendrils::const_iterator it = parameters.begin(), end(parameters.end());
     while (it != end)
     {
       if (it->second->required() && !it->second->user_supplied())
       {
-        throw except::ValueRequired(it->first + " must be supplied with a value during initialization.");
+        BOOST_THROW_EXCEPTION(except::ValueRequired()
+                              << except::tendril_key(it->first));
       }
       ++it;
     }
@@ -195,16 +233,34 @@ namespace ecto
   void
   cell::verify_inputs() const
   {
-
     tendrils::const_iterator it = inputs.begin(), end(inputs.end());
     while (it != end)
     {
       if (it->second->required() && !it->second->user_supplied())
       {
-        throw except::ValueRequired(it->first + " must be connected.");
+        BOOST_THROW_EXCEPTION(except::NotConnected()
+                              << except::tendril_key(it->first));
       }
       ++it;
     }
+  }
+
+  cell::ptr
+  cell::clone() const
+  {
+    cell::ptr c = dispatch_clone();
+    c->declare_params();
+    //copy all of the parameters by value.
+    tendrils::iterator it = c->parameters.begin();
+    tendrils::const_iterator end = c->parameters.end(), oit = parameters.begin();
+    while (it != end)
+    {
+      it->second << *oit->second;
+      ++oit;
+      ++it;
+    }
+    c->declare_io();
+    return c;
   }
 
 }

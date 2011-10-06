@@ -2,38 +2,23 @@
 #include <boost/python.hpp>
 namespace ecto
 {
-
-  namespace
-  {
-    bool isBoostPython(const tendril& t)
-    {
-      return t.is_type<boost::python::object>();
-    }
-  }
+  using namespace except;
 
   tendril::tendril()
-  :
-     doc_()
-    , dirty_(false)
-    , default_(false)
-    , user_supplied_(false)
-    , required_(false)
+    : doc_()
+    , flags_()
+    , converter(&ConverterImpl<none>::instance)
   {
     set_holder<none>(none());
   }
 
-  tendril::~tendril()
-  {}
-
-  tendril::tendril(const tendril& rhs) :
-     doc_(rhs.doc_)
-    , dirty_(false)
-    , default_(rhs.default_)
-    , user_supplied_(rhs.user_supplied_)
-    , required_(rhs.required_)
-  {
-    copy_holder(rhs);
-  }
+  tendril::tendril(const tendril& rhs) 
+    : holder_(rhs.holder_)
+    , type_ID_(rhs.type_ID_)
+    , doc_(rhs.doc_)
+    , flags_(rhs.flags_)
+    , converter(rhs.converter)
+  { }
 
   tendril& tendril::operator=(const tendril& rhs)
   {
@@ -41,16 +26,19 @@ namespace ecto
       return *this;
     copy_holder(rhs);
     doc_ = rhs.doc_;
-    dirty_ = rhs.dirty_;
-    default_ = rhs.default_;
-    required_ = rhs.required_;
+    flags_ = rhs.flags_;
+    converter = rhs.converter;
     return *this;
   }
 
-  void tendril::copy_value(const tendril& rhs)
+  tendril::~tendril(){ }
+
+
+
+  ecto::tendril& tendril::operator<<(const tendril& rhs)
   {
     if (this == &rhs)
-      return;
+      return *this;
     if (is_type<none>() || same_type(rhs))
     {
       copy_holder(rhs);
@@ -60,18 +48,19 @@ namespace ecto
       enforce_compatible_type(rhs);
       if (rhs.is_type<none>())
       {
-        //throw ecto::except::ValueNone("You may not copy the value of a tendril that holds a tendril::none.");
+        BOOST_THROW_EXCEPTION(ecto::except::ValueNone());
       }
       else if (rhs.is_type<boost::python::object>())
       {
-        set(rhs.read<boost::python::object>());
+        *this << rhs.get<boost::python::object>();
       }
       else if (is_type<boost::python::object>())
       {
-        rhs.sample(get<boost::python::object>());
+        (*rhs.converter)(*boost::unsafe_any_cast<boost::python::object>(&holder_), rhs);
       }
     }
-    mark_dirty();
+    user_supplied(true);
+    return *this;
   }
 
 
@@ -80,55 +69,13 @@ namespace ecto
     doc_ = doc_str;
   }
 
-  void tendril::enqueue_oneshot(TendrilJob job)
-  {
-    boost::mutex::scoped_lock lock(mtx_);
-    jobs_onetime_.push_back(job);
-  }
-  void tendril::enqueue_persistent(TendrilJob job)
-  {
-    boost::mutex::scoped_lock lock(mtx_);
-    jobs_persistent_.push_back(job);
-  }
-
-  struct exec
-  {
-    exec(tendril&t):t(t){}
-    void operator()(tendril::TendrilJob& job)
-    {
-      job(t);
-    }
-    tendril& t;
-  };
-
-  template<typename JobQue>
-  void
-  execute(tendril& t, JobQue& q)
-  {
-    std::for_each(q.begin(), q.end(), exec(t));
-  }
-
-  void tendril::exec_oneshots()
-  {
-    boost::mutex::scoped_lock lock(mtx_);
-    execute(*this,jobs_onetime_);
-    jobs_onetime_.clear();
-  }
-
-  void tendril::exec_persistent()
-  {
-    boost::mutex::scoped_lock lock(mtx_);
-    execute(*this,jobs_persistent_);
-  }
-
   void tendril::notify()
   {
-    exec_oneshots();
     if (dirty())
     {
-      exec_persistent();
+      jobs_(*this);
     }
-    mark_clean();
+    dirty(false);
   }
 
   std::string
@@ -146,41 +93,50 @@ namespace ecto
   bool
   tendril::required() const
   {
-    return required_;
+    return flags_[REQUIRED];
   }
 
   void
   tendril::required(bool b)
   {
-    required_ = b;
+    flags_[REQUIRED] = b;
   }
 
   bool
   tendril::user_supplied() const
   {
-    return user_supplied_;
+    return flags_[USER_SUPPLIED];
+  }
+
+  void
+  tendril::user_supplied(bool b)
+  {
+    flags_[USER_SUPPLIED] = b;
   }
 
   bool
   tendril::has_default() const
   {
-    return default_;
+    return flags_[DEFAULT_VALUE];
   }
 
   bool
   tendril::dirty() const
   {
-    return dirty_;
+    return flags_[DIRTY];
   }
 
-  //! The tendril has notified its callback if one was registered since it was changed.
+  void
+  tendril::dirty(bool dirty)
+  {
+    flags_[DIRTY] = dirty;
+  }
+
   bool
   tendril::clean() const
   {
-    return !dirty_;
+    return !flags_[DIRTY];
   }
-
-
 
   bool
   tendril::same_type(const tendril& rhs) const
@@ -202,40 +158,17 @@ namespace ecto
   {
     if (!compatible_type(rhs))
     {
-      throw except::TypeMismatch(type_name() + " is not a " + rhs.type_name());
+      BOOST_THROW_EXCEPTION(except::TypeMismatch() << from_typename(type_name())
+                            << to_typename(rhs.type_name()));
+        ;
     }
-  }
-
-
-  void
-  tendril::mark_dirty()
-  {
-    dirty_ = true;
-    user_supplied_ = true;
-  }
-  void
-  tendril::mark_clean()
-  {
-    dirty_ = false;
-  }
-  template<>
-  void tendril::sample<boost::python::object>(boost::python::object& obj) const
-  {
-    (*pycopy_to_)(const_cast<tendril&>(*this),const_cast<boost::python::object&>(obj));
-  }
-  template<>
-  void tendril::set<boost::python::object>(const boost::python::object& obj)
-  {
-    (*pycopy_from_)(const_cast<tendril&>(*this),const_cast<boost::python::object&>(obj));
-    mark_dirty();
   }
 
   void tendril::copy_holder(const tendril& rhs)
   {
     holder_ = rhs.holder_;
     type_ID_ = rhs.type_ID_;
-    pycopy_from_ = rhs.pycopy_from_;
-    pycopy_to_ = rhs.pycopy_to_;
+    converter = rhs.converter;
   }
 
 }

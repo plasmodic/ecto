@@ -1,11 +1,20 @@
 #include <gtest/gtest.h>
 #include <ecto/ecto.hpp>
+#include <ecto/except.hpp>
 #include <ecto/plasm.hpp>
-#include <ecto/scheduler/threadpool.hpp>
+#include <ecto/schedulers/threadpool.hpp>
 
 #define STRINGDIDLY(A) std::string(#A)
 
 using namespace ecto;
+
+struct InConstructorExcept
+{
+  InConstructorExcept() {
+    throw std::logic_error("no.... I do not want to live.");
+  }
+};
+
 struct ExceptionalModule1
 {
   static void
@@ -45,10 +54,10 @@ struct NotExist
     in.declare<ExceptionalModule1> ("c");
     in.declare<std::string> ("e");
     out.declare<std::string> ("a");
-
   }
+
   int
-  process(tendrils& in, tendrils& out)
+  process(const tendrils& in, const tendrils& out)
   {
     in.get<double> ("a");
     return 0;
@@ -63,7 +72,7 @@ struct WrongType
     in.declare<double> ("d");
   }
   int
-  process(tendrils& in, tendrils& out)
+  process(const tendrils& in, const tendrils& out)
   {
     in.get<int> ("d");
     return 0;
@@ -83,10 +92,10 @@ struct ParameterCBExcept
     throw std::runtime_error("I'm a bad callback, and I like it that way.");
   }
   void
-  configure(tendrils& p,tendrils& in, tendrils& out)
+  configure(const tendrils& p,const tendrils& in, const tendrils& out)
   {
     std::cout << "configurated ***" << std::endl;
-    spore<double> x = p.at("x");
+    spore<double> x = p["x"];
     x.set_callback(boost::bind(&ParameterCBExcept::xcb,this,_1));
   }
 };
@@ -94,12 +103,13 @@ struct ParameterCBExcept
 struct ProcessException
 {
   int
-  process(tendrils& in, tendrils& out)
+  process(const tendrils& in, const tendrils& out)
   {
     throw std::logic_error("A standard exception");
     return ecto::OK;
   }
 };
+
 TEST(Exceptions, ExceptionalModules)
 {
   try
@@ -123,6 +133,8 @@ TEST(Exceptions, ExceptionUnknownException)
   EXPECT_THROW(create_cell<ExceptionUnknownException>(), ecto::except::EctoException);
 }
 
+#define MEH(x, y) x
+
 TEST(Exceptions, ProcessException)
 {
   std::string stre("Original Exception: std::logic_error\n"
@@ -138,11 +150,14 @@ TEST(Exceptions, ProcessException)
       catch (except::EctoException& e)
       {
         std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
+        std::cout << diagnostic_information(e) << "\n";
+        /*
         if(stre != e.msg_)
         {
           throw std::runtime_error("Got :" + e.msg_ +"\nExpected :" +stre);
         }
-        throw e;
+        */
+        throw;
       }
       ,
       ecto::except::EctoException);
@@ -158,59 +173,70 @@ TEST(Exceptions, NotExist)
              "  Function: process");
 
   cell::ptr m = create_cell<NotExist> ();
-  EXPECT_THROW(
-      try
-      {
-        m->process();
-      }
-      catch (except::EctoException& e)
-      {
-        std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
-        if(stre != e.msg_)
-        {
-          throw std::runtime_error("Got :" + e.msg_ +"\nExpected :" +stre);
-        }
-        throw e;
-      }
-      ,
-      ecto::except::EctoException);
+  try
+    {
+      m->process();
+    }
+  catch (except::NonExistant& e)
+    {
+      std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
+      //EXPECT_EQ(stre, e.msg_);
+    }
 }
 
 TEST(Exceptions, WrongType)
 {
   std::string stre("double is not a int\n"
-"  Hint : 'd' is of type: double\n"
+"  Hint : 'd' is of type double\n"
 "  Module : WrongType\n"
 "  Function: process");
   cell::ptr m = create_cell<WrongType> ();
-  EXPECT_THROW(
-      try
-      {
-        m->process();
-      }
-      catch (except::EctoException& e)
-      {
-        std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
-        if(stre != e.msg_)
-        {
-          throw std::runtime_error("Got :" + e.msg_ +"\nExpected :" +stre);
-        }
-        throw e;
-      }
-      ,
-      ecto::except::EctoException);
+  bool threw = false;
+  try
+    {
+      m->process();
+    }
+  catch (except::EctoException& e)
+    {
+      std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
+      //      EXPECT_EQ(stre, e.msg_);
+      threw = true;
+    }
+  EXPECT_TRUE(threw);
 }
 
 TEST(Exceptions, WrongType_sched)
 {
   std::string stre("double is not a int\n"
-"  Hint : 'd' is of type: double\n"
+"  Hint : 'd' is of type double\n"
 "  Module : WrongType\n"
 "  Function: process");
   cell::ptr m = create_cell<WrongType> ();
   plasm::ptr p(new plasm);
   p->insert(m);
-  scheduler::threadpool sched(p);
+  schedulers::threadpool sched(p);
+  bool threw = false;
+  try
+    {
+      sched.execute(8,1);
+    }
+  catch (except::TypeMismatch& e)
+    {
+      std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
+      //      EXPECT_EQ(stre, e.msg_);
+      threw = true;
+    }
+  EXPECT_TRUE(threw);
+}
+
+TEST(Exceptions, ParameterCBExcept_sched)
+{
+  cell::ptr m = create_cell<ParameterCBExcept> ();
+  m->parameters["x"] << 5.1;
+  m->parameters["x"]->dirty(true);
+  plasm::ptr p(new plasm);
+  p->insert(m);
+  schedulers::threadpool sched(p);
   EXPECT_THROW(
       try
       {
@@ -218,43 +244,31 @@ TEST(Exceptions, WrongType_sched)
       }
       catch (except::EctoException& e)
       {
-        std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
-        if(stre != e.msg_)
-        {
-          throw std::runtime_error("Got :" + e.msg_ +"\nExpected :" +stre);
-        }
-        throw e;
+        std::cout << "Good, threw an exception:\n" << ecto::except::diagnostic_string(e) << std::endl;
+        throw;
       }
       ,
       ecto::except::EctoException);
 }
 
-TEST(Exceptions, ParameterCBExcept_sched)
+TEST(Exceptions, ConstructorExcept)
 {
-  std::string stre("Original Exception: std::runtime_error\n"
-"  What   : I'm a bad callback, and I like it that way.\n"
-"  Module : ParameterCBExcept\n"
-"  Function: Parameter Callback for 'x'"
-);
-  cell::ptr m = create_cell<ParameterCBExcept> ();
-  m->parameters.get<double>("x") = 5.1;
+  cell::ptr m = create_cell<InConstructorExcept>();
   plasm::ptr p(new plasm);
   p->insert(m);
-  scheduler::threadpool sched(p);
-  EXPECT_THROW(
-      try
-      {
-        sched.execute(8,1);
-      }
-      catch (except::EctoException& e)
-      {
-        std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
-        if(stre != e.msg_)
-        {
-          throw std::runtime_error("Got :" + e.msg_ +"\nExpected :" +stre);
-        }
-        throw e;
-      }
-      ,
-      ecto::except::EctoException);
+  schedulers::threadpool sched(p);
+  try
+    {
+      sched.execute(8,1);
+      FAIL();
+    }
+  catch (except::EctoException& e)
+    {
+      std::cout << "Good, threw an exception:\n"
+                << ecto::except::diagnostic_string(e)
+                << std::endl;
+      const std::string* what = boost::get_error_info<ecto::except::what>(e);
+      EXPECT_TRUE(what);
+      EXPECT_EQ(*what, std::string("no.... I do not want to live."));
+    }
 }

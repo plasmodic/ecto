@@ -1,93 +1,32 @@
 cmake_minimum_required(VERSION 2.8)
-#put this before project so that it gets picked up.
-set(CMAKE_BUILD_TYPE "Release" CACHE STRING "The build type.")
-
 project(ecto)
 
-set(ECTO_MAJOR_VERSION 0)
-set(ECTO_MINOR_VERSION 1)
-set(ECTO_PATCH_VERSION 0)
-set(ECTO_SOVERSION ${ECTO_MAJOR_VERSION}.${ECTO_MINOR_VERSION})
-set(ECTO_VERSION ${ECTO_MAJOR_VERSION}.${ECTO_MINOR_VERSION}.${ECTO_PATCH_VERSION})
-set(ECTO_CODE_NAME "mold spore (alpha)")
+option(ECTO_TRACE_EXCEPTIONS "Trace ecto exceptions to stdout" OFF)
+if (ECTO_TRACE_EXCEPTIONS)
+  add_definitions(-DECTO_TRACE_EXCEPTIONS=1)
+endif()
 
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
-set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
-
-set(include_prefix include/ecto-${ECTO_VERSION})
-set(share_prefix share/ecto-${ECTO_VERSION})
-
-configure_file(${ecto_SOURCE_DIR}/cmake/version.hpp.in ${CMAKE_BINARY_DIR}/include/ecto/version.hpp)
-include_directories(${CMAKE_BINARY_DIR}/include)
-
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_MODULE_PATH ${ecto_SOURCE_DIR}/cmake)
 
-execute_process(COMMAND mkdir -p ${LIBRARY_OUTPUT_PATH}/ecto)
+include(cmake/buildtype.cmake)
+include(cmake/version.cmake)
+include(cmake/fastidious.cmake)
+include(cmake/git.cmake)
+include(cmake/ectoMacros.cmake)
+include(cmake/boost.cmake)
+include(cmake/ectoFindDeps.cmake)
+include(cmake/config.cmake)
 
-execute_process(COMMAND ln -sf ${ecto_SOURCE_DIR}/python/ecto/__init__.py
-  WORKING_DIRECTORY ${LIBRARY_OUTPUT_PATH}/ecto
-  )
+git_status(ecto)
+ecto_python_env_gen()
 
-include(${ecto_SOURCE_DIR}/cmake/ectoMacros.cmake)
-include(${ecto_SOURCE_DIR}/cmake/ectoFindDeps.cmake)
-
-set(ANAL_FLAGS "")
-option(USE_ANAL_FLAGS "Use extra flags that help catch programming errors and prevent a build up of warnings" ON)
-if(USE_ANAL_FLAGS)
-    if(UNIX)
-        set(ANAL_FLAGS " -Werror -Wall -Wl,--no-undefined")
-    elseif(WIN32)
-        set(ANAL_FLAGS "/D _CRT_SECURE_NO_WARNINGS /D BOOST_HAS_STDINT_H /wd4099 /wd4101 /wd4996 /wd4251 /wd4305 /D _WIN32_WINNT=0x0501")
-    elseif(APPLE)
-        set(ANAL_FLAGS "")
-    endif()
-endif()
-
-add_definitions (${ANAL_FLAGS})
-
-include_directories(
-  ${ecto_SOURCE_DIR}/include
-  ${ecto_SOURCE_DIR}/src
-  )
-
-if(UNIX)
-  configure_file(${ecto_SOURCE_DIR}/cmake/python_path.sh.in 
-    ${CMAKE_BINARY_DIR}/python_path.sh @ONLY@)
-  #copy the python_path.sh.user.in for users that are not installing ecto.
-  file(COPY ${ecto_SOURCE_DIR}/cmake/python_path.sh.user.in DESTINATION ${CMAKE_BINARY_DIR})
-  message(STATUS "To setup your python path for ecto you may source:"
-    " ${CMAKE_BINARY_DIR}/python_path.sh")
-elseif(WIN32)
-  configure_file(${ecto_SOURCE_DIR}/cmake/pathz.bat.in 
-    ${CMAKE_BINARY_DIR}/pathz.bat @ONLY@)
-  message(STATUS "To setup your pathz for ecto you should run:"
-    "${CMAKE_BINARY_DIR}/pathz.bat")
-endif()
-
-  
-
-
-set(ecto_PYTHONPATH ${LIBRARY_OUTPUT_PATH} ${ecto_SOURCE_DIR}/python)
-set(ecto_INCLUDE_DIRS ${ecto_SOURCE_DIR}/include ${CMAKE_BINARY_DIR}/include)
-if(UNIX)
-  set(ecto_LIBRARIES ${LIBRARY_OUTPUT_PATH}/libecto_cpp.so.${ECTO_VERSION})
-elseif(WIN32)
-  set(ecto_LIBRARIES ${LIBRARY_OUTPUT_PATH}/ecto_cpp.dll)
-endif()
-
-set(ECTO_CONFIG_PATH  ${ecto_SOURCE_DIR}/cmake)
-configure_file(${ecto_SOURCE_DIR}/cmake/ectoConfig.cmake.in 
-  ${CMAKE_BINARY_DIR}/ectoConfig.cmake @ONLY)
-configure_file(${ecto_SOURCE_DIR}/cmake/ectoConfig-version.cmake.in 
-  ${CMAKE_BINARY_DIR}/ectoConfig-version.cmake @ONLY)
-configure_file(${ecto_SOURCE_DIR}/cmake/ectoMacros.cmake
-  ${CMAKE_BINARY_DIR}/ectoMacros.cmake @ONLY)
-  
-set(ecto_LIBRARIES ecto_cpp)
-
-add_subdirectory(python)
+include_directories(include)
 add_subdirectory(src)
 add_subdirectory(cmake)
+add_subdirectory(python)
+add_subdirectory(doc)
 
 option(BUILD_TEST "Build tests" ON)
 if(BUILD_TEST)
@@ -95,18 +34,7 @@ if(BUILD_TEST)
   add_subdirectory(test)
 endif()
 
-option(BUILD_DOC "Build documentation" ON)
-if(BUILD_DOC)
-  add_subdirectory(doc)
-endif()
-
 option(BUILD_SAMPLES "Build samples." ON)
 if(BUILD_SAMPLES)
   add_subdirectory(samples)
 endif()
-
-message(STATUS "Building ecto version: ${ECTO_VERSION}")
-message(STATUS "Building ecto code name: ${ECTO_CODE_NAME}")
-string(TOUPPER "CMAKE_CXX_FLAGS_${CMAKE_BUILD_TYPE}" flags_) 
-message(STATUS "flags: ${ANAL_FLAGS} ${${flags_}}")
-

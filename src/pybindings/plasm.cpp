@@ -1,12 +1,17 @@
 #include <ecto/plasm.hpp>
 #include <ecto/cell.hpp>
 
+
 #include <boost/python.hpp>
 #include <boost/python/raw_function.hpp>
 #include <boost/python/args.hpp>
 #include <boost/python/type_id.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <boost/python/suite/indexing/map_indexing_suite.hpp>
+#include <ecto/ecto.hpp>
+#include <ecto/serialization/registry.hpp>
+#include <ecto/serialization/cell.hpp>
+#include <ecto/serialization/plasm.hpp>
 
 namespace bp = boost::python;
 using bp::arg;
@@ -87,6 +92,20 @@ namespace ecto
       return i;
     }
 
+    void
+    plasm_save(plasm&p,std::string filename)
+    {
+      std::ofstream out(filename.c_str());
+      p.save(out);
+    }
+
+    void
+    plasm_load(plasm&p,std::string filename)
+    {
+      std::ifstream in(filename.c_str());
+      p.load(in);
+    }
+
     bp::list plasm_get_connections(plasm& p)
     {
       bp::list result;
@@ -120,6 +139,13 @@ namespace ecto
       std::for_each(cells.begin(),cells.end(),bplistappender(l));
       return l;
     }
+
+    void plasm_insert(plasm& p, bp::object bb)
+    {
+      bp::object cbp = bb.attr("_cell");
+      cell::ptr c =  bp::extract<cell::ptr>(cbp);
+      p.insert(c);
+    }
     BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( execute_overloads , plasm::execute , 0,1)
 
     void wrap()
@@ -127,7 +153,8 @@ namespace ecto
       using bp::arg;
 
       bp::class_<plasm, boost::shared_ptr<plasm>, boost::noncopyable> p("Plasm");
-      p.def("insert", &plasm::insert, bp::args("cell"), "insert cell into the graph");
+      p.def("insert", &plasm_insert, bp::args("cell"), "insert a black box into the graph");
+      p.def("insert", &plasm::insert, bp::args("cell"), "insert cell into the graph");//order is important here.
 
       p.def("connect", &plasm_connect_list, bp::args("connection_list"));
       p.def("connect", bp::raw_function(plasm_connect_args, 2));
@@ -145,6 +172,9 @@ namespace ecto
       p.def("cells", plasm_get_cells, "Grabs the current set of cells that are in the plasm.");
       p.def("check", &plasm::check);
       p.def("configure_all", &plasm::configure_all);
+      p.def("save",plasm_save);
+      p.def("load",plasm_load);
+
     }
 
   };

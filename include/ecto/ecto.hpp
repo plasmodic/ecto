@@ -41,6 +41,7 @@
 #include <ecto/util.hpp>
 #include <ecto/python/raw_constructor.hpp>
 #include <ecto/is_threadsafe.hpp>
+//#include <ecto/serialization.hpp>
 
 #include <iostream>
 #include <sstream>
@@ -55,13 +56,14 @@ namespace ecto
 {
   template<typename T>
   boost::shared_ptr<ecto::cell_<T> > inspect(boost::python::tuple args,
-                                               boost::python::dict kwargs)
+                                             boost::python::dict kwargs)
   {
     typedef ecto::cell_<T> cell_t;
 
     namespace bp = boost::python;
 
     //SHOW();
+    // TDS: fixme is this bare pointer stuff necessary?
     boost::shared_ptr<cell_t> mm(new cell_t());
     ecto::cell * m = mm.get();
     
@@ -96,7 +98,17 @@ namespace ecto
           }
         else 
           {
-            m->parameters.at(keystring)->set(value);
+            tendril::ptr tp = m->parameters[keystring];
+            try{
+              *tp << value;
+            }catch(ecto::except::TypeMismatch& e)
+            {
+              e << except::tendril_key(keystring);
+              e << except::cell_name(m->name());
+              throw;
+            }
+            tp->user_supplied(true);
+            tp->dirty(true);
           }
       }
     m->declare_io();
@@ -157,33 +169,50 @@ namespace ecto
    *        to python or other plugin systems.
    * @param doc_str A highlevel description of your cell.
    */
-  template<typename UserCell>
-  void wrap(const char* name, std::string doc_str = "An ecto::cell...")
+  template <typename Impl>
+  struct cell_wrapper
   {
-    typedef ecto::cell_<UserCell> cell_t;
-    ecto::cell_<UserCell>::SHORT_DOC = doc_str;
-    //SHOW();
-    boost::python::class_<cell_t, boost::python::bases<cell>,
-        boost::shared_ptr<cell_t>, boost::noncopyable>
-        m(name, cell_doc<UserCell> (doc_str).c_str());
+    typedef typename 
+    boost::python::class_<ecto::cell_<Impl>, 
+                          boost::python::bases<cell>,
+                          boost::shared_ptr<ecto::cell_<Impl> >, 
+                          boost::noncopyable>
+    type;
+  };
+
+  template <typename Impl>
+  typename cell_wrapper<Impl>::type 
+  wrap(const char* name, std::string doc_str = "An ecto::cell...")
+  {
+    typedef ecto::cell_<Impl> cell_t;
+    ecto::cell_<Impl>::SHORT_DOC = doc_str;
+
+    typename cell_wrapper<Impl>::type 
+      m(name, cell_doc<Impl> (doc_str).c_str());
     m.def("__init__",
-          boost::python::raw_constructor(&raw_construct<UserCell> ));
-    m.def("inspect", &inspect<UserCell> );
+          boost::python::raw_constructor(&raw_construct<Impl>));
+    m.def("inspect", &inspect<Impl> );
     m.staticmethod("inspect");
     m.def("name", (std::string (cell_t::*)() const) &cell_t::name);
     m.def("type_name", (std::string (cell_t::*)() const) &cell_t::type);
     m.def_readonly("short_doc", &cell_t::SHORT_DOC);
+    return m;
   }
 }
+#define ECTO_ASSERT_MODULE_NAME(MODULE)                               \
+template <unsigned X>  void module_must_be_named_##MODULE();          \
+extern template void module_must_be_named_##MODULE<MODULE##_ectomodule_EXPORTS>();
 
-#define ECTO_DEFINE_MODULE(modname)             \
-  ECTO_INSTANTIATE_REGISTRY(modname)            \
-  void init_module_##modname##_rest() ;         \
-  BOOST_PYTHON_MODULE(modname) {                \
-    ECTO_REGISTER(modname);                     \
-    init_module_##modname##_rest();             \
-  }                                             \
-  void init_module_##modname##_rest()
+#define ECTO_DEFINE_MODULE(MODULE)             \
+  ECTO_ASSERT_MODULE_NAME(MODULE)              \
+  ECTO_INSTANTIATE_REGISTRY(MODULE)            \
+  void init_module_##MODULE##_rest() ;         \
+  BOOST_PYTHON_MODULE(MODULE) {                \
+    boost::python::import("ecto");             \
+    ECTO_REGISTER(MODULE);                     \
+    init_module_##MODULE##_rest();             \
+  }                                            \
+  void init_module_##MODULE##_rest()
 
 #include <ecto/registry.hpp>
 

@@ -4,7 +4,6 @@
 
 #include <boost/foreach.hpp>
 
-#include "setter.hpp"
 
 namespace bp = boost::python;
 
@@ -33,20 +32,22 @@ void tendril_set_doc(tendril::ptr t, const std::string& doc)
   return t->set_doc(doc);
 }
 
-struct ObjectSetter
-{
-
-};
 bp::object tendril_get_val(tendril::ptr t)
 {
   bp::object o;
-  t->sample(o);
+  t >> o;
   return o;
 }
 
 void tendril_set_val(tendril::ptr t, bp::object val)
 {
-  t->enqueue_oneshot(Setter(t,val));
+  t << val;
+  t->dirty(true);
+  t->user_supplied(true);
+}
+void tendril_copy_val(tendril::ptr t, tendril::ptr tv)
+{
+  t << *tv;
 }
 bool tendril_user_supplied(tendril::ptr t)
 {
@@ -87,8 +88,8 @@ void wrapConnection(){
     "May be None if python bindings for the type held do not have boost::python bindings available from the current scope."
     );
     Tendril_.def("set",tendril_set_val, "Assuming the value held by the tendril has boost::python bindings,\nthis will copy the value of the given python object into the value held by the tendril.");
+    Tendril_.def("copy_value",tendril_copy_val, "Copy from one tendril to the other.");
     Tendril_.def("notify",&tendril::notify, "Force updates.");
-
 }
 }
 }

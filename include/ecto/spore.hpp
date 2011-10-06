@@ -51,44 +51,29 @@ namespace ecto
   template<typename T>
   struct spore
   {
+    typedef spore<T> this_type;
+    typedef T value_type;
+    typedef T& reference_type;
+    typedef T* pointer_type;
+    typedef const T* const_pointer_type;
     /**
      * Allocates a spore that doesn't point to anything.
      */
-    spore()
-    {
-    }
+    spore() { }
 
     /**
-     * implicit constructor from a tendril ptr. Needs to be a shared_ptr, as the spore holds a
-     * weak_ptr, and uses this to ensure that the spore always points to valid tendril.
+     * implicit constructor from a tendril ptr. Needs to be a shared_ptr
+     * and uses this to ensure that the spore always points to valid tendril.
      */
     spore(tendril::ptr t) :
         tendril_(t)
     {
-      t->enforce_type<T>();
-    }
+      if(!t)
+        BOOST_THROW_EXCEPTION(NullTendril()
+                              << diag_msg("creating sport with type")
+                              << spore_typename(name_of<T>()));
 
-    /**
-     * Grab a pointer to the tendril that gave birth to this spore.
-     * @return non const pointer to tendril
-     */
-    inline tendril::ptr p()
-    {
-      tendril::ptr _p = tendril_.lock();
-      if (!_p)
-        throw std::logic_error("This spore points to nothing.");
-      return _p;
-    }
-    /**
-     * Grab a pointer to the tendril that gave birth to this spore. const overload.
-     * @return const pointer to tendril
-     */
-    inline tendril::const_ptr p() const
-    {
-      tendril::const_ptr _p = tendril_.lock();
-      if (!_p)
-        throw std::logic_error("This spore points to nothing. Type name:" + name_of<T>());
-      return _p;
+      t->enforce_type<T>();
     }
 
     /**
@@ -99,110 +84,115 @@ namespace ecto
      */
     spore<T>& set_callback(typename boost::function<void(T)> cb)
     {
-      p()->set_callback(cb, false);
+      get()->set_callback(cb);
       return *this;
     }
 
     spore<T>& notify()
     {
-      p()->notify();
+      get()->notify();
       return *this;
     }
 
     spore<T>& set_doc(const std::string& doc)
     {
-      p()->set_doc(doc);
+      get()->set_doc(doc);
       return *this;
     }
 
     spore<T>& set_default_val(const T& val)
     {
-      p()->set_default_val(val);
+      get()->set_default_val(val);
       return *this;
     }
 
     bool dirty() const
     {
-      return p()->dirty();
+      return get()->dirty();
+    }
+
+    void dirty(bool d)
+    {
+      return get()->dirty(d);
     }
 
     bool user_supplied() const
     {
-      return p()->user_supplied();
+      return get()->user_supplied();
     }
 
     bool has_default() const
     {
-      return p()->has_default();
+      return get()->has_default();
     }
 
     spore<T>& required(bool b)
     {
-      p()->required(b);
+      get()->required(b);
       return *this;
     }
 
     bool required() const
     {
-      return p()->required();
+      return get()->required();
     }
 
-
-    T* operator->()
+    pointer_type operator->()
     {
-      tendril::ptr _p = p();
+      tendril::ptr _p = get();
       return &(_p->get<T>());
     }
-    const T* operator->() const
+
+    const_pointer_type operator->() const
     {
-      tendril::const_ptr _p = p();
-      return &(_p->read<T>());
+      tendril::const_ptr _p = get();
+      return &(_p->get<const T>());
     }
-    const T& operator*() const
+
+    reference_type operator*()
     {
-      tendril::const_ptr _p = p();
-      return _p->read<T>();
-    }
-    T& operator*()
-    {
-      tendril::ptr _p = p();
+      tendril::ptr _p = get();
       return _p->get<T>();
     }
-    /**
-     * This is the const read operation, as opposed to the derefence which is not necessarily const.
-     * @return const ref, no copies...
-     */
-    const T& read() const
+
+    const_pointer_type operator*() const
     {
-      tendril::const_ptr _p = p();
-      return _p->read<T>();
-    }
-    /**
-     * Cast operator for convenience.
-     */
-    operator tendril::ptr()
-    {
-      return p();
-    }
-    /**
-     * Cast operator for convenience.
-     */
-    operator tendril::const_ptr() const
-    {
-      return p();
+      tendril::const_ptr _p = get();
+      return _p->get<const T>();
     }
 
-    tendril::ptr tendril_ptr()
-    {
-      return p();
-    }
+    typedef tendril::ptr this_type::*unspecified_bool_type;
 
-    tendril::const_ptr tendril_ptr() const
+    operator unspecified_bool_type() const // never throws
     {
-      return p();
+      return tendril_ ? &this_type::tendril_ : 0;
     }
 
   private:
-    boost::weak_ptr<tendril> tendril_;
+
+    /**
+     * Grab a pointer to the tendril that gave birth to this spore.
+     * @return non const pointer to tendril
+     */
+    inline tendril::ptr get()
+    {
+      if (!tendril_)
+        BOOST_THROW_EXCEPTION(NullTendril());
+      return tendril_;
+    }
+    /**
+     * Grab a pointer to the tendril that gave birth to this spore. const overload.
+     * @return const pointer to tendril
+     */
+    inline tendril::const_ptr get() const
+    {
+      if (!tendril_)
+        BOOST_THROW_EXCEPTION(NullTendril() 
+                              << diag_msg("access via spore")
+                              << spore_typename(name_of<T>()));
+
+      return tendril_;
+    }
+    boost::shared_ptr<tendril> tendril_;
   };
 }
