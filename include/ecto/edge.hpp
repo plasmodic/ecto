@@ -29,30 +29,34 @@
 #pragma once
 
 #include <deque>
-
-#include <ecto/edge.hpp>
-#include <ecto/cell.hpp>
-
-//this quiets a deprecated warning
-#define BOOST_NO_HASH
-#include <boost/graph/graph_traits.hpp>
-#include <boost/graph/adjacency_list.hpp>
-#include <boost/graph/topological_sort.hpp>
-#include <boost/graph/graphviz.hpp>
-
+#include <ecto/tendril.hpp>
+#include <boost/thread/mutex.hpp>
+#include <boost/shared_ptr.hpp>
 
 namespace ecto {
   namespace graph {
 
+    struct edge
+    {
+      typedef boost::shared_ptr<edge> ptr;
+      typedef boost::shared_ptr<const edge> const_ptr;
 
-    // if the first argument is a sequence type (vecS, etc) then parallel edges are allowed
-    typedef boost::adjacency_list<boost::vecS, // OutEdgeList...
-                                  boost::vecS, // VertexList
-                                  boost::bidirectionalS, // Directed
-                                  cell::ptr, // vertex property
-                                  edge::ptr> // edge property
-    graph_t;
-  
+      edge(const std::string& fp, const std::string& tp); 
+
+      std::string from_port, to_port;
+
+      tendril& front();
+
+      void pop_front();
+
+      void push_back(const ecto::tendril& t);
+
+      std::size_t size(); 
+
+    private:
+      boost::mutex mtx;
+      std::deque<ecto::tendril> deque;
+    };
 
   }
 }
