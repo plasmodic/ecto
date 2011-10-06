@@ -171,7 +171,7 @@ namespace ecto
   private:
 
     /**
-     * Grab a pointer to the tendril that gave birth to this spore.
+     * Grab a pointer to the tendril that this spore points to.
      * @return non const pointer to tendril
      */
     inline tendril::ptr get()
@@ -180,8 +180,9 @@ namespace ecto
         BOOST_THROW_EXCEPTION(except::NullTendril());
       return tendril_;
     }
+
     /**
-     * Grab a pointer to the tendril that gave birth to this spore. const overload.
+     * Grab a pointer to the tendril that this spore points to. const overload.
      * @return const pointer to tendril
      */
     inline tendril::const_ptr get() const

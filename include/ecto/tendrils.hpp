@@ -166,8 +166,8 @@ namespace ecto
       return declare<T>(name,doc,default_val);
     }
 
-    template<typename CookieType>
-    void realize_potential(CookieType* cookie)
+    template <typename Impl>
+    void realize_potential(Impl* cookie)
     {
       static_bindings_(cookie,this);
     }

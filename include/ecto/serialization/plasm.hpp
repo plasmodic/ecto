@@ -67,7 +67,9 @@ namespace boost
   {
     template<typename Archive>
     void
-    serialize(Archive& ar, ecto::serialization::connection_t& c,const unsigned int version )
+    serialize(Archive& ar, 
+              ecto::serialization::connection_t& c,
+              const unsigned int version )
     {
       ar & c.get<0>();
       ar & c.get<1>();

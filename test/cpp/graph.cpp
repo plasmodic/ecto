@@ -56,9 +56,10 @@ TEST(Plasm, Passthrough)
     pass(new cell_<Passthrough>);
   m1->declare_params();
   m2->declare_params();
+  pass->declare_params();
   m1->declare_io();
   m2->declare_io();
-
+  pass->declare_io();
   m1->outputs["d"] << 5.0;
   p->connect(m1,"d",pass,"in");
   p->connect(pass,"out",m2,"d");

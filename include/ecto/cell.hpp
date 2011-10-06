@@ -181,9 +181,10 @@ namespace ecto
     boost::optional<strand> strand_; //!< The strand that this cell should be executed in.
     profile::stats_type stats; //!< For collecting execution statistics for process.
 
+    virtual bool init() = 0;
+
   protected:
 
-    virtual bool init() = 0;
     virtual void dispatch_declare_params(tendrils& t) = 0;
 
     virtual void dispatch_declare_io(const tendrils& params, tendrils& inputs,
@@ -210,6 +211,7 @@ namespace ecto
     cell(const cell&);
 
     std::string instance_name_;
+    bool configured;
   };
 
   
@@ -387,9 +389,8 @@ namespace ecto
 
     bool init()
     {
-      try{
-        bool initialized = impl;
-        if(!initialized)
+      try {
+        if(!impl)
         {
           impl.reset(new Impl);
           Impl* i=impl.get();
@@ -399,7 +400,7 @@ namespace ecto
           inputs.realize_potential(i);
           outputs.realize_potential(i);
         }
-        return initialized;
+        return impl;
       }
       catch (const std::exception& e)
       {
@@ -420,7 +421,8 @@ namespace ecto
       }
     }
 
-  public:
+  public: 
+
     boost::shared_ptr<Impl> impl;
     static std::string SHORT_DOC;
     static std::string CELL_NAME; //!< The python name for the cell.

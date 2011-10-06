@@ -69,7 +69,7 @@ namespace ecto
     void
     registry<Archive>::serialize(const std::string& key, Archive& ar, tendril& t) const
     {
-      typename serail_map_t::const_iterator it = serial_map.find(key);
+      typename serial_map_t::const_iterator it = serial_map.find(key);
       if (it == serial_map.end())
       {
         throw std::logic_error("Could not find a serializer registered for the type: " + key);
@@ -81,7 +81,7 @@ namespace ecto
     void
     registry<Archive>::add(const std::string& name, serial_fn_t fnc)
     {
-      typename serail_map_t::iterator it;
+      typename serial_map_t::iterator it;
       bool inserted;
       boost::tie(it, inserted) = serial_map.insert(std::make_pair(name, fnc));
       if (!inserted)
