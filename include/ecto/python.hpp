@@ -40,13 +40,6 @@
 #include <ecto/traits.hpp>
 #include <iostream>
 
-namespace ecto
-{
-  void inspect_impl(ecto::cell::ptr, 
-                    const boost::python::tuple& args, const
-                    boost::python::dict& kwargs);
-}
-
 #include <ecto/registry.hpp>
 
 #define ECTO_ASSERT_MODULE_NAME(MODULE)                                 \

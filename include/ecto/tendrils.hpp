@@ -32,7 +32,6 @@
 #include <ecto/spore.hpp>
 #include <boost/thread.hpp>
 #include <boost/signals2.hpp>
-
 #include <string>
 #include <sstream>
 #include <cstring>

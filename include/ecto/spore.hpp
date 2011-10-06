@@ -28,7 +28,7 @@
  */
 #pragma once
 #include <boost/shared_ptr.hpp>
-#include <boost/function.hpp>
+#include <boost/function/function1.hpp>
 
 #include <ecto/util.hpp> //name_of
 #include <ecto/tendril.hpp>
@@ -75,7 +75,7 @@ namespace ecto
      * @param cb The callback
      * @return ref to this spore, for chaining.
      */
-    spore<T>& set_callback(typename boost::function<void(T)> cb)
+    spore<T>& set_callback(typename boost::function1<void, T> cb)
     {
       get()->set_callback(cb);
       return *this;

@@ -29,7 +29,7 @@
 #pragma once
 #include <vector>
 #include <boost/noncopyable.hpp>
-#include <boost/function.hpp>
+#include <boost/function/function0.hpp>
 #include <boost/make_shared.hpp>
 #include <ecto/util.hpp>
 
@@ -43,9 +43,10 @@ namespace ecto {
 
   namespace registry {
 
-    typedef boost::function<boost::shared_ptr<cell>()> factory_fn_t;
-    typedef boost::function<void(ecto::tendrils&)> declare_params_t;
-    typedef boost::function<void(const ecto::tendrils&, ecto::tendrils&, ecto::tendrils&)> declare_io_t;
+    typedef boost::shared_ptr<cell>(*factory_fn_t)();
+    typedef void (*declare_params_t)(ecto::tendrils&);
+    typedef void (*declare_io_t)(const ecto::tendrils&, ecto::tendrils&, 
+                                 ecto::tendrils&);
 
     struct entry_t {
       factory_fn_t construct;
@@ -63,7 +64,7 @@ namespace ecto {
     template <typename ModuleTag>
     struct module_registry : boost::noncopyable
     {
-      typedef boost::function<void(void)> nullary_fn_t;
+      typedef boost::function0<void> nullary_fn_t;
 
       void add(nullary_fn_t f)
       {
@@ -97,6 +98,11 @@ namespace ecto {
 
       typedef ::ecto::cell_<T> cell_t;
 
+      static cell::ptr create()
+      {
+        return cell::ptr(new cell_t);
+      }
+
       explicit registrator(const char* name, const char* docstring) 
         : name_(name), docstring_(docstring) 
       { 
@@ -105,7 +111,7 @@ namespace ecto {
 
         // this registers the functions needed to do the construction above
         entry_t e;
-        e.construct = &boost::make_shared<ecto::cell_<T> >;// ecto::create_cell<T>;
+        e.construct = &create;// ecto::create_cell<T>;
         e.declare_params = (void (*)(tendrils&)) &cell_t::declare_params;
         e.declare_io = (void (*)(const tendrils&, tendrils&, tendrils&)) &cell_t::declare_io;
         register_factory_fn(name_of<T>(), e);

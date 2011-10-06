@@ -17,6 +17,9 @@ namespace bp = boost::python;
 
 namespace ecto
 {
+  void inspect_impl(ecto::cell::ptr m, const boost::python::tuple& args, 
+                    const boost::python::dict& kwargs);
+
   namespace py
   {
 
@@ -177,7 +180,8 @@ namespace ecto
     }
   }
 
-  void inspect_impl(ecto::cell::ptr m, const boost::python::tuple& args, const boost::python::dict& kwargs)
+  void inspect_impl(ecto::cell::ptr m, const boost::python::tuple& args, 
+                    const boost::python::dict& kwargs)
   {
     
     if (bp::len(args) > 1)

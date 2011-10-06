@@ -30,7 +30,6 @@
 
 #include <boost/shared_ptr.hpp>
 #include <boost/noncopyable.hpp>
-#include <boost/function.hpp>
 #include <boost/optional.hpp>
 
 #include <ecto/tendril.hpp>

@@ -29,7 +29,7 @@
 #pragma once
 #include <boost/python.hpp>
 #include <boost/shared_ptr.hpp>
-#include <boost/function.hpp>
+#include <boost/function/function1.hpp>
 #include <boost/signals2.hpp>
 #include <boost/any.hpp>
 
@@ -63,7 +63,7 @@ namespace ecto
   public:
     typedef boost::shared_ptr<tendril> ptr;
     typedef boost::shared_ptr<const tendril> const_ptr;
-    typedef boost::function< void(tendril&) > TendrilJob;
+    typedef boost::function1<void, tendril&> TendrilJob;
 
     enum {
       DEFAULT_VALUE=0,
@@ -246,7 +246,7 @@ namespace ecto
     template<typename T>
     struct Caller
     {
-      typedef typename boost::function<void(T)> CbT;
+      typedef typename boost::function1<void, T> CbT;
       Caller(CbT cb)
         : cb(cb)
       { }
@@ -272,7 +272,7 @@ namespace ecto
      */
     template<typename T>
     tendril&
-    set_callback(typename boost::function<void(T)> cb)
+    set_callback(typename boost::function1<void, T> cb)
     {
       typedef Caller<T> CallerT;
       enforce_type<T>();
