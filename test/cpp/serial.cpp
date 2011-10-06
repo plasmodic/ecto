@@ -1,8 +1,10 @@
 #include <gtest/gtest.h>
 #include <ecto/ecto.hpp>
+#include <ecto/plasm.hpp>
+
 #include <ecto/serialization/registry.hpp>
 #include <ecto/serialization/cell.hpp>
-#include <ecto/serialization/plasm.hpp>
+
 #include <boost/serialization/vector.hpp>
 #include <fstream>
 #include <boost/foreach.hpp>

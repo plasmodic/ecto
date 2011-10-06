@@ -31,9 +31,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/function.hpp>
-#include <boost/bind.hpp>
 #include <boost/optional.hpp>
-#include <boost/typeof/std/utility.hpp>
 
 #include <ecto/tendril.hpp>
 #include <ecto/tendrils.hpp>
@@ -228,23 +226,23 @@ namespace ecto
     
     // SFINAE eliminates this when the type of arg is invalid
     template<class U>
-    static yes test_declare_params(BOOST_TYPEOF_TPL(&U::declare_params));
+    static yes test_declare_params(__typeof__(&U::declare_params));
     // overload resolution prefers anything at all over "..."
     template<class U>
     static no test_declare_params(...);
 
     template<class U>
-    static yes test_declare_io(BOOST_TYPEOF_TPL(&U::declare_io));
+    static yes test_declare_io(__typeof__(&U::declare_io));
     template<class U>
     static no test_declare_io(...);
 
     template<class U>
-    static yes test_configure(BOOST_TYPEOF_TPL(&U::configure));
+    static yes test_configure(__typeof__(&U::configure));
     template<class U>
     static no test_configure(...);
 
     template<class U>
-    static yes test_process(BOOST_TYPEOF_TPL(&U::process));
+    static yes test_process(__typeof__(&U::process));
     template<class U>
     static no test_process(...);
 

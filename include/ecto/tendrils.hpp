@@ -28,9 +28,6 @@
  */
 #pragma once
 #include <boost/thread.hpp>
-#include <boost/serialization/shared_ptr.hpp>
-#include <boost/serialization/map.hpp>
-
 #include <ecto/tendril.hpp>
 #include <ecto/spore.hpp>
 #include <boost/thread.hpp>
@@ -227,6 +224,9 @@ namespace ecto
     typedef boost::shared_ptr<tendrils> ptr;
     typedef boost::shared_ptr<const tendrils> const_ptr;
 
+    template <class Archive>
+      void serialize(Archive& ar, const unsigned int);
+
   private:
 
     void doesnt_exist(const std::string& name) const;
@@ -237,14 +237,6 @@ namespace ecto
     typedef boost::signals2::signal<void(void*, const tendrils*)> sig_t;
     sig_t static_bindings_;
 
-    friend class boost::serialization::access;
-    template<class Archive>
-    void
-    serialize(Archive & ar, const unsigned int version)
-    {
-      ar & storage;
-    }
- 
  };
 
   /**

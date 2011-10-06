@@ -18,7 +18,6 @@
 #include <ecto/ecto.hpp>
 #include <ecto/serialization/registry.hpp>
 #include <ecto/serialization/cell.hpp>
-#include <ecto/serialization/plasm.hpp>
 
 namespace ecto
 {
@@ -316,6 +315,8 @@ namespace ecto
     }
   }
 
+
+
   void plasm::save(std::ostream& out) const
   {
     boost::archive::text_oarchive oa(out);
@@ -327,5 +328,4 @@ namespace ecto
     boost::archive::text_iarchive ia(in);
     ia >> *this;
   }
-
 }

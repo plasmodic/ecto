@@ -3,7 +3,6 @@
 #include <ecto/plasm.hpp>
 #include <ecto/serialization/registry.hpp>
 #include <ecto/serialization/cell.hpp>
-#include <ecto/serialization/plasm.hpp>
 
 #include <boost/asio.hpp>
 #include <boost/archive/binary_iarchive.hpp>

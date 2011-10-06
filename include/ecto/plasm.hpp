@@ -29,10 +29,6 @@
 #pragma once
 #include <boost/shared_ptr.hpp>
 #include <boost/noncopyable.hpp>
-#include <boost/tuple/tuple.hpp>
-
-#include <boost/serialization/vector.hpp>
-#include <boost/serialization/map.hpp>
 
 #include <string>
 #include <map>
@@ -58,7 +54,8 @@ namespace ecto
    * It enforces several invariants that are necessary for scheduling DAGs and
    * is used by all the ecto::schedulers to enable exectution of modules that are connected in the graph.
    */
-  class ECTO_EXPORT plasm: boost::noncopyable, public boost::enable_shared_from_this<plasm>
+  class ECTO_EXPORT plasm: 
+    boost::noncopyable, public boost::enable_shared_from_this<plasm>
   {
   public:
     plasm();
@@ -162,6 +159,7 @@ namespace ecto
     template<class Archive>
     void
     save(Archive & ar, const unsigned int version) const;
+
     template<class Archive>
     void
     load(Archive & ar,  const unsigned int version);

@@ -28,13 +28,10 @@
  */
 #pragma once
 #include <boost/python.hpp>
-#include <boost/scoped_ptr.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
-#include <boost/thread/mutex.hpp>
 #include <boost/signals2.hpp>
 #include <boost/any.hpp>
-#include <boost/serialization/split_member.hpp>
 
 #include <ecto/util.hpp> //name_of
 #include <ecto/except.hpp>
@@ -182,19 +179,7 @@ namespace ecto
       }
     }
 
-    void operator<<(const boost::python::object& obj)
-    {
-      if (is_type<boost::python::object>())
-      {
-        holder_ = obj;
-      }
-      else if (is_type<none>())
-      {
-        set_holder(obj);
-      }
-      else
-        (*converter)(*this, obj);
-    }
+    void operator<<(const boost::python::object& obj);
 
     ecto::tendril& operator<<(const ecto::tendril& rhs);
 
@@ -279,6 +264,7 @@ namespace ecto
     {
       return jobs_.connect(slot);
     }
+
     /**
      * Register a typed callback with the tendril... Will throw on wrong type.
      * @param cb Will be called by the notify function, if the tendril is dirty.
@@ -390,7 +376,9 @@ namespace ecto
     typedef boost::signals2::signal<void(tendril&)> job_signal_t;
     job_signal_t jobs_;
     Converter* converter;
+
   public:
+
     template <typename T>
     void operator>>(T& val) const
     {
@@ -432,26 +420,12 @@ NullTendril()
     // This is to avoid ambiguous conversion due to boost python funkiness.
     // e.g.  ISO C++ says that these are ambiguous, even...
     friend void
-    operator>>(const ecto::tendril::ptr& rhs, boost::python::object& obj)
-    {
-      if (!rhs)
-        BOOST_THROW_EXCEPTION(except::NullTendril() 
-                              << except::from_typename("(null)")
-                              << except::to_typename("(python object)"));
-      *rhs >> obj;
-    }
+      operator>>(const ecto::tendril::ptr& rhs, boost::python::object& obj);
 
     // This is to avoid ambiguous conversion due to boost python funkiness.
     // e.g.  ISO C++ says that these are ambiguous, even...
     friend void
-    operator>>(const ecto::tendril::const_ptr& rhs, boost::python::object& obj)
-    {
-      if (!rhs)
-        BOOST_THROW_EXCEPTION(except::NullTendril() 
-                              << except::from_typename("(null)")
-                              << except::to_typename("(python object)"));
-      *rhs >> obj;
-    }
+      operator>>(const ecto::tendril::const_ptr& rhs, boost::python::object& obj);
 
     template<typename T>
     friend void
@@ -465,32 +439,10 @@ NullTendril()
     }
 
     friend void
-    operator<<(const ecto::tendril::ptr& lhs, const ecto::tendril::ptr& rhs)
-    {
-      if (!lhs)
-        BOOST_THROW_EXCEPTION(except::NullTendril() 
-                              << except::to_typename("(null)")
-                              << except::from_typename(rhs ? rhs->type_name() : "(null)"));
-      if (!rhs)
-        BOOST_THROW_EXCEPTION(except::NullTendril()
-                              << except::to_typename(lhs->type_name())
-                              << except::from_typename("(null)"));
-      *lhs << *rhs;
-    }
+      operator<<(const ecto::tendril::ptr& lhs, const ecto::tendril::ptr& rhs);
 
     friend void
-    operator<<(const ecto::tendril::ptr& lhs, const ecto::tendril::const_ptr& rhs)
-    {
-      if (!lhs)
-        BOOST_THROW_EXCEPTION(except::NullTendril() 
-                              << except::to_typename("(null)")
-                              << except::from_typename(rhs->type_name()));
-      if (!rhs)
-        BOOST_THROW_EXCEPTION(except::NullTendril() 
-                              << except::to_typename(lhs->type_name())
-                              << except::from_typename("(null)"));
-      *lhs << *rhs;
-    }
+      operator<<(const ecto::tendril::ptr& lhs, const ecto::tendril::const_ptr& rhs);
 
     template<typename T>
     friend
@@ -500,15 +452,9 @@ NullTendril()
       t->set_holder<T>();
       return t;
     }
-  private:
-    template<class Archive>
-    void
-    save(Archive & ar, const unsigned int version) const;
-    template<class Archive>
-    void
-    load(Archive & ar,  const unsigned int version);
-    friend class boost::serialization::access;
-    BOOST_SERIALIZATION_SPLIT_MEMBER()
+
+    template <typename Archive> 
+      void serialize(Archive& ar, const unsigned int);
   };
 
   template <typename T, typename _>

@@ -171,4 +171,68 @@ namespace ecto
     converter = rhs.converter;
   }
 
+  void tendril::operator<<(const boost::python::object& obj)
+  {
+    if (is_type<boost::python::object>())
+      {
+        holder_ = obj;
+      }
+    else if (is_type<none>())
+      {
+        set_holder(obj);
+      }
+    else
+      (*converter)(*this, obj);
+  }
+
+  void
+  operator>>(const ecto::tendril::ptr& rhs, boost::python::object& obj)
+  {
+    if (!rhs)
+      BOOST_THROW_EXCEPTION(except::NullTendril() 
+                            << except::from_typename("(null)")
+                            << except::to_typename("(python object)"));
+    *rhs >> obj;
+  }
+
+  // e.g.  ISO C++ says that these are ambiguous, even...
+  void
+  operator>>(const ecto::tendril::const_ptr& rhs, boost::python::object& obj)
+  {
+    if (!rhs)
+      BOOST_THROW_EXCEPTION(except::NullTendril() 
+                            << except::from_typename("(null)")
+                            << except::to_typename("(python object)"));
+    *rhs >> obj;
+  }
+  void
+  operator<<(const ecto::tendril::ptr& lhs, const ecto::tendril::ptr& rhs)
+  {
+    if (!lhs)
+      BOOST_THROW_EXCEPTION(except::NullTendril() 
+                            << except::to_typename("(null)")
+                            << except::from_typename(rhs ? rhs->type_name() : "(null)"));
+    if (!rhs)
+      BOOST_THROW_EXCEPTION(except::NullTendril()
+                            << except::to_typename(lhs->type_name())
+                            << except::from_typename("(null)"));
+    *lhs << *rhs;
+  }
+
+  void
+  operator<<(const ecto::tendril::ptr& lhs, const ecto::tendril::const_ptr& rhs)
+  {
+    if (!lhs)
+      BOOST_THROW_EXCEPTION(except::NullTendril() 
+                            << except::to_typename("(null)")
+                            << except::from_typename(rhs->type_name()));
+    if (!rhs)
+      BOOST_THROW_EXCEPTION(except::NullTendril() 
+                            << except::to_typename(lhs->type_name())
+                            << except::from_typename("(null)"));
+    *lhs << *rhs;
+  }
+
+
+
 }

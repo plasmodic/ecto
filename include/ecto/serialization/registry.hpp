@@ -135,3 +135,10 @@ namespace ecto{                               \
     template class register_serializer<Type>; \
   }                                           \
 }
+
+#define ECTO_INSTANTIATE_SERIALIZATION(T)                               \
+  template void T::serialize(boost::archive::text_oarchive&, const unsigned int); \
+  template void T::serialize(boost::archive::text_iarchive&, const unsigned int); \
+  template void T::serialize(boost::archive::binary_oarchive&, const unsigned int); \
+  template void T::serialize(boost::archive::binary_iarchive&, const unsigned int);
+
