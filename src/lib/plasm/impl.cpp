@@ -1,3 +1,5 @@
+#include <ecto/edge.hpp>
+#include <ecto/cell.hpp>
 #include "plasm/impl.hpp"
 
 namespace ecto {
@@ -12,10 +14,10 @@ namespace ecto {
     using boost::tie;
     using boost::add_vertex;
 
-    graph::edge::ptr
+    graph::edge_ptr
     make_edge(const std::string& fromport, const std::string& toport)
     {
-      graph::edge::ptr eptr(new graph::edge(fromport, toport));
+      graph::edge_ptr eptr(new graph::edge(fromport, toport));
       return eptr;
     }
   } // namespace
@@ -26,7 +28,7 @@ namespace ecto {
     //insert a cell into the graph, will retrieve the
     //vertex descriptor if its already in the graph...
   graph_t::vertex_descriptor
-  plasm::impl::insert_module(cell::ptr m)
+  plasm::impl::insert_module(cell_ptr m)
   {
     //use the vertex map to look up the graphviz descriptor (reverse lookup)
     ModuleVertexMap::iterator it = mv_map.find(m);
@@ -38,10 +40,10 @@ namespace ecto {
   }
 
   void
-  plasm::impl::connect(cell::ptr from, std::string output, cell::ptr to, std::string input)
+  plasm::impl::connect(cell_ptr from, std::string output, cell_ptr to, std::string input)
   {
     //connect does all sorts of type checking so that connections are always valid.
-    tendril::ptr from_port, to_port;
+    tendril_ptr from_port, to_port;
     try {
       from_port = from->outputs[output];
     }
@@ -78,7 +80,7 @@ namespace ecto {
       }
 
     graph_t::vertex_descriptor fromv = insert_module(from), tov = insert_module(to);
-    edge::ptr new_edge = make_edge(output, input);
+    graph::edge_ptr new_edge = make_edge(output, input);
 
     //assert that the new edge does not violate inputs that are already connected.
     //RULE an input may only have one source.
@@ -86,12 +88,12 @@ namespace ecto {
     tie(inbegin, inend) = boost::in_edges(tov, graph);
     while (inbegin != inend)
       {
-        edge::ptr e = graph[*inbegin];
-        if (e->to_port == new_edge->to_port)
+        graph::edge_ptr e = graph[*inbegin];
+        if (e->to_port() == new_edge->to_port())
           {
             BOOST_THROW_EXCEPTION(AlreadyConnected()
                                   << cell_name(to->name())
-                                  << tendril_key(e->to_port)
+                                  << tendril_key(e->to_port())
                                   );
           }
         ++inbegin;
@@ -112,7 +114,7 @@ namespace ecto {
   }
 
   void
-  plasm::impl::disconnect(cell::ptr from, std::string output, cell::ptr to, std::string input)
+  plasm::impl::disconnect(cell_ptr from, std::string output, cell_ptr to, std::string input)
   {
     graph_t::vertex_descriptor fromv = insert_module(from), tov = insert_module(to);
     boost::remove_edge(fromv, tov, graph);

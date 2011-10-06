@@ -4,6 +4,7 @@
 #include <ecto/except.hpp>
 #include <boost/exception/all.hpp>
 #include <boost/thread.hpp>
+
 #include <boost/preprocessor/cat.hpp>
 #include <boost/preprocessor/stringize.hpp>
 #include <boost/preprocessor/seq/for_each.hpp>

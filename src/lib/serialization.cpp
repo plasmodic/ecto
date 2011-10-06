@@ -1,5 +1,6 @@
 #include <ecto/ecto.hpp>
 #include <ecto/plasm.hpp>
+#include <ecto/edge.hpp>
 #include <ecto/registry.hpp>
 
 #include <boost/archive/text_iarchive.hpp>
@@ -151,8 +152,8 @@ namespace ecto
       cell::ptr to = g[sink], from = g[source];
       cell_map[sink] = to;
       cell_map[source] = from;
-      std::string to_port = g[*begin]->to_port;
-      std::string from_port = g[*begin]->from_port;
+      std::string to_port = g[*begin]->to_port();
+      std::string from_port = g[*begin]->from_port();
       connections.push_back(boost::make_tuple(source, from_port, sink, to_port));
     }
     ar << cell_map;

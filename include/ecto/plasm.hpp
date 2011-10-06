@@ -28,20 +28,19 @@
  */
 #pragma once
 #include <boost/shared_ptr.hpp>
+#include <boost/enable_shared_from_this.hpp>
 #include <boost/noncopyable.hpp>
 
 #include <string>
 #include <map>
 #include <list>
 
+#include <ecto/forward.hpp>
 #include <ecto/tendril.hpp>
 #include <ecto/graph_types.hpp>
 
 namespace ecto
 {
-  //forward declare cell so we don't get affected by its header
-  class cell;
-  typedef boost::shared_ptr<cell> cell_ptr;
 
   //forward declare schedulers for friendliness.
   namespace schedulers
@@ -132,7 +131,7 @@ namespace ecto
      * \brief Grab a set of all the cells from the plasm.
      * @return a set of cells.
      */
-    std::vector<cell::ptr> cells() const;
+    std::vector<cell_ptr> cells() const;
 
     /**
      * \brief Calls configure on all modules, if configure has not already been called.

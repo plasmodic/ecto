@@ -31,6 +31,7 @@
 #include <ecto/tendril.hpp>
 #include <ecto/spore.hpp>
 #include <boost/thread.hpp>
+#define BOOST_SIGNALS2_MAX_ARGS 2
 #include <boost/signals2.hpp>
 #include <string>
 #include <sstream>
@@ -53,7 +54,7 @@ namespace ecto
   {
   public:
 
-    typedef std::map<std::string, tendril::ptr> storage_type;
+    typedef std::map<std::string, tendril_ptr> storage_type;
 
     typedef storage_type::iterator iterator;
     typedef storage_type::const_iterator const_iterator;
@@ -105,7 +106,7 @@ namespace ecto
     spore<T>
     declare(const std::string& name)
     {
-      tendril::ptr t(make_tendril<T>());
+      tendril_ptr t(make_tendril<T>());
       return declare(name, t);
     }
 
@@ -174,8 +175,8 @@ namespace ecto
      * @param t
      * @return
      */
-    tendril::ptr
-    declare(const std::string& name, tendril::ptr t);
+    tendril_ptr
+    declare(const std::string& name, tendril_ptr t);
 
     /**
      * \brief get the given type that is stored at the given key.  Will throw if there is a type mismatch.
@@ -208,9 +209,9 @@ namespace ecto
      * @return A shared pointer to the tendril.
      * this throws if the key is not in the tendrils object
      */
-    const tendril::ptr& operator[](const std::string& name) const;
+    const tendril_ptr& operator[](const std::string& name) const;
 
-    tendril::ptr& operator[](const std::string& name);
+    tendril_ptr& operator[](const std::string& name);
 
     /**
      * \brief Print the tendrils documentation string, in rst format.
@@ -219,9 +220,6 @@ namespace ecto
      */
     void
     print_doc(std::ostream& out, const std::string& tendrils_name) const;
-
-    typedef boost::shared_ptr<tendrils> ptr;
-    typedef boost::shared_ptr<const tendrils> const_ptr;
 
     template <class Archive>
       void serialize(Archive& ar, const unsigned int);

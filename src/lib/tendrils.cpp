@@ -1,3 +1,4 @@
+#include <boost/python.hpp>
 #include <ecto/tendrils.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/function.hpp>
@@ -62,7 +63,7 @@ namespace ecto
       : ss(ss)
     { }
     void
-    operator()(const std::pair<std::string, ecto::tendril::ptr>& tp)
+    operator()(const std::pair<std::string, tendril_ptr>& tp)
     {
       ss << " '" << tp.first << "':type(" << tp.second->type_name() << ")";
     }
@@ -76,7 +77,7 @@ namespace ecto
     { }
 
     void
-    operator()(const std::pair<std::string, ecto::tendril::ptr>& tp)
+    operator()(const std::pair<std::string, tendril_ptr>& tp)
     {
       //TODO
       //EAR: Seems like we would like to have the ability to customize the
@@ -129,7 +130,7 @@ namespace ecto
                           << except::actualkeys_hint(ss.str()));
   }
 
-  const tendril::ptr&
+  const tendril_ptr&
   tendrils::operator[](const std::string& name) const
   {
     boost::mutex::scoped_lock lock(mtx);
@@ -139,7 +140,7 @@ namespace ecto
     return it->second;
   }
 
-  tendril::ptr&
+  tendril_ptr&
   tendrils::operator[](const std::string& name)
   {
     boost::mutex::scoped_lock lock(mtx);
@@ -149,8 +150,8 @@ namespace ecto
     return it->second;
   }
 
-  tendril::ptr
-  tendrils::declare(const std::string& name, tendril::ptr t)
+  tendril_ptr
+  tendrils::declare(const std::string& name, tendril_ptr t)
   {
     storage_type::iterator it = find(name);
     //if there are no exiting tendrils by the given name,

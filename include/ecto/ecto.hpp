@@ -31,6 +31,7 @@
 
 #include <iostream>
 
+#include <ecto/forward.hpp>
 #include <ecto/version.hpp>
 #include <ecto/abi.hpp>
 #include <ecto/util.hpp>

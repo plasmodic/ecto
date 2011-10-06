@@ -30,7 +30,7 @@ namespace ecto
       }
 
       void declareTendrilPtr(tendrils& t, const std::string& name,
-                      tendril::ptr x)
+                      tendril_ptr x)
       {
         t.declare(name,x);
       }
@@ -46,7 +46,7 @@ namespace ecto
       bp::object getTendril(tendrils& t, const std::string& name)
       {
         bp::object o;
-        tendril::ptr tp = t[name];
+        tendril_ptr tp = t[name];
         *tp >> o;
         return o;
       }
@@ -75,7 +75,7 @@ namespace ecto
 
       void tendril_set(tendrils& ts, const std::string& name, bp::object obj)
       {
-        tendril::ptr t = ts[name];
+        tendril_ptr t = ts[name];
         t << obj;
         t->dirty(true);
         t->user_supplied(true);
@@ -89,7 +89,7 @@ namespace ecto
         }
       }
 
-      tendril::ptr tendril_at(tendrils& ts, const std::string& name)
+      tendril_ptr tendril_at(tendrils& ts, const std::string& name)
       {
         return ts[name];
       }

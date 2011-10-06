@@ -30,12 +30,10 @@
 //do not include this in ecto lib files, only in client modules
 
 #include <boost/python.hpp>
-#include <boost/shared_ptr.hpp>
 
 //ecto includes
 #include <ecto/version.hpp>
 #include <ecto/abi.hpp>
-#include <ecto/cell.hpp>
 #include <ecto/util.hpp>
 #include <ecto/traits.hpp>
 #include <iostream>

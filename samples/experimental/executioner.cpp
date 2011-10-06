@@ -28,10 +28,12 @@
  */
 
 #include <ecto/ecto.hpp>
+#include <ecto/python.hpp>
 #include <boost/foreach.hpp>
 #include <ecto/plasm.hpp>
 #include <ecto/schedulers/invoke.hpp>
 #include <ecto/schedulers/singlethreaded.hpp>
+
 namespace ecto
 {
   namespace bp = boost::python;
@@ -60,8 +62,8 @@ namespace ecto
         bp::object key = l[j][0];
         bp::object value = l[j][1];
         std::string keystring = bp::extract<std::string>(key);
-        ecto::cell::ptr cell = bp::extract<ecto::cell::ptr>(value);
-        tendril::ptr t = ((*cell).*member)[keystring];
+        ecto::cell_ptr cell = bp::extract<ecto::cell_ptr>(value);
+        tendril_ptr t = ((*cell).*member)[keystring];
         ts.declare(keystring, t);
       }
 

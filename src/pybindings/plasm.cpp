@@ -8,7 +8,9 @@
 #include <boost/python/type_id.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <boost/python/suite/indexing/map_indexing_suite.hpp>
+
 #include <ecto/ecto.hpp>
+#include <ecto/edge.hpp>
 #include <ecto/serialization/registry.hpp>
 #include <ecto/serialization/cell.hpp>
 
@@ -140,8 +142,8 @@ namespace ecto
         source = boost::source(*begin, g);
         sink = boost::target(*begin, g);
         cell::ptr to = g[sink], from = g[source];
-        std::string to_port = g[*begin]->to_port;
-        std::string from_port = g[*begin]->from_port;
+        std::string to_port = g[*begin]->to_port();
+        std::string from_port = g[*begin]->from_port();
         result.append(bp::make_tuple(from, from_port, to, to_port));
       }
       return result;

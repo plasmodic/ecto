@@ -39,8 +39,6 @@
 #include <ecto/profile.hpp>
 #include <ecto/traits.hpp>
 
-#include <map>
-
 namespace ecto
 {
   /**

@@ -58,8 +58,8 @@ namespace ecto
      * implicit constructor from a tendril ptr. Needs to be a shared_ptr
      * and uses this to ensure that the spore always points to valid tendril.
      */
-    spore(tendril::ptr t) :
-        tendril_(t)
+    spore(tendril_ptr t) :
+      tendril_(t)
     {
       if(!t)
         BOOST_THROW_EXCEPTION(except::NullTendril()
@@ -132,29 +132,29 @@ namespace ecto
 
     pointer_type operator->()
     {
-      tendril::ptr _p = get();
+      tendril_ptr _p = get();
       return &(_p->get<T>());
     }
 
     const_pointer_type operator->() const
     {
-      tendril::const_ptr _p = get();
+      tendril_cptr _p = get();
       return &(_p->get<const T>());
     }
 
     reference_type operator*()
     {
-      tendril::ptr _p = get();
+      tendril_ptr _p = get();
       return _p->get<T>();
     }
 
     const_pointer_type operator*() const
     {
-      tendril::const_ptr _p = get();
+      tendril_cptr _p = get();
       return _p->get<const T>();
     }
 
-    typedef tendril::ptr this_type::*unspecified_bool_type;
+    typedef tendril_ptr this_type::*unspecified_bool_type;
 
     operator unspecified_bool_type() const // never throws
     {
@@ -167,7 +167,7 @@ namespace ecto
      * Grab a pointer to the tendril that this spore points to.
      * @return non const pointer to tendril
      */
-    inline tendril::ptr get()
+    inline tendril_ptr get()
     {
       if (!tendril_)
         BOOST_THROW_EXCEPTION(except::NullTendril());
@@ -178,7 +178,7 @@ namespace ecto
      * Grab a pointer to the tendril that this spore points to. const overload.
      * @return const pointer to tendril
      */
-    inline tendril::const_ptr get() const
+    inline tendril_cptr get() const
     {
       if (!tendril_)
         BOOST_THROW_EXCEPTION(except::NullTendril() 
@@ -187,6 +187,6 @@ namespace ecto
 
       return tendril_;
     }
-    boost::shared_ptr<tendril> tendril_;
+    tendril_ptr tendril_;
   };
 }

@@ -29,7 +29,7 @@
 #pragma once
 
 #include <deque>
-#include <ecto/tendril.hpp>
+#include <ecto/forward.hpp>
 #include <boost/thread/mutex.hpp>
 #include <boost/shared_ptr.hpp>
 
@@ -38,12 +38,10 @@ namespace ecto {
 
     struct edge
     {
-      typedef boost::shared_ptr<edge> ptr;
-      typedef boost::shared_ptr<const edge> const_ptr;
-
       edge(const std::string& fp, const std::string& tp); 
 
-      std::string from_port, to_port;
+      const std::string& from_port();
+      const std::string& to_port();
 
       tendril& front();
 
@@ -54,9 +52,8 @@ namespace ecto {
       std::size_t size(); 
 
     private:
-      boost::mutex mtx;
-      std::deque<ecto::tendril> deque;
+      struct impl;
+      boost::shared_ptr<impl> impl_;
     };
-
   }
 }

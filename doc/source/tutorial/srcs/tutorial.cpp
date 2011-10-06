@@ -8,4 +8,4 @@
 //    <source1.cpp>
 //    <source2.cpp>
 //)
-ECTO_DEFINE_MODULE(tutorial){}
+ECTO_DEFINE_MODULE(tutorial) { }

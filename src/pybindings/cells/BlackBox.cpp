@@ -47,7 +47,7 @@ namespace ecto
       shallow_merge(const tendrils& fts, tendrils& ts)
       {
         std::string key;
-        tendril::ptr t;
+        tendril_ptr t;
         BOOST_FOREACH(boost::tie(key,t), fts)
             {
               ts.declare(key, t);

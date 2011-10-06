@@ -186,7 +186,7 @@ namespace ecto
   }
 
   void
-  operator>>(const ecto::tendril::ptr& rhs, boost::python::object& obj)
+  operator>>(const tendril_ptr& rhs, boost::python::object& obj)
   {
     if (!rhs)
       BOOST_THROW_EXCEPTION(except::NullTendril() 
@@ -197,7 +197,7 @@ namespace ecto
 
   // e.g.  ISO C++ says that these are ambiguous, even...
   void
-  operator>>(const ecto::tendril::const_ptr& rhs, boost::python::object& obj)
+  operator>>(const tendril_cptr& rhs, boost::python::object& obj)
   {
     if (!rhs)
       BOOST_THROW_EXCEPTION(except::NullTendril() 
@@ -206,7 +206,7 @@ namespace ecto
     *rhs >> obj;
   }
   void
-  operator<<(const ecto::tendril::ptr& lhs, const ecto::tendril::ptr& rhs)
+  operator<<(const tendril_ptr& lhs, const tendril_ptr& rhs)
   {
     if (!lhs)
       BOOST_THROW_EXCEPTION(except::NullTendril() 
@@ -220,7 +220,7 @@ namespace ecto
   }
 
   void
-  operator<<(const ecto::tendril::ptr& lhs, const ecto::tendril::const_ptr& rhs)
+  operator<<(const tendril_ptr& lhs, const tendril_cptr& rhs)
   {
     if (!lhs)
       BOOST_THROW_EXCEPTION(except::NullTendril() 

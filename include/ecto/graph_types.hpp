@@ -30,8 +30,7 @@
 
 #include <deque>
 
-#include <ecto/edge.hpp>
-#include <ecto/cell.hpp>
+#include <ecto/forward.hpp>
 
 //this quiets a deprecated warning
 #define BOOST_NO_HASH
@@ -49,8 +48,8 @@ namespace ecto {
     typedef boost::adjacency_list<boost::vecS, // OutEdgeList...
                                   boost::vecS, // VertexList
                                   boost::bidirectionalS, // Directed
-                                  cell::ptr, // vertex property
-                                  edge::ptr> // edge property
+                                  cell_ptr, // vertex property
+                                  edge_ptr> // edge property
     graph_t;
   
 

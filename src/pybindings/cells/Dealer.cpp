@@ -12,7 +12,7 @@ namespace ecto
       p.declare<bp::object>("iterable", 
                             "iterable python object... values to be output")
         .required(true);
-      p.declare<tendril::ptr>("tendril",
+      p.declare<tendril_ptr>("tendril",
                               "Destination tendril...  used to set output type")
         .required(true);
     }
@@ -30,7 +30,7 @@ namespace ecto
 
       size_t end = bp::len(iterable);
 
-      tendril::ptr typer = p["tendril"]->get<tendril::ptr>();
+      tendril_ptr typer = p["tendril"]->get<tendril_ptr>();
 
       for (size_t j = 0; j < end; ++j)
         {
@@ -54,7 +54,7 @@ namespace ecto
       return ecto::OK;
     }
     std::list<tendril> values_;
-    tendril::ptr out_;
+    tendril_ptr out_;
   };
 }
 ECTO_CELL(ecto, ecto::Dealer, "Dealer", "Emit values of python iterable");

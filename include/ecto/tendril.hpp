@@ -27,14 +27,19 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #pragma once
-#include <boost/python.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/function/function1.hpp>
+#define BOOST_SIGNALS2_MAX_ARGS 2
 #include <boost/signals2.hpp>
 #include <boost/any.hpp>
+#include <boost/python/extract.hpp>
+
+#include <ecto/forward.hpp>
 
 #include <ecto/util.hpp> //name_of
 #include <ecto/except.hpp>
+
+//#include <ecto/python.hpp>
 #include <ecto/python/repr.hpp>
 
 #include <vector>
@@ -59,10 +64,7 @@ namespace ecto
 
   class ECTO_EXPORT tendril
   {
-
   public:
-    typedef boost::shared_ptr<tendril> ptr;
-    typedef boost::shared_ptr<const tendril> const_ptr;
     typedef boost::function1<void, tendril&> TendrilJob;
 
     enum {
@@ -181,7 +183,7 @@ namespace ecto
 
     void operator<<(const boost::python::object& obj);
 
-    ecto::tendril& operator<<(const ecto::tendril& rhs);
+    tendril& operator<<(const tendril& rhs);
 
     /**
      * \brief runtime check if the tendril is of the given type.
@@ -390,24 +392,24 @@ namespace ecto
       (*converter)(obj, *this);
     }
 
-    void operator>>(const ecto::tendril::ptr& rhs) const
+    void operator>>(const tendril_ptr& rhs) const
     {
       *rhs << *this;
     }
 
-    void operator>>(ecto::tendril::ptr& rhs) const
+    void operator>>(tendril_ptr& rhs) const
     {
       *rhs << *this;
     }
 
-    void operator>>(ecto::tendril& rhs) const
+    void operator>>(tendril& rhs) const
     {
       rhs << *this;
     }
 
     template<typename T>
     friend void
-    operator>>(const ecto::tendril::const_ptr& rhs, T& val)
+    operator>>(const tendril_cptr& rhs, T& val)
     {
       if (!rhs)
         BOOST_THROW_EXCEPTION(except::
@@ -420,16 +422,16 @@ NullTendril()
     // This is to avoid ambiguous conversion due to boost python funkiness.
     // e.g.  ISO C++ says that these are ambiguous, even...
     friend void
-      operator>>(const ecto::tendril::ptr& rhs, boost::python::object& obj);
+      operator>>(const tendril_ptr& rhs, boost::python::object& obj);
 
     // This is to avoid ambiguous conversion due to boost python funkiness.
     // e.g.  ISO C++ says that these are ambiguous, even...
     friend void
-      operator>>(const ecto::tendril::const_ptr& rhs, boost::python::object& obj);
+      operator>>(const tendril_cptr& rhs, boost::python::object& obj);
 
     template<typename T>
     friend void
-    operator<<(const ecto::tendril::ptr& lhs, const T& rhs)
+    operator<<(const tendril_ptr& lhs, const T& rhs)
     {
       if (!lhs)
         BOOST_THROW_EXCEPTION(except::NullTendril() 
@@ -439,16 +441,16 @@ NullTendril()
     }
 
     friend void
-      operator<<(const ecto::tendril::ptr& lhs, const ecto::tendril::ptr& rhs);
+      operator<<(const tendril_ptr& lhs, const tendril_ptr& rhs);
 
     friend void
-      operator<<(const ecto::tendril::ptr& lhs, const ecto::tendril::const_ptr& rhs);
+      operator<<(const tendril_ptr& lhs, const tendril_cptr& rhs);
 
     template<typename T>
     friend
-    tendril::ptr make_tendril()
+    tendril_ptr make_tendril()
     {
-      tendril::ptr t(new tendril());
+      tendril_ptr t(new tendril());
       t->set_holder<T>();
       return t;
     }

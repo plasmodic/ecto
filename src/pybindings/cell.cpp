@@ -17,7 +17,7 @@ namespace bp = boost::python;
 
 namespace ecto
 {
-  void inspect_impl(ecto::cell::ptr m, const boost::python::tuple& args, 
+  void inspect_impl(ecto::cell_ptr m, const boost::python::tuple& args, 
                     const boost::python::dict& kwargs);
 
   namespace py
@@ -94,10 +94,10 @@ namespace ecto
         return "No Doc str.";
       }
 
-      cell::ptr dispatch_clone() const
+      cell_ptr dispatch_clone() const
       {
         throw std::logic_error("Clone is not implemented!");
-        return cell::ptr();
+        return cell_ptr();
       }
       bool initialized_;
     };
@@ -180,7 +180,7 @@ namespace ecto
     }
   }
 
-  void inspect_impl(ecto::cell::ptr m, const boost::python::tuple& args, 
+  void inspect_impl(ecto::cell_ptr m, const boost::python::tuple& args, 
                     const boost::python::dict& kwargs)
   {
     
@@ -214,7 +214,7 @@ namespace ecto
           }
         else 
           {
-            tendril::ptr tp = m->parameters[keystring];
+            tendril_ptr tp = m->parameters[keystring];
             try{
               *tp << value;
             }catch(ecto::except::TypeMismatch& e)

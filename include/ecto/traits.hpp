@@ -6,7 +6,11 @@
 namespace ecto {
   namespace detail {
     template <typename T> struct is_threadsafe : boost::mpl::true_ { };
-    template <typename T> struct python_mutex { typedef ecto::nothing_to_lock type; };
+
+    template <typename T> struct python_mutex 
+    { 
+      typedef ecto::py::nothing_to_lock type; 
+    };
   }
 }
 
@@ -23,7 +27,7 @@ namespace ecto {
   namespace ecto {                                                      \
     namespace detail {                                                  \
       template <> struct python_mutex<T> {                              \
-        typedef ecto::gil type;                                         \
+        typedef ecto::py::gil type;                                     \
       };                                                                \
     }                                                                   \
   }                                                                     \

@@ -8,7 +8,7 @@ TEST(TendrilMap, Const)
   tendrils t;
   t.declare<bool>("bool", "booly an", true);
 
-  tendril::ptr tp = t["bool"];
+  tendril_ptr tp = t["bool"];
   EXPECT_TRUE(tp);
 }
 
@@ -56,7 +56,7 @@ TEST(tendrils, DefaultCtr)
   tendrils t;
   EXPECT_TRUE(t.size() == 0);
 
-  tendrils::ptr tp(new tendrils());
+  tendrils_ptr tp(new tendrils());
   EXPECT_TRUE(tp->size() == 0);
 }
 //tendrils not copiable. good.
@@ -135,7 +135,7 @@ TEST(tendrils, SyntacticSugarness)
   EXPECT_EQ(t2["yy"]->doc(), "yy's doc");
   EXPECT_EQ(t2.get<std::string>("yy"), "foobar");
 
-  tendril::ptr xp = make_tendril<std::string>();
+  tendril_ptr xp = make_tendril<std::string>();
   xp << std::string("hello there.");
   t2["yy"] << xp;
   EXPECT_EQ(t2.get<std::string>("yy"), "hello there.");

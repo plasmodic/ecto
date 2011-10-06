@@ -20,6 +20,7 @@ add_library(ecto SHARED
   except.cpp
   needs_gil.cpp
   profile.cpp
+  python.cpp
   registry.cpp
   serialization.cpp
   schedulers/invoke.cpp

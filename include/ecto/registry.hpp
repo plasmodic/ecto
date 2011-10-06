@@ -31,7 +31,9 @@
 #include <boost/noncopyable.hpp>
 #include <boost/function/function0.hpp>
 #include <boost/make_shared.hpp>
+#include <ecto/forward.hpp>
 #include <ecto/util.hpp>
+#include <ecto/cell.hpp>
 
 namespace ecto {
 
@@ -98,9 +100,9 @@ namespace ecto {
 
       typedef ::ecto::cell_<T> cell_t;
 
-      static cell::ptr create()
+      static boost::shared_ptr<cell> create()
       {
-        return cell::ptr(new cell_t);
+        return boost::shared_ptr<cell>(new cell_t);
       }
 
       explicit registrator(const char* name, const char* docstring) 
