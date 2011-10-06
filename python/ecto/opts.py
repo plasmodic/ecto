@@ -38,7 +38,11 @@ def use_ipython(options, sched, plasm, locals={}):
         embed() # this call anywhere in your program will start IPython
 
 def run_plasm(options, plasm, locals={}):
-    ''' run the plasm given the options from the command line parser.
+    ''' Run the plasm given the options from the command line parser.
+        :param options: The command line, preparsed options object. It is assumed that you have filled this object using
+            scheduler_options.
+        :param plasm: The plasm to run.
+        :param locals: Any local variables that you would like available to the iPython shell session.
     '''
     global possible_schedulers
     if options.scheduler_type not in possible_schedulers:
@@ -95,9 +99,9 @@ class CellYamlFactory(object):
     :param prefix: The top level key for the parameters dict for this factory
     :type prefix: str
     '''
-        
+
     def __init__(self, CellOrCellType, prefix):
-        
+
         cell_type, cell = _cell_type_instance(CellOrCellType)
         self.cell_type = cell_type
         self.cell = cell
@@ -106,7 +110,7 @@ class CellYamlFactory(object):
         c = {}
         for x in params:
             c[x.key()] = x.data().get()
-            c[x.key()+'__doc__'] = x.data().doc
+            c[x.key() + '__doc__'] = x.data().doc
         self.params = c
 
     def dump(self, stream=None):
@@ -116,7 +120,7 @@ class CellYamlFactory(object):
         :returns: The string YAML representation of the prototype used to initialize the factory.
         '''
         from yaml import dump
-        return dump({self.prefix:self.params}, default_flow_style=False,stream=stream)
+        return dump({self.prefix:self.params}, default_flow_style=False, stream=stream)
 
     def load(self, parsed, cell_name=''):
         '''Create a cell from a parsed bit of YAML.
@@ -165,7 +169,8 @@ def cell_options(parser, CellType, prefix):
     factory = CellFactory(cell_type, cell, prefix)
     return factory
 
-def scheduler_options(parser, default_scheduler='Singlethreaded',
+def scheduler_options(parser,
+                      default_scheduler='Singlethreaded',
                       default_nthreads=0,
                       default_niter=0,
                       default_shell=False,
@@ -213,19 +218,24 @@ def scheduler_options(parser, default_scheduler='Singlethreaded',
                         If no file is given, no output will be generated. (default: %(default)s)'''
                         )
 
-def doit(plasm, description="An ecto graph.", locals={}, args=None, namespace=None, default_scheduler='Singlethreaded', default_nthreads=0, default_niter=0, default_shell=False, default_graphviz=False):
-    '''doit is a short hand for samples that will just add
-    ecto scheduler options, and nothing else.
+def doit(plasm, description="An ecto graph.", locals={}, args=None, default_scheduler='Singlethreaded', default_nthreads=0, default_niter=0, default_shell=False, default_graphviz=False):
+    '''doit is a short hand for samples, that is a combination of a call to scheduler_options, and then run_plasm.
+       This function in not intended to allow customization of parameter parsing.  If this is needed please call
+       scheduler_optinos and run_plasm yourself.
        
-        Use locals to forward any local variables to the ipython
-        shell. Suggest either vars() or locals() to do this.
+       :param args: If this is None, default to using the sys.argv args, otherwise this overrides it.
+       :param locals: May be used to forward any local variables to the ipython shell. Suggest either vars() or locals() to do this.
+       :param default_scheduler: Override the default for the option.
+       :param default_nthreads: Override
+       :param default_shell: Override
+       :param default_graphviz: Override 
     '''
     import argparse
     parser = argparse.ArgumentParser(description=description)
     scheduler_options(parser, default_scheduler=default_scheduler,
               default_nthreads=default_nthreads, default_niter=default_niter,
               default_shell=default_shell, default_graphviz=default_graphviz)
-    options = parser.parse_args(args, namespace)
+    options = parser.parse_args(args=args)
     run_plasm(options, plasm, locals)
 
 if __name__ == '__main__':
@@ -247,7 +257,7 @@ if __name__ == '__main__':
 
     c = const_factory(options)
     m = multiply_factory(options)
-    cyaml = CellYamlFactory(c,'const')
+    cyaml = CellYamlFactory(c, 'const')
     print cyaml.dump()
     c = cyaml.load(yaml.load(cyaml.dump()))
     pr = ecto_test.Printer()
