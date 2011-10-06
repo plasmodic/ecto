@@ -29,12 +29,13 @@
 #pragma once
 #include <stdexcept>
 #include <string>
-#include <sstream>
+#include <map>
 #include <ecto/util.hpp>
 #include <boost/optional.hpp>
 #include <boost/format.hpp>
 
-#include <boost/exception/all.hpp>
+#include <boost/exception/exception.hpp>
+#include <boost/exception/info.hpp>
 
 #include <boost/preprocessor/cat.hpp>
 #include <boost/preprocessor/stringize.hpp>
@@ -69,50 +70,18 @@ namespace ecto
 
     public:
 
-      error_info_container_impl(): count_(0) {}
+      error_info_container_impl();
 
-      ~error_info_container_impl() throw() {}
+      ~error_info_container_impl() throw();
 
       void
       set(boost::shared_ptr<error_info_base> const & x, 
-          type_info_ const & typeid_)
-      {
-        BOOST_ASSERT(x);
-        info_[typeid_.type_.name()] = x;
-        diagnostic_info_str_.clear();
-      }
+          type_info_ const & typeid_);
 
       boost::shared_ptr<error_info_base>
-      get( type_info_ const & ti ) const
-      {
-        error_info_map::const_iterator i=info_.find(ti.type_.name());
-        if( info_.end()!=i )
-          {
-            boost::shared_ptr<error_info_base> const & p = i->second;
-#ifndef BOOST_NO_RTTI
-            BOOST_ASSERT( BOOST_EXCEPTION_DYNAMIC_TYPEID(*p).type_==ti.type_ );
-#endif
-            return p;
-          }
-        return boost::shared_ptr<error_info_base>();
-      }
+      get( type_info_ const & ti ) const;
 
-      char const * diagnostic_information(char const*) const
-      {
-        boost::format fmt("%25s  %s\n");
-        if( diagnostic_info_str_.empty() )
-          {
-            std::ostringstream tmp;
-            for( error_info_map::const_iterator i=info_.begin(),end=info_.end(); i!=end; ++i )
-              {
-                boost::shared_ptr<error_info_base const> const & x = i->second;
-                tmp << str(fmt % /*name_of(*/x->tag_typeid_name()/*) */
-                           % x->value_as_string());
-              }
-            tmp.str().swap(diagnostic_info_str_);
-          }
-        return diagnostic_info_str_.c_str();
-      }
+      char const * diagnostic_information(char const*) const;
 
     private:
 
@@ -124,8 +93,8 @@ namespace ecto
       mutable std::string diagnostic_info_str_;
       mutable int count_;
 
-      void add_ref() const { ++count_; }
-      void release() const { if( !--count_ ) delete this; }
+      void add_ref() const;
+      void release() const;
     };
 
     struct EctoException : virtual std::exception, virtual boost::exception
@@ -155,8 +124,6 @@ namespace ecto
 
     BOOST_PP_SEQ_FOR_EACH(ECTO_EXCEPTION_TAG_DECL, ~, ECTO_EXCEPTION_TAG_NAMES);
 
-    struct HACK_HACK_HACK;
-
   }
 }
 
@@ -169,35 +136,10 @@ namespace boost {
   }
   BOOST_PP_SEQ_FOR_EACH(ECTO_EXCEPTION_TAG_TYPE_NAME_DECL, ~, ECTO_EXCEPTION_TAG_NAMES);
 
-  namespace exception_detail {
-
-    // this break in to a boost::exception and gets the
-    // error_info_container out.  
-    template <> struct get_info< ::ecto::except::HACK_HACK_HACK>
-    {
-      template <typename E>
-      static
-      refcount_ptr<exception_detail::error_info_container>&
-      get(E const& e)
-      {
-        return e.data_;
-      }
-    };
-  }
-
   template <class E,class Tag,class T>
-  inline
   E const &
-  operator<<( E const & x, error_info< ::ecto::except::detail::wrap<Tag>, T> const & v )
-  {
-    typedef error_info< ::ecto::except::detail::wrap<Tag>, T> error_info_tag_t;
-    ::boost::shared_ptr<error_info_tag_t> p( new error_info_tag_t(v) );
-    exception_detail::refcount_ptr<exception_detail::error_info_container>& c 
-      = exception_detail::get_info< ::ecto::except::HACK_HACK_HACK>::get(x);
-    if( !(c.get()) )
-      c.adopt(new ::ecto::except::error_info_container_impl);
-    c.get()->set(p,BOOST_EXCEPTION_STATIC_TYPEID(error_info_tag_t));
-    return x;
-  }
+  operator<<( E const & x, 
+              error_info< ::ecto::except::detail::wrap<Tag>, T> const & v );
+
 }
 

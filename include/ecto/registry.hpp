@@ -90,7 +90,8 @@ namespace ecto {
     };
 
     template <typename Module, typename T>
-    struct registrator {
+    struct registrator 
+    {
       const char* name_;
       const char* docstring_;
 
@@ -120,11 +121,8 @@ namespace ecto {
     entry_t lookup(const std::string& name);
     boost::shared_ptr<cell> create(const std::string& name);
     void register_factory_fn(const std::string& name, entry_t e);
-
   }
 }
-
-//  namespace ecto { namespace tag { struct MODULE; } }                 
 
 #define ECTO_MODULETAG(MODULE) namespace ecto { namespace tag { struct MODULE; } }
 #define ECTO_CELL(MODULE, TYPE, NAME, DOCSTRING)                        \

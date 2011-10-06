@@ -37,47 +37,14 @@
 #include <ecto/abi.hpp>
 #include <ecto/cell.hpp>
 #include <ecto/util.hpp>
-// #include <ecto/python/raw_constructor.hpp>
 #include <ecto/traits.hpp>
 #include <iostream>
 
-/**
- * \namespace ecto
- * \brief ecto is ...
- *
- * ecto is a plugin architecture / pipeline tool based on boost::python.
- */
 namespace ecto
 {
   void inspect_impl(ecto::cell::ptr, 
-                    const boost::python::tuple& args, const boost::python::dict& kwargs);
-
-  /*
-  template<typename T>
-  boost::shared_ptr<ecto::cell_<T> > inspect(boost::python::tuple args,
-                                             boost::python::dict kwargs)
-  {
-    typedef ecto::cell_<T> cell_t;
-
-    namespace bp = boost::python;
-
-    //SHOW();
-    boost::shared_ptr<cell_t> mm(new cell_t());
-    inspect_impl(mm, args, kwargs);
-    return mm;
-  }
-
-  //this adds the autodoc to the cell. TODO remove python duplication...
-  template<typename T>
-  std::string cell_doc(std::string doc)
-  {
-    ecto::cell::ptr c(new ecto::cell_<T>);
-    c->declare_params();
-    c->declare_io();
-    c->name(c->type());
-    return c->gen_doc(doc);
-  }
-  */
+                    const boost::python::tuple& args, const
+                    boost::python::dict& kwargs);
 }
 
 #include <ecto/registry.hpp>
