@@ -1,12 +1,13 @@
 import subprocess,sys
 
 tags = ('amoeba-beta2',
-'amoeba-beta3',
-'amoeba-beta4',
-"amoeba-beta5",
-"amoeba-beta6",
-"HEAD",
-)
+        'amoeba-beta3',
+        'amoeba-beta4',
+        "amoeba-beta5",
+        "amoeba-beta6",
+        "amoeba-0",
+        "HEAD"
+        )
 
 pairs = []
 for i in range(0,len(tags)-1):
@@ -17,10 +18,17 @@ Changelog
 =========
 This is a generated changelog file.
 '''
+link = '`%(ref)s <https://github.com/plasmodic/ecto/commit/%(ref)s>`_'
+
+fclen = len(link % dict(ref='*' * 7))
+
+headline = '=' * fclen + " " + "="*1024
+fmt = link + " %(comment)s"
+
+#headline = fmt % dict(ref='='*20, comment = 
+
 for tag1,tag2 in pairs:
     header = '%s..%s'%(tag1,tag2)
-    print header
-    print '^' * len(header) + '\n'
     p = subprocess.Popen(['git',
                        'log',
                        '--oneline',
@@ -28,6 +36,11 @@ for tag1,tag2 in pairs:
                        '%s..%s'%(tag1,tag2)], stdout=subprocess.PIPE)
     lines = [x.split(' ',1) for x in p.communicate()[0].strip().split('\n') ]
     # '* `%(ref)s <https://github.com/plasmodic/ecto/commit/%(ref)s>`_ %(comment)s` %s'%
-    lines = ['* `%(ref)s <https://github.com/plasmodic/ecto/commit/%(ref)s>`_ %(comment)s'%dict(ref=x[0],comment=x[1]) for x in lines]
-    print '\n'.join(lines)
+    lines = [fmt % dict(ref=x[0],comment=x[1]) for x in lines
+             if len(x) > 1]
+    if len(lines) > 0:
+        print header + '\n' + '^' * len(header) + '\n'
+        print headline
+        print '\n'.join(lines)
+        print headline
     print '\n'
