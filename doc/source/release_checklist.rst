@@ -11,6 +11,19 @@ Release Checklist
 
 * Add to list in ecto/doc/source/changelog_gen.py
 
+* make sure you're synced::
+   
+    git submodule foreach git fetch --all
+
+* check yer diffs::
+
+    git submodule foreach git diff --stat plasmodic/master
+
+* verify that your pushes will succeed::
+
+    git push --dry-run plasmodic master
+    git submodule foreach git push --dry-run plasmodic master
+
 * Tag kitchen and projects with the same tag::
 
     % git submodule foreach git tag amoeba-0
@@ -23,8 +36,21 @@ Release Checklist
 
 * Make docs, verify they look good.
     
-* Change tag/link on main ecto page to latest release
+* if okay, push::
 
+    git submodule foreach git push plasmodic master
+
+* and push tags::
+
+    git submodule foreach git push --tags plasmodic
+
+* and do the kitchen::
+
+    git push plasmodic master
+    git push --tags plasmodic
+
+* make the docs and deploy to the website
+* Change tag/link on main ecto page to latest release (commit to www proj)
 
 
 
