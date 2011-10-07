@@ -8,10 +8,15 @@
 
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
-export CFLAGS=
-export CPPFLAGS=
-export CXXFLAGS=
-export LDFLAGS=
+#export CFLAGS=
+#export CPPFLAGS=
+#export CXXFLAGS=
+#export LDFLAGS=
+
+NPROCS=$(shell grep processor /proc/cpuinfo | wc -l)
+
+howmanyprocs:
+	@echo $(NPROCS) processors
 
 %:
 	dh $@ 
@@ -27,3 +32,5 @@ override_dh_auto_configure:
 	-DBUILD_SAMPLES=OFF \
 	-DBUILD_TEST=ON
 
+override_dh_auto_build:
+	dh_auto_build -- -j -l $(NPROCS)
