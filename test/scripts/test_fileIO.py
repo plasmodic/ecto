@@ -10,7 +10,7 @@ def test_fileO(Scheduler, file_like_object, realfile=False):
     global cards, filetext
     plasm = ecto.Plasm()
     printer = ecto_test.FileO(file=ecto.ostream(file_like_object))
-    dealer = ecto.Dealer(typer=printer.inputs.at('input'), iterable=cards)
+    dealer = ecto.Dealer(tendril=printer.inputs.at('input'), iterable=cards)
     plasm.connect(dealer['out'] >> printer['input'])
     sched = Scheduler(plasm)
     sched.execute()
