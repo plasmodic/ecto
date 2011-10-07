@@ -147,6 +147,7 @@ def _cell_type_instance(CellOrCellType):
         c = cell_type.inspect((), {})
     else:
         cell_type = c.__class__
+    # print "....", (cell_type, c)
     return (cell_type, c)
 
 

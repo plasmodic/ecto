@@ -3,6 +3,7 @@
 #include <ecto/cell.hpp>
 
 #include <boost/foreach.hpp>
+#include <boost/format.hpp>
 #include <boost/python.hpp>
 #include <boost/python/raw_function.hpp>
 #include <boost/python/iterator.hpp>
@@ -19,15 +20,13 @@ namespace ecto
     namespace bp = boost::python;
     struct TendrilSpecification
     {
-      cell::ptr mod_input, mod_output;
+      cell_ptr mod_input, mod_output;
       std::string key;
 
-      TendrilSpecification()
-      {
-      }
+      TendrilSpecification() { }
 
       bool
-      check(cell::ptr mod, const std::string& key)
+      check(cell_ptr mod, const std::string& key)
       {
         if (key.empty())
           return true;
@@ -39,32 +38,38 @@ namespace ecto
         return true;
       }
 
-      TendrilSpecification(cell::ptr mod_in, cell::ptr mod_out, const std::string& key)
+      TendrilSpecification(cell_ptr mod_in, cell_ptr mod_out, const std::string& key)
           :
             mod_input(mod_in),
             mod_output(mod_out),
             key(key)
       {
         if (!check(mod_in, key))
-          BOOST_THROW_EXCEPTION(
-              EctoException() << diag_msg("no input or parameter found") << tendril_key(key) << cell_name(mod_in->name()));
+          BOOST_THROW_EXCEPTION(except::EctoException() 
+                                << except::diag_msg("no input or parameter found") 
+                                << except::tendril_key(key) 
+                                << except::cell_name(mod_in->name()));
         if (!check(mod_out, key))
-          BOOST_THROW_EXCEPTION(
-              EctoException() << diag_msg("no output or parameter found") << tendril_key(key) << cell_name(mod_in->name()));
+          BOOST_THROW_EXCEPTION(except::EctoException() 
+                                << except::diag_msg("no output or parameter found") 
+                                << except::tendril_key(key) 
+                                << except::cell_name(mod_in->name()));
       }
 
-      TendrilSpecification(cell::ptr mod, const std::string& key)
+      TendrilSpecification(cell_ptr mod, const std::string& key)
           :
             mod_input(mod),
             mod_output(mod),
             key(key)
       {
         if (!check(mod, key))
-          BOOST_THROW_EXCEPTION(
-              EctoException() << diag_msg("no inputs or outputs found") << tendril_key(key) << cell_name(mod->name()));
+          BOOST_THROW_EXCEPTION(except::EctoException() 
+                                << except::diag_msg("no inputs or outputs found") 
+                                << except::tendril_key(key) 
+                                << except::cell_name(mod->name()));
       }
 
-      tendril::ptr
+      tendril_ptr
       toTendril(tendril_type t)
       {
         switch (t)
@@ -76,7 +81,7 @@ namespace ecto
           case PARAMETER:
             return mod_input->parameters[key];
           default:
-            return tendril::ptr();
+            return tendril_ptr();
         }
       }
       bp::str
@@ -113,24 +118,25 @@ namespace ecto
       {
         if (vts.size() != 1)
         {
-          BOOST_THROW_EXCEPTION(
-              EctoException() << diag_msg("This specification must be of length one. e.g. module['only one key']"));
+          BOOST_THROW_EXCEPTION(except::EctoException() 
+                                << except::diag_msg("This specification must be of length one. "
+                                                    "e.g. module['only_one_key']"));
         }
         return vts.front();
       }
 
-      static tendrils::ptr
+      static tendrils_ptr
       toTendrils(bp::dict d, int tt)
       {
         bp::list keys = d.keys();
         bp::stl_input_iterator<std::string> begin(keys), end;
-        tendrils::ptr ts(new tendrils);
+        tendrils_ptr ts(new tendrils);
 
         while (begin != end)
         {
           std::string key = *begin;
           TendrilSpecifications spec = bp::extract<TendrilSpecifications>(d.get(bp::str(key)));
-          tendril::ptr tp = spec.toSpec().toTendril(tendril_type(tt));
+          tendril_ptr tp = spec.toSpec().toTendril(tendril_type(tt));
           ts->declare(key, tp);
           ++begin;
 
@@ -142,13 +148,13 @@ namespace ecto
     };
 
     inline TendrilSpecifications
-    getitem_str(cell::ptr mod, const std::string& key)
+    getitem_str(cell_ptr mod, const std::string& key)
     {
       return TendrilSpecifications::Vector(1, TendrilSpecification(mod, key));
     }
 
     inline TendrilSpecifications
-    getitem_tuple(cell::ptr mod, bp::tuple keys)
+    getitem_tuple(cell_ptr mod, bp::tuple keys)
     {
       int end = bp::len(keys);
       TendrilSpecifications l;
@@ -165,14 +171,14 @@ namespace ecto
     }
 
     inline TendrilSpecifications
-    getitem_list(cell::ptr mod, bp::list keys)
+    getitem_list(cell_ptr mod, bp::list keys)
     {
       bp::tuple t(keys);
       return getitem_tuple(mod, t);
     }
 
     inline TendrilSpecifications
-    getitem_slice(cell::ptr mod, bp::slice s)
+    getitem_slice(cell_ptr mod, bp::slice s)
     {
 
       if (s == bp::slice())
@@ -186,7 +192,7 @@ namespace ecto
     }
 
     inline TendrilSpecifications
-    expand(cell::ptr mod, const tendrils& t)
+    expand(cell_ptr mod, const tendrils& t)
     {
       TendrilSpecifications l;
 

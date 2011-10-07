@@ -30,6 +30,7 @@
 #include <ecto/ecto.hpp>
 #include <ecto/registry.hpp>
 #include <boost/foreach.hpp>
+#include <boost/format.hpp>
 
 using ecto::tendrils;
 namespace ecto_test
@@ -65,7 +66,7 @@ namespace ecto_test
       //SHOW();
       value_type& out = outputs.get<value_type> ("out");
       out = 0;
-      typedef std::pair<std::string, ecto::tendril::ptr> pp;
+      typedef std::pair<std::string, ecto::tendril_ptr> pp;
       BOOST_FOREACH(const pp& in,inputs)
         {
           out += in.second->get<value_type> ();

@@ -30,19 +30,14 @@
 
 #include <boost/shared_ptr.hpp>
 #include <boost/noncopyable.hpp>
-#include <boost/function.hpp>
-#include <boost/bind.hpp>
 #include <boost/optional.hpp>
-#include <boost/typeof/std/utility.hpp>
 
 #include <ecto/tendril.hpp>
 #include <ecto/tendrils.hpp>
 #include <ecto/strand.hpp>
 #include <ecto/util.hpp>
 #include <ecto/profile.hpp>
-#include <ecto/is_threadsafe.hpp>
-
-#include <map>
+#include <ecto/traits.hpp>
 
 namespace ecto
 {
@@ -158,6 +153,9 @@ namespace ecto
      */
     void short_doc(const std::string&);
 
+    void reset_strand();
+    void set_strand(ecto::strand);
+
     /**
      * \brief Generate an Restructured Text doc string for the cell. Includes documentation for all parameters,
      * inputs, outputs.
@@ -178,9 +176,10 @@ namespace ecto
     boost::optional<strand> strand_; //!< The strand that this cell should be executed in.
     profile::stats_type stats; //!< For collecting execution statistics for process.
 
+    virtual bool init() = 0;
+
   protected:
 
-    virtual bool init() = 0;
     virtual void dispatch_declare_params(tendrils& t) = 0;
 
     virtual void dispatch_declare_io(const tendrils& params, tendrils& inputs,
@@ -207,6 +206,7 @@ namespace ecto
     cell(const cell&);
 
     std::string instance_name_;
+    bool configured;
   };
 
   
@@ -223,23 +223,23 @@ namespace ecto
     
     // SFINAE eliminates this when the type of arg is invalid
     template<class U>
-    static yes test_declare_params(BOOST_TYPEOF_TPL(&U::declare_params));
+    static yes test_declare_params(__typeof__(&U::declare_params));
     // overload resolution prefers anything at all over "..."
     template<class U>
     static no test_declare_params(...);
 
     template<class U>
-    static yes test_declare_io(BOOST_TYPEOF_TPL(&U::declare_io));
+    static yes test_declare_io(__typeof__(&U::declare_io));
     template<class U>
     static no test_declare_io(...);
 
     template<class U>
-    static yes test_configure(BOOST_TYPEOF_TPL(&U::configure));
+    static yes test_configure(__typeof__(&U::configure));
     template<class U>
     static no test_configure(...);
 
     template<class U>
-    static yes test_process(BOOST_TYPEOF_TPL(&U::process));
+    static yes test_process(__typeof__(&U::process));
     template<class U>
     static no test_process(...);
 
@@ -273,53 +273,71 @@ namespace ecto
 
     typedef typename detail::python_mutex<Impl>::type gil_mtx_t;
 
-    ~cell_()
-    {
+    cell_() {
+      init_strand(typename ecto::detail::is_threadsafe<Impl>::type());
     }
-  protected:
-    template<int I>
-    struct int_
-    {
-    };
+
+    ~cell_() { }
+    template <int I> struct int_ { };
     typedef int_<0> not_implemented;
     typedef int_<1> implemented;
 
-    static void declare_params(not_implemented, tendrils& params)
-    {
-    }
+    // 
+    // declare_params
+    //
+    typedef int_<has_f<Impl>::declare_params> has_declare_params;
 
-    static void declare_params(implemented, tendrils& params)
+    static void declare_params(tendrils& params, not_implemented) { }
+
+    static void declare_params(tendrils& params, implemented)
     {
       Impl::declare_params(params);
     }
 
-    void dispatch_declare_params(tendrils& params)
+    static void declare_params(tendrils& params)
     {
-      declare_params(int_<has_f<Impl>::declare_params> (), params);
+      declare_params(params, has_declare_params());
     }
 
-    static void declare_io(not_implemented, const tendrils& params,
-                           tendrils& inputs, tendrils& outputs)
+    void dispatch_declare_params(tendrils& params)
     {
+      declare_params(params);
     }
-    static void declare_io(implemented, const tendrils& params,
-                           tendrils& inputs, tendrils& outputs)
+
+
+    // 
+    // declare_io
+    //
+    static void declare_io(const tendrils& params, tendrils& inputs, tendrils& outputs, not_implemented)
+    { }
+
+    static void declare_io(const tendrils& params, tendrils& inputs, tendrils& outputs, implemented)
     {
       Impl::declare_io(params, inputs, outputs);
+    }
+
+    typedef int_<has_f<Impl>::declare_io> has_declare_io;
+
+    static void declare_io(const tendrils& params, tendrils& inputs, tendrils& outputs)
+    {
+      declare_io(params, inputs, outputs, has_declare_io());
     }
 
     void dispatch_declare_io(const tendrils& params, tendrils& inputs,
                              tendrils& outputs)
     {
-      declare_io(int_<has_f<Impl>::declare_io> (), params, inputs, outputs);
+      declare_io(params, inputs, outputs);
     }
 
-    void configure(not_implemented, const tendrils&, const tendrils& , const tendrils&)
+    // 
+    // configure
+    //
+    void configure(const tendrils&, const tendrils& , const tendrils&, not_implemented)
     {
     }
 
-    void configure(implemented, 
-                   const tendrils& params, const tendrils& inputs, const tendrils& outputs)
+    void configure(const tendrils& params, const tendrils& inputs, const tendrils& outputs,
+                   implemented)
     {
       impl->configure(params,inputs,outputs);
     }
@@ -327,22 +345,25 @@ namespace ecto
     void dispatch_configure(const tendrils& params, const tendrils& inputs,
                             const tendrils& outputs)
     {
-      configure(int_<has_f<Impl>::configure> (), params,inputs,outputs);
+      configure(params, inputs, outputs, int_<has_f<Impl>::configure> ());
     }
 
-    ReturnCode process(not_implemented, const tendrils&, const tendrils&)
+    // 
+    // process
+    //
+    ReturnCode process(const tendrils&, const tendrils&, not_implemented)
     {
       return OK;
     }
 
-    ReturnCode process(implemented, const tendrils& inputs, const tendrils& outputs)
+    ReturnCode process(const tendrils& inputs, const tendrils& outputs, implemented)
     {
       return ReturnCode(impl->process(inputs, outputs));
     }
 
     ReturnCode dispatch_process(const tendrils& inputs, const tendrils& outputs)
     {
-        return process(int_<has_f<Impl>::process> (), inputs, outputs);
+      return process(inputs, outputs, int_<has_f<Impl>::process> ());
     }
 
     std::string dispatch_name() const
@@ -354,9 +375,7 @@ namespace ecto
       return SHORT_DOC;
     }
 
-    void dispatch_short_doc(const std::string&)
-    {
-    }
+    void dispatch_short_doc(const std::string&) { }
 
     cell::ptr dispatch_clone() const
     {
@@ -365,9 +384,8 @@ namespace ecto
 
     bool init()
     {
-      try{
-        bool initialized = impl;
-        if(!initialized)
+      try {
+        if(!impl)
         {
           impl.reset(new Impl);
           Impl* i=impl.get();
@@ -377,7 +395,7 @@ namespace ecto
           inputs.realize_potential(i);
           outputs.realize_potential(i);
         }
-        return initialized;
+        return impl;
       }
       catch (const std::exception& e)
       {
@@ -398,12 +416,23 @@ namespace ecto
       }
     }
 
-  public:
+  public: 
+
     boost::shared_ptr<Impl> impl;
     static std::string SHORT_DOC;
     static std::string CELL_NAME; //!< The python name for the cell.
     static std::string MODULE_NAME; //!< The module that the cell is part of.
     static const std::string CELL_TYPE_NAME;
+
+  private:
+
+    void init_strand(boost::mpl::true_) { } // threadsafe
+
+    void init_strand(boost::mpl::false_) { 
+      // thread-unsafe
+      static ecto::strand strand_;
+      cell::strand_ = strand_;
+    }
   };
 
   template<typename Impl>
@@ -418,33 +447,5 @@ namespace ecto
   template<typename Impl>
   const std::string cell_<Impl>::CELL_TYPE_NAME = ecto::name_of<Impl>();
 
-  /**
-   * Creates a cell from type T that has not been configured, so therefore,
-   * not allocated.  This only calls the static functions associated with parameter and
-   * input/output declaration.
-   *
-   * @return A cell::ptr that is initialized as far as default params,inputs,outputs go.
-   */
-  template<typename Impl>
-  typename cell_<Impl>::ptr inspect_cell()
-  {
-    typename cell_<Impl>::ptr p(new cell_<Impl> ());
-    cell::ptr base(p);
-    base->declare_params();
-    base->declare_io();
-    return p;
-  }
-
-  /**
-   * Create a cell from an type that has all of the proper interface functions defined.
-   * This will call configure in the cell.
-   * @return A cell ptr.
-   */
-  template<typename Impl>
-  typename cell_<Impl>::ptr create_cell()
-  {
-    typename cell_<Impl>::ptr p = inspect_cell<Impl>();
-    return p;
-  }
-
 }//namespace ecto
+

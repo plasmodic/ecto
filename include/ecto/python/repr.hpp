@@ -1,13 +1,10 @@
 #pragma once
 
-#include <boost/python.hpp>
+#include <boost/python/object_fwd.hpp>
 
 namespace ecto {
   namespace py {
-    inline std::string repr(const boost::python::object& obj)
-    {
-      return boost::python::extract<std::string>(obj.attr("__repr__")());
-    }
+    std::string repr(const boost::python::object& obj);
   }
 }
 

@@ -26,33 +26,34 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+#pragma once
 
-#include <boost/python.hpp>
-#include <ecto/ecto.hpp>
-#include <iostream>
-#include <queue>
+#include <deque>
+#include <ecto/forward.hpp>
+#include <boost/thread/mutex.hpp>
+#include <boost/shared_ptr.hpp>
 
-namespace ecto
-{
-  namespace bp = boost::python;
+namespace ecto {
+  namespace graph {
 
-  struct Constant
-  {
-    static void declare_params(tendrils& p)
+    struct edge
     {
-      p.declare<bp::object>("value", "Value to output").required(true);
-    }
+      edge(const std::string& fp, const std::string& tp); 
 
-    static void declare_io(const tendrils& params, tendrils& in, tendrils& out)
-    {
-      // copy supplied value of 
-      bp::object obj = params.get<bp::object> ("value");
+      const std::string& from_port();
+      const std::string& to_port();
 
-      out.declare<bp::object> ("out", "Any type, constant.", obj);
-    }
+      tendril& front();
 
-  };
+      void pop_front();
+
+      void push_back(const ecto::tendril& t);
+
+      std::size_t size(); 
+
+    private:
+      struct impl;
+      boost::shared_ptr<impl> impl_;
+    };
+  }
 }
-
-ECTO_CELL(ecto, ecto::Constant, "Constant",
-          "Constant node always outputs same value.");

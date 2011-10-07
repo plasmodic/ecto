@@ -28,24 +28,19 @@
  */
 #pragma once
 #include <boost/shared_ptr.hpp>
+#include <boost/enable_shared_from_this.hpp>
 #include <boost/noncopyable.hpp>
-#include <boost/tuple/tuple.hpp>
-
-#include <boost/serialization/vector.hpp>
-#include <boost/serialization/map.hpp>
 
 #include <string>
 #include <map>
 #include <list>
 
+#include <ecto/forward.hpp>
 #include <ecto/tendril.hpp>
 #include <ecto/graph_types.hpp>
 
 namespace ecto
 {
-  //forward declare cell so we don't get affected by its header
-  class cell;
-  typedef boost::shared_ptr<cell> cell_ptr;
 
   //forward declare schedulers for friendliness.
   namespace schedulers
@@ -58,7 +53,8 @@ namespace ecto
    * It enforces several invariants that are necessary for scheduling DAGs and
    * is used by all the ecto::schedulers to enable exectution of modules that are connected in the graph.
    */
-  class ECTO_EXPORT plasm: boost::noncopyable, public boost::enable_shared_from_this<plasm>
+  class ECTO_EXPORT plasm: 
+    boost::noncopyable, public boost::enable_shared_from_this<plasm>
   {
   public:
     plasm();
@@ -135,7 +131,7 @@ namespace ecto
      * \brief Grab a set of all the cells from the plasm.
      * @return a set of cells.
      */
-    std::vector<cell::ptr> cells() const;
+    std::vector<cell_ptr> cells() const;
 
     /**
      * \brief Calls configure on all modules, if configure has not already been called.
@@ -162,6 +158,7 @@ namespace ecto
     template<class Archive>
     void
     save(Archive & ar, const unsigned int version) const;
+
     template<class Archive>
     void
     load(Archive & ar,  const unsigned int version);

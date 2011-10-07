@@ -22,7 +22,9 @@ namespace {
 }
 TEST(Static, DoesItWork)
 {
-  ecto::cell::ptr a = ecto::create_cell<Add>();
+  ecto::cell::ptr a(new cell_<Add>);
+  a->declare_params();
+  a->declare_io();
   a->inputs["left"] << 2.0;
   a->inputs["right"] << 5.0;
   a->process();

@@ -69,7 +69,7 @@ namespace ecto
     struct registry: boost::noncopyable
     {
       typedef boost::function<void(Archive&, tendril&)> serial_fn_t;
-      typedef std::map<std::string, serial_fn_t> serail_map_t;
+      typedef std::map<std::string, serial_fn_t> serial_map_t;
 
       template<typename Serializer>
       void
@@ -86,10 +86,9 @@ namespace ecto
       void
       serialize(const std::string& key, Archive& ar, tendril& t) const;
 
-      serail_map_t serial_map;
+      serial_map_t serial_map;
 
-      static registry<Archive>&
-      instance();
+      static registry<Archive>& instance();
 
     private:
       registry();
@@ -136,3 +135,10 @@ namespace ecto{                               \
     template class register_serializer<Type>; \
   }                                           \
 }
+
+#define ECTO_INSTANTIATE_SERIALIZATION(T)                               \
+  template void T::serialize(boost::archive::text_oarchive&, const unsigned int); \
+  template void T::serialize(boost::archive::text_iarchive&, const unsigned int); \
+  template void T::serialize(boost::archive::binary_oarchive&, const unsigned int); \
+  template void T::serialize(boost::archive::binary_iarchive&, const unsigned int);
+

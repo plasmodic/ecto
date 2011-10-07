@@ -27,20 +27,13 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #pragma once
-#include <boost/python.hpp>
-#include <boost/python/type_id.hpp>
 #include <boost/shared_ptr.hpp>
-#include <boost/weak_ptr.hpp>
-#include <boost/function.hpp>
-#include <boost/bind.hpp>
+#include <boost/function/function1.hpp>
 
 #include <ecto/util.hpp> //name_of
 #include <ecto/tendril.hpp>
 #include <stdexcept>
 #include <string>
-#include <set>
-#include <sstream>
-#include <cstring>
 
 namespace ecto
 {
@@ -65,13 +58,13 @@ namespace ecto
      * implicit constructor from a tendril ptr. Needs to be a shared_ptr
      * and uses this to ensure that the spore always points to valid tendril.
      */
-    spore(tendril::ptr t) :
-        tendril_(t)
+    spore(tendril_ptr t) :
+      tendril_(t)
     {
       if(!t)
-        BOOST_THROW_EXCEPTION(NullTendril()
-                              << diag_msg("creating sport with type")
-                              << spore_typename(name_of<T>()));
+        BOOST_THROW_EXCEPTION(except::NullTendril()
+                              << except::diag_msg("creating sport with type")
+                              << except::spore_typename(name_of<T>()));
 
       t->enforce_type<T>();
     }
@@ -82,7 +75,7 @@ namespace ecto
      * @param cb The callback
      * @return ref to this spore, for chaining.
      */
-    spore<T>& set_callback(typename boost::function<void(T)> cb)
+    spore<T>& set_callback(typename boost::function1<void, T> cb)
     {
       get()->set_callback(cb);
       return *this;
@@ -139,29 +132,29 @@ namespace ecto
 
     pointer_type operator->()
     {
-      tendril::ptr _p = get();
+      tendril_ptr _p = get();
       return &(_p->get<T>());
     }
 
     const_pointer_type operator->() const
     {
-      tendril::const_ptr _p = get();
+      tendril_cptr _p = get();
       return &(_p->get<const T>());
     }
 
     reference_type operator*()
     {
-      tendril::ptr _p = get();
+      tendril_ptr _p = get();
       return _p->get<T>();
     }
 
     const_pointer_type operator*() const
     {
-      tendril::const_ptr _p = get();
+      tendril_cptr _p = get();
       return _p->get<const T>();
     }
 
-    typedef tendril::ptr this_type::*unspecified_bool_type;
+    typedef tendril_ptr this_type::*unspecified_bool_type;
 
     operator unspecified_bool_type() const // never throws
     {
@@ -171,28 +164,29 @@ namespace ecto
   private:
 
     /**
-     * Grab a pointer to the tendril that gave birth to this spore.
+     * Grab a pointer to the tendril that this spore points to.
      * @return non const pointer to tendril
      */
-    inline tendril::ptr get()
+    inline tendril_ptr get()
     {
       if (!tendril_)
-        BOOST_THROW_EXCEPTION(NullTendril());
+        BOOST_THROW_EXCEPTION(except::NullTendril());
       return tendril_;
     }
+
     /**
-     * Grab a pointer to the tendril that gave birth to this spore. const overload.
+     * Grab a pointer to the tendril that this spore points to. const overload.
      * @return const pointer to tendril
      */
-    inline tendril::const_ptr get() const
+    inline tendril_cptr get() const
     {
       if (!tendril_)
-        BOOST_THROW_EXCEPTION(NullTendril() 
-                              << diag_msg("access via spore")
-                              << spore_typename(name_of<T>()));
+        BOOST_THROW_EXCEPTION(except::NullTendril() 
+                              << except::diag_msg("access via spore")
+                              << except::spore_typename(name_of<T>()));
 
       return tendril_;
     }
-    boost::shared_ptr<tendril> tendril_;
+    tendril_ptr tendril_;
   };
 }

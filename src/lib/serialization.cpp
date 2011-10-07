@@ -1,6 +1,24 @@
 #include <ecto/ecto.hpp>
+#include <ecto/plasm.hpp>
+#include <ecto/edge.hpp>
+#include <ecto/registry.hpp>
+
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/binary_iarchive.hpp>
+#include <boost/archive/binary_oarchive.hpp>
+
+#include <boost/serialization/shared_ptr.hpp>
+#include <boost/serialization/vector.hpp>
+#include <boost/serialization/map.hpp>
+#include <boost/serialization/split_free.hpp>
+#include <boost/serialization/nvp.hpp>
+
+#include <ecto/serialization/cell.hpp>
 #include <ecto/serialization/registry.hpp>
 #include <ecto/serialization/cell.hpp>
+
+#include <boost/tuple/tuple.hpp>
 
 ECTO_REGISTER_SERIALIZERS(std::string);
 
@@ -25,9 +43,8 @@ namespace boost
   {
     template<class Archive>
     void
-    serialize(Archive & ar, ecto::tendril::none, const unsigned int version)
-    {
-    }
+    serialize(Archive &, ecto::tendril::none, const unsigned int)
+    { }
   } // namespace serialization
 } // namespace boost
 
@@ -39,37 +56,36 @@ namespace ecto
 {
   template<class Archive>
   void
-  tendril::save(Archive & ar, const unsigned int version) const
+  tendril::serialize(Archive& ar, const unsigned int)
   {
-    std::string type_name(type_ID_);
-    ar << type_name;
-    ar << doc_;
-    ecto::serialization::registry<Archive>::instance().serialize(type_name, ar, const_cast<tendril&>(*this));
+    std::string typename_;
+    if (typename Archive::is_saving()) 
+      typename_ = type_ID_;
+
+    ar & typename_;
+    ar & doc_;
+
+    ecto::serialization::registry<Archive>::instance()
+      .serialize(typename_, ar, const_cast< ::ecto::tendril&>(*this));
   }
+
+  ECTO_INSTANTIATE_SERIALIZATION(tendril);
 
   template<class Archive>
   void
-  tendril::load(Archive & ar, const unsigned int version)
+  tendrils::serialize(Archive & ar, const unsigned int version)
   {
-    std::string type_name;
-    ar >> type_name;
-    ar >> doc_;
-    ecto::serialization::registry<Archive>::instance().serialize(type_name, ar, *this);
+    ar & storage;
   }
-
-  //explicit instantiations
-  template void tendril::load<boost::archive::text_iarchive> (boost::archive::text_iarchive & ar, const unsigned int version) ;
-  template void tendril::save<boost::archive::text_oarchive> (boost::archive::text_oarchive & ar, const unsigned int version) const ;
-  template void tendril::load<boost::archive::binary_iarchive> (boost::archive::binary_iarchive & ar, const unsigned int version) ;
-  template void tendril::save<boost::archive::binary_oarchive> (boost::archive::binary_oarchive & ar, const unsigned int version) const;
-    
+  ECTO_INSTANTIATE_SERIALIZATION(tendrils);
+ 
   namespace serialization
   {
     template<typename Archive>
     void
     registry<Archive>::serialize(const std::string& key, Archive& ar, tendril& t) const
     {
-      typename serail_map_t::const_iterator it = serial_map.find(key);
+      typename serial_map_t::const_iterator it = serial_map.find(key);
       if (it == serial_map.end())
       {
         throw std::logic_error("Could not find a serializer registered for the type: " + key);
@@ -81,9 +97,9 @@ namespace ecto
     void
     registry<Archive>::add(const std::string& name, serial_fn_t fnc)
     {
-      typename serail_map_t::iterator it;
+      typename serial_map_t::iterator it;
       bool inserted;
-      boost::tie(it, inserted) = serial_map.insert(std::make_pair(name, fnc));
+      ::boost::tie(it, inserted) = serial_map.insert(std::make_pair(name, fnc));
       if (!inserted)
       {
         std::cerr << "Warning: ignoring non novel serialization for " << name << "." << std::endl;
@@ -103,9 +119,84 @@ namespace ecto
     {
     }
 
-    template class registry<boost::archive::binary_oarchive> ;
-    template class registry<boost::archive::binary_iarchive> ;
-    template class registry<boost::archive::text_oarchive> ;
-    template class registry<boost::archive::text_iarchive> ;
+    template class registry< ::boost::archive::binary_oarchive> ;
+    template class registry< ::boost::archive::binary_iarchive> ;
+    template class registry< ::boost::archive::text_oarchive> ;
+    template class registry< ::boost::archive::text_iarchive> ;
+  }
+}
+
+
+namespace ecto
+{
+  namespace serialization
+  {
+    typedef ecto::graph::graph_t::vertex_descriptor vd_t;
+    typedef boost::tuple<vd_t, std::string, vd_t, std::string> connection_t;
+    typedef std::map<vd_t, cell::ptr> cell_map_t;
+  }
+
+  template<class Archive>
+  void
+  plasm::save(Archive & ar, const unsigned int version) const
+  {
+    const ecto::graph::graph_t& g = graph();
+    ecto::graph::graph_t::edge_iterator begin, end;
+    serialization::vd_t source, sink;
+    serialization::cell_map_t cell_map;
+    std::vector<serialization::connection_t> connections;
+    for (boost::tie(begin, end) = boost::edges(g); begin != end; ++begin)
+    {
+      source = boost::source(*begin, g);
+      sink = boost::target(*begin, g);
+      cell::ptr to = g[sink], from = g[source];
+      cell_map[sink] = to;
+      cell_map[source] = from;
+      std::string to_port = g[*begin]->to_port();
+      std::string from_port = g[*begin]->from_port();
+      connections.push_back(boost::make_tuple(source, from_port, sink, to_port));
+    }
+    ar << cell_map;
+    ar << connections;
+  }
+
+  template<class Archive>
+  void
+  plasm::load(Archive & ar, const unsigned int version)
+  {
+    serialization::cell_map_t cell_map;
+    std::vector<serialization::connection_t> connections;
+    ar >> cell_map;
+    ar >> connections;
+    for (size_t i = 0; i < connections.size(); i++)
+    {
+      cell::ptr from, to;
+      from = cell_map[connections[i].get<0>()];
+      to = cell_map[connections[i].get<2>()];
+      std::string from_port, to_port;
+      from_port = connections[i].get<1>();
+      to_port = connections[i].get<3>();
+      connect(from, from_port, to, to_port);
+    }
+  }
+  ECTO_INSTANTIATE_SERIALIZATION(plasm);
+
+}
+
+namespace boost
+{
+  namespace serialization
+  {
+    template<typename Archive>
+    void
+    serialize(Archive& ar, 
+              ecto::serialization::connection_t& c,
+              const unsigned int version )
+    {
+      ar & c.get<0>();
+      ar & c.get<1>();
+      ar & c.get<2>();
+      ar & c.get<3>();
+    }
   }
 }

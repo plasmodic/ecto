@@ -29,7 +29,7 @@ TEST(SporeTest, LifeTime)
 
 TEST(SporeTest, NoDefault)
 {
-  tendril::ptr p = make_tendril<double>();
+  tendril_ptr p = make_tendril<double>();
   spore<double> d = p; //p has to stay in scope...
   EXPECT_FALSE(d.user_supplied());
   EXPECT_FALSE(d.dirty());
@@ -46,7 +46,7 @@ TEST(SporeTest, NoDefault)
 
 TEST(SporeTest, Default)
 {
-  tendril::ptr p = make_tendril<double>();
+  tendril_ptr p = make_tendril<double>();
   EXPECT_FALSE(p->dirty());
 
   spore<double> d = p; //p has to stay in scope...
@@ -86,7 +86,7 @@ struct cbs
 
 TEST(SporeTest, Callbacks)
 {
-  tendril::ptr p = make_tendril<double>();
+  tendril_ptr p = make_tendril<double>();
   spore<double> d = p; //p has to stay in scope...
   d.set_default_val(1.41421356);
 
@@ -127,7 +127,7 @@ TEST(SporeTest, Callbacks)
 
 TEST(SporeTest, Expressions)
 {
-  tendril::ptr ta = make_tendril<double>(),
+  tendril_ptr ta = make_tendril<double>(),
     tb = make_tendril<double>(),
     tc = make_tendril<double>()
     ;
@@ -181,7 +181,7 @@ struct SporeCellConst
 
 //    o["out"] = 2.0;//fail to compile.
 
-//    tendril::ptr tp = out.get();//fail to compile
+//    tendril_ptr tp = out.get();//fail to compile
 
     //out >> d; //should fail to compile
     //i["d"] >> out; //should fail at compile time. FIXME this doesn't fail but should not compile.
@@ -192,11 +192,13 @@ struct SporeCellConst
   spore<std::string> foo;
 };
 
-TEST(SporeTest, Semantixs)
+TEST(SporeTest, Semantics)
 {
-    cell::ptr c1 = create_cell<SporeCellConst>();
-    c1->configure();
-    c1->process();
+  cell::ptr c1(new cell_<SporeCellConst>);
+  c1->declare_params();
+  c1->declare_io();
+  c1->configure();
+  c1->process();
 }
 
 
@@ -259,8 +261,8 @@ TEST(SporeTest, CopyConstructionValue)
 
 TEST(SporeTest, ImplicitConstructor)
 {
-  tendril::ptr d = make_tendril<double>();
-  tendril::ptr s = make_tendril<std::string>();
+  tendril_ptr d = make_tendril<double>();
+  tendril_ptr s = make_tendril<std::string>();
   spore<double> dd;
   spore<std::string> ss;
   dd = d;
@@ -274,7 +276,7 @@ TEST(SporeTest, NullAssign)
 {
   spore<std::string> ss;
   EXPECT_THROW(
-  ss = tendril::ptr();
+  ss = tendril_ptr();
   ,
   ecto::except::NullTendril);
 }

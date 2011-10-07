@@ -7,7 +7,7 @@ using namespace ecto;
 
 TEST(TendrilTest, MakeTendril)
 {
-  tendril::ptr tp = make_tendril<bp::object>();
+  tendril_ptr tp = make_tendril<bp::object>();
   EXPECT_TRUE(tp->get<bp::object>() == bp::object());
 }
 
@@ -71,7 +71,7 @@ TEST(TendrilTest, Constructors)
     EXPECT_FALSE(meh.dirty());
   }
   {
-    tendril::ptr meh = make_tendril<float>();
+    tendril_ptr meh = make_tendril<float>();
     EXPECT_FALSE(meh->dirty());
     EXPECT_FALSE(meh->user_supplied());
     EXPECT_FALSE(meh->has_default());
@@ -313,8 +313,8 @@ TEST(TendrilTest, SyntacticSugar)
 TEST(TendrilTest, Nones)
 {
 
-  tendril::ptr a = make_tendril<tendril::none>();
-  tendril::ptr b = make_tendril<tendril::none>();
+  tendril_ptr a = make_tendril<tendril::none>();
+  tendril_ptr b = make_tendril<tendril::none>();
   EXPECT_TRUE(a->is_type<tendril::none>());
   EXPECT_TRUE(a->same_type(*b));
   EXPECT_TRUE(b->same_type(*a));
@@ -444,8 +444,8 @@ TEST(TendrilTest, ConversionTableFromUDTColumn)
 
 TEST(TendrilTest, ConvertersCopied)
 {
-  tendril::ptr a = make_tendril<tendril::none>();
-  tendril::ptr b = make_tendril<double>();
+  tendril_ptr a = make_tendril<tendril::none>();
+  tendril_ptr b = make_tendril<double>();
   EXPECT_FALSE(a->same_type(*b));
   EXPECT_FALSE(b->same_type(*a));
   *a = *b;
@@ -464,8 +464,8 @@ TEST(TendrilTest, ConvertersCopied)
 
 TEST(TendrilTest, ConvertersCopied2)
 {
-  tendril::ptr a = make_tendril<tendril::none>();
-  tendril::ptr b = make_tendril<double>();
+  tendril_ptr a = make_tendril<tendril::none>();
+  tendril_ptr b = make_tendril<double>();
   *a << *b; //copy the converters
   bp::object o(2.0);
   *a << o; //copy boost python object, should try to convert to double.
@@ -474,7 +474,7 @@ TEST(TendrilTest, ConvertersCopied2)
 }
 TEST(TendrilTest, Nullptr)
 {
-  tendril::ptr a, b;
+  tendril_ptr a, b;
   try
   {
     a << b;

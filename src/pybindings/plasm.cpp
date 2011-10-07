@@ -8,10 +8,11 @@
 #include <boost/python/type_id.hpp>
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <boost/python/suite/indexing/map_indexing_suite.hpp>
+
 #include <ecto/ecto.hpp>
+#include <ecto/edge.hpp>
 #include <ecto/serialization/registry.hpp>
 #include <ecto/serialization/cell.hpp>
-#include <ecto/serialization/plasm.hpp>
 
 namespace bp = boost::python;
 using bp::arg;
@@ -57,6 +58,30 @@ namespace ecto
       }
       return tuples;
     }
+
+    void plasm_connect_explicit(plasm& p, 
+                                bp::object fromcell, std::string fromport,
+                                bp::object tocell, std::string toport)
+    {
+      bp::object fc_impl = getattr(fromcell, "__impl");
+      cell::ptr fc = bp::extract<cell::ptr>(fc_impl);
+      bp::object tc_impl = getattr(tocell, "__impl");
+      cell::ptr tc = bp::extract<cell::ptr>(tc_impl);
+      p.connect(fc, fromport, tc, toport);
+    }
+                                
+    void plasm_disconnect_explicit(plasm& p, 
+                                   bp::object fromcell, std::string fromport,
+                                   bp::object tocell, std::string toport)
+    {
+      bp::object fc_impl = getattr(fromcell, "__impl");
+      cell::ptr fc = bp::extract<cell::ptr>(fc_impl);
+      bp::object tc_impl = getattr(tocell, "__impl");
+      cell::ptr tc = bp::extract<cell::ptr>(tc_impl);
+      p.disconnect(fc, fromport, tc, toport);
+    }
+                                
+
     void plasm_connect_list(plasm& p, bp::list connections)
     {
       connections = sanitize_connection_list(connections);
@@ -79,14 +104,14 @@ namespace ecto
       {
         bp::list l;
         try
-        {
+          {
           l = bp::list(args[i]);
-        } catch (const boost::python::error_already_set&)
+          } catch (const boost::python::error_already_set&)
         {
           PyErr_Clear(); //Need to clear the error or python craps out. Try commenting out and running the doc tests.
           throw std::runtime_error(
               "Did you mean plasm.connect(cellA['out'] >> cellB['in']), or plasm.connect(cellA,'out',cellB,'in')?");
-        }
+              }
         plasm_connect_list(*p, l);
       }
       return i;
@@ -117,8 +142,8 @@ namespace ecto
         source = boost::source(*begin, g);
         sink = boost::target(*begin, g);
         cell::ptr to = g[sink], from = g[source];
-        std::string to_port = g[*begin]->to_port;
-        std::string from_port = g[*begin]->from_port;
+        std::string to_port = g[*begin]->to_port();
+        std::string from_port = g[*begin]->from_port();
         result.append(bp::make_tuple(from, from_port, to, to_port));
       }
       return result;
@@ -142,7 +167,7 @@ namespace ecto
 
     void plasm_insert(plasm& p, bp::object bb)
     {
-      bp::object cbp = bb.attr("_cell");
+      bp::object cbp = bb.attr("__impl");
       cell::ptr c =  bp::extract<cell::ptr>(cbp);
       p.insert(c);
     }
@@ -158,10 +183,10 @@ namespace ecto
 
       p.def("connect", &plasm_connect_list, bp::args("connection_list"));
       p.def("connect", bp::raw_function(plasm_connect_args, 2));
-      p.def("connect", &plasm::connect, bp::args("from_cell", "output_name", 
-                                                 "to_cell", "intput_name"));
-      p.def("disconnect", &plasm::disconnect, bp::args("from_cell", "output_name", 
-                                                       "to_cell", "intput_name"));
+      p.def("connect", &plasm_connect_explicit, 
+            bp::args("from_cell", "output_name", "to_cell", "intput_name"));
+      p.def("disconnect", &plasm_disconnect_explicit, 
+            bp::args("from_cell", "output_name", "to_cell", "intput_name"));
       p.def("execute", &plasm::execute,
             execute_overloads(bp::args("niter"),
                               "Executes the graph in topological order. Every node will be executed."));

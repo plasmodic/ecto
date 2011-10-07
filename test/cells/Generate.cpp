@@ -36,7 +36,7 @@ namespace ecto_test
   template<typename T>
   struct Generate
   {
-    ecto::spore<T> step_,start_,out_; //so that it receives updates dynamically.
+    ecto::spore<T> step_, start_, out_; //so that it receives updates dynamically.
 
     static void declare_params(tendrils& parameters)
     {
@@ -60,6 +60,7 @@ namespace ecto_test
     int process(const ecto::tendrils& inputs, const ecto::tendrils& outputs)
     {
       *out_ += *step_;
+      std::cout << "generate:  out=" << *out_ << "\n";
       return 0;
     }
   };

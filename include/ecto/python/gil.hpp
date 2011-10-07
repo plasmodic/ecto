@@ -1,26 +1,26 @@
 #pragma once
 
-#include <Python.h>
-#include <boost/thread/locks.hpp>
+#include <boost/scoped_ptr.hpp>
 
 namespace ecto {
+  namespace py {
 
-  class gil : boost::noncopyable
-  {
-  private:
-    PyGILState_STATE gstate;
+    class gil : boost::noncopyable
+    {
+      struct impl;
+      boost::scoped_ptr<impl> impl_;
 
-  public:
-    gil() { gstate = PyGILState_Ensure(); }
-    
-    ~gil() { PyGILState_Release(gstate);   }
-  };
+    public:
+      gil();
+      ~gil();
+    };
 
-  class nothing_to_lock : boost::noncopyable
-  {
-  public:
-    nothing_to_lock() { }
-    ~nothing_to_lock() { }
-  };
+    class nothing_to_lock : boost::noncopyable
+    {
+    public:
+      nothing_to_lock() { }
+      ~nothing_to_lock() { }
+    };
 
+  }
 }

@@ -47,7 +47,7 @@ namespace ecto
       shallow_merge(const tendrils& fts, tendrils& ts)
       {
         std::string key;
-        tendril::ptr t;
+        tendril_ptr t;
         BOOST_FOREACH(boost::tie(key,t), fts)
             {
               ts.declare(key, t);
@@ -93,7 +93,7 @@ namespace ecto
     cell::ptr
     create_black_box(plasm::ptr plasm, int niter, const tendrils& p, const tendrils& i, const tendrils& o)
     {
-      cell_<BlackBox>::ptr black_box = create_cell<BlackBox>();
+      cell_<BlackBox>::ptr black_box(new cell_<BlackBox>);
       cell::ptr base(black_box);
       BlackBox::shallow_merge(p, base->parameters);
       BlackBox::shallow_merge(i, base->inputs);

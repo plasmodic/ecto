@@ -7,15 +7,43 @@ namespace ecto
   struct Dealer
   {
     static void
+    declare_params(tendrils& p)
+    {
+      p.declare<bp::object>("iterable", 
+                            "iterable python object... values to be output")
+        .required(true);
+      p.declare<tendril_ptr>("tendril",
+                              "Destination tendril...  used to set output type")
+        .required(true);
+    }
+
+    static void
     declare_io(const tendrils& parms, tendrils& in, tendrils& out)
     {
       out.declare<tendril::none>("out", "Any type");
     }
+
     void
-    configure(const tendrils& parms, const tendrils& in, const tendrils& out)
+    configure(const tendrils& p, const tendrils& in, const tendrils& out)
     {
+      bp::object iterable = p["iterable"]->get<bp::object>();
+
+      size_t end = bp::len(iterable);
+
+      tendril_ptr typer = p["tendril"]->get<tendril_ptr>();
+
+      for (size_t j = 0; j < end; ++j)
+        {
+          bp::object value = iterable[j];
+          tendril x;
+          x << *typer; // set the type.
+          x << value;  // extract from python
+          values_.push_back(x);
+        }
+
       out_ = out["out"];
     }
+
     int
     process(const tendrils& in, const tendrils& out)
     {
@@ -26,38 +54,7 @@ namespace ecto
       return ecto::OK;
     }
     std::list<tendril> values_;
-    tendril::ptr out_;
+    tendril_ptr out_;
   };
-
-  cell::ptr
-  createDealer(tendril::ptr typer, bp::object iterable)
-  {
-    cell_<Dealer>::ptr dealer = ecto::create_cell<Dealer>();
-    cell::ptr base(dealer);
-    base->configure();
-    if (!iterable || iterable == bp::object())
-      return dealer;
-    size_t end = bp::len(iterable);
-    for (size_t j = 0; j < end; ++j)
-    {
-      bp::object value = iterable[j];
-      tendril x;
-      x << *typer; //set the type.
-      x << value;
-      dealer->impl->values_.push_back(x);
-    }
-    return dealer;
-  }
-  namespace py
-  {
-    using bp::arg;
-    void
-    wrap_dealer()
-    {
-      bp::def("Dealer", createDealer, (arg("typer"), arg("iterable") = bp::object()), //args
-              "Constructs a Dealer with the type determined by `typer` and the the python iterable." //doc str
-              );
-    }
-  }
 }
-
+ECTO_CELL(ecto, ecto::Dealer, "Dealer", "Emit values of python iterable");

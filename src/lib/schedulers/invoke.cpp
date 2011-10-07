@@ -1,12 +1,13 @@
-#include <ecto/plasm.hpp>
-#include <ecto/tendril.hpp>
-#include <ecto/cell.hpp>
-
 #include <string>
 #include <map>
 #include <set>
 #include <utility>
 #include <deque>
+
+#include <ecto/plasm.hpp>
+#include <ecto/tendril.hpp>
+#include <ecto/cell.hpp>
+#include <ecto/edge.hpp>
 
 #include <ecto/graph_types.hpp>
 #include <ecto/plasm.hpp>
@@ -26,9 +27,9 @@ namespace ecto {
       tie(inbegin, inend) = boost::in_edges(vd, graph);
       while (inbegin != inend)
         {
-          edge::ptr e = graph[*inbegin];
+          edge_ptr e = graph[*inbegin];
           tendril& from = e->front();
-          tendril& to = *(m->inputs[e->to_port]);
+          tendril& to = *(m->inputs[e->to_port()]);
           to << from;
           e->pop_front(); //todo Make this use a pool, instead of popping. To get rid of allocations.
           ++inbegin;
@@ -45,8 +46,8 @@ namespace ecto {
       tie(outbegin, outend) = boost::out_edges(vd, graph);
       while (outbegin != outend)
         {
-          edge::ptr e = graph[*outbegin];
-          e->push_back(*m->outputs[e->from_port]);//copy everything... value, docs, user_defined, etc...
+          edge_ptr e = graph[*outbegin];
+          e->push_back(*m->outputs[e->from_port()]);//copy everything... value, docs, user_defined, etc...
           ++outbegin;
         }
       return rval;

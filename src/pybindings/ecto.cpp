@@ -1,5 +1,6 @@
 #include <boost/python.hpp>
 #include <ecto/ecto.hpp>
+#include <ecto/registry.hpp>
 
 #include <boost/thread.hpp>
 
@@ -13,11 +14,11 @@ namespace ecto {
     void wrapConnection();
     void wrapPlasm();
     void wrapModule();
+    void wrapRegistry();
     void wrapSchedulers();
     void wrapStrand();
     void wrap_except();
     void wrap_ether();
-    void wrap_dealer();
     void wrap_black_box();
     void wrap_python_streambuf();
 
@@ -56,13 +57,14 @@ namespace ecto {
 
 ECTO_INSTANTIATE_REGISTRY(ecto)
  
-namespace
-{
-void dummy() { std::cout << __PRETTY_FUNCTION__ << "\n"; }
-std::string versionstr(){return ECTO_VERSION_STRING;}
-unsigned abinum(){return ECTO_ABI_VERSION;}
-bp::tuple sonametuple(){return bp::make_tuple(ECTO_MAJOR_VERSION, ECTO_MINOR_VERSION, ECTO_PATCH_VERSION);}
+namespace ecto {
+  namespace py {
+    std::string versionstr() { return ECTO_VERSION_STRING; }
+    unsigned abinum() { return ECTO_ABI_VERSION; }
+    bp::tuple sonametuple() { return bp::make_tuple(ECTO_MAJOR_VERSION, ECTO_MINOR_VERSION, ECTO_PATCH_VERSION); }
+  }
 }
+
 BOOST_PYTHON_MODULE(ecto)
 {
   bp::class_<ecto::tendril::none>("no_value");
@@ -70,23 +72,20 @@ BOOST_PYTHON_MODULE(ecto)
   ecto::py::wrapConnection();
   ecto::py::wrapPlasm();
   ecto::py::wrapModule();
+  ecto::py::wrapRegistry();
   ecto::py::wrapTendrils();
   ecto::py::wrapSchedulers();
   ecto::py::wrapStrand();
   ecto::py::wrap_except();
   ecto::py::wrap_ether();
-  ecto::py::wrap_dealer();
   ecto::py::wrap_black_box();
   ecto::py::wrap_python_streambuf();
 
   bp::def("hardware_concurrency", &boost::thread::hardware_concurrency);
 
-  // for setting breakpoints
-  bp::def("dummy", &dummy);
-
-  bp::def("version",&versionstr);
-  bp::def("abi",&abinum);
-  bp::def("soname",&sonametuple);
+  bp::def("version",&ecto::py::versionstr);
+  bp::def("abi",&ecto::py::abinum);
+  bp::def("soname",&ecto::py::sonametuple);
 
   // use this if you're embedding ipython and dont want to see
   // your cout/cerr

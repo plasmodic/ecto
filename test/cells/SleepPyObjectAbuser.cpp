@@ -29,6 +29,7 @@
 
 #define ECTO_LOG_ON
 #include <ecto/ecto.hpp>
+#include <ecto/traits.hpp>
 #include <ecto/registry.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/python/stl_iterator.hpp>

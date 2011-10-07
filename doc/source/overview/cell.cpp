@@ -1,5 +1,6 @@
 //start
 #include <ecto/ecto.hpp>
+#include <ecto/registry.hpp>
 #include <iostream>
 #include <string>
 using ecto::tendrils;

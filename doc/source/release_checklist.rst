@@ -1,6 +1,11 @@
 Release Checklist
 =================
 
+* Be sure you are fully merged::
+  
+    git submodule foreach git fetch --all
+    git submodule foreach git pull plasmodic master
+
 * Verify testing.
 
 * Pick your tag.  We'll call this one ``amoeba-0``

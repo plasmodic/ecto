@@ -27,18 +27,46 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #pragma once
+#include <vector>
 #include <boost/noncopyable.hpp>
+#include <boost/function/function0.hpp>
+#include <boost/make_shared.hpp>
+#include <ecto/forward.hpp>
+#include <ecto/util.hpp>
+#include <ecto/cell.hpp>
 
 namespace ecto {
+
+  namespace py {
+    void postregistration(const std::string&, const std::string&, const std::string&);
+  }
 
   struct cell;
 
   namespace registry {
 
-    template <typename T>
+    typedef boost::shared_ptr<cell>(*factory_fn_t)();
+    typedef void (*declare_params_t)(ecto::tendrils&);
+    typedef void (*declare_io_t)(const ecto::tendrils&, ecto::tendrils&, 
+                                 ecto::tendrils&);
+
+    struct entry_t {
+      factory_fn_t construct;
+      declare_params_t declare_params;
+      declare_io_t declare_io;
+
+      boost::shared_ptr<cell> construct_() { return construct(); }
+      void declare_params_(ecto::tendrils& t) { declare_params(t); }
+      void declare_io_(const ecto::tendrils& p, ecto::tendrils& i, ecto::tendrils& o) 
+      { 
+        declare_io(p, i, o); 
+      }
+    };
+
+    template <typename ModuleTag>
     struct module_registry : boost::noncopyable
     {
-      typedef boost::function<void(void)> nullary_fn_t;
+      typedef boost::function0<void> nullary_fn_t;
 
       void add(nullary_fn_t f)
       {
@@ -65,34 +93,44 @@ namespace ecto {
     };
 
     template <typename Module, typename T>
-    struct registrator {
+    struct registrator 
+    {
       const char* name_;
       const char* docstring_;
+
+      typedef ::ecto::cell_<T> cell_t;
+
+      static boost::shared_ptr<cell> create()
+      {
+        return boost::shared_ptr<cell>(new cell_t);
+      }
 
       explicit registrator(const char* name, const char* docstring) 
         : name_(name), docstring_(docstring) 
       { 
+        // this fires the construction of proper python classes at import time
         module_registry<Module>::instance().add(boost::ref(*this));
-        register_factory_fn(name_of<T>(), &ecto::create_cell<T>);
+
+        // this registers the functions needed to do the construction above
+        entry_t e;
+        e.construct = &create;// ecto::create_cell<T>;
+        e.declare_params = (void (*)(tendrils&)) &cell_t::declare_params;
+        e.declare_io = (void (*)(const tendrils&, tendrils&, tendrils&)) &cell_t::declare_io;
+        register_factory_fn(name_of<T>(), e);
       }
 
       void operator()() const 
       {
-        ecto::wrap<T>(name_, docstring_);
+        ecto::py::postregistration(name_, docstring_, name_of<T>());
       }
       const static registrator& inst;
-
     };
     
+    entry_t lookup(const std::string& name);
     boost::shared_ptr<cell> create(const std::string& name);
-    typedef boost::function<boost::shared_ptr<cell>()> ffn_t;
-
-    void register_factory_fn(const std::string& name, ffn_t fn);
-
+    void register_factory_fn(const std::string& name, entry_t e);
   }
 }
-
-//  namespace ecto { namespace tag { struct MODULE; } }                 
 
 #define ECTO_MODULETAG(MODULE) namespace ecto { namespace tag { struct MODULE; } }
 #define ECTO_CELL(MODULE, TYPE, NAME, DOCSTRING)                        \

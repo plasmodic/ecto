@@ -2,6 +2,12 @@ from ecto import _cell_base
 
 class Cell(_cell_base):
             
+    def __getattr__(self, name):
+        if name == '__impl':
+            return self
+        else:
+            return self.__dict__[name]
+
     def __init__(self, **kwargs):
         _cell_base.__init__(self)
 
@@ -15,6 +21,7 @@ class Cell(_cell_base):
         if self.__doc__ is None:
             self.__doc__ = "TODO docstr me."
         self.__doc__ = self.gen_doc(self.__doc__)
+
     @classmethod
     def inspect(cls,_args,_kwargs):
         m = cls()

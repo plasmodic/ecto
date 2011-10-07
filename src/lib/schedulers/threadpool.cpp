@@ -17,6 +17,12 @@
 #include <boost/asio.hpp>
 #include <boost/thread.hpp>
 #include <boost/unordered_map.hpp>
+#include <boost/format.hpp>
+
+#include <boost/spirit/home/phoenix/core.hpp>
+#include <boost/spirit/home/phoenix/operator.hpp>
+#include <boost/exception/all.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
 
 #include <ecto/plasm.hpp>
 #include <ecto/tendril.hpp>
@@ -25,14 +31,9 @@
 #include <ecto/strand.hpp>
 
 #include <ecto/graph_types.hpp>
-#include <ecto/plasm.hpp>
+#include <ecto/edge.hpp>
 #include <ecto/schedulers/invoke.hpp>
 #include <ecto/schedulers/threadpool.hpp>
-
-#include <boost/spirit/home/phoenix/core.hpp>
-#include <boost/spirit/home/phoenix/operator.hpp>
-#include <boost/exception/all.hpp>
-#include <boost/date_time/posix_time/posix_time.hpp>
 
 namespace ecto {
 
@@ -43,6 +44,8 @@ namespace ecto {
   using boost::thread;
   using boost::exception;
   using boost::exception_ptr;
+
+  using namespace ecto::except;
 
   namespace schedulers {
     namespace asio = boost::asio;
@@ -230,7 +233,7 @@ namespace ecto {
           for (tie(in_beg, in_end) = in_edges(vd, g);
                in_beg != in_end; ++in_beg)
             {
-              graph::edge::ptr e = g[*in_beg];
+              graph::edge_ptr e = g[*in_beg];
               if (e->size() == 0)
                 return false;
             }
@@ -239,7 +242,7 @@ namespace ecto {
           for (tie(out_beg, out_end) = out_edges(vd, g);
                out_beg != out_end; ++out_beg)
             {
-              graph::edge::ptr e = g[*out_beg];
+              graph::edge_ptr e = g[*out_beg];
               if (e->size() > 0)
                 return false;
             }

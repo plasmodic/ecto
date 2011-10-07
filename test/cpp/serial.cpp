@@ -1,8 +1,10 @@
 #include <gtest/gtest.h>
 #include <ecto/ecto.hpp>
+#include <ecto/plasm.hpp>
+
 #include <ecto/serialization/registry.hpp>
 #include <ecto/serialization/cell.hpp>
-#include <ecto/serialization/plasm.hpp>
+
 #include <boost/serialization/vector.hpp>
 #include <fstream>
 #include <boost/foreach.hpp>
@@ -98,32 +100,23 @@ namespace FooT
 }
 TEST(SerialTest, test_unknown)
 {
-  {
-
-    ecto::tendril t(FooT::BarStruct(), "An unknown type.");
-    std::ofstream out("unknown.ecto");
-    boost::archive::text_oarchive oa(out);
-    try{
+  ecto::tendril t(FooT::BarStruct(), "An unknown type.");
+  std::ofstream out("unknown.ecto");
+  boost::archive::text_oarchive oa(out);
+  try{
     oa & t;
-    }catch(std::exception& e)
-    {
-      std::cout << e.what() << std::endl;
-      EXPECT_EQ(std::string("Could not find a serializer registered for the type: FooT::BarStruct"),e.what());
-    }
+  }catch(std::exception& e) {
+    std::cout << e.what() << std::endl;
+    EXPECT_EQ(std::string("Could not find a serializer registered for the type: FooT::BarStruct"),e.what());
   }
-//  {
-//    ecto::tendril t;
-//    std::ifstream in("unknown.ecto");
-//    boost::archive::text_iarchive ia(in);
-//    ia & t;
-//    std::cout << t.type_name() << " " << t.doc() << std::endl;
-//  }
 }
 
 TEST(SerialTest, Cell)
 {
   {
     ecto::cell::ptr add = ecto::registry::create("ecto_test::Add");
+    add->declare_params();
+    add->declare_io();
     EXPECT_TRUE(add);
     std::cout << add->name() << std::endl;
     std::ofstream out("add.ecto");
@@ -147,9 +140,15 @@ TEST(SerialTest, CellWithTendrilWithCell)
 {
   {
     ecto::cell::ptr add = ecto::registry::create("ecto_test::Add");
-    ecto::cell::ptr If = ecto::registry::create("ecto::If");
+    add->declare_params();
+    add->declare_io();
     add->outputs["out"] << 3.14;
+
+    ecto::cell::ptr If = ecto::registry::create("ecto::If");
+    If->declare_params();
+    If->declare_io();
     If->parameters["cell"] << add;
+
     std::ofstream out("If.ecto");
     boost::archive::text_oarchive oa(out);
     oa & If;
@@ -181,14 +180,21 @@ TEST(SerialTest, Plasm)
 {
   {
     ecto::plasm::ptr p(new ecto::plasm);
-    ecto::cell::ptr m1 = ecto::registry::create("ecto_test::Generate<double>"), m2 = ecto::registry::create(
-        "ecto_test::Add");
-    p->connect(m1, "out", m2, "left");
-    p->connect(m1, "out", m2, "right");
+    ecto::cell::ptr gen = ecto::registry::create("ecto_test::Generate<double>"), 
+      add = ecto::registry::create("ecto_test::Add");
+    gen->name("gen");
+    gen->declare_params(); 
+    gen->declare_io();
+    add->name("add");
+    add->declare_params(); 
+    add->declare_io();
+
+    p->connect(gen, "out", add, "left");
+    p->connect(gen, "out", add, "right");
     p->execute(2);
-    std::cout << m2->outputs.get<double>("out") << std::endl;
-    EXPECT_EQ(2, m1->outputs.get<double>("out"));
-    EXPECT_EQ(4, m2->outputs.get<double>("out"));
+    std::cout << add->outputs.get<double>("out") << std::endl;
+    EXPECT_EQ(2, gen->outputs.get<double>("out"));
+    EXPECT_EQ(4, add->outputs.get<double>("out"));
     std::ofstream out("graph.ecto");
     boost::archive::text_oarchive oa(out);
     oa & *p;
@@ -205,13 +211,17 @@ TEST(SerialTest, Plasm)
     std::map<std::string, double> results;
     for (size_t i = 0; i < cells.size(); i++)
     {
-      std::cout << cells[i]->name() << " " << cells[i]->outputs.get<double>("out") << std::endl;
+      std::cout << cells[i]->name() << " out=" 
+                << cells[i]->outputs.get<double>("out") << std::endl;
+
       results[cells[i]->name()] = cells[i]->outputs.get<double>("out");
     }
 
+    EXPECT_EQ(results.count("add"), 1);
+    EXPECT_EQ(results.count("gen"), 1);
     //expect results.
-    EXPECT_EQ(4, results["ecto_test::Add"]);
-    EXPECT_EQ(2, results["ecto_test::Generate<double>"]);
+    EXPECT_EQ(4, results["add"]);
+    EXPECT_EQ(2, results["gen"]);
   }
 
 }

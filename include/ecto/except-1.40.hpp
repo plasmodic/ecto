@@ -40,18 +40,6 @@
 #include <boost/preprocessor/stringize.hpp>
 #include <boost/preprocessor/seq/for_each.hpp>
 
-#define ECTO_EXCEPTION_TAG_NAMES                                        \
-  (from_typename)(to_typename)(from_key)(to_key)                        \
-  (from_cell)(to_cell)(cpp_typename)(pyobject_repr)(actualtype_hint)    \
-  (spore_typename)(diag_msg)(actualkeys_hint)(tendril_key)(cell_name)   \
-  (function_name)(hint)(which_tendrils)(prev_typename)(cur_typename)    \
-  (type)(what)(when)
-
-#define ECTO_EXCEPTIONS                                                 \
-    (TypeMismatch)(ValueNone)(ValueRequired)(NonExistant)               \
-    (FailedFromPythonConversion)(TendrilRedeclaration)(CellException)   \
-    (NotConnected)(AlreadyConnected)(NullTendril)
-
 namespace ecto
 {
   namespace except

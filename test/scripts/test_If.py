@@ -10,8 +10,8 @@ def test_If():
     truer = ecto.TrueEveryN(n=3,count=3)
     plasm.connect(truer['flag'] >> If['__test__']
                   )
-    plasm.execute(niter=9)
-    assert g.outputs.out == 3 #should have only called execute 3 times.
+    plasm.execute(niter=27)
+    assert g.outputs.out == 9 #should have only called execute 9 times.
 if __name__ == '__main__':
     test_If()
 

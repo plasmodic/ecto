@@ -12,59 +12,59 @@ namespace ecto
 namespace py
 {
 
-tendril::ptr tendril_ctr()
+tendril_ptr tendril_ctr()
 {
   return boost::shared_ptr<tendril>(new tendril(bp::object(),"A pythonic tendril."));
 }
 
-std::string tendril_type_name(tendril::ptr t)
+std::string tendril_type_name(tendril_ptr t)
 {
   return t->type_name();
 }
 
-std::string tendril_doc(tendril::ptr t)
+std::string tendril_doc(tendril_ptr t)
 {
   return t->doc();
 }
 
-void tendril_set_doc(tendril::ptr t, const std::string& doc)
+void tendril_set_doc(tendril_ptr t, const std::string& doc)
 {
   return t->set_doc(doc);
 }
 
-bp::object tendril_get_val(tendril::ptr t)
+bp::object tendril_get_val(tendril_ptr t)
 {
   bp::object o;
   t >> o;
   return o;
 }
 
-void tendril_set_val(tendril::ptr t, bp::object val)
+void tendril_set_val(tendril_ptr t, bp::object val)
 {
   t << val;
   t->dirty(true);
   t->user_supplied(true);
 }
-void tendril_copy_val(tendril::ptr t, tendril::ptr tv)
+void tendril_copy_val(tendril_ptr t, tendril_ptr tv)
 {
   t << *tv;
 }
-bool tendril_user_supplied(tendril::ptr t)
+bool tendril_user_supplied(tendril_ptr t)
 {
   return t->user_supplied();
 }
 
-bool tendril_has_default(tendril::ptr t)
+bool tendril_has_default(tendril_ptr t)
 {
   return t->has_default();
 }
 
-bool tendril_dirty(tendril::ptr t)
+bool tendril_dirty(tendril_ptr t)
 {
   return t->dirty();
 }
 
-bool tendril_required(tendril::ptr t)
+bool tendril_required(tendril_ptr t)
 {
   return t->required();
 }

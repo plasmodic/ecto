@@ -33,6 +33,7 @@
 
 using ecto::tendrils;
 using ecto::tendril;
+using ecto::tendril_ptr;
 
 namespace ecto_test
 {
@@ -43,7 +44,7 @@ namespace ecto_test
   {
     unsigned period_usec;
     pt::ptime prevtime;
-    tendril::ptr in, out;
+    tendril_ptr in, out;
     ecto::spore<double> rate_;
 
     static void declare_params(tendrils& parameters)

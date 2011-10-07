@@ -1,6 +1,7 @@
 #include <ecto/plasm.hpp>
 #include "plasm/impl.hpp"
-#include <ecto/tendril.hpp>
+#include <ecto/tendrils.hpp>
+#include <ecto/edge.hpp>
 #include <ecto/cell.hpp>
 #include <ecto/graph_types.hpp>
 #include <ecto/schedulers/singlethreaded.hpp>
@@ -8,6 +9,7 @@
 #include <boost/format.hpp>
 #include <boost/date_time/posix_time/posix_time_duration.hpp>
 #include <boost/regex.hpp>
+#include <boost/foreach.hpp>
 
 #include <string>
 #include <map>
@@ -18,7 +20,6 @@
 #include <ecto/ecto.hpp>
 #include <ecto/serialization/registry.hpp>
 #include <ecto/serialization/cell.hpp>
-#include <ecto/serialization/plasm.hpp>
 
 namespace ecto
 {
@@ -87,7 +88,7 @@ namespace ecto
     {
 
 
-      cell::ptr c = (*g)[vd];
+      cell_ptr c = (*g)[vd];
       int n_inputs = c->inputs.size();
       int n_outputs = c->outputs.size();
       int n_params = c->parameters.size();
@@ -149,7 +150,7 @@ namespace ecto
     void
     operator()(std::ostream& out, graph_t::edge_descriptor ed)
     {
-      out << "[headport=\"i_" << (*g)[ed]->to_port << "\" tailport=\"o_" << (*g)[ed]->from_port << "\"]";
+      out << "[headport=\"i_" << (*g)[ed]->to_port() << "\" tailport=\"o_" << (*g)[ed]->from_port() << "\"]";
     }
   };
 
@@ -170,13 +171,13 @@ namespace ecto
   plasm::~plasm() { }
 
   void
-  plasm::insert(cell::ptr mod)
+  plasm::insert(cell_ptr mod)
   {
     impl_->insert_module(mod);
   }
 
   void
-  plasm::connect(cell::ptr from, const std::string& output, cell::ptr to, const std::string& input)
+  plasm::connect(cell_ptr from, const std::string& output, cell_ptr to, const std::string& input)
   {
     impl_->connect(from, output, to, input);
   }
@@ -236,7 +237,7 @@ namespace ecto
     struct get_first
     {
       template <typename T>
-      cell::ptr
+      cell_ptr
       operator()(T& t) const
       {
         return t.first;
@@ -244,10 +245,10 @@ namespace ecto
     };
   }
 
-  std::vector<cell::ptr>
+  std::vector<cell_ptr>
   plasm::cells() const
   {
-    std::vector<cell::ptr> c;
+    std::vector<cell_ptr> c;
     std::transform(impl_->mv_map.begin(), impl_->mv_map.end(), std::back_inserter(c), get_first());
     return c;
   }
@@ -268,7 +269,7 @@ namespace ecto
     tie(begin, end) = boost::vertices(g);
     while (begin != end)
     {
-      cell::ptr m = g[*begin];
+      cell_ptr m = g[*begin];
       std::set<std::string> in_connected, out_connected;
 
       //verify all required inputs are connected
@@ -276,9 +277,9 @@ namespace ecto
       tie(b_in, e_in) = boost::in_edges(*begin, g);
       while (b_in != e_in)
       {
-        edge::ptr in_edge = g[*b_in];
-        cell::ptr from_module = g[source(*b_in, g)];
-        in_connected.insert(in_edge->to_port);
+        edge_ptr in_edge = g[*b_in];
+        cell_ptr from_module = g[source(*b_in, g)];
+        in_connected.insert(in_edge->to_port());
         ++b_in;
       }
 
@@ -297,8 +298,8 @@ namespace ecto
       tie(b_out, e_out) = boost::out_edges(*begin, g);
       while (b_out != e_out)
       {
-        edge::ptr out_edge = g[*b_out];
-        out_connected.insert(out_edge->from_port);
+        edge_ptr out_edge = g[*b_out];
+        out_connected.insert(out_edge->from_port());
         ++b_out;
       }
 
@@ -316,6 +317,8 @@ namespace ecto
     }
   }
 
+
+
   void plasm::save(std::ostream& out) const
   {
     boost::archive::text_oarchive oa(out);
@@ -327,5 +330,4 @@ namespace ecto
     boost::archive::text_iarchive ia(in);
     ia >> *this;
   }
-
 }

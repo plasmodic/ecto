@@ -9,9 +9,10 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 add_library(ecto SHARED
   abi.cpp
+  cell.cpp
+  edge.cpp
   tendril.cpp
   tendrils.cpp
-  cell.cpp
   plasm.cpp
   plasm/impl.cpp
   util.cpp
@@ -19,6 +20,7 @@ add_library(ecto SHARED
   except.cpp
   needs_gil.cpp
   profile.cpp
+  python.cpp
   registry.cpp
   serialization.cpp
   schedulers/invoke.cpp

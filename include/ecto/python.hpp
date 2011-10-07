@@ -26,33 +26,32 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+#pragma once
+//do not include this in ecto lib files, only in client modules
 
 #include <boost/python.hpp>
-#include <ecto/ecto.hpp>
+
+//ecto includes
+#include <ecto/version.hpp>
+#include <ecto/abi.hpp>
+#include <ecto/util.hpp>
+#include <ecto/traits.hpp>
 #include <iostream>
-#include <queue>
 
-namespace ecto
-{
-  namespace bp = boost::python;
+#include <ecto/registry.hpp>
 
-  struct Constant
-  {
-    static void declare_params(tendrils& p)
-    {
-      p.declare<bp::object>("value", "Value to output").required(true);
-    }
+#define ECTO_ASSERT_MODULE_NAME(MODULE)                                 \
+  template <unsigned T>  void module_must_be_named_##MODULE();          \
+  extern template void module_must_be_named_##MODULE<MODULE##_ectomodule_EXPORTS>();
 
-    static void declare_io(const tendrils& params, tendrils& in, tendrils& out)
-    {
-      // copy supplied value of 
-      bp::object obj = params.get<bp::object> ("value");
+#define ECTO_DEFINE_MODULE(modname)                                     \
+  ECTO_INSTANTIATE_REGISTRY(modname)                                    \
+  ECTO_ASSERT_MODULE_NAME(modname)                                      \
+  void init_module_##modname##_rest() ;                                 \
+  BOOST_PYTHON_MODULE(modname) {                                        \
+    ECTO_REGISTER(modname);                                             \
+    init_module_##modname##_rest();                                     \
+  }                                                                     \
+  void init_module_##modname##_rest()
 
-      out.declare<bp::object> ("out", "Any type, constant.", obj);
-    }
 
-  };
-}
-
-ECTO_CELL(ecto, ecto::Constant, "Constant",
-          "Constant node always outputs same value.");

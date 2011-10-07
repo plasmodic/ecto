@@ -4,6 +4,7 @@
 #include <ecto/except.hpp>
 #include <boost/exception/all.hpp>
 #include <boost/thread.hpp>
+
 #include <boost/preprocessor/cat.hpp>
 #include <boost/preprocessor/stringize.hpp>
 #include <boost/preprocessor/seq/for_each.hpp>
@@ -92,7 +93,7 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
       return "  Hint   : '" + key + "' does not exist in module.";
   }
 
-  cell::cell() { }
+  cell::cell() : configured(false) { }
 
   cell::~cell() { }
 
@@ -117,9 +118,11 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
   void
   cell::configure()
   {
-    bool initialized = true;
-    initialized = init();
-    if(initialized) return;
+    if (configured)
+      return;
+    configured = true;
+      
+    init();
     try
     {
       dispatch_configure(parameters, inputs, outputs);
@@ -248,19 +251,27 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
   cell::ptr
   cell::clone() const
   {
-    cell::ptr c = dispatch_clone();
-    c->declare_params();
+    cell::ptr cloned = dispatch_clone();
+    cloned->declare_params();
     //copy all of the parameters by value.
-    tendrils::iterator it = c->parameters.begin();
-    tendrils::const_iterator end = c->parameters.end(), oit = parameters.begin();
+    tendrils::iterator it = cloned->parameters.begin(), 
+      end = cloned->parameters.end();
+    tendrils::const_iterator oit = parameters.begin();
     while (it != end)
     {
       it->second << *oit->second;
       ++oit;
       ++it;
     }
-    c->declare_io();
-    return c;
+    cloned->declare_io();
+    return cloned;
   }
 
+  void cell::reset_strand() {
+    strand_.reset();
+  }
+
+  void cell::set_strand(ecto::strand s) {
+    strand_ = s;
+  }
 }

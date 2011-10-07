@@ -1,3 +1,4 @@
+#include <boost/python.hpp>
 #include <ecto/ecto.hpp>
 #include <boost/python/errors.hpp>
 #undef BOOST_EXCEPTION_DYNAMIC_TYPEID

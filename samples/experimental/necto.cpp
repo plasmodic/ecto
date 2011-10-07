@@ -3,7 +3,6 @@
 #include <ecto/plasm.hpp>
 #include <ecto/serialization/registry.hpp>
 #include <ecto/serialization/cell.hpp>
-#include <ecto/serialization/plasm.hpp>
 
 #include <boost/asio.hpp>
 #include <boost/archive/binary_iarchive.hpp>
@@ -231,7 +230,7 @@ namespace ecto_X
     std::string url;
     unsigned short port;
     boost::shared_ptr<client> client_;
-    tendril::ptr out_tendril;
+    tendril_ptr out_tendril;
   };
 
   /// Serves stock quote information to any client that connects to it.
@@ -343,7 +342,7 @@ namespace ecto_X
     }
 
     unsigned short port;
-    tendril::ptr in_tendril;
+    tendril_ptr in_tendril;
     boost::shared_ptr<boost::asio::io_service> io_service;
     boost::shared_ptr<server> server_;
     boost::shared_ptr<boost::thread> runner;

@@ -6,7 +6,7 @@ import ecto_test
 plasm = ecto.Plasm()
 printer = ecto_test.Printer()
 cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-dealer = ecto.Dealer(typer=printer.inputs.at('in'), iterable=cards)
+dealer = ecto.Dealer(tendril=printer.inputs.at('in'), iterable=cards)
 plasm.connect(dealer['out'] >> printer['in'])
 
 if __name__ == '__main__':
