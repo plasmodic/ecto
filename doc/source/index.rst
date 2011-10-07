@@ -34,4 +34,4 @@ Also feel free to join the email list:
    techniques/index.rst
    reference/index.rst
    cmake.rst
-
+   release_checklist.rst
