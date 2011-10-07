@@ -23,7 +23,6 @@ class EctoCellBase(object):
     pass
 
 def cell_getitem(self, *args, **kwargs):
-    print "GETITEM!", self, args, kwargs
     if len(args) == 1 and type(args[0]) == slice:
         return __getitem_slice__(self.__impl, args[0])
     if len(args) == 1 and type(args[0]) == tuple:
@@ -63,7 +62,6 @@ def cellinit(cpptype):
 def cell_print_tendrils(tendril):
     s = ""
     for x in tendril:
-        print ">>>>>", x.data().doc
         try:
             value = str(x.data().get())
         except TypeError, e:
@@ -85,9 +83,10 @@ def cell_print_tendrils(tendril):
 
 @classmethod
 def cell_inspect(self, *args, **kwargs):
-    # print "cell_inspect!", self, args, kwargs
-    c = self()
-    return c.__impl
+    c = self.__factory()
+    c.declare_params()
+    c.declare_io()
+    return c
 
 def cell_process(self):
     return self.__impl.process()
@@ -102,8 +101,6 @@ def cell_typename(self):
     return self.__impl.typename()
 
 def postregister(cellname, cpptypename, docstring, inmodule):
-    #print "POSTREGISTER OF", cellname, "(", cpptypename, ") in", inmodule
-    #print "doc:", docstring
 
     e = lookup(cpptypename)
     c = e.construct()
@@ -120,6 +117,7 @@ def postregister(cellname, cpptypename, docstring, inmodule):
                          outputs = c.outputs,
                          params = c.params,
                          type = c.typename,
+                         short_doc = c.short_doc,
                          __init__ = cellinit(cpptypename),
                          __getitem__ = cell_getitem,
                          inspect = cell_inspect,
@@ -127,6 +125,7 @@ def postregister(cellname, cpptypename, docstring, inmodule):
                          configure = cell_configure,
                          name = cell_name,
                          type_name = cell_typename,
+                         __factory = e.construct
                          ))
 
     inmodule.__dict__[cellname] = thistype
