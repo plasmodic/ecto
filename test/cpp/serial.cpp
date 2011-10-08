@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <ecto/ecto.hpp>
 #include <ecto/plasm.hpp>
-
+#include <ecto/schedulers/singlethreaded.hpp>
 #include <ecto/serialization/registry.hpp>
 #include <ecto/serialization/cell.hpp>
 
@@ -191,7 +191,8 @@ TEST(SerialTest, Plasm)
 
     p->connect(gen, "out", add, "left");
     p->connect(gen, "out", add, "right");
-    p->execute(2);
+    ecto::schedulers::singlethreaded sched(p);
+    sched.execute(2);
     std::cout << add->outputs.get<double>("out") << std::endl;
     EXPECT_EQ(2, gen->outputs.get<double>("out"));
     EXPECT_EQ(4, add->outputs.get<double>("out"));

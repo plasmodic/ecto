@@ -22,7 +22,6 @@ namespace ecto {
     typedef boost::unordered_map<cell_ptr, graph::graph_t::vertex_descriptor> ModuleVertexMap;
     ModuleVertexMap mv_map;
     graph::graph_t graph;
-    boost::shared_ptr<ecto::schedulers::singlethreaded> scheduler;
 
   };
 }

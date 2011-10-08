@@ -1,6 +1,6 @@
 #include <ecto/plasm.hpp>
 #include <ecto/cell.hpp>
-
+#include <ecto/schedulers/singlethreaded.hpp>
 
 #include <boost/python.hpp>
 #include <boost/python/raw_function.hpp>
@@ -165,13 +165,18 @@ namespace ecto
       return l;
     }
 
+    int plasm_execute(boost::shared_ptr<plasm> p, unsigned niter = 0)
+    {
+      ecto::schedulers::singlethreaded sched(p);
+      return sched.execute(niter);
+    }
+
     void plasm_insert(plasm& p, bp::object bb)
     {
       bp::object cbp = bb.attr("__impl");
       cell::ptr c =  bp::extract<cell::ptr>(cbp);
       p.insert(c);
     }
-    BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( execute_overloads , plasm::execute , 0,1)
 
     void wrap()
     {
@@ -187,9 +192,9 @@ namespace ecto
             bp::args("from_cell", "output_name", "to_cell", "intput_name"));
       p.def("disconnect", &plasm_disconnect_explicit, 
             bp::args("from_cell", "output_name", "to_cell", "intput_name"));
-      p.def("execute", &plasm::execute,
-            execute_overloads(bp::args("niter"),
-                              "Executes the graph in topological order. Every node will be executed."));
+      p.def("execute", &plasm_execute,
+            (bp::args("niter") = 1),
+            "Executes the graph using a single threaded scheduler.");
 
       p.def("viz", wrapViz, "Get a graphviz string representation of the plasm.");
       p.def("connections", plasm_get_connections, "Grabs the current list based description of the graph. "

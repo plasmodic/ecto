@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <ecto/ecto.hpp>
+#include <ecto/schedulers/singlethreaded.hpp>
 #include <ecto/plasm.hpp>
 
 #define STRINGDIDLY(A) std::string(#A)
@@ -63,7 +64,8 @@ TEST(Plasm, Passthrough)
   m1->outputs["d"] << 5.0;
   p->connect(m1,"d",pass,"in");
   p->connect(pass,"out",m2,"d");
-  p->execute(1);
+  ecto::schedulers::singlethreaded sched(p);
+  sched.execute(1);
   double out;
   m2->inputs["d"] >> out;
   EXPECT_TRUE(out == 5.0);

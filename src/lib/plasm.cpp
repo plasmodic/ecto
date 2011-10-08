@@ -4,7 +4,6 @@
 #include <ecto/edge.hpp>
 #include <ecto/cell.hpp>
 #include <ecto/graph_types.hpp>
-#include <ecto/schedulers/singlethreaded.hpp>
 
 #include <boost/format.hpp>
 #include <boost/date_time/posix_time/posix_time_duration.hpp>
@@ -213,18 +212,6 @@ namespace ecto
   plasm::graph() const
   {
     return impl_->graph;
-  }
-
-  int
-  plasm::execute(unsigned niter)
-  {
-    if (!impl_->scheduler)
-      impl_->scheduler.reset(new ecto::schedulers::singlethreaded(shared_from_this()));
-    impl_->scheduler->execute(niter);
-    while (impl_->scheduler->running())
-      boost::this_thread::sleep(boost::posix_time::microseconds(10));
-
-    return 0;
   }
 
   std::size_t 

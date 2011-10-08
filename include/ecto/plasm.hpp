@@ -51,7 +51,8 @@ namespace ecto
   /**
    * \brief The plasm helps construct the graph structure in ecto.
    * It enforces several invariants that are necessary for scheduling DAGs and
-   * is used by all the ecto::schedulers to enable exectution of modules that are connected in the graph.
+   * is used by all the ecto::schedulers to enable execution of modules
+   * that are connected in the graph.
    */
   class ECTO_EXPORT plasm: 
     boost::noncopyable, public boost::enable_shared_from_this<plasm>
@@ -61,7 +62,7 @@ namespace ecto
     ~plasm();
 
     /**
-     * \brief insert the cell into the graph so that it may be executed by a scheduler.
+     * \brief Insert the cell into the graph so that it may be executed by a scheduler.
      *
      * @param mod The cell to insert into the graph.
      */
@@ -69,7 +70,7 @@ namespace ecto
     insert(cell_ptr mod);
 
     /**
-     * \brief connect one cell to another, and populate the plasms graph accordingly.
+     * \brief Connect one cell to another, and populate the graph accordingly.
      * This will throw on a type mismatch.
      * @param from  The from cell
      * @param output The output key of the from cell
@@ -103,7 +104,7 @@ namespace ecto
     viz() const;
 
     /**
-     * \brief check that all tags on the graph are satisified.
+     * \brief Check that all tags on the graph are satisfied.
      * This will throw on errors in the graph, including, if required inputs are not connected
      * if required outputs are not connected, if there are cycles, etc...
      */
@@ -137,12 +138,6 @@ namespace ecto
      * \brief Calls configure on all modules, if configure has not already been called.
      */
     void configure_all();
-
-    /**
-     * \brief Execute using a predefined scheduler.
-     */
-    int
-    execute(unsigned niter = 1);
 
     typedef boost::shared_ptr<plasm> ptr;
     typedef boost::shared_ptr<const plasm> const_ptr;

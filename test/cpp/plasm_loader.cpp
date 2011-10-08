@@ -2,7 +2,7 @@
 #include <ecto/plasm.hpp>
 #include <ecto/serialization/registry.hpp>
 #include <ecto/serialization/cell.hpp>
-
+#include <ecto/schedulers/singlethreaded.hpp>
 #include <cstring>
 int
 main(int argc, char** argv)
@@ -26,5 +26,6 @@ main(int argc, char** argv)
   {
     std::cout << cells[i]->name() << std::endl;
   }
-  return p->execute(std::atoi(argv[2]));
+  ecto::schedulers::singlethreaded sched(p);
+  return sched.execute(std::atoi(argv[2]));
 }
