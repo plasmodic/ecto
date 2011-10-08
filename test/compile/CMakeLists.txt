@@ -1,30 +1,50 @@
 
 macro(add_compile_fail_test FILENAME)
   add_library(compile_fail_${FILENAME} 
-    SHARED
+    STATIC
     EXCLUDE_FROM_ALL
     ${CMAKE_CURRENT_SOURCE_DIR}/${FILENAME}.cpp
     )
 
+  set_target_properties(compile_fail_${FILENAME}
+    PROPERTIES
+    ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+    )
+
+  set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/${FILENAME}.cpp}
+    PROPERTIES
+    OBJECT_OUTPUTS THIS_DOES_NOT_EXIST_TO_PROVOKE_REBUILD_EVERY_TIME
+    )
+  
   add_test(NAME compile_fail_${FILENAME}
     COMMAND
     ${CMAKE_CURRENT_SOURCE_DIR}/fail.sh 
-    ${CMAKE_MAKE_PROGRAM} -C ${CMAKE_CURRENT_BINARY_DIR} compile_fail_${FILENAME})
+    ${CMAKE_MAKE_PROGRAM} compile_fail_${FILENAME})
 
 endmacro()
 
 
 macro(add_compile_pass_test FILENAME)
   add_library(compile_pass_${FILENAME} 
-    SHARED
+    STATIC
     EXCLUDE_FROM_ALL
     ${CMAKE_CURRENT_SOURCE_DIR}/${FILENAME}.cpp
     )
 
+  set_target_properties(compile_pass_${FILENAME}
+    PROPERTIES
+    ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+    )
+
+  set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/${FILENAME}.cpp}
+    PROPERTIES
+    OBJECT_OUTPUTS THIS_DOES_NOT_EXIST_TO_PROVOKE_REBUILD_EVERY_TIME
+    )
+  
   add_test(NAME compile_pass_${FILENAME}
     COMMAND
     ${CMAKE_CURRENT_SOURCE_DIR}/pass.sh 
-    ${CMAKE_MAKE_PROGRAM} -C ${CMAKE_CURRENT_BINARY_DIR} compile_pass_${FILENAME})
+    ${CMAKE_MAKE_PROGRAM} compile_pass_${FILENAME})
 
 endmacro()
 
@@ -60,7 +80,7 @@ foreach(HEADER ${ECTO_HEADERS})
     @ONLY)
 
   add_library(${testname}
-    SHARED
+    STATIC
     EXCLUDE_FROM_ALL
     ${testsrc}
     )
