@@ -3,6 +3,7 @@
 //  accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
 // Modified by Jakob van Santen, September 2010
+//  Willow Garage BSD License not applicable
 
 #ifndef ICETRAY_PYTHON_STD_VECTOR_INDEXING_SUITE_HPP_INCLUDED
 # define ICETRAY_PYTHON_STD_VECTOR_INDEXING_SUITE_HPP_INCLUDED

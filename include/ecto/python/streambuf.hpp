@@ -1,3 +1,4 @@
+// Willow Garage BSD License not applicable
 #pragma once
 // original source from http://cci.lbl.gov/cctbx_sources/boost_adaptbx/python_streambuf.h
 // original license

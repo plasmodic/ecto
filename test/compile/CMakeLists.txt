@@ -101,3 +101,17 @@ foreach(HEADER ${ECTO_HEADERS})
     )
 
 endforeach()
+
+file(GLOB_RECURSE ECTO_HEADERS_ABSPATH 
+  ${ecto_SOURCE_DIR}/*.hpp)
+
+file(GLOB_RECURSE ECTO_SRC_ABSPATH 
+  ${ecto_SOURCE_DIR}/src/*.cpp)
+
+add_test(NAME license_in_headers 
+  COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/check_new_bsd_license.py ${ECTO_HEADERS_ABSPATH}
+  )
+
+add_test(NAME license_in_src
+  COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/check_new_bsd_license.py ${ECTO_SRC_ABSPATH}
+  )

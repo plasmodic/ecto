@@ -4,7 +4,7 @@
 //  http://www.boost.org/LICENSE_1_0.txt)
 //  Modified by Troy D. Straszheim and Jakob van Santen, 2009-03-26
 //  Pulled in to ecto in 2010-11 by Troy D. Straszheim
-
+//  Willow Garage BSD License not applicable
 #ifndef ICETRAY_PYTHON_STD_MAP_INDEXING_SUITE_HPP_INCLUDED
 # define ICETRAY_PYTHON_STD_MAP_INDEXING_SUITE_HPP_INCLUDED
 
