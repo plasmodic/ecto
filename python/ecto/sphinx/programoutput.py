@@ -22,7 +22,8 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-
+#
+# Willow Garage BSD License not applicable
 
 """
     sphinxcontrib.programoutput
@@ -240,3 +241,4 @@ def setup(app):
     app.add_directive('command-output', ProgramOutputDirective)
     app.connect('builder-inited', init_cache)
     app.connect('doctree-read', run_programs)
+

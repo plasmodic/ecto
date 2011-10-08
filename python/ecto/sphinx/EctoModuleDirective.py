@@ -22,6 +22,8 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
+#
+# Willow Garage BSD License not applicable
 
 
 __version__ = '0.4.1'
@@ -83,3 +85,4 @@ def do_ectomodule(app, doctree):
 def setup(app):
     app.add_directive('ectomodule', EctoModuleDirective)
     app.connect('doctree-read', do_ectomodule)
+

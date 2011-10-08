@@ -70,8 +70,13 @@ for filename in files:
         for k, v in commentchars.iteritems():
             if filename.endswith(k):
                 cmt = v
+        if txt.startswith('#!'):
+            hashbang, rest = txt.split('\n', 1)
+            print >>newf, hashbang
+        else:
+            rest = txt
         print >>newf, cmt, bsd.replace('\n', '\n' + cmt + ' ')
-        print >>newf, txt
+        print >>newf, rest
         newf.close()
         result += filename + "AUTOFIXED"
     print result

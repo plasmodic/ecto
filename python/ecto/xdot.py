@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
+# Willow Garage BSD License not applicable
 
 '''Visualize dot graphs via the xdot format.'''
 
@@ -2210,3 +2211,4 @@ brewer_colors = {
 
 if __name__ == '__main__':
     main()
+

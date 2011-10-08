@@ -115,3 +115,15 @@ add_test(NAME license_in_headers
 add_test(NAME license_in_src
   COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/check_new_bsd_license.py ${ECTO_SRC_ABSPATH}
   )
+
+file(GLOB ECTO_PY_ABSPATH
+  ${ecto_SOURCE_DIR}/python/ecto/*.py
+  ${ecto_SOURCE_DIR}/python/ecto/sphinx/*.py
+  ${ecto_SOURCE_DIR}/test/scripts/*.py
+  ${ecto_SOURCE_DIR}/samples/*.py
+  )
+
+add_test(NAME license_in_py
+  COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/check_new_bsd_license.py ${ECTO_PY_ABSPATH}
+  )
+
