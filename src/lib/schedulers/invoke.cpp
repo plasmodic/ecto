@@ -1,3 +1,5 @@
+#include <ecto/python.hpp>
+
 #include <string>
 #include <map>
 #include <set>

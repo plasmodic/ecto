@@ -11,6 +11,11 @@
 
 using boost::format;
 
+#if BOOST_VERSION <= 104000
+#define TYPEID_NAME(X) X.name()
+#else
+#define TYPEID_NAME(X) X.type_.name()
+#endif
 namespace ecto
 {
   namespace except
@@ -84,21 +89,21 @@ namespace ecto
     using boost::exception_detail::error_info_base;
 
     void
-    error_info_container_impl::set(boost::shared_ptr<error_info_base> const & x, 
+    error_info_container_impl::set(error_info_base_ptr const & x, 
                                    type_info_ const & typeid_)
     {
       BOOST_ASSERT(x);
-      info_[typeid_.type_.name()] = x;
+      info_[TYPEID_NAME(typeid_)] = x;
       diagnostic_info_str_.clear();
     }
 
-    boost::shared_ptr<error_info_base>
+    error_info_container_impl::error_info_base_ptr
     error_info_container_impl::get( type_info_ const & ti ) const
     {
-      error_info_map::const_iterator i=info_.find(ti.type_.name());
+      error_info_map::const_iterator i=info_.find(TYPEID_NAME(ti));
       if( info_.end()!=i )
         {
-          boost::shared_ptr<error_info_base> const & p = i->second;
+          error_info_base_ptr const & p = i->second;
 #ifndef BOOST_NO_RTTI
           BOOST_ASSERT( BOOST_EXCEPTION_DYNAMIC_TYPEID(*p).type_==ti.type_ );
 #endif
@@ -108,7 +113,11 @@ namespace ecto
     }
 
     char const * 
+#if BOOST_VERSION <= 104000
+    error_info_container_impl::diagnostic_information() const
+#else
     error_info_container_impl::diagnostic_information(char const*) const
+#endif
     {
       boost::format fmt("%25s  %s\n");
       if( diagnostic_info_str_.empty() )

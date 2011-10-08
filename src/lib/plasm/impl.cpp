@@ -1,5 +1,5 @@
-#include <ecto/edge.hpp>
-#include <ecto/cell.hpp>
+#include <ecto/all.hpp>
+
 #include "plasm/impl.hpp"
 
 namespace ecto {

@@ -28,8 +28,8 @@ howmanyprocs:
 override_dh_auto_configure:
 	dh_auto_configure -- \
 	-DCMAKE_BUILD_TYPE=RelWithDebInfo \
-	-DBUILD_DOC=OFF \
-	-DBUILD_SAMPLES=OFF \
+	-DBUILD_DOC=ON \
+	-DBUILD_SAMPLES=ON \
 	-DBUILD_TEST=ON
 
 override_dh_auto_build:

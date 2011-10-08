@@ -29,8 +29,9 @@
 #pragma once
 //do not include this in ecto lib files, only in client modules
 
-#include <iostream>
+#include <ecto/python.hpp>
 
+#include <iostream>
 #include <ecto/forward.hpp>
 #include <ecto/version.hpp>
 #include <ecto/abi.hpp>
@@ -38,4 +39,3 @@
 #include <ecto/cell.hpp>
 #include <ecto/registry.hpp>
 #include <ecto/module.hpp>
-#include <ecto/python.hpp>

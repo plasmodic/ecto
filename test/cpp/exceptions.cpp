@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <boost/exception/diagnostic_information.hpp>
 #include <ecto/ecto.hpp>
 #include <ecto/except.hpp>
 #include <ecto/plasm.hpp>

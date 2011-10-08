@@ -1,8 +1,6 @@
 #include <ecto/plasm.hpp>
 #include <ecto/cell.hpp>
 
-
-#include <boost/python.hpp>
 #include <boost/python/raw_function.hpp>
 #include <boost/python/args.hpp>
 #include <boost/python/type_id.hpp>

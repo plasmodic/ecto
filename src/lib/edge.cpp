@@ -1,6 +1,6 @@
+#include <ecto/all.hpp>
+
 #include <boost/thread.hpp>
-#include <ecto/tendril.hpp>
-#include <ecto/edge.hpp>
 
 namespace ecto {
   namespace graph {

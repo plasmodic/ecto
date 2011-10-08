@@ -31,6 +31,8 @@
 #if defined(ECTO_LOG_ON)
 #include <boost/format.hpp>
 #endif
+#include <ecto/util.hpp>
+#include <stdint.h>
 
 namespace ecto {
   ECTO_EXPORT void log(const std::string& msg);
