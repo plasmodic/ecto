@@ -1,4 +1,4 @@
-#include <ecto/python.hpp>
+#include <ecto/all.hpp>
 #include <boost/weak_ptr.hpp>
 #include <boost/python/overloads.hpp>
 namespace bp = boost::python;

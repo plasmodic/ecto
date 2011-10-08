@@ -12,12 +12,12 @@ set(CMAKE_MODULE_PATH ${ecto_SOURCE_DIR}/cmake)
 
 include(cmake/buildtype.cmake)
 include(cmake/version.cmake)
-include(cmake/fastidious.cmake)
 include(cmake/git.cmake)
 include(cmake/ectoMacros.cmake)
 include(cmake/boost.cmake)
 include(cmake/ectoFindDeps.cmake)
 include(cmake/config.cmake)
+include(cmake/fastidious.cmake)
 
 git_status(ecto)
 ecto_python_env_gen()

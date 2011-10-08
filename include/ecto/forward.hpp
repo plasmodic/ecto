@@ -14,6 +14,10 @@ namespace ecto {
   typedef boost::shared_ptr<cell> cell_ptr;
   typedef boost::shared_ptr<const cell> cell_cptr;
 
+  struct plasm;
+  typedef boost::shared_ptr<plasm> plasm_ptr;
+  typedef boost::shared_ptr<const plasm> plasm_cptr;
+
   namespace graph {
     struct edge;
     typedef boost::shared_ptr<edge> edge_ptr;

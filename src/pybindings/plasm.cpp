@@ -2,7 +2,6 @@
 #include <ecto/cell.hpp>
 #include <ecto/schedulers/singlethreaded.hpp>
 
-#include <boost/python.hpp>
 #include <boost/python/raw_function.hpp>
 #include <boost/python/args.hpp>
 #include <boost/python/type_id.hpp>

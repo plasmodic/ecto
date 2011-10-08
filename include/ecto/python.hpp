@@ -29,29 +29,12 @@
 #pragma once
 //do not include this in ecto lib files, only in client modules
 
+#pragma push_macro("_POSIX_C_SOURCE")
+#pragma push_macro("_XOPEN_SOURCE")
+#undef _POSIX_C_SOURCE
+#undef _XOPEN_SOURCE
 #include <boost/python.hpp>
-
-//ecto includes
-#include <ecto/version.hpp>
-#include <ecto/abi.hpp>
-#include <ecto/util.hpp>
-#include <ecto/traits.hpp>
-#include <iostream>
-
-#include <ecto/registry.hpp>
-
-#define ECTO_ASSERT_MODULE_NAME(MODULE)                                 \
-  template <unsigned T>  void module_must_be_named_##MODULE();          \
-  extern template void module_must_be_named_##MODULE<MODULE##_ectomodule_EXPORTS>();
-
-#define ECTO_DEFINE_MODULE(modname)                                     \
-  ECTO_INSTANTIATE_REGISTRY(modname)                                    \
-  ECTO_ASSERT_MODULE_NAME(modname)                                      \
-  void init_module_##modname##_rest() ;                                 \
-  BOOST_PYTHON_MODULE(modname) {                                        \
-    ECTO_REGISTER(modname);                                             \
-    init_module_##modname##_rest();                                     \
-  }                                                                     \
-  void init_module_##modname##_rest()
+#pragma pop_macro("_POSIX_C_SOURCE")
+#pragma pop_macro("_XOPEN_C_SOURCE")
 
 

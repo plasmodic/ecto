@@ -1,6 +1,7 @@
 #pragma once
 
 #include <boost/scoped_ptr.hpp>
+#include <boost/noncopyable.hpp>
 
 namespace ecto {
   namespace py {

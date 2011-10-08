@@ -1,5 +1,5 @@
-#include <cassert>
 #include <ecto/cell.hpp>
+#include <cassert>
 #include <ecto/util.hpp>
 #include <ecto/except.hpp>
 #include <boost/exception/all.hpp>

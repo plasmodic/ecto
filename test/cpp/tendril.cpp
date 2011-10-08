@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
-#include <ecto/ecto.hpp>
+#include <ecto/all.hpp>
+#include <boost/exception/diagnostic_information.hpp>
 
 namespace bp = boost::python;
 

@@ -3,10 +3,12 @@
 //  accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
 //  Modified by Troy D. Straszheim and Jakob van Santen, 2009-03-26
+//  Pulled in to ecto in 2010-11 by Troy D. Straszheim
 
 #ifndef ICETRAY_PYTHON_STD_MAP_INDEXING_SUITE_HPP_INCLUDED
 # define ICETRAY_PYTHON_STD_MAP_INDEXING_SUITE_HPP_INCLUDED
 
+# include <ecto/python.hpp>
 # include <boost/python/suite/indexing/indexing_suite.hpp>
 # include <boost/python/iterator.hpp>
 # include <boost/python/call_method.hpp>

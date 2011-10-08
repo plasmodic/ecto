@@ -1,9 +1,7 @@
-
 #include <map>
 
 #include <ecto/cell.hpp>
 #include <ecto/registry.hpp>
-#include <boost/python.hpp>
 
 
 namespace ecto {

@@ -7,6 +7,19 @@
 #define ECTO_USLEEP()
 #endif
 
+#include <ecto/ecto.hpp>
+
+#include <ecto/plasm.hpp>
+#include <ecto/tendril.hpp>
+#include <ecto/cell.hpp>
+#include <ecto/log.hpp>
+#include <ecto/strand.hpp>
+
+#include <ecto/graph_types.hpp>
+#include <ecto/edge.hpp>
+#include <ecto/schedulers/invoke.hpp>
+#include <ecto/schedulers/threadpool.hpp>
+
 #include <string>
 #include <map>
 #include <set>
@@ -23,17 +36,6 @@
 #include <boost/spirit/home/phoenix/operator.hpp>
 #include <boost/exception/all.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
-
-#include <ecto/plasm.hpp>
-#include <ecto/tendril.hpp>
-#include <ecto/cell.hpp>
-#include <ecto/log.hpp>
-#include <ecto/strand.hpp>
-
-#include <ecto/graph_types.hpp>
-#include <ecto/edge.hpp>
-#include <ecto/schedulers/invoke.hpp>
-#include <ecto/schedulers/threadpool.hpp>
 
 namespace ecto {
 
@@ -433,7 +435,7 @@ namespace ecto {
     //////////////////////////////////////////////////////////////
 
 
-    threadpool::threadpool(plasm::ptr p)
+    threadpool::threadpool(plasm_ptr p)
       : plasm_(p), graph(p->graph()), impl_(new impl)
     { 
       ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);

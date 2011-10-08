@@ -1,5 +1,4 @@
 // #define ECTO_TRACE_EXCEPTIONS
-#include <Python.h>
 #define DISABLE_SHOW
 #include <ecto/util.hpp>
 #include <ecto/plasm.hpp>
@@ -31,7 +30,7 @@ namespace ecto {
 
   namespace schedulers {
 
-    singlethreaded::singlethreaded(plasm::ptr p)
+    singlethreaded::singlethreaded(plasm_ptr p)
       : plasm_(p), graph(p->graph()),stop_running(false)
     {
       assert(plasm_);

@@ -1,7 +1,4 @@
-#include <boost/python.hpp>
-
-#include <ecto/ecto.hpp>
-#include <ecto/cell.hpp>
+#include <ecto/all.hpp>
 
 #include <ecto/python/std_map_indexing_suite.hpp>
 #include <boost/foreach.hpp>

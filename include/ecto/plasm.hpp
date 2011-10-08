@@ -27,6 +27,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #pragma once
+
 #include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/noncopyable.hpp>
@@ -139,12 +140,11 @@ namespace ecto
      */
     void configure_all();
 
-    typedef boost::shared_ptr<plasm> ptr;
-    typedef boost::shared_ptr<const plasm> const_ptr;
-
     void save(std::ostream&) const;
     void load(std::istream&);
 
+    typedef boost::shared_ptr<plasm> ptr;
+    typedef boost::shared_ptr<plasm const> cptr;
 
   private:
     class impl;
@@ -152,11 +152,11 @@ namespace ecto
 
     template<class Archive>
     void
-    save(Archive & ar, const unsigned int version) const;
+    save(Archive & ar, const unsigned int) const;
 
     template<class Archive>
     void
-    load(Archive & ar,  const unsigned int version);
+    load(Archive & ar,  const unsigned int);
     friend class boost::serialization::access;
     BOOST_SERIALIZATION_SPLIT_MEMBER()
   };

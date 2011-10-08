@@ -1,5 +1,6 @@
-#include <ecto/plasm.hpp>
+#include <ecto/all.hpp>
 #include "plasm/impl.hpp"
+
 #include <ecto/tendrils.hpp>
 #include <ecto/edge.hpp>
 #include <ecto/cell.hpp>

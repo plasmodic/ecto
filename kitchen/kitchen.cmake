@@ -12,7 +12,6 @@ macro(init_ecto_kitchen)
     include(ecto/cmake/gcc.cmake)
   endif()
 
-  include(ecto/cmake/fastidious.cmake)
   include(ecto/cmake/git.cmake)
   include(ecto/cmake/virtualenv.cmake)
 

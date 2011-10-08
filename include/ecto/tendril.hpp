@@ -32,14 +32,13 @@
 #define BOOST_SIGNALS2_MAX_ARGS 2
 #include <boost/signals2.hpp>
 #include <boost/any.hpp>
-#include <boost/python/extract.hpp>
 
 #include <ecto/forward.hpp>
 
 #include <ecto/util.hpp> //name_of
 #include <ecto/except.hpp>
 
-//#include <ecto/python.hpp>
+#include <ecto/python.hpp>
 #include <ecto/python/repr.hpp>
 
 #include <vector>

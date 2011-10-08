@@ -1,4 +1,3 @@
-#include <boost/python.hpp>
 #include <ecto/schedulers/singlethreaded.hpp>
 #include <ecto/schedulers/threadpool.hpp>
 
