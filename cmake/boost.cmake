@@ -18,20 +18,22 @@ try_run(BOOST_VERSION_RUN_RESULT BOOST_VERSION_COMPILE_RESULT
 if(NOT BOOST_VERSION_COMPILE_RESULT)
   message(FATAL_ERROR "Couldn't compile boost version checking program: ${BOOST_VERSION_COMPILE}")
 endif()
-
 message(STATUS "Boost version ${Boost_VERSION}")
 
-
 macro(boost_feature_check checkname)
-  try_compile(${checkname}
-    ${CMAKE_BINARY_DIR}/${checkname}
-    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/boost_checks.cpp
-    COMPILE_DEFINITIONS -I${Boost_INCLUDE_DIRS} -D${checkname}=1
-    OUTPUT_VARIABLE ${checkname}_OUTPUT
-    )
-  message(STATUS "${checkname}: ${${checkname}}")
-  if(${${checkname}_OUTPUT} MATCHES ".*ECTO_CHECK_TRY_COMPILE_ERROR.*")
-    message(FATAL_ERROR "Internal error when checking for boost feature ${checkname}")
+  if(NOT ${checkname}_CACHE)
+    try_compile(${checkname}
+      ${CMAKE_BINARY_DIR}/${checkname}
+      ${CMAKE_CURRENT_SOURCE_DIR}/cmake/boost_checks.cpp
+      COMPILE_DEFINITIONS -I${Boost_INCLUDE_DIRS} -D${checkname}=1
+      OUTPUT_VARIABLE ${checkname}_OUTPUT
+      )
+    message(STATUS "${checkname}: ${${checkname}}")
+    if(${${checkname}_OUTPUT} MATCHES ".*ECTO_CHECK_TRY_COMPILE_ERROR.*")
+      message(FATAL_ERROR "Internal error when checking for boost feature ${checkname}")
+    endif()
+    set(${checkname}_CACHE TRUE CACHE BOOL "${checkname} cache variable" FORCE)
+    mark_as_advanced(FORCE ${checkname}_CACHE)
   endif()
 endmacro()
 
