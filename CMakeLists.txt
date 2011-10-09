@@ -18,6 +18,7 @@ include(cmake/boost.cmake)
 include(cmake/ectoFindDeps.cmake)
 include(cmake/config.cmake)
 include(cmake/fastidious.cmake)
+include(cmake/doc.cmake)
 
 git_status(ecto)
 ecto_python_env_gen()

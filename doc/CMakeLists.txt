@@ -1,6 +1,4 @@
 if(NOT ecto_kitchen_SOURCE_DIR)
-    include(doc.cmake)
-
     # add a target to generate API documentation with Doxygen
     # add doc to all
     set(ECTO_DOC_DEPLOY_DESTINATION_BASE /tmp
