@@ -45,3 +45,17 @@ install(DIRECTORY ${CMAKE_BINARY_DIR}/include/ecto
   DESTINATION ${include_prefix}
   COMPONENT main
   )
+
+#checkinstall --exclude=/home -y --nodoc --pkgname ecto-amoeba <<EOF
+#Ecto, a hybrid c++/python framework for dataflow pipeline development.
+#EOF
+
+
+add_custom_target(checkinstall
+  COMMENT "Install using checkinstall." VERBATIM
+  )
+
+add_custom_command(TARGET checkinstall
+  COMMAND sh -c "sudo checkinstall --exclude=/home -y --nodoc --pkgname ecto-${ECTO_CODE_NAME} <<EOF Ecto, a hybrid c++/python framework for dataflow pipeline development. EOF"
+  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+  )
