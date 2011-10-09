@@ -32,7 +32,7 @@ target_link_libraries(ecto-test
   # this is so that we can create cells that are in the test lib w/o 
   # python importing them
   ecto_test_ectomodule
-  ecto_ectomodule
+  ${ecto_PYTHONLIB}
   )
 
 add_test(ecto_gtest_units ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/ecto-test --gtest_output=xml:${CMAKE_BINARY_DIR}/ecto-test.xml)
@@ -48,7 +48,7 @@ target_link_libraries(plasm_loader
   # this is so that we can create cells that are in the test lib w/o 
   # python importing them
   ecto_test_ectomodule
-  ecto_ectomodule
+  ${ecto_PYTHONLIB}
 )
   
 add_test(plasm_loader

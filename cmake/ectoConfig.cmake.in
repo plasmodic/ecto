@@ -34,6 +34,7 @@ include(${SELF_DIR}/rosbuild_lite.cmake)
 set(ecto_INCLUDE_DIRS @ecto_INCLUDE_DIRS@)
 set(ECTO_CONFIG_PATH ${SELF_DIR})
 set(ecto_PYTHONPATH @ecto_PYTHONPATH@)
+set(ecto_PYTHONLIB @ecto_PYTHONLIB@)
 # if we're part of an ecto kitchen, we use the target, not the path on disk
 # so that cmake can calculate dependencies correctly
 if (ecto_kitchen_SOURCE_DIR)

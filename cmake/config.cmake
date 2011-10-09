@@ -2,6 +2,7 @@ set(ecto_CONFIG_DIR ${ecto_BINARY_DIR}/config)
 
 set(ecto_PYTHONPATH ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} ${ecto_SOURCE_DIR}/python)
 set(ecto_INCLUDE_DIRS ${ecto_SOURCE_DIR}/include ${ecto_BINARY_DIR}/include)
+set(ecto_PYTHONLIB ecto_ectomodule)
 
 if(UNIX)
   #don't put the soname on this guy, as it confuses the linker at runtime.

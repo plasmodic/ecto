@@ -1,3 +1,7 @@
+if(NOT ecto_SOURCE_DIR)
+  #not doing a standalone test project, so don't do these types of tests.
+  return()
+endif()
 
 macro(add_compile_fail_test FILENAME)
   add_library(compile_fail_${FILENAME} 
@@ -59,7 +63,6 @@ add_compile_fail_test(wrong_cell_module_name)
 # expect "module_must_be_named_whatshouldinameyou"
 add_compile_fail_test(wrong_module_name)
 
-#
 #  For each public header file, create a test that compilation is
 #  successful if this header file is the only thing included.
 #
@@ -101,6 +104,7 @@ foreach(HEADER ${ECTO_HEADERS})
     )
 
 endforeach()
+
 
 file(GLOB_RECURSE ECTO_HEADERS_ABSPATH 
   ${ecto_SOURCE_DIR}/*.hpp)
