@@ -9,6 +9,8 @@
 #include <fstream>
 #include <boost/foreach.hpp>
 
+#pragma GCC diagnostic ignored "-Wsign-compare"
+
 TEST(SerialTest, float_test)
 {
   {
