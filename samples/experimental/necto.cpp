@@ -244,7 +244,7 @@ namespace ecto_X
           acceptor_(io_service, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port))
     {
       // Start an accept operation for a new connection.
-      connection_ptr new_conn(new connection(acceptor_.io_service()));
+      connection_ptr new_conn(new connection(acceptor_.get_io_service()));
       acceptor_.async_accept(new_conn->socket(),
                              boost::bind(&server::handle_accept, this, boost::asio::placeholders::error, new_conn));
       std::cout << "Started server on " << acceptor_.local_endpoint() << std::endl;
@@ -262,7 +262,7 @@ namespace ecto_X
           connections_.push_back(conn);
         }
         // Start an accept operation for a new connection.
-        connection_ptr new_conn(new connection(acceptor_.io_service()));
+        connection_ptr new_conn(new connection(acceptor_.get_io_service()));
         acceptor_.async_accept(new_conn->socket(),
                                boost::bind(&server::handle_accept, this, boost::asio::placeholders::error, new_conn));
       }

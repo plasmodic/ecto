@@ -38,8 +38,8 @@
 
 using boost::format;
 
-#if BOOST_VERSION <= 104000
-#define TYPEID_NAME(X) X.name()
+#if defined(ECTO_EXCEPTION_TYPE_INFO_NESTED)
+#define TYPEID_NAME(X) X.type_->name()
 #else
 #define TYPEID_NAME(X) X.type_.name()
 #endif
@@ -78,7 +78,7 @@ namespace ecto
       tmp << str(fmt % "exception_type" % se.what());
 
       if( char const * s=ed::get_diagnostic_information(e
-#if BOOST_VERSION > 104000
+#if defined(ECTO_EXCEPTION_DIAGNOSTIC_IMPL_TAKES_CHARSTAR)
                                                         , "MEH"
 #endif
                                                         ))
@@ -124,6 +124,21 @@ namespace ecto
       diagnostic_info_str_.clear();
     }
 
+#if defined(ECTO_EXCEPTION_HAS_CLONE)
+    using boost::exception_detail::refcount_ptr;
+    using boost::exception_detail::error_info_container;
+
+    refcount_ptr<error_info_container> 
+    error_info_container_impl::clone() const
+    {
+      refcount_ptr<error_info_container> p;
+      error_info_container_impl * c=new error_info_container_impl;
+      p.adopt(c);
+      c->info_ = info_;
+      return p;
+    }
+#endif
+
     error_info_container_impl::error_info_base_ptr
     error_info_container_impl::get( type_info_ const & ti ) const
     {
@@ -140,10 +155,10 @@ namespace ecto
     }
 
     char const * 
-#if BOOST_EXCEPTION_DIAGNOSTIC_IMPL_TAKES_CHARSTAR
-    error_info_container_impl::diagnostic_information() const
-#else
+#if defined(ECTO_EXCEPTION_DIAGNOSTIC_IMPL_TAKES_CHARSTAR)
     error_info_container_impl::diagnostic_information(char const*) const
+#else
+    error_info_container_impl::diagnostic_information() const
 #endif
     {
       boost::format fmt("%25s  %s\n");
@@ -162,8 +177,19 @@ namespace ecto
     }
 
     void error_info_container_impl::add_ref() const { ++count_; }
+#if defined(ECTO_EXCEPTION_RELEASE_RETURNS_VOID)
     void error_info_container_impl::release() const { if( !--count_ ) delete this; }
-
+#else
+    bool error_info_container_impl::release() const { 
+      if( --count_ ) 
+        return false;
+      else
+        {
+          delete this; 
+          return true;
+        }
+    }
+#endif
     struct HACK_HACK_HACK;
   }
 }

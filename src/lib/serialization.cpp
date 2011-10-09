@@ -213,6 +213,7 @@ namespace ecto
       connect(from, from_port, to, to_port);
     }
   }
+  #pragma GCC diagnostic ignored "-Wsign-compare"
   ECTO_INSTANTIATE_SERIALIZATION(plasm);
 
 }

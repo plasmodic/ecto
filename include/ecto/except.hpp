@@ -94,7 +94,7 @@ namespace ecto
       //  hacks for boost::exception implementation details that are
       //  moving around.
       //
-#if BOOST_VERSION <= 104000
+#if defined(ECTO_EXCEPTION_SHARED_POINTERS_ARE_CONST)
       typedef boost::shared_ptr<error_info_base const> error_info_base_ptr;
       typedef void diagnostic_information_arg_t;
 #else
@@ -115,10 +115,10 @@ namespace ecto
       error_info_base_ptr
       get( type_info_ const & ti ) const;
 
-#if BOOST_VERSION <= 104000
-      char const * diagnostic_information() const;
-#else
+#if defined(ECTO_EXCEPTION_DIAGONSTIC_IMPL_TAKES_CHARSTAR)
       char const * diagnostic_information(char const*) const;
+#else
+      char const * diagnostic_information() const;
 #endif
     private:
 
@@ -131,7 +131,15 @@ namespace ecto
       mutable int count_;
 
       void add_ref() const;
+#if defined(ECTO_EXCEPTION_RELEASE_RETURNS_VOID)
       void release() const;
+#else
+      bool release() const;
+#endif
+#if defined(ECTO_EXCEPTION_HAS_CLONE)
+      ::boost::exception_detail::refcount_ptr< ::boost::exception_detail::error_info_container> clone() const;
+#endif
+
     };
 
     struct EctoException : virtual std::exception, virtual boost::exception
@@ -166,8 +174,15 @@ namespace ecto
 
 namespace boost {
 
+#if defined(ECTO_EXCEPTION_TAG_TYPE_NAME_RETURNS_STRING)
+#  define ECTO_EXCEPTION_TAG_TYPE_NAME_RETURN_T std::string
+#else
+#  define ECTO_EXCEPTION_TAG_TYPE_NAME_RETURN_T const char*
+#endif
+
 #define ECTO_EXCEPTION_TAG_TYPE_NAME_DECL(r, data, NAME)                \
-  template <> inline char const*                                        \
+  template <> inline                                                    \
+  ECTO_EXCEPTION_TAG_TYPE_NAME_RETURN_T                                 \
   tag_type_name< ::ecto::except::detail::wrap< BOOST_PP_CAT(::ecto::except::tag_, NAME)> >() { \
     return BOOST_PP_STRINGIZE(NAME);                                    \
   }
