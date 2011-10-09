@@ -55,8 +55,18 @@ file(WRITE ${CMAKE_BINARY_DIR}/description-pak
 add_custom_target(checkinstall
   COMMENT "Install using checkinstall." VERBATIM
   )
+add_custom_target(checkinstall-remove
+  COMMENT "Uninstall using the package name from checkinstall." VERBATIM
+  )
+
+add_dependencies(checkinstall checkinstall-remove)
+
+add_custom_command(TARGET checkinstall-remove
+  COMMAND sh -c "sudo dpkg --force-all -r ecto-${ECTO_CODE_NAME}"
+  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+  )
 
 add_custom_command(TARGET checkinstall
-  COMMAND sh -c "sudo dpkg -r ecto-${ECTO_CODE_NAME} || true && sudo checkinstall --exclude=/home -y --nodoc --pkgname ecto-${ECTO_CODE_NAME} make install"
+  COMMAND sh -c "sudo checkinstall --exclude=/home -y --nodoc --pkgname ecto-${ECTO_CODE_NAME} make install"
   WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
   )
