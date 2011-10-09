@@ -89,17 +89,26 @@ endmacro()
 # ==============================================================================
 
 # ============== Python Path ===================================================
+
+#ecto_python_env_gen( [path1 [ path2 [ path3 [...] ] ] ])
+#this will generate a python_path.sh script in the ${PROJECT_BINARY_DIR}
+#where any argument supplied is consired to be a python module directory
+#and will be preprended to the python path.  Also, the path where ecto's python
+#binding are located will appear after any user supplied lists.
+#typically this call will look like:
+# ecto_python_env_gen(${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
+#
 macro( ecto_python_env_gen )
     set(ecto_PYTHONPATH_ ${ecto_PYTHONPATH} )
     set(ecto_user_PYTHONPATH )
-    list(APPEND ecto_user_PYTHONPATH  ${ecto_PYTHONPATH})
+    #put user path first
     list(APPEND ecto_user_PYTHONPATH  ${ARGN})
+    list(APPEND ecto_user_PYTHONPATH  ${ecto_PYTHONPATH})
     #transform the cmake list to a sh path list
     string(REPLACE ";" ":"
         ecto_user_PYTHONPATH
         "${ecto_user_PYTHONPATH}"
     )
-
     configure_file(${ECTO_CONFIG_PATH}/python_path.sh.user.in 
       ${PROJECT_BINARY_DIR}/python_path.sh
       )
