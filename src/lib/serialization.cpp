@@ -24,7 +24,9 @@
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
-// 
+//
+
+#include <boost/version.hpp>
 #if BOOST_VERSION <= 104000
 #pragma GCC diagnostic ignored "-Wsign-compare"
 #pragma message "Ignoring signed-unsigned comparison in boost::serialization in 1.40"
