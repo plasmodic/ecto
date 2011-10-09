@@ -155,11 +155,11 @@ namespace ecto
     }
 
     char const * 
+    error_info_container_impl::diagnostic_information(
 #if defined(ECTO_EXCEPTION_DIAGNOSTIC_IMPL_TAKES_CHARSTAR)
-    error_info_container_impl::diagnostic_information(char const*) const
-#else
-    error_info_container_impl::diagnostic_information() const
+                                                      char const*
 #endif
+                                                      ) const
     {
       boost::format fmt("%25s  %s\n");
       if( diagnostic_info_str_.empty() )

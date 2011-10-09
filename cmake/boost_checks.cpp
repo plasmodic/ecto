@@ -49,7 +49,7 @@ namespace boost {
     void checkem(error_info_container_impl& ei)
     {
       const char* s;
-      ei.diagnostic_information(s);
+      const char* rv = ei.diagnostic_information(s);
     }
   }
 }

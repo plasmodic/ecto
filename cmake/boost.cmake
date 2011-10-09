@@ -29,7 +29,7 @@ macro(boost_feature_check checkname)
     COMPILE_DEFINITIONS -I${Boost_INCLUDE_DIRS} -D${checkname}=1
     OUTPUT_VARIABLE ${checkname}_OUTPUT
     )
-  message("${checkname}: ${${checkname}}")
+  message(STATUS "${checkname}: ${${checkname}}")
   if(${${checkname}_OUTPUT} MATCHES ".*ECTO_CHECK_TRY_COMPILE_ERROR.*")
     message(FATAL_ERROR "Internal error when checking for boost feature ${checkname}")
   endif()

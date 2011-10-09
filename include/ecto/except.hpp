@@ -115,11 +115,11 @@ namespace ecto
       error_info_base_ptr
       get( type_info_ const & ti ) const;
 
-#if defined(ECTO_EXCEPTION_DIAGONSTIC_IMPL_TAKES_CHARSTAR)
-      char const * diagnostic_information(char const*) const;
-#else
-      char const * diagnostic_information() const;
+      char const * diagnostic_information(
+#if defined(ECTO_EXCEPTION_DIAGNOSTIC_IMPL_TAKES_CHARSTAR)
+                                          char const*
 #endif
+                                          ) const;
     private:
 
       friend class boost::exception;
