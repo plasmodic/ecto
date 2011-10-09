@@ -63,6 +63,7 @@
 #include <stdexcept>
 #include <string>
 #include <map>
+#include <ecto/config.hpp>
 #include <ecto/util.hpp>
 #include <boost/optional.hpp>
 

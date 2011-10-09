@@ -140,7 +140,7 @@ namespace ecto
     }
 
     char const * 
-#if BOOST_VERSION <= 104000
+#if BOOST_EXCEPTION_DIAGNOSTIC_IMPL_TAKES_CHARSTAR
     error_info_container_impl::diagnostic_information() const
 #else
     error_info_container_impl::diagnostic_information(char const*) const
