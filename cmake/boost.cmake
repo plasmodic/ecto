@@ -50,8 +50,3 @@ if (NOT ECTO_EXCEPTION_WITHOUT_CLONE)
 endif()
 
 configure_file(${ecto_SOURCE_DIR}/cmake/boost-config.hpp.in ${ecto_BINARY_DIR}/include/ecto/boost-config.hpp)
-if(ecto_kitchen_BINARY_DIR)
-  configure_file(${ecto_SOURCE_DIR}/cmake/boost-config.hpp.in 
-    ${ecto_kitchen_BINARY_DIR}/include/ecto/boost-config.hpp)
-endif()
-
