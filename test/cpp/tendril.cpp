@@ -45,6 +45,7 @@ TEST(TendrilTest, Constructors)
     EXPECT_FALSE(meh.user_supplied());
     EXPECT_FALSE(meh.has_default());
     EXPECT_TRUE(meh.is_type<tendril::none>());
+    EXPECT_EQ(meh.tick, 0);
   }
 
   {
@@ -473,6 +474,38 @@ TEST(TendrilTest, ConvertersCopied2)
   EXPECT_EQ(name_of<double>(), a->type_name());
   EXPECT_EQ(2.0, a->get<double>());
 }
+
+TEST(TendrilTest, TickTracking)
+{
+  tendril_ptr a = make_tendril<tendril::none>();
+  EXPECT_EQ(a->tick, 0);
+  tendril_ptr b = make_tendril<double>();
+  EXPECT_EQ(b->tick, 0);
+  b->tick = 17;
+  EXPECT_EQ(b->tick, 17);
+  *a << *b; //copy the converters
+  EXPECT_EQ(b->tick, 17);
+  EXPECT_EQ(a->tick, 17);
+  a->tick = 14;
+  EXPECT_EQ(a->tick, 14);
+  EXPECT_EQ(b->tick, 17);
+  
+  tendril c(*b);
+  EXPECT_EQ(c.tick, 17);
+  EXPECT_EQ(b->tick, 17);
+  EXPECT_EQ(a->tick, 14);
+
+  tendril d;
+  EXPECT_EQ(d.tick, 0);
+  EXPECT_EQ(a->tick, 14);
+  d = *a;
+  EXPECT_EQ(d.tick, 14);
+  EXPECT_EQ(a->tick, 14);
+  d.tick = 99;
+  EXPECT_EQ(d.tick, 99);
+  EXPECT_EQ(a->tick, 14);
+}
+
 TEST(TendrilTest, Nullptr)
 {
   tendril_ptr a, b;

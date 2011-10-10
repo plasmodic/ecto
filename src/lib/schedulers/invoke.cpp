@@ -25,6 +25,7 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 // 
+
 #include <ecto/python.hpp>
 
 #include <string>
@@ -33,6 +34,7 @@
 #include <utility>
 #include <deque>
 
+#include <ecto/log.hpp>
 #include <ecto/plasm.hpp>
 #include <ecto/tendril.hpp>
 #include <ecto/cell.hpp>
@@ -52,14 +54,22 @@ namespace ecto {
     {
       cell::ptr m = graph[vd];
 
+      std::size_t tick = m->tick();
+
+      ECTO_LOG_DEBUG("process %s tick %u", m->name() % tick);
+
       graph_t::in_edge_iterator inbegin, inend;
       tie(inbegin, inend) = boost::in_edges(vd, graph);
+
       while (inbegin != inend)
         {
           edge_ptr e = graph[*inbegin];
           tendril& from = e->front();
           tendril& to = *(m->inputs[e->to_port()]);
+          ECTO_LOG_DEBUG("moving inputs to %s: tick=%u, from.tick=%u", m->name() % tick % from.tick);
+          assert(tick == from.tick && "Graph has become somehow desynchronized");
           to << from;
+          assert(to.tick == tick && "Graph has become somehow desynchronized");
           e->pop_front(); //todo Make this use a pool, instead of popping. To get rid of allocations.
           ++inbegin;
         }
@@ -76,9 +86,14 @@ namespace ecto {
       while (outbegin != outend)
         {
           edge_ptr e = graph[*outbegin];
-          e->push_back(*m->outputs[e->from_port()]);//copy everything... value, docs, user_defined, etc...
+          tendril& from = *(m->outputs[e->from_port()]);
+          from.tick = tick;
+          ECTO_LOG_DEBUG("%s Put output with tick %u", m->name() % from.tick);
+          e->push_back(from);//copy everything... value, docs, user_defined, etc...
           ++outbegin;
         }
+      m->inc_tick();
+      ECTO_LOG_DEBUG("Incrementing tick on %s to %u", m->name() % m->tick());
       return rval;
     }
 

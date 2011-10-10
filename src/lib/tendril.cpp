@@ -35,6 +35,7 @@ namespace ecto
     : doc_()
     , flags_()
     , converter(&ConverterImpl<none>::instance)
+    , tick(0)
   {
     set_holder<none>(none());
   }
@@ -45,6 +46,7 @@ namespace ecto
     , doc_(rhs.doc_)
     , flags_(rhs.flags_)
     , converter(rhs.converter)
+    , tick(rhs.tick)
   { }
 
   tendril& tendril::operator=(const tendril& rhs)
@@ -55,17 +57,17 @@ namespace ecto
     doc_ = rhs.doc_;
     flags_ = rhs.flags_;
     converter = rhs.converter;
+    tick = rhs.tick;
     return *this;
   }
 
   tendril::~tendril(){ }
 
-
-
   ecto::tendril& tendril::operator<<(const tendril& rhs)
   {
     if (this == &rhs)
       return *this;
+    tick = rhs.tick;
     if (is_type<none>() || same_type(rhs))
     {
       copy_holder(rhs);
@@ -157,12 +159,6 @@ namespace ecto
   tendril::dirty(bool dirty)
   {
     flags_[DIRTY] = dirty;
-  }
-
-  bool
-  tendril::clean() const
-  {
-    return !flags_[DIRTY];
   }
 
   bool
@@ -261,6 +257,6 @@ namespace ecto
   }
 
 
-
+  const tendril::empty_t tendril::empty = tendril::empty_t();
 }
 

@@ -71,8 +71,12 @@ namespace ecto
       DIRTY,
       USER_SUPPLIED,
       REQUIRED,
+      OPTIONAL,
       N_FLAGS
     };
+
+    struct empty_t { };
+    const static empty_t empty;
 
     /**
      * \brief Creates a tendril that is initialized with the
@@ -286,16 +290,13 @@ namespace ecto
     notify();
 
     //! The tendril has likely been modified since the last time that notify has beend called.
+    //! This gets unset after its changed-callbacks have fired
     bool
     dirty() const;
 
     //! Set the tendril dirty, implying that the value has changed.
     void
     dirty(bool);
-
-    //! The tendril has notified its callback if one was registered since it was changed.
-    bool
-    clean() const;
 
   private:
 
@@ -380,6 +381,7 @@ namespace ecto
 
   public:
 
+
     template <typename T>
     void operator>>(T& val) const
     {
@@ -456,6 +458,8 @@ NullTendril()
 
     template <typename Archive> 
       void serialize(Archive& ar, const unsigned int);
+
+    std::size_t tick; // for sanity-checking
   };
 
   template <typename T, typename _>

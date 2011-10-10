@@ -13,9 +13,6 @@ ectomodule(ecto_test
   LatticeSleep.cpp
   Printer.cpp
   Ping.cpp
-  Throttle.cpp
-  Sleep.cpp
-  SleepPyObjectAbuser.cpp
   Metrics.cpp
   Gather.cpp
   Generate.cpp
@@ -24,6 +21,10 @@ ectomodule(ecto_test
   RequiredIO.cpp
   Passthrough.cpp
   ParameterWatcher.cpp
+  Sleep.cpp
+  SleepPyObjectAbuser.cpp
+  Throttle.cpp
+  TickCheck.cpp
   Uniform01.cpp
   ecto_test.cpp
 )

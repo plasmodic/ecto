@@ -36,10 +36,10 @@ plasm = ecto.Plasm()
 uni = ecto_test.Uniform01("Random", seed=17)
 print "OTUPUTS:", uni.outputs
 printer = ecto_test.Printer("Printy")
-
+tickcheck = ecto_test.TickCheck(ninputs=1)
 print ecto.version()
 
-plasm.connect(uni, "out", printer, "in")
+plasm.connect(uni["out"] >> (printer["in"], tickcheck[:]))
     
 sched = ecto.schedulers.Singlethreaded(plasm)
 sched.execute(niter=100)

@@ -42,6 +42,7 @@
 
 namespace ecto
 {
+
   /**
    * \brief Return values for modules' process functions. These
    * are appropriate for non exceptional behavior.
@@ -179,6 +180,9 @@ namespace ecto
 
     virtual bool init() = 0;
 
+    std::size_t tick() const;
+    void inc_tick();
+
   protected:
 
     virtual void dispatch_declare_params(tendrils& t) = 0;
@@ -204,10 +208,12 @@ namespace ecto
     {
     }
   private:
+
     cell(const cell&);
 
     std::string instance_name_;
     bool configured;
+    std::size_t tick_;
   };
 
   

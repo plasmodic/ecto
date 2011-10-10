@@ -26,39 +26,48 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#pragma once
 
-#include <boost/mpl/bool.hpp>
-#include <ecto/python/gil.hpp>
+#include <ecto/ecto.hpp>
+#include <boost/format.hpp>
 
-namespace ecto {
-  namespace detail {
-    template <typename T> struct is_threadsafe : boost::mpl::true_ { };
+namespace ecto
+{
+  namespace bp = boost::python;
 
-    template <typename T> struct python_mutex 
-    { 
-      typedef ecto::py::nothing_to_lock type; 
-    };
-  }
+  struct TickCheck
+  {
+    std::size_t tick;
+    unsigned n_in;
+    std::map<unsigned, tendril_ptr> intendrils;
+
+    TickCheck() : tick(0) { }
+
+    const static void declare_params(tendrils& p)
+    {
+      p.declare<unsigned>("ninputs", "number of inputs", 1);
+    }
+
+    const static void declare_io(const tendrils& p, tendrils& i, tendrils& o)
+    {
+      unsigned n_in = p.get<unsigned>("ninputs");
+      for (unsigned j=0; j<n_in; ++j)
+        {
+          i.declare<tendril::none>(str(boost::format("in%u") % j), "An input");
+        }
+    }
+
+    int process(const tendrils& in, const tendrils& out)
+    {
+      for (tendrils::const_iterator iter = in.begin(), end = in.end(); iter!=end; ++iter)
+        {
+          std::cout << iter->second->tick << " >>?>> " << tick << "\n";
+          if (iter->second->tick != tick)
+            abort();
+        }
+      ++tick;
+      return ecto::OK;
+    }
+  };
 }
 
-
-#define ECTO_THREAD_UNSAFE(T)                                           \
-  namespace ecto {                                                      \
-    namespace detail {                                                  \
-      template <> struct is_threadsafe<T> : boost::mpl::false_ { };     \
-    }                                                                   \
-  }                                                                     \
-
-
-#define ECTO_NEEDS_PYTHON_GIL(T)                                        \
-  namespace ecto {                                                      \
-    namespace detail {                                                  \
-      template <> struct python_mutex<T> {                              \
-        typedef ecto::py::gil type;                                     \
-      };                                                                \
-    }                                                                   \
-  }                                                                     \
-
-
-
+ECTO_CELL(ecto_test, ecto::TickCheck, "TickCheck", "Tick Checker");

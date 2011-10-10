@@ -120,7 +120,10 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
       return "  Hint   : '" + key + "' does not exist in module.";
   }
 
-  cell::cell() : configured(false) { }
+  cell::cell() 
+  : configured(false)
+  , tick_(0) 
+  { }
 
   cell::~cell() { }
 
@@ -300,6 +303,16 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
 
   void cell::set_strand(ecto::strand s) {
     strand_ = s;
+  }
+
+  std::size_t cell::tick() const 
+  { 
+    return tick_; 
+  }
+
+  void cell::inc_tick()
+  { 
+    ++tick_;
   }
 }
 

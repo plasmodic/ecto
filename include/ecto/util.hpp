@@ -91,3 +91,4 @@ namespace ecto
 #else
 #define ECTO_TRACE_EXCEPTION(E)
 #endif
+
