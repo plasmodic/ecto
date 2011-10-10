@@ -1,5 +1,6 @@
 ectomodule(ecto_test
   Add.cpp
+  BpObjectToCellPtr.cpp
   CantCallMeFromTwoThreads.cpp
   ConfigureCalledOnce.cpp
   DontCallMeFromTwoThreads.cpp
