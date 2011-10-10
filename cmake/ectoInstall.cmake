@@ -23,6 +23,11 @@ configure_file(${ecto_SOURCE_DIR}/cmake/ectoMacros.cmake
 configure_file(${ecto_SOURCE_DIR}/cmake/rosbuild_lite.cmake
   ${CMAKE_BINARY_DIR}/unix_install/rosbuild_lite.cmake @ONLY)
 
+#for client projects using ecto documentation tools
+file(COPY ${PROJECT_SOURCE_DIR}/cmake/doc.cmake
+  DESTINATION ${CMAKE_BINARY_DIR}/unix_install/)
+file(COPY ${PROJECT_SOURCE_DIR}/cmake/git.cmake
+  DESTINATION ${CMAKE_BINARY_DIR}/unix_install/)
 #install the ectoConfig.cmake and ectoConfig-version.cmake
 install(DIRECTORY
   ${CMAKE_BINARY_DIR}/unix_install/   #last component empty, so we loose the unix_install

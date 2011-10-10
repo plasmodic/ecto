@@ -117,3 +117,4 @@ macro( ecto_python_env_gen )
       message(STATUS "To setup your python path for *${PROJECT_NAME}* you may source: ${nice_path_}")
     endif()
 endmacro()
+
