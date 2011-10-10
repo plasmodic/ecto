@@ -62,7 +62,7 @@ namespace ecto
         bp::object key = l[j][0];
         bp::object value = l[j][1];
         std::string keystring = bp::extract<std::string>(key);
-        ecto::cell_ptr cell = bp::extract<ecto::cell_ptr>(value);
+        ecto::cell_ptr cell = bp::extract<ecto::cell_ptr>(bp::getattr(value,"__impl"));
         tendril_ptr t = ((*cell).*member)[keystring];
         ts.declare(keystring, t);
       }

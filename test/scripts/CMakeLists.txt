@@ -13,6 +13,7 @@ foreach(file
     test_async_execution_harsh
     test_async_multiple_sched
     test_blackbox
+    #test_bp_to_cell_ptr
     test_constant
     test_dealer
     test_doc
@@ -25,6 +26,7 @@ foreach(file
     test_handles
     test_multiprocess
     test_modules
+    #test_module_qualification
     test_no_ecto_import
     test_options
     # test_metrics
