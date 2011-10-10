@@ -40,7 +40,7 @@ Ecto requires
 
 On ubuntu you can get most of these through apt::
 
-   sudo apt-get install cmake libboost-all-dev python-dev python-argparse libgtest-dev
+   sudo apt-get install cmake libboost-all-dev python-dev python-argparse python-yaml libgtest-dev
 
 To build the docs, you should use a very recent version of Sphinx::
 
