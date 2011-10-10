@@ -53,12 +53,15 @@ endmacro()
 # PATH(s) -> paths to prepend to the PYTHONPATH for the execution of sphinx-build
 #
 macro(sphinx TARGET_NAME SOURCE_DIR BUILD_DIR)
-  set(_PYTHONPATH "")
-  foreach(path ${ARGN})
-    set(_PYTHONPATH "${_PYTHONPATH}:${path}")#first come first serve
-  endforeach()
-  set(_PYTHONPATH "${_PYTHONPATH}:$ENV{PYTHONPATH}")#append the environment python path
-  
+  set(_PYTHONPATH )
+  #put user path first
+  list(APPEND _PYTHONPATH ${ARGN})
+  list(APPEND _PYTHONPATH  ${ecto_PYTHONPATH})
+  #transform the cmake list to a sh path list
+  string(REPLACE ";" ":"
+      _PYTHONPATH
+      "${_PYTHONPATH}"
+  )
   add_custom_target(${TARGET_NAME})
   add_custom_command(TARGET ${TARGET_NAME}
     COMMAND

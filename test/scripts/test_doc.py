@@ -50,7 +50,18 @@ def test_inspection():
     ecto.list_ecto_module(ecto_test)
     ecto.list_ecto_module(pyecto)
 
+def test_short_doc():
+    add = ecto_test.Add
+    assert add.short_doc == 'Add two doubles together.'
+    assert add.short_doc in add.__doc__
+    assert 'Left hand operand' in add.__doc__
+    assert 'Parameters:' not in add.__doc__
+    assert 'Outputs:' in add.__doc__
+    assert 'Inputs:' in add.__doc__
+    assert 'The result.' in add.__doc__
+
 if __name__ == '__main__':
     test_doc()
     test_inspection()
+    test_short_doc()
 

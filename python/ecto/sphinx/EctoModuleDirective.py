@@ -63,15 +63,12 @@ class EctoModuleDirective(rst.Directive):
     def run(self):
         modulenode = ectomodule()
         modulenode.name = modname = self.arguments[0]
-
         nodes = [modulenode]
         __import__(modname)
         m = sys.modules[modname]
         for name, obj in m.__dict__.iteritems():
-
-            if hasattr(obj, '__mro__') and ecto._cell_base in obj.__mro__:
+            if hasattr(obj, '__looks_like_a_cell__'): #probably want a very loose test for an ecto cell here.
                 nodes += make_ectocelldirective(modname, name, self.state)
-
         return nodes
 
 def do_ectomodule(app, doctree):

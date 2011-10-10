@@ -147,7 +147,6 @@ def docize(CellType, content):
 
     d['name'] = CellType.__name__
     d['short_doc'] = CellType.short_doc
-
     cell = nodes.section()
     cell += nodes.title(text=CellType.__name__)
     cell += content

@@ -111,24 +111,32 @@ def cell_name(self):
 def cell_typename(self):
     return self.__impl.typename()
 
-def postregister(cellname, cpptypename, docstring, inmodule):
+def cell_doc(short_doc, c):
+    doc =short_doc + "\n\n"
+    params = cell_print_tendrils(c.params)
+    inputs = cell_print_tendrils(c.inputs)
+    outputs = cell_print_tendrils(c.outputs)
+    if(params):
+        doc += "Parameters:\n%s"%params
+    if(inputs):
+        doc += "Inputs:\n%s"%inputs
+    if(outputs):
+        doc += "Outputs:\n%s"%outputs
+    return doc
 
+def postregister(cellname, cpptypename, short_doc, inmodule):
     e = lookup(cpptypename)
     c = e.construct()
     c.declare_params()
     c.declare_io()
-    #print "ding!", c, c.typename()
-    #print c.inputs, c.outputs, c.params
+    
     thistype = type(cellname, (_cell_cpp,), 
-                    dict(__doc__ = docstring + "\n\n" 
-                         + "Parameters:\n" + cell_print_tendrils(c.params)
-                         + "Inputs:\n"+ cell_print_tendrils(c.inputs) 
-                         + "Outputs:\n" + cell_print_tendrils(c.outputs), 
+                    dict(__doc__ = cell_doc(short_doc,c),
                          inputs = c.inputs,
                          outputs = c.outputs,
                          params = c.params,
                          type = c.typename,
-                         short_doc = c.short_doc,
+                         short_doc = short_doc,
                          __init__ = cellinit(cpptypename),
                          __getitem__ = cell_getitem,
                          inspect = cell_inspect,
@@ -136,7 +144,8 @@ def postregister(cellname, cpptypename, docstring, inmodule):
                          configure = cell_configure,
                          name = cell_name,
                          type_name = cell_typename,
-                         __factory = e.construct
+                         __factory = e.construct,
+                         __looks_like_a_cell__ = True
                          ))
 
     inmodule.__dict__[cellname] = thistype

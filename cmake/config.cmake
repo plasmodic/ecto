@@ -1,4 +1,4 @@
-set(ecto_CONFIG_DIR ${ecto_BINARY_DIR}/config)
+set(ecto_CONFIG_DIR ${ecto_BINARY_DIR})
 
 set(ecto_PYTHONPATH ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} ${ecto_SOURCE_DIR}/python)
 set(ecto_INCLUDE_DIRS ${ecto_SOURCE_DIR}/include ${ecto_BINARY_DIR}/include)

@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 project(ecto)
+set(${PROJECT_NAME}_GITHUB_URL https://github.com/plasmodic/ecto)
 
 option(ECTO_TRACE_EXCEPTIONS "Trace ecto exceptions to stdout" OFF)
 if (ECTO_TRACE_EXCEPTIONS)
