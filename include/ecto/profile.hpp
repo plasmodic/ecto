@@ -31,16 +31,26 @@
 
 #include <ecto/util.hpp>
 #include <ecto/log.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
 
 namespace ecto {
   namespace profile {
 
     unsigned long read_tsc(void);
 
+    struct graph_stats_type
+    {
+      boost::posix_time::ptime start_time, stop_time;
+      boost::posix_time::time_duration cumulative_time;
+      unsigned long start_tick, stop_tick, cumulative_ticks;
+    };
+
     struct ECTO_EXPORT stats_type
     {
       unsigned ncalls;
       int64_t total_ticks;
+      double elapsed_time();
+      double frequency();
     };
 
     struct ECTO_EXPORT stats_collector
@@ -63,8 +73,5 @@ namespace ecto {
       }
     };
 
-    ECTO_EXPORT double elapsed_time(const stats_type& stats);
-    ECTO_EXPORT double period(const stats_type& stats);
-    ECTO_EXPORT double frequency(const stats_type& stats);
  }
 }

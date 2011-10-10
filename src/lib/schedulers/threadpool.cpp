@@ -462,14 +462,12 @@ namespace ecto {
     //////////////////////////////////////////////////////////////
 
 
-    threadpool::threadpool(plasm_ptr p)
-      : plasm_(p), graph(p->graph()), impl_(new impl)
+    threadpool::threadpool(plasm_ptr p) : scheduler<threadpool>(p), impl_(new impl)
     { 
       ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);
     }
 
-    threadpool::threadpool(plasm& p)
-      : plasm_(p.shared_from_this()), graph(plasm_->graph()), impl_(new impl)
+    threadpool::threadpool(plasm& p) : scheduler<threadpool>(p), impl_(new impl)
     { 
       ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);
     }

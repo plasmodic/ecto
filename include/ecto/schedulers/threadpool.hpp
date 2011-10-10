@@ -28,6 +28,7 @@
  */
 #pragma once
 #include <ecto/plasm.hpp>
+#include <ecto/scheduler.hpp>
 #include <ecto/tendril.hpp>
 #include <ecto/cell.hpp>
 #include <ecto/graph_types.hpp>
@@ -45,11 +46,11 @@ namespace ecto {
 
   namespace schedulers {
     
-    struct ECTO_EXPORT threadpool 
+    struct ECTO_EXPORT threadpool : scheduler<threadpool>
     {
       // shared ptr is used to guarantee lifetimes
-      threadpool(plasm_ptr);
-      threadpool(plasm&);
+      explicit threadpool(plasm_ptr);
+      explicit threadpool(plasm&);
       ~threadpool();
 
       /**
@@ -63,8 +64,8 @@ namespace ecto {
       bool running() const;
       void wait();
       
-      plasm_ptr plasm_;
-      ecto::graph::graph_t& graph;
+      //      plasm_ptr plasm_;
+      //      ecto::graph::graph_t& graph;
       
       struct impl;
       boost::shared_ptr<impl> impl_;

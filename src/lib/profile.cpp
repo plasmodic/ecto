@@ -106,24 +106,19 @@ namespace ecto {
 
 #endif
 
-    double elapsed_time(const stats_type& stats)
+    double stats_type::elapsed_time()
     {
 #if !defined(_WIN32)
       double ticks_second = static_cast<double>(sysconf(_SC_CLK_TCK));
-      return stats.total_ticks / ticks_second;
+      return total_ticks / ticks_second;
 #else
 	  return 1.0;
 #endif
     }
 
-    double period(const stats_type& stats)
+    double stats_type::frequency()
     {
-      return elapsed_time(stats)/elapsed_time(stats);
-    }
-
-    double frequency(const stats_type& stats)
-    {
-      return stats.ncalls/elapsed_time(stats);
+      return ncalls/elapsed_time();
     }
 
 

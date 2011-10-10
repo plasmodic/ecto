@@ -39,10 +39,8 @@
 #include <boost/graph/topological_sort.hpp>
 #include <boost/graph/graphviz.hpp>
 
-
 namespace ecto {
   namespace graph {
-
 
     // if the first argument is a sequence type (vecS, etc) then parallel edges are allowed
     typedef boost::adjacency_list<boost::vecS, // OutEdgeList...

@@ -55,16 +55,16 @@ namespace ecto {
   using boost::thread;
   using boost::bind;
 
+  namespace pt = boost::posix_time;
+
   namespace schedulers {
 
-    singlethreaded::singlethreaded(plasm_ptr p)
-      : plasm_(p), graph(p->graph()),stop_running(false)
+    singlethreaded::singlethreaded(plasm_ptr p) : scheduler<singlethreaded>(p), stop_running(false)
     {
       assert(plasm_);
     }
 
-    singlethreaded::singlethreaded(plasm& p)
-      : plasm_(p.shared_from_this()), graph(plasm_->graph()),stop_running(false)
+    singlethreaded::singlethreaded(plasm& p) : scheduler<singlethreaded>(p), stop_running(false)
     {
       assert(plasm_);
     }
@@ -136,10 +136,10 @@ namespace ecto {
     {
       compute_stack();
       boost::mutex::scoped_lock yes_running(running_mtx);
-
       stop_running = false;
       boost::signals2::scoped_connection interupt_connection(
-          SINGLE_THREADED_SIGINT_SIGNAL.connect(boost::bind(&singlethreaded::interrupt, this)));
+            SINGLE_THREADED_SIGINT_SIGNAL.connect(boost::bind(&singlethreaded::interrupt, this)));
+
       #if !defined(_WIN32)
             signal(SIGINT, &sigint_static_thunk);
       #endif

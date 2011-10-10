@@ -27,6 +27,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #include <ecto/plasm.hpp>
+#include <ecto/scheduler.hpp>
 #include <ecto/tendril.hpp>
 #include <ecto/cell.hpp>
 #include <ecto/graph_types.hpp>
@@ -43,10 +44,10 @@ namespace ecto {
 
   namespace schedulers {
     
-    struct ECTO_EXPORT singlethreaded 
+    struct ECTO_EXPORT singlethreaded : scheduler<singlethreaded>
     {
-      singlethreaded(plasm_ptr);
-      singlethreaded(plasm&);
+      explicit singlethreaded(plasm_ptr);
+      explicit singlethreaded(plasm&);
       ~singlethreaded();
 
       int execute(unsigned niter=0);
@@ -64,8 +65,6 @@ namespace ecto {
       int invoke_process(ecto::graph::graph_t::vertex_descriptor vd);
       void compute_stack();
 
-      plasm_ptr plasm_;
-      ecto::graph::graph_t& graph;
       boost::thread runthread;
       
       bool stop_running;
