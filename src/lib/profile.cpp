@@ -25,10 +25,14 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 // 
-#include <ecto/profile.hpp>
+#include <ecto/all.hpp>
+
 #if !defined(_WIN32)
 #include <unistd.h>
 #endif
+#include <boost/format.hpp>
+
+namespace pt = boost::posix_time;
 
 namespace ecto {
   namespace profile {
@@ -119,6 +123,59 @@ namespace ecto {
     double stats_type::frequency()
     {
       return ncalls/elapsed_time();
+    }
+
+    void graph_stats_type::start()
+    {
+      start_time = pt::microsec_clock::universal_time();
+      start_tick = profile::read_tsc();
+    }
+
+    void graph_stats_type::stop()
+    {
+      stop_time = pt::microsec_clock::universal_time();
+      stop_tick = profile::read_tsc();
+      cumulative_time = stop_time - start_time;
+      cumulative_ticks = stop_tick - start_tick;
+    }
+
+    std::string graph_stats_type::as_string(graph::graph_t& g)
+    {
+      std::ostringstream oss;
+
+      std::string hline = "------------------------------------------------------------------------------\n";
+      oss << hline;
+      oss << str(boost::format("* %25s   %-7s %-10s %-10s %-6s\n") % "Cell Name" % "Calls" % "Hz(theo max)" % "Hz(observed)" % "load (%)");
+
+      double total_percentage = 0.0;
+      graph::graph_t::vertex_iterator begin, end;
+
+      for (tie(begin, end) = vertices(g); begin != end; ++begin)
+        {
+          cell::ptr m = g[*begin];
+          double this_percentage = 100.0 * ((double)m->stats.total_ticks / cumulative_ticks);
+          total_percentage += this_percentage;
+          double hz = (double(m->stats.ncalls) / (cumulative_time.total_microseconds() / 1e+06));
+          double theo_hz = hz *(100/this_percentage);
+          oss << str(boost::format("* %25s   %-7u %-12.2f %-12.2f %-8.2lf")
+                     % m->name()
+                     % m->stats.ncalls 
+                     % theo_hz
+                     % hz
+                     % this_percentage)
+              << "\n";
+          }
+              
+
+      oss << hline
+          << "cpu ticks:        " << cumulative_ticks
+          << " (@ " 
+          << (cumulative_ticks / (cumulative_time.total_milliseconds() / 1000.0)) / 1e+9 << " GHz)\n"
+          << "elapsed time:     " << cumulative_time
+          << " (timer resolution: " << 1.0 / cumulative_time.ticks_per_second() << " second)\n"
+        ;
+
+      return oss.str();
     }
 
 

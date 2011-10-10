@@ -65,6 +65,7 @@ namespace ecto {
         .def("stop", &singlethreaded::stop)
         .def("running", &singlethreaded::running)
         .def("wait", &singlethreaded::wait)
+        .def("stats", &singlethreaded::stats)
         ;
 
       bp::class_<threadpool, boost::noncopyable>("Threadpool", bp::init<ecto::plasm::ptr>())
@@ -84,6 +85,7 @@ namespace ecto {
         .def("interrupt", &threadpool::interrupt)
         .def("running", &threadpool::running)
         .def("wait", &threadpool::wait)
+        .def("stats", &threadpool::stats)
         ;
     }
   }

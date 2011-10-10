@@ -31,6 +31,8 @@
 
 #include <ecto/util.hpp>
 #include <ecto/log.hpp>
+#include <ecto/graph_types.hpp>
+
 #include <boost/date_time/posix_time/posix_time.hpp>
 
 namespace ecto {
@@ -43,6 +45,24 @@ namespace ecto {
       boost::posix_time::ptime start_time, stop_time;
       boost::posix_time::time_duration cumulative_time;
       unsigned long start_tick, stop_tick, cumulative_ticks;
+      void start();
+      void stop();
+      std::string as_string(graph::graph_t& g);
+    };
+
+    struct graphstats_collector 
+    {
+      graph_stats_type& gs_; 
+      graphstats_collector(graph_stats_type& gs) 
+        : gs_(gs) 
+      { 
+        gs_.start();
+      }
+
+      ~graphstats_collector() 
+      {
+        gs_.stop();
+      }
     };
 
     struct ECTO_EXPORT stats_type

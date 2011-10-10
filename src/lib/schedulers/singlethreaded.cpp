@@ -74,6 +74,7 @@ namespace ecto {
       interrupt();
       wait();
     }
+
     int
     singlethreaded::invoke_process(graph_t::vertex_descriptor vd)
     {
@@ -122,7 +123,8 @@ namespace ecto {
       // compute_stack(); //FIXME hack for python based tendrils.
       scoped_ptr<thread> tmp(new thread(bind(&singlethreaded::execute_impl, this, niter)));
       tmp->swap(runthread);
-      while(!running()) boost::this_thread::sleep(boost::posix_time::microseconds(5)); //TODO FIXME condition variable?
+      while(!running()) 
+        boost::this_thread::sleep(boost::posix_time::microseconds(5)); //TODO FIXME condition variable?
     }
 
     int singlethreaded::execute(unsigned niter)
@@ -137,12 +139,15 @@ namespace ecto {
       compute_stack();
       boost::mutex::scoped_lock yes_running(running_mtx);
       stop_running = false;
-      boost::signals2::scoped_connection interupt_connection(
-            SINGLE_THREADED_SIGINT_SIGNAL.connect(boost::bind(&singlethreaded::interrupt, this)));
 
-      #if !defined(_WIN32)
-            signal(SIGINT, &sigint_static_thunk);
-      #endif
+      boost::signals2::scoped_connection 
+        interupt_connection(SINGLE_THREADED_SIGINT_SIGNAL.connect(boost::bind(&singlethreaded::interrupt, this)));
+
+#if !defined(_WIN32)
+      signal(SIGINT, &sigint_static_thunk);
+#endif
+      
+      profile::graphstats_collector gs(graphstats);
 
       unsigned cur_iter = 0;
       while((niter == 0 || cur_iter < niter) && !stop_running)

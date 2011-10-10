@@ -28,6 +28,7 @@
 #pragma once
 
 #include <ecto/plasm.hpp>
+#include <ecto/profile.hpp>
 
 namespace ecto {
 
@@ -37,10 +38,17 @@ namespace ecto {
     explicit scheduler(plasm_ptr p) : plasm_(p), graph(p->graph()) { }
     explicit scheduler(plasm& p) : plasm_(p.shared_from_this()), graph(p.graph()) { }
 
+    std::string stats()
+    {
+      return graphstats.as_string(graph);
+    }
+
   protected:
     
     plasm_ptr plasm_;
     ecto::graph::graph_t& graph;
+
+    profile::graph_stats_type graphstats;
 
     Derived& this_() { 
       return static_cast<Derived*>(this);

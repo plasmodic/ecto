@@ -314,8 +314,9 @@ namespace ecto {
         stop = false; //reset the stop
         workserv.reset();
         mainserv.reset();
-        boost::signals2::scoped_connection interupt_connection(
-            THREADPOOL_SIGINT_SIGNAL.connect(boost::bind(&impl::stop_asap, this)));
+        boost::signals2::scoped_connection 
+          interrupt_connection(THREADPOOL_SIGINT_SIGNAL.connect(boost::bind(&impl::stop_asap, this)));
+
 #if !defined(_WIN32)
         signal(SIGINT, &sigint_static_thunk);
 #endif
@@ -323,8 +324,8 @@ namespace ecto {
         // initialize stats
         //
         starttime = pt::microsec_clock::universal_time();
-        int64_t start_ticks = profile::read_tsc();
-        reset_times(graph);
+        //        int64_t start_ticks = profile::read_tsc();
+        //reset_times(graph);
 
         //
         // start per-node threads
@@ -356,43 +357,6 @@ namespace ecto {
           throw;
         }
 
-        //
-        //  print stats
-        //
-        pt::time_duration elapsed = pt::microsec_clock::universal_time() - starttime;
-        int64_t elapsed_ticks = profile::read_tsc() - start_ticks;
-
-        double total_percentage = 0.0;
-
-        std::cout << "------------------------------------------------------------------------------\n";
-        std::cout << str(boost::format("* %25s   %-7s %-10s %-10s %-6s\n") % "Cell Name" % "Calls" % "Hz(theo max)" % "Hz(observed)" % "load (%)");
-        for (tie(begin, end) = vertices(graph); begin != end; ++begin)
-          {
-            cell::ptr m = graph[*begin];
-            double this_percentage = 100.0 * ((double)m->stats.total_ticks / elapsed_ticks);
-            total_percentage += this_percentage;
-            double hz = (double(m->stats.ncalls) / (elapsed.total_microseconds() / 1e+06));
-            double theo_hz = hz *(100/this_percentage);
-            std::cout << str(boost::format("* %25s   %-7u %-12.2f %-12.2f %-8.2lf")
-                             % m->name()
-                             % m->stats.ncalls 
-                             % theo_hz
-                             % hz
-                             % this_percentage)
-                      << "\n";
-          }
-              
-        std::cout << "------------------------------------------------------------------------------"
-                  << "\ncpu freq:         " << (elapsed_ticks / (elapsed.total_milliseconds() / 1000.0)) / 1e+9 
-                  << " GHz"
-                  << "\nthreads:          " << nthreads
-                  << "\nelapsed time:     " << elapsed 
-                  << "\ncpu ticks:        " << elapsed_ticks
-                  << "\ncpu ticks/second: " << elapsed.ticks_per_second();
-          ;
-
-        std::cout << str(boost::format("\nin process():     %.2f%%\n") % (total_percentage / nthreads))
-          ;
         return 0;
       }
 
@@ -492,6 +456,7 @@ namespace ecto {
     {
       ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);
 
+
       unsigned nthreads = 
         nthreadsarg == 0 
         ? std::min((unsigned)plasm_->size(), boost::thread::hardware_concurrency())
@@ -509,6 +474,8 @@ namespace ecto {
         std::cout << ncalls;
     
       std::cout << " ticks in " << nthreads << " threads.\n";
+
+      profile::graphstats_collector gs(graphstats);
 
       if (ncalls == 0)
         return impl_->execute(nthreads, phx::val(true), graph);
