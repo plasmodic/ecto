@@ -27,7 +27,7 @@
 // 
 #pragma once
 
-#include <ecto/all.hpp>
+#include <ecto/plasm.hpp>
 
 namespace ecto {
 
@@ -37,9 +37,7 @@ namespace ecto {
     explicit scheduler(plasm_ptr p) : plasm_(p), graph(p->graph()) { }
     explicit scheduler(plasm& p) : plasm_(p.shared_from_this()), graph(p.graph()) { }
 
-    
-
-    protected:
+  protected:
     
     plasm_ptr plasm_;
     ecto::graph::graph_t& graph;
