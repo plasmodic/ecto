@@ -47,7 +47,7 @@
 #include <ecto/ecto.hpp>
 #include <ecto/serialization/registry.hpp>
 #include <ecto/serialization/cell.hpp>
-
+#include <boost/graph/graphviz.hpp>
 namespace ecto
 {
   using namespace graph;

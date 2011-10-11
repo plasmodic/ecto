@@ -46,7 +46,7 @@
 #include <boost/thread.hpp>
 #include <boost/scoped_ptr.hpp>
 #include <boost/date_time/posix_time/posix_time_duration.hpp>
-
+#include <boost/graph/topological_sort.hpp>
 
 namespace ecto {
 
