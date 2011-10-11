@@ -42,9 +42,9 @@
 #include <ecto/log.hpp>
 #include <ecto/strand.hpp>
 
-#include <ecto/graph_types.hpp>
+#include <ecto/impl/graph_types.hpp>
 #include <ecto/edge.hpp>
-#include <ecto/schedulers/invoke.hpp>
+#include <ecto/impl/invoke.hpp>
 #include <ecto/schedulers/threadpool.hpp>
 
 #include <string>
@@ -425,11 +425,6 @@ namespace ecto {
 
 
     threadpool::threadpool(plasm_ptr p) : scheduler<threadpool>(p), impl_(new impl)
-    { 
-      ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);
-    }
-
-    threadpool::threadpool(plasm& p) : scheduler<threadpool>(p), impl_(new impl)
     { 
       ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);
     }

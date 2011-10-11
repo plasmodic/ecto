@@ -31,6 +31,7 @@
 #include <unistd.h>
 #endif
 #include <boost/format.hpp>
+#include <ecto/impl/graph_types.hpp>
 
 namespace pt = boost::posix_time;
 

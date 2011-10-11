@@ -37,6 +37,8 @@
 #include <ecto/edge.hpp>
 #include <ecto/registry.hpp>
 
+#include <ecto/impl/graph_types.hpp>
+
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>

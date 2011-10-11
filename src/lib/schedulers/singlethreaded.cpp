@@ -38,9 +38,9 @@
 #include <utility>
 #include <deque>
 
-#include <ecto/graph_types.hpp>
+#include <ecto/impl/graph_types.hpp>
 #include <ecto/plasm.hpp>
-#include <ecto/schedulers/invoke.hpp>
+#include <ecto/impl/invoke.hpp>
 #include <ecto/schedulers/singlethreaded.hpp>
 
 #include <boost/thread.hpp>
@@ -48,7 +48,52 @@
 #include <boost/date_time/posix_time/posix_time_duration.hpp>
 #include <boost/graph/topological_sort.hpp>
 
+#include <ecto/plasm.hpp>
+#include <ecto/scheduler.hpp>
+#include <ecto/tendril.hpp>
+#include <ecto/cell.hpp>
+
+#include <string>
+#include <map>
+#include <set>
+#include <utility>
+#include <deque>
+
+
+
 namespace ecto {
+
+  namespace schedulers {
+    
+    struct ECTO_EXPORT singlethreaded::impl : scheduler<singlethreaded::impl>
+    {
+      explicit impl(plasm_ptr);
+      ~impl();
+
+      int execute(unsigned niter=0);
+      void execute_async(unsigned niter=0);
+
+      void stop();
+      void interrupt();
+      bool running() const;
+      void wait();
+
+    private:
+
+      int execute_impl(unsigned niter);
+
+      int invoke_process(ecto::graph::graph_t::vertex_descriptor vd);
+      void compute_stack();
+
+      boost::thread runthread;
+      
+      bool stop_running;
+      int last_rval;
+      std::vector<ecto::graph::graph_t::vertex_descriptor> stack;
+      mutable boost::mutex iface_mtx;
+      mutable boost::mutex running_mtx;
+    };
+  }
 
   using namespace ecto::graph;
   using boost::scoped_ptr;
@@ -59,24 +104,24 @@ namespace ecto {
 
   namespace schedulers {
 
-    singlethreaded::singlethreaded(plasm_ptr p) : scheduler<singlethreaded>(p), stop_running(false)
-    {
-      assert(plasm_);
-    }
+    singlethreaded::singlethreaded(plasm_ptr p) 
+      : impl_(new impl(p))
+    { }
 
-    singlethreaded::singlethreaded(plasm& p) : scheduler<singlethreaded>(p), stop_running(false)
-    {
-      assert(plasm_);
-    }
+    singlethreaded::impl::impl(plasm_ptr p) 
+      : scheduler<singlethreaded::impl>(p), stop_running(false)
+    { }
 
-    singlethreaded::~singlethreaded()
+    singlethreaded::~singlethreaded() { }
+
+    singlethreaded::impl::~impl()
     {
       interrupt();
       wait();
     }
 
     int
-    singlethreaded::invoke_process(graph_t::vertex_descriptor vd)
+    singlethreaded::impl::invoke_process(graph_t::vertex_descriptor vd)
     {
       int rv;
       try {
@@ -88,7 +133,7 @@ namespace ecto {
       return rv;
     }
 
-    void singlethreaded::compute_stack()
+    void singlethreaded::impl::compute_stack()
     {
       if (!stack.empty()) //will be empty if this needs to be computed.
         return;
@@ -114,14 +159,20 @@ namespace ecto {
       }
     }
 
-    void singlethreaded::execute_async(unsigned niter)
+    void singlethreaded::execute_async(unsigned niter) 
+    {
+      impl_->execute_async(niter);
+    }
+
+    void singlethreaded::impl::execute_async(unsigned niter)
     {
       PyEval_InitThreads();
       assert(PyEval_ThreadsInitialized());
 
       boost::mutex::scoped_lock l(iface_mtx);
       // compute_stack(); //FIXME hack for python based tendrils.
-      scoped_ptr<thread> tmp(new thread(bind(&singlethreaded::execute_impl, this, niter)));
+      scoped_ptr<thread> tmp(new thread(bind(&singlethreaded::impl::execute_impl, 
+                                             this, niter)));
       tmp->swap(runthread);
       while(!running()) 
         boost::this_thread::sleep(boost::posix_time::microseconds(5)); //TODO FIXME condition variable?
@@ -129,12 +180,17 @@ namespace ecto {
 
     int singlethreaded::execute(unsigned niter)
     {
+      return impl_->execute(niter);
+    }
+
+    int singlethreaded::impl::execute(unsigned niter)
+    {
       int j;
       j = execute_impl(niter);
       return j;
     }
 
-    int singlethreaded::execute_impl(unsigned niter)
+    int singlethreaded::impl::execute_impl(unsigned niter)
     {
       plasm_->reset_ticks();
       compute_stack();
@@ -142,7 +198,7 @@ namespace ecto {
       stop_running = false;
 
       boost::signals2::scoped_connection 
-        interupt_connection(SINGLE_THREADED_SIGINT_SIGNAL.connect(boost::bind(&singlethreaded::interrupt, this)));
+        interupt_connection(SINGLE_THREADED_SIGINT_SIGNAL.connect(boost::bind(&singlethreaded::impl::interrupt, this)));
 
 #if !defined(_WIN32)
       signal(SIGINT, &sigint_static_thunk);
@@ -168,6 +224,9 @@ namespace ecto {
     }
 
     void singlethreaded::interrupt() {
+      impl_->interrupt();
+    }
+    void singlethreaded::impl::interrupt() {
       boost::mutex::scoped_lock l(iface_mtx);
       SHOW();
       stop_running = true;
@@ -176,6 +235,9 @@ namespace ecto {
     }
 
     void singlethreaded::stop() {
+      impl_->stop();
+    }
+    void singlethreaded::impl::stop() {
       boost::mutex::scoped_lock l(iface_mtx);
       SHOW();
       stop_running = true;
@@ -183,6 +245,10 @@ namespace ecto {
     }
 
     bool singlethreaded::running() const {
+      return impl_->running();
+    }
+
+    bool singlethreaded::impl::running() const {
       boost::mutex::scoped_lock l2(running_mtx, boost::defer_lock);
       if (l2.try_lock())
         return false;
@@ -191,11 +257,19 @@ namespace ecto {
     }
 
     void singlethreaded::wait() {
+      impl_->wait();
+    }
+
+    void singlethreaded::impl::wait() {
       SHOW();
       boost::mutex::scoped_lock l(iface_mtx);
       while(running())
         boost::this_thread::sleep(boost::posix_time::microseconds(10));
       runthread.join();
+    }
+
+    std::string singlethreaded::stats() {
+      return impl_->stats();
     }
 
   }

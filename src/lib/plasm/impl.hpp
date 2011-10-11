@@ -31,6 +31,8 @@
 #include <ecto/plasm.hpp>
 #include <boost/tr1/unordered_map.hpp>
 
+#include <ecto/impl/graph_types.hpp>
+
 namespace ecto {
 
   struct plasm::impl

@@ -31,6 +31,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/noncopyable.hpp>
+#include <boost/serialization/split_member.hpp>
 
 #include <string>
 #include <map>
@@ -38,7 +39,6 @@
 
 #include <ecto/forward.hpp>
 #include <ecto/tendril.hpp>
-#include <ecto/graph_types.hpp>
 
 namespace ecto
 {
@@ -55,7 +55,7 @@ namespace ecto
    * is used by all the ecto::schedulers to enable execution of modules
    * that are connected in the graph.
    */
-  class ECTO_EXPORT plasm: 
+  class ECTO_EXPORT plasm : 
     boost::noncopyable, public boost::enable_shared_from_this<plasm>
   {
   public:

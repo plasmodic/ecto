@@ -28,7 +28,7 @@
  */
 #pragma once
 
-#include <ecto/graph_types.hpp>
+#include <ecto/impl/graph_types.hpp>
 
 namespace ecto {
   namespace schedulers {

@@ -31,7 +31,6 @@
 #include <ecto/scheduler.hpp>
 #include <ecto/tendril.hpp>
 #include <ecto/cell.hpp>
-#include <ecto/graph_types.hpp>
 #include <ecto/strand.hpp>
 
 #include <string>

@@ -54,7 +54,6 @@ namespace ecto {
       using namespace ecto::schedulers;
       using bp::arg;
       bp::class_<singlethreaded, boost::noncopyable>("Singlethreaded", bp::init<ecto::plasm::ptr>())
-        .def(bp::init<ecto::plasm&>())
         .def("execute", &execute0<singlethreaded>)
         .def("execute", &execute1<singlethreaded>, arg("niter"))
 
@@ -69,9 +68,6 @@ namespace ecto {
         ;
 
       bp::class_<threadpool, boost::noncopyable>("Threadpool", bp::init<ecto::plasm::ptr>())
-
-        .def(bp::init<ecto::plasm&>())
-
         .def("execute", &execute0<threadpool>)
         .def("execute", &execute1<threadpool>, arg("niter"))
         .def("execute", &execute2<threadpool>, (arg("niter"), arg("nthreads")))

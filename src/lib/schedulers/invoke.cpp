@@ -41,7 +41,7 @@
 #include <ecto/cell.hpp>
 #include <ecto/edge.hpp>
 
-#include <ecto/graph_types.hpp>
+#include <ecto/impl/graph_types.hpp>
 #include <ecto/plasm.hpp>
 
 namespace ecto {

@@ -31,7 +31,6 @@
 #include <ecto/python.hpp>
 
 #include <ecto/ecto.hpp>
-#include <ecto/graph_types.hpp>
 #include <ecto/edge.hpp>
 #include <ecto/tendril.hpp>
 #include <ecto/tendrils.hpp>

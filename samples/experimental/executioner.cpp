@@ -31,7 +31,6 @@
 #include <ecto/python.hpp>
 #include <boost/foreach.hpp>
 #include <ecto/plasm.hpp>
-#include <ecto/schedulers/invoke.hpp>
 #include <ecto/schedulers/singlethreaded.hpp>
 
 namespace ecto

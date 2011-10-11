@@ -27,6 +27,7 @@
 // 
 #pragma once
 
+#include <ecto/forward.hpp>
 #include <ecto/plasm.hpp>
 #include <ecto/profile.hpp>
 
@@ -36,7 +37,6 @@ namespace ecto {
   struct scheduler {
 
     explicit scheduler(plasm_ptr p) : plasm_(p), graph(p->graph()) { }
-    explicit scheduler(plasm& p) : plasm_(p.shared_from_this()), graph(p.graph()) { }
 
     std::string stats()
     {

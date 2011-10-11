@@ -29,9 +29,9 @@
 #pragma once
 #include <stdint.h>//int64_t
 
+#include <ecto/forward.hpp>
 #include <ecto/util.hpp>
 #include <ecto/log.hpp>
-#include <ecto/graph_types.hpp>
 
 #include <boost/date_time/posix_time/posix_time.hpp>
 

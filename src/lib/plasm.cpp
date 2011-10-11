@@ -31,7 +31,7 @@
 #include <ecto/tendrils.hpp>
 #include <ecto/edge.hpp>
 #include <ecto/cell.hpp>
-#include <ecto/graph_types.hpp>
+#include <ecto/impl/graph_types.hpp>
 
 #include <boost/format.hpp>
 #include <boost/date_time/posix_time/posix_time_duration.hpp>

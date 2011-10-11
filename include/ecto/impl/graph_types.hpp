@@ -40,14 +40,16 @@
 namespace ecto {
   namespace graph {
 
-    // if the first argument is a sequence type (vecS, etc) then parallel edges are allowed
-    typedef boost::adjacency_list<boost::vecS, // OutEdgeList...
-                                  boost::vecS, // VertexList
-                                  boost::bidirectionalS, // Directed
-                                  cell_ptr, // vertex property
-                                  edge_ptr> // edge property
-    graph_t;
-  
+    // if the first argument is a sequence type (vecS, etc) 
+    // then parallel edges are allowed
+
+    struct graph_t 
+      : boost::adjacency_list<boost::vecS, // OutEdgeList...
+                              boost::vecS, // VertexList
+                              boost::bidirectionalS, // Directed
+                              cell_ptr, // vertex property
+                              edge_ptr> // edge property
+    { };
 
   }
 }

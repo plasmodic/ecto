@@ -29,6 +29,7 @@
 #pragma once
 
 #include <boost/shared_ptr.hpp>
+
 namespace ecto {
   class tendril;
   typedef boost::shared_ptr<tendril> tendril_ptr;
@@ -50,7 +51,14 @@ namespace ecto {
     struct edge;
     typedef boost::shared_ptr<edge> edge_ptr;
     typedef boost::shared_ptr<const edge> edge_cptr;
+    struct graph_t;
   }
 
   template <typename T> struct cell_;
+}
+
+namespace boost {
+  namespace serialization {
+    class access;
+  }
 }
