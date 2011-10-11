@@ -4,6 +4,7 @@
 #include <ecto/serialization/cell.hpp>
 #include <ecto/schedulers/singlethreaded.hpp>
 #include <cstring>
+#include <fstream>
 int
 main(int argc, char** argv)
 {

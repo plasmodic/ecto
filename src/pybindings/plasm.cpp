@@ -40,6 +40,8 @@
 #include <ecto/serialization/registry.hpp>
 #include <ecto/serialization/cell.hpp>
 
+#include <fstream>
+
 namespace bp = boost::python;
 using bp::arg;
 
