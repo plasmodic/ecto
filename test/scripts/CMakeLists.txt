@@ -39,6 +39,7 @@ foreach(file
     #test_redirect #reenable when we figure out why this fails. TODO FIXME
     test_required_io
     test_required_param
+    test_restart
     test_random
     test_shared_pass
     test_small_plasms

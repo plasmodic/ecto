@@ -29,7 +29,7 @@
 
 #if defined(ECTO_THREADPOOL_DEBUG)
 #define ECTO_LOG_ON
-#define ECTO_USLEEP() usleep(500000)
+#define ECTO_USLEEP() // usleep(500000)
 #else
 #define ECTO_USLEEP()
 #endif
@@ -231,8 +231,6 @@ namespace ecto {
                   std::cout << "Module " << g[vd]->name() << " returned " << ReturnCodeToStr(rval) <<" Stopping everything."
                             << std::endl; 
                   context.stop = true;
-                  //        context.interrupt();
-                  context.mainserv.post(boost::bind(&threadpool::impl::interrupt, &context));
                   return;
                 }
             } catch (const std::exception& e) {
@@ -456,6 +454,7 @@ namespace ecto {
     {
       ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);
 
+      boost::mutex::scoped_lock lock(execute_mtx);
 
       unsigned nthreads = 
         nthreadsarg == 0 
@@ -465,6 +464,8 @@ namespace ecto {
       //check this plasm for correctness.
       plasm_->check();
       plasm_->configure_all();
+
+      plasm_->reset_ticks();
 
       std::cout << "Threadpool executing ";
 

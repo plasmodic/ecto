@@ -140,6 +140,8 @@ namespace ecto
      */
     void configure_all();
 
+    void reset_ticks();
+
     void save(std::ostream&) const;
     void load(std::istream&);
 

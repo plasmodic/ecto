@@ -268,6 +268,32 @@ namespace ecto
     return c;
   }
 
+  void plasm::reset_ticks()
+  {
+    {
+      graph_t::vertex_iterator beg, end;
+      tie(beg, end) = vertices(impl_->graph);
+      while(beg != end)
+        {
+          cell_ptr c = impl_->graph[*beg];
+          c->reset_tick();
+          ++beg;
+        }
+    }
+
+    {
+      graph_t::edge_iterator beg, end;
+      tie(beg, end) = edges(impl_->graph);
+      while(beg != end)
+        {
+          edge_ptr e = impl_->graph[*beg];
+          while(e->size() > 0)
+            e->pop_front();
+          ++beg;
+        }
+    }
+  }
+
   void plasm::configure_all()
   {
     BOOST_FOREACH(impl::ModuleVertexMap::value_type& x, impl_->mv_map)

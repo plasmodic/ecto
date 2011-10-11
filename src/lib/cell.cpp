@@ -314,5 +314,19 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
   { 
     ++tick_;
   }
+  void cell::reset_tick()
+  { 
+    tick_ = 0;
+    tendrils::iterator it = inputs.begin(), end=inputs.end();
+    while(it != end)
+      if (it->second)
+        (it++)->second->tick = 0;
+    it = outputs.begin();
+    end = outputs.end();
+    while(it != end)
+      if (it->second)
+        (it++)->second->tick = 0;
+    
+  }
 }
 

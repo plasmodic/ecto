@@ -182,6 +182,7 @@ namespace ecto
 
     std::size_t tick() const;
     void inc_tick();
+    void reset_tick();
 
   protected:
 

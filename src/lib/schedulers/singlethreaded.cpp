@@ -136,6 +136,7 @@ namespace ecto {
 
     int singlethreaded::execute_impl(unsigned niter)
     {
+      plasm_->reset_ticks();
       compute_stack();
       boost::mutex::scoped_lock yes_running(running_mtx);
       stop_running = false;

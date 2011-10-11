@@ -34,6 +34,7 @@
 #include <utility>
 #include <deque>
 
+// #define ECTO_LOG_ON
 #include <ecto/log.hpp>
 #include <ecto/plasm.hpp>
 #include <ecto/tendril.hpp>
@@ -99,4 +100,3 @@ namespace ecto {
 
   }
 }
-
