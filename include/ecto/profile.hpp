@@ -45,6 +45,7 @@ namespace ecto {
       boost::posix_time::ptime start_time, stop_time;
       boost::posix_time::time_duration cumulative_time;
       unsigned long start_tick, stop_tick, cumulative_ticks;
+      graph_stats_type();
       void start();
       void stop();
       std::string as_string(graph::graph_t& g);
@@ -67,6 +68,7 @@ namespace ecto {
 
     struct ECTO_EXPORT stats_type
     {
+      stats_type();
       unsigned ncalls;
       int64_t total_ticks;
       double elapsed_time();

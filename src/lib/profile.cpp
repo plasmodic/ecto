@@ -111,6 +111,10 @@ namespace ecto {
 
 #endif
 
+    stats_type::stats_type() 
+      : ncalls(0), total_ticks(0)
+    { }
+
     double stats_type::elapsed_time()
     {
 #if !defined(_WIN32)
@@ -125,6 +129,10 @@ namespace ecto {
     {
       return ncalls/elapsed_time();
     }
+
+    graph_stats_type::graph_stats_type() 
+      : start_tick(0), stop_tick(0), cumulative_ticks(0)
+    { }
 
     void graph_stats_type::start()
     {
