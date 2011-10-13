@@ -26,6 +26,7 @@
 // POSSIBILITY OF SUCH DAMAGE.
 // 
 #include <ecto/schedulers/singlethreaded.hpp>
+#include <ecto/schedulers/multithreaded.hpp>
 #include <ecto/schedulers/threadpool.hpp>
 
 namespace bp = boost::python;
@@ -44,6 +45,25 @@ namespace ecto {
       return s.execute_async(arg1, arg2); 
     }
 
+    template <typename T> 
+    bp::class_<T, boost::noncopyable>& wrap_scheduler(const char* name)
+    {
+      using bp::arg;
+      return bp::class_<T, boost::noncopyable>(name, bp::init<ecto::plasm::ptr>())
+        .def("execute", &execute0<T>)
+        .def("execute", &execute1<T>, arg("niter"))
+
+        .def("execute_async", &execute_async0<T>)
+        .def("execute_async", &execute_async1<T>, arg("niter"))
+
+        .def("interrupt", &T::interrupt)
+        .def("stop", &T::stop)
+        .def("running", &T::running)
+        .def("wait", &T::wait)
+        .def("stats", &T::stats)
+        ;
+    }
+
     void wrapSchedulers()
     {
       //      bp::detail::init_module("ecto.schedulers", initschedulers);
@@ -53,36 +73,15 @@ namespace ecto {
       
       using namespace ecto::schedulers;
       using bp::arg;
-      bp::class_<singlethreaded, boost::noncopyable>("Singlethreaded", bp::init<ecto::plasm::ptr>())
-        .def("execute", &execute0<singlethreaded>)
-        .def("execute", &execute1<singlethreaded>, arg("niter"))
 
-        .def("execute_async", &execute_async0<singlethreaded>)
-        .def("execute_async", &execute_async1<singlethreaded>, arg("niter"))
+      wrap_scheduler<singlethreaded>("singlethreaded");
 
-        .def("interrupt", &singlethreaded::interrupt)
-        .def("stop", &singlethreaded::stop)
-        .def("running", &singlethreaded::running)
-        .def("wait", &singlethreaded::wait)
-        .def("stats", &singlethreaded::stats)
-        ;
+      wrap_scheduler<multithreaded>("multithreaded");
 
-      bp::class_<threadpool, boost::noncopyable>("Threadpool", bp::init<ecto::plasm::ptr>())
-        .def("execute", &execute0<threadpool>)
-        .def("execute", &execute1<threadpool>, arg("niter"))
-        .def("execute", &execute2<threadpool>, (arg("niter"), arg("nthreads")))
-
-        .def("execute_async", &execute_async0<threadpool>)
-
-        .def("execute_async", &execute_async1<threadpool>, arg("niter"))
+      wrap_scheduler<threadpool>("threadpool")
         .def("execute_async", &execute_async2<threadpool>, (arg("niter"), arg("nthreads")))
-
-        .def("stop", &threadpool::stop)
-        .def("interrupt", &threadpool::interrupt)
-        .def("running", &threadpool::running)
-        .def("wait", &threadpool::wait)
-        .def("stats", &threadpool::stats)
         ;
+        
     }
   }
 }

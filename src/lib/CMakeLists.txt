@@ -25,6 +25,7 @@ add_library(ecto SHARED
   serialization.cpp
   schedulers/invoke.cpp
   schedulers/singlethreaded.cpp
+  schedulers/multithreaded.cpp
   schedulers/threadpool.cpp
   ${ecto_HEADERS}
   )
