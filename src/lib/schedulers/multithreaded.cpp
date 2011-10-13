@@ -41,6 +41,7 @@
 #include <ecto/impl/graph_types.hpp>
 #include <ecto/plasm.hpp>
 #include <ecto/impl/invoke.hpp>
+#include <ecto/impl/schedulers/access.hpp>
 #include <ecto/schedulers/multithreaded.hpp>
 
 #include <boost/thread.hpp>

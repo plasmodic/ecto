@@ -215,6 +215,9 @@ namespace ecto
     std::string instance_name_;
     bool configured;
     std::size_t tick_;
+    boost::mutex mtx;
+
+    friend struct ecto::schedulers::access;
   };
 
   
