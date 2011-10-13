@@ -42,6 +42,7 @@
 #include <ecto/edge.hpp>
 
 #include <ecto/impl/graph_types.hpp>
+#include <ecto/impl/schedulers/access.hpp>
 #include <ecto/plasm.hpp>
 
 namespace ecto {
@@ -54,6 +55,9 @@ namespace ecto {
     invoke_process(graph_t& graph, graph_t::vertex_descriptor vd)
     {
       cell::ptr m = graph[vd];
+
+      access cellaccess(*m);
+      boost::mutex::scoped_lock lock(cellaccess.mtx);
 
       std::size_t tick = m->tick();
 
