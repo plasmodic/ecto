@@ -1,4 +1,5 @@
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${ecto_SOURCE_DIR}/src/lib)
+
 ectomodule(ecto
   cell.cpp
   ecto.cpp
