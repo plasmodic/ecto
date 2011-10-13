@@ -48,6 +48,7 @@
 #include <boost/scoped_ptr.hpp>
 #include <boost/date_time/posix_time/posix_time_duration.hpp>
 #include <boost/graph/topological_sort.hpp>
+#include <boost/asio.hpp>
 
 #include <ecto/plasm.hpp>
 #include <ecto/scheduler.hpp>
@@ -81,6 +82,7 @@ namespace ecto {
 
     private:
 
+      int run_graph();
       int execute_impl(unsigned niter, unsigned nthread);
 
       int invoke_process(ecto::graph::graph_t::vertex_descriptor vd);
@@ -89,10 +91,11 @@ namespace ecto {
       boost::thread runthread;
       
       bool stop_running;
-      int last_rval;
       std::vector<ecto::graph::graph_t::vertex_descriptor> stack;
       mutable boost::mutex iface_mtx;
       mutable boost::mutex running_mtx;
+      
+      boost::asio::io_service io;
     };
   }
 
@@ -105,21 +108,61 @@ namespace ecto {
 
   namespace schedulers {
 
+    //
+    // forwarding interface
+    // 
+
     multithreaded::multithreaded(plasm_ptr p) 
       : impl_(new impl(p))
     { }
 
+    multithreaded::~multithreaded() { }
+
+    int multithreaded::execute(unsigned niter, unsigned nthread)
+    {
+      return impl_->execute(niter, nthread);
+    }
+
+    void multithreaded::execute_async(unsigned niter, unsigned nthread)
+    {
+      impl_->execute_async(niter, nthread);
+    }
+
+    void multithreaded::stop() {
+      impl_->stop();
+    }
+
+    bool multithreaded::running() const {
+      return impl_->running();
+    }
+
+    void multithreaded::wait() {
+      impl_->wait();
+    }
+
+    void multithreaded::interrupt() {
+      impl_->interrupt();
+    }
+
+    std::string multithreaded::stats() {
+      return impl_->stats();
+    }
+    
+    //
+    //  impl
+    //
+
+
     multithreaded::impl::impl(plasm_ptr p) 
       : scheduler<multithreaded::impl>(p), stop_running(false)
     { }
-
-    multithreaded::~multithreaded() { }
 
     multithreaded::impl::~impl()
     {
       interrupt();
       wait();
     }
+
 
     int
     multithreaded::impl::invoke_process(graph_t::vertex_descriptor vd)
@@ -160,16 +203,6 @@ namespace ecto {
       }
     }
 
-    int multithreaded::execute(unsigned niter, unsigned nthread)
-    {
-      return impl_->execute(niter, nthread);
-    }
-
-    void multithreaded::execute_async(unsigned niter, unsigned nthread)
-    {
-      impl_->execute_async(niter, nthread);
-    }
-
     void multithreaded::impl::execute_async(unsigned niter, unsigned nthread)
     {
       PyEval_InitThreads();
@@ -191,6 +224,18 @@ namespace ecto {
       return j;
     }
 
+    int multithreaded::impl::run_graph()
+    {
+      for (size_t k = 0; k < stack.size() && !stop_running; ++k)
+        {
+          //need to check the return val of a process here, non zero means exit...
+          size_t retval = invoke_process(stack[k]);
+          if (retval)
+            return retval;
+        }
+      return 0;
+    }
+
     int multithreaded::impl::execute_impl(unsigned niter, unsigned nthread)
     {
       plasm_->reset_ticks();
@@ -210,23 +255,14 @@ namespace ecto {
       unsigned cur_iter = 0;
       while((niter == 0 || cur_iter < niter) && !stop_running)
         {
-          for (size_t k = 0; k < stack.size() && !stop_running; ++k)
-            {
-              //need to check the return val of a process here, non zero means exit...
-              size_t retval = invoke_process(stack[k]);
-              last_rval = retval;
-              if (retval)
-                return retval;
-            }
+          size_t rv = run_graph();
+          if (rv)
+            return rv;
           ++cur_iter;
         }
-      last_rval = stop_running;
-      return last_rval;
+      return stop_running;
     }
 
-    void multithreaded::interrupt() {
-      impl_->interrupt();
-    }
     void multithreaded::impl::interrupt() {
       boost::mutex::scoped_lock l(iface_mtx);
       SHOW();
@@ -235,18 +271,11 @@ namespace ecto {
       runthread.join();
     }
 
-    void multithreaded::stop() {
-      impl_->stop();
-    }
     void multithreaded::impl::stop() {
       boost::mutex::scoped_lock l(iface_mtx);
       SHOW();
       stop_running = true;
       runthread.join();
-    }
-
-    bool multithreaded::running() const {
-      return impl_->running();
     }
 
     bool multithreaded::impl::running() const {
@@ -257,9 +286,6 @@ namespace ecto {
         return true;
     }
 
-    void multithreaded::wait() {
-      impl_->wait();
-    }
 
     void multithreaded::impl::wait() {
       SHOW();
@@ -269,9 +295,6 @@ namespace ecto {
       runthread.join();
     }
 
-    std::string multithreaded::stats() {
-      return impl_->stats();
-    }
 
   }
 }

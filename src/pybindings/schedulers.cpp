@@ -76,9 +76,9 @@ namespace ecto {
       using namespace ecto::schedulers;
       using bp::arg;
 
-      wrap_scheduler<singlethreaded>("Singlethreaded");
+      //      wrap_scheduler<singlethreaded>("Singlethreaded");
 
-      wrap_scheduler<multithreaded>("Multithreaded");
+      wrap_scheduler<multithreaded>("Singlethreaded");
 
       wrap_scheduler<threadpool>("Threadpool");
         
