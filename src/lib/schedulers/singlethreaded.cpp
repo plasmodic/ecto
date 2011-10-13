@@ -70,8 +70,8 @@ namespace ecto {
       explicit impl(plasm_ptr);
       ~impl();
 
-      int execute(unsigned niter=0);
-      void execute_async(unsigned niter=0);
+      int execute(unsigned niter, unsigned nthread);
+      void execute_async(unsigned niter, unsigned nthread);
 
       void stop();
       void interrupt();
@@ -80,7 +80,7 @@ namespace ecto {
 
     private:
 
-      int execute_impl(unsigned niter);
+      int execute_impl(unsigned niter, unsigned nthread);
 
       int invoke_process(ecto::graph::graph_t::vertex_descriptor vd);
       void compute_stack();
@@ -159,12 +159,7 @@ namespace ecto {
       }
     }
 
-    void singlethreaded::execute_async(unsigned niter) 
-    {
-      impl_->execute_async(niter);
-    }
-
-    void singlethreaded::impl::execute_async(unsigned niter)
+    void singlethreaded::impl::execute_async(unsigned niter, unsigned nthreads)
     {
       PyEval_InitThreads();
       assert(PyEval_ThreadsInitialized());
@@ -172,25 +167,30 @@ namespace ecto {
       boost::mutex::scoped_lock l(iface_mtx);
       // compute_stack(); //FIXME hack for python based tendrils.
       scoped_ptr<thread> tmp(new thread(bind(&singlethreaded::impl::execute_impl, 
-                                             this, niter)));
+                                             this, niter, nthreads)));
       tmp->swap(runthread);
       while(!running()) 
         boost::this_thread::sleep(boost::posix_time::microseconds(5)); //TODO FIXME condition variable?
     }
 
-    int singlethreaded::execute(unsigned niter)
+    int singlethreaded::execute(unsigned niter, unsigned nthread)
     {
-      return impl_->execute(niter);
+      return impl_->execute(niter, nthread);
     }
 
-    int singlethreaded::impl::execute(unsigned niter)
+    void singlethreaded::execute_async(unsigned niter, unsigned nthread)
+    {
+      impl_->execute_async(niter, nthread);
+    }
+
+    int singlethreaded::impl::execute(unsigned niter, unsigned nthread)
     {
       int j;
-      j = execute_impl(niter);
+      j = execute_impl(niter, nthread);
       return j;
     }
 
-    int singlethreaded::impl::execute_impl(unsigned niter)
+    int singlethreaded::impl::execute_impl(unsigned niter, unsigned nthread)
     {
       plasm_->reset_ticks();
       compute_stack();

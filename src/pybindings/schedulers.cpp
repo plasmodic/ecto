@@ -46,15 +46,17 @@ namespace ecto {
     }
 
     template <typename T> 
-    bp::class_<T, boost::noncopyable>& wrap_scheduler(const char* name)
+    void wrap_scheduler(const char* name)
     {
       using bp::arg;
-      return bp::class_<T, boost::noncopyable>(name, bp::init<ecto::plasm::ptr>())
+      bp::class_<T, boost::noncopyable>(name, bp::init<ecto::plasm::ptr>())
         .def("execute", &execute0<T>)
         .def("execute", &execute1<T>, arg("niter"))
+        .def("execute", &execute2<T>, (arg("niter"), arg("nthreads")))
 
         .def("execute_async", &execute_async0<T>)
         .def("execute_async", &execute_async1<T>, arg("niter"))
+        .def("execute_async", &execute_async2<T>, (arg("niter"), arg("nthreads")))
 
         .def("interrupt", &T::interrupt)
         .def("stop", &T::stop)
@@ -74,13 +76,11 @@ namespace ecto {
       using namespace ecto::schedulers;
       using bp::arg;
 
-      wrap_scheduler<singlethreaded>("singlethreaded");
+      wrap_scheduler<singlethreaded>("Singlethreaded");
 
-      wrap_scheduler<multithreaded>("multithreaded");
+      wrap_scheduler<multithreaded>("Multithreaded");
 
-      wrap_scheduler<threadpool>("threadpool")
-        .def("execute_async", &execute_async2<threadpool>, (arg("niter"), arg("nthreads")))
-        ;
+      wrap_scheduler<threadpool>("Threadpool");
         
     }
   }

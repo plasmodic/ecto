@@ -49,8 +49,8 @@ namespace ecto {
       explicit multithreaded(plasm_ptr);
       ~multithreaded();
 
-      int execute(unsigned niter=0);
-      void execute_async(unsigned niter=0);
+      int execute(unsigned niter=0, unsigned nthread=1);
+      void execute_async(unsigned niter=0, unsigned nthread=1);
 
       void stop();
       void interrupt();
