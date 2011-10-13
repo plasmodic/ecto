@@ -26,6 +26,7 @@
 // POSSIBILITY OF SUCH DAMAGE.
 // 
 // #define ECTO_TRACE_EXCEPTIONS
+#define ECTO_LOG_ON
 #define DISABLE_SHOW
 #include <ecto/util.hpp>
 #include <ecto/plasm.hpp>
@@ -95,7 +96,9 @@ namespace ecto {
       mutable boost::mutex iface_mtx;
       mutable boost::mutex running_mtx;
       
-      boost::asio::io_service io;
+      boost::asio::io_service serv;
+      boost::mutex current_iter_mtx;
+      unsigned current_iter;
     };
   }
 
@@ -224,20 +227,72 @@ namespace ecto {
       return j;
     }
 
+    struct stack_runner 
+    {
+      graph::graph_t& graph;
+      const std::vector<graph::graph_t::vertex_descriptor>& stack;
+      boost::asio::io_service& serv;
+      unsigned max_iter;
+      unsigned& overall_current_iter;
+      boost::mutex& overall_current_iter_mtx;
+
+      stack_runner(graph::graph_t& graph_,
+                   const std::vector<graph::graph_t::vertex_descriptor>& stack_, 
+                   boost::asio::io_service& serv_,
+                   unsigned max_iter_,
+                   unsigned& overall_current_iter_,
+                   boost::mutex& overall_current_iter_mtx_)
+        : graph(graph_), 
+          stack(stack_), 
+          serv(serv_), 
+          max_iter(max_iter_), 
+          overall_current_iter(overall_current_iter_),
+          overall_current_iter_mtx(overall_current_iter_mtx_)
+      { 
+        ECTO_LOG_DEBUG("Created stack_runner @ overall iteration %u", overall_current_iter);
+      }
+      
+      typedef int result_type;
+
+      result_type operator()(std::size_t index)
+      {
+        ECTO_LOG_DEBUG("Runner firing on index %u of %u", index % stack.size());
+        size_t retval = invoke_process(graph, stack[index]);
+        ++index;
+        assert (index <= stack.size());
+        if (index == stack.size()) {
+          boost::mutex::scoped_lock lock(overall_current_iter_mtx);
+          ECTO_LOG_DEBUG("Thread deciding whether to recycle @ index %u, overall iter=%u", 
+                         index % overall_current_iter);
+          index = 0;
+          if (overall_current_iter == max_iter)
+            {
+              ECTO_LOG_DEBUG("Thread exiting at %u iterations", max_iter);
+              return 0;
+            }
+          else
+            {
+              ++overall_current_iter;
+            }
+        }
+        ECTO_LOG_DEBUG("Posting next job index=%u", index);
+        serv.post(boost::bind(stack_runner(graph, stack, serv, 
+                                           max_iter, 
+                                           overall_current_iter, overall_current_iter_mtx), index));
+        return retval;
+      }
+    };
+
+
     int multithreaded::impl::run_graph()
     {
-      for (size_t k = 0; k < stack.size() && !stop_running; ++k)
-        {
-          //need to check the return val of a process here, non zero means exit...
-          size_t retval = invoke_process(stack[k]);
-          if (retval)
-            return retval;
-        }
       return 0;
     }
 
-    int multithreaded::impl::execute_impl(unsigned niter, unsigned nthread)
+    int multithreaded::impl::execute_impl(unsigned max_iter, unsigned nthread)
     {
+      ECTO_LOG_DEBUG("execute_impl max_iter=%u nthread=%u",
+                     max_iter % nthread);
       plasm_->reset_ticks();
       compute_stack();
       boost::mutex::scoped_lock yes_running(running_mtx);
@@ -252,14 +307,28 @@ namespace ecto {
       
       profile::graphstats_collector gs(graphstats);
 
-      unsigned cur_iter = 0;
-      while((niter == 0 || cur_iter < niter) && !stop_running)
+      if (max_iter < nthread) {
+        nthread = max_iter;
+        ECTO_LOG_DEBUG("Clamped threads to %u", nthread);
+      }
+      for (unsigned j=0; j<nthread; ++j)
+        serv.post(boost::bind(stack_runner(graph, stack, serv, 
+                                           max_iter, 
+                                           current_iter,
+                                           current_iter_mtx), 
+                              0));
+
+      boost::thread_group threads;
+
+      for (unsigned j=0; j<nthread; ++j)
         {
-          size_t rv = run_graph();
-          if (rv)
-            return rv;
-          ++cur_iter;
+          ECTO_LOG_DEBUG("Running service in thread %u", j);
+          threads.create_thread(boost::bind(&boost::asio::io_service::run, &serv));
+          boost::mutex::scoped_lock lock(current_iter_mtx);
+          ++current_iter;
         }
+      threads.join_all();
+      ECTO_LOG_DEBUG("JOINED, EXITING AFTER %u", current_iter);
       return stop_running;
     }
 
