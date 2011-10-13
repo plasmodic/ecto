@@ -47,7 +47,6 @@ namespace ecto {
     struct ECTO_EXPORT singlethreaded
     {
       explicit singlethreaded(plasm_ptr);
-      explicit singlethreaded(plasm&);
       ~singlethreaded();
 
       int execute(unsigned niter=0);

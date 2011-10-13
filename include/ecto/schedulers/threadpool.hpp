@@ -49,7 +49,6 @@ namespace ecto {
     {
       // shared ptr is used to guarantee lifetimes
       explicit threadpool(plasm_ptr);
-      explicit threadpool(plasm&);
       ~threadpool();
 
       /**
@@ -62,9 +61,6 @@ namespace ecto {
       void interrupt();
       bool running() const;
       void wait();
-      
-      //      plasm_ptr plasm_;
-      //      ecto::graph::graph_t& graph;
       
       struct impl;
       boost::shared_ptr<impl> impl_;
