@@ -122,7 +122,7 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
 
   cell::cell() 
   : configured(false)
-  , tick_(0) 
+  , tick_(0)
   { }
 
   cell::~cell() { }

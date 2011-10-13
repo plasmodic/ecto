@@ -60,7 +60,6 @@ namespace ecto_test
     int process(const ecto::tendrils& inputs, const ecto::tendrils& outputs)
     {
       *out_ += *step_;
-      std::cout << "generate:  out=" << *out_ << "\n";
       return 0;
     }
   };

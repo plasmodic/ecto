@@ -26,7 +26,7 @@
 // POSSIBILITY OF SUCH DAMAGE.
 // 
 // #define ECTO_TRACE_EXCEPTIONS
-#define ECTO_LOG_ON
+// #define ECTO_LOG_ON
 #define DISABLE_SHOW
 #include <ecto/util.hpp>
 #include <ecto/plasm.hpp>
@@ -157,7 +157,9 @@ namespace ecto {
 
 
     multithreaded::impl::impl(plasm_ptr p) 
-      : scheduler<multithreaded::impl>(p), stop_running(false)
+      : scheduler<multithreaded::impl>(p), 
+        stop_running(false),
+        current_iter(0)
     { }
 
     multithreaded::impl::~impl()
