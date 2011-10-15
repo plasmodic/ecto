@@ -29,14 +29,13 @@ foreach(file
     #test_module_qualification
     test_no_ecto_import
     test_options
-    # test_metrics
     test_parameter_callbacks
     test_passthrough
     test_plasm
     test_process_return_values
     test_python_module
     test_reconnect
-    #test_redirect #reenable when we figure out why this fails. TODO FIXME
+    test_redirect
     test_required_io
     test_required_param
     test_restart

@@ -32,50 +32,55 @@ import ecto_test
 
 def makeplasm(N):
     plasm = ecto.Plasm()
-    gen = ecto_test.Generate(start=0, step=1)
+    gen = ecto_test.Generate(start=1, step=1)
     quitter = ecto_test.QuitAfter(N=N, restart_okay=True)
     plasm.connect(gen[:] >> quitter[:])
     
     return (gen, plasm)
 
-def do_one_st(N, j):
-    #print "multithreaded test w/ quit after", N
-    (gen, plasm) = makeplasm(N)
+# def do_one_st(N, j):
+#     #print "multithreaded test w/ quit after", N
+#     (gen, plasm) = makeplasm(N)
+# 
+#     sched = ecto.schedulers.Singlethreaded(plasm)
+#     for i in range(j):
+#         sched.execute(niter=N+10)
+#         # print "="*70
+#     
+#     #print "singlethreaded: actual out:", gen.outputs.out, " N:", N
+#     assert (j*N - 1.0) == gen.outputs.out
+#     #print "\n" * 5
+# 
+# do_one_st(1,1)
+# do_one_st(1,2)
+# do_one_st(2,1)
+# do_one_st(2,2)
+# for N in range(1, 100, 10):
+#     for loops in range(2, 10, 2):
+#         do_one_st(N, loops)
 
-    sched = ecto.schedulers.Singlethreaded(plasm)
-    for i in range(j):
-        sched.execute(niter=N+10)
-        # print "="*70
-    
-    #print "singlethreaded: actual out:", gen.outputs.out, " N:", N
-    assert (j*N - 1.0) == gen.outputs.out
-    #print "\n" * 5
 
-do_one_st(1,1)
-do_one_st(1,2)
-do_one_st(2,1)
-do_one_st(2,2)
-for N in range(1, 100, 10):
-    for loops in range(2, 10, 2):
-        do_one_st(N, loops)
-
-
-def do_one(countto, nthreads, niter):
-    #print "multithreaded test w/ quit after", countto, " nthreads=", nthreads, "niter=", niter
+def do_one_impl(SchedType, countto, nthreads, niter):
+    print "*"*80, "\n", SchedType, "test w/ quit after", countto, " nthreads=", nthreads, "niter=", niter
     (gen, plasm) = makeplasm(countto)
 
-    sched = ecto.schedulers.Threadpool(plasm)
+    sched = SchedType(plasm)
 
     for j in range(niter):
+        print ">>>", j
         sched.execute(niter=countto+10, nthreads=nthreads)
-        sched.wait()
-        # print "N-threaded actual out: ", gen.outputs.out
+        print "out: ", gen.outputs.out
         
-    #print "N-threaded actual out: ", gen.outputs.out, " countto:", countto, " niter:", niter, "nthreads=", nthreads
-    assert countto*niter*nthreads >= gen.outputs.out
+    print "N-threaded actual out: ", gen.outputs.out, " countto:", countto, " niter:", niter, "nthreads=", nthreads
+    assert niter == gen.outputs.out
     #print "\n" * 5
 
+def do_one(countto, nthreads, niter):
+    for S in ecto.test.schedulers:
+        do_one_impl(S, countto, nthreads, niter)
+
 do_one(1, 1, 1)
+sys.exit(0)
 do_one(1, 2, 1)
 do_one(2, 1, 2)
 do_one(2, 2, 2)

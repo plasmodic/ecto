@@ -31,6 +31,7 @@
 #include <ecto/scheduler.hpp>
 #include <ecto/tendril.hpp>
 #include <ecto/cell.hpp>
+#include <ecto/impl/graph_types.hpp>
 
 #include <string>
 #include <map>
@@ -44,25 +45,23 @@ namespace ecto {
 
   namespace schedulers {
     
-    struct ECTO_EXPORT singlethreaded
+    class ECTO_EXPORT singlethreaded : public scheduler
     {
+    public:
       explicit singlethreaded(plasm_ptr);
       ~singlethreaded();
 
-      int execute(unsigned niter=0, unsigned nthreads=1);
-      void execute_async(unsigned niter=0, unsigned nthreads=1);
+      int execute_impl(unsigned niter=0, unsigned nthreads=1);
 
-      void stop();
-      void interrupt();
-      bool running() const;
-      void wait();
-
-      std::string stats();
+      void stop_impl();
+      void interrupt_impl();
+      void wait_impl();
 
     private:
 
-      struct impl;
-      boost::shared_ptr<impl> impl_;
+      bool stop_running;
+      int last_rval;
     };
   }
 }
+

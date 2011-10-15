@@ -32,6 +32,8 @@
 #include <ecto/tendril.hpp>
 #include <ecto/cell.hpp>
 
+#include <boost/asio.hpp>
+
 #include <string>
 #include <map>
 #include <set>
@@ -44,25 +46,25 @@ namespace ecto {
 
   namespace schedulers {
     
-    struct ECTO_EXPORT multithreaded
+    class ECTO_EXPORT multithreaded : public scheduler
     {
+    public:
       explicit multithreaded(plasm_ptr);
       ~multithreaded();
 
-      int execute(unsigned niter=0, unsigned nthread=1);
-      void execute_async(unsigned niter=0, unsigned nthread=1);
+      int execute_impl(unsigned niter=0, unsigned nthread=0);
 
-      void stop();
-      void interrupt();
-      bool running() const;
-      void wait();
-
-      std::string stats();
+      void stop_impl();
+      void interrupt_impl();
+      void wait_impl();
 
     private:
 
-      struct impl;
-      boost::shared_ptr<impl> impl_;
+      bool stop_running;
+      boost::asio::io_service serv;
+      boost::mutex current_iter_mtx;
+      unsigned current_iter;
+
     };
   }
 }

@@ -25,6 +25,7 @@ git_status(ecto)
 ecto_python_env_gen()
 
 include_directories(include)
+include_directories(src/lib)
 add_subdirectory(src)
 add_subdirectory(cmake)
 add_subdirectory(python)

@@ -23,10 +23,11 @@ add_library(ecto SHARED
   python.cpp
   registry.cpp
   serialization.cpp
+  scheduler.cpp
   schedulers/invoke.cpp
   schedulers/singlethreaded.cpp
   schedulers/multithreaded.cpp
-  schedulers/threadpool.cpp
+  # schedulers/threadpool.cpp
   ${ecto_HEADERS}
   )
 

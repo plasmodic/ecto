@@ -25,8 +25,8 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 // 
-// #define ECTO_TRACE_EXCEPTIONS
-// #define ECTO_LOG_ON
+#define ECTO_TRACE_EXCEPTIONS
+#define ECTO_LOG_ON
 #define DISABLE_SHOW
 #include <ecto/util.hpp>
 #include <ecto/plasm.hpp>
@@ -48,13 +48,13 @@
 #include <boost/thread.hpp>
 #include <boost/scoped_ptr.hpp>
 #include <boost/date_time/posix_time/posix_time_duration.hpp>
-#include <boost/graph/topological_sort.hpp>
 #include <boost/asio.hpp>
 
 #include <ecto/plasm.hpp>
 #include <ecto/scheduler.hpp>
 #include <ecto/tendril.hpp>
 #include <ecto/cell.hpp>
+#include <ecto/except.hpp>
 
 #include <string>
 #include <map>
@@ -62,18 +62,18 @@
 #include <utility>
 #include <deque>
 
-
-
 namespace ecto {
+
+  using namespace ecto::except;
 
   namespace schedulers {
     
+    /*
     struct ECTO_EXPORT multithreaded::impl : scheduler<multithreaded::impl>
     {
       explicit impl(plasm_ptr);
       ~impl();
 
-      int execute(unsigned niter, unsigned nthread);
       void execute_async(unsigned niter, unsigned nthread);
 
       void stop();
@@ -91,74 +91,48 @@ namespace ecto {
 
       boost::thread runthread;
       
-      bool stop_running;
       std::vector<ecto::graph::graph_t::vertex_descriptor> stack;
       mutable boost::mutex iface_mtx;
       mutable boost::mutex running_mtx;
       
-      boost::asio::io_service serv;
       boost::mutex current_iter_mtx;
       unsigned current_iter;
     };
-  }
+    */
 
-  using namespace ecto::graph;
-  using boost::scoped_ptr;
-  using boost::thread;
-  using boost::bind;
 
-  namespace pt = boost::posix_time;
+    using namespace ecto::graph;
+    using boost::scoped_ptr;
+    using boost::thread;
+    using boost::bind;
 
-  namespace schedulers {
+    namespace pt = boost::posix_time;
 
+    
     //
     // forwarding interface
     // 
 
     multithreaded::multithreaded(plasm_ptr p) 
-      : impl_(new impl(p))
+      : scheduler(p),
+        current_iter(0)
     { }
 
-    multithreaded::~multithreaded() { }
-
-    int multithreaded::execute(unsigned niter, unsigned nthread)
-    {
-      return impl_->execute(niter, nthread);
+    multithreaded::~multithreaded() 
+    { 
+      if (!running())
+        return;
+      interrupt();
+      wait_for_running_is(false);
     }
 
-    void multithreaded::execute_async(unsigned niter, unsigned nthread)
-    {
-      impl_->execute_async(niter, nthread);
-    }
-
-    void multithreaded::stop() {
-      impl_->stop();
-    }
-
-    bool multithreaded::running() const {
-      return impl_->running();
-    }
-
-    void multithreaded::wait() {
-      impl_->wait();
-    }
-
-    void multithreaded::interrupt() {
-      impl_->interrupt();
-    }
-
-    std::string multithreaded::stats() {
-      return impl_->stats();
-    }
-    
     //
     //  impl
     //
 
-
+    /*
     multithreaded::impl::impl(plasm_ptr p) 
       : scheduler<multithreaded::impl>(p), 
-        stop_running(false),
         current_iter(0)
     { }
 
@@ -167,31 +141,7 @@ namespace ecto {
       interrupt();
       wait();
     }
-
-
-    int
-    multithreaded::impl::invoke_process(graph_t::vertex_descriptor vd)
-    {
-      int rv;
-      try {
-        rv = ecto::schedulers::invoke_process(graph, vd);
-      } catch (const boost::thread_interrupted& e) {
-        std::cout << "Interrupted\n";
-        return ecto::QUIT;
-      }
-      return rv;
-    }
-
-    void multithreaded::impl::compute_stack()
-    {
-      if (!stack.empty()) //will be empty if this needs to be computed.
-        return;
-      //check this plasm for correctness.
-      plasm_->check();
-      plasm_->configure_all();
-      boost::topological_sort(graph, std::back_inserter(stack));
-      std::reverse(stack.begin(), stack.end());
-    }
+    */
 
     namespace
     {
@@ -206,27 +156,6 @@ namespace ecto {
         SINGLE_THREADED_SIGINT_SIGNAL();
         PyErr_SetInterrupt();
       }
-    }
-
-    void multithreaded::impl::execute_async(unsigned niter, unsigned nthread)
-    {
-      PyEval_InitThreads();
-      assert(PyEval_ThreadsInitialized());
-
-      boost::mutex::scoped_lock l(iface_mtx);
-      // compute_stack(); //FIXME hack for python based tendrils.
-      scoped_ptr<thread> tmp(new thread(bind(&multithreaded::impl::execute_impl, 
-                                             this, niter, nthread)));
-      tmp->swap(runthread);
-      while(!running()) 
-        boost::this_thread::sleep(boost::posix_time::microseconds(5)); //TODO FIXME condition variable?
-    }
-
-    int multithreaded::impl::execute(unsigned niter, unsigned nthread)
-    {
-      int j;
-      j = execute_impl(niter, nthread);
-      return j;
     }
 
     struct stack_runner 
@@ -285,23 +214,17 @@ namespace ecto {
       }
     };
 
-
-    int multithreaded::impl::run_graph()
-    {
-      return 0;
-    }
-
-    int multithreaded::impl::execute_impl(unsigned max_iter, unsigned nthread)
+    int multithreaded::execute_impl(unsigned max_iter, unsigned nthread)
     {
       ECTO_LOG_DEBUG("execute_impl max_iter=%u nthread=%u",
                      max_iter % nthread);
+
       plasm_->reset_ticks();
       compute_stack();
-      boost::mutex::scoped_lock yes_running(running_mtx);
-      stop_running = false;
+      
 
       boost::signals2::scoped_connection 
-        interupt_connection(SINGLE_THREADED_SIGINT_SIGNAL.connect(boost::bind(&multithreaded::impl::interrupt, this)));
+        interupt_connection(SINGLE_THREADED_SIGINT_SIGNAL.connect(boost::bind(&multithreaded::interrupt_impl, this)));
 
 #if !defined(_WIN32)
       signal(SIGINT, &sigint_static_thunk);
@@ -329,44 +252,33 @@ namespace ecto {
           boost::mutex::scoped_lock lock(current_iter_mtx);
           ++current_iter;
         }
+
       threads.join_all();
       ECTO_LOG_DEBUG("JOINED, EXITING AFTER %u", current_iter);
-      return stop_running;
+
+      this->running(false);
+      return 0;
     }
 
-    void multithreaded::impl::interrupt() {
-      boost::mutex::scoped_lock l(iface_mtx);
+    void multithreaded::interrupt_impl() {
       SHOW();
-      stop_running = true;
       runthread.interrupt();
       runthread.join();
     }
 
-    void multithreaded::impl::stop() {
-      boost::mutex::scoped_lock l(iface_mtx);
+    void multithreaded::stop_impl() 
+    {
       SHOW();
-      stop_running = true;
-      runthread.join();
     }
 
-    bool multithreaded::impl::running() const {
-      boost::mutex::scoped_lock l2(running_mtx, boost::defer_lock);
-      if (l2.try_lock())
-        return false;
-      else
-        return true;
-    }
-
-
-    void multithreaded::impl::wait() {
+    void multithreaded::wait_impl() 
+    {
       SHOW();
-      boost::mutex::scoped_lock l(iface_mtx);
       while(running())
         boost::this_thread::sleep(boost::posix_time::microseconds(10));
       runthread.join();
     }
-
-
   }
 }
+
 

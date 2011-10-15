@@ -71,7 +71,7 @@ namespace ecto {
           edge_ptr e = graph[*inbegin];
           tendril& from = e->front();
           tendril& to = *(m->inputs[e->to_port()]);
-          ECTO_LOG_DEBUG("moving inputs to %s: tick=%u, from.tick=%u", m->name() % tick % from.tick);
+          // ECTO_LOG_DEBUG("moving inputs to %s: tick=%u, from.tick=%u", m->name() % tick % from.tick);
           assert(tick == from.tick && "Graph has become somehow desynchronized");
           to << from;
           assert(to.tick == tick && "Graph has become somehow desynchronized");
@@ -93,12 +93,12 @@ namespace ecto {
           edge_ptr e = graph[*outbegin];
           tendril& from = *(m->outputs[e->from_port()]);
           from.tick = tick;
-          ECTO_LOG_DEBUG("%s Put output with tick %u", m->name() % from.tick);
+          // ECTO_LOG_DEBUG("%s Put output with tick %u", m->name() % from.tick);
           e->push_back(from);//copy everything... value, docs, user_defined, etc...
           ++outbegin;
         }
       m->inc_tick();
-      ECTO_LOG_DEBUG("Incrementing tick on %s to %u", m->name() % m->tick());
+      // ECTO_LOG_DEBUG("Incrementing tick on %s to %u", m->name() % m->tick());
       return rval;
     }
 

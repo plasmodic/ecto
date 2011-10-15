@@ -27,32 +27,72 @@
 // 
 #pragma once
 
+#define ECTO_LOG_ON
+#include <ecto/log.hpp>
 #include <ecto/forward.hpp>
 #include <ecto/plasm.hpp>
 #include <ecto/profile.hpp>
+#include <boost/thread.hpp>
+#include <ecto/impl/graph_types.hpp>
 
 namespace ecto {
 
-  template <typename Derived>
   struct scheduler {
 
-    explicit scheduler(plasm_ptr p) : plasm_(p), graph(p->graph()) { }
+    explicit scheduler(plasm_ptr p);
 
-    std::string stats()
-    {
-      return graphstats.as_string(graph);
-    }
+    virtual ~scheduler();
+
+    int execute(unsigned niter=0, unsigned nthread=0);
+    void execute_async(unsigned niter=0, unsigned nthread=0);
+
+    void stop();
+    void interrupt();
+    bool running() const;
+    void wait();
+
+    std::string stats();
 
   protected:
     
+    virtual int execute_impl(unsigned niter, unsigned nthread) = 0;
+    virtual void stop_impl() = 0;
+    virtual void interrupt_impl() = 0;
+    virtual void wait_impl() = 0;
+
+    void running(bool);
+    void wait_for_running_is(bool value);
+
+    int invoke_process(ecto::graph::graph_t::vertex_descriptor vd);
+    void compute_stack();
+
     plasm_ptr plasm_;
     ecto::graph::graph_t& graph;
 
+    std::vector<ecto::graph::graph_t::vertex_descriptor> stack;
+
     profile::graph_stats_type graphstats;
 
-    Derived& this_() { 
-      return static_cast<Derived*>(this);
-    }
+    boost::thread runthread;
+
+  private:
+
+    struct exec {
+      scheduler& s;
+      unsigned niter, nthread;
+      exec(const exec&);
+
+      exec(scheduler& s_, unsigned niter_, unsigned nthread_) 
+        : s(s_), niter(niter_), nthread(nthread_) 
+      { }
+
+      void operator()();
+    };
+
+    bool running_value;
+    boost::condition_variable running_cond;
+    mutable boost::recursive_mutex running_mtx;
+    mutable boost::recursive_mutex iface_mtx;
   };
 
 }

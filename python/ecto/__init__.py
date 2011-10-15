@@ -195,6 +195,7 @@ __path__ = extend_path(__path__, __name__)
 from doc import *
 from cell import *
 from blackbox import *
+import test
 
 
 

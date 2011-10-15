@@ -2,7 +2,7 @@
 #include <ecto/ecto.hpp>
 #include <ecto/plasm.hpp>
 
-#include <ecto/schedulers/threadpool.hpp>
+#include <ecto/schedulers/multithreaded.hpp>
 
 using namespace ecto;
 
@@ -35,32 +35,32 @@ namespace {
 TEST(Threadpool, CreateAndDestroy)
 {
   plasm::ptr p = makeplasm();
-  schedulers::threadpool* tp = new schedulers::threadpool(p);
+  schedulers::multithreaded* tp = new schedulers::multithreaded(p);
   delete tp;
 }
 
 
-TEST(Threadpool, DestroyWhileRunning)
+TEST(Multithreaded, DestroyWhileRunning)
 {
   plasm::ptr p = makeplasm();
-  schedulers::threadpool* tp = new schedulers::threadpool(p);
+  schedulers::multithreaded* tp = new schedulers::multithreaded(p);
   tp->execute_async();
   delete tp;
 }
 
-TEST(Threadpool, DestroyAfterRunning)
+TEST(Multithreaded, DestroyAfterRunning)
 {
   plasm::ptr p = makeplasm();
-  schedulers::threadpool* tp = new schedulers::threadpool(p);
+  schedulers::multithreaded* tp = new schedulers::multithreaded(p);
   tp->execute(2,2);
   EXPECT_FALSE(tp->running());
   delete tp;
 }
 
-TEST(Threadpool, WaitAndDestroy)
+TEST(Multithreaded, WaitAndDestroy)
 {
   plasm::ptr p = makeplasm();
-  schedulers::threadpool* tp = new schedulers::threadpool(p);
+  schedulers::multithreaded* tp = new schedulers::multithreaded(p);
   tp->execute_async(2,4);
   EXPECT_TRUE(tp->running());
   tp->wait();
@@ -68,10 +68,10 @@ TEST(Threadpool, WaitAndDestroy)
   delete tp;
 }
 
-TEST(Threadpool, StopAndDestroy)
+TEST(Multithreaded, StopAndDestroy)
 {
   plasm::ptr p = makeplasm();
-  schedulers::threadpool* tp = new schedulers::threadpool(p);
+  schedulers::multithreaded* tp = new schedulers::multithreaded(p);
   tp->execute_async(2,4);
   EXPECT_TRUE(tp->running());
   tp->stop();

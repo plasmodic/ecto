@@ -29,7 +29,7 @@
 
 #include <ecto/ecto.hpp>
 #include <ecto/registry.hpp>
-#include <ecto/schedulers/threadpool.hpp>
+#include <ecto/schedulers/multithreaded.hpp>
 #include <iostream>
 #include <boost/format.hpp>
 #include <boost/foreach.hpp>

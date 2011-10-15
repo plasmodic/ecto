@@ -40,30 +40,30 @@ def build_addergraph(nlevels):
         gen1 = ecto_test.Generate("Generator", step=1.0, start=1.0)
         conn1 = gen0["out"] >> adder["left"]
         conn2 = gen1["out"] >> adder["right"]
-        print "conn1=", conn1
+        # print "conn1=", conn1
         plasm.connect(
             conn1,
             conn2
             )
 
-    print "prev has", len(prevlevel)
+    # print "prev has", len(prevlevel)
         
     for k in range(nlevels-2, -1, -1):
-        print "****** k=", k, " ***********"
+        # print "****** k=", k, " ***********"
         thislevel = [ecto_test.Add("Adder %u_%u" % (k, x)) for x in range(2**k)]
-        print "prevlevel=", prevlevel
-        print "thislevel=", thislevel
+        # print "prevlevel=", prevlevel
+        # print "thislevel=", thislevel
         index = 0
-        print "for...", range(2**k)
+        # print "for...", range(2**k)
         for r in range(2**k):
-            print "prev[%u] => cur[%u]" % (index, r)
+            # print "prev[%u] => cur[%u]" % (index, r)
             conn = prevlevel[index]["out"] >> thislevel[r]["left"]
-            print "conn=", conn
+            # print "conn=", conn
             plasm.connect(conn)
             index += 1
-            print "prev[%u] => cur[%u]" % (index, r)
+            # print "prev[%u] => cur[%u]" % (index, r)
             conn2 = prevlevel[index]["out"]>>thislevel[r]["right"]
-            print "conn2=", conn2
+            # print "conn2=", conn2
             plasm.connect(conn2)
             index += 1
         prevlevel = thislevel
@@ -80,24 +80,22 @@ def test_plasm_impl(sched_type, nlevels, nthreads, niter):
     print "*"*80, "\nSCHED:", sched_type
     sched = sched_type(plasm)
     sched.execute(niter, nthreads)
+    print sched.stats()
     print "RESULT:", outnode.outputs.out
     shouldbe = float(2**nlevels * niter)
     print "expected:", shouldbe
     assert outnode.outputs.out == shouldbe
 
 def test_plasm(nlevels, nthreads, niter):
-    for sched in ecto.test.schedulers:
+    for sched in [ecto.schedulers.Singlethreaded, ecto.schedulers.Threadpool]:
         test_plasm_impl(sched, nlevels, nthreads, niter)
 
 if __name__ == '__main__':
-    test_plasm(1, 1, 1)
-    test_plasm(1, 1, 2)
-    test_plasm(5, 1, 1)
-    test_plasm(5, 2, 1)
-    test_plasm(5, 5, 5)
-    test_plasm(6, 6, 6)
+    #test_plasm(9, 4, 10000)
+    test_plasm(10, 8, 10000)
+    #test_plasm(9, 12, 10000)
     #test_plasm(6, 6, 6000)
-    test_plasm(8, 1, 5)
+    #test_plasm(8, 1, 5)
     #test_plasm(9, 64, 100)
     #test_plasm(10, 8, 10)
     #test_plasm(11, 8, 10)

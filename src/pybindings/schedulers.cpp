@@ -27,7 +27,6 @@
 // 
 #include <ecto/schedulers/singlethreaded.hpp>
 #include <ecto/schedulers/multithreaded.hpp>
-#include <ecto/schedulers/threadpool.hpp>
 
 namespace bp = boost::python;
 
@@ -60,7 +59,7 @@ namespace ecto {
 
         .def("interrupt", &T::interrupt)
         .def("stop", &T::stop)
-        .def("running", &T::running)
+        .def("running", (bool (scheduler::*)() const) &scheduler::running)
         .def("wait", &T::wait)
         .def("stats", &T::stats)
         ;
@@ -78,9 +77,9 @@ namespace ecto {
 
       //      wrap_scheduler<singlethreaded>("Singlethreaded");
 
-      wrap_scheduler<multithreaded>("Singlethreaded");
+      wrap_scheduler<singlethreaded>("Singlethreaded");
 
-      wrap_scheduler<threadpool>("Threadpool");
+      wrap_scheduler<multithreaded>("Multithreaded");
         
     }
   }

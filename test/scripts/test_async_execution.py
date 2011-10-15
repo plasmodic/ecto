@@ -33,6 +33,8 @@ import sys, time
 
 print "Hardware concurrency is", ecto.hardware_concurrency()
 
+eps = 0.1
+
 def makeplasm():
     plasm = ecto.Plasm()
 
@@ -40,8 +42,7 @@ def makeplasm():
     sleep0 = ecto_test.Sleep("Sleep_0", seconds=0.1)
     sleep1 = ecto_test.Sleep("Sleep_1", seconds=0.1)
 
-    plasm.connect(ping[:] >> sleep0[:],
-                  sleep0[:] >> sleep1[:])
+    plasm.connect(ping[:] >> sleep0[:], sleep0[:] >> sleep1[:])
 
     return plasm
 
@@ -113,6 +114,7 @@ def tpool():
         s.execute_async(**kwargs)
         while s.running():
             pass
+        s.wait()                            
 
     asynctime = bang(asyncit)
 
@@ -141,13 +143,13 @@ def tpool_interrupt():
 
     stime = time.time()
     s.execute_async()
-    time.sleep(0.1)
+    time.sleep(eps)
     s.interrupt()
     s.wait()
     etime = time.time()
-    time.sleep(0.1)
+    time.sleep(eps)
     print "elapsed:", etime-stime
-    assert etime-stime > 0.1
+    assert etime-stime > eps
     assert 0.4 > etime-stime
 
 def tpool_throw_on_double_execute():
@@ -155,44 +157,122 @@ def tpool_throw_on_double_execute():
     s = ecto.schedulers.Threadpool(p)
 
     stime = time.time()
-    s.execute_async()
+    s.execute_async(niter=10)
     try:
+        print "trying execute..."
         s.execute()
         fail("sched already running")
 
     except ecto.EctoException, e:
-        print e
+        print "OK:", e
         assert "threadpool scheduler already running" in str(e)
-
     try:
+        print "trying execute_async again"
         s.execute_async()
         fail("sched already running")
 
     except ecto.EctoException, e:
-        print e
+        print "OK:", e
         assert "threadpool scheduler already running" in str(e)
 
+def do_test(fn):
+    def impl(Sched):
+        times = { ecto.schedulers.Singlethreaded : 1.0,
+                  ecto.schedulers.Multithreaded : 0.6 }
+        print "*"*80, "\n", fn.__name__, Sched.__name__
+        p = makeplasm()
+        s = Sched(p)
+        t = times[Sched]
+        print "Expecting finish in", t, "seconds"
+        fn(s, times[Sched])
+    map(impl, ecto.test.schedulers)
 
-def tpool_wait_on_nothing():
-    p = makeplasm()
-    s = ecto.schedulers.Threadpool(p)
+def sync(s, ex):
+    t = time.time()
+    assert not s.running()
+    print "starting"
+    s.execute(niter=5)
+    dur = time.time() - t
+    print "done after", dur
+    assert dur > ex
+    assert dur < (ex + eps)
+    assert not s.running()
 
-    stime = time.time()
+do_test(sync)
+
+def synctwice(s, ex):
+    t = time.time()
+    assert not s.running()
+    print "starting"
+    s.execute(niter=5)
+    s.execute(niter=5)
+    dur = time.time() - t
+    print "done after", dur
+    assert dur > (ex*2)
+    assert dur < ((ex*2) + eps)
+    assert not s.running()
+do_test(synctwice)
+
+def ex_async_twice(s, ex):
+    s.execute_async(niter=5)
+    print "once..."
+    assert s.running()
+    t = time.time()
+    try:
+        print "twice..."
+        s.execute_async(niter=5)
+        fail("that should have thrown")
+    except ecto.EctoException, e:
+        print "okay, threw"
+        print "whee"
     s.wait()
+    elapsed = time.time() - t
+    assert elapsed > ex
+    assert elapsed < (ex + eps)
+    
+do_test(ex_async_twice)
+
+def wait_on_nothing(s, ex):
+    stime = time.time()
+    assert not s.running()
+    s.wait()
+    assert not s.running()
     etime = time.time()
     print etime-stime
-    assert 0.01 > etime-stime
+    assert eps > etime-stime
 
+do_test(wait_on_nothing)
 
-if ecto.hardware_concurrency() > 1:
-    tpool()
-    tpool_throw_on_double_execute()
-    tpool_wait_on_nothing()
-    tpool_interrupt()
-else:
-    print "threadpool async execution tests disabled due to lack of hardware concurrency"
+def running_check(s, ex):
+    assert not s.running()
+    s.execute_async(niter=5)
+    assert s.running()
+    time.sleep(ex+eps)
+    assert not s.running()
 
-sthreaded()
+do_test(running_check)
 
-print "okay."
+def wait_check(s, ex):
+    print __name__, s
+    t = time.time()
+    s.execute_async(niter=5)
+    assert time.time() - t < ex
+    s.wait()
+    print time.time() - t > ex+eps  # we might be multithreaded
+    assert not s.running()
+
+do_test(wait_check)
+sys.exit(0)
+    
+
+    #tpool()
+    #tpool_throw_on_double_execute()
+    #tpool_wait_on_nothing()
+    #tpool_interrupt()
+#else:
+#    print "threadpool async execution tests disabled due to lack of hardware concurrency"
+
+#sthreaded()
+
+#print "okay."
 
