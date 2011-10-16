@@ -134,12 +134,12 @@ Delivery
 Scripting
 ^^^^^^^^^
 
-Sets of ROS processes (nodes) are typically controlled by xml "launch"
+Sets of *ROS* processes (nodes) are typically controlled by xml "launch"
 files: python scripts load these xml files, examine the runtime
 environment (e.g. ``ROS_PACKAGE_PATH``) and execute/monitor multiple
 OS processes.
 
-Ecto uses a small DSEL, hosted in python, for graph construction and
+*ecto* uses a small DSEL, hosted in python, for graph construction and
 execution ecto graphs are always run in a single process.
 
 Execution
@@ -150,7 +150,7 @@ one another, but does not participate in the traffic of each
 individual message between nodes.  It has no instantaneous global
 knowledge of what is happening in a running ROS system.
 
-The ecto "scheduler", being responsible for executing each processing
+The *ecto* "scheduler", being responsible for executing each processing
 "cell" in the graph, has complete visibility, at all times, into the
 state of the graph and the data flowing through it.  This enables the
 crucial synchronization-guarantee and an assortment of scheduling and
@@ -159,10 +159,64 @@ optimization strategies.
 Nomenclature
 ^^^^^^^^^^^^
 
-*ROS* is an acronym, *ecto* is a greek prefix.  *ROS* names its
-releases after turtles; *ecto* has a lighthearted nomenclature with
-release names based on things slimy, amorphous, or paranormal.
+*ROS* is an acronym
+
+*ecto* is a greek prefix.
+
+*ROS* names its releases after turtles,
+
+*ecto* has a lighthearted nomenclature with release names based on
+things slimy, amorphous, or paranormal.
 
 
+
+Practical differences to writing standalone programs
+----------------------------------------------------
+
+Interface
+^^^^^^^^^
+
+*ecto* cells are self-documenting and have a consistent interface.  This
+significantly simplifies code reuse and collaborative development.
+
+ROS integration
+^^^^^^^^^^^^^^^
+
+Ecto graphs can run
+* directly against live sensors (during development/prototyping of
+pipelines),
+* on data read from disk (in testing/training)
+* on data read from ROS publishers.
+
+Ecto serves as a hardware abstraction layer in the same way ROS does.
+It also serves as a ROS abstraction layer.  Because these layers are
+entirely decoupled from the ecto core, implementing new abstraction
+layers is straightforward.
+
+Threading
+^^^^^^^^^
+
+Ecto cells can be seamlessly executed with various threading models
+due to the scheduler.  The user constructs singlethreaded cells that
+obey simple rules: they get multithreaded execution for free.  We have
+watched many a researcher waste time struggling with threading issues
+rather than focusing on the valuable issues: techniques, algorithms,
+and results.
+
+Configuration
+^^^^^^^^^^^^^
+
+Developers get use of python bindings and the graph
+construction/configuration language "for free", i.e. without doing any
+manual python integration.
+
+Reuse and collaboration
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Ecto graphs naturally express a type system one level "up" from that
+of C++: a textured object detector, for instance, takes a point cloud
+as input and produces a list of object identifiers and poses as
+output.  Such interfaces appear naturally in ecto systems and make it
+straightforward to exchange components without recompiling.
 
 
