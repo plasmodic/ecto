@@ -37,5 +37,6 @@ Also feel free to join the email list:
    reference/index.rst
    cmake.rst
    release_checklist.rst
+   codingstandards.rst
    changelog.rst
    glossary.rst
