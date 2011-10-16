@@ -23,7 +23,7 @@ message(STATUS "Boost version ${Boost_VERSION}")
 macro(boost_feature_check checkname)
   if(NOT ${checkname}_CACHE)
     try_compile(${checkname}
-      ${CMAKE_BINARY_DIR}/${checkname}
+      ${CMAKE_BINARY_DIR}/${CMAKE_FILES_DIRECTORY}/${checkname}
       ${CMAKE_CURRENT_SOURCE_DIR}/cmake/boost_checks.cpp
       COMPILE_DEFINITIONS -I${Boost_INCLUDE_DIRS} -D${checkname}=1
       OUTPUT_VARIABLE ${checkname}_OUTPUT
