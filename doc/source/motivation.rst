@@ -179,24 +179,10 @@ Interface
 *ecto* cells are self-documenting and have a consistent interface.  This
 significantly simplifies code reuse and collaborative development.
 
-ROS integration
-^^^^^^^^^^^^^^^
-
-Ecto graphs can run
-* directly against live sensors (during development/prototyping of
-pipelines),
-* on data read from disk (in testing/training)
-* on data read from ROS publishers.
-
-Ecto serves as a hardware abstraction layer in the same way ROS does.
-It also serves as a ROS abstraction layer.  Because these layers are
-entirely decoupled from the ecto core, implementing new abstraction
-layers is straightforward.
-
 Threading
 ^^^^^^^^^
 
-Ecto cells can be seamlessly executed with various threading models
+*ecto* cells can be seamlessly executed with various threading models
 due to the scheduler.  The user constructs singlethreaded cells that
 obey simple rules: they get multithreaded execution for free.  We have
 watched many a researcher waste time struggling with threading issues
@@ -219,4 +205,20 @@ as input and produces a list of object identifiers and poses as
 output.  Such interfaces appear naturally in ecto systems and make it
 straightforward to exchange components without recompiling.
 
+ROS integration
+^^^^^^^^^^^^^^^
+
+Ecto graphs can run
+
+* directly against live sensors (during development/prototyping of
+  pipelines),
+
+* on data read from disk (in testing/training)
+
+* on data read from ROS publishers.
+
+Ecto serves as a hardware abstraction layer in the same way ROS does.
+It also serves as a ROS abstraction layer.  Because these layers are
+entirely decoupled from the ecto core, implementing new abstraction
+layers is straightforward.
 
