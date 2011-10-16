@@ -38,3 +38,4 @@ Also feel free to join the email list:
    cmake.rst
    release_checklist.rst
    changelog.rst
+   glossary.rst
