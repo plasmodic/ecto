@@ -25,7 +25,8 @@ Also feel free to join the email list:
 
 .. toctree::
    :maxdepth: 1
-   
+
+   motivation.rst
    changelog.rst
    overview/index.rst
    using_ecto/index.rst
