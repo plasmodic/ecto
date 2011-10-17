@@ -77,6 +77,9 @@ namespace ecto {
       running(true);
     }
 
+    if (nthread == 0)
+      nthread = boost::thread::hardware_concurrency();
+
     ECTO_LOG_DEBUG("%sstart execute_impl", "");
     int rv = execute_impl(niter, nthread);
     ECTO_LOG_DEBUG("%sdone execute_impl", "");
@@ -165,7 +168,6 @@ namespace ecto {
 
   bool scheduler::running() const 
   {
-    ECTO_START();
     recursive_mutex::scoped_lock lock(iface_mtx);
     recursive_mutex::scoped_lock running_lock(running_mtx);
     return running_value;
@@ -193,11 +195,9 @@ namespace ecto {
   void
   scheduler::running(bool value) 
   {
-    ECTO_START();
     boost::recursive_mutex::scoped_lock lock(running_mtx);
     running_value = value;
     running_cond.notify_all();
     ECTO_LOG_DEBUG("running=%u", value);
-    ECTO_FINISH();
   }
 }

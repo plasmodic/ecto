@@ -27,4 +27,7 @@
 # 
 
 import ecto
-schedulers = [ ecto.schedulers.Singlethreaded, ecto.schedulers.Multithreaded ]
+schedulers = [
+    ecto.schedulers.Multithreaded,
+    ecto.schedulers.Singlethreaded,
+    ]

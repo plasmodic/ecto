@@ -180,7 +180,8 @@ namespace ecto {
           overall_current_iter(overall_current_iter_),
           overall_current_iter_mtx(overall_current_iter_mtx_)
       { 
-        ECTO_LOG_DEBUG("Created stack_runner @ overall iteration %u", overall_current_iter);
+        ECTO_LOG_DEBUG("Created stack_runner @ overall iteration %u, max %u", 
+                       overall_current_iter % max_iter);
       }
       
       typedef int result_type;
@@ -221,7 +222,9 @@ namespace ecto {
 
       plasm_->reset_ticks();
       compute_stack();
-      
+      current_iter = 0;
+
+      serv.reset();
 
       boost::signals2::scoped_connection 
         interupt_connection(SINGLE_THREADED_SIGINT_SIGNAL.connect(boost::bind(&multithreaded::interrupt_impl, this)));

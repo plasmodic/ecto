@@ -45,8 +45,8 @@ namespace ecto {
   do {                                                                  \
     ::ecto::log(str(boost::format(fmt) % args));                        \
   } while (false)
-#define ECTO_START()  do { ::ecto::log(">>> "); ::ecto::log(__PRETTY_FUNCTION__); } while (false)
-#define ECTO_FINISH() do { ::ecto::log("<<< "); ::ecto::log(__PRETTY_FUNCTION__); } while (false)
+#define ECTO_START()  ECTO_LOG_DEBUG(">>> %s", __PRETTY_FUNCTION__);
+#define ECTO_FINISH() ECTO_LOG_DEBUG("<<< %s", __PRETTY_FUNCTION__);
 #else
 #define ECTO_LOG_DEBUG(fmg, args) do { } while (false)
 #define ECTO_SHOW() do { } while(false)

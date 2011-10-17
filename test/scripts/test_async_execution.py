@@ -201,13 +201,17 @@ def sync(s, ex):
 do_test(sync)
 
 def synctwice(s, ex):
-    t = time.time()
+    start_t = time.time()
     assert not s.running()
     print "starting"
     s.execute(niter=5)
+    dur = time.time() - start_t
+    print "HALFWAY:", dur
+    assert dur > ex
+    assert dur < ex + eps
     s.execute(niter=5)
-    dur = time.time() - t
-    print "done after", dur
+    dur = time.time() - start_t
+    print "SECONDTIME:", dur
     assert dur > (ex*2)
     assert dur < ((ex*2) + eps)
     assert not s.running()
@@ -227,6 +231,7 @@ def ex_async_twice(s, ex):
         print "whee"
     s.wait()
     elapsed = time.time() - t
+    print "elapsed:", elapsed, "expected:", ex
     assert elapsed > ex
     assert elapsed < (ex + eps)
     
