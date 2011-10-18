@@ -45,6 +45,8 @@ def makeplasm():
     return plasm
 
 def invoke(Scheduler, whatnext):
+    print "*"*80
+    print Scheduler, whatnext
     p = makeplasm()
     s = Scheduler(p)
     s.execute_async()

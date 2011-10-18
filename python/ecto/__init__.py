@@ -197,6 +197,9 @@ from cell import *
 from blackbox import *
 import test
 
-
+#
+#  temporary backwards compat measures
+#
+schedulers.Threadpool = schedulers.Multithreaded
 
 

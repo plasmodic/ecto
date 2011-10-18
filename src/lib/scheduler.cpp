@@ -188,18 +188,6 @@ namespace ecto {
   }
 
   void
-  scheduler::wait_for_running_is(bool value) 
-  {
-    ECTO_START();
-    //    boost::mutex::scoped_lock lock(running_mtx);
-    //    while(running_value != value)
-    //      {
-    //        running_cond.wait(lock);
-    //      }
-    assert(false);
-  }
-
-  void
   scheduler::running(bool value) 
   {
     boost::recursive_mutex::scoped_lock lock(running_mtx);

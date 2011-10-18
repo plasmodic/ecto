@@ -63,6 +63,7 @@ namespace ecto {
       boost::asio::io_service serv;
       boost::mutex current_iter_mtx;
       unsigned current_iter;
+      boost::thread_group threads;
     };
   }
 }

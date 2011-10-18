@@ -61,7 +61,6 @@ namespace ecto {
     virtual void wait_impl() = 0;
 
     void running(bool);
-    void wait_for_running_is(bool value);
 
     int invoke_process(ecto::graph::graph_t::vertex_descriptor vd);
     void compute_stack();

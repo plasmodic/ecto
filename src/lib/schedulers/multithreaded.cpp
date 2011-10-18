@@ -68,39 +68,6 @@ namespace ecto {
 
   namespace schedulers {
     
-    /*
-    struct ECTO_EXPORT multithreaded::impl : scheduler<multithreaded::impl>
-    {
-      explicit impl(plasm_ptr);
-      ~impl();
-
-      void execute_async(unsigned niter, unsigned nthread);
-
-      void stop();
-      void interrupt();
-      bool running() const;
-      void wait();
-
-    private:
-
-      int run_graph();
-      int execute_impl(unsigned niter, unsigned nthread);
-
-      int invoke_process(ecto::graph::graph_t::vertex_descriptor vd);
-      void compute_stack();
-
-      boost::thread runthread;
-      
-      std::vector<ecto::graph::graph_t::vertex_descriptor> stack;
-      mutable boost::mutex iface_mtx;
-      mutable boost::mutex running_mtx;
-      
-      boost::mutex current_iter_mtx;
-      unsigned current_iter;
-    };
-    */
-
-
     using namespace ecto::graph;
     using boost::scoped_ptr;
     using boost::thread;
@@ -123,25 +90,11 @@ namespace ecto {
       if (!running())
         return;
       interrupt();
-      wait_for_running_is(false);
     }
 
     //
     //  impl
     //
-
-    /*
-    multithreaded::impl::impl(plasm_ptr p) 
-      : scheduler<multithreaded::impl>(p), 
-        current_iter(0)
-    { }
-
-    multithreaded::impl::~impl()
-    {
-      interrupt();
-      wait();
-    }
-    */
 
     namespace
     {
@@ -194,6 +147,12 @@ namespace ecto {
         ECTO_LOG_DEBUG("Runner firing on index %u of %u", index % stack.size());
         ECTO_LOG_DEBUG("stop_requested = %u %p", stop_requested % (&stop_requested));
         size_t retval = invoke_process(graph, stack[index]);
+        if (retval != ecto::OK)
+          {
+            serv.stop();
+            stop_requested = true;
+            return retval;
+          }
         ++index;
         assert (index <= stack.size());
         if (index == stack.size()) {
@@ -258,8 +217,6 @@ namespace ecto {
                                            stop_running), 
                               0));
 
-      boost::thread_group threads;
-
       for (unsigned j=0; j<nthread; ++j)
         {
           ECTO_LOG_DEBUG("Running service in thread %u", j);
@@ -277,8 +234,11 @@ namespace ecto {
 
     void multithreaded::interrupt_impl() {
       SHOW();
+      stop();
+      threads.join_all();
       runthread.interrupt();
       runthread.join();
+      running(false);
     }
 
     void multithreaded::stop_impl() 
@@ -291,6 +251,7 @@ namespace ecto {
       SHOW();
       while(running())
         boost::this_thread::sleep(boost::posix_time::microseconds(10));
+      threads.join_all();
       runthread.join();
     }
   }

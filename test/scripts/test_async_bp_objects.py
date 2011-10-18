@@ -66,7 +66,7 @@ def interrupt(s):
 
 def interrupt_and_wait(s):
     print "interrupt_and_wait"
-    s.interrupt()
+    s.stop()
     s.wait()
 
 def tpool(Scheduler, go, afterwards, sleepdur=0.1):
