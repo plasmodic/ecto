@@ -75,23 +75,22 @@ namespace ecto {
 
     boost::thread runthread;
 
+    bool stop_running;
+    
   private:
 
     struct exec {
       scheduler& s;
       unsigned niter, nthread;
       exec(const exec&);
-
-      exec(scheduler& s_, unsigned niter_, unsigned nthread_) 
-        : s(s_), niter(niter_), nthread(nthread_) 
-      { }
-
+      exec(scheduler& s_, unsigned niter_, unsigned nthread_); 
       void operator()();
     };
 
     bool running_value;
     boost::condition_variable running_cond;
     mutable boost::recursive_mutex running_mtx;
+
     mutable boost::recursive_mutex iface_mtx;
   };
 

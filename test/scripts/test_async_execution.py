@@ -46,135 +46,6 @@ def makeplasm():
 
     return plasm
 
-def sthreaded():
-    p = makeplasm()
-
-    s = ecto.schedulers.Singlethreaded(p)
-
-    assert not s.running()
-
-    stime = time.time()
-
-    s.execute(niter=3)
-
-    assert not s.running()
-    etime = time.time()
-    elapsed = etime-stime
-    print "elapsed:", elapsed
-    assert 0.6 < elapsed and elapsed <= 0.7 #for slow vms
-    stime = time.time()
-    s.execute_async(niter=3)
-    assert s.running()
-    nloops = 0
-    while s.running():
-        time.sleep(0.01)
-        nloops = nloops + 1
-
-    assert not s.running()
-    print "nloops=", nloops
-    assert nloops >= 30
-    etime = time.time()
-    elapsed = etime-stime
-    print "elapsed:", elapsed
-    assert 0.6 < elapsed and elapsed <= 0.7 #for slow vms
-
-    stime = time.time()
-    assert not s.running()
-    s.execute_async(niter=3)
-    assert s.running()
-    s.wait()
-    assert not s.running()
-    etime = time.time()
-    elapsed = etime-stime
-    print "elapsed:", elapsed
-    assert 0.6 < elapsed and elapsed <= 0.7 #for slow vms
-
-
-kwargs = dict(niter=10)
-
-def tpool():
-    def bang(fn):
-        p = makeplasm()
-        s = ecto.schedulers.Threadpool(p)
-        assert not s.running()
-        stime = time.time()
-        fn(s)
-        etime = time.time()
-        elapsed = etime-stime
-        return elapsed
-
-    def justrun(s):
-        print "just run it"
-        s.execute(**kwargs)
-
-    runtime = bang(justrun)
-
-    def asyncit(s):
-        print "async and wait on running() == false"
-        s.execute_async(**kwargs)
-        while s.running():
-            pass
-        s.wait()                            
-
-    asynctime = bang(asyncit)
-
-    def waitit(s):
-        print "async and wait()"
-        s.execute_async(**kwargs)
-        s.wait()
-
-    waittime = bang(waitit)
-
-    print runtime, asynctime, waittime
-
-    median = (runtime + asynctime + waittime) / 3.0
-    low = median*0.75
-    high = median*1.2
-
-    print "lowest acceptable:", low, "highest acceptable:", high
-    print "runtime:", runtime, "asynctime", asynctime, "waittime", waittime
-    assert high > runtime > low
-    assert high > asynctime > low
-    assert high > waittime > low
-
-def tpool_interrupt():
-    p = makeplasm()
-    s = ecto.schedulers.Threadpool(p)
-
-    stime = time.time()
-    s.execute_async()
-    time.sleep(eps)
-    s.interrupt()
-    s.wait()
-    etime = time.time()
-    time.sleep(eps)
-    print "elapsed:", etime-stime
-    assert etime-stime > eps
-    assert 0.4 > etime-stime
-
-def tpool_throw_on_double_execute():
-    p = makeplasm()
-    s = ecto.schedulers.Threadpool(p)
-
-    stime = time.time()
-    s.execute_async(niter=10)
-    try:
-        print "trying execute..."
-        s.execute()
-        fail("sched already running")
-
-    except ecto.EctoException, e:
-        print "OK:", e
-        assert "threadpool scheduler already running" in str(e)
-    try:
-        print "trying execute_async again"
-        s.execute_async()
-        fail("sched already running")
-
-    except ecto.EctoException, e:
-        print "OK:", e
-        assert "threadpool scheduler already running" in str(e)
-
 def do_test(fn):
     def impl(Sched):
         times = { ecto.schedulers.Singlethreaded : 1.0,
@@ -186,6 +57,92 @@ def do_test(fn):
         print "Expecting finish in", t, "seconds"
         fn(s, times[Sched])
     map(impl, ecto.test.schedulers)
+
+# Verify that the multithreaded completes in multiples of two seconds
+# from the time stop was called, not the initial start
+def stoppable_multi():
+    hc = ecto.hardware_concurrency()
+    def makeplasm():
+        plasm = ecto.Plasm()
+        ping = ecto_test.Ping("Ping")
+        sleeps = [ecto_test.Sleep("Sleep_0", seconds=1.0/hc)
+                  for x in range(hc)]
+        plasm.connect(ping[:] >> sleeps[0][:])
+        for i in range(1,hc-1):
+            print "i=", i
+            plasm.connect(sleeps[i][:] >> sleeps[i+1][:])
+        return plasm
+
+    p = makeplasm()
+
+    st = ecto.schedulers.Multithreaded(p)
+    st.execute_async()
+    time.sleep(1.3) # wait until we are in steady state
+    start = time.time()
+    st.stop()
+    st.wait()
+    elapsed = time.time() - start
+    print "elapsed multithreded:", elapsed
+    # we'll be partially through an iteration that has just started
+    assert elapsed >= (hc-1.0)/hc
+    assert elapsed <= 1.0
+
+    st.execute_async()
+    time.sleep(1.0)
+    # this time the start is just before stop is called, not
+    # when execute was called
+    start = time.time()
+    st.stop()
+    st.wait()
+    elapsed = time.time() - start
+    mintime =  (hc-1.0)/hc
+    maxtime = 1.0 + (1.0/hc)
+    print "elapsed multithreade:", elapsed, "expected min:", mintime, \
+          "expected max:", maxtime
+    assert elapsed >= mintime
+    assert elapsed <= maxtime
+    
+stoppable_multi()
+
+#
+#  Verify that the singlethreaded completes in multiples of two seconds
+#
+def stoppable():
+    def makeplasm():
+        plasm = ecto.Plasm()
+        ping = ecto_test.Ping("Ping")
+        sleeps = [ecto_test.Sleep("Sleep_0", seconds=0.1)
+                  for x in range(20)]
+        plasm.connect(ping[:] >> sleeps[0][:])
+        for i in range(1,19):
+            print "i=", i
+            plasm.connect(sleeps[i][:] >> sleeps[i+1][:])
+        return plasm
+
+    p = makeplasm()
+
+    st = ecto.schedulers.Singlethreaded(p)
+    start = time.time()
+    st.execute_async()
+    time.sleep(0.01)
+    st.stop()
+    st.wait()
+    elapsed = time.time() - start
+    print "elapsed singlethreaded:", elapsed
+    assert elapsed > 2.0
+    assert elapsed < 2.1
+
+    start = time.time()
+    st.execute_async()
+    time.sleep(1.0)
+    st.stop()
+    st.wait()
+    elapsed = time.time() - start
+    print "elapsed singlethreaded:", elapsed
+    assert elapsed > 2.0
+    assert elapsed < 2.1
+    
+stoppable()
 
 def sync(s, ex):
     t = time.time()
@@ -236,6 +193,26 @@ def ex_async_twice(s, ex):
     assert elapsed < (ex + eps)
     
 do_test(ex_async_twice)
+
+def ex_async_then_sync_throws(s, ex):
+    s.execute_async(niter=5)
+    print "once..."
+    assert s.running()
+    t = time.time()
+    try:
+        print "twice..."
+        s.execute(niter=5)
+        fail("that should have thrown")
+    except ecto.EctoException, e:
+        print "okay, threw"
+        print "whee"
+    s.wait()
+    elapsed = time.time() - t
+    print "elapsed:", elapsed, "expected:", ex
+    assert elapsed > ex
+    assert elapsed < (ex + eps)
+    
+do_test(ex_async_then_sync_throws)
 
 def wait_on_nothing(s, ex):
     stime = time.time()

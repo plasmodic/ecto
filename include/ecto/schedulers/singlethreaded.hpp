@@ -59,7 +59,6 @@ namespace ecto {
 
     private:
 
-      bool stop_running;
       int last_rval;
     };
   }

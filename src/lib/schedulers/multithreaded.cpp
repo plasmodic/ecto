@@ -166,19 +166,22 @@ namespace ecto {
       unsigned max_iter;
       unsigned& overall_current_iter;
       boost::mutex& overall_current_iter_mtx;
+      bool& stop_requested;
 
       stack_runner(graph::graph_t& graph_,
                    const std::vector<graph::graph_t::vertex_descriptor>& stack_, 
                    boost::asio::io_service& serv_,
                    unsigned max_iter_,
                    unsigned& overall_current_iter_,
-                   boost::mutex& overall_current_iter_mtx_)
+                   boost::mutex& overall_current_iter_mtx_,
+                   bool& stop_requested_)
         : graph(graph_), 
           stack(stack_), 
           serv(serv_), 
           max_iter(max_iter_), 
           overall_current_iter(overall_current_iter_),
-          overall_current_iter_mtx(overall_current_iter_mtx_)
+          overall_current_iter_mtx(overall_current_iter_mtx_),
+          stop_requested(stop_requested_)
       { 
         ECTO_LOG_DEBUG("Created stack_runner @ overall iteration %u, max %u", 
                        overall_current_iter % max_iter);
@@ -189,6 +192,7 @@ namespace ecto {
       result_type operator()(std::size_t index)
       {
         ECTO_LOG_DEBUG("Runner firing on index %u of %u", index % stack.size());
+        ECTO_LOG_DEBUG("stop_requested = %u %p", stop_requested % (&stop_requested));
         size_t retval = invoke_process(graph, stack[index]);
         ++index;
         assert (index <= stack.size());
@@ -197,6 +201,11 @@ namespace ecto {
           ECTO_LOG_DEBUG("Thread deciding whether to recycle @ index %u, overall iter=%u", 
                          index % overall_current_iter);
           index = 0;
+          if (stop_requested)
+            {
+              ECTO_LOG_DEBUG("Stop requested, stopping at %u iterations", overall_current_iter);
+              return 0;
+            }
           if (overall_current_iter == max_iter)
             {
               ECTO_LOG_DEBUG("Thread exiting at %u iterations", max_iter);
@@ -210,7 +219,9 @@ namespace ecto {
         ECTO_LOG_DEBUG("Posting next job index=%u", index);
         serv.post(boost::bind(stack_runner(graph, stack, serv, 
                                            max_iter, 
-                                           overall_current_iter, overall_current_iter_mtx), index));
+                                           overall_current_iter, overall_current_iter_mtx, 
+                                           stop_requested), 
+                              index));
         return retval;
       }
     };
@@ -235,7 +246,7 @@ namespace ecto {
       
       profile::graphstats_collector gs(graphstats);
 
-      if (max_iter < nthread) {
+      if (max_iter > 0 && max_iter < nthread) {
         nthread = max_iter;
         ECTO_LOG_DEBUG("Clamped threads to %u", nthread);
       }
@@ -243,7 +254,8 @@ namespace ecto {
         serv.post(boost::bind(stack_runner(graph, stack, serv, 
                                            max_iter, 
                                            current_iter,
-                                           current_iter_mtx), 
+                                           current_iter_mtx,
+                                           stop_running), 
                               0));
 
       boost::thread_group threads;

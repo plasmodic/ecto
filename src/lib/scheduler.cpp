@@ -67,6 +67,7 @@ namespace ecto {
 
   int scheduler::execute(unsigned niter, unsigned nthread)
   {
+    stop_running = false;
     //ECTO_START();
     recursive_mutex::scoped_lock lock(iface_mtx);
     {
@@ -88,6 +89,10 @@ namespace ecto {
 
     return rv;
   }
+
+  scheduler::exec::exec(scheduler& s_, unsigned niter_, unsigned nthread_) 
+    : s(s_), niter(niter_), nthread(nthread_) 
+  { }
 
   scheduler::exec::exec(const exec& rhs) 
     : s(rhs.s)
@@ -112,6 +117,7 @@ namespace ecto {
       BOOST_THROW_EXCEPTION(EctoException()
                             << diag_msg("threadpool scheduler already running"));
     running(true);
+    stop_running = false;
 
     if (nthread == 0)
       nthread = boost::thread::hardware_concurrency();
@@ -156,6 +162,7 @@ namespace ecto {
   {
     ECTO_START();
     recursive_mutex::scoped_lock lock(iface_mtx);
+    stop_running = true;
     stop_impl();
   }
 

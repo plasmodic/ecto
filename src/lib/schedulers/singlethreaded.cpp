@@ -104,10 +104,9 @@ namespace ecto {
 
     int singlethreaded::execute_impl(unsigned niter, unsigned nthread)
     {
+      ECTO_START();
       plasm_->reset_ticks();
       compute_stack();
-
-      stop_running = false;
 
       boost::signals2::scoped_connection 
         interupt_connection(SINGLE_THREADED_SIGINT_SIGNAL.connect(boost::bind(&singlethreaded::interrupt, this)));
@@ -121,9 +120,9 @@ namespace ecto {
       unsigned cur_iter = 0;
       while((niter == 0 || cur_iter < niter) && !stop_running)
         {
-          for (size_t k = 0; k < stack.size() && !stop_running; ++k)
+          for (size_t k = 0; k < stack.size(); ++k)
             {
-              ECTO_LOG_DEBUG("k=%u niter=%u", k % niter);
+              ECTO_LOG_DEBUG("stop_running=%d k=%u niter=%u", stop_running % k % niter);
               //need to check the return val of a process here, non zero means exit...
               size_t retval = invoke_process(stack[k]);
               last_rval = retval;
@@ -151,7 +150,6 @@ namespace ecto {
     void singlethreaded::stop_impl() 
     {
       SHOW();
-      stop_running = true;
     }
     void singlethreaded::wait_impl() 
     {

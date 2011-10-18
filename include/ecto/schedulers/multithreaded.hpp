@@ -60,11 +60,9 @@ namespace ecto {
 
     private:
 
-      bool stop_running;
       boost::asio::io_service serv;
       boost::mutex current_iter_mtx;
       unsigned current_iter;
-
     };
   }
 }
