@@ -25,9 +25,10 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 //
-#include <boost/python.hpp>
+#include <ecto/python.hpp>
 #include <ecto/python/repr.hpp>
 #include <ecto/python/gil.hpp>
+#include <ecto/log.hpp>
 
 namespace ecto {
   namespace py {
@@ -51,6 +52,33 @@ namespace ecto {
       //PyGILState_Release(impl_->gstate);
     }
 
+
+    scoped_gil_release::scoped_gil_release() 
+    { 
+      if (!Py_IsInitialized())
+        return;
+      threadstate = PyEval_SaveThread();
+    }
+
+    scoped_gil_release::~scoped_gil_release() { 
+      if (!Py_IsInitialized())
+        return;
+      PyEval_RestoreThread(threadstate);
+    }
+
+    scoped_call_back_to_python::scoped_call_back_to_python() 
+    {
+      if (!Py_IsInitialized())
+        return;
+      gilstate = PyGILState_Ensure();
+    }
+
+    scoped_call_back_to_python::~scoped_call_back_to_python() 
+    {
+      if (!Py_IsInitialized())
+        return;
+      PyGILState_Release(gilstate);
+    }
 
   }
 }

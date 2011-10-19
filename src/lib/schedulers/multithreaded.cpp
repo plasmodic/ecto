@@ -91,6 +91,7 @@ namespace ecto {
       if (!running())
         return;
       interrupt();
+      wait();
     }
 
     //

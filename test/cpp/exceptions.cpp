@@ -89,7 +89,7 @@ struct ParameterCBExcept
   }
   void xcb(double x)
   {
-    std::cout << "called back***" << std::endl;
+    std::cout << "*** about to throw std::runtime_error ***" << std::endl;
     throw std::runtime_error("I'm a bad callback, and I like it that way.");
   }
   void
@@ -238,6 +238,7 @@ TEST(Exceptions, WrongType_sched)
 
 TEST(Exceptions, ParameterCBExcept_sched)
 {
+  Py_Finalize();
   cell::ptr m(new cell_<ParameterCBExcept>);
   m->declare_params();
   m->declare_io();
@@ -258,6 +259,7 @@ TEST(Exceptions, ParameterCBExcept_sched)
       }
       ,
       ecto::except::EctoException);
+  Py_Initialize();
 }
 
 TEST(Exceptions, ConstructorExcept)

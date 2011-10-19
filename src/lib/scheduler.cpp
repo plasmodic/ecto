@@ -94,6 +94,7 @@ namespace ecto {
     PyEval_InitThreads();
     assert(PyEval_ThreadsInitialized());
 
+    
     //ECTO_START();
     recursive_mutex::scoped_lock lock(iface_mtx);
     {
@@ -107,9 +108,13 @@ namespace ecto {
     if (nthread == 0)
       nthread = boost::thread::hardware_concurrency();
 
-    ECTO_LOG_DEBUG("%sstart execute_impl", "");
-    int rv = execute_impl(niter, nthread);
-    ECTO_LOG_DEBUG("%sdone execute_impl", "");
+    int rv;
+    {
+      ecto::py::scoped_gil_release rel;
+      ECTO_LOG_DEBUG("%sstart execute_impl", "");
+      rv = execute_impl(niter, nthread);
+      ECTO_LOG_DEBUG("%sdone execute_impl", "");
+    }
 
     running(false);
     notify_stop();

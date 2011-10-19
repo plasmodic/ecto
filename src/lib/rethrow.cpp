@@ -55,14 +55,18 @@ namespace ecto {
       //
       void rethrow_schedule()
       {
-        //        PyGILState_STATE gstate;
-        //        gstate = PyGILState_Ensure();
+        // some of our tests are @ the c++ api level, no interpreter.
+        // In this case don't 
+        if (!Py_IsInitialized())
+          boost::rethrow_exception(boost::current_exception());
+        
+        {
+          ecto::py::scoped_call_back_to_python pycall;
 
-        ECTO_LOG_DEBUG("%s", "rethrow scheduled");
-        rethrowable_in_interpreter_thread = boost::current_exception();
-        Py_AddPendingCall(&rethrow_in_python, (void*)13);
-        /* Release the thread. No Python API allowed beyond this point. */
-        //        PyGILState_Release(gstate);
+          ECTO_LOG_DEBUG("%s", "rethrow scheduled");
+          rethrowable_in_interpreter_thread = boost::current_exception();
+          Py_AddPendingCall(&rethrow_in_python, (void*)13);
+        }
       }
 
       void rethrow (boost::function<void()> h)

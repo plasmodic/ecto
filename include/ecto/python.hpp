@@ -37,4 +37,32 @@
 #pragma pop_macro("_POSIX_C_SOURCE")
 #pragma pop_macro("_XOPEN_C_SOURCE")
 
+#include <boost/noncopyable.hpp>
+
+namespace ecto {
+  namespace py {
+    
+    class scoped_gil_release : boost::noncopyable
+    {
+      
+      PyThreadState* threadstate;
+
+    public:
+      scoped_gil_release();
+      ~scoped_gil_release();
+    };
+
+    class scoped_call_back_to_python : boost::noncopyable
+    {
+      PyGILState_STATE gilstate;
+    public:
+      
+      scoped_call_back_to_python();
+      ~scoped_call_back_to_python();
+
+
+    };
+
+  }
+}
 
