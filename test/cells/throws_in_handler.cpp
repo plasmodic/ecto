@@ -26,7 +26,6 @@
 // POSSIBILITY OF SUCH DAMAGE.
 //
 
-#define ECTO_LOG_ON
 #include <ecto/log.hpp>
 #include <ecto/except.hpp>
 #include <ecto/python.hpp>

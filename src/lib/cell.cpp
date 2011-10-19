@@ -25,8 +25,6 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 //
-#define ECTO_LOG_ON
-#define ECTO_TRACE_EXCEPTIONS
 
 #include <ecto/log.hpp>
 #include <ecto/cell.hpp>
@@ -176,14 +174,15 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
   void
   cell::start()
   {
-    ECTO_LOG_DEBUG("*** %s", "start");
+    ECTO_LOG_DEBUG("*** %s", "notified of start");
+    stop_requested(false);
     dispatch_start();
   }
 
   void
   cell::stop()
   {
-    ECTO_LOG_DEBUG("*** %s", "stop");
+    ECTO_LOG_DEBUG("*** %s", "notified of stop");
     dispatch_stop();
   }
 

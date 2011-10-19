@@ -33,6 +33,9 @@
 using namespace boost;
 
 namespace ecto {
+
+  bool logging_on = getenv("ECTO_LOG_ON");
+
   mutex log_mtx;
   mutex process_log_mtx;
 

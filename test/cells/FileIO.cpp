@@ -27,6 +27,7 @@ namespace ecto_test
     int
     process(const tendrils& /*inputs*/, const tendrils& /*outputs*/)
     {
+      
       **stream_ << *input_ << std::endl;
       return ecto::OK;
     }

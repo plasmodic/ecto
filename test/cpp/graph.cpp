@@ -12,7 +12,6 @@ namespace {
     static void
     declare_io(const tendrils& p, tendrils& in, tendrils& out)
     {
-      SHOW();
       out.declare<double> ("d");
     }
   };

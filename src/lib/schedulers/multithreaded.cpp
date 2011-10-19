@@ -25,9 +25,7 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 //
-#define ECTO_TRACE_EXCEPTIONS
-#define ECTO_LOG_ON
-#define DISABLE_SHOW
+
 #include <ecto/util.hpp>
 #include <ecto/plasm.hpp>
 #include <ecto/tendril.hpp>
@@ -121,7 +119,6 @@ namespace ecto {
       unsigned max_iter;
       unsigned& overall_current_iter;
       boost::mutex& overall_current_iter_mtx;
-      bool& stop_requested;
       boost::asio::io_service& topserv;
 
       stack_runner(graph::graph_t& graph_,
@@ -130,7 +127,6 @@ namespace ecto {
                    unsigned max_iter_,
                    unsigned& overall_current_iter_,
                    boost::mutex& overall_current_iter_mtx_,
-                   bool& stop_requested_,
                    boost::asio::io_service& topserv_)
         : graph(graph_),
           stack(stack_),
@@ -138,7 +134,6 @@ namespace ecto {
           max_iter(max_iter_),
           overall_current_iter(overall_current_iter_),
           overall_current_iter_mtx(overall_current_iter_mtx_),
-          stop_requested(stop_requested_),
           topserv(topserv_)
       {
         ECTO_LOG_DEBUG("Created stack_runner @ overall iteration %u, max %u",
@@ -154,18 +149,17 @@ namespace ecto {
         boost::mutex::scoped_lock lock(cellaccess.mtx);
 
         ECTO_LOG_DEBUG("Runner firing on index %u of %u cell %s", index % stack.size() % m->name());
-        ECTO_LOG_DEBUG("stop_requested = %u %p", stop_requested % (&stop_requested));
-        if (stop_requested) {
-
-          serv.stop();
-          return ecto::QUIT;
-        }
+        ECTO_LOG_DEBUG("stop_requested = %u", m->stop_requested());
+        if (m->stop_requested()) 
+          {
+            ECTO_LOG_DEBUG("stop was requested at %s... letting this thread die", m->name());
+            return ecto::QUIT;
+          }
 
         size_t retval = invoke_process(graph, stack[index]);
         if (retval != ecto::OK)
           {
-            serv.stop();
-            stop_requested = true;
+            cellaccess.stop_requested = true;
             return retval;
           }
         ++index;
@@ -175,11 +169,6 @@ namespace ecto {
           ECTO_LOG_DEBUG("Thread deciding whether to recycle @ index %u, overall iter=%u",
                          index % overall_current_iter);
           index = 0;
-          if (stop_requested)
-            {
-              ECTO_LOG_DEBUG("Stop requested, stopping at %u iterations", overall_current_iter);
-              return 0;
-            }
           if (overall_current_iter == max_iter)
             {
               ECTO_LOG_DEBUG("Thread exiting at %u iterations", max_iter);
@@ -194,7 +183,6 @@ namespace ecto {
         boost::function<void()> f = boost::bind(stack_runner(graph, stack, serv,
                                                              max_iter,
                                                              overall_current_iter, overall_current_iter_mtx,
-                                                             stop_requested,
                                                              topserv),
                                                 index);
         serv.post(boost::bind(&ecto::except::py::rethrow, f, boost::ref(topserv)));
@@ -231,7 +219,6 @@ namespace ecto {
           boost::function<void()> f = boost::bind(stack_runner(graph, stack, serv,
                                                                max_iter,
                                                                current_iter, current_iter_mtx,
-                                                               stop_running,
                                                                topserv),
                                                   0);
           serv.post(boost::bind(&ecto::except::py::rethrow, f, boost::ref(topserv)));
@@ -255,7 +242,6 @@ namespace ecto {
     }
 
     void multithreaded::interrupt_impl() {
-      SHOW();
       stop();
       threads.join_all();
       runthread.interrupt();
@@ -265,12 +251,10 @@ namespace ecto {
 
     void multithreaded::stop_impl()
     {
-      SHOW();
     }
 
     void multithreaded::wait_impl()
     {
-      SHOW();
       while(running())
         boost::this_thread::sleep(boost::posix_time::microseconds(10));
       threads.join_all();

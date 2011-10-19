@@ -34,7 +34,6 @@
 #include <utility>
 #include <deque>
 
-#define ECTO_LOG_ON
 #include <ecto/log.hpp>
 #include <ecto/plasm.hpp>
 #include <ecto/tendril.hpp>
@@ -59,8 +58,6 @@ namespace ecto {
       std::size_t tick = m->tick();
 
       ECTO_LOG_DEBUG(">> process %s tick %u", m->name() % tick);
-
-
 
       graph_t::in_edge_iterator inbegin, inend;
       tie(inbegin, inend) = boost::in_edges(vd, graph);

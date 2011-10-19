@@ -138,7 +138,6 @@ namespace ecto
      */
     ReturnCode process();
 
-
     /**
      * \brief Return the type of the child class.
      * @return A human readable non mangled name for the client class.
@@ -195,6 +194,9 @@ namespace ecto
     void inc_tick();
     void reset_tick();
 
+    bool stop_requested() const { return stop_requested_; }
+    void stop_requested(bool b) { stop_requested_ = b; }
+
   protected:
 
     virtual void dispatch_declare_params(tendrils& t) = 0;
@@ -227,6 +229,7 @@ namespace ecto
     cell(const cell&);
 
     std::string instance_name_;
+    bool stop_requested_;
     bool configured;
     std::size_t tick_;
     boost::mutex mtx, process_mtx;

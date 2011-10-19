@@ -25,14 +25,6 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 // 
-// #define ECTO_THREADPOOL_DEBUG
-
-#if defined(ECTO_THREADPOOL_DEBUG)
-#define ECTO_LOG_ON
-#define ECTO_USLEEP() // usleep(500000)
-#else
-#define ECTO_USLEEP()
-#endif
 
 #include <ecto/ecto.hpp>
 
@@ -124,8 +116,6 @@ namespace ecto {
         void async_wait_for_input()
         {
           boost::this_thread::interruption_point();
-          //ECTO_LOG_DEBUG("%s async_wait_for_input", this);
-          ECTO_USLEEP();
           namespace asio = boost::asio;
 
           if (context.stop) return;

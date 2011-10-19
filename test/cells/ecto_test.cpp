@@ -122,7 +122,6 @@ namespace ecto_test
 
     void onvalue_change(double v)
     {
-      SHOW();
       std::cout << "my value: " << *value_ << std::endl;
       std::cout << "new value: " << v << std::endl;
       if(*value_ != v) throw std::runtime_error("The new value should equal the old value!");

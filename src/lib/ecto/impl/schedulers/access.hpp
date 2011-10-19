@@ -35,7 +35,11 @@ namespace ecto {
     struct access : boost::noncopyable 
     {
       boost::mutex& mtx;
-      explicit access(cell& cell) : mtx(cell.mtx) { }
+      bool& stop_requested;
+      explicit access(cell& cell) 
+        : mtx(cell.mtx)
+        , stop_requested(cell.stop_requested_) 
+      { }
     };
   }
 }

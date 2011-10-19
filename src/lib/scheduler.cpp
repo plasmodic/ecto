@@ -26,7 +26,6 @@
 // POSSIBILITY OF SUCH DAMAGE.
 //
 
-#define ECTO_LOG_ON
 #include <ecto/log.hpp>
 
 #include <ecto/cell.hpp>
@@ -87,7 +86,6 @@ namespace ecto {
 
   int scheduler::execute(unsigned niter, unsigned nthread)
   {
-    stop_running = false;
     compute_stack();
     notify_start();
 
@@ -151,7 +149,6 @@ namespace ecto {
       BOOST_THROW_EXCEPTION(EctoException()
                             << diag_msg("threadpool scheduler already running"));
     running(true);
-    stop_running = false;
     compute_stack();
     notify_start();
 
@@ -196,7 +193,7 @@ namespace ecto {
   {
     ECTO_START();
     recursive_mutex::scoped_lock lock(iface_mtx);
-    stop_running = true;
+    graph[stack[0]]->stop_requested(true);
     stop_impl();
   }
 

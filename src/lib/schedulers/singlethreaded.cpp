@@ -25,9 +25,7 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 // 
-// #define ECTO_TRACE_EXCEPTIONS
-//#define DISABLE_SHOW
-#define ECTO_LOG_ON
+
 #include <ecto/util.hpp>
 #include <ecto/plasm.hpp>
 #include <ecto/tendril.hpp>
@@ -117,31 +115,27 @@ namespace ecto {
       
       profile::graphstats_collector gs(graphstats);
 
+      size_t retval = ecto::OK;
       unsigned cur_iter = 0;
-      while((niter == 0 || cur_iter < niter) && !stop_running)
+      while((niter == 0 || cur_iter < niter))
         {
           for (size_t k = 0; k < stack.size(); ++k)
             {
-              ECTO_LOG_DEBUG("stop_running=%d k=%u niter=%u", stop_running % k % niter);
+              ECTO_LOG_DEBUG("k=%u niter=%u", k % niter);
               //need to check the return val of a process here, non zero means exit...
-              size_t retval = invoke_process(stack[k]);
-              last_rval = retval;
+              retval = invoke_process(stack[k]);
               if (retval) {
-                stop_running = true;
                 return retval;
               }
             }
           ++cur_iter;
         }
       ECTO_LOG_DEBUG("FINISH %s", __PRETTY_FUNCTION__);
-      last_rval = stop_running;
-      return last_rval;
+      return retval;
     }
 
     void singlethreaded::interrupt_impl() 
     {
-      SHOW();
-      stop_running = true;
       runthread.interrupt();
       runthread.join();
       running(false);
@@ -149,11 +143,9 @@ namespace ecto {
 
     void singlethreaded::stop_impl() 
     {
-      SHOW();
     }
     void singlethreaded::wait_impl() 
     {
-      SHOW();
       runthread.join();
       //      wait_for_running_is(false);
     }

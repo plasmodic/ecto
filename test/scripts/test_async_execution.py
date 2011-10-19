@@ -184,12 +184,11 @@ def stoppable_multi():
     st.stop()
     st.wait()
     elapsed = time.time() - start
-    print "elapsed multithreded:", elapsed
+    print "elapsed multithreaded:", elapsed
     # we'll be partially through an iteration that has just started
     print "hc=", hc, "(hc-1.0)/hc=", ((hc-1.0)/hc)
     assert elapsed >= (hc-1.0)/hc
     assert elapsed <= 1.0
-
     st.execute_async()
     time.sleep(1.0)
     # this time the start is just before stop is called, not

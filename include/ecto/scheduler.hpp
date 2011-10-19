@@ -27,7 +27,6 @@
 // 
 #pragma once
 
-#define ECTO_LOG_ON
 #include <ecto/log.hpp>
 #include <ecto/forward.hpp>
 #include <ecto/plasm.hpp>
@@ -79,8 +78,6 @@ namespace ecto {
 
     boost::asio::io_service top_serv;
 
-    bool stop_running;
-    
   private:
 
     void notify_start();

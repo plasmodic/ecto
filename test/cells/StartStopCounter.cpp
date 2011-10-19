@@ -27,7 +27,6 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#define ECTO_LOG_ON
 #include <ecto/log.hpp>
 #include <ecto/ecto.hpp>
 #include <ecto/registry.hpp>
