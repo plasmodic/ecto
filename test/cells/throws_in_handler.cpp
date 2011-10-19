@@ -46,6 +46,13 @@ void boom(const boost::system::error_code&)
   ECTO_FINISH();
 }
 
+void boomstd(const boost::system::error_code&)
+{
+  ECTO_START();
+  throw std::logic_error("a nice std exception thrown from inside other stuff");
+  ECTO_FINISH();
+}
+
 boost::exception_ptr eptr;
 
 int something_is_up(void * val)
@@ -62,16 +69,19 @@ struct throws_in_bg
   boost::asio::io_service::work work;
   boost::asio::deadline_timer dt;
   boost::thread runthread;
+  typedef void (*fn_t)(const boost::system::error_code&);
+  fn_t fn;
 
-  throws_in_bg()
+  throws_in_bg(fn_t fn_)
     : work(serv),
-      dt(serv, boost::posix_time::seconds(1))
+      dt(serv, boost::posix_time::seconds(1)),
+      fn(fn_)
   {
     ECTO_START();
     PyEval_InitThreads();
     ECTO_ASSERT(PyEval_ThreadsInitialized(), "threads not initialized, uh oh");
     // Py_AddPendingCall(&something_is_up, (void*)13);
-    dt.async_wait(&boom);
+    dt.async_wait(fn);
 
     boost::thread tmp(boost::bind(&throws_in_bg::bgthread, this));
     tmp.swap(runthread);
@@ -93,9 +103,15 @@ namespace {
   boost::shared_ptr<throws_in_bg> throwptr;
 }
 
+void should_rethrow_stdexcept_in_interpreter_thread()
+{
+  throwptr.reset(new throws_in_bg(&boomstd));
+  std::cout << "throwptr = " << throwptr.get() << "\n";
+}
+
 void should_rethrow_in_interpreter_thread()
 {
-  throwptr.reset(new throws_in_bg);
+  throwptr.reset(new throws_in_bg(&boom));
   std::cout << "throwptr = " << throwptr.get() << "\n";
 }
 

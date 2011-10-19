@@ -39,11 +39,19 @@ namespace ecto {
       int rethrow_in_python(void * val)
       {
         ECTO_LOG_DEBUG("IT IS CALLED!!! %p", val);
+        // handle_exception does the translation to python.
+        // rethrow_exception turns the exception_ptr back in to an
+        // exception.  since this is "scheduled" (do it ASAP) to be
+        // called by the interpreter, our exception gets translated
+        // and rethrown there.
         boost::python::handle_exception(boost::bind(&boost::rethrow_exception, rethrowable_in_interpreter_thread));
-        //  boost::rethrow_exception(eptr);
         return -1;
       }
 
+      //
+      //  Get the current exception (as set by a catch and boost::current_exception)
+      //  and schedule a rethrow in the interpreter thread.
+      //
       void rethrow_schedule()
       {
         PyGILState_STATE gstate;

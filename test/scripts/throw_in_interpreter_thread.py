@@ -41,6 +41,15 @@ try:
     while True:
         pass
     print "FAIL that should have thrown"
+except ecto.EctoException, e:
+    print "OK:\n", e
+
+try:
+    ecto_test.should_rethrow_stdexcept_in_interpreter_thread()
+    print "spinlock..."
+    while True:
+        pass
+    print "FAIL that should have thrown"
 except RuntimeError, e:
     print "OK:\n", e
 
