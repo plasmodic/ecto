@@ -38,7 +38,7 @@ namespace ecto {
 
       int rethrow_in_python(void * val)
       {
-        ECTO_LOG_DEBUG("IT IS CALLED!!! %p", val);
+        ECTO_LOG_DEBUG("rethrowing: %p", val);
         // handle_exception does the translation to python.
         // rethrow_exception turns the exception_ptr back in to an
         // exception.  since this is "scheduled" (do it ASAP) to be
@@ -48,21 +48,35 @@ namespace ecto {
         return -1;
       }
 
+
       //
       //  Get the current exception (as set by a catch and boost::current_exception)
       //  and schedule a rethrow in the interpreter thread.
       //
       void rethrow_schedule()
       {
-        PyGILState_STATE gstate;
-        gstate = PyGILState_Ensure();
+        //        PyGILState_STATE gstate;
+        //        gstate = PyGILState_Ensure();
 
+        ECTO_LOG_DEBUG("%s", "rethrow scheduled");
         rethrowable_in_interpreter_thread = boost::current_exception();
         Py_AddPendingCall(&rethrow_in_python, (void*)13);
         /* Release the thread. No Python API allowed beyond this point. */
-        PyGILState_Release(gstate);
+        //        PyGILState_Release(gstate);
       }
 
+      void rethrow (boost::function<void()> h)
+      {
+        try {
+          h();
+        } catch (const boost::exception&) {
+          // serv.stop();
+          rethrow_schedule();
+          //throw;
+        } catch (const std::exception&) {
+          rethrow_schedule();
+        }
+      }
     }
   }
 }

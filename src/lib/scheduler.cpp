@@ -91,6 +91,9 @@ namespace ecto {
     compute_stack();
     notify_start();
 
+    PyEval_InitThreads();
+    assert(PyEval_ThreadsInitialized());
+
     //ECTO_START();
     recursive_mutex::scoped_lock lock(iface_mtx);
     {
@@ -149,9 +152,6 @@ namespace ecto {
 
     if (nthread == 0)
       nthread = boost::thread::hardware_concurrency();
-
-    PyEval_InitThreads();
-    assert(PyEval_ThreadsInitialized());
 
     exec e(*this, niter, nthread);
 

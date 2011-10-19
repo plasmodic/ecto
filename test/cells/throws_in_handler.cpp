@@ -78,8 +78,11 @@ struct throws_in_bg
       fn(fn_)
   {
     ECTO_START();
-    PyEval_InitThreads();
-    ECTO_ASSERT(PyEval_ThreadsInitialized(), "threads not initialized, uh oh");
+    if (!PyEval_ThreadsInitialized()) {
+      PyEval_InitThreads();
+      ECTO_ASSERT(PyEval_ThreadsInitialized(), "threads not initialized, uh oh");
+      PyEval_ReleaseLock();
+    }
     // Py_AddPendingCall(&something_is_up, (void*)13);
     dt.async_wait(fn);
 

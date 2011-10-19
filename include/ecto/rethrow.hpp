@@ -29,6 +29,7 @@
 #pragma once
 #include <ecto/except.hpp>
 #include <boost/exception/all.hpp>
+#include <boost/function.hpp>
 
 namespace ecto {
   namespace except {
@@ -37,19 +38,7 @@ namespace ecto {
 
       void rethrow_schedule();
 
-      template <typename Handler>
-      void rethrow (Handler h)
-      {
-        try {
-          h();
-        } catch (const boost::exception&) {
-          // serv.stop();
-          rethrow_schedule();
-          //throw;
-        } catch (const std::exception&) {
-          rethrow_schedule();
-        }
-      }
+      void rethrow (boost::function<void()> h);
     }
 
   }

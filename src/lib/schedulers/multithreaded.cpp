@@ -1,7 +1,7 @@
-// 
+//
 // Copyright (c) 2011, Willow Garage, Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
 //     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
 //     * Neither the name of the Willow Garage, Inc. nor the names of its
 //       contributors may be used to endorse or promote products derived from
 //       this software without specific prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -24,7 +24,7 @@
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
-// 
+//
 #define ECTO_TRACE_EXCEPTIONS
 #define ECTO_LOG_ON
 #define DISABLE_SHOW
@@ -32,6 +32,7 @@
 #include <ecto/plasm.hpp>
 #include <ecto/tendril.hpp>
 #include <ecto/cell.hpp>
+#include <ecto/rethrow.hpp>
 
 #include <string>
 #include <map>
@@ -67,7 +68,7 @@ namespace ecto {
   using namespace ecto::except;
 
   namespace schedulers {
-    
+
     using namespace ecto::graph;
     using boost::scoped_ptr;
     using boost::thread;
@@ -75,18 +76,18 @@ namespace ecto {
 
     namespace pt = boost::posix_time;
 
-    
+
     //
     // forwarding interface
-    // 
+    //
 
-    multithreaded::multithreaded(plasm_ptr p) 
+    multithreaded::multithreaded(plasm_ptr p)
       : scheduler(p),
         current_iter(0)
     { }
 
-    multithreaded::~multithreaded() 
-    { 
+    multithreaded::~multithreaded()
+    {
       if (!running())
         return;
       interrupt();
@@ -111,7 +112,7 @@ namespace ecto {
       }
     }
 
-    struct stack_runner 
+    struct stack_runner
     {
       graph::graph_t& graph;
       const std::vector<graph::graph_t::vertex_descriptor>& stack;
@@ -122,24 +123,24 @@ namespace ecto {
       bool& stop_requested;
 
       stack_runner(graph::graph_t& graph_,
-                   const std::vector<graph::graph_t::vertex_descriptor>& stack_, 
+                   const std::vector<graph::graph_t::vertex_descriptor>& stack_,
                    boost::asio::io_service& serv_,
                    unsigned max_iter_,
                    unsigned& overall_current_iter_,
                    boost::mutex& overall_current_iter_mtx_,
                    bool& stop_requested_)
-        : graph(graph_), 
-          stack(stack_), 
-          serv(serv_), 
-          max_iter(max_iter_), 
+        : graph(graph_),
+          stack(stack_),
+          serv(serv_),
+          max_iter(max_iter_),
           overall_current_iter(overall_current_iter_),
           overall_current_iter_mtx(overall_current_iter_mtx_),
           stop_requested(stop_requested_)
-      { 
-        ECTO_LOG_DEBUG("Created stack_runner @ overall iteration %u, max %u", 
+      {
+        ECTO_LOG_DEBUG("Created stack_runner @ overall iteration %u, max %u",
                        overall_current_iter % max_iter);
       }
-      
+
       typedef int result_type;
 
       result_type operator()(std::size_t index)
@@ -167,7 +168,7 @@ namespace ecto {
         assert (index <= stack.size());
         if (index == stack.size()) {
           boost::mutex::scoped_lock lock(overall_current_iter_mtx);
-          ECTO_LOG_DEBUG("Thread deciding whether to recycle @ index %u, overall iter=%u", 
+          ECTO_LOG_DEBUG("Thread deciding whether to recycle @ index %u, overall iter=%u",
                          index % overall_current_iter);
           index = 0;
           if (stop_requested)
@@ -186,10 +187,10 @@ namespace ecto {
             }
         }
         ECTO_LOG_DEBUG("Posting next job index=%u", index);
-        serv.post(boost::bind(stack_runner(graph, stack, serv, 
-                                           max_iter, 
-                                           overall_current_iter, overall_current_iter_mtx, 
-                                           stop_requested), 
+        serv.post(boost::bind(stack_runner(graph, stack, serv,
+                                           max_iter,
+                                           overall_current_iter, overall_current_iter_mtx,
+                                           stop_requested),
                               index));
         return retval;
       }
@@ -206,13 +207,13 @@ namespace ecto {
 
       serv.reset();
 
-      boost::signals2::scoped_connection 
+      boost::signals2::scoped_connection
         interupt_connection(SINGLE_THREADED_SIGINT_SIGNAL.connect(boost::bind(&multithreaded::interrupt_impl, this)));
 
 #if !defined(_WIN32)
       signal(SIGINT, &sigint_static_thunk);
 #endif
-      
+
       profile::graphstats_collector gs(graphstats);
 
       if (max_iter > 0 && max_iter < nthread) {
@@ -220,17 +221,18 @@ namespace ecto {
         ECTO_LOG_DEBUG("Clamped threads to %u", nthread);
       }
       for (unsigned j=0; j<nthread; ++j)
-        serv.post(boost::bind(stack_runner(graph, stack, serv, 
-                                           max_iter, 
+        serv.post(boost::bind(stack_runner(graph, stack, serv,
+                                           max_iter,
                                            current_iter,
                                            current_iter_mtx,
-                                           stop_running), 
+                                           stop_running),
                               0));
 
       for (unsigned j=0; j<nthread; ++j)
         {
           ECTO_LOG_DEBUG("Running service in thread %u", j);
-          threads.create_thread(boost::bind(&boost::asio::io_service::run, &serv));
+          boost::function<void()> runit = boost::bind(&boost::asio::io_service::run, &serv);
+          threads.create_thread(boost::bind(&ecto::except::py::rethrow, runit));
           boost::mutex::scoped_lock lock(current_iter_mtx);
           ++current_iter;
         }
@@ -251,12 +253,12 @@ namespace ecto {
       running(false);
     }
 
-    void multithreaded::stop_impl() 
+    void multithreaded::stop_impl()
     {
       SHOW();
     }
 
-    void multithreaded::wait_impl() 
+    void multithreaded::wait_impl()
     {
       SHOW();
       while(running())
