@@ -54,6 +54,18 @@ namespace ecto
     {
       cellwrap():initialized_(false){}
 
+      void dispatch_start()
+      {
+        if (bp::override start = this->get_override("start"))
+          start();
+      }
+
+      void dispatch_stop()
+      {
+        if (bp::override stop = this->get_override("stop"))
+          stop();
+      }
+
       void dispatch_declare_params(tendrils& params)
       {
         if (bp::override init = this->get_override("declare_params"))

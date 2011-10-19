@@ -167,6 +167,19 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
     }CATCH_ALL()
   }
 
+  void
+  cell::start()
+  {
+    dispatch_start();
+  }
+
+  void
+  cell::stop()
+  {
+    dispatch_stop();
+  }
+
+
   ReturnCode
   cell::process()
   {

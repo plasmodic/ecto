@@ -47,3 +47,5 @@ option(BUILD_SAMPLES "Build samples." ON)
 if(BUILD_SAMPLES)
   add_subdirectory(samples)
 endif()
+
+add_executable(msm msm.cpp)

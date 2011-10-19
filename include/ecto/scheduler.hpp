@@ -78,6 +78,9 @@ namespace ecto {
     
   private:
 
+    void notify_start();
+    void notify_stop();
+
     struct exec {
       scheduler& s;
       unsigned niter, nthread;

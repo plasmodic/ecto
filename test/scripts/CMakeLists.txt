@@ -42,6 +42,7 @@ foreach(file
     test_random
     test_shared_pass
     test_small_plasms
+    test_start_stop_counter
     test_strands
     test_tendril
     test_tendrils

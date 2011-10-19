@@ -58,6 +58,108 @@ def do_test(fn):
         fn(s, times[Sched])
     map(impl, ecto.test.schedulers)
 
+
+def sync(s, ex):
+    t = time.time()
+    assert not s.running()
+    print "starting"
+    s.execute(niter=5)
+    dur = time.time() - t
+    print "done after", dur
+    assert dur > ex
+    assert dur < (ex + eps)
+    assert not s.running()
+
+
+def synctwice(s, ex):
+    start_t = time.time()
+    assert not s.running()
+    print "starting"
+    s.execute(niter=5)
+    dur = time.time() - start_t
+    print "HALFWAY:", dur
+    assert dur > ex
+    assert dur < ex + eps
+    s.execute(niter=5)
+    dur = time.time() - start_t
+    print "SECONDTIME:", dur
+    assert dur > (ex*2)
+    assert dur < ((ex*2) + eps)
+    assert not s.running()
+
+def ex_async_twice(s, ex):
+    s.execute_async(niter=5)
+    print "once..."
+    assert s.running()
+    t = time.time()
+    try:
+        print "twice..."
+        s.execute_async(niter=5)
+        fail("that should have thrown")
+    except ecto.EctoException, e:
+        print "okay, threw"
+        print "whee"
+    s.wait()
+    elapsed = time.time() - t
+    print "elapsed:", elapsed, "expected:", ex
+    assert elapsed > ex
+    assert elapsed < (ex + eps)
+    
+
+def ex_async_then_sync_throws(s, ex):
+    s.execute_async(niter=5)
+    print "once..."
+    assert s.running()
+    t = time.time()
+    try:
+        print "twice..."
+        s.execute(niter=5)
+        fail("that should have thrown")
+    except ecto.EctoException, e:
+        print "okay, threw"
+        print "whee"
+    s.wait()
+    elapsed = time.time() - t
+    print "elapsed:", elapsed, "expected:", ex
+    assert elapsed > ex
+    assert elapsed < (ex + eps)
+    
+
+def wait_on_nothing(s, ex):
+    stime = time.time()
+    assert not s.running()
+    s.wait()
+    assert not s.running()
+    etime = time.time()
+    print etime-stime
+    assert eps > etime-stime
+
+
+def running_check(s, ex):
+    assert not s.running()
+    s.execute_async(niter=5)
+    assert s.running()
+    time.sleep(ex+eps)
+    assert not s.running()
+
+
+def wait_check(s, ex):
+    print __name__, s
+    t = time.time()
+    s.execute_async(niter=5)
+    assert time.time() - t < ex
+    s.wait()
+    print time.time() - t > ex+eps  # we might be multithreaded
+    assert not s.running()
+
+# do_test(wait_on_nothing)
+# do_test(ex_async_then_sync_throws)
+# do_test(ex_async_twice)
+# do_test(sync)
+# do_test(synctwice)
+# do_test(running_check)
+# do_test(wait_check)
+
 # Verify that the multithreaded completes in multiples of two seconds
 # from the time stop was called, not the initial start
 def stoppable_multi():
@@ -84,6 +186,7 @@ def stoppable_multi():
     elapsed = time.time() - start
     print "elapsed multithreded:", elapsed
     # we'll be partially through an iteration that has just started
+    print "hc=", hc, "(hc-1.0)/hc=", ((hc-1.0)/hc)
     assert elapsed >= (hc-1.0)/hc
     assert elapsed <= 1.0
 
@@ -103,7 +206,7 @@ def stoppable_multi():
     assert elapsed <= maxtime
     
 stoppable_multi()
-
+sys.exit(0)
 #
 #  Verify that the singlethreaded completes in multiples of two seconds
 #
@@ -144,107 +247,6 @@ def stoppable():
     
 stoppable()
 
-def sync(s, ex):
-    t = time.time()
-    assert not s.running()
-    print "starting"
-    s.execute(niter=5)
-    dur = time.time() - t
-    print "done after", dur
-    assert dur > ex
-    assert dur < (ex + eps)
-    assert not s.running()
-
-do_test(sync)
-
-def synctwice(s, ex):
-    start_t = time.time()
-    assert not s.running()
-    print "starting"
-    s.execute(niter=5)
-    dur = time.time() - start_t
-    print "HALFWAY:", dur
-    assert dur > ex
-    assert dur < ex + eps
-    s.execute(niter=5)
-    dur = time.time() - start_t
-    print "SECONDTIME:", dur
-    assert dur > (ex*2)
-    assert dur < ((ex*2) + eps)
-    assert not s.running()
-do_test(synctwice)
-
-def ex_async_twice(s, ex):
-    s.execute_async(niter=5)
-    print "once..."
-    assert s.running()
-    t = time.time()
-    try:
-        print "twice..."
-        s.execute_async(niter=5)
-        fail("that should have thrown")
-    except ecto.EctoException, e:
-        print "okay, threw"
-        print "whee"
-    s.wait()
-    elapsed = time.time() - t
-    print "elapsed:", elapsed, "expected:", ex
-    assert elapsed > ex
-    assert elapsed < (ex + eps)
-    
-do_test(ex_async_twice)
-
-def ex_async_then_sync_throws(s, ex):
-    s.execute_async(niter=5)
-    print "once..."
-    assert s.running()
-    t = time.time()
-    try:
-        print "twice..."
-        s.execute(niter=5)
-        fail("that should have thrown")
-    except ecto.EctoException, e:
-        print "okay, threw"
-        print "whee"
-    s.wait()
-    elapsed = time.time() - t
-    print "elapsed:", elapsed, "expected:", ex
-    assert elapsed > ex
-    assert elapsed < (ex + eps)
-    
-do_test(ex_async_then_sync_throws)
-
-def wait_on_nothing(s, ex):
-    stime = time.time()
-    assert not s.running()
-    s.wait()
-    assert not s.running()
-    etime = time.time()
-    print etime-stime
-    assert eps > etime-stime
-
-do_test(wait_on_nothing)
-
-def running_check(s, ex):
-    assert not s.running()
-    s.execute_async(niter=5)
-    assert s.running()
-    time.sleep(ex+eps)
-    assert not s.running()
-
-do_test(running_check)
-
-def wait_check(s, ex):
-    print __name__, s
-    t = time.time()
-    s.execute_async(niter=5)
-    assert time.time() - t < ex
-    s.wait()
-    print time.time() - t > ex+eps  # we might be multithreaded
-    assert not s.running()
-
-do_test(wait_check)
-sys.exit(0)
     
 
     #tpool()

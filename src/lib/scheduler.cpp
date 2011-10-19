@@ -65,9 +65,32 @@ namespace ecto {
     return graphstats.as_string(graph);
   }
 
+  void scheduler::notify_start() 
+  {
+    assert(stack.size() > 0);
+    for (unsigned j=0; j<stack.size(); ++j)
+      {
+        cell::ptr c = graph[stack[j]];
+        c->start();
+      }
+  }
+
+  void scheduler::notify_stop()
+  {
+    assert(stack.size() > 0);
+    for (unsigned j=0; j<stack.size(); ++j)
+      {
+        cell::ptr c = graph[stack[j]];
+        c->stop();
+      }
+  }
+
   int scheduler::execute(unsigned niter, unsigned nthread)
   {
     stop_running = false;
+    compute_stack();
+    notify_start();
+
     //ECTO_START();
     recursive_mutex::scoped_lock lock(iface_mtx);
     {
@@ -86,26 +109,28 @@ namespace ecto {
     ECTO_LOG_DEBUG("%sdone execute_impl", "");
 
     running(false);
+    notify_stop();
 
     return rv;
   }
 
-  scheduler::exec::exec(scheduler& s_, unsigned niter_, unsigned nthread_) 
-    : s(s_), niter(niter_), nthread(nthread_) 
+  scheduler::exec::exec(scheduler& s_, unsigned niter_, unsigned nthread_)
+    : s(s_), niter(niter_), nthread(nthread_)
   { }
 
-  scheduler::exec::exec(const exec& rhs) 
+  scheduler::exec::exec(const exec& rhs)
     : s(rhs.s)
     , niter(rhs.niter)
     , nthread(rhs.nthread)
   { }    
 
-  void scheduler::exec::operator()() 
+  void scheduler::exec::operator()()
   {
     ECTO_START();
     s.running(true);
     s.execute_impl(niter, nthread);
     s.running(false);
+    s.notify_stop();
     ECTO_FINISH();
   }
 
@@ -118,6 +143,8 @@ namespace ecto {
                             << diag_msg("threadpool scheduler already running"));
     running(true);
     stop_running = false;
+    compute_stack();
+    notify_start();
 
     if (nthread == 0)
       nthread = boost::thread::hardware_concurrency();

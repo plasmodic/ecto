@@ -34,7 +34,7 @@
 #include <utility>
 #include <deque>
 
-// #define ECTO_LOG_ON
+#define ECTO_LOG_ON
 #include <ecto/log.hpp>
 #include <ecto/plasm.hpp>
 #include <ecto/tendril.hpp>
@@ -56,12 +56,11 @@ namespace ecto {
     {
       cell::ptr m = graph[vd];
 
-      access cellaccess(*m);
-      boost::mutex::scoped_lock lock(cellaccess.mtx);
-
       std::size_t tick = m->tick();
 
-      ECTO_LOG_DEBUG("process %s tick %u", m->name() % tick);
+      ECTO_LOG_DEBUG(">> process %s tick %u", m->name() % tick);
+
+
 
       graph_t::in_edge_iterator inbegin, inend;
       tie(inbegin, inend) = boost::in_edges(vd, graph);
@@ -83,9 +82,10 @@ namespace ecto {
 
       int rval = m->process();
 
-      if(rval != ecto::OK)
+      if(rval != ecto::OK) {
+        ECTO_LOG_DEBUG("** process %s tick %u *BAILOUT*", m->name() % tick);
         return rval; //short circuit.
-
+      }
       graph_t::out_edge_iterator outbegin, outend;
       tie(outbegin, outend) = boost::out_edges(vd, graph);
       while (outbegin != outend)
@@ -99,6 +99,7 @@ namespace ecto {
         }
       m->inc_tick();
       // ECTO_LOG_DEBUG("Incrementing tick on %s to %u", m->name() % m->tick());
+      ECTO_LOG_DEBUG("<< process %s tick %u", m->name() % tick);
       return rval;
     }
 

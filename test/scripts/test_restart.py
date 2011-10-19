@@ -27,8 +27,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 # 
 
-import ecto
-import ecto_test
+import sys, ecto, ecto_test
 
 def makeplasm(N):
     plasm = ecto.Plasm()
@@ -36,7 +35,7 @@ def makeplasm(N):
     quitter = ecto_test.QuitAfter(N=N, restart_okay=True)
     plasm.connect(gen[:] >> quitter[:])
     
-    return (gen, plasm)
+    return (quitter, plasm)
 
 # def do_one_st(N, j):
 #     #print "multithreaded test w/ quit after", N
@@ -62,28 +61,28 @@ def makeplasm(N):
 
 def do_one_impl(SchedType, countto, nthreads, niter):
     print "*"*80, "\n", SchedType, "test w/ quit after", countto, " nthreads=", nthreads, "niter=", niter
-    (gen, plasm) = makeplasm(countto)
+    (quitter, plasm) = makeplasm(countto)
 
     sched = SchedType(plasm)
 
     for j in range(niter):
         print ">>>", j
         sched.execute(niter=countto+10, nthreads=nthreads)
-        print "out: ", gen.outputs.out
+        print "out: ", quitter.outputs.out
         
-    print "N-threaded actual out: ", gen.outputs.out, " countto:", countto, " niter:", niter, "nthreads=", nthreads
-    assert niter == gen.outputs.out
+    print "niter=", niter, "N-threaded actual out: ", quitter.outputs.out, " countto:", countto, " niter:", niter, "nthreads=", nthreads
+    assert countto * niter == quitter.outputs.out
     #print "\n" * 5
 
 def do_one(countto, nthreads, niter):
     for S in ecto.test.schedulers:
         do_one_impl(S, countto, nthreads, niter)
 
-do_one(1, 1, 1)
-sys.exit(0)
-do_one(1, 2, 1)
-do_one(2, 1, 2)
-do_one(2, 2, 2)
+#do_one(1, 1, 1)
+#do_one(1, 2, 1)
+#do_one(2, 1, 2)
+#do_one(2, 2, 2)
+#sys.exit(0)
 
 for i in range(1, 100, 10):
     for nthreads in range(2, 10, 2):

@@ -57,7 +57,7 @@ def do_one_st(N):
     sched.execute(niter=N+100)
     
     print "singlethreaded: actual out:", gen.outputs.out, " N:", N
-    assert (N - 1.0) == gen.outputs.out
+    assert N == gen.outputs.out
     print "\n" * 5
 
 for i in range(2,12,2):

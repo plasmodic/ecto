@@ -144,8 +144,18 @@ namespace ecto {
 
       result_type operator()(std::size_t index)
       {
-        ECTO_LOG_DEBUG("Runner firing on index %u of %u", index % stack.size());
+        cell::ptr m = graph[stack[index]];
+        access cellaccess(*m);
+        boost::mutex::scoped_lock lock(cellaccess.mtx);
+
+        ECTO_LOG_DEBUG("Runner firing on index %u of %u cell %s", index % stack.size() % m->name());
         ECTO_LOG_DEBUG("stop_requested = %u %p", stop_requested % (&stop_requested));
+        if (stop_requested) {
+
+          serv.stop();
+          return ecto::QUIT;
+        }
+
         size_t retval = invoke_process(graph, stack[index]);
         if (retval != ecto::OK)
           {
