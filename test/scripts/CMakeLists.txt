@@ -7,6 +7,8 @@ macro(pytest testname)
 endmacro()
 
 foreach(file
+    throw_in_interpreter_thread
+
     test_addergraph
     test_async_bp_objects
     test_async_execution
@@ -48,7 +50,7 @@ foreach(file
     test_tendrils
     test_wrong_param_type
     )
-    add_test(ecto_${file} 
+    add_test(ecto_${file}
         /usr/bin/env
         PYTHONPATH=${CMAKE_LIBRARY_OUTPUT_DIRECTORY}:${ecto_SOURCE_DIR}/python:$PYTHONPATH
         ${CMAKE_CURRENT_SOURCE_DIR}/${file}.py)

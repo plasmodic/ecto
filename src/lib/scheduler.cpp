@@ -1,7 +1,7 @@
-// 
+//
 // Copyright (c) 2011, Willow Garage, Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
 //     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
 //     * Neither the name of the Willow Garage, Inc. nor the names of its
 //       contributors may be used to endorse or promote products derived from
 //       this software without specific prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -24,7 +24,7 @@
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
-// 
+//
 
 #define ECTO_LOG_ON
 #include <ecto/log.hpp>
@@ -47,14 +47,14 @@ namespace ecto {
   using namespace ecto::except;
   using ecto::graph::graph_t;
 
-  scheduler::scheduler(plasm_ptr p) 
+  scheduler::scheduler(plasm_ptr p)
     : plasm_(p)
     , graph(p->graph())
     , running_value(false)
   { }
 
-  scheduler::~scheduler() 
-  { 
+  scheduler::~scheduler()
+  {
     // don't call wait() here... you'll thunk to the virtual wait_impl
     // which will dispatch to a child class instance that no longer exists.
     // do this in the destructor of the child scheduler classes
@@ -65,7 +65,7 @@ namespace ecto {
     return graphstats.as_string(graph);
   }
 
-  void scheduler::notify_start() 
+  void scheduler::notify_start()
   {
     assert(stack.size() > 0);
     for (unsigned j=0; j<stack.size(); ++j)
@@ -122,13 +122,14 @@ namespace ecto {
     : s(rhs.s)
     , niter(rhs.niter)
     , nthread(rhs.nthread)
-  { }    
+  { }
 
   void scheduler::exec::operator()()
   {
     ECTO_START();
     s.running(true);
     s.execute_impl(niter, nthread);
+    PyErr_CheckSignals();
     s.running(false);
     s.notify_stop();
     ECTO_FINISH();
@@ -186,7 +187,7 @@ namespace ecto {
     return rv;
   }
 
-  void scheduler::stop() 
+  void scheduler::stop()
   {
     ECTO_START();
     recursive_mutex::scoped_lock lock(iface_mtx);
@@ -194,21 +195,21 @@ namespace ecto {
     stop_impl();
   }
 
-  void scheduler::interrupt() 
+  void scheduler::interrupt()
   {
     ECTO_START();
     recursive_mutex::scoped_lock lock(iface_mtx);
     interrupt_impl();
   }
 
-  bool scheduler::running() const 
+  bool scheduler::running() const
   {
     recursive_mutex::scoped_lock lock(iface_mtx);
     recursive_mutex::scoped_lock running_lock(running_mtx);
     return running_value;
   }
 
-  void scheduler::wait() 
+  void scheduler::wait()
   {
     ECTO_START();
     recursive_mutex::scoped_lock lock(iface_mtx);
@@ -216,7 +217,7 @@ namespace ecto {
   }
 
   void
-  scheduler::running(bool value) 
+  scheduler::running(bool value)
   {
     boost::recursive_mutex::scoped_lock lock(running_mtx);
     running_value = value;

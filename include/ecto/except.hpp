@@ -84,11 +84,11 @@ namespace ecto
       struct wrap { };
     }
 
-    class error_info_container_impl 
+    class error_info_container_impl
       : public ::boost::exception_detail::error_info_container
     {
       typedef ::boost::exception_detail::type_info_ type_info_;
-      typedef ::boost::exception_detail::error_info_base error_info_base; 
+      typedef ::boost::exception_detail::error_info_base error_info_base;
 
       //
       //  hacks for boost::exception implementation details that are
@@ -109,7 +109,7 @@ namespace ecto
       ~error_info_container_impl() throw();
 
       void
-      set(error_info_base_ptr const & x, 
+      set(error_info_base_ptr const & x,
           type_info_ const & typeid_);
 
       error_info_base_ptr
@@ -190,7 +190,7 @@ namespace boost {
 
   template <class E,class Tag,class T>
   E const &
-  operator<<( E const & x, 
+  operator<<( E const & x,
               error_info< ::ecto::except::detail::wrap<Tag>, T> const & v );
 
 }

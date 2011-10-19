@@ -225,7 +225,16 @@ ECTO_CELL(ecto_test, ecto_test::NoPythonBindings, "NoPythonBindings", "Uses some
 using namespace ecto_test;
 namespace bp = boost::python;
 
+
+//
+//  some lowlevel asio rethrowing tests
+//
+void should_throw_in_interpreter_thread();
+void should_rethrow_in_interpreter_thread();
+
 ECTO_DEFINE_MODULE(ecto_test)
 {
   bp::def("make_pod_tendril", ecto_test::makePodTendril);
+  bp::def("should_throw_in_interpreter_thread", &should_throw_in_interpreter_thread);
+  bp::def("should_rethrow_in_interpreter_thread", &should_rethrow_in_interpreter_thread);
 }

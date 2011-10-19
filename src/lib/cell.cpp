@@ -1,7 +1,7 @@
-// 
+//
 // Copyright (c) 2011, Willow Garage, Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
 //     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
 //     * Neither the name of the Willow Garage, Inc. nor the names of its
 //       contributors may be used to endorse or promote products derived from
 //       this software without specific prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -24,7 +24,11 @@
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
-// 
+//
+#define ECTO_LOG_ON
+#define ECTO_TRACE_EXCEPTIONS
+
+#include <ecto/log.hpp>
 #include <ecto/cell.hpp>
 #include <cassert>
 #include <ecto/util.hpp>
@@ -35,6 +39,8 @@
 #include <boost/preprocessor/cat.hpp>
 #include <boost/preprocessor/stringize.hpp>
 #include <boost/preprocessor/seq/for_each.hpp>
+
+
 
 /*
  * Catch all and pass on exception.
@@ -120,7 +126,7 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
       return "  Hint   : '" + key + "' does not exist in module.";
   }
 
-  cell::cell() 
+  cell::cell()
   : configured(false)
   , tick_(0)
   { }
@@ -151,7 +157,7 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
     if (configured)
       return;
     configured = true;
-      
+
     init();
     try
     {
@@ -170,12 +176,14 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
   void
   cell::start()
   {
+    ECTO_LOG_DEBUG("*** %s", "start");
     dispatch_start();
   }
 
   void
   cell::stop()
   {
+    ECTO_LOG_DEBUG("*** %s", "stop");
     dispatch_stop();
   }
 
@@ -183,6 +191,9 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
   ReturnCode
   cell::process()
   {
+    boost::mutex::scoped_try_lock process_lock(process_mtx);
+    ECTO_ASSERT(process_lock.owns_lock(), "process() method of cell run concurrently");
+
     configure();
     //trigger all parameter change callbacks...
     tendrils::iterator begin = parameters.begin(), end = parameters.end();
@@ -196,11 +207,11 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
       {
         ECTO_TRACE_EXCEPTION("const std::exception& outside of CATCH ALL");
         BOOST_THROW_EXCEPTION(except::CellException()
-                              << except::type(name_of(typeid(e))) 
-                              << except::what(e.what()) 
-                              << except::cell_name(name()) 
-                              << except::function_name(__FUNCTION__) 
-                              << except::when("While triggering param change callbacks")) 
+                              << except::type(name_of(typeid(e)))
+                              << except::what(e.what())
+                              << except::cell_name(name())
+                              << except::function_name(__FUNCTION__)
+                              << except::when("While triggering param change callbacks"))
           ;
       }
       ++begin;
@@ -211,9 +222,9 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
       {
         profile::stats_collector coll(name(), stats);
         return dispatch_process(inputs, outputs);
-      } catch (const boost::thread_interrupted&) { 
+      } catch (const boost::thread_interrupted&) {
         ECTO_TRACE_EXCEPTION("const boost::thread_interrupted&, returning QUIT instead of rethrow");
-        return ecto::QUIT; 
+        return ecto::QUIT;
       }
     } CATCH_ALL()
   }
@@ -275,7 +286,7 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
       ++it;
     }
   }
-  
+
   void
   cell::verify_inputs() const
   {
@@ -297,7 +308,7 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
     cell::ptr cloned = dispatch_clone();
     cloned->declare_params();
     //copy all of the parameters by value.
-    tendrils::iterator it = cloned->parameters.begin(), 
+    tendrils::iterator it = cloned->parameters.begin(),
       end = cloned->parameters.end();
     tendrils::const_iterator oit = parameters.begin();
     while (it != end)
@@ -318,17 +329,17 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
     strand_ = s;
   }
 
-  std::size_t cell::tick() const 
-  { 
-    return tick_; 
+  std::size_t cell::tick() const
+  {
+    return tick_;
   }
 
   void cell::inc_tick()
-  { 
+  {
     ++tick_;
   }
   void cell::reset_tick()
-  { 
+  {
     tick_ = 0;
     tendrils::iterator it = inputs.begin(), end=inputs.end();
     while(it != end)
@@ -339,7 +350,7 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
     while(it != end)
       if (it->second)
         (it++)->second->tick = 0;
-    
+
   }
 }
 

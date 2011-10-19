@@ -201,7 +201,7 @@ TEST(Exceptions, WrongType)
     {
       m->process();
     }
-  catch (except::EctoException& e)
+  catch (except::TypeMismatch& e)
     {
       std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
       //      EXPECT_EQ(stre, e.msg_);

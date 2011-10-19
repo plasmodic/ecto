@@ -28,6 +28,8 @@ ectomodule(ecto_test
   Throttle.cpp
   TickCheck.cpp
   Uniform01.cpp
+
+  throws_in_handler.cpp
   ecto_test.cpp
 )
 #install_ecto_module(ecto_test)

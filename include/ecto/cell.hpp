@@ -229,12 +229,12 @@ namespace ecto
     std::string instance_name_;
     bool configured;
     std::size_t tick_;
-    boost::mutex mtx;
+    boost::mutex mtx, process_mtx;
 
     friend struct ecto::schedulers::access;
   };
 
-  
+
   /**
    * \brief Helper class for determining if client modules have function
    * implementations or not.
@@ -245,7 +245,7 @@ namespace ecto
   {
     typedef char yes;
     typedef char (&no)[2];
-    
+
     // SFINAE eliminates this when the type of arg is invalid
     // overload resolution prefers anything at all over "..."
     template<class U>
@@ -326,7 +326,7 @@ namespace ecto
     typedef int_<0> not_implemented;
     typedef int_<1> implemented;
 
-    // 
+    //
     // declare_params
     //
     typedef int_<has_f<Impl>::declare_params> has_declare_params;
@@ -349,7 +349,7 @@ namespace ecto
     }
 
 
-    // 
+    //
     // declare_io
     //
     static void declare_io(const tendrils& params, tendrils& inputs, tendrils& outputs, not_implemented)
@@ -373,7 +373,7 @@ namespace ecto
       declare_io(params, inputs, outputs);
     }
 
-    // 
+    //
     // configure
     //
     void configure(const tendrils&, const tendrils& , const tendrils&, not_implemented)
@@ -392,7 +392,7 @@ namespace ecto
       configure(params, inputs, outputs, int_<has_f<Impl>::configure> ());
     }
 
-    // 
+    //
     // process
     //
     ReturnCode process(const tendrils&, const tendrils&, not_implemented)
@@ -410,7 +410,7 @@ namespace ecto
       return process(inputs, outputs, int_<has_f<Impl>::process> ());
     }
 
-    // 
+    //
     // start
     //
     void start(not_implemented) { }
@@ -420,7 +420,7 @@ namespace ecto
       start(int_<has_f<Impl>::start> ());
     }
 
-    // 
+    //
     // stop
     //
     void stop(not_implemented) { }
@@ -480,7 +480,7 @@ namespace ecto
       }
     }
 
-  public: 
+  public:
 
     boost::shared_ptr<Impl> impl;
     static std::string SHORT_DOC;
@@ -492,7 +492,7 @@ namespace ecto
 
     void init_strand(boost::mpl::true_) { } // threadsafe
 
-    void init_strand(boost::mpl::false_) { 
+    void init_strand(boost::mpl::false_) {
       // thread-unsafe
       static ecto::strand strand_;
       cell::strand_ = strand_;

@@ -37,8 +37,14 @@
 namespace ecto {
   ECTO_EXPORT void log(const char*, unsigned line, const std::string& msg);
   ECTO_EXPORT void log_process(const std::string& name, uint64_t time, unsigned ncalls, bool startstop);
-
+  ECTO_EXPORT void assert_failed(const char* file, unsigned line, const char* cond, const char* msg);
 }
+
+#ifdef NDEBUG
+#define ECTO_ASSERT(X, msg) do { } while(false)
+#else
+#define ECTO_ASSERT(X, msg) do { if (X) ; else ecto::assert_failed(__FILE__, __LINE__, #X, msg); } while(false)
+#endif
 
 #if defined(ECTO_LOG_ON)
 #define ECTO_LOG_DEBUG(fmt, args)                                       \
@@ -56,6 +62,6 @@ namespace ecto {
 #define ECTO_LOG_PROCESS(instancename, time, ncalls, onoff) ::ecto::log_process(instancename, time, ncalls, onoff)
 #else
 #define ECTO_LOG_PROCESS(instancename, time, ncalls, onoff)
-  
+
 #endif
 

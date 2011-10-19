@@ -182,13 +182,13 @@ TEST(SerialTest, Plasm)
 {
   {
     ecto::plasm::ptr p(new ecto::plasm);
-    ecto::cell::ptr gen = ecto::registry::create("ecto_test::Generate<double>"), 
+    ecto::cell::ptr gen = ecto::registry::create("ecto_test::Generate<double>"),
       add = ecto::registry::create("ecto_test::Add");
     gen->name("gen");
-    gen->declare_params(); 
+    gen->declare_params();
     gen->declare_io();
     add->name("add");
-    add->declare_params(); 
+    add->declare_params();
     add->declare_io();
 
     p->connect(gen, "out", add, "left");
@@ -214,7 +214,7 @@ TEST(SerialTest, Plasm)
     std::map<std::string, double> results;
     for (size_t i = 0; i < cells.size(); i++)
     {
-      std::cout << cells[i]->name() << " out=" 
+      std::cout << cells[i]->name() << " out="
                 << cells[i]->outputs.get<double>("out") << std::endl;
 
       results[cells[i]->name()] = cells[i]->outputs.get<double>("out");
