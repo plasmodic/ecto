@@ -112,7 +112,7 @@ namespace ecto {
     {
       ecto::py::scoped_gil_release rel;
       ECTO_LOG_DEBUG("%sstart execute_impl", "");
-      rv = execute_impl(niter, nthread);
+      rv = execute_impl(niter, nthread, top_serv);
       ECTO_LOG_DEBUG("%sdone execute_impl", "");
     }
 
@@ -136,7 +136,7 @@ namespace ecto {
   {
     ECTO_START();
     s.running(true);
-    s.execute_impl(niter, nthread);
+    s.execute_impl(niter, nthread, s.top_serv);
     PyErr_CheckSignals();
     s.running(false);
     s.notify_stop();
@@ -228,5 +228,20 @@ namespace ecto {
     running_value = value;
     running_cond.notify_all();
     ECTO_LOG_DEBUG("running=%u", value);
+  }
+  
+  void verbose_run(boost::asio::io_service& s, std::string name)
+  {
+    while(true) {
+      ECTO_LOG_DEBUG("%p >serv> run_one %s", &s % name);
+      std::size_t nrun = s.run_one();
+      ECTO_LOG_DEBUG("%p <serv< run_one (%u) %s", &s % nrun % name);
+      if (nrun == 0)
+        {
+          ECTO_LOG_DEBUG("%p <serv< done %s", &s % name);
+          return;
+        }
+      //      usleep(100000);
+    }
   }
 }

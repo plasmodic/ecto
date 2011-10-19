@@ -63,5 +63,10 @@ namespace ecto {
 #else
 #define ECTO_LOG_PROCESS(instancename, time, ncalls, onoff)
 
+#ifdef ECTO_TRACE_EXCEPTIONS
+#define ECTO_TRACE_EXCEPTION(E) ECTO_LOG_DEBUG("CAUGHT: %s", E);
+#else
+#define ECTO_TRACE_EXCEPTION(E)
+#endif
 #endif
 

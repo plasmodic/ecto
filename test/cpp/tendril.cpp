@@ -8,6 +8,7 @@ using namespace ecto;
 
 TEST(TendrilTest, MakeTendril)
 {
+  Py_Initialize();
   tendril_ptr tp = make_tendril<bp::object>();
   EXPECT_TRUE(tp->get<bp::object>() == bp::object());
 }

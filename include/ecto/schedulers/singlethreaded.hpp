@@ -51,7 +51,7 @@ namespace ecto {
       explicit singlethreaded(plasm_ptr);
       ~singlethreaded();
 
-      int execute_impl(unsigned niter, unsigned nthreads);
+      int execute_impl(unsigned niter, unsigned nthreads, boost::asio::io_service& topserv);
 
       void stop_impl();
       void interrupt_impl();

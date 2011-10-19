@@ -44,9 +44,8 @@ namespace ecto {
     
     class scoped_gil_release : boost::noncopyable
     {
-      
       PyThreadState* threadstate;
-
+      bool have;
     public:
       scoped_gil_release();
       ~scoped_gil_release();
@@ -55,14 +54,13 @@ namespace ecto {
     class scoped_call_back_to_python : boost::noncopyable
     {
       PyGILState_STATE gilstate;
+      bool have;
+
     public:
       
       scoped_call_back_to_python();
       ~scoped_call_back_to_python();
-
-
     };
-
   }
 }
 

@@ -30,6 +30,7 @@
 #include <ecto/except.hpp>
 #include <boost/exception/all.hpp>
 #include <boost/function.hpp>
+#include <boost/asio.hpp>
 
 namespace ecto {
   namespace except {
@@ -39,6 +40,7 @@ namespace ecto {
       void rethrow_schedule();
 
       void rethrow (boost::function<void()> h);
+      void rethrow (boost::function<void()> h, boost::asio::io_service& serv);
     }
 
   }

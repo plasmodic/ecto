@@ -55,22 +55,25 @@ namespace ecto {
       //
       void rethrow_schedule()
       {
+        ECTO_START();
         // some of our tests are @ the c++ api level, no interpreter.
         // In this case don't 
         if (!Py_IsInitialized())
           boost::rethrow_exception(boost::current_exception());
         
         {
-          ecto::py::scoped_call_back_to_python pycall;
+          //ecto::py::scoped_gil_release pycall;
 
           ECTO_LOG_DEBUG("%s", "rethrow scheduled");
           rethrowable_in_interpreter_thread = boost::current_exception();
           Py_AddPendingCall(&rethrow_in_python, (void*)13);
         }
+        ECTO_FINISH();
       }
 
       void rethrow (boost::function<void()> h)
       {
+        ECTO_START();
         try {
           h();
         } catch (const boost::exception&) {
@@ -80,6 +83,35 @@ namespace ecto {
         } catch (const std::exception&) {
           rethrow_schedule();
         }
+        ECTO_FINISH();
+      }
+
+
+      //
+      //  Get the current exception (as set by a catch and boost::current_exception)
+      //  and schedule a rethrow in an asio service
+      //
+      void rethrow_schedule(boost::asio::io_service& serv)
+      {
+        ECTO_START();
+        serv.dispatch(boost::bind(&boost::rethrow_exception, boost::current_exception()));
+        ECTO_FINISH();
+      }
+
+      void rethrow (boost::function<void()> h, boost::asio::io_service& serv)
+      {
+        boost::asio::io_service::work work(serv);
+        ECTO_START();
+        try {
+          h();
+        } catch (const boost::exception&) {
+          // serv.stop();
+          rethrow_schedule(serv);
+          //throw;
+        } catch (const std::exception&) {
+          rethrow_schedule(serv);
+        }
+        ECTO_FINISH();
       }
     }
   }

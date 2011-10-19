@@ -33,9 +33,12 @@
 #include <ecto/plasm.hpp>
 #include <ecto/profile.hpp>
 #include <boost/thread.hpp>
+#include <boost/asio.hpp>
 #include <ecto/impl/graph_types.hpp>
 
 namespace ecto {
+
+  void verbose_run(boost::asio::io_service& s, std::string name);
 
   struct scheduler {
 
@@ -55,7 +58,7 @@ namespace ecto {
 
   protected:
     
-    virtual int execute_impl(unsigned niter, unsigned nthread) = 0;
+    virtual int execute_impl(unsigned niter, unsigned nthread, boost::asio::io_service& topserv) = 0;
     virtual void stop_impl() = 0;
     virtual void interrupt_impl() = 0;
     virtual void wait_impl() = 0;
@@ -73,6 +76,8 @@ namespace ecto {
     profile::graph_stats_type graphstats;
 
     boost::thread runthread;
+
+    boost::asio::io_service top_serv;
 
     bool stop_running;
     

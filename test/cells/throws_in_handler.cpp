@@ -59,7 +59,6 @@ int something_is_up(void * val)
 {
   ECTO_LOG_DEBUG("IT IS CALLED!!! %p", val);
   boost::python::handle_exception(boost::bind(&boost::rethrow_exception, eptr));
-  //  boost::rethrow_exception(eptr);
   return -1;
 }
 
@@ -78,11 +77,13 @@ struct throws_in_bg
       fn(fn_)
   {
     ECTO_START();
+    /*
     if (!PyEval_ThreadsInitialized()) {
       PyEval_InitThreads();
       ECTO_ASSERT(PyEval_ThreadsInitialized(), "threads not initialized, uh oh");
       PyEval_ReleaseLock();
     }
+    */
     // Py_AddPendingCall(&something_is_up, (void*)13);
     dt.async_wait(fn);
 
@@ -98,7 +99,7 @@ struct throws_in_bg
     ECTO_FINISH();
   }
 
-
+  ~throws_in_bg() { serv.stop(); runthread.join(); }
 };
 
 

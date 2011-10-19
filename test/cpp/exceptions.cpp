@@ -212,6 +212,7 @@ TEST(Exceptions, WrongType)
 
 TEST(Exceptions, WrongType_sched)
 {
+  Py_Finalize();
   std::string stre("double is not a int\n"
 "  Hint : 'd' is of type double\n"
 "  Module : WrongType\n"
@@ -226,6 +227,7 @@ TEST(Exceptions, WrongType_sched)
   try
     {
       sched.execute(8,1);
+      FAIL();
     }
   catch (except::TypeMismatch& e)
     {
@@ -234,6 +236,7 @@ TEST(Exceptions, WrongType_sched)
       threw = true;
     }
   EXPECT_TRUE(threw);
+  Py_Initialize();
 }
 
 TEST(Exceptions, ParameterCBExcept_sched)
@@ -247,18 +250,15 @@ TEST(Exceptions, ParameterCBExcept_sched)
   plasm::ptr p(new plasm);
   p->insert(m);
   schedulers::multithreaded sched(p);
-  EXPECT_THROW(
-      try
-      {
-        sched.execute(8,1);
-      }
-      catch (except::EctoException& e)
-      {
-        std::cout << "Good, threw an exception:\n" << ecto::except::diagnostic_string(e) << std::endl;
-        throw;
-      }
-      ,
-      ecto::except::EctoException);
+  try
+    {
+      sched.execute(8,1);
+      FAIL();
+    }
+  catch (except::EctoException& e)
+    {
+      std::cout << "Good, threw an exception:\n" << ecto::except::diagnostic_string(e) << std::endl;
+    }
   Py_Initialize();
 }
 

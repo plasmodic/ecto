@@ -102,7 +102,7 @@ namespace ecto {
       // wait();
     }
 
-    int singlethreaded::execute_impl(unsigned niter, unsigned nthread)
+    int singlethreaded::execute_impl(unsigned niter, unsigned nthread, boost::asio::io_service& topserv)
     {
       ECTO_START();
       plasm_->reset_ticks();

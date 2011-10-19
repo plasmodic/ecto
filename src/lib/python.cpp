@@ -54,22 +54,28 @@ namespace ecto {
 
 
     scoped_gil_release::scoped_gil_release() 
+      : have(false)
     { 
       if (!Py_IsInitialized())
         return;
       threadstate = PyEval_SaveThread();
+      have = true;
     }
 
     scoped_gil_release::~scoped_gil_release() { 
       if (!Py_IsInitialized())
         return;
+      ECTO_ASSERT(have, "Um, we have no thread state to restore");
       PyEval_RestoreThread(threadstate);
     }
 
     scoped_call_back_to_python::scoped_call_back_to_python() 
+      : have(false)
     {
       if (!Py_IsInitialized())
         return;
+
+      have = true;
       gilstate = PyGILState_Ensure();
     }
 
@@ -77,6 +83,7 @@ namespace ecto {
     {
       if (!Py_IsInitialized())
         return;
+      ECTO_ASSERT(have, "We have no GIL to release");
       PyGILState_Release(gilstate);
     }
 
