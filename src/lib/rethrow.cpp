@@ -25,81 +25,37 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 //
-
 #define ECTO_LOG_ON
 #include <ecto/log.hpp>
-#include <ecto/except.hpp>
-#include <ecto/python.hpp>
 #include <ecto/rethrow.hpp>
-#include <boost/asio.hpp>
-#include <boost/date_time/posix_time/posix_time.hpp>
-#include <boost/thread.hpp>
+#include <ecto/python.hpp>
 
-using namespace ecto::except;
+namespace ecto {
+  namespace except {
+    namespace py {
 
+      boost::exception_ptr rethrowable_in_interpreter_thread;
 
-void boom(const boost::system::error_code&)
-{
-  ECTO_START();
-  BOOST_THROW_EXCEPTION(EctoException()
-                        << diag_msg("boom: thrown from an io_service in a thread in the bg"));
-  ECTO_FINISH();
-}
+      int rethrow_in_python(void * val)
+      {
+        ECTO_LOG_DEBUG("IT IS CALLED!!! %p", val);
+        boost::python::handle_exception(boost::bind(&boost::rethrow_exception, rethrowable_in_interpreter_thread));
+        //  boost::rethrow_exception(eptr);
+        return -1;
+      }
 
-boost::exception_ptr eptr;
+      void rethrow_schedule()
+      {
+        PyGILState_STATE gstate;
+        gstate = PyGILState_Ensure();
 
-int something_is_up(void * val)
-{
-  ECTO_LOG_DEBUG("IT IS CALLED!!! %p", val);
-  boost::python::handle_exception(boost::bind(&boost::rethrow_exception, eptr));
-  //  boost::rethrow_exception(eptr);
-  return -1;
-}
+        rethrowable_in_interpreter_thread = boost::current_exception();
+        Py_AddPendingCall(&rethrow_in_python, (void*)13);
+        /* Release the thread. No Python API allowed beyond this point. */
+        PyGILState_Release(gstate);
+      }
 
-struct throws_in_bg
-{
-  boost::asio::io_service serv;
-  boost::asio::io_service::work work;
-  boost::asio::deadline_timer dt;
-  boost::thread runthread;
-
-  throws_in_bg()
-    : work(serv),
-      dt(serv, boost::posix_time::seconds(1))
-  {
-    ECTO_START();
-    PyEval_InitThreads();
-    ECTO_ASSERT(PyEval_ThreadsInitialized(), "threads not initialized, uh oh");
-    // Py_AddPendingCall(&something_is_up, (void*)13);
-    dt.async_wait(&boom);
-
-    boost::thread tmp(boost::bind(&throws_in_bg::bgthread, this));
-    tmp.swap(runthread);
-    ECTO_FINISH();
+    }
   }
-
-  void bgthread()
-  {
-    ECTO_START();
-    ecto::except::py::rethrow(boost::bind(&boost::asio::io_service::run, boost::ref(serv)));
-    ECTO_FINISH();
-  }
-
-
-};
-
-
-namespace {
-  boost::shared_ptr<throws_in_bg> throwptr;
 }
 
-void should_rethrow_in_interpreter_thread()
-{
-  throwptr.reset(new throws_in_bg);
-  std::cout << "throwptr = " << throwptr.get() << "\n";
-}
-
-void should_throw_in_interpreter_thread()
-{
-  boom(boost::system::error_code());
-}

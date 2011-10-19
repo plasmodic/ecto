@@ -22,6 +22,7 @@ add_library(ecto SHARED
   profile.cpp
   python.cpp
   registry.cpp
+  rethrow.cpp
   serialization.cpp
   scheduler.cpp
   schedulers/invoke.cpp
