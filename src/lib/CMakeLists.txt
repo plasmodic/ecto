@@ -35,6 +35,11 @@ target_link_libraries(ecto
   ${ECTO_DEP_LIBS}
   )
 
+set_source_files_properties(log.cpp
+  PROPERTIES
+  COMPILE_FLAGS -DSOURCE_DIR=\\"${ecto_SOURCE_DIR}\\"
+  )
+
 if(UNIX)
   set_target_properties(ecto PROPERTIES
     COMPILE_FLAGS "${FASTIDIOUS_FLAGS}"

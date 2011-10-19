@@ -35,7 +35,7 @@
 #include <stdint.h>
 
 namespace ecto {
-  ECTO_EXPORT void log(const std::string& msg);
+  ECTO_EXPORT void log(const char*, unsigned line, const std::string& msg);
   ECTO_EXPORT void log_process(const std::string& name, uint64_t time, unsigned ncalls, bool startstop);
 
 }
@@ -43,7 +43,7 @@ namespace ecto {
 #if defined(ECTO_LOG_ON)
 #define ECTO_LOG_DEBUG(fmt, args)                                       \
   do {                                                                  \
-    ::ecto::log(str(boost::format(fmt) % args));                        \
+    ::ecto::log(__FILE__, __LINE__, str(boost::format(fmt) % args));    \
   } while (false)
 #define ECTO_START()  ECTO_LOG_DEBUG(">>> %s", __PRETTY_FUNCTION__);
 #define ECTO_FINISH() ECTO_LOG_DEBUG("<<< %s", __PRETTY_FUNCTION__);

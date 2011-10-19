@@ -26,6 +26,7 @@
 // POSSIBILITY OF SUCH DAMAGE.
 // 
 #include <boost/thread.hpp>
+#include <boost/format.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <fstream>
 
@@ -35,11 +36,16 @@ namespace ecto {
   mutex log_mtx;
   mutex process_log_mtx;
 
-  void log(const std::string& msg)
+  const static std::string srcdir(SOURCE_DIR);
+  const static unsigned srcdirlen(srcdir.size());
+  
+  void log(const char* file, unsigned line, const std::string& msg)
   {
     mutex::scoped_lock lock(log_mtx);
     posix_time::ptime now(posix_time::microsec_clock::local_time());
-    std::cout << now << " " << boost::this_thread::get_id() << " " << msg << std::endl;
+    const char* file_remainder = file + srcdirlen;
+    std::cout << str(boost::format("%14p %s:%u ") % boost::this_thread::get_id() % file_remainder % line) << msg << std::endl;
+    
   }
 
 #if defined(ECTO_LOG_STATS)
