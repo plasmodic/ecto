@@ -149,14 +149,7 @@ namespace ecto {
         boost::mutex::scoped_lock lock(cellaccess.mtx);
 
         ECTO_LOG_DEBUG("Runner firing on index %u of %u cell %s", index % stack.size() % m->name());
-        ECTO_LOG_DEBUG("stop_requested = %u", m->stop_requested());
-        /*
-        if (m->stop_requested())
-          {
-            ECTO_LOG_DEBUG("stop was requested at %s... letting this thread die", m->name());
-            return ecto::QUIT;
-          }
-        */
+
         size_t retval = invoke_process(graph, stack[index]);
         if (retval != ecto::OK)
           {
@@ -227,7 +220,7 @@ namespace ecto {
       for (unsigned j=0; j<nthread; ++j)
         {
           ECTO_LOG_DEBUG("Running service in thread %u", j);
-          boost::function<void()> runit = boost::bind(&verbose_run, boost::ref(serv), 
+          boost::function<void()> runit = boost::bind(&verbose_run, boost::ref(serv),
                                                       str(boost::format("worker_%u") % j));
           threads.create_thread(boost::bind(&ecto::except::py::rethrow, runit, boost::ref(topserv)));
           boost::mutex::scoped_lock lock(current_iter_mtx);
