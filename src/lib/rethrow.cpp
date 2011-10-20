@@ -62,7 +62,7 @@ namespace ecto {
           boost::rethrow_exception(boost::current_exception());
         }
         {
-          ecto::py::scoped_gil_release pycall;
+          ecto::py::scoped_call_back_to_python pycall;
 
           ECTO_LOG_DEBUG("%s", "rethrow scheduled");
           rethrowable_in_interpreter_thread = boost::current_exception();

@@ -232,10 +232,15 @@ void should_throw_in_interpreter_thread();
 void should_rethrow_in_interpreter_thread();
 void should_rethrow_stdexcept_in_interpreter_thread();
 
+void call_back_to_python(const bp::object&);
+void start_gil_thrashing(const bp::object&, unsigned);
 ECTO_DEFINE_MODULE(ecto_test)
 {
   bp::def("make_pod_tendril", ecto_test::makePodTendril);
   bp::def("should_throw_in_interpreter_thread", &should_throw_in_interpreter_thread);
   bp::def("should_rethrow_in_interpreter_thread", &should_rethrow_in_interpreter_thread);
   bp::def("should_rethrow_stdexcept_in_interpreter_thread", &should_rethrow_stdexcept_in_interpreter_thread);
+
+  bp::def("call_back_to_python", &call_back_to_python);
+  bp::def("thrash_gil", &start_gil_thrashing);
 }

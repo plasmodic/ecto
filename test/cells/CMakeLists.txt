@@ -30,6 +30,7 @@ ectomodule(ecto_test
   Uniform01.cpp
 
   throws_in_handler.cpp
+  gil_exercise.cpp
   ecto_test.cpp
 )
 #install_ecto_module(ecto_test)
