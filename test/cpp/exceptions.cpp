@@ -213,10 +213,7 @@ TEST(Exceptions, WrongType)
 TEST(Exceptions, WrongType_sched)
 {
   Py_Finalize();
-  std::string stre("double is not a int\n"
-"  Hint : 'd' is of type double\n"
-"  Module : WrongType\n"
-"  Function: process");
+
   cell::ptr m(new cell_<WrongType>);
   m->declare_params();
   m->declare_io();
@@ -232,7 +229,6 @@ TEST(Exceptions, WrongType_sched)
   catch (except::TypeMismatch& e)
     {
       std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
-      //      EXPECT_EQ(stre, e.msg_);
       threw = true;
     }
   EXPECT_TRUE(threw);
