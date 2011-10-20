@@ -58,6 +58,6 @@ def test_python_module_plasm(Schedtype):
     assert mod.outputs.out == "spam"*5
 
 if __name__ == '__main__':
-#    test_python_module()
-    map(test_python_module_plasm, [ecto.schedulers.Multithreaded])#ecto.test.schedulers)
+    test_python_module()
+    map(test_python_module_plasm, ecto.test.schedulers)
 
