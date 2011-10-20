@@ -48,6 +48,7 @@
 #include <boost/scoped_ptr.hpp>
 #include <boost/date_time/posix_time/posix_time_duration.hpp>
 #include <boost/asio.hpp>
+#include <boost/format.hpp>
 
 #include <ecto/plasm.hpp>
 #include <ecto/scheduler.hpp>
