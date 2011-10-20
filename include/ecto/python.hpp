@@ -47,8 +47,8 @@ namespace ecto {
     //  RIAA-style  Py_BEGIN_ALLOW_THREADS
     class scoped_gil_release : boost::noncopyable
     {
-      PyThreadState* threadstate;
-      bool have;
+      static PyThreadState* threadstate;
+      bool mine;
     public:
       scoped_gil_release();
       ~scoped_gil_release();

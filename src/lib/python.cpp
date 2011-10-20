@@ -53,23 +53,32 @@ namespace ecto {
     }
 
 
-    scoped_gil_release::scoped_gil_release() 
-      : have(false)
-    { 
+    PyThreadState* scoped_gil_release::threadstate = NULL;
+
+    scoped_gil_release::scoped_gil_release()
+    {
       if (!Py_IsInitialized())
         return;
-      threadstate = PyEval_SaveThread();
-      have = true;
+      if (threadstate)
+        mine = false;
+      else
+        {
+          threadstate = PyEval_SaveThread();
+          mine = true;
+        }
     }
 
-    scoped_gil_release::~scoped_gil_release() { 
+    scoped_gil_release::~scoped_gil_release() {
       if (!Py_IsInitialized())
         return;
-      ECTO_ASSERT(have, "Um, we have no thread state to restore");
-      PyEval_RestoreThread(threadstate);
+      if (mine) {
+        PyEval_RestoreThread(threadstate);
+        mine = false;
+        threadstate = NULL;
+      }
     }
 
-    scoped_call_back_to_python::scoped_call_back_to_python() 
+    scoped_call_back_to_python::scoped_call_back_to_python()
       : have(false)
     {
       if (!Py_IsInitialized())
@@ -79,7 +88,7 @@ namespace ecto {
       gilstate = PyGILState_Ensure();
     }
 
-    scoped_call_back_to_python::~scoped_call_back_to_python() 
+    scoped_call_back_to_python::~scoped_call_back_to_python()
     {
       if (!Py_IsInitialized())
         return;

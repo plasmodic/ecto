@@ -1,7 +1,7 @@
-# 
+#
 # Copyright (c) 2011, Willow Garage, Inc.
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
 #     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
 #     * Neither the name of the Willow Garage, Inc. nor the names of its
 #       contributors may be used to endorse or promote products derived from
 #       this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -24,7 +24,7 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-# 
+#
 '''
 Set of helper functions for ecto scripts, that expose a few common args for
 the schedulers.
@@ -86,10 +86,7 @@ def run_plasm(options, plasm, locals={}):
     if options.ipython:
         use_ipython(options, sched, plasm, locals)
     else:
-        if options.scheduler_type == 'Singlethreaded':
-            sched.execute(options.niter)
-        else:
-            sched.execute(options.niter, options.nthreads)
+        sched.execute(options.niter, options.nthreads)
 
 class CellFactory(object):
     '''A factory for cells that are created from command line args.'''
@@ -120,7 +117,7 @@ class CellFactory(object):
 
 class CellYamlFactory(object):
     '''A factory to go between cells and YAML files
-    
+
     :param CellOrCellType: The prototype to base the factory off of.
     :type CellOrCellType: Cell Class, or Cell Instance
     :param prefix: The top level key for the parameters dict for this factory
@@ -142,7 +139,7 @@ class CellYamlFactory(object):
 
     def dump(self, stream=None):
         '''Dump YAML for this factory.
-        
+
         :param stream: A stream like object to print the YAML to.
         :returns: The string YAML representation of the prototype used to initialize the factory.
         '''
@@ -151,7 +148,7 @@ class CellYamlFactory(object):
 
     def load(self, parsed, cell_name=''):
         '''Create a cell from a parsed bit of YAML.
-        
+
         :param parsed: A dictionary that has been parsed from a YAML file.
         :param cell_name: will be used as the cell's instance name.
         :returns: A brand new instance of a cell, modeled after whatever is in the YAML
@@ -250,13 +247,13 @@ def doit(plasm, description="An ecto graph.", locals={}, args=None, default_sche
     '''doit is a short hand for samples, that is a combination of a call to scheduler_options, and then run_plasm.
        This function in not intended to allow customization of parameter parsing.  If this is needed please call
        scheduler_optinos and run_plasm yourself.
-       
+
        :param args: If this is None, default to using the sys.argv args, otherwise this overrides it.
        :param locals: May be used to forward any local variables to the ipython shell. Suggest either vars() or locals() to do this.
        :param default_scheduler: Override the default for the option.
        :param default_nthreads: Override
        :param default_shell: Override
-       :param default_graphviz: Override 
+       :param default_graphviz: Override
     '''
     import argparse
     parser = argparse.ArgumentParser(description=description)
