@@ -120,7 +120,7 @@ namespace ecto {
       unsigned& overall_current_iter;
       boost::mutex& overall_current_iter_mtx;
       boost::asio::io_service& topserv;
-
+      boost::asio::io_service::work topwork;
       stack_runner(graph::graph_t& graph_,
                    const std::vector<graph::graph_t::vertex_descriptor>& stack_,
                    boost::asio::io_service& serv_,
@@ -134,7 +134,8 @@ namespace ecto {
           max_iter(max_iter_),
           overall_current_iter(overall_current_iter_),
           overall_current_iter_mtx(overall_current_iter_mtx_),
-          topserv(topserv_)
+          topserv(topserv_),
+          topwork(topserv)
       {
         ECTO_LOG_DEBUG("Created stack_runner @ overall iteration %u, max %u",
                        overall_current_iter % max_iter);

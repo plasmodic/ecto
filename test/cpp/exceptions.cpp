@@ -212,27 +212,29 @@ TEST(Exceptions, WrongType)
 
 TEST(Exceptions, WrongType_sched)
 {
-  Py_Finalize();
+  for (unsigned j=0; j<100; ++j) {
+    Py_Finalize();
 
-  cell::ptr m(new cell_<WrongType>);
-  m->declare_params();
-  m->declare_io();
-  plasm::ptr p(new plasm);
-  p->insert(m);
-  schedulers::multithreaded sched(p);
-  bool threw = false;
-  try
-    {
-      sched.execute(8,1);
-      FAIL();
-    }
-  catch (except::TypeMismatch& e)
-    {
-      std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
-      threw = true;
-    }
-  EXPECT_TRUE(threw);
-  Py_Initialize();
+    cell::ptr m(new cell_<WrongType>);
+    m->declare_params();
+    m->declare_io();
+    plasm::ptr p(new plasm);
+    p->insert(m);
+    schedulers::multithreaded sched(p);
+    bool threw = false;
+    try
+      {
+        sched.execute(8,1);
+        FAIL();
+      }
+    catch (except::TypeMismatch& e)
+      {
+        std::cout << "Good, threw an exception:\n" << e.what() << std::endl;
+        threw = true;
+      }
+    EXPECT_TRUE(threw);
+    Py_Initialize();
+  }
 }
 
 TEST(Exceptions, ParameterCBExcept_sched)

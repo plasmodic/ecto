@@ -56,12 +56,13 @@ namespace ecto {
       {
         ECTO_START();
         // some of our tests are @ the c++ api level, no interpreter.
-        // In this case don't 
-        if (!Py_IsInitialized())
+        // In this case don't
+        if (!Py_IsInitialized()) {
+          ECTO_LOG_DEBUG("%s", "Python not initialized, rethrowing");
           boost::rethrow_exception(boost::current_exception());
-        
+        }
         {
-          //ecto::py::scoped_gil_release pycall;
+          ecto::py::scoped_gil_release pycall;
 
           ECTO_LOG_DEBUG("%s", "rethrow scheduled");
           rethrowable_in_interpreter_thread = boost::current_exception();
