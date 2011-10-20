@@ -49,18 +49,18 @@ def verify():
     print ">>>", txt, "<<<"
     assert len(txt.splitlines()) >= 5
     
-
-
 for s in ecto.test.schedulers:
     print s, "SYNC"
     sched = make(s)
     sched.execute(niter=5)
+    ecto.unlog_to_file()
     verify()
 
     print s, "ASYNC"
     sched2 = make(s)
     sched2.execute_async(niter=5)
     sched2.wait()
+    ecto.unlog_to_file()
     verify()
 
 

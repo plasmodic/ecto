@@ -47,6 +47,7 @@ def test_python_module_plasm():
     plasm.connect(g,"out",mod,"input")
     sched = ecto.schedulers.Singlethreaded(plasm)
     for i in range(1,5):
+        print "HERE"
         sched.execute(niter=1)
         assert g.outputs.out == i
         assert mod.outputs.out == "spam"*i
@@ -55,6 +56,6 @@ def test_python_module_plasm():
     assert mod.outputs.out == "spam"*5
     
 if __name__ == '__main__':
-    test_python_module()
+#    test_python_module()
     test_python_module_plasm()
 

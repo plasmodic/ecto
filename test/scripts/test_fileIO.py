@@ -64,9 +64,11 @@ def test_fileI(Scheduler, file_like_object, realfile=False):
     sched = Scheduler(plasm)
     sched.execute()
     assert reader.outputs.output == cards[-1]
+
 def test_io_fake(Scheduler):
     test_fileO(Scheduler, StringIO.StringIO())
     test_fileI(Scheduler, StringIO.StringIO())
+
 def test_io_real(Scheduler):
     with open('cards.txt', 'w') as f:
         test_fileO(Scheduler, f, realfile=True)
@@ -74,15 +76,17 @@ def test_io_real(Scheduler):
         test_fileI(Scheduler, f, realfile=True)
     import os
     os.remove('cards.txt')
+
 def test_io_stdo(Scheduler=ecto.schedulers.Singlethreaded):
     import sys
     test_fileO(Scheduler, sys.stdout, realfile=True)
+
 if __name__ == '__main__':
-    for x in [ecto.schedulers.Singlethreaded, ecto.schedulers.Threadpool]:
+    for x in [ecto.schedulers.Singlethreaded, ecto.schedulers.Multithreaded]:
         print " >>>>>>>>> Start sched >>>>>>>>>>", str(x)
         test_io_fake(x)
-        test_io_real(x)
-        test_io_stdo(x)
+        #test_io_real(x)
+        #test_io_stdo(x)
         print "<<<<<<<<<< End sched <<<<<<<<<<<", str(x)
 
 

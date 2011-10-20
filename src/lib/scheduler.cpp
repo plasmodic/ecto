@@ -174,7 +174,6 @@ namespace ecto {
     std::reverse(stack.begin(), stack.end());
   }
 
-
   int scheduler::invoke_process(graph_t::vertex_descriptor vd)
   {
     //    assert(false);

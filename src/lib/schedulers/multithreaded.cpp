@@ -150,12 +150,13 @@ namespace ecto {
 
         ECTO_LOG_DEBUG("Runner firing on index %u of %u cell %s", index % stack.size() % m->name());
         ECTO_LOG_DEBUG("stop_requested = %u", m->stop_requested());
-        if (m->stop_requested()) 
+        /*
+        if (m->stop_requested())
           {
             ECTO_LOG_DEBUG("stop was requested at %s... letting this thread die", m->name());
             return ecto::QUIT;
           }
-
+        */
         size_t retval = invoke_process(graph, stack[index]);
         if (retval != ecto::OK)
           {

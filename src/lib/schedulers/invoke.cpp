@@ -59,6 +59,9 @@ namespace ecto {
 
       ECTO_LOG_DEBUG(">> process %s tick %u", m->name() % tick);
 
+      if (m->stop_requested())
+        return ecto::QUIT;
+
       graph_t::in_edge_iterator inbegin, inend;
       tie(inbegin, inend) = boost::in_edges(vd, graph);
 
