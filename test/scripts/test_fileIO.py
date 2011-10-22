@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# 
+#
 # Copyright (c) 2011, Willow Garage, Inc.
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
 #     * Redistributions of source code must retain the above copyright
@@ -13,7 +13,7 @@
 #     * Neither the name of the Willow Garage, Inc. nor the names of its
 #       contributors may be used to endorse or promote products derived from
 #       this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -25,7 +25,7 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-# 
+#
 
 import ecto
 import ecto_test
@@ -41,10 +41,6 @@ def test_fileO(Scheduler, file_like_object, realfile=False):
     plasm.connect(dealer['out'] >> printer['input'])
     sched = Scheduler(plasm)
     sched.execute()
-    #sched.execute_async()
-    #import time
-    #time.sleep(0.5)
-    #sched.wait()
 
     if not realfile:
         file_like_object.seek(0)
@@ -66,8 +62,10 @@ def test_fileI(Scheduler, file_like_object, realfile=False):
     assert reader.outputs.output == cards[-1]
 
 def test_io_fake(Scheduler):
-    test_fileO(Scheduler, StringIO.StringIO())
-    test_fileI(Scheduler, StringIO.StringIO())
+    outty = StringIO.StringIO()
+    test_fileO(Scheduler, outty)
+    inny = StringIO.StringIO()
+    test_fileI(Scheduler, inny)
 
 def test_io_real(Scheduler):
     with open('cards.txt', 'w') as f:
@@ -82,7 +80,7 @@ def test_io_stdo(Scheduler=ecto.schedulers.Singlethreaded):
     test_fileO(Scheduler, sys.stdout, realfile=True)
 
 if __name__ == '__main__':
-    for x in [ecto.schedulers.Singlethreaded, ecto.schedulers.Multithreaded]:
+    for x in [ecto.schedulers.Multithreaded, ecto.schedulers.Singlethreaded]:
         print " >>>>>>>>> Start sched >>>>>>>>>>", str(x)
         test_io_fake(x)
         #test_io_real(x)

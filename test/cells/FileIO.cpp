@@ -27,7 +27,7 @@ namespace ecto_test
     int
     process(const tendrils& /*inputs*/, const tendrils& /*outputs*/)
     {
-      
+      ::ecto::py::scoped_call_back_to_python scp;
       **stream_ << *input_ << std::endl;
       return ecto::OK;
     }
@@ -43,7 +43,8 @@ namespace ecto_test
       parameters.declare<istream_ptr>("file", "A filelike object");
     }
     static void
-    declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
+    declare_io(const ecto::tendrils& parameters,
+               ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
       outputs.declare<double>("output", "A double output.");
     }
@@ -56,6 +57,7 @@ namespace ecto_test
     int
     process(const tendrils& /*inputs*/, const tendrils& /*outputs*/)
     {
+      ::ecto::py::scoped_call_back_to_python scp;
       std::istream& stream = **stream_;
       if (stream.eof()) return ecto::QUIT;
       double d;
