@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# 
+#
 # Copyright (c) 2011, Willow Garage, Inc.
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
 #     * Redistributions of source code must retain the above copyright
@@ -13,7 +13,7 @@
 #     * Neither the name of the Willow Garage, Inc. nor the names of its
 #       contributors may be used to endorse or promote products derived from
 #       this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -25,7 +25,7 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-# 
+#
 import ecto
 import ecto_test
 import sys, time
@@ -34,7 +34,7 @@ print "Hardware concurrency is", ecto.hardware_concurrency()
 
 def makeplasm():
     plasm = ecto.Plasm()
-    
+
     ping = ecto_test.Ping("Ping")
     sleep0 = ecto_test.Sleep("Sleep_0", seconds=0.1)
     sleep1 = ecto_test.Sleep("Sleep_1", seconds=0.1)
@@ -69,8 +69,7 @@ def bang(Sched):
         invoke(Sched, nada)
         invoke(Sched, stoponly)
         invoke(Sched, interruptonly)
-    
-bang(ecto.schedulers.Singlethreaded)
-bang(ecto.schedulers.Threadpool)
+
+map(bang, ecto.test.schedulers)
 
 

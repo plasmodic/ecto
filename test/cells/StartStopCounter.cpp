@@ -43,28 +43,37 @@ namespace ecto_test
     {
       in.declare<tendril::none>("in", "An inbox");
       out.declare("out", in["in"]);
-      out.declare<unsigned>(&StartStopCounter::nstart, "nstart", "", 0);
-      out.declare<unsigned>(&StartStopCounter::nstop,  "nstop", "", 0);
-      out.declare<unsigned>(&StartStopCounter::nprocess, "nprocess", "", 0);
-      out.declare<unsigned>(&StartStopCounter::nconfigure, "nconfigure", "", 0);
+      out.declare<unsigned>(&StartStopCounter::nstart,
+                            "nstart", "", 0);
+      out.declare<unsigned>(&StartStopCounter::nstop,
+                            "nstop", "", 0);
+      out.declare<unsigned>(&StartStopCounter::nprocess,
+                            "nprocess", "", 0);
+      out.declare<unsigned>(&StartStopCounter::nconfigure,
+                            "nconfigure", "", 0);
     }
 
-    void configure(const tendrils& parms, const tendrils& inputs, const tendrils& outputs)
+    void configure(const tendrils& parms, const tendrils& inputs, const tendrils& o)
     {
+      //      nstart = o["nstart"];
       ECTO_LOG_DEBUG("configure: nstart=%u", *nstart);
+      //nstop = o["nstop"];
+      //nprocess = o["nprocess"];
+      //nconfigure = o["nconfigure"];
       ++(*nconfigure);
     }
 
-    void start() { 
+    void start() {
       ++(*nstart);
-      ECTO_LOG_DEBUG("start: nstart=%u", *nstart); 
+      ECTO_LOG_DEBUG("start: nstart=%u", *nstart);
     }
-    void stop() { 
-      ++(*nstop); 
+    void stop() {
+      ++(*nstop);
     }
 
     int process(const tendrils&, const tendrils&)
     {
+      std::cout << __PRETTY_FUNCTION__ << " " << *nprocess << "\n";
       ++(*nprocess);
       return ecto::OK;
     }
@@ -75,6 +84,6 @@ namespace ecto_test
 
 }
 
-ECTO_CELL(ecto_test, ecto_test::StartStopCounter, "StartStopCounter", 
+ECTO_CELL(ecto_test, ecto_test::StartStopCounter, "StartStopCounter",
           "Count numbers of starts, stops, processes, etc.");
 

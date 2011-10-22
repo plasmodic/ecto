@@ -50,7 +50,13 @@ namespace ecto {
     : plasm_(p)
     , graph(p->graph())
     , running_value(false)
-  { }
+  {
+    // for good measure
+    PyEval_InitThreads();
+    if (!PyEval_ThreadsInitialized())
+      BOOST_THROW_EXCEPTION(EctoException()
+                            << diag_msg("Unable to initalize threads in python interpreter"));
+  }
 
   scheduler::~scheduler()
   {
@@ -89,10 +95,8 @@ namespace ecto {
     compute_stack();
     notify_start();
 
-    PyEval_InitThreads();
-    assert(PyEval_ThreadsInitialized());
+    ecto::py::scoped_gil_release sgr;
 
-    
     //ECTO_START();
     recursive_mutex::scoped_lock lock(iface_mtx);
     {
@@ -108,7 +112,6 @@ namespace ecto {
 
     int rv;
     {
-      ecto::py::scoped_gil_release rel;
       ECTO_LOG_DEBUG("%sstart execute_impl", "");
       rv = execute_impl(niter, nthread, top_serv);
       ECTO_LOG_DEBUG("%sdone execute_impl", "");
@@ -225,7 +228,7 @@ namespace ecto {
     running_cond.notify_all();
     ECTO_LOG_DEBUG("running=%u", value);
   }
-  
+
   void verbose_run(boost::asio::io_service& s, std::string name)
   {
     while(true) {

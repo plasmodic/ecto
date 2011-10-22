@@ -25,77 +25,52 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 //
-#include <ecto/python.hpp>
-#include <ecto/python/repr.hpp>
-#include <ecto/python/gil.hpp>
+
 #include <ecto/log.hpp>
+#include <ecto/except.hpp>
+#include <ecto/python.hpp>
+#include <ecto/rethrow.hpp>
+#include <boost/asio.hpp>
+#include <boost/thread.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/thread.hpp>
 
-namespace ecto {
-  namespace py {
-    std::string repr(const boost::python::object& obj)
+using namespace ecto::except;
+namespace bp = boost::python;
+
+namespace {
+  boost::asio::io_service serv;
+  boost::thread_group tgroup;
+  //  boost::mutex checky;
+}
+
+void call_back_to_python(const bp::object& obj)
+{
+  ECTO_START();
+  ecto::py::scoped_call_back_to_python scb;
+  // don't do this... apparently there really are threads in that there interpreter
+  // boost::mutex::scoped_try_lock sct(checky);
+  // assert(sct.owns_lock());
+  std::string s = str(boost::format("thread_%p") % boost::this_thread::get_id());
+
+  obj(s);
+  ECTO_FINISH();
+}
+
+void start_gil_thrashing(const bp::object& obj, unsigned maxiter)
+{
+  PyEval_InitThreads();
+  ecto::py::scoped_gil_release sgr;
+  unsigned nthread = boost::thread::hardware_concurrency();
+
+  for (unsigned j=0; j<maxiter; ++j)
+    serv.post(boost::bind(&call_back_to_python, obj));
+
+  for (unsigned j=0; j<nthread; ++j)
     {
-      return boost::python::extract<std::string>(obj.attr("__repr__")());
+      tgroup.create_thread(boost::bind(&boost::asio::io_service::run, boost::ref(serv)));
     }
 
-    struct gil::impl : boost::noncopyable
-    {
-      PyGILState_STATE gstate;
-    };
-
-    gil::gil() : impl_(new gil::impl)
-    {
-      //impl_->gstate = PyGILState_Ensure();
-    }
-
-    gil::~gil()
-    {
-      //PyGILState_Release(impl_->gstate);
-    }
-
-
-    PyThreadState* scoped_gil_release::threadstate = NULL;
-
-    scoped_gil_release::scoped_gil_release()
-    {
-      if (!Py_IsInitialized())
-        return;
-      if (threadstate)
-        mine = false;
-      else
-        {
-          threadstate = PyEval_SaveThread();
-          mine = true;
-        }
-    }
-
-    scoped_gil_release::~scoped_gil_release() {
-      if (!Py_IsInitialized())
-        return;
-      if (mine) {
-        PyEval_RestoreThread(threadstate);
-        mine = false;
-        threadstate = NULL;
-      }
-    }
-
-    scoped_call_back_to_python::scoped_call_back_to_python()
-      : have(false)
-    {
-      if (!Py_IsInitialized())
-        return;
-
-      have = true;
-      gilstate = PyGILState_Ensure();
-    }
-
-    scoped_call_back_to_python::~scoped_call_back_to_python()
-    {
-      if (!Py_IsInitialized())
-        return;
-      ECTO_ASSERT(have, "We have no GIL to release");
-      PyGILState_Release(gilstate);
-    }
-
-  }
+  tgroup.join_all();
 }
 

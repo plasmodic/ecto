@@ -1,7 +1,7 @@
-// 
+//
 // Copyright (c) 2011, Willow Garage, Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
 //     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
 //     * Neither the name of the Willow Garage, Inc. nor the names of its
 //       contributors may be used to endorse or promote products derived from
 //       this software without specific prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -24,7 +24,7 @@
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
-// 
+//
 
 #include <ecto/python.hpp>
 
@@ -50,7 +50,7 @@ namespace ecto {
 
   namespace schedulers {
 
-    int 
+    int
     invoke_process(graph_t& graph, graph_t::vertex_descriptor vd)
     {
       cell::ptr m = graph[vd];
@@ -59,9 +59,10 @@ namespace ecto {
 
       ECTO_LOG_DEBUG(">> process %s tick %u", m->name() % tick);
 
-      if (m->stop_requested())
+      if (m->stop_requested()) {
+        ECTO_LOG_DEBUG("%s Not processing because stop_requested", m->name());
         return ecto::QUIT;
-
+      }
       graph_t::in_edge_iterator inbegin, inend;
       tie(inbegin, inend) = boost::in_edges(vd, graph);
 

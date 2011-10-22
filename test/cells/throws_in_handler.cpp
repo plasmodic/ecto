@@ -108,17 +108,20 @@ namespace {
 
 void should_rethrow_stdexcept_in_interpreter_thread()
 {
+  PyEval_InitThreads();
   throwptr.reset(new throws_in_bg(&boomstd));
   std::cout << "throwptr = " << throwptr.get() << "\n";
 }
 
 void should_rethrow_in_interpreter_thread()
 {
+  PyEval_InitThreads();
   throwptr.reset(new throws_in_bg(&boom));
   std::cout << "throwptr = " << throwptr.get() << "\n";
 }
 
 void should_throw_in_interpreter_thread()
 {
+  PyEval_InitThreads();
   boom(boost::system::error_code());
 }

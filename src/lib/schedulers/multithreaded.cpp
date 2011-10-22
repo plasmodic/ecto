@@ -121,7 +121,7 @@ namespace ecto {
       unsigned& overall_current_iter;
       boost::mutex& overall_current_iter_mtx;
       boost::asio::io_service& topserv;
-
+      boost::asio::io_service::work topwork;
       stack_runner(graph::graph_t& graph_,
                    const std::vector<graph::graph_t::vertex_descriptor>& stack_,
                    boost::asio::io_service& serv_,
@@ -135,7 +135,8 @@ namespace ecto {
           max_iter(max_iter_),
           overall_current_iter(overall_current_iter_),
           overall_current_iter_mtx(overall_current_iter_mtx_),
-          topserv(topserv_)
+          topserv(topserv_),
+          topwork(topserv)
       {
         ECTO_LOG_DEBUG("Created stack_runner @ overall iteration %u, max %u",
                        overall_current_iter % max_iter);
@@ -145,19 +146,12 @@ namespace ecto {
 
       result_type operator()(std::size_t index)
       {
+        ECTO_ASSERT(index < stack.size(), "index out of bounds");
         cell::ptr m = graph[stack[index]];
         access cellaccess(*m);
         boost::mutex::scoped_lock lock(cellaccess.mtx);
-
         ECTO_LOG_DEBUG("Runner firing on index %u of %u cell %s", index % stack.size() % m->name());
-        ECTO_LOG_DEBUG("stop_requested = %u", m->stop_requested());
-        /*
-        if (m->stop_requested())
-          {
-            ECTO_LOG_DEBUG("stop was requested at %s... letting this thread die", m->name());
-            return ecto::QUIT;
-          }
-        */
+
         size_t retval = invoke_process(graph, stack[index]);
         if (retval != ecto::OK)
           {
@@ -165,30 +159,33 @@ namespace ecto {
             return retval;
           }
         ++index;
-        assert (index <= stack.size());
-        if (index == stack.size()) {
+        ECTO_ASSERT (index <= stack.size(), "index out of bounds");
+        {
           boost::mutex::scoped_lock lock(overall_current_iter_mtx);
-          ECTO_LOG_DEBUG("Thread deciding whether to recycle @ index %u, overall iter=%u",
-                         index % overall_current_iter);
-          index = 0;
-          if (overall_current_iter == max_iter)
-            {
-              ECTO_LOG_DEBUG("Thread exiting at %u iterations", max_iter);
-              return 0;
-            }
-          else
-            {
-              ++overall_current_iter;
-            }
+
+          if (index == stack.size()) {
+            ECTO_LOG_DEBUG("Thread deciding whether to recycle @ index %u, overall iter=%u",
+                           index % overall_current_iter);
+            index = 0;
+            if (overall_current_iter >= max_iter)
+              {
+                ECTO_LOG_DEBUG("Thread exiting at %u iterations", max_iter);
+                return 0;
+              }
+            else
+              {
+                ++overall_current_iter;
+              }
+          }
+          ECTO_LOG_DEBUG("Posting next job index=%u", index);
+          boost::function<void()> f = boost::bind(stack_runner(graph, stack, serv,
+                                                               max_iter,
+                                                               overall_current_iter, overall_current_iter_mtx,
+                                                               topserv),
+                                                  index);
+          serv.post(boost::bind(&ecto::except::py::rethrow, f, boost::ref(topserv)));
+          return retval;
         }
-        ECTO_LOG_DEBUG("Posting next job index=%u", index);
-        boost::function<void()> f = boost::bind(stack_runner(graph, stack, serv,
-                                                             max_iter,
-                                                             overall_current_iter, overall_current_iter_mtx,
-                                                             topserv),
-                                                index);
-        serv.post(boost::bind(&ecto::except::py::rethrow, f, boost::ref(topserv)));
-        return retval;
       }
     };
 
@@ -225,17 +222,19 @@ namespace ecto {
                                                   0);
           serv.post(boost::bind(&ecto::except::py::rethrow, f, boost::ref(topserv)));
         }
+
       for (unsigned j=0; j<nthread; ++j)
         {
           ECTO_LOG_DEBUG("Running service in thread %u", j);
-          boost::function<void()> runit = boost::bind(&verbose_run, boost::ref(serv), 
-                                                      str(boost::format("worker_%u") % j));
+          std::string thisname = str(boost::format("worker_%u") % j);
+          boost::function<void()> runit = boost::bind(&verbose_run, boost::ref(serv), thisname);
           threads.create_thread(boost::bind(&ecto::except::py::rethrow, runit, boost::ref(topserv)));
           boost::mutex::scoped_lock lock(current_iter_mtx);
           ++current_iter;
         }
 
       verbose_run(topserv, "topserv");
+
       threads.join_all();
       ECTO_LOG_DEBUG("JOINED, EXITING AFTER %u", current_iter);
 

@@ -41,23 +41,29 @@
 
 namespace ecto {
   namespace py {
-    
+
+    //
+    //  used in the interpreter thread during blocking operations
+    //  RIAA-style  Py_BEGIN_ALLOW_THREADS
     class scoped_gil_release : boost::noncopyable
     {
-      PyThreadState* threadstate;
-      bool have;
+      static PyThreadState* threadstate;
+      bool mine;
     public:
       scoped_gil_release();
       ~scoped_gil_release();
     };
 
+    //
+    //  For non-python created threads
+    //
     class scoped_call_back_to_python : boost::noncopyable
     {
       PyGILState_STATE gilstate;
       bool have;
 
     public:
-      
+
       scoped_call_back_to_python();
       ~scoped_call_back_to_python();
     };

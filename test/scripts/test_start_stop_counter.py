@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# 
+#
 # Copyright (c) 2011, Willow Garage, Inc.
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
 #     * Redistributions of source code must retain the above copyright
@@ -13,7 +13,7 @@
 #     * Neither the name of the Willow Garage, Inc. nor the names of its
 #       contributors may be used to endorse or promote products derived from
 #       this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -25,7 +25,7 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-# 
+#
 import ecto
 import ecto_test
 from util import fail
@@ -51,7 +51,7 @@ def do_test(fn):
         (p, ss) = makeplasm()
         s = Sched(p)
         fn(s, ss)
-    map(impl, ecto.test.schedulers)
+    map(impl, [ecto.schedulers.Multithreaded])#ecto.test.schedulers)
 
 
 def synctwice(s, ss):
@@ -68,6 +68,7 @@ def synctwice(s, ss):
     print "NSTOP=", ss.outputs.nstop
     assert ss.outputs.nstop == 1
     assert ss.outputs.nconfigure == 1
+    print "NPROCESS=", ss.outputs.nprocess
     assert ss.outputs.nprocess == 5
 
     s.execute(niter=5)
@@ -77,6 +78,7 @@ def synctwice(s, ss):
     print "NSTOP=", ss.outputs.nstop
     assert ss.outputs.nstop == 2
     assert ss.outputs.nconfigure == 1
+    print "NPROCESS=", ss.outputs.nprocess
     assert ss.outputs.nprocess == 10
 
     s.execute_async(niter=5)
@@ -87,8 +89,10 @@ def synctwice(s, ss):
     print "NSTOP=", ss.outputs.nstop
     assert ss.outputs.nstop == 3
     assert ss.outputs.nconfigure == 1
+    print "NPROCESS=", ss.outputs.nprocess
     assert ss.outputs.nprocess == 15
 
+    s.wait()
     s.execute_async()
     time.sleep(0.1)
     print "NSTART=", ss.outputs.nstart
@@ -96,10 +100,13 @@ def synctwice(s, ss):
     assert ss.outputs.nconfigure == 1
 
     s.stop()
+    s.wait()
     time.sleep(1.0)
     assert ss.outputs.nstop == 4
     assert ss.outputs.nconfigure == 1
+    print "NPROCESS=", ss.outputs.nprocess
     assert ss.outputs.nprocess > 15
-    
-do_test(synctwice)
+
+while True:
+    do_test(synctwice)
 
