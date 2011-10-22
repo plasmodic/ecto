@@ -73,7 +73,6 @@ namespace ecto_test
 
     int process(const tendrils&, const tendrils&)
     {
-      std::cout << __PRETTY_FUNCTION__ << " " << *nprocess << "\n";
       ++(*nprocess);
       return ecto::OK;
     }

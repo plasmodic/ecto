@@ -162,12 +162,14 @@ namespace ecto {
         ECTO_ASSERT (index <= stack.size(), "index out of bounds");
         {
           boost::mutex::scoped_lock lock(overall_current_iter_mtx);
+          if (index == stack.size())
+            {
 
-          if (index == stack.size()) {
-            ECTO_LOG_DEBUG("Thread deciding whether to recycle @ index %u, overall iter=%u",
-                           index % overall_current_iter);
-            index = 0;
-            if (overall_current_iter >= max_iter)
+              ECTO_LOG_DEBUG("Thread deciding whether to recycle @ index %u, overall iter=%u of %u",
+                             index % overall_current_iter % max_iter);
+              index = 0;
+              ECTO_ASSERT(max_iter == 0 || overall_current_iter <= max_iter, "uh oh timing gone bad");
+              if (max_iter && overall_current_iter >= max_iter)
               {
                 ECTO_LOG_DEBUG("Thread exiting at %u iterations", max_iter);
                 return 0;
@@ -223,20 +225,23 @@ namespace ecto {
           serv.post(boost::bind(&ecto::except::py::rethrow, f, boost::ref(topserv)));
         }
 
-      for (unsigned j=0; j<nthread; ++j)
-        {
-          ECTO_LOG_DEBUG("Running service in thread %u", j);
-          std::string thisname = str(boost::format("worker_%u") % j);
-          boost::function<void()> runit = boost::bind(&verbose_run, boost::ref(serv), thisname);
-          threads.create_thread(boost::bind(&ecto::except::py::rethrow, runit, boost::ref(topserv)));
-          boost::mutex::scoped_lock lock(current_iter_mtx);
-          ++current_iter;
-        }
+      {
+        boost::mutex::scoped_lock lock(current_iter_mtx);
 
+        for (unsigned j=0; j<nthread; ++j)
+          {
+            ECTO_LOG_DEBUG("Running service in thread %u", j);
+            std::string thisname = str(boost::format("worker_%u") % j);
+            boost::function<void()> runit = boost::bind(&verbose_run, boost::ref(serv), thisname);
+            threads.create_thread(boost::bind(&ecto::except::py::rethrow, runit, boost::ref(topserv)));
+            ++current_iter;
+          }
+      }
       verbose_run(topserv, "topserv");
 
       threads.join_all();
-      ECTO_LOG_DEBUG("JOINED, EXITING AFTER %u", current_iter);
+      ECTO_LOG_DEBUG("JOINED, EXITING AFTER %u of %u", current_iter % max_iter);
+      ECTO_ASSERT(max_iter == 0 || current_iter == max_iter, "uh oh, our timing is way off");
 
       this->running(false);
       return 0;

@@ -34,23 +34,20 @@ namespace ecto {
     const unsigned delay_seed = get_from_env_with_default("ECTO_DELAY_SEED", time(0));
 
     struct tls {
-  
+
       boost::mt19937 gen;
       boost::uniform_int<unsigned> dist;
-  
+
       tls() : gen(delay_seed), dist(0, max_delay) { }
-  
+
       inline void rndsleep() {
         unsigned dur = dist(gen);
         if (max_delay > 0 && dur >= min_delay)
-          {
-            std::cout << "dur=" << dur << "\n";
-            usleep(dur);
-          }
+          usleep(dur);
       }
     };
 
-    void random_delay() 
+    void random_delay()
     {
       static boost::thread_specific_ptr<ecto::test::tls> bp;
       if (__builtin_expect(!bp.get(), 0))

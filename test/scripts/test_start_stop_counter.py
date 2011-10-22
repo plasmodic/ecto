@@ -56,6 +56,8 @@ def do_test(fn):
 
 def synctwice(s, ss):
 
+    print "*"*80
+    print "\n"*5
     assert ss.outputs.nstart == 0
     assert ss.outputs.nstop == 0
     assert ss.outputs.nconfigure == 0
@@ -82,7 +84,8 @@ def synctwice(s, ss):
     assert ss.outputs.nprocess == 10
 
     s.execute_async(niter=5)
-    time.sleep(1.0)
+    while s.running():
+        time.sleep(0.1)
 
     print "NSTART=", ss.outputs.nstart
     assert ss.outputs.nstart == 3
@@ -94,19 +97,36 @@ def synctwice(s, ss):
 
     s.wait()
     s.execute_async()
-    time.sleep(0.1)
+    time.sleep(1.0)
+    s.stop()
+    s.wait()
+    print s.stats(), "\n"*5
     print "NSTART=", ss.outputs.nstart
     assert ss.outputs.nstart == 4
     assert ss.outputs.nconfigure == 1
 
-    s.stop()
-    s.wait()
-    time.sleep(1.0)
+
     assert ss.outputs.nstop == 4
     assert ss.outputs.nconfigure == 1
     print "NPROCESS=", ss.outputs.nprocess
     assert ss.outputs.nprocess > 15
 
-while True:
+for j in range(10):
     do_test(synctwice)
 
+
+def things_not_too_slow(s, ss):
+
+    s.execute_async()
+    time.sleep(1.0)
+    s.stop()
+    s.wait()
+    print s.stats()
+    s.execute_async()
+    time.sleep(1.0)
+    s.stop()
+    s.wait()
+    print s.stats()
+
+
+do_test(things_not_too_slow)
