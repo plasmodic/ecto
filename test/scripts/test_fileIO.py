@@ -83,8 +83,8 @@ if __name__ == '__main__':
     for x in [ecto.schedulers.Multithreaded, ecto.schedulers.Singlethreaded]:
         print " >>>>>>>>> Start sched >>>>>>>>>>", str(x)
         test_io_fake(x)
-        #test_io_real(x)
-        #test_io_stdo(x)
+        test_io_real(x)
+        test_io_stdo(x)
         print "<<<<<<<<<< End sched <<<<<<<<<<<", str(x)
 
 
