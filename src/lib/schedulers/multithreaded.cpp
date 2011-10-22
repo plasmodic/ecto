@@ -241,7 +241,7 @@ namespace ecto {
 
       threads.join_all();
       ECTO_LOG_DEBUG("JOINED, EXITING AFTER %u of %u", current_iter % max_iter);
-      ECTO_ASSERT(max_iter == 0 || current_iter == max_iter, "uh oh, our timing is way off");
+      ECTO_ASSERT(max_iter == 0 || current_iter < max_iter, "uh oh, our timing is way off");
 
       this->running(false);
       return 0;

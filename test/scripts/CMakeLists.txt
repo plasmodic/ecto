@@ -62,10 +62,10 @@ pytest(test_lineplasm1 ${CMAKE_CURRENT_SOURCE_DIR}/test_lineplasm.py 1 5 5 50)
 pytest(test_lineplasm2 ${CMAKE_CURRENT_SOURCE_DIR}/test_lineplasm.py 10 10 10 50)
 # pytest(test_lineplasm3 ${CMAKE_CURRENT_SOURCE_DIR}/test_lineplasm.py 15 25 35 50)
 
-pytest(save_plasm_to_file 
-  ${CMAKE_CURRENT_SOURCE_DIR}/save_plasm_to_File.py 
+pytest(save_plasm_to_file
+  ${CMAKE_CURRENT_SOURCE_DIR}/save_plasm_to_file.py
   ${ecto_BINARY_DIR}/plasm.ecto)
 
-pytest(load_plasm_from_file 
-  ${CMAKE_CURRENT_SOURCE_DIR}/save_plasm_to_File.py 
+pytest(load_plasm_from_file
+  ${CMAKE_CURRENT_SOURCE_DIR}/save_plasm_to_file.py
   ${ecto_BINARY_DIR}/plasm.ecto)
