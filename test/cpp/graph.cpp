@@ -72,7 +72,7 @@ TEST(Plasm, Passthrough)
   EXPECT_TRUE(out == 5.0);
 }
 
-TEST(Plasm,Registry)
+TEST(Plasm, Registry)
 {
   ecto::cell::ptr add = ecto::registry::create("ecto_test::Add");
   EXPECT_TRUE(add);
