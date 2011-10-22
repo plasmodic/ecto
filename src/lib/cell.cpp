@@ -190,8 +190,10 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
   ReturnCode
   cell::process()
   {
+#if defined(ECTO_STRESS_TEST)
     boost::mutex::scoped_try_lock process_lock(process_mtx);
     ECTO_ASSERT(process_lock.owns_lock(), "process() method of cell run concurrently");
+#endif
 
     configure();
     //trigger all parameter change callbacks...

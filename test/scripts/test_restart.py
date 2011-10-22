@@ -65,22 +65,20 @@ def do_one_impl(SchedType, countto, nthreads, niter):
 
     sched = SchedType(plasm)
 
-    for j in range(1, niter+1):
-        print ">>>", j
-        sched.execute(niter=countto+10, nthreads=nthreads)
-        print "nthreads=", nthreads
+    quitout = countto
+    for j in range(niter):
+        sched.execute(niter=countto+100, nthreads=nthreads)
+        print sched.stats()
+        print "j:", j
+        print "niter:", countto+100
+        print "countto:", countto
+        print "nthreads:", nthreads
         print "quitter.out: ", quitter.outputs.out
         print "gen.out: ", gen.outputs.out
-        if SchedType == ecto.schedulers.Singlethreaded:
-            assert(gen.outputs.out == quitter.outputs.out + 1)
-        elif (SchedType == ecto.schedulers.Multithreaded) and (nthreads <= ecto.hardware_concurrency()):
-            if nthreads < ecto.hardware_concurrency():
-                dist = nthreads
-            else:
-                dist = ecto.hardware_concurrency()
-            assert gen.outputs.out == quitter.outputs.out + dist
-        else:
-            assert False, "eh? what kind of scheduler"
+        print "quitout:", quitout
+        assert quitter.outputs.out == quitout
+        quitout += countto + 1 # because the gen will have fired an unused value
+            # assert gen.outputs.out == countto + dist
 
 def do_one(countto, nthreads, niter):
     for S in ecto.test.schedulers:

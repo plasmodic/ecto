@@ -7,8 +7,12 @@ if (ECTO_TRACE_EXCEPTIONS)
   add_definitions(-DECTO_TRACE_EXCEPTIONS=1)
 endif()
 
+option(ECTO_STRESS_TEST "Stress testing of ecto" OFF)
+
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-  add_definitions(-DECTO_LOG_ON)
+  option(ECTO_LOGGING "Ecto logging" ON)
+else()
+  option(ECTO_LOGGING "Ecto logging" OFF)
 endif()
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)

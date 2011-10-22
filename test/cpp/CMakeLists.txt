@@ -53,6 +53,6 @@ target_link_libraries(plasm_loader
   
 add_test(plasm_loader
     ${CMAKE_BINARY_DIR}/bin/plasm_loader
-    ${CMAKE_CURRENT_SOURCE_DIR}/python_graph.ecto
+    ${ecto_BINARY_DIR}/plasm.ecto
     8
 )

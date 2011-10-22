@@ -232,7 +232,10 @@ namespace ecto
     bool stop_requested_;
     bool configured;
     std::size_t tick_;
-    boost::mutex mtx, process_mtx;
+    boost::mutex mtx;
+#if defined(ECTO_STRESS_TEST)
+    boost::mutex process_mtx;
+#endif
 
     friend struct ecto::schedulers::access;
   };

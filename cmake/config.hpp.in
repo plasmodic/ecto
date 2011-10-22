@@ -28,3 +28,6 @@
  */
 #pragma once
 #include <ecto/boost-config.hpp>
+
+#cmakedefine ECTO_STRESS_TEST
+#cmakedefine ECTO_LOGGING

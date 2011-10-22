@@ -27,3 +27,5 @@ file(COPY ${PROJECT_SOURCE_DIR}/cmake/doc.cmake DESTINATION ${ecto_CONFIG_DIR})
 file(COPY ${PROJECT_SOURCE_DIR}/cmake/git.cmake DESTINATION ${ecto_CONFIG_DIR})
 #set this back for our libs to pick it up as
 set(ecto_LIBRARIES ecto)
+
+configure_file(${ecto_SOURCE_DIR}/cmake/config.hpp.in ${ecto_BINARY_DIR}/include/ecto/config.hpp)

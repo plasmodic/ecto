@@ -25,6 +25,8 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 //
+#include <ecto/except.hpp>
+#include <ecto/test.hpp>
 #include <boost/thread.hpp>
 #include <boost/format.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
@@ -34,7 +36,7 @@ using namespace boost;
 
 namespace ecto {
 
-  bool logging_on = getenv("ECTO_LOG_ON");
+  bool logging_on = getenv("ECTO_LOGGING");
 
   mutex log_mtx;
   mutex process_log_mtx;
