@@ -36,12 +36,10 @@ namespace ecto_test
   //
   // This module will throw if two instances' process() methods are
   // called concurrently; this cannot happen due to it being marked
-  // with ECTO_THREAD_UNSAFEdue to magic (FIXME)
+  // with ECTO_THREAD_UNSAFE due to magic (FIXME)
   //
   struct CantCallMeFromTwoThreads
   {
-    const static bool thread_unsafe = true;
-
     static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
       inputs.declare<double> ("in");
@@ -57,18 +55,18 @@ namespace ecto_test
       if (mtx.try_lock())
         {
           // we got the rock... i.e. we are rocking
-          std::cout << this << " got the lock." << std::endl;
+          ECTO_LOG_DEBUG("%p got the lock.", this);
           // wait a bit so's we can be sure there will be collisions
           dt.expires_from_now(boost::posix_time::milliseconds(10));
           dt.wait();
 
           double value = inputs.get<double> ("in");
-          std::cout << "nonconcurrent node @ " << this << " moving " << value << std::endl;
+          ECTO_LOG_DEBUG("nonconcurrent node @ %p moving %f", this % value);
           // do yer thing
           outputs.get<double> ("out") = value;
 
           // unrock
-          std::cout << this << " done with the lock." << std::endl;
+          ECTO_LOG_DEBUG("%p done with the lock.", this);
           mtx.unlock();
         }
       else
@@ -88,7 +86,7 @@ namespace ecto_test
 }
 
 ECTO_THREAD_UNSAFE(ecto_test::CantCallMeFromTwoThreads);
-ECTO_CELL(ecto_test, ecto_test::CantCallMeFromTwoThreads, "CantCallMeFromTwoThreads", 
+ECTO_CELL(ecto_test, ecto_test::CantCallMeFromTwoThreads, "CantCallMeFromTwoThreads",
           "Throws if process called concurrently from two threads, but you shouldn't."
           " be able to provoke this crash because (FIXME)");
 

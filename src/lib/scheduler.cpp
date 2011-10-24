@@ -46,6 +46,8 @@ namespace ecto {
   using namespace ecto::except;
   using ecto::graph::graph_t;
 
+  strands_t strands;
+
   scheduler::scheduler(plasm_ptr p)
     : plasm_(p)
     , graph(p->graph())

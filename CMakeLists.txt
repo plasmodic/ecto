@@ -54,3 +54,4 @@ if(BUILD_SAMPLES)
 endif()
 
 add_executable(msm msm.cpp)
+add_executable(atomic atomic.cpp)

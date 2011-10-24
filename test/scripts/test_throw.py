@@ -57,9 +57,11 @@ def do_one(nthreads, niter):
         do_one_impl(S, nthreads, niter)
 
 
-for nthreads in range(1, 10):
-    for niter in range(1,100, 5):
-        do_one(nthreads, niter)
+
+for j in range(ecto.test.iterations):
+    for nthreads in range(1, 10):
+        for niter in range(1,100, 5):
+            do_one(nthreads, niter)
 
 
 
