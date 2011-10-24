@@ -115,7 +115,7 @@ namespace ecto {
     {
       graph::graph_t& graph;
       const std::vector<graph::graph_t::vertex_descriptor>& stack;
-      boost::asio::io_service& serv;
+      boost::asio::io_service& workserv;
       unsigned max_iter;
       ecto::atomic<unsigned>& overall_current_iter;
       boost::asio::io_service& topserv;
@@ -124,14 +124,14 @@ namespace ecto {
 
       stack_runner(graph::graph_t& graph_,
                    const std::vector<graph::graph_t::vertex_descriptor>& stack_,
-                   boost::asio::io_service& serv_,
+                   boost::asio::io_service& workserv_,
                    unsigned max_iter_,
                    ecto::atomic<unsigned>& overall_current_iter_,
                    boost::asio::io_service& topserv_,
                    ecto::scheduler* sched_)
         : graph(graph_),
           stack(stack_),
-          serv(serv_),
+          workserv(workserv_),
           max_iter(max_iter_),
           overall_current_iter(overall_current_iter_),
           topserv(topserv_),
@@ -181,14 +181,14 @@ namespace ecto {
               }
           }
           ECTO_LOG_DEBUG("Posting next job index=%u", index);
-          boost::function<void()> f = boost::bind(stack_runner(graph, stack, serv,
+          boost::function<void()> f = boost::bind(stack_runner(graph, stack, workserv,
                                                                max_iter,
                                                                overall_current_iter,
                                                                topserv,
                                                                sched),
                                                   index);
-          on_strand(m, serv, boost::bind(&ecto::except::py::rethrow, f,
-                                         boost::ref(topserv), sched));
+          on_strand(m, workserv, boost::bind(&ecto::except::py::rethrow, f,
+                                             boost::ref(topserv), sched));
           return retval;
         }
       }
@@ -205,7 +205,7 @@ namespace ecto {
         ecto::atomic<unsigned>::scoped_lock l(current_iter);
         l.value = 0;
       }
-      serv.reset();
+      workserv.reset();
 
       boost::signals2::scoped_connection
         interupt_connection(SINGLE_THREADED_SIGINT_SIGNAL.connect(boost::bind(&multithreaded::interrupt_impl,
@@ -223,15 +223,15 @@ namespace ecto {
       }
       for (unsigned j=0; j<nthread; ++j)
         {
-          boost::function<void()> f = boost::bind(stack_runner(graph, stack, serv,
+          boost::function<void()> f = boost::bind(stack_runner(graph, stack, workserv,
                                                                max_iter,
                                                                current_iter,
                                                                topserv,
                                                                this),
                                                   0);
 
-          on_strand(graph[stack[0]], serv, boost::bind(&ecto::except::py::rethrow, f,
-                                                       boost::ref(topserv), this));
+          on_strand(graph[stack[0]], workserv, boost::bind(&ecto::except::py::rethrow, f,
+                                                           boost::ref(topserv), this));
         }
 
       {
@@ -241,7 +241,7 @@ namespace ecto {
           {
             ECTO_LOG_DEBUG("Running service in thread %u", j);
             std::string thisname = str(boost::format("worker_%u") % j);
-            boost::function<void()> runit = boost::bind(&verbose_run, boost::ref(serv), thisname);
+            boost::function<void()> runit = boost::bind(&verbose_run, boost::ref(workserv), thisname);
             threads.create_thread(boost::bind(&ecto::except::py::rethrow, runit,
                                               boost::ref(topserv), this));
             ++oci.value;

@@ -19,17 +19,6 @@ namespace ecto {
     ECTO_LOG_DEBUG("Created strand with id %p", id());
   }
 
-  boost::asio::io_service::strand* 
-  strand::get() const {
-    return impl_->s.get();
-  }
-
-  void
-  strand::set(boost::asio::io_service& serv) 
-  {
-    impl_->s.reset(new boost::asio::io_service::strand(serv));
-  }
-
   std::size_t strand::id() const 
   { 
     return reinterpret_cast<std::size_t>(impl_.get()); 
@@ -45,15 +34,9 @@ namespace ecto {
     return s.id();
   }
 
-  // FIXME encapsulate
-  /*
-  typedef ecto::atomic<boost::unordered_map<ecto::strand,
-                                            boost::shared_ptr<boost::asio::io_service::strand>,
-                                            ecto::strand_hash> > strands_t;
-  strands_t& strands();
-  */
   void on_strand(cell_ptr c, boost::asio::io_service& s, boost::function<void()> h)
   {
+    ECTO_LOG_DEBUG("on_strand %s, serv=%p", c->name() % &s);
     if (c->strand_) {
       ECTO_LOG_DEBUG("Yup %s should have a strand", c->name());
       //strands_t::scoped_lock l(strands());
@@ -65,7 +48,8 @@ namespace ecto {
       if (!thestrand)
         {
           thestrand.reset(new boost::asio::io_service::strand(s));
-          ECTO_LOG_DEBUG("Allocated new strand %p for %s", &thestrand->get_io_service() % c->name());
+          ECTO_LOG_DEBUG("%s: Allocated new asio::strand @ %p assoc with serv @ %p", 
+                         c->name() % thestrand.get() % &thestrand->get_io_service());
         }
       else
         {
@@ -73,7 +57,7 @@ namespace ecto {
           ECTO_ASSERT(&thestrand->get_io_service() == &s,
                       "Hmm, this strand thinks it should be on a different io_service");
         }
-      ECTO_LOG_DEBUG("Cell %s posting via strand %p to %p", c->name() % c->strand_->id() % thestrand.get());
+      ECTO_LOG_DEBUG("Cell %s posting via strand %p", c->name() % thestrand.get());
       thestrand->post(h);
     } else {
       s.post(h);

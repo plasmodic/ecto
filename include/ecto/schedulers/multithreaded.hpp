@@ -62,7 +62,7 @@ namespace ecto {
 
     private:
 
-      boost::asio::io_service serv;
+      boost::asio::io_service workserv;
 
       atomic<unsigned> current_iter;
 

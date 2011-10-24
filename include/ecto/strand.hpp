@@ -43,9 +43,6 @@ namespace ecto
 
     std::size_t id() const;
 
-    boost::asio::io_service::strand* get() const;
-    void set(boost::asio::io_service& s);
-
     friend bool operator==(const strand& lhs, const strand& rhs);
 
   private:
