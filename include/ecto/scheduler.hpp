@@ -49,14 +49,14 @@ namespace ecto {
   typedef ecto::atomic<boost::unordered_map<ecto::strand,
                                             boost::shared_ptr<boost::asio::io_service::strand>,
                                             ecto::strand_hash> > strands_t;
-  extern strands_t strands;
+  strands_t& strands();
 
   template <typename Handler>
   void on_strand(cell_ptr c, boost::asio::io_service& s, Handler h)
   {
     if (c->strand_) {
       ECTO_LOG_DEBUG("Yup %s should have a strand", c->name());
-      strands_t::scoped_lock l(strands);
+      strands_t::scoped_lock l(strands());
 
       const ecto::strand& skey = *(c->strand_);
       ECTO_LOG_DEBUG("skey @ %p", &skey);
@@ -68,9 +68,9 @@ namespace ecto {
         }
       else
         {
+          ECTO_LOG_DEBUG("strand matches, %p ??? %p", &strand_p->get_io_service() % &s);
           ECTO_ASSERT(&strand_p->get_io_service() == &s,
                       "Hmm, this strand thinks it should be on a different io_service");
-          ECTO_LOG_DEBUG("strand matches, %p ??? %p", &strand_p->get_io_service() % &s);
         }
       ECTO_LOG_DEBUG("Cell %s posting via strand %p", c->name() % strand_p.get());
       //      s.post(strand_p->wrap(h));
