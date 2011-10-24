@@ -28,6 +28,8 @@
  */
 #pragma once
 
+#include <ecto/config.hpp>
+
 #if defined(ECTO_LOGGING)
 #include <boost/format.hpp>
 #endif

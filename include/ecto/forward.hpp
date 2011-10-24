@@ -55,6 +55,9 @@ namespace ecto {
   }
 
   template <typename T> struct cell_;
+
+  struct scheduler;
+
   namespace schedulers {
     struct threadpool;
     struct singlethreaded;

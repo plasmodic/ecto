@@ -49,7 +49,8 @@ namespace ecto {
     mutex::scoped_lock lock(log_mtx);
     posix_time::ptime now(posix_time::microsec_clock::local_time());
     const char* file_remainder = file + srcdirlen;
-    std::cout << str(boost::format("%14p %40s:%-4u ") % boost::this_thread::get_id() % file_remainder % line) << msg << std::endl;
+    std::cout << str(boost::format("%14p %40s:%-4u ") % boost::this_thread::get_id() % file_remainder % line)
+              << msg << std::endl;
 
   }
 

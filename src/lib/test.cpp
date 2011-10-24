@@ -29,7 +29,7 @@ namespace ecto {
     template unsigned get_from_env_with_default(const char*, unsigned);
     template int get_from_env_with_default(const char*, int);
 
-    const unsigned max_delay = get_from_env_with_default("ECTO_MAX_DELAY", 10000); // 10 mst
+    const unsigned max_delay = get_from_env_with_default("ECTO_MAX_DELAY", 0); // 10 mst
     const unsigned min_delay = get_from_env_with_default("ECTO_MIN_DELAY", 10); // 10 mst
     const unsigned delay_seed = get_from_env_with_default("ECTO_DELAY_SEED", time(0));
 
