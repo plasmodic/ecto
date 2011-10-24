@@ -10,6 +10,47 @@ namespace bp = boost::python;
 
 using namespace ecto;
 
+TEST(Strands,ValueType)
+{
+  ecto::strand s, t, u, v;
+  ASSERT_FALSE(s == t);
+  ASSERT_FALSE(s == u);
+  ASSERT_FALSE(s == v);
+  ASSERT_FALSE(t == u);
+  ASSERT_FALSE(t == v);
+  ASSERT_FALSE(u == v);
+
+  t = u;
+
+  ASSERT_FALSE(s == t);
+  ASSERT_FALSE(s == u);
+  ASSERT_FALSE(s == v);
+  ASSERT_TRUE(t == u);
+  ASSERT_FALSE(t == v);
+  ASSERT_FALSE(u == v);
+
+  t = v;
+
+  ASSERT_FALSE(s == t);
+  ASSERT_FALSE(s == u);
+  ASSERT_FALSE(s == v);
+  ASSERT_FALSE(t == u);
+  ASSERT_TRUE(t == v);
+  ASSERT_FALSE(u == v);
+
+  ecto::strand copied(t);
+  
+  ASSERT_FALSE(s == t);
+  ASSERT_FALSE(s == u);
+  ASSERT_FALSE(s == v);
+  ASSERT_FALSE(t == u);
+  ASSERT_TRUE(t == v);
+  ASSERT_TRUE(copied == t);
+  ASSERT_TRUE(copied == v);
+  ASSERT_FALSE(u == v);
+
+}
+
 namespace {
 
   boost::mutex mtx;

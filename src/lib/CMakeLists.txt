@@ -29,6 +29,7 @@ add_library(ecto SHARED
   schedulers/singlethreaded.cpp
   schedulers/multithreaded.cpp
   # schedulers/threadpool.cpp
+  strand.cpp
   test.cpp
   ${ecto_HEADERS}
   )

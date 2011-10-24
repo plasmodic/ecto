@@ -229,6 +229,7 @@ namespace ecto {
                                                                topserv,
                                                                this),
                                                   0);
+
           on_strand(graph[stack[0]], serv, boost::bind(&ecto::except::py::rethrow, f,
                                                        boost::ref(topserv), this));
         }

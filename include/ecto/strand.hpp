@@ -29,32 +29,30 @@
 #pragma once
 
 #include <boost/shared_ptr.hpp>
+#include <boost/function.hpp>
+#include <ecto/forward.hpp>
 
 namespace ecto
 {
   struct strand
   {
-    struct whatever { };
+    struct impl;
 
-    strand() : impl_(new whatever) { }
+    strand();
 
-    std::size_t id() const { return reinterpret_cast<std::size_t>(impl_.get()); }
+    std::size_t id() const;
 
-    friend bool operator==(const strand& lhs, const strand& rhs) {
-      return lhs.id() == rhs.id();
-    }
+    friend bool operator==(const strand& lhs, const strand& rhs);
 
   private:
 
-    boost::shared_ptr<void> impl_;
+    boost::shared_ptr<impl> impl_;
   };
 
   struct strand_hash : std::unary_function<strand, std::size_t>
   {
-    std::size_t operator()(const strand& s) const
-    {
-      return s.id();
-    }
+    std::size_t operator()(const strand& s) const;
   };
 
+  void on_strand(cell_ptr c, boost::asio::io_service& s, boost::function<void()> h);
 }

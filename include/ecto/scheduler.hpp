@@ -45,41 +45,6 @@ namespace ecto {
 
   void verbose_run(boost::asio::io_service& s, std::string name);
 
-  // FIXME encapsulate
-  typedef ecto::atomic<boost::unordered_map<ecto::strand,
-                                            boost::shared_ptr<boost::asio::io_service::strand>,
-                                            ecto::strand_hash> > strands_t;
-  strands_t& strands();
-
-  template <typename Handler>
-  void on_strand(cell_ptr c, boost::asio::io_service& s, Handler h)
-  {
-    if (c->strand_) {
-      ECTO_LOG_DEBUG("Yup %s should have a strand", c->name());
-      strands_t::scoped_lock l(strands());
-
-      const ecto::strand& skey = *(c->strand_);
-      ECTO_LOG_DEBUG("skey @ %p", &skey);
-      boost::shared_ptr<boost::asio::io_service::strand>& strand_p = l.value[skey];
-      if (!strand_p)
-        {
-          strand_p.reset(new boost::asio::io_service::strand(s));
-          ECTO_LOG_DEBUG("Allocated new strand %p for %s", strand_p.get() % c->name());
-        }
-      else
-        {
-          ECTO_LOG_DEBUG("strand matches, %p ??? %p", &strand_p->get_io_service() % &s);
-          ECTO_ASSERT(&strand_p->get_io_service() == &s,
-                      "Hmm, this strand thinks it should be on a different io_service");
-        }
-      ECTO_LOG_DEBUG("Cell %s posting via strand %p", c->name() % strand_p.get());
-      //      s.post(strand_p->wrap(h));
-      strand_p->post(h);
-    } else {
-      s.post(h);
-    }
-  }
-
   struct scheduler {
 
     explicit scheduler(plasm_ptr p);

@@ -69,6 +69,10 @@ namespace ecto {
 
 
 namespace boost {
+  namespace asio {
+    class io_service;
+  }
+
   namespace serialization {
     class access;
   }
