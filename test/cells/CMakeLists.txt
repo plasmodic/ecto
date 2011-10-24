@@ -26,6 +26,7 @@ ectomodule(ecto_test
   SleepPyObjectAbuser.cpp
   StartStopCounter.cpp
   Throttle.cpp
+  ThrowAfter.cpp
   TickCheck.cpp
   Uniform01.cpp
 
