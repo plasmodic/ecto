@@ -496,12 +496,14 @@ namespace ecto
 
   private:
 
-    void init_strand(boost::mpl::true_) { } // threadsafe
+    void init_strand(boost::mpl::true_) 
+    { 
+    } // threadsafe
 
     void init_strand(boost::mpl::false_) {
-      // thread-unsafe
       static ecto::strand strand_;
       cell::strand_ = strand_;
+      ECTO_LOG_DEBUG("%s cell has strand @ %p", cell::type() % cell::strand_->id());
     }
   };
 

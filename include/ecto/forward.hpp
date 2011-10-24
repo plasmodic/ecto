@@ -54,6 +54,11 @@ namespace ecto {
     struct graph_t;
   }
 
+  struct strand;
+  typedef boost::shared_ptr<strand> strand_ptr;
+  typedef boost::shared_ptr<const strand> strand_cptr;
+
+
   template <typename T> struct cell_;
 
   struct scheduler;
