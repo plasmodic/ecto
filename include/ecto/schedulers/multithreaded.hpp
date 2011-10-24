@@ -32,6 +32,7 @@
 #include <ecto/tendril.hpp>
 #include <ecto/cell.hpp>
 #include <ecto/strand.hpp>
+#include <ecto/atomic.hpp>
 
 #include <boost/asio.hpp>
 
@@ -62,8 +63,9 @@ namespace ecto {
     private:
 
       boost::asio::io_service serv;
-      boost::mutex current_iter_mtx;
-      unsigned current_iter;
+
+      atomic<unsigned> current_iter;
+
       boost::thread_group threads;
     };
   }
