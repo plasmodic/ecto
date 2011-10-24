@@ -96,7 +96,6 @@ namespace ecto {
     //
     //  impl
     //
-
     namespace
     {
       boost::signals2::signal<void(void)> SINGLE_THREADED_SIGINT_SIGNAL;
@@ -122,13 +121,16 @@ namespace ecto {
       boost::mutex& overall_current_iter_mtx;
       boost::asio::io_service& topserv;
       boost::asio::io_service::work topwork;
+      ecto::scheduler* sched;
+
       stack_runner(graph::graph_t& graph_,
                    const std::vector<graph::graph_t::vertex_descriptor>& stack_,
                    boost::asio::io_service& serv_,
                    unsigned max_iter_,
                    unsigned& overall_current_iter_,
                    boost::mutex& overall_current_iter_mtx_,
-                   boost::asio::io_service& topserv_)
+                   boost::asio::io_service& topserv_,
+                   ecto::scheduler* sched_)
         : graph(graph_),
           stack(stack_),
           serv(serv_),
@@ -136,7 +138,8 @@ namespace ecto {
           overall_current_iter(overall_current_iter_),
           overall_current_iter_mtx(overall_current_iter_mtx_),
           topserv(topserv_),
-          topwork(topserv)
+          topwork(topserv),
+          sched(sched_)
       {
         ECTO_LOG_DEBUG("Created stack_runner @ overall iteration %u, max %u",
                        overall_current_iter % max_iter);
@@ -153,6 +156,7 @@ namespace ecto {
         ECTO_LOG_DEBUG("Runner firing on index %u of %u cell %s", index % stack.size() % m->name());
 
         size_t retval = invoke_process(graph, stack[index]);
+
         if (retval != ecto::OK)
           {
             cellaccess.stop_requested = true;
@@ -183,9 +187,11 @@ namespace ecto {
           boost::function<void()> f = boost::bind(stack_runner(graph, stack, serv,
                                                                max_iter,
                                                                overall_current_iter, overall_current_iter_mtx,
-                                                               topserv),
+                                                               topserv,
+                                                               sched),
                                                   index);
-          serv.post(boost::bind(&ecto::except::py::rethrow, f, boost::ref(topserv)));
+          on_strand(m, serv, boost::bind(&ecto::except::py::rethrow, f,
+                                         boost::ref(topserv), sched));
           return retval;
         }
       }
@@ -203,7 +209,8 @@ namespace ecto {
       serv.reset();
 
       boost::signals2::scoped_connection
-        interupt_connection(SINGLE_THREADED_SIGINT_SIGNAL.connect(boost::bind(&multithreaded::interrupt_impl, this)));
+        interupt_connection(SINGLE_THREADED_SIGINT_SIGNAL.connect(boost::bind(&multithreaded::interrupt_impl,
+                                                                              this)));
 
 #if !defined(_WIN32)
       signal(SIGINT, &sigint_static_thunk);
@@ -220,9 +227,11 @@ namespace ecto {
           boost::function<void()> f = boost::bind(stack_runner(graph, stack, serv,
                                                                max_iter,
                                                                current_iter, current_iter_mtx,
-                                                               topserv),
+                                                               topserv,
+                                                               this),
                                                   0);
-          serv.post(boost::bind(&ecto::except::py::rethrow, f, boost::ref(topserv)));
+          on_strand(graph[stack[0]], serv, boost::bind(&ecto::except::py::rethrow, f,
+                                                       boost::ref(topserv), this));
         }
 
       {
@@ -233,7 +242,8 @@ namespace ecto {
             ECTO_LOG_DEBUG("Running service in thread %u", j);
             std::string thisname = str(boost::format("worker_%u") % j);
             boost::function<void()> runit = boost::bind(&verbose_run, boost::ref(serv), thisname);
-            threads.create_thread(boost::bind(&ecto::except::py::rethrow, runit, boost::ref(topserv)));
+            threads.create_thread(boost::bind(&ecto::except::py::rethrow, runit,
+                                              boost::ref(topserv), this));
             ++current_iter;
           }
       }
@@ -249,9 +259,9 @@ namespace ecto {
 
     void multithreaded::interrupt_impl() {
       stop();
-      threads.join_all();
       runthread.interrupt();
       runthread.join();
+      threads.join_all();
       running(false);
     }
 

@@ -1,7 +1,7 @@
-// 
+//
 // Copyright (c) 2011, Willow Garage, Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
 //     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
 //     * Neither the name of the Willow Garage, Inc. nor the names of its
 //       contributors may be used to endorse or promote products derived from
 //       this software without specific prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -24,7 +24,7 @@
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
-// 
+//
 
 #include <ecto/util.hpp>
 #include <ecto/plasm.hpp>
@@ -65,7 +65,7 @@ namespace ecto {
   using namespace ecto::except;
 
   namespace schedulers {
-    
+
     namespace
     {
       boost::signals2::signal<void(void)> SINGLE_THREADED_SIGINT_SIGNAL;
@@ -89,12 +89,12 @@ namespace ecto {
 
     using boost::scoped_ptr;
 
-    singlethreaded::singlethreaded(plasm_ptr p) 
+    singlethreaded::singlethreaded(plasm_ptr p)
       : scheduler(p)
     { }
 
-    singlethreaded::~singlethreaded() 
-    { 
+    singlethreaded::~singlethreaded()
+    {
       interrupt();
       //      wait_for_running_is(false);
       // wait();
@@ -106,13 +106,13 @@ namespace ecto {
       plasm_->reset_ticks();
       compute_stack();
 
-      boost::signals2::scoped_connection 
+      boost::signals2::scoped_connection
         interupt_connection(SINGLE_THREADED_SIGINT_SIGNAL.connect(boost::bind(&singlethreaded::interrupt, this)));
 
 #if !defined(_WIN32)
       signal(SIGINT, &sigint_static_thunk);
 #endif
-      
+
       profile::graphstats_collector gs(graphstats);
 
       size_t retval = ecto::OK;
@@ -123,7 +123,7 @@ namespace ecto {
             {
               ECTO_LOG_DEBUG("k=%u niter=%u", k % niter);
               //need to check the return val of a process here, non zero means exit...
-              retval = invoke_process(stack[k]);
+              retval = this->invoke_process(stack[k]);
               if (retval) {
                 return retval;
               }
@@ -134,17 +134,17 @@ namespace ecto {
       return retval;
     }
 
-    void singlethreaded::interrupt_impl() 
+    void singlethreaded::interrupt_impl()
     {
       runthread.interrupt();
       runthread.join();
       running(false);
     }
 
-    void singlethreaded::stop_impl() 
+    void singlethreaded::stop_impl()
     {
     }
-    void singlethreaded::wait_impl() 
+    void singlethreaded::wait_impl()
     {
       runthread.join();
       //      wait_for_running_is(false);

@@ -26,62 +26,42 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 #
-import ecto
-import ecto_test
-import sys
 
+import sys, ecto, ecto_test
 
-def test_plasm(Sched, nthreads, niter, n_nodes, incdelay):
+def makeplasm(N):
     plasm = ecto.Plasm()
+    gen = ecto_test.Generate(start=1, step=1)
+    thrower = ecto_test.ThrowAfter(N=N)
+    mult = ecto_test.Multiply()
 
-    gen = ecto_test.Generate("Gen", step=1.0, start=0.0)
-    inc = ecto_test.Increment("Increment 0", delay=incdelay)
+    plasm.connect(gen[:] >> thrower[:],
+                  thrower[:] >> mult[:])
 
-    plasm.connect(gen, "out", inc, "in")
+    return plasm
 
-    for j in range(n_nodes-1): # one has already been added
-        inc_next = ecto_test.Increment("Increment_%u" % (j+1), delay=incdelay)
-        plasm.connect(inc, "out", inc_next, "in")
-        inc = inc_next
+def do_one_impl(Sched, nthreads, niter):
+    print "\n"*5, "*"*80
+    print Sched, nthreads, niter
+    p = makeplasm(niter)
 
-    printer = ecto_test.Printer("Printy")
-    plasm.connect(inc, "out", printer, "in")
-#
-#    o = open('graph.dot', 'w')
-#    print >>o, plasm.viz()
-#    o.close()
-#    print "\n", plasm.viz(), "\n"
-    sched = Sched(plasm)
-    sched.execute(niter, nthreads)
+    s = Sched(p)
+    try:
+        s.execute(nthreads=nthreads, niter=niter+10)
+        assert False, "that should have thrown"
+    except ecto.EctoException, e:
+        print "okay:", e
 
-    print "RESULT:", inc.outputs.out
-    shouldbe = float(n_nodes + niter - 1)
-    print "expected:", shouldbe
-    assert inc.outputs.out == shouldbe
-
-    #sched.execute(nthreads, niter)
-    #result = inc.outputs.out
-    #print "RESULT:", result
-
-    #shouldbe = float(n_nodes + (niter*2 - 1))
-    #assert result == shouldbe
-
-    return
+def do_one(nthreads, niter):
+    for S in ecto.test.schedulers:
+        do_one_impl(S, nthreads, niter)
 
 
-if __name__ == '__main__':
-    test_plasm(ecto.schedulers.Singlethreaded,
-               nthreads=int(sys.argv[1]),
-               niter=int(sys.argv[2]),
-               n_nodes=int(sys.argv[3]),
-               incdelay=int(sys.argv[4])
-               )
-    test_plasm(ecto.schedulers.Multithreaded,
-               nthreads=int(sys.argv[1]),
-               niter=int(sys.argv[2]),
-               n_nodes=int(sys.argv[3]),
-               incdelay=int(sys.argv[4])
-               )
+for nthreads in range(1, 10):
+    for niter in range(1,100, 5):
+        do_one(nthreads, niter)
+
+
 
 
 

@@ -50,13 +50,12 @@ namespace ecto_test
       if (mtx.try_lock())
         {
           // we got the rock... i.e. we are rocking
-          std::cout << this << " got the lock." << std::endl;
+          ECTO_LOG_DEBUG("this=%p we got the lock", this);
           // wait a bit so's we can be sure there will be collisions
           dt.expires_from_now(boost::posix_time::milliseconds(100));
           dt.wait();
 
           double value = inputs.get<double> ("in");
-          std::cout << "nonconcurrent node @ " << this << " moving " << value << std::endl;
           // do yer thing
           outputs.get<double> ("out") = value;
 
@@ -66,9 +65,9 @@ namespace ecto_test
         }
       else
         {
-          std::cout << this << " did NOT get the lock, I'm going to throw about this." << std::endl;
+          ECTO_LOG_DEBUG("this=%p we did NOT got the lock, going to throw", this);
           BOOST_THROW_EXCEPTION(std::runtime_error("AAAAGH NO LOCK HEEEEEELP"));
-          assert(false && "we should NOT be here");
+          ECTO_ASSERT(false, "If you are here your strands weren't specfied or are otherwise broken");
           // throw std::logic_error("Didn't get the lock... this means we were called from two threads.  Baaad.");
         }
       return ecto::OK;
@@ -79,6 +78,6 @@ namespace ecto_test
   boost::mutex DontCallMeFromTwoThreads::mtx;
 
 }
-ECTO_CELL(ecto_test, ecto_test::DontCallMeFromTwoThreads, "DontCallMeFromTwoThreads", 
+ECTO_CELL(ecto_test, ecto_test::DontCallMeFromTwoThreads, "DontCallMeFromTwoThreads",
           "Throws if process called concurrently from two threads.");
 

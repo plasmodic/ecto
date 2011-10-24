@@ -28,6 +28,7 @@
 #include <ecto/log.hpp>
 #include <ecto/rethrow.hpp>
 #include <ecto/python.hpp>
+#include <ecto/scheduler.hpp>
 
 namespace ecto {
   namespace except {
@@ -86,7 +87,6 @@ namespace ecto {
         ECTO_FINISH();
       }
 
-
       //
       //  Get the current exception (as set by a catch and boost::current_exception)
       //  and schedule a rethrow in an asio service
@@ -98,18 +98,22 @@ namespace ecto {
         ECTO_FINISH();
       }
 
-      void rethrow (boost::function<void()> h, boost::asio::io_service& serv)
+      void rethrow (boost::function<void()> h, boost::asio::io_service& serv, ecto::scheduler* sched)
       {
-        boost::asio::io_service::work work(serv);
         ECTO_START();
         try {
+          boost::asio::io_service::work work(serv);
           h();
         } catch (const boost::exception&) {
           // serv.stop();
+          ECTO_LOG_DEBUG("rethrower stopping scheduler at %p", sched);
           rethrow_schedule(serv);
+          if (sched) sched->stop();
           //throw;
         } catch (const std::exception&) {
+          ECTO_LOG_DEBUG("rethrower stopping scheduler at %p", sched);
           rethrow_schedule(serv);
+          if (sched) sched->stop();
         }
         ECTO_FINISH();
       }

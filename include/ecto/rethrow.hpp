@@ -31,16 +31,18 @@
 #include <boost/exception/all.hpp>
 #include <boost/function.hpp>
 #include <boost/asio.hpp>
+#include <ecto/forward.hpp>
 
 namespace ecto {
   namespace except {
 
     namespace py {
 
-      void rethrow_schedule();
-
       void rethrow (boost::function<void()> h);
-      void rethrow (boost::function<void()> h, boost::asio::io_service& serv);
+      //      void rethrow_schedule();
+
+      //      void rethrow (boost::function<void()> h, ecto::scheduler* sched);
+      void rethrow (boost::function<void()> h, boost::asio::io_service& serv, ecto::scheduler* sched = 0);
     }
 
   }

@@ -46,7 +46,7 @@
 namespace ecto {
 
   namespace schedulers {
-    
+
     class ECTO_EXPORT multithreaded : public scheduler
     {
     public:
@@ -61,11 +61,6 @@ namespace ecto {
 
     private:
 
-      /*
-      boost::unordered_map<ecto::strand, 
-                           boost::shared_ptr<boost::asio::io_service::strand>,
-                           ecto::strand_hash> strands;
-      */
       boost::asio::io_service serv;
       boost::mutex current_iter_mtx;
       unsigned current_iter;

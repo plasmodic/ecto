@@ -179,14 +179,18 @@ namespace ecto {
 
   int scheduler::invoke_process(graph_t::vertex_descriptor vd)
   {
-    //    assert(false);
-    //    ECTO_START();
+    ECTO_START();
+
     int rv;
     try {
       rv = ecto::schedulers::invoke_process(graph, vd);
     } catch (const boost::thread_interrupted& e) {
       std::cout << "Interrupted\n";
       return ecto::QUIT;
+    } catch (...) {
+      ECTO_LOG_DEBUG("%s", "STOPPING... somebody done threw something.");
+      stop();
+      throw;
     }
     return rv;
   }
@@ -194,7 +198,7 @@ namespace ecto {
   void scheduler::stop()
   {
     ECTO_START();
-    recursive_mutex::scoped_lock lock(iface_mtx);
+    // recursive_mutex::scoped_lock lock(iface_mtx);
     graph[stack[0]]->stop_requested(true);
     stop_impl();
   }

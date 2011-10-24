@@ -1,7 +1,7 @@
-// 
+//
 // Copyright (c) 2011, Willow Garage, Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
 //     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
 //     * Neither the name of the Willow Garage, Inc. nor the names of its
 //       contributors may be used to endorse or promote products derived from
 //       this software without specific prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -24,20 +24,47 @@
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
-// 
+//
 #pragma once
 
 #include <ecto/log.hpp>
 #include <ecto/forward.hpp>
 #include <ecto/plasm.hpp>
+#include <ecto/strand.hpp>
 #include <ecto/profile.hpp>
+#include <ecto/cell.hpp>
 #include <boost/thread.hpp>
 #include <boost/asio.hpp>
+#include <boost/unordered_map.hpp>
+
 #include <ecto/impl/graph_types.hpp>
 
 namespace ecto {
 
   void verbose_run(boost::asio::io_service& s, std::string name);
+
+  template <typename Handler>
+  void on_strand(cell_ptr c, boost::asio::io_service& s, Handler h)
+  {
+    static boost::mutex strands_mtx;
+    boost::mutex::scoped_lock lock(strands_mtx);
+    static boost::unordered_map<ecto::strand,
+                                boost::shared_ptr<boost::asio::io_service::strand>,
+                                ecto::strand_hash> strands;
+
+    if (c->strand_) {
+      const ecto::strand& skey = *(c->strand_);
+      boost::shared_ptr<boost::asio::io_service::strand>& strand_p = strands[skey];
+      if (!strand_p) {
+        strand_p.reset(new boost::asio::io_service::strand(s));
+      }
+      strand_p->post(h);
+
+    } else {
+      s.post(h);
+    }
+
+  }
 
   struct scheduler {
 
@@ -56,7 +83,7 @@ namespace ecto {
     std::string stats();
 
   protected:
-    
+
     virtual int execute_impl(unsigned niter, unsigned nthread, boost::asio::io_service& topserv) = 0;
     virtual void stop_impl() = 0;
     virtual void interrupt_impl() = 0;
@@ -87,7 +114,7 @@ namespace ecto {
       scheduler& s;
       unsigned niter, nthread;
       exec(const exec&);
-      exec(scheduler& s_, unsigned niter_, unsigned nthread_); 
+      exec(scheduler& s_, unsigned niter_, unsigned nthread_);
       void operator()();
     };
 

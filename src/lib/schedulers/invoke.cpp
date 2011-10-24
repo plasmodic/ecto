@@ -71,17 +71,18 @@ namespace ecto {
           edge_ptr e = graph[*inbegin];
           tendril& from = e->front();
           tendril& to = *(m->inputs[e->to_port()]);
-          // ECTO_LOG_DEBUG("moving inputs to %s: tick=%u, from.tick=%u", m->name() % tick % from.tick);
-          assert(tick == from.tick && "Graph has become somehow desynchronized");
+          ECTO_LOG_DEBUG("Moving inputs to cell %s: tick=%u, from.tick=%u", m->name() % tick % from.tick);
+          ECTO_ASSERT(tick == from.tick, "Internal scheduler error, graph has become somehow desynchronized.");
           to << from;
-          assert(to.tick == tick && "Graph has become somehow desynchronized");
+          // ECTO_ASSERT(to.tick == tick, "Graph has become somehow desynchronized");
           e->pop_front(); //todo Make this use a pool, instead of popping. To get rid of allocations.
           ++inbegin;
         }
       //verify that all inputs have been set.
       m->verify_inputs();
 
-      int rval = m->process();
+      int rval;
+      try { rval = m->process(); } catch (...) { m->stop_requested(true); throw; }
 
       if(rval != ecto::OK) {
         ECTO_LOG_DEBUG("** process %s tick %u *BAILOUT*", m->name() % tick);
@@ -103,6 +104,5 @@ namespace ecto {
       ECTO_LOG_DEBUG("<< process %s tick %u", m->name() % tick);
       return rval;
     }
-
   }
 }

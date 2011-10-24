@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# 
+#
 # Copyright (c) 2011, Willow Garage, Inc.
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
 #     * Redistributions of source code must retain the above copyright
@@ -13,7 +13,7 @@
 #     * Neither the name of the Willow Garage, Inc. nor the names of its
 #       contributors may be used to endorse or promote products derived from
 #       this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -25,7 +25,7 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-# 
+#
 import ecto
 import ecto_test
 
@@ -33,14 +33,14 @@ def test_strands(nlevels, SchedType, execfn, expect):
     s1 = ecto.Strand()
     s2 = s1
     s3 = ecto.Strand()
-    
+
     print "s1.id ==", s1.id
     print "s2.id ==", s2.id
     print "s3.id ==", s3.id
     assert s1.id == s2.id
     assert s3.id != s2.id
     assert s3.id != s1.id
-    
+
     plasm = ecto.Plasm()
 
     gen = ecto_test.Generate(step=1.0, start=1.0)
@@ -54,7 +54,7 @@ def test_strands(nlevels, SchedType, execfn, expect):
 
     printer = ecto_test.Printer()
     plasm.connect(noncurr, "out", printer, "in")
-    
+
     sched = SchedType(plasm)
     print "sched=", sched
     execfn(sched)
@@ -64,7 +64,7 @@ def test_strands(nlevels, SchedType, execfn, expect):
     assert(result == expect)
 
 def test_implicit_strands(nlevels, SchedType, execfn, expect):
-    
+
     plasm = ecto.Plasm()
 
     gen = ecto_test.Generate(step=1.0, start=1.0)
@@ -78,7 +78,7 @@ def test_implicit_strands(nlevels, SchedType, execfn, expect):
 
     printer = ecto_test.Printer()
     plasm.connect(noncurr, "out", printer, "in")
-    
+
     sched = SchedType(plasm)
     print "sched=", sched
     execfn(sched)
@@ -99,8 +99,8 @@ def shouldfail():
 
     printer = ecto_test.Printer()
     plasm.connect(nc2, "out", printer, "in")
-    
-    sched = ecto.schedulers.Threadpool(plasm)
+
+    sched = ecto.schedulers.Multithreaded(plasm)
     try:
         print "about to execute... this should throw"
         sched.execute(nthreads=4, niter=4)

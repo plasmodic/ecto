@@ -1,7 +1,7 @@
-// 
+//
 // Copyright (c) 2011, Willow Garage, Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
 //     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
 //     * Neither the name of the Willow Garage, Inc. nor the names of its
 //       contributors may be used to endorse or promote products derived from
 //       this software without specific prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -24,15 +24,7 @@
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
-// 
-// #define ECTO_THREADPOOL_DEBUG
-
-#if defined(ECTO_SCHEDULERS_DEBUG)
-#define ECTO_LOG_ON
-#define ECTO_USLEEP() // usleep(500000)
-#else
-#define ECTO_USLEEP()
-#endif
+//
 
 #include <ecto/ecto.hpp>
 
@@ -79,7 +71,7 @@ namespace ecto {
       asio::io_service &from, &to;
       asio::io_service::work work;
 
-      propagator(asio::io_service& from_, asio::io_service& to_) 
+      propagator(asio::io_service& from_, asio::io_service& to_)
         : from(from_), to(to_), work(to) { }
 
       void operator()() {
@@ -118,13 +110,13 @@ namespace ecto {
           runner.join();
       }
 
-      void join() 
+      void join()
       {
         if (runner.joinable())
           runner.join();
       }
 
-      void interrupt() 
+      void interrupt()
       {
         ECTO_LOG_DEBUG("interrupting %p", this);
         runner.interrupt();
