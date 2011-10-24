@@ -3,9 +3,6 @@ project(ecto)
 set(${PROJECT_NAME}_GITHUB_URL https://github.com/plasmodic/ecto)
 
 option(ECTO_TRACE_EXCEPTIONS "Trace ecto exceptions to stdout" OFF)
-if (ECTO_TRACE_EXCEPTIONS)
-  add_definitions(-DECTO_TRACE_EXCEPTIONS=1)
-endif()
 
 option(ECTO_STRESS_TEST "Stress testing of ecto" OFF)
 
