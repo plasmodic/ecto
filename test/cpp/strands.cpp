@@ -22,10 +22,10 @@ namespace {
     Crashy() : dt(s) { }
     int process(const ecto::tendrils&, const ecto::tendrils&)
     {
-      ECTO_ASSERT(mtx.try_lock(), "we should own this lock");
+      boost::mutex::scoped_try_lock lock(mtx);
+      ECTO_ASSERT(lock.owns_lock(), "we should own this lock");
       dt.expires_from_now(boost::posix_time::milliseconds(200));
       dt.wait();
-      mtx.unlock();
       return ecto::OK;
     }
   };
@@ -46,8 +46,8 @@ TEST(Strands, Strandy)
   sched.execute(5);
 }
 
-namespace {
-
+namespace
+{
   ecto::atomic<int> n_concurrent(0), max_concurrent(0);
 
   struct NotCrashy
@@ -94,3 +94,19 @@ TEST(Strands, ConcurrencyCount)
   ECTO_LOG_DEBUG("max concurrent runs: %u", max_con.value);
 }
 
+
+
+TEST(Strands, Registry) {
+  ecto::cell_ptr cp = ::ecto::registry::create("ecto_test::CantCallMeFromTwoThreads");
+  ASSERT_TRUE(cp->strand_);
+
+  ecto::cell_ptr cpother = ::ecto::registry::create("ecto_test::CantCallMeFromTwoThreads");
+  ASSERT_TRUE(cpother->strand_);
+
+  ASSERT_TRUE(*(cp->strand_) == *(cpother->strand_));
+
+  ecto::cell_ptr cp2 = ::ecto::registry::create("ecto_test::DontCallMeFromTwoThreads");
+  ASSERT_FALSE(cp2->strand_);
+
+
+}

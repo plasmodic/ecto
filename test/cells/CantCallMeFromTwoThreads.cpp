@@ -51,14 +51,14 @@ namespace ecto_test
       boost::asio::io_service s;
       boost::asio::deadline_timer dt(s);
 
+      boost::mutex::scoped_try_lock lock(mtx);
       // try to rock
-      if (mtx.try_lock())
+      if (!lock.owns_lock())
         {
           // we got the rock... i.e. we are rocking
           ECTO_LOG_DEBUG("%p got the lock.", this);
           // wait a bit so's we can be sure there will be collisions
-          dt.expires_from_now(boost::posix_time::milliseconds(10));
-          dt.wait();
+          usleep(100000);
 
           double value = inputs.get<double> ("in");
           ECTO_LOG_DEBUG("nonconcurrent node @ %p moving %f", this % value);
@@ -67,7 +67,6 @@ namespace ecto_test
 
           // unrock
           ECTO_LOG_DEBUG("%p done with the lock.", this);
-          mtx.unlock();
         }
       else
         {
