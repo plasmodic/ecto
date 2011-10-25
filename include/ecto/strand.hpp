@@ -45,6 +45,8 @@ namespace ecto
 
     friend bool operator==(const strand& lhs, const strand& rhs);
 
+    void reset();
+
   private:
 
     boost::shared_ptr<impl> impl_;

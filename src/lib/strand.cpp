@@ -13,17 +13,22 @@ namespace ecto {
     boost::scoped_ptr<boost::asio::io_service::strand> asio_strand_p;
   };
 
-  strand::strand() : impl_(new impl) 
-  { 
+  strand::strand() : impl_(new impl)
+  {
     ECTO_LOG_DEBUG("Created strand with id %p", id());
   }
 
-  std::size_t strand::id() const 
-  { 
+  std::size_t strand::id() const
+  {
     return reinterpret_cast<std::size_t>(impl_.get());
   }
 
-  bool operator==(const strand& lhs, const strand& rhs) 
+  void strand::reset()
+  {
+    impl_->asio_strand_p.reset();
+  }
+
+  bool operator==(const strand& lhs, const strand& rhs)
   {
     return lhs.id() == rhs.id();
   }
@@ -46,7 +51,7 @@ namespace ecto {
       boost::scoped_ptr<boost::asio::io_service::strand>& thestrand = c->strand_->impl_->asio_strand_p;
       if (!thestrand) {
           thestrand.reset(new boost::asio::io_service::strand(serv));
-          ECTO_LOG_DEBUG("%s: Allocated new asio::strand @ %p assoc with serv @ %p", 
+          ECTO_LOG_DEBUG("%s: Allocated new asio::strand @ %p assoc with serv @ %p",
                          c->name() % thestrand.get() % &thestrand->get_io_service());
         }
       else

@@ -76,6 +76,8 @@ namespace ecto {
     for (unsigned j=0; j<stack.size(); ++j)
       {
         cell::ptr c = graph[stack[j]];
+        if (c->strand_)
+          c->strand_->reset();
         c->start();
       }
   }
