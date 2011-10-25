@@ -221,9 +221,8 @@ namespace ecto
       return "";
     }
 
-    virtual void dispatch_short_doc(const std::string&)
-    {
-    }
+    virtual void dispatch_short_doc(const std::string&) { }
+
   private:
 
     cell(const cell&);
@@ -307,9 +306,6 @@ namespace ecto
     {
       stop = sizeof(test_stop<T> (0)) == sizeof(yes)
     };
-
-
-
   };
 
   /**
@@ -503,7 +499,8 @@ namespace ecto
     void init_strand(boost::mpl::false_) {
       static ecto::strand strand_;
       cell::strand_ = strand_;
-      ECTO_LOG_DEBUG("%s cell has strand @ %p", cell::type() % cell::strand_->id());
+      ECTO_ASSERT(cell::strand_->id() == strand_.id(), "Catastrophe... cells not correctly assignable");
+      ECTO_LOG_DEBUG("%s cell has strand id=%p", cell::type() % cell::strand_->id());
     }
   };
 

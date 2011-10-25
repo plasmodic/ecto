@@ -138,8 +138,8 @@ namespace ecto {
           topwork(topserv),
           sched(sched_)
       {
-        ECTO_LOG_DEBUG("Created stack_runner @ overall iteration %u, max %u",
-                       overall_current_iter.get() % max_iter);
+        ECTO_LOG_DEBUG("Created stack_runner @ overall iteration %u, max %u, workserv=%p",
+                       overall_current_iter.get() % max_iter % &workserv);
       }
 
       typedef int result_type;
@@ -223,6 +223,7 @@ namespace ecto {
       }
       for (unsigned j=0; j<nthread; ++j)
         {
+          ECTO_LOG_DEBUG("Creating initial stack runner %u of %u", j % nthread);
           boost::function<void()> f = boost::bind(stack_runner(graph, stack, workserv,
                                                                max_iter,
                                                                current_iter,
@@ -234,6 +235,7 @@ namespace ecto {
                                                            boost::ref(topserv), this));
         }
 
+      ECTO_LOG_DEBUG("Spawning %u workserv runner threads", nthread);
       {
         ecto::atomic<unsigned>::scoped_lock oci(current_iter);
 

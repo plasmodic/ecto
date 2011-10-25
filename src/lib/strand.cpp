@@ -9,9 +9,8 @@
 
 namespace ecto {
 
-  struct strand::impl 
-  {
-    boost::scoped_ptr<boost::asio::io_service::strand> s;
+  struct strand::impl : boost::noncopyable {
+    boost::scoped_ptr<boost::asio::io_service::strand> asio_strand_p;
   };
 
   strand::strand() : impl_(new impl) 
@@ -21,7 +20,7 @@ namespace ecto {
 
   std::size_t strand::id() const 
   { 
-    return reinterpret_cast<std::size_t>(impl_.get()); 
+    return reinterpret_cast<std::size_t>(impl_.get());
   }
 
   bool operator==(const strand& lhs, const strand& rhs) 
@@ -34,9 +33,9 @@ namespace ecto {
     return s.id();
   }
 
-  void on_strand(cell_ptr c, boost::asio::io_service& s, boost::function<void()> h)
+  void on_strand(cell_ptr c, boost::asio::io_service& serv, boost::function<void()> h)
   {
-    ECTO_LOG_DEBUG("on_strand %s, serv=%p", c->name() % &s);
+    ECTO_LOG_DEBUG("on_strand %s, serv=%p", c->name() % &serv);
     if (c->strand_) {
       ECTO_LOG_DEBUG("Yup %s should have a strand", c->name());
       //strands_t::scoped_lock l(strands());
@@ -44,23 +43,24 @@ namespace ecto {
       //      const ecto::strand& skey = *(c->strand_);
       //      ECTO_LOG_DEBUG("skey @ %p", &skey);
       //      boost::shared_ptr<boost::asio::io_service::strand>& strand_p = l.value[skey];
-      boost::scoped_ptr<boost::asio::io_service::strand>& thestrand = c->strand_->impl_->s;
-      if (!thestrand)
-        {
-          thestrand.reset(new boost::asio::io_service::strand(s));
+      boost::scoped_ptr<boost::asio::io_service::strand>& thestrand = c->strand_->impl_->asio_strand_p;
+      if (!thestrand) {
+          thestrand.reset(new boost::asio::io_service::strand(serv));
           ECTO_LOG_DEBUG("%s: Allocated new asio::strand @ %p assoc with serv @ %p", 
                          c->name() % thestrand.get() % &thestrand->get_io_service());
         }
       else
         {
-          ECTO_LOG_DEBUG("strand matches, %p ??? %p", &thestrand->get_io_service() % &s);
-          ECTO_ASSERT(&thestrand->get_io_service() == &s,
+          boost::asio::io_service& serv_inside_strand = thestrand->get_io_service();
+          ECTO_LOG_DEBUG("strand matches, %p ??? %p", &serv_inside_strand % &serv);
+          ECTO_ASSERT(&serv_inside_strand == &serv,
                       "Hmm, this strand thinks it should be on a different io_service");
         }
       ECTO_LOG_DEBUG("Cell %s posting via strand %p", c->name() % thestrand.get());
       thestrand->post(h);
     } else {
-      s.post(h);
+      ECTO_LOG_DEBUG("%s", "Normal (strandless) post to serv");
+      serv.post(h);
     }
   }
 }
