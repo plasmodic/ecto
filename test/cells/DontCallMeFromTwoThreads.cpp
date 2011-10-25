@@ -66,7 +66,7 @@ namespace ecto_test
       else
         {
           ECTO_LOG_DEBUG("this=%p we did NOT got the lock, going to throw", this);
-          BOOST_THROW_EXCEPTION(std::runtime_error("AAAAGH NO LOCK HEEEEEELP"));
+          //          BOOST_THROW_EXCEPTION(std::runtime_error("AAAAGH NO LOCK HEEEEEELP"));
           ECTO_ASSERT(false, "If you are here your strands weren't specfied or are otherwise broken");
           // throw std::logic_error("Didn't get the lock... this means we were called from two threads.  Baaad.");
         }

@@ -12,6 +12,8 @@ else()
   option(ECTO_LOGGING "Ecto logging" OFF)
 endif()
 
+option(ECTO_WITH_INSTRUMENTATION "Instrument schedulers (for debugging)" OFF)
+
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_MODULE_PATH ${ecto_SOURCE_DIR}/cmake)

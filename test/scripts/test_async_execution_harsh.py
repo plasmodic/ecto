@@ -64,7 +64,7 @@ def nada(s):
     pass
 
 def bang(Sched):
-    for i in range(10):
+    for i in range(ecto.test.iterations):
         print "executing [%d] %s " %(i, Sched)
         invoke(Sched, nada)
         invoke(Sched, stoponly)

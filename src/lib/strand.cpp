@@ -25,6 +25,7 @@ namespace ecto {
 
   void strand::reset()
   {
+    ECTO_LOG_DEBUG("Resetting strand %p", impl_->asio_strand_p.get());
     impl_->asio_strand_p.reset();
   }
 

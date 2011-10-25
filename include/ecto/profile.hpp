@@ -51,16 +51,16 @@ namespace ecto {
       std::string as_string(graph::graph_t& g);
     };
 
-    struct graphstats_collector 
+    struct graphstats_collector
     {
-      graph_stats_type& gs_; 
-      graphstats_collector(graph_stats_type& gs) 
-        : gs_(gs) 
-      { 
+      graph_stats_type& gs_;
+      graphstats_collector(graph_stats_type& gs)
+        : gs_(gs)
+      {
         gs_.start();
       }
 
-      ~graphstats_collector() 
+      ~graphstats_collector()
       {
         gs_.stop();
       }
@@ -71,6 +71,8 @@ namespace ecto {
       stats_type();
       unsigned ncalls;
       int64_t total_ticks;
+      bool on;
+
       double elapsed_time();
       double frequency();
     };
@@ -81,17 +83,19 @@ namespace ecto {
       stats_type& stats;
       const std::string& instancename;
 
-      stats_collector(const std::string& n, stats_type& stats) 
-        : start(read_tsc()), stats(stats), instancename(n) 
-      { 
+      stats_collector(const std::string& n, stats_type& stats)
+        : start(read_tsc()), stats(stats), instancename(n)
+      {
         ++stats.ncalls;
-        ECTO_LOG_PROCESS(instancename, start, stats.ncalls, 1);
+        stats.on = true;
+        //ECTO_LOG_PROCESS(instancename, start, stats.ncalls, 1);
       }
 
       ~stats_collector() {
         int64_t tsc = read_tsc();
-        ECTO_LOG_PROCESS(instancename, tsc, stats.ncalls, 0);
+        //ECTO_LOG_PROCESS(instancename, tsc, stats.ncalls, 0);
         stats.total_ticks += (tsc - start);
+        stats.on = false;
       }
     };
 

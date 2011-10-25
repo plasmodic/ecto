@@ -25,6 +25,7 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 //
+#include <ecto/log.hpp>
 #include <ecto/ecto.hpp>
 #include <ecto/cell.hpp>
 
@@ -246,6 +247,8 @@ namespace ecto
       }
     m->declare_params();
 
+    ECTO_LOG_DEBUG("inspect_impl %s", m->name());
+
     bp::list l = kwargs.items();
     for (int j = 0; j < bp::len(l); ++j)
       {
@@ -256,6 +259,7 @@ namespace ecto
           {
             ecto::strand s = bp::extract<ecto::strand>(value);
             m->strand_ = s;
+            ECTO_LOG_DEBUG("Found a strand for cell %s, id=%p", m->name() % s.id());
           }
         else
           {

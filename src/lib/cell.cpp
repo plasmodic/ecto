@@ -124,10 +124,17 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
       return "  Hint   : '" + key + "' does not exist in module.";
   }
 
+  void sample_siggy(cell& c, unsigned firing)
+  {
+    ECTO_LOG_DEBUG("sample_siggy(%s, %u)", c.name() % firing);
+  }
+
   cell::cell()
   : configured(false)
   , tick_(0)
-  { }
+  {
+    //    bsig_process.connect(&sample_siggy);
+  }
 
   cell::~cell() { }
 
@@ -222,7 +229,10 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
       try
       {
         profile::stats_collector coll(name(), stats);
-        return dispatch_process(inputs, outputs);
+        bsig_process(*this, true);
+        ReturnCode r = dispatch_process(inputs, outputs);
+        bsig_process(*this, false);
+        return r;
       } catch (const boost::thread_interrupted&) {
         ECTO_TRACE_EXCEPTION("const boost::thread_interrupted&, returning QUIT instead of rethrow");
         return ecto::QUIT;
@@ -323,10 +333,12 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
   }
 
   void cell::reset_strand() {
+    ECTO_LOG_DEBUG("reset_strand (%p)", 0);
     strand_.reset();
   }
 
   void cell::set_strand(ecto::strand s) {
+    ECTO_LOG_DEBUG("set_strand id=%p", s.id());
     strand_ = s;
   }
 

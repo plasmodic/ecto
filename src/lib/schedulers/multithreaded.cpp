@@ -82,6 +82,7 @@ namespace ecto {
 
     multithreaded::multithreaded(plasm_ptr p)
       : scheduler(p),
+        plasm(p),
         current_iter(0)
     { }
 
@@ -149,8 +150,12 @@ namespace ecto {
         ECTO_ASSERT(index < stack.size(), "index out of bounds");
         cell::ptr m = graph[stack[index]];
         access cellaccess(*m);
+        ECTO_LOG_DEBUG("Runner firing on cell %u/%u (%s) iter %u",
+                       index % stack.size() % m->name() % overall_current_iter.get());
         boost::mutex::scoped_lock lock(cellaccess.mtx);
-        ECTO_LOG_DEBUG("Runner firing on index %u of %u cell %s", index % stack.size() % m->name());
+        ECTO_LOG_DEBUG("Runner LOCKED on cell %u/%u (%s) iter %u",
+                       index % stack.size() % m->name() % overall_current_iter.get());
+
 
         size_t retval = invoke_process(graph, stack[index]);
 

@@ -33,7 +33,7 @@ import sys
 def build_addergraph(nlevels):
 
     plasm = ecto.Plasm()
-    plasm.movie_out("frames/ecto%04u.viz");
+    plasm.movie_out("ecto_%04u.viz");
 
     prevlevel = [ecto_test.Add("Adder 0_%u" % x) for x in range(2**(nlevels-1))]
     for adder in prevlevel:
@@ -90,7 +90,7 @@ def test_plasm(nlevels, nthreads, niter):
     for sched in ecto.test.schedulers:
         test_plasm_impl(sched, nlevels, nthreads, niter)
 
-test_plasm_impl(ecto.schedulers.Singlethreaded, 3, 3, 3)
+test_plasm_impl(ecto.schedulers.Singlethreaded, 3, 8, 16)
 
 if __name__ == '__main__':
     pass

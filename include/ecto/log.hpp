@@ -39,9 +39,8 @@
 
 namespace ecto {
   ECTO_EXPORT void log(const char*, unsigned line, const std::string& msg);
-  ECTO_EXPORT void log_process(const std::string& name, uint64_t time, unsigned ncalls, bool startstop);
   ECTO_EXPORT void assert_failed(const char* file, unsigned line, const char* cond, const char* msg);
-  extern bool logging_on;
+  bool logging_on();
 }
 
 #ifdef NDEBUG
@@ -58,7 +57,7 @@ namespace ecto {
 #define ECTO_LOG_DEBUG(fmt, args)                                       \
   do {                                                                  \
     ECTO_RANDOM_DELAY();                                                \
-    if (__builtin_expect((ecto::logging_on), 0))                        \
+    if (__builtin_expect((ecto::logging_on()), 0))                      \
       ::ecto::log(__FILE__, __LINE__, str(boost::format(fmt) % args));  \
   } while (false)
 #define ECTO_START()  ECTO_LOG_DEBUG(">>> %s", __PRETTY_FUNCTION__);
@@ -67,12 +66,6 @@ namespace ecto {
 #define ECTO_LOG_DEBUG(fmg, args) do { ECTO_RANDOM_DELAY(); } while (false)
 #define ECTO_START() do { ECTO_RANDOM_DELAY(); } while(false)
 #define ECTO_FINISH() do { ECTO_RANDOM_DELAY(); } while(false)
-#endif
-
-#if defined(ECTO_LOG_STATS)
-#define ECTO_LOG_PROCESS(instancename, time, ncalls, onoff) ::ecto::log_process(instancename, time, ncalls, onoff)
-#else
-#define ECTO_LOG_PROCESS(instancename, time, ncalls, onoff)
 #endif
 
 #ifdef ECTO_TRACE_EXCEPTIONS

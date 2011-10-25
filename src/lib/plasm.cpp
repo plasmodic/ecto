@@ -1,7 +1,7 @@
-// 
+//
 // Copyright (c) 2011, Willow Garage, Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
 //     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
 //     * Neither the name of the Willow Garage, Inc. nor the names of its
 //       contributors may be used to endorse or promote products derived from
 //       this software without specific prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -24,7 +24,7 @@
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
-// 
+//
 #include <ecto/all.hpp>
 #include "plasm/impl.hpp"
 
@@ -48,12 +48,14 @@
 #include <ecto/serialization/registry.hpp>
 #include <ecto/serialization/cell.hpp>
 #include <boost/graph/graphviz.hpp>
+#include <boost/preprocessor/stringize.hpp>
+
 namespace ecto
 {
   using namespace graph;
-  #define STRINGY_DINGY(A) #A
+
   //see http://www.graphviz.org/content/node-shapes for reference.
-  const char* table_str = STRINGY_DINGY(
+  const char* table_str = BOOST_PP_STRINGIZE(
       <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
       %s
       <TR>
@@ -65,27 +67,51 @@ namespace ecto
       </TABLE>
   );
 
-  const char* input_str = STRINGY_DINGY(
-      <TD PORT="i_%s" BGCOLOR="springgreen">%s<BR/><FONT POINT-SIZE="8">%s</FONT></TD>
-  );
-
-  const char* cell_str = 
-    STRINGY_DINGY(<TD ROWSPAN="%d" COLSPAN="%d" BGCOLOR="khaki">%s<BR/><FONT POINT-SIZE="8">%s</FONT></TD>
-  );
-
-  const char* param_str_1st = STRINGY_DINGY(
+  const char* param_str_1st = BOOST_PP_STRINGIZE(
       <TD PORT="p_%s" BGCOLOR="lightblue">%s<BR/><FONT POINT-SIZE="8">%s</FONT></TD>
   );
 
-  const char* param_str_N = STRINGY_DINGY(
+  const char* param_str_N = BOOST_PP_STRINGIZE(
       <TR>
       <TD PORT="p_%s" BGCOLOR="lightblue">%s<BR/><FONT POINT-SIZE="8">%s</FONT></TD>
       </TR>
   );
 
-  const char* output_str = STRINGY_DINGY(
+  const char* output_str = BOOST_PP_STRINGIZE(
       <TD PORT="o_%s" BGCOLOR="indianred1">%s<BR/><FONT POINT-SIZE="8">%s</FONT></TD>
   );
+
+  namespace {
+    // see
+    // http://en.wikipedia.org/wiki/HSL_and_HSV#Converting_to_RGB
+    // for points on a dark background you want somewhat lightened
+    // colors generally... back off the saturation (s)
+    static void hsv2rgb(float h, float s, float v, float& r, float& g, float& b)
+    {
+      float c = v * s;
+      float hprime = h/60.0;
+      float x = c * (1.0 - fabs(fmodf(hprime, 2.0f) - 1));
+
+      r = g = b = 0;
+
+      if (hprime < 1) {
+        r = c; g = x;
+      } else if (hprime < 2) {
+        r = x; g = c;
+      } else if (hprime < 3) {
+        g = c; b = x;
+      } else if (hprime < 4) {
+        g = x; b = c;
+      } else if (hprime < 5) {
+        r = x; b = c;
+      } else if (hprime < 6) {
+        r = c; b = x;
+      }
+
+      float m = v - c;
+      r += m; g+=m; b+=m;
+    }
+  }
 
   struct vertex_writer
   {
@@ -122,6 +148,8 @@ namespace ecto
       std::string htmlescaped_name = htmlescape(c->name());
 
       std::string inputs;
+      const static char* input_str = BOOST_PP_STRINGIZE(<TD PORT="i_%s" BGCOLOR="springgreen">%s<BR/>
+                                                        <FONT POINT-SIZE="8">%s</FONT></TD>);
       BOOST_FOREACH(const tendrils::value_type& x, c->inputs)
           {
             std::string key = x.first;
@@ -143,12 +171,26 @@ namespace ecto
       if (!outputs.empty())
         outputs += "</TR>";
 
+      float r, g, b; // s, v == 1
+      float h = (c->stats.ncalls % 10) * 36.0;
+
+      hsv2rgb(h, 1, 1, r, g, b);
+
+      std::string color = str(boost::format("#%|02X|%|02X|%|02X|") % int(r*255) % int(g*255) % int(b*255));
+
+      const static char* cell_str = BOOST_PP_STRINGIZE(<TD ROWSPAN="%d" COLSPAN="%d" BGCOLOR="%s">%s<BR/>
+                                                       <FONT POINT-SIZE="8">%s</FONT><BR/>
+                                                       %s iter %u
+                                                       </TD>);
       std::string cellrow = boost::str(
-          boost::format(cell_str) 
-          % std::max(1,n_params) 
-          % int(std::max(1,std::max(n_inputs, n_outputs))) 
+          boost::format(cell_str)
+          % std::max(1,n_params)
+          % int(std::max(1,std::max(n_inputs, n_outputs)))
+          % color
           % htmlescaped_name
-          % htmlescape(c->type()));
+          % htmlescape(c->type())
+          % (c->stats.on ? "ON" : "off")
+          % c->stats.ncalls);
       std::string p1, pN;
       BOOST_FOREACH(const tendrils::value_type& x, c->parameters)
           {
@@ -200,12 +242,18 @@ namespace ecto
   void
   plasm::insert(cell_ptr mod)
   {
+    if (movie_out.size() && mod->bsig_process.empty())
+      mod->bsig_process.connect(boost::bind(&plasm::frame, this, _1, _2));
     impl_->insert_module(mod);
   }
 
   void
   plasm::connect(cell_ptr from, const std::string& output, cell_ptr to, const std::string& input)
   {
+    if (movie_out.size() && from->bsig_process.empty())
+      from->bsig_process.connect(boost::bind(&plasm::frame, this, _1, _2));
+    if (movie_out.size() && to->bsig_process.empty())
+      to->bsig_process.connect(boost::bind(&plasm::frame, this, _1, _2));
     impl_->connect(from, output, to, input);
   }
 
@@ -242,7 +290,7 @@ namespace ecto
     return impl_->graph;
   }
 
-  std::size_t 
+  std::size_t
   plasm::size() const
   {
     return num_vertices(impl_->graph);
@@ -294,12 +342,30 @@ namespace ecto
     }
   }
 
+  void plasm::set_movie_out(const std::string& s)
+  {
+    movie_out = s;
+    movie_frame = 0;
+  }
+
   void plasm::configure_all()
   {
     BOOST_FOREACH(impl::ModuleVertexMap::value_type& x, impl_->mv_map)
     {
       x.first->configure();
     }
+  }
+
+  void
+  plasm::frame(cell& c, bool onoff)
+  {
+    boost::mutex::scoped_lock lock(movie_mtx);
+    ECTO_LOG_DEBUG("plasm::frame %s@%p %u %u", c.name() % &c % onoff % c.stats.ncalls);
+    std::string ofname = str(boost::format(movie_out) % movie_frame);
+    std::ofstream ofs(ofname.c_str());
+    viz(ofs);
+    ofs.close();
+    ++movie_frame;
   }
 
   void

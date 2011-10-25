@@ -111,7 +111,7 @@ def synctwice(s, ss):
     print "NPROCESS=", ss.outputs.nprocess
     assert ss.outputs.nprocess > 15
 
-for j in range(10):
+for j in range(ecto.test.iterations):
     do_test(synctwice)
 
 

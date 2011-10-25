@@ -88,4 +88,3 @@ ECTO_THREAD_UNSAFE(ecto_test::CantCallMeFromTwoThreads);
 ECTO_CELL(ecto_test, ecto_test::CantCallMeFromTwoThreads, "CantCallMeFromTwoThreads",
           "Throws if process called concurrently from two threads, but you shouldn't."
           " be able to provoke this crash because (FIXME)");
-

@@ -25,43 +25,52 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 //
-#include <ecto/except.hpp>
-#include <ecto/test.hpp>
+#include <ecto/all.hpp>
 #include <boost/thread.hpp>
 #include <boost/format.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/unordered_map.hpp>
 #include <fstream>
-
-using namespace boost;
 
 namespace ecto {
 
-  bool logging_on() {
-    static bool val = getenv("ECTO_LOGGING");
-    return val;
-  }
+  struct stats {
 
-  mutex log_mtx;
-  mutex process_log_mtx;
+  };
 
-  const static std::string srcdir(SOURCE_DIR);
-  const static unsigned srcdirlen(srcdir.size()+1);
+  struct instrumentation::impl {
+    boost::unordered_map<cell_ptr, stats> m;
+  };
 
-  void log(const char* file, unsigned line, const std::string& msg)
+  instrumentation::instrumentation() : impl_(new impl) { }
+
+  void instrumentation::reset()
   {
-    mutex::scoped_lock lock(log_mtx);
-    posix_time::ptime now(posix_time::microsec_clock::local_time());
-    const char* file_remainder = file + srcdirlen;
-    std::cout << str(boost::format("%14p %40s:%-4u ") % boost::this_thread::get_id() % file_remainder % line)
-              << msg << std::endl;
-
-  }
-
-  void assert_failed(const char* file, unsigned line, const char* cond, const char* msg)
-  {
-    log(file, line, str(boost::format("ASSERT FAILED: %s (%s)") % cond % msg));
-    abort();
+    impl_.reset(new impl);
   }
 
 }
+
+
+
+#if defined(ECTO_LOG_STATS)
+  std::ofstream processlog("process.log");
+
+  struct context {
+    cell_ptr cell;
+    bool
+
+  };
+
+  void log_process_start()
+  {
+
+  }
+
+  void log_process(const std::string& instancename, uint64_t time, unsigned ncalls, bool onoff)
+  {
+    mutex::scoped_lock lock(process_log_mtx);
+    processlog << "process " << instancename << " " << time << " " << ncalls << " " << onoff << "\n";
+  }
+#endif
 

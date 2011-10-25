@@ -27,48 +27,25 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #pragma once
-#include <ecto/plasm.hpp>
-#include <ecto/scheduler.hpp>
-#include <ecto/tendril.hpp>
-#include <ecto/cell.hpp>
-#include <ecto/strand.hpp>
-#include <ecto/atomic.hpp>
-
-#include <boost/asio.hpp>
-
-#include <string>
-#include <map>
-#include <set>
-#include <utility>
-#include <deque>
-
-
+#include <ecto/forward.hpp>
 
 namespace ecto {
 
-  namespace schedulers {
+  class instrumentation
+  {
 
-    class ECTO_EXPORT multithreaded : public scheduler
-    {
-    public:
-      explicit multithreaded(plasm_ptr);
-      ~multithreaded();
+  public:
 
-      int execute_impl(unsigned niter, unsigned nthread, boost::asio::io_service& topserv);
+    instrumentation();
 
-      void stop_impl();
-      void interrupt_impl();
-      void wait_impl();
+    void reset();
 
-    private:
+  private:
 
-      plasm_ptr plasm;
+    struct impl;
 
-      boost::asio::io_service workserv;
+    boost::scoped_ptr<impl> impl_;
 
-      atomic<unsigned> current_iter;
+  };
 
-      boost::thread_group threads;
-    };
-  }
 }

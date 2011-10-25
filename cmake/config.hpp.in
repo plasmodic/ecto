@@ -32,3 +32,4 @@
 #cmakedefine ECTO_STRESS_TEST
 #cmakedefine ECTO_LOGGING
 #cmakedefine ECTO_TRACE_EXCEPTIONS
+#cmakedefine ECTO_WITH_INSTRUMENTATION

@@ -33,6 +33,7 @@
 #include <boost/noncopyable.hpp>
 #include <boost/optional.hpp>
 
+#include <ecto/forward.hpp>
 #include <ecto/tendril.hpp>
 #include <ecto/tendrils.hpp>
 #include <ecto/strand.hpp>
@@ -196,6 +197,8 @@ namespace ecto
 
     bool stop_requested() const { return stop_requested_; }
     void stop_requested(bool b) { stop_requested_ = b; }
+
+    boost::signals2::signal<void(cell&, bool)> bsig_process;
 
   protected:
 
@@ -492,8 +495,8 @@ namespace ecto
 
   private:
 
-    void init_strand(boost::mpl::true_) 
-    { 
+    void init_strand(boost::mpl::true_)
+    {
     } // threadsafe
 
     void init_strand(boost::mpl::false_) {

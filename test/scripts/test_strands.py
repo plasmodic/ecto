@@ -43,16 +43,16 @@ def test_strands(nlevels, SchedType, execfn, expect):
 
     plasm = ecto.Plasm()
 
-    gen = ecto_test.Generate(step=1.0, start=1.0)
-    noncurr = ecto_test.DontCallMeFromTwoThreads(strand=s1)
+    gen = ecto_test.Generate("GENERATE", step=1.0, start=1.0)
+    noncurr = ecto_test.DontCallMeFromTwoThreads("ALPHA", strand=s1)
     plasm.connect(gen, "out", noncurr, "in")
 
     for k in range(nlevels):
-        next = ecto_test.DontCallMeFromTwoThreads(strand=s1)
+        next = ecto_test.DontCallMeFromTwoThreads("BETA_%d" % k, strand=s1)
         plasm.connect(noncurr, "out", next, "in")
         noncurr = next
 
-    printer = ecto_test.Printer()
+    printer = ecto_test.Printer("PRINTER")
     plasm.connect(noncurr, "out", printer, "in")
 
     sched = SchedType(plasm)
@@ -62,6 +62,9 @@ def test_strands(nlevels, SchedType, execfn, expect):
     result = noncurr.outputs.out
     print "result=", result
     assert(result == expect)
+#    execfn(sched)
+#    result = noncurr.outputs.out
+#    print "result=", result
 
 def test_implicit_strands(nlevels, SchedType, execfn, expect):
 
@@ -111,11 +114,11 @@ def shouldfail():
 #shouldfail()
 #print "shouldfail passed"
 
-test_implicit_strands(4, ecto.schedulers.Multithreaded, lambda s: s.execute(nthreads=4, niter=4), expect=4.0)
+#test_implicit_strands(4, ecto.schedulers.Multithreaded, lambda s: s.execute(nthreads=4, niter=4), expect=4.0)
 #test_implicit_strands(4, ecto.schedulers.Singlethreaded, lambda s: s.execute(niter=4), expect=4.0)
 
 #test_strands(4, ecto.schedulers.Singlethreaded, lambda s: s.execute(niter=4), expect=4.0)
-#test_strands(4, ecto.schedulers.Multithreaded, lambda s: s.execute(nthreads=4, niter=4), expect=4.0)
+test_strands(4, ecto.schedulers.Multithreaded, lambda s: s.execute(nthreads=4, niter=4), expect=4.0)
 
 
 
