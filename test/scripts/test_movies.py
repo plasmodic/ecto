@@ -90,7 +90,7 @@ def test_plasm(nlevels, nthreads, niter):
     for sched in ecto.test.schedulers:
         test_plasm_impl(sched, nlevels, nthreads, niter)
 
-test_plasm_impl(ecto.schedulers.Singlethreaded, 3, 8, 16)
+test_plasm_impl(ecto.schedulers.Multithreaded, 3, 8, 16)
 
 if __name__ == '__main__':
     pass

@@ -174,13 +174,13 @@ namespace ecto
       float r, g, b; // s, v == 1
       float h = (c->stats.ncalls % 10) * 36.0;
 
-      hsv2rgb(h, 1, 1, r, g, b);
+      hsv2rgb(h, c->stats.on ? 1 : 0.5, 1, r, g, b);
 
       std::string color = str(boost::format("#%|02X|%|02X|%|02X|") % int(r*255) % int(g*255) % int(b*255));
 
       const static char* cell_str = BOOST_PP_STRINGIZE(<TD ROWSPAN="%d" COLSPAN="%d" BGCOLOR="%s">%s<BR/>
                                                        <FONT POINT-SIZE="8">%s</FONT><BR/>
-                                                       %s iter %u
+                                                       tick: %3u
                                                        </TD>);
       std::string cellrow = boost::str(
           boost::format(cell_str)
@@ -189,7 +189,6 @@ namespace ecto
           % color
           % htmlescaped_name
           % htmlescape(c->type())
-          % (c->stats.on ? "ON" : "off")
           % c->stats.ncalls);
       std::string p1, pN;
       BOOST_FOREACH(const tendrils::value_type& x, c->parameters)
@@ -219,7 +218,8 @@ namespace ecto
     void
     operator()(std::ostream& out, graph_t::edge_descriptor ed)
     {
-      out << "[headport=\"i_" << (*g)[ed]->to_port() << "\" tailport=\"o_" << (*g)[ed]->from_port() << "\"]";
+      boost::format fmt("[headport=\"i_%u\" tailport=\"o_%u\" label=\"%u\" penwidth=\"%f\"]\n");
+      out << fmt % (*g)[ed]->to_port() % (*g)[ed]->from_port() % (*g)[ed]->size() % ((*g)[ed]->size() + 0.5);
     }
   };
 
@@ -360,7 +360,7 @@ namespace ecto
   plasm::frame(cell& c, bool onoff)
   {
     boost::mutex::scoped_lock lock(movie_mtx);
-    ECTO_LOG_DEBUG("plasm::frame %s@%p %u %u", c.name() % &c % onoff % c.stats.ncalls);
+    ECTO_LOG_DEBUG("plasm::frame %u %s@%p %u %u", movie_frame % c.name() % &c % onoff % c.stats.ncalls);
     std::string ofname = str(boost::format(movie_out) % movie_frame);
     std::ofstream ofs(ofname.c_str());
     viz(ofs);

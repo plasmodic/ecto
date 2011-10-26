@@ -228,9 +228,12 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
     {
       try
       {
-        profile::stats_collector coll(name(), stats);
-        bsig_process(*this, true);
-        ReturnCode r = dispatch_process(inputs, outputs);
+        ReturnCode r;
+        {
+          profile::stats_collector coll(name(), stats);
+          bsig_process(*this, true);
+          r = dispatch_process(inputs, outputs);
+        }
         bsig_process(*this, false);
         return r;
       } catch (const boost::thread_interrupted&) {
