@@ -26,3 +26,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 # 
 
+add_subdirectory(cells)
+add_subdirectory(compile)
+add_subdirectory(cpp)
+add_subdirectory(scripts)

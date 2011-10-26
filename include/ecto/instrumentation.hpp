@@ -28,6 +28,7 @@
  */
 #pragma once
 #include <ecto/forward.hpp>
+#include <boost/scoped_ptr.hpp>
 
 namespace ecto {
 
