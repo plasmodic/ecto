@@ -116,18 +116,15 @@ namespace ecto {
       multithreaded& ctx;
       unsigned max_iter;
       ecto::atomic<unsigned>& overall_current_iter;
-      boost::asio::io_service& topserv;
       boost::asio::io_service::work topwork;
 
       stack_runner(multithreaded& ctx_,
                    unsigned max_iter_,
-                   ecto::atomic<unsigned>& overall_current_iter_,
-                   boost::asio::io_service& topserv_)
+                   ecto::atomic<unsigned>& overall_current_iter_)
         : ctx(ctx_),
           max_iter(max_iter_),
           overall_current_iter(overall_current_iter_),
-          topserv(topserv_),
-          topwork(topserv)
+          topwork(ctx.top_serv)
       {
         ECTO_LOG_DEBUG("Created stack_runner @ overall iteration %u, max %u, workserv=%p",
                        overall_current_iter.get() % max_iter % &ctx.workserv);
@@ -180,17 +177,16 @@ namespace ecto {
           ECTO_LOG_DEBUG("Posting next job index=%u", index);
           boost::function<void()> f = boost::bind(stack_runner(ctx,
                                                                max_iter,
-                                                               overall_current_iter,
-                                                               topserv),
+                                                               overall_current_iter),
                                                   index);
           on_strand(m, ctx.workserv, boost::bind(&ecto::except::py::rethrow, f,
-                                                 boost::ref(topserv), &ctx));
+                                                 boost::ref(ctx.top_serv), &ctx));
           return retval;
         }
       }
     };
 
-    int multithreaded::execute_impl(unsigned max_iter, unsigned nthread, boost::asio::io_service& topserv)
+    int multithreaded::execute_impl(unsigned max_iter, unsigned nthread, boost::asio::io_service&)
     {
       ECTO_LOG_DEBUG("execute_impl max_iter=%u nthread=%u",
                      max_iter % nthread);
@@ -221,12 +217,11 @@ namespace ecto {
           ECTO_LOG_DEBUG("Creating initial stack runner %u of %u", j % nthread);
           boost::function<void()> f = boost::bind(stack_runner(*this,
                                                                max_iter,
-                                                               current_iter,
-                                                               topserv),
+                                                               current_iter),
                                                   0);
 
           on_strand(graph[stack[0]], workserv, boost::bind(&ecto::except::py::rethrow, f,
-                                                           boost::ref(topserv), this));
+                                                           boost::ref(top_serv), this));
         }
 
       ECTO_LOG_DEBUG("Spawning %u workserv runner threads", nthread);
@@ -239,11 +234,11 @@ namespace ecto {
             std::string thisname = str(boost::format("worker_%u") % j);
             boost::function<void()> runit = boost::bind(&verbose_run, boost::ref(workserv), thisname);
             threads.create_thread(boost::bind(&ecto::except::py::rethrow, runit,
-                                              boost::ref(topserv), this));
+                                              boost::ref(top_serv), this));
             ++oci.value;
           }
       }
-      verbose_run(topserv, "topserv");
+      verbose_run(top_serv, "top_serv");
 
       threads.join_all();
       {
