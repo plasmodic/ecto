@@ -58,7 +58,6 @@ def cellinit(cpptype):
         self.outputs = c.outputs
         self.params = c.params
         for k, v in kwargs.iteritems():
-            print "K,V", k, v
             if k == 'strand':
                 self.__impl._set_strand(v)
             elif isinstance(v, _cell_cpp):

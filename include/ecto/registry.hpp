@@ -128,6 +128,7 @@ namespace ecto {
     
     entry_t lookup(const std::string& name);
     boost::shared_ptr<cell> create(const std::string& name);
+    boost::shared_ptr<cell> create_initialized(const std::string& name);
     void register_factory_fn(const std::string& name, entry_t e);
   }
 }

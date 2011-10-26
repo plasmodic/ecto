@@ -50,6 +50,15 @@ namespace ecto {
       return e.construct();
     }
 
+    boost::shared_ptr<cell> create_initialized(const std::string& name)
+    {
+      entry_t e = lookup(name);
+      cell_ptr cp = e.construct();
+      e.declare_params(cp->parameters);
+      e.declare_io(cp->parameters, cp->inputs, cp->outputs);
+      return cp;
+    }
+
     entry_t lookup(const std::string& name)
     {
       std::map<std::string, entry_t>::iterator iter = cellmap.find(name);

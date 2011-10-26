@@ -63,10 +63,10 @@ namespace ecto {
           ECTO_ASSERT(&serv_inside_strand == &serv,
                       "Hmm, this strand thinks it should be on a different io_service");
         }
-      ECTO_LOG_DEBUG("Cell %s posting via strand %p", c->name() % thestrand.get());
+      ECTO_LOG_DEBUG("%s: POST via strand id=%p post to serv %p", c->name() % c->strand_->id() % thestrand.get());
       thestrand->post(h);
     } else {
-      ECTO_LOG_DEBUG("%s", "Normal (strandless) post to serv");
+      ECTO_LOG_DEBUG("%s: POST (strandless) post to serv %p", c->name() % &serv);
       serv.post(h);
     }
   }

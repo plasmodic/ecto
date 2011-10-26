@@ -43,33 +43,21 @@ namespace ecto_test
 
     int process(const tendrils& inputs, const tendrils& outputs)
     {
-      boost::asio::io_service s;
-      boost::asio::deadline_timer dt(s);
+      boost::mutex::scoped_try_lock lock(mtx);
 
-      // try to rock
-      if (mtx.try_lock())
-        {
-          // we got the rock... i.e. we are rocking
-          ECTO_LOG_DEBUG("this=%p we got the lock", this);
-          // wait a bit so's we can be sure there will be collisions
-          dt.expires_from_now(boost::posix_time::milliseconds(100));
-          dt.wait();
+      if (! lock.owns_lock())
+        throw std::runtime_error("we should have that damned lock.");
 
-          double value = inputs.get<double> ("in");
-          // do yer thing
-          outputs.get<double> ("out") = value;
+      // wait a bit so's we can be sure there will be collisions
+      ecto::test::random_delay();
+      usleep(1000);
+      
+      double value = inputs.get<double> ("in");
+      // do yer thing
+      outputs.get<double> ("out") = value;
 
-          // unrock
-          ECTO_LOG_DEBUG("this=%p done with the lock", this);
-          mtx.unlock();
-        }
-      else
-        {
-          ECTO_LOG_DEBUG("this=%p we did NOT got the lock, going to throw", this);
-          //          BOOST_THROW_EXCEPTION(std::runtime_error("AAAAGH NO LOCK HEEEEEELP"));
-          ECTO_ASSERT(false, "If you are here your strands weren't specfied or are otherwise broken");
-          // throw std::logic_error("Didn't get the lock... this means we were called from two threads.  Baaad.");
-        }
+      // unrock
+      ECTO_LOG_DEBUG("this=%p done with the lock", this);
       return ecto::OK;
 
     }

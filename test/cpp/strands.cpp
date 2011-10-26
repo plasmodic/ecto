@@ -70,17 +70,32 @@ namespace {
       return ecto::OK;
     }
   };
-
 }
-
 ECTO_THREAD_UNSAFE(Crashy);
 
-TEST(Strands, Strandy)
+TEST(Strands, Crashy_is_ECTO_THREAD_UNSAFE)
 {
   ecto::plasm::ptr p(new ecto::plasm);
   for (unsigned j=0; j<10; ++j) {
     ecto::cell::ptr m(new cell_<Crashy>);
     p->insert(m);
+  }
+
+  ecto::schedulers::multithreaded sched(p);
+  sched.execute(5);
+}
+
+TEST(Strands, Crashy2_is_on_user_supplied_strand)
+{
+  ecto::plasm::ptr p(new ecto::plasm);
+  ecto::strand s;
+  ecto::cell_ptr prev = ecto::registry::create_initialized("ecto_test::Generate<double>");
+  prev->name("gen");
+  for (unsigned j=0; j<10; ++j) {
+    ecto::cell::ptr m(ecto::registry::create_initialized("ecto_test::DontCallMeFromTwoThreads"));
+    m->strand_ = s;
+    p->connect(prev, "out", m, "in");
+    prev = m;
   }
 
   ecto::schedulers::multithreaded sched(p);

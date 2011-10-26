@@ -53,12 +53,12 @@ namespace ecto_test
 
       boost::mutex::scoped_try_lock lock(mtx);
       // try to rock
-      if (!lock.owns_lock())
+      if (lock.owns_lock())
         {
           // we got the rock... i.e. we are rocking
           ECTO_LOG_DEBUG("%p got the lock.", this);
           // wait a bit so's we can be sure there will be collisions
-          usleep(100000);
+          ecto::test::random_delay();
 
           double value = inputs.get<double> ("in");
           ECTO_LOG_DEBUG("nonconcurrent node @ %p moving %f", this % value);

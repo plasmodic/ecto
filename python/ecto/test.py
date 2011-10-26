@@ -35,3 +35,13 @@ schedulers = [
 
 stress_test = 'ECTO_STRESS_TEST_ITERATIONS' in os.environ
 iterations = int(os.environ.get('ECTO_STRESS_TEST_ITERATIONS', 1))
+
+
+def test(f):
+    def impl(*args, **kwargs):
+        print "*"*80
+        print f.__name__, args, kwargs
+        f(*args, **kwargs)
+    return impl
+
+

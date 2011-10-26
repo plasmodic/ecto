@@ -26,10 +26,28 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 #
-import ecto
-import ecto_test
+import ecto, ecto_test, sys
+from ecto.test import test
 
-def test_strands(nlevels, SchedType, execfn, expect):
+@test
+def test_strand_basic_semantics():
+    s = ecto.Strand()
+    print "s.id =", s.id 
+    orig_id = s.id
+    
+    c = ecto_test.DontCallMeFromTwoThreads("CRASHY", strand=s)
+    c2 = ecto_test.DontCallMeFromTwoThreads("CRASHY2", strand=s)
+    c3 = ecto_test.DontCallMeFromTwoThreads("CRASHY3", strand=s)
+    p = ecto.Plasm()
+    gen = ecto_test.Generate("GENERATE", step=1.0, start=1.0)
+    p.connect(gen[:] >> c[:])
+    p.connect(c[:] >> c2[:])
+    p.connect(c2[:] >> c3[:])
+    sched = ecto.schedulers.Multithreaded(p)
+    sched.execute(10)
+
+@test
+def test_user_defined_strands(nlevels, SchedType, execfn, expect):
     s1 = ecto.Strand()
     s2 = s1
     s3 = ecto.Strand()
@@ -46,29 +64,29 @@ def test_strands(nlevels, SchedType, execfn, expect):
 
     gen = ecto_test.Generate("GENERATE", step=1.0, start=1.0)
     noncurr = ecto_test.DontCallMeFromTwoThreads("ALPHA", strand=s1)
-    plasm.connect(gen, "out", noncurr, "in")
+    plasm.connect(gen[:] >> noncurr[:])
 
     for k in range(nlevels):
-        next = ecto_test.DontCallMeFromTwoThreads("BETA_%d" % k, strand=s1)
-        plasm.connect(noncurr, "out", next, "in")
-        noncurr = next
+        n = ecto_test.DontCallMeFromTwoThreads("BETA_%d" % k, strand=s2)
+        plasm.connect(noncurr[:] >> n[:])
+        noncurr = n
 
     printer = ecto_test.Printer("PRINTER")
-    plasm.connect(noncurr, "out", printer, "in")
+    plasm.connect(noncurr[:] >> printer[:])
 
     sched = SchedType(plasm)
     print "sched=", sched
     execfn(sched)
 
     result = noncurr.outputs.out
-    print "result=", result
+    print "result=", result, "expect=", expect
     assert(result == expect)
 #    execfn(sched)
 #    result = noncurr.outputs.out
 #    print "result=", result
 
+@test
 def test_implicit_strands(nlevels, SchedType, execfn, expect):
-
     plasm = ecto.Plasm()
 
     gen = ecto_test.Generate(step=1.0, start=1.0)
@@ -91,6 +109,7 @@ def test_implicit_strands(nlevels, SchedType, execfn, expect):
     print "result=", result
     assert(result == expect)
 
+@test
 def shouldfail():
     plasm = ecto.Plasm()
 
@@ -112,14 +131,17 @@ def shouldfail():
     except RuntimeError, e:
         print "good, python caught error", e
 
-#shouldfail()
+test_strand_basic_semantics()
+
+shouldfail()
 #print "shouldfail passed"
 
-#test_implicit_strands(4, ecto.schedulers.Multithreaded, lambda s: s.execute(nthreads=4, niter=4), expect=4.0)
-#test_implicit_strands(4, ecto.schedulers.Singlethreaded, lambda s: s.execute(niter=4), expect=4.0)
+test_implicit_strands(4, ecto.schedulers.Multithreaded, lambda s: s.execute(nthreads=4, niter=4), expect=4.0)
+test_implicit_strands(4, ecto.schedulers.Singlethreaded, lambda s: s.execute(niter=4), expect=4.0)
 
-#test_strands(4, ecto.schedulers.Singlethreaded, lambda s: s.execute(niter=4), expect=4.0)
-test_strands(4, ecto.schedulers.Multithreaded, lambda s: s.execute(nthreads=2, niter=99), expect=4.0)
+test_user_defined_strands(4, ecto.schedulers.Singlethreaded, lambda s: s.execute(niter=16), expect=16.0)
+test_user_defined_strands(4, ecto.schedulers.Multithreaded,
+                          lambda s: s.execute(nthreads=2, niter=16), expect=16.0)
 
 
 
