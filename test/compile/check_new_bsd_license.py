@@ -34,17 +34,19 @@ skip_check_tag = "Willow Garage BSD License not applicable"
 
 nerrors = 0
 
-if sys.argv[1] == "AUTOFIX":
+import os
+
+if "ECTO_LICENSE_AUTOFIX" in os.environ:
     autofix = True
-    files = sys.argv[2:]
-else:
-    autofix = False
-    files = sys.argv[1:]
+
+files = sys.argv[1:]
     
 commentchars = { '.cpp' : '//',
                  '.hpp' : '//',
                  '.py'  : '#',
-                 '.cmake' : '#'}
+                 '.cmake' : '#',
+                 '.txt' : '#'
+                 }
                  
 
 for filename in files:
