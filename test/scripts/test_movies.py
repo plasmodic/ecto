@@ -26,14 +26,11 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 #
-import ecto
-import ecto_test
-import sys
+import sys, os, ecto, ecto_test
 
 def build_addergraph(nlevels):
 
     plasm = ecto.Plasm()
-    plasm.movie_out("ecto_%04u.viz");
 
     prevlevel = [ecto_test.Add("Adder 0_%u" % x) for x in range(2**(nlevels-1))]
     for adder in prevlevel:
@@ -78,6 +75,10 @@ def build_addergraph(nlevels):
 
 def test_plasm_impl(sched_type, nlevels, nthreads, niter):
     (plasm, outnode) = build_addergraph(nlevels)
+    
+    if not os.path.isdir(sched_type.__name__):
+        os.makedirs(sched_type.__name__)
+    plasm.movie_out("%s/%%04d.dot" % (sched_type.__name__))
     print "*"*80, "\nSCHED:", sched_type
     sched = sched_type(plasm)
     sched.execute(niter, nthreads)
@@ -91,6 +92,7 @@ def test_plasm(nlevels, nthreads, niter):
         test_plasm_impl(sched, nlevels, nthreads, niter)
 
 test_plasm_impl(ecto.schedulers.Multithreaded, 3, 8, 16)
+test_plasm_impl(ecto.schedulers.Singlethreaded, 3, 8, 16)
 
 if __name__ == '__main__':
     pass

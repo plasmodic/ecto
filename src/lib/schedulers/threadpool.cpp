@@ -370,8 +370,6 @@ namespace ecto {
       plasm_->check();
       plasm_->configure_all();
 
-      plasm_->reset_ticks();
-
       std::cout << "Threadpool executing ";
 
       if (ncalls == 0)

@@ -145,7 +145,8 @@ namespace ecto
     void configure_all();
 
     void reset_ticks();
-
+    void init_movie();
+    
     void save(std::ostream&) const;
     void load(std::istream&);
 
@@ -168,6 +169,7 @@ namespace ecto
     void
     load(Archive & ar,  const unsigned int);
     friend class boost::serialization::access;
-    BOOST_SERIALIZATION_SPLIT_MEMBER()
+    BOOST_SERIALIZATION_SPLIT_MEMBER();
+
   };
 }

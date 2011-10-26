@@ -114,15 +114,12 @@ namespace ecto
     }
   }
 
-  struct vertex_writer
-  {
+  struct vertex_writer {
     graph_t* g;
 
     vertex_writer(graph_t* g_)
-        :
-          g(g_)
-    {
-    }
+      : g(g_)
+    { }
 
     std::string htmlescape(const std::string& in)
     {
@@ -140,8 +137,6 @@ namespace ecto
     void
     operator()(std::ostream& out, graph_t::vertex_descriptor vd)
     {
-
-
       cell_ptr c = (*g)[vd];
       int n_inputs = c->inputs.size();
       int n_outputs = c->outputs.size();
@@ -339,10 +334,24 @@ namespace ecto
     }
   }
 
+  void plasm::init_movie()
+  {
+    movie_frame = 0;
+    if (movie_out.size() == 0)
+      return;
+    graph_t::vertex_iterator beg, end;
+    tie(beg, end) = vertices(impl_->graph);
+    while(beg != end)
+      {
+        cell_ptr c = impl_->graph[*beg];
+        c->bsig_process.connect(boost::bind(&plasm::frame, this, _1, _2));
+        ++beg;
+      }
+  }
+
   void plasm::set_movie_out(const std::string& s)
   {
     movie_out = s;
-    movie_frame = 0;
   }
 
   void plasm::configure_all()

@@ -73,7 +73,7 @@ namespace ecto {
     int invoke_process(ecto::graph::graph_t::vertex_descriptor vd);
     void compute_stack();
 
-    plasm_ptr plasm_;
+    plasm_ptr plasm;
     ecto::graph::graph_t& graph;
 
     std::vector<ecto::graph::graph_t::vertex_descriptor> stack;

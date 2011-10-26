@@ -82,7 +82,6 @@ namespace ecto {
 
     multithreaded::multithreaded(plasm_ptr p)
       : scheduler(p),
-        plasm(p),
         current_iter(0)
     { }
 
@@ -115,26 +114,23 @@ namespace ecto {
     struct stack_runner
     {
       multithreaded& ctx;
-      boost::asio::io_service& workserv;
       unsigned max_iter;
       ecto::atomic<unsigned>& overall_current_iter;
       boost::asio::io_service& topserv;
       boost::asio::io_service::work topwork;
 
       stack_runner(multithreaded& ctx_,
-                   boost::asio::io_service& workserv_,
                    unsigned max_iter_,
                    ecto::atomic<unsigned>& overall_current_iter_,
                    boost::asio::io_service& topserv_)
         : ctx(ctx_),
-          workserv(workserv_),
           max_iter(max_iter_),
           overall_current_iter(overall_current_iter_),
           topserv(topserv_),
           topwork(topserv)
       {
         ECTO_LOG_DEBUG("Created stack_runner @ overall iteration %u, max %u, workserv=%p",
-                       overall_current_iter.get() % max_iter % &workserv);
+                       overall_current_iter.get() % max_iter % &ctx.workserv);
       }
 
       typedef int result_type;
@@ -183,13 +179,12 @@ namespace ecto {
           }
           ECTO_LOG_DEBUG("Posting next job index=%u", index);
           boost::function<void()> f = boost::bind(stack_runner(ctx,
-                                                               workserv,
                                                                max_iter,
                                                                overall_current_iter,
                                                                topserv),
                                                   index);
-          on_strand(m, workserv, boost::bind(&ecto::except::py::rethrow, f,
-                                             boost::ref(topserv), &ctx));
+          on_strand(m, ctx.workserv, boost::bind(&ecto::except::py::rethrow, f,
+                                                 boost::ref(topserv), &ctx));
           return retval;
         }
       }
@@ -200,7 +195,6 @@ namespace ecto {
       ECTO_LOG_DEBUG("execute_impl max_iter=%u nthread=%u",
                      max_iter % nthread);
 
-      plasm_->reset_ticks();
       compute_stack();
       {
         ecto::atomic<unsigned>::scoped_lock l(current_iter);
@@ -226,7 +220,6 @@ namespace ecto {
         {
           ECTO_LOG_DEBUG("Creating initial stack runner %u of %u", j % nthread);
           boost::function<void()> f = boost::bind(stack_runner(*this,
-                                                               workserv,
                                                                max_iter,
                                                                current_iter,
                                                                topserv),

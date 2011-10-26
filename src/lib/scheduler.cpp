@@ -47,7 +47,7 @@ namespace ecto {
   using ecto::graph::graph_t;
 
   scheduler::scheduler(plasm_ptr p)
-    : plasm_(p)
+    : plasm(p)
     , graph(p->graph())
     , running_value(false)
   {
@@ -72,6 +72,8 @@ namespace ecto {
 
   void scheduler::notify_start()
   {
+    plasm->init_movie();
+    plasm->reset_ticks();
     assert(stack.size() > 0);
     for (unsigned j=0; j<stack.size(); ++j)
       {
@@ -173,8 +175,8 @@ namespace ecto {
     if (!stack.empty()) //will be empty if this needs to be computed.
       return;
     //check this plasm for correctness.
-    plasm_->check();
-    plasm_->configure_all();
+    plasm->check();
+    plasm->configure_all();
     boost::topological_sort(graph, std::back_inserter(stack));
     std::reverse(stack.begin(), stack.end());
   }

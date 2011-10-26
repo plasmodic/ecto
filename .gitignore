@@ -9,3 +9,5 @@ Makefile
 boost.lockfree/
 boost.atomic/
 bgr
+*.dot
+*.svg

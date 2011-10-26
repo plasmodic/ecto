@@ -62,8 +62,6 @@ namespace ecto {
 
     private:
 
-      plasm_ptr plasm;
-
       boost::asio::io_service workserv;
 
       atomic<unsigned> current_iter;
@@ -73,6 +71,7 @@ namespace ecto {
       using scheduler::top_serv;
       using scheduler::graph;
       using scheduler::stack;
+      using scheduler::plasm;
 
       friend struct stack_runner;
     };

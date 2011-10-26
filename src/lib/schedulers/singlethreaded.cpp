@@ -103,7 +103,6 @@ namespace ecto {
     int singlethreaded::execute_impl(unsigned niter, unsigned nthread, boost::asio::io_service& topserv)
     {
       ECTO_START();
-      plasm_->reset_ticks();
       compute_stack();
 
       boost::signals2::scoped_connection
