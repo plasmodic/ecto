@@ -33,5 +33,6 @@ print ecto_test.Add.__module__
 print ecto.If.__module__
 assert ecto.If.__module__ == 'ecto'
 assert ecto_test.Add.__module__ == 'ecto_test'
+
 #TODO
 #assert ecto_test.some_submodule.ACell.__module__ == 'ecto_test.some_submodule'

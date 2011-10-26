@@ -36,5 +36,5 @@ plasm = ecto.Plasm()
 
 plasm.load(sys.argv[1])
 
-
+print plasm.viz()
 

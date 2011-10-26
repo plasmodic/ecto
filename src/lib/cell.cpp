@@ -79,6 +79,11 @@
                             << except::function_name(__FUNCTION__))     \
         ;                                                               \
     }                                                                   \
+  catch(const boost::python::error_already_set&)                        \
+    {                                                                   \
+      ECTO_TRACE_EXCEPTION("boost::python::error_already_set&");        \
+      throw;                                                            \
+    }                                                                   \
   catch(...)                                                            \
     {                                                                   \
       ECTO_TRACE_EXCEPTION("...");                                      \

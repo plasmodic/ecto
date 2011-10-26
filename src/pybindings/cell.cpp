@@ -100,6 +100,7 @@ namespace ecto
 
       ReturnCode dispatch_process(const tendrils& inputs, const tendrils& outputs)
       {
+        std::cout << "BREAKY\n";
         ecto::py::scoped_call_back_to_python scb;
         int value = OK;
         std::for_each(inputs.begin(),inputs.end(), YouveBeenServed());
@@ -177,6 +178,8 @@ namespace ecto
         .def("declare_io", ((void(cell::*)()) &cell::declare_io))
         .def("configure", ((void(cell::*)()) &cell::configure))
         .def("process", (void(cell::*)()) &cell::process)
+        .def("start", (void(cell::*)()) &cell::start)
+        .def("stop", (void(cell::*)()) &cell::stop)
         .def("verify_params", &cell::verify_params)
         .def("verify_inputs", &cell::verify_inputs)
 

@@ -14,6 +14,7 @@ foreach(file
     test_async_execution
     test_async_execution_harsh
     test_async_multiple_sched
+    test_async
     test_blackbox
     #test_bp_to_cell_ptr
     test_constant
@@ -23,11 +24,13 @@ foreach(file
     test_entanglement
     test_exception
     test_exception_in_constructor
-    test_If
     test_fileIO
     test_handles
-    test_multiprocess
+    test_If
+    test_metrics
+    test_module_qualification
     test_modules
+    test_multiprocess
     #test_module_qualification
     test_no_ecto_import
     test_options

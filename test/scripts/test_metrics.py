@@ -118,12 +118,12 @@ def test_tp(niter, n_nodes):
 
 
 
-#test_nodelay()
-#test_20hz()
+test_nodelay()
+test_20hz()
 test_st(5, 5)
 test_st(5, 12)
 
-#test_tp(20, 15)
-#test_tp(20, 10)
-#test_tp(20, 5)
+test_tp(20, 15)
+test_tp(20, 10)
+test_tp(20, 5)
 

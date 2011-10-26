@@ -29,6 +29,7 @@
 import ecto
 import ecto_test
 import sys
+from ecto.test import test
 
 def build_addergraph(nlevels):
 
@@ -76,9 +77,10 @@ def build_addergraph(nlevels):
 
     return (plasm, final_adder)
 
+
+@test
 def test_plasm_impl(sched_type, nlevels, nthreads, niter):
     (plasm, outnode) = build_addergraph(nlevels)
-    print "*"*80, "\nSCHED:", sched_type
     sched = sched_type(plasm)
     sched.execute(niter, nthreads)
     print "RESULT:", outnode.outputs.out
@@ -90,19 +92,16 @@ def test_plasm(nlevels, nthreads, niter):
     for sched in ecto.test.schedulers:
         test_plasm_impl(sched, nlevels, nthreads, niter)
 
-test_plasm_impl(ecto.schedulers.Singlethreaded, 3, 3, 3)
-
 if __name__ == '__main__':
-    pass
-#    test_plasm(1, 1, 1)
-#    test_plasm(1, 1, 2)
-#    test_plasm(3,3,3)
-#    test_plasm(5, 1, 1)
-#    test_plasm(5, 2, 1)
-#    test_plasm(5, 5, 5)
-#    test_plasm(6, 6, 6)
+    test_plasm(1, 1, 1)
+    test_plasm(1, 1, 2)
+    test_plasm(3,3,3)
+    test_plasm(4, 1, 1)
+    test_plasm(4, 2, 1)
+    test_plasm(4, 5, 5)
+    #    test_plasm(6, 6, 6)
     #test_plasm(6, 6, 6000)
-#    test_plasm(8, 1, 5)
+    #    test_plasm(8, 1, 5)
     #test_plasm(9, 64, 100)
     #test_plasm(10, 8, 10)
     #test_plasm(11, 8, 10)

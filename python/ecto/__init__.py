@@ -132,6 +132,7 @@ def postregister(cellname, cpptypename, short_doc, inmodule):
 
     thistype = type(cellname, (_cell_cpp,),
                     dict(__doc__ = cell_doc(short_doc,c),
+                         __module__ = inmodule.__name__,
                          inputs = c.inputs,
                          outputs = c.outputs,
                          params = c.params,

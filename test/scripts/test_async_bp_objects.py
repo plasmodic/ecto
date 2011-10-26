@@ -59,7 +59,6 @@ def waitonly(s):
     print "waitonly"
     s.wait()
 
-
 def interrupt(s):
     print "interrupt"
     s.interrupt()
@@ -85,16 +84,15 @@ def tpool(Scheduler, go, afterwards, sleepdur=0.1):
     print "elapsed", etime-stime
 
 def doemall(Sched):
-    #tpool(Sched, sync, nada)
-    #tpool(Sched, sync, interrupt)
-    #tpool(Sched, sync, interrupt_and_wait)
+    tpool(Sched, sync, nada)
+    tpool(Sched, sync, interrupt)
+    tpool(Sched, sync, interrupt_and_wait)
     tpool(Sched, sync, waitonly)
     tpool(Sched, async, waitonly)
-    #tpool(Sched, async, interrupt_and_wait)
-    #tpool(Sched, async, interrupt)
-    #tpool(Sched, async, nada)
-    #tpool(Sched, async, nada)
+    tpool(Sched, async, interrupt_and_wait)
+    tpool(Sched, async, interrupt)
+    tpool(Sched, async, nada)
 
-doemall(ecto.schedulers.Threadpool)
-#doemall(ecto.schedulers.Singlethreaded)
+doemall(ecto.schedulers.Multithreaded)
+doemall(ecto.schedulers.Singlethreaded)
 

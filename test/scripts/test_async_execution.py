@@ -152,13 +152,13 @@ def wait_check(s, ex):
     print time.time() - t > ex+eps  # we might be multithreaded
     assert not s.running()
 
-# do_test(wait_on_nothing)
-# do_test(ex_async_then_sync_throws)
-# do_test(ex_async_twice)
-# do_test(sync)
-# do_test(synctwice)
-# do_test(running_check)
-# do_test(wait_check)
+do_test(wait_on_nothing)
+do_test(ex_async_then_sync_throws)
+do_test(ex_async_twice)
+do_test(sync)
+do_test(synctwice)
+do_test(running_check)
+do_test(wait_check)
 
 # Verify that the multithreaded completes in multiples of two seconds
 # from the time stop was called, not the initial start
@@ -205,7 +205,7 @@ def stoppable_multi():
     assert elapsed <= maxtime
 
 stoppable_multi()
-sys.exit(0)
+
 #
 #  Verify that the singlethreaded completes in multiples of two seconds
 #
@@ -245,17 +245,4 @@ def stoppable():
     assert elapsed < 2.1
 
 stoppable()
-
-
-
-    #tpool()
-    #tpool_throw_on_double_execute()
-    #tpool_wait_on_nothing()
-    #tpool_interrupt()
-#else:
-#    print "threadpool async execution tests disabled due to lack of hardware concurrency"
-
-#sthreaded()
-
-#print "okay."
 

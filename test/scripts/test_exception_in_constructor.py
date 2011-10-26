@@ -43,5 +43,6 @@ except ecto.CellException, e:
     assert "when  Construction" in str(e)
     assert "type  std::logic_error" in str(e)
     assert "exception_type  CellException" in str(e)
+
 sys.exit(0)
 
