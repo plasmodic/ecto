@@ -60,7 +60,7 @@ namespace ecto_test
           outputs.get<double> ("out") = value;
 
           // unrock
-          std::cout << this << " done with the lock." << std::endl;
+          ECTO_LOG_DEBUG("this=%p done with the lock", this);
           mtx.unlock();
         }
       else

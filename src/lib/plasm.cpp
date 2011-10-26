@@ -82,6 +82,7 @@ namespace ecto
   );
 
   namespace {
+
     // see
     // http://en.wikipedia.org/wiki/HSL_and_HSV#Converting_to_RGB
     // for points on a dark background you want somewhat lightened
@@ -209,11 +210,7 @@ namespace ecto
   {
     graph_t* g;
 
-    edge_writer(graph_t* g_)
-        :
-          g(g_)
-    {
-    }
+    edge_writer(graph_t* g_) : g(g_) { }
 
     void
     operator()(std::ostream& out, graph_t::edge_descriptor ed)

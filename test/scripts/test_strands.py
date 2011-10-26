@@ -42,6 +42,7 @@ def test_strands(nlevels, SchedType, execfn, expect):
     assert s3.id != s1.id
 
     plasm = ecto.Plasm()
+    # plasm.movie_out("strands_%03d.dot")
 
     gen = ecto_test.Generate("GENERATE", step=1.0, start=1.0)
     noncurr = ecto_test.DontCallMeFromTwoThreads("ALPHA", strand=s1)
@@ -118,7 +119,7 @@ def shouldfail():
 #test_implicit_strands(4, ecto.schedulers.Singlethreaded, lambda s: s.execute(niter=4), expect=4.0)
 
 #test_strands(4, ecto.schedulers.Singlethreaded, lambda s: s.execute(niter=4), expect=4.0)
-test_strands(4, ecto.schedulers.Multithreaded, lambda s: s.execute(nthreads=4, niter=4), expect=4.0)
+test_strands(4, ecto.schedulers.Multithreaded, lambda s: s.execute(nthreads=2, niter=99), expect=4.0)
 
 
 

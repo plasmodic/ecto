@@ -9,7 +9,8 @@
 
 namespace ecto {
 
-  struct strand::impl : boost::noncopyable {
+  struct strand::impl : boost::noncopyable
+  {
     boost::scoped_ptr<boost::asio::io_service::strand> asio_strand_p;
   };
 

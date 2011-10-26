@@ -114,30 +114,24 @@ namespace ecto {
 
     struct stack_runner
     {
-      graph::graph_t& graph;
-      const std::vector<graph::graph_t::vertex_descriptor>& stack;
+      multithreaded& ctx;
       boost::asio::io_service& workserv;
       unsigned max_iter;
       ecto::atomic<unsigned>& overall_current_iter;
       boost::asio::io_service& topserv;
       boost::asio::io_service::work topwork;
-      ecto::scheduler* sched;
 
-      stack_runner(graph::graph_t& graph_,
-                   const std::vector<graph::graph_t::vertex_descriptor>& stack_,
+      stack_runner(multithreaded& ctx_,
                    boost::asio::io_service& workserv_,
                    unsigned max_iter_,
                    ecto::atomic<unsigned>& overall_current_iter_,
-                   boost::asio::io_service& topserv_,
-                   ecto::scheduler* sched_)
-        : graph(graph_),
-          stack(stack_),
+                   boost::asio::io_service& topserv_)
+        : ctx(ctx_),
           workserv(workserv_),
           max_iter(max_iter_),
           overall_current_iter(overall_current_iter_),
           topserv(topserv_),
-          topwork(topserv),
-          sched(sched_)
+          topwork(topserv)
       {
         ECTO_LOG_DEBUG("Created stack_runner @ overall iteration %u, max %u, workserv=%p",
                        overall_current_iter.get() % max_iter % &workserv);
@@ -147,17 +141,19 @@ namespace ecto {
 
       result_type operator()(std::size_t index)
       {
-        ECTO_ASSERT(index < stack.size(), "index out of bounds");
-        cell::ptr m = graph[stack[index]];
+        ECTO_ASSERT(index < ctx.stack.size(), "index out of bounds");
+        cell::ptr m = ctx.graph[ctx.stack[index]];
         access cellaccess(*m);
         ECTO_LOG_DEBUG("Runner firing on cell %u/%u (%s) iter %u",
-                       index % stack.size() % m->name() % overall_current_iter.get());
+                       index % ctx.stack.size() % m->name() % overall_current_iter.get());
         boost::mutex::scoped_lock lock(cellaccess.mtx);
         ECTO_LOG_DEBUG("Runner LOCKED on cell %u/%u (%s) iter %u",
-                       index % stack.size() % m->name() % overall_current_iter.get());
+                       index % ctx.stack.size() % m->name() % overall_current_iter.get());
 
-
-        size_t retval = invoke_process(graph, stack[index]);
+        //
+        //  TDS just use multithreaded as context, nix the rethrow?
+        //
+        size_t retval = invoke_process(ctx.graph, ctx.stack[index]);
 
         if (retval != ecto::OK)
           {
@@ -165,10 +161,10 @@ namespace ecto {
             return retval;
           }
         ++index;
-        ECTO_ASSERT (index <= stack.size(), "index out of bounds");
+        ECTO_ASSERT (index <= ctx.stack.size(), "index out of bounds");
         {
           ecto::atomic<unsigned>::scoped_lock oci(overall_current_iter);
-          if (index == stack.size())
+          if (index == ctx.stack.size())
             {
 
               ECTO_LOG_DEBUG("Thread deciding whether to recycle @ index %u, overall iter=%u of %u",
@@ -186,14 +182,14 @@ namespace ecto {
               }
           }
           ECTO_LOG_DEBUG("Posting next job index=%u", index);
-          boost::function<void()> f = boost::bind(stack_runner(graph, stack, workserv,
+          boost::function<void()> f = boost::bind(stack_runner(ctx,
+                                                               workserv,
                                                                max_iter,
                                                                overall_current_iter,
-                                                               topserv,
-                                                               sched),
+                                                               topserv),
                                                   index);
           on_strand(m, workserv, boost::bind(&ecto::except::py::rethrow, f,
-                                             boost::ref(topserv), sched));
+                                             boost::ref(topserv), &ctx));
           return retval;
         }
       }
@@ -229,11 +225,11 @@ namespace ecto {
       for (unsigned j=0; j<nthread; ++j)
         {
           ECTO_LOG_DEBUG("Creating initial stack runner %u of %u", j % nthread);
-          boost::function<void()> f = boost::bind(stack_runner(graph, stack, workserv,
+          boost::function<void()> f = boost::bind(stack_runner(*this,
+                                                               workserv,
                                                                max_iter,
                                                                current_iter,
-                                                               topserv,
-                                                               this),
+                                                               topserv),
                                                   0);
 
           on_strand(graph[stack[0]], workserv, boost::bind(&ecto::except::py::rethrow, f,

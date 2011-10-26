@@ -69,6 +69,12 @@ namespace ecto {
       atomic<unsigned> current_iter;
 
       boost::thread_group threads;
+
+      using scheduler::top_serv;
+      using scheduler::graph;
+      using scheduler::stack;
+
+      friend struct stack_runner;
     };
   }
 }
