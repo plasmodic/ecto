@@ -1,0 +1,28 @@
+<html>
+<body>
+<img src="ecto_0000.svg" width="90%" name="ectograph"/>
+
+<p name="framename"> </p>
+
+<script type="text/javascript">
+var i=0;
+
+var fname = document.getElementByName("framename").innerHTML;
+
+function increment() {
+  var s = "000000000000000" + i;
+  var img = document.getElementsByName("ectograph")[0];
+  fname = "ecto_" + s.substr(s.length - 4) + ".svg";
+  img.src = fname;
+
+
+  i += 1;
+  if (i == 450) i = 0;
+}
+
+var nterval = self.setInterval("increment()", 100);
+
+</script>
+
+</body>
+</html>
