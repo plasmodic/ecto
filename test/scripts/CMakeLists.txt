@@ -31,7 +31,6 @@ foreach(file
     test_module_qualification
     test_modules
     test_multiprocess
-    #test_module_qualification
     test_no_ecto_import
     test_options
     test_parameter_callbacks
@@ -39,12 +38,13 @@ foreach(file
     test_plasm
     test_process_return_values
     test_python_module
+    test_random
     test_reconnect
-    # test_redirect
+    test_redirect
     test_required_io
     test_required_param
     # test_restart  # this needs thinking about... can't test nexecutions with a stateful cell
-    test_random
+    test_schedbasics
     test_shared_pass
     test_small_plasms
     test_start_stop_counter
@@ -52,6 +52,7 @@ foreach(file
     test_tendril
     test_tendrils
     test_throw
+    test_type_mismatch_errors
     test_wrong_param_type
     )
     add_test(ecto_${file}

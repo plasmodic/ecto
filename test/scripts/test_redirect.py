@@ -46,7 +46,8 @@ def make(Schedtype):
 def verify():
     f = open(fname)
     txt = f.read()
-    print ">>>", txt, "<<<"
+    lns = len(txt.splitlines())
+    print "txt has", lns, "lines" 
     assert len(txt.splitlines()) >= 5
     
 for s in ecto.test.schedulers:
@@ -62,7 +63,4 @@ for s in ecto.test.schedulers:
     sched2.wait()
     ecto.unlog_to_file()
     verify()
-
-
-
 

@@ -46,8 +46,3 @@ sched.execute(niter=100)
 while sched.running():
     print "."
     time.sleep(0.1)
-
-
-
-
-
