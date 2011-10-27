@@ -224,6 +224,8 @@ namespace ecto {
   void scheduler::wait()
   {
     ECTO_START();
+    ecto::py::scoped_gil_release sgr;
+
     recursive_mutex::scoped_lock lock(iface_mtx);
     wait_impl();
   }
