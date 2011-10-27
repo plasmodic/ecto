@@ -58,8 +58,8 @@ namespace ecto_test
 
     void configure(const tendrils& parameters,const tendrils& inputs,const tendrils& outputs)
     {
-      // ecto::py::scoped_call_back_to_python scb;
-      //      SHOW();
+      ecto::py::scoped_call_back_to_python scb;
+
       boost::this_thread::sleep(boost::posix_time::milliseconds(100));//sleep for making sure we're out of the python thread.
       bp::object list_o_sleeps;
       parameters["list_o_sleeps"] >> list_o_sleeps;
