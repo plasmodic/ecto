@@ -43,6 +43,7 @@ foreach(file
     test_async_multiple_sched
     test_async
     test_blackbox
+    test_blackbox_pyobj
     #test_bp_to_cell_ptr
     test_constant
     test_dealer
