@@ -61,8 +61,9 @@ class BlackBoxTendrils(object):
     def __get_cell(self, cell_name):
         cell = getattr(self.bb, cell_name)
         cell_type = getattr(self.bb.__class__, cell_name)
-        if not isinstance(cell, cell_type):
-            raise RuntimeError("You must have a member variable of type " + self.bb.__class__.__name__ + " called " + cell_name)
+        if cell == cell_type:
+            cell = cell_type.inspect()
+            setattr(self.bb, cell_name, cell)
         return cell
 
     def __append(self, cell_name, key, cell_key):

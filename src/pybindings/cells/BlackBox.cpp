@@ -49,6 +49,7 @@ namespace ecto
         tendril_ptr t;
         BOOST_FOREACH(boost::tie(key,t), fts)
             {
+              t->required(false);
               ts.declare(key, t);
             }
       }

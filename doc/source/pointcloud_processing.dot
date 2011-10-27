@@ -1,0 +1,13 @@
+digraph G
+{
+        graph [ rankdir=TB ];
+
+        KinectColor [ label="Kinect RGB Image" ];
+        KinectDepth [ label="Kinect Depth Image" ];
+        KinectColor -> ConstructPointCloud;
+        KinectDepth -> ConstructPointCloud;
+        ConstructPointCloud -> DownSample -> NormalEstimation -> PlanarSegmentation -> ConvexHull -> ExtractClusters -> ColorizeClusters -> Merge;
+        ConstructPointCloud -> Merge;
+        Merge -> Display;
+        ConstructPointCloud -> ExtractClusters;
+};

@@ -87,6 +87,8 @@ def run_plasm(options, plasm, locals={}):
         use_ipython(options, sched, plasm, locals)
     else:
         sched.execute(options.niter, options.nthreads)
+    if options.stats:
+        print sched.stats()
 
 class CellFactory(object):
     '''A factory for cells that are created from command line args.'''
@@ -242,6 +244,9 @@ def scheduler_options(parser,
                         help='''Output a graph in dot format to the given file.
                         If no file is given, no output will be generated. (default: %(default)s)'''
                         )
+    parser.add_argument('--stats',dest='stats',action='store_const',
+                        const=True, default=default_graphviz,
+                        help='Show the the runtime statistics of the plasm.')
 
 def doit(plasm, description="An ecto graph.", locals={}, args=None, default_scheduler='Singlethreaded', default_nthreads=0, default_niter=0, default_shell=False, default_graphviz=False):
     '''doit is a short hand for samples, that is a combination of a call to scheduler_options, and then run_plasm.

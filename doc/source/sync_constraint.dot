@@ -1,0 +1,14 @@
+digraph G
+{
+        graph [ rankdir=LR ];
+        node [ penwidth=0 pencolor=white ];
+
+        A B C D E
+        CTR [ label="perception\nlogic" pencolor=black penwidth=1];
+        A -> CTR;
+        B -> CTR;
+        C -> CTR;
+        CTR -> D;
+        CTR -> E;
+
+};

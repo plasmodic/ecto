@@ -1,0 +1,24 @@
+digraph G
+{
+        graph [ rankdir=LR ];
+        node [ label="" shape=rectangle penwidth=0 pencolor=white ];
+
+        KinectColor [ label="Kinect RGB Image" ];
+        KinectDepth [ label="Kinect Depth Image" ];
+        WebCam [ label="USB Webcam" ];
+        LaserScan [ label="Laser scan" ];
+
+        CTR [ label="perception\nlogic" pencolor=black penwidth=1 shape=ellipse ];
+
+        KinectColor -> CTR;
+        KinectDepth -> CTR;
+        WebCam -> CTR;
+        LaserScan -> CTR;
+
+        Pose [ label="Pose" ];
+        ObjectId [ label="Object ID" ];
+
+
+        CTR -> Pose;
+        CTR -> ObjectId
+};

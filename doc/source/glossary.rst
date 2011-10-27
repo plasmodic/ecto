@@ -1,7 +1,7 @@
 .. index:: glossary
 
-glossary of ecto terms
-======================
+Glossary
+========
 
 .. _ecto-greek:
 
@@ -32,7 +32,9 @@ flexibility.
 
 spore
 -----
-The spore is the typed version of the tendril, and may be thought of as a handle.
+
+The spore is a typed handle to a tendril.  It acts like a smart
+pointer (the star and arrow operators are overloaded).
 
 .. _ectosphere:
 

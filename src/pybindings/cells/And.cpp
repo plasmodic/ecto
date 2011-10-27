@@ -60,7 +60,6 @@ namespace ecto
 
     void configure(const tendrils& p, const tendrils& in, const tendrils& out)
     {
-      std::cout << __PRETTY_FUNCTION__ << "\n";
       for(unsigned int i=0; i<in.size(); i++){
         inputs_.push_back(in[And::get_input_string(i)]);
       }
@@ -69,7 +68,6 @@ namespace ecto
 
     int process(const tendrils& in, const tendrils& out)
     {
-      std::cout << __PRETTY_FUNCTION__ << "\n";
       *output_ = true;
       for(unsigned int i=0; i<inputs_.size(); i++){
         *output_ = *output_ && *inputs_[i];
