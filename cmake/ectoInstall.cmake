@@ -47,7 +47,7 @@ install(DIRECTORY ${ecto_SOURCE_DIR}/include/ecto
   )
 
 #generated headers
-install(DIRECTORY ${CMAKE_BINARY_DIR}/include/ecto
+install(DIRECTORY ${PROJECT_BINARY_DIR}/include/ecto
   DESTINATION ${include_prefix}
   COMPONENT main
   )
