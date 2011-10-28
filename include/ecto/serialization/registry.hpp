@@ -30,7 +30,8 @@
 
 #if BOOST_VERSION <= 104000
 #pragma GCC diagnostic ignored "-Wsign-compare"
-#pragma message "Ignoring signed-unsigned comparison in boost::serialization in 1.40"
+// TODO EAR meh noisy -- We should make a portable stable archive type.
+//#pragma message "Ignoring signed-unsigned comparison in boost::serialization in 1.40"
 #endif
 
 #include <boost/archive/binary_iarchive.hpp>
