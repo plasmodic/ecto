@@ -27,6 +27,7 @@
 // 
 #include <ecto/tendril.hpp>
 #include <boost/python.hpp>
+#include <opencv2/core/core.hpp>
 namespace ecto
 {
   using namespace except;
@@ -189,7 +190,23 @@ namespace ecto
 
   void tendril::copy_holder(const tendril& rhs)
   {
-    holder_ = rhs.holder_;
+#if 1
+    if(!is_type<none>() && is_type<cv::Mat>())
+    {
+      rhs.get<cv::Mat>().copyTo(get<cv::Mat>());
+    }else if(!is_type<none>() && is_type<std::vector<cv::Mat> >())
+    {
+      std::cout << "vecs of mats" << std::endl;
+      const std::vector<cv::Mat>& ms = rhs.get<std::vector<cv::Mat> >();
+      std::vector<cv::Mat>& toms = get<std::vector<cv::Mat> >();
+      toms.resize(ms.size());
+      for(size_t i = 0,end =ms.size(); i < end; i++)
+      {
+        ms[i].copyTo(toms[i]);
+      }
+    }else
+#endif
+      holder_ = rhs.holder_;
     type_ID_ = rhs.type_ID_;
     converter = rhs.converter;
   }

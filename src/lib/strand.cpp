@@ -85,10 +85,14 @@ namespace ecto {
         }
       else
         {
+#if !defined(NDEBUG)
+
+          //home/ecto_ws/recognition_kitchen/ecto/src/lib/strand.cpp:88: error: unused variable ‘serv_inside_strand’
           boost::asio::io_service& serv_inside_strand = thestrand->get_io_service();
           ECTO_LOG_DEBUG("strand matches, %p ??? %p", &serv_inside_strand % &serv);
           ECTO_ASSERT(&serv_inside_strand == &serv,
                       "Hmm, this strand thinks it should be on a different io_service");
+#endif
         }
       ECTO_LOG_DEBUG("%s: POST via strand id=%p post to serv %p", c->name() % c->strand_->id() % thestrand.get());
       thestrand->post(h);
