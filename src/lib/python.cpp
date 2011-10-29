@@ -1,7 +1,7 @@
-// 
+//
 // Copyright (c) 2011, Willow Garage, Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
 //     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
 //     * Neither the name of the Willow Garage, Inc. nor the names of its
 //       contributors may be used to endorse or promote products derived from
 //       this software without specific prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -24,10 +24,11 @@
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
-// 
-#include <boost/python.hpp>
+//
+#include <ecto/python.hpp>
 #include <ecto/python/repr.hpp>
 #include <ecto/python/gil.hpp>
+#include <ecto/log.hpp>
 
 namespace ecto {
   namespace py {
@@ -43,14 +44,57 @@ namespace ecto {
 
     gil::gil() : impl_(new gil::impl)
     {
-      impl_->gstate = PyGILState_Ensure();
+      //impl_->gstate = PyGILState_Ensure();
     }
-    
+
     gil::~gil()
     {
-      PyGILState_Release(impl_->gstate);
+      //PyGILState_Release(impl_->gstate);
     }
-      
+
+
+    PyThreadState* scoped_gil_release::threadstate = NULL;
+
+    scoped_gil_release::scoped_gil_release()
+    {
+      if (!Py_IsInitialized())
+        return;
+      if (threadstate)
+        mine = false;
+      else
+        {
+          threadstate = PyEval_SaveThread();
+          mine = true;
+        }
+    }
+
+    scoped_gil_release::~scoped_gil_release() {
+      if (!Py_IsInitialized())
+        return;
+      if (mine) {
+        PyEval_RestoreThread(threadstate);
+        mine = false;
+        threadstate = NULL;
+      }
+    }
+
+    scoped_call_back_to_python::scoped_call_back_to_python()
+      : have(false)
+    {
+      if (!Py_IsInitialized())
+        return;
+
+      have = true;
+      gilstate = PyGILState_Ensure();
+    }
+
+    scoped_call_back_to_python::~scoped_call_back_to_python()
+    {
+      if (!Py_IsInitialized())
+        return;
+      ECTO_ASSERT(have, "We have no GIL to release");
+      PyGILState_Release(gilstate);
+    }
 
   }
 }

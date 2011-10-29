@@ -1,7 +1,7 @@
-// 
+//
 // Copyright (c) 2011, Willow Garage, Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
 //     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
 //     * Neither the name of the Willow Garage, Inc. nor the names of its
 //       contributors may be used to endorse or promote products derived from
 //       this software without specific prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -24,7 +24,7 @@
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
-// 
+//
 #include <ecto/plasm.hpp>
 #include <ecto/cell.hpp>
 #include <ecto/schedulers/singlethreaded.hpp>
@@ -88,7 +88,7 @@ namespace ecto
       return tuples;
     }
 
-    void plasm_connect_explicit(plasm& p, 
+    void plasm_connect_explicit(plasm& p,
                                 bp::object fromcell, std::string fromport,
                                 bp::object tocell, std::string toport)
     {
@@ -98,8 +98,8 @@ namespace ecto
       cell::ptr tc = bp::extract<cell::ptr>(tc_impl);
       p.connect(fc, fromport, tc, toport);
     }
-                                
-    void plasm_disconnect_explicit(plasm& p, 
+
+    void plasm_disconnect_explicit(plasm& p,
                                    bp::object fromcell, std::string fromport,
                                    bp::object tocell, std::string toport)
     {
@@ -109,7 +109,7 @@ namespace ecto
       cell::ptr tc = bp::extract<cell::ptr>(tc_impl);
       p.disconnect(fc, fromport, tc, toport);
     }
-                                
+
 
     void plasm_connect_list(plasm& p, bp::list connections)
     {
@@ -158,6 +158,12 @@ namespace ecto
     {
       std::ifstream in(filename.c_str());
       p.load(in);
+    }
+
+    void
+    plasm_set_movie_out(plasm&p,std::string s)
+    {
+      p.set_movie_out(s);
     }
 
     bp::list plasm_get_connections(plasm& p)
@@ -217,15 +223,16 @@ namespace ecto
 
       p.def("connect", &plasm_connect_list, bp::args("connection_list"));
       p.def("connect", bp::raw_function(plasm_connect_args, 2));
-      p.def("connect", &plasm_connect_explicit, 
+      p.def("connect", &plasm_connect_explicit,
             bp::args("from_cell", "output_name", "to_cell", "intput_name"));
-      p.def("disconnect", &plasm_disconnect_explicit, 
+      p.def("disconnect", &plasm_disconnect_explicit,
             bp::args("from_cell", "output_name", "to_cell", "intput_name"));
       p.def("execute", &plasm_execute,
             (bp::args("niter") = 1),
             "Executes the graph using a single threaded scheduler.");
 
       p.def("viz", wrapViz, "Get a graphviz string representation of the plasm.");
+      p.def("movie_out", plasm_set_movie_out, "Write svgs every time something happens here (format string, use e.g %04u in filename");
       p.def("connections", plasm_get_connections, "Grabs the current list based description of the graph. "
             "Its a list of tuples (from_cell, output_key, to_cell, input_key)");
       p.def("cells", plasm_get_cells, "Grabs the current set of cells that are in the plasm.");

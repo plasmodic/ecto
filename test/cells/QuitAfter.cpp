@@ -27,6 +27,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <ecto/log.hpp>
 #include <ecto/ecto.hpp>
 #include <ecto/registry.hpp>
 
@@ -38,39 +39,42 @@ namespace ecto_test
     static void declare_params(tendrils& params)
     {
       params.declare<unsigned> ("N", "Quit after this many calls to process()");
-      params.declare<bool> ("restart_okay", "okay to restart");
     }
 
     static void declare_io(const tendrils& params, tendrils& in, tendrils& out)
     {
       in.declare<double> ("in", "An inbox");
+      out.declare<double>("out", "outbox");
     }
 
-    QuitAfter() : quit_already(false), restart_okay(false), N(0), current(0) { }
+    QuitAfter() : N(0), current(0) { }
 
 
     void configure(const tendrils& parms, const tendrils& inputs, const tendrils& outputs)
     {
       N = parms.get<unsigned>("N");
-      restart_okay = parms.get<bool>("restart_okay");
+      in = inputs["in"];
+      out = outputs["out"];
     }
 
-    int process(const tendrils& in, const tendrils& /*out*/)
+    void start() { current = 0; }
+
+    int process(const tendrils&, const tendrils&)
     {
-      if (!restart_okay && (current >= N)) 
-        assert(false && "This shouldn't have been called, we signaled an error already");
+      ECTO_LOG_DEBUG("<< process QuitAfter, current=%u N=%u", current % N);
+      if (current == N) 
+        {
+          ECTO_LOG_DEBUG("<< QUITTING at %u", N);
+          return ecto::QUIT;
+        }
+      
+      *out = *in;
       ++current;
-      if (current == N) {
-        if (restart_okay) current = 0;
-        return ecto::QUIT;
-      }
       return ecto::OK;
     }
 
-    bool quit_already;
-    bool restart_okay;
-    unsigned N;
-    unsigned current;
+    ecto::spore<double> in, out;
+    unsigned N, current;
   };
 
 }

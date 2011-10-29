@@ -31,7 +31,7 @@
 #include <ecto/tendril.hpp>
 #include <ecto/spore.hpp>
 #include <boost/thread.hpp>
-#define BOOST_SIGNALS2_MAX_ARGS 2
+#define BOOST_SIGNALS2_MAX_ARGS 3
 #include <boost/signals2.hpp>
 #include <string>
 #include <sstream>
@@ -63,7 +63,7 @@ namespace ecto
     typedef storage_type::size_type size_type;
     typedef storage_type::difference_type difference_type;
     typedef storage_type::key_compare key_compare;
-    
+
     tendrils();
 
     iterator begin() { return storage.begin(); }
@@ -82,19 +82,19 @@ namespace ecto
     void erase(const key_type& k) { storage.erase(k); }
 
     template <typename InputIterator>
-    void 
+    void
     insert(InputIterator first, InputIterator last)
     {
       storage.insert(first, last);
     }
-    
+
     std::pair<iterator, bool> insert(const value_type &v)
     {
       return storage.insert(v);
     }
 
     key_compare key_comp() const { return storage.key_comp(); }
-      
+
 
     /**
      * \brief Declare a tendril of a certain type, with only a name, no doc, or default values.

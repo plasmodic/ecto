@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# 
+#
 # Copyright (c) 2011, Willow Garage, Inc.
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
 #     * Redistributions of source code must retain the above copyright
@@ -13,7 +13,7 @@
 #     * Neither the name of the Willow Garage, Inc. nor the names of its
 #       contributors may be used to endorse or promote products derived from
 #       this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -25,7 +25,7 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-# 
+#
 import ecto
 import ecto_test
 from pyecto import MyModule
@@ -40,21 +40,29 @@ def test_python_module():
     print mod.outputs.out
     assert mod.outputs.out == "spam"*2
 
-def test_python_module_plasm():
+def test_python_module_plasm(Schedtype):
+    print "*"*80
+    print Schedtype
     mod = MyModule(text="spam")
     g = ecto_test.Generate(start = 1 , step =1)
     plasm = ecto.Plasm()
     plasm.connect(g,"out",mod,"input")
-    sched = ecto.schedulers.Singlethreaded(plasm)
+    sched = Schedtype(plasm)
     for i in range(1,5):
+        print "HERE"
         sched.execute(niter=1)
-        assert g.outputs.out == i
-        assert mod.outputs.out == "spam"*i
+        sched.execute_async(niter=1)
+        sched.wait()
+        assert g.outputs.out == i*2
+        assert mod.outputs.out == "spam"*i*2
+
     sched.execute(niter=1)
-    assert g.outputs.out == 5
-    assert mod.outputs.out == "spam"*5
-    
+    sched.execute_async(niter=1)
+    sched.wait()
+    assert g.outputs.out == 10
+    assert mod.outputs.out == "spam"*10
+
 if __name__ == '__main__':
     test_python_module()
-    test_python_module_plasm()
+    map(test_python_module_plasm, ecto.test.schedulers)
 

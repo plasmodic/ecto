@@ -27,4 +27,39 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #pragma once
-#include <ecto/boost-config.hpp>
+#include <boost/thread.hpp>
+#include <boost/noncopyable.hpp>
+
+namespace ecto
+{
+
+  //
+  //  barebones, slow, "atomic" variable
+  //
+  template <typename T>
+  class atomic : boost::noncopyable
+  {
+
+    T value;
+    boost::mutex mtx;
+
+  public:
+
+    atomic() { }
+    explicit atomic(T v) : value(v) { }
+
+    T get() { return value; }
+
+    class scoped_lock : boost::noncopyable
+    {
+      boost::mutex::scoped_lock sl;
+
+    public:
+
+      scoped_lock(atomic& a_) : sl(a_.mtx), value(a_.value) { }
+      T& value;
+    };
+
+  };
+
+}

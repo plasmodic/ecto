@@ -1,7 +1,7 @@
-// 
+//
 // Copyright (c) 2011, Willow Garage, Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
 //     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
 //     * Neither the name of the Willow Garage, Inc. nor the names of its
 //       contributors may be used to endorse or promote products derived from
 //       this software without specific prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -24,7 +24,8 @@
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
-// 
+//
+#include <ecto/log.hpp>
 #include <ecto/ecto.hpp>
 #include <ecto/cell.hpp>
 
@@ -44,7 +45,7 @@ namespace bp = boost::python;
 
 namespace ecto
 {
-  void inspect_impl(ecto::cell_ptr m, const boost::python::tuple& args, 
+  void inspect_impl(ecto::cell_ptr m, const boost::python::tuple& args,
                     const boost::python::dict& kwargs);
 
   namespace py
@@ -54,20 +55,37 @@ namespace ecto
     {
       cellwrap():initialized_(false){}
 
+      void dispatch_start()
+      {
+        ecto::py::scoped_call_back_to_python scb;
+        if (bp::override start = this->get_override("start"))
+          start();
+      }
+
+      void dispatch_stop()
+      {
+        ecto::py::scoped_call_back_to_python scb;
+        if (bp::override stop = this->get_override("stop"))
+          stop();
+      }
+
       void dispatch_declare_params(tendrils& params)
       {
+        ecto::py::scoped_call_back_to_python scb;
         if (bp::override init = this->get_override("declare_params"))
           init(boost::ref(params));
       }
 
       void dispatch_declare_io(const tendrils&params, tendrils& inputs, tendrils& outputs)
       {
+        ecto::py::scoped_call_back_to_python scb;
         if (bp::override declare_io = this->get_override("declare_io"))
           declare_io(boost::ref(params), boost::ref(inputs), boost::ref(outputs));
       }
 
       void dispatch_configure(const tendrils& params, const tendrils& inputs, const tendrils& outputs)
       {
+        ecto::py::scoped_call_back_to_python scb;
         if (bp::override config = this->get_override("configure"))
           config(boost::ref(params));
       }
@@ -82,6 +100,8 @@ namespace ecto
 
       ReturnCode dispatch_process(const tendrils& inputs, const tendrils& outputs)
       {
+        std::cout << "BREAKY\n";
+        ecto::py::scoped_call_back_to_python scb;
         int value = OK;
         std::for_each(inputs.begin(),inputs.end(), YouveBeenServed());
         if (bp::override proc = this->get_override("process"))
@@ -158,6 +178,8 @@ namespace ecto
         .def("declare_io", ((void(cell::*)()) &cell::declare_io))
         .def("configure", ((void(cell::*)()) &cell::configure))
         .def("process", (void(cell::*)()) &cell::process)
+        .def("start", (void(cell::*)()) &cell::start)
+        .def("stop", (void(cell::*)()) &cell::stop)
         .def("verify_params", &cell::verify_params)
         .def("verify_inputs", &cell::verify_inputs)
 
@@ -167,7 +189,7 @@ namespace ecto
         .def("typename", &cell::type)
         .def("name",(((std::string(cell::*)() const) &cell::name)))
         .def("name",(((void(cell::*)(const std::string&)) &cell::name)))
-        
+
         .def("doc", &cellwrap::doc)
         .def("short_doc",(std::string(cell::*)() const) &cell::short_doc)
         .def("gen_doc", &cell::gen_doc)
@@ -207,10 +229,10 @@ namespace ecto
     }
   }
 
-  void inspect_impl(ecto::cell_ptr m, const boost::python::tuple& args, 
+  void inspect_impl(ecto::cell_ptr m, const boost::python::tuple& args,
                     const boost::python::dict& kwargs)
   {
-    
+
     if (bp::len(args) > 1)
       throw std::runtime_error("Only one non-keyword argument allowed, this will specify instance name");
 
@@ -219,7 +241,7 @@ namespace ecto
         // generate default name == type
         m->name(m->type());
       }
-    else 
+    else
       {
         bp::extract<std::string> e(args[0]);
         if (! e.check())
@@ -227,6 +249,8 @@ namespace ecto
         m->name(e());
       }
     m->declare_params();
+
+    ECTO_LOG_DEBUG("inspect_impl %s", m->name());
 
     bp::list l = kwargs.items();
     for (int j = 0; j < bp::len(l); ++j)
@@ -238,8 +262,9 @@ namespace ecto
           {
             ecto::strand s = bp::extract<ecto::strand>(value);
             m->strand_ = s;
+            ECTO_LOG_DEBUG("Found a strand for cell %s, id=%p", m->name() % s.id());
           }
-        else 
+        else
           {
             tendril_ptr tp = m->parameters[keystring];
             try{

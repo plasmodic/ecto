@@ -25,14 +25,6 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 // 
-// #define ECTO_THREADPOOL_DEBUG
-
-#if defined(ECTO_THREADPOOL_DEBUG)
-#define ECTO_LOG_ON
-#define ECTO_USLEEP() // usleep(500000)
-#else
-#define ECTO_USLEEP()
-#endif
 
 #include <ecto/ecto.hpp>
 
@@ -45,6 +37,7 @@
 #include <ecto/impl/graph_types.hpp>
 #include <ecto/edge.hpp>
 #include <ecto/impl/invoke.hpp>
+#include <ecto/impl/schedulers/util.hpp>
 #include <ecto/schedulers/threadpool.hpp>
 
 #include <string>
@@ -80,87 +73,6 @@ namespace ecto {
     namespace asio = boost::asio;
 
     namespace pt = boost::posix_time;
-
-    struct propagator
-    {
-      asio::io_service &from, &to;
-      asio::io_service::work work;
-
-      propagator(asio::io_service& from_, asio::io_service& to_) 
-        : from(from_), to(to_), work(to) { }
-
-      void operator()() {
-        from.run();
-      }
-
-      template <typename Handler>
-      void post(Handler h)
-      {
-        to.post(h);
-      }
-    };
-
-
-    struct thrower
-    {
-      exception_ptr eptr;
-      thrower(exception_ptr eptr_) : eptr(eptr_) { }
-
-      void operator()() const
-      {
-        ECTO_LOG_DEBUG("%s", __PRETTY_FUNCTION__);
-        rethrow_exception(eptr);
-      }
-    };
-
-    struct runandjoin
-    {
-      typedef shared_ptr<runandjoin> ptr;
-
-      thread runner;
-
-      runandjoin() { }
-
-      ~runandjoin() {
-        if (runner.joinable())
-          runner.join();
-      }
-
-      void join() 
-      {
-        if (runner.joinable())
-          runner.join();
-      }
-
-      void interrupt() 
-      {
-        ECTO_LOG_DEBUG("interrupting %p", this);
-        runner.interrupt();
-        ECTO_LOG_DEBUG("interrupt    %p done", this);
-      }
-
-      template <typename Work>
-      void impl(Work w)
-      {
-        try {
-          w();
-        } catch (const boost::exception& e) {
-          ECTO_LOG_DEBUG("post thrower(boost::exception) %s", __PRETTY_FUNCTION__);
-          w.post(thrower(boost::current_exception()));
-        } catch (const std::exception& e) {
-          ECTO_LOG_DEBUG("post thrower (std::exception) %s", __PRETTY_FUNCTION__);
-          w.post(thrower(boost::current_exception()));
-        }
-        w.post(bind(&runandjoin::join, this));
-      }
-
-      template <typename Work>
-      void run(Work w)
-      {
-        boost::scoped_ptr<thread> newthread(new thread(bind(&runandjoin::impl<Work>, this, w)));
-        newthread->swap(runner);
-      }
-    };
 
     struct threadpool::impl 
     {
@@ -204,8 +116,6 @@ namespace ecto {
         void async_wait_for_input()
         {
           boost::this_thread::interruption_point();
-          //ECTO_LOG_DEBUG("%s async_wait_for_input", this);
-          ECTO_USLEEP();
           namespace asio = boost::asio;
 
           if (context.stop) return;
@@ -459,8 +369,6 @@ namespace ecto {
       //check this plasm for correctness.
       plasm_->check();
       plasm_->configure_all();
-
-      plasm_->reset_ticks();
 
       std::cout << "Threadpool executing ";
 

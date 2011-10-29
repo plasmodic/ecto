@@ -33,6 +33,7 @@
 #include <boost/noncopyable.hpp>
 #include <boost/optional.hpp>
 
+#include <ecto/forward.hpp>
 #include <ecto/tendril.hpp>
 #include <ecto/tendrils.hpp>
 #include <ecto/strand.hpp>
@@ -118,6 +119,16 @@ namespace ecto
     void configure();
 
     /**
+       scheduler is going to call process() zero or more times.
+     */
+    void start();
+
+    /**
+       scheduler is not going to call process() for a while.
+     */
+    void stop();
+
+    /**
      * \brief Dispatches the process function for the client cell.  This should only
      * be called from one thread at a time.
      *
@@ -184,6 +195,11 @@ namespace ecto
     void inc_tick();
     void reset_tick();
 
+    bool stop_requested() const { return stop_requested_; }
+    void stop_requested(bool b) { stop_requested_ = b; }
+
+    boost::signals2::signal<void(cell&, bool)> bsig_process;
+
   protected:
 
     virtual void dispatch_declare_params(tendrils& t) = 0;
@@ -196,6 +212,9 @@ namespace ecto
 
     virtual ReturnCode dispatch_process(const tendrils& inputs, const tendrils& outputs) = 0;
 
+    virtual void dispatch_start() = 0;
+    virtual void dispatch_stop() = 0;
+
     virtual std::string dispatch_name() const = 0;
 
     virtual ptr dispatch_clone() const = 0;
@@ -205,19 +224,25 @@ namespace ecto
       return "";
     }
 
-    virtual void dispatch_short_doc(const std::string&)
-    {
-    }
+    virtual void dispatch_short_doc(const std::string&) { }
+
   private:
 
     cell(const cell&);
 
     std::string instance_name_;
+    bool stop_requested_;
     bool configured;
     std::size_t tick_;
+    boost::mutex mtx;
+#if defined(ECTO_STRESS_TEST)
+    boost::mutex process_mtx;
+#endif
+
+    friend struct ecto::schedulers::access;
   };
 
-  
+
   /**
    * \brief Helper class for determining if client modules have function
    * implementations or not.
@@ -228,46 +253,62 @@ namespace ecto
   {
     typedef char yes;
     typedef char (&no)[2];
-    
+
     // SFINAE eliminates this when the type of arg is invalid
-    template<class U>
-    static yes test_declare_params(__typeof__(&U::declare_params));
     // overload resolution prefers anything at all over "..."
     template<class U>
+    static yes test_declare_params(__typeof__(&U::declare_params));
+    template<class U>
     static no test_declare_params(...);
+    enum
+    {
+      declare_params = sizeof(test_declare_params<T> (0)) == sizeof(yes)
+    };
 
     template<class U>
     static yes test_declare_io(__typeof__(&U::declare_io));
     template<class U>
     static no test_declare_io(...);
+    enum
+    {
+      declare_io = sizeof(test_declare_io<T> (0)) == sizeof(yes)
+    };
 
     template<class U>
     static yes test_configure(__typeof__(&U::configure));
     template<class U>
     static no test_configure(...);
+    enum
+    {
+      configure = sizeof(test_configure<T> (0)) == sizeof(yes)
+    };
 
     template<class U>
     static yes test_process(__typeof__(&U::process));
     template<class U>
     static no test_process(...);
-
-    enum
-    {
-      declare_params = sizeof(test_declare_params<T> (0)) == sizeof(yes)
-    };
-    enum
-    {
-      declare_io = sizeof(test_declare_io<T> (0)) == sizeof(yes)
-    };
-    enum
-    {
-      configure = sizeof(test_configure<T> (0)) == sizeof(yes)
-    };
     enum
     {
       process = sizeof(test_process<T> (0)) == sizeof(yes)
     };
 
+    template<class U>
+    static yes test_start(__typeof__(&U::start));
+    template<class U>
+    static no test_start(...);
+    enum
+    {
+      start = sizeof(test_start<T> (0)) == sizeof(yes)
+    };
+
+    template<class U>
+    static yes test_stop(__typeof__(&U::stop));
+    template<class U>
+    static no test_stop(...);
+    enum
+    {
+      stop = sizeof(test_stop<T> (0)) == sizeof(yes)
+    };
   };
 
   /**
@@ -290,7 +331,7 @@ namespace ecto
     typedef int_<0> not_implemented;
     typedef int_<1> implemented;
 
-    // 
+    //
     // declare_params
     //
     typedef int_<has_f<Impl>::declare_params> has_declare_params;
@@ -313,7 +354,7 @@ namespace ecto
     }
 
 
-    // 
+    //
     // declare_io
     //
     static void declare_io(const tendrils& params, tendrils& inputs, tendrils& outputs, not_implemented)
@@ -337,7 +378,7 @@ namespace ecto
       declare_io(params, inputs, outputs);
     }
 
-    // 
+    //
     // configure
     //
     void configure(const tendrils&, const tendrils& , const tendrils&, not_implemented)
@@ -356,7 +397,7 @@ namespace ecto
       configure(params, inputs, outputs, int_<has_f<Impl>::configure> ());
     }
 
-    // 
+    //
     // process
     //
     ReturnCode process(const tendrils&, const tendrils&, not_implemented)
@@ -372,6 +413,26 @@ namespace ecto
     ReturnCode dispatch_process(const tendrils& inputs, const tendrils& outputs)
     {
       return process(inputs, outputs, int_<has_f<Impl>::process> ());
+    }
+
+    //
+    // start
+    //
+    void start(not_implemented) { }
+    void start(implemented) { impl->start(); }
+    void dispatch_start()
+    {
+      start(int_<has_f<Impl>::start> ());
+    }
+
+    //
+    // stop
+    //
+    void stop(not_implemented) { }
+    void stop(implemented) { impl->stop(); }
+    void dispatch_stop()
+    {
+      stop(int_<has_f<Impl>::stop> ());
     }
 
     std::string dispatch_name() const
@@ -424,7 +485,7 @@ namespace ecto
       }
     }
 
-  public: 
+  public:
 
     boost::shared_ptr<Impl> impl;
     static std::string SHORT_DOC;
@@ -434,12 +495,15 @@ namespace ecto
 
   private:
 
-    void init_strand(boost::mpl::true_) { } // threadsafe
+    void init_strand(boost::mpl::true_)
+    {
+    } // threadsafe
 
-    void init_strand(boost::mpl::false_) { 
-      // thread-unsafe
+    void init_strand(boost::mpl::false_) {
       static ecto::strand strand_;
       cell::strand_ = strand_;
+      ECTO_ASSERT(cell::strand_->id() == strand_.id(), "Catastrophe... cells not correctly assignable");
+      ECTO_LOG_DEBUG("%s cell has strand id=%p", cell::type() % cell::strand_->id());
     }
   };
 

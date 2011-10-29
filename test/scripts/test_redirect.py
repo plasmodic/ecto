@@ -30,10 +30,7 @@ import ecto
 import ecto_test
 import sys
 
-
 fname = "test_redirect.log"
-
-#FIXME This things hangs.
 
 def make(Schedtype):
     print 'Using :', Schedtype
@@ -49,29 +46,21 @@ def make(Schedtype):
 def verify():
     f = open(fname)
     txt = f.read()
-    print ">>>", txt, "<<<"
+    lns = len(txt.splitlines())
+    print "txt has", lns, "lines" 
     assert len(txt.splitlines()) >= 5
     
+for s in ecto.test.schedulers:
+    print s, "SYNC"
+    sched = make(s)
+    sched.execute(niter=5)
+    ecto.unlog_to_file()
+    verify()
 
-sched = make(ecto.schedulers.Singlethreaded)
-sched.execute(niter=5)
-verify()
-
-sched = make(ecto.schedulers.Singlethreaded)
-sched.execute_async(niter=5)
-sched.wait()
-verify()
-
-
-
-sched = make(ecto.schedulers.Threadpool)
-sched.execute(niter=5)
-verify()
-
-sched = make(ecto.schedulers.Threadpool)
-sched.execute_async(niter=5)
-sched.wait()
-verify()
-
-
+    print s, "ASYNC"
+    sched2 = make(s)
+    sched2.execute_async(niter=5)
+    sched2.wait()
+    ecto.unlog_to_file()
+    verify()
 

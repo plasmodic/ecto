@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# 
+#
 # Copyright (c) 2011, Willow Garage, Inc.
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
 #     * Redistributions of source code must retain the above copyright
@@ -13,7 +13,7 @@
 #     * Neither the name of the Willow Garage, Inc. nor the names of its
 #       contributors may be used to endorse or promote products derived from
 #       this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -25,46 +25,68 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-# 
-import ecto
-import ecto_test
+#
+import ecto, ecto_test, sys
+from ecto.test import test
 
-def test_strands(nlevels, SchedType, execfn, expect):
+@test
+def test_strand_basic_semantics():
+    s = ecto.Strand()
+    print "s.id =", s.id 
+    orig_id = s.id
+    
+    c = ecto_test.DontCallMeFromTwoThreads("CRASHY", strand=s)
+    c2 = ecto_test.DontCallMeFromTwoThreads("CRASHY2", strand=s)
+    c3 = ecto_test.DontCallMeFromTwoThreads("CRASHY3", strand=s)
+    p = ecto.Plasm()
+    gen = ecto_test.Generate("GENERATE", step=1.0, start=1.0)
+    p.connect(gen[:] >> c[:])
+    p.connect(c[:] >> c2[:])
+    p.connect(c2[:] >> c3[:])
+    sched = ecto.schedulers.Multithreaded(p)
+    sched.execute(10)
+
+@test
+def test_user_defined_strands(nlevels, SchedType, execfn, expect):
     s1 = ecto.Strand()
     s2 = s1
     s3 = ecto.Strand()
-    
+
     print "s1.id ==", s1.id
     print "s2.id ==", s2.id
     print "s3.id ==", s3.id
     assert s1.id == s2.id
     assert s3.id != s2.id
     assert s3.id != s1.id
-    
-    plasm = ecto.Plasm()
 
-    gen = ecto_test.Generate(step=1.0, start=1.0)
-    noncurr = ecto_test.DontCallMeFromTwoThreads(strand=s1)
-    plasm.connect(gen, "out", noncurr, "in")
+    plasm = ecto.Plasm()
+    # plasm.movie_out("strands_%03d.dot")
+
+    gen = ecto_test.Generate("GENERATE", step=1.0, start=1.0)
+    noncurr = ecto_test.DontCallMeFromTwoThreads("ALPHA", strand=s1)
+    plasm.connect(gen[:] >> noncurr[:])
 
     for k in range(nlevels):
-        next = ecto_test.DontCallMeFromTwoThreads(strand=s1)
-        plasm.connect(noncurr, "out", next, "in")
-        noncurr = next
+        n = ecto_test.DontCallMeFromTwoThreads("BETA_%d" % k, strand=s2)
+        plasm.connect(noncurr[:] >> n[:])
+        noncurr = n
 
-    printer = ecto_test.Printer()
-    plasm.connect(noncurr, "out", printer, "in")
-    
+    printer = ecto_test.Printer("PRINTER")
+    plasm.connect(noncurr[:] >> printer[:])
+
     sched = SchedType(plasm)
     print "sched=", sched
     execfn(sched)
 
     result = noncurr.outputs.out
-    print "result=", result
+    print "result=", result, "expect=", expect
     assert(result == expect)
+#    execfn(sched)
+#    result = noncurr.outputs.out
+#    print "result=", result
 
+@test
 def test_implicit_strands(nlevels, SchedType, execfn, expect):
-    
     plasm = ecto.Plasm()
 
     gen = ecto_test.Generate(step=1.0, start=1.0)
@@ -78,7 +100,7 @@ def test_implicit_strands(nlevels, SchedType, execfn, expect):
 
     printer = ecto_test.Printer()
     plasm.connect(noncurr, "out", printer, "in")
-    
+
     sched = SchedType(plasm)
     print "sched=", sched
     execfn(sched)
@@ -87,6 +109,7 @@ def test_implicit_strands(nlevels, SchedType, execfn, expect):
     print "result=", result
     assert(result == expect)
 
+@test
 def shouldfail():
     plasm = ecto.Plasm()
 
@@ -99,8 +122,8 @@ def shouldfail():
 
     printer = ecto_test.Printer()
     plasm.connect(nc2, "out", printer, "in")
-    
-    sched = ecto.schedulers.Threadpool(plasm)
+
+    sched = ecto.schedulers.Multithreaded(plasm)
     try:
         print "about to execute... this should throw"
         sched.execute(nthreads=4, niter=4)
@@ -108,14 +131,17 @@ def shouldfail():
     except RuntimeError, e:
         print "good, python caught error", e
 
-shouldfail()
-print "shouldfail passed"
+test_strand_basic_semantics()
 
-test_implicit_strands(4, ecto.schedulers.Threadpool, lambda s: s.execute(nthreads=4, niter=4), expect=4.0)
+shouldfail()
+#print "shouldfail passed"
+
+test_implicit_strands(4, ecto.schedulers.Multithreaded, lambda s: s.execute(nthreads=4, niter=4), expect=4.0)
 test_implicit_strands(4, ecto.schedulers.Singlethreaded, lambda s: s.execute(niter=4), expect=4.0)
 
-test_strands(4, ecto.schedulers.Singlethreaded, lambda s: s.execute(niter=4), expect=4.0)
-test_strands(4, ecto.schedulers.Threadpool, lambda s: s.execute(nthreads=4, niter=4), expect=4.0)
+test_user_defined_strands(4, ecto.schedulers.Singlethreaded, lambda s: s.execute(niter=16), expect=16.0)
+test_user_defined_strands(4, ecto.schedulers.Multithreaded,
+                          lambda s: s.execute(nthreads=2, niter=16), expect=16.0)
 
 
 

@@ -32,6 +32,7 @@
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/serialization/split_member.hpp>
+#include <boost/thread.hpp>
 
 #include <string>
 #include <map>
@@ -55,7 +56,7 @@ namespace ecto
    * is used by all the ecto::schedulers to enable execution of modules
    * that are connected in the graph.
    */
-  class ECTO_EXPORT plasm : 
+  class ECTO_EXPORT plasm :
     boost::noncopyable, public boost::enable_shared_from_this<plasm>
   {
   public:
@@ -125,7 +126,7 @@ namespace ecto
 
     /**
      * \brief Return the number of cells in the plasm (vertices in the graph)
-     * 
+     *
      */
     std::size_t size() const;
 
@@ -135,13 +136,17 @@ namespace ecto
      */
     std::vector<cell_ptr> cells() const;
 
+    void set_movie_out(const std::string& s);
+    void frame(cell& c, bool);
+
     /**
      * \brief Calls configure on all modules, if configure has not already been called.
      */
     void configure_all();
 
     void reset_ticks();
-
+    void init_movie();
+    
     void save(std::ostream&) const;
     void load(std::istream&);
 
@@ -152,6 +157,10 @@ namespace ecto
     class impl;
     boost::shared_ptr<impl> impl_;
 
+    std::string movie_out;
+    unsigned movie_frame;
+    boost::mutex movie_mtx;
+
     template<class Archive>
     void
     save(Archive & ar, const unsigned int) const;
@@ -160,6 +169,7 @@ namespace ecto
     void
     load(Archive & ar,  const unsigned int);
     friend class boost::serialization::access;
-    BOOST_SERIALIZATION_SPLIT_MEMBER()
+    BOOST_SERIALIZATION_SPLIT_MEMBER();
+
   };
 }

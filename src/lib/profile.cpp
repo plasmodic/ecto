@@ -1,7 +1,7 @@
-// 
+//
 // Copyright (c) 2011, Willow Garage, Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
 //     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
 //     * Neither the name of the Willow Garage, Inc. nor the names of its
 //       contributors may be used to endorse or promote products derived from
 //       this software without specific prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -24,7 +24,7 @@
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
-// 
+//
 #include <ecto/all.hpp>
 
 #if !defined(_WIN32)
@@ -46,22 +46,22 @@ namespace ecto {
       asm(".byte 0x0f, 0x31" : "=A" (tsc));
       return( tsc );
     }
- 
+
 #elif (defined(__amd64__) || defined(__x86_64__))
- 
+
     unsigned long read_tsc(void)
     {
       unsigned long lo, hi;
       asm( "rdtsc" : "=a" (lo), "=d" (hi) );
       return( lo | (hi << 32) );
     }
- 
+
 #elif (defined(__powerpc__) || defined(__ppc__))
- 
+
     unsigned long read_tsc(void)
     {
       unsigned long tbl, tbu0, tbu1;
- 
+
       do
         {
           asm( "mftbu %0" : "=r" (tbu0) );
@@ -69,12 +69,12 @@ namespace ecto {
           asm( "mftbu %0" : "=r" (tbu1) );
         }
       while( tbu0 != tbu1 );
- 
+
       return( tbl );
     }
- 
+
 #elif defined(__sparc__)
- 
+
     unsigned long read_tsc(void)
     {
       unsigned long tick;
@@ -82,27 +82,27 @@ namespace ecto {
       asm( "mov   %%g1, %0" : "=r" (tick) );
       return( tick );
     }
- 
+
 #elif defined(__alpha__)
- 
+
     unsigned long read_tsc(void)
     {
       unsigned long cc;
       asm( "rpcc %0" : "=r" (cc) );
       return( cc & 0xFFFFFFFF );
     }
- 
+
 #elif defined(__ia64__)
- 
+
     unsigned long read_tsc(void)
     {
       unsigned long itc;
       asm( "mov %0 = ar.itc" : "=r" (itc) );
       return( itc );
     }
- 
+
 #else
-  
+
     unsigned long read_tsc(void)
     {
      //todo FIXME.
@@ -110,6 +110,10 @@ namespace ecto {
     }
 
 #endif
+
+    stats_type::stats_type()
+      : ncalls(0), total_ticks(0)
+    { }
 
     double stats_type::elapsed_time()
     {
@@ -125,6 +129,10 @@ namespace ecto {
     {
       return ncalls/elapsed_time();
     }
+
+    graph_stats_type::graph_stats_type()
+      : start_tick(0), stop_tick(0), cumulative_ticks(0)
+    { }
 
     void graph_stats_type::start()
     {
@@ -160,17 +168,17 @@ namespace ecto {
           double theo_hz = hz *(100/this_percentage);
           oss << str(boost::format("* %25s   %-7u %-12.2f %-12.2f %-8.2lf")
                      % m->name()
-                     % m->stats.ncalls 
+                     % m->stats.ncalls
                      % theo_hz
                      % hz
                      % this_percentage)
               << "\n";
           }
-              
+
 
       oss << hline
           << "cpu ticks:        " << cumulative_ticks
-          << " (@ " 
+          << " (@ "
           << (cumulative_ticks / (cumulative_time.total_milliseconds() / 1000.0)) / 1e+9 << " GHz)\n"
           << "elapsed time:     " << cumulative_time
           << " (timer resolution: " << 1.0 / cumulative_time.ticks_per_second() << " second)\n"
@@ -178,6 +186,8 @@ namespace ecto {
 
       return oss.str();
     }
+
+
 
 
   }

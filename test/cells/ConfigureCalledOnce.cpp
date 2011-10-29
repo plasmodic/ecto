@@ -37,7 +37,6 @@ namespace ecto_test
     ConfigureCalledOnce():count(0){}
     void configure(const tendrils&,const tendrils&,const tendrils&)
     {
-      SHOW();
       count++;
       if(count > 1){
         throw std::runtime_error("Configure called more than once!");

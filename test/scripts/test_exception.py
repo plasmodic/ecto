@@ -54,8 +54,3 @@ except ecto.ValueRequired:
 except ecto.ValueNone:
     print "ok!"
 
-
-
-
-
-

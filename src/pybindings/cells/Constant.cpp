@@ -47,7 +47,6 @@ namespace ecto
     {
       // copy supplied value of 
       bp::object obj = params.get<bp::object> ("value");
-
       out.declare<bp::object> ("out", "Any type, constant.", obj);
     }
 

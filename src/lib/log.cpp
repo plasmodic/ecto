@@ -1,7 +1,7 @@
-// 
+//
 // Copyright (c) 2011, Willow Garage, Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
 //     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
 //     * Neither the name of the Willow Garage, Inc. nor the names of its
 //       contributors may be used to endorse or promote products derived from
 //       this software without specific prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -24,33 +24,44 @@
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
-// 
+//
+#include <ecto/except.hpp>
+#include <ecto/test.hpp>
 #include <boost/thread.hpp>
+#include <boost/format.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <fstream>
 
 using namespace boost;
 
 namespace ecto {
+
+  bool logging_on() {
+    static bool val = getenv("ECTO_LOGGING");
+    return val;
+  }
+
   mutex log_mtx;
   mutex process_log_mtx;
 
-  void log(const std::string& msg)
+  const static std::string srcdir(SOURCE_DIR);
+  const static unsigned srcdirlen(srcdir.size()+1);
+
+  void log(const char* file, unsigned line, const std::string& msg)
   {
     mutex::scoped_lock lock(log_mtx);
     posix_time::ptime now(posix_time::microsec_clock::local_time());
-    std::cout << now << " " << boost::this_thread::get_id() << " " << msg << std::endl;
+    const char* file_remainder = file + srcdirlen;
+    std::cout << str(boost::format("%14p %40s:%-4u ") % boost::this_thread::get_id() % file_remainder % line)
+              << msg << std::endl;
+
   }
 
-#if defined(ECTO_LOG_STATS)
-  std::ofstream processlog("process.log");
-
-  void log_process(const std::string& instancename, uint64_t time, unsigned ncalls, bool onoff)
+  void assert_failed(const char* file, unsigned line, const char* cond, const char* msg)
   {
-    mutex::scoped_lock lock(process_log_mtx);
-    processlog << "process " << instancename << " " << time << " " << ncalls << " " << onoff << "\n";
+    log(file, line, str(boost::format("ASSERT FAILED: %s (%s)") % cond % msg));
+    abort();
   }
-#endif
 
 }
 

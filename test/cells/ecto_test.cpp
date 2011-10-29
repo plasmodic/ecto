@@ -29,7 +29,7 @@
 
 #include <ecto/ecto.hpp>
 #include <ecto/registry.hpp>
-#include <ecto/schedulers/threadpool.hpp>
+#include <ecto/schedulers/multithreaded.hpp>
 #include <iostream>
 #include <boost/format.hpp>
 #include <boost/foreach.hpp>
@@ -122,7 +122,6 @@ namespace ecto_test
 
     void onvalue_change(double v)
     {
-      SHOW();
       std::cout << "my value: " << *value_ << std::endl;
       std::cout << "new value: " << v << std::endl;
       if(*value_ != v) throw std::runtime_error("The new value should equal the old value!");
@@ -225,7 +224,23 @@ ECTO_CELL(ecto_test, ecto_test::NoPythonBindings, "NoPythonBindings", "Uses some
 using namespace ecto_test;
 namespace bp = boost::python;
 
+
+//
+//  some lowlevel asio rethrowing tests
+//
+void should_throw_in_interpreter_thread();
+void should_rethrow_in_interpreter_thread();
+void should_rethrow_stdexcept_in_interpreter_thread();
+
+void call_back_to_python(const bp::object&);
+void start_gil_thrashing(const bp::object&, unsigned);
 ECTO_DEFINE_MODULE(ecto_test)
 {
   bp::def("make_pod_tendril", ecto_test::makePodTendril);
+  bp::def("should_throw_in_interpreter_thread", &should_throw_in_interpreter_thread);
+  bp::def("should_rethrow_in_interpreter_thread", &should_rethrow_in_interpreter_thread);
+  bp::def("should_rethrow_stdexcept_in_interpreter_thread", &should_rethrow_stdexcept_in_interpreter_thread);
+
+  bp::def("call_back_to_python", &call_back_to_python);
+  bp::def("thrash_gil", &start_gil_thrashing);
 }

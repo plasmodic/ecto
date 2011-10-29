@@ -1,0 +1,39 @@
+digraph G {
+
+graph[ splines=true overlap=false ranksep=1.8 nodesep=1.8]
+edge [ fillcolor="#ddffdd" ]
+edge [ fontname=Monospace ]
+node [ shape=circle style=filled border="#333333" ];
+
+Constructed [ label = "Constructed" fillcolor="#ffaaaa" ];
+
+RunningBlocked [ label = "Running\n[blocked]" fillcolor="#aaffaa"];
+RunningBackground [ label = "Running\n[background]" fillcolor="#aaffaa"];
+StopRequested [ label = "Stop Requested" fillcolor=grey];
+RunFinishedNotJoined [ label = "Done running\nbut unjoined" fillcolor="#ffaaaa" ];
+Stopped [ label = "Stopped" fillcolor="#ffaaaa" ];
+Joined [ label = "Joined" fillcolor="#ffaaaa" ];
+WaitingForFullCompletion [ label = "Waiting for full completion\n[blocked]" fillcolor="#aaffaa" ];
+Destroyed [ label = "Destroyed" ];
+           
+RunningBackground -> RunFinishedNotJoined [ label = "[auto]" ];
+RunFinishedNotJoined -> Stopped [ label = "wait()" ];
+Constructed -> RunningBlocked [label = "execute()"];
+Stopped -> Destroyed [label = "[destructor]" ];
+Constructed -> Destroyed [label = "[destructor]" ];
+Constructed -> RunningBackground [label = "execute_async()"];
+RunningBlocked -> Stopped  [ label = "[auto]" fontname="italic"] ;
+RunningBackground -> RunningBackground [ label = "execute_async()\n[throws]" ];
+RunningBackground -> StopRequested [ label = "stop()" ] ;
+StopRequested -> Stopped [ label = "[auto]" ] ;
+Stopped -> Joined [ label = "wait()" ] ;
+Joined -> RunningBlocked [ label = "execute()" ] ;
+Joined -> RunningBackground [ label = "execute_async()" ] ;
+RunningBackground -> Stopped [ label = "wait()" ] ;
+RunningBackground -> WaitingForFullCompletion [ label = "wait()" ];
+WaitingForFullCompletion -> Stopped [ label = "[auto]" ];
+
+}
+
+
+

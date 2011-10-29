@@ -43,34 +43,21 @@ namespace ecto_test
 
     int process(const tendrils& inputs, const tendrils& outputs)
     {
-      boost::asio::io_service s;
-      boost::asio::deadline_timer dt(s);
+      boost::mutex::scoped_try_lock lock(mtx);
 
-      // try to rock
-      if (mtx.try_lock())
-        {
-          // we got the rock... i.e. we are rocking
-          std::cout << this << " got the lock." << std::endl;
-          // wait a bit so's we can be sure there will be collisions
-          dt.expires_from_now(boost::posix_time::milliseconds(100));
-          dt.wait();
+      if (! lock.owns_lock())
+        throw std::runtime_error("we should have that damned lock.");
 
-          double value = inputs.get<double> ("in");
-          std::cout << "nonconcurrent node @ " << this << " moving " << value << std::endl;
-          // do yer thing
-          outputs.get<double> ("out") = value;
+      // wait a bit so's we can be sure there will be collisions
+      ecto::test::random_delay();
+      usleep(1000);
+      
+      double value = inputs.get<double> ("in");
+      // do yer thing
+      outputs.get<double> ("out") = value;
 
-          // unrock
-          std::cout << this << " done with the lock." << std::endl;
-          mtx.unlock();
-        }
-      else
-        {
-          std::cout << this << " did NOT get the lock, I'm going to throw about this." << std::endl;
-          BOOST_THROW_EXCEPTION(std::runtime_error("AAAAGH NO LOCK HEEEEEELP"));
-          assert(false && "we should NOT be here");
-          // throw std::logic_error("Didn't get the lock... this means we were called from two threads.  Baaad.");
-        }
+      // unrock
+      ECTO_LOG_DEBUG("this=%p done with the lock", this);
       return ecto::OK;
 
     }
@@ -79,6 +66,6 @@ namespace ecto_test
   boost::mutex DontCallMeFromTwoThreads::mtx;
 
 }
-ECTO_CELL(ecto_test, ecto_test::DontCallMeFromTwoThreads, "DontCallMeFromTwoThreads", 
+ECTO_CELL(ecto_test, ecto_test::DontCallMeFromTwoThreads, "DontCallMeFromTwoThreads",
           "Throws if process called concurrently from two threads.");
 

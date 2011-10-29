@@ -35,19 +35,18 @@ def make_plasm():
     param_watcher = ecto_test.ParameterWatcher(value=2)
     sleep = ecto_test.Sleep(seconds=0.1)
     plasm = ecto.Plasm()
-    plasm.connect(generate["out"] >> param_watcher["input"],
-                  )
+    plasm.connect(generate["out"] >> param_watcher["input"])
     plasm.insert(sleep)
     return plasm
 
-def test_async_multiple_sched(Sheduler):
+def test_async_multiple_sched(Sched):
     p1 = make_plasm()
     p2 = make_plasm()
     
-    s1 = Sheduler(p1)
+    s1 = Sched(p1)
     s1.execute_async()
 
-    s2 = Sheduler(p2)
+    s2 = Sched(p2)
     s2.execute_async()
     time.sleep(0.5)
     s2.stop()
@@ -66,7 +65,4 @@ def test_async_multiple_sched(Sheduler):
 
 if __name__ == '__main__':
     test_async_multiple_sched(ecto.schedulers.Singlethreaded)
-    test_async_multiple_sched(ecto.schedulers.Threadpool)
-
-
-
+    test_async_multiple_sched(ecto.schedulers.Multithreaded)

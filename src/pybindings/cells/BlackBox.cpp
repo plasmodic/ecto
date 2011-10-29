@@ -31,6 +31,7 @@
 #include <boost/foreach.hpp>
 #include <ecto/plasm.hpp>
 #include <ecto/schedulers/singlethreaded.hpp>
+#include <ecto/schedulers/multithreaded.hpp>
 
 #include "../tendril_spec.hpp"
 namespace ecto

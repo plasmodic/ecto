@@ -70,13 +70,15 @@ namespace ecto {
       std::cout.flush();
       std::cerr.flush();
       log_file.close();
-      std::cout << "Redirecting C++ cout/cerr to '" << fname << "'\n";
+      std::cout << "Redirecting C++ cout to '" << fname << "'\n";
       log_file.open(fname.c_str());
       stdout_orig = std::cout.rdbuf();
       stderr_orig = std::cerr.rdbuf();
       log_rdbuf = log_file.rdbuf();
       std::cout.rdbuf(log_rdbuf);
       std::cerr.rdbuf(log_rdbuf);
+      std::ostream os(stdout_orig);
+      os << "Redirected.\n";
     }
 
   }

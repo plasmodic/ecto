@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# 
+#
 # Copyright (c) 2011, Willow Garage, Inc.
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
 #     * Redistributions of source code must retain the above copyright
@@ -13,7 +13,7 @@
 #     * Neither the name of the Willow Garage, Inc. nor the names of its
 #       contributors may be used to endorse or promote products derived from
 #       this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -25,13 +25,13 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-# 
+#
 import ecto
 import ecto_test
 import sys
 
 
-def test_plasm(nthreads, niter, n_nodes, incdelay):
+def test_plasm(Sched, nthreads, niter, n_nodes, incdelay):
     plasm = ecto.Plasm()
 
     gen = ecto_test.Generate("Gen", step=1.0, start=0.0)
@@ -46,14 +46,14 @@ def test_plasm(nthreads, niter, n_nodes, incdelay):
 
     printer = ecto_test.Printer("Printy")
     plasm.connect(inc, "out", printer, "in")
-#    
+#
 #    o = open('graph.dot', 'w')
 #    print >>o, plasm.viz()
 #    o.close()
 #    print "\n", plasm.viz(), "\n"
-    sched = ecto.schedulers.Threadpool(plasm)
+    sched = Sched(plasm)
     sched.execute(niter, nthreads)
-        
+
     print "RESULT:", inc.outputs.out
     shouldbe = float(n_nodes + niter - 1)
     print "expected:", shouldbe
@@ -62,16 +62,23 @@ def test_plasm(nthreads, niter, n_nodes, incdelay):
     #sched.execute(nthreads, niter)
     #result = inc.outputs.out
     #print "RESULT:", result
-    
+
     #shouldbe = float(n_nodes + (niter*2 - 1))
     #assert result == shouldbe
-                     
+
     return
 
 
 if __name__ == '__main__':
-    test_plasm(nthreads=int(sys.argv[1]), 
-               niter=int(sys.argv[2]), 
+    test_plasm(ecto.schedulers.Singlethreaded,
+               nthreads=int(sys.argv[1]),
+               niter=int(sys.argv[2]),
+               n_nodes=int(sys.argv[3]),
+               incdelay=int(sys.argv[4])
+               )
+    test_plasm(ecto.schedulers.Multithreaded,
+               nthreads=int(sys.argv[1]),
+               niter=int(sys.argv[2]),
                n_nodes=int(sys.argv[3]),
                incdelay=int(sys.argv[4])
                )

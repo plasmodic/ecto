@@ -29,7 +29,7 @@
 #pragma once
 #include <boost/shared_ptr.hpp>
 #include <boost/function/function1.hpp>
-#define BOOST_SIGNALS2_MAX_ARGS 2
+#define BOOST_SIGNALS2_MAX_ARGS 3
 #include <boost/signals2.hpp>
 #include <boost/any.hpp>
 
@@ -222,7 +222,7 @@ namespace ecto
     enforce_type() const
     {
       if (!is_type<T>())
-        BOOST_THROW_EXCEPTION(except::TypeMismatch() 
+        BOOST_THROW_EXCEPTION(except::TypeMismatch()
                               << except::from_typename(type_name())
                               << except::to_typename(name_of<T>()));
     }
@@ -435,7 +435,7 @@ NullTendril()
     operator<<(const tendril_ptr& lhs, const T& rhs)
     {
       if (!lhs)
-        BOOST_THROW_EXCEPTION(except::NullTendril() 
+        BOOST_THROW_EXCEPTION(except::NullTendril()
                               << except::to_typename("(null)")
                               << except::from_typename(name_of<T>()));
       *lhs << rhs;
@@ -456,7 +456,7 @@ NullTendril()
       return t;
     }
 
-    template <typename Archive> 
+    template <typename Archive>
       void serialize(Archive& ar, const unsigned int);
 
     std::size_t tick; // for sanity-checking

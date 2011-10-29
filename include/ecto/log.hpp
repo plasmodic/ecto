@@ -28,31 +28,49 @@
  */
 #pragma once
 
-#if defined(ECTO_LOG_ON)
+#include <ecto/config.hpp>
+
+#if defined(ECTO_LOGGING)
 #include <boost/format.hpp>
 #endif
 #include <ecto/util.hpp>
+#include <ecto/test.hpp>
 #include <stdint.h>
 
 namespace ecto {
-  ECTO_EXPORT void log(const std::string& msg);
-  ECTO_EXPORT void log_process(const std::string& name, uint64_t time, unsigned ncalls, bool startstop);
-
+  ECTO_EXPORT void log(const char*, unsigned line, const std::string& msg);
+  ECTO_EXPORT void assert_failed(const char* file, unsigned line, const char* cond, const char* msg);
+  bool logging_on();
 }
 
-#if defined(ECTO_LOG_ON)
-#define ECTO_LOG_DEBUG(fmt, args)                                       \
-  do {                                                                  \
-    ::ecto::log(str(boost::format(fmt) % args));                        \
-  } while (false)
+#ifdef NDEBUG
+#define ECTO_ASSERT(X, msg) do { ECTO_RANDOM_DELAY(); } while(false)
 #else
-#define ECTO_LOG_DEBUG(fmg, args) do { } while (false)
+#define ECTO_ASSERT(X, msg)                                             \
+  do {                                                                  \
+    ECTO_RANDOM_DELAY();                                                \
+    if (X) ; else ecto::assert_failed(__FILE__, __LINE__, #X, msg);     \
+  } while(false)
 #endif
 
-#if defined(ECTO_LOG_STATS)
-#define ECTO_LOG_PROCESS(instancename, time, ncalls, onoff) ::ecto::log_process(instancename, time, ncalls, onoff)
+#if defined(ECTO_LOGGING)
+#define ECTO_LOG_DEBUG(fmt, args)                                       \
+  do {                                                                  \
+    ECTO_RANDOM_DELAY();                                                \
+    if (__builtin_expect((ecto::logging_on()), 0))                      \
+      ::ecto::log(__FILE__, __LINE__, str(boost::format(fmt) % args));  \
+  } while (false)
+#define ECTO_START()  ECTO_LOG_DEBUG(">>> %s", __PRETTY_FUNCTION__);
+#define ECTO_FINISH() ECTO_LOG_DEBUG("<<< %s", __PRETTY_FUNCTION__);
 #else
-#define ECTO_LOG_PROCESS(instancename, time, ncalls, onoff)
-  
+#define ECTO_LOG_DEBUG(fmg, args) do { ECTO_RANDOM_DELAY(); } while (false)
+#define ECTO_START() do { ECTO_RANDOM_DELAY(); } while(false)
+#define ECTO_FINISH() do { ECTO_RANDOM_DELAY(); } while(false)
+#endif
+
+#ifdef ECTO_TRACE_EXCEPTIONS
+#define ECTO_TRACE_EXCEPTION(E) ECTO_LOG_DEBUG("CAUGHT: %s", E);
+#else
+#define ECTO_TRACE_EXCEPTION(E)
 #endif
 

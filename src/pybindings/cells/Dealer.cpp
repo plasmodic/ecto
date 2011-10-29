@@ -53,6 +53,7 @@ namespace ecto
     void
     configure(const tendrils& p, const tendrils& in, const tendrils& out)
     {
+      ecto::py::scoped_call_back_to_python scb;
       bp::object iterable = p["iterable"]->get<bp::object>();
 
       size_t end = bp::len(iterable);

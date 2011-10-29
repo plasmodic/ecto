@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# 
+#
 # Copyright (c) 2011, Willow Garage, Inc.
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
 #     * Redistributions of source code must retain the above copyright
@@ -13,7 +13,7 @@
 #     * Neither the name of the Willow Garage, Inc. nor the names of its
 #       contributors may be used to endorse or promote products derived from
 #       this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -25,7 +25,7 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-# 
+#
 import ecto
 import ecto_test
 import sys, time
@@ -33,7 +33,7 @@ import random
 
 def makeplasm():
     plasm = ecto.Plasm()
-    
+
     ping = ecto_test.Ping("Ping")
     sleep0 = ecto_test.SleepPyObjectAbuser(list_o_sleeps=[random.random() * 0.1 for i in range(1,10)])
     sleep1 = ecto_test.SleepPyObjectAbuser(list_o_sleeps=[random.random() * 0.1 for i in range(1,10)])
@@ -45,13 +45,13 @@ def makeplasm():
 
 def async(s):
     print "s.execute_async"
-    s.execute_async(niter=5)
+    s.execute_async(niter=5, nthreads=1)
 
 def sync(s):
     print "s.execute"
     s.execute(niter=5)
     print "s.execute DONE"
-    
+
 def nada(s):
     print "nada"
 
@@ -59,18 +59,18 @@ def waitonly(s):
     print "waitonly"
     s.wait()
 
-
 def interrupt(s):
     print "interrupt"
     s.interrupt()
 
 def interrupt_and_wait(s):
     print "interrupt_and_wait"
-    s.interrupt()
+    s.stop()
     s.wait()
 
 def tpool(Scheduler, go, afterwards, sleepdur=0.1):
-    print "tpool"
+    print "*"*80
+    print Scheduler, go, afterwards, sleepdur
     p = makeplasm()
     s = Scheduler(p)
     go(s)
@@ -92,7 +92,7 @@ def doemall(Sched):
     tpool(Sched, async, interrupt_and_wait)
     tpool(Sched, async, interrupt)
     tpool(Sched, async, nada)
-    
-doemall(ecto.schedulers.Threadpool)
+
+doemall(ecto.schedulers.Multithreaded)
 doemall(ecto.schedulers.Singlethreaded)
 

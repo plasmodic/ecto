@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# 
+#
 # Copyright (c) 2011, Willow Garage, Inc.
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
 #     * Redistributions of source code must retain the above copyright
@@ -13,7 +13,7 @@
 #     * Neither the name of the Willow Garage, Inc. nor the names of its
 #       contributors may be used to endorse or promote products derived from
 #       this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -25,14 +25,16 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-# 
+#
 import ecto
 import ecto_test
 import sys
+from ecto.test import test
 
 def build_addergraph(nlevels):
-    
+
     plasm = ecto.Plasm()
+    plasm.movie_out("frames/ecto%04u.viz");
 
     prevlevel = [ecto_test.Add("Adder 0_%u" % x) for x in range(2**(nlevels-1))]
     for adder in prevlevel:
@@ -47,7 +49,7 @@ def build_addergraph(nlevels):
             )
 
     print "prev has", len(prevlevel)
-        
+
     for k in range(nlevels-2, -1, -1):
         print "****** k=", k, " ***********"
         thislevel = [ecto_test.Add("Adder %u_%u" % (k, x)) for x in range(2**k)]
@@ -75,26 +77,34 @@ def build_addergraph(nlevels):
 
     return (plasm, final_adder)
 
-def test_plasm(nlevels, nthreads, niter):
+
+@test
+def test_plasm_impl(sched_type, nlevels, nthreads, niter):
     (plasm, outnode) = build_addergraph(nlevels)
-    sched = ecto.schedulers.Threadpool(plasm)
+    sched = sched_type(plasm)
     sched.execute(niter, nthreads)
     print "RESULT:", outnode.outputs.out
     shouldbe = float(2**nlevels * niter)
     print "expected:", shouldbe
     assert outnode.outputs.out == shouldbe
 
+def test_plasm(nlevels, nthreads, niter):
+    for sched in ecto.test.schedulers:
+        test_plasm_impl(sched, nlevels, nthreads, niter)
+
 if __name__ == '__main__':
-    #test_plasm(1, 1, 1)
+    test_plasm(1, 1, 1)
     test_plasm(1, 1, 2)
-    #test_plasm(5, 1, 1)
-    #test_plasm(5, 2, 1)
-    #test_plasm(5, 5, 5)
+    test_plasm(3,3,3)
+    test_plasm(4, 1, 1)
+    test_plasm(4, 2, 1)
+    test_plasm(4, 5, 5)
+    #    test_plasm(6, 6, 6)
     #test_plasm(6, 6, 6000)
-#    test_plasm(8, 1, 5)
-#    test_plasm(9, 64, 100)
-#    test_plasm(10, 8, 10)
-#    test_plasm(11, 8, 10)
+    #    test_plasm(8, 1, 5)
+    #test_plasm(9, 64, 100)
+    #test_plasm(10, 8, 10)
+    #test_plasm(11, 8, 10)
 
 
 

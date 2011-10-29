@@ -54,10 +54,30 @@ namespace ecto {
     struct graph_t;
   }
 
+  struct strand;
+  typedef boost::shared_ptr<strand> strand_ptr;
+  typedef boost::shared_ptr<const strand> strand_cptr;
+
+
   template <typename T> struct cell_;
+
+  struct scheduler;
+
+  namespace schedulers {
+    struct threadpool;
+    struct singlethreaded;
+    struct multithreaded;
+    struct access;
+  }
 }
 
+
+
 namespace boost {
+  namespace asio {
+    class io_service;
+  }
+
   namespace serialization {
     class access;
   }

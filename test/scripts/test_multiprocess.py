@@ -40,11 +40,11 @@ class Sender(ecto.Cell):
     @staticmethod
     def declare_params(params):
         params.declare("conn", "A pipe connection.", None)
-        #params.declare("file", "A file-like object.", StringIO())
+        params.declare("file", "A file-like object.", StringIO.StringIO())
 
     @staticmethod
     def declare_io(params, inputs, outputs):
-        #inputs.declare("file", "A file like object", None)
+        inputs.declare("file", "A file like object", None)
         pass
 
     def configure(self, params):
@@ -81,4 +81,3 @@ if __name__ == '__main__':
     p2.start()
     p1.join()
     p2.terminate()
-
