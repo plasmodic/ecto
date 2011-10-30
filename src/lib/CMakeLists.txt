@@ -34,8 +34,6 @@ source_group("Headers" FILES ${ecto_HEADERS})
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
-find_package(OpenCV REQUIRED)
-
 add_library(ecto SHARED
   abi.cpp
   cell.cpp
@@ -65,7 +63,6 @@ add_library(ecto SHARED
 
 target_link_libraries(ecto
   ${ECTO_DEP_LIBS}
-  ${OpenCV_LIBS}
   )
 
 set_source_files_properties(log.cpp
