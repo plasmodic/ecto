@@ -27,7 +27,6 @@
 // 
 #include <ecto/tendril.hpp>
 #include <boost/python.hpp>
-#include <opencv2/core/core.hpp>
 namespace ecto
 {
   using namespace except;

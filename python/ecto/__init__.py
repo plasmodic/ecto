@@ -180,8 +180,8 @@ def load_pybindings(name, path):
 
     """
 
-    import imp, sys
-    m = imp.load_dynamic(name, path[0] + ".so")
+    import imp
+    m = imp.load_dynamic(name, path[0] + ".so") #TODO this is only going to work on unix...
     thismod = sys.modules[name]
 
     for (k,v) in m.__dict__.items():
