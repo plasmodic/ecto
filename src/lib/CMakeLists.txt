@@ -45,7 +45,6 @@ add_library(ecto SHARED
   util.cpp
   log.cpp
   except.cpp
-  needs_gil.cpp
   profile.cpp
   python.cpp
   registry.cpp
@@ -55,7 +54,6 @@ add_library(ecto SHARED
   schedulers/invoke.cpp
   schedulers/singlethreaded.cpp
   schedulers/multithreaded.cpp
-  # schedulers/threadpool.cpp
   strand.cpp
   test.cpp
   ${ecto_HEADERS}
