@@ -219,6 +219,13 @@ namespace ecto {
         ECTO_LOG_DEBUG("JOINED, EXITING AFTER %u of %u", oci.value % max_iter);
         ECTO_ASSERT(max_iter == 0 || oci.value <= max_iter, "uh oh, our timing is way off");
       }
+      //reset all of the strands that may have references to our ioservice and what not.
+      for(size_t i = 0; i < stack.size(); i ++)
+      {
+        if(graph[stack[i]]->strand_){
+          graph[stack[i]]->strand_->reset();
+        }
+      }
       return 0;
     }
 
