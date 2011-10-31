@@ -96,20 +96,6 @@ namespace ecto {
     //
     //  impl
     //
-    namespace
-    {
-      boost::signals2::signal<void(void)> SINGLE_THREADED_SIGINT_SIGNAL;
-      void
-      sigint_static_thunk(int)
-      {
-        std::cerr << "*** SIGINT received, stopping graph execution.\n"
-                  << "*** If you are stuck here, you may need to hit ^C again\n"
-                  << "*** when back in the interpreter thread.\n" << "*** or Ctrl-\\ (backslash) for a hard stop.\n"
-                  << std::endl;
-        SINGLE_THREADED_SIGINT_SIGNAL();
-        PyErr_SetInterrupt();
-      }
-    }
 
     struct stack_runner
     {
@@ -187,20 +173,11 @@ namespace ecto {
       ECTO_LOG_DEBUG("execute_impl max_iter=%u nthread=%u",
                      max_iter % nthread);
 
-      compute_stack();
       {
         ecto::atomic<unsigned>::scoped_lock l(current_iter);
         l.value = 0;
       }
       workserv.reset();
-
-      boost::signals2::scoped_connection
-        interupt_connection(SINGLE_THREADED_SIGINT_SIGNAL.connect(boost::bind(&multithreaded::interrupt_impl,
-                                                                              this)));
-
-#if !defined(_WIN32)
-      signal(SIGINT, &sigint_static_thunk);
-#endif
 
       profile::graphstats_collector gs(graphstats);
 
@@ -241,16 +218,13 @@ namespace ecto {
         ECTO_LOG_DEBUG("JOINED, EXITING AFTER %u of %u", oci.value % max_iter);
         ECTO_ASSERT(max_iter == 0 || oci.value <= max_iter, "uh oh, our timing is way off");
       }
-      this->running(false);
       return 0;
     }
 
     void multithreaded::interrupt_impl() {
       stop();
-      runthread.interrupt();
-      runthread.join();
+      threads.interrupt_all();
       threads.join_all();
-      running(false);
     }
 
     void multithreaded::stop_impl()
@@ -259,10 +233,7 @@ namespace ecto {
 
     void multithreaded::wait_impl()
     {
-      while(running())
-        boost::this_thread::sleep(boost::posix_time::microseconds(10));
       threads.join_all();
-      runthread.join();
     }
   }
 }

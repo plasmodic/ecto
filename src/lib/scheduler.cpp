@@ -45,6 +45,20 @@ namespace ecto {
 
   using namespace ecto::except;
   using ecto::graph::graph_t;
+  namespace
+  {
+    boost::signals2::signal<void(void)> SINGLE_THREADED_SIGINT_SIGNAL;
+    void
+    sigint_static_thunk(int)
+    {
+      std::cerr << "*** SIGINT received, stopping graph execution.\n"
+                << "*** If you are stuck here, you may need to hit ^C again\n"
+                << "*** when back in the interpreter thread.\n" << "*** or Ctrl-\\ (backslash) for a hard stop.\n"
+                << std::endl;
+      SINGLE_THREADED_SIGINT_SIGNAL();
+      PyErr_SetInterrupt();
+    }
+  }
 
   scheduler::scheduler(plasm_ptr p)
     : plasm(p)
@@ -56,6 +70,9 @@ namespace ecto {
     if (!PyEval_ThreadsInitialized())
       BOOST_THROW_EXCEPTION(EctoException()
                             << diag_msg("Unable to initalize threads in python interpreter"));
+#if !defined(_WIN32)
+    signal(SIGINT, &sigint_static_thunk);
+#endif
   }
 
   scheduler::~scheduler()
@@ -96,20 +113,22 @@ namespace ecto {
 
   int scheduler::execute(unsigned niter, unsigned nthread)
   {
+    recursive_mutex::scoped_lock lock(iface_mtx);
+    if (running())
+      BOOST_THROW_EXCEPTION(EctoException()
+                            << diag_msg("Scheduler already running"));
+    //handle sigints for all schedulers.
+    boost::signals2::scoped_connection
+      interupt_connection(SINGLE_THREADED_SIGINT_SIGNAL.connect(boost::bind(&scheduler::interrupt, this)));
+
     compute_stack();
     notify_start();
 
+    //so that python may resume, means that all threads that would like
+    //to use python must create a scoped_call_back_to_python object
     ecto::py::scoped_gil_release sgr;
 
-    //ECTO_START();
-    recursive_mutex::scoped_lock lock(iface_mtx);
-    {
-      recursive_mutex::scoped_lock lock(running_mtx);
-      if (running())
-        BOOST_THROW_EXCEPTION(EctoException()
-                              << diag_msg("threadpool scheduler already running"));
-      running(true);
-    }
+    running(true);
 
     if (nthread == 0)
       nthread = boost::thread::hardware_concurrency();
@@ -144,7 +163,7 @@ namespace ecto {
     s.execute_impl(niter, nthread, s.top_serv);
     PyErr_CheckSignals();
     s.running(false);
-    s.notify_stop();
+    s.notify_stop(); //notify all cells that they have been stopped.
     ECTO_FINISH();
   }
 
@@ -154,10 +173,13 @@ namespace ecto {
     recursive_mutex::scoped_lock lock(iface_mtx);
     if (running())
       BOOST_THROW_EXCEPTION(EctoException()
-                            << diag_msg("threadpool scheduler already running"));
-    running(true);
+                            << diag_msg("Scheduler already running"));
+
+    //these should happen in the calling thread
     compute_stack();
     notify_start();
+
+    running(true);
 
     if (nthread == 0)
       nthread = boost::thread::hardware_concurrency();
@@ -165,7 +187,6 @@ namespace ecto {
     exec e(*this, niter, nthread);
 
     boost::scoped_ptr<thread> tmp(new thread(e));
-
     tmp->swap(runthread);
   }
 
@@ -212,10 +233,13 @@ namespace ecto {
     ECTO_START();
     recursive_mutex::scoped_lock lock(iface_mtx);
     interrupt_impl();
+    runthread.interrupt();
+    runthread.join();
   }
 
   bool scheduler::running() const
   {
+    //EAR Why are these locking here?
     recursive_mutex::scoped_lock lock(iface_mtx);
     recursive_mutex::scoped_lock running_lock(running_mtx);
     return running_value;
@@ -224,10 +248,12 @@ namespace ecto {
   void scheduler::wait()
   {
     ECTO_START();
+    //so that python may resume.
     ecto::py::scoped_gil_release sgr;
 
     recursive_mutex::scoped_lock lock(iface_mtx);
     wait_impl();
+    runthread.join();
   }
 
   void
@@ -250,7 +276,6 @@ namespace ecto {
           ECTO_LOG_DEBUG("%p <serv< done %s", &s % name);
           return;
         }
-      //      usleep(100000);
     }
   }
 }

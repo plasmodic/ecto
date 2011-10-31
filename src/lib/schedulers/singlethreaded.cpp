@@ -28,90 +28,28 @@
 
 #include <ecto/util.hpp>
 #include <ecto/plasm.hpp>
-#include <ecto/tendril.hpp>
-#include <ecto/cell.hpp>
-
-#include <string>
-#include <map>
-#include <set>
-#include <utility>
-#include <deque>
-
-#include <ecto/impl/graph_types.hpp>
-#include <ecto/plasm.hpp>
-#include <ecto/impl/invoke.hpp>
 #include <ecto/schedulers/singlethreaded.hpp>
-
-#include <boost/thread.hpp>
-#include <boost/scoped_ptr.hpp>
-#include <boost/date_time/posix_time/posix_time_duration.hpp>
-#include <boost/graph/topological_sort.hpp>
-
-#include <ecto/plasm.hpp>
-#include <ecto/scheduler.hpp>
-#include <ecto/tendril.hpp>
-#include <ecto/cell.hpp>
-
-#include <string>
-#include <map>
-#include <set>
-#include <utility>
-#include <deque>
-
-
 
 namespace ecto {
 
-  using namespace ecto::except;
-
   namespace schedulers {
 
-    namespace
-    {
-      boost::signals2::signal<void(void)> SINGLE_THREADED_SIGINT_SIGNAL;
-      void
-      sigint_static_thunk(int)
-      {
-        std::cerr << "*** SIGINT received, stopping graph execution.\n"
-                  << "*** If you are stuck here, you may need to hit ^C again\n"
-                  << "*** when back in the interpreter thread.\n" << "*** or Ctrl-\\ (backslash) for a hard stop.\n"
-                  << std::endl;
-        SINGLE_THREADED_SIGINT_SIGNAL();
-        PyErr_SetInterrupt();
-      }
-    }
-
-    using namespace ecto::graph;
-    using boost::thread;
-    using boost::bind;
-
-    namespace pt = boost::posix_time;
-
-    using boost::scoped_ptr;
-
     singlethreaded::singlethreaded(plasm_ptr p)
-      : scheduler(p)
+      : scheduler(p),interupted_(false)
     { }
 
     singlethreaded::~singlethreaded()
     {
+      if (!running())
+        return;
       interrupt();
-      //      wait_for_running_is(false);
-      // wait();
+      wait();
     }
 
     int singlethreaded::execute_impl(unsigned niter, unsigned nthread, boost::asio::io_service& topserv)
     {
       ECTO_START();
-      compute_stack();
-
-      boost::signals2::scoped_connection
-        interupt_connection(SINGLE_THREADED_SIGINT_SIGNAL.connect(boost::bind(&singlethreaded::interrupt, this)));
-
-#if !defined(_WIN32)
-      signal(SIGINT, &sigint_static_thunk);
-#endif
-
+      interupted_ = false;
       profile::graphstats_collector gs(graphstats);
 
       size_t retval = ecto::OK;
@@ -120,9 +58,12 @@ namespace ecto {
         {
           for (size_t k = 0; k < stack.size(); ++k)
             {
+              if(interupted_){
+                return ecto::QUIT;//someone interrupted.
+              }
               ECTO_LOG_DEBUG("k=%u niter=%u", k % niter);
               //need to check the return val of a process here, non zero means exit...
-              retval = this->invoke_process(stack[k]);
+              retval = invoke_process(stack[k]);
               if (retval) {
                 return retval;
               }
@@ -135,18 +76,15 @@ namespace ecto {
 
     void singlethreaded::interrupt_impl()
     {
-      runthread.interrupt();
-      runthread.join();
-      running(false);
+      interupted_ = true;
     }
 
     void singlethreaded::stop_impl()
     {
+      //nothing special to do here.. invoke_process takes care of this.
     }
     void singlethreaded::wait_impl()
     {
-      runthread.join();
-      //      wait_for_running_is(false);
     }
   }
 }
