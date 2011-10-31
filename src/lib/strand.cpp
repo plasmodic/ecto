@@ -48,7 +48,6 @@ namespace ecto {
 
   strand::~strand()
   {
-    std::cout << impl_ << ": impl count" << impl_.use_count() << std::endl;
   }
 
   std::size_t strand::id() const
