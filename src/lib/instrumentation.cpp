@@ -56,12 +56,6 @@ namespace ecto {
 #if defined(ECTO_LOG_STATS)
   std::ofstream processlog("process.log");
 
-  struct context {
-    cell_ptr cell;
-    bool
-
-  };
-
   void log_process_start()
   {
 
