@@ -44,12 +44,6 @@
 namespace ecto
 {
 
-  //forward declare schedulers for friendliness.
-  namespace schedulers
-  {
-    class singlethreaded;
-  }
-
   /**
    * \brief The plasm helps construct the graph structure in ecto.
    * It enforces several invariants that are necessary for scheduling DAGs and
