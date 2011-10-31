@@ -46,6 +46,11 @@ namespace ecto {
     ECTO_LOG_DEBUG("Created strand with id %p", id());
   }
 
+  strand::~strand()
+  {
+    std::cout << impl_ << ": impl count" << impl_.use_count() << std::endl;
+  }
+
   std::size_t strand::id() const
   {
     return reinterpret_cast<std::size_t>(impl_.get());

@@ -40,6 +40,7 @@ namespace ecto
     struct impl;
 
     strand();
+    ~strand();
 
     std::size_t id() const;
 
