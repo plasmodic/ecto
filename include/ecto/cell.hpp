@@ -53,7 +53,7 @@ namespace ecto
     OK = 0, //!< Everything A OK.
     QUIT = 1, //!< Explicit quit now.
     BREAK = 2, //!< Stop execution in my scope, jump to outer scope
-    CONTINUE = 3, //!< Stop executino in my scope, jump to top of scope
+    CONTINUE = 3, //!< Stop execution in my scope, jump to top of scope
     UNKNOWN = -1 //!< Unknown return code.
   };
 
