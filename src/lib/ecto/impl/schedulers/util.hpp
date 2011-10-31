@@ -37,7 +37,6 @@
 #include <ecto/impl/graph_types.hpp>
 #include <ecto/edge.hpp>
 #include <ecto/impl/invoke.hpp>
-#include <ecto/schedulers/threadpool.hpp>
 
 #include <string>
 #include <map>
