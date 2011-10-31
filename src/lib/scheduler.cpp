@@ -250,10 +250,9 @@ namespace ecto {
     ECTO_START();
     //so that python may resume.
     ecto::py::scoped_gil_release sgr;
-
     recursive_mutex::scoped_lock lock(iface_mtx);
-    wait_impl();
     runthread.join();
+    wait_impl();
   }
 
   void
