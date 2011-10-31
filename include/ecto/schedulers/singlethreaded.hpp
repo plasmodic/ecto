@@ -56,6 +56,8 @@ namespace ecto {
       void stop_impl();
       void interrupt_impl();
       void wait_impl();
+    private:
+      bool interupted_;
     };
   }
 }
