@@ -114,8 +114,8 @@ TEST(Strands, Crashy_is_ECTO_THREAD_UNSAFE)
 
 TEST(Strands, Crashy2_is_on_user_supplied_strand)
 {
-  ecto::strand s;
   ecto::plasm::ptr p(new ecto::plasm);
+  ecto::strand s;
   ecto::cell_ptr prev = ecto::registry::create_initialized("ecto_test::Generate<double>");
   prev->name("gen");
   for (unsigned j=0; j<10; ++j) {

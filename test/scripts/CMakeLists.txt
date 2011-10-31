@@ -103,3 +103,10 @@ pytest(load_plasm_from_file
   ${CMAKE_CURRENT_SOURCE_DIR}/save_plasm_to_file.py
   ${ecto_BINARY_DIR}/plasm.ecto)
 
+#this will complete the first time, assuming tests are executed in serial order
+#EAR todo find someway of ensure order in tests, test dependencies.
+add_test(plasm_loader
+    ${CMAKE_BINARY_DIR}/bin/plasm_loader
+    ${ecto_BINARY_DIR}/plasm.ecto
+    8
+)

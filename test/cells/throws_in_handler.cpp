@@ -40,6 +40,7 @@ using namespace ecto::except;
 void boom(const boost::system::error_code&)
 {
   ECTO_START();
+  //EAR TODO doesn't appear to work in boost 1.40, lucid, in the sense that it appears as if it were a RuntimeError in python
   BOOST_THROW_EXCEPTION(EctoException()
                         << diag_msg("boom: thrown from an io_service in a thread in the bg"));
   ECTO_FINISH();
