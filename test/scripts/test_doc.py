@@ -47,8 +47,8 @@ def test_doc():
     assert type(plasm.viz()) == str
 
 def test_inspection():
-    ecto.list_ecto_module(ecto_test)
-    ecto.list_ecto_module(pyecto)
+    assert len(ecto.list_cells(ecto_test)) >2
+    assert len(ecto.list_cells(pyecto)) > 0
 
 def test_short_doc():
     add = ecto_test.Add

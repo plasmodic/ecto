@@ -28,7 +28,7 @@
 from ecto import _cell_base
 
 class Cell(_cell_base):
-            
+    __looks_like_a_cell__ = True
     def __getattr__(self, name):
         if name == '__impl':
             return self

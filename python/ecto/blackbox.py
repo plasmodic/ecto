@@ -109,6 +109,7 @@ class BlackBoxTendrils(object):
 
 
 class BlackBox(object):
+    __looks_like_a_cell__ = True
     '''
     The BlackBox may be used as an encapsulation idiom within ecto, to declare reusable plasms.
     

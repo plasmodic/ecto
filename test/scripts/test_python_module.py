@@ -29,6 +29,7 @@
 import ecto
 import ecto_test
 from pyecto import MyModule
+import time
 
 
 def test_python_module():
@@ -36,7 +37,6 @@ def test_python_module():
     assert mod.text == "spam"
     assert mod.params.text == "spam"
     mod.process(mod.inputs,mod.outputs)
-    mod.outputs.notify()
     print mod.outputs.out
     assert mod.outputs.out == "spam"*2
 
@@ -52,6 +52,7 @@ def test_python_module_plasm(Schedtype):
         print "HERE"
         sched.execute(niter=1)
         sched.execute_async(niter=1)
+        time.sleep(0.2)
         sched.wait()
         assert g.outputs.out == i*2
         assert mod.outputs.out == "spam"*i*2

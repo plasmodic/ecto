@@ -50,9 +50,8 @@ def print_tendrils(tendril, n):
 
 def print_module_doc(m):
     print m.__doc__
-    
 
-def list_all_ecto_modules(pymodule):
+def list_all_cells(pymodule):
     '''
     Creates a list of all cells from a python module, which are ready for doc string and other
     types of introspection.
@@ -60,23 +59,19 @@ def list_all_ecto_modules(pymodule):
     l = []
     for x in dir(pymodule):
         mod = getattr(pymodule, x)
-        if inspect.isclass(mod) and issubclass(mod, ecto._cell_base):
-                m = mod.inspect((), {})
-                l.append(m)
+        if inspect.isclass(mod) and getattr(mod, '__looks_like_a_cell__', False):
+            l.append(mod)
     return l
+list_all_ecto_modules = list_all_cells
 
-def list_ecto_module(pymodule):
+def list_cells(pymodule):
     l = []
     for x in dir(pymodule):
         mod = getattr(pymodule, x)
-        if inspect.isclass(mod) and issubclass(mod, ecto._cell_base):
-                m = mod.inspect((), {})
-                if m.__doc__ != None :
-                    print m.__doc__
-                else :
-                    raise ValueError("A module's doc string may not be None.")
-                l.append(m)
+        if inspect.isclass(mod) and getattr(mod, '__looks_like_a_cell__', False):
+            l.append(mod)
     return l
+list_ecto_module = list_cells
 
 def view_plasm(plasm):
     try:
