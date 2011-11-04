@@ -146,7 +146,7 @@ def docize(CellType, content):
         return section
 
     d['name'] = CellType.__name__
-    d['short_doc'] = CellType.short_doc
+    d['short_doc'] = getattr(CellType, 'short_doc','')
     cell = nodes.section()
     cell += nodes.title(text=CellType.__name__)
     cell += content
@@ -154,12 +154,10 @@ def docize(CellType, content):
     cell += top
     cell['ids'].append(CellType.__name__)
     cell['names'].append(CellType.__name__)
-    # cell += nodes.title(text=CellType.__name__, rawtest=CellType.__name__)
+
     para = nodes.title(text="Brief doc")
-    para += nodes.paragraph(text=CellType.short_doc)
+    para += nodes.paragraph(text=d['short_doc'])
     top += para
-    #params = nodes.rubric(text='parameters')
-    # params += nodes.subtitle(text="parameters")
 
     inst = CellType.inspect((),{})
 
