@@ -34,7 +34,8 @@ from ecto.test import test
 def build_addergraph(nlevels):
 
     plasm = ecto.Plasm()
-    plasm.movie_out("frames/ecto%04u.viz");
+    #deprecating the movie_out stuff.
+    #plasm.movie_out("frames/ecto%04u.viz");
 
     prevlevel = [ecto_test.Add("Adder 0_%u" % x) for x in range(2**(nlevels-1))]
     for adder in prevlevel:
