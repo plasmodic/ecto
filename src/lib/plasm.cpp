@@ -1,7 +1,7 @@
-//
+// 
 // Copyright (c) 2011, Willow Garage, Inc.
 // All rights reserved.
-//
+// 
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
 //     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
 //     * Neither the name of the Willow Garage, Inc. nor the names of its
 //       contributors may be used to endorse or promote products derived from
 //       this software without specific prior written permission.
-//
+// 
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -24,7 +24,7 @@
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
-//
+// 
 #include <ecto/all.hpp>
 #include "plasm/impl.hpp"
 
@@ -48,14 +48,12 @@
 #include <ecto/serialization/registry.hpp>
 #include <ecto/serialization/cell.hpp>
 #include <boost/graph/graphviz.hpp>
-#include <boost/preprocessor/stringize.hpp>
-
 namespace ecto
 {
   using namespace graph;
-
+#define STRINGY_DINGY(A) #A
   //see http://www.graphviz.org/content/node-shapes for reference.
-  const char* table_str = BOOST_PP_STRINGIZE(
+  const char* table_str = STRINGY_DINGY(
       <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
       %s
       <TR>
@@ -67,61 +65,39 @@ namespace ecto
       </TABLE>
   );
 
-  const char* param_str_1st = BOOST_PP_STRINGIZE(
-      <TD PORT="p_%s" BGCOLOR="lightblue">%s<BR/><FONT POINT-SIZE="8">%s</FONT></TD>
+  const char* input_str = STRINGY_DINGY(
+      <TD PORT="i_%s" BGCOLOR="springgreen">%s</TD>
   );
 
-  const char* param_str_N = BOOST_PP_STRINGIZE(
+  const char* cell_str = STRINGY_DINGY(<TD ROWSPAN="%d" COLSPAN="%d" BGCOLOR="khaki">%s</TD>
+  );
+
+  const char* param_str_1st = STRINGY_DINGY(
+      <TD PORT="p_%s" BGCOLOR="lightblue">%s</TD>
+  );
+
+  const char* param_str_N = STRINGY_DINGY(
       <TR>
-      <TD PORT="p_%s" BGCOLOR="lightblue">%s<BR/><FONT POINT-SIZE="8">%s</FONT></TD>
+      <TD PORT="p_%s" BGCOLOR="lightblue">%s</TD>
       </TR>
   );
 
-  const char* output_str = BOOST_PP_STRINGIZE(
-      <TD PORT="o_%s" BGCOLOR="indianred1">%s<BR/><FONT POINT-SIZE="8">%s</FONT></TD>
+  const char* output_str = STRINGY_DINGY(
+      <TD PORT="o_%s" BGCOLOR="indianred1">%s</TD>
   );
 
-  namespace {
-
-    // see
-    // http://en.wikipedia.org/wiki/HSL_and_HSV#Converting_to_RGB
-    // for points on a dark background you want somewhat lightened
-    // colors generally... back off the saturation (s)
-    static void hsv2rgb(float h, float s, float v, float& r, float& g, float& b)
-    {
-      float c = v * s;
-      float hprime = h/60.0;
-      float x = c * (1.0 - fabs(fmodf(hprime, 2.0f) - 1));
-
-      r = g = b = 0;
-
-      if (hprime < 1) {
-        r = c; g = x;
-      } else if (hprime < 2) {
-        r = x; g = c;
-      } else if (hprime < 3) {
-        g = c; b = x;
-      } else if (hprime < 4) {
-        g = x; b = c;
-      } else if (hprime < 5) {
-        r = x; b = c;
-      } else if (hprime < 6) {
-        r = c; b = x;
-      }
-
-      float m = v - c;
-      r += m; g+=m; b+=m;
-    }
-  }
-
-  struct vertex_writer {
+  struct vertex_writer
+  {
     graph_t* g;
 
     vertex_writer(graph_t* g_)
-      : g(g_)
-    { }
+        :
+          g(g_)
+    {
+    }
 
-    std::string htmlescape(const std::string& in)
+    std::string
+    htmlescape(const std::string& in)
     {
       const boost::regex esc_lt("[<]");
       const std::string rep_lt("&lt;");
@@ -137,6 +113,7 @@ namespace ecto
     void
     operator()(std::ostream& out, graph_t::vertex_descriptor vd)
     {
+
       cell_ptr c = (*g)[vd];
       int n_inputs = c->inputs.size();
       int n_outputs = c->outputs.size();
@@ -144,14 +121,12 @@ namespace ecto
       std::string htmlescaped_name = htmlescape(c->name());
 
       std::string inputs;
-      const static char* input_str = BOOST_PP_STRINGIZE(<TD PORT="i_%s" BGCOLOR="springgreen">%s<BR/>
-                                                        <FONT POINT-SIZE="8">%s</FONT></TD>);
       BOOST_FOREACH(const tendrils::value_type& x, c->inputs)
           {
             std::string key = x.first;
             if (inputs.empty())
               inputs = "<TR>\n";
-            inputs += boost::str(boost::format(input_str) % key % key % htmlescape(x.second->type_name())) + "\n";
+            inputs += boost::str(boost::format(input_str) % key % key) + "\n";
           }
       if (!inputs.empty())
         inputs += "</TR>";
@@ -162,38 +137,22 @@ namespace ecto
             std::string key = x.first;
             if (outputs.empty())
               outputs = "<TR>\n";
-            outputs += boost::str(boost::format(output_str) % key % key % htmlescape(x.second->type_name())) + "\n";
+            outputs += boost::str(boost::format(output_str) % key % key) + "\n";
           }
       if (!outputs.empty())
         outputs += "</TR>";
 
-      float r, g, b; // s, v == 1
-      float h = (c->stats.ncalls % 10) * 36.0;
-
-      hsv2rgb(h, c->stats.on ? 1 : 0.5, 1, r, g, b);
-
-      std::string color = str(boost::format("#%|02X|%|02X|%|02X|") % int(r*255) % int(g*255) % int(b*255));
-
-      const static char* cell_str = BOOST_PP_STRINGIZE(<TD ROWSPAN="%d" COLSPAN="%d" BGCOLOR="%s">%s<BR/>
-                                                       <FONT POINT-SIZE="8">%s</FONT><BR/>
-                                                       tick: %3u
-                                                       </TD>);
       std::string cellrow = boost::str(
-          boost::format(cell_str)
-          % std::max(1,n_params)
-          % int(std::max(1,std::max(n_inputs, n_outputs)))
-          % color
-          % htmlescaped_name
-          % htmlescape(c->type())
-          % c->stats.ncalls);
+          boost::format(cell_str) % std::max(1, n_params) % int(std::max(1, std::max(n_inputs, n_outputs)))
+          % htmlescaped_name);
       std::string p1, pN;
       BOOST_FOREACH(const tendrils::value_type& x, c->parameters)
           {
             std::string key = x.first;
             if (p1.empty())
-              p1 = boost::str(boost::format(param_str_1st) % key % key % htmlescape(x.second->type_name())) + "\n";
+              p1 = boost::str(boost::format(param_str_1st) % key % key) + "\n";
             else
-              pN += boost::str(boost::format(param_str_N) % key % key % htmlescape(x.second->type_name())) + "\n";
+              pN += boost::str(boost::format(param_str_N) % key % key) + "\n";
           }
 
       std::string table = boost::str(boost::format(table_str) % inputs % cellrow % p1 % pN % outputs);
@@ -205,13 +164,16 @@ namespace ecto
   {
     graph_t* g;
 
-    edge_writer(graph_t* g_) : g(g_) { }
+    edge_writer(graph_t* g_)
+        :
+          g(g_)
+    {
+    }
 
     void
     operator()(std::ostream& out, graph_t::edge_descriptor ed)
     {
-      boost::format fmt("[headport=\"i_%u\" tailport=\"o_%u\" label=\"%u\" penwidth=\"%f\"]\n");
-      out << fmt % (*g)[ed]->to_port() % (*g)[ed]->from_port() % (*g)[ed]->size() % ((*g)[ed]->size() + 0.5);
+      out << "[headport=\"i_" << (*g)[ed]->to_port() << "\" tailport=\"o_" << (*g)[ed]->from_port() << "\"]";
     }
   };
 
@@ -226,29 +188,27 @@ namespace ecto
     }
   };
 
-  plasm::plasm() : impl_(new impl) { }
+  plasm::plasm()
+      :
+        impl_(new impl)
+  {
+  }
 
-
-  plasm::~plasm() { }
+  plasm::~plasm()
+  {
+  }
 
   void
   plasm::insert(cell_ptr mod)
   {
-    if (movie_out.size() && mod->bsig_process.empty())
-      mod->bsig_process.connect(boost::bind(&plasm::frame, this, _1, _2));
     impl_->insert_module(mod);
   }
 
   void
   plasm::connect(cell_ptr from, const std::string& output, cell_ptr to, const std::string& input)
   {
-    if (movie_out.size() && from->bsig_process.empty())
-      from->bsig_process.connect(boost::bind(&plasm::frame, this, _1, _2));
-    if (movie_out.size() && to->bsig_process.empty())
-      to->bsig_process.connect(boost::bind(&plasm::frame, this, _1, _2));
     impl_->connect(from, output, to, input);
   }
-
 
   void
   plasm::viz(std::ostream& out) const
@@ -288,10 +248,11 @@ namespace ecto
     return num_vertices(impl_->graph);
   }
 
-  namespace {
+  namespace
+  {
     struct get_first
     {
-      template <typename T>
+      template<typename T>
       cell_ptr
       operator()(T& t) const
       {
@@ -308,70 +269,13 @@ namespace ecto
     return c;
   }
 
-  void plasm::reset_ticks()
-  {
-    {
-      graph_t::vertex_iterator beg, end;
-      tie(beg, end) = vertices(impl_->graph);
-      while(beg != end)
-        {
-          cell_ptr c = impl_->graph[*beg];
-          c->reset_tick();
-          ++beg;
-        }
-    }
-
-    {
-      graph_t::edge_iterator beg, end;
-      tie(beg, end) = edges(impl_->graph);
-      while(beg != end)
-        {
-          edge_ptr e = impl_->graph[*beg];
-          while(e->size() > 0)
-            e->pop_front();
-          ++beg;
-        }
-    }
-  }
-
-  void plasm::init_movie()
-  {
-    movie_frame = 0;
-    if (movie_out.size() == 0)
-      return;
-    graph_t::vertex_iterator beg, end;
-    tie(beg, end) = vertices(impl_->graph);
-    while(beg != end)
-      {
-        cell_ptr c = impl_->graph[*beg];
-        c->bsig_process.connect(boost::bind(&plasm::frame, this, _1, _2));
-        ++beg;
-      }
-  }
-
-  void plasm::set_movie_out(const std::string& s)
-  {
-    movie_out = s;
-  }
-
-  void plasm::configure_all()
+  void
+  plasm::configure_all()
   {
     BOOST_FOREACH(impl::ModuleVertexMap::value_type& x, impl_->mv_map)
-    {
-      x.first->configure();
-    }
-  }
-
-  void
-  plasm::frame(cell& c, bool onoff)
-  {
-    boost::mutex::scoped_lock lock(movie_mtx);
-    ECTO_LOG_DEBUG("plasm::frame %u %s@%p %u %u", movie_frame % c.name() % &c % onoff % c.stats.ncalls);
-    std::string ofname = str(boost::format(movie_out) % movie_frame);
-    std::ofstream ofs(ofname.c_str());
-    viz(ofs);
-    ofs.close();
-    ++movie_frame;
+        {
+          x.first->configure();
+        }
   }
 
   void
@@ -400,9 +304,8 @@ namespace ecto
       {
         if (b_tend->second->required() && in_connected.count(b_tend->first) == 0)
         {
-          BOOST_THROW_EXCEPTION(except::NotConnected()
-                                << except::tendril_key(b_tend->first)
-                                << except::cell_name(m->name()));
+          BOOST_THROW_EXCEPTION(
+              except::NotConnected() << except::tendril_key(b_tend->first) << except::cell_name(m->name()));
         }
       }
 
@@ -420,25 +323,50 @@ namespace ecto
       {
         if (b_tend->second->required() && out_connected.count(b_tend->first) == 0)
         {
-          BOOST_THROW_EXCEPTION(except::NotConnected()
-                                << except::tendril_key(b_tend->first)
-                                << except::cell_name(m->name()));
+          BOOST_THROW_EXCEPTION(
+              except::NotConnected() << except::tendril_key(b_tend->first) << except::cell_name(m->name()));
         }
       }
 
       ++begin;
     }
   }
+  void
+  plasm::reset_ticks()
+  {
+    {
+      graph_t::vertex_iterator beg, end;
+      tie(beg, end) = vertices(impl_->graph);
+      while (beg != end)
+      {
+        cell_ptr c = impl_->graph[*beg];
+        c->reset_tick();
+        ++beg;
+      }
+    }
 
+    {
+      graph_t::edge_iterator beg, end;
+      tie(beg, end) = edges(impl_->graph);
+      while (beg != end)
+      {
+        edge_ptr e = impl_->graph[*beg];
+        while (e->size() > 0)
+          e->pop_front();
+        ++beg;
+      }
+    }
+  }
 
-
-  void plasm::save(std::ostream& out) const
+  void
+  plasm::save(std::ostream& out) const
   {
     boost::archive::text_oarchive oa(out);
     oa << *this;
   }
 
-  void plasm::load(std::istream& in)
+  void
+  plasm::load(std::istream& in)
   {
     boost::archive::text_iarchive ia(in);
     ia >> *this;

@@ -160,12 +160,6 @@ namespace ecto
       p.load(in);
     }
 
-    void
-    plasm_set_movie_out(plasm&p,std::string s)
-    {
-      p.set_movie_out(s);
-    }
-
     bp::list plasm_get_connections(plasm& p)
     {
       bp::list result;
@@ -232,7 +226,6 @@ namespace ecto
             "Executes the graph using a single threaded scheduler.");
 
       p.def("viz", wrapViz, "Get a graphviz string representation of the plasm.");
-      p.def("movie_out", plasm_set_movie_out, "Write svgs every time something happens here (format string, use e.g %04u in filename");
       p.def("connections", plasm_get_connections, "Grabs the current list based description of the graph. "
             "Its a list of tuples (from_cell, output_key, to_cell, input_key)");
       p.def("cells", plasm_get_cells, "Grabs the current set of cells that are in the plasm.");

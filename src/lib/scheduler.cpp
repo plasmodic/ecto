@@ -89,7 +89,7 @@ namespace ecto {
 
   void scheduler::notify_start()
   {
-    plasm->init_movie();
+    //plasm->init_movie();
     plasm->reset_ticks();
     assert(stack.size() > 0);
     for (unsigned j=0; j<stack.size(); ++j)
