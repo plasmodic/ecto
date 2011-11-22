@@ -47,6 +47,7 @@ ectomodule(ecto
   cells/ether.cpp
   cells/If.cpp
   cells/Passthrough.cpp
+  cells/PassthroughN.cpp
   cells/TrueEveryN.cpp
   )
 
