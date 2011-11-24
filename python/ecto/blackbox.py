@@ -51,6 +51,9 @@ class BlackBoxTendrils(object):
     def __get_cell_type(self, cell_name):
         cell_type = getattr(self.bb.__class__, cell_name, False)
         if not cell_type:
+            cell_type = getattr(self.bb, cell_name, False)
+            if cell_type:
+                return cell_type
             raise RuntimeError("You must have a class variable called " + cell_name + " in your BlackBox.")
         return cell_type
 
