@@ -91,7 +91,8 @@ namespace ecto {
   {
     //plasm->init_movie();
     plasm->reset_ticks();
-    assert(stack.size() > 0);
+    if(stack.empty()) throw std::runtime_error("A badness thing happened.");
+//    assert(stack.size() > 0);
     for (unsigned j=0; j<stack.size(); ++j)
       {
         cell::ptr c = graph[stack[j]];

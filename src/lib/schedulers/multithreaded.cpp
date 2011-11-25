@@ -89,7 +89,6 @@ namespace ecto {
     {
       if (!running())
         return;
-      std::cout <<"<<<<<<<whats up"<<std::endl;
       interrupt();
       wait();
     }
