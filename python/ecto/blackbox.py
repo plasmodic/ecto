@@ -58,15 +58,15 @@ class BlackBoxTendrils(object):
         return cell_type
 
     def __get_cell_template(self, cell_name):
-        cell_type = self.__get_cell_type(cell_name)
-        return cell_type.inspect((), {})
-
-    def __get_cell(self, cell_name):
         cell = getattr(self.bb, cell_name)
-        cell_type = getattr(self.bb.__class__, cell_name)
+        cell_type = getattr(self.bb.__class__, cell_name, False)
         if cell == cell_type:
             cell = cell_type.inspect()
-            setattr(self.bb, cell_name, cell)
+        return cell
+
+    def __get_cell(self, cell_name):
+        cell = self.__get_cell_template(cell_name)
+        setattr(self.bb, cell_name, cell)
         return cell
 
     def __append(self, cell_name, key, cell_key):
