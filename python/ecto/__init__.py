@@ -66,7 +66,11 @@ def cellinit(cpptype):
                 setattr(self.params, k, v)
             # print "now:", getattr(self.params, k)
         e.declare_io(self.params, self.inputs, self.outputs)
-        self.__impl.verify_params()
+        try:
+            self.__impl.verify_params()
+        except ecto.EctoException as e:
+            print >>sys.stderr, cpptype
+            raise type(e)('\nCell Type: %s\nCell Name: %s\nWhat:\n%s'%(cpptype,self.__impl.name(),str(e)))
     # self.params.get('k') = v
     return impl
 

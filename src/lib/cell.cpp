@@ -57,6 +57,7 @@
       assert(key && "NonExistant was thrown w/o stating what it is that doesn't exist."); \
       e << except::hint(auto_suggest(*key, *this))                      \
         << except::cell_name(name())                                    \
+        << except::cell_type(type())                               \
         << except::function_name(__FUNCTION__)                          \
         ;                                                               \
       throw;                                                            \
@@ -65,6 +66,7 @@
     {                                                                   \
       ECTO_TRACE_EXCEPTION("const ecto::except::EctoException&");       \
       e << except::cell_name(name())                                    \
+        << except::cell_type(type())                               \
         << except::function_name(__FUNCTION__)                          \
         ;                                                               \
       throw;                                                            \
@@ -76,6 +78,7 @@
                             << except::type(name_of(typeid(e)))         \
                             << except::what(e.what())                   \
                             << except::cell_name(name())                \
+                            << except::cell_type(type())           \
                             << except::function_name(__FUNCTION__))     \
         ;                                                               \
     }                                                                   \
@@ -90,6 +93,7 @@
       BOOST_THROW_EXCEPTION(except::CellException()                     \
                             << except::what("(unknown exception)")      \
                             << except::cell_name(name())                \
+                            << except::cell_type(type())           \
                             << except::function_name(__FUNCTION__))     \
         ;                                                               \
     }
