@@ -39,6 +39,7 @@
 #include <map>
 #include <boost/thread/mutex.hpp>
 #include <boost/tuple/tuple.hpp>
+#include <boost/algorithm/string/replace.hpp>
 
 #if defined(_WIN32)
 // #define UNDNAME_COMPLETE                 (0x0000)
@@ -141,6 +142,17 @@ namespace ecto
   const std::string& name_of(const std::string &s)
   {
     return type_mapping::instance().lookup(s);
+  }
+
+  std::string
+  symbolic_name_of(const std::string& t_name)
+  {
+    std::string result = t_name;
+    boost::replace_all(result, " ", "_");
+    boost::replace_all(result, "<", "_");
+    boost::replace_all(result, ">", "_");
+    boost::replace_all(result, "::", "_");
+    return result;
   }
 
 }

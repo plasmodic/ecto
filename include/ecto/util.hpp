@@ -63,6 +63,8 @@ namespace ecto
    */
   ECTO_EXPORT const std::string& name_of(const std::string& name);
 
+  ECTO_EXPORT std::string symbolic_name_of(const std::string& name);
+
   /**
    * \brief Get the unmangled type name of a type.
    * @tparam T the type that one wants a name for.
@@ -72,6 +74,13 @@ namespace ecto
   const std::string& name_of()
   {
     static const std::string& name_cache =  name_of(typeid(T));
+    return name_cache;
+  }
+
+  template<typename T>
+  const std::string& symbolic_name_of()
+  {
+    static const std::string name_cache = symbolic_name_of(name_of<T>());
     return name_cache;
   }
 }
