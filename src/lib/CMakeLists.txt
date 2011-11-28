@@ -45,6 +45,7 @@ add_library(ecto SHARED
   util.cpp
   log.cpp
   except.cpp
+  parameters.cpp
   profile.cpp
   python.cpp
   registry.cpp

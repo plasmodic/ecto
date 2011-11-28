@@ -32,13 +32,13 @@ ectomodule(ecto
   ecto.cpp
   except.cpp
   plasm.cpp
+  parameters.cpp
   registry.cpp
   schedulers.cpp
   strand.cpp
   streambuf.cpp
   tendril.cpp
   tendrils.cpp
-
   cells/And.cpp
   cells/BlackBox.cpp
   cells/Constant.cpp
