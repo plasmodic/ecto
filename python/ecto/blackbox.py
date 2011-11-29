@@ -89,13 +89,35 @@ class BlackBoxTendrils(object):
     def forward(self, key, cell_name, cell_key=None, doc=None):
         inst = self.__get_cell_template(cell_name)
         tendrils = getattr(inst, self.tt_key)
-        if not cell_key:
-            cell_key = key
-        tendril = tendrils.at(cell_key)
+        if cell_key:
+            cell_keys = cell_key
+        else:
+            cell_keys = key
+        # convert the inputs to arrays
+        if type(key) is str:
+            keys = [ key ]
+            cell_keys = [ cell_keys ]
+        else:
+            keys = key
+            cell_keys = cell_keys
         if doc:
-            tendril.doc = doc
-        self.__append(cell_name, key, cell_key)
-        self._tendrils.declare(key, tendril)
+            if type(doc) is str:
+                docs = [ doc ]
+            else:
+                docs = doc
+        else:
+            docs = [ None ] * len(keys)
+        if len(keys) != len(cell_keys):
+            raise RuntimeError('keys and cell_keys must be arrays of the same length')
+        if len(keys) != len(docs):
+            raise RuntimeError('keys and docs must be arrays of the same length')
+
+        for sub_key, sub_cell_key, sub_doc in zip(keys, cell_keys, docs):
+            tendril = tendrils.at(sub_cell_key)
+            if sub_doc:
+                tendril.doc = sub_doc
+            self.__append(cell_name, sub_key, sub_cell_key)
+            self._tendrils.declare(sub_key, tendril)
 
     def solidify_forward_declares(self):
         tendrils = ecto.Tendrils()
