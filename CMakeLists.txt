@@ -85,6 +85,5 @@ endif()
 find_package(catkin)
 if(catkin_FOUND)
   catkin_package(ecto)
-  catkin_make_dist(ecto 0.1.1)
 endif()
 
