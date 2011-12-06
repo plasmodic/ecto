@@ -82,3 +82,8 @@ if(BUILD_SAMPLES)
   add_subdirectory(samples)
 endif()
 
+find_package(catkin)
+if(catkin_FOUND)
+  catkin_package(ecto)
+endif()
+

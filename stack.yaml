@@ -1,0 +1,27 @@
+Package: ecto
+Version: 0.1.1
+Section: misc
+Priority: extra
+Architecture: any
+
+Depends: ${shlibs:Depends}, ${misc:Depends},
+    python-argparse
+Build-Depends: debhelper,
+    cmake (>= 2.8),
+    libboost-python-dev | libboost-python1.40-dev,
+    libboost-filesystem-dev | libboost-filesystem1.40-dev,
+    libboost-system-dev | libboost-system1.40-dev,
+    libboost-thread-dev | libboost-thread1.40-dev,
+    libboost-regex-dev | libboost-regex1.40-dev,
+    python-dev,
+    python-argparse,
+    libgtest-dev
+Description: Ecto is a hybrid C++/Python development framework for constructing and maintaining pipelines.
+Author:  Ethan Rublee <erublee@willowgarage.com>, Troy Straszheim <straszheim@willowgarage.com>
+Maintainer: Ethan Rublee <erublee@willowgarage.com>
+Homepage: http://ecto.willowgarage.com
+
+Catkin-ProjectName: ecto
+Catkin-CopyrightType:  willowgarage
+Catkin-ChangelogType: +catkin/changelog.em
+Catkin-DebRulesType: +catkin/rules.em
