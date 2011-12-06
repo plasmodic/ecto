@@ -92,7 +92,7 @@ def run_plasm(options, plasm, locals={}):
 
 class CellFactory(object):
     '''A factory for cells that are created from command line args.'''
-    def __init__(self, CellType, CellProtoType, prefix):
+    def __init__(self, CellType, CellProtoType, prefix=None):
         '''
         cellType a type of ecto cell to create
         prefix the prefix used by the parser
@@ -108,10 +108,17 @@ class CellFactory(object):
         params = {}
         prototype = self.cellProtoType
         for key, value in args.__dict__.iteritems():
-            if key.startswith(self.prefix + '_'):
-                p = ''.join(key.split(self.prefix + '_')[:])
+            if not self.prefix or key.startswith(self.prefix + '_'):
+                if self.prefix:
+                    p = ''.join(key.split(self.prefix + '_')[:])
+                else:
+                    p = key
                 t = type(prototype.params[p])
-                params[p] = t(value)
+                if 'values' in t.__dict__ and type(value) != t and type(value) == str:
+                    params[p] = t.names[value]
+                else:
+                    params[p] = t(value)
+
         nkwargs = ()
         if len(cellname) > 0:
             nkwargs = (cellname,) #tuple
@@ -178,7 +185,7 @@ def _cell_type_instance(CellOrCellType):
 
 
 
-def cell_options(parser, CellType, prefix):
+def cell_options(parser, CellType, prefix=None):
     '''Creates an argument parser group for any cell.
     CellType may be either a __class__ type, or an instance object.
     '''
@@ -186,13 +193,37 @@ def cell_options(parser, CellType, prefix):
     cell_type, cell = _cell_type_instance(CellType)
 
     params = cell.params
+
     for x in params:
-        dest = '%s_%s' % (prefix, x.key())
-        group.add_argument('--%s' % dest, metavar='%s' % dest.upper(),
-                           dest=dest, type=type(x.data().get()),
-                           default=x.data().get(),
-                           help=x.data().doc + ' ... (default: %(default)s)'
-                           )
+        if prefix:
+            dest = '%s_%s' % (prefix, x.key())
+        else:
+            dest = x.key()
+        tendril_type = type(x.data().val)
+        if 'values' in tendril_type.__dict__:
+            choices = tendril_type.names.keys()
+            tendril_type = str
+        else:
+            choices = None
+
+        kwargs = dict(metavar='%s' % dest.upper(),
+                      dest=dest,
+                      type=tendril_type,
+                      default=x.data().val,
+                      help=x.data().doc + ' ... (default: %(default)s)'
+                      )
+        if tendril_type is type(True):
+            if x.data().val:
+                kwargs = dict(dest=dest, help=x.data().doc + 'Disables %s' % dest, action='store_false')
+                dest = '%s_disable' % dest
+            else:
+                kwargs = dict(dest=dest, help=x.data().doc + 'Enables %s' % dest, action='store_true')
+                dest = '%s_enable' % dest
+        if choices:
+#            print 'We got choices', choices
+            kwargs['choices'] = choices
+        group.add_argument('--%s' % dest, **kwargs)
+
     factory = CellFactory(cell_type, cell, prefix)
     return factory
 
@@ -244,7 +275,7 @@ def scheduler_options(parser,
                         help='''Output a graph in dot format to the given file.
                         If no file is given, no output will be generated. (default: %(default)s)'''
                         )
-    parser.add_argument('--stats',dest='stats',action='store_const',
+    parser.add_argument('--stats', dest='stats', action='store_const',
                         const=True, default=default_graphviz,
                         help='Show the the runtime statistics of the plasm.')
 
