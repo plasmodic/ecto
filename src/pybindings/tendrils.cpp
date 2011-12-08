@@ -47,8 +47,15 @@ namespace ecto
   {
     namespace
     {
-      void declareTendril(tendrils& t, const std::string& name, 
-                      const std::string& doc, bp::object o)
+
+      void declareTendril_no_default(tendrils& t, const std::string& name,
+                      const std::string& doc)
+      {
+        t.declare<ecto::tendril::none> (name, doc);
+      }
+
+      void declareTendril(tendrils& t, const std::string& name,
+                      const std::string& doc="Doc me!", bp::object o=bp::object())
       {
         t.declare<bp::object> (name, doc, o);
       }
@@ -121,8 +128,10 @@ namespace ecto
 
     void wrapTendrils()
     {
+      using bp::arg;
       bp::class_<tendrils, boost::shared_ptr<tendrils>, boost::noncopyable>("Tendrils")
         .def(bp::std_map_indexing_suite<tendrils, false>())
+        .def("declare",&declareTendril_no_default)
         .def("declare", &declareTendril)
         .def("declare", &declareTendrilPtr)
         .def("__str__", &strTendril)

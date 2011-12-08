@@ -100,7 +100,6 @@ namespace ecto
 
       ReturnCode dispatch_process(const tendrils& inputs, const tendrils& outputs)
       {
-        std::cout << "BREAKY\n";
         ecto::py::scoped_call_back_to_python scb;
         int value = OK;
         std::for_each(inputs.begin(),inputs.end(), YouveBeenServed());
@@ -225,7 +224,11 @@ namespace ecto
         .value("PARAMETER",PARAMETER)
         .export_values()
         ;
-
+      bp::enum_<ecto::ReturnCode>("ReturnCode")
+        .value("OK",OK)
+        .value("QUIT",QUIT)
+        .export_values()
+        ;
     }
   }
 
