@@ -44,6 +44,11 @@ tendril_ptr tendril_ctr()
   return boost::shared_ptr<tendril>(new tendril(bp::object(),"A pythonic tendril."));
 }
 
+tendril_ptr tendril_ctr1(const bp::object & object)
+{
+  return boost::shared_ptr<tendril>(new tendril(object,"A pythonic tendril."));
+}
+
 std::string tendril_type_name(tendril_ptr t)
 {
   return t->type_name();
@@ -101,6 +106,7 @@ void wrapConnection(){
       "The Tendril is the slendor winding organ of ecto.\n"
       "It is a type erasing holder with meta data that enable introspection.");
     Tendril_.def("__init__", bp::make_constructor(tendril_ctr));
+    Tendril_.def("__init__", bp::make_constructor(tendril_ctr1));
     Tendril_.add_property("doc",tendril_doc,&tendril::set_doc, "A doc string that describes the purpose of this tendril.");
     Tendril_.add_property("type_name",tendril_type_name, "The type of the value held by the tendril." );
     Tendril_.add_property("val", tendril_get_val,tendril_set_val, "The value held by the tendril.\n"
