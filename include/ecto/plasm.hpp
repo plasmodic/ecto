@@ -50,7 +50,7 @@ namespace ecto
    * is used by all the ecto::schedulers to enable execution of modules
    * that are connected in the graph.
    */
-  class ECTO_EXPORT plasm :
+  struct ECTO_EXPORT plasm :
     boost::noncopyable, public boost::enable_shared_from_this<plasm>
   {
   public:
@@ -148,7 +148,7 @@ namespace ecto
     typedef boost::shared_ptr<plasm const> cptr;
 
   private:
-    class impl;
+    struct impl;
     boost::shared_ptr<impl> impl_;
 
     std::string movie_out;

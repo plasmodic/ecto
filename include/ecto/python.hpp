@@ -34,8 +34,8 @@
 #undef _POSIX_C_SOURCE
 #undef _XOPEN_SOURCE
 #include <boost/python.hpp>
-#pragma pop_macro("_POSIX_C_SOURCE")
-#pragma pop_macro("_XOPEN_C_SOURCE")
+//#pragma pop_macro("_POSIX_C_SOURCE")
+//#pragma pop_macro("_XOPEN_C_SOURCE")
 
 #include <boost/noncopyable.hpp>
 

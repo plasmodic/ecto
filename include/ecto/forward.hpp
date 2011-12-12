@@ -64,9 +64,9 @@ namespace ecto {
   struct scheduler;
 
   namespace schedulers {
-    struct threadpool;
-    struct singlethreaded;
-    struct multithreaded;
+    class threadpool;
+    class singlethreaded;
+    class multithreaded;
     struct access;
   }
 }

@@ -146,7 +146,7 @@ namespace ecto {
   
 #define ECTO_INSTANTIATE_REGISTRY(MODULE)                               \
   ECTO_MODULETAG(MODULE)                                                \
-  template class ::ecto::registry::module_registry< ::ecto::tag::MODULE>;
+  template struct ::ecto::registry::module_registry< ::ecto::tag::MODULE>;
 
 #define ECTO_REGISTER(MODULE)                                           \
     ::ecto::registry::module_registry< ::ecto::tag::MODULE>::instance().go();

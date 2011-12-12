@@ -156,10 +156,10 @@ namespace ecto
     {
     }
 
-    template class registry< ::boost::archive::binary_oarchive> ;
-    template class registry< ::boost::archive::binary_iarchive> ;
-    template class registry< ::boost::archive::text_oarchive> ;
-    template class registry< ::boost::archive::text_iarchive> ;
+    template struct registry< ::boost::archive::binary_oarchive> ;
+    template struct registry< ::boost::archive::binary_iarchive> ;
+    template struct registry< ::boost::archive::text_oarchive> ;
+    template struct registry< ::boost::archive::text_iarchive> ;
   }
 }
 

@@ -74,14 +74,6 @@ namespace ecto
         return l;
       }
 
-      bp::object getTendril(tendrils& t, const std::string& name)
-      {
-        bp::object o;
-        tendril_ptr tp = t[name];
-        *tp >> o;
-        return o;
-      }
-
       std::string strTendril(const tendrils& t)
       {
         std::string s = "tendrils:\n";

@@ -72,7 +72,6 @@ namespace ecto {
       using scheduler::graph;
       using scheduler::stack;
       using scheduler::plasm;
-      using scheduler::top_serv;
 
       friend struct stack_runner;
     };

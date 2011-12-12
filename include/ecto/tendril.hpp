@@ -322,7 +322,6 @@ namespace ecto
     struct ConverterImpl : Converter
     {
       static ConverterImpl<T, _> instance;
-
       void
       operator()(tendril& t, const boost::python::object& obj) const
       {
@@ -348,7 +347,6 @@ namespace ecto
     struct ConverterImpl<none, _> : Converter
     {
       static ConverterImpl<none, _> instance;
-
       void
       operator()(tendril& t, const boost::python::object& obj) const
       {
@@ -413,8 +411,7 @@ namespace ecto
     operator>>(const tendril_cptr& rhs, T& val)
     {
       if (!rhs)
-        BOOST_THROW_EXCEPTION(except::
-NullTendril()
+        BOOST_THROW_EXCEPTION(except::NullTendril()
                               << except::from_typename("(null)")
                               << except::to_typename(name_of<T>()));
       *rhs >> val;
@@ -447,20 +444,25 @@ NullTendril()
     friend void
       operator<<(const tendril_ptr& lhs, const tendril_cptr& rhs);
 
-    template<typename T>
-    friend
-    tendril_ptr make_tendril()
-    {
-      tendril_ptr t(new tendril());
-      t->set_holder<T>();
-      return t;
-    }
 
     template <typename Archive>
       void serialize(Archive& ar, const unsigned int);
 
+    //my version of clang
+    //can't handle the friend impl inside the class.
+    template <typename T>
+    friend tendril_ptr make_tendril();
+
     std::size_t tick; // for sanity-checking
   };
+
+  template <typename T>
+  tendril_ptr make_tendril()
+  {
+    tendril_ptr t(new tendril());
+    t->set_holder<T>();
+    return t;
+  }
 
   template <typename T, typename _>
   tendril::ConverterImpl<T,_>

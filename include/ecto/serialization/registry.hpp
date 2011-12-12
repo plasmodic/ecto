@@ -100,10 +100,10 @@ namespace ecto
       registry();
     };
 
-    extern template class registry<boost::archive::binary_oarchive> ;
-    extern template class registry<boost::archive::binary_iarchive> ;
-    extern template class registry<boost::archive::text_oarchive> ;
-    extern template class registry<boost::archive::text_iarchive> ;
+    extern template struct registry<boost::archive::binary_oarchive> ;
+    extern template struct registry<boost::archive::binary_iarchive> ;
+    extern template struct registry<boost::archive::text_oarchive> ;
+    extern template struct registry<boost::archive::text_iarchive> ;
 
     typedef registry<boost::archive::binary_oarchive> registry_binary_oa;
     typedef registry<boost::archive::binary_iarchive> registry_binary_ia;
@@ -138,7 +138,7 @@ namespace ecto
 #define ECTO_REGISTER_SERIALIZERS(Type)       \
 namespace ecto{                               \
   namespace serialization{                    \
-    template class register_serializer<Type>; \
+    template struct register_serializer<Type>; \
   }                                           \
 }
 
