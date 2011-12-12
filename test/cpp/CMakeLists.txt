@@ -59,8 +59,9 @@ target_link_libraries(ecto-test
   ${ECTO_DEP_LIBS}
   )
 
-add_test(ecto_gtest_units ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/ecto-test --gtest_output=xml:${CMAKE_BINARY_DIR}/ecto-test.xml)
+add_test(ecto_gtest_units ${ECTO_ENV} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/ecto-test --gtest_output=xml:${CMAKE_BINARY_DIR}/ecto-test.xml)
 
+#this needs some more thought.
 #add_executable(plasm_loader
 #  plasm_loader.cpp
 #  )
