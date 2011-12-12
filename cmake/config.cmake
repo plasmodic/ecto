@@ -56,4 +56,7 @@ file(COPY ${PROJECT_SOURCE_DIR}/cmake/git.cmake DESTINATION ${ecto_CONFIG_DIR})
 set(ecto_LIBRARIES ecto)
 
 configure_file(${ecto_SOURCE_DIR}/cmake/config.hpp.in ${ecto_BINARY_DIR}/include/ecto/config.hpp)
+configure_file(${ecto_SOURCE_DIR}/cmake/env.sh.in ${ecto_BINARY_DIR}/env.sh @ONLY@)
+
+set(ECTO_ENV ${ecto_BINARY_DIR}/env.sh)
 
