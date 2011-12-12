@@ -80,23 +80,27 @@ endmacro()
 # PATH(s) -> paths to prepend to the PYTHONPATH for the execution of sphinx-build
 #
 macro(sphinx TARGET_NAME SOURCE_DIR BUILD_DIR)
-  set(_PYTHONPATH )
-  #put user path first
-  list(APPEND _PYTHONPATH ${ARGN})
-  list(APPEND _PYTHONPATH  ${ecto_PYTHONPATH})
-  #transform the cmake list to a sh path list
-  string(REPLACE ";" ":"
-      _PYTHONPATH
-      "${_PYTHONPATH}"
-  )
-  add_custom_target(${TARGET_NAME})
-  add_custom_command(TARGET ${TARGET_NAME}
-    COMMAND
-    /usr/bin/env
-    PYTHONPATH=${_PYTHONPATH}
-    ${SPHINX_BUILD} -aE ${SOURCE_DIR} ${BUILD_DIR}
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+  find_sphinx()
+  if(SPHINX_BUILD)
+    set(_PYTHONPATH )
+    #put user path first
+    list(APPEND _PYTHONPATH ${ARGN})
+    list(APPEND _PYTHONPATH  ${ecto_PYTHONPATH})
+    #transform the cmake list to a sh path list
+    string(REPLACE ";" ":"
+        _PYTHONPATH
+        "${_PYTHONPATH}"
     )
+    add_custom_target(${TARGET_NAME})
+    add_custom_command(TARGET ${TARGET_NAME}
+      COMMAND
+      /usr/bin/env
+      PYTHONPATH=${_PYTHONPATH}
+      ${SPHINX_BUILD} -aE ${SOURCE_DIR} ${BUILD_DIR}
+      WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+      )
+    add_dependencies(doc ${TARGET_NAME})
+  endif()
 endmacro()
 
 ##
