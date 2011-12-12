@@ -57,27 +57,18 @@ target_link_libraries(ecto-test
   ecto
   ${GTEST_LIBRARIES}
   ${ECTO_DEP_LIBS}
-  # this is so that we can create cells that are in the test lib w/o
-  # python importing them
-  ecto_test_ectomodule
-  ${ecto_PYTHONLIB}
   )
 
 add_test(ecto_gtest_units ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/ecto-test --gtest_output=xml:${CMAKE_BINARY_DIR}/ecto-test.xml)
 
-add_executable(plasm_loader
-  plasm_loader.cpp
-  )
+#add_executable(plasm_loader
+#  plasm_loader.cpp
+#  )
 
-
-target_link_libraries(plasm_loader
-  ecto
-  ${ECTO_DEP_LIBS}
-  # this is so that we can create cells that are in the test lib w/o
-  # python importing them
-  ecto_test_ectomodule
-  ${ecto_PYTHONLIB}
-)
+#target_link_libraries(plasm_loader
+#  ecto
+#  ${ECTO_DEP_LIBS}
+#)
 
 #has a dependency on another test so lets declare the test there.
 #add_test(plasm_loader
