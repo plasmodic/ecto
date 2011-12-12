@@ -201,7 +201,7 @@ class BlackBox(object):
     def __getattr__(self, name):
         if name in ('parameters',):
             name = 'params'
-        if name not in ('__impl') and name in dir(self.__impl):
+        if '__impl' not in  name and name in dir(self.__impl):
             return getattr(self.__impl, name)
         if name == '__impl':
             return self.__impl
