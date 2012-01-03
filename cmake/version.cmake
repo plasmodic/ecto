@@ -32,8 +32,8 @@ set(ECTO_SOVERSION ${ECTO_MAJOR_VERSION}.${ECTO_MINOR_VERSION})
 set(ECTO_VERSION ${ECTO_MAJOR_VERSION}.${ECTO_MINOR_VERSION}.${ECTO_PATCH_VERSION})
 set(ECTO_CODE_NAME "amoeba") #code name must be hand coded for debian to work, because of lack of git describe, unless something more clever exists
 
-set(include_prefix include/ecto-${ECTO_CODE_NAME})
-set(share_prefix share/ecto-${ECTO_CODE_NAME})
+set(include_prefix include)
+set(share_prefix share/ecto)
 
 configure_file(${ecto_SOURCE_DIR}/cmake/version.hpp.in ${ecto_BINARY_DIR}/include/ecto/version.hpp)
 include_directories(${ecto_BINARY_DIR}/include)

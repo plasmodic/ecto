@@ -33,22 +33,12 @@ set(ecto_LIBRARIES_DIR ${CMAKE_INSTALL_PREFIX}/lib)
 set(ecto_PYTHONPATH ${CMAKE_INSTALL_PREFIX}/${ecto_PYTHON_INSTALL})
 set(ECTO_CONFIG_PATH  ${CMAKE_INSTALL_PREFIX}/${share_prefix})
 
-if(UNIX)
-  set(ecto_LIBRARIES ${ecto_LIBRARIES_DIR}/libecto.so)
-  set(ecto_PYTHONLIB ${ecto_PYTHONPATH}/ecto.so)
-elseif(WIN32)
-  set(ecto_LIBRARIES ${ecto_LIBRARIES_DIR}/ecto_cpp.dll)
-  set(ecto_PYTHONLIB ${ecto_PYTHONPATH}/ecto.pyd)
-endif()
-
-configure_file(${ecto_SOURCE_DIR}/cmake/ectoConfig.cmake.in 
-  ${CMAKE_BINARY_DIR}/unix_install/ectoConfig.cmake @ONLY)
-configure_file(${ecto_SOURCE_DIR}/cmake/ectoConfig-version.cmake.in 
-  ${CMAKE_BINARY_DIR}/unix_install/ectoConfig-version.cmake @ONLY)
-configure_file(${ecto_SOURCE_DIR}/cmake/ectoMacros.cmake
-  ${CMAKE_BINARY_DIR}/unix_install/ectoMacros.cmake @ONLY)
-configure_file(${ecto_SOURCE_DIR}/cmake/rosbuild_lite.cmake
-  ${CMAKE_BINARY_DIR}/unix_install/rosbuild_lite.cmake @ONLY)
+file(COPY ${ecto_SOURCE_DIR}/cmake/ectoMacros.cmake
+    DESTINATION ${ecto_BINARY_DIR}/unix_install/
+    )
+file(COPY ${ecto_SOURCE_DIR}/cmake/rosbuild_lite.cmake
+    DESTINATION ${ecto_BINARY_DIR}/unix_install/rosbuild_lite.cmake
+    )
 
 #for client projects using ecto documentation tools
 file(COPY ${PROJECT_SOURCE_DIR}/cmake/doc.cmake
@@ -57,13 +47,13 @@ file(COPY ${PROJECT_SOURCE_DIR}/cmake/git.cmake
   DESTINATION ${CMAKE_BINARY_DIR}/unix_install/)
 #install the ectoConfig.cmake and ectoConfig-version.cmake
 install(DIRECTORY
-  ${CMAKE_BINARY_DIR}/unix_install/   #last component empty, so we loose the unix_install
-  DESTINATION ${share_prefix}
+  ${ecto_BINARY_DIR}/unix_install/   #last component empty, so we loose the unix_install
+  DESTINATION ${share_prefix}/cmake
   COMPONENT main
   )
 
 install(FILES ${ecto_SOURCE_DIR}/cmake/python_path.sh.user.in
-  DESTINATION ${share_prefix}
+  DESTINATION ${share_prefix}/cmake
   COMPONENT main
   )
 
@@ -71,35 +61,13 @@ install(FILES ${ecto_SOURCE_DIR}/cmake/python_path.sh.user.in
 install(DIRECTORY ${ecto_SOURCE_DIR}/include/ecto
   DESTINATION ${include_prefix}
   COMPONENT main
+  FILES_MATCHING PATTERN "*.hpp"
   )
 
 #generated headers
 install(DIRECTORY ${PROJECT_BINARY_DIR}/include/ecto
   DESTINATION ${include_prefix}
   COMPONENT main
-  )
-
-#used for checkinstall package description.
-file(WRITE ${CMAKE_BINARY_DIR}/description-pak
-    "Ecto, a hybrid c++/python framework for dataflow pipeline development.\n"
-)
-
-add_custom_target(checkinstall
-  COMMENT "Install using checkinstall." VERBATIM
-  )
-add_custom_target(checkinstall-remove
-  COMMENT "Uninstall using the package name from checkinstall." VERBATIM
-  )
-
-add_dependencies(checkinstall checkinstall-remove)
-
-add_custom_command(TARGET checkinstall-remove
-  COMMAND sh -c "sudo dpkg --force-all -r ecto-${ECTO_CODE_NAME}"
-  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-  )
-
-add_custom_command(TARGET checkinstall
-  COMMAND sh -c "sudo checkinstall --exclude=/home -y --nodoc --pkgname ecto-${ECTO_CODE_NAME} make install"
-  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+  FILES_MATCHING PATTERN "*.hpp"
   )
 

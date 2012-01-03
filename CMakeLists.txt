@@ -27,6 +27,9 @@
 # 
 cmake_minimum_required(VERSION 2.8)
 project(ecto)
+find_package(catkin REQUIRED)
+catkin_package(ecto)
+
 set(${PROJECT_NAME}_GITHUB_URL https://github.com/plasmodic/ecto)
 
 option(ECTO_TRACE_EXCEPTIONS "Trace ecto exceptions to stdout" OFF)
@@ -41,11 +44,11 @@ endif()
 
 option(ECTO_WITH_INSTRUMENTATION "Instrument schedulers (for debugging)" OFF)
 
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_MODULE_PATH ${ecto_SOURCE_DIR}/cmake)
+#set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+#set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+list(APPEND CMAKE_MODULE_PATH ${ecto_SOURCE_DIR}/cmake)
 
-include(cmake/buildtype.cmake)
+#include(cmake/buildtype.cmake)
 include(cmake/version.cmake)
 include(cmake/git.cmake)
 include(cmake/ectoMacros.cmake)
@@ -82,8 +85,10 @@ if(BUILD_SAMPLES)
   add_subdirectory(samples)
 endif()
 
-find_package(catkin QUIET)
-if(catkin_FOUND)
-  catkin_package(ecto)
-endif()
-
+catkin_project(ecto
+ INCLUDE_DIRS
+ include
+ ${ecto_BINARY_DIR}/include 
+ LIBRARIES ecto
+ CFG_EXTRAS ecto-extras.cmake
+)
