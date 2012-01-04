@@ -8,9 +8,4 @@ Homepage:  http://ecto.willowgarage.com
 Depends: catkin, boost
 
 Catkin-CopyrightType:  willowgarage
-Catkin-ChangelogType: +catkin/changelog.em
-Catkin-DebRulesType: +catkin/rules.em
-
-Release-Pull: git://github.com/wg-debs/ecto.git
-Release-Push: git@github.com:wg-debs/ecto.git
-
+Catkin-DebRulesType: rules.cmake.em

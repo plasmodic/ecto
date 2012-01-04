@@ -40,15 +40,12 @@ macro(init_ecto_kitchen)
   endif()
 
   include(ecto/cmake/git.cmake)
-  include(ecto/cmake/virtualenv.cmake)
 
   git_status(${PROJECT_NAME})
 
   if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/ecto)
     MESSAGE(FATAL_ERROR "Expecting ecto as a subdirectory of your toplevel project!")
   endif()
-
-  setup_virtualenv(${PROJECT_NAME})
 
   if (NOT KITCHEN_PROJECTS)
     set(KITCHEN_PROJECTS "ecto;${ARGN}")

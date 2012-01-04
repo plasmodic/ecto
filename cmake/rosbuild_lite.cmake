@@ -74,6 +74,8 @@ macro( rosbuild_lite_init )
 
   if (ROSPACK_EXECUTABLE)
     set(ROS_FOUND TRUE)
+    message(STATUS "*** ROS_PACKAGE_PATH=${ROS_PACKAGE_PATH}")
+    message(STATUS "*** ROSPACK_EXECUTABLE=${ROSPACK_EXECUTABLE}")
   else()
     unset(ROS_FOUND)
   endif()
