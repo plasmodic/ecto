@@ -28,7 +28,7 @@
 cmake_minimum_required(VERSION 2.8)
 project(ecto)
 find_package(catkin REQUIRED)
-catkin_package(ecto)
+catkin_stack(ecto)
 
 set(${PROJECT_NAME}_GITHUB_URL https://github.com/plasmodic/ecto)
 
