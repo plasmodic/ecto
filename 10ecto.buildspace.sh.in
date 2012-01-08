@@ -2,6 +2,4 @@
 # ecto!
 #
 
-/bin/echo "ECTO ENV!"
-
 PYTHONPATH=@CMAKE_LIBRARY_OUTPUT_DIRECTORY@:@ecto_SOURCE_DIR@/python:$PYTHONPATH
