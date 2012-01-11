@@ -174,3 +174,39 @@ As you can see there is no helpful information here.  The trick is to
   91	        *out_ = (*pimpl_)();
   92	      return ecto::OK;
 
+.. rubric:: But python throws a zillion exceptions
+
+That's right, throws exceptions to indicate the end of a loop, and
+this happens a lot during startup.  One option is to set a breakpoint
+on the constructor of ``ecto::except::EctoException`` to differentiate
+between innocuous throws and Bad Ones.  Here, we have a throw of an
+EctoException (these are the ones that give you various information
+about the source of the error::
+
+  ecto.NullTendril:            exception_type  NullTendril
+                  cell_name  mything::DrawLineSegments
+                  cell_type  mything::DrawLineSegments
+              function_name  process
+
+  [Thread 0x7fffd3b72700 (LWP 24092) exited]
+  [Thread 0x7fffd1b08700 (LWP 24093) exited]
+  [Inferior 1 (process 24087) exited with code 01]
+  (gdb) break ecto::except::EctoException::EctoException()
+  Breakpoint 1 at 0x7ffff4eb1300: file /home/ecto_kitchen/src/ecto/src/lib/except.cpp, line 58. (2 locations)
+  (gdb) r
+  Starting program: /usr/bin/python ../src/mything/scripts/data_viewer.py
+  [New Thread 0x7fffd3b72700 (LWP 24097)]
+  [New Thread 0x7fffd1b08700 (LWP 24098)]
+
+  Breakpoint 1, ecto::except::EctoException::EctoException (this=0x7fffffffcf80, __vtt_parm=0x7ffff519eae0, __in_chrg=<optimized out>)
+      at /home/ecto_kitchen/src/ecto/src/lib/except.cpp:58
+  58	    EctoException::EctoException() {
+  (gdb) where
+  #0  ecto::except::EctoException::EctoException (this=0x7fffffffcf80, __vtt_parm=0x7ffff519eae0, __in_chrg=<optimized out>)
+      at /home/ecto_kitchen/src/ecto/src/lib/except.cpp:58
+  #1  0x00007fffd3c88ea9 in ecto::except::NullTendril::NullTendril (this=<optimized out>, __in_chrg=<optimized out>, __vtt_parm=<optimized out>)
+      at /home/ecto_kitchen/src/ecto/include/ecto/except.hpp:159
+  #2  0x00007fffd3c988d9 in get (this=0xed3af0) at /home/ecto_kitchen/src/ecto/include/ecto/spore.hpp:173
+  #3  operator* (this=0xed3af0) at /home/ecto_kitchen/src/ecto/include/ecto/spore.hpp:147
+  #4  mything::DrawLineSegments::process (this=0xed3ac0, in=<optimized out>, out=<optimized out>)
+      at /home/ecto_kitchen/src/mything/src/texmex/DrawLineSegments.cpp:39

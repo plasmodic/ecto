@@ -144,6 +144,7 @@ namespace ecto
 
     struct EctoException : virtual std::exception, virtual boost::exception
     {
+      EctoException();
       virtual const char* what() const throw();
     };
 

@@ -1,7 +1,7 @@
-// 
+//
 // Copyright (c) 2011, Willow Garage, Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
 //     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
 //     * Neither the name of the Willow Garage, Inc. nor the names of its
 //       contributors may be used to endorse or promote products derived from
 //       this software without specific prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -24,9 +24,9 @@
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
-// 
+//
 #include <ecto/util.hpp>
-#include <boost/exception/all.hpp> 
+#include <boost/exception/all.hpp>
 
 #include <ecto/except.hpp>
 #include <boost/format.hpp>
@@ -55,6 +55,10 @@ namespace ecto
 
     BOOST_PP_SEQ_FOR_EACH(MAKEWHAT, ~, ECTO_EXCEPTIONS);
 
+    EctoException::EctoException() {
+      // set your breakpoint here.
+    }
+
     const char* EctoException::what() const throw() { return "EctoException"; }
 
     std::string
@@ -67,7 +71,7 @@ namespace ecto
       tmp << str(fmt % "File" % (f ? *f : "(unknown)"));
       int const * l=::boost::get_error_info< ::boost::throw_line>(e);
       tmp << str(fmt % "Line" % (l ? *l : -1));
-      
+
       char const * const * fn=::boost::get_error_info< ::boost::throw_function>(e);
       tmp << str(fmt % "Throw in function" % (fn ? *fn : "(unknown)"));
       tmp << '\n';
@@ -108,15 +112,15 @@ namespace ecto
         return boost::optional<std::string>();
     }
 
-    
+
     error_info_container_impl::error_info_container_impl(): count_(0) {}
-    
+
     error_info_container_impl::~error_info_container_impl() throw() {}
 
     using boost::exception_detail::error_info_base;
 
     void
-    error_info_container_impl::set(error_info_base_ptr const & x, 
+    error_info_container_impl::set(error_info_base_ptr const & x,
                                    type_info_ const & typeid_)
     {
       BOOST_ASSERT(x);
@@ -128,7 +132,7 @@ namespace ecto
     using boost::exception_detail::refcount_ptr;
     using boost::exception_detail::error_info_container;
 
-    refcount_ptr<error_info_container> 
+    refcount_ptr<error_info_container>
     error_info_container_impl::clone() const
     {
       refcount_ptr<error_info_container> p;
@@ -154,7 +158,7 @@ namespace ecto
       return boost::shared_ptr<error_info_base>();
     }
 
-    char const * 
+    char const *
     error_info_container_impl::diagnostic_information(
 #if defined(ECTO_EXCEPTION_DIAGNOSTIC_IMPL_TAKES_CHARSTAR)
                                                       char const*
@@ -180,12 +184,12 @@ namespace ecto
 #if defined(ECTO_EXCEPTION_RELEASE_RETURNS_VOID)
     void error_info_container_impl::release() const { if( !--count_ ) delete this; }
 #else
-    bool error_info_container_impl::release() const { 
-      if( --count_ ) 
+    bool error_info_container_impl::release() const {
+      if( --count_ )
         return false;
       else
         {
-          delete this; 
+          delete this;
           return true;
         }
     }
@@ -198,7 +202,7 @@ namespace boost {
   namespace exception_detail {
 
     // this break in to a boost::exception and gets the
-    // error_info_container out.  
+    // error_info_container out.
     template <> struct get_info< ::ecto::except::HACK_HACK_HACK>
     {
       template <typename E>
@@ -213,12 +217,12 @@ namespace boost {
 
   template <class E,class Tag,class T>
   E const &
-  operator<<( E const & x, 
+  operator<<( E const & x,
               error_info< ::ecto::except::detail::wrap<Tag>, T> const & v )
   {
     typedef error_info< ::ecto::except::detail::wrap<Tag>, T> error_info_tag_t;
     ::boost::shared_ptr<error_info_tag_t> p( new error_info_tag_t(v) );
-    exception_detail::refcount_ptr<exception_detail::error_info_container>& c 
+    exception_detail::refcount_ptr<exception_detail::error_info_container>& c
       = exception_detail::get_info< ::ecto::except::HACK_HACK_HACK>::get(x);
     if( !(c.get()) )
       c.adopt(new ::ecto::except::error_info_container_impl);
@@ -235,7 +239,7 @@ namespace boost {
   BOOST_PP_EXPAND(INSTANTIATE_INSERT BOOST_PP_SEQ_TO_TUPLE(SEQ))
 
   BOOST_PP_SEQ_FOR_EACH_PRODUCT(INSTANTIATE_INSERT_THUNK, ((EctoException)ECTO_EXCEPTIONS)(ECTO_EXCEPTION_TAG_NAMES));
-  
+
 
 }
 
