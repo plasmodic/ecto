@@ -93,4 +93,4 @@ catkin_project(ecto
  CFG_EXTRAS ecto-extras.cmake
 )
 
-catkin_add_env_hooks(10ecto.buildspace.sh 10ecto.install.sh)
+catkin_add_env_hooks(10ecto SHELLS sh)
