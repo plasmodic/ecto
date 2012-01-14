@@ -30,6 +30,11 @@ project(ecto)
 find_package(catkin REQUIRED)
 catkin_stack(ecto)
 
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+
 set(${PROJECT_NAME}_GITHUB_URL https://github.com/plasmodic/ecto)
 
 option(ECTO_TRACE_EXCEPTIONS "Trace ecto exceptions to stdout" OFF)
@@ -93,4 +98,4 @@ catkin_project(ecto
  CFG_EXTRAS ecto-extras.cmake
 )
 
-catkin_add_env_hooks(10ecto SHELLS sh)
+catkin_add_env_hooks(10ecto SHELLS all )

@@ -27,8 +27,7 @@
 # 
 macro(pytest testname)
   add_test(ecto_${testname}
-    /usr/bin/env
-    PYTHONPATH=${CMAKE_LIBRARY_OUTPUT_DIRECTORY}:${ecto_SOURCE_DIR}/python:$ENV{PYTHONPATH}
+    ${CATKIN_ENV} 
     ${ARGN}
     )
 endmacro()
