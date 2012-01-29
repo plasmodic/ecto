@@ -19,7 +19,7 @@ source
 ^^^^^^
 
 We use git for our source control.  You can get a copy of our repo by doing the following::
-   
+
    git clone git://github.com/plasmodic/ecto.git
 
 dependencies
@@ -71,7 +71,7 @@ here: https://github.com/plasmodic/ecto/issues/new
 docs
 ^^^^
 To create the latest documentation for Ecto::
-   
+
    cd ecto/build
    make
    make doc
@@ -88,4 +88,6 @@ To install Ecto on your machine::
 use
 ^^^
 See the documentation (http://ecto.willowgarage.com) for detailed usage instructions.
+
+
 
