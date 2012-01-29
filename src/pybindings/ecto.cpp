@@ -1,7 +1,7 @@
-// 
+//
 // Copyright (c) 2011, Willow Garage, Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
 //     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
 //     * Neither the name of the Willow Garage, Inc. nor the names of its
 //       contributors may be used to endorse or promote products derived from
 //       this software without specific prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -24,10 +24,14 @@
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
-// 
+//
 #include <boost/python.hpp>
 #include <ecto/ecto.hpp>
 #include <ecto/registry.hpp>
+
+#include <boost/python/suite/indexing/vector_indexing_suite.hpp>
+#include <boost/python/stl_iterator.hpp>
+
 
 #include <boost/thread.hpp>
 
@@ -85,12 +89,19 @@ namespace ecto {
 }
 
 ECTO_INSTANTIATE_REGISTRY(ecto)
- 
+
 namespace ecto {
   namespace py {
     std::string versionstr() { return ECTO_VERSION_STRING; }
     unsigned abinum() { return ECTO_ABI_VERSION; }
     bp::tuple sonametuple() { return bp::make_tuple(ECTO_MAJOR_VERSION, ECTO_MINOR_VERSION, ECTO_PATCH_VERSION); }
+    std::vector<std::string> list_of_strings(bp::list l)
+    {
+      std::vector<std::string> sl;
+      bp::stl_input_iterator<std::string> begin(l),end;
+      std::copy(begin,end,std::back_inserter(sl));
+      return sl;
+    }
   }
 }
 
@@ -122,6 +133,12 @@ BOOST_PYTHON_MODULE(ecto)
   bp::def("log_to_file", &ecto::py::log_to_file);
   bp::def("unlog_to_file", &ecto::py::unlog_to_file);
   ECTO_REGISTER(ecto);
+
+  bp::class_<std::vector<std::string> > ("VectorString")
+    .def(bp::vector_indexing_suite<std::vector<std::string> >());
+
+  bp::def("list_of_strings", &ecto::py::list_of_strings);
+
 }
 
 
