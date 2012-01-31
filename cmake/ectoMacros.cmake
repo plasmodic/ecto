@@ -1,7 +1,7 @@
-# 
+#
 # Copyright (c) 2011, Willow Garage, Inc.
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
 #     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
 #     * Neither the name of the Willow Garage, Inc. nor the names of its
 #       contributors may be used to endorse or promote products derived from
 #       this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -24,7 +24,7 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-# 
+#
 option(ECTO_LOG_STATS "Generate logs containing fine-grained per-cell execution timing information.  You probably don't want this."
   OFF)
 mark_as_advanced(ECTO_LOG_STATS)
@@ -114,35 +114,4 @@ macro( install_ecto_module name )
   )
 endmacro()
 # ==============================================================================
-
-# ============== Python Path ===================================================
-
-#ecto_python_env_gen( [path1 [ path2 [ path3 [...] ] ] ])
-#this will generate a python_path.sh script in the ${PROJECT_BINARY_DIR}
-#where any argument supplied is consired to be a python module directory
-#and will be preprended to the python path.  Also, the path where ecto's python
-#binding are located will appear after any user supplied lists.
-#typically this call will look like:
-# ecto_python_env_gen(${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
-#
-macro( ecto_python_env_gen )
-    set(ecto_PYTHONPATH_ ${ecto_PYTHONPATH} )
-    set(ecto_user_PYTHONPATH )
-    #put user path first
-    list(APPEND ecto_user_PYTHONPATH  ${ARGN})
-    list(APPEND ecto_user_PYTHONPATH  ${ecto_PYTHONPATH})
-    #transform the cmake list to a sh path list
-    string(REPLACE ";" ":"
-        ecto_user_PYTHONPATH
-        "${ecto_user_PYTHONPATH}"
-    )
-    configure_file(${ECTO_CONFIG_PATH}/python_path.sh.user.in 
-      ${PROJECT_BINARY_DIR}/python_path.sh
-      )
-    file(RELATIVE_PATH nice_path_ ${CMAKE_BINARY_DIR} ${PROJECT_BINARY_DIR}/python_path.sh)
-    if (NOT ecto_kitchen_SOURCE_DIR)
-      message(STATUS "To setup your python path for *${PROJECT_NAME}* you may source: ${nice_path_}")
-    endif()
-endmacro()
-
 

@@ -64,7 +64,6 @@ include(cmake/fastidious.cmake)
 include(cmake/doc.cmake)
 
 git_status(ecto)
-ecto_python_env_gen()
 
 include_directories(include)
 include_directories(src/lib)
