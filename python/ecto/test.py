@@ -34,7 +34,7 @@ schedulers = [
     ]
 
 stress_test = 'ECTO_STRESS_TEST_ITERATIONS' in os.environ
-iterations = int(os.environ.get('ECTO_STRESS_TEST_ITERATIONS', 1))
+iterations = int(os.environ.get('ECTO_STRESS_TEST_ITERATIONS', 5))
 
 
 def test(f):

@@ -40,6 +40,9 @@ set(${PROJECT_NAME}_GITHUB_URL https://github.com/plasmodic/ecto)
 option(ECTO_TRACE_EXCEPTIONS "Trace ecto exceptions to stdout" OFF)
 
 option(ECTO_STRESS_TEST "Stress testing of ecto" OFF)
+if(ECTO_STRESS_TEST)
+  message("ECTO_STRESS_TEST is ON")
+endif()
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
   option(ECTO_LOGGING "Ecto logging" ON)
