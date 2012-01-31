@@ -16,7 +16,7 @@
 #      - ecto_INCLUDE_DIRS              : The ecto include directories
 #    These macros:
 #      set_ecto_install_package_name(package_name) #default is "" you may specify other
-#	   ectomodule(module_name ${srcs}) #This creates a single ecto module 
+#	   ectomodule(module_name ${srcs}) #This creates a single ecto module
 #                                      #shared library loadable from python,
 #                                      #will add includes, links to bare necessities and mangles the target name with ${name}_ectomodule
 #	   link_ecto(module_name ${libs})  #Link to additional libraries
@@ -30,7 +30,6 @@
 # ==============================================================================
 get_filename_component(SELF_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
 include(${SELF_DIR}/ectoMacros.cmake)
-include(${SELF_DIR}/rosbuild_lite.cmake)
 include(${SELF_DIR}/doc.cmake)
 include(${SELF_DIR}/git.cmake)
 set(ecto_INCLUDE_DIRS @ecto_INCLUDE_DIRS@)
@@ -54,7 +53,7 @@ find_package(PythonInterp REQUIRED)
 execute_process(COMMAND ${PYTHON_EXECUTABLE} --version
               ERROR_VARIABLE PYTHON_VERSION_FULL
               OUTPUT_STRIP_TRAILING_WHITESPACE)
-              
+
 string(REGEX MATCH "[0-9].[0-9]" PYTHON_VERSION_MAJOR_MINOR "${PYTHON_VERSION_FULL}")
 
 if(UNIX)
