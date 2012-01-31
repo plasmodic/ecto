@@ -48,11 +48,6 @@ install(DIRECTORY
   COMPONENT main
   )
 
-install(FILES ${ecto_SOURCE_DIR}/cmake/python_path.sh.user.in
-  DESTINATION ${share_prefix}/cmake
-  COMPONENT main
-  )
-
 #regular headers
 install(DIRECTORY ${ecto_SOURCE_DIR}/include/ecto
   DESTINATION ${include_prefix}

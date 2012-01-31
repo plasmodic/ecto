@@ -36,8 +36,6 @@ set(ECTO_CONFIG_PATH ${CMAKE_BINARY_DIR}/cmake/ecto)
 file(COPY ${ecto_SOURCE_DIR}/cmake/ectoMacros.cmake
   DESTINATION ${ecto_CONFIG_DIR})
 
-#copy the python_path.sh.user.in for users that are not installing ecto.
-file(COPY ${PROJECT_SOURCE_DIR}/cmake/python_path.sh.user.in DESTINATION ${ecto_CONFIG_DIR})
 file(COPY ${PROJECT_SOURCE_DIR}/cmake/doc.cmake DESTINATION ${ecto_CONFIG_DIR})
 file(COPY ${PROJECT_SOURCE_DIR}/cmake/git.cmake DESTINATION ${ecto_CONFIG_DIR})
 #set this back for our libs to pick it up as

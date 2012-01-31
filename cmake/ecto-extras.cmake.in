@@ -21,12 +21,6 @@
 #                                      #will add includes, links to bare necessities and mangles the target name with ${name}_ectomodule
 #	   link_ecto(module_name ${libs})  #Link to additional libraries
 #	   install_ecto_module(module_name) #install your target a python system path.
-#
-#    Generated files:
-#      In your build directory, a python_path.sh will be generated which you may source to setup your PYTHONPATH to
-#      properly find ecto and your own ecto modules. The variable: ecto_user_PYTHONPATH is looked at when generating
-#      this file. ecto_user_PYTHONPATH defaults to the LIBRARY_OUTPUT_DIRECTORY  This variable will be prepended to your
-#      python path in the form PYTHONPATH=${ecto_user_PYTHONPATH}:<path to ecto>:PYTHONPATH
 # ==============================================================================
 get_filename_component(SELF_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
 include(${SELF_DIR}/ectoMacros.cmake)

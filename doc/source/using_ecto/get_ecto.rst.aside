@@ -80,13 +80,13 @@ Now you have a working build of ecto! You should try to run a test.
     #cd to the root of ecto
     cd ..
     #add ecto to your python path
-    . build/python_path.sh
+    . setup.zsh
     python samples/hello.py
 
 You should see the following outputish:
 
 ::
-    
+
     digraph G {
     graph [rankdir=TB, ranksep=1]
     edge [labelfontsize=8]
@@ -128,7 +128,7 @@ You may install ecto using the following:
   cd build
   sudo make install
   sudo ldconfig
-  
+
 
 This will install ecto to the appropriate system paths. On ubuntu the install may touch the following folders:
 
@@ -137,9 +137,9 @@ This will install ecto to the appropriate system paths. On ubuntu the install ma
   /usr/local/include/ecto-VERSION/
   /usr/local/share/ecto-VERSION/
   /usr/local/lib/python*/dist-packages/
-  
 
-The advantage to installing ecto is that it becomes much easier for client code to use.  cmake will auto-magically 
+
+The advantage to installing ecto is that it becomes much easier for client code to use.  cmake will auto-magically
 be able to find ecto, and it will be in your pythonpath by default.
 
 Docs

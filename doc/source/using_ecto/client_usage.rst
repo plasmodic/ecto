@@ -11,7 +11,7 @@ CMake is the recommended build system tool.  For the purpose of this
 documentation you should have a simple CMake project that looks like this on disk.
 
 ::
-  
+
   % ls my_ecto_project
   CMakeLists.txt
   hello_ecto.cpp
@@ -36,10 +36,6 @@ CMake should be used to find ecto and bring in a few macros:
     #make all libraries appear in the build/lib directory
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
-    #generates a script, python_path.sh that may be sourced 
-    #to setup your PYTHONPATH
-    ecto_python_env_gen(${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
-
     ectomodule(hello_ecto
         hello_ecto.cpp
     )
@@ -58,7 +54,7 @@ ecto is installed
 CMake should complete without error, using default settings.
 
 ::
-    
+
     % cd my_ecto_project
     % mkdir build
     % cd build
@@ -74,7 +70,6 @@ Make sure that the output does not contain warnings or errors:
     -- Check for working C compiler: /usr/bin/gcc
     -- Check for working C compiler: /usr/bin/gcc -- works
     ... etc etc
-    -- ecto === Source the python_path.sh in your build folder to setup your python path.
     -- Configuring done
     -- Generating done
 
@@ -100,44 +95,14 @@ Make sure that the output does not contain warnings or errors:
     -- Check for working C compiler: /usr/bin/gcc
     -- Check for working C compiler: /usr/bin/gcc -- works
     ... etc etc
-    -- ecto === Source the python_path.sh in your build folder to setup your python path.
     -- Configuring done
     -- Generating done
 
-Test that its using your local version of ecto by looking at the ``python_path.sh`` If these paths are blank,
-or wrong, a CMake configuration error has occured.
-
-::
-
-    % cat python_path.sh 
-    #source me to get the python path for ecto setup
-    export PYTHONPATH=:/home/me/my_ecto_project/build/modules:/home/me/ecto/build/lib:/home/me/ecto/python:$PYTHONPATH
-
-Build it.  
+Build it.
 ^^^^^^^^^
 
 ::
 
     % cd my_ecto_project/build
     % make
-    
-Running your code
------------------
-
-To run your ecto project, you must setup your ``PYTHONPATH`` environment variable,
-so that ecto and your project may be found by the python interpretter. This is the purpose
-of the python_path.sh that was generated for you by cmake. It tends to live in the build directory.
-
-::
-
-    % cd my_ecto_project
-    % . build/python_path.sh
-
-Now in the same terminal you may run a python script that depends on ecto and your local project.
-
-::
-
-    % python hello.py
-    ecto ecto ecto
-    ... etc etc  
 

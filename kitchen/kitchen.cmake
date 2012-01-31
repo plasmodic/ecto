@@ -1,7 +1,7 @@
-# 
+#
 # Copyright (c) 2011, Willow Garage, Inc.
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
 #     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
 #     * Neither the name of the Willow Garage, Inc. nor the names of its
 #       contributors may be used to endorse or promote products derived from
 #       this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -24,7 +24,7 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-# 
+#
 #
 # The ecto kitchen macro
 #
@@ -85,13 +85,6 @@ macro(init_ecto_kitchen)
   configure_file(ecto/kitchen/util/build_as_standalones.sh.in
     build_as_standalones.sh
     @ONLY)
-
-  configure_file(${ecto_kitchen_SOURCE_DIR}/ecto/kitchen/util/python_path.sh.in
-    ${CMAKE_BINARY_DIR}/python_path.sh
-    @ONLY
-    )
-  message(STATUS "To set up your python path you may source the file 'python_path.sh'")
-  message(STATUS "  in the build directory.")
 
   macro(check_hashbangs SCRIPTDIR)
     file(GLOB_RECURSE _python_scripts ${CMAKE_CURRENT_SOURCE_DIR}/${SCRIPTDIR}/*.py)
