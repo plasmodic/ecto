@@ -74,12 +74,18 @@ add_subdirectory(src)
 add_subdirectory(cmake)
 add_subdirectory(python)
 
+sphinx(${CMAKE_CURRENT_SOURCE_DIR}/doc/source doc
+  ${CMAKE_CURRENT_SOURCE_DIR}
+  ${CMAKE_CURRENT_SOURCE_DIR}/samples
+  )
+
 option(BUILD_DOC "Build docs, this will build tests and samples as well." ON)
 if(BUILD_DOC)
   set(BUILD_TEST ON CACHE BOOL "Tests must be built if docs are expected to build." FORCE)
   set(BUILD_SAMPLES ON CACHE BOOL "Samples must be built if docs are expected to build." FORCE)
   add_subdirectory(doc)
 endif()
+
 
 option(BUILD_TEST "Build tests" ON)
 if(BUILD_TEST)
@@ -99,6 +105,8 @@ catkin_project(ecto
  LIBRARIES ecto
  CFG_EXTRAS ecto-extras.cmake
 )
+
+catkin_doxygen(ecto-doxygen ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 catkin_add_env_hooks(10ecto SHELLS all )
 

@@ -1,7 +1,7 @@
-# 
+#
 # Copyright (c) 2011, Willow Garage, Inc.
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
 #     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
 #     * Neither the name of the Willow Garage, Inc. nor the names of its
 #       contributors may be used to endorse or promote products derived from
 #       this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -24,7 +24,7 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-# 
+#
 if(NOT ecto_kitchen_SOURCE_DIR)
     # add a target to generate API documentation with Doxygen
     # add doc to all
@@ -50,30 +50,30 @@ if(NOT ecto_kitchen_SOURCE_DIR)
       COMMENT "Generate all documentation" VERBATIM
       )
 
-    find_package(Doxygen)
-    if(DOXYGEN_FOUND)
-      set(DOC_SEARCH_DIRS
-        ${ecto_SOURCE_DIR}/include
-      )
-      doxygen(doxygen ${DOC_SEARCH_DIRS})
-      add_dependencies(doc doxygen)
-    endif()
+#     find_package(Doxygen)
+#     if(DOXYGEN_FOUND)
+#       set(DOC_SEARCH_DIRS
+#         ${ecto_SOURCE_DIR}/include
+#       )
+#       doxygen(doxygen ${DOC_SEARCH_DIRS})
+#       add_dependencies(doc doxygen)
+#     endif()
 
     find_sphinx()
-    if(SPHINX_BUILD)
-      sphinx(html ${CMAKE_CURRENT_SOURCE_DIR}/source  ${CMAKE_CURRENT_BINARY_DIR}/html
-        ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}
-        ${ecto_SOURCE_DIR}/python
-        ${CMAKE_CURRENT_BINARY_DIR}
-        )
-      add_dependencies(doc html)
-      if(DOXYGEN_FOUND)
-        add_dependencies(html doxygen)
-      endif()
-
-      deploy(www-deploy ${CMAKE_CURRENT_BINARY_DIR}/html/ ${ECTO_DOC_DEPLOY_DESTINATION})
-      add_dependencies(www-deploy doc)
-    endif()
+#     if(SPHINX_BUILD)
+#       sphinx(html ${CMAKE_CURRENT_SOURCE_DIR}/source  ${CMAKE_CURRENT_BINARY_DIR}/html
+#         ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}
+#         ${ecto_SOURCE_DIR}/python
+#         ${CMAKE_CURRENT_BINARY_DIR}
+#         )
+#       add_dependencies(doc html)
+#       if(DOXYGEN_FOUND)
+#         add_dependencies(html doxygen)
+#       endif()
+#
+#       deploy(www-deploy ${CMAKE_CURRENT_BINARY_DIR}/html/ ${ECTO_DOC_DEPLOY_DESTINATION})
+#       add_dependencies(www-deploy doc)
+#     endif()
 endif()
 
 #these are used by the docs.

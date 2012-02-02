@@ -8,7 +8,7 @@ tendril
 The ``tendril`` is a type-erased value container, essentially a
 `boost::any`_ (in fact, implemented with ``boost::any``) augmented
 with certain conversion rules, operators, introspection capabilities,
-docstrings and the like.  
+docstrings and the like.
 
 Overview
 --------
@@ -40,7 +40,7 @@ Will output,
    :in_srcdir:
 
 .. _tendril-conversions:
-  
+
 Tendril Conversions
 ^^^^^^^^^^^^^^^^^^^
 
@@ -65,11 +65,11 @@ when one tendril or type is inserted to another.
 +----------+--------------------+------------------------------------+------------+--------+
 | ``T``    | ValueNone error    | ``T`` via                          | assignment |        |
 |          |                    | extract<> or                       |            | error  |
-|          | |conversion error| |                                    |            |        |
+|          | <conversion error> |                                    |            |        |
 +----------+--------------------+------------------------------------+------------+--------+
 | ``U``    | ValueNone error    | ``U`` via |TypeMismatch|assignment |            |        |
 |          |                    | extract<> or                       | error      |        |
-|          | |conversion error| |                                    |            |        |
+|          | <conversion error> |                                    |            |        |
 +----------+--------------------+------------------------------------+------------+--------+
 
 

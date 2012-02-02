@@ -1,0 +1,10 @@
+
+print "YES IT IS READ"
+
+extensions += [
+              'ecto.sphinx.EctoShLexer',
+              'ecto.sphinx.EctoPlotDirective',
+              'ecto.sphinx.EctoCellDirective',
+              'ecto.sphinx.EctoModuleDirective'
+              ]
+

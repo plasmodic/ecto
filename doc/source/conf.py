@@ -39,8 +39,6 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.graphviz']
 
 extensions += [
-              'ecto.sphinx.breathe',
-              'ecto.sphinx.programoutput',
               'ecto.sphinx.EctoShLexer',
               'ecto.sphinx.EctoPlotDirective',
               'ecto.sphinx.EctoCellDirective',

@@ -66,8 +66,8 @@ def use_ipython(options, sched, plasm, locals={}):
 
 def run_plasm(options, plasm, locals={}):
     ''' Run the plasm given the options from the command line parser.
-        :param options: The command line, preparsed options object. It is assumed that you have filled this object using
-            scheduler_options.
+        :param options: The command line, preparsed options object.
+        It is assumed that you have filled this object using scheduler_options.
         :param plasm: The plasm to run.
         :param locals: Any local variables that you would like available to the iPython shell session.
     '''

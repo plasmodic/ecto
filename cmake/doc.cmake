@@ -1,7 +1,7 @@
-# 
+#
 # Copyright (c) 2011, Willow Garage, Inc.
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
 #     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
 #     * Neither the name of the Willow Garage, Inc. nor the names of its
 #       contributors may be used to endorse or promote products derived from
 #       this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -24,7 +24,7 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-# 
+#
 
 ##
 # doxygen(<TARGET_NAME> <SEARCH_DIRS>)
@@ -72,36 +72,36 @@ macro(find_sphinx)
   endif()
 endmacro()
 
-##
-# sphinx(<TARGET_NAME> <SOURCE_DIR> <BUILD_DIR> [PATH1 [ PATH2 [ PATH3 ]]])
-# TARGET_NAME -> The cmake target to create.
-# SOURCE_DIR -> Where the conf.py is
-# BUILD_DIR -> Where should sphinx put the result
-# PATH(s) -> paths to prepend to the PYTHONPATH for the execution of sphinx-build
-#
-macro(sphinx TARGET_NAME SOURCE_DIR BUILD_DIR)
-  find_sphinx()
-  if(SPHINX_BUILD)
-    set(_PYTHONPATH )
-    #put user path first
-    list(APPEND _PYTHONPATH ${ARGN})
-    list(APPEND _PYTHONPATH  ${ecto_PYTHONPATH})
-    #transform the cmake list to a sh path list
-    string(REPLACE ";" ":"
-        _PYTHONPATH
-        "${_PYTHONPATH}"
-    )
-    add_custom_target(${TARGET_NAME})
-    add_custom_command(TARGET ${TARGET_NAME}
-      COMMAND
-      /usr/bin/env
-      PYTHONPATH=${_PYTHONPATH}
-      ${SPHINX_BUILD} -aE ${SOURCE_DIR} ${BUILD_DIR}
-      WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-      )
-    add_dependencies(doc ${TARGET_NAME})
-  endif()
-endmacro()
+# ##
+# # sphinx(<TARGET_NAME> <SOURCE_DIR> <BUILD_DIR> [PATH1 [ PATH2 [ PATH3 ]]])
+# # TARGET_NAME -> The cmake target to create.
+# # SOURCE_DIR -> Where the conf.py is
+# # BUILD_DIR -> Where should sphinx put the result
+# # PATH(s) -> paths to prepend to the PYTHONPATH for the execution of sphinx-build
+# #
+# macro(sphinx TARGET_NAME SOURCE_DIR BUILD_DIR)
+#   find_sphinx()
+#   if(SPHINX_BUILD)
+#     set(_PYTHONPATH )
+#     #put user path first
+#     list(APPEND _PYTHONPATH ${ARGN})
+#     list(APPEND _PYTHONPATH  ${ecto_PYTHONPATH})
+#     #transform the cmake list to a sh path list
+#     string(REPLACE ";" ":"
+#         _PYTHONPATH
+#         "${_PYTHONPATH}"
+#     )
+#     add_custom_target(${TARGET_NAME})
+#     add_custom_command(TARGET ${TARGET_NAME}
+#       COMMAND
+#       /usr/bin/env
+#       PYTHONPATH=${_PYTHONPATH}
+#       ${SPHINX_BUILD} -aE ${SOURCE_DIR} ${BUILD_DIR}
+#       WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+#       )
+#     add_dependencies(doc ${TARGET_NAME})
+#   endif()
+# endmacro()
 
 ##
 # deploy(<TARGET_NAME> <DOCS> <DESTINATION>)
