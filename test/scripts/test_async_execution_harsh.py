@@ -36,8 +36,8 @@ def makeplasm():
     plasm = ecto.Plasm()
 
     ping = ecto_test.Ping("Ping")
-    sleep0 = ecto_test.Sleep("Sleep_0", seconds=0.1)
-    sleep1 = ecto_test.Sleep("Sleep_1", seconds=0.1)
+    sleep0 = ecto_test.Sleep("Sleep_0", seconds=0.02)
+    sleep1 = ecto_test.Sleep("Sleep_1", seconds=0.02)
 
     plasm.connect(ping[:] >> sleep0[:],
                   sleep0[:] >> sleep1[:])
