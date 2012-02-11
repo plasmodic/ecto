@@ -82,11 +82,15 @@ def run_plasm(options, plasm, locals={}):
         print >> open(options.dotfile, 'wt'), plasm.viz()
     if len(options.logfile) > 0:
         ecto.log_to_file(options.logfile)
-    sched = ecto.schedulers.__dict__[options.scheduler_type](plasm)
-    if options.ipython:
-        use_ipython(options, sched, plasm, locals)
+    if options.gui:
+        from ecto.gui import gui_execute
+        gui_execute(plasm)
     else:
-        sched.execute(options.niter, options.nthreads)
+        sched = ecto.schedulers.__dict__[options.scheduler_type](plasm)
+        if options.ipython:
+            use_ipython(options, sched, plasm, locals)
+        else:
+            sched.execute(options.niter, options.nthreads)
     if options.stats:
         print sched.stats()
 
@@ -261,6 +265,10 @@ def scheduler_options(parser,
                         and execute asynchronously.(default: %(default)s)
                         '''
                         )
+    parser.add_argument('--gui', dest='gui', action='store_true',
+                        help='Bring up a gui to help execute the plasm.'
+                        )
+
     parser.add_argument('--logfile', metavar='LOGFILE', dest='logfile', type=str,
                         default='',
                         help='''Log to the given file, use tail -f LOGFILE to see the
