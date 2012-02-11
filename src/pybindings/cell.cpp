@@ -105,7 +105,11 @@ namespace ecto
         std::for_each(inputs.begin(),inputs.end(), YouveBeenServed());
         if (bp::override proc = this->get_override("process"))
           {
-            value = proc(boost::ref(inputs), boost::ref(outputs));
+            bp::object rval = proc(boost::ref(inputs), boost::ref(outputs));
+            bp::extract<int> x(rval);
+            if(x.check()){
+              value = x();
+            }
           }
         std::for_each(outputs.begin(),outputs.end(),YouveBeenServed());
         return ReturnCode(value);
