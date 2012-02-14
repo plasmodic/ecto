@@ -73,7 +73,7 @@ add_subdirectory(src)
 add_subdirectory(cmake)
 add_subdirectory(python)
 
-sphinx(${CMAKE_CURRENT_SOURCE_DIR}/doc/source doc
+catkin_sphinx(${CMAKE_CURRENT_SOURCE_DIR}/doc/source doc
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/samples
   )
