@@ -1,8 +1,8 @@
 Catkin-ProjectName: ecto
-Version: 0.2.0
+Version: 0.3.0
 Description: Ecto is a hybrid C++/Python development framework for constructing and maintaining pipelines.
 Author: Ethan Rublee <erublee@willowgarage.com>, Troy Straszheim <straszheim@willowgarage.com>
-Maintainer:  Ethan Rublee <erublee@willowgarage.com>
+Maintainer:  Ethan Rublee <erublee@willowgarage.com>, Vincent Rabaud <vrabaud@willowgarage.com>
 Homepage:  http://ecto.willowgarage.com
 
 Depends: catkin, boost
