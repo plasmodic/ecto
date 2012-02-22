@@ -38,7 +38,7 @@ foreach(file
     test_addergraph
     test_async_bp_objects
     test_async_execution
-    test_async_execution_harsh
+    #test_async_execution_harsh
     test_async_multiple_sched
     test_async
     test_blackbox
