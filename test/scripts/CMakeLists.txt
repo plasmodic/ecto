@@ -27,7 +27,8 @@
 # 
 macro(pytest testname)
   add_test(ecto_${testname}
-    ${CATKIN_ENV} 
+#    ${CATKIN_ENV}
+    ${CMAKE_BINARY_DIR}/env.sh
     ${ARGN}
     )
 endmacro()
