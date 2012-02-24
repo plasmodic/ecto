@@ -44,6 +44,7 @@
 #include <ecto/impl/schedulers/access.hpp>
 #include <ecto/plasm.hpp>
 
+#include <boost/format.hpp>
 namespace ecto {
 
   using namespace ecto::graph;
@@ -73,7 +74,21 @@ namespace ecto {
           tendril& to = *(m->inputs[e->to_port()]);
           ECTO_LOG_DEBUG("Moving inputs to cell %s: tick=%u, from.tick=%u", m->name() % tick % from.tick);
           ECTO_ASSERT(tick == from.tick, "Internal scheduler error, graph has become somehow desynchronized.");
-          to << from;
+
+          try{
+        	  to << from;
+          }catch(ecto::except::EctoException& ex)
+          {
+
+                  BOOST_THROW_EXCEPTION(except::CellException()
+                                        << except::type(name_of(typeid(ex)))
+                                        << except::what(ex.what())
+                                        << except::cell_name(m->name())
+                                        << except::when(boost::str(boost::format("Copying %s to %s")%e->to_port()%e->from_port()))
+                                                        )
+                                        ;
+        	  throw;
+          }
           // ECTO_ASSERT(to.tick == tick, "Graph has become somehow desynchronized");
           e->pop_front(); //todo Make this use a pool, instead of popping. To get rid of allocations.
           ++inbegin;
