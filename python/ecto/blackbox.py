@@ -143,9 +143,6 @@ class BlackBox(object):
     '''
 
     def __init__(self, *args, **kwargs):
-        ''' The BlackBox must be created with the plasm it is intended to be connected
-        to.
-        '''
         self.niter = kwargs.get('niter', 1)
         self.__impl = None
 
