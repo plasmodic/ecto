@@ -73,10 +73,10 @@ add_subdirectory(src)
 add_subdirectory(cmake)
 add_subdirectory(python)
 
-catkin_sphinx(${CMAKE_CURRENT_SOURCE_DIR}/doc/source doc
-  ${CMAKE_CURRENT_SOURCE_DIR}
-  ${CMAKE_CURRENT_SOURCE_DIR}/samples
-  )
+#catkin_sphinx(${CMAKE_CURRENT_SOURCE_DIR}/doc/source doc
+#  ${CMAKE_CURRENT_SOURCE_DIR}
+#  ${CMAKE_CURRENT_SOURCE_DIR}/samples
+#  )
 
 option(BUILD_DOC "Build docs, this will build tests and samples as well." ON)
 if(BUILD_DOC)
