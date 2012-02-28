@@ -34,6 +34,6 @@ ectomodule(ecto_overview
   interface.cpp
   )
 
-add_dependencies(ecto-sphinx
-  ecto_overview_ectomodule functor
-  )
+#add_dependencies(ecto-sphinx
+#  ecto_overview_ectomodule functor
+#  )
