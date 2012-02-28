@@ -35,7 +35,9 @@ set(ECTO_CONFIG_PATH ${CMAKE_BINARY_DIR}/cmake/ecto)
 
 file(COPY ${ecto_SOURCE_DIR}/cmake/ectoMacros.cmake
   DESTINATION ${ecto_CONFIG_DIR})
-
+file(COPY ${ecto_SOURCE_DIR}/cmake/rosbuild_lite.cmake
+  DESTINATION ${ecto_CONFIG_DIR})
+ 
 file(COPY ${PROJECT_SOURCE_DIR}/cmake/doc.cmake DESTINATION ${ecto_CONFIG_DIR})
 file(COPY ${PROJECT_SOURCE_DIR}/cmake/git.cmake DESTINATION ${ecto_CONFIG_DIR})
 #set this back for our libs to pick it up as

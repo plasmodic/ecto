@@ -36,6 +36,9 @@ set(ECTO_CONFIG_PATH  ${CMAKE_INSTALL_PREFIX}/${share_prefix})
 file(COPY ${ecto_SOURCE_DIR}/cmake/ectoMacros.cmake
     DESTINATION ${ecto_BINARY_DIR}/unix_install/
     )
+file(COPY ${ecto_SOURCE_DIR}/cmake/rosbuild_lite.cmake
+    DESTINATION ${ecto_BINARY_DIR}/unix_install/rosbuild_lite.cmake
+    )
 #for client projects using ecto documentation tools
 file(COPY ${PROJECT_SOURCE_DIR}/cmake/doc.cmake
   DESTINATION ${CMAKE_BINARY_DIR}/unix_install/)
