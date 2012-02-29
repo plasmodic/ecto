@@ -251,6 +251,7 @@ if (ROS_ELECTRIC_FOUND)
       /opt/ros/electric/stacks/ros_comm/tools/rosconsole/include
       /opt/ros/electric/stacks/common_msgs/sensor_msgs/msg_gen/cpp/include
       /opt/ros/electric/stacks/perception_pcl/pcl/msg_gen/cpp/include
+      /opt/ros/electric/stacks/perception_pcl/flann/include/
       /usr/include/vtk-5.6/
       /usr/include/eigen3
   )
