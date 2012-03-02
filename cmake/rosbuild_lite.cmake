@@ -241,20 +241,7 @@ rosbuild_lite_init()
 if (ROS_ELECTRIC_FOUND)
   set(PCL_LIBRARIES )
   find_ros_package(std_msgs)
-  set(PCL_INCLUDE_DIRS
-      /opt/ros/electric/stacks/perception_pcl/pcl/include/pcl-1.1/
-      /opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg_gen/cpp/include/
-      /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_serialization/include
-      /opt/ros/electric/stacks/ros_comm/utilities/cpp_common/include
-      /opt/ros/electric/stacks/ros_comm/utilities/rostime/include
-      /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_traits/include
-      /opt/ros/electric/stacks/ros_comm/tools/rosconsole/include
-      /opt/ros/electric/stacks/common_msgs/sensor_msgs/msg_gen/cpp/include
-      /opt/ros/electric/stacks/perception_pcl/pcl/msg_gen/cpp/include
-      /opt/ros/electric/stacks/perception_pcl/flann/include/
-      /usr/include/vtk-5.6/
-      /usr/include/eigen3
-  )
+  find_ros_package(pcl)
   set(PCL_FOUND TRUE)
 else()
   find_package(PCL QUIET)
