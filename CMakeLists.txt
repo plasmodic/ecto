@@ -28,7 +28,7 @@
 cmake_minimum_required(VERSION 2.8)
 project(ecto)
 find_package(catkin REQUIRED)
-catkin_stack(ecto)
+catkin_stack()
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
