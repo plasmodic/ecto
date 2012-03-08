@@ -156,7 +156,7 @@ namespace ecto
       const char* what() const throw();                                 \
     };
 
-    BOOST_PP_SEQ_FOR_EACH(ECTO_DECLARE_EXCEPTION, ~, ECTO_EXCEPTIONS);
+    BOOST_PP_SEQ_FOR_EACH(ECTO_DECLARE_EXCEPTION, ~, ECTO_EXCEPTIONS)
 
     std::string diagnostic_string(const EctoException&);
 
@@ -168,7 +168,7 @@ namespace ecto
     typedef ::boost::error_info<detail::wrap<BOOST_PP_CAT(tag_, NAME)>,         \
                                 std::string> NAME;                      \
 
-    BOOST_PP_SEQ_FOR_EACH(ECTO_EXCEPTION_TAG_DECL, ~, ECTO_EXCEPTION_TAG_NAMES);
+    BOOST_PP_SEQ_FOR_EACH(ECTO_EXCEPTION_TAG_DECL, ~, ECTO_EXCEPTION_TAG_NAMES)
 
   }
 }
@@ -187,7 +187,7 @@ namespace boost {
   tag_type_name< ::ecto::except::detail::wrap< BOOST_PP_CAT(::ecto::except::tag_, NAME)> >() { \
     return BOOST_PP_STRINGIZE(NAME);                                    \
   }
-  BOOST_PP_SEQ_FOR_EACH(ECTO_EXCEPTION_TAG_TYPE_NAME_DECL, ~, ECTO_EXCEPTION_TAG_NAMES);
+  BOOST_PP_SEQ_FOR_EACH(ECTO_EXCEPTION_TAG_TYPE_NAME_DECL, ~, ECTO_EXCEPTION_TAG_NAMES)
 
   template <class E,class Tag,class T>
   E const &
