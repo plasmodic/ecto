@@ -107,13 +107,4 @@ catkin_project(ecto
 
 catkin_doxygen(ecto-doxygen ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-catkin_add_env_hooks(10ecto SHELLS all )
-
-
-
-
-
-
-
-
-
+catkin_add_env_hooks(10.ecto SHELLS all)
