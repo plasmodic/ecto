@@ -76,5 +76,5 @@ if (NOT ECTO_EXCEPTION_WITHOUT_CLONE)
   set(ECTO_EXCEPTION_HAS_CLONE True)
 endif()
 
-configure_file(${ecto_SOURCE_DIR}/cmake/boost-config.hpp.in ${ecto_BINARY_DIR}/include/catkin/boost-config.hpp)
+configure_file(${ecto_SOURCE_DIR}/cmake/boost-config.hpp.in ${ecto_BINARY_DIR}/include/ecto/boost-config.hpp)
 
