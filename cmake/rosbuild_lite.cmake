@@ -47,10 +47,14 @@
 #       
 option(ROS_CONFIGURE_VERBOSE OFF)
 
-macro( rosbuild_lite_init )
-  if ("$ENV{ROS_ROOT}" STREQUAL "/opt/ros/electric/ros")
+if ("$ENV{ROS_ROOT}" STREQUAL "/opt/ros/electric/ros")
     set(ROS_ELECTRIC_FOUND TRUE)
+else()
+    unset(ROS_ELECTRIC_FOUND)
+endif()
 
+
+macro( rosbuild_lite_init )
   set(ROS_ROOT_DEFAULT /opt/ros/electric/ros CACHE PATH "The default ROS_ROOT")
   set(ROS_PACKAGE_PATH_DEFAULT /opt/ros/electric/stacks CACHE PATH "The default ROS_PACKAGE_PATH")
 
@@ -81,10 +85,6 @@ macro( rosbuild_lite_init )
     message(STATUS "*** ROSPACK_EXECUTABLE=${ROSPACK_EXECUTABLE}")
   else()
     unset(ROS_FOUND)
-  endif()
-
-  else()
-    unset(ROS_ELECTRIC_FOUND)
   endif()
 endmacro()
 
