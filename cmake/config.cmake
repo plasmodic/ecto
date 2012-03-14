@@ -37,6 +37,8 @@ file(COPY ${ecto_SOURCE_DIR}/cmake/ectoMacros.cmake
   DESTINATION ${ecto_CONFIG_DIR})
 file(COPY ${ecto_SOURCE_DIR}/cmake/rosbuild_lite.cmake
   DESTINATION ${ecto_CONFIG_DIR})
+file(COPY ${ecto_SOURCE_DIR}/cmake/ros_electric.cmake
+  DESTINATION ${ecto_CONFIG_DIR})
  
 file(COPY ${PROJECT_SOURCE_DIR}/cmake/doc.cmake DESTINATION ${ecto_CONFIG_DIR})
 file(COPY ${PROJECT_SOURCE_DIR}/cmake/git.cmake DESTINATION ${ecto_CONFIG_DIR})

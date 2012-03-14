@@ -65,5 +65,5 @@ endif()
 set(ecto_module_PYTHON_INSTALL ${PYTHON_PACKAGES_PATH})
 
 
-include(ros_electric.cmake)
+include(${SELF_DIR}/ros_electric.cmake)
 
