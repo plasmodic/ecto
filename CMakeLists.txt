@@ -56,6 +56,7 @@ option(ECTO_WITH_INSTRUMENTATION "Instrument schedulers (for debugging)" OFF)
 #set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 list(APPEND CMAKE_MODULE_PATH ${ecto_SOURCE_DIR}/cmake)
 
+include(cmake/ros_electric.cmake)
 #include(cmake/buildtype.cmake)
 include(cmake/version.cmake)
 include(cmake/git.cmake)
