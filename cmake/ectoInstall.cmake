@@ -39,6 +39,9 @@ file(COPY ${ecto_SOURCE_DIR}/cmake/ectoMacros.cmake
 file(COPY ${ecto_SOURCE_DIR}/cmake/rosbuild_lite.cmake
     DESTINATION ${ecto_BINARY_DIR}/unix_install/
     )
+file(COPY ${ecto_SOURCE_DIR}/cmake/ros_electric.cmake
+    DESTINATION ${ecto_BINARY_DIR}/unix_install/
+    )
 #for client projects using ecto documentation tools
 file(COPY ${PROJECT_SOURCE_DIR}/cmake/doc.cmake
   DESTINATION ${CMAKE_BINARY_DIR}/unix_install/)
