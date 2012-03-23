@@ -54,54 +54,54 @@
 #     )
 #   add_dependencies(doc ${TARGET_NAME})
 # endmacro()
-# 
-# macro(find_sphinx)
-#   find_program(SPHINX_BUILD sphinx-build)
-#   if(SPHINX_BUILD)
-#     set(REQUIRED_SPHINX_VERSION "1.0.7")
-#     execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "import sphinx;print sphinx.__version__"
-#       OUTPUT_VARIABLE SPHINX_VERSION
-#       OUTPUT_STRIP_TRAILING_WHITESPACE
-#       )
-#     if("${SPHINX_VERSION}" VERSION_LESS ${REQUIRED_SPHINX_VERSION})
-#       MESSAGE(WARNING "You version of sphinx (http://sphinx.pocoo.org) is ${SPHINX_VERSION}, required ${REQUIRED_SPHINX_VERSION}")
-#       if (UNIX)
-#         MESSAGE(WARNING "You may be able to update with 'easy_install -U sphinx'")
-#       endif()
-#     endif()
-#   endif()
-# endmacro()
-# 
-# ##
-# # sphinx(<TARGET_NAME> <SOURCE_DIR> <BUILD_DIR> [PATH1 [ PATH2 [ PATH3 ]]])
-# # TARGET_NAME -> The cmake target to create.
-# # SOURCE_DIR -> Where the conf.py is
-# # BUILD_DIR -> Where should sphinx put the result
-# # PATH(s) -> paths to prepend to the PYTHONPATH for the execution of sphinx-build
-# #
-# macro(sphinx TARGET_NAME SOURCE_DIR BUILD_DIR)
-#   find_sphinx()
-#   if(SPHINX_BUILD)
-#     set(_PYTHONPATH )
-#     #put user path first
-#     list(APPEND _PYTHONPATH ${ARGN})
-#     list(APPEND _PYTHONPATH  ${ecto_PYTHONPATH})
-#     #transform the cmake list to a sh path list
-#     string(REPLACE ";" ":"
-#         _PYTHONPATH
-#         "${_PYTHONPATH}"
-#     )
-#     add_custom_target(${TARGET_NAME})
-#     add_custom_command(TARGET ${TARGET_NAME}
-#       COMMAND
-#       /usr/bin/env
-#       PYTHONPATH=${_PYTHONPATH}
-#       ${SPHINX_BUILD} -aE ${SOURCE_DIR} ${BUILD_DIR}
-#       WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-#       )
-#     add_dependencies(doc ${TARGET_NAME})
-#   endif()
-# endmacro()
+
+macro(ecto_find_sphinx)
+  find_program(SPHINX_BUILD sphinx-build)
+  if(SPHINX_BUILD)
+    set(REQUIRED_SPHINX_VERSION "1.0.7")
+    execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "import sphinx;print sphinx.__version__"
+      OUTPUT_VARIABLE SPHINX_VERSION
+      OUTPUT_STRIP_TRAILING_WHITESPACE
+      )
+    if("${SPHINX_VERSION}" VERSION_LESS ${REQUIRED_SPHINX_VERSION})
+      MESSAGE(WARNING "You version of sphinx (http://sphinx.pocoo.org) is ${SPHINX_VERSION}, required ${REQUIRED_SPHINX_VERSION}")
+      if (UNIX)
+        MESSAGE(WARNING "You may be able to update with 'easy_install -U sphinx'")
+      endif()
+    endif()
+  endif()
+endmacro()
+
+##
+# sphinx(<TARGET_NAME> <SOURCE_DIR> <BUILD_DIR> [PATH1 [ PATH2 [ PATH3 ]]])
+# TARGET_NAME -> The cmake target to create.
+# SOURCE_DIR -> Where the conf.py is
+# BUILD_DIR -> Where should sphinx put the result
+# PATH(s) -> paths to prepend to the PYTHONPATH for the execution of sphinx-build
+#
+macro(ecto_sphinx TARGET_NAME SOURCE_DIR BUILD_DIR)
+  ecto_find_sphinx()
+  if(SPHINX_BUILD)
+    set(_PYTHONPATH )
+    #put user path first
+    list(APPEND _PYTHONPATH ${ARGN})
+    list(APPEND _PYTHONPATH  ${ecto_PYTHONPATH})
+    #transform the cmake list to a sh path list
+    string(REPLACE ";" ":"
+        _PYTHONPATH
+        "${_PYTHONPATH}"
+    )
+    add_custom_target(${TARGET_NAME})
+    add_custom_command(TARGET ${TARGET_NAME}
+      COMMAND
+      /usr/bin/env
+      PYTHONPATH=${_PYTHONPATH}
+      ${SPHINX_BUILD} -aE ${SOURCE_DIR} ${BUILD_DIR}
+      WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+      )
+    add_dependencies(doc ${TARGET_NAME})
+  endif()
+endmacro()
 
 ##
 # deploy(<TARGET_NAME> <DOCS> <DESTINATION>)
@@ -113,5 +113,3 @@ macro(deploy TARGET_NAME DOCS DESTINATION)
     COMMAND rsync --perms --chmod=a+rX -va  ${DOCS} ${DESTINATION}
   )
 endmacro()
-
-

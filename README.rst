@@ -72,9 +72,8 @@ docs
 ^^^^
 To create the latest documentation for Ecto::
 
-   cd ecto/build
-   make
-   make doc
+   sudo pip install -U catkin_sphinx
+   sphinx-build -b html ./doc/source/ ./doc/build
 
 Then you can open up ``ecto/build/doc/html/index.html`` locally.
 

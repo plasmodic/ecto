@@ -76,8 +76,8 @@ macro( rosbuild_lite_init )
     endif()
   endif()
 
-  find_program(ROSPACK_EXECUTABLE rospack PATHS ${ROS_ROOT}/bin DOC "the rospack executable.")
-  find_program(ROSMSG_EXECUTABLE rosmsg PATHS ${ROS_ROOT}/bin DOC "rosmsg executable")
+  find_program(ROSPACK_EXECUTABLE rospack PATHS ${ROS_ROOT}/bin DOC "the rospack executable." NO_SYSTEM_ENVIRONMENT_PATH NO_CMAKE_ENVIRONMENT_PATH)
+  find_program(ROSMSG_EXECUTABLE rosmsg PATHS ${ROS_ROOT}/bin DOC "rosmsg executable" NO_SYSTEM_ENVIRONMENT_PATH NO_CMAKE_ENVIRONMENT_PATH)
 
   if (ROSPACK_EXECUTABLE)
     set(ROS_FOUND TRUE)

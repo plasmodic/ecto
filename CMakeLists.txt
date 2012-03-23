@@ -84,8 +84,14 @@ if(BUILD_DOC)
   set(BUILD_TEST ON CACHE BOOL "Tests must be built if docs are expected to build." FORCE)
   set(BUILD_SAMPLES ON CACHE BOOL "Samples must be built if docs are expected to build." FORCE)
   add_subdirectory(doc)
+  find_package(catkin-sphinx QUIET)
+  if (catkin-sphinx_FOUND)
+      catkin_sphinx(${CMAKE_CURRENT_SOURCE_DIR}/doc/source doc
+              ${CMAKE_CURRENT_SOURCE_DIR}
+              ${CMAKE_CURRENT_SOURCE_DIR}/samples
+      )
+  endif()
 endif()
-
 
 option(BUILD_TEST "Build tests" ON)
 if(BUILD_TEST)

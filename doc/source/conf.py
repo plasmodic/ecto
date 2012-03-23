@@ -39,10 +39,10 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.graphviz']
 
 extensions += [
-              'ecto.sphinx.EctoShLexer',
-              'ecto.sphinx.EctoPlotDirective',
-              'ecto.sphinx.EctoCellDirective',
-              'ecto.sphinx.EctoModuleDirective'
+              'catkin_sphinx.ShLexer',
+#              'ecto.sphinx.EctoPlotDirective',
+#              'ecto.sphinx.EctoCellDirective',
+#              'ecto.sphinx.EctoModuleDirective'
               ]
 
 # extensions = ['sphinx.ext.ifconfig', 'sphinx.ext.todo'] #, 'cmake']
