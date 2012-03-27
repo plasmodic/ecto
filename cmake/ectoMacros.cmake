@@ -98,17 +98,25 @@ macro(link_ecto NAME)
   target_link_libraries(${NAME}_ectomodule
     ${ARGN}
   )
-  if (ecto_module_PYTHON_INSTALL)
-    set_target_properties(${NAME}_ectomodule PROPERTIES
-                          LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${ecto_module_PYTHON_INSTALL}
-    )
-  endif()
+  set_target_properties(${NAME}_ectomodule PROPERTIES
+                        LIBRARY_OUTPUT_DIRECTORY ${ecto_module_PYTHON_OUTPUT}
+  )
 endmacro()
 
 # ==============================================================================
 #this is where usermodules may be installed to
-macro( set_ecto_install_package_name package_name)
-  set(ecto_module_PYTHON_INSTALL ${PYTHON_PACKAGES_PATH}/${package_name})
+# one folder or none has to be given
+macro(set_ecto_install_package_name)
+  if (${ARGC})
+    # there is only one argument given
+    foreach(package_name ${ARGN})
+      set(ecto_module_PYTHON_INSTALL ${PYTHON_PACKAGES_PATH}/${package_name})
+      set(ecto_module_PYTHON_OUTPUT ${CMAKE_BINARY_DIR}/gen/py/${package_name})
+    endforeach()
+  else()
+    set(ecto_module_PYTHON_INSTALL ${PYTHON_PACKAGES_PATH}/)
+    set(ecto_module_PYTHON_OUTPUT ${CMAKE_BINARY_DIR}/gen/py/)
+  endif()
 endmacro()
 
 # ==============================================================================
