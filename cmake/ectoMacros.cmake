@@ -98,9 +98,19 @@ macro(link_ecto NAME)
   target_link_libraries(${NAME}_ectomodule
     ${ARGN}
   )
-  set_target_properties(${NAME}_ectomodule PROPERTIES
+  if (ecto_module_PYTHON_OUTPUT)
+    set_target_properties(${NAME}_ectomodule PROPERTIES
                         LIBRARY_OUTPUT_DIRECTORY ${ecto_module_PYTHON_OUTPUT}
-  )
+    )
+  else()
+    string(SUBSTRING ${NAME} 5 -1 CLEAN_NAME)
+    
+    set(ecto_module_PYTHON_INSTALL ${PYTHON_PACKAGES_PATH}/${CLEAN_NAME}/ecto_cells)
+    set(ecto_module_PYTHON_OUTPUT ${CMAKE_BINARY_DIR}/gen/py/${CLEAN_NAME}/ecto_cells)
+    set_target_properties(${NAME}_ectomodule PROPERTIES
+                        LIBRARY_OUTPUT_DIRECTORY ${ecto_module_PYTHON_OUTPUT}
+    )
+  endif()
 endmacro()
 
 # ==============================================================================
