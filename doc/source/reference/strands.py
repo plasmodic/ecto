@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-import ecto, ecto_test
+import ecto
+import ecto.ecto_test as ecto_test
 
 s1 = ecto.Strand()  # No cells that have this strand will run concurrenly
 

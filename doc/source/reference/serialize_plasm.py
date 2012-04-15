@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import ecto #ecto core library
-import hello_ecto #a user library, that has a few ecto modules
+import ecto.hello_ecto as hello_ecto #a user library, that has a few ecto modules
 
 plasm = ecto.Plasm()
 r = hello_ecto.Reader()

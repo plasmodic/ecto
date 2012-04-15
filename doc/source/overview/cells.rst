@@ -79,7 +79,7 @@ The most basic of cells would be:
     :start-after: //start
     :end-before: //end
 
-  .. ectocell:: ecto_overview NopCell
+  .. ectocell:: ecto.ecto_overview NopCell
 
 Each cell may or may not implement the following functions:
 
@@ -174,7 +174,8 @@ script demonstrates the python interface of our cell that ecto provides for free
 
 The script, when run will give the following output:
 
-.. program-output:: doc/source/overview/cell01.py
+.. program-output:: overview/cell01.py
+  :in_srcdirs:
 
 Doc Generation
 ^^^^^^^^^^^^^^
@@ -188,16 +189,16 @@ import.
 Another cool aspect of documentation generation is its full integration into sphinx
 docs. Placing the following command in sphinx::
 
-  .. ectocell:: ecto_overview Printer01
+  .. ectocell:: ecto.ecto_overview Printer01
 
 Produces:
 
-.. ectocell:: ecto_overview Printer01
+.. ectocell:: ecto.ecto_overview Printer01
 
 Also from an interactive python prompt, the following should produce useful
 output::
   
-  >>> from ecto_overview import Printer01
+  >>> from ecto.ecto_overview import Printer01
   >>> help(Printer01)
   
 For more detailed information, refer to :ref:`ectodoc`.

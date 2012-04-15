@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import ecto
-from tutorial import Increment, Add
+from ecto.tutorial import Increment, Add
 
 i1 = Increment('Inc 1', start=18)
 i2 = Increment('Inc 2', start=20)

@@ -1,5 +1,5 @@
 #!/usr/bin/python 
-from ecto_overview import Printer01
+from ecto.ecto_overview import Printer01
 
 print Printer01.__doc__
 

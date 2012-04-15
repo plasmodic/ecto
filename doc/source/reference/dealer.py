@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import ecto
-import ecto_test
+import ecto.ecto_test as ecto_test
 
 plasm = ecto.Plasm()
 printer = ecto_test.Printer()

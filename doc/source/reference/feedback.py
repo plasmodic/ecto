@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import ecto
-from ecto_test import Generate, Add
+from ecto.ecto_test import Generate, Add
 
 g = Generate("Generator", step=1.0, start=1.0)
 add = Add()

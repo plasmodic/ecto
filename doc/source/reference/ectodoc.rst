@@ -14,13 +14,13 @@ source for this document than there is on this page.
 
    Placing the following command in sphinx::
 
-     .. ectocell:: ecto_test Add
+     .. ectocell:: ecto.ecto_test Add
  
-   Will import the python module ``ecto_test`` into the running Sphinx
-   process, find the class named ``Add`` and generate documenation,
+   Will import the python module ``ecto.ecto_test`` into the running Sphinx
+   process, find the class named ``Add`` and generate documentation,
    which looks like this (actual output):
 
-   .. ectocell:: ecto_test Add
+   .. ectocell:: ecto.ecto_test Add
 
    Cells' docstrings should contain identical information, albeit
    surrounded with a bit of noise:

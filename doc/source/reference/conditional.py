@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import ecto
 from ecto import If, TrueEveryN
-from ecto_test import Generate
+from ecto.ecto_test import Generate
 
 plasm = ecto.Plasm()
 g = Generate("Generator", step=1.0, start=1.0)

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-import ecto, ecto_test, sys
+import ecto, sys
+import ecto.ecto_test as ecto_test
 
 plasm = ecto.Plasm()
  

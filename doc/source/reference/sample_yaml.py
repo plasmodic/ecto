@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from ecto import Constant
-from ecto_test import Multiply
+from ecto.ecto_test import Multiply
 from ecto.opts import CellYamlFactory
 import yaml
 

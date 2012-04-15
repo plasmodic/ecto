@@ -17,7 +17,7 @@ For instance, this cell takes its parameter ``strategy`` as an integer:
 Which is suboptimal in several ways.  First, the documentation doesn't
 say what the legal values are for this parameter:
 
-.. ectocell:: ecto_examples EnumAsInt
+.. ectocell:: ecto.ecto_examples EnumAsInt
 
 And though the cell functions correctly if used correctly, (note here
 that the direct call to ``process()`` is only for convenience, you'll
@@ -58,7 +58,7 @@ don't have multiple copies floating around.  Now a great many things
 will be more usable.  First of all, the documentation for the module
 will show the correct type (and therefore values) for the parameter:
 
-.. ectocell:: ecto_examples EnumAsEnum
+.. ectocell:: ecto.ecto_examples EnumAsEnum
 
 And if you try to pass magic numbers to cells, you get a reasonable error:
 
@@ -77,7 +77,7 @@ output:
 
 The enum type gets a reasonable docstring,
 
-.. program-output:: /usr/bin/env python -c 'import ecto_examples ; help(ecto_examples.Strategy)'
+.. program-output:: /usr/bin/env python -c 'import ecto.ecto_examples ; help(ecto.ecto_examples.Strategy)'
    :until: Methods inherited from
 
 And the normal way to use this kind of thing would be:

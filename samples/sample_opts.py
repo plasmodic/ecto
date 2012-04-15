@@ -29,7 +29,7 @@
 import ecto
 from ecto.opts import scheduler_options, run_plasm
 from ecto import Constant
-from ecto_test import Multiply, Printer
+from ecto.ecto_test import Multiply, Printer
 import argparse
 
 parser = argparse.ArgumentParser(description='My awesome program thing.')

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import ecto
-import ecto_test
+import ecto.ecto_test as ecto_test
 
 plasm = ecto.Plasm()
 

@@ -10,7 +10,7 @@ to make connections between cells....
 
 Looking at a little interactive prompt:
 
-  >>> from ecto_test import Increment, Add
+  >>> from ecto.ecto_test import Increment, Add
   >>> i = Increment()
   >>> add = Add()
   >>> i['out']

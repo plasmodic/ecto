@@ -3,7 +3,7 @@ import ecto
 
 def doit():
     print "**** pre import of ecto_lifecycle ********"
-    import ecto_lifecycle
+    import ecto.ecto_lifecycle as ecto_lifecycle
     print "**** post import of ecto_lifecycle *******"
 
     print "**** pre allocation of LifeCycle cell ********"
