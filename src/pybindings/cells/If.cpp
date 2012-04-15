@@ -76,4 +76,4 @@ namespace ecto
   };
 }
 
-ECTO_CELL(ecto, ecto::If, "If", "If true, process, else, don't.");
+ECTO_CELL(cells, ecto::If, "If", "If true, process, else, don't.");

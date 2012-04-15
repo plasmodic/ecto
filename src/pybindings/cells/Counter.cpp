@@ -62,6 +62,6 @@ namespace ecto
   };
 }
 
-ECTO_CELL(ecto, ecto::Counter, "Counter", 
+ECTO_CELL(cells, ecto::Counter, "Counter", 
           "Gives an execution count. Useful for counting the number of times that an output of another cell"
           " is valid.  Prints progress every so many frames.");

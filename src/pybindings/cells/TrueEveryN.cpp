@@ -62,4 +62,4 @@ namespace ecto
   };
 }
 
-ECTO_CELL(ecto, ecto::TrueEveryN, "TrueEveryN", "Will give a true result every n executions.");
+ECTO_CELL(cells, ecto::TrueEveryN, "TrueEveryN", "Will give a true result every n executions.");

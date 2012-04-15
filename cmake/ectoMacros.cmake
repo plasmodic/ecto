@@ -90,14 +90,7 @@ macro(ectomodule NAME)
     ${ECTO_MODULE_DEP_LIBS}
     ${ecto_LIBRARIES}
     )
-endmacro()
 
-# ==============================================================================
-
-macro(link_ecto NAME)
-  target_link_libraries(${NAME}_ectomodule
-    ${ARGN}
-  )
   if (ecto_module_PYTHON_OUTPUT)
     set_target_properties(${NAME}_ectomodule PROPERTIES
                         LIBRARY_OUTPUT_DIRECTORY ${ecto_module_PYTHON_OUTPUT}
@@ -111,6 +104,14 @@ macro(link_ecto NAME)
                         LIBRARY_OUTPUT_DIRECTORY ${ecto_module_PYTHON_OUTPUT}
     )
   endif()
+endmacro()
+
+# ==============================================================================
+
+macro(link_ecto NAME)
+  target_link_libraries(${NAME}_ectomodule
+    ${ARGN}
+  )
 endmacro()
 
 # ==============================================================================

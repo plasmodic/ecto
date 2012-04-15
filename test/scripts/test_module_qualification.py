@@ -27,12 +27,13 @@
 # POSSIBILITY OF SUCH DAMAGE.
 # 
 import ecto
-import ecto_test
+import ecto.ecto_test as ecto_test
+import ecto.cells
 
 print ecto_test.Add.__module__
-print ecto.If.__module__
-assert ecto.If.__module__ == 'ecto'
-assert ecto_test.Add.__module__ == 'ecto_test'
+print ecto.cells.If.__module__
+assert ecto.cells.If.__module__ == 'ecto.cells'
+assert ecto_test.Add.__module__ == 'ecto.ecto_test'
 
 #TODO
 #assert ecto_test.some_submodule.ACell.__module__ == 'ecto_test.some_submodule'

@@ -27,7 +27,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 # 
 import ecto
-import ecto_test
+import ecto.ecto_test as ecto_test
 import yaml
 import argparse
 from ecto.opts import scheduler_options, CellYamlFactory, cell_options, run_plasm

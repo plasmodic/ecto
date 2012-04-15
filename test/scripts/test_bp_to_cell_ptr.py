@@ -28,7 +28,7 @@
 # 
 
 import ecto
-import ecto_test
+import ecto.ecto_test as ecto_test
 
 def test_it():
     g = ecto_test.Generate("Generator", step=1.0, start=1.0)

@@ -28,7 +28,7 @@
 # 
 
 import ecto, sys, util
-from ecto_test import *
+from ecto.ecto_test import *
 
 p = ecto.Plasm()
 

@@ -88,7 +88,7 @@ namespace ecto {
   }
 }
 
-ECTO_INSTANTIATE_REGISTRY(ecto)
+ECTO_INSTANTIATE_REGISTRY(ecto_main)
 
 namespace ecto {
   namespace py {
@@ -105,7 +105,7 @@ namespace ecto {
   }
 }
 
-BOOST_PYTHON_MODULE(ecto)
+BOOST_PYTHON_MODULE(ecto_main)
 {
   bp::class_<ecto::tendril::none>("no_value");
 
@@ -132,7 +132,7 @@ BOOST_PYTHON_MODULE(ecto)
   // your cout/cerr
   bp::def("log_to_file", &ecto::py::log_to_file);
   bp::def("unlog_to_file", &ecto::py::unlog_to_file);
-  ECTO_REGISTER(ecto);
+  ECTO_REGISTER(ecto_main);
 
   bp::class_<std::vector<std::string> > ("VectorString")
     .def(bp::vector_indexing_suite<std::vector<std::string> >());

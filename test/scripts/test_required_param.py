@@ -26,8 +26,8 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 # 
-import ecto, ecto_test, sys, util
-
+import ecto, sys, util
+import ecto.ecto_test as ecto_test
 
 def test_required_param():
     plasm = ecto.Plasm()

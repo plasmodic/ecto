@@ -27,7 +27,8 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 
-import sys, ecto, ecto_test
+import sys, ecto
+import ecto.ecto_test as ecto_test
 
 def makeplasm(N):
     plasm = ecto.Plasm()

@@ -28,7 +28,7 @@
 # 
 
 import ecto
-import ecto_test
+import ecto.ecto_test as ecto_test
 
 gen = ecto_test.Generate(start=0, step=1)
 plasm = ecto.Plasm()

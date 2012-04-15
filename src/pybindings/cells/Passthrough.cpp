@@ -44,4 +44,4 @@ namespace ecto
   };
 }
 
-ECTO_CELL(ecto, ecto::Passthrough, "Passthrough", "Passes through any type.");
+ECTO_CELL(cells, ecto::Passthrough, "Passthrough", "Passes through any type.");

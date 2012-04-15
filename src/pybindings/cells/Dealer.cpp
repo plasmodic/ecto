@@ -85,5 +85,5 @@ namespace ecto
     tendril_ptr out_;
   };
 }
-ECTO_CELL(ecto, ecto::Dealer, "Dealer", "Emit values of python iterable");
+ECTO_CELL(cells, ecto::Dealer, "Dealer", "Emit values of python iterable");
 

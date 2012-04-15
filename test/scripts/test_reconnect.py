@@ -31,7 +31,8 @@ Created on Apr 8, 2011
 
 @author: erublee
 '''
-import ecto,ecto_test
+import ecto
+import ecto.ecto_test as ecto_test
 
 def test_one_to_many():
     plasm = ecto.Plasm()

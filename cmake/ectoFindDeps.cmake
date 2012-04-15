@@ -73,10 +73,6 @@ endif()
 
 set(ecto_module_PYTHON_INSTALL_base ${PYTHON_PACKAGES_PATH} CACHE INTERNAL "The base path where ecto modules will be installed." )
 set(ecto_module_PYTHON_INSTALL ${ecto_module_PYTHON_INSTALL_base})
-#this is where usermodules may be installed to
-macro(set_ecto_install_package_name package_name)
-  set(ecto_module_PYTHON_INSTALL ${ecto_module_PYTHON_INSTALL_base}/${package_name})
-endmacro()
 
 set(ecto_PYTHON_INSTALL ${PYTHON_PACKAGES_PATH})
 

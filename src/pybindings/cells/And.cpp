@@ -80,4 +80,4 @@ namespace ecto
   };
 }
 
-ECTO_CELL(ecto, ecto::And, "And", "AND together some number of boolean inputs");
+ECTO_CELL(cells, ecto::And, "And", "AND together some number of boolean inputs");

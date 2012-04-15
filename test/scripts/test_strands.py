@@ -26,7 +26,8 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 #
-import ecto, ecto_test, sys
+import ecto, sys
+import ecto.ecto_test as ecto_test
 from ecto.test import test
 
 @test

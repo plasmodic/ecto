@@ -85,7 +85,6 @@ foreach(file
     )
     add_test(ecto_${file}
         /usr/bin/env
-        PYTHONPATH=${CMAKE_LIBRARY_OUTPUT_DIRECTORY}:${ecto_SOURCE_DIR}/python:$PYTHONPATH
         ${CMAKE_CURRENT_SOURCE_DIR}/${file}.py)
 
 endforeach()

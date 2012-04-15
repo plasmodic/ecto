@@ -27,7 +27,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 import sys, ecto, ecto.schedulers
-import ecto_test
+import ecto.ecto_test as ecto_test
 from util import fail
 
 class MyBlackBox(ecto.BlackBox):

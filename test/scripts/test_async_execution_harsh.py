@@ -27,7 +27,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 import ecto
-import ecto_test
+import ecto.ecto_test as ecto_test
 import sys, time
 
 print "Hardware concurrency is", ecto.hardware_concurrency()

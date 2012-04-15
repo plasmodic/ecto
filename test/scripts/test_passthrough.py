@@ -28,7 +28,7 @@
 # 
 
 import ecto
-import ecto_test
+import ecto.ecto_test as ecto_test
 
 def test_constant2():
     print "test running.."

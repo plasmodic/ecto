@@ -26,7 +26,8 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 # 
-import ecto, ecto_test, util
+import ecto, util
+import ecto.ecto_test as ecto_test
 
 def test_modules_01():
     g = ecto_test.Generate(start=0, step=2)

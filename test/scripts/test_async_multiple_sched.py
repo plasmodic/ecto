@@ -27,7 +27,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 # 
 import ecto
-import ecto_test
+import ecto.ecto_test as ecto_test
 import time
 
 def make_plasm():

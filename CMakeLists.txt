@@ -30,6 +30,10 @@ project(ecto)
 find_package(catkin REQUIRED)
 catkin_stack()
 
+# configure and install Python
+catkin_python_setup()
+
+
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -66,6 +70,7 @@ include(cmake/ectoFindDeps.cmake)
 include(cmake/config.cmake)
 include(cmake/doc.cmake)
 
+set_ecto_install_package_name(ecto)
 git_status(ecto)
 
 include_directories(include)
@@ -113,5 +118,3 @@ catkin_project(ecto
 )
 
 catkin_doxygen(ecto-doxygen ${CMAKE_CURRENT_SOURCE_DIR}/include)
-
-catkin_add_env_hooks(10.ecto SHELLS all)

@@ -27,7 +27,8 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 
-import ecto, ecto_test
+import ecto
+import ecto.ecto_test as ecto_test
 
 try:
     ecto_test.should_throw_in_interpreter_thread()
