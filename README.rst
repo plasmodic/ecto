@@ -75,6 +75,11 @@ To create the latest documentation for Ecto::
    sudo pip install -U catkin_sphinx
    sphinx-build -b html ./doc/source/ ./doc/build
 
+To build documentation for the kitchen:
+::
+
+  sphinx-build -b html ./doc/kitchen/ ./doc/build/
+
 Then you can open up ``ecto/build/doc/html/index.html`` locally.
 
 install
@@ -87,4 +92,3 @@ To install Ecto on your machine::
 use
 ^^^
 See the documentation (http://ecto.willowgarage.com) for detailed usage instructions.
-

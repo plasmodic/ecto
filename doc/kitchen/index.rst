@@ -8,7 +8,7 @@ Initially aimed at computer vision and perception research tasks, Ecto is a hybr
 
 Ecto itself is small, has minimal dependencies (C++, Boost, Python) and works with or without OpenCV, PCL, and ROS in any combination. We believe that Ecto allows vision and perception researchers to express their computational models in a natural fashion, obviating e.g. ROS [1] time synchronizers and ROS nodelets in most cases.
 
-As of 2012, Ecto is officially released. It is being used by researchers at Willow Garage and in industry for prototype applications of object capture and modelling, object recognition, pose estimation and refinement, projector-based augmented reality and chess playing.
+As of 2012, Ecto is officially released. It is being used by researchers at Willow Garage and in industry for prototype applications of object capture and modelling, `object recognition <http://ecto.willowgarage.com/recognition/>`_, pose estimation and refinement, projector-based augmented reality and chess playing.
 
 .. rubric:: Ecto modules
 
@@ -41,7 +41,7 @@ If you want to install from source, you will have to get them from https://githu
   mkdir ecto_kitchen && cd ecto_kitchen
   git clone http://github.com/willowgarage/catkin.git
   git clone http://github.com/plasmodic/ecto.git
-  ln -s catkin/toplevel.cmake CmakeLists.txt
+  ln -s catkin/toplevel.cmake CMakeLists.txt
 
 Then get the ecto modules you want:
 ::
