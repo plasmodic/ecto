@@ -43,7 +43,7 @@ ever have their process methods called concurrently.  Example:
   ECTO_CELL(ecto_test, ThreadUnsafeCell, "ThreadUnsafeCell", 
             "Do something dangerous with globals/statics");
 
-
+.. _ecto_define_module:
 
 .. c:macro:: ECTO_DEFINE_MODULE(pymodule_name)
 
@@ -53,7 +53,7 @@ In a single place inside the shared library (e.g. ``myecto_module.cpp``), call
 .. code-block:: c++
 
   #include <ecto/ecto.hpp>
-  
+ 
   ECTO_DEFINE_MODULE(ecto_test)
   {
     // additional boost::python or ecto bindings go here
@@ -62,5 +62,3 @@ In a single place inside the shared library (e.g. ``myecto_module.cpp``), call
 For instance, if cells in the ecto module contain parameters that are
 enumerations, you may want to wrap the enumerations here so that
 parameter values passed from the script have readable symbolic names.
-
-

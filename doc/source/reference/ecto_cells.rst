@@ -21,6 +21,7 @@ weakly typed.
    Passthrough is mostly useful from within a :ref:`black_box` to connect
    multiple inputs to one cell, which then becomes a singular input for the BlackBox.
 
+.. _if:
 
 .. ectocell:: ecto If
 
@@ -33,7 +34,7 @@ weakly typed.
 
    .. literalinclude:: conditional.py
 
-   The above sample uses the built in cell :ref:`TrueEveryN`
+   The above sample uses the built in cell :ref:`trueeveryn`_
    
 .. _trueeveryn:
 

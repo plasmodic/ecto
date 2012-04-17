@@ -1,5 +1,7 @@
 .. index:: plasm
 
+.. _plasm-overview:
+
 plasm
 =====
 

@@ -9,10 +9,10 @@ algorithms suitable for computer vision, perception,
 audio processing and robotics pipelines. The key components of Ecto
 are
 :ref:`cells-overview`,
-:ref:`plasms-overview`,
-:ref:`tendrils-overview`,
+:ref:`plasm-overview`,
+:ref:`tendril-overview`,
 and
-:ref:`schedulers-overview`.
+:ref:`schedulers`.
 With these tools, you, the programmer, researcher or hacker may
 construct well partitioned reusable processing graphs that exhibit qualities such
 as ordered synchronous execution, efficient scheduling routines, type safety, and

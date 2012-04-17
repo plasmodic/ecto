@@ -1,4 +1,4 @@
-.. _tendril:
+.. _tendril-overview:
 
 tendril
 =======

@@ -40,7 +40,7 @@ but::
   valgrind --tool=memcheck --suppressions=valgrind-python.supp python myscript.py
 
 This is basically the same situation/mechanism as when running ecto
-scripts under :ref:`gdb`.
+scripts under ``gdb``.
 
 
 

@@ -33,7 +33,7 @@ Here is the ecto equivalent of the above functor, slightly more verbose of cours
      :start-after: //start
      :end-before: //end
      
-  A typical :ref:`ecto::cell`.
+  A typical ``ecto::cell``.
 
 
 
@@ -57,13 +57,13 @@ Let us look at a graphical representation of the Cell written :ref:`above <cell-
 
 .. figure:: Printer01.png
    
-   A graphical representation of a :ref:`ecto::cell`.  In ``green`` are the inputs,
+   A graphical representation of a ``ecto::cell``.  In ``green`` are the inputs,
    ``blue`` parameters, ``yellow`` cell type. This cell has no outputs.
 
-The parameters, inputs, and outputs of a cell all share the same type, :ref:`tendrils`.
+The parameters, inputs, and outputs of a cell all share the same type, :ref:`tendril-overview`.
 Tendrils are mappings between strings, and lazily typed objects.  These are how the
 cell communicates with the rest of the system.  The reason for choosing a runtime
-typed object like the :ref:`tendril` instead of a compile time typed object
+typed object like the :ref:`tendril-overview` instead of a compile time typed object
 like a ``boost::tuple`` is that it allows for ecto to be type ignorant, as the
 data held by the tendril has really no effect on how a graph executes or the python
 interfaces.  Ecto is a plugin based architecture, and so can not be header only,
@@ -266,7 +266,7 @@ process.
 Now, before the call to process our Printer01 hasn't actually been allocated,
 but all of its tendrils, inputs, outputs, and parameters are accessible from python.
 During the call to process, the Printer01 is allocated as necessary, the
-configure function is called, any :ref:`parameter-callbacks` are triggered if
+configure function is called, any ``parameter-callbacks`` are triggered if
 parameters have changed value, and then process is executed.
 
 .. _cell-sketch-python-interface:

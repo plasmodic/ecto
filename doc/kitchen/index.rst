@@ -1,5 +1,6 @@
 .. image:: art/ecto_4x4.svg
   :align: center
+  :height: 100 px
 
 Ecto - a framework for perception
 =================================
@@ -17,19 +18,19 @@ To understand ecto, you probably want to go over the Ecto docs first:
 .. toctree::
    :maxdepth: 1
 
-   links/ecto/index.rst 
+   ecto <links/ecto/index.rst>
 
 Ecto has several modules that wrap different libraries or functionalities:
 
 .. toctree::
    :maxdepth: 1
 
-   links/ecto/index.rst
-   links/ecto_image_pipeline/index.rst
-   links/ecto_openni/index.rst
-   links/ecto_opencv/index.rst
-   links/ecto_pcl/index.rst
-   links/ecto_ros/index.rst
+   ecto <links/ecto/index.rst>
+   ecto_image_pipeline <links/ecto_image_pipeline/index.rst>
+   ecto_openni <links/ecto_openni/index.rst>
+   ecto_opencv <links/ecto_opencv/index.rst>
+   ecto_pcl <links/ecto_pcl/index.rst>
+   ecto_ros <links/ecto_ros/index.rst>
 
 .. rubric:: Install
 
