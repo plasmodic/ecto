@@ -110,11 +110,9 @@ if(BUILD_SAMPLES)
 endif()
 
 catkin_project(ecto
- INCLUDE_DIRS
- include
- ${ecto_BINARY_DIR}/include
- LIBRARIES ecto
- CFG_EXTRAS ecto-extras.cmake
+               INCLUDE_DIRS include
+               LIBRARIES ecto
+               CFG_EXTRAS ecto-extras.cmake
 )
 
 catkin_doxygen(ecto-doxygen ${CMAKE_CURRENT_SOURCE_DIR}/include)
