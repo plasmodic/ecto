@@ -85,7 +85,6 @@ macro(ecto_sphinx TARGET_NAME SOURCE_DIR BUILD_DIR)
     set(_PYTHONPATH )
     #put user path first
     list(APPEND _PYTHONPATH ${ARGN})
-    list(APPEND _PYTHONPATH  ${ecto_PYTHONPATH})
     #transform the cmake list to a sh path list
     string(REPLACE ";" ":"
         _PYTHONPATH

@@ -29,7 +29,6 @@
 
 #create an ectoConfig.cmake for easy find_package(ecto)
 set(ecto_LIBRARIES_DIR ${CMAKE_INSTALL_PREFIX}/lib)
-set(ecto_PYTHONPATH ${CMAKE_INSTALL_PREFIX}/${ecto_PYTHON_INSTALL})
 set(ECTO_CONFIG_PATH  ${CMAKE_INSTALL_PREFIX}/${share_prefix})
 
 file(COPY ${ecto_SOURCE_DIR}/cmake/ectoMacros.cmake

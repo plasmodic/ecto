@@ -27,7 +27,6 @@ include(${SELF_DIR}/rosbuild_lite.cmake)
 include(${SELF_DIR}/doc.cmake)
 include(${SELF_DIR}/git.cmake)
 set(ECTO_CONFIG_PATH ${SELF_DIR})
-set(ecto_PYTHONPATH @ecto_PYTHONPATH@)
 set(ecto_PYTHONLIB @ecto_PYTHONLIB@)
 
 # ============== dependencies ==================================================

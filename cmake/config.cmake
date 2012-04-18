@@ -27,7 +27,6 @@
 #
 set(ecto_CONFIG_DIR ${CMAKE_BINARY_DIR}/cmake/ecto)
 
-set(ecto_PYTHONPATH ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} ${ecto_SOURCE_DIR}/python)
 set(ecto_PYTHONLIB ecto_ectomodule)
 
 set(ECTO_CONFIG_PATH ${CMAKE_BINARY_DIR}/cmake/ecto)
