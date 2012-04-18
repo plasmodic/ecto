@@ -13,9 +13,10 @@ language hosted in Python.
 Ecto may be useful in problem domains such as perception, audio, or
 robotics.
 
-.. rubric:: IRC
 
-Drop in on us on ``#ecto`` on ``irc.oftc.net``
+.. rubric:: Bug reports
+
+Please use the github infrastructure https://github.com/plasmodic/ecto
 
 .. rubric:: Email List
 

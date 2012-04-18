@@ -58,9 +58,9 @@ And you're then good to go for the usual cmake install:
 
   mkdir build && cd build && cmake ../ && make
 
-.. rubric:: IRC
+.. rubric:: Bug reports
 
-Drop in on us on ``#ecto`` on ``irc.oftc.net``
+Please use the github infrastructure fot the desired module on https://github.com/plasmodic
 
 .. rubric:: Email List
 
