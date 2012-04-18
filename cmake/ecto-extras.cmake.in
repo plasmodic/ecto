@@ -13,7 +13,6 @@
 #
 #    This file will define the following variables:
 #      - ecto_LIBRARIES                 : The list of libraries to link against.
-#      - ecto_INCLUDE_DIRS              : The ecto include directories
 #    These macros:
 #      set_ecto_install_package_name(package_name) #default is "" you may specify other
 #	   ectomodule(module_name ${srcs}) #This creates a single ecto module
@@ -27,7 +26,6 @@ include(${SELF_DIR}/ectoMacros.cmake)
 include(${SELF_DIR}/rosbuild_lite.cmake)
 include(${SELF_DIR}/doc.cmake)
 include(${SELF_DIR}/git.cmake)
-set(ecto_INCLUDE_DIRS @ecto_INCLUDE_DIRS@)
 set(ECTO_CONFIG_PATH ${SELF_DIR})
 set(ecto_PYTHONPATH @ecto_PYTHONPATH@)
 set(ecto_PYTHONLIB @ecto_PYTHONLIB@)
