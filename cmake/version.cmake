@@ -35,6 +35,4 @@ set(ECTO_CODE_NAME "amoeba") #code name must be hand coded for debian to work, b
 set(include_prefix include)
 set(share_prefix share/ecto)
 
-configure_file(${ecto_SOURCE_DIR}/cmake/version.hpp.in ${ecto_BINARY_DIR}/include/ecto/version.hpp)
-include_directories(${ecto_BINARY_DIR}/include)
-
+configure_file(${ecto_SOURCE_DIR}/cmake/version.hpp.in ${CMAKE_BINARY_DIR}/gen/cpp/ecto/version.hpp)
