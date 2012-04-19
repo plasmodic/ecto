@@ -67,8 +67,8 @@ Additional Ubuntu Packages
 On ubuntu platforms, for the build that includes ros, you want the
 following packages::
 
-ros-electric-desktop-full
-ros-electric-perception-pcl-addons
-libopencv2.3-dev
-openni-dev (or ros-electric-openni-kinect)
-python-argparse
+    ros-electric-desktop-full
+    ros-electric-perception-pcl-addons
+    libopencv2.3-dev
+    openni-dev (or ros-electric-openni-kinect)
+    python-argparse

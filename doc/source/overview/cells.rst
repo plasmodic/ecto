@@ -111,7 +111,7 @@ A peek under the covers
   
   -- Egon
 
-You might be thinking these kinds of things... Well the registration with ecto occurs in the macro :cmacro:`ECTO_CELL`.
+You might be thinking these kinds of things... Well the registration with ecto occurs in the macro :c:macro:`ECTO_CELL`.
 This macro
 does some amount of extra fanciness, but in the end it takes your struct and does something similar
 to the following simplified example:
@@ -153,7 +153,7 @@ to the following simplified example:
 
 The real implementation uses `SFINAE`_ to enable
 optional implementation of the interface functions.
-The macro :cmacro:`ECTO_CELL` also constructs python
+The macro :c:macro:`ECTO_CELL` also constructs python
 bindings for your cell, and
 generates RST formated doc strings from the
 static declaration parameter and io functions.
@@ -174,8 +174,8 @@ script demonstrates the python interface of our cell that ecto provides for free
 
 The script, when run will give the following output:
 
-.. program-output:: overview/cell01.py
-  :in_srcdirs:
+.. program-output:: ./cell01.py
+  :in_srcdir:
 
 Doc Generation
 ^^^^^^^^^^^^^^
