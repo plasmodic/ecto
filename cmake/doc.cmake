@@ -26,34 +26,19 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 
-##
-# doxygen(<TARGET_NAME> <SEARCH_DIRS>)
-# TARGET_NAME -> The cmake target to create.
-# SEARCH_DIRS -> a CMake List of directories to search for doxygenated files.
-#
-# macro(doxygen TARGET_NAME SEARCH_DIRS)
-#   #doxygen based docs
-#   set(DOC_SEARCH_DIRS ${SEARCH_DIRS}
-#   )
-#   foreach(dir ${DOC_SEARCH_DIRS})
-#     file(GLOB_RECURSE _doc_sources ${dir}/*)
-#     list(APPEND doc_sources ${_doc_sources})
-#   endforeach()
-# 
-#   string(REPLACE ";" " " doc_sources "${doc_sources}")
-# 
-#   configure_file(Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
-# 
-#   add_custom_target(${TARGET_NAME}
-#     COMMENT "Generating API documentation with Doxygen" VERBATIM
-#     )
-# 
-#   add_custom_command(TARGET ${TARGET_NAME}
-#     COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
-#     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-#     )
-#   add_dependencies(doc ${TARGET_NAME})
-# endmacro()
+set(ECTO_DOCS_DEPLOY_DESTINATION "OFF" CACHE STRING
+  "Deploy destination for docs, or OFF.  Will be passed to rsync; may contain user@ syntax for ssh"
+  )
+
+if (NOT TARGET sphinx-doc)
+  add_custom_target(sphinx-doc)
+endif()
+
+if(ECTO_DOCS_DEPLOY_DESTINATION)
+    if (NOT TARGET sphinx-deploy)
+        add_custom_target(sphinx-deploy)
+    endif()
+endif()
 
 macro(ecto_find_sphinx)
   find_program(SPHINX_BUILD sphinx-build)
@@ -73,42 +58,38 @@ macro(ecto_find_sphinx)
 endmacro()
 
 ##
-# sphinx(<TARGET_NAME> <SOURCE_DIR> <BUILD_DIR> [PATH1 [ PATH2 [ PATH3 ]]])
-# TARGET_NAME -> The cmake target to create.
+# sphinx(<SOURCE_DIR> [PATH1 [ PATH2 [ PATH3 ]]])
 # SOURCE_DIR -> Where the conf.py is
-# BUILD_DIR -> Where should sphinx put the result
 # PATH(s) -> paths to prepend to the PYTHONPATH for the execution of sphinx-build
 #
-macro(ecto_sphinx TARGET_NAME SOURCE_DIR BUILD_DIR)
+set(SPHINX_LIST ${CMAKE_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/sphinx_projects.list
+  CACHE INTERNAL "File containing master sphinx projects list"
+  )
+file(REMOVE ${SPHINX_LIST})
+
+macro(ecto_sphinx SOURCE_DIR)
   ecto_find_sphinx()
   if(SPHINX_BUILD)
-    set(_PYTHONPATH )
-    #put user path first
-    list(APPEND _PYTHONPATH ${ARGN})
-    #transform the cmake list to a sh path list
-    string(REPLACE ";" ":"
-        _PYTHONPATH
-        "${_PYTHONPATH}"
-    )
-    add_custom_target(${TARGET_NAME})
-    add_custom_command(TARGET ${TARGET_NAME}
-      COMMAND
-      /usr/bin/env
-      PYTHONPATH=${_PYTHONPATH}
-      ${SPHINX_BUILD} -aE ${SOURCE_DIR} ${BUILD_DIR}
-      WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-      )
-    add_dependencies(doc ${TARGET_NAME})
-  endif()
-endmacro()
 
-##
-# deploy(<TARGET_NAME> <DOCS> <DESTINATION>)
-# using rsync create a target that deploys the docs
-#
-macro(deploy TARGET_NAME DOCS DESTINATION)
-  add_custom_target(${TARGET_NAME})
-  add_custom_command(TARGET ${TARGET_NAME}
-    COMMAND rsync --perms --chmod=a+rX -va  ${DOCS} ${DESTINATION}
-  )
+    file(APPEND ${SPHINX_LIST} "${PROJECT_NAME}\n")
+
+    add_custom_target(${PROJECT_NAME}-sphinx)
+    add_custom_command(TARGET ${PROJECT_NAME}-sphinx
+      COMMAND
+      ${CATKIN_ENV} ${SPHINX_BUILD} -aE -b html
+#      -c ${ecto_SPHINX_DIR}
+      -D html_title=${PROJECT_NAME}
+      -D project=${PROJECT_NAME}
+      -D ecto_docs_dir="${CMAKE_BINARY_DIR}/doc/html"
+      ${SOURCE_DIR} ${CMAKE_BINARY_DIR}/doc/html/${PROJECT_NAME}
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+      )
+    add_dependencies(sphinx-doc ${PROJECT_NAME}-sphinx)
+    if (ECTO_DOCS_DEPLOY_DESTINATION)
+      add_custom_target(${PROJECT_NAME}-sphinx-deploy)
+      add_custom_command(TARGET ${PROJECT_NAME}-sphinx-deploy
+        COMMAND rsync --perms --chmod=a+rX -va ${CMAKE_BINARY_DIR}/doc/html/${PROJECT_NAME}/ ${ECTO_DOCS_DEPLOY_DESTINATION}/${PROJECT_NAME})
+      add_dependencies(sphinx-deploy ${PROJECT_NAME}-sphinx-deploy)
+    endif()
+  endif()
 endmacro()
