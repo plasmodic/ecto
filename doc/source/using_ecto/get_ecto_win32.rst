@@ -1,3 +1,5 @@
+.. _get-ecto-win32:
+
 Requirements
 ========
  * boost (try 1.43 from boostpro http://www.boostpro.com/download/)

@@ -14,6 +14,20 @@ Ecto may be useful in problem domains such as perception, audio, or
 robotics.
 
 
+.. rubric:: Table of Contents
+
+.. toctree::
+   :maxdepth: 1
+
+   motivation.rst
+   overview/index.rst
+   Install and Usage <using_ecto/index.rst>
+   Tutorials <tutorial/index.rst>
+   techniques/index.rst
+   reference/index.rst  
+   glossary.rst
+
+
 .. rubric:: Bug reports
 
 Please use the github infrastructure https://github.com/plasmodic/ecto
@@ -25,20 +39,13 @@ Also feel free to join the email list:
 * site: http://groups.google.com/a/plasmodic.org/group/ecto-dev
 * email: **ecto-dev@plasmodic.org**
 
-.. rubric:: Table of Contents
+.. rubric:: Ecto Developer
+
+If you develop ecto, you want to read the following:
 
 .. toctree::
    :maxdepth: 1
 
-   motivation.rst
-   overview/index.rst
-   using_ecto/index.rst
-   tutorial/index.rst
-   techniques/index.rst
-   reference/index.rst
-   cmake.rst
-   release_checklist.rst
-   dependencies.rst
-   changelog.rst
    codingstandards.rst
-   glossary.rst
+   changelog.rst
+   release_checklist.rst

@@ -3,9 +3,14 @@ Get ecto
 
 ecto is available here: https://github.com/plasmodic/ecto
 
+It is also dependent on ``catkin``
+
 .. code-block:: sh
 
-    git clone git://github.com/plasmodic/ecto.git
+    mkdir ecto_kitchen && cd ecto_kitchen
+    git clone http://github.com/willowgarage/catkin.git
+    git clone http://github.com/plasmodic/ecto.git
+    ln -s catkin/toplevel.cmake CMakeLists.txt
 
 You should see the following outputish:
 
@@ -29,7 +34,6 @@ the most advanced user.
 
 .. code-block:: sh
 
-    cd ecto
     mkdir build
     cd build
     cmake ..
@@ -38,7 +42,6 @@ You should see the following outputish:
 
 ::
 
-    $ cd ecto
     $ mkdir build
     $ cd build
     $ cmake ..
@@ -77,11 +80,11 @@ Now you have a working build of ecto! You should try to run a test.
 
 .. code-block:: sh
 
-    #cd to the root of ecto
+    #cd to the root of the ecto kitchen
     cd ..
     #add ecto to your python path
-    . setup.zsh
-    python samples/hello.py
+    . build/setup.bash
+    python ecto/samples/hello.py
 
 You should see the following outputish:
 
@@ -116,7 +119,7 @@ On ubuntu its simple....
 .. code-block:: sh
 
 	 sudo apt-get install libboost-python-dev libboost-filesystem-dev libboost-system-dev libboost-thread-dev python-setuptools python-gobject python-gtk2 graphviz doxygen
-	 sudo easy_install sphinx
+	 sudo pip install -U sphinx
 
 Install
 ---------------------------------------

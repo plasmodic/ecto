@@ -27,7 +27,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 # 
 import ecto #ecto core library
-import hello_ecto #a user library, that has a few ecto modules
+import ecto.hello_ecto as hello_ecto #a user library, that has a few ecto modules
 
 debug = True
 

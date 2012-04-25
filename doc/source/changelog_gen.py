@@ -1,11 +1,13 @@
 import subprocess,sys
 
-tags = ('amoeba-beta2',
-        'amoeba-beta3',
-        'amoeba-beta4',
-        "amoeba-beta5",
-        "amoeba-beta6",
-        "amoeba-0",
+tags = ('0.1.2',
+        '0.1.3',
+        '0.2.0',
+        '0.3.0',
+        '0.3.1',
+        '0.3.2',
+        '0.3.3',
+        '0.3.4',
         "HEAD"
         )
 
