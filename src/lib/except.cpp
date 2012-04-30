@@ -216,7 +216,8 @@ namespace boost {
   }
 
   template <class E,class Tag,class T>
-  E const &
+  //E const &
+  typename enable_if<exception_detail::derives_boost_exception<E>,E const &>::type
   operator<<( E const & x,
               error_info< ::ecto::except::detail::wrap<Tag>, T> const & v )
   {
