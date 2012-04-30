@@ -216,7 +216,7 @@ namespace boost {
   }
 
   template <class E,class Tag,class T>
-#if ((BOOST_VERSION / 100) % 1000) <= 40
+#if ((BOOST_VERSION / 100) % 1000) <= 42
   E const &
 #else
   typename enable_if<exception_detail::derives_boost_exception<E>,E const &>::type

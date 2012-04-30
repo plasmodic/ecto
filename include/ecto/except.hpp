@@ -190,7 +190,7 @@ namespace boost {
   BOOST_PP_SEQ_FOR_EACH(ECTO_EXCEPTION_TAG_TYPE_NAME_DECL, ~, ECTO_EXCEPTION_TAG_NAMES)
 
   template <class E,class Tag,class T>
-#if ((BOOST_VERSION / 100) % 1000) <= 40
+#if ((BOOST_VERSION / 100) % 1000) <= 42
   E const &
 #else
   typename enable_if<exception_detail::derives_boost_exception<E>,E const &>::type
