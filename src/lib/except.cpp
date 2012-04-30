@@ -216,8 +216,11 @@ namespace boost {
   }
 
   template <class E,class Tag,class T>
-  //E const &
+#if ((BOOST_VERSION / 100) % 1000) <= 40
+  E const &
+#else
   typename enable_if<exception_detail::derives_boost_exception<E>,E const &>::type
+#endif
   operator<<( E const & x,
               error_info< ::ecto::except::detail::wrap<Tag>, T> const & v )
   {
