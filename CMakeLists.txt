@@ -75,6 +75,13 @@ git_status(ecto)
 
 include_directories(include)
 include_directories(src/lib)
+include_directories(${CMAKE_BINARY_DIR}/gen/cpp/)
+install(DIRECTORY ${CMAKE_BINARY_DIR}/gen/cpp/ecto/
+        DESTINATION include/ecto
+        COMPONENT main
+)
+
+
 add_subdirectory(src)
 add_subdirectory(cmake)
 add_subdirectory(python)
