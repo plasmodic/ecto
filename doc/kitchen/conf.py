@@ -23,6 +23,8 @@ import sys, os, subprocess
 sys.path += [os.path.abspath('.'), os.path.join(os.path.abspath('.'), '../../ecto/python')]
 print "SYS.PATH===", sys.path
 
+from doc_config import *
+
 # -- General configuration -----------------------------------------------------
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
@@ -37,6 +39,7 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.viewcode']
 
 extensions += ['ecto.sphinx.programoutput',
+               'ecto.sphinx.breathe',
               'ecto.sphinx.EctoShLexer',
               'ecto.sphinx.EctoPlotDirective',
               'ecto.sphinx.EctoCellDirective',

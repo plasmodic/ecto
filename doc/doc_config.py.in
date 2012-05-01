@@ -6,6 +6,6 @@ git_lastmod='${${PROJECT_NAME}_LAST_MODIFIED}'
 github_url='${${PROJECT_NAME}_GITHUB_URL}'
 
 breathe_default_project = '${PROJECT_NAME}'
-breathe_projects = dict(ecto='${CMAKE_CURRENT_BINARY_DIR}/api/xml')
+breathe_projects = dict(ecto='${CMAKE_CURRENT_BINARY_DIR}/../api/xml')
 
 programoutput_path = '${DOC_SOURCE_DIRS}'.split(';')

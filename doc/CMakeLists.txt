@@ -27,4 +27,5 @@
 #
 #these are used by the docs.
 configure_file(${ecto_SOURCE_DIR}/doc/doc_config.py.in ${ecto_SOURCE_DIR}/doc/source/doc_config.py)
+configure_file(${ecto_SOURCE_DIR}/doc/doc_config.py.in ${ecto_SOURCE_DIR}/doc/kitchen/doc_config.py)
 add_subdirectory(source doc_errata)
