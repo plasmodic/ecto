@@ -12,7 +12,7 @@ cells, ecto supports `boost::serialization`_ of tendrils,cells, and plasms.
 
 Steps to ensure your types can be serialized:
   1. Write boost serialization methods for your types, don't worry all the basic types should work by default.
-  2. Use the :cmacro:`ECTO_REGISTER_SERIALIZERS` in one of your translation units.
+  2. Use the :c:macro:`ECTO_REGISTER_SERIALIZERS` in one of your translation units.
 
 .. c:macro:: ECTO_REGISTER_SERIALIZERS(Type)
 

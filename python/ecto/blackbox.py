@@ -233,7 +233,8 @@ class BlackBox(object):
         
         forward_all has the signature:
             def forward_all(self, cell_name):
-        This function has the behavor that all of the inputs, outputs, or parameters
+
+        This function has the behavior that all of the inputs, outputs, or parameters
         will be forwared, with their original keys, docs, etc..
         '''
         pass

@@ -34,7 +34,7 @@ weakly typed.
 
    .. literalinclude:: conditional.py
 
-   The above sample uses the built in cell :ref:`trueeveryn`_
+   The above sample uses the built in cell :ref:`trueeveryn`
    
 .. _trueeveryn:
 

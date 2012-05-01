@@ -15,7 +15,7 @@ object.  From a build system perspective a module looks like:
     )
 
 Where ``module.cpp`` is the recommended idiom for defining your ecto module.
-It will contain very little code and use the :cmacro:`ECTO_DEFINE_MODULE`. A typical
+It will contain very little code and use the :c:macro:`ECTO_DEFINE_MODULE`. A typical
 ``module.cpp`` will look like:
 
   .. code-block:: c++
@@ -25,7 +25,7 @@ It will contain very little code and use the :cmacro:`ECTO_DEFINE_MODULE`. A typ
     ECTO_DEFINE_MODULE(my_ecto_module){}
   
   It is important that the name given to your ``ectomodule`` macro, ``my_ecto_module``
-  matches that given to :cmacro:`ECTO_DEFINE_MODULE`.
+  matches that given to :c:macro:`ECTO_DEFINE_MODULE`.
 
 And every other cpp file will contain typically a single cell, exported:
 

@@ -1,7 +1,7 @@
 .. _get-ecto-win32:
 
 Requirements
-========
+============
  * boost (try 1.43 from boostpro http://www.boostpro.com/download/)
  * python (try 2.6)
  * cmake
@@ -13,9 +13,9 @@ path
 =====
 Windows needs some path setup for this to go smoothly.
 
-::
+.. code-block:: sh
 
-set PATH=C:\Program Files\CMake 2.8\bin;C:\Python26\;C:\gtest\lib_dir
+    set PATH=C:\Program Files\CMake 2.8\bin;C:\Python26\;C:\gtest\lib_dir
 
 Also it may be useful to always work from the **Visual Studio Command Prompt** or otherwise
 be sure to source the ``C:\Program Files\Microsoft Visual Studio 10.0\VC\vcvarsall.bat`` before
