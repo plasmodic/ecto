@@ -34,12 +34,11 @@ import ecto
 
 possible_schedulers = [ x for x in ecto.schedulers.__dict__.keys() if x[0] != '_']
 
-def use_ipython(options, sched, plasm, locals={}):
+def use_ipython(options, plasm, locals={}):
     '''Launch a plasm using ipython, and a scheduler of choice.
 
        Keyword arguments:
        options -- are from scheduler_options
-       sched -- is an already initialized scheduler for plasm.
        plasm -- The graph to execute
        locals -- are a dictionary of locals to forward to the ipython shell, use locals()
     '''
@@ -47,10 +46,8 @@ def use_ipython(options, sched, plasm, locals={}):
     for key, val in locals.items():
         vars()[key] = val
 
-    if type(sched) == ecto.schedulers.Singlethreaded:
-        sched.execute_async(options.niter)
-    else:
-        sched.execute_async(options.niter, options.nthreads)
+    options.use_ipython = True
+    run_plasm(options, plasm, locals=locals)
 
     import IPython
     if IPython.__version__ < '0.11':
