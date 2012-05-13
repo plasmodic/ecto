@@ -1,3 +1,0 @@
-mult:
-  factor: 3.14
-  factor__doc__: A factor to multiply by.
