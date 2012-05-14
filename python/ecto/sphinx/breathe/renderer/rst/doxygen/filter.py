@@ -229,8 +229,36 @@ class FilterFactory(object):
 
         return AndFilter(
                 self.create_members_filter(options),
-                self.create_outline_filter(options),
+                AndFilter(
+                    self.create_outline_filter(options),
+                    self.create_show_filter(options),
+                    )
                 )
+
+    def create_show_filter(self, options):
+        """
+        Currently only handles the header-file entry
+        """
+
+        try:
+            text = options["show"]
+        except KeyError:
+            # Allow through everything except the header-file includes nodes
+            return OrFilter(
+                    NotFilter(NameFilter(NodeTypeAccessor(Parent()), ["compounddef"])),
+                    NotFilter(NameFilter(NodeTypeAccessor(Child()), ["inc"]))
+                    )
+
+        if text == "header-file":
+            # Allow through everything, including header-file includes
+            return OpenFilter()
+
+        # Allow through everything except the header-file includes nodes
+        return OrFilter(
+                NotFilter(NameFilter(NodeTypeAccessor(Parent()), ["compounddef"])),
+                NotFilter(NameFilter(NodeTypeAccessor(Child()), ["inc"]))
+                )
+
 
     def create_members_filter(self, options):
 
@@ -245,7 +273,10 @@ class FilterFactory(object):
         if not text.strip():
             return OrFilter(
                     NotFilter(NameFilter(NodeTypeAccessor(Child()), ["sectiondef"])),
-                    GlobFilter(KindAccessor(Child()), self.globber_factory.create("public*"))
+                    OrFilter(
+                        GlobFilter(KindAccessor(Child()), self.globber_factory.create("public*")),
+                        NameFilter(KindAccessor(Child()), ["user-defined"])
+                        )
                     )
 
         # Matches sphinx-autodoc behaviour of comma separated values

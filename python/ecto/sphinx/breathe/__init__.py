@@ -1,10 +1,9 @@
-import os
-import sys
-sys.path.append(os.path.join(os.path.dirname(__file__), os.path.pardir))
 
 from docutils import nodes
 from docutils.parsers.rst.directives import unchanged_required, unchanged, flag
 
+import os
+import sys
 import copy
 import fnmatch
 import re
@@ -30,6 +29,7 @@ import sphinx.addnodes
 import sphinx.domains.cpp
 sphinx.domains.cpp._identifier_re = re.compile(r'(~?\b[a-zA-Z_][a-zA-Z0-9_]*)\b')
 
+__version__ = '0.7.0'
 
 class BaseDirective(rst.Directive):
 
@@ -99,9 +99,9 @@ class DoxygenIndexDirective(BaseDirective):
                 target_handler,
                 )
         object_renderer = renderer_factory.create_renderer(self.root_data_object, data_object)
-        nodes = object_renderer.render()
+        node_list = object_renderer.render()
 
-        return nodes
+        return node_list
 
 
 class DoxygenFunctionDirective(BaseDirective):
@@ -160,9 +160,9 @@ class DoxygenFunctionDirective(BaseDirective):
                 target_handler,
                 )
         object_renderer = renderer_factory.create_renderer(self.root_data_object, data_object)
-        nodes = object_renderer.render()
+        node_list = object_renderer.render()
 
-        return nodes
+        return node_list
 
 
 class DoxygenClassDirective(BaseDirective):
@@ -175,6 +175,7 @@ class DoxygenClassDirective(BaseDirective):
             "path": unchanged_required,
             "project": unchanged_required,
             "members": unchanged,
+            "show": unchanged_required,
             "outline": flag,
             "no-link": flag,
             }
@@ -220,9 +221,9 @@ class DoxygenClassDirective(BaseDirective):
                 )
         object_renderer = renderer_factory.create_renderer(self.root_data_object, data_object)
 
-        nodes = object_renderer.render()
+        node_list = object_renderer.render()
 
-        return nodes
+        return node_list
 
 
 class DoxygenFileDirective(BaseDirective):
@@ -271,7 +272,7 @@ class DoxygenFileDirective(BaseDirective):
                 self.state.document,
                 self.options,
                 )
-        nodes = []
+        node_list = []
         for data_object in matches:
 
             renderer_factory = renderer_factory_creator.create_factory(
@@ -283,9 +284,9 @@ class DoxygenFileDirective(BaseDirective):
                     )
 
             object_renderer = renderer_factory.create_renderer(self.root_data_object, data_object)
-            nodes.extend(object_renderer.render())
+            node_list.extend(object_renderer.render())
 
-        return nodes
+        return node_list
 
 
 class DoxygenBaseDirective(BaseDirective):
@@ -338,9 +339,9 @@ class DoxygenBaseDirective(BaseDirective):
                 )
         object_renderer = renderer_factory.create_renderer(self.root_data_object, data_object)
 
-        nodes = object_renderer.render()
+        node_list = object_renderer.render()
 
-        return nodes
+        return node_list
 
 
 class DoxygenStructDirective(DoxygenBaseDirective):
@@ -363,7 +364,67 @@ class DoxygenStructDirective(DoxygenBaseDirective):
             )
 
 
-class DoxygenVariableDirective(DoxygenBaseDirective):
+# This class was the same as the DoxygenBaseDirective above, except that it
+# wraps the output in a definition_list before passing it back. This should be
+# abstracted in a far nicely way to avoid repeating so much code
+#
+# Now we're removed the definition_list wrap so we really need to refactor this!
+class DoxygenBaseItemDirective(BaseDirective):
+
+    required_arguments = 1
+    optional_arguments = 1
+    option_spec = {
+            "path": unchanged_required,
+            "project": unchanged_required,
+            "outline": flag,
+            "no-link": flag,
+            }
+    has_content = False
+
+    def run(self):
+
+        try:
+            namespace, name = self.arguments[0].rsplit("::", 1)
+        except ValueError:
+            namespace, name = "", self.arguments[0]
+
+        project_info = self.project_info_factory.create_project_info(self.options)
+
+        finder = self.finder_factory.create_finder(project_info)
+
+        matcher_stack = self.create_matcher_stack(namespace, name)
+
+        try:
+            data_object = finder.find_one(matcher_stack)
+        except NoMatchesError, e:
+            display_name = "%s::%s" % (namespace, name) if namespace else name
+            warning = ('doxygen%s: Cannot find %s "%s" in doxygen xml output for project "%s" from directory: %s'
+                    % (self.kind, self.kind, display_name, project_info.name(), project_info.path()))
+            return [docutils.nodes.warning("", docutils.nodes.paragraph("", "", docutils.nodes.Text(warning))),
+                    self.state.document.reporter.warning(warning, line=self.lineno)]
+
+        target_handler = self.target_handler_factory.create(self.options, project_info, self.state.document)
+        filter_ = self.filter_factory.create_outline_filter(self.options)
+        renderer_factory_creator = self.renderer_factory_creator_constructor.create_factory_creator(
+                project_info,
+                self.state.document,
+                self.options,
+                )
+        renderer_factory = renderer_factory_creator.create_factory(
+                data_object,
+                self.state,
+                self.state.document,
+                filter_,
+                target_handler,
+                )
+        object_renderer = renderer_factory.create_renderer(self.root_data_object, data_object)
+
+        node_list = object_renderer.render()
+
+        return node_list
+
+
+class DoxygenVariableDirective(DoxygenBaseItemDirective):
 
     kind = "variable"
 
@@ -377,8 +438,7 @@ class DoxygenVariableDirective(DoxygenBaseDirective):
                 "member"
             )
 
-
-class DoxygenDefineDirective(DoxygenBaseDirective):
+class DoxygenDefineDirective(DoxygenBaseItemDirective):
 
     kind = "define"
 
@@ -392,8 +452,7 @@ class DoxygenDefineDirective(DoxygenBaseDirective):
                 "member"
             )
 
-
-class DoxygenEnumDirective(DoxygenBaseDirective):
+class DoxygenEnumDirective(DoxygenBaseItemDirective):
 
     kind = "enum"
 
@@ -407,8 +466,7 @@ class DoxygenEnumDirective(DoxygenBaseDirective):
                 "member"
             )
 
-
-class DoxygenTypedefDirective(DoxygenBaseDirective):
+class DoxygenTypedefDirective(DoxygenBaseItemDirective):
 
     kind = "typedef"
 
@@ -421,8 +479,6 @@ class DoxygenTypedefDirective(DoxygenBaseDirective):
                 },
                 "member"
             )
-
-
 # Setup Administration
 # --------------------
 
@@ -678,7 +734,7 @@ class PathHandler(object):
 
     def includes_directory(self, file_path):
 
-        return bool(file_path.count(self.sep))
+        return bool( file_path.count( self.sep ) )
 
 
 # Setup

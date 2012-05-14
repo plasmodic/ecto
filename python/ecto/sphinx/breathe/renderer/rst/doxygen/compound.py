@@ -6,7 +6,10 @@ class DoxygenTypeSubRenderer(Renderer):
     def render(self):
 
         compound_renderer = self.renderer_factory.create_renderer(self.data_object, self.data_object.compounddef)
-        return compound_renderer.render()
+        nodelist = compound_renderer.render()
+
+        return [self.node_factory.block_quote("", *nodelist)]
+
 
 
 class CompoundDefTypeSubRenderer(Renderer):
@@ -49,18 +52,6 @@ class CompoundDefTypeSubRenderer(Renderer):
                 "var"
              ]
 
-
-    def extend_nodelist(self, nodelist, section, title, section_nodelists):
-
-        # Add title and contents if found
-        if section_nodelists.has_key(section):
-            nodes = section_nodelists[section]
-
-            if nodes:
-
-                nodelist.append(self.node_factory.emphasis(text=title))
-                nodelist.append(self.node_factory.block_quote("", *nodes))
-
     def render(self):
 
         nodelist = []    
@@ -80,7 +71,11 @@ class CompoundDefTypeSubRenderer(Renderer):
             kind = sectiondef.kind
             renderer = self.renderer_factory.create_renderer(self.data_object, sectiondef)
             subnodes = renderer.render()
-            section_nodelists[kind] = subnodes
+            try:
+                # As "user-defined" can repeat
+                section_nodelists[kind] += subnodes
+            except KeyError:
+                section_nodelists[kind] = subnodes
 
         # Order the results in an appropriate manner
         for kind in self.section_titles:
@@ -99,7 +94,7 @@ class CompoundDefTypeSubRenderer(Renderer):
             if namespace_nodes:
                 nodelist.append(self.node_factory.paragraph("", "", *namespace_nodes))
 
-        return [self.node_factory.block_quote("", *nodelist)]
+        return nodelist
 
 
 class SectionDefTypeSubRenderer(Renderer):
@@ -144,18 +139,32 @@ class SectionDefTypeSubRenderer(Renderer):
 
     def render(self):
 
-        defs = []
+        node_list = []
+
+        if self.data_object.description:
+            renderer = self.renderer_factory.create_renderer(self.data_object, self.data_object.description)
+            node_list.append(self.node_factory.paragraph( "", "", *renderer.render()))
 
         # Get all the memberdef info
         for memberdef in self.data_object.memberdef:
             renderer = self.renderer_factory.create_renderer(self.data_object, memberdef)
-            defs.extend(renderer.render())
+            node_list.extend(renderer.render())
 
-        if defs:
+        if node_list:
+
             text = self.section_titles[self.data_object.kind]
+
+            # Override default name for user-defined sections. Use "Unnamed
+            # Group" if the user didn't name the section
+            # This is different to Doxygen which will track the groups and name
+            # them Group1, Group2, Group3, etc.
+            if self.data_object.kind == "user-defined":
+                if self.data_object.header:
+                    text = self.data_object.header
+                else:
+                    text = "Unnamed Group"
             title = self.node_factory.emphasis(text=text)
-            def_list = self.node_factory.definition_list("", *defs)
-            return [title, self.node_factory.block_quote("", def_list)]
+            return [title, self.node_factory.block_quote("", *node_list)]
 
         return []
 
@@ -173,7 +182,7 @@ class MemberDefTypeSubRenderer(Renderer):
     def title(self):
 
         kind = []
-        
+
         # Variable type or function return type
         if self.data_object.type_:
             renderer = self.renderer_factory.create_renderer(self.data_object, self.data_object.type_)
@@ -212,11 +221,9 @@ class MemberDefTypeSubRenderer(Renderer):
         title = self.title()
         target = self.create_target(refid)
         target.extend(title)
-        term = self.node_factory.term("","", ids=[domain_id,refid], *target )
-        definition = self.node_factory.definition("", *self.description())
-        entry = self.node_factory.definition_list_item("",term, definition)
-
-        return [entry]
+        term = self.node_factory.paragraph("", "", ids=[domain_id,refid], *target )
+        definition = self.node_factory.paragraph("", "", *self.description())
+        return [term, self.node_factory.block_quote("", definition)]
 
 
 class FuncMemberDefTypeSubRenderer(MemberDefTypeSubRenderer):
@@ -235,6 +242,31 @@ class FuncMemberDefTypeSubRenderer(MemberDefTypeSubRenderer):
 
     def title(self):
 
+        lines = []
+
+        # Handle any template information
+        if self.data_object.templateparamlist:
+            renderer = self.renderer_factory.create_renderer(
+                    self.data_object,
+                    self.data_object.templateparamlist
+                    )
+            template = [
+                    self.node_factory.Text("template < ")
+                ]
+            template.extend(renderer.render())
+            template.append(self.node_factory.Text(" >"))
+
+            # Add blank string at the start otherwise for some reason it renders
+            # the emphasis tags around the kind in plain text (same below)
+            lines.append(
+                    self.node_factory.line(
+                        "",
+                        self.node_factory.Text(""),
+                        *template
+                        )
+                    )
+
+        # Get the function type and name
         args = MemberDefTypeSubRenderer.title(self)
 
         # Get the function arguments
@@ -245,7 +277,21 @@ class FuncMemberDefTypeSubRenderer(MemberDefTypeSubRenderer):
             args.extend(renderer.render())
         args.append(self.node_factory.Text(")"))
 
-        return args
+        lines.append(
+                self.node_factory.line(
+                    "",
+                    self.node_factory.Text(""),
+                    *args
+                    )
+                )
+
+        # Setup the line block with gathered informationo
+        block = self.node_factory.line_block(
+                "",
+                *lines
+                )
+
+        return [block]
 
 
 class DefineMemberDefTypeSubRenderer(MemberDefTypeSubRenderer):
@@ -364,16 +410,26 @@ class LinkedTextTypeSubRenderer(Renderer):
         nodelist = []
 
         # Recursively process where possible
-        for i in self.data_object.content_:
-            renderer = self.renderer_factory.create_renderer(self.data_object, i)
+        for i, entry in enumerate(self.data_object.content_):
+            if i:
+                nodelist.append(self.node_factory.Text(" "))
+            renderer = self.renderer_factory.create_renderer(self.data_object, entry)
             nodelist.extend(renderer.render())
-            nodelist.append(self.node_factory.Text(" "))
-
 
         return nodelist
 
 
 class ParamTypeSubRenderer(Renderer):
+
+    def __init__(
+            self,
+            output_defname,
+            *args
+            ):
+
+        Renderer.__init__( self, *args )
+
+        self.output_defname = output_defname
 
     def render(self):
 
@@ -386,9 +442,11 @@ class ParamTypeSubRenderer(Renderer):
 
         # Parameter name
         if self.data_object.declname:
+            nodelist.append(self.node_factory.Text(" "))
             nodelist.append(self.node_factory.Text(self.data_object.declname))
 
-        if self.data_object.defname:
+        if self.output_defname and self.data_object.defname:
+            nodelist.append(self.node_factory.Text(" "))
             nodelist.append(self.node_factory.Text(self.data_object.defname))
 
         # Default value
@@ -476,7 +534,7 @@ class DocMarkupTypeSubRenderer(Renderer):
             renderer = self.renderer_factory.create_renderer(self.data_object, item)
             nodelist.extend(renderer.render())
 
-        return [self.creator("", *nodelist)]
+        return [self.creator("", "", *nodelist)]
 
 
 class DocParamListTypeSubRenderer(Renderer):
@@ -602,6 +660,30 @@ class DocTitleTypeSubRenderer(Renderer):
 
         return nodelist
 
+class TemplateParamListRenderer(Renderer):
+
+    def render(self):
+
+        nodelist = []
+
+        for i, param in enumerate(self.data_object.param):
+            if i:
+                nodelist.append(self.node_factory.Text(", "))
+            renderer = self.renderer_factory.create_renderer(self.data_object, param)
+            nodelist.extend(renderer.render())
+
+        return nodelist
+
+class IncTypeSubRenderer(Renderer):
+
+    def render(self):
+
+        if self.data_object.local == u"yes":
+            text = '#include "%s"' % self.data_object.content_[0].getValue()
+        else:
+            text = '#include <%s>' % self.data_object.content_[0].getValue()
+
+        return [self.node_factory.emphasis(text=text)]
 
 class RefTypeSubRenderer(Renderer):
 
