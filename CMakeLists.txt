@@ -114,10 +114,10 @@ if(BUILD_SAMPLES)
   add_subdirectory(samples)
 endif()
 
-catkin_project(ecto
-               INCLUDE_DIRS include
-               LIBRARIES ecto
-               CFG_EXTRAS ecto-extras.cmake
+catkin_project(ecto INCLUDE_DIRS include
+                    LIBRARIES ecto
+                    DEPENDS PythonLibs
+                    CFG_EXTRAS ecto-extras.cmake
 )
 
 catkin_doxygen(ecto-doxygen ${CMAKE_CURRENT_SOURCE_DIR}/include)
