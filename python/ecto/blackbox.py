@@ -126,6 +126,7 @@ class BlackBoxTendrils(object):
             ctendrils = getattr(cell, self.tt_key)
             for key, cell_key in keys:
                 tendrils.declare(key, ctendrils.at(cell_key))
+                tendrils.at(key).doc = self._tendrils.at(key).doc
                 tendrils.at(key).copy_value(self._tendrils.at(key))#set the cells to parameters.
         for key, tendril in self._tendrils:
             if not key in tendrils:
