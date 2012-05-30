@@ -1,0 +1,13 @@
+<stack>
+  <name>ecto</name>
+  <version>0.4.0</version>
+  <description>Ecto is a hybrid C++/Python development framework for constructing and maintaining pipelines.</description>
+  <author>Ethan Rublee/erublee@willowgarage.com>, Troy Straszheim/straszheim@willowgarage.com</author>
+  <maintainer>Vincent Rabaud/vrabaud@willowgarage.com, Ethan Rublee/erublee@willowgarage.com</maintainer>
+  <license>BSD</license>
+  <copyright>Willow Garage</copyright>
+
+  <url>http://ecto.willowgarage.com</url>
+  <build_depends>catkin, boost</build_depends>
+  <depends>catkin, boost</depends>
+</stack>
