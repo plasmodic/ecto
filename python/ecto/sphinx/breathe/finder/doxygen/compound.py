@@ -1,5 +1,5 @@
 
-from breathe.finder.doxygen.base import ItemFinder 
+from ecto.sphinx.breathe.finder.doxygen.base import ItemFinder 
 
 class DoxygenTypeSubItemFinder(ItemFinder):
 

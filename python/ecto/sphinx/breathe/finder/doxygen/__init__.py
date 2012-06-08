@@ -1,8 +1,8 @@
 
-from breathe.finder.doxygen import index as indexfinder
-from breathe.finder.doxygen import compound as compoundfinder
+from ecto.sphinx.breathe.finder.doxygen import index as indexfinder
+from ecto.sphinx.breathe.finder.doxygen import compound as compoundfinder
 
-from breathe.parser.doxygen import index, compound
+from ecto.sphinx.breathe.parser.doxygen import index, compound
 
 class MissingLevelError(Exception):
     pass

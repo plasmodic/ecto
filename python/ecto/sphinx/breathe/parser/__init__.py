@@ -1,6 +1,6 @@
 
-import breathe.parser.doxygen.index
-import breathe.parser.doxygen.compound
+import ecto.sphinx.breathe.parser.doxygen.index
+import ecto.sphinx.breathe.parser.doxygen.compound
 import os
 
 class ParserError(Exception):
@@ -27,10 +27,10 @@ class DoxygenIndexParser(Parser):
 
             # If that fails, parse it afresh
             try:
-                result = breathe.parser.doxygen.index.parse(filename)
+                result = ecto.sphinx.breathe.parser.doxygen.index.parse(filename)
                 self.cache[filename] = result
                 return result
-            except breathe.parser.doxygen.index.ParseError:
+            except ecto.sphinx.breathe.parser.doxygen.index.ParseError:
                 raise ParserError(filename)
 
 class DoxygenCompoundParser(Parser):
@@ -51,10 +51,10 @@ class DoxygenCompoundParser(Parser):
 
             # If that fails, parse it afresh
             try:
-                result = breathe.parser.doxygen.compound.parse(filename)
+                result = ecto.sphinx.breathe.parser.doxygen.compound.parse(filename)
                 self.cache[filename] = result
                 return result
-            except breathe.parser.doxygen.compound.ParseError:
+            except ecto.sphinx.breathe.parser.doxygen.compound.ParseError:
                 raise ParserError(filename)
 
 class CacheFactory(object):

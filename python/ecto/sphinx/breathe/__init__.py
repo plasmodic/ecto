@@ -13,14 +13,14 @@ from docutils.parsers import rst
 from docutils.statemachine import ViewList
 from sphinx.domains.cpp import DefinitionParser
 
-from breathe.finder import FinderFactory, NoMatchesError, MultipleMatchesError
-from breathe.parser import DoxygenParserFactory, CacheFactory, ParserError
-from breathe.renderer.rst.doxygen import DoxygenToRstRendererFactoryCreatorConstructor, RstContentCreator
-from breathe.renderer.rst.doxygen.domain import DomainHandlerFactoryCreator, NullDomainHandler
-from breathe.renderer.rst.doxygen.domain import CppDomainHelper, CDomainHelper
-from breathe.renderer.rst.doxygen.filter import FilterFactory, GlobFactory
-from breathe.renderer.rst.doxygen.target import TargetHandlerFactory
-from breathe.finder.doxygen import DoxygenItemFinderFactoryCreator, ItemMatcherFactory
+from ecto.sphinx.breathe.finder import FinderFactory, NoMatchesError, MultipleMatchesError
+from ecto.sphinx.breathe.parser import DoxygenParserFactory, CacheFactory, ParserError
+from ecto.sphinx.breathe.renderer.rst.doxygen import DoxygenToRstRendererFactoryCreatorConstructor, RstContentCreator
+from ecto.sphinx.breathe.renderer.rst.doxygen.domain import DomainHandlerFactoryCreator, NullDomainHandler
+from ecto.sphinx.breathe.renderer.rst.doxygen.domain import CppDomainHelper, CDomainHelper
+from ecto.sphinx.breathe.renderer.rst.doxygen.filter import FilterFactory, GlobFactory
+from ecto.sphinx.breathe.renderer.rst.doxygen.target import TargetHandlerFactory
+from ecto.sphinx.breathe.finder.doxygen import DoxygenItemFinderFactoryCreator, ItemMatcherFactory
 
 import docutils.nodes
 import sphinx.addnodes

@@ -1,9 +1,9 @@
 
-from breathe.renderer.rst.doxygen.base import Renderer
-from breathe.renderer.rst.doxygen import index as indexrenderer
-from breathe.renderer.rst.doxygen import compound as compoundrenderer
+from ecto.sphinx.breathe.renderer.rst.doxygen.base import Renderer
+from ecto.sphinx.breathe.renderer.rst.doxygen import index as indexrenderer
+from ecto.sphinx.breathe.renderer.rst.doxygen import compound as compoundrenderer
 
-from breathe.parser.doxygen import index, compound, compoundsuper
+from ecto.sphinx.breathe.parser.doxygen import index, compound, compoundsuper
 
 class RstContentCreator(object):
 
