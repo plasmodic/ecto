@@ -40,7 +40,7 @@ If you want to install from source, you will have to get them from https://githu
 ::
 
   mkdir ecto_kitchen && cd ecto_kitchen
-  git clone http://github.com/willowgarage/catkin.git
+  git clone http://github.com/ros/catkin.git
   git clone http://github.com/plasmodic/ecto.git
   ln -s catkin/toplevel.cmake CMakeLists.txt
 
