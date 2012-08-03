@@ -76,8 +76,8 @@ macro( rosbuild_lite_init )
     endif()
   endif()
 
-  find_program(ROSPACK_EXECUTABLE rospack PATHS ${ROS_ROOT}/bin DOC "the rospack executable." NO_SYSTEM_ENVIRONMENT_PATH NO_CMAKE_ENVIRONMENT_PATH)
-  find_program(ROSMSG_EXECUTABLE rosmsg PATHS ${ROS_ROOT}/bin DOC "rosmsg executable" NO_SYSTEM_ENVIRONMENT_PATH NO_CMAKE_ENVIRONMENT_PATH)
+  find_program(ROSPACK_EXECUTABLE rospack PATHS ${ROS_ROOT}/bin /opt/ros/fuerte/bin DOC "the rospack executable." NO_SYSTEM_ENVIRONMENT_PATH NO_CMAKE_ENVIRONMENT_PATH)
+  find_program(ROSMSG_EXECUTABLE rosmsg PATHS ${ROS_ROOT}/bin /opt/ros/fuerte/bin DOC "rosmsg executable" NO_SYSTEM_ENVIRONMENT_PATH NO_CMAKE_ENVIRONMENT_PATH)
 
   if (ROSPACK_EXECUTABLE)
     set(ROS_FOUND TRUE)
@@ -255,4 +255,17 @@ else()
     endif()
   endif()
 endif()
+endmacro()
+
+# find the (unstable) pcl16 package. uses rosbuild, even on fuerte,
+# since perception_pcl_fuerte_unstable isn't yet catkinized
+macro(find_pcl16_package)
+  rosbuild_lite_init()
+  unset(PCL16_LIBRARIES)
+  find_ros_package(std_msgs)
+  find_ros_package(pcl16)
+  set(PCL16_FOUND TRUE)
+  set(PCL16_LIBRARIES ${pcl16_LIBRARIES})
+  set(PCL16_INCLUDE_DIRS ${pcl16_INCLUDE_DIRS})
+  message(STATUS "+   ${pcl16_libraries} libraries, ${pcl16_include_dirs} include directories")
 endmacro()
