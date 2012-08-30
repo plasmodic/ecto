@@ -55,13 +55,9 @@ endif()
 
 
 macro( rosbuild_lite_init )
-  set(ROS_ROOT_DEFAULT /opt/ros/electric/ros CACHE PATH "The default ROS_ROOT")
-  set(ROS_PACKAGE_PATH_DEFAULT /opt/ros/electric/stacks CACHE PATH "The default ROS_PACKAGE_PATH")
-
   if (NOT ROS_ROOT)
     if ("$ENV{ROS_ROOT}" STREQUAL "")
-      message(STATUS "*** ROS_ROOT is not set... is your environment set correctly? Setting to default: ${ROS_ROOT_DEFAULT}")
-      set(ROS_ROOT ${ROS_ROOT_DEFAULT} CACHE PATH  "ROS_ROOT path")
+      message(FATAL_ERROR "*** ROS_ROOT is not set... is your environment set correctly?")
     else()
       set(ROS_ROOT "$ENV{ROS_ROOT}" CACHE PATH  "ROS_ROOT path")
     endif()
@@ -69,15 +65,14 @@ macro( rosbuild_lite_init )
 
   if (NOT ROS_PACKAGE_PATH)
     if ("$ENV{ROS_PACKAGE_PATH}" STREQUAL "")
-      message(STATUS "*** ROS_PACKAGE_PATH is not set... is your environment set correctly? Setting to default: ${ROS_PACKAGE_PATH_DEFAULT}")
-      set(ROS_PACKAGE_PATH ${ROS_PACKAGE_PATH_DEFAULT} CACHE PATH "ROS_PACKAGE_PATH path")
+      message(FATAL_ERROR "*** ROS_PACKAGE_PATH is not set... is your environment set correctly?")
     else()
       set(ROS_PACKAGE_PATH "$ENV{ROS_PACKAGE_PATH}" CACHE PATH "ROS_PACKAGE_PATH path")
     endif()
   endif()
 
-  find_program(ROSPACK_EXECUTABLE rospack PATHS ${ROS_ROOT}/bin /opt/ros/fuerte/bin DOC "the rospack executable." NO_SYSTEM_ENVIRONMENT_PATH NO_CMAKE_ENVIRONMENT_PATH)
-  find_program(ROSMSG_EXECUTABLE rosmsg PATHS ${ROS_ROOT}/bin /opt/ros/fuerte/bin DOC "rosmsg executable" NO_SYSTEM_ENVIRONMENT_PATH NO_CMAKE_ENVIRONMENT_PATH)
+  find_program(ROSPACK_EXECUTABLE rospack PATHS ${ROS_ROOT}/bin DOC "the rospack executable." NO_SYSTEM_ENVIRONMENT_PATH NO_CMAKE_ENVIRONMENT_PATH)
+  find_program(ROSMSG_EXECUTABLE rosmsg PATHS ${ROS_ROOT}/bin DOC "rosmsg executable" NO_SYSTEM_ENVIRONMENT_PATH NO_CMAKE_ENVIRONMENT_PATH)
 
   if (ROSPACK_EXECUTABLE)
     set(ROS_FOUND TRUE)
