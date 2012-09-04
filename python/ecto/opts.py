@@ -237,52 +237,53 @@ def scheduler_options(parser,
     '''Creates an argument parser for ecto schedulers.  Operates inplace on the
     given parser object.
     '''
-    parser.add_argument('--scheduler',
+    ecto_group = parser.add_argument_group('Ecto runtime parameters')
+    ecto_group.add_argument('--scheduler',
                         dest='scheduler_type',
                         default=default_scheduler,
                         choices=possible_schedulers,
                         help='The scheduler to execute the plasm with. (default: %(default)s)'
                         )
-    parser.add_argument('--nthreads', metavar='NUMBER_OF_THREADS',
+    ecto_group.add_argument('--nthreads', metavar='NUMBER_OF_THREADS',
                         dest='nthreads', type=int, default=default_nthreads,
                         help='''For schedulers that use threading, this specifies
                         the number of threads, 0 defaults to hardware concurrency information.
                         (default: %(default)s)'''
                         )
-    parser.add_argument('--niter', metavar='ITERATIONS', dest='niter',
+    ecto_group.add_argument('--niter', metavar='ITERATIONS', dest='niter',
                         type=int,
                         default=default_niter,
                         help='''Run the graph for niter iterations.
                         0 means run until stopped by a cell or external forces.
                         (default: %(default)s)'''
                         )
-    parser.add_argument('--shell', dest='ipython', action='store_const',
+    ecto_group.add_argument('--shell', dest='ipython', action='store_const',
                         const=True, default=default_shell,
                         help=''''Bring up an ipython prompt,
                         and execute asynchronously.(default: %(default)s)
                         '''
                         )
-    parser.add_argument('--gui', dest='gui', action='store_true',
+    ecto_group.add_argument('--gui', dest='gui', action='store_true',
                         help='Bring up a gui to help execute the plasm.'
                         )
 
-    parser.add_argument('--logfile', metavar='LOGFILE', dest='logfile', type=str,
+    ecto_group.add_argument('--logfile', metavar='LOGFILE', dest='logfile', type=str,
                         default='',
                         help='''Log to the given file, use tail -f LOGFILE to see the
                        live output. May be useful in combination with --shell'''
                        )
-    parser.add_argument('--graphviz', dest='graphviz',
+    ecto_group.add_argument('--graphviz', dest='graphviz',
                         action='store_const',
                         const=True, default=default_graphviz,
                         help='Show the graphviz of the plasm. (default: %(default)s)'
                         )
-    parser.add_argument('--dotfile', dest='dotfile', type=str, default='',
+    ecto_group.add_argument('--dotfile', dest='dotfile', type=str, default='',
                         help='''Output a graph in dot format to the given file.
                         If no file is given, no output will be generated. (default: %(default)s)'''
                         )
-    parser.add_argument('--stats', dest='stats', action='store_const',
+    ecto_group.add_argument('--stats', dest='stats', action='store_const',
                         const=True, default=default_graphviz,
-                        help='Show the the runtime statistics of the plasm.')
+                        help='Show the runtime statistics of the plasm.')
 
 def doit(plasm, description="An ecto graph.", locals={}, args=None, default_scheduler='Singlethreaded', default_nthreads=0, default_niter=0, default_shell=False, default_graphviz=False):
     '''doit is a short hand for samples, that is a combination of a call to scheduler_options, and then run_plasm.
