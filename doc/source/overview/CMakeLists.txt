@@ -27,7 +27,7 @@
 #
 #add_executable(functor functor.cpp)
 
-ectomodule(ecto_overview
+ectomodule(ecto_overview DESTINATION ecto
   module.cpp
   cell.cpp
   nop.cpp

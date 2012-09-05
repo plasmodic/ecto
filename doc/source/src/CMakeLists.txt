@@ -25,7 +25,7 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 # 
-ectomodule(ecto_examples
+ectomodule(ecto_examples DESTINATION ecto
   module.cpp
   Example01.cpp
   EnumAsInt.cpp

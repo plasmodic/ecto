@@ -36,7 +36,7 @@ CMake should be used to find ecto and bring in a few macros:
     #make all libraries appear in the build/lib directory
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
-    ectomodule(hello_ecto
+    ectomodule(hello_ecto ecto FALSE
         hello_ecto.cpp
     )
 

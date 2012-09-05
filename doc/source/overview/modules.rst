@@ -8,13 +8,16 @@ object.  From a build system perspective a module looks like:
 
 .. code-block:: cmake
   
-  ectomodule(my_ecto_module
+  ectomodule(my_ecto_module DESTINATION path_to_relative_build_module INSTALL
     module.cpp
     Hello.cpp
     SomeCell.cpp
     )
 
 Where ``module.cpp`` is the recommended idiom for defining your ecto module.
+INSTALL is an optional argument: if set, the module will also be installed (you might
+not want to install a test module). DESTINATION is the relative path where to 
+install the module (e.g.: ``./`` (default) or ``${PROJECT_NAME}/ecto_cells``).
 It will contain very little code and use the :c:macro:`ECTO_DEFINE_MODULE`. A typical
 ``module.cpp`` will look like:
 
@@ -49,7 +52,7 @@ violations.  Also notice that most ecto modules do not contain header files, as 
 ecto cells should be rather self contained, use common types for 
 tendrils (int, float, cv::Mat, pcl::PointCloud), etc ...
 
-The ``ectomodule`` cmake macro will yield an shared library artifact in your build, that
+The ``ectomodule`` cmake macro will yield a shared library artifact in your build, that
 has no lib prefix. This shared library is accessible to python if it is in 
 the python python path.
 

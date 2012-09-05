@@ -28,7 +28,7 @@
 cmake_minimum_required(VERSION 2.8)
 project(ecto_samples)
 
-ectomodule(hello_ecto
+ectomodule(hello_ecto DESTINATION ecto
     hello_ecto.cpp
 )
 

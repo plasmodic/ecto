@@ -25,7 +25,7 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 # 
-ectomodule(tutorial
+ectomodule(tutorial DESTINATION ecto
     tutorial.cpp
     Hello.cpp
     Increment.cpp
@@ -33,6 +33,6 @@ ectomodule(tutorial
 )
 
 
-ectomodule(ecto_lifecycle
+ectomodule(ecto_lifecycle DESTINATION ecto
     LifeCycle.cpp
 )

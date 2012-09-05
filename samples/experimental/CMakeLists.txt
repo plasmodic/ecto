@@ -26,9 +26,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 # 
 include_directories(${ecto_SOURCE_DIR}/src/lib)
-ectomodule(ecto_X
+ectomodule(ecto_X DESTINATION ecto INSTALL
     executioner.cpp
     necto.cpp
 )
-
-install_ecto_module(ecto_X)

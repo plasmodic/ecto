@@ -3,7 +3,7 @@
 //Defines a top level ecto python cell with the name 'tutorial'
 //Note that the shared library must be called tutorial.so
 //In CMake this is acheived using the ecto specific macro:
-//ectomodule(tutorial
+//ectomodule(tutorial ecto FALSE
 //    tutorial.cpp
 //    <source1.cpp>
 //    <source2.cpp>

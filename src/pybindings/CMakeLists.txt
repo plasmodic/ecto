@@ -27,10 +27,10 @@
 # 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${ecto_SOURCE_DIR}/src/lib)
 
-ectomodule(ecto_main
+ectomodule(ecto_main DESTINATION ecto INSTALL
   cell.cpp
-           cells/BlackBox.cpp
-           cells/ether.cpp
+  cells/BlackBox.cpp
+  cells/ether.cpp
   ecto.cpp
   except.cpp
   plasm.cpp
@@ -42,7 +42,5 @@ ectomodule(ecto_main
   tendril.cpp
   tendrils.cpp
 )
-
-install_ecto_module(ecto_main)
 
 add_subdirectory(cells)

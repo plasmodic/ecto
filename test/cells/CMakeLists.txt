@@ -25,7 +25,7 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 # 
-ectomodule(ecto_test
+ectomodule(ecto_test DESTINATION ecto
   Add.cpp
   BpObjectToCellPtr.cpp
   CantCallMeFromTwoThreads.cpp
@@ -61,5 +61,3 @@ ectomodule(ecto_test
   gil_exercise.cpp
   ecto_test.cpp
 )
-#install_ecto_module(ecto_test)
-

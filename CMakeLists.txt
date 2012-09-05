@@ -70,7 +70,6 @@ include(cmake/ectoFindDeps.cmake)
 include(cmake/config.cmake)
 include(cmake/doc.cmake)
 
-set_ecto_install_package_name(ecto)
 git_status(ecto)
 
 include_directories(include)
@@ -84,7 +83,6 @@ install(DIRECTORY ${CMAKE_BINARY_DIR}/gen/cpp/ecto/
 
 add_subdirectory(src)
 add_subdirectory(cmake)
-add_subdirectory(python)
 
 set(ecto_SPHINX_DIR ${CMAKE_CURRENT_SOURCE_DIR}/python/ecto/sphinx)
 ecto_sphinx(${CMAKE_CURRENT_SOURCE_DIR}/doc/kitchen)

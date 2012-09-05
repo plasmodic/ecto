@@ -26,7 +26,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 # 
 
-ectomodule(cells
+ectomodule(cells DESTINATION ecto INSTALL
            And.cpp
            Constant.cpp
            Counter.cpp
@@ -37,5 +37,3 @@ ectomodule(cells
            TrueEveryN.cpp
            module.cpp
 )
-
-install_ecto_module(cells)

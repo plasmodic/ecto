@@ -25,6 +25,7 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 #
+include(CMakeParseArguments)
 option(ECTO_LOG_STATS "Generate logs containing fine-grained per-cell execution timing information.  You probably don't want this."
   OFF)
 mark_as_advanced(ECTO_LOG_STATS)
@@ -33,8 +34,24 @@ if(ECTO_LOG_STATS)
   add_definitions(-DECTO_LOG_STATS=1)
 endif()
 
+# TODO: Those should be removed once catkin provides them
+set(ECTO_PYTHON_INSTALL_PATH ${PYTHON_PACKAGES_PATH})
+set(ECTO_PYTHON_BUILD_PATH ${CMAKE_BINARY_DIR}/gen/py/)
 
+# 
+# :param NAME: the name of your ecto module
+# :param INSTALL: if given, it will also install the ecto module
+#                 you might not want to install test modules.
+# :param DESTINATION: the relative path where you want to install your ecto
+#                     module (it will be built/install in the right place but
+#                     you can specify submodules). e.g: ${PROJECT_NAME}/ecto_cells
 macro(ectomodule NAME)
+  cmake_parse_arguments(ARGS "INSTALL" "DESTINATION" "" ${ARGN})
+
+  # Figure out the install folder from the parameters
+  set(ecto_module_PYTHON_INSTALL ${ECTO_PYTHON_INSTALL_PATH}/${ARGS_DESTINATION})
+  set(ecto_module_PYTHON_OUTPUT ${ECTO_PYTHON_BUILD_PATH}/${ARGS_DESTINATION})
+
   if(WIN32)
     link_directories(${Boost_LIBRARY_DIRS})
     set(ECTO_MODULE_DEP_LIBS
@@ -48,14 +65,13 @@ macro(ectomodule NAME)
       )
   endif()
   #these are required includes for every ecto module
-  include_directories(
-    ${ecto_INCLUDE_DIRS}
-    ${PYTHON_INCLUDE_PATH}
-    ${Boost_INCLUDE_DIRS}
-    )
+  include_directories(SYSTEM ${ecto_INCLUDE_DIRS}
+                             ${PYTHON_INCLUDE_PATH}
+                             ${Boost_INCLUDE_DIRS}
+  )
 
   add_library(${NAME}_ectomodule SHARED
-    ${ARGN}
+    ${ARGS_UNPARSED_ARGUMENTS}
     )
   if(UNIX)
     set_target_properties(${NAME}_ectomodule
@@ -91,17 +107,14 @@ macro(ectomodule NAME)
     ${ecto_LIBRARIES}
     )
 
-  if (ecto_module_PYTHON_OUTPUT)
-    set_target_properties(${NAME}_ectomodule PROPERTIES
+  set_target_properties(${NAME}_ectomodule PROPERTIES
                         LIBRARY_OUTPUT_DIRECTORY ${ecto_module_PYTHON_OUTPUT}
-    )
-  else()
-    string(SUBSTRING ${NAME} 5 -1 CLEAN_NAME)
-    
-    set(ecto_module_PYTHON_INSTALL ${PYTHON_PACKAGES_PATH}/${CLEAN_NAME}/ecto_cells)
-    set(ecto_module_PYTHON_OUTPUT ${CMAKE_BINARY_DIR}/gen/py/${CLEAN_NAME}/ecto_cells)
-    set_target_properties(${NAME}_ectomodule PROPERTIES
-                        LIBRARY_OUTPUT_DIRECTORY ${ecto_module_PYTHON_OUTPUT}
+  )
+
+  if (ARGS_INSTALL)
+    install(TARGETS ${NAME}_ectomodule
+            DESTINATION ${ecto_module_PYTHON_INSTALL}
+            COMPONENT main
     )
   endif()
 endmacro()
@@ -113,29 +126,3 @@ macro(link_ecto NAME)
     ${ARGN}
   )
 endmacro()
-
-# ==============================================================================
-#this is where usermodules may be installed to
-# one folder or none has to be given
-macro(set_ecto_install_package_name)
-  if (${ARGC})
-    # there is only one argument given
-    foreach(package_name ${ARGN})
-      set(ecto_module_PYTHON_INSTALL ${PYTHON_PACKAGES_PATH}/${package_name})
-      set(ecto_module_PYTHON_OUTPUT ${CMAKE_BINARY_DIR}/gen/py/${package_name})
-    endforeach()
-  else()
-    set(ecto_module_PYTHON_INSTALL ${PYTHON_PACKAGES_PATH}/)
-    set(ecto_module_PYTHON_OUTPUT ${CMAKE_BINARY_DIR}/gen/py/)
-  endif()
-endmacro()
-
-# ==============================================================================
-macro( install_ecto_module name )
-  install(TARGETS ${name}_ectomodule
-    DESTINATION ${ecto_module_PYTHON_INSTALL}
-    COMPONENT main
-  )
-endmacro()
-# ==============================================================================
-

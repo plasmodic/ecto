@@ -9,17 +9,14 @@
 #    find_package(ecto REQUIRED)
 #    ectomodule(mymodule src/module.cpp)
 #    ecto_link(mymodule ${MY_LIB_DEPS})
-#    install_ecto_module(mymodule)
 #
 #    This file will define the following variables:
 #      - ecto_LIBRARIES                 : The list of libraries to link against.
 #    These macros:
-#      set_ecto_install_package_name(package_name) #default is "" you may specify other
 #	   ectomodule(module_name ${srcs}) #This creates a single ecto module
 #                                      #shared library loadable from python,
 #                                      #will add includes, links to bare necessities and mangles the target name with ${name}_ectomodule
 #	   link_ecto(module_name ${libs})  #Link to additional libraries
-#	   install_ecto_module(module_name) #install your target a python system path.
 # ==============================================================================
 get_filename_component(SELF_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
 include(${SELF_DIR}/ectoMacros.cmake)
