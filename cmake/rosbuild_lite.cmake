@@ -45,16 +45,34 @@
 #   find_ros_package( PACKAGE )
 #       Finds a ROS package, by the name PACKAGE, it must be in the cached ROS_PACKAGE_PATH.
 #       
+
+function(check_unused_arguments ARG_NAME ARG_UNUSED)
+  if(ARG_UNUSED)
+    message(WARNING "${ARG_NAME} called with unused arguments: ${ARG_UNUSED}")
+  endif()
+endfunction()
+
 option(ROS_CONFIGURE_VERBOSE OFF)
+
+unset(ROS_ELECTRIC_FOUND)
+unset(ROS_FUERTE_FOUND)
+unset(ROS_GROOVY_FOUND)
+unset(ROS_FUERTE_OR_ABOVE_FOUND)
 
 if ("$ENV{ROS_ROOT}" STREQUAL "/opt/ros/electric/ros")
     set(ROS_ELECTRIC_FOUND TRUE)
 else()
-    unset(ROS_ELECTRIC_FOUND)
+    set(ROS_FUERTE_OR_ABOVE_FOUND)
+    if ("$ENV{ROS_ROOT}" STREQUAL "/opt/ros/fuerte/share/ros")
+        set(ROS_FUERTE_FOUND TRUE)
+    else()
+        set(ROS_GROOVY_FOUND TRUE)
+    endif()
 endif()
 
 
 macro( rosbuild_lite_init )
+  if (ROS_ELECTRIC_FOUND OR ROS_FUERTE_FOUND)
   if (NOT ROS_ROOT)
     if ("$ENV{ROS_ROOT}" STREQUAL "")
       message(FATAL_ERROR "*** ROS_ROOT is not set... is your environment set correctly?")
@@ -73,6 +91,10 @@ macro( rosbuild_lite_init )
 
   find_program(ROSPACK_EXECUTABLE rospack PATHS ${ROS_ROOT}/bin DOC "the rospack executable." NO_SYSTEM_ENVIRONMENT_PATH NO_CMAKE_ENVIRONMENT_PATH)
   find_program(ROSMSG_EXECUTABLE rosmsg PATHS ${ROS_ROOT}/bin DOC "rosmsg executable" NO_SYSTEM_ENVIRONMENT_PATH NO_CMAKE_ENVIRONMENT_PATH)
+  else()
+  find_program(ROSPACK_EXECUTABLE rospack PATHS /opt/ros/groovy/bin DOC "the rospack executable." NO_SYSTEM_ENVIRONMENT_PATH NO_CMAKE_ENVIRONMENT_PATH)
+  find_program(ROSMSG_EXECUTABLE rosmsg PATHS /opt/ros/groovy/bin DOC "rosmsg executable" NO_SYSTEM_ENVIRONMENT_PATH NO_CMAKE_ENVIRONMENT_PATH)
+  endif()
 
   if (ROSPACK_EXECUTABLE)
     set(ROS_FOUND TRUE)
@@ -246,6 +268,7 @@ else()
     find_package(PCL QUIET)
     if (PCL_FOUND)
       message(STATUS "+ Found PCL Version ${PCL_VERSION} with config from ${PCL_CONFIG}. ")
+      # TODO: once electric is not supported anymore, we can use the PCL macro
       add_definitions(-DPCL_VERSION_GE_151=1 -DPCL_VERSION_GE_140=1)
     endif()
   endif()

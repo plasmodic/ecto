@@ -35,4 +35,8 @@ set(ECTO_CODE_NAME "amoeba") #code name must be hand coded for debian to work, b
 set(include_prefix include)
 set(share_prefix share/ecto)
 
+if (ROS_GROOVY_FOUND)
+configure_file(${ecto_SOURCE_DIR}/cmake/version.hpp.in ${CATKIN_BUILD_PREFIX}/include/ecto/version.hpp)
+else()
 configure_file(${ecto_SOURCE_DIR}/cmake/version.hpp.in ${CMAKE_BINARY_DIR}/gen/cpp/ecto/version.hpp)
+endif()

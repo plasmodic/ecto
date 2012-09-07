@@ -29,15 +29,27 @@ cmake_minimum_required(VERSION 2.8)
 project(ecto)
 find_package(catkin REQUIRED)
 catkin_stack()
+catkin_project(ecto INCLUDE_DIRS include
+                    LIBRARIES ecto
+                    DEPENDS PythonLibs
+                    CFG_EXTRAS ecto-extras.cmake
+)
+
 
 # configure and install Python
 catkin_python_setup()
 
+include(cmake/config.cmake)
 
+if (NOT ROS_GROOVY_FOUND)
+#set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CATKIN_BUILD_PREFIX}/${CATKIN_PROJECT_LIB_DESTINATION})
+#set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CATKIN_BUILD_PREFIX}/${CATKIN_PROJECT_LIB_DESTINATION})
+#set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CATKIN_BUILD_PREFIX}/${CATKIN_PROJECT_BIN_DESTINATION})
+#else()
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-
+endif()
 
 set(${PROJECT_NAME}_GITHUB_URL https://github.com/plasmodic/ecto)
 
@@ -67,19 +79,25 @@ include(cmake/git.cmake)
 include(cmake/ectoMacros.cmake)
 include(cmake/boost.cmake)
 include(cmake/ectoFindDeps.cmake)
-include(cmake/config.cmake)
 include(cmake/doc.cmake)
 
 git_status(ecto)
 
 include_directories(include)
 include_directories(src/lib)
+if (ROS_GROOVY_FOUND)
+include_directories(${CATKIN_BUILD_PREFIX}/include)
+install(DIRECTORY ${CATKIN_BUILD_PREFIX}/include/ecto/
+        DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION}/ecto
+        COMPONENT main
+)
+else()
 include_directories(${CMAKE_BINARY_DIR}/gen/cpp/)
 install(DIRECTORY ${CMAKE_BINARY_DIR}/gen/cpp/ecto/
         DESTINATION include/ecto
         COMPONENT main
 )
-
+endif()
 
 add_subdirectory(src)
 add_subdirectory(cmake)
@@ -111,11 +129,5 @@ option(BUILD_SAMPLES "Build samples." ON)
 if(BUILD_SAMPLES)
   add_subdirectory(samples)
 endif()
-
-catkin_project(ecto INCLUDE_DIRS include
-                    LIBRARIES ecto
-                    DEPENDS PythonLibs
-                    CFG_EXTRAS ecto-extras.cmake
-)
 
 catkin_doxygen(ecto-doxygen ${CMAKE_CURRENT_SOURCE_DIR}/include)

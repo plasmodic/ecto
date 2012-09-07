@@ -25,25 +25,32 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 #
-set(ecto_CONFIG_DIR ${CMAKE_BINARY_DIR}/cmake/ecto)
+get_filename_component(SELF_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+include(${SELF_DIR}/rosbuild_lite.cmake)
+
+if (ROS_GROOVY_FOUND)
+  set(ecto_CONFIG_DIR ${CATKIN_BUILD_PREFIX}/share/ecto/cmake/)
+else()
+  set(ecto_CONFIG_DIR ${CMAKE_BINARY_DIR}/cmake/ecto)
+endif()
 
 set(ecto_PYTHONLIB ecto_ectomodule)
 
 set(ECTO_CONFIG_PATH ${CMAKE_BINARY_DIR}/cmake/ecto)
 
-file(COPY ${ecto_SOURCE_DIR}/cmake/ectoMacros.cmake
-  DESTINATION ${ecto_CONFIG_DIR})
-file(COPY ${ecto_SOURCE_DIR}/cmake/rosbuild_lite.cmake
-  DESTINATION ${ecto_CONFIG_DIR})
-file(COPY ${ecto_SOURCE_DIR}/cmake/ros_electric.cmake
-  DESTINATION ${ecto_CONFIG_DIR})
+#for client projects using ecto documentation tools
+foreach(file doc git ectoMacros rosbuild_lite ros_electric)
+  file(COPY ${ecto_SOURCE_DIR}/cmake/${file}.cmake
+    DESTINATION ${ecto_CONFIG_DIR})
+endforeach()
  
-file(COPY ${PROJECT_SOURCE_DIR}/cmake/doc.cmake DESTINATION ${ecto_CONFIG_DIR})
-file(COPY ${PROJECT_SOURCE_DIR}/cmake/git.cmake DESTINATION ${ecto_CONFIG_DIR})
 #set this back for our libs to pick it up as
 set(ecto_LIBRARIES ecto)
 
+if (ROS_GROOVY_FOUND)
+configure_file(${ecto_SOURCE_DIR}/cmake/config.hpp.in ${CATKIN_BUILD_PREFIX}/include/ecto/config.hpp)
+else()
 configure_file(${ecto_SOURCE_DIR}/cmake/config.hpp.in ${CMAKE_BINARY_DIR}/gen/cpp/ecto/config.hpp)
-
+endif()
 
 set(ECTO_ENV ${ecto_BINARY_DIR}/env.sh)

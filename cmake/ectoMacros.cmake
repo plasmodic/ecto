@@ -35,8 +35,16 @@ if(ECTO_LOG_STATS)
 endif()
 
 # TODO: Those should be removed once catkin provides them
-set(ECTO_PYTHON_INSTALL_PATH ${PYTHON_PACKAGES_PATH})
+get_filename_component(SELF_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+include(${SELF_DIR}/rosbuild_lite.cmake)
+
+if (ROS_GROOVY_FOUND)
+set(ECTO_PYTHON_BUILD_PATH ${CATKIN_BUILD_PREFIX}/${CATKIN_PROJECT_PYTHON_DESTINATION}/../)
+set(ECTO_PYTHON_INSTALL_PATH ${CATKIN_PROJECT_PYTHON_DESTINATION}/../)
+else()
 set(ECTO_PYTHON_BUILD_PATH ${CMAKE_BINARY_DIR}/gen/py/)
+set(ECTO_PYTHON_INSTALL_PATH ${PYTHON_PACKAGES_PATH})
+endif()
 
 # 
 # :param NAME: the name of your ecto module

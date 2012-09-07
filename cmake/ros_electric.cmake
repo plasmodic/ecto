@@ -1,8 +1,5 @@
-if ("$ENV{ROS_ROOT}" STREQUAL "/opt/ros/electric/ros")
-    set(ROS_ELECTRIC_FOUND TRUE)
-else()
-    unset(ROS_ELECTRIC_FOUND)
-endif()
+get_filename_component(SELF_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+include(${SELF_DIR}/rosbuild_lite.cmake)
 
 
 # inspired from http://www.cmake.org/Wiki/CMake_RPATH_handling

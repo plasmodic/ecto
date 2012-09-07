@@ -26,28 +26,34 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 #### install stuff #####
+if (ROS_GROOVY_FOUND)
+#install the ectoConfig.cmake and ectoConfig-version.cmake
+install(DIRECTORY ${CATKIN_PREFIX_PATH}/${CATKIN_PROJECT_SHARE_DESTINATION}/cmake
+        DESTINATION ${CATKIN_PROJECT_SHARE_DESTINATION}/cmake
+        COMPONENT main
+)
 
+#regular headers
+install(DIRECTORY ${ecto_SOURCE_DIR}/include/ecto
+        DESTINATION ${include_prefix}
+        COMPONENT main
+        FILES_MATCHING PATTERN "*.hpp"
+)
+
+#generated headers
+install(DIRECTORY ${CATKIN_BUILD_PREFIX}/${CATKIN_PROJECT_INCLUDE_DESTINATION}
+        DESTINATION ${CATKIN_PROJECT_INCLUDE_DESTINATION}
+        COMPONENT main
+        FILES_MATCHING PATTERN "*.hpp"
+)
+else()
 #create an ectoConfig.cmake for easy find_package(ecto)
 set(ecto_LIBRARIES_DIR ${CMAKE_INSTALL_PREFIX}/lib)
 set(ECTO_CONFIG_PATH  ${CMAKE_INSTALL_PREFIX}/${share_prefix})
 
-file(COPY ${ecto_SOURCE_DIR}/cmake/ectoMacros.cmake
-    DESTINATION ${ecto_BINARY_DIR}/unix_install/
-    )
-file(COPY ${ecto_SOURCE_DIR}/cmake/rosbuild_lite.cmake
-    DESTINATION ${ecto_BINARY_DIR}/unix_install/
-    )
-file(COPY ${ecto_SOURCE_DIR}/cmake/ros_electric.cmake
-    DESTINATION ${ecto_BINARY_DIR}/unix_install/
-    )
-#for client projects using ecto documentation tools
-file(COPY ${PROJECT_SOURCE_DIR}/cmake/doc.cmake
-  DESTINATION ${CMAKE_BINARY_DIR}/unix_install/)
-file(COPY ${PROJECT_SOURCE_DIR}/cmake/git.cmake
-  DESTINATION ${CMAKE_BINARY_DIR}/unix_install/)
 #install the ectoConfig.cmake and ectoConfig-version.cmake
 install(DIRECTORY
-  ${ecto_BINARY_DIR}/unix_install/   #last component empty, so we loose the unix_install
+  ${ecto_CONFIG_DIR}/
   DESTINATION ${share_prefix}/cmake
   COMPONENT main
   )
@@ -65,4 +71,4 @@ install(DIRECTORY ${PROJECT_BINARY_DIR}/include/ecto
   COMPONENT main
   FILES_MATCHING PATTERN "*.hpp"
   )
-
+endif()
