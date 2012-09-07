@@ -46,6 +46,8 @@ Download: :download:`srcs/hello.py`
 .. literalinclude:: srcs/hello.py
   :language: python
 
+The ``Ecto`` module is imported just like any Python module so make sure you have an ``__init__.py`` in the same folder (there is one in the ``ecto`` folder so no worries for the tutorial).
+
 Lets run it:
 
 .. program-output:: srcs/hello.py
