@@ -26,7 +26,10 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 cmake_minimum_required(VERSION 2.8)
+if ((${CMAKE_VERSION} VERSION_GREATER "2.8.4") OR (${CMAKE_VERSION} VERSION_EQUAL "2.8.4"))
 cmake_policy(SET CMP0017 NEW)
+endif()
+
 project(ecto)
 find_package(catkin REQUIRED)
 catkin_stack()
