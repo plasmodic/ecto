@@ -52,5 +52,3 @@ configure_file(${ecto_SOURCE_DIR}/cmake/config.hpp.in ${CATKIN_BUILD_PREFIX}/inc
 else()
 configure_file(${ecto_SOURCE_DIR}/cmake/config.hpp.in ${CMAKE_BINARY_DIR}/gen/cpp/ecto/config.hpp)
 endif()
-
-set(ECTO_ENV ${ecto_BINARY_DIR}/env.sh)

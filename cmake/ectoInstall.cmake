@@ -29,13 +29,13 @@
 if (ROS_GROOVY_FOUND)
 #install the ectoConfig.cmake and ectoConfig-version.cmake
 install(DIRECTORY ${CATKIN_BUILD_PREFIX}/${CATKIN_PROJECT_SHARE_DESTINATION}/cmake
-        DESTINATION ${CATKIN_PROJECT_SHARE_DESTINATION}/cmake
+        DESTINATION ${CATKIN_PROJECT_SHARE_DESTINATION}
         COMPONENT main
 )
 
 #regular headers
 install(DIRECTORY ${ecto_SOURCE_DIR}/include/ecto
-        DESTINATION ${include_prefix}
+        DESTINATION ${CATKIN_PROJECT_INCLUDE_DESTINATION}
         COMPONENT main
         FILES_MATCHING PATTERN "*.hpp"
 )

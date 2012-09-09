@@ -25,7 +25,6 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 #
-include(CMakeParseArguments)
 option(ECTO_LOG_STATS "Generate logs containing fine-grained per-cell execution timing information.  You probably don't want this."
   OFF)
 mark_as_advanced(ECTO_LOG_STATS)
@@ -38,7 +37,9 @@ endif()
 get_filename_component(SELF_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
 include(${SELF_DIR}/rosbuild_lite.cmake)
 
-if (ROS_GROOVY_FOUND)
+# TODO, once fuerte/Lucid is not supported anymore, remove the CMakeParseArguments file
+include(CMakeParseArguments)
+if (ROS_GROOVY_OR_ABOVE_FOUND)
 set(ECTO_PYTHON_BUILD_PATH ${CATKIN_BUILD_PREFIX}/${CATKIN_PROJECT_PYTHON_DESTINATION}/../)
 set(ECTO_PYTHON_INSTALL_PATH ${CATKIN_PROJECT_PYTHON_DESTINATION}/../)
 else()
