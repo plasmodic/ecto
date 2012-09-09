@@ -38,11 +38,12 @@ get_filename_component(SELF_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
 include(${SELF_DIR}/rosbuild_lite.cmake)
 
 # TODO, once fuerte/Lucid is not supported anymore, remove the CMakeParseArguments file
-include(CMakeParseArguments)
 if (ROS_GROOVY_OR_ABOVE_FOUND)
+include(CMakeParseArguments)
 set(ECTO_PYTHON_BUILD_PATH ${CATKIN_BUILD_PREFIX}/${CATKIN_PROJECT_PYTHON_DESTINATION}/../)
 set(ECTO_PYTHON_INSTALL_PATH ${CATKIN_PROJECT_PYTHON_DESTINATION}/../)
 else()
+include(${SELF_DIR}/CMakeParseArguments.cmake)
 set(ECTO_PYTHON_BUILD_PATH ${CMAKE_BINARY_DIR}/gen/py/)
 set(ECTO_PYTHON_INSTALL_PATH ${PYTHON_PACKAGES_PATH})
 endif()
