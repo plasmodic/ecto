@@ -39,7 +39,7 @@ set(ecto_PYTHONLIB ecto_ectomodule)
 set(ECTO_CONFIG_PATH ${CMAKE_BINARY_DIR}/cmake/ecto)
 
 #for client projects using ecto documentation tools
-foreach(file doc git ectoMacros rosbuild_lite ros_electric)
+foreach(file CMakeParseArguments doc git ectoMacros rosbuild_lite ros_electric)
   file(COPY ${ecto_SOURCE_DIR}/cmake/${file}.cmake
     DESTINATION ${ecto_CONFIG_DIR})
 endforeach()

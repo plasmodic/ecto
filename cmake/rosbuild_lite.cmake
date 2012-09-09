@@ -68,7 +68,7 @@ else()
         set(ROS_FUERTE_FOUND TRUE)
     else()
         set(ROS_GROOVY_FOUND TRUE)
-        set(ROS_GROOVY_OR_ABOVE_FOUND)
+        set(ROS_GROOVY_OR_ABOVE_FOUND TRUE)
     endif()
 endif()
 

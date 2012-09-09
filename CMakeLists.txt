@@ -26,6 +26,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 cmake_minimum_required(VERSION 2.8)
+cmake_policy(SET CMP0017 NEW)
 project(ecto)
 find_package(catkin REQUIRED)
 catkin_stack()
