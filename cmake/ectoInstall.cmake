@@ -66,7 +66,7 @@ install(DIRECTORY ${ecto_SOURCE_DIR}/include/ecto
 
 #generated headers
 install(DIRECTORY ${PROJECT_BINARY_DIR}/include/ecto
-  DESTINATION ${include_prefix}
+  DESTINATION include
   COMPONENT main
   FILES_MATCHING PATTERN "*.hpp"
   )
