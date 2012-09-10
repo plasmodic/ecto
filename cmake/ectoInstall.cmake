@@ -53,13 +53,13 @@ set(ecto_LIBRARIES_DIR ${CMAKE_INSTALL_PREFIX}/lib)
 #install the ectoConfig.cmake and ectoConfig-version.cmake
 install(DIRECTORY
   ${ecto_CONFIG_DIR}/
-  DESTINATION ${share_prefix}/cmake
+  DESTINATION share/ecto/cmake
   COMPONENT main
   )
 
 #regular headers
 install(DIRECTORY ${ecto_SOURCE_DIR}/include/ecto
-  DESTINATION ${include_prefix}
+  DESTINATION include
   COMPONENT main
   FILES_MATCHING PATTERN "*.hpp"
   )

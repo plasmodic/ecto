@@ -32,9 +32,6 @@ set(ECTO_SOVERSION ${ECTO_MAJOR_VERSION}.${ECTO_MINOR_VERSION})
 set(ECTO_VERSION ${ECTO_MAJOR_VERSION}.${ECTO_MINOR_VERSION}.${ECTO_PATCH_VERSION})
 set(ECTO_CODE_NAME "amoeba") #code name must be hand coded for debian to work, because of lack of git describe, unless something more clever exists
 
-set(include_prefix include)
-set(share_prefix share/ecto)
-
 if (ROS_GROOVY_OR_ABOVE_FOUND)
 configure_file(${ecto_SOURCE_DIR}/cmake/version.hpp.in ${CATKIN_BUILD_PREFIX}/${CATKIN_PROJECT_INCLUDE_DESTINATION}/version.hpp)
 else()
