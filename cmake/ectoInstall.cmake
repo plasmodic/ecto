@@ -49,7 +49,6 @@ install(DIRECTORY ${CATKIN_BUILD_PREFIX}/${CATKIN_PROJECT_INCLUDE_DESTINATION}/
 else()
 #create an ectoConfig.cmake for easy find_package(ecto)
 set(ecto_LIBRARIES_DIR ${CMAKE_INSTALL_PREFIX}/lib)
-set(ECTO_CONFIG_PATH  ${CMAKE_INSTALL_PREFIX}/${share_prefix})
 
 #install the ectoConfig.cmake and ectoConfig-version.cmake
 install(DIRECTORY
