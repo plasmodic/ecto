@@ -70,9 +70,3 @@ elseif(WIN32)
     get_filename_component(PYTHON_PATH "[HKEY_LOCAL_MACHINE\\SOFTWARE\\Python\\PythonCore\\${PYTHON_VERSION_MAJOR_MINOR}\\InstallPath]" ABSOLUTE CACHE)
     set(PYTHON_PACKAGES_PATH "${PYTHON_PATH}/Lib/site-packages" CACHE INTERNAL "Where to install the python packages.")
 endif()
-
-set(ecto_module_PYTHON_INSTALL_base ${PYTHON_PACKAGES_PATH} CACHE INTERNAL "The base path where ecto modules will be installed." )
-set(ecto_module_PYTHON_INSTALL ${ecto_module_PYTHON_INSTALL_base})
-
-set(ecto_PYTHON_INSTALL ${PYTHON_PACKAGES_PATH})
-

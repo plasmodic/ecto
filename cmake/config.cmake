@@ -28,13 +28,11 @@
 get_filename_component(SELF_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
 include(${SELF_DIR}/rosbuild_lite.cmake)
 
-if (ROS_GROOVY_FOUND)
-  set(ecto_CONFIG_DIR ${CATKIN_BUILD_PREFIX}/share/ecto/cmake/)
+if (ROS_GROOVY_OR_ABOVE_FOUND)
+  set(ecto_CONFIG_DIR ${CATKIN_BUILD_PREFIX}/${CATKIN_PROJECT_SHARE_DESTINATION}/cmake/)
 else()
   set(ecto_CONFIG_DIR ${CMAKE_BINARY_DIR}/cmake/ecto)
 endif()
-
-set(ecto_PYTHONLIB ecto_ectomodule)
 
 #for client projects using ecto documentation tools
 foreach(file CMakeParseArguments doc git ectoMacros rosbuild_lite ros_electric)
@@ -45,8 +43,8 @@ endforeach()
 #set this back for our libs to pick it up as
 set(ecto_LIBRARIES ecto)
 
-if (ROS_GROOVY_FOUND)
-configure_file(${ecto_SOURCE_DIR}/cmake/config.hpp.in ${CATKIN_BUILD_PREFIX}/include/ecto/config.hpp)
+if (ROS_GROOVY_OR_ABOVE_FOUND)
+configure_file(${ecto_SOURCE_DIR}/cmake/config.hpp.in ${CATKIN_BUILD_PREFIX}/$CATKIN_PROJECT_INCLUDE_DESTINATION}/config.hpp)
 else()
 configure_file(${ecto_SOURCE_DIR}/cmake/config.hpp.in ${CMAKE_BINARY_DIR}/gen/cpp/ecto/config.hpp)
 endif()

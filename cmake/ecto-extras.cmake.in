@@ -22,7 +22,6 @@ get_filename_component(SELF_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
 include(${SELF_DIR}/rosbuild_lite.cmake)
 include(${SELF_DIR}/doc.cmake)
 include(${SELF_DIR}/git.cmake)
-set(ecto_PYTHONLIB @ecto_PYTHONLIB@)
 
 # ============== dependencies ==================================================
 find_package(Threads)
@@ -53,8 +52,6 @@ elseif(WIN32)
     get_filename_component(PYTHON_PATH "[HKEY_LOCAL_MACHINE\\SOFTWARE\\Python\\PythonCore\\${PYTHON_VERSION_MAJOR_MINOR}\\InstallPath]" ABSOLUTE CACHE)
     set(PYTHON_PACKAGES_PATH "${PYTHON_PATH}/Lib/site-packages" CACHE PATH "Where to install the python packages.")
 endif()
-
-set(ecto_module_PYTHON_INSTALL ${PYTHON_PACKAGES_PATH})
 
 
 include(${SELF_DIR}/ros_electric.cmake)
