@@ -44,7 +44,7 @@ endforeach()
 set(ecto_LIBRARIES ecto)
 
 if (ROS_GROOVY_OR_ABOVE_FOUND)
-configure_file(${ecto_SOURCE_DIR}/cmake/config.hpp.in ${CATKIN_BUILD_PREFIX}/$CATKIN_PROJECT_INCLUDE_DESTINATION}/config.hpp)
+configure_file(${ecto_SOURCE_DIR}/cmake/config.hpp.in ${CATKIN_BUILD_PREFIX}/${CATKIN_PROJECT_INCLUDE_DESTINATION}/config.hpp)
 else()
 configure_file(${ecto_SOURCE_DIR}/cmake/config.hpp.in ${CMAKE_BINARY_DIR}/gen/cpp/ecto/config.hpp)
 endif()
