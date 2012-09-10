@@ -34,8 +34,30 @@ if(ECTO_LOG_STATS)
 endif()
 
 # TODO: Those should be removed once catkin provides them
-get_filename_component(SELF_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
-include(${SELF_DIR}/rosbuild_lite.cmake)
+unset(ROS_ELECTRIC_FOUND)
+unset(ROS_FUERTE_FOUND)
+unset(ROS_GROOVY_FOUND)
+unset(ROS_FUERTE_OR_ABOVE_FOUND)
+unset(ROS_GROOVY_OR_ABOVE_FOUND)
+
+if ("$ENV{ROS_ROOT}" STREQUAL "/opt/ros/electric/ros")
+    set(ROS_ELECTRIC_FOUND TRUE)
+else()
+    set(ROS_FUERTE_OR_ABOVE_FOUND TRUE)
+    set(BUNCH_OF_VARS "$ENV{ROS_ROOT}, ${CMAKE_PREFIX_PATH}, $ENV{ROS_PACKAGE_PATH}, ${CMAKE_INSTALL_PREFIX}, ${catkin_INSTALL_PREFIX}, ${catkin_EXTRAS_DIR}")
+    message(STATUS ${BUNCH_OF_VARS})
+    string(REGEX MATCH "fuerte" ROS_FUERTE_FOUND ${BUNCH_OF_VARS})
+    message(STATUS "${ROS_FUERTE_FOUND}")
+    if (ROS_FUERTE_FOUND)
+        set(ROS_FUERTE_FOUND TRUE)
+        message(STATUS "Fuerte found")
+    else()
+        set(ROS_GROOVY_FOUND TRUE)
+        set(ROS_GROOVY_OR_ABOVE_FOUND TRUE)
+        message(STATUS "Groovy found")
+    endif()
+endif()
+
 
 # TODO, once fuerte/Lucid is not supported anymore, remove the CMakeParseArguments file
 if (ROS_GROOVY_OR_ABOVE_FOUND)
