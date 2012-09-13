@@ -1,11 +1,7 @@
-.. image:: art/ecto_4x4.svg
-  :align: center
-  :height: 100 px
+Ecto - A C++/Python Computation Graph Framework
+===============================================
 
-Ecto - a framework for perception
-=================================
-
-Initially aimed at computer vision and perception research tasks, Ecto is a hybrid C++/Python framework for organizing computations as directed acyclic graphs of computing ‘cells’ connected by typed edges. These graphs are typically constructed via Python script and executed in a single process (and possibly multiple threads) by external schedulers. The computing nodes are written in C++ against a simple interface that naturally creates libraries of self-documenting, scriptable components and smooths the path from prototyping to testing to deployment.
+Initially aimed at computer vision and perception research tasks, Ecto is a hybrid C++/Python framework for organizing computations as directed acyclic graphs of computing 'cells' connected by typed edges. These graphs are typically constructed via Python script and executed in a single process (and possibly multiple threads) by external schedulers. The computing nodes are written in C++ against a simple interface that naturally creates libraries of self-documenting, scriptable components and smooths the path from prototyping to testing to deployment.
 
 Ecto itself is small, has minimal dependencies (C++, Boost, Python) and works with or without OpenCV, PCL, and ROS in any combination. We believe that Ecto allows vision and perception researchers to express their computational models in a natural fashion, obviating e.g. ROS [1] time synchronizers and ROS nodelets in most cases.
 
@@ -25,7 +21,6 @@ Ecto has several modules that wrap different libraries or functionalities:
 .. toctree::
    :maxdepth: 1
 
-   ecto <links/ecto/index.rst>
    ecto_image_pipeline <links/ecto_image_pipeline/index.rst>
    ecto_openni <links/ecto_openni/index.rst>
    ecto_opencv <links/ecto_opencv/index.rst>
