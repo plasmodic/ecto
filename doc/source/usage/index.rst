@@ -35,6 +35,7 @@ So you now have a basic understanding and you should follow the following guidel
 .. toctree::
     :maxdepth: 1
 
+    techniques/python-packages
     techniques/autoregister.rst
     techniques/ecto_cells.rst
     techniques/black_box.rst
@@ -62,7 +63,6 @@ Ecto was developed with interoperability with classic C++/Python development too
 
     external/ipython
     external/debugging
-    external/python-packages
     external/valgrind
 
 Advanced Usage
