@@ -6,7 +6,8 @@ plasm
 =====
 
 from the Greek *plasma*, meaning "something formed or molded"
-Think ectoplasm or protoplasm. Leading naturally to slime molds.
+Think ectoplasm or protoplasm. Leading naturally to slime molds. The plasm
+is the ecto **Directed Acyclic Graph**, or *DAG* for short.
 
 
 Python interface

@@ -8,7 +8,6 @@ Reference
     
     autoregister
     argparse.rst
-    yaml.rst
     tendril
     connections.rst
     plasm

@@ -29,7 +29,7 @@ Ecto has several modules that wrap different libraries or functionalities:
 
 .. rubric:: Install
 
-If you are on ROS Fuerte or above, you probably just want to install the packages available in the ROS repositories.
+If you are on ROS Fuerte or above, you probably just want to install the packages available in the ROS repositories named ros-*-ecto*
 
 If you want to install from source, you will have to get them from https://github.com/plasmodic/ecto:
 ::

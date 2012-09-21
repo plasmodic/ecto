@@ -21,9 +21,8 @@ robotics.
 
    motivation.rst
    overview/index.rst
-   Install and Usage <using_ecto/index.rst>
-   Tutorials <tutorial/index.rst>
-   techniques/index.rst
+   Install <install/index.rst>
+   Usage <usage/index.rst>
    reference/index.rst  
    glossary.rst
 

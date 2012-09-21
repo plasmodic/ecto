@@ -221,11 +221,6 @@ Every Cell gets a constructor that has the following python signature::
   
   Cell([Cell.type_name()], [param1=...],[param2=...])
 
-The first optional non-keyword argment is the cell's instance name. The instance
-name is useful for debug and graph display purposes.  Each parameter that was
-declared by the cell may be initialized as a keyword argument.  Other advanced keyword arguments
-may exist, that are defined by ecto, such as :ref:`strands`.
-
 .. sidebar:: When is configure called?
   
   Your cell is not actually allocated(constructed) until a call to process or right before
@@ -237,6 +232,12 @@ may exist, that are defined by ecto, such as :ref:`strands`.
   
   This may be abused for **documentation**, **prototyping**, and **GUI** applications.
   
+
+The first optional non-keyword argment is the cell's instance name. The instance
+name is useful for debug and graph display purposes.  Each parameter that was
+declared by the cell may be initialized as a keyword argument.  Other advanced keyword arguments
+may exist, that are defined by ecto, such as :ref:`strands`.
+
 The constructor of the cell calls ``declare_params``, sets the cell's parameters
 with any supplied by keyword arguments, then precedes to call ``declare_io``, with
 the parameter values set by the keyword arguments.  It is important to note that

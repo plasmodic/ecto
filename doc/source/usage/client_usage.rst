@@ -36,17 +36,26 @@ CMake should be used to find ecto and bring in a few macros:
     #make all libraries appear in the build/lib directory
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
-    ectomodule(hello_ecto ecto FALSE
+    ectomodule(hello_ecto FALSE
         hello_ecto.cpp
     )
 
     #optionally link against other libs
-    #ecto_link(hello_ecto
+    #link_ecto(hello_ecto
     #  ${MY_EXTRA_LIBS}
     #)
 
 Take notice of the command ``find_package(ecto REQUIRED)``. If ecto is installed on your
 system, or built somewhere, this will enable your project to become an ecto beast.
+
+The ``ectomodule`` macro is the one that defines your C++ set of cells. The first argument is
+mandotory and is the ``NAME`` of your module. It then accept a ``DESTINATION`` argument where you define
+in which subfolder of your project to install the module and a ``INSTALL`` flag that defines whether your
+module will be isntalled or not when during ``make install`` (you might not want to if it is a test module).
+In case you want more flexibility, just know that this macro defines a ``${NAME}_ectomodule`` CMake target.
+
+The second and last ecto macro you need to know is ``link_ecto`` that you can use to link your module to
+external libraries (it just abstracts this ``${NAME}_ectomodule`` target for you).
 
 ecto is installed
 ^^^^^^^^^^^^^^^^^

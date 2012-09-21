@@ -8,7 +8,7 @@
 #
 #    find_package(ecto REQUIRED)
 #    ectomodule(mymodule src/module.cpp)
-#    ecto_link(mymodule ${MY_LIB_DEPS})
+#    link_ecto(mymodule ${MY_LIB_DEPS})
 #
 #    This file will define the following variables:
 #      - ecto_LIBRARIES                 : The list of libraries to link against.
