@@ -27,6 +27,31 @@ These tutorials walk through the basic usage of ecto.
     tutorials/lifecycle.rst
     tutorials/checklist.rst
 
+Techniques
+==========
+
+So you now have a basic understanding and you should follow the following guidelines to code with ``ecto`` perfectly :)
+
+.. toctree::
+    :maxdepth: 1
+
+    techniques/autoregister.rst
+    techniques/ecto_cells.rst
+    techniques/black_box.rst
+
+Tips and Tricks
+===============
+
+With great flexibility comes great tips and tricks. The following info might help code faster and exploit ``ecto`` and its tools fully.
+
+.. toctree::
+    :maxdepth: 1
+
+    tips/argparse.rst
+    tips/static_registration.rst
+    tips/ectodoc.rst
+
+
 Using External Tools
 ====================
 
@@ -49,5 +74,7 @@ Well, what is I want to do for loops ? or integrate with Python better ? or not 
 .. toctree::
     :maxdepth: 1
 
-    advanced/wrapping_enums
-    advanced/yaml
+    advanced/wrapping_enums.rst
+    advanced/yaml.rst
+    advanced/strands.rst
+    advanced/serialization.rst

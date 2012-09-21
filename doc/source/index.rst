@@ -19,7 +19,6 @@ robotics.
 .. toctree::
    :maxdepth: 1
 
-   motivation.rst
    overview/index.rst
    Install <install/index.rst>
    Usage <usage/index.rst>
@@ -45,6 +44,7 @@ If you develop ecto, you want to read the following:
 .. toctree::
    :maxdepth: 1
 
+   motivation.rst
    codingstandards.rst
    changelog.rst
    release_checklist.rst

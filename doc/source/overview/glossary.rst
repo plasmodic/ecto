@@ -7,7 +7,7 @@ Glossary
 
 ecto
 ----
-from the Greek *ektos*, meaning "outside"
+from the Greek *ektos*, meaning "outside".
 Think ghostbusters.
 
 .. _DAG:
