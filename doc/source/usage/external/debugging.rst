@@ -1,5 +1,5 @@
-Debugging with gdb and valgrind
-===============================
+Debugging with gdb
+==================
 
 .. highlight:: ectosh
 
