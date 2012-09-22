@@ -25,7 +25,7 @@ These tutorials walk through the basic usage of ecto.
     tutorials/hello.rst
     tutorials/plasms.rst
     tutorials/lifecycle.rst
-    tutorials/checklist.rst
+    tutorials/summary.rst
 
 Techniques
 ==========
