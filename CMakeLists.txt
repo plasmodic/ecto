@@ -32,12 +32,20 @@ endif()
 
 project(ecto)
 find_package(catkin REQUIRED)
+if (${catkin_VERSION} VERSION_GREATER "0.5.26")
+catkin_package()
+catkin_package_export(INCLUDE_DIRS include
+                      LIBRARIES ecto
+                      CFG_EXTRAS ecto-extras.cmake
+)
+else()
 catkin_stack()
 catkin_project(ecto INCLUDE_DIRS include
                     LIBRARIES ecto
                     DEPENDS PythonLibs
                     CFG_EXTRAS ecto-extras.cmake
 )
+endif()
 
 
 # configure and install Python

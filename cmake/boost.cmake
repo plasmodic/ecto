@@ -77,7 +77,7 @@ if (NOT ECTO_EXCEPTION_WITHOUT_CLONE)
 endif()
 
 if (ROS_GROOVY_OR_ABOVE_FOUND)
-configure_file(${ecto_SOURCE_DIR}/cmake/boost-config.hpp.in ${CATKIN_BUILD_PREFIX}/${CATKIN_PROJECT_INCLUDE_DESTINATION}/boost-config.hpp)
+configure_file(${ecto_SOURCE_DIR}/cmake/boost-config.hpp.in ${CATKIN_BUILD_PREFIX}/${CATKIN_PACKAGE_INCLUDE_DESTINATION}/boost-config.hpp)
 else()
 configure_file(${ecto_SOURCE_DIR}/cmake/boost-config.hpp.in ${CMAKE_BINARY_DIR}/gen/cpp/ecto/boost-config.hpp)
 endif()
