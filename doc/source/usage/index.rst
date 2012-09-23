@@ -13,6 +13,7 @@ To get going with ``ecto``, you need the following simple CMake steps
     :maxdepth: 1
 
     client_usage.rst
+    summary.rst
 
 Tutorials
 =========
@@ -25,7 +26,6 @@ These tutorials walk through the basic usage of ecto.
     tutorials/hello.rst
     tutorials/plasms.rst
     tutorials/lifecycle.rst
-    tutorials/summary.rst
 
 Techniques
 ==========

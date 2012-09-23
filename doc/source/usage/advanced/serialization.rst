@@ -2,8 +2,8 @@
 
 .. highlight:: ectosh
 
-Serialization
-=============
+Serialization: Create From Python, Load/Execute From Pure C++
+=============================================================
 
 .. _boost::serialization: http://www.boost.org/doc/libs/1_47_0/libs/serialization/doc/index.html
 
