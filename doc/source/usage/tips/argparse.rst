@@ -1,7 +1,7 @@
 .. _argparsing:
 
-Command line helpers
-====================
+Command line helpers: getting stats, GUIS, a shell and more automagically !
+===========================================================================
 
 .. _argparse: http://docs.python.org/library/argparse.html
 

@@ -41,8 +41,7 @@ parser.add_argument('--factor', metavar='FACTOR', dest='factor',
                     type=float, default=5, help='The factor to multiply the constant with.')
 
 #add ecto scheduler args.
-group = parser.add_argument_group('ecto scheduler options')
-scheduler_options(group)
+scheduler_options(parser)
 options = parser.parse_args()
 
 c = Constant(value=options.value)
