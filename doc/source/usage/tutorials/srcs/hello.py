@@ -1,5 +1,8 @@
 #!/usr/bin/env python
-import ecto.tutorial as tutorial #this is our ecto module
+# we import out ecto module: it was built in the ecto_tutorial folder and it is named tutorial
+import ecto_tutorial.tutorial as tutorial
 
-printer = tutorial.Hello() #allocate a cell
-printer.process() #cause it to execute.
+# we get the cell that we named Hello in that module
+printer = tutorial.Hello()
+# execute the cell itself
+printer.process()

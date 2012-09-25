@@ -8,7 +8,7 @@ Python/C++ cells that will belong to a Python module. So you need to go through 
 
     * you need to define your ecto module through an ``ectomodule`` CMake macro:
 
-      .. code-block:: CMake
+      .. code-block:: cmake
       
           ectomodule(my_ecto_module_name INSTALL
                                          DESTINATION ./here/different_name
@@ -38,7 +38,7 @@ Python/C++ cells that will belong to a Python module. So you need to go through 
 
     * you create a Python script to create your plasm and run it
 
-      .. code-block:: Python
+      .. code-block:: python
 
           #!/usr/bin/env python
           import ecto
