@@ -25,6 +25,8 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 //
+
+// This file is use in the docs
 #include <gtest/gtest.h>
 #include <ecto/ecto.hpp>
 #include <ecto/schedulers/singlethreaded.hpp>
@@ -34,6 +36,7 @@
 
 using namespace ecto;
 namespace {
+  // Declare a bogus cell that just outputs stuff
   struct Module1
   {
     static void
@@ -43,6 +46,7 @@ namespace {
     }
   };
 
+  // Declare a bogus cell that just reads stuff
   struct Module2
   {
     static void
@@ -52,10 +56,12 @@ namespace {
     }
   };
 
+  // Declare a bogus cell that gets stuff in and spits it out
   struct Passthrough
   {
     static void declare_io(const tendrils& parms, tendrils& in, tendrils& out)
     {
+      // The type could be explicit but the 'none' is used to specify any type
       in.declare<tendril::none>("in", "Any type");
       out.declare<tendril::none>("out", "Any type on the output...");
       out["out"] = in["in"]; //assign the ptr.
@@ -65,44 +71,63 @@ namespace {
 }
 TEST(Plasm, Viz)
 {
+  // Create an empty plasm
   ecto::plasm p;
+  // Create some cells
   ecto::cell::ptr m1(new ecto::cell_<Module1>), m2(new ecto::cell_<Module2>);
+  // Initialize the cells
   m1->declare_params();
   m1->declare_io();
   m2->declare_params();
   m2->declare_io();
+  // Connect the cells in the plasm: the output named 'd' of the cell 'm1' is
+  // connected to the input 'd' of the cell 'm2'
   p.connect(m1,"d",m2,"d");
+  // Visualize the plasm
   std::cout << p.viz() << std::endl;
 }
 
 TEST(Plasm, Passthrough)
 {
+  // Create an empty plasm
   ecto::plasm::ptr p(new ecto::plasm);
+  // Create some cells
   ecto::cell::ptr m1(new cell_<Module1>), 
     m2(new cell_<Module2>), 
     pass(new cell_<Passthrough>);
+  // Initialize some cells
   m1->declare_params();
   m2->declare_params();
   pass->declare_params();
   m1->declare_io();
   m2->declare_io();
   pass->declare_io();
+  // Impose the output of a cell to be of certain value
+  // That could be done inside the cell but this is just
+  // to show that tendrils can be modified like in Python
   m1->outputs["d"] << 5.0;
+  // Create some connection inside the plasm
   p->connect(m1,"d",pass,"in");
   p->connect(pass,"out",m2,"d");
+  // Create a scheduler to execute your plasm
   ecto::schedulers::singlethreaded sched(p);
+  // Execute your plasm once
   sched.execute(1);
   double out;
+  // Read the output 'd' of the 'm2' cell
   m2->inputs["d"] >> out;
   EXPECT_TRUE(out == 5.0);
+  // Read the output 'out' of the plasm
   pass->outputs["out"] >> out;
   EXPECT_TRUE(out == 5.0);
 }
 
 TEST(Plasm, Registry)
 {
+  // Create a cell that is of type "Add" from the module "ecto_test"
   ecto::cell::ptr add = ecto::registry::create("ecto_test::Add");
   EXPECT_TRUE(add);
+  // Display the name of the cell
   std::cout << add->name() << std::endl;
   EXPECT_EQ("ecto_test::Add", add->name());
 }

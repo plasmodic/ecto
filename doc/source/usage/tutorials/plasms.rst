@@ -33,7 +33,7 @@ Download: :download:`srcs/plasms.py`
 
 Lets run it:
 
-.. program-output:: srcs/plasms.py
+.. program-output:: srcs/plasms_doc.py
    :in_srcdir:
 
 Parameters
@@ -74,7 +74,7 @@ Graphs
 
 The graph for this will look like:
 
-.. ectoplot:: srcs/plasms.py plasm
+.. ectoplot:: srcs/plasms_doc.py plasm
 
 Plasms, graphs, in ecto are *Directed Acyclic Graphs* , see :ref:`DAG`. 
 The DAG is important for scheduling and determining execution order.

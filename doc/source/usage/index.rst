@@ -78,3 +78,4 @@ Well, what is I want to do for loops ? or integrate with Python better ? or not 
     advanced/yaml.rst
     advanced/strands.rst
     advanced/serialization.rst
+    advanced/pure_cpp.rst

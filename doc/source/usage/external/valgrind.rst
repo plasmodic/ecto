@@ -9,7 +9,8 @@ Valgrind
 ========
 
 Valgrind is our tool of choice for hunting nasty memory errors and/or
-profiling.
+profiling. Then again, if you just want to compare the performance of your cells using
+``callgrind``, ``ecto`` provides runtime statistics as explained in :ref:`argparsing`.
 
 Suppressions
 ------------
