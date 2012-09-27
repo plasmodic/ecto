@@ -24,14 +24,6 @@ Python becomes the glue that is used to compose higher level processing
 graphs, or ``Plasms`` from these cells.  As such, most of the examples that will
 follow will involve both C++ and Python snippets.
 
-You probably want to read the quick glossary
-
-.. toctree::
-    :maxdepth: 1
-
-    glossary.rst
-
-and then get to those concept in more detail:
 
 .. toctree::
     :maxdepth: 1

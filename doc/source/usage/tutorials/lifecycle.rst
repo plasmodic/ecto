@@ -3,7 +3,8 @@
 Lifecycle of Cells
 ==================
 
-Let's examine the lifecycle of a cell. See :ref:`cells-overview` for a more detailed reference.
+This tutorial is more of a demo of what happens during the lifetime of a cell.
+Please read the reference for a :ref:`cell <cells-overview>` for a more detailed reference.
 
 This cell will chirp at every point in its life.
 

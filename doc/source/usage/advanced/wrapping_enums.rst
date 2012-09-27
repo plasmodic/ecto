@@ -49,7 +49,7 @@ cell, declare and get the parameter as being of the enum type,
 
 .. literalinclude:: ../../src/EnumAsEnum.cpp
 
-And wrap the enum in the :ref:`ecto_define_module` section like so:
+And wrap the enum in the :ref:`ECTO_DEFINE_MODULE <ecto_define_module>` section like so:
 
 .. literalinclude:: ../../src/module.cpp
 

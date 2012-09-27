@@ -26,6 +26,7 @@ These tutorials walk through the basic usage of ecto.
     tutorials/hello.rst
     tutorials/plasms.rst
     tutorials/lifecycle.rst
+    tutorials/tendrils_spore.rst
 
 Techniques
 ==========
@@ -49,14 +50,13 @@ With great flexibility comes great tips and tricks. The following info might hel
     :maxdepth: 1
 
     tips/argparse.rst
-    tips/static_registration.rst
     tips/ectodoc.rst
 
 
 Using External Tools
 ====================
 
-Ecto was developed with interoperability with classic C++/Python development tools.
+Ecto was developed to interoperate with classic C++/Python development tools.
 
 .. toctree::
     :maxdepth: 1

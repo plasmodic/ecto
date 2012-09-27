@@ -1,6 +1,6 @@
-.. _serialization:
-
 .. highlight:: ectosh
+
+.. _serialization:
 
 Serialization: Create From Python, Load/Execute From Pure C++
 =============================================================

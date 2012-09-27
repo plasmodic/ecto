@@ -3,8 +3,14 @@
 Installing ecto
 ===============
 
-If you have access to a ROS repository, just install the ros-*-ecto packages. Otherwise, ecto is still easy to use and
-how to setup your machine and get productive follows:
+If you have access to a ROS repository, just install the ros-*-ecto packages. E.g., if you are on Groovy:
+
+.. code-block:: bash
+
+    sudo apt-get install ros-groovy-ecto
+
+
+Otherwise, ecto is still easy to build from source:
 
 .. toctree::
     :maxdepth: 1
@@ -12,4 +18,9 @@ how to setup your machine and get productive follows:
     dependencies.rst    
     get_ecto.rst
 
-Windows support is still experimental but we had good experience with ``cygwin``: :ref:`Windows <get-ecto-win32>`
+Windows support is still experimental but we had good experience with ``cygwin``:
+
+.. toctree::
+    :maxdepth: 1
+
+    get_ecto_win32

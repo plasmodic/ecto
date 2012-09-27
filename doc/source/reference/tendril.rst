@@ -49,29 +49,28 @@ when one tendril or type is inserted to another.
 
 .. rubric:: Tendril Conversions
 
-+----------+--------------------+------------------------------------+------------+--------+
-| FROM     |                    |                                    |            |        |
-|          |                    | python                             |            |        |
-| TO       | ``none``           | object                             | ``T``      | ``U``  |
-+----------+--------------------+------------------------------------+------------+--------+
-| ``none`` | assignment (no-op) | python                             | ``T``      | ``U``  |
-|          |                    | object                             |            |        |
-|          |                    |                                    |            |        |
-+----------+--------------------+------------------------------------+------------+--------+
-| python   | ValueNone error    | assignment                         | python     | python |
-| object   |                    |                                    | object     | object |
-|          |                    |                                    |            |        |
-|          |                    |                                    |            |        |
-+----------+--------------------+------------------------------------+------------+--------+
-| ``T``    | ValueNone error    | ``T`` via                          | assignment |        |
-|          |                    | extract<> or                       |            | error  |
-|          | <conversion error> |                                    |            |        |
-+----------+--------------------+------------------------------------+------------+--------+
-| ``U``    | ValueNone error    | ``U`` via |TypeMismatch|assignment |            |        |
-|          |                    | extract<> or                       | error      |        |
-|          | <conversion error> |                                    |            |        |
-+----------+--------------------+------------------------------------+------------+--------+
-
++------------+---------------------+----------------+------------+------------+
+|        FROM|                     |                |            |            |
+|            |                     |python          |            |            |
+|TO          |``none``             |object          |``T``       |``U``       |
++------------+---------------------+----------------+------------+------------+
+|``none``    |assignment (no-op)   |python          |``T``       |``U``       |
+|            |                     |object          |            |            |
+|            |                     |                |            |            |
++------------+---------------------+----------------+------------+------------+
+|python      |ValueNone error      |assignment      |python      |python      |
+|object      |                     |                |object      |object      |
+|            |                     |                |            |            |
+|            |                     |                |            |            |
++------------+---------------------+----------------+------------+------------+
+|``T``       |ValueNone error      |``T`` via       |assignment  |TypeMismatch|
+|            |                     |extract<> or    |            |error       |
+|            |                     |conversion error|            |            |
++------------+---------------------+----------------+------------+------------+
+|``U``       |ValueNone error      |``U`` via       |TypeMismatch|assignment  |
+|            |                     |extract<> or    |error       |            |
+|            |                     |conversion error|            |            |
++------------+---------------------+----------------+------------+------------+
 
 
 python api
@@ -84,7 +83,7 @@ c++ api
 .. doxygenclass:: ecto::tendril
     :members:
 
-
+.. _spore-overview:
 
 spore
 =====
@@ -97,6 +96,8 @@ c++ api
     :members:
 
 .. _tendrils:
+
+.. _tendrils-overview:
 
 tendrils
 ========

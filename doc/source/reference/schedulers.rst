@@ -106,7 +106,7 @@ Threadpool
       Blocks until the execution started by the last call to
       execute_async() is finished.
 
-Renentrant running
+Reentrant running
 ------------------
 
 The schedulers are fully reentrant, meaning, that when you stop(), and wait() on

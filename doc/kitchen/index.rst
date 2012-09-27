@@ -7,14 +7,18 @@ Ecto itself is small, has minimal dependencies (C++, Boost, Python) and works wi
 
 As of 2012, Ecto is officially released. It is being used by researchers at Willow Garage and in industry for prototype applications of object capture and modelling, `object recognition <http://ecto.willowgarage.com/recognition/>`_, pose estimation and refinement, projector-based augmented reality and chess playing.
 
-.. rubric:: Ecto modules
 
 To understand ecto, you probably want to go over the Ecto docs first:
 
 .. toctree::
    :maxdepth: 1
 
-   ecto <links/ecto/index.rst>
+   links/ecto/overview/index.rst
+   Advanced Install <links/ecto/install/index.rst>
+   Usage <links/ecto/usage/index.rst>
+   links/ecto/reference/index.rst
+
+.. rubric:: Ecto modules
 
 Ecto has several modules that wrap different libraries or functionalities:
 

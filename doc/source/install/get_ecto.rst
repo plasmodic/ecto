@@ -1,5 +1,5 @@
-Get ecto
-========
+Build Ecto From Source
+======================
 
 ecto is available here: https://github.com/plasmodic/ecto
 
@@ -37,6 +37,7 @@ the most advanced user.
     mkdir build
     cd build
     cmake ..
+    make
 
 You should see the following outputish:
 

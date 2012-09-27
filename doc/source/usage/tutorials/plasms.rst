@@ -42,13 +42,13 @@ Look at the allocation of our cells in the script.
 
 .. literalinclude:: srcs/plasms.py
   :language: py
-  :lines: 5,6,7
+  :lines: 5-8
 
 The parameters that were declared in:
 
 .. literalinclude:: srcs/Add.cpp
     :language: cpp
-    :lines: 8-12
+    :lines: 8-14
 
 Become the keyword arguments for the cell.  The first non keyword argument is
 the cell's instance name, which is relevant for pretty looking graphs.
@@ -60,7 +60,7 @@ plasm looks like this.
 
 .. literalinclude:: srcs/plasms.py
   :language: py
-  :lines: 10,11,12
+  :lines: 10-17
 
 Each connection is made by using the ``>>`` operator, where
 the key value in the ``[]`` operator refers to an output tendril
@@ -90,7 +90,7 @@ Once a plasm is constructed, it may be used with an :ref:`ecto scheduler <schedu
 
 .. literalinclude:: srcs/plasms.py
   :language: py
-  :lines: 14,15
+  :lines: 18-22
 
 ..  _topological-sort: http://en.wikipedia.org/wiki/Topological_sorting
 

@@ -1,8 +1,18 @@
 Dependencies
 ============
 
-Boost
------
+Packages
+--------
+
+Ecto only depends on Python and Boost so make sure you have those two sets of tools.
+On Ubuntu, simply install the corresponding pacakges:
+
+.. code-block:: bash
+
+   sudo apt-get install python libboost-dev
+
+Nonsystem Boost
+---------------
 
 (Accurate as of boost 1.47.0)
 
@@ -56,19 +66,8 @@ others it can get it wrong... ``tmp`` is a terrible name for a
 package.
 
 When you then want to detect this new boost when running cmake, use
-``BOOST_ROOT`` (see also the cmake docs for ``FindBoost``), e.g.::
+``BOOST_ROOT`` (see also the cmake docs for ``FindBoost``), e.g.:
+
+.. code-block:: bash
 
    cmake ../src -DBOOST_ROOT=/usr/local/boost-1.40.0
-
-
-Additional Ubuntu Packages
---------------------------
-
-On ubuntu platforms, for the build that includes ros, you want the
-following packages::
-
-    ros-electric-desktop-full
-    ros-electric-perception-pcl-addons
-    libopencv2.3-dev
-    openni-dev (or ros-electric-openni-kinect)
-    python-argparse
