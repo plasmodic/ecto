@@ -5,10 +5,15 @@ tendril
 
 .. _boost::any: http://www.boost.org/doc/libs/1_47_0/doc/html/any.html
 
-The ``tendril`` is a type-erased value container, essentially a
-`boost::any`_ (in fact, implemented with ``boost::any``) augmented
+The basic way of communication for a cell (whether as an input/output or as a parameter)
+is through a C++ object called ``tendril``. A tendril abstracts the C++ type of the object
+it contains to allow the scheduling to be generic, to allow static introspection and to
+ease the Python interaction.
+
+It is behaving like a :ref:`boost::any` (think `void*` with an encoded type) augmented
 with certain conversion rules, operators, introspection capabilities,
 docstrings and the like.
+
 
 Overview
 --------
@@ -88,7 +93,10 @@ c++ api
 spore
 =====
 
-A spore is a typed handle for a tendril. It is best used in conjunction with tendrils.
+A spore is a typed handle for a tendril: it is basically a typed pointer that wraps a
+tendril. Its use is purely for ease of coding: instead of extracting the object from a
+tendril every time, you can just define a spore. You can think of a tendril as 
+containing a ``void*`` and a spore as a cast of that pointer to a specific type.
 
 c++ api
 -------
