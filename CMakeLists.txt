@@ -26,6 +26,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 cmake_minimum_required(VERSION 2.8)
+#Drop after Fuerte, also remove the CMakeParseArgument
 if ((${CMAKE_VERSION} VERSION_GREATER "2.8.4") OR (${CMAKE_VERSION} VERSION_EQUAL "2.8.4"))
 cmake_policy(SET CMP0017 NEW)
 endif()
@@ -33,9 +34,11 @@ endif()
 project(ecto)
 find_package(catkin REQUIRED)
 if (${catkin_VERSION} VERSION_GREATER "0.5.28")
-catkin_package(INCLUDE_DIRS include
+find_package(Boost REQUIRED)
+catkin_package(CFG_EXTRAS ecto-extras.cmake
+               DEPENDS Boost
+               INCLUDE_DIRS include
                LIBRARIES ecto
-               CFG_EXTRAS ecto-extras.cmake
 )
 else()
 catkin_stack()
