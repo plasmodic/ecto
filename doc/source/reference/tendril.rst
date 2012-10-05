@@ -78,15 +78,15 @@ when one tendril or type is inserted to another.
 +------------+---------------------+----------------+------------+------------+
 
 
-python api
-----------
-.. autoclass:: ecto.Tendril
-    :members:
+.. python api
+   ----------
+   .. autoclass:: ecto.Tendril
+       :members:
 
-c++ api
--------
-.. doxygenclass:: ecto::tendril
-    :members:
+.. c++ api
+   -------
+   .. doxygenclass:: ecto::tendril
+       :members:
 
 .. _spore-overview:
 
@@ -98,10 +98,10 @@ tendril. Its use is purely for ease of coding: instead of extracting the object 
 tendril every time, you can just define a spore. You can think of a tendril as 
 containing a ``void*`` and a spore as a cast of that pointer to a specific type.
 
-c++ api
--------
-.. doxygenclass:: ecto::spore
-    :members:
+.. c++ api
+   -------
+   .. doxygenclass:: ecto::spore
+       :members:
 
 .. _tendrils:
 
@@ -114,11 +114,11 @@ tendrils are containers for the tendril type, essentially a mapping from name to
 The tendrils also give a convenient form of templated type safe access to the data that
 tendril objects hold.
 
-python api
-----------
-.. autoclass:: ecto.Tendrils
+.. python api
+   ----------
+   .. autoclass:: ecto.Tendrils
 
-c++ api
--------
-.. doxygenclass:: ecto::tendrils
-    :members:
+   c++ api
+   -------
+   .. doxygenclass:: ecto::tendrils
+       :members:

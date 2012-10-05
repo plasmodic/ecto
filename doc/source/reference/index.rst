@@ -3,12 +3,27 @@
 Reference
 =========
 
+Objects
+-------
+
+This details the key objects used in the C++ code
+
 .. toctree::
     :maxdepth: 1
     
     tendril
-    connections.rst
     plasm
     schedulers
     ecto_test_cells
-    api
+
+.. api (we used to link to that file but it's ugly)
+
+API
+---
+
+.. raw:: html
+
+    <ul>
+      <li><a href="../../../api/html/index.html">C++ API generated from doxygen</a></li>
+      <li><a href="../../../api/html/index.html">Python API</a></li>
+    <ul>

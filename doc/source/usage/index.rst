@@ -49,6 +49,7 @@ With great flexibility comes great tips and tricks. The following info might hel
 .. toctree::
     :maxdepth: 1
 
+    tips/connections.rst
     tips/argparse.rst
     tips/ectodoc.rst
 

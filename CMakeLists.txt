@@ -119,7 +119,7 @@ if(BUILD_DOC)
   set(BUILD_TEST ON CACHE BOOL "Tests must be built if docs are expected to build." FORCE)
   set(BUILD_SAMPLES ON CACHE BOOL "Samples must be built if docs are expected to build." FORCE)
   add_subdirectory(doc)
-  find_package(catkin-sphinx QUIET)
+#  find_package(catkin-sphinx QUIET)
   if (catkin-sphinx_FOUND)
       catkin_sphinx(${CMAKE_CURRENT_SOURCE_DIR}/doc/source doc
               ${CMAKE_CURRENT_SOURCE_DIR}
@@ -139,4 +139,9 @@ if(BUILD_SAMPLES)
   add_subdirectory(samples)
 endif()
 
-catkin_doxygen(ecto-doxygen ${CMAKE_CURRENT_SOURCE_DIR}/include)
+# deal with doxygen and integration with sphinx
+catkin_doxygen(ecto-doxygen "${CMAKE_CURRENT_SOURCE_DIR}/include;${CMAKE_CURRENT_SOURCE_DIR}/doc/doxygen")
+add_custom_target(ecto-copy-doxygen-to-doc COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/ecto/api ${CMAKE_BINARY_DIR}/doc/html/ecto/api
+                                           DEPENDS ecto-doxygen
+)
+add_dependencies(sphinx-doc ecto-copy-doxygen-to-doc)
