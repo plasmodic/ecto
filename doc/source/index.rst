@@ -1,4 +1,5 @@
 :orphan:
+
 Ecto
 ====
 
@@ -24,7 +25,6 @@ robotics.
    Install <install/index.rst>
    Usage <usage/index.rst>
    reference/index.rst  
-   glossary.rst
 
 
 .. rubric:: Bug reports

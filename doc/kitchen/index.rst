@@ -13,23 +13,20 @@ To understand ecto, you probably want to go over the Ecto docs first:
 .. toctree::
    :maxdepth: 1
 
-   links/ecto/overview/index.rst
-   Advanced Install <links/ecto/install/index.rst>
-   Usage <links/ecto/usage/index.rst>
-   links/ecto/reference/index.rst
+   ecto/overview/index.rst
+   Advanced Install <ecto/install/index.rst>
+   Usage <ecto/usage/index.rst>
+   ecto/reference/index.rst
 
 .. rubric:: Ecto modules
 
 Ecto has several modules that wrap different libraries or functionalities:
 
-.. toctree::
-   :maxdepth: 1
-
-   ecto_image_pipeline <links/ecto_image_pipeline/index.rst>
-   ecto_openni <links/ecto_openni/index.rst>
-   ecto_opencv <links/ecto_opencv/index.rst>
-   ecto_pcl <links/ecto_pcl/index.rst>
-   ecto_ros <links/ecto_ros/index.rst>
+   * :ref:`ecto_image_pipeline <ecto_image_pipeline:ecto_image_pipeline>`
+   * :ref:`ecto_opencv <ecto_opencv:ecto_opencv>`
+   * :ref:`ecto_openni <ecto_openni:ecto_openni>`
+   * :ref:`ecto_pcl <ecto_pcl:ecto_pcl>`
+   * :ref:`ecto_ros <ecto_ros:ecto_ros>`
 
 .. rubric:: Install
 

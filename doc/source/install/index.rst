@@ -3,7 +3,7 @@
 Installing ecto
 ===============
 
-If you have access to a ROS repository, just install the ros-*-ecto packages. E.g., if you are on Groovy:
+If you have access to a ROS repository, just install the ros-ditro_name-ecto packages. E.g., if you are on Groovy:
 
 .. code-block:: bash
 

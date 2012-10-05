@@ -1,4 +1,5 @@
 :orphan:
+
 .. index:: glossary
 
 Glossary
