@@ -12,7 +12,6 @@ This details the key objects used in the C++ code
     :maxdepth: 1
     
     tendril
-    plasm
     schedulers
     ecto_test_cells
 
