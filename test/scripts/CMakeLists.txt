@@ -28,7 +28,7 @@
 macro(pytest testname)
 if (ROS_GROOVY_FOUND)
   add_test(ecto_${testname}
-    ${CATKIN_BUILD_PREFIX}/env.sh
+    ${CATKIN_ENV}
     ${ARGN}
     )
 else()
@@ -90,7 +90,7 @@ foreach(file
     test_wrong_param_type
     )
     add_test(ecto_${file}
-        /usr/bin/env
+        ${CATKIN_ENV}
         ${CMAKE_CURRENT_SOURCE_DIR}/${file}.py)
 
 endforeach()

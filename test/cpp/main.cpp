@@ -34,7 +34,7 @@ int main(int argc, char** argv)
   Py_Initialize();
   //import our ecto_test... this means that before running tests
   //be sure that the python path is correct.
-  boost::python::import("ecto_test");
+  boost::python::import("ecto.ecto_test");
 
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
