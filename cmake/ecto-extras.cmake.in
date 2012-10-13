@@ -54,5 +54,4 @@ elseif(WIN32)
 endif()
 
 
-include(${SELF_DIR}/ros_electric.cmake)
 include(${SELF_DIR}/ectoMacros.cmake)

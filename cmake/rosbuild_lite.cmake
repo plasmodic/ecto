@@ -25,26 +25,6 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 # 
-#rosbuild_lite.cmake
-#
-#   A set of cmake macros that allow non rosbuild projects to use ros packages
-#
-#   rosbuild_lite_init()
-#       This finds ROSPACK_EXECUTABLE, and ROSMSG_EXECUTABLE, along with setting
-#       ROS_ROOT and ROS_PACKAGE_PATH. You may change the ros distro
-#       by setting ROS_ROOT and ROS_PACKAGE_PATH in the cmake cache.
-#       ROS_FOUND will be set to TRUE if this is successful, and will be unset
-#       otherwise.
-#
-#
-#   rospack( VAR COMMAND PACKAGE )
-#       This calls rospack and stores the result in VAR.  It uses the COMMAND
-#       as the rospack subcommand, and PACKAGE as the ros package.  The ROS_PACKAGE_PATH
-#       that is set in the cache must contain the ros package you wish to build against.
-#
-#   find_ros_package( PACKAGE )
-#       Finds a ROS package, by the name PACKAGE, it must be in the cached ROS_PACKAGE_PATH.
-#       
 
 function(check_unused_arguments ARG_NAME ARG_UNUSED)
   if(ARG_UNUSED)
@@ -54,16 +34,10 @@ endfunction()
 
 option(ROS_CONFIGURE_VERBOSE OFF)
 
-unset(ROS_ELECTRIC_FOUND)
 unset(ROS_FUERTE_FOUND)
 unset(ROS_GROOVY_FOUND)
-unset(ROS_FUERTE_OR_ABOVE_FOUND)
 unset(ROS_GROOVY_OR_ABOVE_FOUND)
 
-if ("$ENV{ROS_ROOT}" STREQUAL "/opt/ros/electric/ros")
-    set(ROS_ELECTRIC_FOUND TRUE)
-else()
-    set(ROS_FUERTE_OR_ABOVE_FOUND TRUE)
     set(BUNCH_OF_VARS "$ENV{ROS_ROOT}, ${CMAKE_PREFIX_PATH}, $ENV{ROS_PACKAGE_PATH}, ${CMAKE_INSTALL_PREFIX}, ${catkin_INSTALL_PREFIX}, ${catkin_EXTRAS_DIR}")
     string(REGEX MATCH "fuerte" ROS_FUERTE_FOUND ${BUNCH_OF_VARS})
     if (ROS_FUERTE_FOUND)
@@ -72,42 +46,7 @@ else()
         set(ROS_GROOVY_FOUND TRUE)
         set(ROS_GROOVY_OR_ABOVE_FOUND TRUE)
     endif()
-endif()
 
-
-macro( rosbuild_lite_init )
-  if (ROS_ELECTRIC_FOUND OR ROS_FUERTE_FOUND)
-  if (NOT ROS_ROOT)
-    if ("$ENV{ROS_ROOT}" STREQUAL "")
-      message(FATAL_ERROR "*** ROS_ROOT is not set... is your environment set correctly?")
-    else()
-      set(ROS_ROOT "$ENV{ROS_ROOT}" CACHE PATH  "ROS_ROOT path")
-    endif()
-  endif()
-
-  if (NOT ROS_PACKAGE_PATH)
-    if ("$ENV{ROS_PACKAGE_PATH}" STREQUAL "")
-      message(FATAL_ERROR "*** ROS_PACKAGE_PATH is not set... is your environment set correctly?")
-    else()
-      set(ROS_PACKAGE_PATH "$ENV{ROS_PACKAGE_PATH}" CACHE PATH "ROS_PACKAGE_PATH path")
-    endif()
-  endif()
-
-  find_program(ROSPACK_EXECUTABLE rospack PATHS ${ROS_ROOT}/bin DOC "the rospack executable." NO_SYSTEM_ENVIRONMENT_PATH NO_CMAKE_ENVIRONMENT_PATH)
-  find_program(ROSMSG_EXECUTABLE rosmsg PATHS ${ROS_ROOT}/bin DOC "rosmsg executable" NO_SYSTEM_ENVIRONMENT_PATH NO_CMAKE_ENVIRONMENT_PATH)
-  else()
-  find_program(ROSPACK_EXECUTABLE rospack PATHS /opt/ros/groovy/bin DOC "the rospack executable." NO_SYSTEM_ENVIRONMENT_PATH NO_CMAKE_ENVIRONMENT_PATH)
-  find_program(ROSMSG_EXECUTABLE rosmsg PATHS /opt/ros/groovy/bin DOC "rosmsg executable" NO_SYSTEM_ENVIRONMENT_PATH NO_CMAKE_ENVIRONMENT_PATH)
-  endif()
-
-  if (ROSPACK_EXECUTABLE)
-    set(ROS_FOUND TRUE)
-    message(STATUS "*** ROS_PACKAGE_PATH=${ROS_PACKAGE_PATH}")
-    message(STATUS "*** ROSPACK_EXECUTABLE=${ROSPACK_EXECUTABLE}")
-  else()
-    unset(ROS_FOUND)
-  endif()
-endmacro()
 
 #attempts to set ENV variables so that ROS commands will work.
 #This appears to work well on linux, but may be questionable on
@@ -131,158 +70,9 @@ macro (_unset_ros_env)
   set(ENV{PYTHONPATH} "${ORIG_PYTHONPATH}")
 endmacro()
 
-macro (rospack VAR COMMAND PACKAGE)
-  set(cachevar ROSPACK_${PACKAGE}_${COMMAND})
-  set(${cachevar} "not-run-yet-NOTFOUND" CACHE INTERNAL "")
-  if(NOT ${cachevar})
-    if (NOT ROSPACK_EXECUTABLE)
-      message(WARNING "*** rosmsg There is no rosmsg executable!")
-      set(rospack_error "ROSPACK_EXECUTABLE not found") 
-    else()
-      _set_ros_env()
-      execute_process(COMMAND ${ROSPACK_EXECUTABLE} ${COMMAND} ${PACKAGE}
-        OUTPUT_VARIABLE ROSPACK_OUT
-        ERROR_VARIABLE rospack_error
-        OUTPUT_STRIP_TRAILING_WHITESPACE
-        ERROR_STRIP_TRAILING_WHITESPACE
-        RESULT_VARIABLE rospack_error_code
-        )
-      _unset_ros_env()
-      if(${rospack_error_code} EQUAL 0)
-        unset(rospack_error)
-        unset(rospack_error_code)
-      endif()
-    endif()
-    if(rospack_error)
-      message(STATUS "***")
-      message(STATUS "*** rospack ${COMMAND} ${PACKAGE} failed: ${rospack_error}")
-      message(STATUS "***")
-      set(${cachevar} "ROSPACK_${PACKAGE}_${COMMAND}-NOTFOUND"
-        CACHE INTERNAL "rospack output for rospack ${PACKAGE} ${COMMAND}")
-    else()
-      separate_arguments(ROSPACK_SEPARATED UNIX_COMMAND ${ROSPACK_OUT})
-      set(${cachevar} ${ROSPACK_SEPARATED} CACHE INTERNAL "value")
-      set(${VAR} ${ROSPACK_SEPARATED} CACHE INTERNAL "" FORCE)
-      # message("${VAR} == ${${VAR}}")
-    endif()
-  else()
-    set(${VAR} "${${cachevar}}")
-  endif()
-endmacro()
-
-macro (find_ros_package PACKAGE)
-  if (NOT ${PACKAGE}_DIR)
-    rospack(${PACKAGE}_DIR find ${PACKAGE})
-  endif()
-
-  if(NOT ${PACKAGE}_DIR)
-    message(STATUS "Could not find package ${PACKAGE} via rosmake")
-  else()
-    if(NOT ${PACKAGE}_FOUND)
-      message(STATUS "Finding ROS package: ${PACKAGE}")
-      rospack(${PACKAGE}_INCLUDE_DIRS cflags-only-I ${PACKAGE})
-      rospack(${PACKAGE}_DEFINITIONS cflags-only-other ${PACKAGE})
-
-      rospack(libdirs libs-only-L ${PACKAGE})
-      rospack(libnames libs-only-l ${PACKAGE})
-
-      set(${PACKAGE}_LIBRARIES "" CACHE INTERNAL "")
-
-      foreach(libname ${ROSPACK_${PACKAGE}_libs-only-l})
-        find_library(${libname}_LIBRARY
-          NAMES ${libname}
-          PATHS ${ROSPACK_${PACKAGE}_libs-only-L}
-          NO_DEFAULT_PATH
-          )
-        find_library(${libname}_LIBRARY ${libname})
-        # message("${libname}_LIBRARY ${${libname}_LIBRARY}")
-        if (NOT ${libname}_LIBRARY)
-          message(FATAL_ERROR "uh oh ${PACKAGE} ${libname} found us ${thelib}")
-        endif()
-        set(${PACKAGE}_LIBRARIES ${${PACKAGE}_LIBRARIES};${${libname}_LIBRARY})
-        mark_as_advanced(${libname}_LIBRARY)
-      endforeach()
-      set(${PACKAGE}_LIBRARIES ${${PACKAGE}_LIBRARIES} CACHE INTERNAL "" FORCE)
-    endif()
-
-    include_directories(${${PACKAGE}_INCLUDE_DIRS})
-    add_definitions(${${PACKAGE}_DEFINITIONS})
-
-  endif() # not PACKAGE_DIR
-
-  if (${PACKAGE}_DIR)
-
-    # message("${PACKAGE}_LIBRARIES ${${PACKAGE}_LIBRARIES}")
-    list(LENGTH ${PACKAGE}_LIBRARIES nlibs)
-    list(LENGTH ${PACKAGE}_INCLUDE_DIRS nincludes)
-    list(LENGTH ${PACKAGE}_DEFINITIONS ndefs)
-    if(ROS_CONFIGURE_VERBOSE)
-        message(STATUS "+ ${PACKAGE} at ${${PACKAGE}_DIR}")
-        message(STATUS "+   ${nlibs} libraries, ${nincludes} include directories, ${ndefs} compile definitions")
-    endif()
-    set(${PACKAGE}_FOUND TRUE CACHE INTERNAL "" FORCE)
-  else()
-    message(WARNING "+ ${PACKAGE}: NOT FOUND")
-    set(${PACKAGE}_FOUND FALSE CACHE INTERNAL "" FORCE)
-  endif()
-
-endmacro()
-
-macro(rosmsg VAR CMD PACKAGE)
-  if (NOT ROSMSG_EXECUTABLE)
-    set(rosmsg_error "rosmsg There is no rosmsg executable!")
-  else()
-    _set_ros_env()
-    execute_process(COMMAND ${ROSMSG_EXECUTABLE} ${CMD} ${PACKAGE}
-      OUTPUT_VARIABLE ROSMSG_OUT
-      ERROR_VARIABLE rosmsg_error
-      OUTPUT_STRIP_TRAILING_WHITESPACE
-      ERROR_STRIP_TRAILING_WHITESPACE
-      RESULT_VARIABLE rosmsg_error_code
-      )
-    _unset_ros_env()
-    if(${rosmsg_error_code} EQUAL 0)
-      unset(rosmsg_error)
-      unset(rosmsg_error_code)
-    endif()
-  endif()
-  if (rosmsg_error)
-    message(WARNING "*** rosmsg ${CMD} ${PACKAGE} failed: ${rosmsg_error}")
-  else()
-    separate_arguments(ROSPACK_SEPARATED UNIX_COMMAND ${ROSMSG_OUT})
-    set(${VAR} ${ROSPACK_SEPARATED} CACHE INTERNAL "" FORCE)
-    message(STATUS "rosmsg ${VAR} == ${${VAR}}")
-  endif()
-endmacro()
-
-
-macro(find_pcl_package)
-
-if (ROS_ELECTRIC_FOUND)
-  rosbuild_lite_init()
-  unset(PCL_LIBRARIES)
-  find_ros_package(std_msgs)
-  find_ros_package(pcl)
-  set(PCL_FOUND TRUE)
-  set(PCL_LIBRARIES ${pcl_LIBRARIES})
-  set(PCL_INCLUDE_DIRS ${pcl_INCLUDE_DIRS})
-else()
-  if (NOT PCL_FOUND)
-    message(STATUS "+ Looking for PCL ")
-    find_package(PCL QUIET)
-    if (PCL_FOUND)
-      message(STATUS "+ Found PCL Version ${PCL_VERSION} with config from ${PCL_CONFIG}. ")
-      # TODO: once electric is not supported anymore, we can use the PCL macro
-      add_definitions(-DPCL_VERSION_GE_151=1 -DPCL_VERSION_GE_140=1)
-    endif()
-  endif()
-endif()
-endmacro()
-
 # find the (unstable) pcl16 package. uses rosbuild, even on fuerte,
 # since perception_pcl_fuerte_unstable isn't yet catkinized
 macro(find_pcl16_package)
-  rosbuild_lite_init()
   unset(PCL16_LIBRARIES)
   find_ros_package(std_msgs)
   find_ros_package(pcl16)

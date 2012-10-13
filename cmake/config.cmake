@@ -35,7 +35,7 @@ else()
 endif()
 
 #for client projects using ecto documentation tools
-foreach(file CMakeParseArguments doc git ectoMacros rosbuild_lite ros_electric)
+foreach(file CMakeParseArguments doc git ectoMacros rosbuild_lite)
   file(COPY ${ecto_SOURCE_DIR}/cmake/${file}.cmake
     DESTINATION ${ecto_CONFIG_DIR})
 endforeach()
