@@ -19,7 +19,7 @@
 #	   link_ecto(module_name ${libs})  #Link to additional libraries
 # ==============================================================================
 get_filename_component(SELF_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
-include(${SELF_DIR}/rosbuild_lite.cmake)
+include(${SELF_DIR}/ectoMacros.cmake)
 include(${SELF_DIR}/doc.cmake)
 include(${SELF_DIR}/git.cmake)
 

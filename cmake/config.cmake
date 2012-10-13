@@ -26,7 +26,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 get_filename_component(SELF_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
-include(${SELF_DIR}/rosbuild_lite.cmake)
+include(${SELF_DIR}/ectoMacros.cmake)
 
 if (ROS_GROOVY_OR_ABOVE_FOUND)
   set(ecto_CONFIG_DIR ${CATKIN_BUILD_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}/cmake/)
@@ -35,7 +35,7 @@ else()
 endif()
 
 #for client projects using ecto documentation tools
-foreach(file CMakeParseArguments doc git ectoMacros rosbuild_lite)
+foreach(file CMakeParseArguments doc git ectoMacros)
   file(COPY ${ecto_SOURCE_DIR}/cmake/${file}.cmake
     DESTINATION ${ecto_CONFIG_DIR})
 endforeach()
