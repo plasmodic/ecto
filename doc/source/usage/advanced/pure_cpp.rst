@@ -17,8 +17,7 @@ doing everything in C++ is possible. Let just remind you of a few things:
     actually be used as a pre-processing step (cf. :ref:`serialization`)
   * Python is only used as a glue so you don't get any performance hit: code still runs as fast as your cells
   * You can still set break points in your cells just like you would with pure C++ (cf :ref:`debugging`). The only bad
-    thing is the ugliness of the stack (10-20 more levels as you have to go through the Python interpreter first and maybe 1-2 levels
-    if you look deeply into a tendril and find some ``Boost Python``) but you don't need to look into it.
+    thing is the ugliness of the stack (10-20 more levels as you have to go through the Python interpreter first but you don't need to look into it.
   * there is some overhead to learn Python but with ``ecto``, you just need to know how to create a plasm (cf. :ref:`tutorial-hello-plasms`)
     and that's the same overhead you would have to learn a graph generation syntax
 
