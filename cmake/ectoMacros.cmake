@@ -58,6 +58,7 @@ include(${SELF_DIR}/CMakeParseArguments.cmake)
 set(ECTO_PYTHON_BUILD_PATH ${CMAKE_BINARY_DIR}/gen/py/)
 set(ECTO_PYTHON_INSTALL_PATH ${INSTALLED_PYTHONPATH})
 endif()
+ 
 
 # 
 # :param NAME: the name of your ecto module
@@ -128,15 +129,28 @@ macro(ectomodule NAME)
     ${ecto_LIBRARIES}
     )
 
+if (ROS_GROOVY_OR_ABOVE_FOUND)
   set_target_properties(${NAME}_ectomodule PROPERTIES
-                        LIBRARY_OUTPUT_DIRECTORY ${ecto_module_PYTHON_OUTPUT}
+                        LIBRARY_OUTPUT_DIRECTORY ${CATKIN_BUILD_PREFIX}/${CATKIN_GLOBAL_PYTHON_DESTINATION}/${ARGS_DESTINATION}
   )
+else()
+  set_target_properties(${NAME}_ectomodule PROPERTIES
+                        LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/gen/py/${ARGS_DESTINATION}
+  )
+endif()
 
   if (ARGS_INSTALL)
+if (ROS_GROOVY_OR_ABOVE_FOUND)
     install(TARGETS ${NAME}_ectomodule
-            DESTINATION ${ecto_module_PYTHON_INSTALL}
+            DESTINATION ${CATKIN_GLOBAL_PYTHON_DESTINATION}/${ARGS_DESTINATION}
             COMPONENT main
     )
+else()
+    install(TARGETS ${NAME}_ectomodule
+            DESTINATION ${INSTALLED_PYTHONPATH}/${ARGS_DESTINATION}
+            COMPONENT main
+    )
+endif()
   endif()
 endmacro()
 
