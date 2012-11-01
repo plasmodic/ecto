@@ -34,9 +34,7 @@
 THIS FILE IS A TOTAL COPY OF THE package.py IN catkin-pkg AND IS ONLY
 MEANT FOR FUERTE COMPATIBILITY (WHICH DOES NOT HAVE catkin-pkg).
 IT WILL BE REMOVED ONCE FUERTE IS NOT SUPPORTED ANYMORE
-"""
 
-"""
 Library for parsing package.xml and providing an object
 representation.
 """
