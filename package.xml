@@ -7,7 +7,6 @@
   <maintainer email="vrabaud@willowgarage.com">Vincent Rabaud</maintainer>
   <maintainer email="erublee@willowgarage.com">Ethan Rublee</maintainer>
   <license>BSD</license>
-  <copyright>Willow Garage</copyright>
 
   <url>http://ecto.willowgarage.com</url>
   <build_depend>catkin</build_depend>
