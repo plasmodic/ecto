@@ -33,14 +33,20 @@ endif()
 
 project(ecto)
 find_package(catkin REQUIRED)
+
 if (${catkin_VERSION} VERSION_GREATER "0.5.28")
 find_package(Boost REQUIRED)
+catkin_package_xml()
+
+include(cmake/config.cmake)
+
 catkin_package(CFG_EXTRAS ecto-extras.cmake
                DEPENDS Boost
                INCLUDE_DIRS include ${CATKIN_BUILD_PREFIX}/include/
                LIBRARIES ecto
 )
 else()
+include(cmake/config.cmake)
 catkin_stack()
 catkin_project(ecto INCLUDE_DIRS include ${CMAKE_BINARY_DIR}/gen/cpp/
                     LIBRARIES ecto
@@ -52,8 +58,6 @@ endif()
 
 # configure and install Python
 catkin_python_setup()
-
-include(cmake/config.cmake)
 
 if (NOT ROS_GROOVY_OR_ABOVE_FOUND)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
