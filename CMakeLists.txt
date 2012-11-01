@@ -37,12 +37,12 @@ if (${catkin_VERSION} VERSION_GREATER "0.5.28")
 find_package(Boost REQUIRED)
 catkin_package(CFG_EXTRAS ecto-extras.cmake
                DEPENDS Boost
-               INCLUDE_DIRS include
+               INCLUDE_DIRS include ${CATKIN_BUILD_PREFIX}/include/
                LIBRARIES ecto
 )
 else()
 catkin_stack()
-catkin_project(ecto INCLUDE_DIRS include
+catkin_project(ecto INCLUDE_DIRS include ${CMAKE_BINARY_DIR}/gen/cpp/
                     LIBRARIES ecto
                     DEPENDS PythonLibs
                     CFG_EXTRAS ecto-extras.cmake
