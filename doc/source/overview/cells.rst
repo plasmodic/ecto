@@ -233,7 +233,7 @@ Every Cell gets a constructor that has the following python signature::
   This may be abused for **documentation**, **prototyping**, and **GUI** applications.
   
 
-The first optional non-keyword argment is the cell's instance name. The instance
+The first optional non-keyword argument is the cell's instance name. The instance
 name is useful for debug and graph display purposes.  Each parameter that was
 declared by the cell may be initialized as a keyword argument.  Other advanced keyword arguments
 may exist, that are defined by ecto, such as :ref:`strands`.
@@ -256,7 +256,7 @@ Configuration and Processing
   manipulate your tendrils from python... Oh and you get python bindings
   for free for all the basic types.
   
-So even thought we have a shell of cell, we can still manipulate its :ref:`tendrils`.
+So even though we only have a shell of a cell, we can still manipulate its :ref:`tendrils`.
 Lets set the input tendril, called `message`, to a custom string. Then we'll call
 process.
 
