@@ -6,10 +6,7 @@ They are a mapping from a string to the matching :ref:`tendril <tendril-overview
 tendril then ? Well, it is a container that holdes the input/output/parameter in a type-agnostic
 way (like a ``boost::any``) to allow for static introspection and Python interaction.
 
-We have seen some code that uses tendrils to extract the information at runtime but there are other ways
-of getting the data. We will here show three ways. You will most likely always use the last one as it is
-the most convenient to write but the other ones can also have their use case (usually for lower level
-tendril manipulation)
+We have seen some code that uses tendrils to extract the information at runtime but there are other ways of getting the data. Here we will show three different ways to get the data, but you will most likely always use the last one. The first method is the most convenient to write but the other methods can also have their use case (usually for lower level tendril manipulation).
 
 We have seen how to use tendrils with a runtime registration:
 

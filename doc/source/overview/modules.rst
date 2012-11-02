@@ -47,7 +47,7 @@ And every other cpp file will contain typically a single cell, exported:
   ECTO_CELL(my_ecto_module, my_ecto_module::Hello,"Hello", "Prints a string input to standard output.");
   
 
-Note that namespacing your implementations is a good idea to avoid linktime ODR
+Note that namespacing your implementations is a good idea to avoid linktime One Definition Rule (ODR)
 violations.  Also notice that most ecto modules do not contain header files, as your
 ecto cells should be rather self contained, use common types for 
 tendrils (int, float, cv::Mat, pcl::PointCloud), etc ...
