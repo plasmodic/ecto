@@ -56,7 +56,7 @@ macro(boost_feature_check checkname)
       OUTPUT_VARIABLE ${checkname}_OUTPUT
       )
     message(STATUS "${checkname}: ${${checkname}}")
-    if(${${checkname}_OUTPUT} MATCHES ".*ECTO_CHECK_TRY_COMPILE_ERROR.*")
+    if("${${checkname}_OUTPUT}" MATCHES ".*ECTO_CHECK_TRY_COMPILE_ERROR.*")
       message(FATAL_ERROR "Internal error when checking for boost feature ${checkname}")
     endif()
     set(${checkname}_CACHE TRUE CACHE BOOL "${checkname} cache variable" FORCE)
