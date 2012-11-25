@@ -37,7 +37,6 @@
 #include <stdlib.h>
 #include <cstring>
 #include <map>
-#include <boost/thread/mutex.hpp>
 #include <boost/tuple/tuple.hpp>
 #include <boost/algorithm/string/replace.hpp>
 
@@ -104,8 +103,6 @@ namespace ecto
     const std::string&
     lookup(const std::string& mangled)
     {
-      boost::mutex::scoped_lock l(mtx);
-
       dict_t::iterator iter = m.find(mangled);
       if (iter != m.end())
         return iter->second;
@@ -132,7 +129,6 @@ namespace ecto
     
     typedef std::tr1::unordered_map<std::string, std::string> dict_t;
     dict_t m;
-    boost::mutex mtx;
   };
 
   const std::string& name_of(const std::type_info &ti)

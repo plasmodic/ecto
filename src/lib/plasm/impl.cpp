@@ -35,6 +35,8 @@ namespace ecto {
 
   using graph::graph_t;
   using graph::edge;
+  using graph::vertex;
+  using graph::vertex_ptr;
 
   namespace
   {
@@ -61,7 +63,8 @@ namespace ecto {
     ModuleVertexMap::iterator it = mv_map.find(m);
     if (it != mv_map.end())
       return it->second;
-    graph_t::vertex_descriptor d = add_vertex(m, graph);
+    vertex_ptr v(new vertex(m));
+    graph_t::vertex_descriptor d = add_vertex(v, graph);
     mv_map.insert(std::make_pair(m, d));
     return d;
   }

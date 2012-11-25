@@ -35,7 +35,7 @@ def test_parameter_callbacks():
     plasm = ecto.Plasm()
     plasm.connect(generate, "out", param_watcher, "input")
     
-    sched = ecto.schedulers.Singlethreaded(plasm)
+    sched = ecto.Scheduler(plasm)
     sched.execute(niter=2)
     print "first value: ",param_watcher.params.value, param_watcher.outputs.output, generate.outputs.out
     assert param_watcher.params.value == 2

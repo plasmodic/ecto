@@ -1,7 +1,7 @@
-# 
+#
 # Copyright (c) 2011, Willow Garage, Inc.
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
 #     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
 #     * Neither the name of the Willow Garage, Inc. nor the names of its
 #       contributors may be used to endorse or promote products derived from
 #       this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -24,7 +24,7 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-# 
+#
 import ecto
 
 class BlackBoxTendrils(object):
@@ -220,7 +220,7 @@ class BlackBox(object):
         return cls()
 
     def declare_params(self, p):
-        '''The implementer of a BlackBox should create this method to declare any 
+        '''The implementer of a BlackBox should create this method to declare any
         parameters or otherwise forward declare internal parameters.
         
         When this function is calls, p will be an empty tendrils like object,
@@ -232,14 +232,14 @@ class BlackBox(object):
         
         :key: the externally usable name of the given tendril
         :cell_name: is the name of a class variable that refers to a cell like type.
-        :cell_key: is cell_name's tendril that will be remapped to key, 
+        :cell_key: is cell_name's tendril that will be remapped to key,
             if None then it is assumed that the key is also the cell_key
         :doc: If not None, this overrides the given tendril's doc string.
         
         forward_all has the signature:
             def forward_all(self, cell_name):
 
-        This function has the behavior that all of the inputs, outputs, or parameters
+        This function has the behavor that all of the inputs, outputs, or parameters
         will be forwared, with their original keys, docs, etc..
         '''
         pass
@@ -264,7 +264,7 @@ class BlackBox(object):
         o.solidify_forward_declares()
 
     def configure(self, p, i, o):
-        ''' 
+        '''
         This function should be used to allocate all cells that are forward declared.
         After this function exits, the BlackBox will try to solidify all the forward declarations.
         '''
@@ -274,4 +274,12 @@ class BlackBox(object):
         '''The return value of this function should be an iterable of tendril connections.
         '''
         raise NotImplementedError("All BlackBox's must implement atleast the connections function....")
+
+    def cell(self):
+        '''
+        Return an instance of the cell that backs this
+        BlackBox. Useful for ecto.If, or other places that expect a
+        cell
+        '''
+        return self.__impl
 

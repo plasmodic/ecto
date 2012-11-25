@@ -57,37 +57,51 @@ namespace ecto
 
       void dispatch_start()
       {
-        ecto::py::scoped_call_back_to_python scb;
+        ECTO_SCOPED_CALLPYTHON();
         if (bp::override start = this->get_override("start"))
           start();
       }
 
       void dispatch_stop()
       {
-        ecto::py::scoped_call_back_to_python scb;
+        ECTO_SCOPED_CALLPYTHON();
         if (bp::override stop = this->get_override("stop"))
           stop();
       }
 
       void dispatch_declare_params(tendrils& params)
       {
-        ecto::py::scoped_call_back_to_python scb;
+        ECTO_SCOPED_CALLPYTHON();
         if (bp::override init = this->get_override("declare_params"))
           init(boost::ref(params));
       }
 
       void dispatch_declare_io(const tendrils&params, tendrils& inputs, tendrils& outputs)
       {
-        ecto::py::scoped_call_back_to_python scb;
+        ECTO_SCOPED_CALLPYTHON();
         if (bp::override declare_io = this->get_override("declare_io"))
           declare_io(boost::ref(params), boost::ref(inputs), boost::ref(outputs));
       }
 
       void dispatch_configure(const tendrils& params, const tendrils& inputs, const tendrils& outputs)
       {
-        ecto::py::scoped_call_back_to_python scb;
+        ECTO_SCOPED_CALLPYTHON();
         if (bp::override config = this->get_override("configure"))
           config(boost::ref(params));
+      }
+
+      void dispatch_activate()
+      {
+        ECTO_SCOPED_CALLPYTHON();
+        if (bp::override activate = this->get_override("activate"))
+          activate();
+      }
+
+      void dispatch_deactivate()
+      {
+        ECTO_SCOPED_CALLPYTHON();
+        if (bp::override deactivate = this->get_override("deactivate"))
+          deactivate();
       }
 
       struct YouveBeenServed
@@ -100,7 +114,7 @@ namespace ecto
 
       ReturnCode dispatch_process(const tendrils& inputs, const tendrils& outputs)
       {
-        ecto::py::scoped_call_back_to_python scb;
+        ECTO_SCOPED_CALLPYTHON();
         int value = OK;
         std::for_each(inputs.begin(),inputs.end(), YouveBeenServed());
         if (bp::override proc = this->get_override("process"))
@@ -171,6 +185,8 @@ namespace ecto
       bp::class_<cell, boost::shared_ptr<cell>, boost::noncopyable>("_cell_cpp", bp::no_init)
         .def("type", &cell::type)
         .def("configure", ((void(cell::*)()) &cell::configure))
+        .def("activate", ((void(cell::*)()) &cell::activate))
+        .def("deactivate", ((void(cell::*)()) &cell::deactivate))
         ;
 
       bp::class_<cellwrap, boost::shared_ptr<cellwrap>, boost::noncopyable> ("_cell_base" /*bp::no_init*/)
@@ -180,6 +196,8 @@ namespace ecto
         .def("declare_params", &cell::declare_params)
         .def("declare_io", ((void(cell::*)()) &cell::declare_io))
         .def("configure", ((void(cell::*)()) &cell::configure))
+        .def("activate", ((void(cell::*)()) &cell::activate))
+        .def("deactivate", ((void(cell::*)()) &cell::deactivate))
         .def("process", (void(cell::*)()) &cell::process)
         .def("start", (void(cell::*)()) &cell::start)
         .def("stop", (void(cell::*)()) &cell::stop)
@@ -231,6 +249,7 @@ namespace ecto
       bp::enum_<ecto::ReturnCode>("ReturnCode")
         .value("OK",OK)
         .value("QUIT",QUIT)
+        .value("DO_OVER",DO_OVER)
         .export_values()
         ;
     }

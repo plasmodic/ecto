@@ -9,7 +9,7 @@ a graph, what ecto is especially good at.
 c++
 ---
 
-Lets make two more cells 
+Lets make two more cells
 
 Download: :download:`srcs/Increment.cpp`
 
@@ -76,7 +76,7 @@ The graph for this will look like:
 
 .. ectoplot:: srcs/plasms_doc.py plasm
 
-Plasms, graphs, in ecto are *Directed Acyclic Graphs* , see :ref:`DAG`. 
+Plasms, graphs, in ecto are *Directed Acyclic Graphs* , see :ref:`DAG`.
 The DAG is important for scheduling and determining execution order.
 It is used to describe the **happens before** relationships in cells.
 Because of the DAG construct, implicit feedback loops are not allowed,
@@ -94,9 +94,9 @@ Once a plasm is constructed, it may be used with an :ref:`ecto scheduler <schedu
 
 ..  _topological-sort: http://en.wikipedia.org/wiki/Topological_sorting
 
-The :py:class:`ecto.schedulers.Singlethreaded` scheduler essentially
+The :py:class:`ecto.Scheduler' scheduler essentially
 does a `topological-sort`_
 on the graph, and then executes each cell in order.
 This repeats for the specified number of iterations,
-or indefinitely if ``niter`` is ``0``. 
+or indefinitely if ``niter`` is ``0``.
 

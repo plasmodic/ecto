@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011, Willow Garage, Inc.
+ * Copyright (c) 2012, Industrial Perception, Inc.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,53 +27,31 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #pragma once
-#include <ecto/plasm.hpp>
-#include <ecto/scheduler.hpp>
-#include <ecto/tendril.hpp>
-#include <ecto/cell.hpp>
-#include <ecto/strand.hpp>
-#include <ecto/atomic.hpp>
 
-#include <boost/asio.hpp>
-
-#include <string>
-#include <map>
-#include <set>
-#include <utility>
-#include <deque>
-
-
+#include <ecto/element.hpp>
+#include <ecto/forward.hpp> // Need cell_ptr def.
+#include <ecto/profile.hpp>
 
 namespace ecto {
+namespace graph {
 
-  namespace schedulers {
+class vertex : public element
+{
+public:
+  vertex(cell_ptr c) : element(), cell_(c) { assert(cell_.get() != 0); }
 
-    class ECTO_EXPORT multithreaded : public scheduler
-    {
-    public:
-      explicit multithreaded(plasm_ptr);
-      ~multithreaded();
+  cell_cptr cell() const { return cell_; }
+  cell_ptr cell() { return cell_; }
 
-      int execute_impl(unsigned niter, unsigned nthread, boost::asio::io_service& topserv);
+  const profile::stats_type & stats() const { return stats_; };
+  profile::stats_type & stats() { return stats_; };
 
-      void stop_impl();
-      void interrupt_impl();
-      void wait_impl();
+private:
+  cell_ptr cell_;
+  //! For collecting execution statistics for cell::process() calls.
+  profile::stats_type stats_;
 
-    private:
+};
 
-      boost::asio::io_service workserv;
-
-      atomic<unsigned> current_iter;
-
-      boost::thread_group threads;
-
-      using scheduler::top_serv;
-      using scheduler::graph;
-      using scheduler::stack;
-      using scheduler::plasm;
-
-      friend struct stack_runner;
-    };
-  }
-}
+} // End of namespace graph.
+} // End of namespace ecto.

@@ -29,7 +29,7 @@
 // This file is use in the docs
 #include <gtest/gtest.h>
 #include <ecto/ecto.hpp>
-#include <ecto/schedulers/singlethreaded.hpp>
+#include <ecto/scheduler.hpp>
 #include <ecto/plasm.hpp>
 
 #define STRINGDIDLY(A) std::string(#A)
@@ -92,8 +92,8 @@ TEST(Plasm, Passthrough)
   // Create an empty plasm
   ecto::plasm::ptr p(new ecto::plasm);
   // Create some cells
-  ecto::cell::ptr m1(new cell_<Module1>), 
-    m2(new cell_<Module2>), 
+  ecto::cell::ptr m1(new cell_<Module1>),
+    m2(new cell_<Module2>),
     pass(new cell_<Passthrough>);
   // Initialize some cells
   m1->declare_params();
@@ -110,7 +110,7 @@ TEST(Plasm, Passthrough)
   p->connect(m1,"d",pass,"in");
   p->connect(pass,"out",m2,"d");
   // Create a scheduler to execute your plasm
-  ecto::schedulers::singlethreaded sched(p);
+  ecto::scheduler sched(p);
   // Execute your plasm once
   sched.execute(1);
   double out;
@@ -126,10 +126,22 @@ TEST(Plasm, Registry)
 {
   // Create a cell that is of type "Add" from the module "ecto_test"
   ecto::cell::ptr add = ecto::registry::create("ecto_test::Add");
+  add->declare_params();
+  add->declare_io();
+
   EXPECT_TRUE(add);
   // Display the name of the cell
   std::cout << add->name() << std::endl;
   EXPECT_EQ("ecto_test::Add", add->name());
+
+  ecto::plasm::ptr p(new ecto::plasm());
+  add->inputs["left"] << 1.0;
+  add->inputs["right"] << 2.0;
+
+  p->insert(add);
+  ecto::scheduler sched(p);
+  sched.execute(1);
+  EXPECT_EQ(add->outputs.get<double>("out"), 3);
 }
 
 

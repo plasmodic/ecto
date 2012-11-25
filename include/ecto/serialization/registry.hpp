@@ -36,8 +36,6 @@
 
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
 #include <ecto/util.hpp>
 #include <ecto/tendril.hpp>
 #include <boost/tuple/tuple.hpp>
@@ -54,6 +52,7 @@ namespace ecto
       void
       operator()(Archive& ar, const tendril& t) const
       {
+        ECTO_LOG_DEBUG("%s", "");
         ar << t.get<T>();
       }
     };
@@ -65,6 +64,7 @@ namespace ecto
       void
       operator()(Archive& ar, tendril& t) const
       {
+        ECTO_LOG_DEBUG("%s", "");
         if (!t.is_type<T>())
           t << tendril(T(), ""); //don't want to lose docs.
         ar >> t.get<T>();
@@ -81,6 +81,7 @@ namespace ecto
       void
       add(const Serializer& s)
       {
+        ECTO_LOG_DEBUG("%s", "");
         typedef typename Serializer::value_type value_type;
         const std::string& name = name_of<value_type>();
         serial_fn_t fnc = serial_fn_t(s);
@@ -102,29 +103,22 @@ namespace ecto
 
     extern template struct registry<boost::archive::binary_oarchive> ;
     extern template struct registry<boost::archive::binary_iarchive> ;
-    extern template struct registry<boost::archive::text_oarchive> ;
-    extern template struct registry<boost::archive::text_iarchive> ;
 
     typedef registry<boost::archive::binary_oarchive> registry_binary_oa;
     typedef registry<boost::archive::binary_iarchive> registry_binary_ia;
-    typedef registry<boost::archive::text_oarchive> registry_text_oa;
-    typedef registry<boost::archive::text_iarchive> registry_text_ia;
+
 
     template<typename T>
     struct register_serializer: boost::noncopyable
     {
       typedef writer_<T, boost::archive::binary_oarchive> writer_binary_oa;
       typedef reader_<T, boost::archive::binary_iarchive> reader_binary_ia;
-      typedef writer_<T, boost::archive::text_oarchive> writer_text_oa;
-      typedef reader_<T, boost::archive::text_iarchive> reader_text_ia;
     private:
       static const register_serializer instance;
       register_serializer()
       {
         serialization::registry_binary_oa::instance().add(writer_binary_oa());
         serialization::registry_binary_ia::instance().add(reader_binary_ia());
-        serialization::registry_text_oa::instance().add(writer_text_oa());
-        serialization::registry_text_ia::instance().add(reader_text_ia());
       }
     };
 
@@ -143,8 +137,6 @@ namespace ecto{                               \
 }
 
 #define ECTO_INSTANTIATE_SERIALIZATION(T)                               \
-  template void T::serialize(boost::archive::text_oarchive&, const unsigned int); \
-  template void T::serialize(boost::archive::text_iarchive&, const unsigned int); \
   template void T::serialize(boost::archive::binary_oarchive&, const unsigned int); \
   template void T::serialize(boost::archive::binary_iarchive&, const unsigned int);
 

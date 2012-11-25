@@ -29,14 +29,14 @@ try:
             self.setWindowTitle("Dynamic Reconfigure")
             plasm.configure_all()
             self.generate_dialogs()
-            self.sched = ecto.schedulers.Singlethreaded(plasm)
+            self.sched = ecto.Scheduler(plasm)
 
         def exec_one(self):
             #hack to get around GIL issues.
             #TODO remove this
             rval = self.sched.execute(niter=1)
-            if rval:
-                sys.exit(rval)
+            if not rval:
+                sys.exit(1)
 
         def generate_dialogs(self):
             vlayout = QVBoxLayout()

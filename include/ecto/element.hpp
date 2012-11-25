@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011, Willow Garage, Inc.
+ * Copyright (c) 2012, Industrial Perception, Inc.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,38 +27,21 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #pragma once
-#include <ecto/plasm.hpp>
-#include <ecto/scheduler.hpp>
-#include <ecto/tendril.hpp>
-#include <ecto/cell.hpp>
-#include <ecto/impl/graph_types.hpp>
-
-#include <string>
-#include <map>
-#include <set>
-#include <utility>
-#include <deque>
-
-
 
 namespace ecto {
+namespace graph {
 
-  namespace schedulers {
-    
-    class ECTO_EXPORT singlethreaded : public scheduler
-    {
-    public:
-      explicit singlethreaded(plasm_ptr);
-      ~singlethreaded();
+class element
+{
+public:
+  element() : tick_(0) {}
 
-      int execute_impl(unsigned niter, unsigned nthreads, boost::asio::io_service& topserv);
+  std::size_t tick() const { return tick_; }
+  void inc_tick() { ++tick_; }
+  void reset_tick() { tick_ = 0; }
+private:
+  std::size_t tick_;
+};
 
-      void stop_impl();
-      void interrupt_impl();
-      void wait_impl();
-    private:
-      bool interupted_;
-    };
-  }
-}
-
+} // End of namespace graph.
+} // End of namespace ecto.

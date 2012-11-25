@@ -12,7 +12,7 @@ plasm.connect(i1['output'] >> add['a'],
               i2['output'] >> add['b'],
               )
 
-sched = ecto.schedulers.Singlethreaded(plasm)
+sched = ecto.Scheduler(plasm)
 sched.execute(niter=2)
 
 print add.outputs.output

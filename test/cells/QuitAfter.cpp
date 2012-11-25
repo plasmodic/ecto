@@ -62,7 +62,7 @@ namespace ecto_test
     int process(const tendrils&, const tendrils&)
     {
       ECTO_LOG_DEBUG("<< process QuitAfter, current=%u N=%u", current % N);
-      if (current == N) 
+      if (current >= N) 
         {
           ECTO_LOG_DEBUG("<< QUITTING at %u", N);
           return ecto::QUIT;
@@ -79,5 +79,5 @@ namespace ecto_test
 
 }
 
-ECTO_CELL(ecto_test, ecto_test::QuitAfter, "QuitAfter", "Quits the graph after so many ticks");
+ECTO_CELL(ecto_test, ecto_test::QuitAfter, "QuitAfter", "Quits the graph after so many process calls");
 

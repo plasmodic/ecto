@@ -1,7 +1,7 @@
-// 
+//
 // Copyright (c) 2011, Willow Garage, Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
 //     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
 //     * Neither the name of the Willow Garage, Inc. nor the names of its
 //       contributors may be used to endorse or promote products derived from
 //       this software without specific prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -24,23 +24,15 @@
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
-// 
+//
 #include <ecto/all.hpp>
 
 #include <ecto/python/std_map_indexing_suite.hpp>
 #include <boost/foreach.hpp>
+#include <ecto/serialization/registry.hpp>
 
 namespace bp = boost::python;
-//namespace boost { namespace python {
-//
-//    //typedef detail::final_std_map_derived_policies<ecto::tendrils, false> details;
-//    // Forward declaration
-//    void std_map_indexing_suite<ecto::tendrils,false>::set_item(ecto::tendrils& container, ecto::tendrils::key_type i, ecto::tendrils::value_type::second_type const& v)
-//    {
-//        throw std::logic_error("This don't work with tendrils");
-//    }
-//}
-//}
+
 namespace ecto
 {
   namespace py
@@ -116,6 +108,17 @@ namespace ecto
       {
         return ts[name];
       }
+
+      void tendrils_save(const tendrils& ts, std::ostream& o)
+      {
+        boost::archive::binary_oarchive oa(o, boost::archive::no_header);
+        oa << ts;
+      }
+
+      void tendrils_load(tendrils& ts, std::istream& i){
+        boost::archive::binary_iarchive ia(i,  boost::archive::no_header);
+        ia >> ts;
+      }
     }
 
     void wrapTendrils()
@@ -132,6 +135,9 @@ namespace ecto
         .def("__getitem__", &tendril_get)
         .def("at",tendril_at)
         .def("notify",tendrils_notify)
+        .def("save", tendrils_save)
+        .def("load", tendrils_load)
+        .enable_pickling()
         ;
     }
   }

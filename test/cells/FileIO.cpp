@@ -27,7 +27,7 @@ namespace ecto_test
     int
     process(const tendrils& /*inputs*/, const tendrils& /*outputs*/)
     {
-      ::ecto::py::scoped_call_back_to_python scp;
+      ECTO_SCOPED_CALLPYTHON();
       **stream_ << *input_ << std::endl;
       return ecto::OK;
     }
@@ -57,7 +57,7 @@ namespace ecto_test
     int
     process(const tendrils& /*inputs*/, const tendrils& /*outputs*/)
     {
-      ::ecto::py::scoped_call_back_to_python scp;
+      ECTO_SCOPED_CALLPYTHON();
       std::istream& stream = **stream_;
       if (stream.eof()) return ecto::QUIT;
       double d;

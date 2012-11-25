@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011, Willow Garage, Inc.
+ * Copyright (c) 2012, Industrial Perception, Inc.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,47 +27,59 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <ecto/log.hpp>
 #include <ecto/ecto.hpp>
-#include <boost/format.hpp>
+#include <ecto/registry.hpp>
 
-namespace ecto
+using ecto::tendrils;
+namespace ecto_test
 {
-  namespace bp = boost::python;
-
-  struct TickCheck
+  struct DoOverFor
   {
-    std::size_t tick;
-    unsigned n_in;
-    std::map<unsigned, tendril_ptr> intendrils;
-
-    TickCheck() : tick(0) { }
-
-    const static void declare_params(tendrils& p)
+    static void declare_params(tendrils& params)
     {
-      p.declare<unsigned>("ninputs", "number of inputs", 1);
+      params.declare<unsigned> ("N", "Return ecto::DO_OVER from process() this many times");
     }
 
-    const static void declare_io(const tendrils& p, tendrils& i, tendrils& o)
+    static void declare_io(const tendrils& params, tendrils& in, tendrils& out)
     {
-      unsigned n_in = p.get<unsigned>("ninputs");
-      for (unsigned j=0; j<n_in; ++j)
-        {
-          i.declare<tendril::none>(str(boost::format("in%u") % j), "An input");
-        }
+      in.declare<double> ("in", "An inbox");
+      out.declare<double>("out", "outbox");
+
+      out.declare<unsigned>(&DoOverFor::current, "current", "", 0);
     }
 
-    int process(const tendrils& in, const tendrils& out)
+    DoOverFor() : N(0) { }
+
+
+    void configure(const tendrils& parms, const tendrils& inputs, const tendrils& outputs)
     {
-      for (tendrils::const_iterator iter = in.begin(), end = in.end(); iter!=end; ++iter)
-        {
-          std::cout << iter->second->tick << " >>?>> " << tick << "\n";
-          if (iter->second->tick != tick)
-            abort();
-        }
-      ++tick;
-      return ecto::OK;
+      N = parms.get<unsigned>("N");
+      in = inputs["in"];
+      out = outputs["out"];
     }
+
+    void start() { *current = 0; }
+
+    int process(const tendrils&, const tendrils&)
+    {
+      ECTO_LOG_DEBUG("<< process DoOverFor, current=%u N=%u", *current % N);
+      ++(*current);
+      if (! (*current % N))
+      {
+        *out = *in; // Only set outputs when returning OK.
+        ECTO_LOG_DEBUG("<< Returning OK ...", N);
+        return ecto::OK;
+      }
+
+      return ecto::DO_OVER;
+    }
+
+    ecto::spore<double> in, out;
+    ecto::spore<unsigned> current;
+    unsigned N;
   };
+
 }
 
-ECTO_CELL(ecto_test, ecto::TickCheck, "TickCheck", "Tick Checker");
+ECTO_CELL(ecto_test, ecto_test::DoOverFor, "DoOverFor", "Returns ecto::DO_OVER for so many process calls, and returns ecto::OK every current mod N");

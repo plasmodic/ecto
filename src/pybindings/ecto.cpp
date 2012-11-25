@@ -25,14 +25,11 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 //
-#include <boost/python.hpp>
 #include <ecto/ecto.hpp>
 #include <ecto/registry.hpp>
 
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <boost/python/stl_iterator.hpp>
-
-
 #include <boost/thread.hpp>
 
 #include <fstream>
@@ -53,6 +50,8 @@ namespace ecto {
     void wrap_black_box();
     void wrap_python_streambuf();
     void wrap_parameters();
+    void wrap_ptime();
+
     namespace {
       std::ofstream log_file;
       std::streambuf* stdout_orig = 0, *stderr_orig = 0, *log_rdbuf = 0;
@@ -95,15 +94,42 @@ namespace ecto {
     std::string versionstr() { return ECTO_VERSION_STRING; }
     unsigned abinum() { return ECTO_ABI_VERSION; }
     bp::tuple sonametuple() { return bp::make_tuple(ECTO_MAJOR_VERSION, ECTO_MINOR_VERSION, ECTO_PATCH_VERSION); }
-    std::vector<std::string> list_of_strings(bp::list l)
+
+    std::vector<std::string> list_of_strings(bp::object l)
     {
       std::vector<std::string> sl;
       bp::stl_input_iterator<std::string> begin(l),end;
       std::copy(begin,end,std::back_inserter(sl));
       return sl;
     }
-  }
-}
+
+    std::vector<int> list_of_ints(bp::object l)
+    {
+      std::vector<int> sl;
+      bp::stl_input_iterator<int> begin(l),end;
+      std::copy(begin,end,std::back_inserter(sl));
+      return sl;
+    }
+
+    std::vector<float> list_of_floats(bp::object l)
+    {
+      std::vector<float> sl;
+      bp::stl_input_iterator<float> begin(l),end;
+      std::copy(begin,end,std::back_inserter(sl));
+      return sl;
+    }
+
+    std::vector<double> list_of_doubles(bp::object l)
+    {
+      std::vector<double> sl;
+      bp::stl_input_iterator<double> begin(l),end;
+      std::copy(begin,end,std::back_inserter(sl));
+      return sl;
+    }
+
+
+  } // End of namespace py.
+} // End of namespace ecto.
 
 BOOST_PYTHON_MODULE(ecto_main)
 {
@@ -121,9 +147,9 @@ BOOST_PYTHON_MODULE(ecto_main)
   ecto::py::wrap_black_box();
   ecto::py::wrap_python_streambuf();
   ecto::py::wrap_parameters();
+  ecto::py::wrap_ptime();
 
   bp::def("hardware_concurrency", &boost::thread::hardware_concurrency);
-
   bp::def("version",&ecto::py::versionstr);
   bp::def("abi",&ecto::py::abinum);
   bp::def("soname",&ecto::py::sonametuple);
@@ -137,7 +163,20 @@ BOOST_PYTHON_MODULE(ecto_main)
   bp::class_<std::vector<std::string> > ("VectorString")
     .def(bp::vector_indexing_suite<std::vector<std::string> >());
 
+  bp::class_<std::vector<int> > ("VectorInt")
+    .def(bp::vector_indexing_suite<std::vector<int> >());
+
+  bp::class_<std::vector<float> > ("VectorFloat")
+    .def(bp::vector_indexing_suite<std::vector<float> >());
+
+  bp::class_<std::vector<double> > ("VectorDouble")
+    .def(bp::vector_indexing_suite<std::vector<double> >());
+
   bp::def("list_of_strings", &ecto::py::list_of_strings);
+  bp::def("list_of_ints", &ecto::py::list_of_ints);
+  bp::def("list_of_floats", &ecto::py::list_of_floats);
+  bp::def("list_of_doubles", &ecto::py::list_of_doubles);
+
 
 }
 

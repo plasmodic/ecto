@@ -27,39 +27,10 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #pragma once
-#include <ecto/plasm.hpp>
-#include <ecto/scheduler.hpp>
-#include <ecto/tendril.hpp>
-#include <ecto/cell.hpp>
-#include <ecto/impl/graph_types.hpp>
 
-#include <string>
-#include <map>
-#include <set>
-#include <utility>
-#include <deque>
-
-
-
-namespace ecto {
-
-  namespace schedulers {
-
-    class ECTO_EXPORT sdf : public scheduler
-    {
-    public:
-      explicit sdf(plasm_ptr);
-      ~sdf();
-
-      int execute_impl(unsigned niter, unsigned nthreads, boost::asio::io_service& topserv);
-
-      void stop_impl();
-      void interrupt_impl();
-      void wait_impl();
-    private:
-      struct runner;
-      bool interupted_;
-    };
-  }
-}
-
+/* #undef ECTO_EXCEPTION_SHARED_POINTERS_ARE_CONST */
+#define ECTO_EXCEPTION_DIAGNOSTIC_IMPL_TAKES_CHARSTAR
+/* #undef ECTO_EXCEPTION_RELEASE_RETURNS_VOID */
+#define ECTO_EXCEPTION_TAG_TYPE_NAME_RETURNS_STRING
+/* #undef ECTO_EXCEPTION_TYPE_INFO_NESTED */
+#define ECTO_EXCEPTION_HAS_CLONE

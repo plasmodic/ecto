@@ -16,7 +16,7 @@ def doit():
     print "**** post insert *******"
 
     print "**** pre execute ********"
-    sched = ecto.schedulers.Singlethreaded(plasm)
+    sched = ecto.Scheduler(plasm)
     sched.execute(1)
     print "**** post execute *******"
 

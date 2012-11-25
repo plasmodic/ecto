@@ -32,13 +32,14 @@ the schedulers.
 
 import ecto
 
-possible_schedulers = [ x for x in ecto.schedulers.__dict__.keys() if x[0] != '_']
+possible_schedulers = [ 'Scheduler' ]
 
-def use_ipython(options, plasm, locals={}):
+def use_ipython(options, sched, plasm, locals={}):
     '''Launch a plasm using ipython, and a scheduler of choice.
 
        Keyword arguments:
        options -- are from scheduler_options
+       sched -- is an already initialized scheduler for plasm.
        plasm -- The graph to execute
        locals -- are a dictionary of locals to forward to the ipython shell, use locals()
     '''
@@ -46,8 +47,7 @@ def use_ipython(options, plasm, locals={}):
     for key, val in locals.items():
         vars()[key] = val
 
-    options.use_ipython = True
-    run_plasm(options, plasm, locals=locals)
+    sched.execute_async(options.niter)
 
     import IPython
     if IPython.__version__ < '0.11':
@@ -83,11 +83,11 @@ def run_plasm(options, plasm, locals={}):
         from ecto.gui import gui_execute
         gui_execute(plasm)
     else:
-        sched = ecto.schedulers.__dict__[options.scheduler_type](plasm)
+        sched = ecto.__dict__[options.scheduler_type](plasm)
         if options.ipython:
             use_ipython(options, sched, plasm, locals)
         else:
-            sched.execute(options.niter, options.nthreads)
+            sched.execute(options.niter)
     if options.stats:
         print sched.stats()
 
@@ -114,6 +114,8 @@ class CellFactory(object):
                     p = ''.join(key.split(self.prefix + '_')[:])
                 else:
                     p = key
+                if p not in prototype.params.keys():
+                    continue
                 t = type(prototype.params[p])
                 if 'values' in t.__dict__ and type(value) != t and type(value) == str:
                     params[p] = t.names[value]
@@ -211,25 +213,25 @@ def cell_options(parser, CellType, prefix=None):
                       dest=dest,
                       type=tendril_type,
                       default=x.data().val,
-                      help=x.data().doc + ' ... (default: %(default)s)'
+                      help=x.data().doc + ' ~  (default: %(default)s)'
                       )
         if tendril_type is type(True):
             if x.data().val:
-                kwargs = dict(dest=dest, help=x.data().doc + 'Disables %s' % dest, action='store_false')
+                kwargs = dict(dest=dest, help=x.data().doc + ' Disables %s' % dest, action='store_false')
                 dest = '%s_disable' % dest
             else:
-                kwargs = dict(dest=dest, help=x.data().doc + 'Enables %s' % dest, action='store_true')
+                kwargs = dict(dest=dest, help=x.data().doc + ' Enables %s' % dest, action='store_true')
                 dest = '%s_enable' % dest
         if choices:
-#            print 'We got choices', choices
             kwargs['choices'] = choices
+            kwargs['help'] = kwargs['help'] + ' (choices: %(choices)s)'
         group.add_argument('--%s' % dest, **kwargs)
 
     factory = CellFactory(cell_type, cell, prefix)
     return factory
 
 def scheduler_options(parser,
-                      default_scheduler='Singlethreaded',
+                      default_scheduler='Scheduler',
                       default_nthreads=0,
                       default_niter=0,
                       default_shell=False,
@@ -285,7 +287,7 @@ def scheduler_options(parser,
                         const=True, default=default_graphviz,
                         help='Show the runtime statistics of the plasm.')
 
-def doit(plasm, description="An ecto graph.", locals={}, args=None, default_scheduler='Singlethreaded', default_nthreads=0, default_niter=0, default_shell=False, default_graphviz=False):
+def doit(plasm, description="An ecto graph.", locals={}, args=None, default_scheduler='Scheduler', default_nthreads=0, default_niter=0, default_shell=False, default_graphviz=False):
     '''doit is a short hand for samples, that is a combination of a call to scheduler_options, and then run_plasm.
        This function in not intended to allow customization of parameter parsing.  If this is needed please call
        scheduler_optinos and run_plasm yourself.
