@@ -47,6 +47,10 @@ class BlackBoxTendrils(object):
             return getattr(self._tendrils, name)
         else:
             return object.__getattribute__(self, name)
+        
+    def __getitem__(self, key):
+        #forward to the member _tendrils
+        return self._tendrils.at(key)  
 
     def __get_cell_type(self, cell_name):
         cell_type = getattr(self.bb.__class__, cell_name, False)
