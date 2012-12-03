@@ -110,6 +110,12 @@ def cell_process(self):
 def cell_configure(self):
     return self.__impl.configure()
 
+def cell_activate(self):
+    return self.__impl.activate()
+
+def cell_deactivate(self):
+    return self.__impl.deactivate()
+
 def cell_name(self):
     return self.__impl.name()
 
@@ -148,6 +154,8 @@ def postregister(cellname, cpptypename, short_doc, inmodule):
                          inspect = cell_inspect,
                          process = cell_process,
                          configure = cell_configure,
+                         activate = cell_activate,
+                         deactivate = cell_deactivate,
                          name = cell_name,
                          type_name = cell_typename,
                          __factory = e.construct,
@@ -156,14 +164,14 @@ def postregister(cellname, cpptypename, short_doc, inmodule):
 
     inmodule.__dict__[cellname] = thistype
 
-if platform.system().startswith('freebsd'):
-        # C++ modules are extremely fragile when loaded with RTLD_LOCAL,
-        # which is what Python uses on FreeBSD by default, and maybe other
-        # systems. Convince it to use RTLD_GLOBAL.
 
-        # See thread by Abrahams et al:
-        # http://mail.python.org/pipermail/python-dev/2002-May/024074.html
-        sys.setdlopenflags(0x102)
+#allow build/lib/ecto and src/ecto/python/ecto
+#from pkgutil import extend_path
+#__path__ = extend_path(__path__, __name__)
+
+#load ecto.so
+#from ecto.load_pybindings import load_pybindings
+#load_pybindings(__name__)
 
 from ecto.cells import *
 from ecto.ecto_main import *
@@ -173,7 +181,3 @@ from cell import *
 from blackbox import *
 import test
 
-#
-#  temporary backwards compat measures
-#
-schedulers.Threadpool = schedulers.Multithreaded

@@ -19,7 +19,7 @@ outside this set.
 Singlethreaded
 --------------
 
-.. class:: ecto.schedulers.Singlethreaded
+.. class:: ecto.Scheduler
 
    Singlethreaded scheduler.  This class will execute the cells in the
    plasm in topological order in a single thread.
@@ -57,54 +57,6 @@ Singlethreaded
       Blocks until the execution started by the last call to
       execute_async() is finished.
 
-                  
-Threadpool
-----------
-
-.. class:: ecto.schedulers.Threadpool
-
-   Simple locally-greedy threadpool scheduler.  Each cell gets a
-   thread that waits until its inputs are ready, then it requests that
-   its ``process()`` method be run by one of a pool of worker threads.
-
-   .. method:: __init__(plasm)
-
-      Construct one around a plasm
-
-   .. method:: execute()
-
-      Execute the graph in an infinite loop.  Blocks.
-
-   .. method:: execute(niter)
-
-      Execute the graph niter times, with nthreads equal to the lesser
-      of the hardware concurrency or the number of nodes in the graph.
-      This call will blocks until the execution is finished.
-
-   .. method:: execute(niter, nthreads)
-
-      Execute the graph niter times in nthreads.  This call will
-      blocks until the execution is finished.
-
-   .. method:: execute_async()
-   .. method:: execute_async(niter)
-   .. method:: execute_async(niter, nthreads)
-
-      These functions are the same as the synchronous ones above,
-      except they start a background thread and return immediately.
-
-   .. method:: running()
-
-      Returns true if the execution started by execute_async() is still running.
-
-   .. method:: stop()
-
-      Stops the background graph execution at the end of the current process() call.
-
-   .. method:: wait()
-
-      Blocks until the execution started by the last call to
-      execute_async() is finished.
 
 Reentrant running
 ------------------

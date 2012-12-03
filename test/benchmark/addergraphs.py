@@ -79,7 +79,7 @@ def test_plasm_impl(sched_type, nlevels, nthreads, niter):
     (plasm, outnode) = build_addergraph(nlevels)
     print "*"*80, "\nSCHED:", sched_type
     sched = sched_type(plasm)
-    sched.execute(niter, nthreads)
+    sched.execute(niter)
     print sched.stats()
     print "RESULT:", outnode.outputs.out
     shouldbe = float(2**nlevels * niter)
@@ -87,7 +87,7 @@ def test_plasm_impl(sched_type, nlevels, nthreads, niter):
     assert outnode.outputs.out == shouldbe
 
 def test_plasm(nlevels, nthreads, niter):
-    for sched in [ecto.schedulers.Singlethreaded, ecto.schedulers.Threadpool]:
+    for sched in [ecto.Scheduler]:
         test_plasm_impl(sched, nlevels, nthreads, niter)
 
 if __name__ == '__main__':

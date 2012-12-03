@@ -30,8 +30,7 @@
 #include <ecto/ecto.hpp>
 #include <boost/foreach.hpp>
 #include <ecto/plasm.hpp>
-#include <ecto/schedulers/singlethreaded.hpp>
-#include <ecto/schedulers/multithreaded.hpp>
+#include <ecto/scheduler.hpp>
 
 #include "../tendril_spec.hpp"
 namespace ecto
@@ -42,7 +41,7 @@ namespace ecto
 
     struct BlackBox
     {
-      typedef schedulers::singlethreaded scheduler_t;
+      typedef scheduler scheduler_t;
       static void
       shallow_merge(const tendrils& fts, tendrils& ts)
       {
@@ -75,16 +74,20 @@ namespace ecto
         try
         {
           if (niter_ > 0)
-          {
-            return sched_->execute(niter_);
-          }
+            sched_->execute(niter_);
           else
             sched_->execute(0);
+          if (! sched_->running())
+            return ecto::QUIT;
         } catch (ecto::except::EctoException& e)
         {
           throw std::runtime_error(ecto::except::diagnostic_string(e));
         }
         return ecto::OK;
+      }
+      void stop(){
+        //std::cout << "Stopped! " << __PRETTY_FUNCTION__ << std::endl;
+
       }
       plasm::ptr plasm_;
       boost::shared_ptr<scheduler_t> sched_;
@@ -96,12 +99,14 @@ namespace ecto
     {
       cell_<BlackBox>::ptr black_box(new cell_<BlackBox>);
       cell::ptr base(black_box);
+      base->declare_params(); //declare params and IO
+      base->declare_io();
       BlackBox::shallow_merge(p, base->parameters);
       BlackBox::shallow_merge(i, base->inputs);
       BlackBox::shallow_merge(o, base->outputs);
       base->configure(); //This causes the impl to be created
-      black_box->impl->plasm_ = plasm; //initialize a few thangs
-      black_box->impl->niter_ = niter;
+      black_box->impl().plasm_ = plasm; //initialize a few thangs
+      black_box->impl().niter_ = niter;
       return black_box;
     }
   }

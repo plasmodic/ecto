@@ -31,8 +31,6 @@
 
 namespace ecto
 {
-  namespace bp = boost::python;
-
   struct PassthroughAny
   {
     static void

@@ -38,8 +38,8 @@
 #include <stdint.h>
 
 namespace ecto {
-  ECTO_EXPORT void log(const char*, unsigned line, const std::string& msg);
-  ECTO_EXPORT void assert_failed(const char* file, unsigned line, const char* cond, const char* msg);
+  ECTO_EXPORT void log(const char*, const char*, unsigned line, const std::string& msg);
+  ECTO_EXPORT void assert_failed(const char*, const char* file, unsigned line, const char* cond, const char* msg);
   bool logging_on();
 }
 
@@ -49,7 +49,7 @@ namespace ecto {
 #define ECTO_ASSERT(X, msg)                                             \
   do {                                                                  \
     ECTO_RANDOM_DELAY();                                                \
-    if (X) ; else ecto::assert_failed(__FILE__, __LINE__, #X, msg);     \
+    if (X) ; else ecto::assert_failed(__PRETTY_FUNCTION__, __FILE__, __LINE__, #X, msg); \
   } while(false)
 #endif
 
@@ -58,7 +58,7 @@ namespace ecto {
   do {                                                                  \
     ECTO_RANDOM_DELAY();                                                \
     if (__builtin_expect((ecto::logging_on()), 0))                      \
-      ::ecto::log(__FILE__, __LINE__, str(boost::format(fmt) % args));  \
+      ::ecto::log(__PRETTY_FUNCTION__, __FILE__, __LINE__, str(boost::format(fmt) % args)); \
   } while (false)
 #define ECTO_START()  ECTO_LOG_DEBUG(">>> %s", __PRETTY_FUNCTION__);
 #define ECTO_FINISH() ECTO_LOG_DEBUG("<<< %s", __PRETTY_FUNCTION__);

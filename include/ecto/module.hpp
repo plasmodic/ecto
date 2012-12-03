@@ -34,8 +34,8 @@
 #include <ecto/registry.hpp>
 
 #define ECTO_ASSERT_MODULE_NAME(MODULE)                                 \
-//  template <unsigned T>  void incorrect_ecto_module_name_##MODULE();          
-//  extern template void incorrect_ecto_module_name_##MODULE<MODULE##_ectomodule_EXPORTS>();
+  template <unsigned T>  void incorrect_ecto_module_name_##MODULE();          \
+  extern template void incorrect_ecto_module_name_##MODULE<MODULE##_ectomodule_EXPORTS>();
 
 #define ECTO_DEFINE_MODULE(modname)                                     \
   ECTO_INSTANTIATE_REGISTRY(modname)                                    \

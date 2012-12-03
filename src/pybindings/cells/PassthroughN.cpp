@@ -43,7 +43,7 @@ namespace ecto
     static void
     declare_io(const tendrils& parms, tendrils& in, tendrils& out)
     {
-      ecto::py::scoped_call_back_to_python scb;
+      ECTO_SCOPED_CALLPYTHON();
       bp::object obj;
       parms["items"] >> obj;
       if (!obj || obj == bp::object())

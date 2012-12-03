@@ -51,18 +51,18 @@ def test_dual_line_plasm(nlevels):
     printer = ecto_test.Printer()
     plasm.connect(add, "out", printer, "in")
     
-    sched = ecto.schedulers.Threadpool(plasm)
-    sched.execute(niter=1, nthreads=int(nlevels/2))
+    sched = ecto.Scheduler(plasm)
+    sched.execute(niter=1)
     result = add.outputs.out
     print "result=", result
     assert(result == nlevels * 2)
 
-    sched.execute(niter=2, nthreads=int(nlevels/2))
+    sched.execute(niter=2)
     result = add.outputs.out
     print "iter2 result=", result
     assert result == (nlevels + 2) * 2
 
-    sched.execute(niter=3, nthreads=int(nlevels/2))
+    sched.execute(niter=3)
     result = add.outputs.out
     print "iter3 result=", result
     assert result == (nlevels + 5) * 2

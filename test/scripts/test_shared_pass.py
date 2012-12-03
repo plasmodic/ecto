@@ -41,7 +41,7 @@ def test_plasm():
     plasm.connect(sps[0],"output",sps[4],"input");
     plasm.connect(sps[4],"output",sps[5],"input");
 
-    sched = ecto.schedulers.Singlethreaded(plasm)
+    sched = ecto.Scheduler(plasm)
     sched.execute(niter=1)
     #ecto.view_plasm(plasm)
 

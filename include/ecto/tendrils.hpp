@@ -77,6 +77,7 @@ namespace ecto
     void clear() { storage.clear(); }
 
     size_type size() const { return storage.size(); }
+    size_type count(const std::string& name) const { return storage.count(name); }
 
     void erase(iterator pos) { storage.erase(pos); }
     void erase(const key_type& k) { storage.erase(k); }
@@ -230,7 +231,6 @@ namespace ecto
     tendrils(const tendrils&);
 
     storage_type storage;
-    mutable boost::mutex mtx;
     typedef boost::signals2::signal<void(void*, const tendrils*)> sig_t;
     sig_t static_bindings_;
 
