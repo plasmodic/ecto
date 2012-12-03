@@ -47,7 +47,7 @@ struct graph_t
       : boost::adjacency_list<boost::vecS, // OutEdgeList...
                               boost::vecS, // VertexList
                               boost::bidirectionalS, // Directed
-                        vertex_ptr, // vertex property
+                              vertex_ptr, // vertex property
                               edge_ptr> // edge property
 {
 };
