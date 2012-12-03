@@ -50,7 +50,7 @@ def verify():
     print "txt has", lns, "lines" 
     assert len(txt.splitlines()) >= 5
     
-for s in ecto.test.schedulers:
+for s in [ecto.Scheduler]:
     print s, "SYNC"
     sched = make(s)
     sched.execute(niter=5)
@@ -60,7 +60,7 @@ for s in ecto.test.schedulers:
     print s, "ASYNC"
     sched2 = make(s)
     sched2.execute_async(niter=5)
-    sched2.wait()
+    sched2.run()
     ecto.unlog_to_file()
     verify()
 

@@ -79,5 +79,5 @@ namespace ecto_test
 
 }
 
-ECTO_CELL(ecto_test, ecto_test::ThrowAfter, "ThrowAfter", "Throw after so many ticks");
+ECTO_CELL(ecto_test, ecto_test::ThrowAfter, "ThrowAfter", "Throw after so many process calls");
 

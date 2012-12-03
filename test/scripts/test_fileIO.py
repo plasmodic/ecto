@@ -75,12 +75,12 @@ def test_io_real(Scheduler):
     import os
     os.remove('cards.txt')
 
-def test_io_stdo(Scheduler=ecto.schedulers.Singlethreaded):
+def test_io_stdo(Scheduler=ecto.Scheduler):
     import sys
     test_fileO(Scheduler, sys.stdout, realfile=True)
 
 if __name__ == '__main__':
-    for x in [ecto.schedulers.Multithreaded, ecto.schedulers.Singlethreaded]:
+    for x in [ecto.Scheduler]:
         print " >>>>>>>>> Start sched >>>>>>>>>>", str(x)
         test_io_fake(x)
         test_io_real(x)

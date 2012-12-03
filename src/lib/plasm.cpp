@@ -1,7 +1,7 @@
-// 
+//
 // Copyright (c) 2011, Willow Garage, Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
 //     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
 //     * Neither the name of the Willow Garage, Inc. nor the names of its
 //       contributors may be used to endorse or promote products derived from
 //       this software without specific prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -24,14 +24,19 @@
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
-// 
+//
 #include <ecto/all.hpp>
 #include "plasm/impl.hpp"
 
-#include <ecto/tendrils.hpp>
-#include <ecto/edge.hpp>
 #include <ecto/cell.hpp>
+#include <ecto/ecto.hpp>
+#include <ecto/edge.hpp>
+#include <boost/graph/graphviz.hpp>
 #include <ecto/impl/graph_types.hpp>
+#include <ecto/serialization/registry.hpp>
+#include <ecto/serialization/cell.hpp>
+#include <ecto/tendrils.hpp>
+#include <ecto/vertex.hpp>
 
 #include <boost/format.hpp>
 #include <boost/date_time/posix_time/posix_time_duration.hpp>
@@ -44,16 +49,12 @@
 #include <utility>
 #include <deque>
 
-#include <ecto/ecto.hpp>
-#include <ecto/serialization/registry.hpp>
-#include <ecto/serialization/cell.hpp>
-#include <boost/graph/graphviz.hpp>
 namespace ecto
 {
   using namespace graph;
-#define STRINGY_DINGY(A) #A
+#define STRINGIZE(A) #A
   //see http://www.graphviz.org/content/node-shapes for reference.
-  const char* table_str = STRINGY_DINGY(
+  const char* table_str = STRINGIZE(
       <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
       %s
       <TR>
@@ -65,24 +66,24 @@ namespace ecto
       </TABLE>
   );
 
-  const char* input_str = STRINGY_DINGY(
+  const char* input_str = STRINGIZE(
       <TD PORT="i_%s" BGCOLOR="springgreen">%s</TD>
   );
 
-  const char* cell_str = STRINGY_DINGY(<TD ROWSPAN="%d" COLSPAN="%d" BGCOLOR="khaki">%s</TD>
+  const char* cell_str = STRINGIZE(<TD ROWSPAN="%d" COLSPAN="%d" BGCOLOR="khaki">%s</TD>
   );
 
-  const char* param_str_1st = STRINGY_DINGY(
+  const char* param_str_1st = STRINGIZE(
       <TD PORT="p_%s" BGCOLOR="lightblue">%s</TD>
   );
 
-  const char* param_str_N = STRINGY_DINGY(
+  const char* param_str_N = STRINGIZE(
       <TR>
       <TD PORT="p_%s" BGCOLOR="lightblue">%s</TD>
       </TR>
   );
 
-  const char* output_str = STRINGY_DINGY(
+  const char* output_str = STRINGIZE(
       <TD PORT="o_%s" BGCOLOR="indianred1">%s</TD>
   );
 
@@ -90,11 +91,7 @@ namespace ecto
   {
     graph_t* g;
 
-    vertex_writer(graph_t* g_)
-        :
-          g(g_)
-    {
-    }
+    vertex_writer(graph_t* g_) : g(g_) { }
 
     std::string
     htmlescape(const std::string& in)
@@ -114,7 +111,7 @@ namespace ecto
     operator()(std::ostream& out, graph_t::vertex_descriptor vd)
     {
 
-      cell_ptr c = (*g)[vd];
+      cell_ptr c = (*g)[vd]->cell();
       int n_inputs = c->inputs.size();
       int n_outputs = c->outputs.size();
       int n_params = c->parameters.size();
@@ -164,16 +161,13 @@ namespace ecto
   {
     graph_t* g;
 
-    edge_writer(graph_t* g_)
-        :
-          g(g_)
-    {
-    }
+    edge_writer(graph_t* g_) : g(g_) { }
 
     void
     operator()(std::ostream& out, graph_t::edge_descriptor ed)
     {
-      out << "[headport=\"i_" << (*g)[ed]->to_port() << "\" tailport=\"o_" << (*g)[ed]->from_port() << "\"]";
+      out << "[headport=\"i_" << (*g)[ed]->to_port()
+          << "\" tailport=\"o_" << (*g)[ed]->from_port() << "\"]";
     }
   };
 
@@ -188,11 +182,7 @@ namespace ecto
     }
   };
 
-  plasm::plasm()
-      :
-        impl_(new impl)
-  {
-  }
+  plasm::plasm() : impl_(new impl) { }
 
   plasm::~plasm()
   {
@@ -213,7 +203,8 @@ namespace ecto
   void
   plasm::viz(std::ostream& out) const
   {
-    boost::write_graphviz(out, impl_->graph, vertex_writer(&impl_->graph), edge_writer(&impl_->graph), graph_writer());
+    boost::write_graphviz(out, impl_->graph, vertex_writer(&impl_->graph),
+                          edge_writer(&impl_->graph), graph_writer());
   }
 
   std::string
@@ -279,6 +270,24 @@ namespace ecto
   }
 
   void
+  plasm::activate_all()
+  {
+    BOOST_FOREACH(impl::ModuleVertexMap::value_type& x, impl_->mv_map)
+        {
+          x.first->activate();
+        }
+  }
+
+  void
+  plasm::deactivate_all()
+  {
+    BOOST_FOREACH(impl::ModuleVertexMap::value_type& x, impl_->mv_map)
+        {
+          x.first->deactivate();
+        }
+  }
+
+  void
   plasm::check() const
   {
     graph_t& g(impl_->graph);
@@ -286,7 +295,7 @@ namespace ecto
     tie(begin, end) = boost::vertices(g);
     while (begin != end)
     {
-      cell_ptr m = g[*begin];
+      cell_ptr m = g[*begin]->cell();
       std::set<std::string> in_connected, out_connected;
 
       //verify all required inputs are connected
@@ -295,17 +304,18 @@ namespace ecto
       while (b_in != e_in)
       {
         edge_ptr in_edge = g[*b_in];
-        cell_ptr from_module = g[source(*b_in, g)];
         in_connected.insert(in_edge->to_port());
         ++b_in;
       }
 
-      for (tendrils::const_iterator b_tend = m->inputs.begin(), e_tend = m->inputs.end(); b_tend != e_tend; ++b_tend)
+      for (tendrils::const_iterator b_tend = m->inputs.begin(), e_tend = m->inputs.end();
+           b_tend != e_tend; ++b_tend)
       {
         if (b_tend->second->required() && in_connected.count(b_tend->first) == 0)
         {
           BOOST_THROW_EXCEPTION(
-              except::NotConnected() << except::tendril_key(b_tend->first) << except::cell_name(m->name()));
+              except::NotConnected() << except::tendril_key(b_tend->first)
+                                     << except::cell_name(m->name()));
         }
       }
 
@@ -319,12 +329,14 @@ namespace ecto
         ++b_out;
       }
 
-      for (tendrils::const_iterator b_tend = m->outputs.begin(), e_tend = m->outputs.end(); b_tend != e_tend; ++b_tend)
+      for (tendrils::const_iterator b_tend = m->outputs.begin(), e_tend = m->outputs.end();
+           b_tend != e_tend; ++b_tend)
       {
         if (b_tend->second->required() && out_connected.count(b_tend->first) == 0)
         {
           BOOST_THROW_EXCEPTION(
-              except::NotConnected() << except::tendril_key(b_tend->first) << except::cell_name(m->name()));
+              except::NotConnected() << except::tendril_key(b_tend->first)
+                                     << except::cell_name(m->name()));
         }
       }
 
@@ -339,8 +351,8 @@ namespace ecto
       tie(beg, end) = vertices(impl_->graph);
       while (beg != end)
       {
-        cell_ptr c = impl_->graph[*beg];
-        c->reset_tick();
+        vertex_ptr v = impl_->graph[*beg];
+        v->reset_tick();
         ++beg;
       }
     }
@@ -351,7 +363,9 @@ namespace ecto
       while (beg != end)
       {
         edge_ptr e = impl_->graph[*beg];
-        while (e->size() > 0)
+        e->reset_tick();
+        // TODO: We're doing more than resetting ticks in this method. Rename!
+        while (! e->empty()) // TODO: Add a clear() method.
           e->pop_front();
         ++beg;
       }
@@ -361,14 +375,14 @@ namespace ecto
   void
   plasm::save(std::ostream& out) const
   {
-    boost::archive::text_oarchive oa(out);
+    boost::archive::binary_oarchive oa(out);
     oa << *this;
   }
 
   void
   plasm::load(std::istream& in)
   {
-    boost::archive::text_iarchive ia(in);
+    boost::archive::binary_iarchive ia(in);
     ia >> *this;
   }
 }

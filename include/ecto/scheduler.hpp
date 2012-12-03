@@ -29,79 +29,167 @@
 
 #include <ecto/log.hpp>
 #include <ecto/forward.hpp>
-#include <ecto/plasm.hpp>
-#include <ecto/strand.hpp>
 #include <ecto/profile.hpp>
-#include <ecto/cell.hpp>
-#include <ecto/atomic.hpp>
 
-#include <boost/thread.hpp>
 #include <boost/asio.hpp>
-#include <boost/unordered_map.hpp>
+#include <boost/thread/mutex.hpp>
 
 #include <ecto/impl/graph_types.hpp>
 
 namespace ecto {
 
-  void verbose_run(boost::asio::io_service& s, std::string name);
-
-  struct scheduler {
-
-    explicit scheduler(plasm_ptr p);
-
-    virtual ~scheduler();
-
-    int execute(unsigned niter=0, unsigned nthread=0);
-    void execute_async(unsigned niter=0, unsigned nthread=0);
-
-    void stop();
-    void interrupt();
-    bool running() const;
-    void wait();
-
-    std::string stats();
-
-  protected:
-
-    virtual int execute_impl(unsigned niter, unsigned nthread, boost::asio::io_service& topserv) = 0;
-    virtual void stop_impl() = 0;
-    virtual void interrupt_impl() = 0;
-    virtual void wait_impl() = 0;
-
-    void running(bool);
-
-    int invoke_process(ecto::graph::graph_t::vertex_descriptor vd);
-    void compute_stack();
-
-    plasm_ptr plasm;
-    ecto::graph::graph_t& graph;
-
-    std::vector<ecto::graph::graph_t::vertex_descriptor> stack;
-
-    profile::graph_stats_type graphstats;
-
-    boost::thread runthread;
-
-    boost::asio::io_service top_serv;
-
-  private:
-
-    void notify_start();
-    void notify_stop();
-
-    struct exec {
-      scheduler& s;
-      unsigned niter, nthread;
-      exec(const exec&);
-      exec(scheduler& s_, unsigned niter_, unsigned nthread_);
-      void operator()();
-    };
-
-    bool running_value;
-    boost::condition_variable running_cond;
-    mutable boost::recursive_mutex running_mtx;
-
-    mutable boost::recursive_mutex iface_mtx;
+/**
+ * TODO: Doc this class.
+ * TODO: Need to share io_svc_ instances with other entities (schedulers+)?
+ */
+class scheduler {
+public:
+  /** Scheduler states. Values greater than 0 indicate a "running" state.
+   */
+  enum State {
+    /** None of the execute*() methods have been called yet. */
+    INIT = 0,
+    /** One of the execute*() methods was called and successfully completed
+     * the specified number of iterations. */
+    RUNNING,
+    /** execute() is running, or execute_async() was called, and
+     * the specified number of iterations have not been completed. */
+    EXECUTING,
+    /** stop() was called, but the scheduler has not stopped yet. */
+    STOPPING,
+    /** stop() completed, or one of the cell::process() calls
+     * returned ecto::QUIT and the scheduler is no longer running. */
+    FINI = -1,
+    /** One of the cell::process() calls returned an error or threw,
+     * and the scheduler is no longer running. */
+    ERROR = -2
   };
 
+  explicit scheduler(plasm_ptr p);
+  ~scheduler();
+
+  /** Synchronously execute plasm for num_iters iterations.
+   * @param[in] The number of iterations to execute the plasm. 0 indicates
+   *   that the plasm should be executed until some cell::process() call
+   *   returns ecto::QUIT. @TRICKY: This call will block indefinately if
+   *   num_iters is 0.
+   */
+  bool execute(unsigned num_iters = 0);
+  /** Kick off an asynchronous plasm execution for num_iters iterations.
+   * No actual work will be done without calling the run*() methods.
+   * @param[in] The number of iterations to execute the plasm. 0 indicates
+   *   that the plasm should be executed until some cell::process() call
+   *   returns ecto::QUIT. @TRICKY: A call to run() will block indefinately if
+   *   num_iters is 0.
+   */
+  bool execute_async(unsigned num_iters = 0);
+
+  /** Run one job in the calling thread of execution.
+   * @NOTE: A job is not necessarily (but is usually) a cell::process() call.
+   * @TRICKY: If using python cells, this method must be called from the main
+   *   python thread.
+   * @return true indicates that the scheduler is still "running."
+   */
+  bool run_job();
+  /** Run jobs in the calling thread for the specified number of microseconds,
+   * or until the io_service is depleted.
+   * @param[in] timeout_usec The number of microsecs to run io_service jobs.
+   *   @TRICKY: Assuming the io_service does not run out of work, this is the
+   *   minimum amount of time that will be spent running jobs.
+   * @return true indicates that the scheduler is still "running."
+   */
+  bool run(unsigned timeout_usec);
+  /** Run jobs in the calling thread until the io_service is depleted.
+   * @return true indicates that the scheduler is still "running."
+   */
+  bool run();
+
+  /** @return true indicates that the plasm is currently in a running state
+   *    (state_ > 0, i.e. RUNNING, EXECUTING, or STOPPING).
+   */
+  inline bool running() const;
+  /** @return true indicates that the plasm is currently in an executing state
+   *    ( state_ == EXECUTING).
+   */
+  inline bool executing() const;
+
+  /** Stop the scheduler, and flush any jobs in the io_service.
+   * @NOTE: The scheduler will no longer be in the running state.
+   * @TRICKY: The plasm may be in the middle of the stack when it is stopped,
+   *   but successive calls to execute*() start from the beginning.
+   */
+  void stop();
+
+  /** @return The current graph execution stats. */
+  std::string stats() const { return graphstats_.as_string(graph_); }
+
+  /** @return The current scheduler state. */
+  inline State state() const;
+
+private:
+  inline State state(State);
+  void execute_init(unsigned num_iteRelWithDebInfors);
+  void execute_iter(unsigned cur_iter, unsigned num_iters,
+                    std::size_t stack_idx);
+  void execute_fini();
+
+  /** Check plasm for correctness, configure it, activate it, then sort it
+   * topologically to populate stack_.
+   * This method is idempotent.
+   */
+  void compute_stack();
+
+  plasm_ptr plasm_;
+  ecto::graph::graph_t& graph_;
+
+  std::vector<ecto::graph::graph_t::vertex_descriptor> stack_;
+
+  profile::graph_stats_type graphstats_;
+
+  boost::asio::io_service io_svc_;
+
+  mutable boost::mutex mtx_;
+  //! Current state of the scheduler.
+  State state_;
+  //! Current number of "runners" (threads calling a run method).
+  std::size_t runners_;
+}; // scheduler
+
+template<typename Mutex_T = boost::mutex, typename Count_T = std::size_t>
+class ref_count {
+public:
+  ref_count(Mutex_T & m, Count_T & t)
+  : m_(m), t_(t) {
+    typename Mutex_T::scoped_lock l(m_);
+    ++t_;
+  }
+  ~ref_count() {
+    typename Mutex_T::scoped_lock l(m_);
+    --t_;
+  }
+private:
+  Mutex_T & m_;
+  Count_T & t_;
+};
+
+scheduler::State scheduler::state() const
+{
+  boost::mutex::scoped_lock l(mtx_);
+  return state_;
 }
+
+bool scheduler::running() const
+{
+  boost::mutex::scoped_lock l(mtx_);
+  return static_cast<int>(state_) > 0;
+}
+
+scheduler::State scheduler::state(State state)
+{
+  boost::mutex::scoped_lock l(mtx_);
+  state_ = state;
+  return state_;
+}
+
+
+} // End of namespace ecto.

@@ -41,7 +41,7 @@ def makeplasm(N):
 #     #print "multithreaded test w/ quit after", N
 #     (gen, plasm) = makeplasm(N)
 #
-#     sched = ecto.schedulers.Singlethreaded(plasm)
+#     sched = ecto.Scheduler(plasm)
 #     for i in range(j):
 #         sched.execute(niter=N+10)
 #         # print "="*70
@@ -67,7 +67,7 @@ def do_one_impl(SchedType, countto, nthreads, niter):
 
     quitout = countto
     for j in range(niter):
-        sched.execute(niter=countto+100, nthreads=nthreads)
+        sched.execute(niter=countto+100)
         print sched.stats()
         print "j:", j
         print "niter:", countto+100
@@ -81,7 +81,7 @@ def do_one_impl(SchedType, countto, nthreads, niter):
             # assert gen.outputs.out == countto + dist
 
 def do_one(countto, nthreads, niter):
-    for S in ecto.test.schedulers:
+    for S in [ecto.Scheduler]:
         do_one_impl(S, countto, nthreads, niter)
 
 do_one(1, 1, 1)

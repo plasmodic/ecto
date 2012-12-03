@@ -130,16 +130,17 @@ namespace ecto
      */
     std::vector<cell_ptr> cells() const;
 
-    void set_movie_out(const std::string& s);
-    void frame(cell& c, bool);
-
     /**
      * \brief Calls configure on all modules, if configure has not already been called.
      */
     void configure_all();
 
+    /** \brief Calls activate on all modules, if hasn't already been called.  */
+    void activate_all();
+    /** \brief Calls deactivate on all modules, if it hasn't already been called.  */
+    void deactivate_all();
+
     void reset_ticks();
-//    void init_movie();
     
     void save(std::ostream&) const;
     void load(std::istream&);
@@ -150,10 +151,6 @@ namespace ecto
   private:
     struct impl;
     boost::shared_ptr<impl> impl_;
-
-    std::string movie_out;
-    unsigned movie_frame;
-    boost::mutex movie_mtx;
 
     template<class Archive>
     void

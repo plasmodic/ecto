@@ -47,38 +47,26 @@ namespace ecto {
   typedef boost::shared_ptr<plasm> plasm_ptr;
   typedef boost::shared_ptr<const plasm> plasm_cptr;
 
-  namespace graph {
-    struct edge;
-    typedef boost::shared_ptr<edge> edge_ptr;
-    typedef boost::shared_ptr<const edge> edge_cptr;
-    struct graph_t;
-  }
-
   struct strand;
   typedef boost::shared_ptr<strand> strand_ptr;
   typedef boost::shared_ptr<const strand> strand_cptr;
 
-
   template <typename T> struct cell_;
 
-  struct scheduler;
+  class scheduler;
 
-  namespace schedulers {
-    class threadpool;
-    class singlethreaded;
-    class multithreaded;
-    struct access;
-  }
-}
+  namespace graph {
+    struct edge;
+    typedef boost::shared_ptr<edge> edge_ptr;
+    typedef boost::shared_ptr<const edge> edge_cptr;
+
+    struct vertex;
+    typedef boost::shared_ptr<vertex> vertex_ptr;
+    typedef boost::shared_ptr<const vertex> vertex_cptr;
+
+    struct graph_t;
+  } // End of namespace graph.
+
+} // End of namespace ecto.
 
 
-
-namespace boost {
-  namespace asio {
-    class io_service;
-  }
-
-  namespace serialization {
-    class access;
-  }
-}

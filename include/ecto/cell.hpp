@@ -29,49 +29,48 @@
 #pragma once
 
 
-#include <boost/shared_ptr.hpp>
-#include <boost/noncopyable.hpp>
-#include <boost/optional.hpp>
-
 #include <ecto/forward.hpp>
+#include <ecto/log.hpp>
+#include <ecto/strand.hpp>
 #include <ecto/tendril.hpp>
 #include <ecto/tendrils.hpp>
-#include <ecto/strand.hpp>
-#include <ecto/util.hpp>
-#include <ecto/profile.hpp>
 #include <ecto/traits.hpp>
+#include <ecto/util.hpp>
+
+#include <boost/noncopyable.hpp>
+#include <boost/optional.hpp>
+#include <boost/shared_ptr.hpp>
 
 namespace ecto
 {
-
-  /**
-   * \brief Return values for modules' process functions. These
-   * are appropriate for non exceptional behavior.
+  /** \brief Return values for cell::process().
+   * TODO: Should these live in cell?
+   * These are appropriate for non exceptional behavior.
    */
   enum ReturnCode
   {
-    OK = 0, //!< Everything A OK.
-    QUIT = 1, //!< Explicit quit now.
-    BREAK = 2, //!< Stop execution in my scope, jump to outer scope
-    CONTINUE = 3, //!< Stop execution in my scope, jump to top of scope
-    UNKNOWN = -1 //!< Unknown return code.
+    OK       =  0, //!< Everything A OK.
+    QUIT     =  1, //!< Explicit quit now.
+    DO_OVER  =  2, //!< This modules' process call needs to be made again
+    BREAK    =  3, //!< Stop execution in my scope, jump to outer scope
+    CONTINUE =  4, //!< Stop execution in my scope, jump to top of scope
+    UNKNOWN  = -1  //!< Unknown return code.
   };
 
-#define ECTO_RETURN_VALUES                                                \
-    (OK)(QUIT)(CONTINUE)(BREAK)(UNKNOWN)                                  \
+#define ECTO_RETURN_VALUES                        \
+    (OK)(QUIT)(DO_OVER)(BREAK)(CONTINUE)(UNKNOWN) \
 
   const std::string&
   ReturnCodeToStr(int rval);
 
-  /**
-   * \brief ecto::cell is the non virtual interface to the basic building
+  /** \brief ecto::cell is the non virtual interface to the basic building
    * block of ecto graphs.  This interface should never be the parent of
    * client cell, but may be used for polymorphic access to client cells.
    *
    * Clients should expose their code to this interface through
    * ecto::wrap, or ecto::create_cell<T>().
    *
-   * For a client's cell to satisfy the ecto::cell idium, it must
+   * For a client's cell to satisfy the ecto::cell idiom, it must
    * look similar to the following definition.
    * @code
    struct MyEctoCell
@@ -89,8 +88,7 @@ namespace ecto
    };
    * @endcode
    *
-   * It is important to note that all functions have are optional and they all have
-   * default implementations.
+   * All functions are optional.
    */
   struct ECTO_EXPORT cell: boost::noncopyable
   {
@@ -99,79 +97,76 @@ namespace ecto
     cell();
     virtual ~cell();
 
-    /**
-     * \brief Dispatches parameter declaration code. After this code, the parameters
-     * for the cell will be set to their defaults.
+    /** \brief Dispatches parameter declaration code. After this code,
+     * the parameters for the cell will be set to their defaults.
      */
     void declare_params();
-    /**
-     * \brief Dispatches input/output declaration code.  It is assumed that the parameters
-     * have been declared before this is called, so that inputs and outputs may be dependent
-     * on those parameters.
+    /** \brief Dispatches input/output declaration code.  It is assumed that
+     * the parameters have been declared before this is called, so that inputs
+     * and outputs may be dependent on those parameters.
      */
     void declare_io();
 
-    /**
-     * \brief Given initialized parameters,inputs, and outputs, this will dispatch the client
-     * configuration code.  This will allocated an instace of the clients cell, so this
-     * should not be called during introspection.
+    /** \brief Given initialized parameters,inputs, and outputs, this will
+     * dispatch the client configuration code.  This will allocated an instace
+     * of the clients cell, so this should not be called during introspection.
      */
     void configure();
 
-    /**
-       scheduler is going to call process() zero or more times.
+    /** \brief Activate the cell. i.e. Put it into a "ready" state,
+     * opening sockets, etc.
      */
+    void activate();
+
+    /** \brief Deactivate the cell. i.e. Put it into an "unready" state,
+     * closing sockets, etc.
+     */
+    void deactivate();
+
+    /** scheduler is going to call process() zero or more times. */
     void start();
 
-    /**
-       scheduler is not going to call process() for a while.
-     */
+    /** scheduler is not going to call process() for a while. */
     void stop();
 
-    /**
-     * \brief Dispatches the process function for the client cell.  This should only
-     * be called from one thread at a time.
-     *
+    /** \brief Dispatches the process function for the client cell.
+     * This should only be called from one thread at a time.
      * Also, this function may throw exceptions...
      *
-     * @return A return code, ecto::OK , or 0 means all is ok. Anything non zero should be considered an
-     * exit signal.
+     * @return A return code, ecto::OK , or 0 means all is ok.
+     * Anything non zero should be considered an exit signal.
      */
     ReturnCode process();
 
-    /**
-     * \brief Return the type of the child class.
+    /** \brief Return the type of the child class.
      * @return A human readable non mangled name for the client class.
      */
-    std::string type() const;
+    std::string type() const { return dispatch_name(); }
 
-    /**
-     * \brief Grab the name of the instance.
-     * @return The name of the instance, or the address if none was given when object was constructed
+    /** \brief Grab the name of the instance.
+     * @return The name of the instance, or the address if none was given
+     *   when object was constructed.
      */
-    std::string name() const;
+    std::string name() const
+    { return instance_name_.size() ? instance_name_ : dispatch_name(); }
 
-    /**
-     * \brief Set the name of the instance.
-     */
-    void name(const std::string&);
+    /** \brief Set the name of the instance. */
+    void name(const std::string& name)
+    { instance_name_ = name; }
 
-    /**
-     * \brief Set the short_doc_ of the instance.
-     */
-    std::string short_doc() const;
+    /** \brief Set the short_doc_ of the instance. */
+    std::string short_doc() const
+    { return dispatch_short_doc(); }
 
-    /**
-     * \brief Set the short_doc_ of the instance.
-     */
-    void short_doc(const std::string&);
+    /** \brief Set the short_doc_ of the instance. */
+    void short_doc(const std::string& short_doc)
+    { dispatch_short_doc(short_doc); }
 
     void reset_strand();
     void set_strand(ecto::strand);
 
-    /**
-     * \brief Generate an Restructured Text doc string for the cell. Includes documentation for all parameters,
-     * inputs, outputs.
+    /** \brief Generate an Restructured Text doc string for the cell.
+     * Includes documentation for all parameters, inputs, outputs.
      * @param doc The highest level documentation for the cell.
      * @return A nicely formatted doc string.
      */
@@ -182,23 +177,17 @@ namespace ecto
 
     ptr clone() const;
 
-    tendrils parameters; //!< Parameters
-    tendrils inputs; //!< Inputs, inboxes, always have a valid value ( may be NULL )
-    tendrils outputs; //!< Outputs, outboxes, always have a valid value ( may be NULL )
+    //! Parameters
+    tendrils parameters;
+    //! Inputs, inboxes, always have a valid value ( may be NULL )
+    tendrils inputs;
+    //! Outputs, outboxes, always have a valid value ( may be NULL )
+    tendrils outputs;
 
-    boost::optional<strand> strand_; //!< The strand that this cell should be executed in.
-    profile::stats_type stats; //!< For collecting execution statistics for process.
+    //! The strand that this cell should be executed in.
+    boost::optional<strand> strand_;
 
     virtual bool init() = 0;
-
-    std::size_t tick() const;
-    void inc_tick();
-    void reset_tick();
-
-    bool stop_requested() const { return stop_requested_; }
-    void stop_requested(bool b) { stop_requested_ = b; }
-
-    boost::signals2::signal<void(cell&, bool)> bsig_process;
 
   protected:
 
@@ -207,10 +196,16 @@ namespace ecto
     virtual void dispatch_declare_io(const tendrils& params, tendrils& inputs,
                                      tendrils& outputs) = 0;
 
-    virtual void dispatch_configure(const tendrils& params, const tendrils& inputs,
+    virtual void dispatch_configure(const tendrils& params,
+                                    const tendrils& inputs,
                                     const tendrils& outputs) = 0;
 
-    virtual ReturnCode dispatch_process(const tendrils& inputs, const tendrils& outputs) = 0;
+    virtual void dispatch_activate() = 0;
+
+    virtual void dispatch_deactivate() = 0;
+
+    virtual ReturnCode dispatch_process(const tendrils& inputs,
+                                        const tendrils& outputs) = 0;
 
     virtual void dispatch_start() = 0;
     virtual void dispatch_stop() = 0;
@@ -220,31 +215,21 @@ namespace ecto
     virtual ptr dispatch_clone() const = 0;
 
     virtual std::string dispatch_short_doc() const
-    {
-      return "";
-    }
+    { return std::string(); }
 
     virtual void dispatch_short_doc(const std::string&) { }
 
   private:
-
     cell(const cell&);
 
     std::string instance_name_;
-    bool stop_requested_;
-    bool configured;
-    std::size_t tick_;
-    boost::mutex mtx;
-#if defined(ECTO_STRESS_TEST)
-    boost::mutex process_mtx;
-#endif
+    bool configured_;
+    bool activated_;
 
-    friend struct ecto::schedulers::access;
-  };
+  }; // cell
 
 
-  /**
-   * \brief Helper class for determining if client modules have function
+  /** \brief Helper class for determining if client modules have function
    * implementations or not.
    * @internal
    */
@@ -284,6 +269,24 @@ namespace ecto
     };
 
     template<class U>
+    static yes test_activate(__typeof__(&U::activate));
+    template<class U>
+    static no test_activate(...);
+    enum
+    {
+      activate = sizeof(test_activate<T> (0)) == sizeof(yes)
+    };
+
+    template<class U>
+    static yes test_deactivate(__typeof__(&U::deactivate));
+    template<class U>
+    static no test_deactivate(...);
+    enum
+    {
+      deactivate = sizeof(test_deactivate<T> (0)) == sizeof(yes)
+    };
+
+    template<class U>
     static yes test_process(__typeof__(&U::process));
     template<class U>
     static no test_process(...);
@@ -309,195 +312,143 @@ namespace ecto
     {
       stop = sizeof(test_stop<T> (0)) == sizeof(yes)
     };
-  };
+  }; // has_f
 
-  /**
-   * \brief cell_<T> is for registering an arbitrary class
-   * with the the cell NVI. This adds a barrier between client code and the cell.
+  /** \brief cell_<T> is for registering an arbitrary class with the the cell
+   * NVI. This adds a barrier between client code and the cell.
    */
   template<class Impl>
   struct cell_: cell
   {
-    typedef boost::shared_ptr<cell_<Impl> > ptr;
+    typedef boost::shared_ptr<cell_<Impl> > ptr; //convience type def
 
-    typedef typename detail::python_mutex<Impl>::type gil_mtx_t;
+    cell_()
+    { init_strand(typename ecto::detail::is_threadsafe<Impl>::type()); }
 
-    cell_() {
-      init_strand(typename ecto::detail::is_threadsafe<Impl>::type());
+    ~cell_() {
+      // Make sure all cells in the plasm are deactivated prior to exiting.
+      dispatch_deactivate();
     }
-
-    ~cell_() { }
     template <int I> struct int_ { };
     typedef int_<0> not_implemented;
     typedef int_<1> implemented;
 
-    //
     // declare_params
-    //
     typedef int_<has_f<Impl>::declare_params> has_declare_params;
 
     static void declare_params(tendrils& params, not_implemented) { }
 
     static void declare_params(tendrils& params, implemented)
-    {
-      Impl::declare_params(params);
-    }
+    { Impl::declare_params(params); }
 
     static void declare_params(tendrils& params)
-    {
-      declare_params(params, has_declare_params());
-    }
+    { declare_params(params, has_declare_params()); }
 
     void dispatch_declare_params(tendrils& params)
-    {
-      declare_params(params);
-    }
+    { declare_params(params); }
 
 
-    //
     // declare_io
-    //
-    static void declare_io(const tendrils& params, tendrils& inputs, tendrils& outputs, not_implemented)
+    static void declare_io(const tendrils& params, tendrils& inputs,
+                           tendrils& outputs, not_implemented)
     { }
 
-    static void declare_io(const tendrils& params, tendrils& inputs, tendrils& outputs, implemented)
-    {
-      Impl::declare_io(params, inputs, outputs);
-    }
+    static void declare_io(const tendrils& params, tendrils& inputs,
+                           tendrils& outputs, implemented)
+    { Impl::declare_io(params, inputs, outputs); }
 
     typedef int_<has_f<Impl>::declare_io> has_declare_io;
 
-    static void declare_io(const tendrils& params, tendrils& inputs, tendrils& outputs)
-    {
-      declare_io(params, inputs, outputs, has_declare_io());
-    }
+    static void declare_io(const tendrils& params, tendrils& inputs,
+                           tendrils& outputs)
+    { declare_io(params, inputs, outputs, has_declare_io()); }
 
     void dispatch_declare_io(const tendrils& params, tendrils& inputs,
                              tendrils& outputs)
-    {
-      declare_io(params, inputs, outputs);
-    }
+    { declare_io(params, inputs, outputs); }
 
-    //
     // configure
-    //
-    void configure(const tendrils&, const tendrils& , const tendrils&, not_implemented)
-    {
-    }
+    void configure(const tendrils&, const tendrils& , const tendrils&,
+                   not_implemented)
+    { }
 
-    void configure(const tendrils& params, const tendrils& inputs, const tendrils& outputs,
-                   implemented)
-    {
-      impl->configure(params,inputs,outputs);
-    }
+    void configure(const tendrils& params, const tendrils& inputs,
+                   const tendrils& outputs, implemented)
+    { impl_->configure(params,inputs,outputs); }
 
     void dispatch_configure(const tendrils& params, const tendrils& inputs,
                             const tendrils& outputs)
-    {
-      configure(params, inputs, outputs, int_<has_f<Impl>::configure> ());
-    }
+    { configure(params, inputs, outputs, int_<has_f<Impl>::configure> ()); }
 
-    //
+    // activate
+    void activate(not_implemented) { }
+
+    void activate(implemented)
+    { if(impl_) impl_->activate(); }
+
+    void dispatch_activate()
+    { activate(int_<has_f<Impl>::activate> ()); }
+
+    // deactivate
+    void deactivate(not_implemented) { }
+
+    void deactivate(implemented)
+    { if(impl_) impl_->deactivate(); }
+
+    void dispatch_deactivate()
+    { deactivate(int_<has_f<Impl>::deactivate> ()); }
+
     // process
-    //
     ReturnCode process(const tendrils&, const tendrils&, not_implemented)
-    {
-      return OK;
-    }
+    { return OK; }
 
-    ReturnCode process(const tendrils& inputs, const tendrils& outputs, implemented)
-    {
-      return ReturnCode(impl->process(inputs, outputs));
-    }
+    ReturnCode process(const tendrils& inputs, const tendrils& outputs,
+                       implemented)
+    { return ReturnCode(impl_->process(inputs, outputs)); }
 
-    ReturnCode dispatch_process(const tendrils& inputs, const tendrils& outputs)
-    {
-      return process(inputs, outputs, int_<has_f<Impl>::process> ());
-    }
+    ReturnCode dispatch_process(const tendrils& inputs,
+                                const tendrils& outputs)
+    { return process(inputs, outputs, int_<has_f<Impl>::process> ()); }
 
-    //
     // start
-    //
     void start(not_implemented) { }
-    void start(implemented) { impl->start(); }
+    void start(implemented) { impl_->start(); }
     void dispatch_start()
-    {
-      start(int_<has_f<Impl>::start> ());
-    }
+    { start(int_<has_f<Impl>::start> ()); }
 
-    //
     // stop
-    //
     void stop(not_implemented) { }
-    void stop(implemented) { impl->stop(); }
-    void dispatch_stop()
-    {
-      stop(int_<has_f<Impl>::stop> ());
-    }
+    void stop(implemented) { impl_->stop(); }
+    void dispatch_stop() { stop(int_<has_f<Impl>::stop> ()); }
 
-    std::string dispatch_name() const
-    {
-      return CELL_TYPE_NAME;
-    }
-    std::string dispatch_short_doc() const
-    {
-      return SHORT_DOC;
-    }
-
+    std::string dispatch_name() const { return CELL_TYPE_NAME; }
+    std::string dispatch_short_doc() const { return SHORT_DOC; }
     void dispatch_short_doc(const std::string&) { }
 
     cell::ptr dispatch_clone() const
-    {
-      return cell::ptr(new cell_<Impl> ());
-    }
+    { return cell::ptr(new cell_<Impl> ()); }
 
-    bool init()
-    {
-      try {
-        if(!impl)
-        {
-          impl.reset(new Impl);
-          Impl* i=impl.get();
-          //these handle finalizing the registration of spores that
-          //were registered at static time.
-          parameters.realize_potential(i);
-          inputs.realize_potential(i);
-          outputs.realize_potential(i);
-        }
-        return impl;
-      }
-      catch (const std::exception& e)
-      {
-        ECTO_TRACE_EXCEPTION("const std::exception&");
-        BOOST_THROW_EXCEPTION(except::CellException()
-                              << except::when("Construction")
-                              << except::type(name_of(typeid(e)))
-                              << except::cell_name(name())
-                              << except::what(e.what()));
-      }
-      catch (...)
-      {
-        ECTO_TRACE_EXCEPTION("...");
-        BOOST_THROW_EXCEPTION(except::CellException()
-                              << except::when("Construction")
-                              << except::what("(unknown exception)")
-                              << except::cell_name(name()));
-      }
-    }
-
+    bool init();
   public:
-
-    boost::shared_ptr<Impl> impl;
     static std::string SHORT_DOC;
-    static std::string CELL_NAME; //!< The python name for the cell.
-    static std::string MODULE_NAME; //!< The module that the cell is part of.
+    //! The python name for the cell.
+    static std::string CELL_NAME;
+    //! The module that the cell is part of.
+    static std::string MODULE_NAME;
     static const std::string CELL_TYPE_NAME;
+    //! Grab a typed reference to the implementation of the cell.
+    Impl& impl() {
+      ECTO_ASSERT(impl_, "impl is null, call configure first");
+      return *impl_;
+    }
+    const Impl& impl() const {
+      ECTO_ASSERT(impl_, "impl is null, call configure first");
+      return *impl_;
+    }
 
   private:
-
-    void init_strand(boost::mpl::true_)
-    {
-    } // threadsafe
+    boost::scoped_ptr<Impl> impl_;
+    void init_strand(boost::mpl::true_) { } // threadsafe
 
     void init_strand(boost::mpl::false_) {
       static ecto::strand strand_;
@@ -505,7 +456,38 @@ namespace ecto
       ECTO_ASSERT(cell::strand_->id() == strand_.id(), "Catastrophe... cells not correctly assignable");
       ECTO_LOG_DEBUG("%s cell has strand id=%p", cell::type() % cell::strand_->id());
     }
-  };
+  }; // cell_
+
+  template<typename Impl>
+  bool cell_<Impl>::init()
+  {
+    try {
+      if(!impl_)
+      {
+        impl_.reset(new Impl);
+        Impl* i=impl_.get();
+        //these handle finalizing the registration of spores that
+        //were registered at static time.
+        parameters.realize_potential(i);
+        inputs.realize_potential(i);
+        outputs.realize_potential(i);
+      }
+      return impl_;
+    } catch (const std::exception& e) {
+      ECTO_TRACE_EXCEPTION("const std::exception&");
+      BOOST_THROW_EXCEPTION(except::CellException()
+                            << except::when("Construction")
+                            << except::type(name_of(typeid(e)))
+                            << except::cell_name(name())
+                            << except::what(e.what()));
+    } catch (...) {
+      ECTO_TRACE_EXCEPTION("...");
+      BOOST_THROW_EXCEPTION(except::CellException()
+                            << except::when("Construction")
+                            << except::what("(unknown exception)")
+                            << except::cell_name(name()));
+    }
+  }
 
   template<typename Impl>
   std::string cell_<Impl>::SHORT_DOC;
@@ -519,5 +501,4 @@ namespace ecto
   template<typename Impl>
   const std::string cell_<Impl>::CELL_TYPE_NAME = ecto::name_of<Impl>();
 
-}//namespace ecto
-
+} // End of namespace ecto.

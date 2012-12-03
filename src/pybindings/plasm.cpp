@@ -27,7 +27,8 @@
 //
 #include <ecto/plasm.hpp>
 #include <ecto/cell.hpp>
-#include <ecto/schedulers/singlethreaded.hpp>
+#include <ecto/scheduler.hpp>
+#include <ecto/vertex.hpp>
 
 #include <boost/python/raw_function.hpp>
 #include <boost/python/args.hpp>
@@ -170,7 +171,7 @@ namespace ecto
       {
         source = boost::source(*begin, g);
         sink = boost::target(*begin, g);
-        cell::ptr to = g[sink], from = g[source];
+        cell::ptr to = g[sink]->cell(), from = g[source]->cell();
         std::string to_port = g[*begin]->to_port();
         std::string from_port = g[*begin]->from_port();
         result.append(bp::make_tuple(from, from_port, to, to_port));
@@ -194,10 +195,11 @@ namespace ecto
       return l;
     }
 
-    int plasm_execute(boost::shared_ptr<plasm> p, unsigned niter = 0)
+    bool plasm_execute(boost::shared_ptr<plasm> p, unsigned niter = 0)
     {
-      ecto::schedulers::singlethreaded sched(p);
-      return sched.execute(niter);
+      ecto::scheduler sched(p);
+      const bool retval = sched.execute(niter);
+      return retval;
     }
 
     void plasm_insert(plasm& p, bp::object bb)
@@ -231,6 +233,8 @@ namespace ecto
       p.def("cells", plasm_get_cells, "Grabs the current set of cells that are in the plasm.");
       p.def("check", &plasm::check);
       p.def("configure_all", &plasm::configure_all);
+      p.def("activate_all", &plasm::activate_all);
+      p.def("deactivate_all", &plasm::deactivate_all);
       p.def("save",plasm_save);
       p.def("load",plasm_load);
 

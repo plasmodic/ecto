@@ -71,6 +71,14 @@ namespace ecto
       }
       return ecto::OK;
     }
+    void start(){
+      if(c_)
+        c_->start();
+    }
+    void stop(){
+      if(c_)
+        c_->stop();
+    }
     cell::ptr c_;
     spore<bool> test_;
   };

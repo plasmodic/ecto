@@ -51,7 +51,7 @@ def do_test(fn):
         (p, ss) = makeplasm()
         s = Sched(p)
         fn(s, ss)
-    map(impl, [ecto.schedulers.Multithreaded])#ecto.test.schedulers)
+    map(impl, [ecto.Scheduler])
 
 
 def synctwice(s, ss):
@@ -63,70 +63,92 @@ def synctwice(s, ss):
     assert ss.outputs.nconfigure == 0
     assert ss.outputs.nprocess == 0
 
-    s.execute(niter=5)
+    # Test synchronous execute with no stops.
+    iters = 3
+    for i in range(iters):
+        s.execute(niter=5)
 
-    print "NSTART=", ss.outputs.nstart
-    assert ss.outputs.nstart == 1
-    print "NSTOP=", ss.outputs.nstop
-    assert ss.outputs.nstop == 1
-    assert ss.outputs.nconfigure == 1
-    print "NPROCESS=", ss.outputs.nprocess
-    assert ss.outputs.nprocess == 5
+        print "NSTART=", ss.outputs.nstart
+        assert ss.outputs.nstart == 1
+        print "NSTOP=", ss.outputs.nstop
+        assert ss.outputs.nstop == 0
+        assert ss.outputs.nconfigure == 1
+        print "NPROCESS=", ss.outputs.nprocess
+        assert ss.outputs.nprocess == 5*(i+1)
 
-    s.execute(niter=5)
+    # Test asynchronous execute with no stops.
+    for i in range(iters):
+        s.execute_async(niter=5)
+        s.run()
 
-    print "NSTART=", ss.outputs.nstart
-    assert ss.outputs.nstart == 2
-    print "NSTOP=", ss.outputs.nstop
-    assert ss.outputs.nstop == 2
-    assert ss.outputs.nconfigure == 1
-    print "NPROCESS=", ss.outputs.nprocess
-    assert ss.outputs.nprocess == 10
+        print "NSTART=", ss.outputs.nstart
+        assert ss.outputs.nstart == 1
+        print "NSTOP=", ss.outputs.nstop
+        assert ss.outputs.nstop == 0
+        assert ss.outputs.nconfigure == 1
+        print "NPROCESS=", ss.outputs.nprocess
+        assert ss.outputs.nprocess == 5*iters + 5*(i+1)
 
-    s.execute_async(niter=5)
-    while s.running():
-        time.sleep(0.1)
+    # Test synchronous execute with stops
+    for i in range(iters):
+        s.stop()
+        s.execute(niter=5)
 
-    print "NSTART=", ss.outputs.nstart
-    assert ss.outputs.nstart == 3
-    print "NSTOP=", ss.outputs.nstop
-    assert ss.outputs.nstop == 3
-    assert ss.outputs.nconfigure == 1
-    print "NPROCESS=", ss.outputs.nprocess
-    assert ss.outputs.nprocess == 15
+        print "NSTART=", ss.outputs.nstart
+        assert ss.outputs.nstart == 1 + i + 1
+        print "NSTOP=", ss.outputs.nstop
+        assert ss.outputs.nstop == i + 1
+        assert ss.outputs.nconfigure == 1
+        print "NPROCESS=", ss.outputs.nprocess
+        assert ss.outputs.nprocess == 2*5*iters + 5*(i+1)
 
-    s.wait()
+    # Test asynchronous execute with stops
+    for i in range(iters):
+        s.stop()
+        s.execute_async(niter=5)
+        s.run()
+
+        print "NSTART=", ss.outputs.nstart
+        assert ss.outputs.nstart == iters + 1 + i + 1
+        print "NSTOP=", ss.outputs.nstop
+        assert ss.outputs.nstop == iters + i + 1
+        assert ss.outputs.nconfigure == 1
+        print "NPROCESS=", ss.outputs.nprocess
+        assert ss.outputs.nprocess == 3*5*iters + 5*(i+1)
+
+    # Test partial asynchronous execution
     s.execute_async()
-    time.sleep(1.0)
+    for i in range(2): # 2 cell::process() jobs + no execute_init() jobs.
+        s.run_job() # Make sure params, etc are initialized, and process() is called once on each cell.
     s.stop()
-    s.wait()
     print s.stats(), "\n"*5
     print "NSTART=", ss.outputs.nstart
-    assert ss.outputs.nstart == 4
-    assert ss.outputs.nconfigure == 1
-
-
-    assert ss.outputs.nstop == 4
+    assert ss.outputs.nstart == 2*iters + 1
+    print "NSTOP=", ss.outputs.nstop
+    assert ss.outputs.nstop == 2*iters + 1
     assert ss.outputs.nconfigure == 1
     print "NPROCESS=", ss.outputs.nprocess
-    assert ss.outputs.nprocess > 15
+    assert ss.outputs.nprocess == 4*5*iters + 1
+
+    s.execute(niter=5)
+
+    #print "NSTART=", ss.outputs.nstart
+    #assert ss.outputs.nstart == 2
+    #print "NSTOP=", ss.outputs.nstop
+    #assert ss.outputs.nstop == 1
+    #assert ss.outputs.nconfigure == 1
+    #print "NPROCESS=", ss.outputs.nprocess
+    #assert ss.outputs.nprocess == 10
 
 for j in range(ecto.test.iterations):
     do_test(synctwice)
 
-
 def things_not_too_slow(s, ss):
-
     s.execute_async()
-    time.sleep(1.0)
     s.stop()
-    s.wait()
     print s.stats()
     s.execute_async()
-    time.sleep(1.0)
     s.stop()
-    s.wait()
     print s.stats()
-
 
 do_test(things_not_too_slow)

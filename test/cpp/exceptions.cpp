@@ -30,7 +30,7 @@
 #include <ecto/ecto.hpp>
 #include <ecto/except.hpp>
 #include <ecto/plasm.hpp>
-#include <ecto/schedulers/multithreaded.hpp>
+#include <ecto/scheduler.hpp>
 
 #define STRINGDIDLY(A) std::string(#A)
 
@@ -247,11 +247,11 @@ TEST(Exceptions, WrongType_sched)
     m->declare_io();
     plasm::ptr p(new plasm);
     p->insert(m);
-    schedulers::multithreaded sched(p);
+    scheduler sched(p);
     bool threw = false;
     try
       {
-        sched.execute(8,1);
+        sched.execute(8);
         FAIL();
       }
     catch (except::TypeMismatch& e)
@@ -274,10 +274,10 @@ TEST(Exceptions, ParameterCBExcept_sched)
   m->parameters["x"]->dirty(true);
   plasm::ptr p(new plasm);
   p->insert(m);
-  schedulers::multithreaded sched(p);
+  scheduler sched(p);
   try
     {
-      sched.execute(8,1);
+      sched.execute(8);
       FAIL();
     }
   catch (except::EctoException& e)
@@ -294,10 +294,10 @@ TEST(Exceptions, ConstructorExcept)
   m->declare_io();
   plasm::ptr p(new plasm);
   p->insert(m);
-  schedulers::multithreaded sched(p);
+  scheduler sched(p);
   try
     {
-      sched.execute(8,1);
+      sched.execute(8);
       FAIL();
     }
   catch (except::EctoException& e)

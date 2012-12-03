@@ -28,10 +28,7 @@
 
 import ecto, os
 
-schedulers = [
-    ecto.schedulers.Multithreaded,
-    ecto.schedulers.Singlethreaded,
-    ]
+schedulers = [ ecto.Scheduler ]
 
 stress_test = 'ECTO_STRESS_TEST_ITERATIONS' in os.environ
 iterations = int(os.environ.get('ECTO_STRESS_TEST_ITERATIONS', 5))

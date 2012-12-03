@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011, Willow Garage, Inc.
+ * Copyright (c) 2012, Industrial Perception, Inc.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,54 +26,60 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#pragma once
-#include <ecto/plasm.hpp>
-#include <ecto/scheduler.hpp>
-#include <ecto/tendril.hpp>
-#include <ecto/cell.hpp>
-#include <ecto/strand.hpp>
-#include <ecto/atomic.hpp>
 
-#include <boost/asio.hpp>
+#include <ecto/log.hpp>
+#include <ecto/ecto.hpp>
+#include <ecto/registry.hpp>
 
-#include <string>
-#include <map>
-#include <set>
-#include <utility>
-#include <deque>
-
-
-
-namespace ecto {
-
-  namespace schedulers {
-
-    class ECTO_EXPORT multithreaded : public scheduler
+using ecto::tendrils;
+namespace ecto_test
+{
+  struct DoOverFor
+  {
+    static void declare_params(tendrils& params)
     {
-    public:
-      explicit multithreaded(plasm_ptr);
-      ~multithreaded();
+      params.declare<unsigned> ("N", "Return ecto::DO_OVER from process() this many times");
+    }
 
-      int execute_impl(unsigned niter, unsigned nthread, boost::asio::io_service& topserv);
+    static void declare_io(const tendrils& params, tendrils& in, tendrils& out)
+    {
+      in.declare<double> ("in", "An inbox");
+      out.declare<double>("out", "outbox");
 
-      void stop_impl();
-      void interrupt_impl();
-      void wait_impl();
+      out.declare<unsigned>(&DoOverFor::current, "current", "", 0);
+    }
 
-    private:
+    DoOverFor() : N(0) { }
 
-      boost::asio::io_service workserv;
 
-      atomic<unsigned> current_iter;
+    void configure(const tendrils& parms, const tendrils& inputs, const tendrils& outputs)
+    {
+      N = parms.get<unsigned>("N");
+      in = inputs["in"];
+      out = outputs["out"];
+    }
 
-      boost::thread_group threads;
+    void start() { *current = 0; }
 
-      using scheduler::top_serv;
-      using scheduler::graph;
-      using scheduler::stack;
-      using scheduler::plasm;
+    int process(const tendrils&, const tendrils&)
+    {
+      ECTO_LOG_DEBUG("<< process DoOverFor, current=%u N=%u", *current % N);
+      ++(*current);
+      if (! (*current % N))
+      {
+        *out = *in; // Only set outputs when returning OK.
+        ECTO_LOG_DEBUG("<< Returning OK ...", N);
+        return ecto::OK;
+      }
 
-      friend struct stack_runner;
-    };
-  }
+      return ecto::DO_OVER;
+    }
+
+    ecto::spore<double> in, out;
+    ecto::spore<unsigned> current;
+    unsigned N;
+  };
+
 }
+
+ECTO_CELL(ecto_test, ecto_test::DoOverFor, "DoOverFor", "Returns ecto::DO_OVER for so many process calls, and returns ecto::OK every current mod N");

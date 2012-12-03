@@ -52,14 +52,14 @@ def test_plasm(Sched, nthreads, niter, n_nodes, incdelay):
 #    o.close()
 #    print "\n", plasm.viz(), "\n"
     sched = Sched(plasm)
-    sched.execute(niter, nthreads)
+    sched.execute(niter)
 
     print "RESULT:", inc.outputs.out
     shouldbe = float(n_nodes + niter - 1)
     print "expected:", shouldbe
     assert inc.outputs.out == shouldbe
 
-    #sched.execute(nthreads, niter)
+    #sched.execute(niter)
     #result = inc.outputs.out
     #print "RESULT:", result
 
@@ -70,19 +70,9 @@ def test_plasm(Sched, nthreads, niter, n_nodes, incdelay):
 
 
 if __name__ == '__main__':
-    test_plasm(ecto.schedulers.Singlethreaded,
+    test_plasm(ecto.Scheduler,
                nthreads=int(sys.argv[1]),
                niter=int(sys.argv[2]),
                n_nodes=int(sys.argv[3]),
                incdelay=int(sys.argv[4])
                )
-    test_plasm(ecto.schedulers.Multithreaded,
-               nthreads=int(sys.argv[1]),
-               niter=int(sys.argv[2]),
-               n_nodes=int(sys.argv[3]),
-               incdelay=int(sys.argv[4])
-               )
-
-
-
-

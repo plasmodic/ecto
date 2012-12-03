@@ -61,7 +61,7 @@ def f(conn):
     s = Sender(conn=conn)
     plasm = ecto.Plasm()
     plasm.insert(s)
-    sched = ecto.schedulers.Singlethreaded(plasm)
+    sched = ecto.Scheduler(plasm)
     sched.execute(niter=10)
 
 def g(conn):

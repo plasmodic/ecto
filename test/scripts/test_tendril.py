@@ -70,7 +70,7 @@ def test_tendril_defs():
     assert t2.val == t1.val
 
 def test_cpp_python_tendril():
-    x = ecto_test.make_pod_tendril()
+    x = ecto.Tendril.createT('int')
     x.val = 10
     x.notify()
     t1 = ecto.Tendril()
@@ -80,9 +80,25 @@ def test_cpp_python_tendril():
     t1.notify()
     assert t1.type_name == x.type_name
     assert x.val == 20
-    
+
+def test_python_serialization():
+    y = ecto.Tendril(None) #empty tendril
+    x = ecto.Tendril.createT('std::string')
+    x.val = 'UuUuU'
+    y.load(x.save())
+    assert y.type_name == 'std::string'
+    assert y.val == x.val
+    print y.val
+    sy = y.save()
+    print len(sy)
+    print len(y.val)
+    import binhex
+    print binhex.binascii.hexlify(sy)
+
 if __name__ == '__main__':
     test_tendril()
     test_tendril_defs()
     test_cpp_python_tendril()
+    test_python_serialization()
+
 
