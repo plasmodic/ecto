@@ -38,7 +38,6 @@ using ecto::tendril_ptr;
 namespace ecto_test
 {
   namespace pt = boost::posix_time;
-  namespace bp = boost::python;
 
   struct Throttle
   {

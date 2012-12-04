@@ -48,21 +48,19 @@ def test_async_multiple_sched(Sched):
 
     s2 = Sched(p2)
     s2.execute_async()
-    time.sleep(0.5)
+    for i in range(3):
+      s2.run_job() # Exececute a few cells.
     s2.stop()
-    s2.wait()
     assert not s2.running()
     s2.execute_async()
-    time.sleep(0.5)
+    for i in range(5):
+      s2.run_job() # Exececute a few cells.
     assert s2.running()
-    time.sleep(0.5)
     s2.stop()
-    s2.wait()
     assert not s2.running()
     assert s1.running()
     s1.stop()
-    s1.wait()
+    assert not s1.running()
 
 if __name__ == '__main__':
-    test_async_multiple_sched(ecto.schedulers.Singlethreaded)
-    test_async_multiple_sched(ecto.schedulers.Multithreaded)
+    test_async_multiple_sched(ecto.Scheduler)

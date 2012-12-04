@@ -17,7 +17,7 @@ plasm.connect(i1['output'] >> add['a'],
               )
 
 # create a scheduler that will run that plasm
-sched = ecto.schedulers.Singlethreaded(plasm)
+sched = ecto.Scheduler(plasm)
 # execute the plasm
 sched.execute(niter=2)
 

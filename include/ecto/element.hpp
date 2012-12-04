@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011, Willow Garage, Inc.
+ * Copyright (c) 2012, Industrial Perception, Inc.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -10,9 +10,10 @@
  *     * Redistributions in binary form must reproduce the above copyright
  *       notice, this list of conditions and the following disclaimer in the
  *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Willow Garage, Inc. nor the names of its
- *       contributors may be used to endorse or promote products derived from
- *       this software without specific prior written permission.
+ *     * Neither the name of the Industrial Perception, Inc. nor the
+ *       names of its contributors may be used to endorse or promote
+ *       products derived from this software without specific prior
+ *       written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -27,39 +28,21 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #pragma once
-#include <ecto/plasm.hpp>
-#include <ecto/scheduler.hpp>
-#include <ecto/tendril.hpp>
-#include <ecto/cell.hpp>
-#include <ecto/impl/graph_types.hpp>
-
-#include <string>
-#include <map>
-#include <set>
-#include <utility>
-#include <deque>
-
-
 
 namespace ecto {
+namespace graph {
 
-  namespace schedulers {
+class element
+{
+public:
+  element() : tick_(0) {}
 
-    class ECTO_EXPORT sdf : public scheduler
-    {
-    public:
-      explicit sdf(plasm_ptr);
-      ~sdf();
+  std::size_t tick() const { return tick_; }
+  void inc_tick() { ++tick_; }
+  void reset_tick() { tick_ = 0; }
+private:
+  std::size_t tick_;
+};
 
-      int execute_impl(unsigned niter, unsigned nthreads, boost::asio::io_service& topserv);
-
-      void stop_impl();
-      void interrupt_impl();
-      void wait_impl();
-    private:
-      struct runner;
-      bool interupted_;
-    };
-  }
-}
-
+} // End of namespace graph.
+} // End of namespace ecto.

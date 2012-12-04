@@ -9,7 +9,7 @@ Python/C++ cells that will belong to a Python module. So you need to go through 
     * you need to define your ecto module through an ``ectomodule`` CMake macro:
 
       .. code-block:: cmake
-      
+
           ectomodule(my_ecto_module_name INSTALL
                                          DESTINATION ./here/different_name
                                          module.cpp
@@ -46,7 +46,7 @@ Python/C++ cells that will belong to a Python module. So you need to go through 
           plasm = ecto.Plasm()
           plasm.connect(cell1['output'] >> cell2['input'])
 
-          sched = ecto.schedulers.Singlethreaded(plasm)
+          sched = ecto.Scheduler(plasm)
           sched.execute(niter=2)
 
 Now, let's see some concrete examples.

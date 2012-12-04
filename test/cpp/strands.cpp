@@ -30,10 +30,7 @@
 #include <ecto/all.hpp>
 #include <ecto/plasm.hpp>
 #include <ecto/atomic.hpp>
-#include <ecto/schedulers/multithreaded.hpp>
 #include <boost/exception/diagnostic_information.hpp>
-
-namespace bp = boost::python;
 
 using namespace ecto;
 
@@ -100,6 +97,7 @@ namespace {
 }
 ECTO_THREAD_UNSAFE(Crashy);
 
+#if 0
 TEST(Strands, Crashy_is_ECTO_THREAD_UNSAFE)
 {
   ecto::plasm::ptr p(new ecto::plasm);
@@ -129,6 +127,7 @@ TEST(Strands, Crashy2_is_on_user_supplied_strand)
   sched.execute(5);
   std::cout << " made it here *************" << std::endl;
 }
+#endif
 
 namespace
 {
@@ -162,6 +161,7 @@ namespace
 }
 
 
+#if 0
 TEST(Strands, ConcurrencyCount)
 {
   ecto::plasm::ptr p(new ecto::plasm);
@@ -177,6 +177,7 @@ TEST(Strands, ConcurrencyCount)
   ASSERT_EQ(max_con.value, boost::thread::hardware_concurrency());
   ECTO_LOG_DEBUG("max concurrent runs: %u", max_con.value);
 }
+#endif
 
 
 

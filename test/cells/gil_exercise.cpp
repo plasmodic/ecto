@@ -42,26 +42,25 @@ namespace bp = boost::python;
 namespace {
   boost::asio::io_service serv;
   boost::thread_group tgroup;
-  //  boost::mutex checky;
 }
 
 void call_back_to_python(const bp::object& obj)
 {
   ECTO_START();
-  ecto::py::scoped_call_back_to_python scb;
-  // don't do this... apparently there really are threads in that there interpreter
-  // boost::mutex::scoped_try_lock sct(checky);
-  // assert(sct.owns_lock());
+  ECTO_SCOPED_CALLPYTHON();{
+  ECTO_SCOPED_CALLPYTHON();
+  // TRICKY: Grabbing a lock here is ill-advised... apparently there really are threads in that there interpreter
   std::string s = str(boost::format("thread_%p") % boost::this_thread::get_id());
 
   obj(s);
+  }
   ECTO_FINISH();
 }
 
 void start_gil_thrashing(const bp::object& obj, unsigned maxiter)
 {
   PyEval_InitThreads();
-  ecto::py::scoped_gil_release sgr;
+  ECTO_SCOPED_GILRELEASE();
   unsigned nthread = boost::thread::hardware_concurrency();
 
   for (unsigned j=0; j<maxiter; ++j)

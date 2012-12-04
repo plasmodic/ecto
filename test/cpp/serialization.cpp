@@ -28,7 +28,7 @@
 #include <gtest/gtest.h>
 #include <ecto/ecto.hpp>
 #include <ecto/plasm.hpp>
-#include <ecto/schedulers/singlethreaded.hpp>
+#include <ecto/scheduler.hpp>
 #include <ecto/serialization/registry.hpp>
 #include <ecto/serialization/cell.hpp>
 
@@ -43,13 +43,13 @@ TEST(SerialTest, float_test)
   {
     ecto::tendril t(1.0f, "A tendril.");
     std::ofstream out("float_tendril.ecto");
-    boost::archive::text_oarchive oa(out);
+    boost::archive::binary_oarchive oa(out);
     oa & t;
   }
   {
     ecto::tendril t;
     std::ifstream in("float_tendril.ecto");
-    boost::archive::text_iarchive ia(in);
+    boost::archive::binary_iarchive ia(in);
     ia & t;
     std::cout << t.type_name() << " " << t.get<float>() << " " << t.doc() << std::endl;
     EXPECT_EQ(t.get<float>(), 1.0f);
@@ -60,7 +60,6 @@ TEST(SerialTest, float_test)
 
 TEST(SerialTest, many_tendrils_test)
 {
-
   {
     std::vector<ecto::tendril> ts(10);
     ts[0] << std::string("hello");
@@ -74,21 +73,19 @@ TEST(SerialTest, many_tendrils_test)
     ts[3] << 4.0;
     ts[3].set_doc("4.0 is a double");
     std::ofstream out("many.ecto");
-    boost::archive::text_oarchive oa(out);
+    boost::archive::binary_oarchive oa(out);
     oa & ts;
   }
   {
     std::vector<ecto::tendril> ts;
     std::ifstream in("many.ecto");
-    boost::archive::text_iarchive ia(in);
+    boost::archive::binary_iarchive ia(in);
     ia & ts;
     for (size_t i = 0; i < ts.size(); i++)
     {
       std::cout << ts[i].type_name() << " " << ts[i].doc() << "\n";
     }
-
   }
-
 }
 
 ECTO_REGISTER_SERIALIZERS(double);
@@ -100,13 +97,13 @@ TEST(SerialTest, tendrils_test)
     ts.declare<std::string>("whoopie", "A docstr for woopie", "pie");
     ts.declare<int>("foo", "A foo.", 18);
     std::ofstream out("tendrils.ecto");
-    boost::archive::text_oarchive oa(out);
+    boost::archive::binary_oarchive oa(out);
     oa & ts;
   }
   {
     ecto::tendrils ts;
     std::ifstream in("tendrils.ecto");
-    boost::archive::text_iarchive ia(in);
+    boost::archive::binary_iarchive ia(in);
     ia & ts;
     BOOST_FOREACH(ecto::tendrils::value_type x, ts)
         {
@@ -131,7 +128,7 @@ TEST(SerialTest, test_unknown)
 {
   ecto::tendril t(FooT::BarStruct(), "An unknown type.");
   std::ofstream out("unknown.ecto");
-  boost::archive::text_oarchive oa(out);
+  boost::archive::binary_oarchive oa(out);
   try{
     oa & t;
   }catch(std::exception& e) {
@@ -149,14 +146,14 @@ TEST(SerialTest, Cell)
     EXPECT_TRUE(add);
     std::cout << add->name() << std::endl;
     std::ofstream out("add.ecto");
-    boost::archive::text_oarchive oa(out);
+    boost::archive::binary_oarchive oa(out);
     oa & add;
   }
 
   {
     ecto::cell::ptr add;
     std::ifstream in("add.ecto");
-    boost::archive::text_iarchive ia(in);
+    boost::archive::binary_iarchive ia(in);
     ia & add;
     std::cout << add->type() << std::endl;
     EXPECT_TRUE(add);
@@ -179,14 +176,13 @@ TEST(SerialTest, CellWithTendrilWithCell)
     If->parameters["cell"] << add;
 
     std::ofstream out("If.ecto");
-    boost::archive::text_oarchive oa(out);
+    boost::archive::binary_oarchive oa(out);
     oa & If;
   }
-
   {
     ecto::cell::ptr add,If;
     std::ifstream in("If.ecto");
-    boost::archive::text_iarchive ia(in);
+    boost::archive::binary_iarchive ia(in);
     ia & If;
     If->parameters["cell"] >> add;
     std::cout << add->type() << std::endl;
@@ -202,7 +198,6 @@ TEST(SerialTest, CellWithTendrilWithCell)
     add->outputs["out"] >> out;
     EXPECT_EQ(out,0); //check that we ran. 0+0=0
   }
-
 }
 
 TEST(SerialTest, Plasm)
@@ -220,20 +215,20 @@ TEST(SerialTest, Plasm)
 
     p->connect(gen, "out", add, "left");
     p->connect(gen, "out", add, "right");
-    ecto::schedulers::singlethreaded sched(p);
+    ecto::scheduler sched(p);
     sched.execute(2);
     std::cout << add->outputs.get<double>("out") << std::endl;
     EXPECT_EQ(2, gen->outputs.get<double>("out"));
     EXPECT_EQ(4, add->outputs.get<double>("out"));
     std::ofstream out("graph.ecto");
-    boost::archive::text_oarchive oa(out);
+    boost::archive::binary_oarchive oa(out);
     oa & *p;
   }
   {
     std::cout << "deserial." << std::endl;
     ecto::plasm::ptr p(new ecto::plasm());
     std::ifstream in("graph.ecto");
-    boost::archive::text_iarchive ia(in);
+    boost::archive::binary_iarchive ia(in);
     ia & *p;
     std::vector<ecto::cell::ptr> cells = p->cells();
 

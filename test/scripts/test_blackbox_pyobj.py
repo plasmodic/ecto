@@ -26,7 +26,7 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 #
-import sys, ecto, ecto.schedulers
+import sys, ecto, ecto
 import ecto.ecto_test as ecto_test
 from util import fail
 

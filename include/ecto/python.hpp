@@ -42,15 +42,25 @@
 namespace ecto {
   namespace py {
 
+    struct gilstatus
+    {
+      const char* file;
+      unsigned line;
+      const char* what;
+      gilstatus(const char* f, unsigned l, const char* w);
+    };
+
     //
     //  used in the interpreter thread during blocking operations
     //  RIAA-style  Py_BEGIN_ALLOW_THREADS
+    //
     class scoped_gil_release : boost::noncopyable
     {
       static PyThreadState* threadstate;
       bool mine;
+      gilstatus mystatus;
     public:
-      scoped_gil_release();
+      scoped_gil_release(const char* file, unsigned line);
       ~scoped_gil_release();
     };
 
@@ -61,12 +71,18 @@ namespace ecto {
     {
       PyGILState_STATE gilstate;
       bool have;
+      gilstatus mystatus;
 
     public:
 
-      scoped_call_back_to_python();
+      scoped_call_back_to_python(const char* file, unsigned line);
       ~scoped_call_back_to_python();
     };
   }
 }
 
+//#define ECTO_SCOPED_GILRELEASE() ecto::py::scoped_gil_release gilrelease ## __LINE__(__FILE__, __LINE__)
+#define ECTO_SCOPED_GILRELEASE()
+
+//#define ECTO_SCOPED_CALLPYTHON() ecto::py::scoped_call_back_to_python gilcall ## __LINE__(__FILE__, __LINE__)
+#define ECTO_SCOPED_CALLPYTHON()

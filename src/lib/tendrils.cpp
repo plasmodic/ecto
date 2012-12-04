@@ -139,7 +139,6 @@ namespace ecto
   void
   tendrils::print_doc(std::ostream& out, const std::string& tendrils_name) const
   {
-    boost::mutex::scoped_lock lock(mtx);
     if (storage.empty())
       return;
     out << tendrils_name << ":\n";
@@ -160,7 +159,6 @@ namespace ecto
   const tendril_ptr&
   tendrils::operator[](const std::string& name) const
   {
-    boost::mutex::scoped_lock lock(mtx);
     storage_type::const_iterator it = storage.find(name);
     if (it == end())
       doesnt_exist(name);
@@ -170,7 +168,6 @@ namespace ecto
   tendril_ptr&
   tendrils::operator[](const std::string& name)
   {
-    boost::mutex::scoped_lock lock(mtx);
     storage_type::iterator it = storage.find(name);
     if (it == end())
       doesnt_exist(name);

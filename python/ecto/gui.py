@@ -29,14 +29,18 @@ try:
             self.setWindowTitle("Dynamic Reconfigure")
             plasm.configure_all()
             self.generate_dialogs()
-            self.sched = ecto.schedulers.Singlethreaded(plasm)
+            self.sched = ecto.Scheduler(plasm)
 
         def exec_one(self):
-            #hack to get around GIL issues.
-            #TODO remove this
-            rval = self.sched.execute(niter=1)
-            if rval:
-                sys.exit(rval)
+            if not self.sched.running():
+                self.sched.execute_async()
+            try:
+                #give ecto a slice of time
+                rval = self.sched.run(1000) #exec for 1000 microseconds
+                if not rval: #quit condition
+                    sys.exit(1)
+            except KeyboardInterrupt as e: #ctrl-c
+                sys.exit(1)
 
         def generate_dialogs(self):
             vlayout = QVBoxLayout()
@@ -81,7 +85,6 @@ class TendrilThunker(object):
             x = type(self.tendril.val)(self.val)
             self.tendril.set(x)
             self.val = None
-
 
 def gui_execute(plasm):
     if HAS_GUI:

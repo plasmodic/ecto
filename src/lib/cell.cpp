@@ -139,10 +139,9 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
   }
 
   cell::cell()
-  : configured(false)
-  , tick_(0)
+    : configured_(false)
+    , activated_(false)
   {
-    //    bsig_process.connect(&sample_siggy);
   }
 
   cell::~cell() { }
@@ -153,7 +152,7 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
     try
     {
       dispatch_declare_params(parameters);
-    }CATCH_ALL()
+    } CATCH_ALL()
   }
 
   void
@@ -162,36 +161,55 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
     try
     {
       dispatch_declare_io(parameters, inputs, outputs);
-    }CATCH_ALL()
+    } CATCH_ALL()
   }
 
   void
   cell::configure()
   {
-    if (configured)
+    if (configured_)
       return;
-    configured = true;
 
     init();
     try
     {
       dispatch_configure(parameters, inputs, outputs);
+      configured_ = true;
+    } CATCH_ALL()
+  }
 
-//      for (tendrils::const_iterator iter = inputs.begin(); iter != inputs.end(); ++iter)
-//        if (iter->second->is_type<boost::python::object>())
-//          BOOST_THROW_EXCEPTION(std::runtime_error("you can't use a python object as an input"));
-//
-//      for (tendrils::const_iterator iter = outputs.begin(); iter != outputs.end(); ++iter)
-//        if (iter->second->is_type<boost::python::object>())
-//          BOOST_THROW_EXCEPTION(std::runtime_error("you can't use a python object as an output"));
-    }CATCH_ALL()
+  void
+  cell::activate()
+  {
+    if (activated_)
+      return;
+
+    configure(); //configure first...
+
+    try
+    {
+      dispatch_activate();
+      activated_ = true;
+    } CATCH_ALL()
+  }
+
+  void
+  cell::deactivate()
+  {
+    if (! activated_)
+      return;
+
+    try
+    {
+      dispatch_deactivate();
+      activated_ = false;
+    } CATCH_ALL()
   }
 
   void
   cell::start()
   {
     ECTO_LOG_DEBUG("*** %s", "notified of start");
-    stop_requested(false);
     dispatch_start();
   }
 
@@ -206,11 +224,6 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
   ReturnCode
   cell::process()
   {
-#if defined(ECTO_STRESS_TEST)
-    boost::mutex::scoped_try_lock process_lock(process_mtx);
-    ECTO_ASSERT(process_lock.owns_lock(), "process() method of cell run concurrently");
-#endif
-
     configure();
     //trigger all parameter change callbacks...
     tendrils::iterator begin = parameters.begin(), end = parameters.end();
@@ -237,49 +250,13 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
     {
       try
       {
-        ReturnCode r;
-        {
-          profile::stats_collector coll(name(), stats);
-          bsig_process(*this, true);
-          r = dispatch_process(inputs, outputs);
-        }
-        bsig_process(*this, false);
-        return r;
+        const ReturnCode rc = dispatch_process(inputs, outputs);
+        return rc;
       } catch (const boost::thread_interrupted&) {
         ECTO_TRACE_EXCEPTION("const boost::thread_interrupted&, returning QUIT instead of rethrow");
         return ecto::QUIT;
       }
     } CATCH_ALL()
-  }
-
-  std::string
-  cell::type() const
-  {
-    return dispatch_name();
-  }
-
-  void
-  cell::name(const std::string& name)
-  {
-    instance_name_ = name;
-  }
-
-  std::string
-  cell::name() const
-  {
-    return instance_name_.size() ? instance_name_ : dispatch_name();
-  }
-
-  void
-  cell::short_doc(const std::string& short_doc)
-  {
-    dispatch_short_doc(short_doc);
-  }
-
-  std::string
-  cell::short_doc() const
-  {
-    return dispatch_short_doc();
   }
 
   std::string
@@ -313,15 +290,14 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
   void
   cell::verify_inputs() const
   {
-    tendrils::const_iterator it = inputs.begin(), end(inputs.end());
-    while (it != end)
+    for (tendrils::const_iterator it = inputs.begin(), end(inputs.end());
+         it != end; ++it)
     {
       if (it->second->required() && !it->second->user_supplied())
       {
         BOOST_THROW_EXCEPTION(except::NotConnected()
                               << except::tendril_key(it->first));
       }
-      ++it;
     }
   }
 
@@ -354,28 +330,5 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
     strand_ = s;
   }
 
-  std::size_t cell::tick() const
-  {
-    return tick_;
-  }
-
-  void cell::inc_tick()
-  {
-    ++tick_;
-  }
-  void cell::reset_tick()
-  {
-    tick_ = 0;
-    tendrils::iterator it = inputs.begin(), end=inputs.end();
-    while(it != end)
-      if (it->second)
-        (it++)->second->tick = 0;
-    it = outputs.begin();
-    end = outputs.end();
-    while(it != end)
-      if (it->second)
-        (it++)->second->tick = 0;
-
-  }
-}
+} // End of namespace ecto.
 
