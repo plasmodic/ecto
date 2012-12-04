@@ -33,21 +33,22 @@ from util import fail
 class MyBlackBox(ecto.BlackBox):
     ''' A simple black box that doesn't really do anything.
     '''
-    gen = ecto_test.Generate
-    inc = ecto_test.Increment
+    @staticmethod
+    def declare_cell_classes(p):
+        return {'inc': ecto_test.Increment, 'gen': ecto_test.Generate}
 
-    def declare_params(self, p):
+    @staticmethod
+    def declare_params(p):
         p.declare("fail", "Should i fail or should i go.", False)
         p.forward("amount", cell_name='inc')
         p.forward_all(cell_name='gen') #carte blanche forward all of the parameters.
 
-    def declare_io(self, p, i, o):
+    @staticmethod
+    def declare_io(p, i, o):
         o.forward('value', cell_name='inc', cell_key='out', doc='New docs')
 
     def configure(self, p, i, o):
         self.fail = p.fail
-        self.gen = self.gen() #custom overriding can occur here.
-        self.inc = self.inc()
         self.printer = ecto_test.Printer()
 
     def connections(self):

@@ -26,6 +26,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 # 
 import ecto
+import inspect
 
 class BlackBoxTendrils(object):
     '''These look like tendrils with a few extra bits of functionality for BlackBoxes.
@@ -34,11 +35,17 @@ class BlackBoxTendrils(object):
                ecto.tendril_type.PARAMETER: 'params',
                ecto.tendril_type.OUTPUT: 'outputs' }
 
-    def __init__(self, bb, tendril_type):
+    def __init__(self, bb, tendril_type, bb_params = None):
+        """
+        :param bb: the BlackBox the tendrils are related to
+        :param tendril_type: one of the tt_key
+        :param bb_params: the params BlackBoxTendrils of the BlackBox
+        """
         self._tendrils = ecto.Tendrils()
         self.tt = tendril_type
         self.tt_key = BlackBoxTendrils.tt_key[self.tt]
         self.bb = bb
+        self.bb_params = bb_params
         self.forwards = {}
 
     def __getattribute__(self, name):
@@ -47,52 +54,109 @@ class BlackBoxTendrils(object):
             return getattr(self._tendrils, name)
         else:
             return object.__getattribute__(self, name)
-        
-    def __getitem__(self, key):
-        #forward to the member _tendrils
-        return self._tendrils.at(key)  
 
-    def __get_cell_type(self, cell_name):
-        cell_type = getattr(self.bb.__class__, cell_name, False)
-        if not cell_type:
-            cell_type = getattr(self.bb, cell_name, False)
-            if cell_type:
-                return cell_type
-            raise RuntimeError("You must have a class variable called " + cell_name + " in your BlackBox.")
-        return cell_type
-
-    def __get_cell_template(self, cell_name):
-        cell = getattr(self.bb, cell_name)
-        cell_type = getattr(self.bb.__class__, cell_name, False)
-        if cell == cell_type:
-            cell = cell_type.inspect()
-        return cell
-
-    def __get_cell(self, cell_name):
-        cell = self.__get_cell_template(cell_name)
-        setattr(self.bb, cell_name, cell)
-        return cell
-
-    def __append(self, cell_name, key, cell_key):
+    def __append(self, cell_name, cell_class, key, cell_key):
         l = [(key, cell_key)]
         if cell_name in self.forwards :
-            self.forwards[cell_name] += l
+            self.forwards[cell_name][1] += l
         else:
-            self.forwards[cell_name] = l
+            self.forwards[cell_name] = [cell_class, l]
 
-    def forward_all(self, cell_name):
-        '''
+    def __get_class_tendrils(self, cell_name=None, cell_class=None, cell_params={}):
+        """
+        Given an ecto cell class, get the tendrils that can be used for forwarding
+        :param cell_name: the name of the cell to fetch from the BlackBox.
+                          If not specified, you need a cell_class
+        :param cell_class: a cell class but it can be an instance of that class too
+        :param cell_params: if cell_params is given (a dictionary), then a cell of type cell_class
+                       is instantiated
+        :return: a tuple (cell class, cell tendrils)
+        """
+        if cell_class == None:
+            # if no class is given, get it from the BlackBox using its name
+            if not hasattr(self.bb.__class__, 'declare_cell_classes'):
+                raise RuntimeError('The BlacBox must implement the declare_cell_classes method '
+                                   'to define the class of %s, or use the cell_class argument.' % cell_name)
+
+            if self.tt == ecto.tendril_type.PARAMETER:
+                cell_classes = self.bb.__class__.declare_cell_classes(self)
+            else:
+                cell_classes = self.bb.__class__.declare_cell_classes(self.bb_params)
+
+            if cell_name not in cell_classes:
+                raise RuntimeError('The cell %s must be defined in declare_cell_classes.' % cell_name)
+
+            # make cell_class be a class object
+            cell_class = cell_classes[cell_name]
+
+        # if the class is a C++ class, it has no accessible declare_*
+        if hasattr(cell_class, 'params'):
+            # the cell might laerady have been created but it can also be a class
+            if inspect.isclass(cell_class):
+                cell_class = cell_class(**cell_params)
+
+            # use the tendrils straight up if they are present
+            if self.tt == ecto.tendril_type.PARAMETER:
+                cell_tendrils = cell_class.params
+            elif self.tt == ecto.tendril_type.INPUT:
+                cell_tendrils = cell_class.inputs
+            elif self.tt == ecto.tendril_type.OUTPUT:
+                cell_tendrils = cell_class.outputs
+        # otherwise, call the declare_params/declare_io
+        elif self.tt == ecto.tendril_type.PARAMETER:
+            cell_tendrils = ecto.Tendrils()
+            # that's the Python defined cell (e.g. BlackBox)
+            cell_class.declare_params(cell_tendrils)
+        else:
+            # we are forwarding an INPUT or an OUTPUT
+            inputs = ecto.Tendrils()
+            outputs = ecto.Tendrils()
+            if not cell_params:
+                cell_params = self.bb_params
+            # that's the Python defined cell (e.g. BlackBox)
+            cell_class.declare_io(cell_params, inputs, outputs)
+            if self.tt == ecto.tendril_type.INPUT:
+                cell_tendrils = inputs
+            else:
+                cell_tendrils = outputs
+
+        # now, return the class of the object
+        if inspect.isclass(cell_class):
+            return cell_class, cell_tendrils
+        else:
+            return cell_class.__class__, cell_tendrils
+
+    def forward_all(self, cell_name, cell_class=None, cell_params={}):
+        """
         Given the name of a class variable that is a cell, forward declare all
         its tendrils (params, inputs,outputs depending on context).
-        '''
-        inst = self.__get_cell_template(cell_name)
-        for key, val in getattr(inst, self.tt_key):
-            self.__append(cell_name, key, key)
+        :param cell_name: the name of the cell to forward tendrils from
+        :param cell_class: the class of the cell to forward tendrils from.
+                           It can also be defines in the declare_cell_classes() BlackBox function
+        :param cell_params: the parameters to initialize the cell with (as a dict). This can be useful if
+                           that cell is not initialized using public/forwarded parameters but
+                           initialized in the configure function of the BlackBox
+        """
+        cell_class, cell_tendrils = self.__get_class_tendrils(cell_name, cell_class, cell_params)
+
+        for key, val in cell_tendrils:
+            self.__append(cell_name, cell_class, key, key)
             self._tendrils.declare(key, val)
 
-    def forward(self, key, cell_name, cell_key=None, doc=None):
-        inst = self.__get_cell_template(cell_name)
-        tendrils = getattr(inst, self.tt_key)
+    def forward(self, key, cell_name, cell_key=None, doc=None, cell_params={}, cell_class=None):
+        """
+        If you forward a parameter, you probably do not want to create an instance of the forwarded
+        class in your configure (or anywhere else). If it does not exist, it will automatically be
+        created for you, using the initial values of the forwarded parameters.
+        :param cell_name: the name of the cell to forward tendrils from
+        :param cell_key: the specific tendril from that cell to forward. It can also be an array
+        :param doc: the doc string to associate to that tendril (if None, the original ones are kept)
+        :param cell_params: the parameters to initialize the cell with (as a dict). This can be useful if
+                           that cell is not initialed using public/forwarded parameters but
+                           initialized in the configure function of the BlackBox
+        :param cell_class: the class of the cell to forward tendrils from.
+                           It can also be defines in the declare_cell_classes() BlackBox function
+        """
         if cell_key:
             cell_keys = cell_key
         else:
@@ -116,22 +180,41 @@ class BlackBoxTendrils(object):
         if len(keys) != len(docs):
             raise RuntimeError('keys and docs must be arrays of the same length')
 
+        # find the tendrils of the forwarded class
+        cell_class, cell_tendrils = self.__get_class_tendrils(cell_name, cell_class, cell_params)
+
+        # assign them temporarily to the final tendrils
+        # they don't need to be linked to a cell yet
         for sub_key, sub_cell_key, sub_doc in zip(keys, cell_keys, docs):
-            tendril = tendrils.at(sub_cell_key)
+            tendril = cell_tendrils.at(sub_cell_key)
             if sub_doc:
                 tendril.doc = sub_doc
-            self.__append(cell_name, sub_key, sub_cell_key)
+            self.__append(cell_name, cell_class, sub_key, sub_cell_key)
             self._tendrils.declare(sub_key, tendril)
 
     def solidify_forward_declares(self):
         tendrils = ecto.Tendrils()
-        for cell_name, keys in self.forwards.iteritems():
-            cell = self.__get_cell(cell_name)
+        # First, go over the diferent forwards and make sure there is a cell for each
+        for cell_name, val in self.forwards.iteritems():
+            cell_class, keys = val
+            # make sure the BlackBox has a cell of the corresponding name/class
+            if not hasattr(self.bb, cell_name):
+                # create parameters to initialize the cell
+                cell_params = {}
+                for key, cell_key in keys:
+                    cell_params[key] = self.bb_params.at(key).val
+
+                cell = cell_class(**cell_params)
+                setattr(self.bb, cell_name, cell)
+            else:
+                cell = getattr(self.bb, cell_name)
+
             ctendrils = getattr(cell, self.tt_key)
             for key, cell_key in keys:
                 tendrils.declare(key, ctendrils.at(cell_key))
                 tendrils.at(key).doc = self._tendrils.at(key).doc
                 tendrils.at(key).copy_value(self._tendrils.at(key))#set the cells to parameters.
+        # add the currently defined tendrils
         for key, tendril in self._tendrils:
             if not key in tendrils:
                 tendrils.declare(key, tendril)
@@ -151,15 +234,18 @@ class BlackBox(object):
         self.niter = kwargs.get('niter', 1)
         self.__impl = None
 
+        # create the parameters
         self.__params = BlackBoxTendrils(self, ecto.tendril_type.PARAMETER)
-        self.__inputs = BlackBoxTendrils(self, ecto.tendril_type.INPUT)
-        self.__outputs = BlackBoxTendrils(self, ecto.tendril_type.OUTPUT)
-
         self.declare_params(self.__params)
 
-        #set the parameters from the kwargs.
+        # override the values of the parameters from the kwargs
         for key, value in self.__params.iteritems():
             value.val = kwargs.get(key, value.val)
+        self.__params.bb_params = self.__params
+
+        # deal with the inputs/outputs
+        self.__inputs = BlackBoxTendrils(self, ecto.tendril_type.INPUT, self.__params)
+        self.__outputs = BlackBoxTendrils(self, ecto.tendril_type.OUTPUT, self.__params)
 
         self.declare_io(self.__params, self.__inputs, self.__outputs)
         self.__configure(self.__params, self.__inputs, self.__outputs)
@@ -197,9 +283,6 @@ class BlackBox(object):
                                            inputs=self.__inputs._tendrils,
                                            outputs=self.__outputs._tendrils)
 
-    def __getattribute__(self, *args, **kwargs):
-        return object.__getattribute__(self, *args, **kwargs)
-
     def __getattr__(self, name):
         if name in ('parameters',):
             name = 'params'
@@ -217,24 +300,28 @@ class BlackBox(object):
         '''This emulates the inspect method that each ecto cell has, which creates a light
         version of the cell, where the default values for p,i,o are acceptable.
         '''
-        return cls()
+        return cls(*args, **kwargs)
 
-    def declare_params(self, p):
+    @staticmethod
+    def declare_params(p):
         '''The implementer of a BlackBox should create this method to declare any 
         parameters or otherwise forward declare internal parameters.
         
-        When this function is calls, p will be an empty tendrils like object,
+        When this function is called, p will be an empty tendrils like object,
         with two additional functions, forward_all and forward.  This object
         is aware that is refers contextually to the parameters of the cell.
         
         forward has the signature:
-            def forward(self, key, cell_name, cell_key=None, doc=None):
+            def forward(self, key, cell_name, cell_key=None, doc=None, cell_params=None):
         
-        :key: the externally usable name of the given tendril
-        :cell_name: is the name of a class variable that refers to a cell like type.
-        :cell_key: is cell_name's tendril that will be remapped to key, 
-            if None then it is assumed that the key is also the cell_key
-        :doc: If not None, this overrides the given tendril's doc string.
+        :param cell_name: the name of the cell to forward tendrils from
+        :param cell_key: the specific tendril from that cell to forward
+        :param doc: the doc string to associate to that tendril (if None, the original ones are kept)
+        :param cell_params: the parameters to initialize the cell with (as a dict). This can be useful if
+                           that cell is not initialed using public/forwarded parameters but
+                           initialized in the configure function of the BlackBox
+        :param cell_class: the class of the cell to forward tendrils from.
+                           It can also be defines in the declare_cell_classes() BlackBox function
         
         forward_all has the signature:
             def forward_all(self, cell_name):
@@ -244,7 +331,8 @@ class BlackBox(object):
         '''
         pass
 
-    def declare_io(self, p, i, o):
+    @staticmethod
+    def declare_io(p, i, o):
         '''
         This function will be called after declare_params, and before configure.
         Here all inputs and outputs should be forward declared.  This parameters
@@ -258,7 +346,7 @@ class BlackBox(object):
     def __configure(self, p, i, o):
         self.configure(p, i, o)
         #take  all of the forward declares and make them point to the actual
-        #underlying stuffs.
+        #underlying stuffs. This actually creates cells if needed
         p.solidify_forward_declares()
         i.solidify_forward_declares()
         o.solidify_forward_declares()
@@ -274,4 +362,3 @@ class BlackBox(object):
         '''The return value of this function should be an iterable of tendril connections.
         '''
         raise NotImplementedError("All BlackBox's must implement atleast the connections function....")
-
