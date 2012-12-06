@@ -202,7 +202,8 @@ class BlackBoxTendrils(object):
                 # create parameters to initialize the cell
                 cell_params = {}
                 for key, cell_key in keys:
-                    cell_params[key] = self.bb_params.at(key).val
+                    if hasattr(self.bb_params, cell_key):
+                        cell_params[key] = self.bb_params.at(cell_key).val
 
                 cell = cell_class(**cell_params)
                 setattr(self.bb, cell_name, cell)
