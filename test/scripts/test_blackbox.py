@@ -33,19 +33,18 @@ from util import fail
 class MyBlackBox(ecto.BlackBox):
     ''' A simple black box that doesn't really do anything.
     '''
-    #You must have class variables for any cells which you would like to
-    #forward inputs,outputs,params
-    #The names of these class variables are assumed to stay consistent
-    #and are used when forward declaring.
-    #These class level variables are type names, and should be transformed into
-    #instances in the configure method.
-    gen = ecto_test.Generate
-    inc = ecto_test.Increment
+    @staticmethod
+    def declare_cell_classes(p):
+        """
+        We declare the types of some internal cells
+        """
+        return {'inc': ecto_test.Increment}
 
     def declare_params(self, p):
         p.declare("fail", "Should i fail or should i go.", False)
         p.forward("amount", cell_name='inc')
-        p.forward_all(cell_name='gen') #carte blanche forward all of the parameters.
+        # We could have defined a key 'gen' in declare_cell_classes too
+        p.forward_all(cell_name='gen', cell_class=ecto_test.Generate) #carte blanche forward all of the parameters.
 
     def declare_io(self, p, i, o):
         #forward one element
@@ -53,10 +52,11 @@ class MyBlackBox(ecto.BlackBox):
 
     def configure(self, p, i, o):
         self.fail = p.fail
-        #You must transform instance versions of the class cell types in this
-        #function.
-        self.gen = self.gen() #custom overriding can occur here.
-        self.inc = self.inc()
+        # inc could be define here or we can trust BlackBox to create one for us
+        # which happens as the cell has been defined in declare_cell_classes or in a.forward()
+        #self.inc = ecto_test.Increment()
+        # Define gen manually
+        self.gen = ecto_test.Generate()
         self.printer = ecto_test.Printer()
 
     def connections(self):
