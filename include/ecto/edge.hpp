@@ -28,32 +28,36 @@
  */
 #pragma once
 
-#include <deque>
+#include <ecto/element.hpp>
 #include <ecto/forward.hpp>
-#include <boost/thread/mutex.hpp>
 #include <boost/shared_ptr.hpp>
 
 namespace ecto {
-  namespace graph {
+namespace graph {
 
-    struct edge
-    {
-      edge(const std::string& fp, const std::string& tp); 
+struct edge : public element
+{
+  edge(const std::string& fp, const std::string& tp); 
 
-      const std::string& from_port();
-      const std::string& to_port();
+  const std::string& from_port() const;
+  const std::string& to_port() const;
 
-      tendril& front();
+  tendril& front() const;
 
-      void pop_front();
+  void pop_front();
 
-      void push_back(const ecto::tendril& t);
+  void push_back(const ecto::tendril& t);
 
-      std::size_t size(); 
+  std::size_t size() const;
 
-    private:
-      struct impl;
-      boost::shared_ptr<impl> impl_;
-    };
-  }
-}
+  bool empty() const;
+
+  void clear();
+
+private:
+  struct impl;
+  boost::shared_ptr<impl> impl_;
+};
+
+} // End of namespace graph.
+} // End of namespace ecto.

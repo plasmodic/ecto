@@ -48,21 +48,21 @@ def do_one_impl(Sched, nthreads, niter):
 
     s = Sched(p)
     try:
-        s.execute(nthreads=nthreads, niter=niter+10)
+        s.execute(niter=niter+10)
         assert False, "that should have thrown"
     except ecto.EctoException, e:
         print "okay:", e
 
+
 def do_one(nthreads, niter):
-    for S in ecto.test.schedulers:
+    for S in [ecto.Scheduler]:
         do_one_impl(S, nthreads, niter)
 
-
-
 for j in range(ecto.test.iterations):
-    for nthreads in range(1, 10):
-        for niter in range(1,100, 100/ecto.test.iterations):
-            do_one(nthreads, niter)
+    for q in range(10):
+        for nthreads in range(1, 10):
+            for niter in range(1, 100):
+                do_one(nthreads, niter)
 
 
 

@@ -1,7 +1,7 @@
-// 
+//
 // Copyright (c) 2011, Willow Garage, Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
 //     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
 //     * Neither the name of the Willow Garage, Inc. nor the names of its
 //       contributors may be used to endorse or promote products derived from
 //       this software without specific prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -37,11 +37,10 @@
 #include <ecto/plasm.hpp>
 #include <ecto/edge.hpp>
 #include <ecto/registry.hpp>
+#include <ecto/vertex.hpp>
 
 #include <ecto/impl/graph_types.hpp>
 
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 
@@ -50,6 +49,8 @@
 #include <boost/serialization/map.hpp>
 #include <boost/serialization/split_free.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/date_time/gregorian/greg_serialize.hpp>
+#include <boost/date_time/posix_time/time_serialize.hpp>
 
 #include <ecto/serialization/cell.hpp>
 #include <ecto/serialization/registry.hpp>
@@ -74,6 +75,12 @@ ECTO_REGISTER_SERIALIZERS(unsigned long);
 
 ECTO_REGISTER_SERIALIZERS(bool);
 
+ECTO_REGISTER_SERIALIZERS(std::vector<int>);
+ECTO_REGISTER_SERIALIZERS(std::vector<float>);
+ECTO_REGISTER_SERIALIZERS(std::vector<double>);
+
+ECTO_REGISTER_SERIALIZERS(boost::posix_time::ptime);
+
 namespace boost
 {
   namespace serialization
@@ -88,6 +95,8 @@ namespace boost
 ECTO_REGISTER_SERIALIZERS(ecto::tendril::none);
 
 ECTO_REGISTER_SERIALIZERS(ecto::cell::ptr);
+ECTO_REGISTER_SERIALIZERS(ecto::tendrils_ptr);
+ECTO_REGISTER_SERIALIZERS(ecto::tendril_ptr);
 
 namespace ecto
 {
@@ -95,11 +104,13 @@ namespace ecto
   void
   tendril::serialize(Archive& ar, const unsigned int)
   {
+    ECTO_LOG_DEBUG("%s", "serializing");
     std::string typename_;
-    if (typename Archive::is_saving()) 
+    if (typename Archive::is_saving())
       typename_ = type_ID_;
 
     ar & typename_;
+    ECTO_LOG_DEBUG("typename = %s", typename_);
     ar & doc_;
 
     ecto::serialization::registry<Archive>::instance()
@@ -112,16 +123,18 @@ namespace ecto
   void
   tendrils::serialize(Archive & ar, const unsigned int version)
   {
+    ECTO_LOG_DEBUG("%s", "serializing");
     ar & storage;
   }
   ECTO_INSTANTIATE_SERIALIZATION(tendrils);
- 
+
   namespace serialization
   {
     template<typename Archive>
     void
     registry<Archive>::serialize(const std::string& key, Archive& ar, tendril& t) const
     {
+      ECTO_LOG_DEBUG("%s", "serializing");
       typename serial_map_t::const_iterator it = serial_map.find(key);
       if (it == serial_map.end())
       {
@@ -158,8 +171,6 @@ namespace ecto
 
     template struct registry< ::boost::archive::binary_oarchive> ;
     template struct registry< ::boost::archive::binary_iarchive> ;
-    template struct registry< ::boost::archive::text_oarchive> ;
-    template struct registry< ::boost::archive::text_iarchive> ;
   }
 }
 
@@ -186,7 +197,7 @@ namespace ecto
     {
       source = boost::source(*begin, g);
       sink = boost::target(*begin, g);
-      cell::ptr to = g[sink], from = g[source];
+      cell::ptr to = g[sink]->cell(), from = g[source]->cell();
       cell_map[sink] = to;
       cell_map[source] = from;
       std::string to_port = g[*begin]->to_port();
@@ -227,7 +238,7 @@ namespace boost
   {
     template<typename Archive>
     void
-    serialize(Archive& ar, 
+    serialize(Archive& ar,
               ecto::serialization::connection_t& c,
               const unsigned int version )
     {

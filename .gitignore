@@ -1,3 +1,4 @@
+doc_config.py
 build*/
 ._*
 *.pyc

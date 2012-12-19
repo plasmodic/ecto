@@ -35,29 +35,25 @@ namespace ecto_test
 {
   struct Multiply
   {
-    double factor_;
+    ecto::spore<double> factor_, in_, out_;
 
     static void declare_params(ecto::tendrils& p)
     {
-      p.declare<double> ("factor", "A factor to multiply by.", 3.14);
+      p.declare(&Multiply::factor_, "factor", "A factor to multiply by.", 3.14);
     }
 
     static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
     {
-      inputs.declare<double> ("in", "multly in by factor");
-      outputs.declare<double> ("out", "the result of in * factor");
-    }
-
-    void configure(const tendrils& parms, const tendrils& inputs, const tendrils& outputs)
-    {
-      factor_ = parms.get<double> ("factor");
+      inputs.declare(&Multiply::in_, "in", "multly in by factor");
+      outputs.declare(&Multiply::out_, "out", "the result of in * factor");
     }
 
     int process(const tendrils& inputs, const tendrils& outputs)
     {
-      outputs.get<double> ("out") = inputs.get<double> ("in") * factor_;
+      *out_ = (*in_) * (*factor_);
       return ecto::OK;
     }
+
   };
 }
 

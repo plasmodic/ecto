@@ -1,7 +1,7 @@
-// 
+//
 // Copyright (c) 2011, Willow Garage, Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
 //     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
 //     * Neither the name of the Willow Garage, Inc. nor the names of its
 //       contributors may be used to endorse or promote products derived from
 //       this software without specific prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -24,13 +24,15 @@
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
-// 
+//
 #include <boost/python.hpp>
 
 #include <ecto/tendril.hpp>
 
 #include <boost/foreach.hpp>
+#include <Python.h>
 
+#include <ecto/serialization/tendril.hpp>
 
 namespace bp = boost::python;
 
@@ -46,7 +48,18 @@ tendril_ptr tendril_ctr()
 
 tendril_ptr tendril_ctr1(const bp::object & object)
 {
+  //allow the tendril to have no type...
+  if(object.is_none()){
+    return boost::shared_ptr<tendril>(new tendril);
+  }
   return boost::shared_ptr<tendril>(new tendril(object,"A pythonic tendril."));
+}
+
+// this is probably a terrible thing to do, but it is needed for pickle
+// an alternative is to override __new__
+tendril_ptr tendril_ctr2(std::string s, std::string useless)
+{
+  return boost::shared_ptr<tendril>(new tendril(registry::tendril::get(s)));
 }
 
 std::string tendril_type_name(tendril_ptr t)
@@ -101,12 +114,33 @@ bool tendril_required(tendril_ptr t)
   return t->required();
 }
 
+bp::object py_tendril_reg_list(){
+  bp::list l;
+  BOOST_FOREACH(const std::string& x, ecto::registry::tendril::type_names())
+      l.append(bp::str(x));
+  return l;
+}
+namespace io = boost::iostreams;
+
+std::string py_tendril_save(const tendril& t)
+{
+  //todo allow python to pass in a buffer so copies don't need to be made.
+  std::string buf;
+  ecto::serialization::save(buf, t);
+  return buf;
+}
+
+void py_tendril_load(tendril& t,const std::string& str){
+  ecto::serialization::load(str, t);
+}
+
 void wrapConnection(){
-  bp::class_<tendril,boost::shared_ptr<tendril> > Tendril_("Tendril", 
+  bp::class_<tendril,boost::shared_ptr<tendril> > Tendril_("Tendril",
       "The Tendril is the slendor winding organ of ecto.\n"
       "It is a type erasing holder with meta data that enable introspection.");
     Tendril_.def("__init__", bp::make_constructor(tendril_ctr));
     Tendril_.def("__init__", bp::make_constructor(tendril_ctr1));
+    Tendril_.def("__init__", bp::make_constructor(tendril_ctr2));
     Tendril_.add_property("doc",tendril_doc,&tendril::set_doc, "A doc string that describes the purpose of this tendril.");
     Tendril_.add_property("type_name",tendril_type_name, "The type of the value held by the tendril." );
     Tendril_.add_property("val", tendril_get_val,tendril_set_val, "The value held by the tendril.\n"
@@ -123,6 +157,15 @@ void wrapConnection(){
     Tendril_.def("set",tendril_set_val, "Assuming the value held by the tendril has boost::python bindings,\nthis will copy the value of the given python object into the value held by the tendril.");
     Tendril_.def("copy_value",tendril_copy_val, "Copy from one tendril to the other.");
     Tendril_.def("notify",&tendril::notify, "Force updates.");
+    Tendril_.def("save",&py_tendril_save);
+    Tendril_.def("load",&py_tendril_load);
+    Tendril_.def("createT",&registry::tendril::get, "Create a tendril of the c++ type.", bp::return_value_policy<bp::return_by_value>());
+    def("make_tendril",&registry::tendril::get, "Create a tendril of the c++ type.", bp::return_value_policy<bp::return_by_value>());
+    Tendril_.staticmethod("createT");
+    Tendril_.def("listT", &py_tendril_reg_list);
+    Tendril_.staticmethod("listT");
+    Tendril_.enable_pickling();
+
 }
 }
 }

@@ -3,7 +3,7 @@
 #include <ecto/serialization/cell.hpp>
 #include <ecto/serialization/plasm.hpp>
 
-#include <ecto/schedulers/singlethreaded.hpp>
+#include <ecto/scheduler.hpp>
 
 int
 main()
@@ -30,6 +30,6 @@ main()
   }
 
   //use a scheduler...
-  ecto::schedulers::singlethreaded sched(p);
+  ecto::scheduler sched(p);
   return sched.execute();
 }

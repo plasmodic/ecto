@@ -36,32 +36,39 @@ using namespace boost;
 
 namespace ecto {
 
-  bool logging_on() {
-    static bool val = getenv("ECTO_LOGGING");
-    return val;
+namespace {
+  format make_format() {
+    // make a format and turn off the 'too many args for format string' error
+    // TODO: This is only thread-safe if log() is thread-safe.
+    static const char* fmtstr = getenv("ECTO_LOGGING_FORMAT");
+    format fmt(fmtstr ? fmtstr : "%14p %25s %40s:%-4u ");
+    fmt.exceptions(io::all_error_bits ^ io::too_many_args_bit);
+    return fmt;
   }
 
-  mutex log_mtx;
-  mutex process_log_mtx;
+} // End of anonymous namespace.
 
-  const static std::string srcdir(SOURCE_DIR);
-  const static unsigned srcdirlen(srcdir.size()+1);
-
-  void log(const char* file, unsigned line, const std::string& msg)
-  {
-    mutex::scoped_lock lock(log_mtx);
-    posix_time::ptime now(posix_time::microsec_clock::local_time());
-    const char* file_remainder = file + srcdirlen;
-    std::cout << str(boost::format("%14p %40s:%-4u ") % boost::this_thread::get_id() % file_remainder % line)
-              << msg << std::endl;
-
-  }
-
-  void assert_failed(const char* file, unsigned line, const char* cond, const char* msg)
-  {
-    log(file, line, str(boost::format("ASSERT FAILED: %s (%s)") % cond % msg));
-    abort();
-  }
-
+bool logging_on() {
+  // TODO: This must be made thread-safe independent of log().
+  static bool val = getenv("ECTO_LOGGING");
+  return val;
 }
 
+const static std::string srcdir(SOURCE_DIR);
+const static unsigned srcdirlen(srcdir.size()+1);
+
+void log(const char* prettyfn, const char* file, unsigned line, const std::string& msg) {
+  // TODO: This must be made thread-safe.
+  static format fmt(make_format());
+  posix_time::ptime now(posix_time::microsec_clock::local_time());
+  const char* file_remainder = file + srcdirlen;
+  std::cout << str(fmt % this_thread::get_id() % prettyfn % file_remainder % line)
+            << msg << std::endl;
+}
+
+void assert_failed(const char* prettyfn, const char* file, unsigned line, const char* cond, const char* msg) {
+  log(prettyfn, file, line, str(format("ASSERT FAILED: %s (%s)") % cond % msg));
+  abort();
+}
+
+} // End of namespace ecto.

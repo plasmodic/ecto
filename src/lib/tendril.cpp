@@ -1,7 +1,7 @@
-// 
+//
 // Copyright (c) 2011, Willow Garage, Inc.
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
 //     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
 //     * Neither the name of the Willow Garage, Inc. nor the names of its
 //       contributors may be used to endorse or promote products derived from
 //       this software without specific prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -24,9 +24,12 @@
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
-// 
+//
 #include <ecto/tendril.hpp>
 #include <boost/python.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
+
+#include <ecto/python.hpp>
 namespace ecto
 {
   using namespace except;
@@ -35,18 +38,16 @@ namespace ecto
     : doc_()
     , flags_()
     , converter(&ConverterImpl<none>::instance)
-    , tick(0)
   {
     set_holder<none>(none());
   }
 
-  tendril::tendril(const tendril& rhs) 
+  tendril::tendril(const tendril& rhs)
     : holder_(rhs.holder_)
     , type_ID_(rhs.type_ID_)
     , doc_(rhs.doc_)
     , flags_(rhs.flags_)
     , converter(rhs.converter)
-    , tick(rhs.tick)
   { }
 
   tendril& tendril::operator=(const tendril& rhs)
@@ -57,7 +58,6 @@ namespace ecto
     doc_ = rhs.doc_;
     flags_ = rhs.flags_;
     converter = rhs.converter;
-    tick = rhs.tick;
     return *this;
   }
 
@@ -67,7 +67,6 @@ namespace ecto
   {
     if (this == &rhs)
       return *this;
-    tick = rhs.tick;
     if (is_type<none>() || same_type(rhs))
     {
       copy_holder(rhs);
@@ -81,10 +80,12 @@ namespace ecto
       }
       else if (rhs.is_type<boost::python::object>())
       {
+        ECTO_SCOPED_CALLPYTHON();
         *this << rhs.get<boost::python::object>();
       }
       else if (is_type<boost::python::object>())
       {
+        ECTO_SCOPED_CALLPYTHON();
         (*rhs.converter)(*boost::unsafe_any_cast<boost::python::object>(&holder_), rhs);
       }
     }
@@ -212,7 +213,7 @@ namespace ecto
   operator>>(const tendril_ptr& rhs, boost::python::object& obj)
   {
     if (!rhs)
-      BOOST_THROW_EXCEPTION(except::NullTendril() 
+      BOOST_THROW_EXCEPTION(except::NullTendril()
                             << except::from_typename("(null)")
                             << except::to_typename("(python object)"));
     *rhs >> obj;
@@ -223,7 +224,7 @@ namespace ecto
   operator>>(const tendril_cptr& rhs, boost::python::object& obj)
   {
     if (!rhs)
-      BOOST_THROW_EXCEPTION(except::NullTendril() 
+      BOOST_THROW_EXCEPTION(except::NullTendril()
                             << except::from_typename("(null)")
                             << except::to_typename("(python object)"));
     *rhs >> obj;
@@ -232,7 +233,7 @@ namespace ecto
   operator<<(const tendril_ptr& lhs, const tendril_ptr& rhs)
   {
     if (!lhs)
-      BOOST_THROW_EXCEPTION(except::NullTendril() 
+      BOOST_THROW_EXCEPTION(except::NullTendril()
                             << except::to_typename("(null)")
                             << except::from_typename(rhs ? rhs->type_name() : "(null)"));
     if (!rhs)
@@ -246,11 +247,11 @@ namespace ecto
   operator<<(const tendril_ptr& lhs, const tendril_cptr& rhs)
   {
     if (!lhs)
-      BOOST_THROW_EXCEPTION(except::NullTendril() 
+      BOOST_THROW_EXCEPTION(except::NullTendril()
                             << except::to_typename("(null)")
                             << except::from_typename(rhs->type_name()));
     if (!rhs)
-      BOOST_THROW_EXCEPTION(except::NullTendril() 
+      BOOST_THROW_EXCEPTION(except::NullTendril()
                             << except::to_typename(lhs->type_name())
                             << except::from_typename("(null)"));
     *lhs << *rhs;
@@ -258,5 +259,56 @@ namespace ecto
 
 
   const tendril::empty_t tendril::empty = tendril::empty_t();
+
+  namespace registry
+  {
+    namespace tendril
+    {
+      typedef std::map<std::string, ecto::tendril> tr_t;
+      tr_t tr;
+
+      tendril_ptr pre_reg[] =
+      { ecto::make_tendril<int>(), //
+        ecto::make_tendril<float>(), //
+        ecto::make_tendril<double>(), //
+        ecto::make_tendril<unsigned>(), //
+        ecto::make_tendril<unsigned long>(), //
+        ecto::make_tendril<bool>(), //
+        ecto::make_tendril<std::string>(), //
+        ecto::make_tendril<std::vector<int> >(), //
+        ecto::make_tendril<std::vector<float> >(), //
+        ecto::make_tendril<std::vector<double> >(), //
+        ecto::make_tendril<boost::posix_time::ptime>() };
+
+      bool
+      add(const ecto::tendril& t)
+      {
+        bool inserted;
+        tr_t::iterator it;
+        boost::tie(it, inserted) = tr.insert(std::make_pair(t.type_name(), t));
+        return inserted;
+      }
+      const ecto::tendril&
+      get(const std::string& type_name)
+      {
+        tr_t::const_iterator it = tr.find(type_name);
+        if (it == tr.end())
+          BOOST_THROW_EXCEPTION(
+              except::TypeMismatch() << except::type(type_name) << except::what("Type has not been registered!"));
+        return it->second;
+      }
+      struct first{
+        template<typename T>
+        typename T::first_type operator()(T pair){
+          return pair.first;
+        }
+      };
+      std::vector<std::string> type_names(){
+        std::vector<std::string> r;
+        std::transform(tr.begin(), tr.end(), std::back_inserter(r), first());
+        return r;
+      }
+    }
+  }
 }
 

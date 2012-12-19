@@ -36,68 +36,73 @@
 #include <boost/date_time/posix_time/posix_time.hpp>
 
 namespace ecto {
-  namespace profile {
+namespace profile {
 
-    unsigned long read_tsc(void);
+unsigned long read_tsc();
 
-    struct graph_stats_type
-    {
-      boost::posix_time::ptime start_time, stop_time;
-      boost::posix_time::time_duration cumulative_time;
-      unsigned long start_tick, stop_tick, cumulative_ticks;
-      graph_stats_type();
-      void start();
-      void stop();
-      std::string as_string(graph::graph_t& g);
-    };
+struct graph_stats_type
+{
+  graph_stats_type() : cumulative_time(), cumulative_ticks(0) {}
+  boost::posix_time::time_duration cumulative_time;
+  uint64_t cumulative_ticks;
 
-    struct graphstats_collector
-    {
-      graph_stats_type& gs_;
-      graphstats_collector(graph_stats_type& gs)
-        : gs_(gs)
-      {
-        gs_.start();
-      }
+  std::string as_string(graph::graph_t& g) const;
+};
 
-      ~graphstats_collector()
-      {
-        gs_.stop();
-      }
-    };
+struct graphstats_collector
+{
+  graph_stats_type& gs_;
+  const boost::posix_time::ptime start_time;
+  const unsigned long start_tick;
+  graphstats_collector(graph_stats_type& gs)
+    : gs_(gs)
+    , start_time(boost::posix_time::microsec_clock::universal_time())
+    , start_tick(profile::read_tsc())
+  {
+  }
 
-    struct ECTO_EXPORT stats_type
-    {
-      stats_type();
-      unsigned ncalls;
-      int64_t total_ticks;
-      bool on;
+  ~graphstats_collector()
+  {
+    const unsigned long stop_tick = profile::read_tsc();
+    const boost::posix_time::ptime stop_time =
+      boost::posix_time::microsec_clock::universal_time();
+    gs_.cumulative_time  += stop_time - start_time;
+    gs_.cumulative_ticks += stop_tick - start_tick;
+  }
+};
 
-      double elapsed_time();
-      double frequency();
-    };
+struct ECTO_EXPORT stats_type
+{
+  stats_type();
+  unsigned ncalls;
+  uint64_t total_ticks;
+  bool on;
 
-    struct ECTO_EXPORT stats_collector
-    {
-      int64_t start;
-      stats_type& stats;
-      const std::string& instancename;
+  double elapsed_time();
+  double frequency();
+};
 
-      stats_collector(const std::string& n, stats_type& stats)
-        : start(read_tsc()), stats(stats), instancename(n)
-      {
-        ++stats.ncalls;
-        stats.on = true;
-        //ECTO_LOG_PROCESS(instancename, start, stats.ncalls, 1);
-      }
+struct ECTO_EXPORT stats_collector
+{
+  const unsigned long start;
+  stats_type& stats;
+  const std::string& instancename;
 
-      ~stats_collector() {
-        int64_t tsc = read_tsc();
-        //ECTO_LOG_PROCESS(instancename, tsc, stats.ncalls, 0);
-        stats.total_ticks += (tsc - start);
-        stats.on = false;
-      }
-    };
+  stats_collector(const std::string& n, stats_type& stats)
+    : start(read_tsc()), stats(stats), instancename(n)
+  {
+    ++stats.ncalls;
+    stats.on = true;
+    //ECTO_LOG_PROCESS(instancename, start, stats.ncalls, 1);
+  }
 
- }
-}
+  ~stats_collector() {
+    const unsigned long tsc = read_tsc();
+    //ECTO_LOG_PROCESS(instancename, tsc, stats.ncalls, 0);
+    stats.total_ticks += (tsc - start);
+    stats.on = false;
+  }
+};
+
+} // End of namespace profile.
+} // End of namespace ecto.

@@ -35,7 +35,7 @@ def test_parameter_callbacks():
     plasm = ecto.Plasm()
     plasm.connect(generate, "out", handle_holder, "input")
 
-    sched = ecto.schedulers.Singlethreaded(plasm)
+    sched = ecto.Scheduler(plasm)
     for i in range(0, 5):
         value = handle_holder.params.value * (i + 1);
         handle_holder.params.value = value

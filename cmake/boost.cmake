@@ -26,11 +26,12 @@
 # POSSIBILITY OF SUCH DAMAGE.
 # 
 find_package(Boost COMPONENTS
+  date_time
   python
-  thread
   regex
-  system
   serialization
+  system
+  thread
   REQUIRED
   )
 
