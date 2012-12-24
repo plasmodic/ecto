@@ -29,6 +29,7 @@
 import sys, ecto
 import ecto.ecto_test as ecto_test
 from util import fail
+from ecto import BlackBoxCellInfo as CellInfo, BlackBoxForward as Forward
 
 class MyBlackBox(ecto.BlackBox):
     ''' A simple black box that doesn't really do anything.
@@ -36,8 +37,8 @@ class MyBlackBox(ecto.BlackBox):
 
     @classmethod
     def declare_cells(cls, p):
-        return {'gen': ecto.BlackBoxCellInfo(ecto_test.Generate, {}, 'all'),
-                'inc': ecto.BlackBoxCellInfo(ecto_test.Increment, {}, [ecto.BlackBoxForward('amount','','')])
+        return {'gen': CellInfo(python_class=ecto_test.Generate),
+                'inc': CellInfo(python_class=ecto_test.Increment)
                }
 
     @classmethod
@@ -45,14 +46,19 @@ class MyBlackBox(ecto.BlackBox):
         p.declare("fail", "Should i fail or should i go.", False)
 
     @classmethod
-    def declare_forwarded_io(cls, p):
-        return ({},{'inc': [ecto.BlackBoxForward('out', 'value', 'New docs')]})
+    def declare_forwards(cls, params):
+        p = {'gen': 'all',
+             'inc': [Forward(key='amount')]}
+        i = {}
+        o = {'inc': [Forward(key='out', new_key='value', new_doc='New docs')]}
+
+        return (p,i,o)
 
     def configure(self, p, i, o):
         self.fail = p.at('fail').val
         self.printer = ecto_test.Printer()
 
-    def connections(self):
+    def connections(self, p):
         graph = [
                 self.gen["out"] >> self.inc["in"],
                 self.inc["out"] >> self.printer["in"]
@@ -101,7 +107,7 @@ def test_command_line_args2():
     import yaml
     parser = argparse.ArgumentParser()
     bb_factory = cell_options(parser, MyBlackBox, 'bb')
-    args = parser.parse_args(['--bb_start', '102'])      
+    args = parser.parse_args(['--bb_start', '102'])
     mm = bb_factory(args)
     assert mm.params.start == 102
 
@@ -125,19 +131,22 @@ class MyBlackBox2(ecto.BlackBox):
 
     @classmethod
     def declare_cells(cls, p):
-        return {'gen': ecto.BlackBoxCellInfo(MyBlackBox, {'start':20}, [ecto.BlackBoxForward('step','',''),
-                                                                        ecto.BlackBoxForward('amount','amount1','')]),
-                'inc': ecto.BlackBoxCellInfo(ecto_test.Increment, {}, [ecto.BlackBoxForward('amount','amount2','')])
+        return {'gen': CellInfo(python_class=MyBlackBox, params={'start':20}),
+                'inc': CellInfo(python_class=ecto_test.Increment)
                }
 
     @classmethod
-    def declare_forwarded_io(cls, p):
-        return ({},{'inc': [ecto.BlackBoxForward('out', 'value', 'New docs')]})
+    def declare_forwards(cls, p):
+        p = {'gen': [Forward(key='step'), Forward(key='amount',new_key='amount1')],
+             'inc': [Forward(key='amount',new_key='amount2')]}
+        i = {}
+        o = {'inc': [Forward(key='out', new_key='value', new_doc='New docs')]}
+        return (p,i,o)
 
     def configure(self, p, i, o):
         self.printer = ecto_test.Printer()
 
-    def connections(self):
+    def connections(self, p):
         graph = [
                 self.gen["value"] >> self.inc["in"],
                 self.inc["out"] >> self.printer["in"]
@@ -147,6 +156,13 @@ class MyBlackBox2(ecto.BlackBox):
 def test_bb2(options):
     # start is going to be ignored as it is set to 20 by default
     mm = MyBlackBox2(start=0, step=3, amount1=10, amount2=50)
+    # make sure the declare functions work
+    p=ecto.Tendrils()
+    i=ecto.Tendrils()
+    o=ecto.Tendrils()
+    mm.declare_params(p)
+    mm.declare_io(p,i,o)
+    # run the BlackBox
     plasm = ecto.Plasm()
     plasm.insert(mm)
     options.niter = 5
