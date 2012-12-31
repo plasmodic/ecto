@@ -159,7 +159,7 @@ def docize(CellType, content):
     para += nodes.paragraph(text=d['short_doc'])
     top += para
 
-    inst = CellType.inspect((),{})
+    inst = CellType.inspect()
 
     top += gettendril('Parameters', inst.params, True)
     top += gettendril('Inputs', inst.inputs, False)

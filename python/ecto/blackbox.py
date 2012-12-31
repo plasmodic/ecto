@@ -120,7 +120,7 @@ def _get_param_tendrils(cell_info, forwards=None, params=None):
     if isinstance(forwards, list):
         for forward in forwards:
             if forward.key in tendrils and forward.new_default is not None:
-                tendrils.at(forward.new_key).set(forward.new_default)
+                tendrils.at(forward.key).set(forward.new_default)
 
     # override the values with whatever is in cell_info
     for key, val in cell_info.params.items():
@@ -213,17 +213,11 @@ class BlackBox(object):
     """
     The BlackBox may be used as an encapsulation idiom within ecto, to declare reusable plasms.
     
-    Users should inherit from BlackBox, and likely will wish to implement a few functions that
-    describe their reusable plasm.
-    
-    A BlackBox is a meta-cell. Its inputs/outputs are just forwarded from other cells.
-    Those forwards are defined in "declare_fowards" that needs to therefore be overriden.
-    In there you can also forward parameters to inner cells.
-    declare_ioand declare_params should not be overriden but in order to have them work 
-    statically, information about the inner cells have to be given. This is why "declare_cells"
-    has to be overriden.
-    Finally, a BlackBox can have its own parameters and those have to be declared in
-    "declare_direct_params".
+    A BlackBox is a meta-cell. 3 functions need to be implemented when inheriting.
+     "declare_fowards": defines the inputs/outputs/parameters that are forwarded to the inner cells
+     "declare_cells": declare_io and declare_params should not be overriden but in order to have them work 
+    statically, information about the inner cells have to be given in "declare_cells"
+     "declare_direct_params": a BlackBox can have its own parameters and this is where they are declared
     """
     __looks_like_a_cell__ = True
 
@@ -268,6 +262,8 @@ class BlackBox(object):
             connections = self.connections(self.__params)
         except Exception as e:
             raise BlackBoxError('Got error "%s" when calling connections on "%s"' % (str(e), str(self)))
+        if not connections:
+            raise BlackBoxError('Your BlackBox has empty connections')
         for x in connections:
             if not getattr(x, '__iter__', False):
                 plasm.insert(x)
@@ -321,7 +317,7 @@ class BlackBox(object):
         Given some parameters, define the characteristics of the cells
         :param p: an ecto.Tendrils() object
         :return: a dictionary of the form:
-                    {'cell_name': BlackBoxCellInfo, 'cell_name': cell_instance}
+                    {'cell_name': BlackBoxCellInfo_call, 'cell_name': cell_instance}
         """
         return {}
 
@@ -373,7 +369,7 @@ class BlackBox(object):
                   specific parameters (non-forwarded)
         :return: a tuple of three dictionaries definining the params/input/output
                     forwarded to/from the inner cells. It has the format:
-                    {'cell_name': 'all', 'cell_name': [BlackBoxForward1, BlackBoxForward2]}
+                    {'cell_name': 'all', 'cell_name': [BlackBoxForward_call1, BlackBoxForward_call2]}
         """
         return ({}, {}, {})
 
