@@ -55,7 +55,16 @@ If we execute that ``BlackBox``, we get the same as when running the plasm:
 Python definition
 -----------------
 
-Here is the full Python definition
+Here is the full Python definition and what members you are supposed to override.
 
 .. autoclass:: ecto.BlackBox
   :members:
+
+More Examples
+-------------
+
+Here are a few more examples from the official ecto tests in *test/scripts/test_blackbox*:
+
+.. literalinclude:: ../../../../test/scripts/test_blackbox.py
+  :language: py
+  :lines: 29-69, 123-154
