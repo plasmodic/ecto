@@ -214,10 +214,10 @@ class BlackBox(object):
     The BlackBox may be used as an encapsulation idiom within ecto, to declare reusable plasms.
     
     A BlackBox is a meta-cell. 3 functions need to be implemented when inheriting.
-     "declare_fowards": defines the inputs/outputs/parameters that are forwarded to the inner cells
-     "declare_cells": declare_io and declare_params should not be overriden but in order to have them work 
-    statically, information about the inner cells have to be given in "declare_cells"
-     "declare_direct_params": a BlackBox can have its own parameters and this is where they are declared
+    *declare_fowards*: defines the inputs/outputs/parameters that are forwarded to the inner cells.
+    *declare_cells*: declare_io and declare_params should not be overriden but in order to have them work 
+    statically, information about the inner cells have to be given in *declare_cells*.
+    *declare_direct_params*: a BlackBox can have its own parameters and this is where they are declared
     """
     __looks_like_a_cell__ = True
 
@@ -298,23 +298,28 @@ class BlackBox(object):
     @staticmethod
     def declare_direct_params(p):
         """
-        This function can be overriden by a child class
+        This function can be overriden by a child class.
+
         This function declares normal parameters for the BlackBox, i.e. you need to declare them
         using p.declare('key_name', 'key_docs', default_value) like you would in a normal
-        Python cell
-        :param p: an ecto.Tendrils() object
+        Python cell.
+
         If you want to have your cell expose different parameters according to different
         parameters sent to the constructor of the BlackBox, you can make this function
         non-static. declare_params and declare_io (that are static) might then fail if called
-        statically but they are not used to build a BlackBoxs
+        statically but they are not used to build a BlackBoxs.
+
+        :param p: an ecto.Tendrils() object
         """
         pass
 
     @classmethod
-    def declare_cells(cls, _p):
+    def declare_cells(cls, p):
         """
-        This function can be overriden by a child class
-        Given some parameters, define the characteristics of the cells
+        This function can be overriden by a child class.
+
+        Given some parameters, define the characteristics of the cells.
+
         :param p: an ecto.Tendrils() object
         :return: a dictionary of the form:
                     {'cell_name': BlackBoxCellInfo_call, 'cell_name': cell_instance}
@@ -324,14 +329,16 @@ class BlackBox(object):
     @classmethod
     def declare_params(cls, p, **kwargs):
         """
-        This method should not be overridden by a child class.
+        This method should NOT be overridden by a child class.
+
         This function returns the parameter tendrils but as there are two kinds
         (namely the BlackBox ones defined in "declare_direct_params" and the
         forwarded parameters), there are two levels of parameters. If you
         just call the function with no kwargs, you get the default parametes. But
         if you know the parameters you will send to your BlackBox constructor, 
         call declare_params with it and you will have a "runtime estimate" of your
-        parameters
+        parameters.
+
         :param p: an ecto.Tendrils() object
         :param kwargs: anything sent to the constructor of the BlackBox
         """
@@ -361,9 +368,10 @@ class BlackBox(object):
             _deep_copy_tendrils_to_tendrils(tendrils_params, forwards, p)
 
     @classmethod
-    def declare_forwards(cls, _p):
+    def declare_forwards(cls, p):
         """
-        This function has to be overriden by a child class
+        This function can be overriden by a child class.
+
         :param p: an ecto.Tendrils object from which some logic can be done to know what to forward.
                   This function will be called after declare_direct_params which fills 'p' with BlackBox
                   specific parameters (non-forwarded)
@@ -376,7 +384,11 @@ class BlackBox(object):
     @classmethod
     def declare_io(cls, p, i, o):
         """
-        This function has the same meaning as in C++ and should not be overriden by a child class
+        This function has the same meaning as in C++ and should NOT be overriden by a child class.
+
+        :param p: an ecto.Tendrils object for the parameters
+        :param i: an ecto.Tendrils object for the inputs
+        :param o: an ecto.Tendrils object for the outputs   
         """
         cell_infos = cls.declare_cells(p)
         try:
@@ -485,17 +497,23 @@ class BlackBox(object):
 
     def configure(self, p, i, o):
         """
-        This function has the same meaning as in C++ and can be overriden by a child class
+        This function has the same meaning as in C++ and can be overriden by a child class.
+
         This function should be used to allocate all cells internal to a BlackBox
+
+        :param p: an ecto.Tendrils object for the parameters
+        :param i: an ecto.Tendrils object for the inputs
+        :param o: an ecto.Tendrils object for the outputs
         """
         pass
 
     def connections(self, p):
         """
-        This function has to be overriden by a child class
+        This function has to be overriden by a child class.
+
         :param p: an already filled ecto.Tendrils for the parameters that can be used
                   to decide on certain connections
-        The return value of this function should be an iterable of tendril connections.
+        :return: an iterable of tendril connections.
         """
         raise NotImplementedError("All BlackBox's must implement atleast the connections function....")
 
