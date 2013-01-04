@@ -5,12 +5,13 @@ ecto is available here: https://github.com/plasmodic/ecto
 
 It is also dependent on ``catkin``
 
-.. code-block:: sh
+.. code-block:: bash
 
-    mkdir ecto_kitchen && cd ecto_kitchen
-    git clone http://github.com/willowgarage/catkin.git
-    git clone http://github.com/plasmodic/ecto.git
-    ln -s catkin/toplevel.cmake CMakeLists.txt
+  mkdir ecto_kitchen && cd ecto_kitchen
+  git clone http://github.com/ros/catkin.git
+  git clone http://github.com/ros-infrastructure/catkin_pkg.git
+  git clone http://github.com/plasmodic/ecto.git
+  ln -s catkin/cmake/toplevel.cmake CMakeLists.txt
 
 You should see the following outputish:
 
@@ -32,12 +33,11 @@ Using a standard cmake build system, you must first create a build directory and
 run cmake to configure the build system. `cmake` may be run with all default settings for all but
 the most advanced user.
 
-.. code-block:: sh
+.. code-block:: bash
 
-    mkdir build
-    cd build
-    cmake ..
-    make
+  export PYTHONPATH=`pwd`/catkin_pkg/src:$PYTHONPATH
+  mkdir build && cd build && cmake ..
+
 
 You should see the following outputish:
 
@@ -84,7 +84,7 @@ Now you have a working build of ecto! You should try to run a test.
     #cd to the root of the ecto kitchen
     cd ..
     #add ecto to your python path
-    . build/setup.bash
+    . build/devel/setup.bash
     python ecto/samples/hello.py
 
 You should see the following outputish:
@@ -119,8 +119,9 @@ On ubuntu its simple....
 
 .. code-block:: sh
 
-	 sudo apt-get install libboost-python-dev libboost-filesystem-dev libboost-system-dev libboost-thread-dev python-setuptools python-gobject python-gtk2 graphviz doxygen
-	 sudo pip install -U sphinx
+    sudo apt-get install libboost-python-dev libboost-filesystem-dev libboost-system-dev \
+            libboost-thread-dev python-setuptools python-gobject python-gtk2 graphviz doxygen \
+            python-sphinx
 
 Install
 ---------------------------------------
