@@ -28,6 +28,11 @@
 from ecto import _cell_base
 
 class Cell(_cell_base):
+    """
+    When creating a cell from Python, just inherit from that class and define
+    the same functions as in C++ if you want (i.e. declare_params(self, p),
+    declare_io(self, p), configure(self, p, i, o) and run(self, i, o)
+    """
     __looks_like_a_cell__ = True
     def __getattr__(self, name):
         if name == '__impl':
@@ -38,8 +43,11 @@ class Cell(_cell_base):
             else:
                 raise AttributeError(self, name)
 
-    def __init__(self, **kwargs):
-        _cell_base.__init__(self)
+    def __init__(self, *args, **kwargs):
+        if args:
+            _cell_base.__init__(self, args[0])
+        else:
+            _cell_base.__init__(self)
 
         _cell_base.declare_params(self)
 
@@ -57,8 +65,6 @@ class Cell(_cell_base):
         return self._short_doc
 
     @classmethod
-    def inspect(cls,_args=None,_kwargs=None):
-        m = cls()
+    def inspect(cls, *args, **kwargs):
+        m = cls(*args, **kwargs)
         return m
-
-
