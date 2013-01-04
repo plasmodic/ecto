@@ -20,9 +20,17 @@ This details the key objects used in the C++ code
 API
 ---
 
+For Python, please refer to:
+
+.. toctree::    
+    :maxdepth: 1
+
+    python
+
+For C++, please refer to:
+
 .. raw:: html
 
     <ul>
-      <li><a href="../../../api/html/index.html">C++ API generated from doxygen</a></li>
-      <li><a href="../../../api/html/index.html">Python API</a></li>
+      <li><a href="../../api/html/index.html">C++ API generated from doxygen</a></li>
     <ul>

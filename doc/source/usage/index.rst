@@ -13,7 +13,6 @@ To get going with ``ecto``, you need the following simple CMake steps
     :maxdepth: 1
 
     client_usage.rst
-    summary.rst
 
 Tutorials
 =========

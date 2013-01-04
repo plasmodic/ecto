@@ -32,27 +32,33 @@ class BlackBoxError(RuntimeError):
     def __init__(self, *args, **kwargs):
         RuntimeError.__init__(self, *args, **kwargs)
 
-# a BlackBoxForward defines how a tendril is forwarded to a given cell: the tendril of name
-# 'key' in the cell is forwarded as 'new_key' in the BlackBox and has the documentation 'new_doc'
-# 'new_key' and 'new_doc' can be set to '',None to indicate they use the same values as the original tendril
-# You should never use that object straight up but instantiate through BlackBoxForward to allow defaults
 _BlackBoxForward = collections.namedtuple('BlackBoxForward', ['key', 'new_key', 'new_doc', 'new_default'])
 
 def BlackBoxForward(key, new_key=None, new_doc=None, new_default=None):
     """
+    Function to define the information of a forward in :func:`ecto.blackbox.BlackBox.declare_forwards`
+
+    :param key: tendril to forward from the cell
+    :param new_key: the name under which the tendril will be forwarded. If not given or None or emtpy, it will be the same
+    :param new_doc: the new documentation of the tendril. If not given or None or emtpy, it will be the same
+    :param new_default: the new default value of the tendril. If not given or None or emtpy, it will be the same
+    :return: a _BlackBoxForward object which is a private namedtuple that users should not interact with
     """
     if not new_key:
         new_key = key
     return _BlackBoxForward(key, new_key, new_doc, new_default)
 
-# The info of a class
-# 'params' is a dictionary of parameters that will be sent to the
-# constructor of the cell (with the forwarded parameters if any
-# You should never use that object straight up but instantiate through BlackBoxCellInfo to allow defaults
 _BlackBoxCellInfo = collections.namedtuple('BlackBoxCellInfo', ['python_class', 'params', 'name'])
 
 def BlackBoxCellInfo(python_class, params=None, name=None):
     """
+    Function to define the information of a cell in :func:`ecto.blackbox.BlackBox.declare_cells`
+
+    :param python_class: a Class object describing the cell
+    :param params: a dictionary of parameters that will be sent to the constructor of
+                  the cell (with the forwarded parameters if any, and they have priority over forwards)
+    :param name: the name of the cell when instantiating it
+    :return: a _BlackBoxCellInfo object which is a private namedtuple that users should not interact with
     """
     if name is None:
         name = str(python_class)

@@ -33,7 +33,8 @@ Ecto has several modules that wrap different libraries or functionalities:
 If you are on ROS Fuerte or above, you probably just want to install the packages available in the ROS repositories named ros-DISTO-ecto-PACKAGE
 
 If you want to install from source, you will have to get them from https://github.com/plasmodic/ecto:
-::
+
+.. code-block:: bash
 
   mkdir ecto_kitchen && cd ecto_kitchen
   git clone http://github.com/ros/catkin.git
@@ -41,8 +42,10 @@ If you want to install from source, you will have to get them from https://githu
   git clone http://github.com/plasmodic/ecto.git
   ln -s catkin/cmake/toplevel.cmake CMakeLists.txt
 
-Then get the ecto modules you want:
-::
+Then get the ecto modules you want (and make sure their dependencies defiend in their package.xml
+are on your path):
+
+.. code-block:: bash
 
   git clone http://github.com/plasmodic/ecto_image_pipeline.git
   git clone http://github.com/plasmodic/ecto_openni.git
@@ -50,9 +53,12 @@ Then get the ecto modules you want:
   git clone http://github.com/plasmodic/ecto_pcl.git
   git clone http://github.com/plasmodic/ecto_ros.git
 
-And you're then good to go for the usual cmake install:
-::
+And you're then good to go for the usual cmake install except you need to add ``catkin_pkg``
+to your Python path:
 
+.. code-block:: bash
+
+  export PYTHONPATH=`pwd`/catkin_pkg/src:$PYTHONPATH
   mkdir build && cd build && cmake ../ && make
 
 .. rubric:: Bug reports
