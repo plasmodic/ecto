@@ -23,6 +23,6 @@ API
 .. raw:: html
 
     <ul>
-      <li><a href="../../../api/html/index.html">C++ API generated from doxygen</a></li>
-      <li><a href="../../../api/html/index.html">Python API</a></li>
+      <li><a href="../../api/html/index.html">C++ API generated from doxygen</a></li>
+      <li><a href="../../api/html/index.html">Python API</a></li>
     <ul>
