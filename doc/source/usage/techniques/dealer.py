@@ -10,7 +10,7 @@ dealer = ecto.Dealer(tendril=printer.inputs.at('in'), iterable=cards)
 plasm.connect(dealer['out'] >> printer['in'])
 
 if __name__ == '__main__':
-    Scheduler = ecto.schedulers.Singlethreaded
+    Scheduler = ecto.Scheduler
     sched = Scheduler(plasm)
     sched.execute()
     assert dealer.outputs.at('out').type_name == 'double'

@@ -32,13 +32,12 @@ the schedulers.
 
 import ecto
 
-possible_schedulers = [ x for x in ecto.schedulers.__dict__.keys() if x[0] != '_']
-
-def use_ipython(options, plasm, locals={}):
+def use_ipython(options, sched, plasm, locals={}):
     '''Launch a plasm using ipython, and a scheduler of choice.
 
        Keyword arguments:
        options -- are from scheduler_options
+       sched -- is an already initialized scheduler for plasm.
        plasm -- The graph to execute
        locals -- are a dictionary of locals to forward to the ipython shell, use locals()
     '''
@@ -46,8 +45,9 @@ def use_ipython(options, plasm, locals={}):
     for key, val in locals.items():
         vars()[key] = val
 
-    options.use_ipython = True
-    run_plasm(options, plasm, locals=locals)
+    sched.execute_async(options.niter)
+    print "Scheduler running in async mode. To execute for some number of microseconds, type:"
+    print "sched.run(1000)"
 
     import IPython
     if IPython.__version__ < '0.11':
@@ -68,11 +68,6 @@ def run_plasm(options, plasm, locals={}):
         :param plasm: The plasm to run.
         :param locals: Any local variables that you would like available to the iPython shell session.
     '''
-    global possible_schedulers
-    if options.scheduler_type not in possible_schedulers:
-        msg = "You must supply a valid scheduler type, not \'%s\'\n" % options.scheduler_type
-        msg += 'Valid schedulers are:\n\t' + '\n\t'.join(possible_schedulers) + '\n'
-        raise RuntimeError(msg)
     if options.graphviz:
         ecto.view_plasm(plasm)
     if len(options.dotfile) > 0:
@@ -83,11 +78,11 @@ def run_plasm(options, plasm, locals={}):
         from ecto.gui import gui_execute
         gui_execute(plasm)
     else:
-        sched = ecto.schedulers.__dict__[options.scheduler_type](plasm)
+        sched = ecto.Scheduler(plasm)
         if options.ipython:
             use_ipython(options, sched, plasm, locals)
         else:
-            sched.execute(options.niter, options.nthreads)
+            sched.execute(options.niter)
     if options.stats:
         print sched.stats()
 
@@ -114,6 +109,8 @@ class CellFactory(object):
                     p = ''.join(key.split(self.prefix + '_')[:])
                 else:
                     p = key
+                if p not in prototype.params.keys():
+                    continue
                 t = type(prototype.params[p])
                 if 'values' in t.__dict__ and type(value) != t and type(value) == str:
                     params[p] = t.names[value]
@@ -178,7 +175,7 @@ def _cell_type_instance(CellOrCellType):
     c = CellOrCellType
     cell_type = CellOrCellType
     if isinstance(cell_type, object.__class__):
-        c = cell_type.inspect((), {})
+        c = cell_type.inspect()
     else:
         cell_type = c.__class__
     # print "....", (cell_type, c)
@@ -211,26 +208,24 @@ def cell_options(parser, CellType, prefix=None):
                       dest=dest,
                       type=tendril_type,
                       default=x.data().val,
-                      help=x.data().doc + ' ... (default: %(default)s)'
+                      help=x.data().doc + ' ~  (default: %(default)s)'
                       )
         if tendril_type is type(True):
             if x.data().val:
-                kwargs = dict(dest=dest, help=x.data().doc + 'Disables %s' % dest, action='store_false')
+                kwargs = dict(dest=dest, help=x.data().doc + ' Disables %s' % dest, action='store_false')
                 dest = '%s_disable' % dest
             else:
-                kwargs = dict(dest=dest, help=x.data().doc + 'Enables %s' % dest, action='store_true')
+                kwargs = dict(dest=dest, help=x.data().doc + ' Enables %s' % dest, action='store_true')
                 dest = '%s_enable' % dest
         if choices:
-#            print 'We got choices', choices
             kwargs['choices'] = choices
+            kwargs['help'] = kwargs['help'] + ' (choices: %(choices)s)'
         group.add_argument('--%s' % dest, **kwargs)
 
     factory = CellFactory(cell_type, cell, prefix)
     return factory
 
 def scheduler_options(parser,
-                      default_scheduler='Singlethreaded',
-                      default_nthreads=0,
                       default_niter=0,
                       default_shell=False,
                       default_graphviz=False):
@@ -238,18 +233,6 @@ def scheduler_options(parser,
     given parser object.
     '''
     ecto_group = parser.add_argument_group('Ecto runtime parameters')
-    ecto_group.add_argument('--scheduler',
-                        dest='scheduler_type',
-                        default=default_scheduler,
-                        choices=possible_schedulers,
-                        help='The scheduler to execute the plasm with. (default: %(default)s)'
-                        )
-    ecto_group.add_argument('--nthreads', metavar='NUMBER_OF_THREADS',
-                        dest='nthreads', type=int, default=default_nthreads,
-                        help='''For schedulers that use threading, this specifies
-                        the number of threads, 0 defaults to hardware concurrency information.
-                        (default: %(default)s)'''
-                        )
     ecto_group.add_argument('--niter', metavar='ITERATIONS', dest='niter',
                         type=int,
                         default=default_niter,
@@ -285,36 +268,41 @@ def scheduler_options(parser,
                         const=True, default=default_graphviz,
                         help='Show the runtime statistics of the plasm.')
 
-def doit(plasm, description="An ecto graph.", locals={}, args=None, default_scheduler='Singlethreaded', default_nthreads=0, default_niter=0, default_shell=False, default_graphviz=False):
-    '''doit is a short hand for samples, that is a combination of a call to scheduler_options, and then run_plasm.
-       This function in not intended to allow customization of parameter parsing.  If this is needed please call
-       scheduler_optinos and run_plasm yourself.
+def doit(plasm, description="An ecto graph.", locals={}, args=None,
+         default_niter=0,
+         default_shell=False,
+         default_graphviz=False):
+    ''' doit is a short hand for samples, that is a combination of a
+       call to scheduler_options, and then run_plasm.  This function
+       in not intended to allow customization of parameter parsing.
+       If this is needed please call scheduler_options and run_plasm
+       yourself.
 
-       :param args: If this is None, default to using the sys.argv args, otherwise this overrides it.
-       :param locals: May be used to forward any local variables to the ipython shell. Suggest either vars() or locals() to do this.
-       :param default_scheduler: Override the default for the option.
-       :param default_nthreads: Override
+       :param args: If this is None, default to using the sys.argv
+       args, otherwise this overrides it.
+       :param locals: May be used to forward any local variables to
+       the ipython shell. Suggest either vars() or locals() to do
+       this.
        :param default_shell: Override
        :param default_graphviz: Override
     '''
     import argparse
     parser = argparse.ArgumentParser(description=description)
-    scheduler_options(parser, default_scheduler=default_scheduler,
-              default_nthreads=default_nthreads, default_niter=default_niter,
-              default_shell=default_shell, default_graphviz=default_graphviz)
+    scheduler_options(parser,
+                      default_niter=default_niter,
+                      default_shell=default_shell,
+                      default_graphviz=default_graphviz)
     options = parser.parse_args(args=args)
     run_plasm(options, plasm, locals)
 
 if __name__ == '__main__':
-    import ecto_test
+    import ecto.ecto_test as ecto_test
     import yaml
     import argparse
     parser = argparse.ArgumentParser(description='My awesome program thing.')
     parser.add_argument('-i,--input', metavar='IMAGE_FILE', dest='imagefile',
                         type=str, default='', help='an image file to load.')
-    group = parser.add_argument_group('ecto scheduler options')
-    scheduler_options(group, default_niter=2)
-
+    scheduler_options(parser, default_niter=2)
 
     multiply_factory = cell_options(parser, ecto_test.Multiply, prefix='mult')
     const_factory = cell_options(parser, ecto.Constant(value=0.50505), prefix='const')

@@ -30,10 +30,11 @@
 
 #include <ecto/python.hpp>
 
+#include <ecto/cell.hpp>
 #include <ecto/ecto.hpp>
 #include <ecto/edge.hpp>
+#include <ecto/except.hpp>
+#include <ecto/spore.hpp>
 #include <ecto/tendril.hpp>
 #include <ecto/tendrils.hpp>
-#include <ecto/cell.hpp>
-#include <ecto/spore.hpp>
-#include <ecto/except.hpp>
+#include <ecto/vertex.hpp>

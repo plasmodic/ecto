@@ -52,18 +52,17 @@ def test_python_module_plasm(Schedtype):
         print "HERE"
         sched.execute(niter=1)
         sched.execute_async(niter=1)
-        time.sleep(0.2)
-        sched.wait()
+        sched.run()
         assert g.outputs.out == i*2
         assert mod.outputs.out == "spam"*i*2
 
     sched.execute(niter=1)
     sched.execute_async(niter=1)
-    sched.wait()
+    sched.run()
     assert g.outputs.out == 10
     assert mod.outputs.out == "spam"*10
 
 if __name__ == '__main__':
     test_python_module()
-    map(test_python_module_plasm, ecto.test.schedulers)
+    map(test_python_module_plasm, [ecto.Scheduler])
 

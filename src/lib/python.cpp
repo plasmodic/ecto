@@ -25,17 +25,45 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 //
+#include <boost/thread/mutex.hpp>
 #include <ecto/python.hpp>
 #include <ecto/python/repr.hpp>
 #include <ecto/python/gil.hpp>
 #include <ecto/log.hpp>
 
+#include <deque>
+
 namespace ecto {
   namespace py {
+
+    gilstatus::gilstatus(const char* f, unsigned l, const char* w): file(f), line(l), what(w) { }
+
+    bool operator==(const gilstatus& lhs, const gilstatus& rhs)
+    {
+      return lhs.file == rhs.file && lhs.line == rhs.line;
+    }
+
+    std::deque<gilstatus> gilstack;
+
+    boost::mutex gilmutex;
+
+    void showstack()
+    {
+      for(std::deque<gilstatus>::iterator iter = gilstack.begin(), end=gilstack.end();
+          iter != end;
+          ++iter)
+        {
+          ECTO_LOG_DEBUG("%s:%u %s", iter->file % iter->line % iter->what);
+        }
+    }
+
+
     std::string repr(const boost::python::object& obj)
     {
       return boost::python::extract<std::string>(obj.attr("__repr__")());
     }
+
+
 
     struct gil::impl : boost::noncopyable
     {
@@ -55,17 +83,20 @@ namespace ecto {
 
     PyThreadState* scoped_gil_release::threadstate = NULL;
 
-    scoped_gil_release::scoped_gil_release()
+    scoped_gil_release::scoped_gil_release(const char* file, unsigned line)
+      : mine(false), mystatus(file, line, "scoped_gil_release")
     {
       if (!Py_IsInitialized())
         return;
-      if (threadstate)
-        mine = false;
-      else
-        {
-          threadstate = PyEval_SaveThread();
-          mine = true;
-        }
+      if (! threadstate) {
+        threadstate = PyEval_SaveThread();
+        mine = true;
+      }
+      {
+        boost::unique_lock<boost::mutex> lock(gilmutex);
+        gilstack.push_front(mystatus);
+        showstack();
+      }
     }
 
     scoped_gil_release::~scoped_gil_release() {
@@ -76,16 +107,28 @@ namespace ecto {
         mine = false;
         threadstate = NULL;
       }
+      {
+        boost::unique_lock<boost::mutex> lock(gilmutex);
+        showstack();
+        ECTO_ASSERT(gilstack.size() > 0, "There's no lock coords on the stack");
+        ECTO_ASSERT(gilstack.front() == mystatus, "I can't pop a lock that isn't mine");
+        gilstack.pop_front();
+      }
     }
 
-    scoped_call_back_to_python::scoped_call_back_to_python()
-      : have(false)
+    scoped_call_back_to_python::scoped_call_back_to_python(const char* file, unsigned line)
+      : have(false), mystatus(file, line, "scoped_call_python")
     {
       if (!Py_IsInitialized())
         return;
 
       have = true;
       gilstate = PyGILState_Ensure();
+      {
+        boost::unique_lock<boost::mutex> lock(gilmutex);
+        gilstack.push_front(mystatus);
+        showstack();
+      }
     }
 
     scoped_call_back_to_python::~scoped_call_back_to_python()
@@ -94,6 +137,13 @@ namespace ecto {
         return;
       ECTO_ASSERT(have, "We have no GIL to release");
       PyGILState_Release(gilstate);
+      {
+        boost::unique_lock<boost::mutex> lock(gilmutex);
+        showstack();
+        ECTO_ASSERT(gilstack.size() > 0, "no lock to pop, ehm.");
+        ECTO_ASSERT(gilstack.front() == mystatus, "can't pop a lock that isn't mine");
+        gilstack.pop_front();
+      }
     }
 
   }

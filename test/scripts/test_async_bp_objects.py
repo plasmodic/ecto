@@ -45,28 +45,22 @@ def makeplasm():
 
 def async(s):
     print "s.execute_async"
-    s.execute_async(niter=5, nthreads=1)
+    s.execute_async(niter=5)
+    assert s.running()
 
 def sync(s):
     print "s.execute"
     s.execute(niter=5)
-    print "s.execute DONE"
+    assert s.running()
 
 def nada(s):
     print "nada"
 
 def waitonly(s):
     print "waitonly"
-    s.wait()
-
-def interrupt(s):
-    print "interrupt"
-    s.interrupt()
-
-def interrupt_and_wait(s):
-    print "interrupt_and_wait"
-    s.stop()
-    s.wait()
+    s.run()
+    assert s.running()
+    print "wait DONE"
 
 def tpool(Scheduler, go, afterwards, sleepdur=0.1):
     print "*"*80
@@ -85,14 +79,9 @@ def tpool(Scheduler, go, afterwards, sleepdur=0.1):
 
 def doemall(Sched):
     tpool(Sched, sync, nada)
-    tpool(Sched, sync, interrupt)
-    tpool(Sched, sync, interrupt_and_wait)
     tpool(Sched, sync, waitonly)
     tpool(Sched, async, waitonly)
-    tpool(Sched, async, interrupt_and_wait)
-    tpool(Sched, async, interrupt)
     tpool(Sched, async, nada)
 
-doemall(ecto.schedulers.Multithreaded)
-doemall(ecto.schedulers.Singlethreaded)
+doemall(ecto.Scheduler)
 

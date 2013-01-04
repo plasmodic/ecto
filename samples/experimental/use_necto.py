@@ -40,7 +40,7 @@ source = Source(port=2932)
 plasm.connect(g['out'] >> source['in'],
               )
 
-sched = ecto.schedulers.Singlethreaded(plasm)
+sched = ecto.Scheduler(plasm)
 sched.execute_async()
 
 def scope():
@@ -49,7 +49,7 @@ def scope():
     
     plasm2 = ecto.Plasm()
     plasm2.connect(sink[:] >> p[:])
-    sched2 = ecto.schedulers.Singlethreaded(plasm2)
+    sched2 = ecto.Scheduler(plasm2)
     sched2.execute(10)
 
 scope()

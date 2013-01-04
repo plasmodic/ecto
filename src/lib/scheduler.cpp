@@ -26,256 +26,312 @@
 // POSSIBILITY OF SUCH DAMAGE.
 //
 
-#include <ecto/log.hpp>
+#include <ecto/scheduler.hpp>
 
 #include <ecto/cell.hpp>
-#include <ecto/scheduler.hpp>
 #include <ecto/impl/invoke.hpp>
+#include <ecto/log.hpp>
+#include <ecto/plasm.hpp>
+#include <ecto/vertex.hpp>
+
+#include <boost/date_time/microsec_time_clock.hpp>
+#include <boost/date_time/posix_time/ptime.hpp>
 #include <boost/thread.hpp>
 #include <boost/graph/topological_sort.hpp>
 #include <boost/scoped_ptr.hpp>
 
+#include <signal.h>
+
 namespace ecto {
+using namespace ecto::except;
+using ecto::graph::graph_t;
+using boost::scoped_ptr;
+using boost::thread;
+using boost::mutex;
 
-  using boost::scoped_ptr;
-  using boost::thread;
-  using boost::bind;
-  using boost::mutex;
-  using boost::recursive_mutex;
-
-  using namespace ecto::except;
-  using ecto::graph::graph_t;
-  namespace
+namespace {
+  boost::signals2::signal<void(void)> SINGLE_THREADED_SIGINT_SIGNAL;
+  void sigint_static_thunk(int)
   {
-    boost::signals2::signal<void(void)> SINGLE_THREADED_SIGINT_SIGNAL;
-    void
-    sigint_static_thunk(int)
-    {
-      std::cerr << "*** SIGINT received, stopping graph execution.\n"
-                << "*** If you are stuck here, you may need to hit ^C again\n"
-                << "*** when back in the interpreter thread.\n" << "*** or Ctrl-\\ (backslash) for a hard stop.\n"
-                << std::endl;
-      SINGLE_THREADED_SIGINT_SIGNAL();
-      PyErr_SetInterrupt();
-    }
+    std::cerr << "*** SIGINT received, stopping graph execution.\n"
+              << "*** If you are stuck here, you may need to hit ^C again\n"
+              << "*** when back in the interpreter thread.\n"
+              << "*** or Ctrl-\\ (backslash) for a hard stop.\n" << std::endl;
+    SINGLE_THREADED_SIGINT_SIGNAL();
+    PyErr_SetInterrupt();
   }
+} // End of anonymous namespace.
 
-  scheduler::scheduler(plasm_ptr p)
-    : plasm(p)
-    , graph(p->graph())
-    , running_value(false)
-  {
-    // for good measure
-    PyEval_InitThreads();
-    if (!PyEval_ThreadsInitialized())
-      BOOST_THROW_EXCEPTION(EctoException()
-                            << diag_msg("Unable to initalize threads in python interpreter"));
+// TODO: Need to call PyErr_CheckSignals() anywhere?
+
+scheduler::scheduler(plasm_ptr p)
+: plasm_(p)
+, graph_(p->graph())
+, io_svc_()
+, state_(INIT)
+, runners_(0)
+{
+  assert(plasm_);
 #if !defined(_WIN32)
-    signal(SIGINT, &sigint_static_thunk);
+  // TODO (JTF): Move this somewhere else, and use sigaction(2) instead.
+  signal(SIGINT, &sigint_static_thunk);
 #endif
-  }
-
-  scheduler::~scheduler()
-  {
-    // don't call wait() here... you'll thunk to the virtual wait_impl
-    // which will dispatch to a child class instance that no longer exists.
-    // do this in the destructor of the child scheduler classes
-  }
-
-  std::string scheduler::stats()
-  {
-    return graphstats.as_string(graph);
-  }
-
-  void scheduler::notify_start()
-  {
-    //plasm->init_movie();
-    plasm->reset_ticks();
-    if(stack.empty()) throw std::runtime_error("A badness thing happened.");
-//    assert(stack.size() > 0);
-    for (unsigned j=0; j<stack.size(); ++j)
-      {
-        cell::ptr c = graph[stack[j]];
-        if (c->strand_)
-          c->strand_->reset();
-        c->start();
-      }
-  }
-
-  void scheduler::notify_stop()
-  {
-    assert(stack.size() > 0);
-    for (unsigned j=0; j<stack.size(); ++j)
-      {
-        cell::ptr c = graph[stack[j]];
-        c->stop();
-      }
-  }
-
-  int scheduler::execute(unsigned niter, unsigned nthread)
-  {
-    recursive_mutex::scoped_lock lock(iface_mtx);
-    if (running())
-      BOOST_THROW_EXCEPTION(EctoException()
-                            << diag_msg("Scheduler already running"));
-    //handle sigints for all schedulers.
-    boost::signals2::scoped_connection
-      interupt_connection(SINGLE_THREADED_SIGINT_SIGNAL.connect(boost::bind(&scheduler::interrupt, this)));
-
-    compute_stack();
-    notify_start();
-
-    //so that python may resume, means that all threads that would like
-    //to use python must create a scoped_call_back_to_python object
-    ecto::py::scoped_gil_release sgr;
-
-    running(true);
-
-    if (nthread == 0)
-      nthread = boost::thread::hardware_concurrency();
-
-    int rv;
-    {
-      ECTO_LOG_DEBUG("%sstart execute_impl", "");
-      rv = execute_impl(niter, nthread, top_serv);
-      ECTO_LOG_DEBUG("%sdone execute_impl", "");
-    }
-
-    running(false);
-    notify_stop();
-
-    return rv;
-  }
-
-  scheduler::exec::exec(scheduler& s_, unsigned niter_, unsigned nthread_)
-    : s(s_), niter(niter_), nthread(nthread_)
-  { }
-
-  scheduler::exec::exec(const exec& rhs)
-    : s(rhs.s)
-    , niter(rhs.niter)
-    , nthread(rhs.nthread)
-  { }
-
-  void scheduler::exec::operator()()
-  {
-    ECTO_START();
-    s.running(true);
-    s.execute_impl(niter, nthread, s.top_serv);
-    PyErr_CheckSignals();
-    s.running(false);
-    s.notify_stop(); //notify all cells that they have been stopped.
-    ECTO_FINISH();
-  }
-
-  void scheduler::execute_async(unsigned niter, unsigned nthread)
-  {
-    ECTO_START();
-    recursive_mutex::scoped_lock lock(iface_mtx);
-    if (running())
-      BOOST_THROW_EXCEPTION(EctoException()
-                            << diag_msg("Scheduler already running"));
-
-    //these should happen in the calling thread
-    compute_stack();
-    notify_start();
-
-    running(true);
-
-    if (nthread == 0)
-      nthread = boost::thread::hardware_concurrency();
-
-    exec e(*this, niter, nthread);
-
-    boost::scoped_ptr<thread> tmp(new thread(e));
-    tmp->swap(runthread);
-  }
-
-  void scheduler::compute_stack()
-  {
-    ECTO_START();
-    if (!stack.empty()) //will be empty if this needs to be computed.
-      return;
-    //check this plasm for correctness.
-    plasm->check();
-    plasm->configure_all();
-    boost::topological_sort(graph, std::back_inserter(stack));
-    std::reverse(stack.begin(), stack.end());
-  }
-
-  int scheduler::invoke_process(graph_t::vertex_descriptor vd)
-  {
-    ECTO_START();
-
-    int rv;
-    try {
-      rv = ecto::schedulers::invoke_process(graph, vd);
-    } catch (const boost::thread_interrupted& e) {
-      std::cout << "Interrupted\n";
-      return ecto::QUIT;
-    } catch (...) {
-      ECTO_LOG_DEBUG("%s", "STOPPING... somebody done threw something.");
-      stop();
-      throw;
-    }
-    return rv;
-  }
-
-  void scheduler::stop()
-  {
-    ECTO_START();
-    // recursive_mutex::scoped_lock lock(iface_mtx);
-    graph[stack[0]]->stop_requested(true);
-    stop_impl();
-  }
-
-  void scheduler::interrupt()
-  {
-    ECTO_START();
-    recursive_mutex::scoped_lock lock(iface_mtx);
-    interrupt_impl();
-    runthread.interrupt();
-    runthread.join();
-  }
-
-  bool scheduler::running() const
-  {
-    //EAR Why are these locking here?
-    recursive_mutex::scoped_lock lock(iface_mtx);
-    recursive_mutex::scoped_lock running_lock(running_mtx);
-    return running_value;
-  }
-
-  void scheduler::wait()
-  {
-    ECTO_START();
-    //so that python may resume.
-    ecto::py::scoped_gil_release sgr;
-    recursive_mutex::scoped_lock lock(iface_mtx);
-    runthread.join();
-    wait_impl();
-  }
-
-  void
-  scheduler::running(bool value)
-  {
-    boost::recursive_mutex::scoped_lock lock(running_mtx);
-    running_value = value;
-    running_cond.notify_all();
-    ECTO_LOG_DEBUG("running=%u", value);
-  }
-
-  void verbose_run(boost::asio::io_service& s, std::string name)
-  {
-    while(true) {
-      ECTO_LOG_DEBUG("%p >serv> run_one %s", &s % name);
-      std::size_t nrun = s.run_one();
-      ECTO_LOG_DEBUG("%p <serv< run_one (%u) %s", &s % nrun % name);
-      if (nrun == 0)
-        {
-          ECTO_LOG_DEBUG("%p <serv< done %s", &s % name);
-          return;
-        }
-    }
-  }
 }
+
+scheduler::~scheduler()
+{
+  //std::cerr << this << " ~scheduler()\n";
+  stop();
+}
+
+bool scheduler::execute(unsigned num_iters)
+{
+  //std::cerr << this << " scheduler::execute(" << num_iters << ")\n";
+  execute_async(num_iters);
+  run();
+  return (state_ > 0); // NOT thread-safe!
+}
+
+bool scheduler::execute_async(unsigned num_iters)
+{
+  //std::cerr << this << " scheduler::execute_async(" << num_iters << ")\n";
+  { // BEGIN mtx_ scope.
+    mutex::scoped_lock l(mtx_);
+    if (EXECUTING == state_)
+      BOOST_THROW_EXCEPTION(EctoException()
+                            << diag_msg("Scheduler already executing"));
+
+    // Make sure the io_service is ready to go.
+    io_svc_.reset();
+    if (state_ != RUNNING) {
+      io_svc_.post(boost::bind(& scheduler::execute_init, this, num_iters));
+    } else {
+      io_svc_.post(boost::bind(& scheduler::execute_iter, this,
+        0 /* cur_iter */, num_iters, 0 /* stack_idx */));
+    }
+
+    state_ = EXECUTING; // Make sure no one else can start an execution.
+  } // END mtx_ scope.
+
+  return (state_ > 0); // NOT thread-safe!
+}
+
+bool scheduler::run_job()
+{
+  ref_count<> c(mtx_, runners_);
+  profile::graphstats_collector gs(graphstats_); // TODO: NOT thread-safe!
+  io_svc_.run_one();
+  return (state_ > 0); // NOT thread-safe!
+}
+
+bool scheduler::run(unsigned timeout_usec)
+{
+  ref_count<> c(mtx_, runners_);
+  profile::graphstats_collector gs(graphstats_); // TODO: NOT thread-safe!
+  using namespace boost::posix_time;
+  ptime quit = microsec_clock::universal_time() + microseconds(timeout_usec);
+  std::size_t n = 0;
+  do {
+    n = io_svc_.run_one(); // Sit and spin.
+  } while (n && microsec_clock::universal_time() < quit);
+  return (state_ > 0); // NOT thread-safe!
+}
+
+bool scheduler::run()
+{
+  ref_count<> c(mtx_, runners_);
+  profile::graphstats_collector gs(graphstats_); // TODO: NOT thread-safe!
+  io_svc_.run();
+  return (state_ > 0); // NOT thread-safe!
+}
+
+void scheduler::stop()
+{
+  //std::cerr << this << " scheduler::stop()\n";
+  if (! running()) return;
+  state(STOPPING);
+  run(); // Flush all jobs.
+  io_svc_.stop();
+  //while (! io_svc_.stopped()) // TODO: Need updated version of boost!
+  while (true) {
+    boost::mutex::scoped_lock l(mtx_);
+    if (! runners_) break; // TODO: Use condition variable?
+  }
+  execute_fini();
+  assert(state() == FINI);
+  assert(! running());
+}
+
+void scheduler::execute_init(unsigned num_iters)
+{
+  //std::cerr << this << " scheduler::execute_init(" << num_iters << "): STATE="
+  //          << state() << "\n";
+  if (state() == STOPPING) return; // Flush all jobs from the io_service.
+  assert(state() == EXECUTING);
+
+  compute_stack();
+  plasm_->reset_ticks();
+
+  // TODO: Should plasm have a reset_ method for strands?
+  // Reset cell strands and invoke their start() method.
+  for (std::size_t j=0; j<stack_.size(); ++j) {
+    cell::ptr c = graph_[stack_[j]]->cell();
+    if (! c) continue;
+    if (c->strand_)
+      c->strand_->reset();
+    c->start();
+  }
+
+#if 0
+  // Handle SIGINTs for all schedulers.
+  boost::signals2::scoped_connection interrupt_connection(
+    SINGLE_THREADED_SIGINT_SIGNAL.connect(
+      boost::bind(&scheduler::interrupt, this)));
+#endif
+
+  io_svc_.post(boost::bind(& scheduler::execute_iter, this,
+                           0 /* cur_iter */, num_iters, 0 /* stack_idx */));
+}
+
+void scheduler::execute_iter(unsigned cur_iter, unsigned num_iters,
+                             std::size_t stack_idx)
+{
+  //std::cerr << this << " scheduler::execute_iter(" << cur_iter << ","
+  //          << num_iters << "," << stack_idx << "): STATE=" << state() << " stack_.size()=" << stack_.size() << "\n";
+  if (state() == STOPPING) return; // Flush all jobs from the io_service.
+
+  assert(stack_idx < stack_.size());
+  assert(state() == EXECUTING);
+
+  int retval = ecto::QUIT;
+  try {
+    retval = ecto::schedulers::invoke_process(graph_, stack_[stack_idx]);
+  } catch (const boost::thread_interrupted &) {
+    std::cout << "Interrupted\n";
+  } catch (...) {
+    ECTO_LOG_DEBUG("%s", "STOPPING... somebody done threw something.");
+    state(ERROR);
+    throw; // Propagate to the calling thread.
+  }
+
+  // TODO: Handle BREAK or CONTINUE? There are serious implications for
+  // multi-threaded scheduling.
+  switch (retval) {
+  case ecto::OK:
+    ++stack_idx;
+    if (stack_.size() <= stack_idx) {
+      stack_idx = 0;
+      ++cur_iter;
+
+      // Made it through the stack. Do it again?
+      if (num_iters && cur_iter >= num_iters) {
+        // No longer executing, but still "running".
+        state(RUNNING);
+        return;
+      }
+    }
+    break; // continue execution in this method.
+
+  case ecto::DO_OVER:
+    break; // Reschedule this cell e.g. Don't bump the stack_idx.
+
+  default:
+    // Don't schedule any more cells, just finalize and quit.
+    io_svc_.post(boost::bind(& scheduler::execute_fini, this));
+    return;
+  }
+
+  io_svc_.post(boost::bind(& scheduler::execute_iter, this,
+                           cur_iter, num_iters, stack_idx));
+}
+
+void scheduler::execute_fini()
+{
+  //std::cerr << this << " execute_fini(): STATE=" << state() << "\n";
+  assert(running());
+
+  for (std::size_t j=0; j<stack_.size(); ++j) {
+    cell::ptr c = graph_[stack_[j]]->cell();
+    if (! c) continue;
+    c->stop();
+  }
+  state(FINI);
+}
+
+void scheduler::compute_stack()
+{
+  if (! stack_.empty()) // stack_ will be empty if it needs to be computed.
+    return;
+
+  // Check the plasm for correctness, and make sure it is configured/activated.
+  plasm_->check();
+  plasm_->configure_all();
+  plasm_->activate_all();
+  ECTO_LOG_DEBUG("graph size = %u", num_vertices(graph_));
+
+#define BREADTHFIRST
+#ifdef BREADTHFIRST
+// TODO: Doc why we want a "BFS" topological sort here.
+
+  graph_t::vertex_iterator vit, vend;
+  // NOTE: We only need to reset the vertex ticks here, and
+  // plasm::reset_ticks() also resets the edge ticks.
+  tie(vit, vend) = vertices(graph_);
+  for (; vit != vend; ++vit)
+    graph_[*vit]->reset_tick();
+
+  const std::size_t NUM_VERTICES = num_vertices(graph_);
+  for (size_t n = 0; n < NUM_VERTICES; ++n) {
+    tie(vit, vend) = vertices(graph_);
+    for (; vit != vend; ++vit) {
+      // NOTE: tick is incremented on visit
+      const graph::vertex_ptr vp = graph_[*vit];
+      if (vp->tick() != 0)
+        continue; // Already visited this vertex.
+
+      graph_t::in_edge_iterator iebegin, ieend;
+      tie(iebegin, ieend) = in_edges(*vit, graph_);
+      bool all_ins_visited = true;
+      for (; iebegin != ieend; ++iebegin) {
+        const graph::vertex_ptr in_vp = graph_[source(*iebegin, graph_)];
+        if (in_vp->tick() == 0)
+          all_ins_visited = false;
+      }
+      if (all_ins_visited) {
+        vp->inc_tick();
+        stack_.push_back(*vit);
+
+        // Check for cycles.
+        graph_t::out_edge_iterator oebegin, oeend;
+        tie(oebegin, oeend) = out_edges(*vit, graph_);
+        for (; oebegin != oeend; ++oebegin) {
+          const graph::vertex_ptr out_vp = graph_[target(*oebegin, graph_)];
+          if (out_vp->tick()) // Back edge!
+            BOOST_THROW_EXCEPTION(EctoException() << diag_msg("Plasm NOT a DAG!"));
+        }
+      }
+    }
+  }
+
+  // NOTE: We should insert a vertex each iteration.
+  if (NUM_VERTICES != stack_.size())
+    BOOST_THROW_EXCEPTION(EctoException() << diag_msg("Plasm NOT a DAG!"));
+
+#else // dfs, which is what boost::topological_sort does
+  boost::topological_sort(graph_, std::back_inserter(stack_));
+  std::reverse(stack_.begin(), stack_.end());
+#endif
+
+  assert(! stack_.empty());
+}
+
+#if 0
+void scheduler::stop()
+{
+  // TODO (JTF): This isn't really safe, and we shouldn't really need it w/
+  // io_svc_ controlling execution.
+  graph_[stack_[0]]->stop_requested(true);
+}
+#endif
+
+} // End of namespace ecto.

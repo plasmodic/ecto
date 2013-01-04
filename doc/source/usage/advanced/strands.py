@@ -19,6 +19,6 @@ printer = ecto_test.Printer()
 plasm.connect(noncurr['out'] >> printer['in'])
 
 if __name__ == '__main__':
-    sched = ecto.schedulers.Threadpool(plasm)
-    sched.execute(niter=2,nthreads=8)
+    sched = ecto.Scheduler(plasm)
+    sched.execute(niter=2)
 

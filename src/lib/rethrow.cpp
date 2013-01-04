@@ -63,7 +63,7 @@ namespace ecto {
           boost::rethrow_exception(boost::current_exception());
         }
         {
-          ecto::py::scoped_call_back_to_python pycall;
+          ECTO_SCOPED_CALLPYTHON();
 
           ECTO_LOG_DEBUG("%s", "rethrow scheduled");
           rethrowable_in_interpreter_thread = boost::current_exception();
@@ -109,7 +109,6 @@ namespace ecto {
           ECTO_LOG_DEBUG("rethrower stopping scheduler at %p", sched);
           rethrow_schedule(serv);
           if (sched) sched->stop();
-          //throw;
         } catch (const std::exception&) {
           ECTO_LOG_DEBUG("rethrower stopping scheduler at %p", sched);
           rethrow_schedule(serv);

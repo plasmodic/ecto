@@ -33,7 +33,7 @@ import sys, util
 plasm = ecto.Plasm()
 exceptor = ecto_test.ExceptInConstructor()
 plasm.insert(exceptor)
-sched = ecto.schedulers.Singlethreaded(plasm)
+sched = ecto.Scheduler(plasm)
 
 try:
     sched.execute(1)

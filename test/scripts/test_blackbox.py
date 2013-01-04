@@ -26,40 +26,39 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 #
-import sys, ecto, ecto.schedulers
+import sys, ecto
 import ecto.ecto_test as ecto_test
 from util import fail
+from ecto import BlackBoxCellInfo as CellInfo, BlackBoxForward as Forward
 
 class MyBlackBox(ecto.BlackBox):
     ''' A simple black box that doesn't really do anything.
     '''
-    #You must have class variables for any cells which you would like to
-    #forward inputs,outputs,params
-    #The names of these class variables are assumed to stay consistent
-    #and are used when forward declaring.
-    #These class level variables are type names, and should be transformed into
-    #instances in the configure method.
-    gen = ecto_test.Generate
-    inc = ecto_test.Increment
 
-    def declare_params(self, p):
+    @classmethod
+    def declare_cells(cls, p):
+        return {'gen': CellInfo(python_class=ecto_test.Generate),
+                'inc': CellInfo(python_class=ecto_test.Increment)
+               }
+
+    @classmethod
+    def declare_direct_params(cls, p, **kwargs):
         p.declare("fail", "Should i fail or should i go.", False)
-        p.forward("amount", cell_name='inc')
-        p.forward_all(cell_name='gen') #carte blanche forward all of the parameters.
 
-    def declare_io(self, p, i, o):
-        #forward one element
-        o.forward('value', cell_name='inc', cell_key='out', doc='New docs')
+    @classmethod
+    def declare_forwards(cls, params):
+        p = {'gen': 'all',
+             'inc': [Forward(key='amount')]}
+        i = {}
+        o = {'inc': [Forward(key='out', new_key='value', new_doc='New docs')]}
+
+        return (p,i,o)
 
     def configure(self, p, i, o):
-        self.fail = p.fail
-        #You must transform instance versions of the class cell types in this
-        #function.
-        self.gen = self.gen() #custom overriding can occur here.
-        self.inc = self.inc()
+        self.fail = p.at('fail').val
         self.printer = ecto_test.Printer()
 
-    def connections(self):
+    def connections(self, p):
         graph = [
                 self.gen["out"] >> self.inc["in"],
                 self.inc["out"] >> self.printer["in"]
@@ -74,8 +73,10 @@ def test_bb(options):
     plasm.insert(mm)
     options.niter = 5
     run_plasm(options, plasm)
+    # final value is start + step*(2*5-1)+amount
     assert mm.outputs.value == 39
     run_plasm(options, plasm)
+    # final value is start + step*(2*(5+5)-1)+amount
     assert mm.outputs.value == 69
 
 def test_bb_fail(options):
@@ -119,6 +120,59 @@ def test_yaml():
     print mm.params.start
     assert mm.params.start == 54
 
+class MyBlackBox2(ecto.BlackBox):
+    '''
+    This BlackBox tests:
+    - a BlackBox within a Blacbox
+    - some parameters are implicitly declared
+    - no declare_direct_params
+    - two cells of the same type are part of it
+    '''
+
+    @classmethod
+    def declare_cells(cls, p):
+        return {'gen': CellInfo(python_class=MyBlackBox, params={'start':20}),
+                'inc': CellInfo(python_class=ecto_test.Increment)
+               }
+
+    @classmethod
+    def declare_forwards(cls, p):
+        p = {'gen': [Forward(key='step'), Forward(key='amount',new_key='amount1')],
+             'inc': [Forward(key='amount',new_key='amount2')]}
+        i = {}
+        o = {'inc': [Forward(key='out', new_key='value', new_doc='New docs')]}
+        return (p,i,o)
+
+    def configure(self, p, i, o):
+        self.printer = ecto_test.Printer()
+
+    def connections(self, p):
+        graph = [
+                self.gen["value"] >> self.inc["in"],
+                self.inc["out"] >> self.printer["in"]
+               ]
+        return graph
+
+def test_bb2(options):
+    # start is going to be ignored as it is set to 20 by default
+    mm = MyBlackBox2(start=0, step=3, amount1=10, amount2=50)
+    # make sure the declare functions work
+    p=ecto.Tendrils()
+    i=ecto.Tendrils()
+    o=ecto.Tendrils()
+    mm.declare_params(p)
+    mm.declare_io(p,i,o)
+    # run the BlackBox
+    plasm = ecto.Plasm()
+    plasm.insert(mm)
+    options.niter = 5
+    run_plasm(options, plasm)
+    # final value is start + step*(5-1)+amount1+amount2
+    assert mm.outputs.value == 92
+    run_plasm(options, plasm)
+    # final value is start + step*(5+5-1)+amount1+amount2
+    assert mm.outputs.value == 107
+
 if __name__ == '__main__':
     test_command_line_args()
     test_command_line_args2()
@@ -131,3 +185,4 @@ if __name__ == '__main__':
     test_bb(options)
     test_bb_fail(options)
 
+    test_bb2(options)

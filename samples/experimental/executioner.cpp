@@ -31,7 +31,7 @@
 #include <ecto/python.hpp>
 #include <boost/foreach.hpp>
 #include <ecto/plasm.hpp>
-#include <ecto/schedulers/singlethreaded.hpp>
+#include <ecto/scheduler.hpp>
 
 namespace ecto
 {
@@ -80,7 +80,7 @@ namespace ecto
     {
       p["plasm"] >> plasm_;
       plasm_->configure_all();
-      sched_.reset(new schedulers::singlethreaded(plasm_));
+      sched_.reset(new scheduler(plasm_));
       niters = p["niter"];
     }
 
@@ -88,15 +88,13 @@ namespace ecto
     process(const tendrils& /*in*/, const tendrils& /*out*/)
     {
       if (*niters > 0)
-      {
-        return sched_->execute(*niters);
-      }
+        sched_->execute(*niters);
       else
         sched_->execute(0);
       return ecto::OK;
     }
     plasm::ptr plasm_;
-    boost::shared_ptr<schedulers::singlethreaded> sched_;
+    boost::shared_ptr<scheduler> sched_;
     spore<int> niters;
   };
 }

@@ -51,14 +51,20 @@ def invoke(Scheduler, whatnext):
     s = Scheduler(p)
     s.execute_async()
     assert s.running()
-    time.sleep(0.05)
     whatnext(s)
+
+def runsome(s):
+    for i in range(0,3):
+        s.run_job()
+    assert s.running()
 
 def stoponly(s):
     s.stop()
+    assert not s.running()
 
-def interruptonly(s):
-    s.interrupt()
+def runsomethenstop(s):
+    runsome(s)
+    stoponly(s)
 
 def nada(s):
     pass
@@ -68,8 +74,7 @@ def bang(Sched):
         print "executing [%d] %s " %(i, Sched)
         invoke(Sched, nada)
         invoke(Sched, stoponly)
-        invoke(Sched, interruptonly)
+        invoke(Sched, runsome)
+        invoke(Sched, runsomethenstop)
 
-map(bang, ecto.test.schedulers)
-
-
+map(bang, [ecto.Scheduler])

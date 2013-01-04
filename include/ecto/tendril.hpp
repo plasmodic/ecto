@@ -47,6 +47,24 @@
 
 namespace ecto
 {
+  namespace registry{
+    namespace tendril{
+      bool add(const ecto::tendril& t);
+      const ecto::tendril& get(const std::string& type_name);
+      std::vector<std::string> type_names();
+      template<typename T>
+      struct entry{
+        entry(const ecto::tendril& t)
+        {
+          add(t);
+        }
+      };
+      template<typename T>
+      void add(const ecto::tendril& t){
+        static entry<T> e(t);
+      }
+    }
+  }
   /**
    * \brief A tendril is the slender, winding organ of the
    * ecto::cell that gives it its awesome type erasure and uber
@@ -325,6 +343,7 @@ namespace ecto
       void
       operator()(tendril& t, const boost::python::object& obj) const
       {
+        ECTO_SCOPED_CALLPYTHON();
         boost::python::extract<T> get_T(obj);
         if (get_T.check())
           t << get_T();
@@ -337,6 +356,7 @@ namespace ecto
       void
       operator()(boost::python::object& o, const tendril& t) const
       {
+        ECTO_SCOPED_CALLPYTHON();
         const T& v = t.get<T>();
         boost::python::object obj(v);
         o = obj;
@@ -356,6 +376,7 @@ namespace ecto
       void
       operator()(boost::python::object& o, const tendril& t) const
       {
+        ECTO_SCOPED_CALLPYTHON();
         o = boost::python::object();
       }
     };
@@ -366,6 +387,7 @@ namespace ecto
       holder_ = t;
       type_ID_ = name_of<T>().c_str();
       converter = &ConverterImpl<T>::instance;
+      registry::tendril::add<T>(*this);
     }
     void copy_holder(const tendril& rhs);
 
@@ -453,7 +475,6 @@ namespace ecto
     template <typename T>
     friend tendril_ptr make_tendril();
 
-    std::size_t tick; // for sanity-checking
   };
 
   template <typename T>

@@ -25,24 +25,29 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 // 
-#include <ecto/schedulers/singlethreaded.hpp>
-#include <ecto/schedulers/multithreaded.hpp>
+#include <ecto/plasm.hpp>
+#include <ecto/scheduler.hpp>
+
+#include <boost/python.hpp>
 
 namespace bp = boost::python;
 
 namespace ecto {
   namespace py {
 
-    template <typename T> int execute0 (T& s) { return s.execute(); }
-    template <typename T> int execute1 (T& s, unsigned arg1) { return s.execute(arg1); }
-    template <typename T> int execute2 (T& s, unsigned arg1, unsigned arg2) { return s.execute(arg1, arg2); }
+    template <typename T> bool execute0 (T& s) { return s.execute(); }
+    template <typename T> bool execute1 (T& s, unsigned arg1)
+    { return s.execute(arg1); }
 
-    template <typename T> void execute_async0 (T& s) { return s.execute_async(); }
-    template <typename T> void execute_async1 (T& s, unsigned arg1) { return s.execute_async(arg1); }
-    template <typename T> void execute_async2 (T& s, unsigned arg1, unsigned arg2) 
-    { 
-      return s.execute_async(arg1, arg2); 
-    }
+    template <typename T> bool execute_async0 (T& s)
+    { return s.execute_async(); }
+    template <typename T> bool execute_async1 (T& s, unsigned arg1)
+    { return s.execute_async(arg1); }
+
+    template <typename T> bool run0 (T& s)
+    { return s.run(); }
+    template <typename T> bool run1 (T& s, unsigned arg1)
+    { return s.run(arg1); }
 
     template <typename T> 
     void wrap_scheduler(const char* name)
@@ -51,16 +56,16 @@ namespace ecto {
       bp::class_<T, boost::noncopyable>(name, bp::init<ecto::plasm::ptr>())
         .def("execute", &execute0<T>)
         .def("execute", &execute1<T>, arg("niter"))
-        .def("execute", &execute2<T>, (arg("niter"), arg("nthreads")))
-
         .def("execute_async", &execute_async0<T>)
         .def("execute_async", &execute_async1<T>, arg("niter"))
-        .def("execute_async", &execute_async2<T>, (arg("niter"), arg("nthreads")))
 
-        .def("interrupt", &T::interrupt)
+        //.def("interrupt", &T::interrupt)
         .def("stop", &T::stop)
         .def("running", (bool (scheduler::*)() const) &scheduler::running)
-        .def("wait", &T::wait)
+        //.def("wait", &T::wait)
+        .def("run", &run0<T>)
+        .def("run", &run1<T>, arg("timeout_usec"))
+        .def("run_job", &T::run_job)
         .def("stats", &T::stats)
         ;
     }
@@ -68,19 +73,13 @@ namespace ecto {
     void wrapSchedulers()
     {
       //      bp::detail::init_module("ecto.schedulers", initschedulers);
-      bp::object schedulers_module(bp::handle<>(bp::borrowed(PyImport_AddModule("ecto.schedulers"))));
-      bp::scope().attr("schedulers") = schedulers_module;
-      bp::scope schedulers_scope = schedulers_module;
-      
-      using namespace ecto::schedulers;
+      //bp::object scheduler_module(bp::handle<>(bp::borrowed(PyImport_AddModule("ecto"))));
+      //bp::scope().attr("schedulers") = schedulers_module;
+      //bp::scope schedulers_scope = schedulers_module;
+
       using bp::arg;
 
-      //      wrap_scheduler<singlethreaded>("Singlethreaded");
-
-      wrap_scheduler<singlethreaded>("Singlethreaded");
-
-      wrap_scheduler<multithreaded>("Multithreaded");
-        
+      wrap_scheduler<ecto::scheduler>("Scheduler");
     }
   }
 }
