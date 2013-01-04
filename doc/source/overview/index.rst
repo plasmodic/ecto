@@ -25,6 +25,16 @@ graphs, or ``Plasms`` from these cells.  As such, most of the examples that will
 follow will involve both C++ and Python snippets.
 
 
+First, check if you like ecto:
+
+.. toctree::
+    :maxdepth: 1
+
+    summary.rst
+
+The following is a pretty thorough explanation of the main concepts behind ecto but
+you can get to coding right away if you want:
+
 .. toctree::
     :maxdepth: 1
 
