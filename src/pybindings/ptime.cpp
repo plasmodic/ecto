@@ -27,6 +27,8 @@
 //
 
 #include <boost/python.hpp>
+// The next line needs to be here for Ubuntu Lucid
+#include <boost/date_time/time_resolution_traits.hpp>
 #include <boost/date_time/posix_time/posix_time_io.hpp>
 #include <boost/date_time/posix_time/time_parsers.hpp>
 #include <ecto/time.hpp>
