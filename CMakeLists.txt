@@ -42,7 +42,7 @@ include(cmake/config.cmake)
 
 catkin_package(CFG_EXTRAS ecto-extras.cmake
                DEPENDS Boost
-               INCLUDE_DIRS include ${CATKIN_BUILD_PREFIX}/include/
+               INCLUDE_DIRS include ${CATKIN_DEVEL_PREFIX}/include/
                LIBRARIES ecto
 )
 else()
@@ -98,8 +98,8 @@ git_status(ecto)
 include_directories(include)
 include_directories(src/lib)
 if (ROS_GROOVY_FOUND)
-include_directories(${CATKIN_BUILD_PREFIX}/include)
-install(DIRECTORY ${CATKIN_BUILD_PREFIX}/include/ecto/
+include_directories(${CATKIN_DEVEL_PREFIX}/include)
+install(DIRECTORY ${CATKIN_DEVEL_PREFIX}/include/ecto/
         DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION}/ecto
         COMPONENT main
 )
