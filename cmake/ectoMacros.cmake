@@ -51,7 +51,7 @@ unset(ROS_GROOVY_OR_ABOVE_FOUND)
 # TODO, once fuerte/Lucid is not supported anymore, remove the CMakeParseArguments file
 if (ROS_GROOVY_OR_ABOVE_FOUND)
 include(CMakeParseArguments)
-set(ECTO_PYTHON_BUILD_PATH ${CATKIN_BUILD_PREFIX}/${CATKIN_PACKAGE_PYTHON_DESTINATION}/../)
+set(ECTO_PYTHON_BUILD_PATH ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_PYTHON_DESTINATION}/../)
 set(ECTO_PYTHON_INSTALL_PATH ${CATKIN_PACKAGE_PYTHON_DESTINATION}/../)
 else()
 include(${SELF_DIR}/CMakeParseArguments.cmake)
@@ -131,7 +131,7 @@ macro(ectomodule NAME)
 
 if (ROS_GROOVY_OR_ABOVE_FOUND)
   set_target_properties(${NAME}_ectomodule PROPERTIES
-                        LIBRARY_OUTPUT_DIRECTORY ${CATKIN_BUILD_PREFIX}/${CATKIN_GLOBAL_PYTHON_DESTINATION}/${ARGS_DESTINATION}
+                        LIBRARY_OUTPUT_DIRECTORY ${CATKIN_DEVEL_PREFIX}/${CATKIN_GLOBAL_PYTHON_DESTINATION}/${ARGS_DESTINATION}
   )
 else()
   set_target_properties(${NAME}_ectomodule PROPERTIES
