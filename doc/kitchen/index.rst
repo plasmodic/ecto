@@ -42,13 +42,14 @@ If you want to install from source, you will have to get them from https://githu
   git clone http://github.com/plasmodic/ecto.git
   ln -s catkin/cmake/toplevel.cmake CMakeLists.txt
 
-Then get the ecto modules you want (and make sure their dependencies defiend in their package.xml
+Then get the ecto modules you want (and make sure their dependencies defined in their package.xml
 are on your path):
 
 .. code-block:: bash
 
   git clone http://github.com/plasmodic/ecto_image_pipeline.git
   git clone http://github.com/plasmodic/ecto_openni.git
+  git clone http://github.com/wg-perception/opencv_candidate.git
   git clone http://github.com/plasmodic/ecto_opencv.git
   git clone http://github.com/plasmodic/ecto_pcl.git
   git clone http://github.com/plasmodic/ecto_ros.git
