@@ -49,7 +49,7 @@ tendril_ptr tendril_ctr()
 tendril_ptr tendril_ctr1(const bp::object & object)
 {
   //allow the tendril to have no type...
-#if BOOST_PYTHON_OBJECT_HAS_IS_NONE
+#ifdef BOOST_PYTHON_OBJECT_HAS_IS_NONE
   if(object.is_none()){
 #else
   if(object.ptr() == Py_None){
