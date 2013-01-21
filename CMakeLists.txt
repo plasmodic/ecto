@@ -42,7 +42,7 @@ include(cmake/config.cmake)
 
 catkin_package(CFG_EXTRAS ecto-extras.cmake
                DEPENDS Boost
-               INCLUDE_DIRS include ${CATKIN_DEVEL_PREFIX}/include/
+               INCLUDE_DIRS include
                LIBRARIES ecto
 )
 else()
