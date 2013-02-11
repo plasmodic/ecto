@@ -81,7 +81,7 @@ void move_inputs(graph_t& graph, graph_t::vertex_descriptor vd)
         << except::what(ex.what())
         << except::cell_name(name)
         << except::when(boost::str(
-             boost::format("Copying %s to %s")%e->to_port()%e->from_port())));
+             boost::format("Copying %s to %s")%e->from_port()%e->to_port())));
       throw;
     }
     e->pop_front(); // TODO: Make this use a pool instead of popping (to get rid of allocations).
