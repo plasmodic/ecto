@@ -36,8 +36,7 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.intersphinx',
               'sphinx.ext.pngmath',
               'sphinx.ext.todo',
-              'sphinx.ext.viewcode',
-              'sphinx.ext.intersphinx']
+              'sphinx.ext.viewcode']
 
 extensions += ['ecto.sphinx.programoutput',
                'ecto.sphinx.breathe',
