@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="dir_64d3c749b493e25622b448d27db60e04" kind="dir">
+    <compoundname>/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/</compoundname>
+    <innerdir refid="dir_4c19d758b47173816dbf97ecaabeb5bf">/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/impl/</innerdir>
+    <innerdir refid="dir_b5c27c6dcdb2e52bc7b0b261671e10f2">/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python/</innerdir>
+    <innerdir refid="dir_fdea777f18e5a5e35335b12896a06d25">/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/serialization/</innerdir>
+    <innerfile refid="abi_8hpp">abi.hpp</innerfile>
+    <innerfile refid="all_8hpp">all.hpp</innerfile>
+    <innerfile refid="atomic_8hpp">atomic.hpp</innerfile>
+    <innerfile refid="cell_8hpp">cell.hpp</innerfile>
+    <innerfile refid="ecto_8hpp">ecto.hpp</innerfile>
+    <innerfile refid="edge_8hpp">edge.hpp</innerfile>
+    <innerfile refid="element_8hpp">element.hpp</innerfile>
+    <innerfile refid="except_8hpp">except.hpp</innerfile>
+    <innerfile refid="forward_8hpp">forward.hpp</innerfile>
+    <innerfile refid="log_8hpp">log.hpp</innerfile>
+    <innerfile refid="module_8hpp">module.hpp</innerfile>
+    <innerfile refid="parameters_8hpp">parameters.hpp</innerfile>
+    <innerfile refid="plasm_8hpp">plasm.hpp</innerfile>
+    <innerfile refid="profile_8hpp">profile.hpp</innerfile>
+    <innerfile refid="python_8hpp">python.hpp</innerfile>
+    <innerfile refid="registry_8hpp">registry.hpp</innerfile>
+    <innerfile refid="rethrow_8hpp">rethrow.hpp</innerfile>
+    <innerfile refid="scheduler_8hpp">scheduler.hpp</innerfile>
+    <innerfile refid="spore_8hpp">spore.hpp</innerfile>
+    <innerfile refid="strand_8hpp">strand.hpp</innerfile>
+    <innerfile refid="tendril_8hpp">tendril.hpp</innerfile>
+    <innerfile refid="tendrils_8hpp">tendrils.hpp</innerfile>
+    <innerfile refid="test_8hpp">test.hpp</innerfile>
+    <innerfile refid="time_8hpp">time.hpp</innerfile>
+    <innerfile refid="traits_8hpp">traits.hpp</innerfile>
+    <innerfile refid="util_8hpp">util.hpp</innerfile>
+    <innerfile refid="vertex_8hpp">vertex.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/"/>
+  </compounddef>
+</doxygen>

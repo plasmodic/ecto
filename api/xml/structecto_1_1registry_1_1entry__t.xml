@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="structecto_1_1registry_1_1entry__t" kind="struct" prot="public">
+    <compoundname>ecto::registry::entry_t</compoundname>
+    <includes refid="registry_8hpp" local="no">registry.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structecto_1_1registry_1_1entry__t_1ae1c1832273dbd622b1789a82f0832aa8" prot="public" static="no" mutable="no">
+        <type><ref refid="namespaceecto_1_1registry_1a3f75a16f135bcadb9bf1a7000b807b3b" kindref="member">factory_fn_t</ref></type>
+        <definition>factory_fn_t ecto::registry::entry_t::construct</definition>
+        <argsstring></argsstring>
+        <name>construct</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/registry.hpp" line="54" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/registry.hpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structecto_1_1registry_1_1entry__t_1a0e87799ee057b4509d45eab85def3b80" prot="public" static="no" mutable="no">
+        <type><ref refid="namespaceecto_1_1registry_1a04d849b45313a8ce9a602095e1edade9" kindref="member">declare_params_t</ref></type>
+        <definition>declare_params_t ecto::registry::entry_t::declare_params</definition>
+        <argsstring></argsstring>
+        <name>declare_params</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/registry.hpp" line="55" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/registry.hpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structecto_1_1registry_1_1entry__t_1ac052cec6adea69584fbb17f24e147ec2" prot="public" static="no" mutable="no">
+        <type><ref refid="namespaceecto_1_1registry_1af52d8f0fff3baaf352e2523ab8ed7977" kindref="member">declare_io_t</ref></type>
+        <definition>declare_io_t ecto::registry::entry_t::declare_io</definition>
+        <argsstring></argsstring>
+        <name>declare_io</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/registry.hpp" line="56" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/registry.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structecto_1_1registry_1_1entry__t_1a6690e4cc01562d27df2cca184cdd06e0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>boost::shared_ptr&lt; <ref refid="structecto_1_1cell" kindref="compound">cell</ref> &gt;</type>
+        <definition>boost::shared_ptr&lt;cell&gt; ecto::registry::entry_t::construct_</definition>
+        <argsstring>()</argsstring>
+        <name>construct_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/registry.hpp" line="58" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/registry.hpp" bodystart="58" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1registry_1_1entry__t_1af0aeb9fd69fc09b5a2b5f82841cba647" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::registry::entry_t::declare_params_</definition>
+        <argsstring>(ecto::tendrils &amp;t)</argsstring>
+        <name>declare_params_</name>
+        <param>
+          <type><ref refid="classecto_1_1tendrils" kindref="compound">ecto::tendrils</ref> &amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/registry.hpp" line="59" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/registry.hpp" bodystart="59" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1registry_1_1entry__t_1a079fd7bed79b335a8fa74c68a4ccf988" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::registry::entry_t::declare_io_</definition>
+        <argsstring>(const ecto::tendrils &amp;p, ecto::tendrils &amp;i, ecto::tendrils &amp;o)</argsstring>
+        <name>declare_io_</name>
+        <param>
+          <type>const <ref refid="classecto_1_1tendrils" kindref="compound">ecto::tendrils</ref> &amp;</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type><ref refid="classecto_1_1tendrils" kindref="compound">ecto::tendrils</ref> &amp;</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type><ref refid="classecto_1_1tendrils" kindref="compound">ecto::tendrils</ref> &amp;</type>
+          <declname>o</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/registry.hpp" line="61" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/registry.hpp" bodystart="60" bodyend="63"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="235">
+        <label>ecto::tendrils</label>
+        <link refid="classecto_1_1tendrils"/>
+      </node>
+      <node id="234">
+        <label>ecto::registry::entry_t</label>
+        <link refid="structecto_1_1registry_1_1entry__t"/>
+        <childnode refid="235" relation="usage">
+          <edgelabel>declare_params</edgelabel>
+          <edgelabel>declare_io</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/registry.hpp" line="53" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/registry.hpp" bodystart="53" bodyend="64"/>
+    <listofallmembers>
+      <member refid="structecto_1_1registry_1_1entry__t_1ae1c1832273dbd622b1789a82f0832aa8" prot="public" virt="non-virtual"><scope>ecto::registry::entry_t</scope><name>construct</name></member>
+      <member refid="structecto_1_1registry_1_1entry__t_1a6690e4cc01562d27df2cca184cdd06e0" prot="public" virt="non-virtual"><scope>ecto::registry::entry_t</scope><name>construct_</name></member>
+      <member refid="structecto_1_1registry_1_1entry__t_1ac052cec6adea69584fbb17f24e147ec2" prot="public" virt="non-virtual"><scope>ecto::registry::entry_t</scope><name>declare_io</name></member>
+      <member refid="structecto_1_1registry_1_1entry__t_1a079fd7bed79b335a8fa74c68a4ccf988" prot="public" virt="non-virtual"><scope>ecto::registry::entry_t</scope><name>declare_io_</name></member>
+      <member refid="structecto_1_1registry_1_1entry__t_1a0e87799ee057b4509d45eab85def3b80" prot="public" virt="non-virtual"><scope>ecto::registry::entry_t</scope><name>declare_params</name></member>
+      <member refid="structecto_1_1registry_1_1entry__t_1af0aeb9fd69fc09b5a2b5f82841cba647" prot="public" virt="non-virtual"><scope>ecto::registry::entry_t</scope><name>declare_params_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

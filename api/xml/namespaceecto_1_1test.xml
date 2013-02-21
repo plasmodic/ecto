@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="namespaceecto_1_1test" kind="namespace">
+    <compoundname>ecto::test</compoundname>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="namespaceecto_1_1test_1ae34aab3f49c4e0d8ba421135cafca312" prot="public" static="no" mutable="no">
+        <type>const unsigned</type>
+        <definition>const unsigned ecto::test::max_delay</definition>
+        <argsstring></argsstring>
+        <name>max_delay</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/test.hpp" line="36"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespaceecto_1_1test_1ab6aaaa31355ed0c3c07380853b4ee174" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::test::random_delay</definition>
+        <argsstring>()</argsstring>
+        <name>random_delay</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/test.hpp" line="32"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceecto_1_1test_1abdfa3ef5cd4f48e6a428bf0d8c500450" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T ecto::test::get_from_env_with_default</definition>
+        <argsstring>(const char *name, T defval)</argsstring>
+        <name>get_from_env_with_default</name>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>defval</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/test.hpp" line="34"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/test.hpp" line="31"/>
+  </compounddef>
+</doxygen>

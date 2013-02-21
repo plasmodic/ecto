@@ -1,0 +1,278 @@
+\hypertarget{classecto_1_1py_1_1streambuf}{\section{ecto\-:\-:py\-:\-:streambuf \-Class \-Reference}
+\label{classecto_1_1py_1_1streambuf}\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}}
+}
+
+
+{\ttfamily \#include $<$streambuf.\-hpp$>$}
+
+\subsection*{\-Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classecto_1_1py_1_1streambuf_1_1istream}{istream}
+\item 
+class \hyperlink{classecto_1_1py_1_1streambuf_1_1ostream}{ostream}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef base\-\_\-t\-::char\-\_\-type \hyperlink{classecto_1_1py_1_1streambuf_acd255be6a50678c600c431c5bea7bc7b}{char\-\_\-type}
+\item 
+typedef base\-\_\-t\-::int\-\_\-type \hyperlink{classecto_1_1py_1_1streambuf_a1bfd3d3f54b7b91a5ea54f980436a617}{int\-\_\-type}
+\item 
+typedef base\-\_\-t\-::pos\-\_\-type \hyperlink{classecto_1_1py_1_1streambuf_afdd3f60ff0d0b2f4645742690b7d27dd}{pos\-\_\-type}
+\item 
+typedef base\-\_\-t\-::off\-\_\-type \hyperlink{classecto_1_1py_1_1streambuf_aa01772d1599fc51089a209a69fcab7c7}{off\-\_\-type}
+\item 
+typedef base\-\_\-t\-::traits\-\_\-type \hyperlink{classecto_1_1py_1_1streambuf_aaf8a5185360343bec29d804d5b416417}{traits\-\_\-type}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classecto_1_1py_1_1streambuf_a363d9b87292423903bc5fe94782ad6e0}{streambuf} (bp\-::object \&python\-\_\-file\-\_\-obj, std\-::size\-\_\-t buffer\-\_\-size\-\_\-=0)
+\begin{DoxyCompactList}\small\item\em \-Construct from a \-Python file object. \end{DoxyCompactList}\item 
+virtual \hyperlink{classecto_1_1py_1_1streambuf_a3a63f6d4610731b218bcdca5603a51ef}{$\sim$streambuf} ()
+\begin{DoxyCompactList}\small\item\em \-Mundane destructor freeing the allocated resources. \end{DoxyCompactList}\item 
+virtual std\-::streamsize \hyperlink{classecto_1_1py_1_1streambuf_aba2bcdbeeee00b043f918e60f86ebdd4}{showmanyc} ()
+\begin{DoxyCompactList}\small\item\em \-C.\-f. \-C++ standard section 27.\-5.\-2.\-4.\-3. \end{DoxyCompactList}\item 
+virtual \hyperlink{classecto_1_1py_1_1streambuf_a1bfd3d3f54b7b91a5ea54f980436a617}{int\-\_\-type} \hyperlink{classecto_1_1py_1_1streambuf_adf2601f0f067538a980dced85e8f8d2e}{underflow} ()
+\begin{DoxyCompactList}\small\item\em \-C.\-f. \-C++ standard section 27.\-5.\-2.\-4.\-3. \end{DoxyCompactList}\item 
+virtual \hyperlink{classecto_1_1py_1_1streambuf_a1bfd3d3f54b7b91a5ea54f980436a617}{int\-\_\-type} \hyperlink{classecto_1_1py_1_1streambuf_a6eb250e56b6bbc9345b4f00981e4182f}{overflow} (\hyperlink{classecto_1_1py_1_1streambuf_a1bfd3d3f54b7b91a5ea54f980436a617}{int\-\_\-type} c=\hyperlink{classecto_1_1py_1_1streambuf_ab4446bbe746f4d3713c15492d798872e}{traits\-\_\-type\-\_\-eof}())
+\begin{DoxyCompactList}\small\item\em \-C.\-f. \-C++ standard section 27.\-5.\-2.\-4.\-5. \end{DoxyCompactList}\item 
+virtual int \hyperlink{classecto_1_1py_1_1streambuf_af09b35e1d7da997aacdf99c8802c0fa2}{sync} ()
+\begin{DoxyCompactList}\small\item\em \-Update the python file to reflect the state of this stream buffer. \end{DoxyCompactList}\item 
+virtual \hyperlink{classecto_1_1py_1_1streambuf_afdd3f60ff0d0b2f4645742690b7d27dd}{pos\-\_\-type} \hyperlink{classecto_1_1py_1_1streambuf_af30e4b5af87fcc71a7974b1c00721dbb}{seekoff} (\hyperlink{classecto_1_1py_1_1streambuf_aa01772d1599fc51089a209a69fcab7c7}{off\-\_\-type} off, std\-::ios\-\_\-base\-::seekdir way, std\-::ios\-\_\-base\-::openmode which=std\-::ios\-\_\-base\-::in$|$std\-::ios\-\_\-base\-::out)
+\begin{DoxyCompactList}\small\item\em \-C.\-f. \-C++ standard section 27.\-5.\-2.\-4.\-2. \end{DoxyCompactList}\item 
+virtual \hyperlink{classecto_1_1py_1_1streambuf_afdd3f60ff0d0b2f4645742690b7d27dd}{pos\-\_\-type} \hyperlink{classecto_1_1py_1_1streambuf_a5763f3ff57fc8044b30a695ad7c403f7}{seekpos} (\hyperlink{classecto_1_1py_1_1streambuf_afdd3f60ff0d0b2f4645742690b7d27dd}{pos\-\_\-type} sp, std\-::ios\-\_\-base\-::openmode which=std\-::ios\-\_\-base\-::in$|$std\-::ios\-\_\-base\-::out)
+\begin{DoxyCompactList}\small\item\em \-C.\-f. \-C++ standard section 27.\-5.\-2.\-4.\-2. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \hyperlink{classecto_1_1py_1_1streambuf_ab4446bbe746f4d3713c15492d798872e}{traits\-\_\-type\-\_\-eof} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bp\-::object \hyperlink{classecto_1_1py_1_1streambuf_a63254ed85f60504895f526272e19dd34}{file\-\_\-obj}
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\-::size\-\_\-t \hyperlink{classecto_1_1py_1_1streambuf_a7a20a01fb9aeda8677b3c65bccd6b59d}{default\-\_\-buffer\-\_\-size} = 1024
+\begin{DoxyCompactList}\small\item\em \-The default size of the read and write buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Private \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\-::basic\-\_\-streambuf\*
+$<$ char $>$ \hyperlink{classecto_1_1py_1_1streambuf_ac46c69e7d213fec69f80d1943389366c}{base\-\_\-t}
+\end{DoxyCompactItemize}
+\subsection*{\-Private \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+boost\-::optional$<$ \hyperlink{classecto_1_1py_1_1streambuf_aa01772d1599fc51089a209a69fcab7c7}{off\-\_\-type} $>$ \hyperlink{classecto_1_1py_1_1streambuf_a367a7e20642d4a3ebcefd2f6abc3c3e6}{seekoff\-\_\-without\-\_\-calling\-\_\-python} (\hyperlink{classecto_1_1py_1_1streambuf_aa01772d1599fc51089a209a69fcab7c7}{off\-\_\-type} off, std\-::ios\-\_\-base\-::seekdir way, std\-::ios\-\_\-base\-::openmode which)
+\end{DoxyCompactItemize}
+\subsection*{\-Private \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bp\-::object \hyperlink{classecto_1_1py_1_1streambuf_a77a192df96e66a2e19cdfce078017df8}{py\-\_\-read}
+\item 
+bp\-::object \hyperlink{classecto_1_1py_1_1streambuf_aad739c2392d3c8f0de7d44719c7cc37a}{py\-\_\-write}
+\item 
+bp\-::object \hyperlink{classecto_1_1py_1_1streambuf_ad4e0dc91a74411d2181897d026ff945b}{py\-\_\-seek}
+\item 
+bp\-::object \hyperlink{classecto_1_1py_1_1streambuf_a3735b9e199be3e58c277354127a86146}{py\-\_\-tell}
+\item 
+std\-::size\-\_\-t \hyperlink{classecto_1_1py_1_1streambuf_a8d60fa297a9140474d136a48342ac850}{buffer\-\_\-size}
+\item 
+bp\-::object \hyperlink{classecto_1_1py_1_1streambuf_ac239012691e5d3485572159a53600005}{read\-\_\-buffer}
+\item 
+char $\ast$ \hyperlink{classecto_1_1py_1_1streambuf_a331e541fac616ac9ac3a81fb117057c6}{write\-\_\-buffer}
+\item 
+\hyperlink{classecto_1_1py_1_1streambuf_aa01772d1599fc51089a209a69fcab7c7}{off\-\_\-type} \hyperlink{classecto_1_1py_1_1streambuf_a7b219ca66aa176fdfbc9d6fb63d15cef}{pos\-\_\-of\-\_\-read\-\_\-buffer\-\_\-end\-\_\-in\-\_\-py\-\_\-file}
+\item 
+\hyperlink{classecto_1_1py_1_1streambuf_aa01772d1599fc51089a209a69fcab7c7}{off\-\_\-type} \hyperlink{classecto_1_1py_1_1streambuf_a1775b9bced7a5ff74fe30c788e20ad9e}{pos\-\_\-of\-\_\-write\-\_\-buffer\-\_\-end\-\_\-in\-\_\-py\-\_\-file}
+\item 
+char $\ast$ \hyperlink{classecto_1_1py_1_1streambuf_a8267e360cfb0201b1518a0dfd3d7c353}{farthest\-\_\-pptr}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Member \-Typedef \-Documentation}
+\hypertarget{classecto_1_1py_1_1streambuf_ac46c69e7d213fec69f80d1943389366c}{\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}!base\-\_\-t@{base\-\_\-t}}
+\index{base\-\_\-t@{base\-\_\-t}!ecto::py::streambuf@{ecto\-::py\-::streambuf}}
+\subsubsection[{base\-\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\-::basic\-\_\-streambuf$<$char$>$ {\bf ecto\-::py\-::streambuf\-::base\-\_\-t}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classecto_1_1py_1_1streambuf_ac46c69e7d213fec69f80d1943389366c}
+\hypertarget{classecto_1_1py_1_1streambuf_acd255be6a50678c600c431c5bea7bc7b}{\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}!char\-\_\-type@{char\-\_\-type}}
+\index{char\-\_\-type@{char\-\_\-type}!ecto::py::streambuf@{ecto\-::py\-::streambuf}}
+\subsubsection[{char\-\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}typedef base\-\_\-t\-::char\-\_\-type {\bf ecto\-::py\-::streambuf\-::char\-\_\-type}}}\label{classecto_1_1py_1_1streambuf_acd255be6a50678c600c431c5bea7bc7b}
+\hypertarget{classecto_1_1py_1_1streambuf_a1bfd3d3f54b7b91a5ea54f980436a617}{\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}!int\-\_\-type@{int\-\_\-type}}
+\index{int\-\_\-type@{int\-\_\-type}!ecto::py::streambuf@{ecto\-::py\-::streambuf}}
+\subsubsection[{int\-\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}typedef base\-\_\-t\-::int\-\_\-type {\bf ecto\-::py\-::streambuf\-::int\-\_\-type}}}\label{classecto_1_1py_1_1streambuf_a1bfd3d3f54b7b91a5ea54f980436a617}
+\hypertarget{classecto_1_1py_1_1streambuf_aa01772d1599fc51089a209a69fcab7c7}{\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}!off\-\_\-type@{off\-\_\-type}}
+\index{off\-\_\-type@{off\-\_\-type}!ecto::py::streambuf@{ecto\-::py\-::streambuf}}
+\subsubsection[{off\-\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}typedef base\-\_\-t\-::off\-\_\-type {\bf ecto\-::py\-::streambuf\-::off\-\_\-type}}}\label{classecto_1_1py_1_1streambuf_aa01772d1599fc51089a209a69fcab7c7}
+\hypertarget{classecto_1_1py_1_1streambuf_afdd3f60ff0d0b2f4645742690b7d27dd}{\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}!pos\-\_\-type@{pos\-\_\-type}}
+\index{pos\-\_\-type@{pos\-\_\-type}!ecto::py::streambuf@{ecto\-::py\-::streambuf}}
+\subsubsection[{pos\-\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}typedef base\-\_\-t\-::pos\-\_\-type {\bf ecto\-::py\-::streambuf\-::pos\-\_\-type}}}\label{classecto_1_1py_1_1streambuf_afdd3f60ff0d0b2f4645742690b7d27dd}
+\hypertarget{classecto_1_1py_1_1streambuf_aaf8a5185360343bec29d804d5b416417}{\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}!traits\-\_\-type@{traits\-\_\-type}}
+\index{traits\-\_\-type@{traits\-\_\-type}!ecto::py::streambuf@{ecto\-::py\-::streambuf}}
+\subsubsection[{traits\-\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}typedef base\-\_\-t\-::traits\-\_\-type {\bf ecto\-::py\-::streambuf\-::traits\-\_\-type}}}\label{classecto_1_1py_1_1streambuf_aaf8a5185360343bec29d804d5b416417}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classecto_1_1py_1_1streambuf_a363d9b87292423903bc5fe94782ad6e0}{\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}!streambuf@{streambuf}}
+\index{streambuf@{streambuf}!ecto::py::streambuf@{ecto\-::py\-::streambuf}}
+\subsubsection[{streambuf}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ecto\-::py\-::streambuf\-::streambuf} (
+\begin{DoxyParamCaption}
+\item[{bp\-::object \&}]{python\-\_\-file\-\_\-obj, }
+\item[{std\-::size\-\_\-t}]{buffer\-\_\-size\-\_\- = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classecto_1_1py_1_1streambuf_a363d9b87292423903bc5fe94782ad6e0}
+
+
+\-Construct from a \-Python file object. 
+
+if buffer\-\_\-size is 0 the current default\-\_\-buffer\-\_\-size is used. \hypertarget{classecto_1_1py_1_1streambuf_a3a63f6d4610731b218bcdca5603a51ef}{\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}!$\sim$streambuf@{$\sim$streambuf}}
+\index{$\sim$streambuf@{$\sim$streambuf}!ecto::py::streambuf@{ecto\-::py\-::streambuf}}
+\subsubsection[{$\sim$streambuf}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf ecto\-::py\-::streambuf\-::$\sim$streambuf} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline, virtual\mbox{]}}}}\label{classecto_1_1py_1_1streambuf_a3a63f6d4610731b218bcdca5603a51ef}
+
+
+\-Mundane destructor freeing the allocated resources. 
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classecto_1_1py_1_1streambuf_a6eb250e56b6bbc9345b4f00981e4182f}{\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}!overflow@{overflow}}
+\index{overflow@{overflow}!ecto::py::streambuf@{ecto\-::py\-::streambuf}}
+\subsubsection[{overflow}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf int\-\_\-type} {\bf ecto\-::py\-::streambuf\-::overflow} (
+\begin{DoxyParamCaption}
+\item[{{\bf int\-\_\-type}}]{c = {\ttfamily {\bf traits\-\_\-type\-\_\-eof}()}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline, virtual\mbox{]}}}}\label{classecto_1_1py_1_1streambuf_a6eb250e56b6bbc9345b4f00981e4182f}
+
+
+\-C.\-f. \-C++ standard section 27.\-5.\-2.\-4.\-5. 
+
+\hypertarget{classecto_1_1py_1_1streambuf_af30e4b5af87fcc71a7974b1c00721dbb}{\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}!seekoff@{seekoff}}
+\index{seekoff@{seekoff}!ecto::py::streambuf@{ecto\-::py\-::streambuf}}
+\subsubsection[{seekoff}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf pos\-\_\-type} {\bf ecto\-::py\-::streambuf\-::seekoff} (
+\begin{DoxyParamCaption}
+\item[{{\bf off\-\_\-type}}]{off, }
+\item[{std\-::ios\-\_\-base\-::seekdir}]{way, }
+\item[{std\-::ios\-\_\-base\-::openmode}]{which = {\ttfamily std\-:\-:ios\-\_\-base\-:\-:in~$|$~std\-:\-:ios\-\_\-base\-:\-:out}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline, virtual\mbox{]}}}}\label{classecto_1_1py_1_1streambuf_af30e4b5af87fcc71a7974b1c00721dbb}
+
+
+\-C.\-f. \-C++ standard section 27.\-5.\-2.\-4.\-2. 
+
+\-This implementation is optimised to look whether the position is within the buffers, so as to avoid calling \-Python seek or tell. \-It is important for many applications that the overhead of calling into \-Python is avoided as much as possible (e.\-g. parsers which may do a lot of backtracking) \hypertarget{classecto_1_1py_1_1streambuf_a367a7e20642d4a3ebcefd2f6abc3c3e6}{\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}!seekoff\-\_\-without\-\_\-calling\-\_\-python@{seekoff\-\_\-without\-\_\-calling\-\_\-python}}
+\index{seekoff\-\_\-without\-\_\-calling\-\_\-python@{seekoff\-\_\-without\-\_\-calling\-\_\-python}!ecto::py::streambuf@{ecto\-::py\-::streambuf}}
+\subsubsection[{seekoff\-\_\-without\-\_\-calling\-\_\-python}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::optional$<${\bf off\-\_\-type}$>$ {\bf ecto\-::py\-::streambuf\-::seekoff\-\_\-without\-\_\-calling\-\_\-python} (
+\begin{DoxyParamCaption}
+\item[{{\bf off\-\_\-type}}]{off, }
+\item[{std\-::ios\-\_\-base\-::seekdir}]{way, }
+\item[{std\-::ios\-\_\-base\-::openmode}]{which}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline, private\mbox{]}}}}\label{classecto_1_1py_1_1streambuf_a367a7e20642d4a3ebcefd2f6abc3c3e6}
+\hypertarget{classecto_1_1py_1_1streambuf_a5763f3ff57fc8044b30a695ad7c403f7}{\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}!seekpos@{seekpos}}
+\index{seekpos@{seekpos}!ecto::py::streambuf@{ecto\-::py\-::streambuf}}
+\subsubsection[{seekpos}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf pos\-\_\-type} {\bf ecto\-::py\-::streambuf\-::seekpos} (
+\begin{DoxyParamCaption}
+\item[{{\bf pos\-\_\-type}}]{sp, }
+\item[{std\-::ios\-\_\-base\-::openmode}]{which = {\ttfamily std\-:\-:ios\-\_\-base\-:\-:in~$|$~std\-:\-:ios\-\_\-base\-:\-:out}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline, virtual\mbox{]}}}}\label{classecto_1_1py_1_1streambuf_a5763f3ff57fc8044b30a695ad7c403f7}
+
+
+\-C.\-f. \-C++ standard section 27.\-5.\-2.\-4.\-2. 
+
+\hypertarget{classecto_1_1py_1_1streambuf_aba2bcdbeeee00b043f918e60f86ebdd4}{\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}!showmanyc@{showmanyc}}
+\index{showmanyc@{showmanyc}!ecto::py::streambuf@{ecto\-::py\-::streambuf}}
+\subsubsection[{showmanyc}]{\setlength{\rightskip}{0pt plus 5cm}virtual std\-::streamsize {\bf ecto\-::py\-::streambuf\-::showmanyc} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline, virtual\mbox{]}}}}\label{classecto_1_1py_1_1streambuf_aba2bcdbeeee00b043f918e60f86ebdd4}
+
+
+\-C.\-f. \-C++ standard section 27.\-5.\-2.\-4.\-3. 
+
+\-It is essential to override this virtual function for the stream member function readsome to work correctly (c.\-f. 27.\-6.\-1.\-3, alinea 30) \hypertarget{classecto_1_1py_1_1streambuf_af09b35e1d7da997aacdf99c8802c0fa2}{\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}!sync@{sync}}
+\index{sync@{sync}!ecto::py::streambuf@{ecto\-::py\-::streambuf}}
+\subsubsection[{sync}]{\setlength{\rightskip}{0pt plus 5cm}virtual int {\bf ecto\-::py\-::streambuf\-::sync} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline, virtual\mbox{]}}}}\label{classecto_1_1py_1_1streambuf_af09b35e1d7da997aacdf99c8802c0fa2}
+
+
+\-Update the python file to reflect the state of this stream buffer. 
+
+\-Empty the write buffer into the \-Python file object and set the seek position of the latter accordingly (\-C++ standard section 27.\-5.\-2.\-4.\-2). \-If there is no write buffer or it is empty, but there is a non-\/empty read buffer, set the \-Python file object seek position to the seek position in that read buffer. \hypertarget{classecto_1_1py_1_1streambuf_ab4446bbe746f4d3713c15492d798872e}{\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}!traits\-\_\-type\-\_\-eof@{traits\-\_\-type\-\_\-eof}}
+\index{traits\-\_\-type\-\_\-eof@{traits\-\_\-type\-\_\-eof}!ecto::py::streambuf@{ecto\-::py\-::streambuf}}
+\subsubsection[{traits\-\_\-type\-\_\-eof}]{\setlength{\rightskip}{0pt plus 5cm}static int {\bf ecto\-::py\-::streambuf\-::traits\-\_\-type\-\_\-eof} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline, static\mbox{]}}}}\label{classecto_1_1py_1_1streambuf_ab4446bbe746f4d3713c15492d798872e}
+\hypertarget{classecto_1_1py_1_1streambuf_adf2601f0f067538a980dced85e8f8d2e}{\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}!underflow@{underflow}}
+\index{underflow@{underflow}!ecto::py::streambuf@{ecto\-::py\-::streambuf}}
+\subsubsection[{underflow}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf int\-\_\-type} {\bf ecto\-::py\-::streambuf\-::underflow} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline, virtual\mbox{]}}}}\label{classecto_1_1py_1_1streambuf_adf2601f0f067538a980dced85e8f8d2e}
+
+
+\-C.\-f. \-C++ standard section 27.\-5.\-2.\-4.\-3. 
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\hypertarget{classecto_1_1py_1_1streambuf_a8d60fa297a9140474d136a48342ac850}{\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}!buffer\-\_\-size@{buffer\-\_\-size}}
+\index{buffer\-\_\-size@{buffer\-\_\-size}!ecto::py::streambuf@{ecto\-::py\-::streambuf}}
+\subsubsection[{buffer\-\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}std\-::size\-\_\-t {\bf ecto\-::py\-::streambuf\-::buffer\-\_\-size}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classecto_1_1py_1_1streambuf_a8d60fa297a9140474d136a48342ac850}
+\hypertarget{classecto_1_1py_1_1streambuf_a7a20a01fb9aeda8677b3c65bccd6b59d}{\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}!default\-\_\-buffer\-\_\-size@{default\-\_\-buffer\-\_\-size}}
+\index{default\-\_\-buffer\-\_\-size@{default\-\_\-buffer\-\_\-size}!ecto::py::streambuf@{ecto\-::py\-::streambuf}}
+\subsubsection[{default\-\_\-buffer\-\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}std\-::size\-\_\-t {\bf ecto\-::py\-::streambuf\-::default\-\_\-buffer\-\_\-size} = 1024\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}\label{classecto_1_1py_1_1streambuf_a7a20a01fb9aeda8677b3c65bccd6b59d}
+
+
+\-The default size of the read and write buffer. 
+
+\-They are respectively used to buffer data read from and data written to the \-Python file object. \-It can be modified from \-Python. \hypertarget{classecto_1_1py_1_1streambuf_a8267e360cfb0201b1518a0dfd3d7c353}{\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}!farthest\-\_\-pptr@{farthest\-\_\-pptr}}
+\index{farthest\-\_\-pptr@{farthest\-\_\-pptr}!ecto::py::streambuf@{ecto\-::py\-::streambuf}}
+\subsubsection[{farthest\-\_\-pptr}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ {\bf ecto\-::py\-::streambuf\-::farthest\-\_\-pptr}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classecto_1_1py_1_1streambuf_a8267e360cfb0201b1518a0dfd3d7c353}
+\hypertarget{classecto_1_1py_1_1streambuf_a63254ed85f60504895f526272e19dd34}{\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}!file\-\_\-obj@{file\-\_\-obj}}
+\index{file\-\_\-obj@{file\-\_\-obj}!ecto::py::streambuf@{ecto\-::py\-::streambuf}}
+\subsubsection[{file\-\_\-obj}]{\setlength{\rightskip}{0pt plus 5cm}bp\-::object {\bf ecto\-::py\-::streambuf\-::file\-\_\-obj}}}\label{classecto_1_1py_1_1streambuf_a63254ed85f60504895f526272e19dd34}
+\hypertarget{classecto_1_1py_1_1streambuf_a7b219ca66aa176fdfbc9d6fb63d15cef}{\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}!pos\-\_\-of\-\_\-read\-\_\-buffer\-\_\-end\-\_\-in\-\_\-py\-\_\-file@{pos\-\_\-of\-\_\-read\-\_\-buffer\-\_\-end\-\_\-in\-\_\-py\-\_\-file}}
+\index{pos\-\_\-of\-\_\-read\-\_\-buffer\-\_\-end\-\_\-in\-\_\-py\-\_\-file@{pos\-\_\-of\-\_\-read\-\_\-buffer\-\_\-end\-\_\-in\-\_\-py\-\_\-file}!ecto::py::streambuf@{ecto\-::py\-::streambuf}}
+\subsubsection[{pos\-\_\-of\-\_\-read\-\_\-buffer\-\_\-end\-\_\-in\-\_\-py\-\_\-file}]{\setlength{\rightskip}{0pt plus 5cm}{\bf off\-\_\-type} {\bf ecto\-::py\-::streambuf\-::pos\-\_\-of\-\_\-read\-\_\-buffer\-\_\-end\-\_\-in\-\_\-py\-\_\-file}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classecto_1_1py_1_1streambuf_a7b219ca66aa176fdfbc9d6fb63d15cef}
+\hypertarget{classecto_1_1py_1_1streambuf_a1775b9bced7a5ff74fe30c788e20ad9e}{\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}!pos\-\_\-of\-\_\-write\-\_\-buffer\-\_\-end\-\_\-in\-\_\-py\-\_\-file@{pos\-\_\-of\-\_\-write\-\_\-buffer\-\_\-end\-\_\-in\-\_\-py\-\_\-file}}
+\index{pos\-\_\-of\-\_\-write\-\_\-buffer\-\_\-end\-\_\-in\-\_\-py\-\_\-file@{pos\-\_\-of\-\_\-write\-\_\-buffer\-\_\-end\-\_\-in\-\_\-py\-\_\-file}!ecto::py::streambuf@{ecto\-::py\-::streambuf}}
+\subsubsection[{pos\-\_\-of\-\_\-write\-\_\-buffer\-\_\-end\-\_\-in\-\_\-py\-\_\-file}]{\setlength{\rightskip}{0pt plus 5cm}{\bf off\-\_\-type} {\bf ecto\-::py\-::streambuf\-::pos\-\_\-of\-\_\-write\-\_\-buffer\-\_\-end\-\_\-in\-\_\-py\-\_\-file}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classecto_1_1py_1_1streambuf_a1775b9bced7a5ff74fe30c788e20ad9e}
+\hypertarget{classecto_1_1py_1_1streambuf_a77a192df96e66a2e19cdfce078017df8}{\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}!py\-\_\-read@{py\-\_\-read}}
+\index{py\-\_\-read@{py\-\_\-read}!ecto::py::streambuf@{ecto\-::py\-::streambuf}}
+\subsubsection[{py\-\_\-read}]{\setlength{\rightskip}{0pt plus 5cm}bp\-::object {\bf ecto\-::py\-::streambuf\-::py\-\_\-read}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classecto_1_1py_1_1streambuf_a77a192df96e66a2e19cdfce078017df8}
+\hypertarget{classecto_1_1py_1_1streambuf_ad4e0dc91a74411d2181897d026ff945b}{\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}!py\-\_\-seek@{py\-\_\-seek}}
+\index{py\-\_\-seek@{py\-\_\-seek}!ecto::py::streambuf@{ecto\-::py\-::streambuf}}
+\subsubsection[{py\-\_\-seek}]{\setlength{\rightskip}{0pt plus 5cm}bp\-::object {\bf ecto\-::py\-::streambuf\-::py\-\_\-seek}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classecto_1_1py_1_1streambuf_ad4e0dc91a74411d2181897d026ff945b}
+\hypertarget{classecto_1_1py_1_1streambuf_a3735b9e199be3e58c277354127a86146}{\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}!py\-\_\-tell@{py\-\_\-tell}}
+\index{py\-\_\-tell@{py\-\_\-tell}!ecto::py::streambuf@{ecto\-::py\-::streambuf}}
+\subsubsection[{py\-\_\-tell}]{\setlength{\rightskip}{0pt plus 5cm}bp\-::object {\bf ecto\-::py\-::streambuf\-::py\-\_\-tell}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classecto_1_1py_1_1streambuf_a3735b9e199be3e58c277354127a86146}
+\hypertarget{classecto_1_1py_1_1streambuf_aad739c2392d3c8f0de7d44719c7cc37a}{\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}!py\-\_\-write@{py\-\_\-write}}
+\index{py\-\_\-write@{py\-\_\-write}!ecto::py::streambuf@{ecto\-::py\-::streambuf}}
+\subsubsection[{py\-\_\-write}]{\setlength{\rightskip}{0pt plus 5cm}bp\-::object {\bf ecto\-::py\-::streambuf\-::py\-\_\-write}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classecto_1_1py_1_1streambuf_aad739c2392d3c8f0de7d44719c7cc37a}
+\hypertarget{classecto_1_1py_1_1streambuf_ac239012691e5d3485572159a53600005}{\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}!read\-\_\-buffer@{read\-\_\-buffer}}
+\index{read\-\_\-buffer@{read\-\_\-buffer}!ecto::py::streambuf@{ecto\-::py\-::streambuf}}
+\subsubsection[{read\-\_\-buffer}]{\setlength{\rightskip}{0pt plus 5cm}bp\-::object {\bf ecto\-::py\-::streambuf\-::read\-\_\-buffer}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classecto_1_1py_1_1streambuf_ac239012691e5d3485572159a53600005}
+\hypertarget{classecto_1_1py_1_1streambuf_a331e541fac616ac9ac3a81fb117057c6}{\index{ecto\-::py\-::streambuf@{ecto\-::py\-::streambuf}!write\-\_\-buffer@{write\-\_\-buffer}}
+\index{write\-\_\-buffer@{write\-\_\-buffer}!ecto::py::streambuf@{ecto\-::py\-::streambuf}}
+\subsubsection[{write\-\_\-buffer}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ {\bf ecto\-::py\-::streambuf\-::write\-\_\-buffer}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{classecto_1_1py_1_1streambuf_a331e541fac616ac9ac3a81fb117057c6}
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/vrabaud/workspace/recognition\-\_\-kitchen\-\_\-groovy/src/ecto/include/ecto/python/\hyperlink{streambuf_8hpp}{streambuf.\-hpp}\end{DoxyCompactItemize}

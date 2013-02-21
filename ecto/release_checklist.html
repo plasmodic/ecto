@@ -1,0 +1,161 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Release Checklist &mdash; ecto</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="ecto" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">ecto</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/ecto210.png" alt="Logo"/>
+            </a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/ecto/release_checklist.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="release-checklist">
+<h1>Release Checklist<a class="headerlink" href="#release-checklist" title="Permalink to this headline">¶</a></h1>
+<ul>
+<li><p class="first">Be sure you are fully merged:</p>
+<div class="highlight-python"><pre>git submodule foreach git fetch --all
+git submodule foreach git pull plasmodic master</pre>
+</div>
+</li>
+<li><p class="first">Verify testing.</p>
+</li>
+<li><p class="first">Pick your tag.  We&#8217;ll call this one <tt class="docutils literal"><span class="pre">amoeba-0</span></tt></p>
+</li>
+<li><p class="first">Tweak version information in ecto/cmake/version.hpp</p>
+</li>
+<li><p class="first">If desired update ABI info in ecto/include/ecto/abi.hpp</p>
+</li>
+<li><p class="first">Add to list in ecto/doc/source/changelog_gen.py</p>
+</li>
+<li><p class="first">make sure you&#8217;re synced:</p>
+<div class="highlight-python"><pre>git submodule foreach git fetch --all</pre>
+</div>
+</li>
+<li><p class="first">check yer diffs:</p>
+<div class="highlight-python"><pre>git submodule foreach git diff --stat plasmodic/master</pre>
+</div>
+</li>
+<li><p class="first">verify that your pushes will succeed:</p>
+<div class="highlight-python"><pre>git push --dry-run plasmodic master
+git submodule foreach git push --dry-run plasmodic master</pre>
+</div>
+</li>
+<li><p class="first">Tag kitchen and projects with the same tag:</p>
+<div class="highlight-python"><pre>% git submodule foreach git tag amoeba-0
+Entering 'ecto'
+Entering 'opencv'
+Entering 'openni'
+Entering 'pcl'
+Entering 'ros'
+% git tag amoeba-0</pre>
+</div>
+</li>
+<li><p class="first">Make docs, verify they look good.</p>
+</li>
+<li><p class="first">if okay, push:</p>
+<div class="highlight-python"><pre>git submodule foreach git push plasmodic master</pre>
+</div>
+</li>
+<li><p class="first">and push tags:</p>
+<div class="highlight-python"><pre>git submodule foreach git push --tags plasmodic</pre>
+</div>
+</li>
+<li><p class="first">and do the kitchen:</p>
+<div class="highlight-python"><pre>git push plasmodic master
+git push --tags plasmodic</pre>
+</div>
+</li>
+<li><p class="first">make the docs and deploy to the website</p>
+</li>
+<li><p class="first">Change tag/link on main ecto page to latest release (commit to www proj)</p>
+</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">ecto</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011,  Willow Garage, Inc.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

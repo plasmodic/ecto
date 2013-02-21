@@ -1,0 +1,237 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Lifecycle of Cells &mdash; ecto</title>
+    
+    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="ecto" href="../../../index.html" />
+    <link rel="up" title="Usage" href="../index.html" />
+    <link rel="next" title="Tendrils and Spores" href="tendrils_spore.html" />
+    <link rel="prev" title="Hello Plasms!" href="plasms.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tendrils_spore.html" title="Tendrils and Spores"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="plasms.html" title="Hello Plasms!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../index.html">
+              <img class="logo" src="../../../_static/ecto210.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="plasms.html"
+                        title="previous chapter">Hello Plasms!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tendrils_spore.html"
+                        title="next chapter">Tendrils and Spores</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/ecto/usage/tutorials/lifecycle.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="lifecycle-of-cells">
+<span id="tutorial-lifetime"></span><h1>Lifecycle of Cells<a class="headerlink" href="#lifecycle-of-cells" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial is more of a demo of what happens during the lifetime of a cell.
+Please read the reference for a <a class="reference internal" href="../../overview/cells.html#cells-overview"><em>cell</em></a> for a more detailed reference.</p>
+<p>This cell will chirp at every point in its life.</p>
+<blockquote>
+<div><p>Download: <a class="reference download internal" href="../../../_downloads/LifeCycle.cpp"><tt class="xref download docutils literal"><span class="pre">srcs/LifeCycle.cpp</span></tt></a></p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
+<span class="cp">#include &lt;iostream&gt;</span>
+
+<span class="k">using</span> <span class="n">ecto</span><span class="o">::</span><span class="n">tendrils</span><span class="p">;</span>
+<span class="k">namespace</span> <span class="n">lifecycle</span>
+<span class="p">{</span>
+  <span class="k">struct</span> <span class="n">LifeCycle</span>
+  <span class="p">{</span>
+    <span class="k">static</span> <span class="kt">void</span>
+    <span class="n">declare_params</span><span class="p">(</span><span class="n">tendrils</span><span class="o">&amp;</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;static &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">ecto</span><span class="o">::</span><span class="n">name_of</span><span class="o">&lt;</span><span class="n">LifeCycle</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;::declare_params&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">static</span> <span class="kt">void</span>
+    <span class="n">declare_io</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span><span class="p">,</span> <span class="n">tendrils</span><span class="o">&amp;</span><span class="p">,</span> <span class="n">tendrils</span><span class="o">&amp;</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;static &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">ecto</span><span class="o">::</span><span class="n">name_of</span><span class="o">&lt;</span><span class="n">LifeCycle</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;::declare_io&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="p">}</span>
+
+    <span class="n">LifeCycle</span><span class="p">()</span>
+    <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ecto</span><span class="o">::</span><span class="n">name_of</span><span class="o">&lt;</span><span class="n">LifeCycle</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;::LifeCycle()  this=&quot;</span> <span class="o">&lt;&lt;</span> <span class="k">this</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="o">~</span><span class="n">LifeCycle</span><span class="p">()</span>
+    <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ecto</span><span class="o">::</span><span class="n">name_of</span><span class="o">&lt;</span><span class="n">LifeCycle</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;::~LifeCycle()  this=&quot;</span> <span class="o">&lt;&lt;</span> <span class="k">this</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span>
+    <span class="n">configure</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ecto</span><span class="o">::</span><span class="n">name_of</span><span class="o">&lt;</span><span class="n">LifeCycle</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;::configure  this=&quot;</span> <span class="o">&lt;&lt;</span> <span class="k">this</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span>
+    <span class="n">process</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ecto</span><span class="o">::</span><span class="n">name_of</span><span class="o">&lt;</span><span class="n">LifeCycle</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;::process  this=&quot;</span> <span class="o">&lt;&lt;</span> <span class="k">this</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+      <span class="k">return</span> <span class="n">ecto</span><span class="o">::</span><span class="n">OK</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="n">ECTO_DEFINE_MODULE</span><span class="p">(</span><span class="n">ecto_lifecycle</span><span class="p">)</span>
+<span class="p">{</span> <span class="p">}</span>
+
+<span class="n">ECTO_CELL</span><span class="p">(</span><span class="n">ecto_lifecycle</span><span class="p">,</span> <span class="n">lifecycle</span><span class="o">::</span><span class="n">LifeCycle</span><span class="p">,</span> <span class="s">&quot;LifeCycle&quot;</span><span class="p">,</span> <span class="s">&quot;Chirps on each stage of life.&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Also here is a python script that will trigger the lifecycle exploration.</p>
+<blockquote>
+<div><p>Download: <a class="reference download internal" href="../../../_downloads/lifecycler.py"><tt class="xref download docutils literal"><span class="pre">srcs/lifecycler.py</span></tt></a></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<span class="kn">import</span> <span class="nn">ecto</span>
+
+<span class="k">def</span> <span class="nf">doit</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">&quot;**** pre import of ecto_lifecycle ********&quot;</span>
+    <span class="kn">import</span> <span class="nn">ecto.ecto_lifecycle</span> <span class="kn">as</span> <span class="nn">ecto_lifecycle</span>
+    <span class="k">print</span> <span class="s">&quot;**** post import of ecto_lifecycle *******&quot;</span>
+
+    <span class="k">print</span> <span class="s">&quot;**** pre allocation of LifeCycle cell ********&quot;</span>
+    <span class="n">lifecycle</span> <span class="o">=</span> <span class="n">ecto_lifecycle</span><span class="o">.</span><span class="n">LifeCycle</span><span class="p">()</span> <span class="c">#allocate a cell</span>
+    <span class="k">print</span> <span class="s">&quot;**** post allocation of LifeCycle cell *******&quot;</span>
+
+    <span class="n">plasm</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Plasm</span><span class="p">()</span>
+    <span class="k">print</span> <span class="s">&quot;**** pre insert ********&quot;</span>
+    <span class="n">plasm</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">lifecycle</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&quot;**** post insert *******&quot;</span>
+
+    <span class="k">print</span> <span class="s">&quot;**** pre execute ********&quot;</span>
+    <span class="n">sched</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Scheduler</span><span class="p">(</span><span class="n">plasm</span><span class="p">)</span>
+    <span class="n">sched</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&quot;**** post execute *******&quot;</span>
+
+<span class="k">print</span> <span class="s">&quot;**** pre scope ********&quot;</span>
+<span class="n">doit</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&quot;**** post scope *******&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Lets run it:</p>
+<blockquote>
+<div><div class="highlight-text"><div class="highlight"><pre>**** pre scope ********
+**** pre import of ecto_lifecycle ********
+static lifecycle::LifeCycle::declare_params
+static lifecycle::LifeCycle::declare_io
+**** post import of ecto_lifecycle *******
+**** pre allocation of LifeCycle cell ********
+static lifecycle::LifeCycle::declare_params
+static lifecycle::LifeCycle::declare_io
+**** post allocation of LifeCycle cell *******
+**** pre insert ********
+**** post insert *******
+**** pre execute ********
+lifecycle::LifeCycle::LifeCycle()  this=0x1d03960
+lifecycle::LifeCycle::configure  this=0x1d03960
+lifecycle::LifeCycle::process  this=0x1d03960
+**** post execute *******
+lifecycle::LifeCycle::~LifeCycle()  this=0x1d03960
+**** post scope *******
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tendrils_spore.html" title="Tendrils and Spores"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="plasms.html" title="Hello Plasms!"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li><a href="../index.html" >Usage</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011,  Willow Garage, Inc.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

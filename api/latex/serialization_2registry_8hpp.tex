@@ -1,0 +1,83 @@
+\hypertarget{serialization_2registry_8hpp}{\section{/home/vrabaud/workspace/recognition\-\_\-kitchen\-\_\-groovy/src/ecto/include/ecto/serialization/registry.hpp \-File \-Reference}
+\label{serialization_2registry_8hpp}\index{/home/vrabaud/workspace/recognition\-\_\-kitchen\-\_\-groovy/src/ecto/include/ecto/serialization/registry.\-hpp@{/home/vrabaud/workspace/recognition\-\_\-kitchen\-\_\-groovy/src/ecto/include/ecto/serialization/registry.\-hpp}}
+}
+{\ttfamily \#include $<$boost/archive/binary\-\_\-iarchive.\-hpp$>$}\*
+{\ttfamily \#include $<$boost/archive/binary\-\_\-oarchive.\-hpp$>$}\*
+{\ttfamily \#include $<$ecto/util.\-hpp$>$}\*
+{\ttfamily \#include $<$ecto/tendril.\-hpp$>$}\*
+{\ttfamily \#include $<$boost/tuple/tuple.\-hpp$>$}\*
+{\ttfamily \#include $<$map$>$}\*
+{\ttfamily \#include $<$ecto/log.\-hpp$>$}\*
+\-Include dependency graph for registry.\-hpp\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{serialization_2registry_8hpp__incl}
+\end{center}
+\end{figure}
+\subsection*{\-Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structecto_1_1serialization_1_1writer__}{ecto\-::serialization\-::writer\-\_\-$<$ T, Archive $>$}
+\item 
+struct \hyperlink{structecto_1_1serialization_1_1reader__}{ecto\-::serialization\-::reader\-\_\-$<$ T, Archive $>$}
+\item 
+struct \hyperlink{structecto_1_1serialization_1_1registry}{ecto\-::serialization\-::registry$<$ Archive $>$}
+\item 
+struct \hyperlink{structecto_1_1serialization_1_1register__serializer}{ecto\-::serialization\-::register\-\_\-serializer$<$ T $>$}
+\end{DoxyCompactItemize}
+\subsection*{\-Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \hyperlink{namespaceecto}{ecto}
+\item 
+namespace \hyperlink{namespaceecto_1_1serialization}{ecto\-::serialization}
+\end{DoxyCompactItemize}
+\subsection*{\-Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{serialization_2registry_8hpp_ad5d035c036a61c039fc9aa77bb6ead5b}{\-E\-C\-T\-O\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R\-\_\-\-S\-E\-R\-I\-A\-L\-I\-Z\-E\-R\-S}(\-Type)
+\item 
+\#define \hyperlink{serialization_2registry_8hpp_a12f48be608e34f182e8c5453106ab1d5}{\-E\-C\-T\-O\-\_\-\-I\-N\-S\-T\-A\-N\-T\-I\-A\-T\-E\-\_\-\-S\-E\-R\-I\-A\-L\-I\-Z\-A\-T\-I\-O\-N}(\-T)
+\end{DoxyCompactItemize}
+\subsection*{\-Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef registry\*
+$<$ boost\-::archive\-::binary\-\_\-oarchive $>$ \hyperlink{namespaceecto_1_1serialization_ad544c8b5416e0ecfe692922b2f2e8e54}{ecto\-::serialization\-::registry\-\_\-binary\-\_\-oa}
+\item 
+typedef registry\*
+$<$ boost\-::archive\-::binary\-\_\-iarchive $>$ \hyperlink{namespaceecto_1_1serialization_a465425ff3a756de86571c1262f22d2ba}{ecto\-::serialization\-::registry\-\_\-binary\-\_\-ia}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Define \-Documentation}
+\hypertarget{serialization_2registry_8hpp_a12f48be608e34f182e8c5453106ab1d5}{\index{serialization/registry.\-hpp@{serialization/registry.\-hpp}!\-E\-C\-T\-O\-\_\-\-I\-N\-S\-T\-A\-N\-T\-I\-A\-T\-E\-\_\-\-S\-E\-R\-I\-A\-L\-I\-Z\-A\-T\-I\-O\-N@{\-E\-C\-T\-O\-\_\-\-I\-N\-S\-T\-A\-N\-T\-I\-A\-T\-E\-\_\-\-S\-E\-R\-I\-A\-L\-I\-Z\-A\-T\-I\-O\-N}}
+\index{\-E\-C\-T\-O\-\_\-\-I\-N\-S\-T\-A\-N\-T\-I\-A\-T\-E\-\_\-\-S\-E\-R\-I\-A\-L\-I\-Z\-A\-T\-I\-O\-N@{\-E\-C\-T\-O\-\_\-\-I\-N\-S\-T\-A\-N\-T\-I\-A\-T\-E\-\_\-\-S\-E\-R\-I\-A\-L\-I\-Z\-A\-T\-I\-O\-N}!serialization/registry.hpp@{serialization/registry.\-hpp}}
+\subsubsection[{\-E\-C\-T\-O\-\_\-\-I\-N\-S\-T\-A\-N\-T\-I\-A\-T\-E\-\_\-\-S\-E\-R\-I\-A\-L\-I\-Z\-A\-T\-I\-O\-N}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-E\-C\-T\-O\-\_\-\-I\-N\-S\-T\-A\-N\-T\-I\-A\-T\-E\-\_\-\-S\-E\-R\-I\-A\-L\-I\-Z\-A\-T\-I\-O\-N}(
+\begin{DoxyParamCaption}
+\item[{}]{\-T}
+\end{DoxyParamCaption}
+)}}\label{serialization_2registry_8hpp_a12f48be608e34f182e8c5453106ab1d5}
+{\bfseries \-Value\-:}
+\begin{DoxyCode}
+template void T::serialize(boost::archive::binary_oarchive&, const unsigned int
+      ); \
+  template void T::serialize(boost::archive::binary_iarchive&, const unsigned 
+      int);
+\end{DoxyCode}
+\hypertarget{serialization_2registry_8hpp_ad5d035c036a61c039fc9aa77bb6ead5b}{\index{serialization/registry.\-hpp@{serialization/registry.\-hpp}!\-E\-C\-T\-O\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R\-\_\-\-S\-E\-R\-I\-A\-L\-I\-Z\-E\-R\-S@{\-E\-C\-T\-O\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R\-\_\-\-S\-E\-R\-I\-A\-L\-I\-Z\-E\-R\-S}}
+\index{\-E\-C\-T\-O\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R\-\_\-\-S\-E\-R\-I\-A\-L\-I\-Z\-E\-R\-S@{\-E\-C\-T\-O\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R\-\_\-\-S\-E\-R\-I\-A\-L\-I\-Z\-E\-R\-S}!serialization/registry.hpp@{serialization/registry.\-hpp}}
+\subsubsection[{\-E\-C\-T\-O\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R\-\_\-\-S\-E\-R\-I\-A\-L\-I\-Z\-E\-R\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-E\-C\-T\-O\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R\-\_\-\-S\-E\-R\-I\-A\-L\-I\-Z\-E\-R\-S}(
+\begin{DoxyParamCaption}
+\item[{}]{\-Type}
+\end{DoxyParamCaption}
+)}}\label{serialization_2registry_8hpp_ad5d035c036a61c039fc9aa77bb6ead5b}
+{\bfseries \-Value\-:}
+\begin{DoxyCode}
+namespace ecto{                               \
+  namespace serialization{                    \
+    template struct register_serializer<Type>; \
+  }                                           \
+}
+\end{DoxyCode}

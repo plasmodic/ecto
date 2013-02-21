@@ -1,0 +1,75 @@
+\hypertarget{traits_8hpp}{\section{/home/vrabaud/workspace/recognition\-\_\-kitchen\-\_\-groovy/src/ecto/include/ecto/traits.hpp \-File \-Reference}
+\label{traits_8hpp}\index{/home/vrabaud/workspace/recognition\-\_\-kitchen\-\_\-groovy/src/ecto/include/ecto/traits.\-hpp@{/home/vrabaud/workspace/recognition\-\_\-kitchen\-\_\-groovy/src/ecto/include/ecto/traits.\-hpp}}
+}
+{\ttfamily \#include $<$boost/mpl/bool.\-hpp$>$}\*
+{\ttfamily \#include $<$ecto/python/gil.\-hpp$>$}\*
+\-Include dependency graph for traits.\-hpp\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{traits_8hpp__incl}
+\end{center}
+\end{figure}
+\-This graph shows which files directly or indirectly include this file\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{traits_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{\-Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structecto_1_1detail_1_1is__threadsafe}{ecto\-::detail\-::is\-\_\-threadsafe$<$ T $>$}
+\item 
+struct \hyperlink{structecto_1_1detail_1_1python__mutex}{ecto\-::detail\-::python\-\_\-mutex$<$ T $>$}
+\end{DoxyCompactItemize}
+\subsection*{\-Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \hyperlink{namespaceecto}{ecto}
+\item 
+namespace \hyperlink{namespaceecto_1_1detail}{ecto\-::detail}
+\end{DoxyCompactItemize}
+\subsection*{\-Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{traits_8hpp_a3ffa6f8f490132ab0ca275caf570cd5a}{\-E\-C\-T\-O\-\_\-\-T\-H\-R\-E\-A\-D\-\_\-\-U\-N\-S\-A\-F\-E}(\-T)
+\item 
+\#define \hyperlink{traits_8hpp_a0257937771b4ae0a643e3480b19f42df}{\-E\-C\-T\-O\-\_\-\-N\-E\-E\-D\-S\-\_\-\-P\-Y\-T\-H\-O\-N\-\_\-\-G\-I\-L}(\-T)
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Define \-Documentation}
+\hypertarget{traits_8hpp_a0257937771b4ae0a643e3480b19f42df}{\index{traits.\-hpp@{traits.\-hpp}!\-E\-C\-T\-O\-\_\-\-N\-E\-E\-D\-S\-\_\-\-P\-Y\-T\-H\-O\-N\-\_\-\-G\-I\-L@{\-E\-C\-T\-O\-\_\-\-N\-E\-E\-D\-S\-\_\-\-P\-Y\-T\-H\-O\-N\-\_\-\-G\-I\-L}}
+\index{\-E\-C\-T\-O\-\_\-\-N\-E\-E\-D\-S\-\_\-\-P\-Y\-T\-H\-O\-N\-\_\-\-G\-I\-L@{\-E\-C\-T\-O\-\_\-\-N\-E\-E\-D\-S\-\_\-\-P\-Y\-T\-H\-O\-N\-\_\-\-G\-I\-L}!traits.hpp@{traits.\-hpp}}
+\subsubsection[{\-E\-C\-T\-O\-\_\-\-N\-E\-E\-D\-S\-\_\-\-P\-Y\-T\-H\-O\-N\-\_\-\-G\-I\-L}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-E\-C\-T\-O\-\_\-\-N\-E\-E\-D\-S\-\_\-\-P\-Y\-T\-H\-O\-N\-\_\-\-G\-I\-L}(
+\begin{DoxyParamCaption}
+\item[{}]{\-T}
+\end{DoxyParamCaption}
+)}}\label{traits_8hpp_a0257937771b4ae0a643e3480b19f42df}
+{\bfseries \-Value\-:}
+\begin{DoxyCode}
+namespace ecto {                                                      \
+    namespace detail {                                                  \
+      template <> struct python_mutex<T> {                              \
+        typedef ecto::py::gil type;                                     \
+      };                                                                \
+    }                                                                   \
+  }                                                                     \
+\end{DoxyCode}
+\hypertarget{traits_8hpp_a3ffa6f8f490132ab0ca275caf570cd5a}{\index{traits.\-hpp@{traits.\-hpp}!\-E\-C\-T\-O\-\_\-\-T\-H\-R\-E\-A\-D\-\_\-\-U\-N\-S\-A\-F\-E@{\-E\-C\-T\-O\-\_\-\-T\-H\-R\-E\-A\-D\-\_\-\-U\-N\-S\-A\-F\-E}}
+\index{\-E\-C\-T\-O\-\_\-\-T\-H\-R\-E\-A\-D\-\_\-\-U\-N\-S\-A\-F\-E@{\-E\-C\-T\-O\-\_\-\-T\-H\-R\-E\-A\-D\-\_\-\-U\-N\-S\-A\-F\-E}!traits.hpp@{traits.\-hpp}}
+\subsubsection[{\-E\-C\-T\-O\-\_\-\-T\-H\-R\-E\-A\-D\-\_\-\-U\-N\-S\-A\-F\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf \-E\-C\-T\-O\-\_\-\-T\-H\-R\-E\-A\-D\-\_\-\-U\-N\-S\-A\-F\-E}(
+\begin{DoxyParamCaption}
+\item[{}]{\-T}
+\end{DoxyParamCaption}
+)}}\label{traits_8hpp_a3ffa6f8f490132ab0ca275caf570cd5a}
+{\bfseries \-Value\-:}
+\begin{DoxyCode}
+namespace ecto {                                                      \
+    namespace detail {                                                  \
+      template <> struct is_threadsafe<T> : boost::mpl::false_ { };     \
+    }                                                                   \
+  }                                                                     \
+\end{DoxyCode}

@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="structecto_1_1tendril_1_1Converter" kind="struct" prot="private">
+    <compoundname>ecto::tendril::Converter</compoundname>
+    <derivedcompoundref refid="structecto_1_1tendril_1_1ConverterImpl" prot="public" virt="non-virtual">ecto::tendril::ConverterImpl&lt; T, _ &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structecto_1_1tendril_1_1ConverterImpl_3_01none_00_01___01_4" prot="public" virt="non-virtual">ecto::tendril::ConverterImpl&lt; none, _ &gt;</derivedcompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structecto_1_1tendril_1_1Converter_1a9987df3be3c0657bea97eeeaa190e48a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void ecto::tendril::Converter::operator()</definition>
+        <argsstring>(tendril &amp;t, const boost::python::object &amp;o) const =0</argsstring>
+        <name>operator()</name>
+        <reimplementedby refid="structecto_1_1tendril_1_1ConverterImpl_1aa03b80197057d2810198e3029a150988">operator()</reimplementedby>
+        <reimplementedby refid="structecto_1_1tendril_1_1ConverterImpl_3_01none_00_01___01_4_1ac139edd43cc2f8371eee89ed029166d4">operator()</reimplementedby>
+        <param>
+          <type><ref refid="classecto_1_1tendril" kindref="compound">tendril</ref> &amp;</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>const boost::python::object &amp;</type>
+          <declname>o</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendril.hpp" line="335"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1tendril_1_1Converter_1a73562ca297e0c5d1c6fef136701f50d3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void ecto::tendril::Converter::operator()</definition>
+        <argsstring>(boost::python::object &amp;o, const tendril &amp;t) const =0</argsstring>
+        <name>operator()</name>
+        <reimplementedby refid="structecto_1_1tendril_1_1ConverterImpl_1a1b9b248c9a7386b8b34a436f0c8453c1">operator()</reimplementedby>
+        <reimplementedby refid="structecto_1_1tendril_1_1ConverterImpl_3_01none_00_01___01_4_1afbc6677e2eacb4352bff1b6f2aa94eee">operator()</reimplementedby>
+        <param>
+          <type>boost::python::object &amp;</type>
+          <declname>o</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classecto_1_1tendril" kindref="compound">tendril</ref> &amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendril.hpp" line="336"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="207">
+        <label>ecto::tendril::Converter</label>
+        <link refid="structecto_1_1tendril_1_1Converter"/>
+      </node>
+      <node id="209">
+        <label>ecto::tendril::ConverterImpl&lt; none, _ &gt;</label>
+        <link refid="structecto_1_1tendril_1_1ConverterImpl_3_01none_00_01___01_4"/>
+        <childnode refid="207" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="208">
+        <label>ecto::tendril::ConverterImpl&lt; T, _ &gt;</label>
+        <link refid="structecto_1_1tendril_1_1ConverterImpl"/>
+        <childnode refid="207" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendril.hpp" line="334" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendril.hpp" bodystart="333" bodyend="337"/>
+    <listofallmembers>
+      <member refid="structecto_1_1tendril_1_1Converter_1a9987df3be3c0657bea97eeeaa190e48a" prot="public" virt="pure-virtual"><scope>ecto::tendril::Converter</scope><name>operator()</name></member>
+      <member refid="structecto_1_1tendril_1_1Converter_1a73562ca297e0c5d1c6fef136701f50d3" prot="public" virt="pure-virtual"><scope>ecto::tendril::Converter</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

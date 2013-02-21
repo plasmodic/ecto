@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="structecto_1_1except_1_1detail_1_1wrap" kind="struct" prot="public">
+    <compoundname>ecto::except::detail::wrap</compoundname>
+    <includes refid="except_8hpp" local="no">except.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/except.hpp" line="84" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/except.hpp" bodystart="84" bodyend="84"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

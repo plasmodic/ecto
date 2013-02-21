@@ -1,0 +1,227 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="profile_8hpp" kind="file">
+    <compoundname>profile.hpp</compoundname>
+    <includes local="no">stdint.h</includes>
+    <includes refid="forward_8hpp" local="no">ecto/forward.hpp</includes>
+    <includes refid="util_8hpp" local="no">ecto/util.hpp</includes>
+    <includes refid="log_8hpp" local="no">ecto/log.hpp</includes>
+    <includes local="no">boost/date_time/posix_time/posix_time.hpp</includes>
+    <includedby refid="scheduler_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/scheduler.hpp</includedby>
+    <includedby refid="vertex_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/vertex.hpp</includedby>
+    <incdepgraph>
+      <node id="1306">
+        <label>boost/shared_ptr.hpp</label>
+      </node>
+      <node id="1307">
+        <label>ecto/util.hpp</label>
+        <link refid="util_8hpp"/>
+        <childnode refid="1308" relation="include">
+        </childnode>
+        <childnode refid="1309" relation="include">
+        </childnode>
+        <childnode refid="1310" relation="include">
+        </childnode>
+      </node>
+      <node id="1304">
+        <label>stdint.h</label>
+      </node>
+      <node id="1313">
+        <label>ecto/test.hpp</label>
+        <link refid="test_8hpp"/>
+      </node>
+      <node id="1310">
+        <label>string</label>
+      </node>
+      <node id="1303">
+        <label>/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/profile.hpp</label>
+        <link refid="profile.hpp"/>
+        <childnode refid="1304" relation="include">
+        </childnode>
+        <childnode refid="1305" relation="include">
+        </childnode>
+        <childnode refid="1307" relation="include">
+        </childnode>
+        <childnode refid="1311" relation="include">
+        </childnode>
+        <childnode refid="1314" relation="include">
+        </childnode>
+      </node>
+      <node id="1312">
+        <label>ecto/config.hpp</label>
+      </node>
+      <node id="1314">
+        <label>boost/date_time/posix_time/posix_time.hpp</label>
+      </node>
+      <node id="1309">
+        <label>typeinfo</label>
+      </node>
+      <node id="1305">
+        <label>ecto/forward.hpp</label>
+        <link refid="forward_8hpp"/>
+        <childnode refid="1306" relation="include">
+        </childnode>
+      </node>
+      <node id="1311">
+        <label>ecto/log.hpp</label>
+        <link refid="log_8hpp"/>
+        <childnode refid="1312" relation="include">
+        </childnode>
+        <childnode refid="1307" relation="include">
+        </childnode>
+        <childnode refid="1313" relation="include">
+        </childnode>
+        <childnode refid="1304" relation="include">
+        </childnode>
+      </node>
+      <node id="1308">
+        <label>iostream</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1318">
+        <label>/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/all.hpp</label>
+        <link refid="all_8hpp"/>
+      </node>
+      <node id="1315">
+        <label>/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/profile.hpp</label>
+        <link refid="profile.hpp"/>
+        <childnode refid="1316" relation="include">
+        </childnode>
+        <childnode refid="1317" relation="include">
+        </childnode>
+      </node>
+      <node id="1317">
+        <label>/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/vertex.hpp</label>
+        <link refid="vertex_8hpp"/>
+        <childnode refid="1318" relation="include">
+        </childnode>
+      </node>
+      <node id="1316">
+        <label>/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/scheduler.hpp</label>
+        <link refid="scheduler_8hpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structecto_1_1profile_1_1graph__stats__type" prot="public">ecto::profile::graph_stats_type</innerclass>
+    <innerclass refid="structecto_1_1profile_1_1graphstats__collector" prot="public">ecto::profile::graphstats_collector</innerclass>
+    <innerclass refid="structecto_1_1profile_1_1stats__type" prot="public">ecto::profile::stats_type</innerclass>
+    <innerclass refid="structecto_1_1profile_1_1stats__collector" prot="public">ecto::profile::stats_collector</innerclass>
+    <innernamespace refid="namespaceecto">ecto</innernamespace>
+    <innernamespace refid="namespaceecto_1_1profile">ecto::profile</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2011,<sp/>Willow<sp/>Garage,<sp/>Inc.</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>All<sp/>rights<sp/>reserved.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/>Redistribution<sp/>and<sp/>use<sp/>in<sp/>source<sp/>and<sp/>binary<sp/>forms,<sp/>with<sp/>or<sp/>without</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>modification,<sp/>are<sp/>permitted<sp/>provided<sp/>that<sp/>the<sp/>following<sp/>conditions<sp/>are<sp/>met:</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>*<sp/>Redistributions<sp/>of<sp/>source<sp/>code<sp/>must<sp/>retain<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer.</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>*<sp/>Redistributions<sp/>in<sp/>binary<sp/>form<sp/>must<sp/>reproduce<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer<sp/>in<sp/>the</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>documentation<sp/>and/or<sp/>other<sp/>materials<sp/>provided<sp/>with<sp/>the<sp/>distribution.</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>*<sp/>Neither<sp/>the<sp/>name<sp/>of<sp/>the<sp/>Willow<sp/>Garage,<sp/>Inc.<sp/>nor<sp/>the<sp/>names<sp/>of<sp/>its</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>contributors<sp/>may<sp/>be<sp/>used<sp/>to<sp/>endorse<sp/>or<sp/>promote<sp/>products<sp/>derived<sp/>from</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>this<sp/>software<sp/>without<sp/>specific<sp/>prior<sp/>written<sp/>permission.</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/>THIS<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>BY<sp/>THE<sp/>COPYRIGHT<sp/>HOLDERS<sp/>AND<sp/>CONTRIBUTORS<sp/>&quot;AS<sp/>IS&quot;</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/>AND<sp/>ANY<sp/>EXPRESS<sp/>OR<sp/>IMPLIED<sp/>WARRANTIES,<sp/>INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,<sp/>THE</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*<sp/>IMPLIED<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY<sp/>AND<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR<sp/>PURPOSE</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>ARE<sp/>DISCLAIMED.<sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>THE<sp/>COPYRIGHT<sp/>OWNER<sp/>OR<sp/>CONTRIBUTORS<sp/>BE</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>DIRECT,<sp/>INDIRECT,<sp/>INCIDENTAL,<sp/>SPECIAL,<sp/>EXEMPLARY,<sp/>OR</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>CONSEQUENTIAL<sp/>DAMAGES<sp/>(INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,<sp/>PROCUREMENT<sp/>OF</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>SUBSTITUTE<sp/>GOODS<sp/>OR<sp/>SERVICES;<sp/>LOSS<sp/>OF<sp/>USE,<sp/>DATA,<sp/>OR<sp/>PROFITS;<sp/>OR<sp/>BUSINESS</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>INTERRUPTION)<sp/>HOWEVER<sp/>CAUSED<sp/>AND<sp/>ON<sp/>ANY<sp/>THEORY<sp/>OF<sp/>LIABILITY,<sp/>WHETHER<sp/>IN</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>CONTRACT,<sp/>STRICT<sp/>LIABILITY,<sp/>OR<sp/>TORT<sp/>(INCLUDING<sp/>NEGLIGENCE<sp/>OR<sp/>OTHERWISE)</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight></codeline>
+<codeline lineno="30"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="comment">//int64_t</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="forward_8hpp" kindref="compound">ecto/forward.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="util_8hpp" kindref="compound">ecto/util.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="log_8hpp" kindref="compound">ecto/log.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/date_time/posix_time/posix_time.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ecto<sp/>{</highlight></codeline>
+<codeline lineno="39" refid="namespaceecto_1_1profile" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">profile<sp/>{</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/><ref refid="namespaceecto_1_1profile_1aedec79d10deb5a37a71464c79a02187a" kindref="member">read_tsc</ref>();</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43" refid="structecto_1_1profile_1_1graph__stats__type" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structecto_1_1profile_1_1graph__stats__type" kindref="compound">graph_stats_type</ref></highlight></codeline>
+<codeline lineno="44"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="45" refid="structecto_1_1profile_1_1graph__stats__type_1aefc20d119cb949420bf74e845a8a1e8c" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="structecto_1_1profile_1_1graph__stats__type_1aefc20d119cb949420bf74e845a8a1e8c" kindref="member">graph_stats_type</ref>()<sp/>:<sp/><ref refid="structecto_1_1profile_1_1graph__stats__type_1a340d79ae72ca5639e55098c860640ba8" kindref="member">cumulative_time</ref>(),<sp/><ref refid="structecto_1_1profile_1_1graph__stats__type_1a0d465d23569a8af1789c0b57ccb21017" kindref="member">cumulative_ticks</ref>(0)<sp/>{}</highlight></codeline>
+<codeline lineno="46" refid="structecto_1_1profile_1_1graph__stats__type_1a340d79ae72ca5639e55098c860640ba8" refkind="member"><highlight class="normal"><sp/><sp/>boost::posix_time::time_duration<sp/><ref refid="structecto_1_1profile_1_1graph__stats__type_1a340d79ae72ca5639e55098c860640ba8" kindref="member">cumulative_time</ref>;</highlight></codeline>
+<codeline lineno="47" refid="structecto_1_1profile_1_1graph__stats__type_1a0d465d23569a8af1789c0b57ccb21017" refkind="member"><highlight class="normal"><sp/><sp/>uint64_t<sp/><ref refid="structecto_1_1profile_1_1graph__stats__type_1a0d465d23569a8af1789c0b57ccb21017" kindref="member">cumulative_ticks</ref>;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/>std::string<sp/><ref refid="structecto_1_1profile_1_1graph__stats__type_1ab412a3b91cbd9b062cdcd0f078ca163d" kindref="member">as_string</ref>(<ref refid="structecto_1_1graph_1_1graph__t" kindref="compound">graph::graph_t</ref>&amp;<sp/>g)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52" refid="structecto_1_1profile_1_1graphstats__collector" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structecto_1_1profile_1_1graphstats__collector" kindref="compound">graphstats_collector</ref></highlight></codeline>
+<codeline lineno="53"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="54" refid="structecto_1_1profile_1_1graphstats__collector_1a4a6ceeeffacb5f69edc173d5aaf3cf89" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="structecto_1_1profile_1_1graph__stats__type" kindref="compound">graph_stats_type</ref>&amp;<sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1a4a6ceeeffacb5f69edc173d5aaf3cf89" kindref="member">gs_</ref>;</highlight></codeline>
+<codeline lineno="55" refid="structecto_1_1profile_1_1graphstats__collector_1a85cb67d72c9d1072634b879776e2e4b8" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>boost::posix_time::ptime<sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1a85cb67d72c9d1072634b879776e2e4b8" kindref="member">start_time</ref>;</highlight></codeline>
+<codeline lineno="56" refid="structecto_1_1profile_1_1graphstats__collector_1a7a840b075fd490da5107ea538614d017" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1a7a840b075fd490da5107ea538614d017" kindref="member">start_tick</ref>;</highlight></codeline>
+<codeline lineno="57" refid="structecto_1_1profile_1_1graphstats__collector_1a375c75ce1c0197d1d87a5fc1bdf97050" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1a375c75ce1c0197d1d87a5fc1bdf97050" kindref="member">graphstats_collector</ref>(<ref refid="structecto_1_1profile_1_1graph__stats__type" kindref="compound">graph_stats_type</ref>&amp;<sp/>gs)</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1a4a6ceeeffacb5f69edc173d5aaf3cf89" kindref="member">gs_</ref>(gs)</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>,<sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1a85cb67d72c9d1072634b879776e2e4b8" kindref="member">start_time</ref>(boost::posix_time::microsec_clock::<ref refid="namespaceecto_1ad48a07c99914e7c96702bcce4baf6bc6" kindref="member">universal_time</ref>())</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>,<sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1a7a840b075fd490da5107ea538614d017" kindref="member">start_tick</ref>(profile::read_tsc())</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64" refid="structecto_1_1profile_1_1graphstats__collector_1a1bc967dcde1e3418aeeb10e58a52d79f" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1a1bc967dcde1e3418aeeb10e58a52d79f" kindref="member">~graphstats_collector</ref>()</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>stop_tick<sp/>=<sp/><ref refid="namespaceecto_1_1profile_1aedec79d10deb5a37a71464c79a02187a" kindref="member">profile::read_tsc</ref>();</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>boost::posix_time::ptime<sp/>stop_time<sp/>=</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespaceecto_1ad48a07c99914e7c96702bcce4baf6bc6" kindref="member">boost::posix_time::microsec_clock::universal_time</ref>();</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1a4a6ceeeffacb5f69edc173d5aaf3cf89" kindref="member">gs_</ref>.<ref refid="structecto_1_1profile_1_1graph__stats__type_1a340d79ae72ca5639e55098c860640ba8" kindref="member">cumulative_time</ref><sp/><sp/>+=<sp/>stop_time<sp/>-<sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1a85cb67d72c9d1072634b879776e2e4b8" kindref="member">start_time</ref>;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1a4a6ceeeffacb5f69edc173d5aaf3cf89" kindref="member">gs_</ref>.<ref refid="structecto_1_1profile_1_1graph__stats__type_1a0d465d23569a8af1789c0b57ccb21017" kindref="member">cumulative_ticks</ref><sp/>+=<sp/>stop_tick<sp/>-<sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1a7a840b075fd490da5107ea538614d017" kindref="member">start_tick</ref>;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="72"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74" refid="structecto_1_1profile_1_1stats__type" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="util_8hpp_1ab55b7868679cda60fc162580957fb98c" kindref="member">ECTO_EXPORT</ref><sp/><ref refid="structecto_1_1profile_1_1stats__type" kindref="compound">stats_type</ref></highlight></codeline>
+<codeline lineno="75"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><ref refid="structecto_1_1profile_1_1stats__type" kindref="compound">stats_type</ref>();</highlight></codeline>
+<codeline lineno="77" refid="structecto_1_1profile_1_1stats__type_1a570c8df89c2318ab98757e29670ba70b" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/><ref refid="structecto_1_1profile_1_1stats__type_1a570c8df89c2318ab98757e29670ba70b" kindref="member">ncalls</ref>;</highlight></codeline>
+<codeline lineno="78" refid="structecto_1_1profile_1_1stats__type_1affa2973693dec71733bcf8f7b6cf9c0b" refkind="member"><highlight class="normal"><sp/><sp/>uint64_t<sp/><ref refid="structecto_1_1profile_1_1stats__type_1affa2973693dec71733bcf8f7b6cf9c0b" kindref="member">total_ticks</ref>;</highlight></codeline>
+<codeline lineno="79" refid="structecto_1_1profile_1_1stats__type_1a25c84366176dc49eb9b113a4e74c6b5a" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structecto_1_1profile_1_1stats__type_1a25c84366176dc49eb9b113a4e74c6b5a" kindref="member">on</ref>;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>elapsed_time();</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>frequency();</highlight></codeline>
+<codeline lineno="83"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85" refid="structecto_1_1profile_1_1stats__collector" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="util_8hpp_1ab55b7868679cda60fc162580957fb98c" kindref="member">ECTO_EXPORT</ref><sp/><ref refid="structecto_1_1profile_1_1stats__collector" kindref="compound">stats_collector</ref></highlight></codeline>
+<codeline lineno="86"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="87" refid="structecto_1_1profile_1_1stats__collector_1ae607313a8ecc75d6a6ab201cdf7c2d61" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/><ref refid="structecto_1_1profile_1_1stats__collector_1ae607313a8ecc75d6a6ab201cdf7c2d61" kindref="member">start</ref>;</highlight></codeline>
+<codeline lineno="88" refid="structecto_1_1profile_1_1stats__collector_1a2c206fb60ea04b5162ec43a609f2a185" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="structecto_1_1profile_1_1stats__type" kindref="compound">stats_type</ref>&amp;<sp/><ref refid="structecto_1_1profile_1_1stats__collector_1a2c206fb60ea04b5162ec43a609f2a185" kindref="member">stats</ref>;</highlight></codeline>
+<codeline lineno="89" refid="structecto_1_1profile_1_1stats__collector_1ac3d5d7adf91b02719a6b897869683f03" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/><ref refid="structecto_1_1profile_1_1stats__collector_1ac3d5d7adf91b02719a6b897869683f03" kindref="member">instancename</ref>;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91" refid="structecto_1_1profile_1_1stats__collector_1adae561b196f7ec50f42ba76031924ee4" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="structecto_1_1profile_1_1stats__collector" kindref="compound">stats_collector</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>n,<sp/><ref refid="structecto_1_1profile_1_1stats__type" kindref="compound">stats_type</ref>&amp;<sp/>stats)</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/>start(read_tsc()),<sp/>stats(stats),<sp/>instancename(n)</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/>++stats.<ref refid="structecto_1_1profile_1_1stats__type_1a570c8df89c2318ab98757e29670ba70b" kindref="member">ncalls</ref>;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>stats.<ref refid="structecto_1_1profile_1_1stats__type_1a25c84366176dc49eb9b113a4e74c6b5a" kindref="member">on</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//ECTO_LOG_PROCESS(instancename,<sp/>start,<sp/>stats.ncalls,<sp/>1);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99" refid="structecto_1_1profile_1_1stats__collector_1aa1521de3406025190b06d0b7bad33064" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="structecto_1_1profile_1_1stats__collector_1aa1521de3406025190b06d0b7bad33064" kindref="member">~stats_collector</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>tsc<sp/>=<sp/><ref refid="namespaceecto_1_1profile_1aedec79d10deb5a37a71464c79a02187a" kindref="member">read_tsc</ref>();</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//ECTO_LOG_PROCESS(instancename,<sp/>tsc,<sp/>stats.ncalls,<sp/>0);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/>stats.total_ticks<sp/>+=<sp/>(tsc<sp/>-<sp/>start);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/>stats.on<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="105"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>of<sp/>namespace<sp/>profile.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>of<sp/>namespace<sp/>ecto.</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/profile.hpp"/>
+  </compounddef>
+</doxygen>

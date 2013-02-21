@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="structecto_1_1cell___1_1int__" kind="struct" prot="public">
+    <compoundname>ecto::cell_::int_</compoundname>
+    <includes refid="cell_8hpp" local="no">cell.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>int</type>
+        <declname>I</declname>
+        <defname>I</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/cell.hpp" line="332" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/cell.hpp" bodystart="332" bodyend="332"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

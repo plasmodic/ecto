@@ -1,0 +1,195 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Dependencies &mdash; ecto</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="ecto" href="../../index.html" />
+    <link rel="up" title="Installing ecto" href="index.html" />
+    <link rel="next" title="Build Ecto From Source" href="get_ecto.html" />
+    <link rel="prev" title="Installing ecto" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="get_ecto.html" title="Build Ecto From Source"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Installing ecto"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">ecto</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Installing ecto</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/ecto210.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Dependencies</a><ul>
+<li><a class="reference internal" href="#packages">Packages</a></li>
+<li><a class="reference internal" href="#nonsystem-boost">Nonsystem Boost</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Installing ecto</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="get_ecto.html"
+                        title="next chapter">Build Ecto From Source</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/ecto/install/dependencies.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="dependencies">
+<h1>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="packages">
+<h2>Packages<a class="headerlink" href="#packages" title="Permalink to this headline">¶</a></h2>
+<p>Ecto only depends on Python and Boost so make sure you have those two sets of tools.
+On Ubuntu, simply install the corresponding pacakges:</p>
+<div class="highlight-bash"><div class="highlight"><pre>sudo apt-get install python libboost-dev
+</pre></div>
+</div>
+</div>
+<div class="section" id="nonsystem-boost">
+<h2>Nonsystem Boost<a class="headerlink" href="#nonsystem-boost" title="Permalink to this headline">¶</a></h2>
+<p>(Accurate as of boost 1.47.0)</p>
+<p>If you want to build against nonsystem boost (i.e. boost that isn&#8217;t
+available as a package) on linux, you need to use specific build
+flags, so that boost&#8217;s uniquely cantankerous build system generates
+files that cmake&#8217;s <tt class="docutils literal"><span class="pre">find_package()</span></tt> can find.  First you run the
+included <tt class="docutils literal"><span class="pre">bootstrap.sh</span></tt>, then run bjam like this:</p>
+<div class="highlight-python"><pre>./bjam threading=multi link=shared runtime-link=shared --layout=tagged install</pre>
+</div>
+<p>If you&#8217;re on ubuntu I recommend using <a class="reference external" href="https://help.ubuntu.com/community/CheckInstall">checkinstall</a> for easy removal of
+the package if you get things wrong.  Example:</p>
+<div class="highlight-python"><pre>sudo checkinstall ./bjam threading=multi link=shared runtime-link=shared -j8 --layout=tagged --prefix=/usr/local/boost-1.40.0 install</pre>
+</div>
+<p>Checkinstall will ask for a summary and such.  Be sure to check that
+the autogenerated name of the package is reasonable (item 3 below):</p>
+<div class="highlight-python"><pre>*****************************************
+**** Debian package creation selected ***
+*****************************************
+
+*** Warning: The package name "boost_1_40_0" contains illegal
+*** Warning: characters. dpkg might not like that so I changed
+*** Warning: them to dashes.
+
+This package will be built according to these values:
+
+0 -  Maintainer: [ root@bsq ]
+1 -  Summary: [ boost 1.40.0 in /usr/local/boost-1.40.0 ]
+2 -  Name:    [ boost-1-40-0 ]
+3 -  Version: [ 20110926 ]
+4 -  Release: [ 1 ]
+5 -  License: [ GPL ]
+6 -  Group:   [ checkinstall ]
+7 -  Architecture: [ amd64 ]
+8 -  Source location: [ boost_1_40_0 ]
+9 -  Alternate source location: [  ]
+10 - Requires: [  ]
+11 - Provides: [ boost-1-40-0 ]
+12 - Conflicts: [  ]
+13 - Replaces: [  ]
+
+Enter a number to change any of them or press ENTER to continue:</pre>
+</div>
+<p>With boost, <tt class="docutils literal"><span class="pre">checkinstall</span></tt> figures out a reasonable package name due
+to the name of the directory that the boost tarball unpacks to.  With
+others it can get it wrong... <tt class="docutils literal"><span class="pre">tmp</span></tt> is a terrible name for a
+package.</p>
+<p>When you then want to detect this new boost when running cmake, use
+<tt class="docutils literal"><span class="pre">BOOST_ROOT</span></tt> (see also the cmake docs for <tt class="docutils literal"><span class="pre">FindBoost</span></tt>), e.g.:</p>
+<div class="highlight-bash"><div class="highlight"><pre>cmake ../src -DBOOST_ROOT<span class="o">=</span>/usr/local/boost-1.40.0
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="get_ecto.html" title="Build Ecto From Source"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Installing ecto"
+             >previous</a> |</li>
+        <li><a href="../../index.html">ecto</a> &raquo;</li>
+          <li><a href="index.html" >Installing ecto</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011,  Willow Garage, Inc.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

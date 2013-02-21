@@ -1,0 +1,225 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Tendril Connections &mdash; ecto</title>
+    
+    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="ecto" href="../../../index.html" />
+    <link rel="up" title="Usage" href="../index.html" />
+    <link rel="next" title="Command line helpers: getting stats, GUIS, a shell and more automagically !" href="argparse.html" />
+    <link rel="prev" title="BlackBox" href="../techniques/black_box.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="argparse.html" title="Command line helpers: getting stats, GUIS, a shell and more automagically !"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../techniques/black_box.html" title="BlackBox"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../index.html">
+              <img class="logo" src="../../../_static/ecto210.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Tendril Connections</a><ul>
+<li><a class="reference internal" href="#slice-notation">Slice notation</a></li>
+<li><a class="reference internal" href="#multicasting">Multicasting</a></li>
+<li><a class="reference internal" href="#plasms">Plasms</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../techniques/black_box.html"
+                        title="previous chapter">BlackBox</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="argparse.html"
+                        title="next chapter">Command line helpers: getting stats, GUIS, a shell and more automagically !</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/ecto/usage/tips/connections.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="tendril-connections">
+<span id="id1"></span><h1>Tendril Connections<a class="headerlink" href="#tendril-connections" title="Permalink to this headline">¶</a></h1>
+<p><tt class="docutils literal"><span class="pre">&gt;&gt;</span></tt> is a cute little operator in python, and ecto abuses it
+to make connections between cells....</p>
+<p>Looking at a little interactive prompt:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ecto.ecto_test</span> <span class="kn">import</span> <span class="n">Increment</span><span class="p">,</span> <span class="n">Add</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="n">Increment</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span> <span class="o">=</span> <span class="n">Add</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i</span><span class="p">[</span><span class="s">&#39;out&#39;</span><span class="p">]</span>
+<span class="go"> &lt;ecto.TendrilSpecifications object at 0x20800d0&gt;</span>
+</pre></div>
+</div>
+<p>So the the operator <tt class="docutils literal"><span class="pre">[]</span></tt> returns this special type, which we
+won&#8217;t talk about much but this special type represents the cell,
+the input or output tendril and a few other properties. The key in
+the <tt class="docutils literal"><span class="pre">[]</span></tt> operator will look up any input, or output in the
+cell that matches it.</p>
+<p>For example, if we give the wrong key:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">]</span>
+<span class="go">RuntimeError: The module ecto_test::Add does not contain any inputs or outputs or parameters by the given name: a</span>
+</pre></div>
+</div>
+<p>Ok, so with this special object, ecto overrides the <tt class="docutils literal"><span class="pre">__rshift__</span></tt>
+python function.  This makes the following possible:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span><span class="p">[</span><span class="s">&#39;out&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">add</span><span class="p">[</span><span class="s">&#39;right&#39;</span><span class="p">]</span>
+<span class="go">[(&lt;ecto_test.Increment object at 0x2062158&gt;,</span>
+<span class="go">&#39;out&#39;,</span>
+<span class="go">&lt;ecto_test.Add object at 0x205ee68&gt;,</span>
+<span class="go">&#39;right&#39;)]</span>
+</pre></div>
+</div>
+<p>So when the <tt class="docutils literal"><span class="pre">&gt;&gt;</span></tt> operator is used with two <tt class="docutils literal"><span class="pre">TendrilSpecifications</span></tt> objects, it returns a list of tuples, that descript
+the connection.  Think of each tuple as containing <tt class="docutils literal"><span class="pre">(from</span> <span class="pre">cell,</span> <span class="pre">from</span> <span class="pre">port</span> <span class="pre">name,</span> <span class="pre">to</span> <span class="pre">cell,</span> <span class="pre">to</span> <span class="pre">port</span> <span class="pre">name)</span></tt>.</p>
+<div class="section" id="slice-notation">
+<h2>Slice notation<a class="headerlink" href="#slice-notation" title="Permalink to this headline">¶</a></h2>
+<p>You may notice the slice notation being used:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span><span class="p">[:]</span> <span class="o">&gt;&gt;</span> <span class="n">add</span><span class="p">[</span><span class="s">&#39;right&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>This is shorthand for asking for all the outputs, or all the inputs of the cell.
+You must be careful with this operation, as there must be a one to one mapping from the
+left to right.  If all the inputs on the right have the same name as those on the left,
+<tt class="docutils literal"><span class="pre">i[:]</span> <span class="pre">&gt;&gt;</span> <span class="pre">add[:]</span></tt>
+would work. However, since <tt class="docutils literal"><span class="pre">i[:]</span></tt> is of &#8220;length&#8221; 1 and <tt class="docutils literal"><span class="pre">add[:]</span></tt> is of length 2, this
+fails.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span><span class="p">[:]</span> <span class="o">&gt;&gt;</span> <span class="n">add</span><span class="p">[:]</span>
+<span class="go">RuntimeError: Specification mismatch... len(lhs) != len(rhs) -&gt; 1 != 2</span>
+</pre></div>
+</div>
+<p>Think all inputs to all outputs for the above statement.</p>
+</div>
+<div class="section" id="multicasting">
+<h2>Multicasting<a class="headerlink" href="#multicasting" title="Permalink to this headline">¶</a></h2>
+<p>You may, in one line connect one output to many inputs in the following way:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span><span class="p">[</span><span class="s">&#39;out&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="n">add</span><span class="p">[</span><span class="s">&#39;left&#39;</span><span class="p">],</span><span class="n">add</span><span class="p">[</span><span class="s">&#39;right])</span>
+<span class="go">[(&lt;ecto_test.Increment object at 0x2062158&gt;,</span>
+<span class="go">&#39;out&#39;,</span>
+<span class="go">&lt;ecto_test.Add object at 0x205ee68&gt;,</span>
+<span class="go">&#39;left&#39;),</span>
+<span class="go">(&lt;ecto_test.Increment object at 0x2062158&gt;,</span>
+<span class="go">&#39;out&#39;,</span>
+<span class="go">&lt;ecto_test.Add object at 0x205ee68&gt;,</span>
+<span class="go">&#39;right&#39;)]</span>
+</pre></div>
+</div>
+<p>Notice the two tuples in the list now, each one describing a single connection from
+an output tendril to an input tendril.</p>
+</div>
+<div class="section" id="plasms">
+<h2>Plasms<a class="headerlink" href="#plasms" title="Permalink to this headline">¶</a></h2>
+<p>Plasms have the <a class="reference internal" href="../../reference/python.html#ecto.Plasm.connect" title="ecto.Plasm.connect"><tt class="xref py py-func docutils literal"><span class="pre">ecto.Plasm.connect()</span></tt></a> which will take a list of connections
+like the ones described above:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">plasm</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Plasm</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span> <span class="n">i</span><span class="p">[</span><span class="s">&#39;out&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">add</span><span class="p">[</span><span class="s">&#39;left&#39;</span><span class="p">],</span>
+<span class="go">                   i2[&#39;out&#39;] &gt;&gt; add[&#39;right&#39;],</span>
+<span class="go">                   add[&#39;out&#39;] &gt;&gt; printer[&#39;input&#39;],</span>
+<span class="go">                  )</span>
+</pre></div>
+</div>
+<p>It is useful to always have a trailing <tt class="docutils literal"><span class="pre">,</span></tt> when writing the connection,
+so that it is easy to append new connections to the function call.</p>
+<p>You may also pass a vanilla python list to this function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span> <span class="o">+=</span> <span class="p">[</span> <span class="n">i</span><span class="p">[</span><span class="s">&#39;out&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">add</span><span class="p">[</span><span class="s">&#39;left&#39;</span><span class="p">],</span>
+<span class="go">               i2[&#39;out&#39;] &gt;&gt; add[&#39;right&#39;],</span>
+<span class="go">               add[&#39;out&#39;] &gt;&gt; printer[&#39;input&#39;],</span>
+<span class="go">             ]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plasm</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Plasm</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="argparse.html" title="Command line helpers: getting stats, GUIS, a shell and more automagically !"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../techniques/black_box.html" title="BlackBox"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li><a href="../index.html" >Usage</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011,  Willow Garage, Inc.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

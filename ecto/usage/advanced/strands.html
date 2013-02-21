@@ -1,0 +1,202 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Strands: preventing cells from running concurrently &mdash; ecto</title>
+    
+    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="ecto" href="../../../index.html" />
+    <link rel="up" title="Usage" href="../index.html" />
+    <link rel="next" title="Serialization: Create From Python, Load/Execute From Pure C++" href="serialization.html" />
+    <link rel="prev" title="Parameters to and from YAML" href="yaml.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="serialization.html" title="Serialization: Create From Python, Load/Execute From Pure C++"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="yaml.html" title="Parameters to and from YAML"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../index.html">
+              <img class="logo" src="../../../_static/ecto210.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="yaml.html"
+                        title="previous chapter">Parameters to and from YAML</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="serialization.html"
+                        title="next chapter">Serialization: Create From Python, Load/Execute From Pure C++</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/ecto/usage/advanced/strands.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="strands-preventing-cells-from-running-concurrently">
+<span id="strands"></span><h1>Strands:  preventing cells from running concurrently<a class="headerlink" href="#strands-preventing-cells-from-running-concurrently" title="Permalink to this headline">¶</a></h1>
+<p>Strands are used by the schedulers when cells must not run
+concurrently with specific instances or other cells.  Simply create a
+strand and pass it as the argument <tt class="docutils literal"><span class="pre">strand</span></tt> when creating cells: no
+cells that have the same strand will ever run at the same time.</p>
+<p>One can also mark all instances of the same <strong>type</strong> of cell as always
+thread-unsafe, see <a class="reference internal" href="../techniques/autoregister.html#ecto-thread-unsafe"><em>ECTO_THREAD_UNSAFE()</em></a>.</p>
+<p>Sample:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">ecto</span>
+<span class="kn">import</span> <span class="nn">ecto.ecto_test</span> <span class="kn">as</span> <span class="nn">ecto_test</span>
+
+<span class="n">s1</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Strand</span><span class="p">()</span>  <span class="c"># No cells that have this strand will run concurrenly</span>
+
+<span class="n">plasm</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Plasm</span><span class="p">()</span>
+<span class="n">gen</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">Generate</span><span class="p">(</span><span class="s">&quot;Gen&quot;</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">noncurr</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">DontCallMeFromTwoThreads</span><span class="p">(</span><span class="s">&quot;Unsafe0&quot;</span><span class="p">,</span> <span class="n">strand</span><span class="o">=</span><span class="n">s1</span><span class="p">)</span>
+<span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">gen</span><span class="p">[</span><span class="s">&#39;out&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">noncurr</span><span class="p">[</span><span class="s">&#39;in&#39;</span><span class="p">])</span>
+
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="nb">next</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">DontCallMeFromTwoThreads</span><span class="p">(</span><span class="s">&quot;Unsafe</span><span class="si">%u</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">strand</span><span class="o">=</span><span class="n">s1</span><span class="p">)</span>
+    <span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">noncurr</span><span class="p">[</span><span class="s">&#39;out&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="nb">next</span><span class="p">[</span><span class="s">&#39;in&#39;</span><span class="p">])</span>
+    <span class="n">noncurr</span> <span class="o">=</span> <span class="nb">next</span>
+
+<span class="n">printer</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">Printer</span><span class="p">()</span>
+<span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">noncurr</span><span class="p">[</span><span class="s">&#39;out&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">printer</span><span class="p">[</span><span class="s">&#39;in&#39;</span><span class="p">])</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">sched</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Scheduler</span><span class="p">(</span><span class="n">plasm</span><span class="p">)</span>
+    <span class="n">sched</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">niter</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="graphviz">
+<img src="../../../_images/graphviz-e7806bc8eee9b5759777d653eb733394c18d38a3.png" alt="digraph G {
+graph [rankdir=TB, ranksep=1]
+edge [labelfontsize=8]
+node [shape=plaintext]
+0[label=&lt;&lt;TABLE BORDER=&quot;0&quot; CELLBORDER=&quot;1&quot; CELLSPACING=&quot;0&quot; CELLPADDING=&quot;4&quot;&gt;  &lt;TR&gt; &lt;TD ROWSPAN=&quot;2&quot; COLSPAN=&quot;1&quot; BGCOLOR=&quot;khaki&quot;&gt;Gen&lt;/TD&gt; &lt;TD PORT=&quot;p_start&quot; BGCOLOR=&quot;lightblue&quot;&gt;start&lt;/TD&gt;
+ &lt;/TR&gt; &lt;TR&gt; &lt;TD PORT=&quot;p_step&quot; BGCOLOR=&quot;lightblue&quot;&gt;step&lt;/TD&gt; &lt;/TR&gt;
+ &lt;TR&gt;
+&lt;TD PORT=&quot;o_out&quot; BGCOLOR=&quot;indianred1&quot;&gt;out&lt;/TD&gt;
+&lt;/TR&gt; &lt;/TABLE&gt;&gt;];
+1[label=&lt;&lt;TABLE BORDER=&quot;0&quot; CELLBORDER=&quot;1&quot; CELLSPACING=&quot;0&quot; CELLPADDING=&quot;4&quot;&gt; &lt;TR&gt;
+&lt;TD PORT=&quot;i_in&quot; BGCOLOR=&quot;springgreen&quot;&gt;in&lt;/TD&gt;
+&lt;/TR&gt; &lt;TR&gt; &lt;TD ROWSPAN=&quot;1&quot; COLSPAN=&quot;1&quot; BGCOLOR=&quot;khaki&quot;&gt;Unsafe0&lt;/TD&gt;  &lt;/TR&gt;  &lt;TR&gt;
+&lt;TD PORT=&quot;o_out&quot; BGCOLOR=&quot;indianred1&quot;&gt;out&lt;/TD&gt;
+&lt;/TR&gt; &lt;/TABLE&gt;&gt;];
+2[label=&lt;&lt;TABLE BORDER=&quot;0&quot; CELLBORDER=&quot;1&quot; CELLSPACING=&quot;0&quot; CELLPADDING=&quot;4&quot;&gt; &lt;TR&gt;
+&lt;TD PORT=&quot;i_in&quot; BGCOLOR=&quot;springgreen&quot;&gt;in&lt;/TD&gt;
+&lt;/TR&gt; &lt;TR&gt; &lt;TD ROWSPAN=&quot;1&quot; COLSPAN=&quot;1&quot; BGCOLOR=&quot;khaki&quot;&gt;Unsafe1&lt;/TD&gt;  &lt;/TR&gt;  &lt;TR&gt;
+&lt;TD PORT=&quot;o_out&quot; BGCOLOR=&quot;indianred1&quot;&gt;out&lt;/TD&gt;
+&lt;/TR&gt; &lt;/TABLE&gt;&gt;];
+3[label=&lt;&lt;TABLE BORDER=&quot;0&quot; CELLBORDER=&quot;1&quot; CELLSPACING=&quot;0&quot; CELLPADDING=&quot;4&quot;&gt; &lt;TR&gt;
+&lt;TD PORT=&quot;i_in&quot; BGCOLOR=&quot;springgreen&quot;&gt;in&lt;/TD&gt;
+&lt;/TR&gt; &lt;TR&gt; &lt;TD ROWSPAN=&quot;1&quot; COLSPAN=&quot;1&quot; BGCOLOR=&quot;khaki&quot;&gt;Unsafe2&lt;/TD&gt;  &lt;/TR&gt;  &lt;TR&gt;
+&lt;TD PORT=&quot;o_out&quot; BGCOLOR=&quot;indianred1&quot;&gt;out&lt;/TD&gt;
+&lt;/TR&gt; &lt;/TABLE&gt;&gt;];
+4[label=&lt;&lt;TABLE BORDER=&quot;0&quot; CELLBORDER=&quot;1&quot; CELLSPACING=&quot;0&quot; CELLPADDING=&quot;4&quot;&gt; &lt;TR&gt;
+&lt;TD PORT=&quot;i_in&quot; BGCOLOR=&quot;springgreen&quot;&gt;in&lt;/TD&gt;
+&lt;/TR&gt; &lt;TR&gt; &lt;TD ROWSPAN=&quot;1&quot; COLSPAN=&quot;1&quot; BGCOLOR=&quot;khaki&quot;&gt;Unsafe3&lt;/TD&gt;  &lt;/TR&gt;  &lt;TR&gt;
+&lt;TD PORT=&quot;o_out&quot; BGCOLOR=&quot;indianred1&quot;&gt;out&lt;/TD&gt;
+&lt;/TR&gt; &lt;/TABLE&gt;&gt;];
+5[label=&lt;&lt;TABLE BORDER=&quot;0&quot; CELLBORDER=&quot;1&quot; CELLSPACING=&quot;0&quot; CELLPADDING=&quot;4&quot;&gt; &lt;TR&gt;
+&lt;TD PORT=&quot;i_in&quot; BGCOLOR=&quot;springgreen&quot;&gt;in&lt;/TD&gt;
+&lt;/TR&gt; &lt;TR&gt; &lt;TD ROWSPAN=&quot;1&quot; COLSPAN=&quot;1&quot; BGCOLOR=&quot;khaki&quot;&gt;ecto_test::Printer&lt;/TD&gt; &lt;TD PORT=&quot;p_print_type&quot; BGCOLOR=&quot;lightblue&quot;&gt;print_type&lt;/TD&gt;
+ &lt;/TR&gt;   &lt;/TABLE&gt;&gt;];
+0-&gt;1 [headport=&quot;i_in&quot; tailport=&quot;o_out&quot;];
+1-&gt;2 [headport=&quot;i_in&quot; tailport=&quot;o_out&quot;];
+2-&gt;3 [headport=&quot;i_in&quot; tailport=&quot;o_out&quot;];
+3-&gt;4 [headport=&quot;i_in&quot; tailport=&quot;o_out&quot;];
+4-&gt;5 [headport=&quot;i_in&quot; tailport=&quot;o_out&quot;];
+}" />
+</p>
+<div class="highlight-text"><div class="highlight"><pre>***** 1 ***** 0x130f630
+***** 2 ***** 0x130f630
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="serialization.html" title="Serialization: Create From Python, Load/Execute From Pure C++"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="yaml.html" title="Parameters to and from YAML"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li><a href="../index.html" >Usage</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011,  Willow Garage, Inc.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

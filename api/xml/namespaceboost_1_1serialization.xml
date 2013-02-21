@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="namespaceboost_1_1serialization" kind="namespace">
+    <compoundname>boost::serialization</compoundname>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespaceboost_1_1serialization_1a2426e0778002bc8706de04819006b274" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Archive</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void boost::serialization::save</definition>
+        <argsstring>(Archive &amp;ar, const boost::shared_ptr&lt; ecto::cell &gt; &amp;cell_, const unsigned int file_version)</argsstring>
+        <name>save</name>
+        <param>
+          <type>Archive &amp;</type>
+          <declname>ar</declname>
+        </param>
+        <param>
+          <type>const boost::shared_ptr&lt; <ref refid="structecto_1_1cell" kindref="compound">ecto::cell</ref> &gt; &amp;</type>
+          <declname>cell_</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>file_version</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/serialization/cell.hpp" line="42" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/serialization/cell.hpp" bodystart="41" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceboost_1_1serialization_1a05438bec420c8465b28eab17e1e1dc16" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Archive</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void boost::serialization::load</definition>
+        <argsstring>(Archive &amp;ar, boost::shared_ptr&lt; ecto::cell &gt; &amp;cell_, const unsigned int file_version)</argsstring>
+        <name>load</name>
+        <param>
+          <type>Archive &amp;</type>
+          <declname>ar</declname>
+        </param>
+        <param>
+          <type>boost::shared_ptr&lt; <ref refid="structecto_1_1cell" kindref="compound">ecto::cell</ref> &gt; &amp;</type>
+          <declname>cell_</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>file_version</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/serialization/cell.hpp" line="53" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/serialization/cell.hpp" bodystart="52" bodyend="64"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/serialization/cell.hpp" line="38"/>
+  </compounddef>
+</doxygen>

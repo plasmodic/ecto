@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="structboost_1_1python_1_1std__map__indexing__suite_1_1make__transform__impl" kind="struct" prot="public">
+    <compoundname>boost::python::std_map_indexing_suite::make_transform_impl</compoundname>
+    <includes refid="std__map__indexing__suite_8hpp" local="no">std_map_indexing_suite.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Transform</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structboost_1_1python_1_1std__map__indexing__suite_1_1make__transform__impl_1a64d7b60f0e792533c1cc89b84f341b0d" prot="public" static="no">
+        <type>boost::transform_iterator&lt; Transform, <ref refid="classboost_1_1python_1_1std__map__indexing__suite_1aae0c4473455223a4e048cc207ca7b3ea" kindref="member">const_iterator</ref> &gt;</type>
+        <definition>typedef boost::transform_iterator&lt;Transform, const_iterator&gt; boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::make_transform_impl&lt; Transform &gt;::iterator</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="286" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="286" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structboost_1_1python_1_1std__map__indexing__suite_1_1make__transform__impl_1ab74967f0d94cdc5adcae986110974656" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structboost_1_1python_1_1std__map__indexing__suite_1_1make__transform__impl_1a64d7b60f0e792533c1cc89b84f341b0d" kindref="member">iterator</ref></type>
+        <definition>static iterator boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::make_transform_impl&lt; Transform &gt;::begin</definition>
+        <argsstring>(const Container &amp;m)</argsstring>
+        <name>begin</name>
+        <param>
+          <type>const Container &amp;</type>
+          <declname>m</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="289" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="288" bodyend="291"/>
+      </memberdef>
+      <memberdef kind="function" id="structboost_1_1python_1_1std__map__indexing__suite_1_1make__transform__impl_1ac8c3535052a0a3320e73ab5b49eb6b82" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structboost_1_1python_1_1std__map__indexing__suite_1_1make__transform__impl_1a64d7b60f0e792533c1cc89b84f341b0d" kindref="member">iterator</ref></type>
+        <definition>static iterator boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::make_transform_impl&lt; Transform &gt;::end</definition>
+        <argsstring>(const Container &amp;m)</argsstring>
+        <name>end</name>
+        <param>
+          <type>const Container &amp;</type>
+          <declname>m</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="293" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="292" bodyend="295"/>
+      </memberdef>
+      <memberdef kind="function" id="structboost_1_1python_1_1std__map__indexing__suite_1_1make__transform__impl_1a9dbcd293bf92f94f2eaeaed8edb64ee2" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bp::object</type>
+        <definition>static bp::object boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::make_transform_impl&lt; Transform &gt;::range</definition>
+        <argsstring>()</argsstring>
+        <name>range</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="298" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="297" bodyend="300"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="285" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="284" bodyend="301"/>
+    <listofallmembers>
+      <member refid="structboost_1_1python_1_1std__map__indexing__suite_1_1make__transform__impl_1ab74967f0d94cdc5adcae986110974656" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite::make_transform_impl</scope><name>begin</name></member>
+      <member refid="structboost_1_1python_1_1std__map__indexing__suite_1_1make__transform__impl_1ac8c3535052a0a3320e73ab5b49eb6b82" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite::make_transform_impl</scope><name>end</name></member>
+      <member refid="structboost_1_1python_1_1std__map__indexing__suite_1_1make__transform__impl_1a64d7b60f0e792533c1cc89b84f341b0d" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite::make_transform_impl</scope><name>iterator</name></member>
+      <member refid="structboost_1_1python_1_1std__map__indexing__suite_1_1make__transform__impl_1a9dbcd293bf92f94f2eaeaed8edb64ee2" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite::make_transform_impl</scope><name>range</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

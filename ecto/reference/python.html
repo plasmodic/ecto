@@ -1,0 +1,856 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Documentation for Python &mdash; ecto</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="ecto" href="../../index.html" />
+    <link rel="up" title="Reference" href="index.html" />
+    <link rel="prev" title="Module ecto_test" href="ecto_test_cells.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ecto_test_cells.html" title="Module ecto_test"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">ecto</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/ecto210.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Documentation for Python</a><ul>
+<li><a class="reference internal" href="#cell">Cell</a></li>
+<li><a class="reference internal" href="#tendril">Tendril</a></li>
+<li><a class="reference internal" href="#plasm">Plasm</a></li>
+<li><a class="reference internal" href="#blackbox">BlackBox</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ecto_test_cells.html"
+                        title="previous chapter">Module ecto_test</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/ecto/reference/python.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-ecto">
+<span id="documentation-for-python"></span><h1>Documentation for Python<a class="headerlink" href="#module-ecto" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="cell">
+<h2>Cell<a class="headerlink" href="#cell" title="Permalink to this headline">¶</a></h2>
+<p>To implement an ecto cell in Python, you need to inherit from the following class:</p>
+<dl class="class">
+<dt id="ecto.cell.Cell">
+<em class="property">class </em><tt class="descclassname">ecto.cell.</tt><tt class="descname">Cell</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../../_modules/ecto/cell.html#Cell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.cell.Cell" title="Permalink to this definition">¶</a></dt>
+<dd><p>When creating a cell from Python, just inherit from that class and define
+the same functions as in C++ if you want (i.e. declare_params(self, p),
+declare_io(self, p), configure(self, p, i, o) and run(self, i, o)</p>
+</dd></dl>
+
+</div>
+<div class="section" id="tendril">
+<h2>Tendril<a class="headerlink" href="#tendril" title="Permalink to this headline">¶</a></h2>
+<p>You have the same functionalities as in C++ with Tendril:</p>
+<dl class="class">
+<dt id="ecto.Tendril">
+<em class="property">class </em><tt class="descclassname">ecto.</tt><tt class="descname">Tendril</tt><a class="headerlink" href="#ecto.Tendril" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Tendril is the slendor winding organ of ecto.
+It is a type erasing holder with meta data that enable introspection.</p>
+<dl class="method">
+<dt id="ecto.Tendril.copy_value">
+<tt class="descname">copy_value</tt><big>(</big><em>(Tendril)arg1</em>, <em>(Tendril)arg2</em><big>)</big> &rarr; None :<a class="headerlink" href="#ecto.Tendril.copy_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy from one tendril to the other.</p>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>void copy_value(boost::shared_ptr&lt;ecto::tendril&gt;,boost::shared_ptr&lt;ecto::tendril&gt;)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Tendril.createT">
+<tt class="descname">createT</tt><big>(</big><em>(str)arg1</em><big>)</big> &rarr; Tendril :<a class="headerlink" href="#ecto.Tendril.createT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a tendril of the c++ type.</p>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>ecto::tendril createT(std::string)</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ecto.Tendril.dirty">
+<tt class="descname">dirty</tt><a class="headerlink" href="#ecto.Tendril.dirty" title="Permalink to this definition">¶</a></dt>
+<dd><p>Has the tendril changed since the last time?</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ecto.Tendril.doc">
+<tt class="descname">doc</tt><a class="headerlink" href="#ecto.Tendril.doc" title="Permalink to this definition">¶</a></dt>
+<dd><p>A doc string that describes the purpose of this tendril.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Tendril.get">
+<tt class="descname">get</tt><big>(</big><em>(Tendril)arg1</em><big>)</big> &rarr; object :<a class="headerlink" href="#ecto.Tendril.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the python value of the object.
+May be None if python bindings for the type held do not have boost::python bindings available from the current scope.</p>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>boost::python::api::object get(boost::shared_ptr&lt;ecto::tendril&gt;)</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ecto.Tendril.has_default">
+<tt class="descname">has_default</tt><a class="headerlink" href="#ecto.Tendril.has_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Does the tendril have an explicit default value?
+Remember that the implicit default is always the default constructed type.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Tendril.listT">
+<tt class="descname">listT</tt><big>(</big><big>)</big> &rarr; object :<a class="headerlink" href="#ecto.Tendril.listT" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>boost::python::api::object listT()</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Tendril.load">
+<tt class="descname">load</tt><big>(</big><em>(Tendril)arg1</em>, <em>(str)arg2</em><big>)</big> &rarr; None :<a class="headerlink" href="#ecto.Tendril.load" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>void load(ecto::tendril {lvalue},std::string)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Tendril.notify">
+<tt class="descname">notify</tt><big>(</big><em>(Tendril)arg1</em><big>)</big> &rarr; None :<a class="headerlink" href="#ecto.Tendril.notify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Force updates.</p>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>void notify(ecto::tendril {lvalue})</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ecto.Tendril.required">
+<tt class="descname">required</tt><a class="headerlink" href="#ecto.Tendril.required" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is this tendril required to be connected?</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Tendril.save">
+<tt class="descname">save</tt><big>(</big><em>(Tendril)arg1</em><big>)</big> &rarr; str :<a class="headerlink" href="#ecto.Tendril.save" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>std::string save(ecto::tendril)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Tendril.set">
+<tt class="descname">set</tt><big>(</big><em>(Tendril)arg1</em>, <em>(object)arg2</em><big>)</big> &rarr; None :<a class="headerlink" href="#ecto.Tendril.set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assuming the value held by the tendril has boost::python bindings,
+this will copy the value of the given python object into the value held by the tendril.</p>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>void set(boost::shared_ptr&lt;ecto::tendril&gt;,boost::python::api::object)</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ecto.Tendril.type_name">
+<tt class="descname">type_name</tt><a class="headerlink" href="#ecto.Tendril.type_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type of the value held by the tendril.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ecto.Tendril.user_supplied">
+<tt class="descname">user_supplied</tt><a class="headerlink" href="#ecto.Tendril.user_supplied" title="Permalink to this definition">¶</a></dt>
+<dd><p>Has the value been set by the user?</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ecto.Tendril.val">
+<tt class="descname">val</tt><a class="headerlink" href="#ecto.Tendril.val" title="Permalink to this definition">¶</a></dt>
+<dd><p>The value held by the tendril.
+It requires boost::python bindings to be accessible from python.
+If none are available it will be None.</p>
+</dd></dl>
+
+</dd></dl>
+
+<p>And similaryl with an ecto.Tendrils:</p>
+<dl class="class">
+<dt id="ecto.Tendrils">
+<em class="property">class </em><tt class="descclassname">ecto.</tt><tt class="descname">Tendrils</tt><a class="headerlink" href="#ecto.Tendrils" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="ecto.Tendrils.at">
+<tt class="descname">at</tt><big>(</big><em>(Tendrils)arg1</em>, <em>(str)arg2</em><big>)</big> &rarr; Tendril :<a class="headerlink" href="#ecto.Tendrils.at" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>boost::shared_ptr&lt;ecto::tendril&gt; at(ecto::tendrils {lvalue},std::string)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Tendrils.clear">
+<tt class="descname">clear</tt><big>(</big><em>(Tendrils)arg1</em><big>)</big> &rarr; None :<a class="headerlink" href="#ecto.Tendrils.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>D.clear() -&gt; None.  Remove all items from D.</p>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>void clear(ecto::tendrils {lvalue})</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Tendrils.declare">
+<tt class="descname">declare</tt><big>(</big><em>(Tendrils)arg1</em>, <em>(str)arg2</em>, <em>(str)arg3</em><big>)</big> &rarr; None :<a class="headerlink" href="#ecto.Tendrils.declare" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>void declare(ecto::tendrils {lvalue},std::string,std::string)</dd>
+</dl>
+</div></blockquote>
+<p>declare( (Tendrils)arg1, (str)arg2, (str)arg3, (object)arg4) -&gt; None :</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>void declare(ecto::tendrils {lvalue},std::string,std::string,boost::python::api::object)</dd>
+</dl>
+</div></blockquote>
+<p>declare( (Tendrils)arg1, (str)arg2, (Tendril)arg3) -&gt; None :</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>void declare(ecto::tendrils {lvalue},std::string,boost::shared_ptr&lt;ecto::tendril&gt;)</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Tendrils.fromkeys">
+<tt class="descname">fromkeys</tt><big>(</big><em>(object)arg1</em>, <em>(object)arg2</em><big>)</big> &rarr; object :<a class="headerlink" href="#ecto.Tendrils.fromkeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tendrils.fromkeys(S,v) -&gt; New Tendrils with keys from S and values equal to v.</p>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>boost::python::api::object fromkeys(boost::python::api::object,boost::python::api::object)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Tendrils.get">
+<tt class="descname">get</tt><big>(</big><em>(Tendrils)arg1</em>, <em>(str)arg2</em><span class="optional">[</span>, <em>(object)default_val</em><span class="optional">]</span><big>)</big> &rarr; object :<a class="headerlink" href="#ecto.Tendrils.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>D.get(k[,d]) -&gt; D[k] if k in D, else d.  d defaults to None.</p>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>boost::python::api::object get(ecto::tendrils,std::string [,boost::python::api::object])</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Tendrils.has_key">
+<tt class="descname">has_key</tt><big>(</big><em>(Tendrils)arg1</em>, <em>(str)arg2</em><big>)</big> &rarr; bool :<a class="headerlink" href="#ecto.Tendrils.has_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>D.has_key(k) -&gt; True if D has a key k, else False</p>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>bool has_key(ecto::tendrils {lvalue},std::string)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Tendrils.items">
+<tt class="descname">items</tt><big>(</big><em>(Tendrils)arg1</em><big>)</big> &rarr; list :<a class="headerlink" href="#ecto.Tendrils.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>D.items() -&gt; list of D&#8217;s (key, value) pairs, as 2-tuples</p>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>boost::python::list items(ecto::tendrils)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Tendrils.iteritems">
+<tt class="descname">iteritems</tt><big>(</big><em>(object)arg1</em><big>)</big> &rarr; object :<a class="headerlink" href="#ecto.Tendrils.iteritems" title="Permalink to this definition">¶</a></dt>
+<dd><p>D.iteritems() -&gt; an iterator over the (key, value) items of D</p>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>boost::python::objects::iterator_range&lt;boost::python::return_value_policy&lt;boost::python::return_by_value, boost::python::default_call_policies&gt;, boost::transform_iterator&lt;boost::python::std_map_indexing_suite&lt;ecto::tendrils, false, boost::python::detail::final_std_map_derived_policies&lt;ecto::tendrils, false&gt; &gt;::iteritems, std::_Rb_tree_const_iterator&lt;std::pair&lt;std::string const, boost::shared_ptr&lt;ecto::tendril&gt; &gt; &gt;, boost::use_default, boost::use_default&gt; &gt; iteritems(boost::python::back_reference&lt;ecto::tendrils const&amp;&gt;)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Tendrils.iterkeys">
+<tt class="descname">iterkeys</tt><big>(</big><em>(object)arg1</em><big>)</big> &rarr; object :<a class="headerlink" href="#ecto.Tendrils.iterkeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>D.iterkeys() -&gt; an iterator over the keys of D</p>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>boost::python::objects::iterator_range&lt;boost::python::return_value_policy&lt;boost::python::return_by_value, boost::python::default_call_policies&gt;, boost::transform_iterator&lt;boost::python::std_map_indexing_suite&lt;ecto::tendrils, false, boost::python::detail::final_std_map_derived_policies&lt;ecto::tendrils, false&gt; &gt;::iterkeys, std::_Rb_tree_const_iterator&lt;std::pair&lt;std::string const, boost::shared_ptr&lt;ecto::tendril&gt; &gt; &gt;, boost::use_default, boost::use_default&gt; &gt; iterkeys(boost::python::back_reference&lt;ecto::tendrils const&amp;&gt;)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Tendrils.itervalues">
+<tt class="descname">itervalues</tt><big>(</big><em>(object)arg1</em><big>)</big> &rarr; object :<a class="headerlink" href="#ecto.Tendrils.itervalues" title="Permalink to this definition">¶</a></dt>
+<dd><p>D.itervalues() -&gt; an iterator over the values of D</p>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>boost::python::objects::iterator_range&lt;boost::python::return_value_policy&lt;boost::python::return_by_value, boost::python::default_call_policies&gt;, boost::transform_iterator&lt;boost::python::std_map_indexing_suite&lt;ecto::tendrils, false, boost::python::detail::final_std_map_derived_policies&lt;ecto::tendrils, false&gt; &gt;::itervalues, std::_Rb_tree_const_iterator&lt;std::pair&lt;std::string const, boost::shared_ptr&lt;ecto::tendril&gt; &gt; &gt;, boost::use_default, boost::use_default&gt; &gt; itervalues(boost::python::back_reference&lt;ecto::tendrils const&amp;&gt;)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Tendrils.keys">
+<tt class="descname">keys</tt><big>(</big><em>(Tendrils)arg1</em><big>)</big> &rarr; list :<a class="headerlink" href="#ecto.Tendrils.keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>D.keys() -&gt; list of D&#8217;s keys</p>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>boost::python::list keys(ecto::tendrils)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Tendrils.load">
+<tt class="descname">load</tt><big>(</big><em>(Tendrils)arg1</em>, <em>(std_istream)arg2</em><big>)</big> &rarr; None :<a class="headerlink" href="#ecto.Tendrils.load" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>void load(ecto::tendrils {lvalue},std::istream {lvalue})</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Tendrils.notify">
+<tt class="descname">notify</tt><big>(</big><em>(Tendrils)arg1</em><big>)</big> &rarr; None :<a class="headerlink" href="#ecto.Tendrils.notify" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>void notify(ecto::tendrils {lvalue})</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Tendrils.pop">
+<tt class="descname">pop</tt><big>(</big><em>(Tendrils)arg1</em>, <em>(str)arg2</em><big>)</big> &rarr; object :<a class="headerlink" href="#ecto.Tendrils.pop" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>boost::python::api::object pop(ecto::tendrils {lvalue},std::string)</dd>
+</dl>
+</div></blockquote>
+<dl class="docutils">
+<dt>pop( (Tendrils)arg1, (str)arg2, (object)arg3) -&gt; object :</dt>
+<dd><p class="first">D.pop(k[,d]) -&gt; v, remove specified key and return the corresponding value
+If key is not found, d is returned if given, otherwise KeyError is raised</p>
+<dl class="last docutils">
+<dt>C++ signature :</dt>
+<dd>boost::python::api::object pop(ecto::tendrils {lvalue},std::string,boost::python::api::object)</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Tendrils.popitem">
+<tt class="descname">popitem</tt><big>(</big><em>(Tendrils)arg1</em><big>)</big> &rarr; object :<a class="headerlink" href="#ecto.Tendrils.popitem" title="Permalink to this definition">¶</a></dt>
+<dd><p>D.popitem() -&gt; (k, v), remove and return some (key, value) pair as a
+2-tuple; but raise KeyError if D is empty</p>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>boost::python::api::object popitem(ecto::tendrils {lvalue})</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Tendrils.save">
+<tt class="descname">save</tt><big>(</big><em>(Tendrils)arg1</em>, <em>(std_ostream)arg2</em><big>)</big> &rarr; None :<a class="headerlink" href="#ecto.Tendrils.save" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>void save(ecto::tendrils,std::ostream {lvalue})</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Tendrils.update">
+<tt class="descname">update</tt><big>(</big><em>(object)arg1</em>, <em>(object)arg2</em><big>)</big> &rarr; None :<a class="headerlink" href="#ecto.Tendrils.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>D.update(E) -&gt; None.  Update D from E: for k in E: D[k] = E[k]</p>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>void update(boost::python::api::object {lvalue},boost::python::api::object)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Tendrils.values">
+<tt class="descname">values</tt><big>(</big><em>(Tendrils)arg1</em><big>)</big> &rarr; list :<a class="headerlink" href="#ecto.Tendrils.values" title="Permalink to this definition">¶</a></dt>
+<dd><p>D.values() -&gt; list of D&#8217;s values</p>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>boost::python::list values(ecto::tendrils)</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="plasm">
+<h2>Plasm<a class="headerlink" href="#plasm" title="Permalink to this headline">¶</a></h2>
+<p>This is all you can do with a plasm in Python:</p>
+<dl class="class">
+<dt id="ecto.Plasm">
+<em class="property">class </em><tt class="descclassname">ecto.</tt><tt class="descname">Plasm</tt><a class="headerlink" href="#ecto.Plasm" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="ecto.Plasm.activate_all">
+<tt class="descname">activate_all</tt><big>(</big><em>(Plasm)arg1</em><big>)</big> &rarr; None :<a class="headerlink" href="#ecto.Plasm.activate_all" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>void activate_all(ecto::plasm {lvalue})</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Plasm.cells">
+<tt class="descname">cells</tt><big>(</big><em>(Plasm)arg1</em><big>)</big> &rarr; list :<a class="headerlink" href="#ecto.Plasm.cells" title="Permalink to this definition">¶</a></dt>
+<dd><p>Grabs the current set of cells that are in the plasm.</p>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>boost::python::list cells(ecto::plasm {lvalue})</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Plasm.check">
+<tt class="descname">check</tt><big>(</big><em>(Plasm)arg1</em><big>)</big> &rarr; None :<a class="headerlink" href="#ecto.Plasm.check" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>void check(ecto::plasm {lvalue})</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Plasm.configure_all">
+<tt class="descname">configure_all</tt><big>(</big><em>(Plasm)arg1</em><big>)</big> &rarr; None :<a class="headerlink" href="#ecto.Plasm.configure_all" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>void configure_all(ecto::plasm {lvalue})</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Plasm.connect">
+<tt class="descname">connect</tt><big>(</big><em>(Plasm)arg1</em>, <em>(list)connection_list</em><big>)</big> &rarr; None :<a class="headerlink" href="#ecto.Plasm.connect" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>void connect(ecto::plasm {lvalue},boost::python::list)</dd>
+</dl>
+</div></blockquote>
+<p>object connect(tuple args, dict kwds) :</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>object connect(tuple args, dict kwds)</dd>
+</dl>
+</div></blockquote>
+<p>connect( (Plasm)arg1, (object)from_cell, (str)output_name, (object)to_cell, (str)intput_name) -&gt; None :</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>void connect(ecto::plasm {lvalue},boost::python::api::object,std::string,boost::python::api::object,std::string)</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Plasm.connections">
+<tt class="descname">connections</tt><big>(</big><em>(Plasm)arg1</em><big>)</big> &rarr; list :<a class="headerlink" href="#ecto.Plasm.connections" title="Permalink to this definition">¶</a></dt>
+<dd><p>Grabs the current list based description of the graph. Its a list of tuples (from_cell, output_key, to_cell, input_key)</p>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>boost::python::list connections(ecto::plasm {lvalue})</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Plasm.deactivate_all">
+<tt class="descname">deactivate_all</tt><big>(</big><em>(Plasm)arg1</em><big>)</big> &rarr; None :<a class="headerlink" href="#ecto.Plasm.deactivate_all" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>void deactivate_all(ecto::plasm {lvalue})</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Plasm.disconnect">
+<tt class="descname">disconnect</tt><big>(</big><em>(Plasm)arg1</em>, <em>(object)from_cell</em>, <em>(str)output_name</em>, <em>(object)to_cell</em>, <em>(str)intput_name</em><big>)</big> &rarr; None :<a class="headerlink" href="#ecto.Plasm.disconnect" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>void disconnect(ecto::plasm {lvalue},boost::python::api::object,std::string,boost::python::api::object,std::string)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Plasm.execute">
+<tt class="descname">execute</tt><big>(</big><em>(Plasm)arg1</em><span class="optional">[</span>, <em>(object)niter=1</em><span class="optional">]</span><big>)</big> &rarr; bool :<a class="headerlink" href="#ecto.Plasm.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes the graph using a single threaded scheduler.</p>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>bool execute(boost::shared_ptr&lt;ecto::plasm&gt; [,unsigned int=1])</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Plasm.insert">
+<tt class="descname">insert</tt><big>(</big><em>(Plasm)arg1</em>, <em>(object)cell</em><big>)</big> &rarr; None :<a class="headerlink" href="#ecto.Plasm.insert" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>insert a black box into the graph</p>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>void insert(ecto::plasm {lvalue},boost::python::api::object)</dd>
+</dl>
+</div></blockquote>
+<dl class="docutils">
+<dt>insert( (Plasm)arg1, (_cell_cpp)cell) -&gt; None :</dt>
+<dd><p class="first">insert cell into the graph</p>
+<dl class="last docutils">
+<dt>C++ signature :</dt>
+<dd>void insert(ecto::plasm {lvalue},boost::shared_ptr&lt;ecto::cell&gt;)</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Plasm.load">
+<tt class="descname">load</tt><big>(</big><em>(Plasm)arg1</em>, <em>(str)arg2</em><big>)</big> &rarr; None :<a class="headerlink" href="#ecto.Plasm.load" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>void load(ecto::plasm {lvalue},std::string)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Plasm.save">
+<tt class="descname">save</tt><big>(</big><em>(Plasm)arg1</em>, <em>(str)arg2</em><big>)</big> &rarr; None :<a class="headerlink" href="#ecto.Plasm.save" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>void save(ecto::plasm {lvalue},std::string)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Plasm.viz">
+<tt class="descname">viz</tt><big>(</big><em>(Plasm)arg1</em><big>)</big> &rarr; str :<a class="headerlink" href="#ecto.Plasm.viz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a graphviz string representation of the plasm.</p>
+<dl class="docutils">
+<dt>C++ signature :</dt>
+<dd>std::string viz(ecto::plasm)</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="blackbox">
+<h2>BlackBox<a class="headerlink" href="#blackbox" title="Permalink to this headline">¶</a></h2>
+<p>You need to inherit from the following class when defining your BlackBox:</p>
+<span class="target" id="module-ecto.blackbox"></span><dl class="class">
+<dt id="ecto.blackbox.BlackBox">
+<em class="property">class </em><tt class="descclassname">ecto.blackbox.</tt><tt class="descname">BlackBox</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../../_modules/ecto/blackbox.html#BlackBox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.blackbox.BlackBox" title="Permalink to this definition">¶</a></dt>
+<dd><p>The BlackBox may be used as an encapsulation idiom within ecto, to declare reusable plasms.</p>
+<p>A BlackBox is a meta-cell. 3 functions need to be implemented when inheriting.
+<em>declare_fowards</em>: defines the inputs/outputs/parameters that are forwarded to the inner cells.
+<em>declare_cells</em>: declare_io and declare_params should not be overriden but in order to have them work 
+statically, information about the inner cells have to be given in <em>declare_cells</em>.
+<em>declare_direct_params</em>: a BlackBox can have its own parameters and this is where they are declared</p>
+<dl class="method">
+<dt id="ecto.blackbox.BlackBox.cell">
+<tt class="descname">cell</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/ecto/blackbox.html#BlackBox.cell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.blackbox.BlackBox.cell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an instance of the cell that backs this
+BlackBox. Useful for ecto.If, or other places that expect a
+cell</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.blackbox.BlackBox.configure">
+<tt class="descname">configure</tt><big>(</big><em>p</em>, <em>i</em>, <em>o</em><big>)</big><a class="reference internal" href="../../_modules/ecto/blackbox.html#BlackBox.configure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.blackbox.BlackBox.configure" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function has the same meaning as in C++ and can be overriden by a child class.</p>
+<p>This function should be used to allocate all cells internal to a BlackBox</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>p</strong> &#8211; an ecto.Tendrils object for the parameters</li>
+<li><strong>i</strong> &#8211; an ecto.Tendrils object for the inputs</li>
+<li><strong>o</strong> &#8211; an ecto.Tendrils object for the outputs</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.blackbox.BlackBox.connections">
+<tt class="descname">connections</tt><big>(</big><em>p</em><big>)</big><a class="reference internal" href="../../_modules/ecto/blackbox.html#BlackBox.connections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.blackbox.BlackBox.connections" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function has to be overriden by a child class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> &#8211; an already filled ecto.Tendrils for the parameters that can be used
+to decide on certain connections</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">an iterable of tendril connections.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ecto.blackbox.BlackBox.declare_cells">
+<em class="property">classmethod </em><tt class="descname">declare_cells</tt><big>(</big><em>p</em><big>)</big><a class="reference internal" href="../../_modules/ecto/blackbox.html#BlackBox.declare_cells"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.blackbox.BlackBox.declare_cells" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function can be overriden by a child class.</p>
+<p>Given some parameters, define the characteristics of the cells.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> &#8211; an ecto.Tendrils() object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a dictionary of the form:
+{&#8216;cell_name&#8217;: BlackBoxCellInfo_call, &#8216;cell_name&#8217;: cell_instance}</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="ecto.blackbox.BlackBox.declare_direct_params">
+<em class="property">static </em><tt class="descname">declare_direct_params</tt><big>(</big><em>p</em><big>)</big><a class="reference internal" href="../../_modules/ecto/blackbox.html#BlackBox.declare_direct_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.blackbox.BlackBox.declare_direct_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function can be overriden by a child class.</p>
+<p>This function declares normal parameters for the BlackBox, i.e. you need to declare them
+using p.declare(&#8216;key_name&#8217;, &#8216;key_docs&#8217;, default_value) like you would in a normal
+Python cell.</p>
+<p>If you want to have your cell expose different parameters according to different
+parameters sent to the constructor of the BlackBox, you can make this function
+non-static. declare_params and declare_io (that are static) might then fail if called
+statically but they are not used to build a BlackBoxs.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> &#8211; an ecto.Tendrils() object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ecto.blackbox.BlackBox.declare_forwards">
+<em class="property">classmethod </em><tt class="descname">declare_forwards</tt><big>(</big><em>p</em><big>)</big><a class="reference internal" href="../../_modules/ecto/blackbox.html#BlackBox.declare_forwards"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.blackbox.BlackBox.declare_forwards" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function can be overriden by a child class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> &#8211; an ecto.Tendrils object from which some logic can be done to know what to forward.
+This function will be called after declare_direct_params which fills &#8216;p&#8217; with BlackBox
+specific parameters (non-forwarded)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a tuple of three dictionaries definining the params/input/output
+forwarded to/from the inner cells. It has the format:
+{&#8216;cell_name&#8217;: &#8216;all&#8217;, &#8216;cell_name&#8217;: [BlackBoxForward_call1, BlackBoxForward_call2]}</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ecto.blackbox.BlackBox.declare_io">
+<em class="property">classmethod </em><tt class="descname">declare_io</tt><big>(</big><em>p</em>, <em>i</em>, <em>o</em><big>)</big><a class="reference internal" href="../../_modules/ecto/blackbox.html#BlackBox.declare_io"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.blackbox.BlackBox.declare_io" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function has the same meaning as in C++ and should NOT be overriden by a child class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>p</strong> &#8211; an ecto.Tendrils object for the parameters</li>
+<li><strong>i</strong> &#8211; an ecto.Tendrils object for the inputs</li>
+<li><strong>o</strong> &#8211; an ecto.Tendrils object for the outputs</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ecto.blackbox.BlackBox.declare_params">
+<em class="property">classmethod </em><tt class="descname">declare_params</tt><big>(</big><em>p</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../../_modules/ecto/blackbox.html#BlackBox.declare_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.blackbox.BlackBox.declare_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method should NOT be overridden by a child class.</p>
+<p>This function returns the parameter tendrils but as there are two kinds
+(namely the BlackBox ones defined in &#8220;declare_direct_params&#8221; and the
+forwarded parameters), there are two levels of parameters. If you
+just call the function with no kwargs, you get the default parametes. But
+if you know the parameters you will send to your BlackBox constructor, 
+call declare_params with it and you will have a &#8220;runtime estimate&#8221; of your
+parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>p</strong> &#8211; an ecto.Tendrils() object</li>
+<li><strong>kwargs</strong> &#8211; anything sent to the constructor of the BlackBox</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="ecto.blackbox.BlackBox.inspect">
+<em class="property">classmethod </em><tt class="descname">inspect</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../../_modules/ecto/blackbox.html#BlackBox.inspect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.blackbox.BlackBox.inspect" title="Permalink to this definition">¶</a></dt>
+<dd><p>This emulates the inspect method that each ecto cell has, which creates a light
+version of the cell, where the default values for p,i,o are acceptable.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="ecto.blackbox.BlackBoxCellInfo">
+<tt class="descclassname">ecto.blackbox.</tt><tt class="descname">BlackBoxCellInfo</tt><big>(</big><em>python_class</em>, <em>params=None</em>, <em>name=None</em><big>)</big><a class="reference internal" href="../../_modules/ecto/blackbox.html#BlackBoxCellInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.blackbox.BlackBoxCellInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to define the information of a cell in <a class="reference internal" href="#ecto.blackbox.BlackBox.declare_cells" title="ecto.blackbox.BlackBox.declare_cells"><tt class="xref py py-func docutils literal"><span class="pre">ecto.blackbox.BlackBox.declare_cells()</span></tt></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>python_class</strong> &#8211; a Class object describing the cell</li>
+<li><strong>params</strong> &#8211; a dictionary of parameters that will be sent to the constructor of
+the cell (with the forwarded parameters if any, and they have priority over forwards)</li>
+<li><strong>name</strong> &#8211; the name of the cell when instantiating it</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a _BlackBoxCellInfo object which is a private namedtuple that users should not interact with</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ecto.blackbox.BlackBoxForward">
+<tt class="descclassname">ecto.blackbox.</tt><tt class="descname">BlackBoxForward</tt><big>(</big><em>key</em>, <em>new_key=None</em>, <em>new_doc=None</em>, <em>new_default=None</em><big>)</big><a class="reference internal" href="../../_modules/ecto/blackbox.html#BlackBoxForward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.blackbox.BlackBoxForward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to define the information of a forward in <a class="reference internal" href="#ecto.blackbox.BlackBox.declare_forwards" title="ecto.blackbox.BlackBox.declare_forwards"><tt class="xref py py-func docutils literal"><span class="pre">ecto.blackbox.BlackBox.declare_forwards()</span></tt></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>key</strong> &#8211; tendril to forward from the cell</li>
+<li><strong>new_key</strong> &#8211; the name under which the tendril will be forwarded. If not given or None or emtpy, it will be the same</li>
+<li><strong>new_doc</strong> &#8211; the new documentation of the tendril. If not given or None or emtpy, it will be the same</li>
+<li><strong>new_default</strong> &#8211; the new default value of the tendril. If not given or None or emtpy, it will be the same</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a _BlackBoxForward object which is a private namedtuple that users should not interact with</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ecto_test_cells.html" title="Module ecto_test"
+             >previous</a> |</li>
+        <li><a href="../../index.html">ecto</a> &raquo;</li>
+          <li><a href="index.html" >Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011,  Willow Garage, Inc.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

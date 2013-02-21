@@ -1,0 +1,259 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Hello Ecto! &mdash; ecto</title>
+    
+    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="ecto" href="../../../index.html" />
+    <link rel="up" title="Usage" href="../index.html" />
+    <link rel="next" title="Hello Plasms!" href="plasms.html" />
+    <link rel="prev" title="Using ecto in your own projects" href="../client_usage.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="plasms.html" title="Hello Plasms!"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../client_usage.html" title="Using ecto in your own projects"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../index.html">
+              <img class="logo" src="../../../_static/ecto210.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Hello Ecto!</a><ul>
+<li><a class="reference internal" href="#cmake">CMake</a></li>
+<li><a class="reference internal" href="#c">c++</a></li>
+<li><a class="reference internal" href="#python">python</a></li>
+<li><a class="reference internal" href="#let-s-run-it">Let&#8217;s run it</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../client_usage.html"
+                        title="previous chapter">Using ecto in your own projects</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="plasms.html"
+                        title="next chapter">Hello Plasms!</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/ecto/usage/tutorials/hello.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="hello-ecto">
+<span id="tutorial-hello-ecto"></span><h1>Hello Ecto!<a class="headerlink" href="#hello-ecto" title="Permalink to this headline">¶</a></h1>
+<p>The beginning. Well, you should have read <a class="reference internal" href="../client_usage.html#client-usage"><em>Using ecto in your own projects</em></a>
+first. Your ecto experience will involve a hybrid approach to development, using
+c++ and Python.</p>
+<div class="section" id="cmake">
+<h2>CMake<a class="headerlink" href="#cmake" title="Permalink to this headline">¶</a></h2>
+<p>You&#8217;ll need a CMake file named <tt class="docutils literal"><span class="pre">CMakeLists.txt</span></tt> <a class="reference download internal" href="../../../_downloads/CMakeListsHello.txt"><tt class="xref download docutils literal"><span class="pre">srcs/CMakeListsHello.txt</span></tt></a></p>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="c"># This is standard CMake, you need that line</span>
+<span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8</span><span class="p">)</span>
+<span class="c"># This just defines the name of that project from CMake</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">hello_ecto</span><span class="p">)</span>
+
+<span class="c"># You need ecto, so find it first: that will give you access to macros</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">ecto</span> <span class="s">REQUIRED</span><span class="p">)</span>
+<span class="c"># This is all you need to know: it will create an ecto module named tutorial</span>
+<span class="c"># and it will be built in the ${where_your_Python_lib_are_bult}/ecto_tutorial folder.</span>
+<span class="c"># If you add the ``INSTALL`` flag, it will also install it when you do ``make install`</span>
+<span class="nb">ectomodule</span><span class="p">(</span><span class="s">tutorial</span> <span class="s">DESTINATION</span> <span class="s">./ecto_tutorial</span> <span class="s">INSTALL</span>
+    <span class="c"># You need a file defining the module (cf. below)</span>
+    <span class="s">tutorial.cpp</span>
+    <span class="c"># You need a file defining some content for module (cf. below)</span>
+    <span class="s">Hello.cpp</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="c">
+<h2>c++<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h2>
+<p>So, the c++ side of things.  Ecto code structurally break down into
+<a class="reference internal" href="../../overview/cells.html#cells-overview"><em>Cells</em></a> and <a class="reference internal" href="../../overview/modules.html#modules-overview"><em>Modules</em></a></p>
+<p>The module code:</p>
+<blockquote>
+<div><p>Download: <a class="reference download internal" href="../../../_downloads/tutorial.cpp"><tt class="xref download docutils literal"><span class="pre">srcs/tutorial.cpp</span></tt></a></p>
+<div class="highlight-cpp" id="code-module"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
+
+<span class="c1">//Defines a top level ecto python cell with the name &#39;tutorial&#39;</span>
+<span class="c1">//Note that the shared library must be called tutorial.so</span>
+<span class="c1">//In CMake this is achieved using the ecto specific macro:</span>
+<span class="c1">//ectomodule(tutorial INSTALL</span>
+<span class="c1">//                    DESTINATION whatever_folder</span>
+<span class="c1">//                    tutorial.cpp</span>
+<span class="c1">//                    &lt;source1.cpp&gt;</span>
+<span class="c1">//                    &lt;source2.cpp&gt;</span>
+<span class="c1">//)</span>
+
+<span class="n">ECTO_DEFINE_MODULE</span><span class="p">(</span><span class="n">tutorial</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The cell code:</p>
+<blockquote>
+<div><p>Download: <a class="reference download internal" href="../../../_downloads/Hello.cpp"><tt class="xref download docutils literal"><span class="pre">srcs/Hello.cpp</span></tt></a></p>
+<div class="highlight-cpp" id="code-hello"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
+<span class="cp">#include &lt;iostream&gt;</span>
+
+<span class="k">namespace</span> <span class="n">tutorial</span>
+<span class="p">{</span>
+  <span class="k">using</span> <span class="n">ecto</span><span class="o">::</span><span class="n">tendrils</span><span class="p">;</span>
+  <span class="k">struct</span> <span class="n">Hello</span>
+  <span class="p">{</span>
+    <span class="cm">/* We only a process function for now, and it just prints somethin</span>
+<span class="cm">     * Its inputs and outputs are ignored in that case</span>
+<span class="cm">     */</span>
+    <span class="kt">int</span>
+    <span class="n">process</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="cm">/*in*/</span><span class="p">,</span> <span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="cm">/*out*/</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Hello&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+      <span class="k">return</span> <span class="n">ecto</span><span class="o">::</span><span class="n">OK</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="c1">// This macro is required to register the cell with the module</span>
+<span class="c1">// first argument: the module that was defined in the tutorial.cpp</span>
+<span class="c1">// second argument: the cell we want to expose in the module</span>
+<span class="c1">// third argument: the name of that cell as seen in Python</span>
+<span class="c1">// fourht argument: a description of what that cell does</span>
+<span class="n">ECTO_CELL</span><span class="p">(</span><span class="n">tutorial</span><span class="p">,</span> <span class="n">tutorial</span><span class="o">::</span><span class="n">Hello</span><span class="p">,</span> <span class="s">&quot;Hello&quot;</span><span class="p">,</span> <span class="s">&quot;Prints &#39;Hello&#39; to standard output.&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Our first example.</p>
+</div></blockquote>
+<p>As you can see in <a class="reference internal" href="#code-hello"><em>Hello.cpp</em></a> this is one of the most basic ecto cells.</p>
+</div>
+<div class="section" id="python">
+<h2>python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
+<p>The python counter part to hello might look like:</p>
+<p id="code-hello-python">Download: <a class="reference download internal" href="../../../_downloads/hello.py"><tt class="xref download docutils literal"><span class="pre">srcs/hello.py</span></tt></a></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<span class="c"># we import out ecto module: it was built in the ecto_tutorial folder and it is named tutorial</span>
+<span class="kn">import</span> <span class="nn">ecto_tutorial.tutorial</span> <span class="kn">as</span> <span class="nn">tutorial</span>
+
+<span class="c"># we get the cell that we named Hello in that module</span>
+<span class="n">printer</span> <span class="o">=</span> <span class="n">tutorial</span><span class="o">.</span><span class="n">Hello</span><span class="p">()</span>
+<span class="c"># execute the cell itself</span>
+<span class="n">printer</span><span class="o">.</span><span class="n">process</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">Ecto</span></tt> module is imported just like any Python module so make sure you have an <tt class="docutils literal"><span class="pre">__init__.py</span></tt> in the same folder.</p>
+</div>
+<div class="section" id="let-s-run-it">
+<h2>Let&#8217;s run it<a class="headerlink" href="#let-s-run-it" title="Permalink to this headline">¶</a></h2>
+<p>Well first, you need to build your module and your cell. If you put the 4 files above in a common folder,
+(and make sure you renamed <tt class="docutils literal"><span class="pre">CMakeListsHello.txt</span></tt> to <tt class="docutils literal"><span class="pre">CMakeLists.txt</span></tt>), just type:</p>
+<div class="highlight-bash"><div class="highlight"><pre>mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd </span>build <span class="o">&amp;&amp;</span> cmake ../ <span class="o">&amp;&amp;</span> make <span class="o">&amp;&amp;</span> <span class="nb">cd</span> ..
+</pre></div>
+</div>
+<p>Now, <tt class="docutils literal"><span class="pre">ecto</span></tt> created a Python module so it needs to be added to your Python path:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nb">export </span><span class="nv">PYTHONPATH</span><span class="o">=</span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>/build:<span class="nv">$PYTHONPATH</span>
+</pre></div>
+</div>
+<p>Also, do not forget this standard Python: if you have a folder containing Python modules, for it to become a proper package,
+you need a file named <tt class="docutils literal"><span class="pre">__init__.py</span></tt> in it so:</p>
+<div class="highlight-bash"><div class="highlight"><pre>touch ./build/ecto_tutorial/__init__.py
+</pre></div>
+</div>
+<p>Now, make your script executable and run it:</p>
+<div class="highlight-bash"><div class="highlight"><pre>chmod 755 hello.py <span class="o">&amp;&amp;</span> ./hello.py
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>Hello
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="plasms.html" title="Hello Plasms!"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../client_usage.html" title="Using ecto in your own projects"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li><a href="../index.html" >Usage</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011,  Willow Garage, Inc.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

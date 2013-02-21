@@ -1,0 +1,857 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="classecto_1_1tendrils" kind="class" prot="public">
+    <compoundname>ecto::tendrils</compoundname>
+    <includes refid="tendrils_8hpp" local="no">tendrils.hpp</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classecto_1_1tendrils_1a3647503829f1b29de220584d265c63fb" prot="public" static="no">
+        <type>std::map&lt; std::string, <ref refid="namespaceecto_1a84fb5f6130275382e5cbeb5fdececa78" kindref="member">tendril_ptr</ref> &gt;</type>
+        <definition>typedef std::map&lt;std::string, tendril_ptr&gt; ecto::tendrils::storage_type</definition>
+        <argsstring></argsstring>
+        <name>storage_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="57" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classecto_1_1tendrils_1a6f0b7bd6e3a03f047351303630b889e0" prot="public" static="no">
+        <type>storage_type::iterator</type>
+        <definition>typedef storage_type::iterator ecto::tendrils::iterator</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="59" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classecto_1_1tendrils_1a86df9983555ca4ebdae8b1d36aa4bbd8" prot="public" static="no">
+        <type>storage_type::const_iterator</type>
+        <definition>typedef storage_type::const_iterator ecto::tendrils::const_iterator</definition>
+        <argsstring></argsstring>
+        <name>const_iterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="60" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classecto_1_1tendrils_1a736870868e76890e198448924cecdd4f" prot="public" static="no">
+        <type>storage_type::value_type</type>
+        <definition>typedef storage_type::value_type ecto::tendrils::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="61" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classecto_1_1tendrils_1aa6165c6ab72d93cd56796ea81e450245" prot="public" static="no">
+        <type>storage_type::key_type</type>
+        <definition>typedef storage_type::key_type ecto::tendrils::key_type</definition>
+        <argsstring></argsstring>
+        <name>key_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="62" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classecto_1_1tendrils_1af3726f822a4fd60a1095bba31f1926ef" prot="public" static="no">
+        <type>storage_type::size_type</type>
+        <definition>typedef storage_type::size_type ecto::tendrils::size_type</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="63" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classecto_1_1tendrils_1a919b9a4666ad641148b6a432a1fd08fb" prot="public" static="no">
+        <type>storage_type::difference_type</type>
+        <definition>typedef storage_type::difference_type ecto::tendrils::difference_type</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="64" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classecto_1_1tendrils_1aa347bebda44153437e8554a25bed9e6b" prot="public" static="no">
+        <type>storage_type::key_compare</type>
+        <definition>typedef storage_type::key_compare ecto::tendrils::key_compare</definition>
+        <argsstring></argsstring>
+        <name>key_compare</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="65" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classecto_1_1tendrils_1aa898408b75690dffde72989cdeaf03e6" prot="private" static="no">
+        <type>boost::signals2::signal&lt; void(void *, const <ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref> *)</type>
+        <definition>typedef boost::signals2::signal&lt;void(void*, const tendrils*) ecto::tendrils::sig_t)</definition>
+        <argsstring>)</argsstring>
+        <name>sig_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="234" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="234" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classecto_1_1tendrils_1afaa587298937ffa94ccfefc8a97b4edc" prot="private" static="no" mutable="no">
+        <type><ref refid="classecto_1_1tendrils_1a3647503829f1b29de220584d265c63fb" kindref="member">storage_type</ref></type>
+        <definition>storage_type ecto::tendrils::storage</definition>
+        <argsstring></argsstring>
+        <name>storage</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="233" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="233" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classecto_1_1tendrils_1a40635d009ae082dccde9486c1293212e" prot="private" static="no" mutable="no">
+        <type><ref refid="classecto_1_1tendrils_1aa898408b75690dffde72989cdeaf03e6" kindref="member">sig_t</ref></type>
+        <definition>sig_t ecto::tendrils::static_bindings_</definition>
+        <argsstring></argsstring>
+        <name>static_bindings_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="235" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="235" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classecto_1_1tendrils_1a4e76bfe7ed91c88fa8bd3249c275c0ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ecto::tendrils::tendrils</definition>
+        <argsstring>()</argsstring>
+        <name>tendrils</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1tendrils_1a1191620f21a9dc618eb4380e2cf48b63" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classecto_1_1tendrils_1a6f0b7bd6e3a03f047351303630b889e0" kindref="member">iterator</ref></type>
+        <definition>iterator ecto::tendrils::begin</definition>
+        <argsstring>()</argsstring>
+        <name>begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="69" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="69" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1tendrils_1a10d0c932826165f25406b849b958ad27" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classecto_1_1tendrils_1a86df9983555ca4ebdae8b1d36aa4bbd8" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator ecto::tendrils::begin</definition>
+        <argsstring>() const </argsstring>
+        <name>begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="70" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="70" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1tendrils_1ae77c08ecbfff9aa13b442e4e9eb11441" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classecto_1_1tendrils_1a6f0b7bd6e3a03f047351303630b889e0" kindref="member">iterator</ref></type>
+        <definition>iterator ecto::tendrils::end</definition>
+        <argsstring>()</argsstring>
+        <name>end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="71" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="71" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1tendrils_1aec3278598a3d3bc3c3810ec3cecf72cb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classecto_1_1tendrils_1a86df9983555ca4ebdae8b1d36aa4bbd8" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator ecto::tendrils::end</definition>
+        <argsstring>() const </argsstring>
+        <name>end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="72" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="72" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1tendrils_1a4af12838006b6cfda8157dc3957c166e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classecto_1_1tendrils_1a6f0b7bd6e3a03f047351303630b889e0" kindref="member">iterator</ref></type>
+        <definition>iterator ecto::tendrils::find</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>find</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="74" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="74" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1tendrils_1af0ef7fa5535b477b83620a66331a475b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classecto_1_1tendrils_1a86df9983555ca4ebdae8b1d36aa4bbd8" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator ecto::tendrils::find</definition>
+        <argsstring>(const std::string &amp;name) const </argsstring>
+        <name>find</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="75" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="75" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1tendrils_1ac7bfc201ab8170684307cb7095323c2d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::tendrils::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="77" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="77" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1tendrils_1a3f86ef76f17dbde432321239fcbfd639" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classecto_1_1tendrils_1af3726f822a4fd60a1095bba31f1926ef" kindref="member">size_type</ref></type>
+        <definition>size_type ecto::tendrils::size</definition>
+        <argsstring>() const </argsstring>
+        <name>size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="79" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="79" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1tendrils_1aa6bc2c6a64d087c1b516119d0550f83c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classecto_1_1tendrils_1af3726f822a4fd60a1095bba31f1926ef" kindref="member">size_type</ref></type>
+        <definition>size_type ecto::tendrils::count</definition>
+        <argsstring>(const std::string &amp;name) const </argsstring>
+        <name>count</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="80" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="80" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1tendrils_1a700cd209735e5b6254669a6f9c16b74f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::tendrils::erase</definition>
+        <argsstring>(iterator pos)</argsstring>
+        <name>erase</name>
+        <param>
+          <type><ref refid="classecto_1_1tendrils_1a6f0b7bd6e3a03f047351303630b889e0" kindref="member">iterator</ref></type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="82" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="82" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1tendrils_1a58aa945fa23bdeef212ea4a69d077e52" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::tendrils::erase</definition>
+        <argsstring>(const key_type &amp;k)</argsstring>
+        <name>erase</name>
+        <param>
+          <type>const <ref refid="classecto_1_1tendrils_1aa6165c6ab72d93cd56796ea81e450245" kindref="member">key_type</ref> &amp;</type>
+          <declname>k</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="83" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="83" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1tendrils_1ac8926dfa72716d030751e09f6461fa6c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename InputIterator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void ecto::tendrils::insert</definition>
+        <argsstring>(InputIterator first, InputIterator last)</argsstring>
+        <name>insert</name>
+        <param>
+          <type>InputIterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>InputIterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="88" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="87" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1tendrils_1a98adbbe057fc34545cd51c7deeafca2f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::pair&lt; <ref refid="classecto_1_1tendrils_1a6f0b7bd6e3a03f047351303630b889e0" kindref="member">iterator</ref>, bool &gt;</type>
+        <definition>std::pair&lt;iterator, bool&gt; ecto::tendrils::insert</definition>
+        <argsstring>(const value_type &amp;v)</argsstring>
+        <name>insert</name>
+        <param>
+          <type>const <ref refid="classecto_1_1tendrils_1a736870868e76890e198448924cecdd4f" kindref="member">value_type</ref> &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="93" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="92" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1tendrils_1ab56662cb08014858ce9df9403a357954" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classecto_1_1tendrils_1aa347bebda44153437e8554a25bed9e6b" kindref="member">key_compare</ref></type>
+        <definition>key_compare ecto::tendrils::key_comp</definition>
+        <argsstring>() const </argsstring>
+        <name>key_comp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="97" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="97" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1tendrils_1aebef8c562cb501738d2a7f8fa5e53518" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structecto_1_1spore" kindref="compound">spore</ref>&lt; T &gt;</type>
+        <definition>spore&lt;T&gt; ecto::tendrils::declare</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>declare</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Declare a tendril of a certain type, with only a name, no doc, or default values. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the type of tendril to declare. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The key for the tendril. Must be unique. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A typed holder for the tendril. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="109" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="108" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1tendrils_1a58b219396a7e5ca2f2876efc2f66aa38" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structecto_1_1spore" kindref="compound">spore</ref>&lt; T &gt;</type>
+        <definition>spore&lt;T&gt; ecto::tendrils::declare</definition>
+        <argsstring>(const std::string &amp;name, const std::string &amp;doc)</argsstring>
+        <name>declare</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>doc</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classecto_1_1tendrils_1aebef8c562cb501738d2a7f8fa5e53518" kindref="member">tendrils::declare</ref> </para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="classecto_1_1tendrils_1aebef8c562cb501738d2a7f8fa5e53518" kindref="member">tendrils::declare</ref> </para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>doc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The doc string for the tendril. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para></simplesect>
+<simplesect kind="see"><para><ref refid="classecto_1_1tendrils_1aebef8c562cb501738d2a7f8fa5e53518" kindref="member">tendrils::declare</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="123" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="122" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1tendrils_1a89e7ed34481d3ed987ddfd5ba35174ae" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structecto_1_1spore" kindref="compound">spore</ref>&lt; T &gt;</type>
+        <definition>spore&lt;T&gt; ecto::tendrils::declare</definition>
+        <argsstring>(const std::string &amp;name, const std::string &amp;doc, const T &amp;default_val)</argsstring>
+        <name>declare</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>doc</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>default_val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classecto_1_1tendrils_1aebef8c562cb501738d2a7f8fa5e53518" kindref="member">tendrils::declare</ref> </para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="classecto_1_1tendrils_1aebef8c562cb501738d2a7f8fa5e53518" kindref="member">tendrils::declare</ref> </para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>doc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="classecto_1_1tendrils_1aebef8c562cb501738d2a7f8fa5e53518" kindref="member">tendrils::declare</ref> </para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>default_val</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A default value for the tendril. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para></simplesect>
+<simplesect kind="see"><para><ref refid="classecto_1_1tendrils_1aebef8c562cb501738d2a7f8fa5e53518" kindref="member">tendrils::declare</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="137" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="136" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1tendrils_1a65a2a2745bd52ccc827c63d4cc016224" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename CellImpl</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structecto_1_1spore" kindref="compound">spore</ref>&lt; T &gt;</type>
+        <definition>spore&lt;T&gt; ecto::tendrils::declare</definition>
+        <argsstring>(spore&lt; T &gt; CellImpl::*ptm, const std::string &amp;name, const std::string &amp;doc=&quot;&quot;, const typename spore&lt; T &gt;::value_type &amp;default_val=typename spore&lt; T &gt;::value_type())</argsstring>
+        <name>declare</name>
+        <param>
+          <type><ref refid="structecto_1_1spore" kindref="compound">spore</ref>&lt; T &gt; CellImpl::*</type>
+          <declname>ptm</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>doc</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const typename <ref refid="structecto_1_1spore" kindref="compound">spore</ref>&lt; T &gt;::<ref refid="classecto_1_1tendrils_1a736870868e76890e198448924cecdd4f" kindref="member">value_type</ref> &amp;</type>
+          <declname>default_val</declname>
+          <defval>typename <ref refid="structecto_1_1spore" kindref="compound">spore</ref>&lt; T &gt;::<ref refid="classecto_1_1tendrils_1a736870868e76890e198448924cecdd4f" kindref="member">value_type</ref>()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Sig is a function object that looks like: struct Callback { typedef void result_type; void operator()(const boost::signals2::connection &amp;conn, void* cookie, const tendrils* tdls) const { conn.disconnect();//for one time callbacks do your thang. } };</para><para>This will be called by realize_potential(cookie). Typically cookie is of type CellImplementation.</para><para>Convenience function for static registration of pointer to members that are of type spore&lt;T&gt; </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="161" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="159" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1tendrils_1a1072755c7df91725bcabb7dc65db103b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Impl</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void ecto::tendrils::realize_potential</definition>
+        <argsstring>(Impl *cookie)</argsstring>
+        <name>realize_potential</name>
+        <param>
+          <type>Impl *</type>
+          <declname>cookie</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="169" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="168" bodyend="171"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1tendrils_1aa32bcd230653775b655b63a415a349eb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespaceecto_1a84fb5f6130275382e5cbeb5fdececa78" kindref="member">tendril_ptr</ref></type>
+        <definition>tendril_ptr ecto::tendrils::declare</definition>
+        <argsstring>(const std::string &amp;name, tendril_ptr t)</argsstring>
+        <name>declare</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaceecto_1a84fb5f6130275382e5cbeb5fdececa78" kindref="member">tendril_ptr</ref></type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Runtime declare function. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="180"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1tendrils_1a43aea6bf46edc5921a9768838b9fbe93" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T &amp;</type>
+        <definition>T&amp; ecto::tendrils::get</definition>
+        <argsstring>(const std::string &amp;name) const </argsstring>
+        <name>get</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>get the given type that is stored at the given key. Will throw if there is a type mismatch. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The compile time type to attempt to get from the tendrils. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The key value </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A reference to the value, no copy is done. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="191" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="190" bodyend="205"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1tendrils_1a2462fa379fff3d0f81afa8eb40d45624" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="namespaceecto_1a84fb5f6130275382e5cbeb5fdececa78" kindref="member">tendril_ptr</ref> &amp;</type>
+        <definition>const tendril_ptr&amp; ecto::tendrils::operator[]</definition>
+        <argsstring>(const std::string &amp;name) const </argsstring>
+        <name>operator[]</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Grabs the tendril at the key. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The key for the desired tendril. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A shared pointer to the tendril. this throws if the key is not in the tendrils object </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="213"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1tendrils_1a774ab854c749359953b44ffdaa62456c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespaceecto_1a84fb5f6130275382e5cbeb5fdececa78" kindref="member">tendril_ptr</ref> &amp;</type>
+        <definition>tendril_ptr&amp; ecto::tendrils::operator[]</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>operator[]</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="215"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1tendrils_1a3e29152c1c0979cf02219d0e02b8fb5e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::tendrils::print_doc</definition>
+        <argsstring>(std::ostream &amp;out, const std::string &amp;tendrils_name) const </argsstring>
+        <name>print_doc</name>
+        <param>
+          <type>std::ostream &amp;</type>
+          <declname>out</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>tendrils_name</declname>
+        </param>
+        <briefdescription>
+<para>Print the tendrils documentation string, in rst format. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The stream to print to. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tendrils_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name used as a label, for the tendrils. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="223"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1tendrils_1aa9839d00f20cf2a3b87c0cbf19864a4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Archive</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void ecto::tendrils::serialize</definition>
+        <argsstring>(Archive &amp;ar, const unsigned int)</argsstring>
+        <name>serialize</name>
+        <param>
+          <type>Archive &amp;</type>
+          <declname>ar</declname>
+        </param>
+        <param>
+          <type>const unsigned</type>
+          <declname>int</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="226"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classecto_1_1tendrils_1aa33d16327157994060a8051d2bbe018e" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::tendrils::doesnt_exist</definition>
+        <argsstring>(const std::string &amp;name) const </argsstring>
+        <name>doesnt_exist</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="230"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1tendrils_1a7ee52bb996bd2ec581ff2008dea341dc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ecto::tendrils::tendrils</definition>
+        <argsstring>(const tendrils &amp;)</argsstring>
+        <name>tendrils</name>
+        <param>
+          <type>const <ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="231"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The tendrils are a collection for the <ref refid="classecto_1_1tendril" kindref="compound">ecto::tendril</ref> class, addressable by a string key. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" line="54" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" bodystart="53" bodyend="237"/>
+    <listofallmembers>
+      <member refid="classecto_1_1tendrils_1a1191620f21a9dc618eb4380e2cf48b63" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>begin</name></member>
+      <member refid="classecto_1_1tendrils_1a10d0c932826165f25406b849b958ad27" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>begin</name></member>
+      <member refid="classecto_1_1tendrils_1ac7bfc201ab8170684307cb7095323c2d" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>clear</name></member>
+      <member refid="classecto_1_1tendrils_1a86df9983555ca4ebdae8b1d36aa4bbd8" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>const_iterator</name></member>
+      <member refid="classecto_1_1tendrils_1aa6bc2c6a64d087c1b516119d0550f83c" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>count</name></member>
+      <member refid="classecto_1_1tendrils_1aebef8c562cb501738d2a7f8fa5e53518" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>declare</name></member>
+      <member refid="classecto_1_1tendrils_1a58b219396a7e5ca2f2876efc2f66aa38" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>declare</name></member>
+      <member refid="classecto_1_1tendrils_1a89e7ed34481d3ed987ddfd5ba35174ae" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>declare</name></member>
+      <member refid="classecto_1_1tendrils_1a65a2a2745bd52ccc827c63d4cc016224" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>declare</name></member>
+      <member refid="classecto_1_1tendrils_1aa32bcd230653775b655b63a415a349eb" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>declare</name></member>
+      <member refid="classecto_1_1tendrils_1a919b9a4666ad641148b6a432a1fd08fb" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>difference_type</name></member>
+      <member refid="classecto_1_1tendrils_1aa33d16327157994060a8051d2bbe018e" prot="private" virt="non-virtual"><scope>ecto::tendrils</scope><name>doesnt_exist</name></member>
+      <member refid="classecto_1_1tendrils_1ae77c08ecbfff9aa13b442e4e9eb11441" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>end</name></member>
+      <member refid="classecto_1_1tendrils_1aec3278598a3d3bc3c3810ec3cecf72cb" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>end</name></member>
+      <member refid="classecto_1_1tendrils_1a700cd209735e5b6254669a6f9c16b74f" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>erase</name></member>
+      <member refid="classecto_1_1tendrils_1a58aa945fa23bdeef212ea4a69d077e52" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>erase</name></member>
+      <member refid="classecto_1_1tendrils_1a4af12838006b6cfda8157dc3957c166e" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>find</name></member>
+      <member refid="classecto_1_1tendrils_1af0ef7fa5535b477b83620a66331a475b" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>find</name></member>
+      <member refid="classecto_1_1tendrils_1a43aea6bf46edc5921a9768838b9fbe93" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>get</name></member>
+      <member refid="classecto_1_1tendrils_1ac8926dfa72716d030751e09f6461fa6c" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>insert</name></member>
+      <member refid="classecto_1_1tendrils_1a98adbbe057fc34545cd51c7deeafca2f" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>insert</name></member>
+      <member refid="classecto_1_1tendrils_1a6f0b7bd6e3a03f047351303630b889e0" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>iterator</name></member>
+      <member refid="classecto_1_1tendrils_1ab56662cb08014858ce9df9403a357954" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>key_comp</name></member>
+      <member refid="classecto_1_1tendrils_1aa347bebda44153437e8554a25bed9e6b" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>key_compare</name></member>
+      <member refid="classecto_1_1tendrils_1aa6165c6ab72d93cd56796ea81e450245" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>key_type</name></member>
+      <member refid="classecto_1_1tendrils_1a2462fa379fff3d0f81afa8eb40d45624" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>operator[]</name></member>
+      <member refid="classecto_1_1tendrils_1a774ab854c749359953b44ffdaa62456c" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>operator[]</name></member>
+      <member refid="classecto_1_1tendrils_1a3e29152c1c0979cf02219d0e02b8fb5e" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>print_doc</name></member>
+      <member refid="classecto_1_1tendrils_1a1072755c7df91725bcabb7dc65db103b" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>realize_potential</name></member>
+      <member refid="classecto_1_1tendrils_1aa9839d00f20cf2a3b87c0cbf19864a4f" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>serialize</name></member>
+      <member refid="classecto_1_1tendrils_1aa898408b75690dffde72989cdeaf03e6" prot="private" virt="non-virtual"><scope>ecto::tendrils</scope><name>sig_t</name></member>
+      <member refid="classecto_1_1tendrils_1a3f86ef76f17dbde432321239fcbfd639" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>size</name></member>
+      <member refid="classecto_1_1tendrils_1af3726f822a4fd60a1095bba31f1926ef" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>size_type</name></member>
+      <member refid="classecto_1_1tendrils_1a40635d009ae082dccde9486c1293212e" prot="private" virt="non-virtual"><scope>ecto::tendrils</scope><name>static_bindings_</name></member>
+      <member refid="classecto_1_1tendrils_1afaa587298937ffa94ccfefc8a97b4edc" prot="private" virt="non-virtual"><scope>ecto::tendrils</scope><name>storage</name></member>
+      <member refid="classecto_1_1tendrils_1a3647503829f1b29de220584d265c63fb" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>storage_type</name></member>
+      <member refid="classecto_1_1tendrils_1a4e76bfe7ed91c88fa8bd3249c275c0ef" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>tendrils</name></member>
+      <member refid="classecto_1_1tendrils_1a7ee52bb996bd2ec581ff2008dea341dc" prot="private" virt="non-virtual"><scope>ecto::tendrils</scope><name>tendrils</name></member>
+      <member refid="classecto_1_1tendrils_1a736870868e76890e198448924cecdd4f" prot="public" virt="non-virtual"><scope>ecto::tendrils</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,261 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="python_8hpp" kind="file">
+    <compoundname>python.hpp</compoundname>
+    <includes local="no">boost/python.hpp</includes>
+    <includes local="no">boost/noncopyable.hpp</includes>
+    <includedby refid="all_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/all.hpp</includedby>
+    <includedby refid="module_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/module.hpp</includedby>
+    <includedby refid="tendril_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendril.hpp</includedby>
+    <includedby refid="std__map__indexing__suite_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python/std_map_indexing_suite.hpp</includedby>
+    <includedby refid="ecto_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/ecto.hpp</includedby>
+    <incdepgraph>
+      <node id="1321">
+        <label>boost/noncopyable.hpp</label>
+      </node>
+      <node id="1320">
+        <label>boost/python.hpp</label>
+      </node>
+      <node id="1319">
+        <label>/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python.hpp</label>
+        <link refid="python.hpp"/>
+        <childnode refid="1320" relation="include">
+        </childnode>
+        <childnode refid="1321" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1332">
+        <label>/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/plasm.hpp</label>
+        <link refid="plasm_8hpp"/>
+      </node>
+      <node id="1323">
+        <label>/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/all.hpp</label>
+        <link refid="all_8hpp"/>
+      </node>
+      <node id="1335">
+        <label>/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python/std_map_indexing_suite.hpp</label>
+        <link refid="std__map__indexing__suite_8hpp"/>
+      </node>
+      <node id="1326">
+        <label>/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendril.hpp</label>
+        <link refid="tendril_8hpp"/>
+        <childnode refid="1323" relation="include">
+        </childnode>
+        <childnode refid="1327" relation="include">
+        </childnode>
+        <childnode refid="1330" relation="include">
+        </childnode>
+        <childnode refid="1332" relation="include">
+        </childnode>
+        <childnode refid="1331" relation="include">
+        </childnode>
+        <childnode refid="1333" relation="include">
+        </childnode>
+        <childnode refid="1334" relation="include">
+        </childnode>
+      </node>
+      <node id="1324">
+        <label>/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/module.hpp</label>
+        <link refid="module_8hpp"/>
+        <childnode refid="1325" relation="include">
+        </childnode>
+      </node>
+      <node id="1331">
+        <label>/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp</label>
+        <link refid="tendrils_8hpp"/>
+        <childnode refid="1323" relation="include">
+        </childnode>
+        <childnode refid="1327" relation="include">
+        </childnode>
+      </node>
+      <node id="1330">
+        <label>/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/spore.hpp</label>
+        <link refid="spore_8hpp"/>
+        <childnode refid="1323" relation="include">
+        </childnode>
+        <childnode refid="1331" relation="include">
+        </childnode>
+      </node>
+      <node id="1333">
+        <label>/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/serialization/tendril.hpp</label>
+        <link refid="serialization_2tendril_8hpp"/>
+      </node>
+      <node id="1322">
+        <label>/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python.hpp</label>
+        <link refid="python.hpp"/>
+        <childnode refid="1323" relation="include">
+        </childnode>
+        <childnode refid="1324" relation="include">
+        </childnode>
+        <childnode refid="1326" relation="include">
+        </childnode>
+        <childnode refid="1335" relation="include">
+        </childnode>
+        <childnode refid="1325" relation="include">
+        </childnode>
+      </node>
+      <node id="1329">
+        <label>/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/registry.hpp</label>
+        <link refid="registry_8hpp"/>
+        <childnode refid="1324" relation="include">
+        </childnode>
+        <childnode refid="1328" relation="include">
+        </childnode>
+        <childnode refid="1325" relation="include">
+        </childnode>
+      </node>
+      <node id="1327">
+        <label>/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/cell.hpp</label>
+        <link refid="cell_8hpp"/>
+        <childnode refid="1323" relation="include">
+        </childnode>
+        <childnode refid="1328" relation="include">
+        </childnode>
+        <childnode refid="1329" relation="include">
+        </childnode>
+        <childnode refid="1325" relation="include">
+        </childnode>
+      </node>
+      <node id="1325">
+        <label>/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/ecto.hpp</label>
+        <link refid="ecto_8hpp"/>
+        <childnode refid="1323" relation="include">
+        </childnode>
+      </node>
+      <node id="1334">
+        <label>/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/serialization/registry.hpp</label>
+        <link refid="serialization_2registry_8hpp"/>
+      </node>
+      <node id="1328">
+        <label>/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/serialization/cell.hpp</label>
+        <link refid="serialization_2cell_8hpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structecto_1_1py_1_1gilstatus" prot="public">ecto::py::gilstatus</innerclass>
+    <innerclass refid="classecto_1_1py_1_1scoped__gil__release" prot="public">ecto::py::scoped_gil_release</innerclass>
+    <innerclass refid="classecto_1_1py_1_1scoped__call__back__to__python" prot="public">ecto::py::scoped_call_back_to_python</innerclass>
+    <innernamespace refid="namespaceecto">ecto</innernamespace>
+    <innernamespace refid="namespaceecto_1_1py">ecto::py</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="python_8hpp_1a1d1670056b000763eff9d847d1b278d9" prot="public" static="no">
+        <name>ECTO_SCOPED_GILRELEASE</name>
+        <param></param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python.hpp" line="85" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python.hpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="python_8hpp_1a35348385dcbe88e8b584f4ef5067371a" prot="public" static="no">
+        <name>ECTO_SCOPED_CALLPYTHON</name>
+        <param></param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python.hpp" line="88" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python.hpp" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2011,<sp/>Willow<sp/>Garage,<sp/>Inc.</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>All<sp/>rights<sp/>reserved.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/>Redistribution<sp/>and<sp/>use<sp/>in<sp/>source<sp/>and<sp/>binary<sp/>forms,<sp/>with<sp/>or<sp/>without</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>modification,<sp/>are<sp/>permitted<sp/>provided<sp/>that<sp/>the<sp/>following<sp/>conditions<sp/>are<sp/>met:</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>*<sp/>Redistributions<sp/>of<sp/>source<sp/>code<sp/>must<sp/>retain<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer.</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>*<sp/>Redistributions<sp/>in<sp/>binary<sp/>form<sp/>must<sp/>reproduce<sp/>the<sp/>above<sp/>copyright</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>notice,<sp/>this<sp/>list<sp/>of<sp/>conditions<sp/>and<sp/>the<sp/>following<sp/>disclaimer<sp/>in<sp/>the</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>documentation<sp/>and/or<sp/>other<sp/>materials<sp/>provided<sp/>with<sp/>the<sp/>distribution.</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>*<sp/>Neither<sp/>the<sp/>name<sp/>of<sp/>the<sp/>Willow<sp/>Garage,<sp/>Inc.<sp/>nor<sp/>the<sp/>names<sp/>of<sp/>its</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>contributors<sp/>may<sp/>be<sp/>used<sp/>to<sp/>endorse<sp/>or<sp/>promote<sp/>products<sp/>derived<sp/>from</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>this<sp/>software<sp/>without<sp/>specific<sp/>prior<sp/>written<sp/>permission.</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/>THIS<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>BY<sp/>THE<sp/>COPYRIGHT<sp/>HOLDERS<sp/>AND<sp/>CONTRIBUTORS<sp/>&quot;AS<sp/>IS&quot;</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/>AND<sp/>ANY<sp/>EXPRESS<sp/>OR<sp/>IMPLIED<sp/>WARRANTIES,<sp/>INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,<sp/>THE</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*<sp/>IMPLIED<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY<sp/>AND<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR<sp/>PURPOSE</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*<sp/>ARE<sp/>DISCLAIMED.<sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>THE<sp/>COPYRIGHT<sp/>OWNER<sp/>OR<sp/>CONTRIBUTORS<sp/>BE</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>DIRECT,<sp/>INDIRECT,<sp/>INCIDENTAL,<sp/>SPECIAL,<sp/>EXEMPLARY,<sp/>OR</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>CONSEQUENTIAL<sp/>DAMAGES<sp/>(INCLUDING,<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,<sp/>PROCUREMENT<sp/>OF</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>SUBSTITUTE<sp/>GOODS<sp/>OR<sp/>SERVICES;<sp/>LOSS<sp/>OF<sp/>USE,<sp/>DATA,<sp/>OR<sp/>PROFITS;<sp/>OR<sp/>BUSINESS</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>INTERRUPTION)<sp/>HOWEVER<sp/>CAUSED<sp/>AND<sp/>ON<sp/>ANY<sp/>THEORY<sp/>OF<sp/>LIABILITY,<sp/>WHETHER<sp/>IN</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>CONTRACT,<sp/>STRICT<sp/>LIABILITY,<sp/>OR<sp/>TORT<sp/>(INCLUDING<sp/>NEGLIGENCE<sp/>OR<sp/>OTHERWISE)</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight></codeline>
+<codeline lineno="30"><highlight class="preprocessor"></highlight><highlight class="comment">//do<sp/>not<sp/>include<sp/>this<sp/>in<sp/>ecto<sp/>lib<sp/>files,<sp/>only<sp/>in<sp/>client<sp/>modules</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>push_macro(&quot;_POSIX_C_SOURCE&quot;)</highlight></codeline>
+<codeline lineno="33"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#pragma<sp/>push_macro(&quot;_XOPEN_SOURCE&quot;)</highlight></codeline>
+<codeline lineno="34"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>_POSIX_C_SOURCE</highlight></codeline>
+<codeline lineno="35"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>_XOPEN_SOURCE</highlight></codeline>
+<codeline lineno="36"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/python.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="comment">//#pragma<sp/>pop_macro(&quot;_POSIX_C_SOURCE&quot;)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="comment">//#pragma<sp/>pop_macro(&quot;_XOPEN_C_SOURCE&quot;)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/noncopyable.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42" refid="namespaceecto" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ecto<sp/>{</highlight></codeline>
+<codeline lineno="43" refid="namespaceecto_1_1py" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">py<sp/>{</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45" refid="structecto_1_1py_1_1gilstatus" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structecto_1_1py_1_1gilstatus" kindref="compound">gilstatus</ref></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="47" refid="structecto_1_1py_1_1gilstatus_1a454efe188c683788ca52b64b1c87245b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="structecto_1_1py_1_1gilstatus_1a454efe188c683788ca52b64b1c87245b" kindref="member">file</ref>;</highlight></codeline>
+<codeline lineno="48" refid="structecto_1_1py_1_1gilstatus_1a86f9f360d4950496f737ce0faa4d7e1b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/><ref refid="structecto_1_1py_1_1gilstatus_1a86f9f360d4950496f737ce0faa4d7e1b" kindref="member">line</ref>;</highlight></codeline>
+<codeline lineno="49" refid="structecto_1_1py_1_1gilstatus_1aaeba7e13dad90eaefa0a3c119e0a33ff" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="structecto_1_1py_1_1gilstatus_1aaeba7e13dad90eaefa0a3c119e0a33ff" kindref="member">what</ref>;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structecto_1_1py_1_1gilstatus_1a9d3fd3fb2c0db89ac667eb534d9ba470" kindref="member">gilstatus</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>f,<sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/>l,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>w);</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/>used<sp/>in<sp/>the<sp/>interpreter<sp/>thread<sp/>during<sp/>blocking<sp/>operations</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/>RIAA-style<sp/><sp/>Py_BEGIN_ALLOW_THREADS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57" refid="classecto_1_1py_1_1scoped__gil__release" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classecto_1_1py_1_1scoped__gil__release" kindref="compound">scoped_gil_release</ref><sp/>:<sp/>boost::noncopyable</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="59" refid="classecto_1_1py_1_1scoped__gil__release_1a2ebf229b22f53b7d31b742e45b8832d8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>PyThreadState*<sp/><ref refid="classecto_1_1py_1_1scoped__gil__release_1a2ebf229b22f53b7d31b742e45b8832d8" kindref="member">threadstate</ref>;</highlight></codeline>
+<codeline lineno="60" refid="classecto_1_1py_1_1scoped__gil__release_1a9e9fbf0c5819ac1b706437d99a6459a3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1py_1_1scoped__gil__release_1a9e9fbf0c5819ac1b706437d99a6459a3" kindref="member">mine</ref>;</highlight></codeline>
+<codeline lineno="61" refid="classecto_1_1py_1_1scoped__gil__release_1a888a6813c86b9bbd2d5cd0d4a0f7e2f2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structecto_1_1py_1_1gilstatus" kindref="compound">gilstatus</ref><sp/><ref refid="classecto_1_1py_1_1scoped__gil__release_1a888a6813c86b9bbd2d5cd0d4a0f7e2f2" kindref="member">mystatus</ref>;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classecto_1_1py_1_1scoped__gil__release_1afd4cb62267206421eca93969a8bb0865" kindref="member">scoped_gil_release</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>file,<sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/>line);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classecto_1_1py_1_1scoped__gil__release_1addd644daf557129d6584829cda6b9cc0" kindref="member">~scoped_gil_release</ref>();</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/>For<sp/>non-python<sp/>created<sp/>threads</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70" refid="classecto_1_1py_1_1scoped__call__back__to__python" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classecto_1_1py_1_1scoped__call__back__to__python" kindref="compound">scoped_call_back_to_python</ref><sp/>:<sp/>boost::noncopyable</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="72" refid="classecto_1_1py_1_1scoped__call__back__to__python_1a67de9bb9e263a7e77cefe47e75b18512" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>PyGILState_STATE<sp/><ref refid="classecto_1_1py_1_1scoped__call__back__to__python_1a67de9bb9e263a7e77cefe47e75b18512" kindref="member">gilstate</ref>;</highlight></codeline>
+<codeline lineno="73" refid="classecto_1_1py_1_1scoped__call__back__to__python_1a4f4d2f01e986f7b93028996a7bd8498f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1py_1_1scoped__call__back__to__python_1a4f4d2f01e986f7b93028996a7bd8498f" kindref="member">have</ref>;</highlight></codeline>
+<codeline lineno="74" refid="classecto_1_1py_1_1scoped__call__back__to__python_1a421a7edb2c8c08321c015312217caad7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structecto_1_1py_1_1gilstatus" kindref="compound">gilstatus</ref><sp/><ref refid="classecto_1_1py_1_1scoped__call__back__to__python_1a421a7edb2c8c08321c015312217caad7" kindref="member">mystatus</ref>;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classecto_1_1py_1_1scoped__call__back__to__python_1aa0e62dcba9ee21268b612d0a70849b2d" kindref="member">scoped_call_back_to_python</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>file,<sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/>line);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classecto_1_1py_1_1scoped__call__back__to__python_1a55b49e169de3007a19bb3881d96c38cc" kindref="member">~scoped_call_back_to_python</ref>();</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="82"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>ECTO_SCOPED_GILRELEASE()<sp/>ecto::py::scoped_gil_release<sp/>gilrelease<sp/>##<sp/>__LINE__(__FILE__,<sp/>__LINE__)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85" refid="python_8hpp_1a1d1670056b000763eff9d847d1b278d9" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECTO_SCOPED_GILRELEASE()</highlight></codeline>
+<codeline lineno="86"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight><highlight class="comment">//#define<sp/>ECTO_SCOPED_CALLPYTHON()<sp/>ecto::py::scoped_call_back_to_python<sp/>gilcall<sp/>##<sp/>__LINE__(__FILE__,<sp/>__LINE__)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="88" refid="python_8hpp_1a35348385dcbe88e8b584f4ef5067371a" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECTO_SCOPED_CALLPYTHON()</highlight></codeline>
+    </programlisting>
+    <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python.hpp"/>
+  </compounddef>
+</doxygen>

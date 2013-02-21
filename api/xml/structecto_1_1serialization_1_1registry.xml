@@ -1,0 +1,172 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="structecto_1_1serialization_1_1registry" kind="struct" prot="public">
+    <compoundname>ecto::serialization::registry</compoundname>
+    <includes refid="serialization_2registry_8hpp" local="no">registry.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename</type>
+        <declname>Archive</declname>
+        <defname>Archive</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structecto_1_1serialization_1_1registry_1a9bbc5358e0b5bb519983c16db9c6391b" prot="public" static="no">
+        <type>boost::function&lt; void(Archive &amp;, <ref refid="classecto_1_1tendril" kindref="compound">tendril</ref> &amp;)&gt;</type>
+        <definition>typedef boost::function&lt;void(Archive&amp;, tendril&amp;)&gt; ecto::serialization::registry&lt; Archive &gt;::serial_fn_t</definition>
+        <argsstring></argsstring>
+        <name>serial_fn_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/serialization/registry.hpp" line="77" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/serialization/registry.hpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structecto_1_1serialization_1_1registry_1a89253dc4749e297b132dacb9e14967c2" prot="public" static="no">
+        <type>std::map&lt; std::string, <ref refid="structecto_1_1serialization_1_1registry_1a9bbc5358e0b5bb519983c16db9c6391b" kindref="member">serial_fn_t</ref> &gt;</type>
+        <definition>typedef std::map&lt;std::string, serial_fn_t&gt; ecto::serialization::registry&lt; Archive &gt;::serial_map_t</definition>
+        <argsstring></argsstring>
+        <name>serial_map_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/serialization/registry.hpp" line="78" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/serialization/registry.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structecto_1_1serialization_1_1registry_1a7ef09466a24edc21695e3905c0a7921b" prot="public" static="no" mutable="no">
+        <type><ref refid="structecto_1_1serialization_1_1registry_1a89253dc4749e297b132dacb9e14967c2" kindref="member">serial_map_t</ref></type>
+        <definition>serial_map_t ecto::serialization::registry&lt; Archive &gt;::serial_map</definition>
+        <argsstring></argsstring>
+        <name>serial_map</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/serialization/registry.hpp" line="96" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/serialization/registry.hpp" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structecto_1_1serialization_1_1registry_1ae82f89f8e2bdcf2573671a6d390a94e2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Serializer</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void ecto::serialization::registry&lt; Archive &gt;::add</definition>
+        <argsstring>(const Serializer &amp;s)</argsstring>
+        <name>add</name>
+        <param>
+          <type>const Serializer &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/serialization/registry.hpp" line="83" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/serialization/registry.hpp" bodystart="82" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1serialization_1_1registry_1a9642b0813d8bb6c99dffb527b9d57419" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::serialization::registry&lt; Archive &gt;::add</definition>
+        <argsstring>(const std::string &amp;name, serial_fn_t fnc)</argsstring>
+        <name>add</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="structecto_1_1serialization_1_1registry_1a9bbc5358e0b5bb519983c16db9c6391b" kindref="member">serial_fn_t</ref></type>
+          <declname>fnc</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/serialization/registry.hpp" line="92"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1serialization_1_1registry_1afaecca49afab42cb3f41a7a515b69cbb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::serialization::registry&lt; Archive &gt;::serialize</definition>
+        <argsstring>(const std::string &amp;key, Archive &amp;ar, tendril &amp;t) const </argsstring>
+        <name>serialize</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>Archive &amp;</type>
+          <declname>ar</declname>
+        </param>
+        <param>
+          <type><ref refid="classecto_1_1tendril" kindref="compound">tendril</ref> &amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/serialization/registry.hpp" line="94"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structecto_1_1serialization_1_1registry_1a19aae99a3cc5ddb4b56d069faf01e300" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structecto_1_1serialization_1_1registry" kindref="compound">registry</ref>&lt; Archive &gt; &amp;</type>
+        <definition>static registry&lt;Archive&gt;&amp; ecto::serialization::registry&lt; Archive &gt;::instance</definition>
+        <argsstring>()</argsstring>
+        <name>instance</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/serialization/registry.hpp" line="98"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="structecto_1_1serialization_1_1registry_1acbf5b14a8ef87e8a1324ad852e3e3f13" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ecto::serialization::registry&lt; Archive &gt;::registry</definition>
+        <argsstring>()</argsstring>
+        <name>registry</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/serialization/registry.hpp" line="101"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/serialization/registry.hpp" line="76" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/serialization/registry.hpp" bodystart="75" bodyend="102"/>
+    <listofallmembers>
+      <member refid="structecto_1_1serialization_1_1registry_1ae82f89f8e2bdcf2573671a6d390a94e2" prot="public" virt="non-virtual"><scope>ecto::serialization::registry</scope><name>add</name></member>
+      <member refid="structecto_1_1serialization_1_1registry_1a9642b0813d8bb6c99dffb527b9d57419" prot="public" virt="non-virtual"><scope>ecto::serialization::registry</scope><name>add</name></member>
+      <member refid="structecto_1_1serialization_1_1registry_1a19aae99a3cc5ddb4b56d069faf01e300" prot="public" virt="non-virtual"><scope>ecto::serialization::registry</scope><name>instance</name></member>
+      <member refid="structecto_1_1serialization_1_1registry_1acbf5b14a8ef87e8a1324ad852e3e3f13" prot="private" virt="non-virtual"><scope>ecto::serialization::registry</scope><name>registry</name></member>
+      <member refid="structecto_1_1serialization_1_1registry_1a9bbc5358e0b5bb519983c16db9c6391b" prot="public" virt="non-virtual"><scope>ecto::serialization::registry</scope><name>serial_fn_t</name></member>
+      <member refid="structecto_1_1serialization_1_1registry_1a7ef09466a24edc21695e3905c0a7921b" prot="public" virt="non-virtual"><scope>ecto::serialization::registry</scope><name>serial_map</name></member>
+      <member refid="structecto_1_1serialization_1_1registry_1a89253dc4749e297b132dacb9e14967c2" prot="public" virt="non-virtual"><scope>ecto::serialization::registry</scope><name>serial_map_t</name></member>
+      <member refid="structecto_1_1serialization_1_1registry_1afaecca49afab42cb3f41a7a515b69cbb" prot="public" virt="non-virtual"><scope>ecto::serialization::registry</scope><name>serialize</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

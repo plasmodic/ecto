@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="namespaceecto_1_1registry_1_1tendril" kind="namespace">
+    <compoundname>ecto::registry::tendril</compoundname>
+    <innerclass refid="structecto_1_1registry_1_1tendril_1_1entry" prot="public">ecto::registry::tendril::entry</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespaceecto_1_1registry_1_1tendril_1ae22480a936472049982cbab1f0ebb042" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>void ecto::registry::tendril::add</definition>
+        <argsstring>(const ecto::tendril &amp;t)</argsstring>
+        <name>add</name>
+        <param>
+          <type>const <ref refid="classecto_1_1tendril" kindref="compound">ecto::tendril</ref> &amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendril.hpp" line="52" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendril.hpp" bodystart="63" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceecto_1_1registry_1_1tendril_1a0f79f6d8838565c91f43e05c93a3f01d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classecto_1_1tendril" kindref="compound">ecto::tendril</ref> &amp;</type>
+        <definition>const ecto::tendril&amp; ecto::registry::tendril::get</definition>
+        <argsstring>(const std::string &amp;type_name)</argsstring>
+        <name>get</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>type_name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendril.hpp" line="53"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceecto_1_1registry_1_1tendril_1a7e62217ece919ba72bb0aca35c93fd7b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; ecto::registry::tendril::type_names</definition>
+        <argsstring>()</argsstring>
+        <name>type_names</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendril.hpp" line="54"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendril.hpp" line="51"/>
+  </compounddef>
+</doxygen>

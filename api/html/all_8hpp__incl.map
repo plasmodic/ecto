@@ -1,0 +1,23 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$python_8hpp.html" title="ecto/python.hpp" alt="" coords="2867,624,2992,653"/>
+<area shape="rect" id="node9" href="$cell_8hpp.html" title="ecto/cell.hpp" alt="" coords="3419,315,3520,344"/>
+<area shape="rect" id="node37" href="$tendril_8hpp.html" title="ecto/tendril.hpp" alt="" coords="2357,547,2480,576"/>
+<area shape="rect" id="node48" href="$except_8hpp.html" title="ecto/except.hpp" alt="" coords="1332,624,1457,653"/>
+<area shape="rect" id="node80" href="$tendrils_8hpp.html" title="ecto/tendrils.hpp" alt="" coords="2508,392,2636,421"/>
+<area shape="rect" id="node85" href="$spore_8hpp.html" title="ecto/spore.hpp" alt="" coords="2015,469,2132,499"/>
+<area shape="rect" id="node109" href="$ecto_8hpp.html" title="ecto/ecto.hpp" alt="" coords="3208,83,3317,112"/>
+<area shape="rect" id="node133" href="$edge_8hpp.html" title="ecto/edge.hpp" alt="" coords="3917,469,4032,499"/>
+<area shape="rect" id="node143" href="$vertex_8hpp.html" title="ecto/vertex.hpp" alt="" coords="4088,469,4211,499"/>
+<area shape="rect" id="node11" href="$forward_8hpp.html" title="ecto/forward.hpp" alt="" coords="3811,624,3939,653"/>
+<area shape="rect" id="node15" href="$log_8hpp.html" title="ecto/log.hpp" alt="" coords="4096,624,4197,653"/>
+<area shape="rect" id="node19" href="$util_8hpp.html" title="ecto/util.hpp" alt="" coords="3111,701,3212,731"/>
+<area shape="rect" id="node29" href="$strand_8hpp.html" title="ecto/strand.hpp" alt="" coords="3528,547,3651,576"/>
+<area shape="rect" id="node101" href="$traits_8hpp.html" title="ecto/traits.hpp" alt="" coords="3515,392,3629,421"/>
+<area shape="rect" id="node25" href="$test_8hpp.html" title="ecto/test.hpp" alt="" coords="4081,701,4188,731"/>
+<area shape="rect" id="node72" href="$repr_8hpp.html" title="ecto/python/repr.hpp" alt="" coords="2053,624,2208,653"/>
+<area shape="rect" id="node116" href="$abi_8hpp.html" title="ecto/abi.hpp" alt="" coords="3256,160,3357,189"/>
+<area shape="rect" id="node122" href="$registry_8hpp.html" title="ecto/registry.hpp" alt="" coords="3152,237,3280,267"/>
+<area shape="rect" id="node129" href="$module_8hpp.html" title="ecto/module.hpp" alt="" coords="3051,160,3181,189"/>
+<area shape="rect" id="node135" href="$element_8hpp.html" title="ecto/element.hpp" alt="" coords="3979,547,4112,576"/>
+<area shape="rect" id="node147" href="$profile_8hpp.html" title="ecto/profile.hpp" alt="" coords="4187,547,4307,576"/>
+</map>

@@ -1,0 +1,224 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Tendrils and Spores &mdash; ecto</title>
+    
+    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="ecto" href="../../../index.html" />
+    <link rel="up" title="Usage" href="../index.html" />
+    <link rel="next" title="Using python packages with ecto projects" href="../techniques/python-packages.html" />
+    <link rel="prev" title="Lifecycle of Cells" href="lifecycle.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../techniques/python-packages.html" title="Using python packages with ecto projects"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="lifecycle.html" title="Lifecycle of Cells"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../index.html">
+              <img class="logo" src="../../../_static/ecto210.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="lifecycle.html"
+                        title="previous chapter">Lifecycle of Cells</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../techniques/python-packages.html"
+                        title="next chapter">Using python packages with ecto projects</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/ecto/usage/tutorials/tendrils_spore.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="tendrils-and-spores">
+<h1>Tendrils and Spores<a class="headerlink" href="#tendrils-and-spores" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="../../reference/tendril.html#tendrils-overview"><em>Tendrils</em></a> are what defines the inputs/outputs/parameters of any cell.
+They are a mapping from a string to the matching <a class="reference internal" href="../../reference/tendril.html#tendril-overview"><em>tendril</em></a>. So what is a
+tendril then ? Well, it is a container that holdes the input/output/parameter in a type-agnostic
+way (like a <tt class="docutils literal"><span class="pre">boost::any</span></tt>) to allow for static introspection and Python interaction.</p>
+<p>We have seen some code that uses tendrils to extract the information at runtime but there are other ways of getting the data. Here we will show three different ways to get the data, but you will most likely always use the last one. The first method is the most convenient to write but the other methods can also have their use case (usually for lower level tendril manipulation).</p>
+<p>We have seen how to use tendrils with a runtime registration:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
+
+<span class="k">using</span> <span class="n">ecto</span><span class="o">::</span><span class="n">tendrils</span><span class="p">;</span>
+<span class="k">namespace</span> <span class="n">tutorial</span>
+<span class="p">{</span>
+  <span class="k">struct</span> <span class="n">Add</span>
+  <span class="p">{</span>
+    <span class="k">static</span> <span class="kt">void</span>
+    <span class="n">declare_io</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="cm">/*params*/</span><span class="p">,</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">in</span><span class="p">,</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">in</span><span class="p">.</span><span class="n">declare</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="s">&quot;1st operand.&quot;</span><span class="p">).</span><span class="n">required</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+      <span class="n">in</span><span class="p">.</span><span class="n">declare</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="s">&quot;2nd operand.&quot;</span><span class="p">).</span><span class="n">required</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+      <span class="n">out</span><span class="p">.</span><span class="n">declare</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;output&quot;</span><span class="p">,</span> <span class="s">&quot;Result of a + b.&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span>
+    <span class="n">process</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">in</span><span class="p">,</span> <span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">out</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;output&quot;</span><span class="p">)</span> <span class="o">=</span> <span class="n">in</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">in</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;b&quot;</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">ecto</span><span class="o">::</span><span class="n">OK</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="n">ECTO_CELL</span><span class="p">(</span><span class="n">tutorial</span><span class="p">,</span> <span class="n">tutorial</span><span class="o">::</span><span class="n">Add</span><span class="p">,</span> <span class="s">&quot;Add&quot;</span><span class="p">,</span> <span class="s">&quot;Adds two integers together.&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In an effort to save duplicate declaration, you may register a member <a class="reference internal" href="../../reference/tendril.html#spore-overview"><em>spore</em></a> at
+tendril declaration time. A spore is basically a typed wrapper around a tendril that behaves just like a pointer.</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
+
+<span class="k">using</span> <span class="n">ecto</span><span class="o">::</span><span class="n">tendrils</span><span class="p">;</span>
+<span class="k">namespace</span> <span class="n">tutorial</span>
+<span class="p">{</span>
+  <span class="k">struct</span> <span class="n">Add</span>
+  <span class="p">{</span>
+    <span class="k">static</span> <span class="kt">void</span>
+    <span class="n">declare_io</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="cm">/*params*/</span><span class="p">,</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">in</span><span class="p">,</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">in</span><span class="p">.</span><span class="n">declare</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="s">&quot;1st operand.&quot;</span><span class="p">).</span><span class="n">required</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+      <span class="n">in</span><span class="p">.</span><span class="n">declare</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="s">&quot;2nd operand.&quot;</span><span class="p">).</span><span class="n">required</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+      <span class="n">out</span><span class="p">.</span><span class="n">declare</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;output&quot;</span><span class="p">,</span> <span class="s">&quot;Result of a + b.&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">configure</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">p</span><span class="p">,</span> <span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">i</span><span class="p">,</span> <span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">o</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">output_</span> <span class="o">=</span> <span class="n">o</span><span class="p">[</span><span class="s">&quot;output&quot;</span><span class="p">];</span>
+      <span class="n">a_</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="s">&quot;a&quot;</span><span class="p">];</span>
+      <span class="n">b_</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="s">&quot;b&quot;</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span>
+    <span class="n">process</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">in</span><span class="p">,</span> <span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="o">*</span><span class="n">output_</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">a_</span> <span class="o">+</span> <span class="o">*</span><span class="n">b_</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">ecto</span><span class="o">::</span><span class="n">OK</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+  <span class="n">ecto</span><span class="o">::</span><span class="n">spore</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">output_</span><span class="p">,</span> <span class="n">a_</span><span class="p">,</span> <span class="n">b_</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">ECTO_CELL</span><span class="p">(</span><span class="n">tutorial</span><span class="p">,</span> <span class="n">tutorial</span><span class="o">::</span><span class="n">Add</span><span class="p">,</span> <span class="s">&quot;Add&quot;</span><span class="p">,</span> <span class="s">&quot;Adds two integers together.&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>And you can actually register a spore to a tendril when you&#8217;re declaring it, making things even shorter:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
+
+<span class="k">using</span> <span class="n">ecto</span><span class="o">::</span><span class="n">tendrils</span><span class="p">;</span>
+<span class="k">namespace</span> <span class="n">tutorial</span>
+<span class="p">{</span>
+  <span class="k">struct</span> <span class="n">Add</span>
+  <span class="p">{</span>
+    <span class="k">static</span> <span class="kt">void</span>
+    <span class="n">declare_io</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="cm">/*params*/</span><span class="p">,</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">in</span><span class="p">,</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">in</span><span class="p">.</span><span class="n">declare</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Add</span><span class="o">::</span><span class="n">a_</span><span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="s">&quot;1st operand.&quot;</span><span class="p">).</span><span class="n">required</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+      <span class="n">in</span><span class="p">.</span><span class="n">declare</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Add</span><span class="o">::</span><span class="n">b_</span><span class="p">,</span> <span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="s">&quot;2nd operand.&quot;</span><span class="p">).</span><span class="n">required</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+      <span class="n">out</span><span class="p">.</span><span class="n">declare</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Add</span><span class="o">::</span><span class="n">output_</span><span class="p">,</span> <span class="s">&quot;output&quot;</span><span class="p">,</span> <span class="s">&quot;Result of a + b.&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span>
+    <span class="n">process</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">in</span><span class="p">,</span> <span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="o">*</span><span class="n">output_</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">a_</span> <span class="o">+</span> <span class="o">*</span><span class="n">b_</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">ecto</span><span class="o">::</span><span class="n">OK</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+  <span class="n">ecto</span><span class="o">::</span><span class="n">spore</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">output_</span><span class="p">,</span> <span class="n">a_</span><span class="p">,</span> <span class="n">b_</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">ECTO_CELL</span><span class="p">(</span><span class="n">tutorial</span><span class="p">,</span> <span class="n">tutorial</span><span class="o">::</span><span class="n">Add</span><span class="p">,</span> <span class="s">&quot;Add&quot;</span><span class="p">,</span> <span class="s">&quot;Adds two integers together.&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../techniques/python-packages.html" title="Using python packages with ecto projects"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="lifecycle.html" title="Lifecycle of Cells"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li><a href="../index.html" >Usage</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011,  Willow Garage, Inc.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

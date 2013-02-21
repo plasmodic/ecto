@@ -1,0 +1,266 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Automatic Documentation and Ecto’s Sphinx Extensions &mdash; ecto</title>
+    
+    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="ecto" href="../../../index.html" />
+    <link rel="up" title="Usage" href="../index.html" />
+    <link rel="next" title="Using IPython" href="../external/ipython.html" />
+    <link rel="prev" title="Command line helpers: getting stats, GUIS, a shell and more automagically !" href="argparse.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../external/ipython.html" title="Using IPython"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="argparse.html" title="Command line helpers: getting stats, GUIS, a shell and more automagically !"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../index.html">
+              <img class="logo" src="../../../_static/ecto210.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="argparse.html"
+                        title="previous chapter">Command line helpers: getting stats, GUIS, a shell and more automagically !</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../external/ipython.html"
+                        title="next chapter">Using IPython</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/ecto/usage/tips/ectodoc.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="automatic-documentation-and-ecto-s-sphinx-extensions">
+<span id="ectodoc"></span><h1>Automatic Documentation and Ecto&#8217;s Sphinx Extensions<a class="headerlink" href="#automatic-documentation-and-ecto-s-sphinx-extensions" title="Permalink to this headline">¶</a></h1>
+<p>Ecto comes with a number of extensions to assist in documenting
+ecto-based projects.  Try clicking &#8220;Show Source&#8221; on the right for a
+before-and-after sphinx view....  there is much less text in the
+source for this document than there is on this page.</p>
+<dl class="directive">
+<dt id="directive-ectocell &lt;Module&gt; &lt;CellType&gt;">
+<tt class="descname">.. ectocell &lt;Module&gt; &lt;CellType&gt;::</tt><a class="headerlink" href="#directive-ectocell <Module> <CellType>" title="Permalink to this definition">¶</a></dt>
+<dd><p>Placing the following command in sphinx:</p>
+<div class="highlight-python"><pre>.. ectocell:: ecto.ecto_test Add</pre>
+</div>
+<p>Will import the python module <tt class="docutils literal"><span class="pre">ecto.ecto_test</span></tt> into the running Sphinx
+process, find the class named <tt class="docutils literal"><span class="pre">Add</span></tt> and generate documentation,
+which looks like this (actual output):</p>
+<div class="section" id="Add">
+<span id="index-0"></span><span id="ecto.ecto_test.Add"></span><h2>Add<a class="headerlink" href="#Add" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Add two doubles together.</p>
+</p>
+<p></p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>left</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>Left hand operand.</p>
+</li>
+<li><p class="first"><strong>right</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>Right hand operand.</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>The result.</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<p>Cells&#8217; docstrings should contain identical information, albeit
+surrounded with a bit of noise:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/python</span>
+
+<span class="kn">import</span> <span class="nn">ecto.ecto_test</span> <span class="kn">as</span> <span class="nn">ecto_test</span>
+<span class="k">print</span> <span class="n">help</span><span class="p">(</span><span class="n">ecto_test</span><span class="o">.</span><span class="n">Add</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and the output below, which is truncated for clarity as there is
+quite a bit of noise, starting with <tt class="docutils literal"><span class="pre">Methods</span> <span class="pre">defined</span> <span class="pre">here</span></tt>.</p>
+<div class="highlight-text"><div class="highlight"><pre>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="directive">
+<dt id="directive-ectoplot &lt;file&gt; &lt;object&gt;">
+<tt class="descname">.. ectoplot &lt;file&gt; &lt;object&gt;::</tt><a class="headerlink" href="#directive-ectoplot <file> <object>" title="Permalink to this definition">¶</a></dt>
+<dd><p>This directive generates and includes graph diagrams.  The directive
+takes the name of a file and the name of an object in that file.
+Sphinx will execute the file, pull the named object out of the file
+(which must be a live plasm), get the <tt class="docutils literal"><span class="pre">graphviz</span></tt> information from
+the plasm, generate and include a graphic.  For instance this direcive:</p>
+<div class="highlight-python"><pre>.. ectoplot:: ../../sampleplasm.py plasm</pre>
+</div>
+<p>Will look for the file <tt class="docutils literal"><span class="pre">sampleplasm.py</span></tt> in the documentation
+directory, execute it, pull out and plot the object named plasm.  If
+that script looks like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/python</span>
+<span class="kn">import</span> <span class="nn">ecto</span>
+<span class="kn">import</span> <span class="nn">ecto.ecto_test</span> <span class="kn">as</span> <span class="nn">ecto_test</span>
+
+<span class="n">plasm</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Plasm</span><span class="p">()</span>
+
+<span class="n">gen</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">Generate</span><span class="p">()</span>
+<span class="n">inc</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">Increment</span><span class="p">()</span>
+<span class="n">mul</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">Multiply</span><span class="p">()</span>
+<span class="n">add</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">Add</span><span class="p">()</span>
+
+<span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">gen</span><span class="p">[:]</span> <span class="o">&gt;&gt;</span> <span class="n">inc</span><span class="p">[:],</span>
+              <span class="n">gen</span><span class="p">[:]</span> <span class="o">&gt;&gt;</span> <span class="n">mul</span><span class="p">[:],</span>
+              <span class="n">mul</span><span class="p">[:]</span> <span class="o">&gt;&gt;</span> <span class="n">add</span><span class="p">[</span><span class="s">&#39;left&#39;</span><span class="p">],</span>
+              <span class="n">inc</span><span class="p">[:]</span> <span class="o">&gt;&gt;</span> <span class="n">add</span><span class="p">[</span><span class="s">&#39;right&#39;</span><span class="p">],</span>
+              <span class="p">)</span>
+</pre></div>
+</div>
+<p>you&#8217;ll get this:</p>
+<p class="graphviz">
+<img src="../../../_images/graphviz-202fffb1b6358498062b18f2dac640904887fdf9.png" alt="digraph G {
+graph [rankdir=TB, ranksep=1]
+edge [labelfontsize=8]
+node [shape=plaintext]
+0[label=&lt;&lt;TABLE BORDER=&quot;0&quot; CELLBORDER=&quot;1&quot; CELLSPACING=&quot;0&quot; CELLPADDING=&quot;4&quot;&gt;  &lt;TR&gt; &lt;TD ROWSPAN=&quot;2&quot; COLSPAN=&quot;1&quot; BGCOLOR=&quot;khaki&quot;&gt;ecto_test::Generate&amp;lt;double&amp;gt;&lt;/TD&gt; &lt;TD PORT=&quot;p_start&quot; BGCOLOR=&quot;lightblue&quot;&gt;start&lt;/TD&gt;
+ &lt;/TR&gt; &lt;TR&gt; &lt;TD PORT=&quot;p_step&quot; BGCOLOR=&quot;lightblue&quot;&gt;step&lt;/TD&gt; &lt;/TR&gt;
+ &lt;TR&gt;
+&lt;TD PORT=&quot;o_out&quot; BGCOLOR=&quot;indianred1&quot;&gt;out&lt;/TD&gt;
+&lt;/TR&gt; &lt;/TABLE&gt;&gt;];
+1[label=&lt;&lt;TABLE BORDER=&quot;0&quot; CELLBORDER=&quot;1&quot; CELLSPACING=&quot;0&quot; CELLPADDING=&quot;4&quot;&gt; &lt;TR&gt;
+&lt;TD PORT=&quot;i_in&quot; BGCOLOR=&quot;springgreen&quot;&gt;in&lt;/TD&gt;
+&lt;/TR&gt; &lt;TR&gt; &lt;TD ROWSPAN=&quot;2&quot; COLSPAN=&quot;1&quot; BGCOLOR=&quot;khaki&quot;&gt;ecto_test::Increment&lt;/TD&gt; &lt;TD PORT=&quot;p_amount&quot; BGCOLOR=&quot;lightblue&quot;&gt;amount&lt;/TD&gt;
+ &lt;/TR&gt; &lt;TR&gt; &lt;TD PORT=&quot;p_delay&quot; BGCOLOR=&quot;lightblue&quot;&gt;delay&lt;/TD&gt; &lt;/TR&gt;
+ &lt;TR&gt;
+&lt;TD PORT=&quot;o_out&quot; BGCOLOR=&quot;indianred1&quot;&gt;out&lt;/TD&gt;
+&lt;/TR&gt; &lt;/TABLE&gt;&gt;];
+2[label=&lt;&lt;TABLE BORDER=&quot;0&quot; CELLBORDER=&quot;1&quot; CELLSPACING=&quot;0&quot; CELLPADDING=&quot;4&quot;&gt; &lt;TR&gt;
+&lt;TD PORT=&quot;i_in&quot; BGCOLOR=&quot;springgreen&quot;&gt;in&lt;/TD&gt;
+&lt;/TR&gt; &lt;TR&gt; &lt;TD ROWSPAN=&quot;1&quot; COLSPAN=&quot;1&quot; BGCOLOR=&quot;khaki&quot;&gt;ecto_test::Multiply&lt;/TD&gt; &lt;TD PORT=&quot;p_factor&quot; BGCOLOR=&quot;lightblue&quot;&gt;factor&lt;/TD&gt;
+ &lt;/TR&gt;  &lt;TR&gt;
+&lt;TD PORT=&quot;o_out&quot; BGCOLOR=&quot;indianred1&quot;&gt;out&lt;/TD&gt;
+&lt;/TR&gt; &lt;/TABLE&gt;&gt;];
+3[label=&lt;&lt;TABLE BORDER=&quot;0&quot; CELLBORDER=&quot;1&quot; CELLSPACING=&quot;0&quot; CELLPADDING=&quot;4&quot;&gt; &lt;TR&gt;
+&lt;TD PORT=&quot;i_left&quot; BGCOLOR=&quot;springgreen&quot;&gt;left&lt;/TD&gt;
+&lt;TD PORT=&quot;i_right&quot; BGCOLOR=&quot;springgreen&quot;&gt;right&lt;/TD&gt;
+&lt;/TR&gt; &lt;TR&gt; &lt;TD ROWSPAN=&quot;1&quot; COLSPAN=&quot;2&quot; BGCOLOR=&quot;khaki&quot;&gt;ecto_test::Add&lt;/TD&gt;  &lt;/TR&gt;  &lt;TR&gt;
+&lt;TD PORT=&quot;o_out&quot; BGCOLOR=&quot;indianred1&quot;&gt;out&lt;/TD&gt;
+&lt;/TR&gt; &lt;/TABLE&gt;&gt;];
+0-&gt;1 [headport=&quot;i_in&quot; tailport=&quot;o_out&quot;];
+0-&gt;2 [headport=&quot;i_in&quot; tailport=&quot;o_out&quot;];
+2-&gt;3 [headport=&quot;i_left&quot; tailport=&quot;o_out&quot;];
+1-&gt;3 [headport=&quot;i_right&quot; tailport=&quot;o_out&quot;];
+}" />
+</p>
+</dd></dl>
+
+<dl class="directive">
+<dt id="directive-program-output">
+<tt class="descname">.. program-output::</tt><a class="headerlink" href="#directive-program-output" title="Permalink to this definition">¶</a></dt>
+<dd><p>This directive has been taken from the sphinx contributions
+repository and souped up a bit.  Extra options are:</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">:until:</span> <span class="pre">&lt;string&gt;</span></tt></p>
+<p>truncate program output after first occurrance of &lt;string&gt;, which
+may contain spaces.  This is done with a simple <tt class="docutils literal"><span class="pre">find</span></tt></p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">:expect_error:</span></tt></p>
+<p>expect the script to return an error, so don&#8217;t fail if it does</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">:in_srcdir:</span></tt></p>
+<p>the path specified is relative to the filesystem location of the
+calling .rst file</p>
+</li>
+</ul>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../external/ipython.html" title="Using IPython"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="argparse.html" title="Command line helpers: getting stats, GUIS, a shell and more automagically !"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li><a href="../index.html" >Usage</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011,  Willow Garage, Inc.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

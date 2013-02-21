@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="structecto_1_1tendril_1_1empty__t" kind="struct" prot="public">
+    <compoundname>ecto::tendril::empty_t</compoundname>
+    <includes refid="tendril_8hpp" local="no">tendril.hpp</includes>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendril.hpp" line="96" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendril.hpp" bodystart="96" bodyend="96"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

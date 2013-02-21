@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="dir_4c19d758b47173816dbf97ecaabeb5bf" kind="dir">
+    <compoundname>/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/impl/</compoundname>
+    <innerfile refid="graph__types_8hpp">graph_types.hpp</innerfile>
+    <innerfile refid="impl_2parameters_8hpp">parameters.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/impl/"/>
+  </compounddef>
+</doxygen>

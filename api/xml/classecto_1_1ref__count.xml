@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="classecto_1_1ref__count" kind="class" prot="public">
+    <compoundname>ecto::ref_count</compoundname>
+    <includes refid="scheduler_8hpp" local="no">scheduler.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Mutex_T</type>
+        <defval>boost::mutex</defval>
+      </param>
+      <param>
+        <type>typename Count_T</type>
+        <defval>std::size_t</defval>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classecto_1_1ref__count_1a766db0f4309f593f6c3086a1ebead3a5" prot="private" static="no" mutable="no">
+        <type>Mutex_T &amp;</type>
+        <definition>Mutex_T&amp; ecto::ref_count&lt; Mutex_T, Count_T &gt;::m_</definition>
+        <argsstring></argsstring>
+        <name>m_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/scheduler.hpp" line="171" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/scheduler.hpp" bodystart="171" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classecto_1_1ref__count_1a689842816509f8f13710aee79b8c9898" prot="private" static="no" mutable="no">
+        <type>Count_T &amp;</type>
+        <definition>Count_T&amp; ecto::ref_count&lt; Mutex_T, Count_T &gt;::t_</definition>
+        <argsstring></argsstring>
+        <name>t_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/scheduler.hpp" line="172" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/scheduler.hpp" bodystart="172" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classecto_1_1ref__count_1a39fc7e105b142b7444a90dc6a3796828" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ecto::ref_count&lt; Mutex_T, Count_T &gt;::ref_count</definition>
+        <argsstring>(Mutex_T &amp;m, Count_T &amp;t)</argsstring>
+        <name>ref_count</name>
+        <param>
+          <type>Mutex_T &amp;</type>
+          <declname>m</declname>
+        </param>
+        <param>
+          <type>Count_T &amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/scheduler.hpp" line="162" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/scheduler.hpp" bodystart="161" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1ref__count_1a22b67e2d381344ff4c9b4c453bb47e23" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ecto::ref_count&lt; Mutex_T, Count_T &gt;::~ref_count</definition>
+        <argsstring>()</argsstring>
+        <name>~ref_count</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/scheduler.hpp" line="166" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/scheduler.hpp" bodystart="166" bodyend="169"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/scheduler.hpp" line="159" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/scheduler.hpp" bodystart="159" bodyend="173"/>
+    <listofallmembers>
+      <member refid="classecto_1_1ref__count_1a766db0f4309f593f6c3086a1ebead3a5" prot="private" virt="non-virtual"><scope>ecto::ref_count</scope><name>m_</name></member>
+      <member refid="classecto_1_1ref__count_1a39fc7e105b142b7444a90dc6a3796828" prot="public" virt="non-virtual"><scope>ecto::ref_count</scope><name>ref_count</name></member>
+      <member refid="classecto_1_1ref__count_1a689842816509f8f13710aee79b8c9898" prot="private" virt="non-virtual"><scope>ecto::ref_count</scope><name>t_</name></member>
+      <member refid="classecto_1_1ref__count_1a22b67e2d381344ff4c9b4c453bb47e23" prot="public" virt="non-virtual"><scope>ecto::ref_count</scope><name>~ref_count</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

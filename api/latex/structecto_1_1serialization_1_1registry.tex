@@ -1,0 +1,106 @@
+\hypertarget{structecto_1_1serialization_1_1registry}{\section{ecto\-:\-:serialization\-:\-:registry$<$ \-Archive $>$ \-Struct \-Template \-Reference}
+\label{structecto_1_1serialization_1_1registry}\index{ecto\-::serialization\-::registry$<$ Archive $>$@{ecto\-::serialization\-::registry$<$ Archive $>$}}
+}
+
+
+{\ttfamily \#include $<$registry.\-hpp$>$}
+
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef boost\-::function$<$ void(\-Archive \*
+\&, \hyperlink{classecto_1_1tendril}{tendril} \&)$>$ \hyperlink{structecto_1_1serialization_1_1registry_a9bbc5358e0b5bb519983c16db9c6391b}{serial\-\_\-fn\-\_\-t}
+\item 
+typedef std\-::map$<$ std\-::string, \*
+\hyperlink{structecto_1_1serialization_1_1registry_a9bbc5358e0b5bb519983c16db9c6391b}{serial\-\_\-fn\-\_\-t} $>$ \hyperlink{structecto_1_1serialization_1_1registry_a89253dc4749e297b132dacb9e14967c2}{serial\-\_\-map\-\_\-t}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Serializer $>$ }\\void \hyperlink{structecto_1_1serialization_1_1registry_ae82f89f8e2bdcf2573671a6d390a94e2}{add} (const \-Serializer \&s)
+\item 
+void \hyperlink{structecto_1_1serialization_1_1registry_a9642b0813d8bb6c99dffb527b9d57419}{add} (const std\-::string \&name, \hyperlink{structecto_1_1serialization_1_1registry_a9bbc5358e0b5bb519983c16db9c6391b}{serial\-\_\-fn\-\_\-t} fnc)
+\item 
+void \hyperlink{structecto_1_1serialization_1_1registry_afaecca49afab42cb3f41a7a515b69cbb}{serialize} (const std\-::string \&key, \-Archive \&ar, \hyperlink{classecto_1_1tendril}{tendril} \&t) const 
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{structecto_1_1serialization_1_1registry}{registry}$<$ \-Archive $>$ \& \hyperlink{structecto_1_1serialization_1_1registry_a19aae99a3cc5ddb4b56d069faf01e300}{instance} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structecto_1_1serialization_1_1registry_a89253dc4749e297b132dacb9e14967c2}{serial\-\_\-map\-\_\-t} \hyperlink{structecto_1_1serialization_1_1registry_a7ef09466a24edc21695e3905c0a7921b}{serial\-\_\-map}
+\end{DoxyCompactItemize}
+\subsection*{\-Private \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structecto_1_1serialization_1_1registry_acbf5b14a8ef87e8a1324ad852e3e3f13}{registry} ()
+\end{DoxyCompactItemize}
+\subsubsection*{template$<$typename \-Archive$>$ struct ecto\-::serialization\-::registry$<$ Archive $>$}
+
+
+
+\subsection{\-Member \-Typedef \-Documentation}
+\hypertarget{structecto_1_1serialization_1_1registry_a9bbc5358e0b5bb519983c16db9c6391b}{\index{ecto\-::serialization\-::registry@{ecto\-::serialization\-::registry}!serial\-\_\-fn\-\_\-t@{serial\-\_\-fn\-\_\-t}}
+\index{serial\-\_\-fn\-\_\-t@{serial\-\_\-fn\-\_\-t}!ecto::serialization::registry@{ecto\-::serialization\-::registry}}
+\subsubsection[{serial\-\_\-fn\-\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Archive$>$ typedef boost\-::function$<$void(\-Archive\&, {\bf tendril}\&)$>$ {\bf ecto\-::serialization\-::registry}$<$ \-Archive $>$\-::{\bf serial\-\_\-fn\-\_\-t}}}\label{structecto_1_1serialization_1_1registry_a9bbc5358e0b5bb519983c16db9c6391b}
+\hypertarget{structecto_1_1serialization_1_1registry_a89253dc4749e297b132dacb9e14967c2}{\index{ecto\-::serialization\-::registry@{ecto\-::serialization\-::registry}!serial\-\_\-map\-\_\-t@{serial\-\_\-map\-\_\-t}}
+\index{serial\-\_\-map\-\_\-t@{serial\-\_\-map\-\_\-t}!ecto::serialization::registry@{ecto\-::serialization\-::registry}}
+\subsubsection[{serial\-\_\-map\-\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Archive$>$ typedef std\-::map$<$std\-::string, {\bf serial\-\_\-fn\-\_\-t}$>$ {\bf ecto\-::serialization\-::registry}$<$ \-Archive $>$\-::{\bf serial\-\_\-map\-\_\-t}}}\label{structecto_1_1serialization_1_1registry_a89253dc4749e297b132dacb9e14967c2}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{structecto_1_1serialization_1_1registry_acbf5b14a8ef87e8a1324ad852e3e3f13}{\index{ecto\-::serialization\-::registry@{ecto\-::serialization\-::registry}!registry@{registry}}
+\index{registry@{registry}!ecto::serialization::registry@{ecto\-::serialization\-::registry}}
+\subsubsection[{registry}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Archive$>$ {\bf ecto\-::serialization\-::registry}$<$ \-Archive $>$\-::{\bf registry} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}\label{structecto_1_1serialization_1_1registry_acbf5b14a8ef87e8a1324ad852e3e3f13}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{structecto_1_1serialization_1_1registry_ae82f89f8e2bdcf2573671a6d390a94e2}{\index{ecto\-::serialization\-::registry@{ecto\-::serialization\-::registry}!add@{add}}
+\index{add@{add}!ecto::serialization::registry@{ecto\-::serialization\-::registry}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Archive$>$ template$<$typename Serializer $>$ void {\bf ecto\-::serialization\-::registry}$<$ \-Archive $>$\-::{\bf add} (
+\begin{DoxyParamCaption}
+\item[{const \-Serializer \&}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{structecto_1_1serialization_1_1registry_ae82f89f8e2bdcf2573671a6d390a94e2}
+\hypertarget{structecto_1_1serialization_1_1registry_a9642b0813d8bb6c99dffb527b9d57419}{\index{ecto\-::serialization\-::registry@{ecto\-::serialization\-::registry}!add@{add}}
+\index{add@{add}!ecto::serialization::registry@{ecto\-::serialization\-::registry}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Archive$>$ void {\bf ecto\-::serialization\-::registry}$<$ \-Archive $>$\-::{\bf add} (
+\begin{DoxyParamCaption}
+\item[{const std\-::string \&}]{name, }
+\item[{{\bf serial\-\_\-fn\-\_\-t}}]{fnc}
+\end{DoxyParamCaption}
+)}}\label{structecto_1_1serialization_1_1registry_a9642b0813d8bb6c99dffb527b9d57419}
+\hypertarget{structecto_1_1serialization_1_1registry_a19aae99a3cc5ddb4b56d069faf01e300}{\index{ecto\-::serialization\-::registry@{ecto\-::serialization\-::registry}!instance@{instance}}
+\index{instance@{instance}!ecto::serialization::registry@{ecto\-::serialization\-::registry}}
+\subsubsection[{instance}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Archive$>$ static {\bf registry}$<$\-Archive$>$\& {\bf ecto\-::serialization\-::registry}$<$ \-Archive $>$\-::{\bf instance} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}\label{structecto_1_1serialization_1_1registry_a19aae99a3cc5ddb4b56d069faf01e300}
+\hypertarget{structecto_1_1serialization_1_1registry_afaecca49afab42cb3f41a7a515b69cbb}{\index{ecto\-::serialization\-::registry@{ecto\-::serialization\-::registry}!serialize@{serialize}}
+\index{serialize@{serialize}!ecto::serialization::registry@{ecto\-::serialization\-::registry}}
+\subsubsection[{serialize}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Archive$>$ void {\bf ecto\-::serialization\-::registry}$<$ \-Archive $>$\-::{\bf serialize} (
+\begin{DoxyParamCaption}
+\item[{const std\-::string \&}]{key, }
+\item[{\-Archive \&}]{ar, }
+\item[{{\bf tendril} \&}]{t}
+\end{DoxyParamCaption}
+) const}}\label{structecto_1_1serialization_1_1registry_afaecca49afab42cb3f41a7a515b69cbb}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\hypertarget{structecto_1_1serialization_1_1registry_a7ef09466a24edc21695e3905c0a7921b}{\index{ecto\-::serialization\-::registry@{ecto\-::serialization\-::registry}!serial\-\_\-map@{serial\-\_\-map}}
+\index{serial\-\_\-map@{serial\-\_\-map}!ecto::serialization::registry@{ecto\-::serialization\-::registry}}
+\subsubsection[{serial\-\_\-map}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename \-Archive$>$ {\bf serial\-\_\-map\-\_\-t} {\bf ecto\-::serialization\-::registry}$<$ \-Archive $>$\-::{\bf serial\-\_\-map}}}\label{structecto_1_1serialization_1_1registry_a7ef09466a24edc21695e3905c0a7921b}
+
+
+\-The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/vrabaud/workspace/recognition\-\_\-kitchen\-\_\-groovy/src/ecto/include/ecto/serialization/\hyperlink{serialization_2registry_8hpp}{registry.\-hpp}\end{DoxyCompactItemize}

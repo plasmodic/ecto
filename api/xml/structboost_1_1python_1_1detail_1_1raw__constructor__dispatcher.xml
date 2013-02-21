@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="structboost_1_1python_1_1detail_1_1raw__constructor__dispatcher" kind="struct" prot="public">
+    <compoundname>boost::python::detail::raw_constructor_dispatcher</compoundname>
+    <includes refid="raw__constructor_8hpp" local="no">raw_constructor.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class F</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structboost_1_1python_1_1detail_1_1raw__constructor__dispatcher_1a055de51d7e8492c050508aa131ec1dd5" prot="private" static="no" mutable="no">
+        <type>object</type>
+        <definition>object boost::python::detail::raw_constructor_dispatcher&lt; F &gt;::f</definition>
+        <argsstring></argsstring>
+        <name>f</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python/raw_constructor.hpp" line="61" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python/raw_constructor.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structboost_1_1python_1_1detail_1_1raw__constructor__dispatcher_1a24c048cfc2d50e1897e6a779eef33f5c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>boost::python::detail::raw_constructor_dispatcher&lt; F &gt;::raw_constructor_dispatcher</definition>
+        <argsstring>(F f)</argsstring>
+        <name>raw_constructor_dispatcher</name>
+        <param>
+          <type>F</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python/raw_constructor.hpp" line="43" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python/raw_constructor.hpp" bodystart="42" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="structboost_1_1python_1_1detail_1_1raw__constructor__dispatcher_1ae3fe9c3c2b28ec59a57468fc05381a96" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>PyObject *</type>
+        <definition>PyObject* boost::python::detail::raw_constructor_dispatcher&lt; F &gt;::operator()</definition>
+        <argsstring>(PyObject *args, PyObject *keywords)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>PyObject *</type>
+          <declname>args</declname>
+        </param>
+        <param>
+          <type>PyObject *</type>
+          <declname>keywords</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python/raw_constructor.hpp" line="46" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python/raw_constructor.hpp" bodystart="45" bodyend="58"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python/raw_constructor.hpp" line="41" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python/raw_constructor.hpp" bodystart="40" bodyend="62"/>
+    <listofallmembers>
+      <member refid="structboost_1_1python_1_1detail_1_1raw__constructor__dispatcher_1a055de51d7e8492c050508aa131ec1dd5" prot="private" virt="non-virtual"><scope>boost::python::detail::raw_constructor_dispatcher</scope><name>f</name></member>
+      <member refid="structboost_1_1python_1_1detail_1_1raw__constructor__dispatcher_1ae3fe9c3c2b28ec59a57468fc05381a96" prot="public" virt="non-virtual"><scope>boost::python::detail::raw_constructor_dispatcher</scope><name>operator()</name></member>
+      <member refid="structboost_1_1python_1_1detail_1_1raw__constructor__dispatcher_1a24c048cfc2d50e1897e6a779eef33f5c" prot="public" virt="non-virtual"><scope>boost::python::detail::raw_constructor_dispatcher</scope><name>raw_constructor_dispatcher</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

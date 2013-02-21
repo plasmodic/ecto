@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="structecto_1_1profile_1_1graphstats__collector" kind="struct" prot="public">
+    <compoundname>ecto::profile::graphstats_collector</compoundname>
+    <includes refid="profile_8hpp" local="no">profile.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structecto_1_1profile_1_1graphstats__collector_1a4a6ceeeffacb5f69edc173d5aaf3cf89" prot="public" static="no" mutable="no">
+        <type><ref refid="structecto_1_1profile_1_1graph__stats__type" kindref="compound">graph_stats_type</ref> &amp;</type>
+        <definition>graph_stats_type&amp; ecto::profile::graphstats_collector::gs_</definition>
+        <argsstring></argsstring>
+        <name>gs_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/profile.hpp" line="54" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/profile.hpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structecto_1_1profile_1_1graphstats__collector_1a85cb67d72c9d1072634b879776e2e4b8" prot="public" static="no" mutable="no">
+        <type>const boost::posix_time::ptime</type>
+        <definition>const boost::posix_time::ptime ecto::profile::graphstats_collector::start_time</definition>
+        <argsstring></argsstring>
+        <name>start_time</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/profile.hpp" line="55" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/profile.hpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structecto_1_1profile_1_1graphstats__collector_1a7a840b075fd490da5107ea538614d017" prot="public" static="no" mutable="no">
+        <type>const unsigned long</type>
+        <definition>const unsigned long ecto::profile::graphstats_collector::start_tick</definition>
+        <argsstring></argsstring>
+        <name>start_tick</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/profile.hpp" line="56" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/profile.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structecto_1_1profile_1_1graphstats__collector_1a375c75ce1c0197d1d87a5fc1bdf97050" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ecto::profile::graphstats_collector::graphstats_collector</definition>
+        <argsstring>(graph_stats_type &amp;gs)</argsstring>
+        <name>graphstats_collector</name>
+        <param>
+          <type><ref refid="structecto_1_1profile_1_1graph__stats__type" kindref="compound">graph_stats_type</ref> &amp;</type>
+          <declname>gs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/profile.hpp" line="61" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/profile.hpp" bodystart="57" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1profile_1_1graphstats__collector_1a1bc967dcde1e3418aeeb10e58a52d79f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ecto::profile::graphstats_collector::~graphstats_collector</definition>
+        <argsstring>()</argsstring>
+        <name>~graphstats_collector</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/profile.hpp" line="65" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/profile.hpp" bodystart="64" bodyend="71"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="260">
+        <label>ecto::profile::graph_stats_type</label>
+        <link refid="structecto_1_1profile_1_1graph__stats__type"/>
+      </node>
+      <node id="259">
+        <label>ecto::profile::graphstats_collector</label>
+        <link refid="structecto_1_1profile_1_1graphstats__collector"/>
+        <childnode refid="260" relation="usage">
+          <edgelabel>gs_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/profile.hpp" line="53" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/profile.hpp" bodystart="52" bodyend="72"/>
+    <listofallmembers>
+      <member refid="structecto_1_1profile_1_1graphstats__collector_1a375c75ce1c0197d1d87a5fc1bdf97050" prot="public" virt="non-virtual"><scope>ecto::profile::graphstats_collector</scope><name>graphstats_collector</name></member>
+      <member refid="structecto_1_1profile_1_1graphstats__collector_1a4a6ceeeffacb5f69edc173d5aaf3cf89" prot="public" virt="non-virtual"><scope>ecto::profile::graphstats_collector</scope><name>gs_</name></member>
+      <member refid="structecto_1_1profile_1_1graphstats__collector_1a7a840b075fd490da5107ea538614d017" prot="public" virt="non-virtual"><scope>ecto::profile::graphstats_collector</scope><name>start_tick</name></member>
+      <member refid="structecto_1_1profile_1_1graphstats__collector_1a85cb67d72c9d1072634b879776e2e4b8" prot="public" virt="non-virtual"><scope>ecto::profile::graphstats_collector</scope><name>start_time</name></member>
+      <member refid="structecto_1_1profile_1_1graphstats__collector_1a1bc967dcde1e3418aeeb10e58a52d79f" prot="public" virt="non-virtual"><scope>ecto::profile::graphstats_collector</scope><name>~graphstats_collector</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

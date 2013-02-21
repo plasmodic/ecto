@@ -1,0 +1,303 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Motivation &mdash; ecto</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="ecto" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">ecto</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/ecto210.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Motivation</a><ul>
+<li><a class="reference internal" href="#where-ecto-and-ros-sit-in-design-space">Where Ecto and ROS sit in &#8220;design space&#8221;</a><ul>
+<li><a class="reference internal" href="#serialization">Serialization</a></li>
+<li><a class="reference internal" href="#language-support">Language Support</a></li>
+<li><a class="reference internal" href="#protocol">Protocol</a></li>
+<li><a class="reference internal" href="#transport">Transport</a></li>
+<li><a class="reference internal" href="#data-synchronization">Data Synchronization</a></li>
+<li><a class="reference internal" href="#delivery">Delivery</a></li>
+<li><a class="reference internal" href="#scripting">Scripting</a></li>
+<li><a class="reference internal" href="#execution">Execution</a></li>
+<li><a class="reference internal" href="#nomenclature">Nomenclature</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#practical-differences-to-writing-standalone-programs">Practical differences to writing standalone programs</a><ul>
+<li><a class="reference internal" href="#interface">Interface</a></li>
+<li><a class="reference internal" href="#threading">Threading</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
+<li><a class="reference internal" href="#reuse-and-collaboration">Reuse and collaboration</a></li>
+<li><a class="reference internal" href="#ros-integration">ROS integration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/ecto/motivation.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="motivation">
+<h1>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h1>
+<p>Ecto started in 2010 as a response to real architectural difficulties
+in computer vision and perception teams at Willow Garage.  The main
+issue appeared to be that the preferred Model of Computation (MoC) of
+perception groups, namely dataflow programming in a single process,
+was difficult to implement using a distributed message passing
+framework (ROS).</p>
+<p>For instance, given a data flow like this:</p>
+<img src="../_images/perception_programming.svg" width="50%" /><p>The &#8220;perception logic&#8221; part of the program needs a guarantee that the
+incoming sensor readings (kinect, webcam and laser) correspond to one
+another.  It may additionally require that each observation be
+processed in sequence, e.g. that no sensor readings are dropped and
+that time-ordering is preserved over multiple iterations of the graph.</p>
+<p>The perception logic itself may have arbitrary internal structure and
+require internal synchronization to function correctly.  Consider a
+typical point cloud processing pipeline for tabletop segmentation:</p>
+<img src="../_images/pointcloud_processing.svg" width="50%" /><p>The &#8220;Merge&#8221; operation will need to know that its two inputs correspond
+to the same original sensor data, regardless of how long e.g. the
+normal estmation or planar segmentation steps run.  The
+ExtractClusters uses bounding boxes calculated in earlier steps to
+retrieve subsets of the original high density point clouds.</p>
+<p>In an asynchronous, distributed publish-subscribe model (i.e. if each
+vertex in the graph above were a standard ROS node), there is no way
+to make such guarantees, and time synchronizers of various sorts tend
+to proliferate, essentially whereever one sees a vertex with multiple
+incoming edgess.  This costing runtime and inflicing complexity on the
+researcher.  In the case above, the &#8220;long&#8221; route through the graph may
+have a bottleneck midway through and run so slowly that input to the
+pipeline must be halted so that it processes only one point cloud at a
+time.  In one implementation, the Merge operation published messages
+back to the PointCloudConstruction process indicating when it was safe
+to put more data into the pipeline.  This, too, is an unsatisfactory
+solution: since each input is delivered by a different callback
+function, ROS &#8220;message filters&#8221; are still required.</p>
+<p>Ecto makes a guarantee which simplifies this and many other scenarios:</p>
+<a class="reference internal image-reference" href="../_images/sync_constraint.svg"><img src="../_images/sync_constraint.svg" /></a>
+<p>given some program logic which processes inputs (A B C) and produces
+outputs (D E), Ecto warrants to <em>program logic</em> that <em>A</em>, <em>B</em>, and <em>C</em>
+correspond to the same original sensor data.  The cell is required to
+produce output on all of its outgoing edges <em>D</em> and <em>E</em>.</p>
+<div class="section" id="where-ecto-and-ros-sit-in-design-space">
+<h2>Where Ecto and ROS sit in &#8220;design space&#8221;<a class="headerlink" href="#where-ecto-and-ros-sit-in-design-space" title="Permalink to this headline">¶</a></h2>
+<p>Software architectures at this level of abstraction inhabit a high
+dimensional &#8220;design space&#8221;.  As we will see, though they look
+superficially similar (that is, you can draw graphs of systems with
+processing at the vertices and data flowing along typed edges), the
+systems are quite different.  They have different talents and enable
+different programming paradigms.</p>
+<div class="section" id="serialization">
+<h3>Serialization<a class="headerlink" href="#serialization" title="Permalink to this headline">¶</a></h3>
+<p>Fundamental to <em>ROS</em> is the notion of copyable &#8220;messages&#8221;,
+serializable to a single binary format.  These messages may have only
+&#8220;value&#8221; semantics.</p>
+<p><em>ecto</em> has no notion of message or serialization.  Connections between
+cells contain types unknown to ecto (it treats them all generically as
+&#8220;T&#8221;) and are simply copied, not serialized.</p>
+</div>
+<div class="section" id="language-support">
+<h3>Language Support<a class="headerlink" href="#language-support" title="Permalink to this headline">¶</a></h3>
+<p><em>ROS</em>: any language for which you can implement xml-rpc, message
+code-generators, and the ROS wire protocol.  C++ and Python most
+significant, but Java, Lisp, Haskell and Lua implementations exist.</p>
+<p><em>ecto</em>:  C++ and Python.</p>
+</div>
+<div class="section" id="protocol">
+<h3>Protocol<a class="headerlink" href="#protocol" title="Permalink to this headline">¶</a></h3>
+<p><em>ROS</em> is a wire protocol: nodes encode messages in a binary format
+that is compiled in to each node.</p>
+<p><em>ecto</em> has no inherent notion of protocol.</p>
+</div>
+<div class="section" id="transport">
+<h3>Transport<a class="headerlink" href="#transport" title="Permalink to this headline">¶</a></h3>
+<p><em>ROS</em> is intended to support multiple types of transport between nodes
+(TCP, UDP, etc) through which serialized data flows as dictated by the
+protocol.  The choice of transport layer determines the reliability of
+a given connection via flow control, segmentation/desegmentation, and
+error control.</p>
+<p><em>ecto</em> has no inherent notion of transport: data is copied between
+threads using whatever the C++ copy constructor does.  Reference
+semantics are easily achievable (and copies avoided) by passing shared
+pointers.  In this case, <em>ecto</em> requires that the user not modify data
+that is possibly visible to other cells in the graph; <em>ROS</em> does not
+need to require devlopers to think about this as messages have value
+semantics and are always copied.</p>
+</div>
+<div class="section" id="data-synchronization">
+<h3>Data Synchronization<a class="headerlink" href="#data-synchronization" title="Permalink to this headline">¶</a></h3>
+<p><em>ROS</em>: the publish-subscribe model requires manual synchronization by
+the user.  Some generic synchronization subscribers exist
+(e.g. <tt class="docutils literal"><span class="pre">message_filters</span></tt>) that attempt to synchronize data; the user
+manually inserts these where they deem synchronization necessary.</p>
+<p><em>ecto</em>: each input to each cell is guaranteed by the scheduler to
+contain data corresponding to the same &#8220;tick&#8221; of data, regardless of
+the structure of the graph.</p>
+</div>
+<div class="section" id="delivery">
+<h3>Delivery<a class="headerlink" href="#delivery" title="Permalink to this headline">¶</a></h3>
+<p><em>ROS</em>:  messages can be dropped if queues fill up.</p>
+<p><em>ecto</em>: once data has entered the graph, it is never dropped.</p>
+</div>
+<div class="section" id="scripting">
+<h3>Scripting<a class="headerlink" href="#scripting" title="Permalink to this headline">¶</a></h3>
+<p>Sets of <em>ROS</em> processes (nodes) are typically controlled by xml &#8220;launch&#8221;
+files: python scripts load these xml files, examine the runtime
+environment (e.g. <tt class="docutils literal"><span class="pre">ROS_PACKAGE_PATH</span></tt>) and execute/monitor multiple
+OS processes.</p>
+<p><em>ecto</em> uses a small DSEL, hosted in python, for graph construction and
+execution ecto graphs are always run in a single process.</p>
+</div>
+<div class="section" id="execution">
+<h3>Execution<a class="headerlink" href="#execution" title="Permalink to this headline">¶</a></h3>
+<p>The <em>ROS</em>&#8216; &#8220;master&#8221; serves to connect publishers and subscribers to
+one another, but does not participate in the traffic of each
+individual message between nodes.  It has no instantaneous global
+knowledge of what is happening in a running ROS system.</p>
+<p>The <em>ecto</em> &#8220;scheduler&#8221;, being responsible for executing each processing
+&#8220;cell&#8221; in the graph, has complete visibility, at all times, into the
+state of the graph and the data flowing through it.  This enables the
+crucial synchronization-guarantee and an assortment of scheduling and
+optimization strategies.</p>
+</div>
+<div class="section" id="nomenclature">
+<h3>Nomenclature<a class="headerlink" href="#nomenclature" title="Permalink to this headline">¶</a></h3>
+<p><em>ROS</em> is an acronym</p>
+<p><em>ecto</em> is a greek prefix.</p>
+<p><em>ROS</em> names its releases after turtles,</p>
+<p><em>ecto</em> has a lighthearted nomenclature with release names based on
+things slimy, amorphous, or paranormal.</p>
+</div>
+</div>
+<div class="section" id="practical-differences-to-writing-standalone-programs">
+<h2>Practical differences to writing standalone programs<a class="headerlink" href="#practical-differences-to-writing-standalone-programs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="interface">
+<h3>Interface<a class="headerlink" href="#interface" title="Permalink to this headline">¶</a></h3>
+<p><em>ecto</em> cells are self-documenting and have a consistent interface.  This
+significantly simplifies code reuse and collaborative development.</p>
+</div>
+<div class="section" id="threading">
+<h3>Threading<a class="headerlink" href="#threading" title="Permalink to this headline">¶</a></h3>
+<p><em>ecto</em> cells can be seamlessly executed with various threading models
+due to the scheduler.  The user constructs singlethreaded cells that
+obey simple rules: they get multithreaded execution for free.  We have
+watched many a researcher waste time struggling with threading issues
+rather than focusing on the valuable issues: techniques, algorithms,
+and results.</p>
+</div>
+<div class="section" id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h3>
+<p>Developers get use of python bindings and the graph
+construction/configuration language &#8220;for free&#8221;, i.e. without doing any
+manual python integration.</p>
+</div>
+<div class="section" id="reuse-and-collaboration">
+<h3>Reuse and collaboration<a class="headerlink" href="#reuse-and-collaboration" title="Permalink to this headline">¶</a></h3>
+<p>Ecto graphs naturally express a type system one level &#8220;up&#8221; from that
+of C++: a textured object detector, for instance, takes a point cloud
+as input and produces a list of object identifiers and poses as
+output.  Such interfaces appear naturally in ecto systems and make it
+straightforward to exchange components without recompiling.</p>
+</div>
+<div class="section" id="ros-integration">
+<h3>ROS integration<a class="headerlink" href="#ros-integration" title="Permalink to this headline">¶</a></h3>
+<p>Ecto graphs can run</p>
+<ul class="simple">
+<li>directly against live sensors (during development/prototyping of
+pipelines),</li>
+<li>on data read from disk (in testing/training)</li>
+<li>on data read from ROS publishers.</li>
+</ul>
+<p>Ecto serves as a hardware abstraction layer in the same way ROS does.
+It also serves as a ROS abstraction layer.  Because these layers are
+entirely decoupled from the ecto core, implementing new abstraction
+layers is straightforward.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">ecto</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011,  Willow Garage, Inc.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

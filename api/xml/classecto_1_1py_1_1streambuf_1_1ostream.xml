@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="classecto_1_1py_1_1streambuf_1_1ostream" kind="class" prot="public">
+    <compoundname>ecto::py::streambuf::ostream</compoundname>
+    <derivedcompoundref refid="structecto_1_1py_1_1ostream" prot="public" virt="non-virtual">ecto::py::ostream</derivedcompoundref>
+    <includes refid="streambuf_8hpp" local="no">streambuf.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classecto_1_1py_1_1streambuf_1_1ostream_1ab62cdec76b066fa4492b032dd1533bc5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ecto::py::streambuf::ostream::ostream</definition>
+        <argsstring>(streambuf &amp;buf)</argsstring>
+        <name>ostream</name>
+        <param>
+          <type><ref refid="classecto_1_1py_1_1streambuf" kindref="compound">streambuf</ref> &amp;</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python/streambuf.hpp" line="526" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python/streambuf.hpp" bodystart="525" bodyend="528"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1py_1_1streambuf_1_1ostream_1abeaab4a21b07a3bbf944d4ce8693a7b5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ecto::py::streambuf::ostream::~ostream</definition>
+        <argsstring>()</argsstring>
+        <name>~ostream</name>
+        <reimplementedby refid="structecto_1_1py_1_1ostream_1a69cba9ec021b14b76fd08d35ea322434">~ostream</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python/streambuf.hpp" line="530" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python/streambuf.hpp" bodystart="530" bodyend="530"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="309">
+        <label>ecto::py::ostream</label>
+        <link refid="structecto_1_1py_1_1ostream"/>
+        <childnode refid="308" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="308">
+        <label>ecto::py::streambuf::ostream</label>
+        <link refid="classecto_1_1py_1_1streambuf_1_1ostream"/>
+      </node>
+    </inheritancegraph>
+    <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python/streambuf.hpp" line="523" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python/streambuf.hpp" bodystart="522" bodyend="531"/>
+    <listofallmembers>
+      <member refid="classecto_1_1py_1_1streambuf_1_1ostream_1ab62cdec76b066fa4492b032dd1533bc5" prot="public" virt="non-virtual"><scope>ecto::py::streambuf::ostream</scope><name>ostream</name></member>
+      <member refid="classecto_1_1py_1_1streambuf_1_1ostream_1abeaab4a21b07a3bbf944d4ce8693a7b5" prot="public" virt="non-virtual"><scope>ecto::py::streambuf::ostream</scope><name>~ostream</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

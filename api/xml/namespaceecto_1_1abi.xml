@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="namespaceecto_1_1abi" kind="namespace">
+    <compoundname>ecto::abi</compoundname>
+    <innerclass refid="structecto_1_1abi_1_1verifier" prot="public">ecto::abi::verifier</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/abi.hpp" line="35"/>
+  </compounddef>
+</doxygen>

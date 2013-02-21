@@ -1,0 +1,485 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Changelog &mdash; ecto</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="ecto" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">ecto</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/ecto210.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Changelog</a><ul>
+<li><a class="reference internal" href="#head">0.3.4..HEAD</a></li>
+<li><a class="reference internal" href="#id2">0.3.3..0.3.4</a></li>
+<li><a class="reference internal" href="#id3">0.3.2..0.3.3</a></li>
+<li><a class="reference internal" href="#id4">0.3.1..0.3.2</a></li>
+<li><a class="reference internal" href="#id5">0.3.0..0.3.1</a></li>
+<li><a class="reference internal" href="#id6">0.2.0..0.3.0</a></li>
+<li><a class="reference internal" href="#id8">0.1.3..0.2.0</a></li>
+<li><a class="reference internal" href="#id9">0.1.2..0.1.3</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/ecto/changelog.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="changelog">
+<h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h1>
+<p>This is a generated changelog file.</p>
+<div class="section" id="head">
+<h2>0.3.4..HEAD<a class="headerlink" href="#head" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/2a31a15">2a31a15</a></td>
+<td>try to bring back the sphinx macro</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/461a3ed">461a3ed</a></td>
+<td>delete useless files</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/4807007">4807007</a></td>
+<td>add breathe back as the pip install is broken. We don&#8217;t use breathe yet though</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/d13037a">d13037a</a></td>
+<td>generalize the toggle directive and fix some docs</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/5157f91">5157f91</a></td>
+<td>install generated hpp to gen/cpp as catkin wants</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/c4896ca">c4896ca</a></td>
+<td>simplify the include in catkin_project</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/6dfd3e4">6dfd3e4</a></td>
+<td>remove uselss ecto_PYTHONPATH</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/1920fda">1920fda</a></td>
+<td>let catkin deal with ecto_INCLUDE_DIRS</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/4b23176">4b23176</a></td>
+<td>add bug reports for the docs, drop IRC</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/bab42d6">bab42d6</a></td>
+<td>fix some references</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/7516b5b">7516b5b</a></td>
+<td>delete the kitchen related docs</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/b11f9e6">b11f9e6</a></td>
+<td>fix the docs more</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/6f35778">6f35778</a></td>
+<td>add docs for the kitchen</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/bf946d0">bf946d0</a></td>
+<td>update the docs to the new hierarchy</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/948260f">948260f</a></td>
+<td>no need for that functionality anymore</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/705b7ec">705b7ec</a></td>
+<td>have catkin handle the Python install and make sure the tests pass</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id2">
+<h2>0.3.3..0.3.4<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/f3897b3">f3897b3</a></td>
+<td>change the version number</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/2fe4047">2fe4047</a></td>
+<td>facilitate the install folder</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/dfe07fa">dfe07fa</a></td>
+<td>add variable duplication for PCL</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/18064f0">18064f0</a></td>
+<td>improve the macros to set a variable for Python OUTPUT in buildspace</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/e2e77f3">e2e77f3</a></td>
+<td>safer bin checking</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id3">
+<h2>0.3.2..0.3.3<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/08d4fb1">08d4fb1</a></td>
+<td>bump the version number</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/9a097c2">9a097c2</a></td>
+<td>add the pybindings to ecto</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/04b1d8f">04b1d8f</a></td>
+<td>make sure ros_electric.cmake is copied properly all over</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/71d2aba">71d2aba</a></td>
+<td>copy the ros_electric file too</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/9c97156">9c97156</a></td>
+<td>make sure ecto itself uses the RPATH fix for Electric</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/cb393c4">cb393c4</a></td>
+<td>fix rpath issues on electric ....</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id4">
+<h2>0.3.1..0.3.2<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/7edee7b">7edee7b</a></td>
+<td>bump the revision number</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/64ece04">64ece04</a></td>
+<td>clarify the catkin boost, and make it ecto specific</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/e5716db">e5716db</a></td>
+<td>rename the hooks to what it should be</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/2d3c17a">2d3c17a</a></td>
+<td>make sure we install robuild_lite to the right path</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id5">
+<h2>0.3.0..0.3.1<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/449bd5c">449bd5c</a></td>
+<td>time for 0.3.1 that works with the more recent catkin</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/d135033">d135033</a></td>
+<td>remove errors from -pedantic</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/ef3789a">ef3789a</a></td>
+<td>use ros to find pcl</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/a383a68">a383a68</a></td>
+<td>generate the boost config file automatically as it&#8217;s supposed to be</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/e46727d">e46727d</a></td>
+<td>add python2.7/site-packages/ to the python path</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/5382b42">5382b42</a></td>
+<td>install the libraries in the right place at build time</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/c69600a">c69600a</a></td>
+<td>add some flann includes</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/3bc625d">3bc625d</a></td>
+<td>resurect rosbuild_lite_init but this will only work for electric</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/1ef7025">1ef7025</a></td>
+<td>disable some more docs</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/59ea86d">59ea86d</a></td>
+<td>disable catkin sphinx</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/e8746ae">e8746ae</a></td>
+<td>merge with IPI</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/b7113f3">b7113f3</a></td>
+<td>Merge branch &#8216;master&#8217; of <a class="reference external" href="ssh://gw.industrial-perception.com:9119/~/ecto">ssh://gw.industrial-perception.com:9119/~/ecto</a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/0edfc4e">0edfc4e</a></td>
+<td>adding cell freezer</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/f4be4ce">f4be4ce</a></td>
+<td>better error throwing</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/fe94b0b">fe94b0b</a></td>
+<td>remove bad comment.</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/bcf43a9">bcf43a9</a></td>
+<td>adding standin for state</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/dd7bbab">dd7bbab</a></td>
+<td>gui playing</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/d79713c">d79713c</a></td>
+<td>Fix return value error from process in python</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id6">
+<h2>0.2.0..0.3.0<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/0b1c50d">0b1c50d</a></td>
+<td>another test seem to be freezing ecto</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/ec58041">ec58041</a></td>
+<td>use the right environment variables for the test</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/1971bdd">1971bdd</a></td>
+<td>disable a test that freezes once in a while when building a deb package</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/2e8414f">2e8414f</a></td>
+<td>update the version in cmake too</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/22d8bd4">22d8bd4</a></td>
+<td>0.3.0 is ready to go</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/2fbc836">2fbc836</a></td>
+<td>doxygen is now handled through catkin</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/f855469">f855469</a></td>
+<td>adding standin for state</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/72f676e">72f676e</a></td>
+<td>use proper catkin_sphinx</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/37aec33">37aec33</a></td>
+<td>gui playing</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/24eb4f9">24eb4f9</a></td>
+<td>Fix return value error from process in python</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/b384ab1">b384ab1</a></td>
+<td>Merge branch &#8216;master&#8217; of <a class="reference external" href="ssh://gw.industrial-perception.com:9119/~/ecto">ssh://gw.industrial-perception.com:9119/~/ecto</a></td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/e3d7821">e3d7821</a></td>
+<td>reconfigure</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/66cae21">66cae21</a></td>
+<td>rm empty sphinx ?</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/74439da">74439da</a></td>
+<td>add a config file</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/8dc553a">8dc553a</a></td>
+<td>use to thunk (temporarily) to generated boost detection stuff which is now in catkin</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/808fab1">808fab1</a></td>
+<td>fastidious moves to catkin</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/de6abe1">de6abe1</a></td>
+<td>moved ecto sphinx extensions to catkin</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/6f6b2b9">6f6b2b9</a></td>
+<td>move EctoCellDirective and other sphinx stuff over to catkin</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/0a72004">0a72004</a></td>
+<td>maybe slightly less harsh</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/250d197">250d197</a></td>
+<td>docs</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/b68d524">b68d524</a></td>
+<td>docs</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/6eb5a22">6eb5a22</a></td>
+<td>more</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/8c8ed38">8c8ed38</a></td>
+<td>more goodbye to python_path.sh</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/a6a4b2f">a6a4b2f</a></td>
+<td>adios ecto_python_env_gen</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/f9af253">f9af253</a></td>
+<td>adios rosbuild_lite</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/35c3432">35c3432</a></td>
+<td>buildbot... POKE</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/3ffadc5">3ffadc5</a></td>
+<td>buildbot poke</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/9fc5590">9fc5590</a></td>
+<td>buildbot poke</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/557b312">557b312</a></td>
+<td>buildbot poke</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/9200114">9200114</a></td>
+<td>buildbot poke</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/2d6a923">2d6a923</a></td>
+<td>buildbot poke</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/073ef1d">073ef1d</a></td>
+<td>buildbot poke</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/8a11219">8a11219</a></td>
+<td>buildbot poke</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/92a7706">92a7706</a></td>
+<td>buildbot poke</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/78094ee">78094ee</a></td>
+<td>better?</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/10410fa">10410fa</a></td>
+<td>meh.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/d20e70f">d20e70f</a></td>
+<td>meh.</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/0f666f2">0f666f2</a></td>
+<td>go buildbot, go!</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/0ee9941">0ee9941</a></td>
+<td>another test.  go buildbot!</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/39acddd">39acddd</a></td>
+<td>test commit</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/01dde72">01dde72</a></td>
+<td>adding list_of_strings function</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id8">
+<h2>0.1.3..0.2.0<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/2f29b92">2f29b92</a></td>
+<td>Bumping minor version ~&gt; 0.2.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id9">
+<h2>0.1.2..0.1.3<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/9614012">9614012</a></td>
+<td>Bump the patch version.</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://github.com/plasmodic/ecto/commit/8b1beff">8b1beff</a></td>
+<td>Fixing env stuff for catkin.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">ecto</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011,  Willow Garage, Inc.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$rethrow_8hpp.html" title="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/rethrow.hpp" alt="" coords="5,83,587,112"/>
+<area shape="rect" id="node5" href="$profile_8hpp.html" title="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/profile.hpp" alt="" coords="1331,83,1904,112"/>
+<area shape="rect" id="node7" href="$scheduler_8hpp.html" title="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/scheduler.hpp" alt="" coords="685,160,1283,189"/>
+<area shape="rect" id="node9" href="$vertex_8hpp.html" title="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/vertex.hpp" alt="" coords="1337,160,1913,189"/>
+<area shape="rect" id="node13" href="$cell_8hpp.html" title="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/cell.hpp" alt="" coords="2457,315,3015,344"/>
+<area shape="rect" id="node18" href="$registry_8hpp.html" title="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/registry.hpp" alt="" coords="2044,392,2625,421"/>
+<area shape="rect" id="node22" href="$ecto_8hpp.html" title="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/ecto.hpp" alt="" coords="2053,547,2616,576"/>
+<area shape="rect" id="node28" href="$graph__types_8hpp.html" title="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/impl/graph_types.hpp" alt="" coords="661,83,1307,112"/>
+<area shape="rect" id="node32" href="$tendril_8hpp.html" title="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendril.hpp" alt="" coords="2719,83,3295,112"/>
+<area shape="rect" id="node43" href="$plasm_8hpp.html" title="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/plasm.hpp" alt="" coords="4843,160,5416,189"/>
+<area shape="rect" id="node51" href="$edge_8hpp.html" title="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/edge.hpp" alt="" coords="4329,315,4897,344"/>
+<area shape="rect" id="node54" href="$strand_8hpp.html" title="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/strand.hpp" alt="" coords="2131,237,2707,267"/>
+<area shape="rect" id="node11" href="$all_8hpp.html" title="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/all.hpp" alt="" coords="2873,624,3423,653"/>
+<area shape="rect" id="node16" href="$serialization_2cell_8hpp.html" title="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/serialization/cell.hpp" alt="" coords="2372,469,3009,499"/>
+<area shape="rect" id="node20" href="$module_8hpp.html" title="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/module.hpp" alt="" coords="1713,469,2297,499"/>
+<area shape="rect" id="node36" href="$spore_8hpp.html" title="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/spore.hpp" alt="" coords="2883,160,3453,189"/>
+<area shape="rect" id="node39" href="$tendrils_8hpp.html" title="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/tendrils.hpp" alt="" coords="2832,237,3413,267"/>
+<area shape="rect" id="node46" href="$serialization_2tendril_8hpp.html" title="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/serialization/tendril.hpp" alt="" coords="3477,160,4133,189"/>
+<area shape="rect" id="node48" href="$serialization_2registry_8hpp.html" title="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/serialization/registry.hpp" alt="" coords="4157,160,4819,189"/>
+</map>

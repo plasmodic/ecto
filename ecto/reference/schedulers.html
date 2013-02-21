@@ -1,0 +1,219 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>schedulers &mdash; ecto</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="ecto" href="../../index.html" />
+    <link rel="up" title="Reference" href="index.html" />
+    <link rel="next" title="Module ecto_test" href="ecto_test_cells.html" />
+    <link rel="prev" title="tendril" href="tendril.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ecto_test_cells.html" title="Module ecto_test"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tendril.html" title="tendril"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">ecto</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/ecto210.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">schedulers</a><ul>
+<li><a class="reference internal" href="#singlethreaded">Singlethreaded</a></li>
+<li><a class="reference internal" href="#reentrant-running">Reentrant running</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tendril.html"
+                        title="previous chapter">tendril</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ecto_test_cells.html"
+                        title="next chapter">Module ecto_test</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/ecto/reference/schedulers.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="schedulers">
+<span id="index-0"></span><span id="id1"></span><h1>schedulers<a class="headerlink" href="#schedulers" title="Permalink to this headline">¶</a></h1>
+<p>The schedulers operate on the plasm.  There are singlethreaded and
+threadpool schedulers.  Yes, the name <em>scheduler</em> is a little dry, and
+some think a plasm should have a <em>metabolism</em> or <em>Krebs Cycle</em>
+instead, but there were no motivating name collisions (as with
+&#8216;node&#8217;).</p>
+<p>All schedulers should implement a basic interface for construction and
+execution (the same as the interface as the Singlethreaded scheduler
+implements); scheduler-specific functions and parameters may exist
+outside this set.</p>
+<div class="section" id="singlethreaded">
+<h2>Singlethreaded<a class="headerlink" href="#singlethreaded" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ecto.Scheduler">
+<em class="property">class </em><tt class="descclassname">ecto.</tt><tt class="descname">Scheduler</tt><a class="headerlink" href="#ecto.Scheduler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Singlethreaded scheduler.  This class will execute the cells in the
+plasm in topological order in a single thread.</p>
+<dl class="method">
+<dt id="ecto.Scheduler.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>plasm</em><big>)</big><a class="headerlink" href="#ecto.Scheduler.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct one around a plasm</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Scheduler.execute">
+<tt class="descname">execute</tt><big>(</big><big>)</big><a class="headerlink" href="#ecto.Scheduler.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute the graph in an infinite loop.  Blocks.</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<tt class="descname">execute</tt><big>(</big><em>niter</em><big>)</big></dt>
+<dd><p>Execute the graph niter times.  This call will blocks until the
+execution is finished.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Scheduler.execute_async">
+<tt class="descname">execute_async</tt><big>(</big><big>)</big><a class="headerlink" href="#ecto.Scheduler.execute_async" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<tt class="descname">execute_async</tt><big>(</big><em>niter</em><big>)</big></dt>
+<dd><p>These functions are the same as the blocking ones above, except
+they start an execution thread in the background and return
+immediately.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Scheduler.running">
+<tt class="descname">running</tt><big>(</big><big>)</big><a class="headerlink" href="#ecto.Scheduler.running" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if the execution started by execute_async() is still running.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Scheduler.stop">
+<tt class="descname">stop</tt><big>(</big><big>)</big><a class="headerlink" href="#ecto.Scheduler.stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stops the background graph execution at the end of the current process() call.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Scheduler.wait">
+<tt class="descname">wait</tt><big>(</big><big>)</big><a class="headerlink" href="#ecto.Scheduler.wait" title="Permalink to this definition">¶</a></dt>
+<dd><p>Blocks until the execution started by the last call to
+execute_async() is finished.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="reentrant-running">
+<h2>Reentrant running<a class="headerlink" href="#reentrant-running" title="Permalink to this headline">¶</a></h2>
+<p>The schedulers are fully reentrant, meaning, that when you stop(), and wait() on
+a scheduler it may be executed again.</p>
+<p>The following code is therefore valid for any ecto scheduler:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">s</span> <span class="o">=</span> <span class="n">Sheduler</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">execute_async</span><span class="p">()</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+<span class="n">s</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+<span class="n">s</span><span class="o">.</span><span class="n">execute_async</span><span class="p">()</span>
+<span class="k">assert</span> <span class="n">s</span><span class="o">.</span><span class="n">running</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ecto_test_cells.html" title="Module ecto_test"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tendril.html" title="tendril"
+             >previous</a> |</li>
+        <li><a href="../../index.html">ecto</a> &raquo;</li>
+          <li><a href="index.html" >Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011,  Willow Garage, Inc.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

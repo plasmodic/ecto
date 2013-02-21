@@ -1,0 +1,229 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using ecto in your own projects &mdash; ecto</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="ecto" href="../../index.html" />
+    <link rel="up" title="Usage" href="index.html" />
+    <link rel="next" title="Hello Ecto!" href="tutorials/hello.html" />
+    <link rel="prev" title="Usage" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tutorials/hello.html" title="Hello Ecto!"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Usage"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">ecto</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Usage</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/ecto210.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Using ecto in your own projects</a><ul>
+<li><a class="reference internal" href="#cmake-setup">CMake Setup</a><ul>
+<li><a class="reference internal" href="#ecto-is-installed">ecto is installed</a></li>
+<li><a class="reference internal" href="#ecto-is-not-installed">ecto is not installed</a></li>
+<li><a class="reference internal" href="#build-it">Build it.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Usage</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tutorials/hello.html"
+                        title="next chapter">Hello Ecto!</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/ecto/usage/client_usage.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="using-ecto-in-your-own-projects">
+<span id="client-usage"></span><h1>Using ecto in your own projects<a class="headerlink" href="#using-ecto-in-your-own-projects" title="Permalink to this headline">¶</a></h1>
+<p>CMake is the recommended build system tool.  For the purpose of this
+documentation you should have a simple CMake project that looks like this on disk.</p>
+<div class="highlight-ectosh"><div class="highlight"><pre><span class="mf">%</span><span class="gd"> ls my_ecto_project</span>
+CMakeLists.txt
+hello_ecto.cpp
+hello.py
+</pre></div>
+</div>
+<div class="section" id="cmake-setup">
+<h2>CMake Setup<a class="headerlink" href="#cmake-setup" title="Permalink to this headline">¶</a></h2>
+<p>CMake should be used to find ecto and bring in a few macros:</p>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8</span><span class="p">)</span>
+
+<span class="nb">project</span><span class="p">(</span><span class="s">my_ecto_project</span><span class="p">)</span>
+
+<span class="c">#defines include directories, libraries a few macros</span>
+<span class="c">#that simplify creating ecto module targets.</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">ecto</span> <span class="s">REQUIRED</span><span class="p">)</span>
+
+<span class="c">#make all libraries appear in the build/lib directory</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_LIBRARY_OUTPUT_DIRECTORY</span> <span class="o">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="o">}</span><span class="s">/lib</span><span class="p">)</span>
+
+<span class="nb">ectomodule</span><span class="p">(</span><span class="s">hello_ecto</span> <span class="s">FALSE</span>
+    <span class="s">hello_ecto.cpp</span>
+<span class="p">)</span>
+
+<span class="c">#optionally link against other libs</span>
+<span class="c">#link_ecto(hello_ecto</span>
+<span class="c">#  ${MY_EXTRA_LIBS}</span>
+<span class="c">#)</span>
+</pre></div>
+</div>
+<p>Take notice of the command <tt class="docutils literal"><span class="pre">find_package(ecto</span> <span class="pre">REQUIRED)</span></tt>. If ecto is installed on your
+system, or built somewhere, this will enable your project to become an ecto beast.</p>
+<p>The <tt class="docutils literal"><span class="pre">ectomodule</span></tt> macro is the one that defines your C++ set of cells. The first argument is
+mandotory and is the <tt class="docutils literal"><span class="pre">NAME</span></tt> of your module. It then accept a <tt class="docutils literal"><span class="pre">DESTINATION</span></tt> argument where you define
+in which subfolder of your project to install the module and a <tt class="docutils literal"><span class="pre">INSTALL</span></tt> flag that defines whether your
+module will be isntalled or not when during <tt class="docutils literal"><span class="pre">make</span> <span class="pre">install</span></tt> (you might not want to if it is a test module).
+In case you want more flexibility, just know that this macro defines a <tt class="docutils literal"><span class="pre">${NAME}_ectomodule</span></tt> CMake target.</p>
+<p>The second and last ecto macro you need to know is <tt class="docutils literal"><span class="pre">link_ecto</span></tt> that you can use to link your module to
+external libraries (it just abstracts this <tt class="docutils literal"><span class="pre">${NAME}_ectomodule</span></tt> target for you).</p>
+<div class="section" id="ecto-is-installed">
+<h3>ecto is installed<a class="headerlink" href="#ecto-is-installed" title="Permalink to this headline">¶</a></h3>
+<p>CMake should complete without error, using default settings.</p>
+<div class="highlight-ectosh"><div class="highlight"><pre><span class="mf">%</span><span class="gd"> cd my_ecto_project</span>
+<span class="mf">%</span><span class="gd"> mkdir build</span>
+<span class="mf">%</span><span class="gd"> cd build</span>
+<span class="mf">%</span><span class="gd"> cmake ..</span>
+</pre></div>
+</div>
+<p>Make sure that the output does not contain warnings or errors:</p>
+<div class="highlight-ectosh"><div class="highlight"><pre><span class="mf">%</span><span class="gd"> cmake ..</span>
+-- The C compiler identification is GNU
+-- The CXX compiler identification is GNU
+-- Check for working C compiler: /usr/bin/gcc
+-- Check for working C compiler: /usr/bin/gcc -- works
+... etc etc
+-- Configuring done
+-- Generating done
+</pre></div>
+</div>
+</div>
+<div class="section" id="ecto-is-not-installed">
+<h3>ecto is not installed<a class="headerlink" href="#ecto-is-not-installed" title="Permalink to this headline">¶</a></h3>
+<p>You will need to supply the ecto build path to your cmake cache.</p>
+<div class="highlight-ectosh"><div class="highlight"><pre><span class="mf">%</span><span class="gd"> cd my_ecto_project</span>
+<span class="mf">%</span><span class="gd"> mkdir build</span>
+<span class="mf">%</span><span class="gd"> cd build</span>
+<span class="mf">%</span><span class="gd"> cmake -Decto_DIR=~/ecto_dev/ecto/build ..</span>
+</pre></div>
+</div>
+<p>Make sure that the output does not contain warnings or errors:</p>
+<div class="highlight-ectosh"><div class="highlight"><pre><span class="mf">%</span><span class="gd"> cmake ..</span>
+-- The C compiler identification is GNU
+-- The CXX compiler identification is GNU
+-- Check for working C compiler: /usr/bin/gcc
+-- Check for working C compiler: /usr/bin/gcc -- works
+... etc etc
+-- Configuring done
+-- Generating done
+</pre></div>
+</div>
+</div>
+<div class="section" id="build-it">
+<h3>Build it.<a class="headerlink" href="#build-it" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-ectosh"><div class="highlight"><pre><span class="mf">%</span><span class="gd"> cd my_ecto_project/build</span>
+<span class="mf">%</span><span class="gd"> make</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tutorials/hello.html" title="Hello Ecto!"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Usage"
+             >previous</a> |</li>
+        <li><a href="../../index.html">ecto</a> &raquo;</li>
+          <li><a href="index.html" >Usage</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011,  Willow Garage, Inc.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="dir_3d94456137644b4e75fb50cc7d70df04" kind="dir">
+    <compoundname>/home/vrabaud/workspace/recognition_kitchen_groovy/src/</compoundname>
+    <innerdir refid="dir_d38fea9004b610b06426adfa7f33fc87">/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/"/>
+  </compounddef>
+</doxygen>

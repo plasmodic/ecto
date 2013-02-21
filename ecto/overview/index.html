@@ -1,0 +1,155 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Overview of Ecto &mdash; ecto</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="ecto" href="../../index.html" />
+    <link rel="next" title="Quickguide" href="summary.html" />
+    <link rel="prev" title="Ecto - A C++/Python Computation Graph Framework" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="summary.html" title="Quickguide"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../../index.html" title="Ecto - A C++/Python Computation Graph Framework"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">ecto</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/ecto210.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../../index.html"
+                        title="previous chapter">Ecto - A C++/Python Computation Graph Framework</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="summary.html"
+                        title="next chapter">Quickguide</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/ecto/overview/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="overview-of-ecto">
+<span id="overview-ecto"></span><h1>Overview of Ecto<a class="headerlink" href="#overview-of-ecto" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="glossary.html#ecto-greek"><em>ecto</em></a> is a scriptable processing framework with a
+lightweight plugin architecture, graph constructs and scheduling
+algorithms suitable for computer vision, perception,
+audio processing and robotics pipelines. The key components of Ecto
+are
+<a class="reference internal" href="cells.html#cells-overview"><em>Cells</em></a>,
+<a class="reference internal" href="../reference/tendril.html#plasm-overview"><em>plasm</em></a>,
+<a class="reference internal" href="../reference/tendril.html#tendril-overview"><em>tendril</em></a>,
+and
+<a class="reference internal" href="../reference/schedulers.html#schedulers"><em>schedulers</em></a>.
+With these tools, you, the programmer, researcher or hacker may
+construct well partitioned reusable processing graphs that exhibit qualities such
+as ordered synchronous execution, efficient scheduling routines, type safety, and
+self documentation.</p>
+<p>To develop ecto based applications, one should be moderately comfortable with
+C++ and Python.  C++ is preferred when writing <tt class="docutils literal"><span class="pre">Cells</span></tt>, the basic unit of work in Ecto.
+Python becomes the glue that is used to compose higher level processing
+graphs, or <tt class="docutils literal"><span class="pre">Plasms</span></tt> from these cells.  As such, most of the examples that will
+follow will involve both C++ and Python snippets.</p>
+<p>First, check if you like ecto:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="summary.html">Quickguide</a></li>
+</ul>
+</div>
+<p>The following is a pretty thorough explanation of the main concepts behind ecto but
+you can get to coding right away if you want:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cells.html">Cells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Modules</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="summary.html" title="Quickguide"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../../index.html" title="Ecto - A C++/Python Computation Graph Framework"
+             >previous</a> |</li>
+        <li><a href="../../index.html">ecto</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011,  Willow Garage, Inc.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

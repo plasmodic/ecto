@@ -1,0 +1,152 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Requirements &mdash; ecto</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="ecto" href="../../index.html" />
+    <link rel="up" title="Installing ecto" href="index.html" />
+    <link rel="next" title="Usage" href="../usage/index.html" />
+    <link rel="prev" title="Build Ecto From Source" href="get_ecto.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../usage/index.html" title="Usage"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="get_ecto.html" title="Build Ecto From Source"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">ecto</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Installing ecto</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/ecto210.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Requirements</a></li>
+<li><a class="reference internal" href="#path">path</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="get_ecto.html"
+                        title="previous chapter">Build Ecto From Source</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../usage/index.html"
+                        title="next chapter">Usage</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/ecto/install/get_ecto_win32.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="requirements">
+<span id="get-ecto-win32"></span><h1>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><ul class="simple">
+<li>boost (try 1.43 from boostpro <a class="reference external" href="http://www.boostpro.com/download/">http://www.boostpro.com/download/</a>)</li>
+<li>python (try 2.6)</li>
+<li>cmake</li>
+<li>gtest (build and add to path)</li>
+<li>git (Follow <a class="reference external" href="http://help.github.com/win-set-up-git/">http://help.github.com/win-set-up-git/</a>)</li>
+<li>msvc 2010 express ( <a class="reference external" href="http://www.microsoft.com/visualstudio/en-us/products/2010-editions/express">http://www.microsoft.com/visualstudio/en-us/products/2010-editions/express</a> )</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="path">
+<h1>path<a class="headerlink" href="#path" title="Permalink to this headline">¶</a></h1>
+<p>Windows needs some path setup for this to go smoothly.</p>
+<div class="highlight-sh"><div class="highlight"><pre><span class="nb">set </span><span class="nv">PATH</span><span class="o">=</span>C:<span class="se">\P</span>rogram Files<span class="se">\C</span>Make 2.8<span class="se">\b</span>in;C:<span class="se">\P</span>ython26<span class="se">\;</span>C:<span class="se">\g</span>test<span class="se">\l</span>ib_dir
+</pre></div>
+</div>
+<p>Also it may be useful to always work from the <strong>Visual Studio Command Prompt</strong> or otherwise
+be sure to source the <tt class="docutils literal"><span class="pre">C:\Program</span> <span class="pre">Files\Microsoft</span> <span class="pre">Visual</span> <span class="pre">Studio</span> <span class="pre">10.0\VC\vcvarsall.bat</span></tt> before
+starting any work.</p>
+<p><a class="reference external" href="http://technet.microsoft.com/en-us/sysinternals/bb896645">http://technet.microsoft.com/en-us/sysinternals/bb896645</a></p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../usage/index.html" title="Usage"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="get_ecto.html" title="Build Ecto From Source"
+             >previous</a> |</li>
+        <li><a href="../../index.html">ecto</a> &raquo;</li>
+          <li><a href="index.html" >Installing ecto</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011,  Willow Garage, Inc.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

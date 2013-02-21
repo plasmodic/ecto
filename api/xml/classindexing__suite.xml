@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="classindexing__suite" kind="class" prot="public">
+    <compoundname>indexing_suite</compoundname>
+    <derivedcompoundref refid="classboost_1_1python_1_1std__map__indexing__suite" prot="public" virt="non-virtual">boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classboost_1_1python_1_1std__vector__indexing__suite" prot="public" virt="non-virtual">boost::python::std_vector_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classboost_1_1python_1_1std__map__indexing__suite" prot="public" virt="non-virtual">boost::python::std_map_indexing_suite&lt; Container, NoProxy, final_std_map_derived_policies&lt; Container, NoProxy &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classboost_1_1python_1_1std__vector__indexing__suite" prot="public" virt="non-virtual">boost::python::std_vector_indexing_suite&lt; Container, NoProxy, final_std_vector_derived_policies&lt; Container, NoProxy &gt; &gt;</derivedcompoundref>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="265">
+        <label>boost::python::std_vector_indexing_suite&lt; Container, DerivedPolicies, NoProxy &gt;</label>
+        <link refid="classboost_1_1python_1_1std__vector__indexing__suite"/>
+        <childnode refid="263" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="263">
+        <label>indexing_suite</label>
+        <link refid="classindexing__suite"/>
+      </node>
+      <node id="264">
+        <label>boost::python::std_map_indexing_suite&lt; Container, DerivedPolicies, NoProxy, true, Container::value_type::second_type, Container::key_type, Container::key_type &gt;</label>
+        <link refid="classboost_1_1python_1_1std__map__indexing__suite"/>
+        <childnode refid="263" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="268">
+        <label>std_vector_indexing_suite&lt; Container, NoProxy, final_std_vector_derived_policies&lt; Container, NoProxy &gt; &gt;</label>
+        <link refid="classboost_1_1python_1_1std__vector__indexing__suite"/>
+        <childnode refid="263" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="267">
+        <label>boost::python::detail::final_std_map_derived_policies&lt; Container, NoProxy &gt;</label>
+        <link refid="classboost_1_1python_1_1detail_1_1final__std__map__derived__policies"/>
+        <childnode refid="266" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="266">
+        <label>std_map_indexing_suite&lt; Container, NoProxy, final_std_map_derived_policies&lt; Container, NoProxy &gt; &gt;</label>
+        <link refid="classboost_1_1python_1_1std__map__indexing__suite"/>
+        <childnode refid="263" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="269">
+        <label>boost::python::detail::final_std_vector_derived_policies&lt; Container, NoProxy &gt;</label>
+        <link refid="classboost_1_1python_1_1detail_1_1final__std__vector__derived__policies"/>
+        <childnode refid="268" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python/std_vector_indexing_suite.hpp" line="52"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,17 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$cell_8hpp.html" title="ecto/cell.hpp" alt="" coords="2172,160,2273,189"/>
+<area shape="rect" id="node117" href="$registry_8hpp.html" title="ecto/registry.hpp" alt="" coords="2647,83,2775,112"/>
+<area shape="rect" id="node5" href="$forward_8hpp.html" title="ecto/forward.hpp" alt="" coords="2481,469,2609,499"/>
+<area shape="rect" id="node9" href="$log_8hpp.html" title="ecto/log.hpp" alt="" coords="229,469,331,499"/>
+<area shape="rect" id="node13" href="$util_8hpp.html" title="ecto/util.hpp" alt="" coords="483,547,584,576"/>
+<area shape="rect" id="node25" href="$strand_8hpp.html" title="ecto/strand.hpp" alt="" coords="2773,392,2896,421"/>
+<area shape="rect" id="node33" href="$tendril_8hpp.html" title="ecto/tendril.hpp" alt="" coords="1469,392,1592,421"/>
+<area shape="rect" id="node83" href="$tendrils_8hpp.html" title="ecto/tendrils.hpp" alt="" coords="915,237,1043,267"/>
+<area shape="rect" id="node104" href="$traits_8hpp.html" title="ecto/traits.hpp" alt="" coords="2300,237,2415,267"/>
+<area shape="rect" id="node21" href="$test_8hpp.html" title="ecto/test.hpp" alt="" coords="99,547,205,576"/>
+<area shape="rect" id="node44" href="$except_8hpp.html" title="ecto/except.hpp" alt="" coords="1253,469,1379,499"/>
+<area shape="rect" id="node67" href="$python_8hpp.html" title="ecto/python.hpp" alt="" coords="1899,469,2024,499"/>
+<area shape="rect" id="node73" href="$repr_8hpp.html" title="ecto/python/repr.hpp" alt="" coords="1453,469,1608,499"/>
+<area shape="rect" id="node88" href="$spore_8hpp.html" title="ecto/spore.hpp" alt="" coords="659,315,776,344"/>
+<area shape="rect" id="node108" href="$gil_8hpp.html" title="ecto/python/gil.hpp" alt="" coords="2453,315,2597,344"/>
+</map>

@@ -1,0 +1,180 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Modules &mdash; ecto</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="ecto" href="../../index.html" />
+    <link rel="up" title="Overview of Ecto" href="index.html" />
+    <link rel="next" title="Installing ecto" href="../install/index.html" />
+    <link rel="prev" title="Cells" href="cells.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../install/index.html" title="Installing ecto"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="cells.html" title="Cells"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">ecto</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Overview of Ecto</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/ecto210.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="cells.html"
+                        title="previous chapter">Cells</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../install/index.html"
+                        title="next chapter">Installing ecto</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/ecto/overview/modules.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="modules">
+<span id="modules-overview"></span><h1>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h1>
+<p>An ecto module is a collection of cells, and manifests itself as a single shared
+object.  From a build system perspective a module looks like:</p>
+<div class="highlight-cmake"><div class="highlight"><pre><span class="nb">ectomodule</span><span class="p">(</span><span class="s">my_ecto_module</span> <span class="s">DESTINATION</span> <span class="s">path_to_relative_build_module</span> <span class="s">INSTALL</span>
+  <span class="s">module.cpp</span>
+  <span class="s">Hello.cpp</span>
+  <span class="s">SomeCell.cpp</span>
+  <span class="p">)</span>
+</pre></div>
+</div>
+<p>Where <tt class="docutils literal"><span class="pre">module.cpp</span></tt> is the recommended idiom for defining your ecto module.
+INSTALL is an optional argument: if set, the module will also be installed (you might
+not want to install a test module). DESTINATION is the relative path where to
+install the module (e.g.: <tt class="docutils literal"><span class="pre">./</span></tt> (default) or <tt class="docutils literal"><span class="pre">${PROJECT_NAME}/ecto_cells</span></tt>).
+It will contain very little code and use the <a class="reference internal" href="../usage/techniques/autoregister.html#ECTO_DEFINE_MODULE" title="ECTO_DEFINE_MODULE"><tt class="xref c c-macro docutils literal"><span class="pre">ECTO_DEFINE_MODULE</span></tt></a>. A typical
+<tt class="docutils literal"><span class="pre">module.cpp</span></tt> will look like:</p>
+<blockquote>
+<div><div class="highlight-c++"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
+
+<span class="n">ECTO_DEFINE_MODULE</span><span class="p">(</span><span class="n">my_ecto_module</span><span class="p">){}</span>
+</pre></div>
+</div>
+<p>It is important that the name given to your <tt class="docutils literal"><span class="pre">ectomodule</span></tt> macro, <tt class="docutils literal"><span class="pre">my_ecto_module</span></tt>
+matches that given to <a class="reference internal" href="../usage/techniques/autoregister.html#ECTO_DEFINE_MODULE" title="ECTO_DEFINE_MODULE"><tt class="xref c c-macro docutils literal"><span class="pre">ECTO_DEFINE_MODULE</span></tt></a>.</p>
+</div></blockquote>
+<p>And every other cpp file will contain typically a single cell, exported:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
+
+<span class="k">namespace</span> <span class="n">my_ecto_module</span>
+<span class="p">{</span>
+  <span class="k">struct</span> <span class="n">Hello</span>
+  <span class="p">{</span>
+    <span class="c1">//... cell implementation</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="n">ECTO_CELL</span><span class="p">(</span><span class="n">my_ecto_module</span><span class="p">,</span> <span class="n">my_ecto_module</span><span class="o">::</span><span class="n">Hello</span><span class="p">,</span><span class="s">&quot;Hello&quot;</span><span class="p">,</span> <span class="s">&quot;Prints a string input to standard output.&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Note that namespacing your implementations is a good idea to avoid linktime One Definition Rule (ODR)
+violations.  Also notice that most ecto modules do not contain header files, as your
+ecto cells should be rather self contained, use common types for
+tendrils (int, float, cv::Mat, pcl::PointCloud), etc ...</p>
+<p>The <tt class="docutils literal"><span class="pre">ectomodule</span></tt> cmake macro will yield a shared library artifact in your build, that
+has no lib prefix. This shared library is accessible to python if it is in
+the python python path.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#import the ecto module</span>
+<span class="kn">import</span> <span class="nn">my_ecto_module</span>
+
+<span class="c">#access a cell from the module</span>
+<span class="n">hello</span> <span class="o">=</span> <span class="n">my_ecto_module</span><span class="o">.</span><span class="n">Hello</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Your project may contain any number of modules, and each module may have any number
+of cells. More advanced projects might use python package layout, which should work
+fine with compiled ecto modules, see <a class="reference internal" href="../usage/techniques/python-packages.html#techniques-python-packages"><em>Using python packages with ecto projects</em></a>.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../install/index.html" title="Installing ecto"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="cells.html" title="Cells"
+             >previous</a> |</li>
+        <li><a href="../../index.html">ecto</a> &raquo;</li>
+          <li><a href="index.html" >Overview of Ecto</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011,  Willow Garage, Inc.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

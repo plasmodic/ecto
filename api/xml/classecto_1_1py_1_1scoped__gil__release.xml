@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.7.6.1">
+  <compounddef id="classecto_1_1py_1_1scoped__gil__release" kind="class" prot="public">
+    <compoundname>ecto::py::scoped_gil_release</compoundname>
+    <includes refid="python_8hpp" local="no">python.hpp</includes>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classecto_1_1py_1_1scoped__gil__release_1a2ebf229b22f53b7d31b742e45b8832d8" prot="private" static="yes" mutable="no">
+        <type>PyThreadState *</type>
+        <definition>PyThreadState* ecto::py::scoped_gil_release::threadstate</definition>
+        <argsstring></argsstring>
+        <name>threadstate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python.hpp" line="59" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classecto_1_1py_1_1scoped__gil__release_1a9e9fbf0c5819ac1b706437d99a6459a3" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ecto::py::scoped_gil_release::mine</definition>
+        <argsstring></argsstring>
+        <name>mine</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python.hpp" line="60" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classecto_1_1py_1_1scoped__gil__release_1a888a6813c86b9bbd2d5cd0d4a0f7e2f2" prot="private" static="no" mutable="no">
+        <type><ref refid="structecto_1_1py_1_1gilstatus" kindref="compound">gilstatus</ref></type>
+        <definition>gilstatus ecto::py::scoped_gil_release::mystatus</definition>
+        <argsstring></argsstring>
+        <name>mystatus</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python.hpp" line="61" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classecto_1_1py_1_1scoped__gil__release_1afd4cb62267206421eca93969a8bb0865" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ecto::py::scoped_gil_release::scoped_gil_release</definition>
+        <argsstring>(const char *file, unsigned line)</argsstring>
+        <name>scoped_gil_release</name>
+        <param>
+          <type>const char *</type>
+          <declname>file</declname>
+        </param>
+        <param>
+          <type>unsigned</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python.hpp" line="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1py_1_1scoped__gil__release_1addd644daf557129d6584829cda6b9cc0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ecto::py::scoped_gil_release::~scoped_gil_release</definition>
+        <argsstring>()</argsstring>
+        <name>~scoped_gil_release</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python.hpp" line="64"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="336">
+        <label>ecto::py::gilstatus</label>
+        <link refid="structecto_1_1py_1_1gilstatus"/>
+      </node>
+      <node id="335">
+        <label>ecto::py::scoped_gil_release</label>
+        <link refid="classecto_1_1py_1_1scoped__gil__release"/>
+        <childnode refid="336" relation="usage">
+          <edgelabel>mystatus</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python.hpp" line="58" bodyfile="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/python.hpp" bodystart="57" bodyend="65"/>
+    <listofallmembers>
+      <member refid="classecto_1_1py_1_1scoped__gil__release_1a9e9fbf0c5819ac1b706437d99a6459a3" prot="private" virt="non-virtual"><scope>ecto::py::scoped_gil_release</scope><name>mine</name></member>
+      <member refid="classecto_1_1py_1_1scoped__gil__release_1a888a6813c86b9bbd2d5cd0d4a0f7e2f2" prot="private" virt="non-virtual"><scope>ecto::py::scoped_gil_release</scope><name>mystatus</name></member>
+      <member refid="classecto_1_1py_1_1scoped__gil__release_1afd4cb62267206421eca93969a8bb0865" prot="public" virt="non-virtual"><scope>ecto::py::scoped_gil_release</scope><name>scoped_gil_release</name></member>
+      <member refid="classecto_1_1py_1_1scoped__gil__release_1a2ebf229b22f53b7d31b742e45b8832d8" prot="private" virt="non-virtual"><scope>ecto::py::scoped_gil_release</scope><name>threadstate</name></member>
+      <member refid="classecto_1_1py_1_1scoped__gil__release_1addd644daf557129d6584829cda6b9cc0" prot="public" virt="non-virtual"><scope>ecto::py::scoped_gil_release</scope><name>~scoped_gil_release</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

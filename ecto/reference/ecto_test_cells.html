@@ -1,0 +1,1175 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Module ecto_test &mdash; ecto</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="ecto" href="../../index.html" />
+    <link rel="up" title="Reference" href="index.html" />
+    <link rel="next" title="Documentation for Python" href="python.html" />
+    <link rel="prev" title="schedulers" href="schedulers.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="python.html" title="Documentation for Python"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="schedulers.html" title="schedulers"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">ecto</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/ecto210.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="schedulers.html"
+                        title="previous chapter">schedulers</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="python.html"
+                        title="next chapter">Documentation for Python</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/ecto/reference/ecto_test_cells.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-ecto-test">
+<h1>Module ecto_test<a class="headerlink" href="#module-ecto-test" title="Permalink to this headline">¶</a></h1>
+<h1>ecto.ecto_test<a class="headerlink" href="#module-ecto-test" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="SleepPyObjectAbuser">
+<span id="index-0"></span><span id="ecto.ecto_test.SleepPyObjectAbuser"></span><h2>SleepPyObjectAbuser<a class="headerlink" href="#SleepPyObjectAbuser" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Sleep for a bit while in process, according to a list of sleep times.</p>
+</p>
+<p class="topic-title first">Parameters<ul>
+<li><p class="first"><strong>list_o_sleeps</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">boost::python::api::object</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> no default value</em></p>
+<p>A sequence of sleeps.</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">boost::posix_time::ptime</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>input</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">boost::posix_time::ptime</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>output</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="Emit_none">
+<span id="index-1"></span><span id="ecto.ecto_test.Emit_none"></span><h2>Emit_none<a class="headerlink" href="#Emit_none" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Emit_none</p>
+</p>
+<p></p>
+<p></p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>output</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto::tendril::none</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>output</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="DontAllocateMe">
+<span id="index-2"></span><span id="ecto.ecto_test.DontAllocateMe"></span><h2>DontAllocateMe<a class="headerlink" href="#DontAllocateMe" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Don&#8217;t allocate me, feel free to inspect.</p>
+</p>
+<p class="topic-title first">Parameters<ul>
+<li><p class="first"><strong>str</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">std::string</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> no default value</em></p>
+<p></p>
+</li>
+</ul>
+</p>
+<p></p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>str</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">std::string</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p></p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="RequiredIO">
+<span id="index-3"></span><span id="ecto.ecto_test.RequiredIO"></span><h2>RequiredIO<a class="headerlink" href="#RequiredIO" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>RequiredIO test module</p>
+</p>
+<p></p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>required input</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>required output</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="Ping">
+<span id="index-4"></span><span id="ecto.ecto_test.Ping"></span><h2>Ping<a class="headerlink" href="#Ping" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Ping as fast as you can, send the current time downstream</p>
+</p>
+<p></p>
+<p></p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">boost::posix_time::ptime</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>output</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="NoPythonBindings">
+<span id="index-5"></span><span id="ecto.ecto_test.NoPythonBindings"></span><h2>NoPythonBindings<a class="headerlink" href="#NoPythonBindings" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Uses something that is bound to python</p>
+</p>
+<p class="topic-title first">Parameters<ul>
+<li><p class="first"><strong>Woz</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto_test::EvilNoPython</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> no default value</em></p>
+<p>A Woz is a Woz when a Woz was Woz</p>
+</li>
+</ul>
+</p>
+<p></p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>Strasz</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto_test::EvilNoPython</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>A Strasz is a Strasz when a Strasz saw a Strasz</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="Emit_float">
+<span id="index-6"></span><span id="ecto.ecto_test.Emit_float"></span><h2>Emit_float<a class="headerlink" href="#Emit_float" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Emit_float</p>
+</p>
+<p></p>
+<p></p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>output</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">float</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>output</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="Add">
+<span id="index-7"></span><span id="ecto.ecto_test.Add"></span><h2>Add<a class="headerlink" href="#Add" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Add two doubles together.</p>
+</p>
+<p></p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>left</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>Left hand operand.</p>
+</li>
+<li><p class="first"><strong>right</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>Right hand operand.</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>The result.</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="HandleHolder">
+<span id="index-8"></span><span id="ecto.ecto_test.HandleHolder"></span><h2>HandleHolder<a class="headerlink" href="#HandleHolder" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Holds on to handles...</p>
+</p>
+<p class="topic-title first">Parameters<ul>
+<li><p class="first"><strong>value</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">1.0</span></tt></p>
+<p>I use this value</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>input</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>input</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>output</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>output</p>
+</li>
+<li><p class="first"><strong>value</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>the parameter.</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="Throttle">
+<span id="index-9"></span><span id="ecto.ecto_test.Throttle"></span><h2>Throttle<a class="headerlink" href="#Throttle" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Throttle to a certain Hz frequency</p>
+</p>
+<p class="topic-title first">Parameters<ul>
+<li><p class="first"><strong>rate</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">1.0</span></tt></p>
+<p>Do not pass data more quickly than this many hz</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto::tendril::none</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>input</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto::tendril::none</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>input</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="FileI">
+<span id="index-10"></span><span id="ecto.ecto_test.FileI"></span><h2>FileI<a class="headerlink" href="#FileI" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Reads doubles from a file like object</p>
+</p>
+<p class="topic-title first">Parameters<ul>
+<li><p class="first"><strong>file</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">boost::shared_ptr&lt;std::istream&gt;</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> no default value</em></p>
+<p>A filelike object</p>
+</li>
+</ul>
+</p>
+<p></p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>output</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>A double output.</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="LatticeSleep">
+<span id="index-11"></span><span id="ecto.ecto_test.LatticeSleep"></span><h2>LatticeSleep<a class="headerlink" href="#LatticeSleep" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Node with N inputs and N outputs, sleeps for a random period on each process()</p>
+</p>
+<p class="topic-title first">Parameters<ul>
+<li><p class="first"><strong>n</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">1</span></tt></p>
+<p>number of ins and outs</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>in0</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto::tendril::none</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>input</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>out0</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto::tendril::none</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>output</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="FileO">
+<span id="index-12"></span><span id="ecto.ecto_test.FileO"></span><h2>FileO<a class="headerlink" href="#FileO" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Writes doubles to a file like object</p>
+</p>
+<p class="topic-title first">Parameters<ul>
+<li><p class="first"><strong>file</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">boost::shared_ptr&lt;std::ostream&gt;</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> no default value</em></p>
+<p>A filelike object</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>input</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>A double input.</p>
+</li>
+</ul>
+</p>
+<p></p>
+</div>
+</div>
+<div class="section" id="Printer">
+<span id="index-13"></span><span id="ecto.ecto_test.Printer"></span><h2>Printer<a class="headerlink" href="#Printer" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>A printer of int, double, string, bool. Use the print_type parameter to specify type.  Default is double</p>
+</p>
+<p class="topic-title first">Parameters<ul>
+<li><p class="first"><strong>print_type</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">std::string</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">double</span></tt></p>
+<p>The type string for what i&#8217;m to print... int, double, bool, string.</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>what to print</p>
+</li>
+</ul>
+</p>
+<p></p>
+</div>
+</div>
+<div class="section" id="Metrics">
+<span id="index-14"></span><span id="ecto.ecto_test.Metrics"></span><h2>Metrics<a class="headerlink" href="#Metrics" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Calcluate bandwidth and latency based on timestamps received from an upstream ping.</p>
+</p>
+<p class="topic-title first">Parameters<ul>
+<li><p class="first"><strong>queue_size</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">10</span></tt></p>
+<p>size of window to collect statistics over</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">boost::posix_time::ptime</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>input</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>hz</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p></p>
+</li>
+<li><p class="first"><strong>latency_seconds</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p></p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="Emit_Struct">
+<span id="index-15"></span><span id="ecto.ecto_test.Emit_Struct"></span><h2>Emit_Struct<a class="headerlink" href="#Emit_Struct" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Emit_Struct</p>
+</p>
+<p></p>
+<p></p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>output</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto_test::Struct</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>output</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="Emit_bool">
+<span id="index-16"></span><span id="ecto.ecto_test.Emit_bool"></span><h2>Emit_bool<a class="headerlink" href="#Emit_bool" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Emit_bool</p>
+</p>
+<p></p>
+<p></p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>output</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">bool</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>output</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="Multiply">
+<span id="index-17"></span><span id="ecto.ecto_test.Multiply"></span><h2>Multiply<a class="headerlink" href="#Multiply" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Multiply an input by a constant</p>
+</p>
+<p class="topic-title first">Parameters<ul>
+<li><p class="first"><strong>factor</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">3.14</span></tt></p>
+<p>A factor to multiply by.</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>multly in by factor</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>the result of in * factor</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="ParameterWatcher">
+<span id="index-18"></span><span id="ecto.ecto_test.ParameterWatcher"></span><h2>ParameterWatcher<a class="headerlink" href="#ParameterWatcher" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Uses parameter change callbacks.</p>
+</p>
+<p class="topic-title first">Parameters<ul>
+<li><p class="first"><strong>value</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">1.0</span></tt></p>
+<p>I use this value</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>input</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>input</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>output</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>output</p>
+</li>
+<li><p class="first"><strong>value</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>the parameter.</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="Uniform01">
+<span id="index-19"></span><span id="ecto.ecto_test.Uniform01"></span><h2>Uniform01<a class="headerlink" href="#Uniform01" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Generate random doubles uniformly distributed on [0, 1)</p>
+</p>
+<p class="topic-title first">Parameters<ul>
+<li><p class="first"><strong>ncalls</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">1</span></tt></p>
+<p>Call this many times, return only the last. Used to generate CPU load in testing.</p>
+</li>
+<li><p class="first"><strong>seed</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> no default value</em></p>
+<p>Seed.  By default the RNG is seeded from the system time.</p>
+</li>
+</ul>
+</p>
+<p></p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>output</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="Gather">
+<span id="index-20"></span><span id="ecto.ecto_test.Gather"></span><h2>Gather<a class="headerlink" href="#Gather" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Gather ints</p>
+</p>
+<p class="topic-title first">Parameters<ul>
+<li><p class="first"><strong>n</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">2</span></tt></p>
+<p>N to gather</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>in_0000</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>An intinput.</p>
+</li>
+<li><p class="first"><strong>in_0001</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>An intinput.</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>The sum of all inputs.</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="QuitAfter">
+<span id="index-21"></span><span id="ecto.ecto_test.QuitAfter"></span><h2>QuitAfter<a class="headerlink" href="#QuitAfter" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Quits the graph after so many process calls</p>
+</p>
+<p class="topic-title first">Parameters<ul>
+<li><p class="first"><strong>N</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> no default value</em></p>
+<p>Quit after this many calls to process()</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>An inbox</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>outbox</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="Scatter">
+<span id="index-22"></span><span id="ecto.ecto_test.Scatter"></span><h2>Scatter<a class="headerlink" href="#Scatter" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Scatter a value...</p>
+</p>
+<p class="topic-title first">Parameters<ul>
+<li><p class="first"><strong>n</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">2</span></tt></p>
+<p>Number to scatter...</p>
+</li>
+<li><p class="first"><strong>x</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">13</span></tt></p>
+<p>The value to scatter...</p>
+</li>
+</ul>
+</p>
+<p></p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>out_0000</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>The 0th scatter</p>
+</li>
+<li><p class="first"><strong>out_0001</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>The 1th scatter</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="StartStopCounter">
+<span id="index-23"></span><span id="ecto.ecto_test.StartStopCounter"></span><h2>StartStopCounter<a class="headerlink" href="#StartStopCounter" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Count numbers of starts, stops, processes, etc.</p>
+</p>
+<p></p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto::tendril::none</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>An inbox</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>nconfigure</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p></p>
+</li>
+<li><p class="first"><strong>nprocess</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p></p>
+</li>
+<li><p class="first"><strong>nstart</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p></p>
+</li>
+<li><p class="first"><strong>nstop</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p></p>
+</li>
+<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto::tendril::none</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>An inbox</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="Quitter">
+<span id="index-24"></span><span id="ecto.ecto_test.Quitter"></span><h2>Quitter<a class="headerlink" href="#Quitter" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Will quit the graph on some certain input</p>
+</p>
+<p class="topic-title first">Parameters<ul>
+<li><p class="first"><strong>str</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">std::string</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">EXIT</span></tt></p>
+<p>The default string to print</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>str</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">std::string</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>The input string to listen to.</p>
+</li>
+</ul>
+</p>
+<p></p>
+</div>
+</div>
+<div class="section" id="Gather_double">
+<span id="index-25"></span><span id="ecto.ecto_test.Gather_double"></span><h2>Gather_double<a class="headerlink" href="#Gather_double" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Gather doubles</p>
+</p>
+<p class="topic-title first">Parameters<ul>
+<li><p class="first"><strong>n</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">2</span></tt></p>
+<p>N to gather</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>in_0000</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>An doubleinput.</p>
+</li>
+<li><p class="first"><strong>in_0001</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>An doubleinput.</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>The sum of all inputs.</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="Accept_float">
+<span id="index-26"></span><span id="ecto.ecto_test.Accept_float"></span><h2>Accept_float<a class="headerlink" href="#Accept_float" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Accept_float</p>
+</p>
+<p></p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>input</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">float</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>input</p>
+</li>
+</ul>
+</p>
+<p></p>
+</div>
+</div>
+<div class="section" id="Generate">
+<span id="index-27"></span><span id="ecto.ecto_test.Generate"></span><h2>Generate<a class="headerlink" href="#Generate" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Generate doubles</p>
+</p>
+<p class="topic-title first">Parameters<ul>
+<li><p class="first"><strong>start</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">0.0</span></tt></p>
+<p>My starting value.</p>
+</li>
+<li><p class="first"><strong>step</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">2.0</span></tt></p>
+<p>The step with which i generate integers.</p>
+</li>
+</ul>
+</p>
+<p></p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>The starting value + (step * iterations).</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="DontCallMeFromTwoThreads">
+<span id="index-28"></span><span id="ecto.ecto_test.DontCallMeFromTwoThreads"></span><h2>DontCallMeFromTwoThreads<a class="headerlink" href="#DontCallMeFromTwoThreads" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Throws if process called concurrently from two threads.</p>
+</p>
+<p></p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p></p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p></p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="Emit_int">
+<span id="index-29"></span><span id="ecto.ecto_test.Emit_int"></span><h2>Emit_int<a class="headerlink" href="#Emit_int" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Emit_int</p>
+</p>
+<p></p>
+<p></p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>output</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>output</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="Accept_int">
+<span id="index-30"></span><span id="ecto.ecto_test.Accept_int"></span><h2>Accept_int<a class="headerlink" href="#Accept_int" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Accept_int</p>
+</p>
+<p></p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>input</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>input</p>
+</li>
+</ul>
+</p>
+<p></p>
+</div>
+</div>
+<div class="section" id="CantCallMeFromTwoThreads">
+<span id="index-31"></span><span id="ecto.ecto_test.CantCallMeFromTwoThreads"></span><h2>CantCallMeFromTwoThreads<a class="headerlink" href="#CantCallMeFromTwoThreads" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Throws if process called concurrently from two threads, but you shouldn&#8217;t. be able to provoke this crash because (FIXME)</p>
+</p>
+<p></p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p></p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p></p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="Accept_none">
+<span id="index-32"></span><span id="ecto.ecto_test.Accept_none"></span><h2>Accept_none<a class="headerlink" href="#Accept_none" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Accept_none</p>
+</p>
+<p></p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>input</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto::tendril::none</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>input</p>
+</li>
+</ul>
+</p>
+<p></p>
+</div>
+</div>
+<div class="section" id="DoOverFor">
+<span id="index-33"></span><span id="ecto.ecto_test.DoOverFor"></span><h2>DoOverFor<a class="headerlink" href="#DoOverFor" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Returns ecto::DO_OVER for so many process calls, and returns ecto::OK every current mod N</p>
+</p>
+<p class="topic-title first">Parameters<ul>
+<li><p class="first"><strong>N</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> no default value</em></p>
+<p>Return ecto::DO_OVER from process() this many times</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>An inbox</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>current</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p></p>
+</li>
+<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>outbox</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="Accept_bool">
+<span id="index-34"></span><span id="ecto.ecto_test.Accept_bool"></span><h2>Accept_bool<a class="headerlink" href="#Accept_bool" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Accept_bool</p>
+</p>
+<p></p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>input</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">bool</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>input</p>
+</li>
+</ul>
+</p>
+<p></p>
+</div>
+</div>
+<div class="section" id="Accept_string">
+<span id="index-35"></span><span id="ecto.ecto_test.Accept_string"></span><h2>Accept_string<a class="headerlink" href="#Accept_string" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Accept_string</p>
+</p>
+<p></p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>input</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">std::string</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>input</p>
+</li>
+</ul>
+</p>
+<p></p>
+</div>
+</div>
+<div class="section" id="SharedPass">
+<span id="index-36"></span><span id="ecto.ecto_test.SharedPass"></span><h2>SharedPass<a class="headerlink" href="#SharedPass" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Shared pointer passthru</p>
+</p>
+<p class="topic-title first">Parameters<ul>
+<li><p class="first"><strong>x</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">-1</span></tt></p>
+<p>Default value</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>input</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">boost::shared_ptr&lt;int&gt;</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>a pass through</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>output</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">boost::shared_ptr&lt;int&gt;</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>a pass through</p>
+</li>
+<li><p class="first"><strong>value</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>value</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="BpObjectToCellPtr">
+<span id="index-37"></span><span id="ecto.ecto_test.BpObjectToCellPtr"></span><h2>BpObjectToCellPtr<a class="headerlink" href="#BpObjectToCellPtr" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Takes a cell ptr as a bp object.</p>
+</p>
+<p></p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>cell</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">boost::python::api::object</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>a cell ptr</p>
+</li>
+</ul>
+</p>
+<p></p>
+</div>
+</div>
+<div class="section" id="ThrowAfter">
+<span id="index-38"></span><span id="ecto.ecto_test.ThrowAfter"></span><h2>ThrowAfter<a class="headerlink" href="#ThrowAfter" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Throw after so many process calls</p>
+</p>
+<p class="topic-title first">Parameters<ul>
+<li><p class="first"><strong>N</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> no default value</em></p>
+<p>Throw in the N-th call to process()</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>An inbox</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>outbox</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="ExceptInConstructor">
+<span id="index-39"></span><span id="ecto.ecto_test.ExceptInConstructor"></span><h2>ExceptInConstructor<a class="headerlink" href="#ExceptInConstructor" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>A bad cell</p>
+</p>
+<p></p>
+<p></p>
+<p></p>
+</div>
+</div>
+<div class="section" id="PassthroughAny">
+<span id="index-40"></span><span id="ecto.ecto_test.PassthroughAny"></span><h2>PassthroughAny<a class="headerlink" href="#PassthroughAny" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Constant node always outputs same value.</p>
+</p>
+<p></p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto::tendril::none</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>Any type</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto::tendril::none</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>Any type</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="RequiredInput">
+<span id="index-41"></span><span id="ecto.ecto_test.RequiredInput"></span><h2>RequiredInput<a class="headerlink" href="#RequiredInput" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Required input.</p>
+</p>
+<p></p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>an input</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>The input + x</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="Accept_Struct">
+<span id="index-42"></span><span id="ecto.ecto_test.Accept_Struct"></span><h2>Accept_Struct<a class="headerlink" href="#Accept_Struct" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Accept_Struct</p>
+</p>
+<p></p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>input</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto_test::Struct</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>input</p>
+</li>
+</ul>
+</p>
+<p></p>
+</div>
+</div>
+<div class="section" id="ConfigureCalledOnce">
+<span id="index-43"></span><span id="ecto.ecto_test.ConfigureCalledOnce"></span><h2>ConfigureCalledOnce<a class="headerlink" href="#ConfigureCalledOnce" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Throw&#8217;s an error if configure is called more than once.</p>
+</p>
+<p></p>
+<p></p>
+<p></p>
+</div>
+</div>
+<div class="section" id="RequiredParam">
+<span id="index-44"></span><span id="ecto.ecto_test.RequiredParam"></span><h2>RequiredParam<a class="headerlink" href="#RequiredParam" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Required parameter</p>
+</p>
+<p class="topic-title first">Parameters<ul>
+<li><p class="first"><strong>x</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> no default value</em></p>
+<p>A required parameter.</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>an input</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>The input + x</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="Sleep">
+<span id="index-45"></span><span id="ecto.ecto_test.Sleep"></span><h2>Sleep<a class="headerlink" href="#Sleep" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Sleep for a bit while in process</p>
+</p>
+<p class="topic-title first">Parameters<ul>
+<li><p class="first"><strong>seconds</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">1.0</span></tt></p>
+<p>sleep this many seconds</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">boost::posix_time::ptime</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>input</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">boost::posix_time::ptime</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>output</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="Increment">
+<span id="index-46"></span><span id="ecto.ecto_test.Increment"></span><h2>Increment<a class="headerlink" href="#Increment" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Increment input by some amount</p>
+</p>
+<p class="topic-title first">Parameters<ul>
+<li><p class="first"><strong>amount</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">1.0</span></tt></p>
+<p>Amount to increment by.</p>
+</li>
+<li><p class="first"><strong>delay</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">0</span></tt></p>
+<p>How long it takes to increment in milliseconds</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>input</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>output</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+<div class="section" id="Emit_string">
+<span id="index-47"></span><span id="ecto.ecto_test.Emit_string"></span><h2>Emit_string<a class="headerlink" href="#Emit_string" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Emit_string</p>
+</p>
+<p></p>
+<p></p>
+<p class="topic-title first">Outputs<ul>
+<li><p class="first"><strong>output</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">std::string</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>output</p>
+</li>
+</ul>
+</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="python.html" title="Documentation for Python"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="schedulers.html" title="schedulers"
+             >previous</a> |</li>
+        <li><a href="../../index.html">ecto</a> &raquo;</li>
+          <li><a href="index.html" >Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011,  Willow Garage, Inc.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

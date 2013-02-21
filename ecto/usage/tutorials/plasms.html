@@ -1,0 +1,333 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Hello Plasms! &mdash; ecto</title>
+    
+    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="ecto" href="../../../index.html" />
+    <link rel="up" title="Usage" href="../index.html" />
+    <link rel="next" title="Lifecycle of Cells" href="lifecycle.html" />
+    <link rel="prev" title="Hello Ecto!" href="hello.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lifecycle.html" title="Lifecycle of Cells"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="hello.html" title="Hello Ecto!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../index.html">
+              <img class="logo" src="../../../_static/ecto210.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Hello Plasms!</a><ul>
+<li><a class="reference internal" href="#c">c++</a></li>
+<li><a class="reference internal" href="#python">python</a><ul>
+<li><a class="reference internal" href="#parameters">Parameters</a></li>
+<li><a class="reference internal" href="#connections">Connections</a></li>
+<li><a class="reference internal" href="#graphs">Graphs</a></li>
+<li><a class="reference internal" href="#execution">Execution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="hello.html"
+                        title="previous chapter">Hello Ecto!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="lifecycle.html"
+                        title="next chapter">Lifecycle of Cells</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/ecto/usage/tutorials/plasms.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="hello-plasms">
+<span id="tutorial-hello-plasms"></span><h1>Hello Plasms!<a class="headerlink" href="#hello-plasms" title="Permalink to this headline">¶</a></h1>
+<p>Ok, so you made your first cell in <a class="reference internal" href="hello.html#tutorial-hello-ecto"><em>Hello Ecto!</em></a>.  Now lets make
+a graph, what ecto is especially good at.</p>
+<div class="section" id="c">
+<h2>c++<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h2>
+<p>Lets make two more cells</p>
+<p>Download: <a class="reference download internal" href="../../../_downloads/Increment.cpp"><tt class="xref download docutils literal"><span class="pre">srcs/Increment.cpp</span></tt></a></p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
+
+<span class="k">using</span> <span class="n">ecto</span><span class="o">::</span><span class="n">tendrils</span><span class="p">;</span>
+<span class="k">namespace</span> <span class="n">tutorial</span>
+<span class="p">{</span>
+  <span class="k">struct</span> <span class="n">Increment</span>
+  <span class="p">{</span>
+    <span class="k">static</span> <span class="kt">void</span>
+    <span class="n">declare_params</span><span class="p">(</span><span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">params</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">params</span><span class="p">.</span><span class="n">declare</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;start&quot;</span><span class="p">,</span> <span class="s">&quot;The starting value.&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">static</span> <span class="kt">void</span>
+    <span class="n">declare_io</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">params</span><span class="p">,</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="cm">/*in*/</span><span class="p">,</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">out</span><span class="p">.</span><span class="n">declare</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;output&quot;</span><span class="p">,</span> <span class="s">&quot;An increasing integer&quot;</span><span class="p">,</span> <span class="n">params</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;start&quot;</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span>
+    <span class="n">process</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">in</span><span class="p">,</span> <span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="c1">//the get function of the tendrils returns a mutable reference.</span>
+      <span class="n">out</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;output&quot;</span><span class="p">)</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="k">return</span> <span class="n">ecto</span><span class="o">::</span><span class="n">OK</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="n">ECTO_CELL</span><span class="p">(</span><span class="n">tutorial</span><span class="p">,</span> <span class="n">tutorial</span><span class="o">::</span><span class="n">Increment</span><span class="p">,</span> <span class="s">&quot;Increment&quot;</span><span class="p">,</span> <span class="s">&quot;Outputs a monotonically increasing integer.&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Download: <a class="reference download internal" href="../../../_downloads/Add.cpp"><tt class="xref download docutils literal"><span class="pre">srcs/Add.cpp</span></tt></a></p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
+
+<span class="k">using</span> <span class="n">ecto</span><span class="o">::</span><span class="n">tendrils</span><span class="p">;</span>
+<span class="k">namespace</span> <span class="n">tutorial</span>
+<span class="p">{</span>
+  <span class="k">struct</span> <span class="n">Add</span>
+  <span class="p">{</span>
+    <span class="k">static</span> <span class="kt">void</span>
+    <span class="n">declare_io</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="cm">/*params*/</span><span class="p">,</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">in</span><span class="p">,</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">in</span><span class="p">.</span><span class="n">declare</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="s">&quot;1st operand.&quot;</span><span class="p">).</span><span class="n">required</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+      <span class="n">in</span><span class="p">.</span><span class="n">declare</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="s">&quot;2nd operand.&quot;</span><span class="p">).</span><span class="n">required</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+      <span class="n">out</span><span class="p">.</span><span class="n">declare</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;output&quot;</span><span class="p">,</span> <span class="s">&quot;Result of a + b.&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span>
+    <span class="n">process</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">in</span><span class="p">,</span> <span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">out</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;output&quot;</span><span class="p">)</span> <span class="o">=</span> <span class="n">in</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">in</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;b&quot;</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">ecto</span><span class="o">::</span><span class="n">OK</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="n">ECTO_CELL</span><span class="p">(</span><span class="n">tutorial</span><span class="p">,</span> <span class="n">tutorial</span><span class="o">::</span><span class="n">Add</span><span class="p">,</span> <span class="s">&quot;Add&quot;</span><span class="p">,</span> <span class="s">&quot;Adds two integers together.&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="python">
+<h2>python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
+<p>The python counter part to hello might look like:</p>
+<p>Download: <a class="reference download internal" href="../../../_downloads/plasms.py"><tt class="xref download docutils literal"><span class="pre">srcs/plasms.py</span></tt></a></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<span class="kn">import</span> <span class="nn">ecto</span>
+<span class="kn">from</span> <span class="nn">ecto_tutorial.tutorial</span> <span class="kn">import</span> <span class="n">Increment</span><span class="p">,</span> <span class="n">Add</span>
+
+<span class="c"># create three Cell objects</span>
+<span class="n">i1</span> <span class="o">=</span> <span class="n">Increment</span><span class="p">(</span><span class="s">&#39;Inc 1&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">i2</span> <span class="o">=</span> <span class="n">Increment</span><span class="p">(</span><span class="s">&#39;Inc 2&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">add</span> <span class="o">=</span> <span class="n">Add</span><span class="p">(</span><span class="s">&#39;Add&#39;</span><span class="p">)</span>
+
+<span class="c"># create an empty plasm: a graph</span>
+<span class="n">plasm</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Plasm</span><span class="p">()</span>
+<span class="c"># create connections inside that graph: the output named &#39;output&#39;</span>
+<span class="c"># of cell &#39;i1&#39; is connected to the inut named &#39;a&#39; of cell &#39;add&#39;</span>
+<span class="c"># and reciprocally with cell &#39;i2&#39;.</span>
+<span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">i1</span><span class="p">[</span><span class="s">&#39;output&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">add</span><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">],</span>
+              <span class="n">i2</span><span class="p">[</span><span class="s">&#39;output&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">add</span><span class="p">[</span><span class="s">&#39;b&#39;</span><span class="p">],</span>
+              <span class="p">)</span>
+
+<span class="c"># create a scheduler that will run that plasm</span>
+<span class="n">sched</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Scheduler</span><span class="p">(</span><span class="n">plasm</span><span class="p">)</span>
+<span class="c"># execute the plasm</span>
+<span class="n">sched</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">niter</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c"># display the output name &#39;output&#39; in the outputs of cell &#39;add&#39;</span>
+<span class="k">print</span> <span class="n">add</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">output</span>
+</pre></div>
+</div>
+<p>Lets run it:</p>
+<div class="highlight-text"><div class="highlight"><pre>42
+</pre></div>
+</div>
+<div class="section" id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
+<p>Look at the allocation of our cells in the script.</p>
+<div class="highlight-py"><div class="highlight"><pre><span class="c"># create three Cell objects</span>
+<span class="n">i1</span> <span class="o">=</span> <span class="n">Increment</span><span class="p">(</span><span class="s">&#39;Inc 1&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">i2</span> <span class="o">=</span> <span class="n">Increment</span><span class="p">(</span><span class="s">&#39;Inc 2&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">add</span> <span class="o">=</span> <span class="n">Add</span><span class="p">(</span><span class="s">&#39;Add&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The parameters that were declared in:</p>
+<div class="highlight-cpp"><div class="highlight"><pre>    <span class="k">static</span> <span class="kt">void</span>
+    <span class="n">declare_io</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="cm">/*params*/</span><span class="p">,</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">in</span><span class="p">,</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">in</span><span class="p">.</span><span class="n">declare</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="s">&quot;1st operand.&quot;</span><span class="p">).</span><span class="n">required</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+      <span class="n">in</span><span class="p">.</span><span class="n">declare</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="s">&quot;2nd operand.&quot;</span><span class="p">).</span><span class="n">required</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+      <span class="n">out</span><span class="p">.</span><span class="n">declare</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;output&quot;</span><span class="p">,</span> <span class="s">&quot;Result of a + b.&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p>Become the keyword arguments for the cell.  The first non keyword argument is
+the cell&#8217;s instance name, which is relevant for pretty looking graphs.</p>
+</div>
+<div class="section" id="connections">
+<h3>Connections<a class="headerlink" href="#connections" title="Permalink to this headline">¶</a></h3>
+<p>The syntax for connecting ecto cells together in the
+plasm looks like this.</p>
+<div class="highlight-py"><div class="highlight"><pre><span class="c"># create an empty plasm: a graph</span>
+<span class="n">plasm</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Plasm</span><span class="p">()</span>
+<span class="c"># create connections inside that graph: the output named &#39;output&#39;</span>
+<span class="c"># of cell &#39;i1&#39; is connected to the inut named &#39;a&#39; of cell &#39;add&#39;</span>
+<span class="c"># and reciprocally with cell &#39;i2&#39;.</span>
+<span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">i1</span><span class="p">[</span><span class="s">&#39;output&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">add</span><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">],</span>
+              <span class="n">i2</span><span class="p">[</span><span class="s">&#39;output&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">add</span><span class="p">[</span><span class="s">&#39;b&#39;</span><span class="p">],</span>
+              <span class="p">)</span>
+</pre></div>
+</div>
+<p>Each connection is made by using the <tt class="docutils literal"><span class="pre">&gt;&gt;</span></tt> operator, where
+the key value in the <tt class="docutils literal"><span class="pre">[]</span></tt> operator refers to an output tendril
+on the left hand side, or an input tendril on the right hand side.
+See <a class="reference internal" href="../tips/connections.html#tendril-connections"><em>Tendril Connections</em></a> for more details on how this operator
+works.</p>
+</div>
+<div class="section" id="graphs">
+<h3>Graphs<a class="headerlink" href="#graphs" title="Permalink to this headline">¶</a></h3>
+<p>The graph for this will look like:</p>
+<p class="graphviz">
+<img src="../../../_images/graphviz-9c4423738c9be3952cfc2cabe311bf3aace48eab.png" alt="digraph G {
+graph [rankdir=TB, ranksep=1]
+edge [labelfontsize=8]
+node [shape=plaintext]
+0[label=&lt;&lt;TABLE BORDER=&quot;0&quot; CELLBORDER=&quot;1&quot; CELLSPACING=&quot;0&quot; CELLPADDING=&quot;4&quot;&gt;  &lt;TR&gt; &lt;TD ROWSPAN=&quot;1&quot; COLSPAN=&quot;1&quot; BGCOLOR=&quot;khaki&quot;&gt;Inc 1&lt;/TD&gt; &lt;TD PORT=&quot;p_start&quot; BGCOLOR=&quot;lightblue&quot;&gt;start&lt;/TD&gt;
+ &lt;/TR&gt;  &lt;TR&gt;
+&lt;TD PORT=&quot;o_output&quot; BGCOLOR=&quot;indianred1&quot;&gt;output&lt;/TD&gt;
+&lt;/TR&gt; &lt;/TABLE&gt;&gt;];
+1[label=&lt;&lt;TABLE BORDER=&quot;0&quot; CELLBORDER=&quot;1&quot; CELLSPACING=&quot;0&quot; CELLPADDING=&quot;4&quot;&gt; &lt;TR&gt;
+&lt;TD PORT=&quot;i_a&quot; BGCOLOR=&quot;springgreen&quot;&gt;a&lt;/TD&gt;
+&lt;TD PORT=&quot;i_b&quot; BGCOLOR=&quot;springgreen&quot;&gt;b&lt;/TD&gt;
+&lt;/TR&gt; &lt;TR&gt; &lt;TD ROWSPAN=&quot;1&quot; COLSPAN=&quot;2&quot; BGCOLOR=&quot;khaki&quot;&gt;Add&lt;/TD&gt;  &lt;/TR&gt;  &lt;TR&gt;
+&lt;TD PORT=&quot;o_output&quot; BGCOLOR=&quot;indianred1&quot;&gt;output&lt;/TD&gt;
+&lt;/TR&gt; &lt;/TABLE&gt;&gt;];
+2[label=&lt;&lt;TABLE BORDER=&quot;0&quot; CELLBORDER=&quot;1&quot; CELLSPACING=&quot;0&quot; CELLPADDING=&quot;4&quot;&gt;  &lt;TR&gt; &lt;TD ROWSPAN=&quot;1&quot; COLSPAN=&quot;1&quot; BGCOLOR=&quot;khaki&quot;&gt;Inc 2&lt;/TD&gt; &lt;TD PORT=&quot;p_start&quot; BGCOLOR=&quot;lightblue&quot;&gt;start&lt;/TD&gt;
+ &lt;/TR&gt;  &lt;TR&gt;
+&lt;TD PORT=&quot;o_output&quot; BGCOLOR=&quot;indianred1&quot;&gt;output&lt;/TD&gt;
+&lt;/TR&gt; &lt;/TABLE&gt;&gt;];
+0-&gt;1 [headport=&quot;i_a&quot; tailport=&quot;o_output&quot;];
+2-&gt;1 [headport=&quot;i_b&quot; tailport=&quot;o_output&quot;];
+}" />
+</p>
+<p>Plasms, graphs, in ecto are <em>Directed Acyclic Graphs</em> , see <a class="reference internal" href="../../overview/glossary.html#dag"><em>plasm</em></a>.
+The DAG is important for scheduling and determining execution order.
+It is used to describe the <strong>happens before</strong> relationships in cells.
+Because of the DAG construct, implicit feedback loops are not allowed,
+and can only be achieved through special purpose cells,
+see <a class="reference internal" href="../techniques/ecto_cells.html#entanglement"><em>Entanglement</em></a> for more information.</p>
+</div>
+<div class="section" id="execution">
+<h3>Execution<a class="headerlink" href="#execution" title="Permalink to this headline">¶</a></h3>
+<p>Once a plasm is constructed, it may be used with an <a class="reference internal" href="../../reference/schedulers.html#schedulers"><em>ecto scheduler</em></a></p>
+<div class="highlight-py"><div class="highlight"><pre><span class="c"># create a scheduler that will run that plasm</span>
+<span class="n">sched</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Scheduler</span><span class="p">(</span><span class="n">plasm</span><span class="p">)</span>
+<span class="c"># execute the plasm</span>
+<span class="n">sched</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">niter</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <a href="#id1"><span class="problematic" id="id2">:py:class:`ecto.Scheduler&#8217; scheduler essentially
+does a `topological-sort`_</span></a>
+on the graph, and then executes each cell in order.
+This repeats for the specified number of iterations,
+or indefinitely if <tt class="docutils literal"><span class="pre">niter</span></tt> is <tt class="docutils literal"><span class="pre">0</span></tt>.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lifecycle.html" title="Lifecycle of Cells"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="hello.html" title="Hello Ecto!"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li><a href="../index.html" >Usage</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011,  Willow Garage, Inc.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

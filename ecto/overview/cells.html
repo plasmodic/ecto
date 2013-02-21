@@ -1,0 +1,583 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Cells &mdash; ecto</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="ecto" href="../../index.html" />
+    <link rel="up" title="Overview of Ecto" href="index.html" />
+    <link rel="next" title="Modules" href="modules.html" />
+    <link rel="prev" title="Quickguide" href="summary.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modules.html" title="Modules"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="summary.html" title="Quickguide"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">ecto</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Overview of Ecto</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/ecto210.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Cells</a><ul>
+<li><a class="reference internal" href="#examination-of-the-cell">Examination of the Cell</a><ul>
+<li><a class="reference internal" href="#optional-interface">Optional interface</a></li>
+<li><a class="reference internal" href="#a-peek-under-the-covers">A peek under the covers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#doing-work">Doing work</a><ul>
+<li><a class="reference internal" href="#doc-generation">Doc Generation</a></li>
+<li><a class="reference internal" href="#cell-construction">Cell construction</a></li>
+<li><a class="reference internal" href="#configuration-and-processing">Configuration and Processing</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cell-life-cycle">Cell Life Cycle</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="summary.html"
+                        title="previous chapter">Quickguide</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="modules.html"
+                        title="next chapter">Modules</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/ecto/overview/cells.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="cells">
+<span id="cells-overview"></span><h1>Cells<a class="headerlink" href="#cells" title="Permalink to this headline">¶</a></h1>
+<p>The Cell is the core concept that one must grok to use ecto.  Think of a cell
+as a small self contained well formed unit of processing machinery. Each cell&#8217;s
+job is to take some number of inputs, and transform them into
+some number of outputs. Of course, parameters may have some effect on this
+transformation, and cells may each have their own state that they alone govern.</p>
+<p>Let us examine a c++ construct, a common functor:</p>
+<blockquote id="cell-functor">
+<div><div class="highlight-cpp"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Printer</span>
+<span class="p">{</span>
+  <span class="n">Printer</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">prefix</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">suffix</span><span class="p">)</span>
+      <span class="o">:</span>
+        <span class="n">prefix_</span><span class="p">(</span><span class="n">prefix</span><span class="p">),</span>
+        <span class="n">suffix_</span><span class="p">(</span><span class="n">suffix</span><span class="p">)</span>
+  <span class="p">{</span>
+  <span class="p">}</span>
+  <span class="kt">void</span>
+  <span class="k">operator</span><span class="p">()(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">message</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">prefix_</span> <span class="o">&lt;&lt;</span> <span class="n">message</span> <span class="o">&lt;&lt;</span> <span class="n">suffix_</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">prefix_</span><span class="p">,</span> <span class="n">suffix_</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>A c++ function object.</p>
+</div></blockquote>
+<p>Functors, function objects, are a reasonable way of encapsulating self contained
+functionality to operate on a set of data, and mesh well with the stl algorithms.
+The operator() may be abused by templated code to give way to genericity.</p>
+<p>The ecto Cell is similar, in that it gives ecto a common unit with which to work.
+Here is the ecto equivalent of the above functor, slightly more verbose of course:</p>
+<blockquote id="cell-printer01">
+<div><div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
+<span class="cp">#include &lt;ecto/registry.hpp&gt;</span>
+<span class="cp">#include &lt;iostream&gt;</span>
+<span class="cp">#include &lt;string&gt;</span>
+<span class="k">using</span> <span class="n">ecto</span><span class="o">::</span><span class="n">tendrils</span><span class="p">;</span>
+<span class="k">namespace</span> <span class="n">overview</span>
+<span class="p">{</span>
+  <span class="k">struct</span> <span class="n">Printer01</span>
+  <span class="p">{</span>
+    <span class="k">static</span> <span class="kt">void</span>
+    <span class="n">declare_params</span><span class="p">(</span><span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">params</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">params</span><span class="p">.</span><span class="n">declare</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;prefix&quot;</span><span class="p">,</span> <span class="s">&quot;A string to prefix printing with.&quot;</span><span class="p">,</span> <span class="s">&quot;start&gt;&gt; &quot;</span><span class="p">);</span>
+      <span class="n">params</span><span class="p">.</span><span class="n">declare</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;suffix&quot;</span><span class="p">,</span> <span class="s">&quot;A string to append printing with.&quot;</span><span class="p">,</span> <span class="s">&quot; &lt;&lt;stop</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">static</span> <span class="kt">void</span>
+    <span class="n">declare_io</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">params</span><span class="p">,</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">outputs</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">inputs</span><span class="p">.</span><span class="n">declare</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;message&quot;</span><span class="p">,</span> <span class="s">&quot;The message to print.&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="kt">void</span>
+    <span class="n">configure</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">params</span><span class="p">,</span> <span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">inputs</span><span class="p">,</span> <span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">outputs</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">params</span><span class="p">[</span><span class="s">&quot;prefix&quot;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">prefix_</span><span class="p">;</span>
+      <span class="n">params</span><span class="p">[</span><span class="s">&quot;suffix&quot;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">suffix_</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">int</span>
+    <span class="n">process</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">inputs</span><span class="p">,</span> <span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">outputs</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">prefix_</span> <span class="o">&lt;&lt;</span> <span class="n">inputs</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;message&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">suffix_</span><span class="p">;</span>
+      <span class="k">return</span> <span class="n">ecto</span><span class="o">::</span><span class="n">OK</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">prefix_</span><span class="p">,</span> <span class="n">suffix_</span><span class="p">;</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+<span class="n">ECTO_CELL</span><span class="p">(</span><span class="n">ecto_overview</span><span class="p">,</span> <span class="n">overview</span><span class="o">::</span><span class="n">Printer01</span><span class="p">,</span> <span class="s">&quot;Printer01&quot;</span><span class="p">,</span>
+          <span class="s">&quot;A simple stdout printer with prefix and suffix parameters.&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>A typical <tt class="docutils literal"><span class="pre">ecto::cell</span></tt>.</p>
+</div></blockquote>
+<p>The verbosity is a feature of ecto, in that each cell exposes as much information
+as it can to the <a class="reference internal" href="glossary.html#ectosphere"><em>ectosphere</em></a>.  At runtime, ecto may ask the cell
+for documentation, types, and semantics.  These features are what enable
+the type-safety in a graph of cells, or auto-completion from an <a class="reference internal" href="../usage/external/ipython.html#ipython"><em>ipython context</em></a>.</p>
+<div class="section" id="examination-of-the-cell">
+<span id="examination-cell"></span><h2>Examination of the Cell<a class="headerlink" href="#examination-of-the-cell" title="Permalink to this headline">¶</a></h2>
+<p>A Cell defines some set of parameters, inputs and outputs statically.  And each cell
+created from this static definition holds its own state, and may operate on it&#8217;s
+parameters,inputs and outputs at specific moments throughout it&#8217;s lifetime. Also
+the outside world may examine and manipulate the cells <a class="reference internal" href="../reference/tendril.html#tendrils"><em>tendrils</em></a>.</p>
+<p>Let us look at a graphical representation of the Cell written <a class="reference internal" href="#cell-printer01"><em>above</em></a>:</p>
+<div class="figure">
+<img alt="../../_images/Printer01.png" src="../../_images/Printer01.png" />
+<p class="caption">A graphical representation of a <tt class="docutils literal"><span class="pre">ecto::cell</span></tt>.  In <tt class="docutils literal"><span class="pre">green</span></tt> are the inputs,
+<tt class="docutils literal"><span class="pre">blue</span></tt> parameters, <tt class="docutils literal"><span class="pre">yellow</span></tt> cell type. This cell has no outputs.</p>
+</div>
+<p>The parameters, inputs, and outputs of a cell all share the same type, <a class="reference internal" href="../reference/tendril.html#tendril-overview"><em>tendril</em></a>.
+Tendrils are mappings between strings, and lazily typed objects.  These are how the
+cell communicates with the rest of the system.  The reason for choosing a runtime
+typed object like the <a class="reference internal" href="../reference/tendril.html#tendril-overview"><em>tendril</em></a> instead of a compile time typed object
+like a <tt class="docutils literal"><span class="pre">boost::tuple</span></tt> is that it allows for ecto to be type ignorant, as the
+data held by the tendril has really no effect on how a graph executes or the python
+interfaces.  Ecto is a plugin based architecture, and so can not be header only,
+strictly compile time typed.</p>
+<div class="section" id="optional-interface">
+<h3>Optional interface<a class="headerlink" href="#optional-interface" title="Permalink to this headline">¶</a></h3>
+<p>The most basic of cells would be:</p>
+<blockquote>
+<div><div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
+<span class="k">namespace</span> <span class="n">overview</span>
+<span class="p">{</span>
+  <span class="k">struct</span> <span class="n">NopCell</span>
+  <span class="p">{</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+<span class="n">ECTO_CELL</span><span class="p">(</span><span class="n">ecto_overview</span><span class="p">,</span> <span class="n">overview</span><span class="o">::</span><span class="n">NopCell</span><span class="p">,</span> <span class="s">&quot;NopCell&quot;</span><span class="p">,</span>
+          <span class="s">&quot;A cell that can&#39;t do anything.&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="section" id="NopCell">
+<span id="index-0"></span><span id="ecto.ecto_overview.NopCell"></span><h4>NopCell<a class="headerlink" href="#NopCell" title="Permalink to this headline">¶</a></h4>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>A cell that can&#8217;t do anything.</p>
+</p>
+<p></p>
+<p></p>
+<p></p>
+</div>
+</div>
+</div></blockquote>
+<p>Each cell may or may not implement the following functions:</p>
+<blockquote id="interface-sample">
+<div><div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
+<span class="k">using</span> <span class="n">ecto</span><span class="o">::</span><span class="n">tendrils</span><span class="p">;</span>
+<span class="k">namespace</span> <span class="n">overview</span>
+<span class="p">{</span>
+  <span class="k">struct</span> <span class="n">InterfaceCell</span>
+  <span class="p">{</span>
+    <span class="k">static</span> <span class="kt">void</span>
+    <span class="n">declare_params</span><span class="p">(</span><span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">params</span><span class="p">);</span>
+
+    <span class="k">static</span> <span class="kt">void</span>
+    <span class="n">declare_io</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">params</span><span class="p">,</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">in</span><span class="p">,</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">);</span>
+
+    <span class="kt">void</span>
+    <span class="n">configure</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">params</span><span class="p">,</span> <span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">in</span><span class="p">,</span> <span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">);</span>
+
+    <span class="kt">int</span>
+    <span class="n">process</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">in</span><span class="p">,</span> <span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">);</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+<span class="n">ECTO_CELL</span><span class="p">(</span><span class="n">ecto_overview</span><span class="p">,</span> <span class="n">overview</span><span class="o">::</span><span class="n">InterfaceCell</span><span class="p">,</span> <span class="s">&quot;InterfaceCell&quot;</span><span class="p">,</span>
+          <span class="s">&quot;A cell cell implementing the entire ecto interface&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The cell interface functions.</p>
+</div></blockquote>
+<div class="sidebar">
+<p class="first sidebar-title">A note on where to implement</p>
+<p class="last">Notice that in most examples we implement the functions for cells inline in the declaration
+of the struct. However there is nothing stopping you from writing the implementation elsewhere.</p>
+</div>
+<p>However if you do implement any of the methods in the cell interface, be sure that
+their signatures match the above specification.</p>
+</div>
+<div class="section" id="a-peek-under-the-covers">
+<h3>A peek under the covers<a class="headerlink" href="#a-peek-under-the-covers" title="Permalink to this headline">¶</a></h3>
+<blockquote class="epigraph">
+<div><p>But wait, how does ecto know anything about my cell? You must be full of black magic!
+Where is the inheritence and polymorphism?</p>
+<p class="attribution">&mdash;Egon</p>
+</div></blockquote>
+<p>You might be thinking these kinds of things... Well the registration with ecto occurs in the macro <a class="reference internal" href="../usage/techniques/autoregister.html#ECTO_CELL" title="ECTO_CELL"><tt class="xref c c-macro docutils literal"><span class="pre">ECTO_CELL</span></tt></a>.
+This macro
+does some amount of extra fanciness, but in the end it takes your struct and does something similar
+to the following simplified example:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">struct</span> <span class="n">cell</span>
+<span class="p">{</span>
+  <span class="k">virtual</span> <span class="o">~</span><span class="n">cell</span><span class="p">(){}</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">declare_params</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="kt">int</span> <span class="n">process</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="c1">//... other interface functions</span>
+  <span class="n">ecto</span><span class="o">::</span><span class="n">tendrils</span> <span class="n">params_</span><span class="p">,</span> <span class="n">inputs_</span><span class="p">,</span> <span class="n">outputs_</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">YourCell</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="n">cell_</span> <span class="o">:</span> <span class="n">cell</span>
+<span class="p">{</span>
+  <span class="kt">void</span> <span class="n">declare_params</span><span class="p">()</span>
+  <span class="p">{</span>
+    <span class="n">YourCell</span><span class="o">::</span><span class="n">declare_params</span><span class="p">(</span><span class="n">params_</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">configure</span><span class="p">()</span>
+  <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">thiz_</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">thiz_</span> <span class="o">=</span> <span class="k">new</span> <span class="n">YourCell</span><span class="p">();</span>
+      <span class="n">thiz_</span><span class="o">-&gt;</span><span class="n">configure</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="c1">//... dispatch other functions...</span>
+  <span class="n">YourCell</span><span class="o">*</span> <span class="n">thiz_</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">cell_</span><span class="o">&lt;</span><span class="n">InterfaceCell</span><span class="o">&gt;</span> <span class="n">c</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The real implementation uses <a class="reference external" href="http://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error">SFINAE</a> to enable
+optional implementation of the interface functions.
+The macro <a class="reference internal" href="../usage/techniques/autoregister.html#ECTO_CELL" title="ECTO_CELL"><tt class="xref c c-macro docutils literal"><span class="pre">ECTO_CELL</span></tt></a> also constructs python
+bindings for your cell, and
+generates RST formated doc strings from the
+static declaration parameter and io functions.
+The above sample
+should be referred to as the essence of the technique, rather than the exact
+implementation.  This technique gives a certain amount of opaqueness to
+the client cell implementers, and
+provides ecto with a flexible entry point for implementation details.</p>
+</div>
+</div>
+<div class="section" id="doing-work">
+<h2>Doing work<a class="headerlink" href="#doing-work" title="Permalink to this headline">¶</a></h2>
+<p>Let us take the <a class="reference internal" href="#cell-printer01"><em>Printer</em></a> from above and use it from python. The following python
+script demonstrates the python interface of our cell that ecto provides for free(assuming you used the macro and followed the cell interface).</p>
+<div class="highlight-py"><div class="highlight"><pre><span class="c">#!/usr/bin/python </span>
+<span class="kn">from</span> <span class="nn">ecto.ecto_overview</span> <span class="kn">import</span> <span class="n">Printer01</span>
+
+<span class="k">print</span> <span class="n">Printer01</span><span class="o">.</span><span class="n">__doc__</span>
+
+<span class="n">printer</span> <span class="o">=</span> <span class="n">Printer01</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s">&#39;... &#39;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s">&#39; ...</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+
+<span class="n">printer</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="s">&#39;TFJ&#39;</span>
+
+<span class="n">printer</span><span class="o">.</span><span class="n">process</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The script, when run will give the following output:</p>
+<div class="highlight-text"><div class="highlight"><pre>A simple stdout printer with prefix and suffix parameters.
+
+Parameters:
+ - prefix [std::string] default = start&gt;&gt; 
+    A string to prefix printing with.
+
+ - suffix [std::string] default =  &lt;&lt;stop
+
+    A string to append printing with.
+
+Inputs:
+ - message [std::string]
+    The message to print.
+
+
+... TFJ ...
+</pre></div>
+</div>
+<div class="section" id="doc-generation">
+<h3>Doc Generation<a class="headerlink" href="#doc-generation" title="Permalink to this headline">¶</a></h3>
+<p>Notice the line <tt class="docutils literal"><span class="pre">print</span> <span class="pre">Printer01.__doc__</span></tt>, every ecto cell gets this for free
+based on the docstrings that were written in the static declare_* functions.
+This is a class level attribute, and is one of the justifications for having
+the declare_* functions be static.  At import time, the <tt class="docutils literal"><span class="pre">__doc__</span></tt> strings are
+generated, and it is important that you write cells that will <strong>not</strong> crash during
+import.</p>
+<p>Another cool aspect of documentation generation is its full integration into sphinx
+docs. Placing the following command in sphinx:</p>
+<div class="highlight-python"><pre>.. ectocell:: ecto.ecto_overview Printer01</pre>
+</div>
+<p>Produces:</p>
+<div class="section" id="Printer01">
+<span id="index-1"></span><span id="ecto.ecto_overview.Printer01"></span><h4>Printer01<a class="headerlink" href="#Printer01" title="Permalink to this headline">¶</a></h4>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>A simple stdout printer with prefix and suffix parameters.</p>
+</p>
+<p class="topic-title first">Parameters<ul>
+<li><p class="first"><strong>prefix</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">std::string</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">start&gt;&gt;</span> </tt></p>
+<p>A string to prefix printing with.</p>
+</li>
+<li><p class="first"><strong>suffix</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">std::string</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"> <span class="pre">&lt;&lt;stop</span>
+</tt></p>
+<p>A string to append printing with.</p>
+</li>
+</ul>
+</p>
+<p class="topic-title first">Inputs<ul>
+<li><p class="first"><strong>message</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">std::string</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<p>The message to print.</p>
+</li>
+</ul>
+</p>
+<p></p>
+</div>
+</div>
+<p>Also from an interactive python prompt, the following should produce useful
+output:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ecto.ecto_overview</span> <span class="kn">import</span> <span class="n">Printer01</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">help</span><span class="p">(</span><span class="n">Printer01</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For more detailed information, refer to <a class="reference internal" href="../usage/tips/ectodoc.html#ectodoc"><em>Automatic Documentation and Ecto&#8217;s Sphinx Extensions</em></a>.</p>
+</div>
+<div class="section" id="cell-construction">
+<h3>Cell construction<a class="headerlink" href="#cell-construction" title="Permalink to this headline">¶</a></h3>
+<p>Let us take a closer look at the python sample code. Take the cell construction
+line:</p>
+<blockquote>
+<div><div class="highlight-py"><div class="highlight"><pre><span class="n">printer</span> <span class="o">=</span> <span class="n">Printer01</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s">&#39;... &#39;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s">&#39; ...</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A typical cell constructor call from python. Notice mapping from keyword
+arguments to the parameters declared in <a class="reference internal" href="#cell-printer01"><em>Printer</em></a>.</p>
+</div></blockquote>
+<p>Every Cell gets a constructor that has the following python signature:</p>
+<div class="highlight-python"><pre>Cell([Cell.type_name()], [param1=...],[param2=...])</pre>
+</div>
+<div class="sidebar">
+<p class="first sidebar-title">When is configure called?</p>
+<p>Your cell is not actually allocated(constructed) until a call to process or right before
+a scheduler executes your processing graph, see <a class="reference internal" href="../reference/schedulers.html#schedulers"><em>schedulers</em></a>.</p>
+<p>This is important, as python may be used to quickly iterate on your processing graph
+structure, and heavy allocation (and possible crashes) will be lazily evaluated
+when the Cell is actually used to do work.</p>
+<p class="last">This may be abused for <strong>documentation</strong>, <strong>prototyping</strong>, and <strong>GUI</strong> applications.</p>
+</div>
+<p>The first optional non-keyword argument is the cell&#8217;s instance name. The instance
+name is useful for debug and graph display purposes.  Each parameter that was
+declared by the cell may be initialized as a keyword argument.  Other advanced keyword arguments
+may exist, that are defined by ecto, such as <a class="reference internal" href="../usage/advanced/strands.html#strands"><em>Strands:  preventing cells from running concurrently</em></a>.</p>
+<p>The constructor of the cell calls <tt class="docutils literal"><span class="pre">declare_params</span></tt>, sets the cell&#8217;s parameters
+with any supplied by keyword arguments, then precedes to call <tt class="docutils literal"><span class="pre">declare_io</span></tt>, with
+the parameter values set by the keyword arguments.  It is important to note that
+when the constructor returns a new cell, the constructor of the struct, e.g. <tt class="docutils literal"><span class="pre">Printer01</span></tt>,
+has not yet been called, also, configure has not yet been called.</p>
+</div>
+<div class="section" id="configuration-and-processing">
+<h3>Configuration and Processing<a class="headerlink" href="#configuration-and-processing" title="Permalink to this headline">¶</a></h3>
+<div class="sidebar">
+<p class="first sidebar-title">If it has a boost::python binding, life is wonderful</p>
+<p>You may notice the assignment of a string to tendril from <strong>python</strong>, even though
+the tendril was declared with a <strong>c++</strong> type.  Its all good as long as you have
+boost::python bindings. See <a class="reference internal" href="../reference/tendril.html#tendril-conversions"><em>Tendril Conversions</em></a> for an explanation.</p>
+<p class="last">If you <strong>don&#8217;t</strong> have bindings, not to worry, you just won&#8217;t be able to
+manipulate your tendrils from python... Oh and you get python bindings
+for free for all the basic types.</p>
+</div>
+<p>So even though we only have a shell of a cell, we can still manipulate its <a class="reference internal" href="../reference/tendril.html#tendrils"><em>tendrils</em></a>.
+Lets set the input tendril, called <cite>message</cite>, to a custom string. Then we&#8217;ll call
+process.</p>
+<blockquote>
+<div><div class="highlight-py"><div class="highlight"><pre><span class="n">printer</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="s">&#39;TFJ&#39;</span>
+<span class="n">printer</span><span class="o">.</span><span class="n">process</span><span class="p">()</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Now, before the call to process our Printer01 hasn&#8217;t actually been allocated,
+but all of its tendrils, inputs, outputs, and parameters are accessible from python.
+During the call to process, the Printer01 is allocated as necessary, the
+configure function is called, any <tt class="docutils literal"><span class="pre">parameter-callbacks</span></tt> are triggered if
+parameters have changed value, and then process is executed.</p>
+<div class="topic" id="cell-sketch-python-interface">
+<p class="topic-title first">Cell Python Interface</p>
+<p>Every cell exposes a bit of functionality to python, which may be useful to
+know.</p>
+<dl class="class">
+<dt id="Cell">
+<em class="property">class </em><tt class="descname">Cell</tt><a class="headerlink" href="#Cell" title="Permalink to this definition">¶</a></dt>
+<dd><p>A sketch of the cell python interface.</p>
+<dl class="attribute">
+<dt>
+<tt class="descname">(Tendrils)parameters</tt></dt>
+<dd><p>The parameters of the cell, initialized by the cell&#8217;s constructor.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<tt class="descname">(Tendrils)inputs</tt></dt>
+<dd><p>The inputs may be initialized with dependence on the parameters but are valid
+and free game in python.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<tt class="descname">(Tendrils)outputs</tt></dt>
+<dd><p>Same as inputs.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Cell.configure">
+<tt class="descname">configure</tt><big>(</big><big>)</big><a class="headerlink" href="#Cell.configure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allocates the underlying cell, say <tt class="docutils literal"><span class="pre">Printer01</span></tt>, and dispatches configure.
+Will not have any effect the second time configure is called.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Cell.process">
+<tt class="descname">process</tt><big>(</big><big>)</big><a class="headerlink" href="#Cell.process" title="Permalink to this definition">¶</a></dt>
+<dd><p>May call configure if it has not already been called. Dispatches a call to
+process in the underlying cell, e.g. <tt class="docutils literal"><span class="pre">Printer::process(...)</span></tt></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+<div class="section" id="cell-life-cycle">
+<h2>Cell Life Cycle<a class="headerlink" href="#cell-life-cycle" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>The life cycle of cell is important to keep in mind.</dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">declare_params</span></tt> and <tt class="docutils literal"><span class="pre">declare_io</span></tt> are static functions and will be called
+in order to initialize the cell&#8217;s parameters,inputs, and outputs.</li>
+<li><tt class="docutils literal"><span class="pre">configure</span></tt> will be called once right after the construction of the
+cell.</li>
+<li><tt class="docutils literal"><span class="pre">process</span></tt> will be called any number of times, with parameter callbacks being triggered prior to its execution.</li>
+<li>When all references to the cell are gone, i.e. it has gone out of scope, then it may be deleted.</li>
+</ul>
+</dd>
+</dl>
+<p class="graphviz">
+<img src="../../_images/graphviz-1172e8d6ff68c2f144c217a5713ed96522a34404.png" alt="digraph cell_life_cycle
+{
+  node [shape=rect];
+  1 [label=&quot;CellT::declare_params(...)&quot;];
+  user [label=&quot;User sets params.&quot;,shape=parallelogram];
+  2 [label=&quot;CellT::declare_io(...)&quot;];
+  3 [label=&quot;cell = new CellT()&quot;];
+  4 [label=&quot;cell-&gt;configure(...)&quot;];
+  5 [label=&quot;cell-&gt;process(...)&quot;];
+  8 [label=&quot;Parameters changed?&quot;, shape=diamond];
+  6 [label=&quot;Notify change callbacks.&quot;];
+  7 [label=&quot;delete cell&quot;];
+
+  1-&gt;user-&gt;2;
+  2-&gt; 3 -&gt;4-&gt;8;
+
+  8-&gt;6 [label=&quot;True&quot;];
+  6-&gt;5;
+  8-&gt;5 [label=&quot;False&quot;];
+  5-&gt;8;
+  5-&gt;7[label=&quot;exit scope&quot;];
+}" />
+</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modules.html" title="Modules"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="summary.html" title="Quickguide"
+             >previous</a> |</li>
+        <li><a href="../../index.html">ecto</a> &raquo;</li>
+          <li><a href="index.html" >Overview of Ecto</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011,  Willow Garage, Inc.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

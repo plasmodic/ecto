@@ -1,0 +1,365 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Wrapping enumerations &mdash; ecto</title>
+    
+    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="ecto" href="../../../index.html" />
+    <link rel="up" title="Usage" href="../index.html" />
+    <link rel="next" title="Parameters to and from YAML" href="yaml.html" />
+    <link rel="prev" title="Valgrind" href="../external/valgrind.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="yaml.html" title="Parameters to and from YAML"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../external/valgrind.html" title="Valgrind"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../index.html">
+              <img class="logo" src="../../../_static/ecto210.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Wrapping enumerations</a><ul>
+<li><a class="reference internal" href="#the-problem">The problem</a></li>
+<li><a class="reference internal" href="#solution-enum-parameters-as-enums-and-wrap-your-enumerations">Solution: enum parameters as enums, and wrap your enumerations</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../external/valgrind.html"
+                        title="previous chapter">Valgrind</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="yaml.html"
+                        title="next chapter">Parameters to and from YAML</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/ecto/usage/advanced/wrapping_enums.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="wrapping-enumerations">
+<h1>Wrapping enumerations<a class="headerlink" href="#wrapping-enumerations" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="the-problem">
+<h2>The problem<a class="headerlink" href="#the-problem" title="Permalink to this headline">¶</a></h2>
+<p>Ecto cells that take parameters that are enumerations should <strong>wrap
+those enumerations using boost::python</strong>, this vastly improves
+use/readability.</p>
+<p>For instance, this cell takes its parameter <tt class="docutils literal"><span class="pre">strategy</span></tt> as an integer:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
+<span class="cp">#include &lt;iostream&gt;</span>
+
+<span class="k">using</span> <span class="n">ecto</span><span class="o">::</span><span class="n">tendrils</span><span class="p">;</span>
+
+<span class="k">struct</span> <span class="n">EnumAsInt</span>
+<span class="p">{</span>
+  <span class="k">enum</span> <span class="n">Strategy</span> <span class="p">{</span>
+    <span class="n">FAST</span><span class="p">,</span> <span class="n">SLOW</span><span class="p">,</span> <span class="n">ADAPTIVE</span>
+  <span class="p">};</span>
+
+  <span class="k">static</span> <span class="kt">void</span> <span class="n">declare_params</span><span class="p">(</span><span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">p</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">p</span><span class="p">.</span><span class="n">declare</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;strategy&quot;</span><span class="p">,</span> <span class="s">&quot;How to run our algorithm&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">configure</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">p</span><span class="p">,</span> <span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">i</span><span class="p">,</span> <span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">o</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;strategy&quot;</span><span class="p">);</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="nl">FAST:</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;running FAST</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nl">SLOW:</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;running SLOW</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nl">ADAPTIVE:</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;running ADAPTIVE</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+    <span class="k">default</span><span class="o">:</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;BAD!  Unhandled value of enum parameter&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="n">ECTO_CELL</span><span class="p">(</span><span class="n">ecto_examples</span><span class="p">,</span> <span class="n">EnumAsInt</span><span class="p">,</span> <span class="s">&quot;EnumAsInt&quot;</span><span class="p">,</span> 
+          <span class="s">&quot;Example of how *not* to handle parameters that are enums&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Which is suboptimal in several ways.  First, the documentation doesn&#8217;t
+say what the legal values are for this parameter:</p>
+<div class="section" id="EnumAsInt">
+<span id="index-0"></span><span id="ecto.ecto_examples.EnumAsInt"></span><h3>EnumAsInt<a class="headerlink" href="#EnumAsInt" title="Permalink to this headline">¶</a></h3>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>Example of how *not* to handle parameters that are enums</p>
+</p>
+<p class="topic-title first">Parameters<ul>
+<li><p class="first"><strong>strategy</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> no default value</em></p>
+<p>How to run our algorithm</p>
+</li>
+</ul>
+</p>
+<p></p>
+<p></p>
+</div>
+</div>
+<p>And though the cell functions correctly if used correctly, (note here
+that the direct call to <tt class="docutils literal"><span class="pre">process()</span></tt> is only for convenience, you&#8217;ll
+typically be adding the cell to a plasm and letting a scheduler do
+this),</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#!/usr/bin/python</span>
+
+<span class="n">import</span> <span class="n">ecto</span><span class="p">.</span><span class="n">ecto_examples</span> <span class="n">as</span> <span class="n">ecto_examples</span>
+
+<span class="n">cell</span> <span class="o">=</span> <span class="n">ecto_examples</span><span class="p">.</span><span class="n">EnumAsInt</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">cell</span><span class="p">.</span><span class="n">process</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>output:</p>
+<div class="highlight-text"><div class="highlight"><pre>running SLOW
+</pre></div>
+</div>
+<p>it is easy to pass invalid values to the cell from python, and easy to
+forget to handle out-of-range values:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#!/usr/bin/python</span>
+
+<span class="n">import</span> <span class="n">ecto</span><span class="p">.</span><span class="n">ecto_examples</span> <span class="n">as</span> <span class="n">ecto_examples</span>
+
+<span class="n">cell</span> <span class="o">=</span> <span class="n">ecto_examples</span><span class="p">.</span><span class="n">EnumAsInt</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="mi">17</span><span class="p">)</span>
+<span class="n">cell</span><span class="p">.</span><span class="n">process</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>output:</p>
+<div class="highlight-text"><div class="highlight"><pre>BAD!  Unhandled value of enum parameter
+</pre></div>
+</div>
+</div>
+<div class="section" id="solution-enum-parameters-as-enums-and-wrap-your-enumerations">
+<h2>Solution: enum parameters as enums, and wrap your enumerations<a class="headerlink" href="#solution-enum-parameters-as-enums-and-wrap-your-enumerations" title="Permalink to this headline">¶</a></h2>
+<p>Make sure that the parameters are of the enum type itself.  In the
+cell, declare and get the parameter as being of the enum type,</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;iostream&gt;</span>
+<span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
+
+<span class="k">using</span> <span class="n">ecto</span><span class="o">::</span><span class="n">tendrils</span><span class="p">;</span>
+
+<span class="k">enum</span> <span class="n">Strategy</span> <span class="p">{</span>
+  <span class="n">FAST</span><span class="p">,</span> <span class="n">SLOW</span><span class="p">,</span> <span class="n">ADAPTIVE</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">EnumAsEnum</span>
+<span class="p">{</span>
+  <span class="k">static</span> <span class="kt">void</span> <span class="n">declare_params</span><span class="p">(</span><span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">p</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">p</span><span class="p">.</span><span class="n">declare</span><span class="o">&lt;</span><span class="n">Strategy</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;strategy&quot;</span><span class="p">,</span> <span class="s">&quot;How to run our algorithm&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">configure</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">p</span><span class="p">,</span> <span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">i</span><span class="p">,</span> <span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">o</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">Strategy</span> <span class="n">s</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="n">Strategy</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;strategy&quot;</span><span class="p">);</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="nl">FAST:</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;running FAST</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nl">SLOW:</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;running SLOW</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nl">ADAPTIVE:</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;running ADAPTIVE</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+    <span class="k">default</span><span class="o">:</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;BAD!  Unhandled value of enum parameter&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="n">ECTO_CELL</span><span class="p">(</span><span class="n">ecto_examples</span><span class="p">,</span> <span class="n">EnumAsEnum</span><span class="p">,</span> <span class="s">&quot;EnumAsEnum&quot;</span><span class="p">,</span> 
+          <span class="s">&quot;This is how to defined enum parameters.  Like this.&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>And wrap the enum in the <a class="reference internal" href="../techniques/autoregister.html#ecto-define-module"><em>ECTO_DEFINE_MODULE</em></a> section like so:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
+<span class="cp">#include &lt;ecto/python.hpp&gt;</span>
+
+<span class="cp">#include &lt;boost/python.hpp&gt;</span>
+
+<span class="k">enum</span> <span class="n">Strategy</span> <span class="p">{</span>
+  <span class="n">FAST</span><span class="p">,</span> <span class="n">SLOW</span><span class="p">,</span> <span class="n">ADAPTIVE</span>
+<span class="p">};</span>
+
+<span class="n">ECTO_DEFINE_MODULE</span><span class="p">(</span><span class="n">ecto_examples</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">boost</span><span class="o">::</span><span class="n">python</span><span class="o">::</span><span class="n">enum_</span><span class="o">&lt;</span><span class="n">Strategy</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Strategy&quot;</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="s">&quot;FAST&quot;</span><span class="p">,</span> <span class="n">FAST</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="s">&quot;SLOW&quot;</span><span class="p">,</span> <span class="n">SLOW</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="s">&quot;ADAPTIVE&quot;</span><span class="p">,</span> <span class="n">ADAPTIVE</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">export_values</span><span class="p">()</span>
+    <span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Of course, this enumeration should be in a header file so that you
+don&#8217;t have multiple copies floating around.  Now a great many things
+will be more usable.  First of all, the documentation for the module
+will show the correct type (and therefore values) for the parameter:</p>
+<div class="section" id="EnumAsEnum">
+<span id="index-1"></span><span id="ecto.ecto_examples.EnumAsEnum"></span><h3>EnumAsEnum<a class="headerlink" href="#EnumAsEnum" title="Permalink to this headline">¶</a></h3>
+<p></p>
+<div class="topic">
+<p class="topic-title first">Brief doc<p>This is how to defined enum parameters.  Like this.</p>
+</p>
+<p class="topic-title first">Parameters<ul>
+<li><p class="first"><strong>strategy</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">Strategy</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> no default value</em><p><em>Legal Values: </em><tt class="docutils literal"><span class="pre">FAST</span> <span class="pre">(0)</span>&nbsp;&nbsp; </tt><tt class="docutils literal"><span class="pre">SLOW</span> <span class="pre">(1)</span>&nbsp;&nbsp; </tt><tt class="docutils literal"><span class="pre">ADAPTIVE</span> <span class="pre">(2)</span>&nbsp;&nbsp; </tt></p>
+</p>
+<p>How to run our algorithm</p>
+</li>
+</ul>
+</p>
+<p></p>
+<p></p>
+</div>
+</div>
+<p>And if you try to pass magic numbers to cells, you get a reasonable error:</p>
+<div class="highlight-py"><div class="highlight"><pre><span class="c">#!/usr/bin/python</span>
+
+<span class="kn">import</span> <span class="nn">ecto_examples</span>
+
+<span class="n">cell</span> <span class="o">=</span> <span class="n">ecto_examples</span><span class="o">.</span><span class="n">EnumAsEnum</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="mi">17</span><span class="p">)</span>
+<span class="n">cell</span><span class="o">.</span><span class="n">process</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>output:</p>
+<div class="highlight-text"><div class="highlight"><pre>$ /home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/doc/kitchen/ecto/usage/advanced/../../src/enumasenum_bad.py
+Traceback (most recent call last):
+  File &quot;/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/doc/kitchen/ecto/usage/advanced/../../src/enumasenum_bad.py&quot;, line 3, in &lt;module&gt;
+    import ecto_examples
+ImportError: No module named ecto_examples
+</pre></div>
+</div>
+<p>The enum type gets a reasonable docstring,</p>
+<div class="highlight-text"><div class="highlight"><pre>Help on class Strategy in module ecto.ecto_examples:
+
+class Strategy(Boost.Python.enum)
+ |  Method resolution order:
+ |      Strategy
+ |      Boost.Python.enum
+ |      __builtin__.int
+ |      __builtin__.object
+ |  
+ |  Data and other attributes defined here:
+ |  
+ |  ADAPTIVE = ecto.ecto_examples.Strategy.ADAPTIVE
+ |  
+ |  FAST = ecto.ecto_examples.Strategy.FAST
+ |  
+ |  SLOW = ecto.ecto_examples.Strategy.SLOW
+ |  
+ |  names = {&#39;ADAPTIVE&#39;: ecto.ecto_examples.Strategy.ADAPTIVE, &#39;FAST&#39;: ect...
+ |  
+ |  values = {0: ecto.ecto_examples.Strategy.FAST, 1: ecto.ecto_examples.S...
+ |  
+ |  ----------------------------------------------------------------------
+ |  
+</pre></div>
+</div>
+<p>And the normal way to use this kind of thing would be:</p>
+<div class="highlight-py"><div class="highlight"><pre><span class="c">#!/usr/bin/python</span>
+
+<span class="kn">import</span> <span class="nn">ecto.ecto_examples</span> <span class="kn">as</span> <span class="nn">ecto_examples</span>
+
+<span class="n">cell</span> <span class="o">=</span> <span class="n">ecto_examples</span><span class="o">.</span><span class="n">EnumAsEnum</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="n">ecto_examples</span><span class="o">.</span><span class="n">ADAPTIVE</span><span class="p">)</span>
+<span class="n">cell</span><span class="o">.</span><span class="n">process</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>running ADAPTIVE
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="yaml.html" title="Parameters to and from YAML"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../external/valgrind.html" title="Valgrind"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li><a href="../index.html" >Usage</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011,  Willow Garage, Inc.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
