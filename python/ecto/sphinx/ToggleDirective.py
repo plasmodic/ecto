@@ -59,13 +59,16 @@ class ToggleTableDirective(docutils.parsers.rst.Directive):
     node_class = nodes.container
 
     def run(self):
-        js = """
+        js_toggle = """
 function toggle(label) {
   $('.toggleable_button').css({border: '2px outset', 'border-radius': '4px'});
   $('.toggleable_button.label_' + label).css({border: '2px inset', 'border-radius': '4px'});
   $('.toggleable_div').css('display', 'none');
   $('.toggleable_div.label_' + label).css('display', 'block');
 };
+"""
+
+        js_ready = """
 $(document).ready(function() {
   var classList =$('.toggleable_button').attr('class').split(/\s+/);
   $.each( classList, function(index, item){
@@ -74,7 +77,6 @@ $(document).ready(function() {
     };
   });
 });
-toggle('%s');
 """
 
         # Create the node, to be populated by `nested_parse`.
@@ -84,9 +86,10 @@ toggle('%s');
                 raise RuntimeError(key + ' not in the contructor of ToggleTableDirective, use arg0 to arg99')
             label = self.options[key]
             label_strip = label.replace(' ', '')
-            str1 = '<button class="toggleable_button label_%s" onClick="' %label_strip
-            str2 = js % label_strip
+            str1 = '<button class="toggleable_button label_%s" onclick="' % label_strip
+            str2 = js_toggle + "toggle('%s')" % label_strip
             str3 = '">%s</button>' % label
-            node += nodes.raw(key, str1 + str2 + str3, format="html")
+            str4 = '<frameset onload="%s"/>' % js_ready
+            node += nodes.raw(key, str1 + str2 + str3 + str4, format="html")
 
         return [node]
