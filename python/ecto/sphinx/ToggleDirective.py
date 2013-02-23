@@ -69,6 +69,8 @@ function toggle(label) {
 """
 
         js_ready = """
+<script>
+%s
 $(document).ready(function() {
   var classList =$('.toggleable_button').attr('class').split(/\s+/);
   $.each( classList, function(index, item){
@@ -77,7 +79,8 @@ $(document).ready(function() {
     };
   });
 });
-"""
+</script>
+""" % js_toggle
 
         # Create the node, to be populated by `nested_parse`.
         node = self.node_class()
@@ -89,7 +92,6 @@ $(document).ready(function() {
             str1 = '<button class="toggleable_button label_%s" onclick="' % label_strip
             str2 = js_toggle + "toggle('%s')" % label_strip
             str3 = '">%s</button>' % label
-            str4 = '<frameset onload="%s"/>' % js_ready
-            node += nodes.raw(key, str1 + str2 + str3 + str4, format="html")
+            node += nodes.raw(key, str1 + str2 + str3 + js_ready, format="html")
 
         return [node]
