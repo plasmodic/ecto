@@ -14,11 +14,11 @@ breathe_projects = dict(ecto='${CMAKE_CURRENT_BINARY_DIR}/../api/xml')
 ecto_module_url_root = 'http://plasmodic.github.com/'
 
 intersphinx_mapping = {
-                       'ecto_image_pipeline': (ecto_module_url_root + 'ecto_image_pipeline', None),
-                       'ecto_openni': (ecto_module_url_root + 'ecto_openni', None),
-                       'ecto_opencv': (ecto_module_url_root + 'ecto_opencv', None),
-                       'ecto_pcl': (ecto_module_url_root + 'ecto_pcl', None),
-                       'ecto_ros': (ecto_module_url_root + 'ecto_ros', None),
+                       'ectoimagepipeline': (ecto_module_url_root + 'ecto_image_pipeline', None),
+                       'ectoopenni': (ecto_module_url_root + 'ecto_openni', None),
+                       'ectoopencv': (ecto_module_url_root + 'ecto_opencv', None),
+                       'ectopcl': (ecto_module_url_root + 'ecto_pcl', None),
+                       'ectoros': (ecto_module_url_root + 'ecto_ros', None),
                        }
 
 programoutput_path = '${DOC_SOURCE_DIRS}'.split(';')
