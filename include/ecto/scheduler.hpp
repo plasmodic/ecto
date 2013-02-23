@@ -69,24 +69,24 @@ public:
   ~scheduler();
 
   /** Synchronously execute plasm for num_iters iterations.
-   * @param[in] The number of iterations to execute the plasm. 0 indicates
+   * @param[in] num_iters The number of iterations to execute the plasm. 0 indicates
    *   that the plasm should be executed until some cell::process() call
-   *   returns ecto::QUIT. @TRICKY: This call will block indefinately if
+   *   returns ecto::QUIT. \attention This call will block indefinately if
    *   num_iters is 0.
    */
   bool execute(unsigned num_iters = 0);
   /** Kick off an asynchronous plasm execution for num_iters iterations.
    * No actual work will be done without calling the run*() methods.
-   * @param[in] The number of iterations to execute the plasm. 0 indicates
+   * @param[in] num_iters The number of iterations to execute the plasm. 0 indicates
    *   that the plasm should be executed until some cell::process() call
-   *   returns ecto::QUIT. @TRICKY: A call to run() will block indefinately if
+   *   returns ecto::QUIT. \attention A call to run() will block indefinately if
    *   num_iters is 0.
    */
   bool execute_async(unsigned num_iters = 0);
 
   /** Run one job in the calling thread of execution.
-   * @NOTE: A job is not necessarily (but is usually) a cell::process() call.
-   * @TRICKY: If using python cells, this method must be called from the main
+   * \note A job is not necessarily (but is usually) a cell::process() call.
+   * \attention If using python cells, this method must be called from the main
    *   python thread.
    * @return true indicates that the scheduler is still "running."
    */
@@ -94,7 +94,7 @@ public:
   /** Run jobs in the calling thread for the specified number of microseconds,
    * or until the io_service is depleted.
    * @param[in] timeout_usec The number of microsecs to run io_service jobs.
-   *   @TRICKY: Assuming the io_service does not run out of work, this is the
+   *   \attention Assuming the io_service does not run out of work, this is the
    *   minimum amount of time that will be spent running jobs.
    * @return true indicates that the scheduler is still "running."
    */
@@ -114,8 +114,8 @@ public:
   inline bool executing() const;
 
   /** Stop the scheduler, and flush any jobs in the io_service.
-   * @NOTE: The scheduler will no longer be in the running state.
-   * @TRICKY: The plasm may be in the middle of the stack when it is stopped,
+   * \note The scheduler will no longer be in the running state.
+   * \attention The plasm may be in the middle of the stack when it is stopped,
    *   but successive calls to execute*() start from the beginning.
    */
   void stop();
