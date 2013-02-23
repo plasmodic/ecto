@@ -36,3 +36,7 @@ find_package(PythonLibs REQUIRED)
 
 
 include(${SELF_DIR}/ectoMacros.cmake)
+
+@[if DEVELSPACE]@
+include_directories(@(CATKIN_DEVEL_PREFIX)/include)
+@[end if]@

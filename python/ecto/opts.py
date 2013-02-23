@@ -279,10 +279,10 @@ def doit(plasm, description="An ecto graph.", locals={}, args=None,
        yourself.
 
        :param args: If this is None, default to using the sys.argv
-       args, otherwise this overrides it.
+           args, otherwise this overrides it.
        :param locals: May be used to forward any local variables to
-       the ipython shell. Suggest either vars() or locals() to do
-       this.
+           the ipython shell. Suggest either vars() or locals() to do
+           this.
        :param default_shell: Override
        :param default_graphviz: Override
     '''

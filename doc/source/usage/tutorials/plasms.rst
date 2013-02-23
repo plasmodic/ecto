@@ -94,7 +94,7 @@ Once a plasm is constructed, it may be used with an :ref:`ecto scheduler <schedu
 
 ..  _topological-sort: http://en.wikipedia.org/wiki/Topological_sorting
 
-The :py:class:`ecto.Scheduler' scheduler essentially
+The :py:class:`ecto.Scheduler` scheduler essentially
 does a `topological-sort`_
 on the graph, and then executes each cell in order.
 This repeats for the specified number of iterations,

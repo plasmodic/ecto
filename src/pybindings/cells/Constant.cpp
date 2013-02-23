@@ -40,16 +40,24 @@ namespace ecto
   {
     static void declare_params(tendrils& p)
     {
-      p.declare<bp::object>("value", "Value to output").required(true);
+      p.declare(&Constant::value_, "value", "Value to output").required(true);
     }
 
     static void declare_io(const tendrils& params, tendrils& in, tendrils& out)
     {
-      // copy supplied value of 
-      bp::object obj = params.get<bp::object> ("value");
-      out.declare<bp::object> ("out", "Any type, constant.", obj);
+      out.declare(&Constant::out_, "out", "Any type, constant.");
     }
 
+    int
+    process(const tendrils& inputs, const tendrils& outputs)
+    {
+      *out_ = *value_;
+
+      return ecto::OK;
+    }
+
+    ecto::spore<bp::object> value_;
+    ecto::spore<bp::object> out_;
   };
 }
 
