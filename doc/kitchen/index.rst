@@ -22,11 +22,11 @@ To understand ecto, you probably want to go over the Ecto docs first:
 
 Ecto has several modules that wrap different libraries or functionalities:
 
-   * :ref:`ecto_image_pipeline <ecto_image_pipeline:ecto_image_pipeline>`
-   * :ref:`ecto_opencv <ecto_opencv:ecto_opencv>`
-   * :ref:`ecto_openni <ecto_openni:ecto_openni>`
-   * :ref:`ecto_pcl <ecto_pcl:ecto_pcl>`
-   * :ref:`ecto_ros <ecto_ros:ecto_ros>`
+   * :ref:`ecto_image_pipeline <ectoimagepipeline:ecto_image_pipeline>`
+   * :ref:`ecto_opencv <ectoopencv:ecto_opencv>`
+   * :ref:`ecto_openni <ectoopenni:ecto_openni>`
+   * :ref:`ecto_pcl <ectopcl:ecto_pcl>`
+   * :ref:`ecto_ros <ectoros:ecto_ros>`
 
 .. rubric:: Install
 
