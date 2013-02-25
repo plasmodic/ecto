@@ -178,6 +178,6 @@ from ecto.ecto_main import *
 
 from doc import *
 from cell import *
-from blackbox import BlackBox, BlackBoxCellInfo, BlackBoxForward
+from blackbox import BlackBox, BlackBoxCellInfo, BlackBoxError, BlackBoxForward
 import test
 
