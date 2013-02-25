@@ -173,6 +173,57 @@ def test_bb2(options):
     # final value is start + step*(5+5-1)+amount1+amount2
     assert mm.outputs.value == 107
 
+class MyBlackBox3(ecto.BlackBox):
+    pass
+class MyBlackBox4(ecto.BlackBox):
+    def connections(self, p):
+        return []
+class MyBlackBox5(ecto.BlackBox):
+    def declare_cells(self, p):
+        return {'gen': CellInfo(python_class=ecto_test.Generate),
+                'inc': CellInfo(python_class=ecto_test.Increment)}
+    @classmethod
+    def declare_direct_params(cls, p, **kwargs):
+        p.declare("fail", "Should i fail or should i go.", False)
+    @classmethod
+    def declare_forwards(cls, params):
+        return ({},{},{})
+    def connections(self, p):
+        return [self.gen["out"] >> self.inc["in"]]
+class MyBlackBox6(ecto.BlackBox):
+    @classmethod
+    def declare_cells(cls, p):
+        return {'gen': CellInfo(python_class=ecto_test.Generate),
+                'inc': CellInfo(python_class=ecto_test.Increment)}
+    def declare_direct_params(self, p, **kwargs):
+        p.declare("fail", "Should i fail or should i go.", False)
+    @classmethod
+    def declare_forwards(cls, params):
+        return ({},{},{})
+    def connections(self, p):
+        return [self.gen["out"] >> self.inc["in"]]
+class MyBlackBox7(ecto.BlackBox):
+    @classmethod
+    def declare_cells(cls, p):
+        return {'gen': CellInfo(python_class=ecto_test.Generate),
+                'inc': CellInfo(python_class=ecto_test.Increment)}
+    @classmethod
+    def declare_direct_params(cls, p, **kwargs):
+        p.declare("fail", "Should i fail or should i go.", False)
+    def declare_forwards(self, params):
+        return ({},{},{})
+    def connections(self, p):
+        return [self.gen["out"] >> self.inc["in"]]
+
+def test_bb_static():
+    for BB in [MyBlackBox3, MyBlackBox4, MyBlackBox5, MyBlackBox6, MyBlackBox7]:
+        try:
+            mm = BB("MaMaMa")
+            fail()
+        except ecto.BlackBoxError as e:
+            print "Good:"
+            print str(e)
+
 if __name__ == '__main__':
     test_command_line_args()
     test_command_line_args2()
@@ -184,5 +235,6 @@ if __name__ == '__main__':
     options = parser.parse_args()
     test_bb(options)
     test_bb_fail(options)
+    test_bb_static()
 
     test_bb2(options)
