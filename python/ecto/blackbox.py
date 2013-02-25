@@ -25,8 +25,9 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 #
-import ecto
 import collections
+import ecto
+import types
 
 class BlackBoxError(RuntimeError):
     def __init__(self, *args, **kwargs):
@@ -233,6 +234,19 @@ class BlackBox(object):
                      of the BlackBox
         :param kwargs: any parameter that is a declared parameter or a forwarded one
         """
+        # check that the overrides have proper types
+        # declare_direct_params has to be a classmethod or a staticmethod (as declare_params uses it and it's a
+        # classmethod)
+        for func in [self.__class__.declare_cells, self.__class__.declare_direct_params,
+                     self.__class__.declare_forwards]:
+            if type(func) != types.FunctionType:
+                if type(func) != types.MethodType:
+                    raise BlackBoxError('The "%s" member of the BlackBox %s ' % (func.__name__,
+                                        self.__class__.__name__) + 'is not a function.')
+                if func.__self__ is None:
+                    raise BlackBoxError('The "%s" function of the BlackBox %s '  % (func.__name__,
+                                self.__class__.__name__) + 'needs to be decorated with @classmethod or @staticmethod.')
+
         self.niter = kwargs.get('niter', 1)
         self.__impl = None
         self.__doc__ = ''
@@ -313,7 +327,7 @@ class BlackBox(object):
         If you want to have your cell expose different parameters according to different
         parameters sent to the constructor of the BlackBox, you can make this function
         non-static. declare_params and declare_io (that are static) might then fail if called
-        statically but they are not used to build a BlackBoxs.
+        statically but they are not used to build a BlackBox.
 
         :param p: an ecto.Tendrils() object
         """
@@ -370,15 +384,15 @@ class BlackBox(object):
             if isinstance(cell_infos[cell_name], _BlackBoxCellInfo):
                 tendrils_params = _get_param_tendrils(cell_infos[cell_name], forwards, kwargs)
             else:
-                tendrils_params = cell_info.params
+                tendrils_params = cell_infos[cell_name].params
             _deep_copy_tendrils_to_tendrils(tendrils_params, forwards, p)
 
     @classmethod
-    def declare_forwards(cls, p):
+    def declare_forwards(cls, _p):
         """
         This function can be overriden by a child class.
 
-        :param p: an ecto.Tendrils object from which some logic can be done to know what to forward.
+        :param _p: an ecto.Tendrils object from which some logic can be done to know what to forward.
                   This function will be called after declare_direct_params which fills 'p' with BlackBox
                   specific parameters (non-forwarded)
         :return: a tuple of three dictionaries definining the params/input/output
@@ -521,7 +535,7 @@ class BlackBox(object):
                   to decide on certain connections
         :return: an iterable of tendril connections.
         """
-        raise NotImplementedError("All BlackBox's must implement atleast the connections function....")
+        raise NotImplementedError("All BlackBox's must implement at least the connections function....")
 
     def cell(self):
         '''
