@@ -48,7 +48,7 @@ catkin_package(CFG_EXTRAS ecto-extras.cmake
 else()
 include(cmake/config.cmake)
 catkin_stack()
-catkin_project(ecto INCLUDE_DIRS include ${CMAKE_BINARY_DIR}/gen/cpp/
+catkin_project(ecto INCLUDE_DIRS include
                     LIBRARIES ecto
                     DEPENDS PythonLibs
                     CFG_EXTRAS ecto-extras.cmake

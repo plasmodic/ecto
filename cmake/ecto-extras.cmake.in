@@ -36,3 +36,7 @@ find_package(PythonLibs REQUIRED)
 
 
 include(${SELF_DIR}/ectoMacros.cmake)
+
+if (EXISTS ${CMAKE_BINARY_DIR}/gen/cpp/)
+include_directories(${CMAKE_BINARY_DIR}/gen/cpp/)
+endif()
