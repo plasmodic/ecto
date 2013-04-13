@@ -320,16 +320,19 @@ yourself.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>args</strong> &#8211; If this is None, default to using the sys.argv</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>args</strong> &#8211; If this is None, default to using the sys.argv
+args, otherwise this overrides it.</li>
+<li><strong>locals</strong> &#8211; May be used to forward any local variables to
+the ipython shell. Suggest either vars() or locals() to do
+this.</li>
+<li><strong>default_shell</strong> &#8211; Override</li>
+<li><strong>default_graphviz</strong> &#8211; Override</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
-<p>args, otherwise this overrides it.
-:param locals: May be used to forward any local variables to
-the ipython shell. Suggest either vars() or locals() to do
-this.
-:param default_shell: Override
-:param default_graphviz: Override</p>
 </dd></dl>
 
 </div>

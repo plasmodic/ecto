@@ -645,7 +645,7 @@
 <em>Public Type</em><blockquote>
 <div><p id=""><span id="project0structecto_1_1cell___1a26d9e255a2ba0335c5e90fd04efa6bfa"></span>typedef boost::shared_ptr&lt;  <a class="reference internal" href="#project0structecto_1_1cell__"><em>cell_</em></a> &lt; Impl &gt; &gt; <strong>ptr</strong></p>
 <blockquote>
-<div><p>A convenience pointer typedef. </p>
+<div><p></p>
 <p></p>
 </div></blockquote>
 <p id=""><span id="project0structecto_1_1cell___1a3e48e52421d132bb2bb4e343f771abeb"></span>typedef <a class="reference internal" href="#project0structecto_1_1cell___1_1int__"><em>int_</em></a> &lt; 0 &gt; <strong>not_implemented</strong></p>
@@ -1940,6 +1940,24 @@
 <p></p>
 </div></blockquote>
 <div class="line-block">
+<div class="line"><em>struct</em> <strong>ecto::py::istream</strong></div>
+<div class="line"><em>#include &lt;streambuf.hpp&gt;</em></div>
+</div>
+<blockquote>
+<div><p></p>
+<p></p>
+<em>Public Functions</em><blockquote>
+<div><p id=""><span id="project0structecto_1_1py_1_1istream_1a1261100ee2202be4989166b6a16fc1b0"></span><div class="line-block">
+<div class="line"> <strong>istream</strong>(bp::object &amp; python_file_obj, std::size_t buffer_size = 0)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<div class="line-block">
 <div class="line"><em>class</em> <strong>ecto::py::streambuf::istream</strong></div>
 <div class="line"><em>#include &lt;streambuf.hpp&gt;</em></div>
 </div>
@@ -1957,24 +1975,6 @@
 </div></blockquote>
 <p id=""><span id="project0classecto_1_1py_1_1streambuf_1_1istream_1ab53f3c2893d995a22ef2374ce9a00004"></span><div class="line-block">
 <div class="line"> <strong>~istream</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-</div></blockquote>
-</div></blockquote>
-<div class="line-block">
-<div class="line"><em>struct</em> <strong>ecto::py::istream</strong></div>
-<div class="line"><em>#include &lt;streambuf.hpp&gt;</em></div>
-</div>
-<blockquote>
-<div><p></p>
-<p></p>
-<em>Public Functions</em><blockquote>
-<div><p id=""><span id="project0structecto_1_1py_1_1istream_1a1261100ee2202be4989166b6a16fc1b0"></span><div class="line-block">
-<div class="line"> <strong>istream</strong>(bp::object &amp; python_file_obj, std::size_t buffer_size = 0)</div>
 </div>
 </p>
 <blockquote>
@@ -2226,32 +2226,6 @@
 </div></blockquote>
 </div></blockquote>
 <div class="line-block">
-<div class="line"><em>struct</em> <strong>ecto::py::ostream</strong></div>
-<div class="line"><em>#include &lt;streambuf.hpp&gt;</em></div>
-</div>
-<blockquote>
-<div><p></p>
-<p></p>
-<em>Public Functions</em><blockquote>
-<div><p id=""><span id="project0structecto_1_1py_1_1ostream_1a5fc23212b0b77a69a0c4e7e67133b2c8"></span><div class="line-block">
-<div class="line"> <strong>ostream</strong>(bp::object &amp; python_file_obj, std::size_t buffer_size = 0)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p id=""><span id="project0structecto_1_1py_1_1ostream_1a69cba9ec021b14b76fd08d35ea322434"></span><div class="line-block">
-<div class="line"> <strong>~ostream</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-</div></blockquote>
-</div></blockquote>
-<div class="line-block">
 <div class="line"><em>class</em> <strong>ecto::py::streambuf::ostream</strong></div>
 <div class="line"><em>#include &lt;streambuf.hpp&gt;</em></div>
 </div>
@@ -2268,6 +2242,32 @@
 <p></p>
 </div></blockquote>
 <p id=""><span id="project0classecto_1_1py_1_1streambuf_1_1ostream_1abeaab4a21b07a3bbf944d4ce8693a7b5"></span><div class="line-block">
+<div class="line"> <strong>~ostream</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><em>struct</em> <strong>ecto::py::ostream</strong></div>
+<div class="line"><em>#include &lt;streambuf.hpp&gt;</em></div>
+</div>
+<blockquote>
+<div><p></p>
+<p></p>
+<em>Public Functions</em><blockquote>
+<div><p id=""><span id="project0structecto_1_1py_1_1ostream_1a5fc23212b0b77a69a0c4e7e67133b2c8"></span><div class="line-block">
+<div class="line"> <strong>ostream</strong>(bp::object &amp; python_file_obj, std::size_t buffer_size = 0)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="project0structecto_1_1py_1_1ostream_1a69cba9ec021b14b76fd08d35ea322434"></span><div class="line-block">
 <div class="line"> <strong>~ostream</strong>()</div>
 </div>
 </p>
@@ -2918,10 +2918,14 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="breatheparameterlist first last">
-<li><tt class="first docutils literal"><span class="pre">The</span></tt> - <p>number of iterations to execute the plasm. 0 indicates that the plasm should be executed until some <a class="reference internal" href="#project0structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3"><em>cell::process()</em></a> call returns ecto::QUIT. : This call will block indefinately if num_iters is 0. </p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="breatheparameterlist first">
+<li><tt class="first docutils literal"><span class="pre">num_iters</span></tt> - <p>The number of iterations to execute the plasm. 0 indicates that the plasm should be executed until some <a class="reference internal" href="#project0structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3"><em>cell::process()</em></a> call returns ecto::QUIT. </p>
 </li>
 </ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Attention:</th><td class="field-body"><p class="first last"><p>This call will block indefinately if num_iters is 0. </p>
+</p>
 </td>
 </tr>
 </tbody>
@@ -2938,10 +2942,14 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="breatheparameterlist first last">
-<li><tt class="first docutils literal"><span class="pre">The</span></tt> - <p>number of iterations to execute the plasm. 0 indicates that the plasm should be executed until some <a class="reference internal" href="#project0structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3"><em>cell::process()</em></a> call returns ecto::QUIT. : A call to <a class="reference internal" href="#project0classecto_1_1scheduler_1a8d5ce4f97e511341f315bb7621ba38f4"><em>run()</em></a> will block indefinately if num_iters is 0. </p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="breatheparameterlist first">
+<li><tt class="first docutils literal"><span class="pre">num_iters</span></tt> - <p>The number of iterations to execute the plasm. 0 indicates that the plasm should be executed until some <a class="reference internal" href="#project0structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3"><em>cell::process()</em></a> call returns ecto::QUIT. </p>
 </li>
 </ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Attention:</th><td class="field-body"><p class="first last"><p>A call to <a class="reference internal" href="#project0classecto_1_1scheduler_1a8d5ce4f97e511341f315bb7621ba38f4"><em>run()</em></a> will block indefinately if num_iters is 0. </p>
+</p>
 </td>
 </tr>
 </tbody>
@@ -2954,10 +2962,14 @@
 </p>
 <blockquote>
 <div><p></p>
-<p>Run one job in the calling thread of execution. : A job is not necessarily (but is usually) a <a class="reference internal" href="#project0structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3"><em>cell::process()</em></a> call. : If using python cells, this method must be called from the main python thread. <table class="docutils field-list" frame="void" rules="none">
+<p>Run one job in the calling thread of execution. <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Note:</th><td class="field-body">A job is not necessarily (but is usually) a <a class="reference internal" href="#project0structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3"><em>cell::process()</em></a> call. </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Attention:</th><td class="field-body">If using python cells, this method must be called from the main python thread. </td>
+</tr>
 <tr class="field-odd field"><th class="field-name">Return:</th><td class="field-body">true indicates that the scheduler is still &#8220;running.&#8221; </td>
 </tr>
 </tbody>
@@ -2975,12 +2987,16 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="breatheparameterlist first">
-<li><tt class="first docutils literal"><span class="pre">timeout_usec</span></tt> - <p>The number of microsecs to run io_service jobs. : Assuming the io_service does not run out of work, this is the minimum amount of time that will be spent running jobs. </p>
+<li><tt class="first docutils literal"><span class="pre">timeout_usec</span></tt> - <p>The number of microsecs to run io_service jobs. </p>
 </li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return:</th><td class="field-body"><p class="first last"><p>true indicates that the scheduler is still &#8220;running.&#8221; </p>
+<tr class="field-even field"><th class="field-name">Attention:</th><td class="field-body"><p class="first"><p>Assuming the io_service does not run out of work, this is the minimum amount of time that will be spent running jobs. </p>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return:</th><td class="field-body"><p class="first last"><p>true indicates that the scheduler is still &#8220;running.&#8221; </p>
 </p>
 </td>
 </tr>
@@ -3042,7 +3058,17 @@
 </p>
 <blockquote>
 <div><p></p>
-<p>Stop the scheduler, and flush any jobs in the io_service. : The scheduler will no longer be in the running state. : The plasm may be in the middle of the stack when it is stopped, but successive calls to execute*() start from the beginning. </p>
+<p>Stop the scheduler, and flush any jobs in the io_service. <table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Note:</th><td class="field-body">The scheduler will no longer be in the running state. </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Attention:</th><td class="field-body">The plasm may be in the middle of the stack when it is stopped, but successive calls to execute*() start from the beginning. </td>
+</tr>
+</tbody>
+</table>
+</p>
 </div></blockquote>
 <p id=""><span id="project0classecto_1_1scheduler_1a99d2f51779f856b3905bb8b493f091c4"></span><div class="line-block">
 <div class="line">std::string <strong>stats</strong>()</div>
@@ -4539,7 +4565,7 @@
 </p>
 <blockquote>
 <div><p>A doc string for this tendril, &#8220;foo is for the input
- and will be mashed with spam.&#8221;. </p>
+and will be mashed with spam.&#8221;. </p>
 <p><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -5283,7 +5309,15 @@
 </p>
 <blockquote>
 <div><p></p>
-<p><p>Sig is a function object that looks like: struct Callback { typedef void result_type; void operator()(const boost::signals2::connection &amp;conn, void* cookie, const tendrils* tdls) const { conn.disconnect();//for one time callbacks do your thang. } };</p>
+<p><p><div class="highlight-python"><pre>  Sig is a function object that looks like:
+  struct Callback
+  {
+    typedef void result_type;
+    void operator()(const boost::signals2::connection &amp;conn, void* cookie, const tendrils* tdls) const
+    {
+      conn.disconnect();//for one time callbacks</pre>
+</div>
+ do your thang. } };</p>
 <p>This will be called by realize_potential(cookie). Typically cookie is of type CellImplementation.</p>
 <p>Convenience function for static registration of pointer to members that are of type spore&lt;T&gt; </p>
 </p>
@@ -5419,7 +5453,7 @@
 </div></blockquote>
 </div></blockquote>
 <em>Private Types</em><blockquote>
-<div><p id=""><span id="project0classecto_1_1tendrils_1aa898408b75690dffde72989cdeaf03e6"></span>typedef boost::signals2::signal&lt; void(void *, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  *) <strong>sig_t</strong>)</p>
+<div><p id=""><span id="project0classecto_1_1tendrils_1aca7990b4d8ccfbddfb4d5c805345ca23"></span>typedef boost::signals2::signal&lt; void(void *, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  *)&gt; <strong>sig_t</strong></p>
 <blockquote>
 <div><p></p>
 <p></p>
@@ -5449,7 +5483,7 @@
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p id=""><span id="project0classecto_1_1tendrils_1a40635d009ae082dccde9486c1293212e"></span><a class="reference internal" href="#project0classecto_1_1tendrils_1aa898408b75690dffde72989cdeaf03e6"><em>sig_t</em></a> <strong>static_bindings_</strong></p>
+<p id=""><span id="project0classecto_1_1tendrils_1a40635d009ae082dccde9486c1293212e"></span><a class="reference internal" href="#project0classecto_1_1tendrils_1aca7990b4d8ccfbddfb4d5c805345ca23"><em>sig_t</em></a> <strong>static_bindings_</strong></p>
 <blockquote>
 <div><p></p>
 <p></p>
@@ -5656,7 +5690,47 @@
 <div><p></p>
 <p></p>
 <em>Typedefs</em><blockquote>
-<div><p id=""><span id="project0namespaceecto_1a84fb5f6130275382e5cbeb5fdececa78"></span>typedef boost::shared_ptr&lt;  <a class="reference internal" href="#project0classecto_1_1tendril"><em>tendril</em></a>  &gt; <strong>tendril_ptr</strong></p>
+<div><p id=""><span id="project0namespaceecto_1a96ba8fa498cc4b8e2a0217a9e236b50d"></span>typedef uint64_t <strong>stamp_t</strong></p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="project0namespaceecto_1a5bbe8fb0da047cb18d92eb9dfb469652"></span>typedef boost::posix_time::ptime <strong>ptime_t</strong></p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="project0namespaceecto_1a0952d5ebd059cbd79b978ecab9ec781c"></span>typedef boost::posix_time::time_duration <strong>ptime_duration_t</strong></p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="project0namespaceecto_1a477c167c1e1288b689db5872f650540e"></span>typedef boost::posix_time::hours <strong>hours_t</strong></p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="project0namespaceecto_1ad57e5ebf1455dd895ce11804e47669e5"></span>typedef boost::posix_time::minutes <strong>minutes_t</strong></p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="project0namespaceecto_1ae14f91b3661ad9cb774590b15407742c"></span>typedef boost::posix_time::seconds <strong>seconds_t</strong></p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="project0namespaceecto_1ab1f4721cc3b311f9615b3092d291260b"></span>typedef boost::posix_time::millisec <strong>millisec_t</strong></p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="project0namespaceecto_1affe36dc8be6d20a6b8f7359655c8dc23"></span>typedef boost::posix_time::microsec <strong>microsec_t</strong></p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="project0namespaceecto_1a84fb5f6130275382e5cbeb5fdececa78"></span>typedef boost::shared_ptr&lt;  <a class="reference internal" href="#project0classecto_1_1tendril"><em>tendril</em></a>  &gt; <strong>tendril_ptr</strong></p>
 <blockquote>
 <div><p></p>
 <p></p>
@@ -5706,49 +5780,20 @@
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p id=""><span id="project0namespaceecto_1a96ba8fa498cc4b8e2a0217a9e236b50d"></span>typedef uint64_t <strong>stamp_t</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p id=""><span id="project0namespaceecto_1a5bbe8fb0da047cb18d92eb9dfb469652"></span>typedef boost::posix_time::ptime <strong>ptime_t</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p id=""><span id="project0namespaceecto_1a0952d5ebd059cbd79b978ecab9ec781c"></span>typedef boost::posix_time::time_duration <strong>ptime_duration_t</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p id=""><span id="project0namespaceecto_1a477c167c1e1288b689db5872f650540e"></span>typedef boost::posix_time::hours <strong>hours_t</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p id=""><span id="project0namespaceecto_1ad57e5ebf1455dd895ce11804e47669e5"></span>typedef boost::posix_time::minutes <strong>minutes_t</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p id=""><span id="project0namespaceecto_1ae14f91b3661ad9cb774590b15407742c"></span>typedef boost::posix_time::seconds <strong>seconds_t</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p id=""><span id="project0namespaceecto_1ab1f4721cc3b311f9615b3092d291260b"></span>typedef boost::posix_time::millisec <strong>millisec_t</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p id=""><span id="project0namespaceecto_1affe36dc8be6d20a6b8f7359655c8dc23"></span>typedef boost::posix_time::microsec <strong>microsec_t</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
 </div></blockquote>
 <em>Enums</em><blockquote>
-<div><p id=""><span id="project0namespaceecto_1a93d82cd28db695d53963fb696582762c"></span><strong>ReturnCode enum</strong></p>
+<div><p id=""><span id="project0namespaceecto_1a02939764b22968505f82e425c83272c2"></span><strong>tendril_type enum</strong></p>
+<blockquote>
+<div><p></p>
+<p></p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">OUTPUT</span></tt><tt class="docutils literal"> <span class="pre">=</span>  <span class="pre">0</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">INPUT</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">PARAMETER</span></tt> - </li>
+</ul>
+</div></blockquote>
+<p id=""><span id="project0namespaceecto_1a93d82cd28db695d53963fb696582762c"></span><strong>ReturnCode enum</strong></p>
 <blockquote>
 <div><p>Return values for <a class="reference internal" href="#project0structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3"><em>cell::process()</em></a>. TODO: Should these live in cell? These are appropriate for non exceptional behavior. </p>
 <p></p>
@@ -5768,20 +5813,85 @@
 </li>
 </ul>
 </div></blockquote>
-<p id=""><span id="project0namespaceecto_1a02939764b22968505f82e425c83272c2"></span><strong>tendril_type enum</strong></p>
+</div></blockquote>
+<em>Functions</em><blockquote>
+<div><p id=""><span id="project0namespaceecto_1a776138cb830340922312c3ec98c15b6d"></span><div class="line-block">
+<div class="line">template &lt; typename CellImpl, typename T &gt;</div>
+<div class="line"><a class="reference internal" href="#project0structecto_1_1spore__assign__impl"><em>spore_assign_impl</em></a> &lt; CellImpl, T &gt; <strong>spore_assign</strong>(<a class="reference internal" href="#project0structecto_1_1spore"><em>spore</em></a> &lt; T &gt; CellImpl::* ptm, const std::string &amp; name)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p>Constructs a function object used for static time registration of a pointer to member ecto::spore&lt;T&gt; and a <a class="reference internal" href="#project0classecto_1_1tendrils"><em>ecto::tendrils</em></a> object. <table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="breatheparameterlist first">
+<li><tt class="first docutils literal"><span class="pre">ptm</span></tt> - <p>A pointer to an ecto::spore&lt;T&gt; member of your cell impl. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">name</span></tt> - <p>The corresponding key in the <a class="reference internal" href="#project0classecto_1_1tendrils"><em>ecto::tendrils</em></a> object. </p>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return:</th><td class="field-body"><p class="first last"><p>A function object appropriate for static time registration. </p>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</p>
+</div></blockquote>
+<p id=""><span id="project0namespaceecto_1a3870bebbdf6a0d01f28424e402be2834"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#project0util_8hpp_1ab55b7868679cda60fc162580957fb98c"><em>ECTO_EXPORT</em></a>  void <strong>log</strong>(const char *, const char *, unsigned line, const std::string &amp; msg)</div>
+</div>
+</p>
 <blockquote>
 <div><p></p>
 <p></p>
-<p><em>Values:</em></p>
-<ul class="breatheenumvalues">
-<li><tt class="first docutils literal"><span class="pre">OUTPUT</span></tt><tt class="docutils literal"> <span class="pre">=</span>  <span class="pre">0</span></tt> - </li>
-<li><tt class="first docutils literal"><span class="pre">INPUT</span></tt> - </li>
-<li><tt class="first docutils literal"><span class="pre">PARAMETER</span></tt> - </li>
-</ul>
 </div></blockquote>
+<p id=""><span id="project0namespaceecto_1af79493e380ac31e886186e2ba1a1b809"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#project0util_8hpp_1ab55b7868679cda60fc162580957fb98c"><em>ECTO_EXPORT</em></a>  void <strong>assert_failed</strong>(const char *, const char * file, unsigned line, const char * cond, const char * msg)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
 </div></blockquote>
-<em>Functions</em><blockquote>
-<div><p id=""><span id="project0namespaceecto_1af5e1929b12d596f7cc45a3fe7c76c5ed"></span><div class="line-block">
+<p id=""><span id="project0namespaceecto_1a34c1f436c47dc08392c8248632cde6f0"></span><div class="line-block">
+<div class="line">bool <strong>logging_on</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="project0namespaceecto_1a00786d16020c07e60fea08e8352dba30"></span><div class="line-block">
+<div class="line">const std::string &amp; <strong>ReturnCodeToStr</strong>(int rval)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="project0namespaceecto_1a653dab75b6cd892233b9f3676a5d2921"></span><div class="line-block">
+<div class="line">void <strong>on_strand</strong>(<a class="reference internal" href="#project0namespaceecto_1aed1809e82b9229ea81ef9ee3438cf62c"><em>cell_ptr</em></a> c, boost::asio::io_service &amp; s, boost::function&lt; void()&gt; h)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="project0namespaceecto_1af284ea4dc605a1d2e037731e5f35eeaa"></span><div class="line-block">
+<div class="line">template &lt; typename T &gt;</div>
+<div class="line"><a class="reference internal" href="#project0namespaceecto_1a84fb5f6130275382e5cbeb5fdececa78"><em>tendril_ptr</em></a> <strong>make_tendril</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="project0namespaceecto_1af5e1929b12d596f7cc45a3fe7c76c5ed"></span><div class="line-block">
 <div class="line"><a class="reference internal" href="#project0namespaceecto_1a96ba8fa498cc4b8e2a0217a9e236b50d"><em>stamp_t</em></a> <strong>microseconds</strong>()</div>
 </div>
 </p>
@@ -5807,30 +5917,6 @@
 </div></blockquote>
 <p id=""><span id="project0namespaceecto_1ad48a07c99914e7c96702bcce4baf6bc6"></span><div class="line-block">
 <div class="line"><a class="reference internal" href="#project0namespaceecto_1a5bbe8fb0da047cb18d92eb9dfb469652"><em>ptime_t</em></a> <strong>universal_time</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p id=""><span id="project0namespaceecto_1a3870bebbdf6a0d01f28424e402be2834"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#project0util_8hpp_1ab55b7868679cda60fc162580957fb98c"><em>ECTO_EXPORT</em></a>  void <strong>log</strong>(const char *, const char *, unsigned line, const std::string &amp; msg)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p id=""><span id="project0namespaceecto_1af79493e380ac31e886186e2ba1a1b809"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#project0util_8hpp_1ab55b7868679cda60fc162580957fb98c"><em>ECTO_EXPORT</em></a>  void <strong>assert_failed</strong>(const char *, const char * file, unsigned line, const char * cond, const char * msg)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p id=""><span id="project0namespaceecto_1a34c1f436c47dc08392c8248632cde6f0"></span><div class="line-block">
-<div class="line">bool <strong>logging_on</strong>()</div>
 </div>
 </p>
 <blockquote>
@@ -5911,58 +5997,6 @@
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p id=""><span id="project0namespaceecto_1a00786d16020c07e60fea08e8352dba30"></span><div class="line-block">
-<div class="line">const std::string &amp; <strong>ReturnCodeToStr</strong>(int rval)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p id=""><span id="project0namespaceecto_1af284ea4dc605a1d2e037731e5f35eeaa"></span><div class="line-block">
-<div class="line">template &lt; typename T &gt;</div>
-<div class="line"><a class="reference internal" href="#project0namespaceecto_1a84fb5f6130275382e5cbeb5fdececa78"><em>tendril_ptr</em></a> <strong>make_tendril</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p id=""><span id="project0namespaceecto_1a776138cb830340922312c3ec98c15b6d"></span><div class="line-block">
-<div class="line">template &lt; typename CellImpl, typename T &gt;</div>
-<div class="line"><a class="reference internal" href="#project0structecto_1_1spore__assign__impl"><em>spore_assign_impl</em></a> &lt; CellImpl, T &gt; <strong>spore_assign</strong>(<a class="reference internal" href="#project0structecto_1_1spore"><em>spore</em></a> &lt; T &gt; CellImpl::* ptm, const std::string &amp; name)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p>Constructs a function object used for static time registration of a pointer to member ecto::spore&lt;T&gt; and a <a class="reference internal" href="#project0classecto_1_1tendrils"><em>ecto::tendrils</em></a> object. <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="breatheparameterlist first">
-<li><tt class="first docutils literal"><span class="pre">ptm</span></tt> - <p>A pointer to an ecto::spore&lt;T&gt; member of your cell impl. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">name</span></tt> - <p>The corresponding key in the <a class="reference internal" href="#project0classecto_1_1tendrils"><em>ecto::tendrils</em></a> object. </p>
-</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return:</th><td class="field-body"><p class="first last"><p>A function object appropriate for static time registration. </p>
-</p>
-</td>
-</tr>
-</tbody>
-</table>
-</p>
-</div></blockquote>
-<p id=""><span id="project0namespaceecto_1a653dab75b6cd892233b9f3676a5d2921"></span><div class="line-block">
-<div class="line">void <strong>on_strand</strong>(<a class="reference internal" href="#project0namespaceecto_1aed1809e82b9229ea81ef9ee3438cf62c"><em>cell_ptr</em></a> c, boost::asio::io_service &amp; s, boost::function&lt; void()&gt; h)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
 </div></blockquote>
 </div></blockquote>
 <div class="line-block">
@@ -5973,7 +6007,7 @@
 <p></p>
 </div></blockquote>
 <div class="line-block">
-<div class="line"><em>namespace</em> <strong>ecto::abi::&#64;10</strong></div>
+<div class="line"><em>namespace</em> <strong>ecto::abi::&#64;21</strong></div>
 </div>
 <blockquote>
 <div><p></p>
@@ -6121,10 +6155,6 @@
 <p><p>The aims are as follow:</p>
 <p></p>
 <p></p>
-<p>and given a piece of Python code which creates a file-like object, to be able to pass this file object to that C++ function, e.g.</p>
-<p></p>
-<p>and have the standard stream pull data from and put data into the Python file object.</p>
-<p></p>
 <p></p>
 <p><strong>Motivation</strong> </p>
 <p></p>
@@ -6133,10 +6163,6 @@
 <p>This is 2-step:</p>
 <p></p>
 <p></p>
-<p>which has to be written every time one wants a Python binding for such a C++ function.</p>
-<p></p>
-<p></p>
-<p><tt class="docutils literal"><span class="pre">buffer_size</span></tt> is optional. See also: <tt class="docutils literal"><span class="pre">default_buffer_size</span></tt> </p>
 <p>Note: references are to the C++ standard (the numbers between parentheses at the end of references are margin markers). </p>
 </p>
 </div></blockquote>
@@ -6466,6 +6492,11 @@
 <div><p></p>
 <p></p>
 </div></blockquote>
+<p id=""><span id="project0except_8hpp_1adbf60807e9dffa4b82209ed4a8e78fd1"></span><strong>BOOST_PREPROCESSOR_CONFIG_LIMITS_HPP</strong></p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
 <p id=""><span id="project0except_8hpp_1ae60f080f6aa76332f308c11c5b722e4e"></span><strong>ECTO_PP_ITERLIMIT</strong></p>
 <blockquote>
 <div><p></p>
@@ -6575,6 +6606,35 @@
 </div></blockquote>
 </div></blockquote>
 <div class="line-block">
+<div class="line"><em>file</em> <strong>parameters.hpp</strong></div>
+<div class="line"><em>#include &lt;ecto/abi.hpp&gt;</em></div>
+<div class="line"><em>#include &lt;stdexcept&gt;</em></div>
+<div class="line"><em>#include &lt;exception&gt;</em></div>
+<div class="line"><em>#include &lt;boost/format.hpp&gt;</em></div>
+<div class="line"><em>#include &lt;boost/lexical_cast.hpp&gt;</em></div>
+</div>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><em>file</em> <strong>parameters.hpp</strong></div>
+<div class="line"><em>#include &lt;ecto/abi.hpp&gt;</em></div>
+<div class="line"><em>#include &lt;string&gt;</em></div>
+<div class="line"><em>#include &lt;stdint.h&gt;</em></div>
+</div>
+<blockquote>
+<div><p></p>
+<p></p>
+<em>Defines</em><blockquote>
+<div><p id=""><span id="project0parameters_8hpp_1ac9757f633f20c113336d7dc4ce2cbee7"></span><strong>ECTO_COMMON_TYPES</strong></p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<div class="line-block">
 <div class="line"><em>file</em> <strong>log.hpp</strong></div>
 <div class="line"><em>#include &lt;ecto/config.hpp&gt;</em></div>
 <div class="line"><em>#include &lt;ecto/util.hpp&gt;</em></div>
@@ -6632,35 +6692,6 @@
 <p></p>
 </div></blockquote>
 </div></blockquote>
-</div></blockquote>
-<div class="line-block">
-<div class="line"><em>file</em> <strong>parameters.hpp</strong></div>
-<div class="line"><em>#include &lt;ecto/abi.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;string&gt;</em></div>
-<div class="line"><em>#include &lt;stdint.h&gt;</em></div>
-</div>
-<blockquote>
-<div><p></p>
-<p></p>
-<em>Defines</em><blockquote>
-<div><p id=""><span id="project0parameters_8hpp_1ac9757f633f20c113336d7dc4ce2cbee7"></span><strong>ECTO_COMMON_TYPES</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-</div></blockquote>
-</div></blockquote>
-<div class="line-block">
-<div class="line"><em>file</em> <strong>parameters.hpp</strong></div>
-<div class="line"><em>#include &lt;ecto/abi.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;stdexcept&gt;</em></div>
-<div class="line"><em>#include &lt;exception&gt;</em></div>
-<div class="line"><em>#include &lt;boost/format.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;boost/lexical_cast.hpp&gt;</em></div>
-</div>
-<blockquote>
-<div><p></p>
-<p></p>
 </div></blockquote>
 <div class="line-block">
 <div class="line"><em>file</em> <strong>plasm.hpp</strong></div>
@@ -6790,57 +6821,6 @@
 </div></blockquote>
 </div></blockquote>
 <div class="line-block">
-<div class="line"><em>file</em> <strong>rethrow.hpp</strong></div>
-<div class="line"><em>#include &lt;ecto/except.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;boost/exception/all.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;boost/function.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;boost/asio.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/forward.hpp&gt;</em></div>
-</div>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<div class="line-block">
-<div class="line"><em>file</em> <strong>scheduler.hpp</strong></div>
-<div class="line"><em>#include &lt;ecto/log.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/forward.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/profile.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;boost/asio.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;boost/thread/mutex.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/impl/graph_types.hpp&gt;</em></div>
-</div>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<div class="line-block">
-<div class="line"><em>file</em> <strong>registry.hpp</strong></div>
-<div class="line"><em>#include &lt;boost/archive/binary_iarchive.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;boost/archive/binary_oarchive.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/util.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/tendril.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;boost/tuple/tuple.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;map&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/log.hpp&gt;</em></div>
-</div>
-<blockquote>
-<div><p></p>
-<p></p>
-<em>Defines</em><blockquote>
-<div><p id=""><span id="project0serialization_2registry_8hpp_1ad5d035c036a61c039fc9aa77bb6ead5b"></span><strong>ECTO_REGISTER_SERIALIZERS</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p id=""><span id="project0serialization_2registry_8hpp_1a12f48be608e34f182e8c5453106ab1d5"></span><strong>ECTO_INSTANTIATE_SERIALIZATION</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-</div></blockquote>
-</div></blockquote>
-<div class="line-block">
 <div class="line"><em>file</em> <strong>registry.hpp</strong></div>
 <div class="line"><em>#include &lt;vector&gt;</em></div>
 <div class="line"><em>#include &lt;boost/noncopyable.hpp&gt;</em></div>
@@ -6875,6 +6855,57 @@
 <p></p>
 </div></blockquote>
 </div></blockquote>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><em>file</em> <strong>registry.hpp</strong></div>
+<div class="line"><em>#include &lt;boost/archive/binary_iarchive.hpp&gt;</em></div>
+<div class="line"><em>#include &lt;boost/archive/binary_oarchive.hpp&gt;</em></div>
+<div class="line"><em>#include &lt;ecto/util.hpp&gt;</em></div>
+<div class="line"><em>#include &lt;ecto/tendril.hpp&gt;</em></div>
+<div class="line"><em>#include &lt;boost/tuple/tuple.hpp&gt;</em></div>
+<div class="line"><em>#include &lt;map&gt;</em></div>
+<div class="line"><em>#include &lt;ecto/log.hpp&gt;</em></div>
+</div>
+<blockquote>
+<div><p></p>
+<p></p>
+<em>Defines</em><blockquote>
+<div><p id=""><span id="project0serialization_2registry_8hpp_1ad5d035c036a61c039fc9aa77bb6ead5b"></span><strong>ECTO_REGISTER_SERIALIZERS</strong></p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="project0serialization_2registry_8hpp_1a12f48be608e34f182e8c5453106ab1d5"></span><strong>ECTO_INSTANTIATE_SERIALIZATION</strong></p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><em>file</em> <strong>rethrow.hpp</strong></div>
+<div class="line"><em>#include &lt;ecto/except.hpp&gt;</em></div>
+<div class="line"><em>#include &lt;boost/exception/all.hpp&gt;</em></div>
+<div class="line"><em>#include &lt;boost/function.hpp&gt;</em></div>
+<div class="line"><em>#include &lt;boost/asio.hpp&gt;</em></div>
+<div class="line"><em>#include &lt;ecto/forward.hpp&gt;</em></div>
+</div>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><em>file</em> <strong>scheduler.hpp</strong></div>
+<div class="line"><em>#include &lt;ecto/log.hpp&gt;</em></div>
+<div class="line"><em>#include &lt;ecto/forward.hpp&gt;</em></div>
+<div class="line"><em>#include &lt;ecto/profile.hpp&gt;</em></div>
+<div class="line"><em>#include &lt;boost/asio.hpp&gt;</em></div>
+<div class="line"><em>#include &lt;boost/thread/mutex.hpp&gt;</em></div>
+<div class="line"><em>#include &lt;ecto/impl/graph_types.hpp&gt;</em></div>
+</div>
+<blockquote>
+<div><p></p>
+<p></p>
 </div></blockquote>
 <div class="line-block">
 <div class="line"><em>file</em> <strong>spore.hpp</strong></div>

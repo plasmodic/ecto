@@ -322,7 +322,7 @@ Python cell.</p>
 <p>If you want to have your cell expose different parameters according to different
 parameters sent to the constructor of the BlackBox, you can make this function
 non-static. declare_params and declare_io (that are static) might then fail if called
-statically but they are not used to build a BlackBoxs.</p>
+statically but they are not used to build a BlackBox.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -335,13 +335,13 @@ statically but they are not used to build a BlackBoxs.</p>
 
 <dl class="classmethod">
 <dt id="ecto.BlackBox.declare_forwards">
-<em class="property">classmethod </em><tt class="descname">declare_forwards</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#ecto.BlackBox.declare_forwards" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><tt class="descname">declare_forwards</tt><big>(</big><em>_p</em><big>)</big><a class="headerlink" href="#ecto.BlackBox.declare_forwards" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function can be overriden by a child class.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> &#8211; an ecto.Tendrils object from which some logic can be done to know what to forward.
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>_p</strong> &#8211; an ecto.Tendrils object from which some logic can be done to know what to forward.
 This function will be called after declare_direct_params which fills &#8216;p&#8217; with BlackBox
 specific parameters (non-forwarded)</td>
 </tr>

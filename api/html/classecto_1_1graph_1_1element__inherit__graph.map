@@ -1,4 +1,4 @@
-<map id="G" name="G">
+<map id="ecto::graph::element" name="ecto::graph::element">
 <area shape="rect" id="node3" href="$structecto_1_1graph_1_1edge.html" title="ecto::graph::edge" alt="" coords="5,83,139,112"/>
 <area shape="rect" id="node5" href="$classecto_1_1graph_1_1vertex.html" title="ecto::graph::vertex" alt="" coords="163,83,304,112"/>
 </map>

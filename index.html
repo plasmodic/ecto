@@ -82,8 +82,8 @@
   <div class="section" id="ecto-a-c-python-computation-graph-framework">
 <h1>Ecto - A C++/Python Computation Graph Framework<a class="headerlink" href="#ecto-a-c-python-computation-graph-framework" title="Permalink to this headline">¶</a></h1>
 <p>Initially aimed at computer vision and perception research tasks, Ecto is a hybrid C++/Python framework for organizing computations as directed acyclic graphs of computing &#8216;cells&#8217; connected by typed edges. These graphs are typically constructed via Python script and executed in a single process (and possibly multiple threads) by external schedulers. The computing nodes are written in C++ against a simple interface that naturally creates libraries of self-documenting, scriptable components and smooths the path from prototyping to testing to deployment.</p>
-<p>Ecto itself is small, has minimal dependencies (C++, Boost, Python) and works with or without OpenCV, PCL, and ROS in any combination. We believe that Ecto allows vision and perception researchers to express their computational models in a natural fashion, obviating e.g. ROS [1] time synchronizers and ROS nodelets in most cases.</p>
-<p>As of 2012, Ecto is officially released. It is being used by researchers at Willow Garage and in industry for prototype applications of object capture and modelling, <a class="reference external" href="http://ecto.willowgarage.com/recognition/">object recognition</a>, pose estimation and refinement, projector-based augmented reality and chess playing.</p>
+<p>Ecto itself is small, has minimal dependencies (C++, Boost, Python) and works with or without OpenCV, PCL, and ROS in any combination. We believe that Ecto allows vision and perception researchers to express their computational models in a natural fashion, obviating e.g. ROS time synchronizers and ROS nodelets in most cases.</p>
+<p>As of 2012, Ecto is officially released. It is being used by researchers at Willow Garage and in industry for prototype applications of object capture and modelling, <a class="reference external" href="http://wg-perception.github.com/object_recognition_core/">object recognition</a>, pose estimation and refinement, projector-based augmented reality and chess playing.</p>
 <p>To understand ecto, you probably want to go over the Ecto docs first:</p>
 <div class="toctree-wrapper compound">
 <ul>
@@ -107,9 +107,10 @@
 <p class="rubric">Install</p>
 <p>If you are on ROS Fuerte or above, you probably just want to install the packages available in the ROS repositories named ros-DISTO-ecto-PACKAGE</p>
 <p>If you want to install from source, you will have to get them from <a class="reference external" href="https://github.com/plasmodic/ecto">https://github.com/plasmodic/ecto</a>:</p>
-<div class="highlight-bash"><div class="highlight"><pre>mkdir ecto_kitchen <span class="o">&amp;&amp;</span> <span class="nb">cd </span>ecto_kitchen
-git clone http://github.com/ros/catkin.git
+<div class="highlight-bash"><div class="highlight"><pre>mkdir -p ecto_kitchen/src <span class="o">&amp;&amp;</span> <span class="nb">cd </span>ecto_kitchen
 git clone http://github.com/ros-infrastructure/catkin_pkg.git
+<span class="nb">cd </span>src
+git clone http://github.com/ros/catkin.git
 git clone http://github.com/plasmodic/ecto.git
 ln -s catkin/cmake/toplevel.cmake CMakeLists.txt
 </pre></div>
@@ -126,8 +127,9 @@ git clone http://github.com/plasmodic/ecto_ros.git
 </div>
 <p>And you&#8217;re then good to go for the usual cmake install except you need to add <tt class="docutils literal"><span class="pre">catkin_pkg</span></tt>
 to your Python path:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nb">export </span><span class="nv">PYTHONPATH</span><span class="o">=</span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>/catkin_pkg/src:<span class="nv">$PYTHONPATH</span>
-mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd </span>build <span class="o">&amp;&amp;</span> cmake ../ <span class="o">&amp;&amp;</span> make
+<div class="highlight-bash"><div class="highlight"><pre><span class="nb">cd</span> ../
+<span class="nb">export </span><span class="nv">PYTHONPATH</span><span class="o">=</span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>/catkin_pkg/src:<span class="nv">$PYTHONPATH</span>
+mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd </span>build <span class="o">&amp;&amp;</span> cmake ../src <span class="o">&amp;&amp;</span> make
 </pre></div>
 </div>
 <p class="rubric">Bug reports</p>

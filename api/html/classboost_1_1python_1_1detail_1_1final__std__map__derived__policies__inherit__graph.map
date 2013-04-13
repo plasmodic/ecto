@@ -1,4 +1,4 @@
-<map id="G" name="G">
-<area shape="rect" id="node2" href="$classboost_1_1python_1_1std__map__indexing__suite.html" title="boost::python::std_map_indexing_suite\&lt; Container, NoProxy, final_std_map_derived_policies\&lt; Container, NoProxy \&gt; \&gt;" alt="" coords="1220,5,2001,35"/>
-<area shape="rect" id="node4" href="$classindexing__suite.html" title="indexing_suite\&lt; Container, final_std_map_derived_policies\&lt; Container, NoProxy \&gt;, NoProxy, true, Container::value_type::second_type, Container::key_type, Container::key_type \&gt;" alt="" coords="7,5,1169,35"/>
+<map id="boost::python::detail::final_std_map_derived_policies&lt; Container, NoProxy &gt;" name="boost::python::detail::final_std_map_derived_policies&lt; Container, NoProxy &gt;">
+<area shape="rect" id="node2" href="$classboost_1_1python_1_1std__map__indexing__suite.html" title="boost::python::std\l_map_indexing_suite\l\&lt; Container, NoProxy,\l final_std_map_derived\l_policies\&lt; Container, NoProxy \&gt; \&gt;" alt="" coords="313,13,556,112"/>
+<area shape="rect" id="node4" href="$classindexing__suite.html" title="indexing_suite\&lt; Container,\l final_std_map_derived\l_policies\&lt; Container, NoProxy\l \&gt;, NoProxy, true, Container\l::value_type::second_type, Container\l::key_type, Container::key_type \&gt;" alt="" coords="5,5,264,121"/>
 </map>

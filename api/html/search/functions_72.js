@@ -13,7 +13,7 @@ var searchData=
   ['registry',['registry',['../structecto_1_1serialization_1_1registry.html#acbf5b14a8ef87e8a1324ad852e3e3f13',1,'ecto::serialization::registry']]],
   ['release',['release',['../classecto_1_1except_1_1error__info__container__impl.html#a59b8d31c21da10236de67f0a5bfdf4dd',1,'ecto::except::error_info_container_impl']]],
   ['repr',['repr',['../namespaceecto_1_1py.html#abc1149eb9720c52fa9191bf7ee10ccf2',1,'ecto::py']]],
-  ['required',['required',['../structecto_1_1spore.html#a94342d6ff2601ae701dc4b66e53cb05c',1,'ecto::spore::required(bool b)'],['../structecto_1_1spore.html#a3520306f4699901fe09cd0fe0cd29ab0',1,'ecto::spore::required() const '],['../classecto_1_1tendril.html#a216eb6b817644e1dfd76d3ba07d0ced7',1,'ecto::tendril::required(bool b)'],['../classecto_1_1tendril.html#aa10be79605183977989cf01956aedeb6',1,'ecto::tendril::required() const ']]],
+  ['required',['required',['../classecto_1_1tendril.html#a216eb6b817644e1dfd76d3ba07d0ced7',1,'ecto::tendril::required(bool b)'],['../classecto_1_1tendril.html#aa10be79605183977989cf01956aedeb6',1,'ecto::tendril::required() const '],['../structecto_1_1spore.html#a94342d6ff2601ae701dc4b66e53cb05c',1,'ecto::spore::required(bool b)'],['../structecto_1_1spore.html#a3520306f4699901fe09cd0fe0cd29ab0',1,'ecto::spore::required() const ']]],
   ['reset',['reset',['../structecto_1_1strand.html#a251900ed19b2c9019fd4829927d95fc1',1,'ecto::strand']]],
   ['reset_5fstrand',['reset_strand',['../structecto_1_1cell.html#af32a9e2113b7afcb5b225bdc3c234e8c',1,'ecto::cell']]],
   ['reset_5ftick',['reset_tick',['../classecto_1_1graph_1_1element.html#a6417601ffd8159b6e00f2ff57eda1b99',1,'ecto::graph::element']]],

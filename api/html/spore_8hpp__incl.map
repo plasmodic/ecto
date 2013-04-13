@@ -1,8 +1,8 @@
-<map id="G" name="G">
-<area shape="rect" id="node7" href="$util_8hpp.html" title="ecto/util.hpp" alt="" coords="2820,237,2922,267"/>
-<area shape="rect" id="node15" href="$tendril_8hpp.html" title="ecto/tendril.hpp" alt="" coords="1408,83,1531,112"/>
-<area shape="rect" id="node23" href="$forward_8hpp.html" title="ecto/forward.hpp" alt="" coords="1255,160,1383,189"/>
-<area shape="rect" id="node27" href="$except_8hpp.html" title="ecto/except.hpp" alt="" coords="1407,160,1532,189"/>
-<area shape="rect" id="node51" href="$python_8hpp.html" title="ecto/python.hpp" alt="" coords="2142,160,2267,189"/>
-<area shape="rect" id="node57" href="$repr_8hpp.html" title="ecto/python/repr.hpp" alt="" coords="2310,160,2464,189"/>
+<map id="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/spore.hpp" name="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/spore.hpp">
+<area shape="rect" id="node7" href="$util_8hpp.html" title="ecto/util.hpp" alt="" coords="2513,281,2615,311"/>
+<area shape="rect" id="node15" href="$tendril_8hpp.html" title="ecto/tendril.hpp" alt="" coords="1157,117,1280,147"/>
+<area shape="rect" id="node23" href="$forward_8hpp.html" title="ecto/forward.hpp" alt="" coords="1004,195,1132,224"/>
+<area shape="rect" id="node27" href="$except_8hpp.html" title="ecto/except.hpp" alt="" coords="1156,195,1281,224"/>
+<area shape="rect" id="node51" href="$python_8hpp.html" title="ecto/python.hpp" alt="" coords="1873,195,1999,224"/>
+<area shape="rect" id="node57" href="$repr_8hpp.html" title="ecto/python/repr.hpp" alt="" coords="2023,195,2177,224"/>
 </map>

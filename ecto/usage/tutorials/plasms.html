@@ -291,8 +291,8 @@ see <a class="reference internal" href="../techniques/ecto_cells.html#entangleme
 <span class="n">sched</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">niter</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The <a href="#id1"><span class="problematic" id="id2">:py:class:`ecto.Scheduler&#8217; scheduler essentially
-does a `topological-sort`_</span></a>
+<p>The <a class="reference internal" href="../../reference/schedulers.html#ecto.Scheduler" title="ecto.Scheduler"><tt class="xref py py-class docutils literal"><span class="pre">ecto.Scheduler</span></tt></a> scheduler essentially
+does a <a class="reference external" href="http://en.wikipedia.org/wiki/Topological_sorting">topological-sort</a>
 on the graph, and then executes each cell in order.
 This repeats for the specified number of iterations,
 or indefinitely if <tt class="docutils literal"><span class="pre">niter</span></tt> is <tt class="docutils literal"><span class="pre">0</span></tt>.</p>

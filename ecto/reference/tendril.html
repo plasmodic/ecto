@@ -108,7 +108,7 @@
 is through a C++ object called <tt class="docutils literal"><span class="pre">tendril</span></tt>. A tendril abstracts the C++ type of the object
 it contains to allow the scheduling to be generic, to allow static introspection and to
 ease the Python interaction.</p>
-<p>It is behaving like a <em class="xref std std-ref">boost::any</em> (think <cite>void*</cite> with an encoded type) augmented
+<p>It is behaving like a <a class="reference external" href="boost_any">boost::any</a> (think <cite>void*</cite> with an encoded type) augmented
 with certain conversion rules, operators, introspection capabilities,
 docstrings and the like.</p>
 <div class="section" id="overview">
@@ -152,7 +152,7 @@ Value of n is 17
 </pre></div>
 </div>
 <div class="section" id="tendril-conversions">
-<span id="id1"></span><h3>Tendril Conversions<a class="headerlink" href="#tendril-conversions" title="Permalink to this headline">¶</a></h3>
+<span id="id2"></span><h3>Tendril Conversions<a class="headerlink" href="#tendril-conversions" title="Permalink to this headline">¶</a></h3>
 <p>The table below explains (somewhat) the type conversions that happen
 when one tendril or type is inserted to another.</p>
 <p class="rubric">Tendril Conversions</p>
@@ -222,7 +222,7 @@ tendril every time, you can just define a spore. You can think of a tendril as
 containing a <tt class="docutils literal"><span class="pre">void*</span></tt> and a spore as a cast of that pointer to a specific type.</p>
 </div>
 <div class="section" id="tendrils-overview">
-<span id="tendrils"></span><span id="id2"></span><h1>tendrils<a class="headerlink" href="#tendrils-overview" title="Permalink to this headline">¶</a></h1>
+<span id="tendrils"></span><span id="id3"></span><h1>tendrils<a class="headerlink" href="#tendrils-overview" title="Permalink to this headline">¶</a></h1>
 <p>tendrils are containers for the tendril type, essentially a mapping from name to tendril.
 The tendrils also give a convenient form of templated type safe access to the data that
 tendril objects hold.</p>

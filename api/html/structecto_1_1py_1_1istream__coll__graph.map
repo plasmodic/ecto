@@ -1,5 +1,5 @@
-<map id="G" name="G">
-<area shape="rect" id="node2" href="$structecto_1_1py_1_1streambuf__capsule.html" title="ecto::py::streambuf_capsule" alt="" coords="5,101,208,131"/>
-<area shape="rect" id="node4" href="$classecto_1_1py_1_1streambuf.html" title="ecto::py::streambuf" alt="" coords="33,5,180,35"/>
-<area shape="rect" id="node6" href="$classecto_1_1py_1_1streambuf_1_1istream.html" title="ecto::py::streambuf::istream" alt="" coords="232,101,435,131"/>
+<map id="ecto::py::istream" name="ecto::py::istream">
+<area shape="rect" id="node2" href="$structecto_1_1py_1_1streambuf__capsule.html" title="ecto::py::streambuf\l_capsule" alt="" coords="5,102,152,149"/>
+<area shape="rect" id="node4" href="$classecto_1_1py_1_1streambuf.html" title="ecto::py::streambuf" alt="" coords="5,5,152,35"/>
+<area shape="rect" id="node6" href="$classecto_1_1py_1_1streambuf_1_1istream.html" title="ecto::py::streambuf\l::istream" alt="" coords="176,102,323,149"/>
 </map>

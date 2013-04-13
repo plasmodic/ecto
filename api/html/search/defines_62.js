@@ -12,5 +12,6 @@ var searchData=
   ['boost_5fpp_5flimit_5fslot_5fsig',['BOOST_PP_LIMIT_SLOT_SIG',['../except_8hpp.html#a7351250ea0acf4a9dfbabd6d3d66268e',1,'except.hpp']]],
   ['boost_5fpp_5flimit_5ftuple',['BOOST_PP_LIMIT_TUPLE',['../except_8hpp.html#a7cab985088506b7f93f8b08f4f28eeb9',1,'except.hpp']]],
   ['boost_5fpp_5flimit_5fwhile',['BOOST_PP_LIMIT_WHILE',['../except_8hpp.html#ad081cc556d6300248148d294ce5788fa',1,'except.hpp']]],
-  ['boost_5fsignals2_5fmax_5fargs',['BOOST_SIGNALS2_MAX_ARGS',['../tendril_8hpp.html#aa84dbe584b0b7df365956205e05572c0',1,'BOOST_SIGNALS2_MAX_ARGS():&#160;tendril.hpp'],['../tendrils_8hpp.html#aa84dbe584b0b7df365956205e05572c0',1,'BOOST_SIGNALS2_MAX_ARGS():&#160;tendrils.hpp']]]
+  ['boost_5fpreprocessor_5fconfig_5flimits_5fhpp',['BOOST_PREPROCESSOR_CONFIG_LIMITS_HPP',['../except_8hpp.html#adbf60807e9dffa4b82209ed4a8e78fd1',1,'except.hpp']]],
+  ['boost_5fsignals2_5fmax_5fargs',['BOOST_SIGNALS2_MAX_ARGS',['../tendrils_8hpp.html#aa84dbe584b0b7df365956205e05572c0',1,'BOOST_SIGNALS2_MAX_ARGS():&#160;tendrils.hpp'],['../tendril_8hpp.html#aa84dbe584b0b7df365956205e05572c0',1,'BOOST_SIGNALS2_MAX_ARGS():&#160;tendril.hpp']]]
 ];

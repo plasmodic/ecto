@@ -1,6 +1,6 @@
-<map id="G" name="G">
-<area shape="rect" id="node5" href="$forward_8hpp.html" title="ecto/forward.hpp" alt="" coords="367,83,495,112"/>
-<area shape="rect" id="node9" href="$util_8hpp.html" title="ecto/util.hpp" alt="" coords="153,160,255,189"/>
-<area shape="rect" id="node17" href="$log_8hpp.html" title="ecto/log.hpp" alt="" coords="241,83,343,112"/>
-<area shape="rect" id="node22" href="$test_8hpp.html" title="ecto/test.hpp" alt="" coords="279,160,385,189"/>
+<map id="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/profile.hpp" name="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/profile.hpp">
+<area shape="rect" id="node5" href="$forward_8hpp.html" title="ecto/forward.hpp" alt="" coords="312,127,440,156"/>
+<area shape="rect" id="node9" href="$util_8hpp.html" title="ecto/util.hpp" alt="" coords="99,213,200,243"/>
+<area shape="rect" id="node17" href="$log_8hpp.html" title="ecto/log.hpp" alt="" coords="187,127,288,156"/>
+<area shape="rect" id="node22" href="$test_8hpp.html" title="ecto/test.hpp" alt="" coords="224,213,331,243"/>
 </map>

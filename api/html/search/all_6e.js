@@ -10,6 +10,6 @@ var searchData=
   ['not_5fimplemented',['not_implemented',['../structecto_1_1cell__.html#a3e48e52421d132bb2bb4e343f771abeb',1,'ecto::cell_']]],
   ['nothing_5fto_5flock',['nothing_to_lock',['../classecto_1_1py_1_1nothing__to__lock.html#a277b110e856f61f30f645e4bed50c566',1,'ecto::py::nothing_to_lock']]],
   ['nothing_5fto_5flock',['nothing_to_lock',['../classecto_1_1py_1_1nothing__to__lock.html',1,'ecto::py']]],
-  ['notify',['notify',['../structecto_1_1spore.html#a979e896020612cd69604f8dad43f412d',1,'ecto::spore::notify()'],['../classecto_1_1tendril.html#a87c2df829c12bcd46089d74183c1d8d8',1,'ecto::tendril::notify()']]],
+  ['notify',['notify',['../classecto_1_1tendril.html#a87c2df829c12bcd46089d74183c1d8d8',1,'ecto::tendril::notify()'],['../structecto_1_1spore.html#a979e896020612cd69604f8dad43f412d',1,'ecto::spore::notify()']]],
   ['nullary_5ffn_5ft',['nullary_fn_t',['../structecto_1_1registry_1_1module__registry.html#a90fc28cbb13d6662b0b8d898985be04e',1,'ecto::registry::module_registry']]]
 ];

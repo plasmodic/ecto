@@ -21,15 +21,15 @@ var searchData=
   ['registrator',['registrator',['../structecto_1_1registry_1_1registrator.html#a3c8bafa2e65ef88c572c1779fb05fd12',1,'ecto::registry::registrator']]],
   ['registry',['registry',['../structecto_1_1serialization_1_1registry.html#acbf5b14a8ef87e8a1324ad852e3e3f13',1,'ecto::serialization::registry']]],
   ['registry',['registry',['../structecto_1_1serialization_1_1registry.html',1,'ecto::serialization']]],
-  ['registry_2ehpp',['registry.hpp',['../serialization_2registry_8hpp.html',1,'']]],
   ['registry_2ehpp',['registry.hpp',['../registry_8hpp.html',1,'']]],
+  ['registry_2ehpp',['registry.hpp',['../serialization_2registry_8hpp.html',1,'']]],
   ['registry_5fbinary_5fia',['registry_binary_ia',['../namespaceecto_1_1serialization.html#a465425ff3a756de86571c1262f22d2ba',1,'ecto::serialization']]],
   ['registry_5fbinary_5foa',['registry_binary_oa',['../namespaceecto_1_1serialization.html#ad544c8b5416e0ecfe692922b2f2e8e54',1,'ecto::serialization']]],
   ['regvec',['regvec',['../structecto_1_1registry_1_1module__registry.html#a77ae3e886433428c82d5dbb8039d53f6',1,'ecto::registry::module_registry']]],
   ['release',['release',['../classecto_1_1except_1_1error__info__container__impl.html#a59b8d31c21da10236de67f0a5bfdf4dd',1,'ecto::except::error_info_container_impl']]],
   ['repr',['repr',['../namespaceecto_1_1py.html#abc1149eb9720c52fa9191bf7ee10ccf2',1,'ecto::py']]],
   ['repr_2ehpp',['repr.hpp',['../repr_8hpp.html',1,'']]],
-  ['required',['REQUIRED',['../classecto_1_1tendril.html#ab63b76909681783917fcb55e3c89f4acac686a7ccc1227f1ae09d79536683136b',1,'ecto::tendril::REQUIRED()'],['../structecto_1_1spore.html#a94342d6ff2601ae701dc4b66e53cb05c',1,'ecto::spore::required(bool b)'],['../structecto_1_1spore.html#a3520306f4699901fe09cd0fe0cd29ab0',1,'ecto::spore::required() const '],['../classecto_1_1tendril.html#a216eb6b817644e1dfd76d3ba07d0ced7',1,'ecto::tendril::required(bool b)'],['../classecto_1_1tendril.html#aa10be79605183977989cf01956aedeb6',1,'ecto::tendril::required() const ']]],
+  ['required',['required',['../classecto_1_1tendril.html#a216eb6b817644e1dfd76d3ba07d0ced7',1,'ecto::tendril::required(bool b)'],['../classecto_1_1tendril.html#aa10be79605183977989cf01956aedeb6',1,'ecto::tendril::required() const '],['../structecto_1_1spore.html#a94342d6ff2601ae701dc4b66e53cb05c',1,'ecto::spore::required(bool b)'],['../structecto_1_1spore.html#a3520306f4699901fe09cd0fe0cd29ab0',1,'ecto::spore::required() const '],['../classecto_1_1tendril.html#ab63b76909681783917fcb55e3c89f4acac686a7ccc1227f1ae09d79536683136b',1,'ecto::tendril::REQUIRED()']]],
   ['reset',['reset',['../structecto_1_1strand.html#a251900ed19b2c9019fd4829927d95fc1',1,'ecto::strand']]],
   ['reset_5fstrand',['reset_strand',['../structecto_1_1cell.html#af32a9e2113b7afcb5b225bdc3c234e8c',1,'ecto::cell']]],
   ['reset_5ftick',['reset_tick',['../classecto_1_1graph_1_1element.html#a6417601ffd8159b6e00f2ff57eda1b99',1,'ecto::graph::element']]],
@@ -42,5 +42,5 @@ var searchData=
   ['run',['run',['../classecto_1_1scheduler.html#a326022cba6c3154f28f9694b7c9968fd',1,'ecto::scheduler::run(unsigned timeout_usec)'],['../classecto_1_1scheduler.html#a8d5ce4f97e511341f315bb7621ba38f4',1,'ecto::scheduler::run()']]],
   ['run_5fjob',['run_job',['../classecto_1_1scheduler.html#a7fcfe7583c13ff5d2294242aedfa0b1a',1,'ecto::scheduler']]],
   ['runners_5f',['runners_',['../classecto_1_1scheduler.html#a650d97445fe90ba4572d208430f71e20',1,'ecto::scheduler']]],
-  ['running',['RUNNING',['../classecto_1_1scheduler.html#a6b063d1c4bb9dad58d7ace61946b1200aef190614c39d85b915b9ff2225eacf02',1,'ecto::scheduler::RUNNING()'],['../classecto_1_1scheduler.html#a99ac4b8df3d015f6a39d0cf7607cc657',1,'ecto::scheduler::running() const ']]]
+  ['running',['running',['../classecto_1_1scheduler.html#a99ac4b8df3d015f6a39d0cf7607cc657',1,'ecto::scheduler::running() const '],['../classecto_1_1scheduler.html#a6b063d1c4bb9dad58d7ace61946b1200aef190614c39d85b915b9ff2225eacf02',1,'ecto::scheduler::RUNNING()']]]
 ];

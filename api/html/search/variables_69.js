@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['impl_5f',['impl_',['../structecto_1_1cell__.html#a2984b78c1ed24aca6ee427502bd6e8c4',1,'ecto::cell_::impl_()'],['../structecto_1_1plasm.html#a4cfd41e9dc82039a75970755565b2513',1,'ecto::plasm::impl_()'],['../structecto_1_1graph_1_1edge.html#a88b7d991f162cd009884c3061da8169d',1,'ecto::graph::edge::impl_()'],['../structecto_1_1strand.html#a084e92534065005498a40649cf340cdb',1,'ecto::strand::impl_()'],['../classecto_1_1py_1_1gil.html#af91dedbf0eb88a914bacb64ff176bf93',1,'ecto::py::gil::impl_()']]],
+  ['impl_5f',['impl_',['../classecto_1_1py_1_1gil.html#af91dedbf0eb88a914bacb64ff176bf93',1,'ecto::py::gil::impl_()'],['../structecto_1_1cell__.html#a2984b78c1ed24aca6ee427502bd6e8c4',1,'ecto::cell_::impl_()'],['../structecto_1_1strand.html#a084e92534065005498a40649cf340cdb',1,'ecto::strand::impl_()'],['../structecto_1_1plasm.html#a4cfd41e9dc82039a75970755565b2513',1,'ecto::plasm::impl_()'],['../structecto_1_1graph_1_1edge.html#a88b7d991f162cd009884c3061da8169d',1,'ecto::graph::edge::impl_()']]],
   ['info_5f',['info_',['../classecto_1_1except_1_1error__info__container__impl.html#a8ec60b174805696bd691a894b7f4109f',1,'ecto::except::error_info_container_impl']]],
   ['inputs',['inputs',['../structecto_1_1cell.html#a65099b0458a7761b8bfa7a1ddc17e92f',1,'ecto::cell']]],
   ['inst',['inst',['../structecto_1_1registry_1_1registrator.html#a0b0f6e3aa1718476b962a007786e7496',1,'ecto::registry::registrator']]],
