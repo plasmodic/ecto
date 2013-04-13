@@ -36,9 +36,10 @@ If you want to install from source, you will have to get them from https://githu
 
 .. code-block:: bash
 
-  mkdir ecto_kitchen && cd ecto_kitchen
-  git clone http://github.com/ros/catkin.git
+  mkdir -p ecto_kitchen/src && cd ecto_kitchen
   git clone http://github.com/ros-infrastructure/catkin_pkg.git
+  cd src
+  git clone http://github.com/ros/catkin.git
   git clone http://github.com/plasmodic/ecto.git
   ln -s catkin/cmake/toplevel.cmake CMakeLists.txt
 
@@ -59,8 +60,9 @@ to your Python path:
 
 .. code-block:: bash
 
+  cd ../
   export PYTHONPATH=`pwd`/catkin_pkg/src:$PYTHONPATH
-  mkdir build && cd build && cmake ../ && make
+  mkdir build && cd build && cmake ../src && make
 
 .. rubric:: Bug reports
 
