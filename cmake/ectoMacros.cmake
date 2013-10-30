@@ -33,31 +33,9 @@ if(ECTO_LOG_STATS)
   add_definitions(-DECTO_LOG_STATS=1)
 endif()
 
-# TODO: Those should be removed once catkin provides them
-unset(ROS_FUERTE_FOUND)
-unset(ROS_GROOVY_FOUND)
-unset(ROS_GROOVY_OR_ABOVE_FOUND)
-
-    set(BUNCH_OF_VARS "$ENV{ROS_ROOT}, ${CMAKE_PREFIX_PATH}, $ENV{ROS_PACKAGE_PATH}, ${CMAKE_INSTALL_PREFIX}, ${catkin_INSTALL_PREFIX}, ${catkin_EXTRAS_DIR}")
-    string(REGEX MATCH "fuerte" ROS_FUERTE_FOUND ${BUNCH_OF_VARS})
-    if (ROS_FUERTE_FOUND)
-        set(ROS_FUERTE_FOUND TRUE)
-    else()
-        set(ROS_GROOVY_FOUND TRUE)
-        set(ROS_GROOVY_OR_ABOVE_FOUND TRUE)
-    endif()
-
-
-# TODO, once fuerte/Lucid is not supported anymore, remove the CMakeParseArguments file
-if (ROS_GROOVY_OR_ABOVE_FOUND)
 include(CMakeParseArguments)
 set(ECTO_PYTHON_BUILD_PATH ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_PYTHON_DESTINATION}/../)
 set(ECTO_PYTHON_INSTALL_PATH ${CATKIN_PACKAGE_PYTHON_DESTINATION}/../)
-else()
-include(${SELF_DIR}/CMakeParseArguments.cmake)
-set(ECTO_PYTHON_BUILD_PATH ${CMAKE_BINARY_DIR}/gen/py/)
-set(ECTO_PYTHON_INSTALL_PATH ${INSTALLED_PYTHONPATH})
-endif()
  
 
 # 
@@ -129,28 +107,15 @@ macro(ectomodule NAME)
     ${ecto_LIBRARIES}
     )
 
-if (ROS_GROOVY_OR_ABOVE_FOUND)
   set_target_properties(${NAME}_ectomodule PROPERTIES
-                        LIBRARY_OUTPUT_DIRECTORY ${CATKIN_DEVEL_PREFIX}/${CATKIN_GLOBAL_PYTHON_DESTINATION}/${ARGS_DESTINATION}
+    LIBRARY_OUTPUT_DIRECTORY ${CATKIN_DEVEL_PREFIX}/${CATKIN_GLOBAL_PYTHON_DESTINATION}/${ARGS_DESTINATION}
   )
-else()
-  set_target_properties(${NAME}_ectomodule PROPERTIES
-                        LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/gen/py/${ARGS_DESTINATION}
-  )
-endif()
 
   if (ARGS_INSTALL)
-if (ROS_GROOVY_OR_ABOVE_FOUND)
     install(TARGETS ${NAME}_ectomodule
             DESTINATION ${CATKIN_GLOBAL_PYTHON_DESTINATION}/${ARGS_DESTINATION}
             COMPONENT main
     )
-else()
-    install(TARGETS ${NAME}_ectomodule
-            DESTINATION ${INSTALLED_PYTHONPATH}/${ARGS_DESTINATION}
-            COMPONENT main
-    )
-endif()
   endif()
 endmacro()
 

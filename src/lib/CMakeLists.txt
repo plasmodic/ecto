@@ -84,14 +84,7 @@ elseif(WIN32)
 endif()
 
 #install the main shared lib
-if (ROS_GROOVY_FOUND)
 install(TARGETS ecto
         DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
         COMPONENT main
 )
-else()
-install(TARGETS ecto
-  DESTINATION lib
-  COMPONENT main
-  )
-endif()

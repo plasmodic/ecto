@@ -26,17 +26,10 @@
 # POSSIBILITY OF SUCH DAMAGE.
 # 
 macro(pytest testname)
-if (ROS_GROOVY_FOUND)
   add_test(ecto_${testname}
     ${CATKIN_ENV}
     ${ARGN}
     )
-else()
-  add_test(ecto_${testname}
-    ${CMAKE_BINARY_DIR}/env.sh
-    ${ARGN}
-    ) 
-endif()
 endmacro()
 
 foreach(file

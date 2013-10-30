@@ -28,14 +28,10 @@
 get_filename_component(SELF_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
 include(${SELF_DIR}/ectoMacros.cmake)
 
-if (ROS_GROOVY_OR_ABOVE_FOUND)
-  set(ecto_CONFIG_DIR ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}/cmake/)
-else()
-  set(ecto_CONFIG_DIR ${CMAKE_BINARY_DIR}/cmake/ecto)
-endif()
+set(ecto_CONFIG_DIR ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}/cmake/)
 
 #for client projects using ecto documentation tools
-foreach(file CMakeParseArguments doc git ectoMacros)
+foreach(file doc git ectoMacros)
   file(COPY ${ecto_SOURCE_DIR}/cmake/${file}.cmake
     DESTINATION ${ecto_CONFIG_DIR})
 endforeach()
@@ -43,8 +39,4 @@ endforeach()
 #set this back for our libs to pick it up as
 set(ecto_LIBRARIES ecto)
 
-if (ROS_GROOVY_OR_ABOVE_FOUND)
 configure_file(${ecto_SOURCE_DIR}/cmake/config.hpp.in ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_INCLUDE_DESTINATION}/config.hpp)
-else()
-configure_file(${ecto_SOURCE_DIR}/cmake/config.hpp.in ${CMAKE_BINARY_DIR}/gen/cpp/ecto/config.hpp)
-endif()

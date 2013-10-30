@@ -26,7 +26,6 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 #### install stuff #####
-if (ROS_GROOVY_FOUND)
 #install the ectoConfig.cmake and ectoConfig-version.cmake
 install(DIRECTORY ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}/cmake
         DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
@@ -46,28 +45,3 @@ install(DIRECTORY ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_INCLUDE_DESTINATION}/
         COMPONENT main
         FILES_MATCHING PATTERN "*.hpp"
 )
-else()
-#create an ectoConfig.cmake for easy find_package(ecto)
-set(ecto_LIBRARIES_DIR ${CMAKE_INSTALL_PREFIX}/lib)
-
-#install the ectoConfig.cmake and ectoConfig-version.cmake
-install(DIRECTORY
-  ${ecto_CONFIG_DIR}/
-  DESTINATION share/ecto/cmake
-  COMPONENT main
-  )
-
-#regular headers
-install(DIRECTORY ${ecto_SOURCE_DIR}/include/ecto
-  DESTINATION include
-  COMPONENT main
-  FILES_MATCHING PATTERN "*.hpp"
-  )
-
-#generated headers
-install(DIRECTORY ${PROJECT_BINARY_DIR}/include/ecto
-  DESTINATION include
-  COMPONENT main
-  FILES_MATCHING PATTERN "*.hpp"
-  )
-endif()

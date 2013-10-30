@@ -25,9 +25,8 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 #
-#find_package(GTest)
 
-if(NOT GTEST_FOUND)
+if(NOT CATKIN_ENABLE_TESTING)
   message(STATUS "Disabling testing since gtest was not found.")
   return()
 endif()

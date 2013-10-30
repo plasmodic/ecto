@@ -26,15 +26,10 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 cmake_minimum_required(VERSION 2.8)
-#Drop after Fuerte, also remove the CMakeParseArgument
-if ((${CMAKE_VERSION} VERSION_GREATER "2.8.4") OR (${CMAKE_VERSION} VERSION_EQUAL "2.8.4"))
-cmake_policy(SET CMP0017 NEW)
-endif()
 
 project(ecto)
 find_package(catkin REQUIRED)
 
-if (${catkin_VERSION} VERSION_GREATER "0.5.28")
 find_package(Boost REQUIRED)
 catkin_package_xml()
 
@@ -45,25 +40,9 @@ catkin_package(CFG_EXTRAS ecto-extras.cmake
                INCLUDE_DIRS include
                LIBRARIES ecto
 )
-else()
-include(cmake/config.cmake)
-catkin_stack()
-catkin_project(ecto INCLUDE_DIRS include
-                    LIBRARIES ecto
-                    DEPENDS PythonLibs
-                    CFG_EXTRAS ecto-extras.cmake
-)
-endif()
-
 
 # configure and install Python
 catkin_python_setup()
-
-if (NOT ROS_GROOVY_OR_ABOVE_FOUND)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-endif()
 
 set(${PROJECT_NAME}_GITHUB_URL https://github.com/plasmodic/ecto)
 
@@ -82,8 +61,6 @@ endif()
 
 option(ECTO_WITH_INSTRUMENTATION "Instrument schedulers (for debugging)" OFF)
 
-#set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-#set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 list(APPEND CMAKE_MODULE_PATH ${ecto_SOURCE_DIR}/cmake)
 
 include(cmake/boost.cmake)
@@ -97,19 +74,11 @@ git_status(ecto)
 
 include_directories(include)
 include_directories(src/lib)
-if (ROS_GROOVY_FOUND)
 include_directories(${CATKIN_DEVEL_PREFIX}/include)
 install(DIRECTORY ${CATKIN_DEVEL_PREFIX}/include/ecto/
         DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION}/ecto
         COMPONENT main
 )
-else()
-include_directories(${CMAKE_BINARY_DIR}/gen/cpp/)
-install(DIRECTORY ${CMAKE_BINARY_DIR}/gen/cpp/ecto/
-        DESTINATION include/ecto
-        COMPONENT main
-)
-endif()
 
 add_subdirectory(src)
 add_subdirectory(cmake)
@@ -119,7 +88,7 @@ ecto_sphinx(${CMAKE_CURRENT_SOURCE_DIR}/doc/kitchen)
 
 option(BUILD_DOC "Build docs, this will build tests and samples as well." ON)
 if(BUILD_DOC)
-  set(BUILD_TEST ON CACHE BOOL "Tests must be built if docs are expected to build." FORCE)
+  set(CATKIN_ENABLE_TESTING ON CACHE BOOL "Tests must be built if docs are expected to build." FORCE)
   set(BUILD_SAMPLES ON CACHE BOOL "Samples must be built if docs are expected to build." FORCE)
   add_subdirectory(doc)
 #  find_package(catkin-sphinx QUIET)
@@ -131,9 +100,7 @@ if(BUILD_DOC)
   endif()
 endif()
 
-option(BUILD_TEST "Build tests" ON)
-if(BUILD_TEST)
-  enable_testing()
+if(CATKIN_ENABLE_TESTING)
   add_subdirectory(test)
 endif()
 
