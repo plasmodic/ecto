@@ -36,7 +36,7 @@ include_directories(SYSTEM ${GTEST_INCLUDE_DIRS}
                            ${Boost_INCLUDE_DIRS}
 )
 
-add_executable(ecto-test
+catkin_add_gtest(ecto-test
   main.cpp
   tendril.cpp
   tendrils.cpp
@@ -53,11 +53,8 @@ add_executable(ecto-test
 
 target_link_libraries(ecto-test
   ecto
-  ${GTEST_LIBRARIES}
   ${ECTO_DEP_LIBS}
-  )
-
-add_test(ecto_gtest_units ${CATKIN_ENV} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/ecto-test --gtest_output=xml:${CMAKE_BINARY_DIR}/ecto-test.xml)
+)
 
 #this needs some more thought.
 #add_executable(plasm_loader
