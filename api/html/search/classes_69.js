@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['indexing_5fsuite',['indexing_suite',['../classindexing__suite.html',1,'']]],
   ['init_5ffactory',['init_factory',['../structboost_1_1python_1_1std__map__indexing__suite_1_1init__factory.html',1,'boost::python::std_map_indexing_suite']]],
   ['int_5f',['int_',['../structecto_1_1cell___1_1int__.html',1,'ecto::cell_']]],
   ['is_5fthreadsafe',['is_threadsafe',['../structecto_1_1detail_1_1is__threadsafe.html',1,'ecto::detail']]],

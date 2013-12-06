@@ -1,10 +1,10 @@
-<map id="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/serialization/registry.hpp" name="/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/include/ecto/serialization/registry.hpp">
+<map id="/home/vrabaud/workspace/recognition_kitchen_hydro/src/ecto/include/ecto/serialization/registry.hpp" name="/home/vrabaud/workspace/recognition_kitchen_hydro/src/ecto/include/ecto/serialization/registry.hpp">
 <area shape="rect" id="node7" href="$util_8hpp.html" title="ecto/util.hpp" alt="" coords="373,319,475,348"/>
-<area shape="rect" id="node15" href="$tendril_8hpp.html" title="ecto/tendril.hpp" alt="" coords="1536,145,1659,175"/>
+<area shape="rect" id="node15" href="$tendril_8hpp.html" title="ecto/tendril.hpp" alt="" coords="1523,145,1645,175"/>
 <area shape="rect" id="node72" href="$log_8hpp.html" title="ecto/log.hpp" alt="" coords="239,232,340,261"/>
-<area shape="rect" id="node25" href="$forward_8hpp.html" title="ecto/forward.hpp" alt="" coords="1625,232,1753,261"/>
-<area shape="rect" id="node29" href="$except_8hpp.html" title="ecto/except.hpp" alt="" coords="1325,232,1451,261"/>
-<area shape="rect" id="node53" href="$python_8hpp.html" title="ecto/python.hpp" alt="" coords="2532,232,2657,261"/>
-<area shape="rect" id="node59" href="$repr_8hpp.html" title="ecto/python/repr.hpp" alt="" coords="2353,232,2508,261"/>
+<area shape="rect" id="node25" href="$forward_8hpp.html" title="ecto/forward.hpp" alt="" coords="1612,232,1740,261"/>
+<area shape="rect" id="node29" href="$except_8hpp.html" title="ecto/except.hpp" alt="" coords="1316,232,1439,261"/>
+<area shape="rect" id="node53" href="$python_8hpp.html" title="ecto/python.hpp" alt="" coords="2519,232,2644,261"/>
+<area shape="rect" id="node59" href="$repr_8hpp.html" title="ecto/python/repr.hpp" alt="" coords="2340,232,2495,261"/>
 <area shape="rect" id="node76" href="$test_8hpp.html" title="ecto/test.hpp" alt="" coords="5,319,112,348"/>
 </map>

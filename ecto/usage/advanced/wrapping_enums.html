@@ -116,22 +116,22 @@ use/readability.</p>
     <span class="n">FAST</span><span class="p">,</span> <span class="n">SLOW</span><span class="p">,</span> <span class="n">ADAPTIVE</span>
   <span class="p">};</span>
 
-  <span class="k">static</span> <span class="kt">void</span> <span class="n">declare_params</span><span class="p">(</span><span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">p</span><span class="p">)</span>
+  <span class="k">static</span> <span class="kt">void</span> <span class="nf">declare_params</span><span class="p">(</span><span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">p</span><span class="p">)</span>
   <span class="p">{</span>
     <span class="n">p</span><span class="p">.</span><span class="n">declare</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;strategy&quot;</span><span class="p">,</span> <span class="s">&quot;How to run our algorithm&quot;</span><span class="p">);</span>
   <span class="p">}</span>
 
-  <span class="kt">void</span> <span class="n">configure</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">p</span><span class="p">,</span> <span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">i</span><span class="p">,</span> <span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">o</span><span class="p">)</span>
+  <span class="kt">void</span> <span class="nf">configure</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">p</span><span class="p">,</span> <span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">i</span><span class="p">,</span> <span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">o</span><span class="p">)</span>
   <span class="p">{</span>
     <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;strategy&quot;</span><span class="p">);</span>
     <span class="k">switch</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">case</span> <span class="nl">FAST:</span>
+    <span class="k">case</span> <span class="n">FAST</span>:
       <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;running FAST</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-    <span class="k">case</span> <span class="nl">SLOW:</span>
+    <span class="k">case</span> <span class="n">SLOW</span>:
       <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;running SLOW</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-    <span class="k">case</span> <span class="nl">ADAPTIVE:</span>
+    <span class="k">case</span> <span class="n">ADAPTIVE</span>:
       <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;running ADAPTIVE</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-    <span class="k">default</span><span class="o">:</span>
+    <span class="nl">default:</span>
       <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;BAD!  Unhandled value of enum parameter&quot;</span><span class="p">;</span>
     <span class="p">}</span>
 
@@ -215,13 +215,13 @@ cell, declare and get the parameter as being of the enum type,</p>
   <span class="p">{</span>
     <span class="n">Strategy</span> <span class="n">s</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="n">Strategy</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;strategy&quot;</span><span class="p">);</span>
     <span class="k">switch</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">case</span> <span class="nl">FAST:</span>
+    <span class="k">case</span> <span class="n">FAST</span>:
       <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;running FAST</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-    <span class="k">case</span> <span class="nl">SLOW:</span>
+    <span class="k">case</span> <span class="n">SLOW</span>:
       <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;running SLOW</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-    <span class="k">case</span> <span class="nl">ADAPTIVE:</span>
+    <span class="k">case</span> <span class="n">ADAPTIVE</span>:
       <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;running ADAPTIVE</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-    <span class="k">default</span><span class="o">:</span>
+    <span class="nl">default:</span>
       <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;BAD!  Unhandled value of enum parameter&quot;</span><span class="p">;</span>
     <span class="p">}</span>
 
@@ -284,9 +284,9 @@ will show the correct type (and therefore values) for the parameter:</p>
 </pre></div>
 </div>
 <p>output:</p>
-<div class="highlight-text"><div class="highlight"><pre>$ /home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/doc/kitchen/ecto/usage/advanced/../../src/enumasenum_bad.py
+<div class="highlight-text"><div class="highlight"><pre>$ /home/vrabaud/workspace/recognition_kitchen_hydro/src/ecto/doc/kitchen/ecto/usage/advanced/../../src/enumasenum_bad.py
 Traceback (most recent call last):
-  File &quot;/home/vrabaud/workspace/recognition_kitchen_groovy/src/ecto/doc/kitchen/ecto/usage/advanced/../../src/enumasenum_bad.py&quot;, line 3, in &lt;module&gt;
+  File &quot;/home/vrabaud/workspace/recognition_kitchen_hydro/src/ecto/doc/kitchen/ecto/usage/advanced/../../src/enumasenum_bad.py&quot;, line 3, in &lt;module&gt;
     import ecto_examples
 ImportError: No module named ecto_examples
 </pre></div>

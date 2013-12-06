@@ -1,3 +1,3 @@
 <map id="ecto::cell_&lt; Impl &gt;" name="ecto::cell_&lt; Impl &gt;">
-<area shape="rect" id="node2" href="$structecto_1_1cell.html" title="ecto::cell is the non virtual interface to the basic building block of ecto graphs. This interface should never be the parent of client cell, but may be used for polymorphic access to client cells." alt="" coords="37,5,115,35"/>
+<area shape="rect" id="node2" href="$structecto_1_1cell.html" title="ecto::cell is the non virtual interface to the basic building block of ecto graphs. This interface should never be the parent of client cell, but may be used for polymorphic access to client cells." alt="" coords="37,83,115,112"/>
 </map>
