@@ -36,7 +36,6 @@ Please use the github infrastructure https://github.com/plasmodic/ecto
 Also feel free to join the email list:
 
 * site: http://groups.google.com/a/plasmodic.org/group/ecto-dev
-* email: **ecto-dev@plasmodic.org**
 
 .. rubric:: Ecto Developer
 

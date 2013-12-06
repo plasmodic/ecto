@@ -71,4 +71,3 @@ Please use the github infrastructure fot the desired module on https://github.co
 Also feel free to join the email list:
 
 * site: http://groups.google.com/a/plasmodic.org/group/ecto-dev
-* email: **ecto-dev@plasmodic.org**
