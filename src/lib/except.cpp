@@ -165,9 +165,7 @@ namespace ecto
 #endif
                                                       ) const
     {
-#if ((BOOST_VERSION / 100) % 1000) <= 50
       boost::format fmt("%25s  %s\n");
-#endif
       if( diagnostic_info_str_.empty() )
         {
           std::ostringstream tmp;
