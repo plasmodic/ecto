@@ -472,7 +472,7 @@ namespace ecto
         inputs.realize_potential(i);
         outputs.realize_potential(i);
       }
-      return impl_;
+      return static_cast<bool>(impl_);
     } catch (const std::exception& e) {
       ECTO_TRACE_EXCEPTION("const std::exception&");
       BOOST_THROW_EXCEPTION(except::CellException()

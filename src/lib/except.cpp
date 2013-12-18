@@ -172,8 +172,7 @@ namespace ecto
           for( error_info_map::const_iterator i=info_.begin(),end=info_.end(); i!=end; ++i )
             {
               boost::shared_ptr<error_info_base const> const & x = i->second;
-              tmp << str(fmt % /*name_of(*/x->tag_typeid_name()/*) */
-                         % x->value_as_string());
+              tmp << boost::str(fmt % x->name_value_string());
             }
           tmp.str().swap(diagnostic_info_str_);
         }
