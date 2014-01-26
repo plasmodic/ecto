@@ -39,7 +39,7 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.viewcode']
 
 extensions += ['ecto.sphinx.programoutput',
-               'ecto.sphinx.breathe',
+               'breathe',
               'ecto.sphinx.EctoShLexer',
               'ecto.sphinx.EctoPlotDirective',
               'ecto.sphinx.EctoCellDirective',
