@@ -476,7 +476,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;        inputs.realize_potential(i);</div>
 <div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;        outputs.realize_potential(i);</div>
 <div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;      }</div>
-<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;      <span class="keywordflow">return</span> impl_;</div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">bool</span><span class="keyword">&gt;</span>(impl_);</div>
 <div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;    } <span class="keywordflow">catch</span> (<span class="keyword">const</span> std::exception&amp; e) {</div>
 <div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;      <a class="code" href="log_8hpp.html#ad686c520d8ee4f107785ee2bfebd0ed9">ECTO_TRACE_EXCEPTION</a>(<span class="stringliteral">&quot;const std::exception&amp;&quot;</span>);</div>
 <div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;      BOOST_THROW_EXCEPTION(except::CellException()</div>
@@ -509,7 +509,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 6 2013 23:44:11 for ecto by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 26 2014 15:32:33 for ecto by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

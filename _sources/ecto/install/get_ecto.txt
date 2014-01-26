@@ -9,7 +9,6 @@ It is also dependent on ``catkin``
 
   mkdir ecto_kitchen && cd ecto_kitchen
   git clone http://github.com/ros/catkin.git
-  git clone http://github.com/ros-infrastructure/catkin_pkg.git
   git clone http://github.com/plasmodic/ecto.git
   ln -s catkin/cmake/toplevel.cmake CMakeLists.txt
 
@@ -27,7 +26,7 @@ You should see the following outputish:
 
 
 building ecto
-------------------------------------
+-------------
 
 Using a standard cmake build system, you must first create a build directory and
 run cmake to configure the build system. `cmake` may be run with all default settings for all but
@@ -35,7 +34,6 @@ the most advanced user.
 
 .. code-block:: bash
 
-  export PYTHONPATH=`pwd`/catkin_pkg/src:$PYTHONPATH
   mkdir build && cd build && cmake ..
 
 

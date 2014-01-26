@@ -9,6 +9,7 @@ On Ubuntu, simply install the corresponding pacakges:
 
 .. code-block:: bash
 
+   sudo pip install catkin_pkg breathe empy
    sudo apt-get install python libboost-dev
 
 Nonsystem Boost

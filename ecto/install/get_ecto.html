@@ -106,7 +106,6 @@
 <p>It is also dependent on <tt class="docutils literal"><span class="pre">catkin</span></tt></p>
 <div class="highlight-bash"><div class="highlight"><pre>mkdir ecto_kitchen <span class="o">&amp;&amp;</span> <span class="nb">cd </span>ecto_kitchen
 git clone http://github.com/ros/catkin.git
-git clone http://github.com/ros-infrastructure/catkin_pkg.git
 git clone http://github.com/plasmodic/ecto.git
 ln -s catkin/cmake/toplevel.cmake CMakeLists.txt
 </pre></div>
@@ -125,8 +124,7 @@ Resolving deltas: 100% (3226/3226), done.</pre>
 <p>Using a standard cmake build system, you must first create a build directory and
 run cmake to configure the build system. <cite>cmake</cite> may be run with all default settings for all but
 the most advanced user.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nb">export </span><span class="nv">PYTHONPATH</span><span class="o">=</span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>/catkin_pkg/src:<span class="nv">$PYTHONPATH</span>
-mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd </span>build <span class="o">&amp;&amp;</span> cmake ..
+<div class="highlight-bash"><div class="highlight"><pre>mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd </span>build <span class="o">&amp;&amp;</span> cmake ..
 </pre></div>
 </div>
 <p>You should see the following outputish:</p>

@@ -108,8 +108,8 @@
 <p>If you are on ROS Fuerte or above, you probably just want to install the packages available in the ROS repositories named ros-DISTO-ecto-PACKAGE</p>
 <p>If you want to install from source, you will have to get them from <a class="reference external" href="https://github.com/plasmodic/ecto">https://github.com/plasmodic/ecto</a>:</p>
 <div class="highlight-bash"><div class="highlight"><pre>mkdir ecto_kitchen <span class="o">&amp;&amp;</span> <span class="nb">cd </span>ecto_kitchen
+sudo pip install catkin_pkg breathe empy
 git clone http://github.com/ros/catkin.git
-git clone http://github.com/ros-infrastructure/catkin_pkg.git
 git clone http://github.com/plasmodic/ecto.git
 ln -s catkin/cmake/toplevel.cmake CMakeLists.txt
 </pre></div>
@@ -126,8 +126,7 @@ git clone http://github.com/plasmodic/ecto_ros.git
 </div>
 <p>And you&#8217;re then good to go for the usual cmake install except you need to add <tt class="docutils literal"><span class="pre">catkin_pkg</span></tt>
 to your Python path:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nb">export </span><span class="nv">PYTHONPATH</span><span class="o">=</span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>/catkin_pkg/src:<span class="nv">$PYTHONPATH</span>
-mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd </span>build <span class="o">&amp;&amp;</span> cmake ../ <span class="o">&amp;&amp;</span> make
+<div class="highlight-bash"><div class="highlight"><pre>mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd </span>build <span class="o">&amp;&amp;</span> cmake ../ <span class="o">&amp;&amp;</span> make
 </pre></div>
 </div>
 <p class="rubric">Bug reports</p>
