@@ -113,7 +113,7 @@ namespace ecto
 
     /**
      * @see tendrils::declare
-     * @param name @see tendrils::declare
+     * @param name The key for the tendril. Must be unique.
      * @param doc The doc string for the tendril.
      * @return @see tendrils::declare
      */
@@ -126,8 +126,8 @@ namespace ecto
 
     /**
      * @see tendrils::declare
-     * @param name @see tendrils::declare
-     * @param doc @see tendrils::declare
+     * @param name The key for the tendril. Must be unique.
+     * @param doc The doc string for the tendril.
      * @param default_val A default value for the tendril.
      * @return @see tendrils::declare
      */
