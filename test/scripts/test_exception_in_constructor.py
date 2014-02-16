@@ -29,6 +29,7 @@
 import ecto
 import ecto.ecto_test as ecto_test
 import sys, util
+import re
 
 plasm = ecto.Plasm()
 exceptor = ecto_test.ExceptInConstructor()
@@ -39,10 +40,10 @@ try:
     sched.execute(1)
 except ecto.CellException, e:
     print "except!\n", e
-    assert "what  I hate life." in str(e)
-    assert "when  Construction" in str(e)
-    assert "type  std::logic_error" in str(e)
-    assert "exception_type  CellException" in str(e)
+    assert re.findall("what.*I hate life.", str(e))
+    assert re.findall("when.*Construction", str(e))
+    assert re.findall("type.*std::logic_error", str(e))
+    assert re.findall("exception_type.*CellException", str(e))
 
 sys.exit(0)
 

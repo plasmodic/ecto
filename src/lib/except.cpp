@@ -176,6 +176,7 @@ namespace ecto
               tmp << str(fmt % /*name_of(*/x->tag_typeid_name()/*) */
                          % x->value_as_string());
 #else
+              fmt = boost::format("%s\n");
               tmp << boost::str(fmt % x->name_value_string());
 #endif
             }

@@ -29,6 +29,7 @@
 
 import ecto
 import ecto.ecto_test as ecto_test
+import re
 
 def test_dealer(Scheduler):
     print "*" *80
@@ -59,7 +60,7 @@ def test_dealer_heterogenous_type_fail(Scheduler):
         assert False == " Should have thrown."
     except ecto.FailedFromPythonConversion, e:
         print "Threw as expected:", str(e)
-        assert 'cpp_typename  double' in str(e)
+        assert re.findall('cpp_typename.*double', str(e))
 
 if __name__ == '__main__':
     test_dealer(ecto.Scheduler)

@@ -28,6 +28,7 @@
 # 
 import ecto
 import ecto.ecto_test as ecto_test
+import re
 
 class shouldathrown: pass
 
@@ -59,8 +60,8 @@ def test_plasm():
     except ecto.TypeMismatch, e:
         print "type:",type(e)
         print ">>>",e
-        assert "from_typename  int" in str(e)
-        assert "to_typename  double" in str(e)
+        assert re.findall("from_typename.*int", str(e))
+        assert re.findall("to_typename.*double", str(e))
         print "(threw as expected)"
 
     try:

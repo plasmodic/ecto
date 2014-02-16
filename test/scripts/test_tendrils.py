@@ -28,6 +28,7 @@
 # 
 import ecto
 import ecto.ecto_test as ecto_test
+import re
 
 def test_tendrils():
     t = ecto.Tendrils()
@@ -51,14 +52,14 @@ def test_tendrils():
         util.fail()
     except ecto.NonExistant, e:
         print str(e)
-        assert "tendril_key  nonexistant" in str(e)
+        assert re.findall("tendril_key.*nonexistant", str(e))
     try:
         #index error
         print t["nonexistant"]
         util.fail()
     except ecto.NonExistant, e:
         print str(e)
-        assert "tendril_key  nonexistant" in str(e)
+        assert re.findall("tendril_key.*nonexistant", str(e))
 
     assert len(t.keys()) == 2
     assert len(t.values()) == 2
