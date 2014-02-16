@@ -1,5 +1,5 @@
-Forthcoming
------------
+0.6.1 (2014-02-16)
+------------------
 * get tests to pass with boost 1.54
 * update maintainers
 * fix compilation on Saucy
