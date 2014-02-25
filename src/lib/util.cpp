@@ -27,7 +27,7 @@
 // 
 #include <vector>
 #include <iostream>
-#include <tr1/unordered_map>
+#include <boost/tr1/unordered_map.hpp>
 #include <ecto/util.hpp>
 #include <ecto/except.hpp>
 #if !defined(_WIN32)
