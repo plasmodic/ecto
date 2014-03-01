@@ -58,7 +58,7 @@ boost::exception_ptr eptr;
 int something_is_up(void * val)
 {
   ECTO_LOG_DEBUG("IT IS CALLED!!! %p", val);
-  boost::python::handle_exception(boost::bind(&boost::rethrow_exception, eptr));
+  boost::python::handle_exception(boost::bind<void>(&boost::rethrow_exception, eptr));
   return -1;
 }
 

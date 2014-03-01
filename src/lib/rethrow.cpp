@@ -44,7 +44,7 @@ namespace ecto {
         // exception.  since this is "scheduled" (do it ASAP) to be
         // called by the interpreter, our exception gets translated
         // and rethrown there.
-        boost::python::handle_exception(boost::bind(&boost::rethrow_exception, rethrowable_in_interpreter_thread));
+        boost::python::handle_exception(boost::bind<void>(&boost::rethrow_exception, rethrowable_in_interpreter_thread));
         return -1;
       }
 
@@ -94,7 +94,7 @@ namespace ecto {
       void rethrow_schedule(boost::asio::io_service& serv)
       {
         ECTO_START();
-        serv.dispatch(boost::bind(&boost::rethrow_exception, boost::current_exception()));
+        serv.dispatch(boost::bind<void>(&boost::rethrow_exception, boost::current_exception()));
         ECTO_FINISH();
       }
 
