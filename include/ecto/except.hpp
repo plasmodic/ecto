@@ -59,6 +59,7 @@
 #
 # endif
 
+#include <Python.h>
 #include <boost/version.hpp>
 #include <stdexcept>
 #include <string>

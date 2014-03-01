@@ -28,7 +28,7 @@
  */
 #pragma once
 
-
+#include <Python.h>
 #include <ecto/forward.hpp>
 #include <ecto/log.hpp>
 #include <ecto/strand.hpp>

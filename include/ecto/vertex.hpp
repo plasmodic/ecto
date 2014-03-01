@@ -28,6 +28,7 @@
  */
 #pragma once
 
+#include <Python.h>
 #include <ecto/element.hpp>
 #include <ecto/forward.hpp> // Need cell_ptr def.
 #include <ecto/profile.hpp>

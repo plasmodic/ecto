@@ -28,6 +28,8 @@
  */
 #pragma once
 
+#include <Python.h>
+
 #cmakedefine ECTO_EXCEPTION_SHARED_POINTERS_ARE_CONST
 #cmakedefine ECTO_EXCEPTION_DIAGNOSTIC_IMPL_TAKES_CHARSTAR
 #cmakedefine ECTO_EXCEPTION_RELEASE_RETURNS_VOID

@@ -27,6 +27,7 @@
 //
 #pragma once
 
+#include <Python.h>
 #include <ecto/log.hpp>
 #include <ecto/forward.hpp>
 #include <ecto/profile.hpp>
