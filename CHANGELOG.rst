@@ -1,5 +1,5 @@
-Forthcoming
------------
+0.6.2 (2014-03-02)
+------------------
 * get the tests to compile on OSX
 * solve boost::bind problem on some compilers
 * fixes `#245 <https://github.com/plasmodic/ecto/issues/245>`_ according to http://bugs.python.org/issue10910
