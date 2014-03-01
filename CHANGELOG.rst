@@ -1,3 +1,12 @@
+Forthcoming
+-----------
+* get the tests to compile on OSX
+* solve boost::bind problem on some compilers
+* fixes `#245 <https://github.com/plasmodic/ecto/issues/245>`_ according to http://bugs.python.org/issue10910
+* trust catkin to handle the version number
+* trust catkin to handle ecto_LIBRARIES
+* Contributors: Vincent Rabaud
+
 0.6.1 (2014-02-16)
 ------------------
 * get tests to pass with boost 1.54
