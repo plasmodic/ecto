@@ -62,6 +62,7 @@ add_library(ecto SHARED
 target_link_libraries(ecto
   ${Boost_LIBRARIES}
   ${catkin_LIBRARIES}
+  ${PYTHON_LIBRARIES}
 )
 
 set_source_files_properties(log.cpp
