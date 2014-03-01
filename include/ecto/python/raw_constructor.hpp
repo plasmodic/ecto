@@ -28,6 +28,7 @@
  */
 #pragma once
 
+#include <Python.h>
 #include <boost/python.hpp>
 #include <boost/python/raw_function.hpp>
 #include <boost/python/detail/api_placeholder.hpp>

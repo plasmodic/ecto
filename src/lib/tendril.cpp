@@ -26,8 +26,8 @@
 // POSSIBILITY OF SUCH DAMAGE.
 //
 #include <ecto/tendril.hpp>
+#include <Python.h>
 #include <boost/python.hpp>
-#undef tolower
 #include <boost/date_time/posix_time/posix_time.hpp>
 
 #include <ecto/python.hpp>

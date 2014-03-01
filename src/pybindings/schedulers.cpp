@@ -28,7 +28,6 @@
 #include <ecto/plasm.hpp>
 #include <ecto/scheduler.hpp>
 
-#include <boost/python.hpp>
 
 namespace bp = boost::python;
 

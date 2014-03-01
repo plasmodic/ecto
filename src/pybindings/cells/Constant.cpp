@@ -27,6 +27,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <Python.h>
 #include <boost/python.hpp>
 #include <ecto/ecto.hpp>
 #include <iostream>

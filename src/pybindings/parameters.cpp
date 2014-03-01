@@ -1,3 +1,4 @@
+#include <Python.h>
 #include <boost/python.hpp>
 
 #include <boost/python/class.hpp>

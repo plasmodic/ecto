@@ -26,6 +26,7 @@
 // POSSIBILITY OF SUCH DAMAGE.
 //
 
+#include <Python.h>
 #include <boost/python.hpp>
 // The next line needs to be here for Ubuntu Lucid
 #include <boost/date_time/time_resolution_traits.hpp>

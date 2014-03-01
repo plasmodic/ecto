@@ -32,7 +32,6 @@
 
 #include <boost/foreach.hpp>
 #include <boost/format.hpp>
-#include <boost/python.hpp>
 #include <boost/python/raw_function.hpp>
 #include <boost/python/iterator.hpp>
 #include <boost/python/slice.hpp>

@@ -25,12 +25,12 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 //
+#include <Python.h>
 #include <boost/python.hpp>
 
 #include <ecto/tendril.hpp>
 
 #include <boost/foreach.hpp>
-#include <Python.h>
 
 #include <ecto/serialization/tendril.hpp>
 
