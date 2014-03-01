@@ -27,6 +27,7 @@
 //
 
 // This file is use in the docs
+#include <Python.h>
 #include <gtest/gtest.h>
 #include <ecto/ecto.hpp>
 #include <ecto/scheduler.hpp>

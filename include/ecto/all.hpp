@@ -28,6 +28,7 @@
  */
 #pragma once
 
+#include <Python.h>
 #include <ecto/python.hpp>
 
 #include <ecto/cell.hpp>

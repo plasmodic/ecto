@@ -29,6 +29,7 @@
 #pragma once
 #include <stdint.h>//int64_t
 
+#include <Python.h>
 #include <ecto/forward.hpp>
 #include <ecto/util.hpp>
 #include <ecto/log.hpp>

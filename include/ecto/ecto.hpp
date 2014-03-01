@@ -29,6 +29,7 @@
 #pragma once
 //do not include this in ecto lib files, only in client modules
 
+#include <Python.h>
 #include <ecto/python.hpp>
 
 #include <iostream>

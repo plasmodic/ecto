@@ -26,7 +26,9 @@
 // POSSIBILITY OF SUCH DAMAGE.
 //
 #include <gtest/gtest.h>
-#include <ecto/all.hpp>
+#include <Python.h>
+#include <boost/python.hpp>
+#include <ecto/tendrils.hpp>
 #include <boost/exception/diagnostic_information.hpp>
 
 namespace bp = boost::python;

@@ -26,7 +26,8 @@
 // POSSIBILITY OF SUCH DAMAGE.
 //
 #include <gtest/gtest.h>
-#include <ecto/all.hpp>
+#include <Python.h>
+#include <ecto/tendrils.hpp>
 #include <boost/exception/diagnostic_information.hpp>
 
 using namespace ecto;
