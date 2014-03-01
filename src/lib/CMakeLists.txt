@@ -72,13 +72,13 @@ set_source_files_properties(log.cpp
 if(UNIX)
   set_target_properties(ecto PROPERTIES
     COMPILE_FLAGS "${FASTIDIOUS_FLAGS}"
-    VERSION ${ECTO_VERSION}
+    VERSION ${ecto_VERSION}
     SOVERSION ${ECTO_SOVERSION}
     )
 elseif(WIN32)
   set_target_properties(ecto PROPERTIES
     COMPILE_FLAGS "${FASTIDIOUS_FLAGS}"
-    VERSION ${ECTO_VERSION}
+    VERSION ${ecto_VERSION}
     SOVERSION ${ECTO_SOVERSION}
     OUTPUT_NAME ecto_cpp
     )

@@ -25,11 +25,18 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 # 
-set(ECTO_MAJOR_VERSION 0)
-set(ECTO_MINOR_VERSION 4)
-set(ECTO_PATCH_VERSION 6)
+string (REGEX MATCHALL "[0-9]+" _versionComponents "${ecto_VERSION}")
+list (LENGTH _versionComponents _len)
+if (${_len} GREATER 0)
+  list(GET _versionComponents 0 ECTO_MAJOR_VERSION)
+endif()
+if (${_len} GREATER 1)
+  list(GET _versionComponents 1 ECTO_MINOR_VERSION)
+endif()
+if (${_len} GREATER 2)
+  list(GET _versionComponents 2 ECTO_PATCH_VERSION)
+endif()
 set(ECTO_SOVERSION ${ECTO_MAJOR_VERSION}.${ECTO_MINOR_VERSION})
-set(ECTO_VERSION ${ECTO_MAJOR_VERSION}.${ECTO_MINOR_VERSION}.${ECTO_PATCH_VERSION})
 set(ECTO_CODE_NAME "amoeba") #code name must be hand coded for debian to work, because of lack of git describe, unless something more clever exists
 
 configure_file(${ecto_SOURCE_DIR}/cmake/version.hpp.in ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_INCLUDE_DESTINATION}/version.hpp)
