@@ -28,15 +28,17 @@
 cmake_minimum_required(VERSION 2.8)
 
 project(ecto)
+
 find_package(catkin REQUIRED)
-
 find_package(Boost REQUIRED)
-catkin_package_xml()
+find_package(Threads REQUIRED)
 
-include(cmake/config.cmake)
+set(Python_ADDITIONAL_VERSIONS 2.7)
+find_package(PythonLibs REQUIRED)
+
 
 catkin_package(CFG_EXTRAS ecto-extras.cmake
-               DEPENDS Boost
+               DEPENDS Boost PythonLibs Threads
                INCLUDE_DIRS include
                LIBRARIES ecto
 )
@@ -61,10 +63,8 @@ endif()
 
 option(ECTO_WITH_INSTRUMENTATION "Instrument schedulers (for debugging)" OFF)
 
-list(APPEND CMAKE_MODULE_PATH ${ecto_SOURCE_DIR}/cmake)
-
+include(cmake/config.cmake)
 include(cmake/boost.cmake)
-include(cmake/ectoFindDeps.cmake)
 include(cmake/version.cmake)
 include(cmake/git.cmake)
 include(cmake/ectoMacros.cmake)
@@ -75,11 +75,13 @@ git_status(ecto)
 include_directories(include)
 include_directories(src/lib)
 include_directories(${CATKIN_DEVEL_PREFIX}/include)
-install(DIRECTORY ${CATKIN_DEVEL_PREFIX}/include/ecto/
-        DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION}/ecto
-        COMPONENT main
+include_directories(SYSTEM
+  ${PYTHON_INCLUDE_PATH}
+  ${Boost_INCLUDE_DIRS}
 )
 
+# deal with sources
+set(ecto_LIBRARIES ecto)
 add_subdirectory(src)
 add_subdirectory(cmake)
 

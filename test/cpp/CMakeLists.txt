@@ -53,7 +53,9 @@ catkin_add_gtest(ecto-test
 
 target_link_libraries(ecto-test
   ecto
-  ${ECTO_DEP_LIBS}
+  ${Boost_LIBRARIES}
+  ${catkin_LIBRARIES}
+  ${PYTHON_LIBRARIES}
 )
 
 #this needs some more thought.
@@ -63,7 +65,8 @@ target_link_libraries(ecto-test
 
 #target_link_libraries(plasm_loader
 #  ecto
-#  ${ECTO_DEP_LIBS}
+#  ${Boost_LIBRARIES}
+#  ${catkin_LIBRARIES}
 #)
 
 #has a dependency on another test so lets declare the test there.

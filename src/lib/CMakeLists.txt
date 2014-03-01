@@ -60,8 +60,9 @@ add_library(ecto SHARED
   )
 
 target_link_libraries(ecto
-  ${ECTO_DEP_LIBS}
-  )
+  ${Boost_LIBRARIES}
+  ${catkin_LIBRARIES}
+)
 
 set_source_files_properties(log.cpp
   PROPERTIES

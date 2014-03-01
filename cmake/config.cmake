@@ -35,8 +35,5 @@ foreach(file doc git ectoMacros)
   file(COPY ${ecto_SOURCE_DIR}/cmake/${file}.cmake
     DESTINATION ${ecto_CONFIG_DIR})
 endforeach()
- 
-#set this back for our libs to pick it up as
-set(ecto_LIBRARIES ecto)
 
 configure_file(${ecto_SOURCE_DIR}/cmake/config.hpp.in ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_INCLUDE_DESTINATION}/config.hpp)

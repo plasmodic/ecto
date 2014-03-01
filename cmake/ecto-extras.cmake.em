@@ -10,9 +10,7 @@
 #    ectomodule(mymodule src/module.cpp)
 #    link_ecto(mymodule ${MY_LIB_DEPS})
 #
-#    This file will define the following variables:
-#      - ecto_LIBRARIES                 : The list of libraries to link against.
-#    These macros:
+#    This file defines the following macros:
 #	   ectomodule(module_name ${srcs}) #This creates a single ecto module
 #                                      #shared library loadable from python,
 #                                      #will add includes, links to bare necessities and mangles the target name with ${name}_ectomodule

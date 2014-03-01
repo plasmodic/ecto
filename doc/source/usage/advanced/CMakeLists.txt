@@ -31,6 +31,6 @@ add_executable(tutorial_native_plasm
 
 target_link_libraries(tutorial_native_plasm
   ecto
-  ${ECTO_DEP_LIBS}
+  ${catkin_LIBRARIES}
   hello_ecto_ectomodule #uses cells from this module.
 )
