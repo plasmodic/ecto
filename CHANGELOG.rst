@@ -1,5 +1,5 @@
-Forthcoming
------------
+0.6.3 (2014-04-03)
+------------------
 * Merge pull request `#247 <https://github.com/plasmodic/ecto/issues/247>`_ from cottsay/master
   Added depend on python
 * Added depend on python
