@@ -1,3 +1,10 @@
+Forthcoming
+-----------
+* Merge pull request `#247 <https://github.com/plasmodic/ecto/issues/247>`_ from cottsay/master
+  Added depend on python
+* Added depend on python
+* Contributors: Scott K Logan, Vincent Rabaud
+
 0.6.2 (2014-03-02)
 ------------------
 * get the tests to compile on OSX
