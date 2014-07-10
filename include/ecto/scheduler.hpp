@@ -133,6 +133,7 @@ private:
   void execute_iter(unsigned cur_iter, unsigned num_iters,
                     std::size_t stack_idx);
   void execute_fini();
+  void interrupt();
 
   /** Check plasm for correctness, configure it, activate it, then sort it
    * topologically to populate stack_.
@@ -154,6 +155,7 @@ private:
   State state_;
   //! Current number of "runners" (threads calling a run method).
   std::size_t runners_;
+  bool interrupted;
 }; // scheduler
 
 template<typename Mutex_T = boost::mutex, typename Count_T = std::size_t>
