@@ -65,9 +65,9 @@ macro(ectomodule NAME)
       )
   endif()
   #these are required includes for every ecto module
-  include_directories(SYSTEM ${ecto_INCLUDE_DIRS}
-                             ${PYTHON_INCLUDE_PATH}
-                             ${Boost_INCLUDE_DIRS}
+  include_directories(${ecto_INCLUDE_DIRS}
+                      ${PYTHON_INCLUDE_PATH}
+                      ${Boost_INCLUDE_DIRS}
   )
 
   add_library(${NAME}_ectomodule SHARED
