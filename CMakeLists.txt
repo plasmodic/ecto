@@ -75,7 +75,7 @@ git_status(ecto)
 include_directories(include)
 include_directories(src/lib)
 include_directories(${CATKIN_DEVEL_PREFIX}/include)
-include_directories(SYSTEM
+include_directories(
   ${PYTHON_INCLUDE_PATH}
   ${Boost_INCLUDE_DIRS}
 )

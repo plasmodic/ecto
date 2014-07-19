@@ -31,9 +31,9 @@ if(NOT CATKIN_ENABLE_TESTING)
   return()
 endif()
 
-include_directories(SYSTEM ${GTEST_INCLUDE_DIRS}
-                           ${PYTHON_INCLUDE_PATH}
-                           ${Boost_INCLUDE_DIRS}
+include_directories(${GTEST_INCLUDE_DIRS}
+                    ${PYTHON_INCLUDE_PATH}
+                    ${Boost_INCLUDE_DIRS}
 )
 
 catkin_add_gtest(ecto-test
