@@ -33,6 +33,10 @@
 #include <ecto/profile.hpp>
 
 #include <boost/asio.hpp>
+#ifndef BOOST_SIGNALS2_MAX_ARGS  // this is also defined in tendril.hpp (TODO: consolidate)
+  #define BOOST_SIGNALS2_MAX_ARGS 3
+#endif
+#include <boost/signals2/signal.hpp>
 #include <boost/thread/mutex.hpp>
 
 #include <ecto/impl/graph_types.hpp>
@@ -155,6 +159,9 @@ private:
   State state_;
   //! Current number of "runners" (threads calling a run method).
   std::size_t runners_;
+
+  // sigint handling
+  boost::signals2::connection interrupt_connection;
   bool interrupted;
 }; // scheduler
 

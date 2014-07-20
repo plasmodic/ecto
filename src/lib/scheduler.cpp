@@ -62,14 +62,13 @@ namespace {
   }
 } // End of anonymous namespace.
 
-// TODO: Need to call PyErr_CheckSignals() anywhere?
-
 scheduler::scheduler(plasm_ptr p)
 : plasm_(p)
 , graph_(p->graph())
 , io_svc_()
 , state_(INIT)
 , runners_(0)
+, interrupt_connection(SINGLE_THREADED_SIGINT_SIGNAL.connect(boost::bind(&scheduler::interrupt, this)))
 , interrupted(false)
 {
   assert(plasm_);
@@ -81,17 +80,13 @@ scheduler::scheduler(plasm_ptr p)
 
 scheduler::~scheduler()
 {
+  interrupt_connection.disconnect();
   //std::cerr << this << " ~scheduler()\n";
   stop();
 }
 
 bool scheduler::execute(unsigned num_iters)
 {
-  // Handle SIGINTs for all schedulers.
-  boost::signals2::scoped_connection interrupt_connection(
-    SINGLE_THREADED_SIGINT_SIGNAL.connect(
-      boost::bind(&scheduler::interrupt, this)));
-
   //std::cerr << this << " scheduler::execute(" << num_iters << ")\n";
   execute_async(num_iters);
   run();
@@ -100,6 +95,7 @@ bool scheduler::execute(unsigned num_iters)
 
 bool scheduler::execute_async(unsigned num_iters)
 {
+
   //std::cerr << this << " scheduler::execute_async(" << num_iters << ")\n";
   { // BEGIN mtx_ scope.
     mutex::scoped_lock l(mtx_);
@@ -115,7 +111,6 @@ bool scheduler::execute_async(unsigned num_iters)
       io_svc_.post(boost::bind(& scheduler::execute_iter, this,
         0 /* cur_iter */, num_iters, 0 /* stack_idx */));
     }
-
     state_ = EXECUTING; // Make sure no one else can start an execution.
   } // END mtx_ scope.
 
