@@ -28,6 +28,7 @@
 
 import platform, sys
 from ecto.ecto_main import _cell_base, _cell_cpp, __getitem_list__, __getitem_slice__, __getitem_str__, __getitem_tuple__, lookup
+from . import impl
 
 #import inspect
 

@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2011, Willow Garage, Inc.
+# Copyright (c) 2014, Yujin Robot, Inc.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -25,57 +25,5 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 #
-'''
-        Created on Mar 12, 2011
 
-        @author: ethan.rublee@gmail.com (Ethan Rublee)
-'''
-import ecto
-import sys
-import inspect
-from pydoc import ispackage
-from inspect import ismodule
-import multiprocessing
-
-def print_tendrils(tendril, n):
-    for x in tendril :
-        #print "here"
-        value = str(x.data().get())
-        print  " - " + x.key() + " [%s]" % x.data().type_name + " default = %s" % value
-        print  ""
-        docstr = str(x.data().doc)
-        doclines = docstr.splitlines()
-        if doclines :
-            for docline in doclines:
-                print  "    " + docline
-        print  ""
-
-def print_module_doc(m):
-    print m.__doc__
-
-def list_all_cells(pymodule):
-    '''
-    Creates a list of all cells from a python module, which are ready for doc string and other
-    types of introspection.
-    '''
-    l = []
-    for x in dir(pymodule):
-        mod = getattr(pymodule, x)
-        if inspect.isclass(mod) and getattr(mod, '__looks_like_a_cell__', False):
-            l.append(mod)
-    return l
-list_all_ecto_modules = list_all_cells
-
-def list_cells(pymodule):
-    l = []
-    for x in dir(pymodule):
-        mod = getattr(pymodule, x)
-        if inspect.isclass(mod) and getattr(mod, '__looks_like_a_cell__', False):
-            l.append(mod)
-    return l
-list_ecto_module = list_cells
-
-def view_plasm(plasm):
-    process = multiprocessing.Process(target=ecto.impl.view_plasm, args=(plasm,))
-    process.daemon = True
-    process.start()
+from .view_plasm import view_plasm
