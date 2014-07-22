@@ -61,6 +61,8 @@ def cellinit(cpptype):
         for k, v in kwargs.iteritems():
             if k == 'strand':
                 self.__impl._set_strand(v)
+            elif k == "connected_inputs_only":
+                self.__impl._set_process_connected_inputs_only(True)
             elif isinstance(v, _cell_cpp):
                 setattr(self.params, k, v.__impl)
             else:
@@ -140,7 +142,6 @@ def postregister(cellname, cpptypename, short_doc, inmodule):
     c = e.construct()
     c.declare_params()
     c.declare_io()
-
     thistype = type(cellname, (_cell_cpp,),
                     dict(__doc__ = cell_doc(short_doc,c),
                          __module__ = inmodule.__name__,
