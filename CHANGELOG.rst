@@ -1,3 +1,15 @@
+Forthcoming
+-----------
+* Posix signal handling
+* proper depends syntax for pythonlibs find-packages variables.
+* add the impl sub-package to the python setup.
+* subprocessing view_plasm
+* sigint handling for sync and async executors
+* remove usage of SYSTEM in include_directories.
+* experimental signal connection for sync executions.
+* internal 0.4 xdot is broken on trusty, this moves it out to 0.5 as a rosdep entity.
+* Contributors: Daniel Stonier, Vincent Rabaud
+
 0.6.3 (2014-04-03)
 ------------------
 * Merge pull request `#247 <https://github.com/plasmodic/ecto/issues/247>`_ from cottsay/master
