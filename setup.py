@@ -5,7 +5,7 @@ from catkin_pkg.python_setup import generate_distutils_setup
 
 d = generate_distutils_setup()
 
-d['packages'] = ['ecto', 'ecto.sphinx' ]
+d['packages'] = ['ecto', 'ecto.sphinx', 'ecto.impl' ]
 d['package_dir'] = {'': 'python'}
 d['install_requires'] = []
 
