@@ -1,5 +1,5 @@
-Forthcoming
------------
+0.6.4 (2014-07-27)
+------------------
 * Posix signal handling
 * proper depends syntax for pythonlibs find-packages variables.
 * add the impl sub-package to the python setup.
