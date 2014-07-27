@@ -29,7 +29,9 @@
 #pragma once
 #include <boost/shared_ptr.hpp>
 #include <boost/function/function1.hpp>
-#define BOOST_SIGNALS2_MAX_ARGS 3
+#ifndef BOOST_SIGNALS2_MAX_ARGS
+  #define BOOST_SIGNALS2_MAX_ARGS 3
+#endif
 #include <boost/signals2.hpp>
 #include <boost/any.hpp>
 

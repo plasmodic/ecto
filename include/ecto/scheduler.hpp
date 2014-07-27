@@ -33,6 +33,10 @@
 #include <ecto/profile.hpp>
 
 #include <boost/asio.hpp>
+#ifndef BOOST_SIGNALS2_MAX_ARGS  // this is also defined in tendril.hpp (TODO: consolidate)
+  #define BOOST_SIGNALS2_MAX_ARGS 3
+#endif
+#include <boost/signals2/signal.hpp>
 #include <boost/thread/mutex.hpp>
 
 #include <ecto/impl/graph_types.hpp>
@@ -133,6 +137,7 @@ private:
   void execute_iter(unsigned cur_iter, unsigned num_iters,
                     std::size_t stack_idx);
   void execute_fini();
+  void interrupt();
 
   /** Check plasm for correctness, configure it, activate it, then sort it
    * topologically to populate stack_.
@@ -154,6 +159,10 @@ private:
   State state_;
   //! Current number of "runners" (threads calling a run method).
   std::size_t runners_;
+
+  // sigint handling
+  boost::signals2::connection interrupt_connection;
+  bool interrupted;
 }; // scheduler
 
 template<typename Mutex_T = boost::mutex, typename Count_T = std::size_t>

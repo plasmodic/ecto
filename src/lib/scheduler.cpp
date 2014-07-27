@@ -62,14 +62,14 @@ namespace {
   }
 } // End of anonymous namespace.
 
-// TODO: Need to call PyErr_CheckSignals() anywhere?
-
 scheduler::scheduler(plasm_ptr p)
 : plasm_(p)
 , graph_(p->graph())
 , io_svc_()
 , state_(INIT)
 , runners_(0)
+, interrupt_connection(SINGLE_THREADED_SIGINT_SIGNAL.connect(boost::bind(&scheduler::interrupt, this)))
+, interrupted(false)
 {
   assert(plasm_);
 #if !defined(_WIN32)
@@ -80,6 +80,7 @@ scheduler::scheduler(plasm_ptr p)
 
 scheduler::~scheduler()
 {
+  interrupt_connection.disconnect();
   //std::cerr << this << " ~scheduler()\n";
   stop();
 }
@@ -94,6 +95,7 @@ bool scheduler::execute(unsigned num_iters)
 
 bool scheduler::execute_async(unsigned num_iters)
 {
+
   //std::cerr << this << " scheduler::execute_async(" << num_iters << ")\n";
   { // BEGIN mtx_ scope.
     mutex::scoped_lock l(mtx_);
@@ -109,7 +111,6 @@ bool scheduler::execute_async(unsigned num_iters)
       io_svc_.post(boost::bind(& scheduler::execute_iter, this,
         0 /* cur_iter */, num_iters, 0 /* stack_idx */));
     }
-
     state_ = EXECUTING; // Make sure no one else can start an execution.
   } // END mtx_ scope.
 
@@ -145,6 +146,10 @@ bool scheduler::run()
   return (state_ > 0); // NOT thread-safe!
 }
 
+void scheduler::interrupt() {
+  interrupted = true;
+}
+
 void scheduler::stop()
 {
   //std::cerr << this << " scheduler::stop()\n";
@@ -152,7 +157,7 @@ void scheduler::stop()
   state(STOPPING);
   run(); // Flush all jobs.
   io_svc_.stop();
-  //while (! io_svc_.stopped()) // TODO: Need updated version of boost!
+  //while (! io_svc_.stopped()) {} // TODO: Need updated version of boost!
   while (true) {
     boost::mutex::scoped_lock l(mtx_);
     if (! runners_) break; // TODO: Use condition variable?
@@ -181,14 +186,6 @@ void scheduler::execute_init(unsigned num_iters)
       c->strand_->reset();
     c->start();
   }
-
-#if 0
-  // Handle SIGINTs for all schedulers.
-  boost::signals2::scoped_connection interrupt_connection(
-    SINGLE_THREADED_SIGINT_SIGNAL.connect(
-      boost::bind(&scheduler::interrupt, this)));
-#endif
-
   io_svc_.post(boost::bind(& scheduler::execute_iter, this,
                            0 /* cur_iter */, num_iters, 0 /* stack_idx */));
 }
@@ -206,6 +203,10 @@ void scheduler::execute_iter(unsigned cur_iter, unsigned num_iters,
   int retval = ecto::QUIT;
   try {
     retval = ecto::schedulers::invoke_process(graph_, stack_[stack_idx]);
+    if (interrupted) {
+      retval = ecto::QUIT;
+      interrupted = false;
+    }
   } catch (const boost::thread_interrupted &) {
     std::cout << "Interrupted\n";
   } catch (...) {
