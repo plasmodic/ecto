@@ -88,10 +88,13 @@ class TendrilThunker(object):
         self.val = None
 
     def update(self, val):
-        self.val = val
+        if type(self.tendril.val) is bool:
+            self.val = True if (val == 2) else False
+        else:
+            self.val = val
 
     def commit(self):
-        if self.val:
+        if self.val is not None:
             x = type(self.tendril.val)(self.val)
             self.tendril.set(x)
             self.val = None
