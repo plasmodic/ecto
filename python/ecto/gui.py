@@ -23,9 +23,18 @@ try:
             self.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
 
     class DynamicReconfigureForm(QWidget):
-        def __init__(self, plasm, parent=None):
+        def __init__(self, plasm, whitelist=None, parent=None):
+            '''
+            Accepts a plasm for connecting tendrils to a frontend widget. Also
+            takes an optional whitelist parameter so that you can selectively
+            decide which parameters are for show.
+
+            :param Plasm ecto.Plasm: live squelchy thing that contains the configuration of your system locked in its parameter tendrils.
+            :param whitelist dic: dictionary of {cell name: [tendril_name]} to show
+            '''
             super(DynamicReconfigureForm, self).__init__(parent)
             self.plasm = plasm
+            self.whitelist = whitelist
             self.setWindowTitle("Dynamic Reconfigure")
             plasm.configure_all()
             self.generate_dialogs()
@@ -42,22 +51,33 @@ try:
             except KeyboardInterrupt as e: #ctrl-c
                 sys.exit(1)
 
+        def is_in_whitelist(self, cell_name, tendril_name):
+            if cell_name in self.whitelist.keys():
+                if tendril_name in self.whitelist[cell_name]:
+                    return True
+            return False
+
         def generate_dialogs(self):
             vlayout = QVBoxLayout()
             commit_button = QPushButton("&Commit")
             w_all = QWidget()
             v = QVBoxLayout()
             for cell in self.plasm.cells():
-                w = QWidget()
-                cvlayout = QVBoxLayout()
-                cvlayout.addWidget(QLabel(cell.name()))
+                tendril_widgets = []
                 for name, tendril in cell.params:
-                    tw = TendrilWidget(name, tendril)
-                    cvlayout.addWidget(tw)
-                    commit_button.clicked.connect(tw.thunker.commit)
-                w.setLayout(cvlayout)
-#                w.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
-                v.addWidget(w)
+                    if self.whitelist is None or self.is_in_whitelist(cell.name(), name):
+                        tw = TendrilWidget(name, tendril)
+                        commit_button.clicked.connect(tw.thunker.commit)
+                        tendril_widgets.append(tw)
+                if tendril_widgets:
+                    w = QWidget()
+                    cvlayout = QVBoxLayout()
+                    cvlayout.addWidget(QLabel(cell.name()))
+                    for tendril_widget in tendril_widgets:
+                        cvlayout.addWidget(tendril_widget)
+                    w.setLayout(cvlayout)
+                    # w.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
+                    v.addWidget(w)
             w_all.setLayout(v)
             s = QScrollArea()
             s.setWidget(w_all)
