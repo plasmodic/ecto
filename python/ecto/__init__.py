@@ -62,7 +62,7 @@ def cellinit(cpptype):
             if k == 'strand':
                 self.__impl._set_strand(v)
             elif k == "connected_inputs_only":
-                self.__impl._set_process_connected_inputs_only(True)
+                self.__impl._set_process_connected_inputs_only(v)
             elif isinstance(v, _cell_cpp):
                 setattr(self.params, k, v.__impl)
             else:
