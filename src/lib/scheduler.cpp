@@ -29,7 +29,7 @@
 #include <ecto/scheduler.hpp>
 
 #include <ecto/cell.hpp>
-#include <ecto/impl/invoke.hpp>
+#include <ecto/graph/utilities.hpp>
 #include <ecto/log.hpp>
 #include <ecto/plasm.hpp>
 #include <ecto/vertex.hpp>
@@ -202,7 +202,7 @@ void scheduler::execute_iter(unsigned cur_iter, unsigned num_iters,
 
   int retval = ecto::QUIT;
   try {
-    retval = ecto::schedulers::invoke_process(graph_, stack_[stack_idx]);
+    retval = ecto::graph::invoke_process(graph_, stack_[stack_idx]);
     if (interrupted) {
       retval = ecto::QUIT;
       interrupted = false;

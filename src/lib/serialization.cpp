@@ -39,7 +39,7 @@
 #include <ecto/registry.hpp>
 #include <ecto/vertex.hpp>
 
-#include <ecto/impl/graph_types.hpp>
+#include <ecto/graph/types.hpp>
 
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>

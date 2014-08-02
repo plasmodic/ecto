@@ -26,15 +26,20 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+
 #pragma once
 
-#include <ecto/impl/graph_types.hpp>
+#include <string>
+#include "types.hpp"
 
 namespace ecto {
-  namespace schedulers {
+namespace graph {
 
-    int 
-    invoke_process(graph::graph_t& graph, graph::graph_t::vertex_descriptor vd);
+std::set<std::string> get_connected_input_tendril_names(graph_t& graph, graph_t::vertex_descriptor vd);
+void move_inputs(graph_t& graph, graph_t::vertex_descriptor vd);
+void move_outputs(graph_t& graph, graph_t::vertex_descriptor vd);
+void invoke_configuration(graph_t& graph, graph_t::vertex_descriptor vd);
+int invoke_process(graph_t& graph, graph_t::vertex_descriptor vd);
 
-  }
-}
+} // namespace graph
+} // namespace ecto

@@ -40,7 +40,7 @@
 #include <ecto/edge.hpp>
 #include <ecto/serialization/registry.hpp>
 #include <ecto/serialization/cell.hpp>
-#include <ecto/impl/graph_types.hpp>
+#include <ecto/graph/types.hpp>
 
 #include <fstream>
 

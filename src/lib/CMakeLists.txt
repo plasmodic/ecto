@@ -52,7 +52,7 @@ add_library(ecto SHARED
   rethrow.cpp
   serialization.cpp
   scheduler.cpp
-  ecto/impl/invoke.cpp
+  graph/utilities.cpp
   strand.cpp
   test.cpp
   time.cpp

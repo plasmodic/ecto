@@ -28,7 +28,7 @@
 
 #include <ecto/cell.hpp>
 #include <ecto/edge.hpp>
-#include <ecto/impl/graph_types.hpp>
+#include <ecto/graph/types.hpp>
 #include <ecto/log.hpp>
 #include <ecto/plasm.hpp>
 #include <ecto/python.hpp>
@@ -44,9 +44,7 @@
 #include <utility>
 
 namespace ecto {
-using namespace ecto::graph;
-
-namespace schedulers {
+namespace graph {
 
 std::set<std::string> get_connected_input_tendril_names(graph_t& graph, graph_t::vertex_descriptor vd)
 {
@@ -131,6 +129,26 @@ void move_outputs(graph_t& graph, graph_t::vertex_descriptor vd)
   ECTO_LOG_DEBUG("<< process %s tick %u", name % v->tick());
 }
 
+/**
+ * Invoke configuration of a single cell as part of a set of directed cell
+ * configurations. This simply transfers inputs and outputs across the
+ * configuration call so that it can utilise the configuration results of
+ * preceding cells and transfer its results to following cells.
+ *
+ * TODO : constraint ins & outs to only connected tendrils (c.f. invoke process)
+ * @param graph
+ * @param vd
+ */
+void invoke_configuration(graph_t& graph, graph_t::vertex_descriptor vd) {
+  move_inputs(graph, vd);
+
+  vertex_ptr v = graph[vd];
+  cell::ptr m = v->cell();
+  m->configure();
+
+  move_outputs(graph, vd);
+}
+
 int invoke_process(graph_t& graph, graph_t::vertex_descriptor vd)
 {
   vertex_ptr v = graph[vd];
@@ -175,5 +193,5 @@ int invoke_process(graph_t& graph, graph_t::vertex_descriptor vd)
   return rval;
 }
 
-} // End of namespace schedulers.
+} // End of namespace graph.
 } // End of namespace ecto.

@@ -49,6 +49,14 @@ namespace ecto
       out.declare(&Constant::out_, "out", "Any type, constant.");
     }
 
+    void configure(const ecto::tendrils& params,
+                   const ecto::tendrils& /* in */,
+                   const ecto::tendrils& out)
+    {
+      // initialise outputs so it can be used with directed configuration
+      *out_ = *value_;
+    }
+
     int
     process(const tendrils& inputs, const tendrils& outputs)
     {
