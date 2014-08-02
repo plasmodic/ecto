@@ -37,7 +37,7 @@
 #include <ecto/serialization/cell.hpp>
 #include <ecto/tendrils.hpp>
 #include <ecto/vertex.hpp>
-
+#include <ecto/impl/graph_utils.hpp>
 #include <boost/format.hpp>
 #include <boost/date_time/posix_time/posix_time_duration.hpp>
 #include <boost/regex.hpp>
@@ -282,9 +282,7 @@ namespace ecto
     std::reverse(stack.begin(), stack.end());
     BOOST_FOREACH(const ecto::graph::graph_t::vertex_descriptor& vd, stack)
     {
-      vertex_ptr v = impl_->graph[vd];
-      cell::ptr c = v->cell();
-      c->configure();
+      ecto::graph::invoke_configuration(impl_->graph, vd);
     }
     /****************************************
      ** Sorted Configuration - Breadth First
