@@ -42,6 +42,7 @@
 #include <boost/date_time/posix_time/posix_time_duration.hpp>
 #include <boost/regex.hpp>
 #include <boost/foreach.hpp>
+#include <boost/graph/topological_sort.hpp>
 
 #include <string>
 #include <map>
@@ -182,7 +183,7 @@ namespace ecto
     }
   };
 
-  plasm::plasm() : impl_(new impl) { }
+  plasm::plasm() : impl_(new impl), configured(false) { }
 
   plasm::~plasm()
   {
@@ -192,12 +193,14 @@ namespace ecto
   plasm::insert(cell_ptr mod)
   {
     impl_->insert_module(mod);
+    configured = false;
   }
 
   void
   plasm::connect(cell_ptr from, const std::string& output, cell_ptr to, const std::string& input)
   {
     impl_->connect(from, output, to, input);
+    configured = false;
   }
 
   void
@@ -263,10 +266,32 @@ namespace ecto
   void
   plasm::configure_all()
   {
-    BOOST_FOREACH(impl::ModuleVertexMap::value_type& x, impl_->mv_map)
-        {
-          x.first->configure();
-        }
+    if (configured) return;
+    /****************************************
+     ** Unsorted Configuration
+     ****************************************/
+    // BOOST_FOREACH(impl::ModuleVertexMap::value_type& x, impl_->mv_map)
+    //      {
+    //        x.first->configure();
+    //      }
+    /****************************************
+     ** Sorted Configuration - Depth First
+     ****************************************/
+    std::vector<ecto::graph::graph_t::vertex_descriptor> stack;
+    boost::topological_sort(impl_->graph, std::back_inserter(stack));
+    std::reverse(stack.begin(), stack.end());
+    BOOST_FOREACH(const ecto::graph::graph_t::vertex_descriptor& vd, stack)
+    {
+      vertex_ptr v = impl_->graph[vd];
+      cell::ptr c = v->cell();
+      c->configure();
+    }
+    /****************************************
+     ** Sorted Configuration - Breadth First
+     ****************************************/
+    // Note that the default scheduler uses this instead. Bring it in, if needed.
+
+    configured = true;
   }
 
   void
