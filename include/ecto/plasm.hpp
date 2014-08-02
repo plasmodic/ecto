@@ -152,6 +152,7 @@ namespace ecto
   private:
     struct impl;
     boost::shared_ptr<impl> impl_;
+    bool configured;
 
     template<class Archive>
     void
