@@ -86,7 +86,7 @@ namespace ecto
       {
         ECTO_SCOPED_CALLPYTHON();
         if (bp::override config = this->get_override("configure"))
-          config(boost::ref(params));
+          config(boost::ref(params), boost::ref(inputs), boost::ref(outputs));
       }
 
       void dispatch_activate()

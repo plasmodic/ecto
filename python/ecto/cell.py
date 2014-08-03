@@ -31,7 +31,7 @@ class Cell(_cell_base):
     """
     When creating a cell from Python, just inherit from that class and define
     the same functions as in C++ if you want (i.e. declare_params(self, p),
-    declare_io(self, p), configure(self, p, i, o) and run(self, i, o)
+    declare_io(self, p, i, o), configure(self, p, i, o) and process(self, i, o)
     """
     __looks_like_a_cell__ = True
     def __getattr__(self, name):
@@ -44,10 +44,9 @@ class Cell(_cell_base):
                 raise AttributeError(self, name)
 
     def __init__(self, *args, **kwargs):
+        _cell_base.__init__(self)
         if args:
-            _cell_base.__init__(self, args[0])
-        else:
-            _cell_base.__init__(self)
+            _cell_base.name(self, args[0])
 
         _cell_base.declare_params(self)
 
@@ -55,7 +54,6 @@ class Cell(_cell_base):
             self.params.at(k).set(v)
         self.params.notify()
         _cell_base.declare_io(self)
-        _cell_base.configure(self)
         if self.__doc__ is None:
             self.__doc__ = "TODO docstr me."
         self._short_doc = self.__doc__

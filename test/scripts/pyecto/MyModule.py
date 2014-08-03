@@ -30,7 +30,7 @@ import ecto
 class MyModule(ecto.Cell):
     """ A python module that does not much."""
     def __init__(self, *args, **kwargs):
-        ecto.Cell.__init__(self, **kwargs)
+        ecto.Cell.__init__(self, *args, **kwargs)
     
     @staticmethod
     def declare_params(params):
@@ -41,7 +41,7 @@ class MyModule(ecto.Cell):
         inputs.declare("input","aye", 2)
         outputs.declare("out", "i'll give you this", "hello")
     
-    def configure(self,params):
+    def configure(self,params, inputs, outputs):
         print "configure!"
         self.text = params.text
 
