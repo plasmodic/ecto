@@ -189,6 +189,7 @@ namespace ecto
         ;
 
       bp::class_<cellwrap, boost::shared_ptr<cellwrap>, boost::noncopyable> ("_cell_base" /*bp::no_init*/)
+        .def("_set_process_connected_inputs_only", &cell::set_process_connected_inputs_only)
         .def("_set_strand", &cell::set_strand)
         .def("_reset_strand", &cell::reset_strand)
         .def("construct", &inspect_impl)
@@ -197,6 +198,7 @@ namespace ecto
         .def("configure", ((void(cell::*)()) &cell::configure))
         .def("activate", ((void(cell::*)()) &cell::activate))
         .def("deactivate", ((void(cell::*)()) &cell::deactivate))
+        .def("process_with_only_these_inputs", (void(cell::*)()) &cell::process_with_only_these_inputs)
         .def("process", (void(cell::*)()) &cell::process)
         .def("start", (void(cell::*)()) &cell::start)
         .def("stop", (void(cell::*)()) &cell::stop)
@@ -289,6 +291,11 @@ namespace ecto
             m->strand_ = s;
             ECTO_LOG_DEBUG("Found a strand for cell %s, id=%p", m->name() % s.id());
           }
+        else if ( keystring == "connected_inputs_only")
+        {
+          bool result = bp::extract<bool>(value);
+          m->set_process_connected_inputs_only(result);
+        }
         else
           {
             tendril_ptr tp = m->parameters[keystring];

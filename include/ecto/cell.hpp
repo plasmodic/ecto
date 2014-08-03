@@ -137,6 +137,7 @@ namespace ecto
      * Anything non zero should be considered an exit signal.
      */
     ReturnCode process();
+    ReturnCode process_with_only_these_inputs(const tendrils& connected_inputs);
 
     /** \brief Return the type of the child class.
      * @return A human readable non mangled name for the client class.
@@ -174,6 +175,19 @@ namespace ecto
 
     void verify_params() const;
     void verify_inputs() const;
+
+    /**
+     * \brief Processing mode query - only connected tendrils or all.
+     * Typically used by the scheduler to arrange input tendrils when
+     * invoking a process.
+     * @return flag only connected input tendrils if true, all otherwise.
+     */
+    bool process_connected_inputs_only() const {
+      return process_connected_inputs_only_;
+    }
+    void set_process_connected_inputs_only(const bool &value) {
+      process_connected_inputs_only_ = value;
+    }
 
     ptr clone() const;
 
@@ -225,6 +239,7 @@ namespace ecto
     std::string instance_name_;
     bool configured_;
     bool activated_;
+    bool process_connected_inputs_only_;
 
   }; // cell
 

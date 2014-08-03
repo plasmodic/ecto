@@ -48,6 +48,22 @@ using namespace ecto::graph;
 
 namespace schedulers {
 
+std::set<std::string> get_connected_input_tendril_names(graph_t& graph, graph_t::vertex_descriptor vd)
+{
+  std::set<std::string> connected_tendril_names;
+  vertex_ptr v = graph[vd];
+  cell::ptr m = v->cell();
+  const std::string name = m->name();
+  graph_t::in_edge_iterator inbegin, inend;
+  tie(inbegin, inend) = boost::in_edges(vd, graph);
+  for (; inbegin != inend; ++inbegin) {
+    edge_ptr e = graph[*inbegin];
+    if (e->empty()) { continue; }
+    connected_tendril_names.insert(e->to_port());
+  }
+  return connected_tendril_names;
+}
+
 void move_inputs(graph_t& graph, graph_t::vertex_descriptor vd)
 {
   vertex_ptr v = graph[vd];
@@ -125,12 +141,28 @@ int invoke_process(graph_t& graph, graph_t::vertex_descriptor vd)
 #endif
   ECTO_LOG_DEBUG(">> process %s tick %u", name % tick);
 
+  tendrils connected_input_tendrils;
+  if (m->process_connected_inputs_only()) {
+    // must come before move_inputs since move_inputs pops the input edges as it goes
+    const std::set<std::string>& names = get_connected_input_tendril_names(graph, vd);
+    std::set<std::string>::const_iterator iter = names.begin();
+    for(iter; iter != names.end(); ++iter) {
+      const tendril_ptr to = m->inputs[*iter];
+      connected_input_tendrils.insert(std::pair<std::string, tendril_ptr>(*iter, to));
+    }
+  }
+
   move_inputs(graph, vd);
 
   int rval = ecto::QUIT;
   { // BEGIN stats_collector scope.
     profile::stats_collector c(m->name(), v->stats());
-    rval = m->process();
+    if (m->process_connected_inputs_only()) {
+      rval = m->process_with_only_these_inputs(connected_input_tendrils);
+    } else {
+      rval = m->process();
+    }
+
   } // END stats_collector scope.
 
   if (rval != ecto::OK) {

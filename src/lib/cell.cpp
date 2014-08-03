@@ -141,6 +141,7 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
   cell::cell()
     : configured_(false)
     , activated_(false)
+    , process_connected_inputs_only_(false)
   {
   }
 
@@ -220,9 +221,8 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
     dispatch_stop();
   }
 
-
   ReturnCode
-  cell::process()
+  cell::process_with_only_these_inputs(const tendrils& connected_inputs)
   {
     configure();
     //trigger all parameter change callbacks...
@@ -250,13 +250,19 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
     {
       try
       {
-        const ReturnCode rc = dispatch_process(inputs, outputs);
+        const ReturnCode rc = dispatch_process(connected_inputs, outputs);
         return rc;
       } catch (const boost::thread_interrupted&) {
         ECTO_TRACE_EXCEPTION("const boost::thread_interrupted&, returning QUIT instead of rethrow");
         return ecto::QUIT;
       }
     } CATCH_ALL()
+  }
+
+  ReturnCode
+  cell::process()
+  {
+    process_with_only_these_inputs(inputs);
   }
 
   std::string
