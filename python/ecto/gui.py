@@ -4,21 +4,31 @@ import sys
 HAS_GUI=False
 
 try:
-    from PySide.QtCore import QTimer
-    from PySide.QtGui import QWidget, QDialog, QPushButton, QApplication, \
-     QVBoxLayout, QLabel, QHBoxLayout, QLineEdit, QScrollArea, QMainWindow, QSizePolicy
+    from PySide.QtCore import QTimer, Qt
+    from PySide.QtGui import QWidget, QDialog, QPushButton, QApplication, QCheckBox, \
+     QVBoxLayout, QLabel, QHBoxLayout, QLineEdit, QScrollArea, QMainWindow, QSizePolicy, \
+     QSpacerItem
     HAS_GUI=True
     class TendrilWidget(QWidget):
         def __init__(self, name, tendril, parent=None):
             super(TendrilWidget,self).__init__(parent)
-            hlayout = QHBoxLayout()
-            hlayout.addWidget(QLabel(name))
-            edit = QLineEdit(str(tendril.val))
-            hlayout.addWidget(edit)
-
+            hlayout = QHBoxLayout(self)
+            label = QLabel("&" + name)
+            hlayout.addWidget(label)
             self.thunker = TendrilThunker(tendril)
-            edit.textChanged.connect(self.thunker.update)
-
+            if tendril.val == True or tendril.val == False:
+                spacer = QSpacerItem(0, 0, hPolicy=QSizePolicy.Expanding, vPolicy=QSizePolicy.Minimum)
+                hlayout.addItem(spacer)
+                checkbox = QCheckBox(self)
+                checkbox.setCheckState(Qt.Checked if tendril.val else Qt.Unchecked)
+                checkbox.stateChanged.connect(self.thunker.update)
+                label.setBuddy(checkbox)
+                hlayout.addWidget(checkbox)
+            else:
+                edit = QLineEdit(str(tendril.val), self)
+                edit.textChanged.connect(self.thunker.update)
+                label.setBuddy(edit)
+                hlayout.addWidget(edit)
             self.setLayout(hlayout)
             self.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
 
@@ -78,10 +88,13 @@ class TendrilThunker(object):
         self.val = None
 
     def update(self, val):
-        self.val = val
+        if type(self.tendril.val) is bool:
+            self.val = True if (val == 2) else False
+        else:
+            self.val = val
 
     def commit(self):
-        if self.val:
+        if self.val is not None:
             x = type(self.tendril.val)(self.val)
             self.tendril.set(x)
             self.val = None
