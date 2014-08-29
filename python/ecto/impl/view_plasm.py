@@ -28,7 +28,7 @@
 
 import sys
 
-def view_plasm(plasm):
+def view_plasm(plasm, title):
     try:
         saveit = sys.argv
         sys.argv = [sys.argv[0]]
@@ -39,6 +39,10 @@ def view_plasm(plasm):
             print e
             print "view_plasm requires gobject gtk graphviz, possibly more to run..."
             return
+        if title is not None:
+            # DotWindow doesn't have api for setting the title
+            # Could also access the internal variable afterwards and re-show, but this avoids re-showing.
+            xdot.DotWindow.base_title = title
         window = xdot.DotWindow()
         x = plasm.viz()
         window.set_dotcode(x)

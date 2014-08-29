@@ -75,7 +75,7 @@ def list_cells(pymodule):
     return l
 list_ecto_module = list_cells
 
-def view_plasm(plasm):
-    process = multiprocessing.Process(target=ecto.impl.view_plasm, args=(plasm,))
+def view_plasm(plasm, title=None):
+    process = multiprocessing.Process(target=ecto.impl.view_plasm, args=(plasm,title))
     process.daemon = True
     process.start()
