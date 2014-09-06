@@ -1,5 +1,5 @@
-Forthcoming
------------
+0.6.5 (2014-09-06)
+------------------
 * do not install dev ectoConfig*
   fixes `#262 <https://github.com/plasmodic/ecto/issues/262>`_
 * Merge pull request `#261 <https://github.com/plasmodic/ecto/issues/261>`_ from stonier/bugfix_pythonic_cells
