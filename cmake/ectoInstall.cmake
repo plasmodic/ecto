@@ -26,12 +26,6 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 #### install stuff #####
-#install the ectoConfig.cmake and ectoConfig-version.cmake
-install(DIRECTORY ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}/cmake
-        DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-        COMPONENT main
-)
-
 #regular headers
 install(DIRECTORY ${ecto_SOURCE_DIR}/include/ecto/
         DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
