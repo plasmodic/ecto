@@ -1,3 +1,26 @@
+Forthcoming
+-----------
+* do not install dev ectoConfig*
+  fixes `#262 <https://github.com/plasmodic/ecto/issues/262>`_
+* Merge pull request `#261 <https://github.com/plasmodic/ecto/issues/261>`_ from stonier/bugfix_pythonic_cells
+  Bugfix pythonic cell construction
+* Merge pull request `#263 <https://github.com/plasmodic/ecto/issues/263>`_ from stonier/dot_graph_titles
+  Add title to the dot graph windows
+* add title to the dot graph windows.
+* bugfix pythonic cell construction and parameter argument invocation.
+* Merge pull request `#259 <https://github.com/plasmodic/ecto/issues/259>`_ from stonier/dynamic_reconfigure_whitelist
+  A whitelist for dynamic reconfigure
+* Merge pull request `#254 <https://github.com/plasmodic/ecto/issues/254>`_ from stonier/optional_inputs
+  optional processing of connected inputs only
+* Merge pull request `#258 <https://github.com/plasmodic/ecto/issues/258>`_ from stonier/dynamic_reconfigure
+  Boolean types for dynamic reconfigure
+* Use the value, don't assume it is true.
+* a whitelist for dynamic reconfigure.
+* bugfix boolean parameter setting in dynamic reconfigure.
+* checkboxes for dynamic reconfigure.
+* optional processing of connected inputs only.
+* Contributors: Daniel Stonier, Vincent Rabaud
+
 0.6.4 (2014-07-27)
 ------------------
 * Posix signal handling
