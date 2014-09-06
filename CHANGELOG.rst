@@ -1,5 +1,5 @@
-Forthcoming
------------
+0.6.6 (2014-09-06)
+------------------
 * don't forget to install necessary extra CMake files
 * Contributors: Vincent Rabaud
 
