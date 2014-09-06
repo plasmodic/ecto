@@ -26,6 +26,11 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 #### install stuff #####
+#CMake files
+install(FILES doc.cmake ectoMacros.cmake git.cmake
+        DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/cmake/
+)
+
 #regular headers
 install(DIRECTORY ${ecto_SOURCE_DIR}/include/ecto/
         DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
