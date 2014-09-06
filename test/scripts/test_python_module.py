@@ -33,7 +33,8 @@ import time
 
 
 def test_python_module():
-    mod = MyModule(text="spam")
+    mod = MyModule("mymodule", text="spam")
+    mod.configure(mod.params, mod.inputs, mod.outputs)
     assert mod.text == "spam"
     assert mod.params.text == "spam"
     mod.process(mod.inputs,mod.outputs)
@@ -44,6 +45,7 @@ def test_python_module_plasm(Schedtype):
     print "*"*80
     print Schedtype
     mod = MyModule(text="spam")
+    mod.configure(mod.params, mod.inputs, mod.outputs)
     g = ecto_test.Generate(start = 1 , step =1)
     plasm = ecto.Plasm()
     plasm.connect(g,"out",mod,"input")
