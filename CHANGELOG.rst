@@ -1,3 +1,8 @@
+Forthcoming
+-----------
+* don't forget to install necessary extra CMake files
+* Contributors: Vincent Rabaud
+
 0.6.5 (2014-09-06)
 ------------------
 * do not install dev ectoConfig*
