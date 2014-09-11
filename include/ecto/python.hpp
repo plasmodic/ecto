@@ -35,6 +35,8 @@
 #undef _XOPEN_SOURCE
 #include <Python.h>
 #include <boost/python.hpp>
+#include <boost/thread/thread.hpp>
+#include <map>
 //#pragma pop_macro("_POSIX_C_SOURCE")
 //#pragma pop_macro("_XOPEN_C_SOURCE")
 
@@ -57,7 +59,7 @@ namespace ecto {
     //
     class scoped_gil_release : boost::noncopyable
     {
-      static PyThreadState* threadstate;
+      static std::map<boost::thread::id, PyThreadState*> thread_states;
       bool mine;
       gilstatus mystatus;
     public:
