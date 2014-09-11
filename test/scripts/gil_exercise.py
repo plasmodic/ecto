@@ -27,7 +27,8 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 
-import ecto, ecto_test, time, pprint
+import ecto, time, pprint
+import ecto.ecto_test as ecto_test
 
 n = 0
 
