@@ -81,15 +81,16 @@ namespace ecto {
     }
 
 
-    PyThreadState* scoped_gil_release::threadstate = NULL;
+    std::map<boost::thread::id, PyThreadState*> scoped_gil_release::thread_states = std::map<boost::thread::id, PyThreadState*>();
 
     scoped_gil_release::scoped_gil_release(const char* file, unsigned line)
       : mine(false), mystatus(file, line, "scoped_gil_release")
     {
       if (!Py_IsInitialized())
         return;
-      if (! threadstate) {
-        threadstate = PyEval_SaveThread();
+      boost::thread::id current_thread_id = boost::this_thread::get_id();
+      if ( thread_states.find(current_thread_id) == thread_states.end() ) {
+        thread_states[current_thread_id] = PyEval_SaveThread();
         mine = true;
       }
       {
@@ -103,9 +104,12 @@ namespace ecto {
       if (!Py_IsInitialized())
         return;
       if (mine) {
-        PyEval_RestoreThread(threadstate);
+        boost::thread::id current_thread_id = boost::this_thread::get_id();
+        std::map<boost::thread::id, PyThreadState*>::iterator iter;
+        iter = thread_states.find(current_thread_id);
+        PyEval_RestoreThread(iter->second);
+        thread_states.erase(iter);
         mine = false;
-        threadstate = NULL;
       }
       {
         boost::unique_lock<boost::mutex> lock(gilmutex);
