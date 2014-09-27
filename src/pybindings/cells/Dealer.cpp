@@ -70,6 +70,10 @@ namespace ecto
         }
 
       out_ = out["out"];
+      // initialise so directed configuration has something to play with
+      if (!values_.empty()) {
+        *out_ << values_.front();
+      }
     }
 
     int

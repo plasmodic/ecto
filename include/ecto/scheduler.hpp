@@ -39,7 +39,7 @@
 #include <boost/signals2/signal.hpp>
 #include <boost/thread/mutex.hpp>
 
-#include <ecto/impl/graph_types.hpp>
+#include <ecto/graph/types.hpp>
 
 namespace ecto {
 
