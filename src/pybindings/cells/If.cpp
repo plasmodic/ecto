@@ -41,11 +41,15 @@ namespace ecto
                            "Cell to conditionally execute."
                            " The inputs and outputs of this cell will be"
                            " replicated to the If cell.").required(true);
+      p.declare<std::string>("input_tendril_name", 
+                           "Name to use for the conditional input tendril.",
+                           "__test__"
+                           );
     }
 
     static void declare_io(const tendrils& p, tendrils& in, tendrils& out)
     {
-      in.declare<bool>("__test__",
+      in.declare<bool>(p.get<std::string>("input_tendril_name"),
                        "The test value. If this is true then "
                        " cell::process() is called.", false);
       cell::ptr c;
@@ -60,7 +64,7 @@ namespace ecto
     {
       p["cell"] >> c_;
       c_->configure();
-      test_ = in["__test__"];
+      test_ = in[p.get<std::string>("input_tendril_name")];
     }
 
     int process(const tendrils& in, const tendrils& out)
