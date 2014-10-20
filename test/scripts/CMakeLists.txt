@@ -58,6 +58,7 @@ foreach(file
     test_module_qualification
     test_modules
     test_multiprocess
+    test_nested_if
     test_no_ecto_import
     test_options
     test_parameter_callbacks
