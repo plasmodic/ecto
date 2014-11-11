@@ -1,3 +1,20 @@
+Forthcoming
+-----------
+* Merge branch 'master' of github.com:plasmodic/ecto
+* Merge pull request `#266 <https://github.com/plasmodic/ecto/issues/266>`_ from stonier/if_nests
+  Nested If Cells
+* test for nested ifs.
+* parameterise if cell name variables, this allows if-nests.
+* add awesome Daniel as maintainer
+* Merge pull request `#265 <https://github.com/plasmodic/ecto/issues/265>`_ from stonier/gil_releaser
+  Gil releaser
+* Merge pull request `#264 <https://github.com/plasmodic/ecto/issues/264>`_ from stonier/directed_configuration
+  Directed configuration revisited
+* bugfix module reference in the gil exercise.
+* advanced multithreaded gil releaser.
+* directed configuration
+* Contributors: Daniel Stonier, Vincent Rabaud
+
 0.6.6 (2014-09-06)
 ------------------
 * don't forget to install necessary extra CMake files
