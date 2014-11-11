@@ -1,5 +1,5 @@
-Forthcoming
------------
+0.6.7 (2014-11-11)
+------------------
 * Merge branch 'master' of github.com:plasmodic/ecto
 * Merge pull request `#266 <https://github.com/plasmodic/ecto/issues/266>`_ from stonier/if_nests
   Nested If Cells
