@@ -315,7 +315,7 @@ namespace ecto
   {
     graph_t& g(impl_->graph);
     graph_t::vertex_iterator begin, end;
-    tie(begin, end) = boost::vertices(g);
+    boost::tie(begin, end) = boost::vertices(g);
     while (begin != end)
     {
       cell_ptr m = g[*begin]->cell();
@@ -323,7 +323,7 @@ namespace ecto
 
       //verify all required inputs are connected
       graph_t::in_edge_iterator b_in, e_in;
-      tie(b_in, e_in) = boost::in_edges(*begin, g);
+      boost::tie(b_in, e_in) = boost::in_edges(*begin, g);
       while (b_in != e_in)
       {
         edge_ptr in_edge = g[*b_in];
@@ -344,7 +344,7 @@ namespace ecto
 
       //verify the outputs are connected
       graph_t::out_edge_iterator b_out, e_out;
-      tie(b_out, e_out) = boost::out_edges(*begin, g);
+      boost::tie(b_out, e_out) = boost::out_edges(*begin, g);
       while (b_out != e_out)
       {
         edge_ptr out_edge = g[*b_out];
@@ -371,7 +371,7 @@ namespace ecto
   {
     {
       graph_t::vertex_iterator beg, end;
-      tie(beg, end) = vertices(impl_->graph);
+      boost::tie(beg, end) = vertices(impl_->graph);
       while (beg != end)
       {
         vertex_ptr v = impl_->graph[*beg];
@@ -382,7 +382,7 @@ namespace ecto
 
     {
       graph_t::edge_iterator beg, end;
-      tie(beg, end) = edges(impl_->graph);
+      boost::tie(beg, end) = edges(impl_->graph);
       while (beg != end)
       {
         edge_ptr e = impl_->graph[*beg];
