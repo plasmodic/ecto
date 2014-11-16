@@ -277,13 +277,13 @@ void scheduler::compute_stack()
   graph_t::vertex_iterator vit, vend;
   // NOTE: We only need to reset the vertex ticks here, and
   // plasm::reset_ticks() also resets the edge ticks.
-  tie(vit, vend) = vertices(graph_);
+  boost::tie(vit, vend) = vertices(graph_);
   for (; vit != vend; ++vit)
     graph_[*vit]->reset_tick();
 
   const std::size_t NUM_VERTICES = num_vertices(graph_);
   for (size_t n = 0; n < NUM_VERTICES; ++n) {
-    tie(vit, vend) = vertices(graph_);
+    boost::tie(vit, vend) = vertices(graph_);
     for (; vit != vend; ++vit) {
       // NOTE: tick is incremented on visit
       const graph::vertex_ptr vp = graph_[*vit];
@@ -291,7 +291,7 @@ void scheduler::compute_stack()
         continue; // Already visited this vertex.
 
       graph_t::in_edge_iterator iebegin, ieend;
-      tie(iebegin, ieend) = in_edges(*vit, graph_);
+      boost::tie(iebegin, ieend) = in_edges(*vit, graph_);
       bool all_ins_visited = true;
       for (; iebegin != ieend; ++iebegin) {
         const graph::vertex_ptr in_vp = graph_[source(*iebegin, graph_)];
@@ -304,7 +304,7 @@ void scheduler::compute_stack()
 
         // Check for cycles.
         graph_t::out_edge_iterator oebegin, oeend;
-        tie(oebegin, oeend) = out_edges(*vit, graph_);
+        boost::tie(oebegin, oeend) = out_edges(*vit, graph_);
         for (; oebegin != oeend; ++oebegin) {
           const graph::vertex_ptr out_vp = graph_[target(*oebegin, graph_)];
           if (out_vp->tick()) // Back edge!

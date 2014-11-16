@@ -160,7 +160,7 @@ std::string graph_stats_type::as_string(graph::graph_t& g) const
     (cumulative_ticks / (total_milliseconds / 1000.));
 
   graph::graph_t::vertex_iterator begin, end;
-  for (tie(begin, end) = vertices(g); begin != end; ++begin) {
+  for (boost::tie(begin, end) = vertices(g); begin != end; ++begin) {
     const graph::vertex_ptr vp = g[*begin];
     const double this_ticks = static_cast<double>(vp->stats().total_ticks);
     const double this_time = (! total_milliseconds) ? 0. :
