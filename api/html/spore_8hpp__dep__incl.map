@@ -1,9 +1,12 @@
-<map id="/home/vrabaud/workspace/recognition_kitchen_hydro/src/ecto/include/ecto/spore.hpp" name="/home/vrabaud/workspace/recognition_kitchen_hydro/src/ecto/include/ecto/spore.hpp">
-<area shape="rect" id="node3" href="$tendrils_8hpp.html" title="/home/vrabaud/workspace\l/recognition_kitchen_hydro\l/src/ecto/include/ecto/tendrils.hpp" alt="" coords="447,117,684,181"/>
-<area shape="rect" id="node11" href="$all_8hpp.html" title="/home/vrabaud/workspace\l/recognition_kitchen_hydro\l/src/ecto/include/ecto/all.hpp" alt="" coords="544,696,747,760"/>
-<area shape="rect" id="node5" href="$cell_8hpp.html" title="/home/vrabaud/workspace\l/recognition_kitchen_hydro\l/src/ecto/include/ecto/cell.hpp" alt="" coords="423,229,634,293"/>
-<area shape="rect" id="node7" href="$registry_8hpp.html" title="/home/vrabaud/workspace\l/recognition_kitchen_hydro\l/src/ecto/include/ecto/registry.hpp" alt="" coords="115,341,350,405"/>
-<area shape="rect" id="node9" href="$ecto_8hpp.html" title="/home/vrabaud/workspace\l/recognition_kitchen_hydro\l/src/ecto/include/ecto/ecto.hpp" alt="" coords="206,584,422,648"/>
-<area shape="rect" id="node13" href="$serialization_2cell_8hpp.html" title="/home/vrabaud/workspace\l/recognition_kitchen_hydro\l/src/ecto/include/ecto/serialization\l/cell.hpp" alt="" coords="295,454,532,535"/>
-<area shape="rect" id="node15" href="$module_8hpp.html" title="/home/vrabaud/workspace\l/recognition_kitchen_hydro\l/src/ecto/include/ecto/module.hpp" alt="" coords="34,463,271,527"/>
+<map id="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" name="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp">
+<area shape="rect" id="node2" href="$tendrils_8hpp.html" title="/home/vrabaud/workspace\l/recognition_kitchen/src\l/ecto/include/ecto/tendrils.hpp" alt="" coords="397,109,611,165"/>
+<area shape="rect" id="node7" href="$all_8hpp~.html" title="/home/vrabaud/workspace\l/recognition_kitchen/src\l/ecto/include/ecto/all.hpp~" alt="" coords="5,645,197,701"/>
+<area shape="rect" id="node8" href="$all_8hpp.html" title="/home/vrabaud/workspace\l/recognition_kitchen/src\l/ecto/include/ecto/all.hpp" alt="" coords="790,645,980,701"/>
+<area shape="rect" id="node3" href="$cell_8hpp.html" title="/home/vrabaud/workspace\l/recognition_kitchen/src\l/ecto/include/ecto/cell.hpp" alt="" coords="299,213,489,269"/>
+<area shape="rect" id="node11" href="$cell_8hpp~.html" title="/home/vrabaud/workspace\l/recognition_kitchen/src\l/ecto/include/ecto/cell.hpp~" alt="" coords="514,213,712,269"/>
+<area shape="rect" id="node4" href="$ecto_8hpp~.html" title="/home/vrabaud/workspace\l/recognition_kitchen/src\l/ecto/include/ecto/ecto.hpp~" alt="" coords="615,541,821,597"/>
+<area shape="rect" id="node5" href="$registry_8hpp.html" title="/home/vrabaud/workspace\l/recognition_kitchen/src\l/ecto/include/ecto/registry.hpp" alt="" coords="361,317,575,373"/>
+<area shape="rect" id="node6" href="$ecto_8hpp.html" title="/home/vrabaud/workspace\l/recognition_kitchen/src\l/ecto/include/ecto/ecto.hpp" alt="" coords="371,541,565,597"/>
+<area shape="rect" id="node9" href="$serialization_2cell_8hpp.html" title="/home/vrabaud/workspace\l/recognition_kitchen/src\l/ecto/include/ecto/serialization\l/cell.hpp" alt="" coords="215,422,429,493"/>
+<area shape="rect" id="node10" href="$module_8hpp.html" title="/home/vrabaud/workspace\l/recognition_kitchen/src\l/ecto/include/ecto/module.hpp" alt="" coords="506,429,720,485"/>
 </map>

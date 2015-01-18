@@ -1,9 +1,10 @@
-<map id="/home/vrabaud/workspace/recognition_kitchen_hydro/src/ecto/include/ecto" name="/home/vrabaud/workspace/recognition_kitchen_hydro/src/ecto/include/ecto">
-<area shape="rect" id="node4" href="dir_1f9320df8291dad569ce928f8ba185f7.html" title="impl" alt="" coords="64,161,136,209"/>
-<area shape="rect" id="edge6" href="dir_000005_000007.html" title="1" alt="" coords="139,145,148,163"/>
-<area shape="rect" id="node5" href="dir_b81b1299b3c12345209d2146296177a7.html" title="python" alt="" coords="160,161,232,209"/>
-<area shape="rect" id="edge4" href="dir_000005_000008.html" title="2" alt="" coords="200,134,209,151"/>
-<area shape="rect" id="node6" href="dir_b8ba8bdecec24202647344231f3c9d1d.html" title="serialization" alt="" coords="37,65,136,113"/>
-<area shape="rect" id="graph3" href="dir_c24cbdf628439aa3208a039e526fc43e.html" alt="" coords="27,55,243,220"/>
-<area shape="rect" id="graph2" href="dir_49694466ee6c864d4a1aa63bc4101e39.html" title="include" alt="" coords="16,16,253,231"/>
+<map id="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto" name="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto">
+<area shape="rect" id="node2" href="dir_30c299c00e268ad0ca3a5cd08f2b9299.html" title="graph" alt="" coords="160,159,232,207"/>
+<area shape="rect" id="edge1-headlabel" href="dir_000005_000007.html" title="1" alt="" coords="234,145,243,159"/>
+<area shape="rect" id="node4" href="dir_b81b1299b3c12345209d2146296177a7.html" title="python" alt="" coords="256,159,328,207"/>
+<area shape="rect" id="edge2-headlabel" href="dir_000005_000009.html" title="2" alt="" coords="296,133,305,148"/>
+<area shape="rect" id="node3" href="dir_1f9320df8291dad569ce928f8ba185f7.html" title="impl" alt="" coords="160,63,232,111"/>
+<area shape="rect" id="node5" href="dir_b8ba8bdecec24202647344231f3c9d1d.html" title="serialization" alt="" coords="37,63,136,111"/>
+<area shape="rect" id="clust2" href="dir_c24cbdf628439aa3208a039e526fc43e.html" alt="" coords="27,52,339,217"/>
+<area shape="rect" id="clust1" href="dir_49694466ee6c864d4a1aa63bc4101e39.html" title="include" alt="" coords="16,16,349,228"/>
 </map>

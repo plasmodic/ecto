@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="structecto_1_1graph_1_1graph__t" kind="struct" prot="public">
+    <compoundname>ecto::graph::graph_t</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">boost::adjacency_list&lt; boost::vecS, boost::vecS, boost::bidirectionalS, vertex_ptr, edge_ptr &gt;</basecompoundref>
+    <includes refid="types_8hpp" local="no">types.hpp</includes>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="331">
+        <label>boost::adjacency_list&lt; boost::vecS,boost::vecS,boost::bidirectionalS,vertex_ptr,edge_ptr &gt;</label>
+      </node>
+      <node id="330">
+        <label>ecto::graph::graph_t</label>
+        <link refid="structecto_1_1graph_1_1graph__t"/>
+        <childnode refid="331" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="333">
+        <label>boost::adjacency_list&lt; boost::vecS,boost::vecS,boost::bidirectionalS,vertex_ptr,edge_ptr &gt;</label>
+      </node>
+      <node id="332">
+        <label>ecto::graph::graph_t</label>
+        <link refid="structecto_1_1graph_1_1graph__t"/>
+        <childnode refid="333" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/graph/types.hpp" line="52" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/graph/types.hpp" bodystart="46" bodyend="53"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

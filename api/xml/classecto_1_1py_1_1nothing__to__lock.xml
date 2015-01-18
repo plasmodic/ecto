@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classecto_1_1py_1_1nothing__to__lock" kind="class" prot="public">
+    <compoundname>ecto::py::nothing_to_lock</compoundname>
+    <basecompoundref prot="private" virt="non-virtual">noncopyable</basecompoundref>
+    <includes refid="gil_8hpp" local="no">gil.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classecto_1_1py_1_1nothing__to__lock_1a277b110e856f61f30f645e4bed50c566" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ecto::py::nothing_to_lock::nothing_to_lock</definition>
+        <argsstring>()</argsstring>
+        <name>nothing_to_lock</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/gil.hpp" line="50" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/gil.hpp" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1py_1_1nothing__to__lock_1aa734fa290aeb9aa7de729960aa12df9b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ecto::py::nothing_to_lock::~nothing_to_lock</definition>
+        <argsstring>()</argsstring>
+        <name>~nothing_to_lock</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/gil.hpp" line="51" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/gil.hpp" bodystart="51" bodyend="51"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="377">
+        <label>noncopyable</label>
+      </node>
+      <node id="376">
+        <label>ecto::py::nothing_to_lock</label>
+        <link refid="classecto_1_1py_1_1nothing__to__lock"/>
+        <childnode refid="377" relation="private-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="379">
+        <label>noncopyable</label>
+      </node>
+      <node id="378">
+        <label>ecto::py::nothing_to_lock</label>
+        <link refid="classecto_1_1py_1_1nothing__to__lock"/>
+        <childnode refid="379" relation="private-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/gil.hpp" line="48" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/gil.hpp" bodystart="47" bodyend="52"/>
+    <listofallmembers>
+      <member refid="classecto_1_1py_1_1nothing__to__lock_1a277b110e856f61f30f645e4bed50c566" prot="public" virt="non-virtual"><scope>ecto::py::nothing_to_lock</scope><name>nothing_to_lock</name></member>
+      <member refid="classecto_1_1py_1_1nothing__to__lock_1aa734fa290aeb9aa7de729960aa12df9b" prot="public" virt="non-virtual"><scope>ecto::py::nothing_to_lock</scope><name>~nothing_to_lock</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

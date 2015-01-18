@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="structboost_1_1python_1_1std__map__indexing__suite_1_1iterkeys" kind="struct" prot="public">
+    <compoundname>boost::python::std_map_indexing_suite::iterkeys</compoundname>
+    <includes refid="std__map__indexing__suite_8hpp" local="no">std_map_indexing_suite.hpp</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structboost_1_1python_1_1std__map__indexing__suite_1_1iterkeys_1a7c12b5aeae081d2ecf524e29e5a5c343" prot="public" static="no">
+        <type><ref refid="classboost_1_1python_1_1std__map__indexing__suite_1a4e2daeb60a58d6ce9964e0ea27680009" kindref="member">key_type</ref></type>
+        <definition>typedef key_type boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::iterkeys::result_type</definition>
+        <argsstring></argsstring>
+        <name>result_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="256" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="256" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structboost_1_1python_1_1std__map__indexing__suite_1_1iterkeys_1a0e3b853fc4bbcc4777e5c663cc8bdd60" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structboost_1_1python_1_1std__map__indexing__suite_1_1iterkeys_1a7c12b5aeae081d2ecf524e29e5a5c343" kindref="member">result_type</ref></type>
+        <definition>result_type boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::iterkeys::operator()</definition>
+        <argsstring>(value_type const &amp;x) const </argsstring>
+        <name>operator()</name>
+        <param>
+          <type><ref refid="classboost_1_1python_1_1std__map__indexing__suite_1aff9ed68cf30e805a04a313d92c62ab38" kindref="member">value_type</ref> const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="258" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="258" bodyend="261"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="255" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="254" bodyend="262"/>
+    <listofallmembers>
+      <member refid="structboost_1_1python_1_1std__map__indexing__suite_1_1iterkeys_1a0e3b853fc4bbcc4777e5c663cc8bdd60" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite::iterkeys</scope><name>operator()</name></member>
+      <member refid="structboost_1_1python_1_1std__map__indexing__suite_1_1iterkeys_1a7c12b5aeae081d2ecf524e29e5a5c343" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite::iterkeys</scope><name>result_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

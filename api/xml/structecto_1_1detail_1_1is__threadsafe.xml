@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="structecto_1_1detail_1_1is__threadsafe" kind="struct" prot="public">
+    <compoundname>ecto::detail::is_threadsafe</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">true_</basecompoundref>
+    <includes refid="traits_8hpp" local="no">traits.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="343">
+        <label>ecto::detail::is_threadsafe&lt; T &gt;</label>
+        <link refid="structecto_1_1detail_1_1is__threadsafe"/>
+        <childnode refid="344" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="344">
+        <label>boost::mpl::true_</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="345">
+        <label>ecto::detail::is_threadsafe&lt; T &gt;</label>
+        <link refid="structecto_1_1detail_1_1is__threadsafe"/>
+        <childnode refid="346" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="346">
+        <label>boost::mpl::true_</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/traits.hpp" line="36" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/traits.hpp" bodystart="36" bodyend="36"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

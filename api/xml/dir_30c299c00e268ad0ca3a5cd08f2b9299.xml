@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="dir_30c299c00e268ad0ca3a5cd08f2b9299" kind="dir">
+    <compoundname>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/graph</compoundname>
+    <innerfile refid="types_8hpp">types.hpp</innerfile>
+    <innerfile refid="utilities_8hpp">utilities.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/graph/"/>
+  </compounddef>
+</doxygen>

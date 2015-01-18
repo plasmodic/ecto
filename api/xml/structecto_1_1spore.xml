@@ -1,0 +1,428 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="structecto_1_1spore" kind="class" prot="public">
+    <compoundname>ecto::spore</compoundname>
+    <includes refid="spore_8hpp" local="no">spore.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename</type>
+        <declname>T</declname>
+        <defname>T</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structecto_1_1spore_1aa1e4c8dec72f4671c3469b84136677e4" prot="public" static="no">
+        <type><ref refid="structecto_1_1spore" kindref="compound">spore</ref>&lt; T &gt;</type>
+        <definition>typedef spore&lt;T&gt; ecto::spore&lt; T &gt;::this_type</definition>
+        <argsstring></argsstring>
+        <name>this_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" line="47" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structecto_1_1spore_1af36d72731a0e1b823de1b411c34b1a1c" prot="public" static="no">
+        <type>T</type>
+        <definition>typedef T ecto::spore&lt; T &gt;::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" line="48" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structecto_1_1spore_1a79afa6b324736afc257bc89c6c770f81" prot="public" static="no">
+        <type>T &amp;</type>
+        <definition>typedef T&amp; ecto::spore&lt; T &gt;::reference_type</definition>
+        <argsstring></argsstring>
+        <name>reference_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" line="49" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structecto_1_1spore_1af00c161eec3285210e59c856aff26456" prot="public" static="no">
+        <type>T *</type>
+        <definition>typedef T* ecto::spore&lt; T &gt;::pointer_type</definition>
+        <argsstring></argsstring>
+        <name>pointer_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" line="50" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structecto_1_1spore_1af1219cc7b5343824699fc7f66a5c5891" prot="public" static="no">
+        <type>const T *</type>
+        <definition>typedef const T* ecto::spore&lt; T &gt;::const_pointer_type</definition>
+        <argsstring></argsstring>
+        <name>const_pointer_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" line="51" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structecto_1_1spore_1a162474193fb3865f81f8b49b74858aa3" prot="public" static="no">
+        <type><ref refid="namespaceecto_1a84fb5f6130275382e5cbeb5fdececa78" kindref="member">tendril_ptr</ref> this_type::*</type>
+        <definition>typedef tendril_ptr this_type::* ecto::spore&lt; T &gt;::unspecified_bool_type</definition>
+        <argsstring></argsstring>
+        <name>unspecified_bool_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" line="157" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" bodystart="157" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structecto_1_1spore_1a17e2ffe6861f828cad58904d20f117d4" prot="private" static="no" mutable="no">
+        <type><ref refid="namespaceecto_1a84fb5f6130275382e5cbeb5fdececa78" kindref="member">tendril_ptr</ref></type>
+        <definition>tendril_ptr ecto::spore&lt; T &gt;::tendril_</definition>
+        <argsstring></argsstring>
+        <name>tendril_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" line="190" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" bodystart="190" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structecto_1_1spore_1a6b22569e73747f63644005c77d0fccd8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ecto::spore&lt; T &gt;::spore</definition>
+        <argsstring>()</argsstring>
+        <name>spore</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Allocates a spore that doesn&apos;t point to anything. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" line="55" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1spore_1af45353900f648ef26ff9eb778dd61f23" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ecto::spore&lt; T &gt;::spore</definition>
+        <argsstring>(tendril_ptr t)</argsstring>
+        <name>spore</name>
+        <param>
+          <type><ref refid="namespaceecto_1a84fb5f6130275382e5cbeb5fdececa78" kindref="member">tendril_ptr</ref></type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>implicit constructor from a tendril ptr. Needs to be a shared_ptr and uses this to ensure that the spore always points to valid tendril. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" line="61" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" bodystart="61" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1spore_1ac46e4114f6e01b3acfa4a7ae4dd9dc67" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structecto_1_1spore" kindref="compound">spore</ref>&lt; T &gt; &amp;</type>
+        <definition>spore&lt;T&gt;&amp; ecto::spore&lt; T &gt;::set_callback</definition>
+        <argsstring>(typename boost::function1&lt; void, T &gt; cb)</argsstring>
+        <name>set_callback</name>
+        <param>
+          <type>typename boost::function1&lt; void, T &gt;</type>
+          <declname>cb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set a typed callback, that will be called when ever the tendril value is changed by the user. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cb</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The callback </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>ref to this spore, for chaining. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" line="78" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" bodystart="78" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1spore_1a979e896020612cd69604f8dad43f412d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structecto_1_1spore" kindref="compound">spore</ref>&lt; T &gt; &amp;</type>
+        <definition>spore&lt;T&gt;&amp; ecto::spore&lt; T &gt;::notify</definition>
+        <argsstring>()</argsstring>
+        <name>notify</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" line="84" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" bodystart="84" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1spore_1a5eb3c4df0a6b798de09a76e2efbb5fb0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structecto_1_1spore" kindref="compound">spore</ref>&lt; T &gt; &amp;</type>
+        <definition>spore&lt;T&gt;&amp; ecto::spore&lt; T &gt;::set_doc</definition>
+        <argsstring>(const std::string &amp;doc)</argsstring>
+        <name>set_doc</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>doc</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" line="90" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" bodystart="90" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1spore_1a1d4ad4266f0e03bcf5b3c930cb9428a9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structecto_1_1spore" kindref="compound">spore</ref>&lt; T &gt; &amp;</type>
+        <definition>spore&lt;T&gt;&amp; ecto::spore&lt; T &gt;::set_default_val</definition>
+        <argsstring>(const T &amp;val)</argsstring>
+        <name>set_default_val</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" line="96" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" bodystart="96" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1spore_1a3a358fb5a6cf0d18c854399285e98184" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ecto::spore&lt; T &gt;::dirty</definition>
+        <argsstring>() const </argsstring>
+        <name>dirty</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" line="102" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" bodystart="102" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1spore_1a82d0d47b28034003965e8f70f4afea59" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::spore&lt; T &gt;::dirty</definition>
+        <argsstring>(bool d)</argsstring>
+        <name>dirty</name>
+        <param>
+          <type>bool</type>
+          <declname>d</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" line="107" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" bodystart="107" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1spore_1ae982e7c491c3445a6b4672494c6151b7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ecto::spore&lt; T &gt;::user_supplied</definition>
+        <argsstring>() const </argsstring>
+        <name>user_supplied</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" line="112" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" bodystart="112" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1spore_1a6c1f818917367c7c1e04e2d362257317" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ecto::spore&lt; T &gt;::has_default</definition>
+        <argsstring>() const </argsstring>
+        <name>has_default</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" line="117" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" bodystart="117" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1spore_1a94342d6ff2601ae701dc4b66e53cb05c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structecto_1_1spore" kindref="compound">spore</ref>&lt; T &gt; &amp;</type>
+        <definition>spore&lt;T&gt;&amp; ecto::spore&lt; T &gt;::required</definition>
+        <argsstring>(bool b)</argsstring>
+        <name>required</name>
+        <param>
+          <type>bool</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" line="122" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" bodystart="122" bodyend="126"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1spore_1a3520306f4699901fe09cd0fe0cd29ab0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ecto::spore&lt; T &gt;::required</definition>
+        <argsstring>() const </argsstring>
+        <name>required</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" line="128" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" bodystart="128" bodyend="131"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1spore_1ad84fe1edeea4944545266bdf3b93556b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structecto_1_1spore_1af00c161eec3285210e59c856aff26456" kindref="member">pointer_type</ref></type>
+        <definition>pointer_type ecto::spore&lt; T &gt;::operator-&gt;</definition>
+        <argsstring>()</argsstring>
+        <name>operator-&gt;</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" line="133" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" bodystart="133" bodyend="137"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1spore_1aeab6c0fdaf10bf4a3d1570d3eef46bd1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structecto_1_1spore_1af1219cc7b5343824699fc7f66a5c5891" kindref="member">const_pointer_type</ref></type>
+        <definition>const_pointer_type ecto::spore&lt; T &gt;::operator-&gt;</definition>
+        <argsstring>() const </argsstring>
+        <name>operator-&gt;</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" line="139" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" bodystart="139" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1spore_1a6d693f3096c3fede0c85351d36adaded" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structecto_1_1spore_1a79afa6b324736afc257bc89c6c770f81" kindref="member">reference_type</ref></type>
+        <definition>reference_type ecto::spore&lt; T &gt;::operator*</definition>
+        <argsstring>()</argsstring>
+        <name>operator*</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" line="145" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" bodystart="145" bodyend="149"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1spore_1ae13ad63a891e8ed71d9010c18b754588" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structecto_1_1spore_1af1219cc7b5343824699fc7f66a5c5891" kindref="member">const_pointer_type</ref></type>
+        <definition>const_pointer_type ecto::spore&lt; T &gt;::operator*</definition>
+        <argsstring>() const </argsstring>
+        <name>operator*</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" line="151" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" bodystart="151" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1spore_1ae47aff3850e59591aed5fe2ad0b8d567" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ecto::spore&lt; T &gt;::operator unspecified_bool_type</definition>
+        <argsstring>() const </argsstring>
+        <name>operator unspecified_bool_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" line="159" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" bodystart="159" bodyend="162"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="structecto_1_1spore_1a42f435f8c44fea74854382e0526e36ca" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="namespaceecto_1a84fb5f6130275382e5cbeb5fdececa78" kindref="member">tendril_ptr</ref></type>
+        <definition>tendril_ptr ecto::spore&lt; T &gt;::get</definition>
+        <argsstring>()</argsstring>
+        <name>get</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Grab a pointer to the tendril that this spore points to. <simplesect kind="return"><para>non const pointer to tendril </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" line="170" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" bodystart="170" bodyend="175"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1spore_1a07c4091d4e5c14c30de319ec0f14b7de" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="namespaceecto_1ad01f26ee47597f71a6f86ee34bb3ffe4" kindref="member">tendril_cptr</ref></type>
+        <definition>tendril_cptr ecto::spore&lt; T &gt;::get</definition>
+        <argsstring>() const </argsstring>
+        <name>get</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Grab a pointer to the tendril that this spore points to. const overload. <simplesect kind="return"><para>const pointer to tendril </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" line="181" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" bodystart="181" bodyend="189"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The spore is a typed handle for tendrils, making holding onto tendrils a bit easier. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" line="46" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp" bodystart="45" bodyend="191"/>
+    <listofallmembers>
+      <member refid="structecto_1_1spore_1af1219cc7b5343824699fc7f66a5c5891" prot="public" virt="non-virtual"><scope>ecto::spore</scope><name>const_pointer_type</name></member>
+      <member refid="structecto_1_1spore_1a3a358fb5a6cf0d18c854399285e98184" prot="public" virt="non-virtual"><scope>ecto::spore</scope><name>dirty</name></member>
+      <member refid="structecto_1_1spore_1a82d0d47b28034003965e8f70f4afea59" prot="public" virt="non-virtual"><scope>ecto::spore</scope><name>dirty</name></member>
+      <member refid="structecto_1_1spore_1a42f435f8c44fea74854382e0526e36ca" prot="private" virt="non-virtual"><scope>ecto::spore</scope><name>get</name></member>
+      <member refid="structecto_1_1spore_1a07c4091d4e5c14c30de319ec0f14b7de" prot="private" virt="non-virtual"><scope>ecto::spore</scope><name>get</name></member>
+      <member refid="structecto_1_1spore_1a6c1f818917367c7c1e04e2d362257317" prot="public" virt="non-virtual"><scope>ecto::spore</scope><name>has_default</name></member>
+      <member refid="structecto_1_1spore_1a979e896020612cd69604f8dad43f412d" prot="public" virt="non-virtual"><scope>ecto::spore</scope><name>notify</name></member>
+      <member refid="structecto_1_1spore_1ae47aff3850e59591aed5fe2ad0b8d567" prot="public" virt="non-virtual"><scope>ecto::spore</scope><name>operator unspecified_bool_type</name></member>
+      <member refid="structecto_1_1spore_1a6d693f3096c3fede0c85351d36adaded" prot="public" virt="non-virtual"><scope>ecto::spore</scope><name>operator*</name></member>
+      <member refid="structecto_1_1spore_1ae13ad63a891e8ed71d9010c18b754588" prot="public" virt="non-virtual"><scope>ecto::spore</scope><name>operator*</name></member>
+      <member refid="structecto_1_1spore_1ad84fe1edeea4944545266bdf3b93556b" prot="public" virt="non-virtual"><scope>ecto::spore</scope><name>operator-&gt;</name></member>
+      <member refid="structecto_1_1spore_1aeab6c0fdaf10bf4a3d1570d3eef46bd1" prot="public" virt="non-virtual"><scope>ecto::spore</scope><name>operator-&gt;</name></member>
+      <member refid="structecto_1_1spore_1af00c161eec3285210e59c856aff26456" prot="public" virt="non-virtual"><scope>ecto::spore</scope><name>pointer_type</name></member>
+      <member refid="structecto_1_1spore_1a79afa6b324736afc257bc89c6c770f81" prot="public" virt="non-virtual"><scope>ecto::spore</scope><name>reference_type</name></member>
+      <member refid="structecto_1_1spore_1a94342d6ff2601ae701dc4b66e53cb05c" prot="public" virt="non-virtual"><scope>ecto::spore</scope><name>required</name></member>
+      <member refid="structecto_1_1spore_1a3520306f4699901fe09cd0fe0cd29ab0" prot="public" virt="non-virtual"><scope>ecto::spore</scope><name>required</name></member>
+      <member refid="structecto_1_1spore_1ac46e4114f6e01b3acfa4a7ae4dd9dc67" prot="public" virt="non-virtual"><scope>ecto::spore</scope><name>set_callback</name></member>
+      <member refid="structecto_1_1spore_1a1d4ad4266f0e03bcf5b3c930cb9428a9" prot="public" virt="non-virtual"><scope>ecto::spore</scope><name>set_default_val</name></member>
+      <member refid="structecto_1_1spore_1a5eb3c4df0a6b798de09a76e2efbb5fb0" prot="public" virt="non-virtual"><scope>ecto::spore</scope><name>set_doc</name></member>
+      <member refid="structecto_1_1spore_1a6b22569e73747f63644005c77d0fccd8" prot="public" virt="non-virtual"><scope>ecto::spore</scope><name>spore</name></member>
+      <member refid="structecto_1_1spore_1af45353900f648ef26ff9eb778dd61f23" prot="public" virt="non-virtual"><scope>ecto::spore</scope><name>spore</name></member>
+      <member refid="structecto_1_1spore_1a17e2ffe6861f828cad58904d20f117d4" prot="private" virt="non-virtual"><scope>ecto::spore</scope><name>tendril_</name></member>
+      <member refid="structecto_1_1spore_1aa1e4c8dec72f4671c3469b84136677e4" prot="public" virt="non-virtual"><scope>ecto::spore</scope><name>this_type</name></member>
+      <member refid="structecto_1_1spore_1a162474193fb3865f81f8b49b74858aa3" prot="public" virt="non-virtual"><scope>ecto::spore</scope><name>unspecified_bool_type</name></member>
+      <member refid="structecto_1_1spore_1ae982e7c491c3445a6b4672494c6151b7" prot="public" virt="non-virtual"><scope>ecto::spore</scope><name>user_supplied</name></member>
+      <member refid="structecto_1_1spore_1af36d72731a0e1b823de1b411c34b1a1c" prot="public" virt="non-virtual"><scope>ecto::spore</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

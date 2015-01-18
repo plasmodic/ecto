@@ -1,0 +1,1052 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="structecto_1_1plasm" kind="struct" prot="public">
+    <compoundname>ecto::plasm</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">noncopyable</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">boost::enable_shared_from_this&lt; plasm &gt;</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">noncopyable</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">boost::enable_shared_from_this&lt; plasm &gt;</basecompoundref>
+    <includes refid="plasm_8hpp" local="no">plasm.hpp</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structecto_1_1plasm_1a899b9da452ab35849f07038c90990ac3" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="structecto_1_1plasm" kindref="compound">plasm</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;plasm&gt; ecto::plasm::ptr</definition>
+        <argsstring></argsstring>
+        <name>ptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" line="148" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" bodystart="148" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structecto_1_1plasm_1afd3b9e2d4732023ab9e94553e0d66ac4" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="structecto_1_1plasm" kindref="compound">plasm</ref> const  &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;plasm const&gt; ecto::plasm::cptr</definition>
+        <argsstring></argsstring>
+        <name>cptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" line="149" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" bodystart="149" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structecto_1_1plasm_1a899b9da452ab35849f07038c90990ac3" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="structecto_1_1plasm" kindref="compound">plasm</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;plasm&gt; ecto::plasm::ptr</definition>
+        <argsstring></argsstring>
+        <name>ptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp" line="149" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp" bodystart="149" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structecto_1_1plasm_1afd3b9e2d4732023ab9e94553e0d66ac4" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="structecto_1_1plasm" kindref="compound">plasm</ref> const  &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;plasm const&gt; ecto::plasm::cptr</definition>
+        <argsstring></argsstring>
+        <name>cptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp" line="150" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp" bodystart="150" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structecto_1_1plasm_1a3fa8095e74d8f7b36a5fce7ebcd3e79c" prot="private" static="no" mutable="no">
+        <type>boost::shared_ptr&lt; impl &gt;</type>
+        <definition>boost::shared_ptr&lt; impl &gt; ecto::plasm::impl_</definition>
+        <argsstring></argsstring>
+        <name>impl_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" line="153" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" bodystart="152" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structecto_1_1plasm_1a8d074da8290587fab0ed04d5cfe3f6b1" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ecto::plasm::configured</definition>
+        <argsstring></argsstring>
+        <name>configured</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp" line="155" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="structecto_1_1plasm_1a4305f269960e8ccc92b19b2f0480b16d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend class</type>
+        <definition>boost::serialization::access</definition>
+        <argsstring></argsstring>
+        <name>boost::serialization::access</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" line="162" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" bodystart="162" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structecto_1_1plasm_1a1d4a2f7e4fa1a4ef839c7ba0316a825c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ecto::plasm::plasm</definition>
+        <argsstring>()</argsstring>
+        <name>plasm</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" line="57" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1a3000d2cb042c0875b4d5c38d33763845" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ecto::plasm::~plasm</definition>
+        <argsstring>()</argsstring>
+        <name>~plasm</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" line="58" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1a3419c720b1f839cf9b423655cf4de343" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::plasm::insert</definition>
+        <argsstring>(cell_ptr mod)</argsstring>
+        <name>insert</name>
+        <param>
+          <type><ref refid="namespaceecto_1aed1809e82b9229ea81ef9ee3438cf62c" kindref="member">cell_ptr</ref></type>
+          <declname>mod</declname>
+        </param>
+        <briefdescription>
+<para>Insert the cell into the graph so that it may be executed by a scheduler. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mod</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The cell to insert into the graph. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" line="66" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1a0ca320f5cef8372cfa713fd7991ad3b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::plasm::connect</definition>
+        <argsstring>(cell_ptr from, const std::string &amp;output, cell_ptr to, const std::string &amp;input)</argsstring>
+        <name>connect</name>
+        <param>
+          <type><ref refid="namespaceecto_1aed1809e82b9229ea81ef9ee3438cf62c" kindref="member">cell_ptr</ref></type>
+          <declname>from</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>output</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaceecto_1aed1809e82b9229ea81ef9ee3438cf62c" kindref="member">cell_ptr</ref></type>
+          <declname>to</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>input</declname>
+        </param>
+        <briefdescription>
+<para>Connect one cell to another, and populate the graph accordingly. This will throw on a type mismatch. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>from</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The from cell </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>output</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output key of the from cell </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>to</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The to cell </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>input</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The input key from the to cell. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" line="77" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1a5e187b40ce0a7d7ed9a6859452aed5ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::plasm::disconnect</definition>
+        <argsstring>(cell_ptr from, const std::string &amp;output, cell_ptr to, const std::string &amp;input)</argsstring>
+        <name>disconnect</name>
+        <param>
+          <type><ref refid="namespaceecto_1aed1809e82b9229ea81ef9ee3438cf62c" kindref="member">cell_ptr</ref></type>
+          <declname>from</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>output</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaceecto_1aed1809e82b9229ea81ef9ee3438cf62c" kindref="member">cell_ptr</ref></type>
+          <declname>to</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>input</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Disconnect a tendril from another tendril.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>from</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>output</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>to</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>input</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" line="88" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1a6350e90b6d85a218e7a84183eaed0c18" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::plasm::viz</definition>
+        <argsstring>(std::ostream &amp;out) const </argsstring>
+        <name>viz</name>
+        <param>
+          <type>std::ostream &amp;</type>
+          <declname>out</declname>
+        </param>
+        <briefdescription>
+<para>output graphviz to a stream. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the output stream. Graphviz will be in plain text format. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" line="94" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1a4586d90c908123a18dbd3a26c206f63c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string ecto::plasm::viz</definition>
+        <argsstring>() const </argsstring>
+        <name>viz</name>
+        <briefdescription>
+<para>Get a std::string graphiz of the cell. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para></para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" line="100" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1a9554edd5758b8a83ed092a81e249f64a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::plasm::check</definition>
+        <argsstring>() const </argsstring>
+        <name>check</name>
+        <briefdescription>
+<para>Check that all tags on the graph are satisfied. This will throw on errors in the graph, including, if required inputs are not connected if required outputs are not connected, if there are cycles, etc... </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" line="108" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1a4f8de02440afdad0aa395fbaea03399e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structecto_1_1graph_1_1graph__t" kindref="compound">graph::graph_t</ref> &amp;</type>
+        <definition>graph::graph_t&amp; ecto::plasm::graph</definition>
+        <argsstring>()</argsstring>
+        <name>graph</name>
+        <briefdescription>
+<para>Get the underlying boost graph that this plasm has constructed. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para></para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" line="115" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1ac6cde6d1d615e85f442ce299fdf0e7a0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="structecto_1_1graph_1_1graph__t" kindref="compound">graph::graph_t</ref> &amp;</type>
+        <definition>const graph::graph_t&amp; ecto::plasm::graph</definition>
+        <argsstring>() const </argsstring>
+        <name>graph</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" line="118" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1aaeeabeb3f78c1a7291eb14e0f705574e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t ecto::plasm::size</definition>
+        <argsstring>() const </argsstring>
+        <name>size</name>
+        <briefdescription>
+<para>Return the number of cells in the plasm (vertices in the graph) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" line="125" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1aa7724234d631563b10de07030c066e01" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="namespaceecto_1aed1809e82b9229ea81ef9ee3438cf62c" kindref="member">cell_ptr</ref> &gt;</type>
+        <definition>std::vector&lt;cell_ptr&gt; ecto::plasm::cells</definition>
+        <argsstring>() const </argsstring>
+        <name>cells</name>
+        <briefdescription>
+<para>Grab a set of all the cells from the plasm. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>a set of cells. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" line="131" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1a55d56445bd1d09b9422390fb49e81bec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::plasm::configure_all</definition>
+        <argsstring>()</argsstring>
+        <name>configure_all</name>
+        <briefdescription>
+<para>Calls configure on all modules, if configure has not already been called. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" line="136" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1a4419135c6c8dd8bb0cc7f4807a025df2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::plasm::activate_all</definition>
+        <argsstring>()</argsstring>
+        <name>activate_all</name>
+        <briefdescription>
+<para>Calls activate on all modules, if hasn&apos;t already been called. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" line="139" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1a6c10f2812f731c3787e5e22bdd80e9bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::plasm::deactivate_all</definition>
+        <argsstring>()</argsstring>
+        <name>deactivate_all</name>
+        <briefdescription>
+<para>Calls deactivate on all modules, if it hasn&apos;t already been called. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" line="141" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1a992f656fa931efc20d2cf1a97c963cec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::plasm::reset_ticks</definition>
+        <argsstring>()</argsstring>
+        <name>reset_ticks</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" line="143" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1ab0fd6bec2e5d8943363fe5aa36c1d676" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::plasm::save</definition>
+        <argsstring>(std::ostream &amp;) const </argsstring>
+        <name>save</name>
+        <param>
+          <type>std::ostream &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" line="145" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1a854400c2f46f995731e058c72a547185" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::plasm::load</definition>
+        <argsstring>(std::istream &amp;)</argsstring>
+        <name>load</name>
+        <param>
+          <type>std::istream &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" line="146" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1a1d4a2f7e4fa1a4ef839c7ba0316a825c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ecto::plasm::plasm</definition>
+        <argsstring>()</argsstring>
+        <name>plasm</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp" line="58" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1a3000d2cb042c0875b4d5c38d33763845" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ecto::plasm::~plasm</definition>
+        <argsstring>()</argsstring>
+        <name>~plasm</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp" line="59" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1a3419c720b1f839cf9b423655cf4de343" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::plasm::insert</definition>
+        <argsstring>(cell_ptr mod)</argsstring>
+        <name>insert</name>
+        <param>
+          <type><ref refid="namespaceecto_1aed1809e82b9229ea81ef9ee3438cf62c" kindref="member">cell_ptr</ref></type>
+          <declname>mod</declname>
+        </param>
+        <briefdescription>
+<para>Insert the cell into the graph so that it may be executed by a scheduler. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mod</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The cell to insert into the graph. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp" line="67" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1a0ca320f5cef8372cfa713fd7991ad3b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::plasm::connect</definition>
+        <argsstring>(cell_ptr from, const std::string &amp;output, cell_ptr to, const std::string &amp;input)</argsstring>
+        <name>connect</name>
+        <param>
+          <type><ref refid="namespaceecto_1aed1809e82b9229ea81ef9ee3438cf62c" kindref="member">cell_ptr</ref></type>
+          <declname>from</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>output</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaceecto_1aed1809e82b9229ea81ef9ee3438cf62c" kindref="member">cell_ptr</ref></type>
+          <declname>to</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>input</declname>
+        </param>
+        <briefdescription>
+<para>Connect one cell to another, and populate the graph accordingly. This will throw on a type mismatch. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>from</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The from cell </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>output</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output key of the from cell </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>to</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The to cell </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>input</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The input key from the to cell. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp" line="78" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1a5e187b40ce0a7d7ed9a6859452aed5ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::plasm::disconnect</definition>
+        <argsstring>(cell_ptr from, const std::string &amp;output, cell_ptr to, const std::string &amp;input)</argsstring>
+        <name>disconnect</name>
+        <param>
+          <type><ref refid="namespaceecto_1aed1809e82b9229ea81ef9ee3438cf62c" kindref="member">cell_ptr</ref></type>
+          <declname>from</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>output</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaceecto_1aed1809e82b9229ea81ef9ee3438cf62c" kindref="member">cell_ptr</ref></type>
+          <declname>to</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>input</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Disconnect a tendril from another tendril.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>from</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>output</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>to</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>input</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp" line="89" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1a6350e90b6d85a218e7a84183eaed0c18" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::plasm::viz</definition>
+        <argsstring>(std::ostream &amp;out) const </argsstring>
+        <name>viz</name>
+        <param>
+          <type>std::ostream &amp;</type>
+          <declname>out</declname>
+        </param>
+        <briefdescription>
+<para>output graphviz to a stream. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the output stream. Graphviz will be in plain text format. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp" line="95" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1a4586d90c908123a18dbd3a26c206f63c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string ecto::plasm::viz</definition>
+        <argsstring>() const </argsstring>
+        <name>viz</name>
+        <briefdescription>
+<para>Get a std::string graphiz of the cell. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para></para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp" line="101" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1a9554edd5758b8a83ed092a81e249f64a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::plasm::check</definition>
+        <argsstring>() const </argsstring>
+        <name>check</name>
+        <briefdescription>
+<para>Check that all tags on the graph are satisfied. This will throw on errors in the graph, including, if required inputs are not connected if required outputs are not connected, if there are cycles, etc... </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp" line="109" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1a4f8de02440afdad0aa395fbaea03399e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structecto_1_1graph_1_1graph__t" kindref="compound">graph::graph_t</ref> &amp;</type>
+        <definition>graph::graph_t&amp; ecto::plasm::graph</definition>
+        <argsstring>()</argsstring>
+        <name>graph</name>
+        <briefdescription>
+<para>Get the underlying boost graph that this plasm has constructed. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para></para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp" line="116" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1ac6cde6d1d615e85f442ce299fdf0e7a0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="structecto_1_1graph_1_1graph__t" kindref="compound">graph::graph_t</ref> &amp;</type>
+        <definition>const graph::graph_t&amp; ecto::plasm::graph</definition>
+        <argsstring>() const </argsstring>
+        <name>graph</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp" line="119" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1aaeeabeb3f78c1a7291eb14e0f705574e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t ecto::plasm::size</definition>
+        <argsstring>() const </argsstring>
+        <name>size</name>
+        <briefdescription>
+<para>Return the number of cells in the plasm (vertices in the graph) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp" line="126" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1aa7724234d631563b10de07030c066e01" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="namespaceecto_1aed1809e82b9229ea81ef9ee3438cf62c" kindref="member">cell_ptr</ref> &gt;</type>
+        <definition>std::vector&lt;cell_ptr&gt; ecto::plasm::cells</definition>
+        <argsstring>() const </argsstring>
+        <name>cells</name>
+        <briefdescription>
+<para>Grab a set of all the cells from the plasm. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>a set of cells. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp" line="132" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1a55d56445bd1d09b9422390fb49e81bec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::plasm::configure_all</definition>
+        <argsstring>()</argsstring>
+        <name>configure_all</name>
+        <briefdescription>
+<para>Calls configure on all modules, if configure has not already been called. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp" line="137" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1a4419135c6c8dd8bb0cc7f4807a025df2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::plasm::activate_all</definition>
+        <argsstring>()</argsstring>
+        <name>activate_all</name>
+        <briefdescription>
+<para>Calls activate on all modules, if hasn&apos;t already been called. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp" line="140" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1a6c10f2812f731c3787e5e22bdd80e9bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::plasm::deactivate_all</definition>
+        <argsstring>()</argsstring>
+        <name>deactivate_all</name>
+        <briefdescription>
+<para>Calls deactivate on all modules, if it hasn&apos;t already been called. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp" line="142" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1a992f656fa931efc20d2cf1a97c963cec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::plasm::reset_ticks</definition>
+        <argsstring>()</argsstring>
+        <name>reset_ticks</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp" line="144" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1ab0fd6bec2e5d8943363fe5aa36c1d676" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::plasm::save</definition>
+        <argsstring>(std::ostream &amp;) const </argsstring>
+        <name>save</name>
+        <param>
+          <type>std::ostream &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp" line="146" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1a854400c2f46f995731e058c72a547185" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::plasm::load</definition>
+        <argsstring>(std::istream &amp;)</argsstring>
+        <name>load</name>
+        <param>
+          <type>std::istream &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp" line="147" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="structecto_1_1plasm_1a420eb464746042e8247a69828e6782af" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Archive</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void ecto::plasm::save</definition>
+        <argsstring>(Archive &amp;ar, const unsigned int) const </argsstring>
+        <name>save</name>
+        <param>
+          <type>Archive &amp;</type>
+          <declname>ar</declname>
+        </param>
+        <param>
+          <type>const unsigned</type>
+          <declname>int</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" line="157" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1ae6540bca37d0980ec24b0b75061e124e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Archive</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void ecto::plasm::load</definition>
+        <argsstring>(Archive &amp;ar, const unsigned int)</argsstring>
+        <name>load</name>
+        <param>
+          <type>Archive &amp;</type>
+          <declname>ar</declname>
+        </param>
+        <param>
+          <type>const unsigned</type>
+          <declname>int</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" line="161" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1ac443cf0a58324a8003e1c9fd3b49b428" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ecto::plasm::BOOST_SERIALIZATION_SPLIT_MEMBER</definition>
+        <argsstring>()</argsstring>
+        <name>BOOST_SERIALIZATION_SPLIT_MEMBER</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" line="163" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1a420eb464746042e8247a69828e6782af" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Archive</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void ecto::plasm::save</definition>
+        <argsstring>(Archive &amp;ar, const unsigned int) const </argsstring>
+        <name>save</name>
+        <param>
+          <type>Archive &amp;</type>
+          <declname>ar</declname>
+        </param>
+        <param>
+          <type>const unsigned</type>
+          <declname>int</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp" line="159" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1ae6540bca37d0980ec24b0b75061e124e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Archive</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void ecto::plasm::load</definition>
+        <argsstring>(Archive &amp;ar, const unsigned int)</argsstring>
+        <name>load</name>
+        <param>
+          <type>Archive &amp;</type>
+          <declname>ar</declname>
+        </param>
+        <param>
+          <type>const unsigned</type>
+          <declname>int</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp" line="163" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1plasm_1ac443cf0a58324a8003e1c9fd3b49b428" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ecto::plasm::BOOST_SERIALIZATION_SPLIT_MEMBER</definition>
+        <argsstring>()</argsstring>
+        <name>BOOST_SERIALIZATION_SPLIT_MEMBER</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp" line="165" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The plasm helps construct the graph structure in ecto. It enforces several invariants that are necessary for scheduling DAGs and is used by all the ecto::schedulers to enable execution of modules that are connected in the graph. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="397">
+        <label>boost::enable_shared_from_this&lt; plasm &gt;</label>
+      </node>
+      <node id="395">
+        <label>ecto::plasm</label>
+        <link refid="structecto_1_1plasm"/>
+        <childnode refid="396" relation="public-inheritance">
+        </childnode>
+        <childnode refid="397" relation="public-inheritance">
+        </childnode>
+        <childnode refid="396" relation="public-inheritance">
+        </childnode>
+        <childnode refid="397" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="396">
+        <label>noncopyable</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="400">
+        <label>boost::enable_shared_from_this&lt; plasm &gt;</label>
+      </node>
+      <node id="398">
+        <label>ecto::plasm</label>
+        <link refid="structecto_1_1plasm"/>
+        <childnode refid="399" relation="public-inheritance">
+        </childnode>
+        <childnode refid="400" relation="public-inheritance">
+        </childnode>
+        <childnode refid="399" relation="public-inheritance">
+        </childnode>
+        <childnode refid="400" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="399">
+        <label>noncopyable</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" line="55" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp~" bodystart="53" bodyend="165"/>
+    <listofallmembers>
+      <member refid="structecto_1_1plasm_1a4419135c6c8dd8bb0cc7f4807a025df2" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>activate_all</name></member>
+      <member refid="structecto_1_1plasm_1a4419135c6c8dd8bb0cc7f4807a025df2" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>activate_all</name></member>
+      <member refid="structecto_1_1plasm_1a4305f269960e8ccc92b19b2f0480b16d" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>boost::serialization::access</name></member>
+      <member refid="structecto_1_1plasm_1ac443cf0a58324a8003e1c9fd3b49b428" prot="private" virt="non-virtual"><scope>ecto::plasm</scope><name>BOOST_SERIALIZATION_SPLIT_MEMBER</name></member>
+      <member refid="structecto_1_1plasm_1ac443cf0a58324a8003e1c9fd3b49b428" prot="private" virt="non-virtual"><scope>ecto::plasm</scope><name>BOOST_SERIALIZATION_SPLIT_MEMBER</name></member>
+      <member refid="structecto_1_1plasm_1aa7724234d631563b10de07030c066e01" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>cells</name></member>
+      <member refid="structecto_1_1plasm_1aa7724234d631563b10de07030c066e01" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>cells</name></member>
+      <member refid="structecto_1_1plasm_1a9554edd5758b8a83ed092a81e249f64a" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>check</name></member>
+      <member refid="structecto_1_1plasm_1a9554edd5758b8a83ed092a81e249f64a" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>check</name></member>
+      <member refid="structecto_1_1plasm_1a55d56445bd1d09b9422390fb49e81bec" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>configure_all</name></member>
+      <member refid="structecto_1_1plasm_1a55d56445bd1d09b9422390fb49e81bec" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>configure_all</name></member>
+      <member refid="structecto_1_1plasm_1a8d074da8290587fab0ed04d5cfe3f6b1" prot="private" virt="non-virtual"><scope>ecto::plasm</scope><name>configured</name></member>
+      <member refid="structecto_1_1plasm_1a0ca320f5cef8372cfa713fd7991ad3b2" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>connect</name></member>
+      <member refid="structecto_1_1plasm_1a0ca320f5cef8372cfa713fd7991ad3b2" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>connect</name></member>
+      <member refid="structecto_1_1plasm_1afd3b9e2d4732023ab9e94553e0d66ac4" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>cptr</name></member>
+      <member refid="structecto_1_1plasm_1afd3b9e2d4732023ab9e94553e0d66ac4" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>cptr</name></member>
+      <member refid="structecto_1_1plasm_1a6c10f2812f731c3787e5e22bdd80e9bc" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>deactivate_all</name></member>
+      <member refid="structecto_1_1plasm_1a6c10f2812f731c3787e5e22bdd80e9bc" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>deactivate_all</name></member>
+      <member refid="structecto_1_1plasm_1a5e187b40ce0a7d7ed9a6859452aed5ca" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>disconnect</name></member>
+      <member refid="structecto_1_1plasm_1a5e187b40ce0a7d7ed9a6859452aed5ca" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>disconnect</name></member>
+      <member refid="structecto_1_1plasm_1a4f8de02440afdad0aa395fbaea03399e" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>graph</name></member>
+      <member refid="structecto_1_1plasm_1ac6cde6d1d615e85f442ce299fdf0e7a0" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>graph</name></member>
+      <member refid="structecto_1_1plasm_1a4f8de02440afdad0aa395fbaea03399e" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>graph</name></member>
+      <member refid="structecto_1_1plasm_1ac6cde6d1d615e85f442ce299fdf0e7a0" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>graph</name></member>
+      <member refid="structecto_1_1plasm_1a3fa8095e74d8f7b36a5fce7ebcd3e79c" prot="private" virt="non-virtual"><scope>ecto::plasm</scope><name>impl_</name></member>
+      <member refid="structecto_1_1plasm_1a3419c720b1f839cf9b423655cf4de343" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>insert</name></member>
+      <member refid="structecto_1_1plasm_1a3419c720b1f839cf9b423655cf4de343" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>insert</name></member>
+      <member refid="structecto_1_1plasm_1a854400c2f46f995731e058c72a547185" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>load</name></member>
+      <member refid="structecto_1_1plasm_1ae6540bca37d0980ec24b0b75061e124e" prot="private" virt="non-virtual"><scope>ecto::plasm</scope><name>load</name></member>
+      <member refid="structecto_1_1plasm_1a854400c2f46f995731e058c72a547185" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>load</name></member>
+      <member refid="structecto_1_1plasm_1ae6540bca37d0980ec24b0b75061e124e" prot="private" virt="non-virtual"><scope>ecto::plasm</scope><name>load</name></member>
+      <member refid="structecto_1_1plasm_1a1d4a2f7e4fa1a4ef839c7ba0316a825c" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>plasm</name></member>
+      <member refid="structecto_1_1plasm_1a1d4a2f7e4fa1a4ef839c7ba0316a825c" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>plasm</name></member>
+      <member refid="structecto_1_1plasm_1a899b9da452ab35849f07038c90990ac3" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>ptr</name></member>
+      <member refid="structecto_1_1plasm_1a899b9da452ab35849f07038c90990ac3" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>ptr</name></member>
+      <member refid="structecto_1_1plasm_1a992f656fa931efc20d2cf1a97c963cec" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>reset_ticks</name></member>
+      <member refid="structecto_1_1plasm_1a992f656fa931efc20d2cf1a97c963cec" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>reset_ticks</name></member>
+      <member refid="structecto_1_1plasm_1ab0fd6bec2e5d8943363fe5aa36c1d676" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>save</name></member>
+      <member refid="structecto_1_1plasm_1a420eb464746042e8247a69828e6782af" prot="private" virt="non-virtual"><scope>ecto::plasm</scope><name>save</name></member>
+      <member refid="structecto_1_1plasm_1ab0fd6bec2e5d8943363fe5aa36c1d676" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>save</name></member>
+      <member refid="structecto_1_1plasm_1a420eb464746042e8247a69828e6782af" prot="private" virt="non-virtual"><scope>ecto::plasm</scope><name>save</name></member>
+      <member refid="structecto_1_1plasm_1aaeeabeb3f78c1a7291eb14e0f705574e" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>size</name></member>
+      <member refid="structecto_1_1plasm_1aaeeabeb3f78c1a7291eb14e0f705574e" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>size</name></member>
+      <member refid="structecto_1_1plasm_1a6350e90b6d85a218e7a84183eaed0c18" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>viz</name></member>
+      <member refid="structecto_1_1plasm_1a4586d90c908123a18dbd3a26c206f63c" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>viz</name></member>
+      <member refid="structecto_1_1plasm_1a6350e90b6d85a218e7a84183eaed0c18" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>viz</name></member>
+      <member refid="structecto_1_1plasm_1a4586d90c908123a18dbd3a26c206f63c" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>viz</name></member>
+      <member refid="structecto_1_1plasm_1a3000d2cb042c0875b4d5c38d33763845" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>~plasm</name></member>
+      <member refid="structecto_1_1plasm_1a3000d2cb042c0875b4d5c38d33763845" prot="public" virt="non-virtual"><scope>ecto::plasm</scope><name>~plasm</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

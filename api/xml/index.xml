@@ -1,0 +1,1258 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.6">
+  <compound refid="classecto_1_1atomic" kind="class"><name>ecto::atomic</name>
+    <member refid="classecto_1_1atomic_1ac5ba45af623c7bc47e6918e290e39c67" kind="variable"><name>value</name></member>
+    <member refid="classecto_1_1atomic_1a52a121e21f9449371998dbccaca0cbde" kind="variable"><name>mtx</name></member>
+    <member refid="classecto_1_1atomic_1ab905c76c87a64092b9c4217c6cc2b00d" kind="function"><name>atomic</name></member>
+    <member refid="classecto_1_1atomic_1a805df2159911558f653edbe19a789b51" kind="function"><name>atomic</name></member>
+    <member refid="classecto_1_1atomic_1aa98175bf31ad55fe61e5d3d324a4f664" kind="function"><name>get</name></member>
+  </compound>
+  <compound refid="structecto_1_1bounded" kind="struct"><name>ecto::bounded</name>
+    <member refid="structecto_1_1bounded_1a92b4f90f8588d99f0d6d3216565c3f82" kind="variable"><name>value</name></member>
+    <member refid="structecto_1_1bounded_1a1809a5fa7b57a025107b0c12e6a293ae" kind="variable"><name>min</name></member>
+    <member refid="structecto_1_1bounded_1a8df1ae15c7a45a33bb17f8482c81418b" kind="variable"><name>max</name></member>
+    <member refid="structecto_1_1bounded_1ab7ddb1af2438b94a3563f00188d02690" kind="variable"><name>has_bounds</name></member>
+    <member refid="structecto_1_1bounded_1a2b27e0fe3fd9bd4392fe0422328cdc21" kind="function"><name>bounded</name></member>
+    <member refid="structecto_1_1bounded_1a77b53af4586fb05eb2f9e4b0f350b42d" kind="function"><name>bounded</name></member>
+    <member refid="structecto_1_1bounded_1a3c8158a8581de90b22f1f702b47d4c78" kind="function"><name>operator=</name></member>
+    <member refid="structecto_1_1bounded_1aff81e7792f2b05be160cd0d8cde73023" kind="function"><name>set</name></member>
+    <member refid="structecto_1_1bounded_1a7d73cabf049b631f8abc9973a2bff183" kind="function"><name>check</name></member>
+    <member refid="structecto_1_1bounded_1a929439a21225157ab7ba7f4427dc42ad" kind="function"><name>bounds</name></member>
+    <member refid="structecto_1_1bounded_1ae032eb9fc9ba64687a249f50a7bdf877" kind="function"><name>operator T</name></member>
+  </compound>
+  <compound refid="structecto_1_1tendril_1_1Caller" kind="struct"><name>ecto::tendril::Caller</name>
+    <member refid="structecto_1_1tendril_1_1Caller_1a846333ac5c22cfb6eafb1c2240c0c623" kind="typedef"><name>CbT</name></member>
+    <member refid="structecto_1_1tendril_1_1Caller_1afecdbc09ca504c16292a6365ab1cd950" kind="variable"><name>cb</name></member>
+    <member refid="structecto_1_1tendril_1_1Caller_1a84b71a5526ff59dcbd6cb7a102f8d9db" kind="function"><name>Caller</name></member>
+    <member refid="structecto_1_1tendril_1_1Caller_1a19099e68a2059823575e71f45b2c0b20" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="structecto_1_1cell" kind="struct"><name>ecto::cell</name>
+    <member refid="structecto_1_1cell_1af2cab9d2bc012088c4f58c40da57a862" kind="typedef"><name>ptr</name></member>
+    <member refid="structecto_1_1cell_1af2cab9d2bc012088c4f58c40da57a862" kind="typedef"><name>ptr</name></member>
+    <member refid="structecto_1_1cell_1ae00a91199c758cf7c24dcf0ecdf70a27" kind="variable"><name>parameters</name></member>
+    <member refid="structecto_1_1cell_1a65099b0458a7761b8bfa7a1ddc17e92f" kind="variable"><name>inputs</name></member>
+    <member refid="structecto_1_1cell_1a93951743b603faba35312ebdb07ceb22" kind="variable"><name>outputs</name></member>
+    <member refid="structecto_1_1cell_1a0ecc893a5427877548d0c39a208a5a26" kind="variable"><name>strand_</name></member>
+    <member refid="structecto_1_1cell_1a2bf4e65c7a699624c61d3b55cfac45ed" kind="variable"><name>instance_name_</name></member>
+    <member refid="structecto_1_1cell_1a187d36610ae8035e9f589de06ecc0d0a" kind="variable"><name>configured_</name></member>
+    <member refid="structecto_1_1cell_1ad270620c006f30471b2371feb38b6a03" kind="variable"><name>activated_</name></member>
+    <member refid="structecto_1_1cell_1a9a9d7fa3bb72fd74073a997bfb6cbad8" kind="variable"><name>process_connected_inputs_only_</name></member>
+    <member refid="structecto_1_1cell_1a782c9d0f521f8a34c8eed309d0d8d79a" kind="function"><name>cell</name></member>
+    <member refid="structecto_1_1cell_1a98748014df1b1a4fd3fbb47f6adc8c5e" kind="function"><name>~cell</name></member>
+    <member refid="structecto_1_1cell_1a5c3c204f531de15920cb9d3db3ecfc4c" kind="function"><name>declare_params</name></member>
+    <member refid="structecto_1_1cell_1af6c3782ed0d1c258bcf5050b4af272b4" kind="function"><name>declare_io</name></member>
+    <member refid="structecto_1_1cell_1a30d48d21d6ffa86af4888f78e92241af" kind="function"><name>configure</name></member>
+    <member refid="structecto_1_1cell_1a0416d7265db282a18202b58636be7165" kind="function"><name>activate</name></member>
+    <member refid="structecto_1_1cell_1ab988f785fb943af3ff48c2d6f67a07aa" kind="function"><name>deactivate</name></member>
+    <member refid="structecto_1_1cell_1a06abb010763ff7aeaaf2b28be4a6424a" kind="function"><name>start</name></member>
+    <member refid="structecto_1_1cell_1abac52b774d350b02dc99a55c64b94bcd" kind="function"><name>stop</name></member>
+    <member refid="structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3" kind="function"><name>process</name></member>
+    <member refid="structecto_1_1cell_1a407e320190ee98c1a1a3042ac3c38f0e" kind="function"><name>process_with_only_these_inputs</name></member>
+    <member refid="structecto_1_1cell_1ae3b84af61e78dab25f66a66773d5c5df" kind="function"><name>type</name></member>
+    <member refid="structecto_1_1cell_1a931fbc02fff66a58684ab25e00dbb2f8" kind="function"><name>name</name></member>
+    <member refid="structecto_1_1cell_1a3956efb238f50a6983b86f430c47ca05" kind="function"><name>name</name></member>
+    <member refid="structecto_1_1cell_1aefa443962201caebb08d1a3163730639" kind="function"><name>short_doc</name></member>
+    <member refid="structecto_1_1cell_1a49d510eec19d352c5729e6a2fd149340" kind="function"><name>short_doc</name></member>
+    <member refid="structecto_1_1cell_1af32a9e2113b7afcb5b225bdc3c234e8c" kind="function"><name>reset_strand</name></member>
+    <member refid="structecto_1_1cell_1ae0009fc4a4d12d400126f455396f5c9f" kind="function"><name>set_strand</name></member>
+    <member refid="structecto_1_1cell_1a486454d7466c5f0373ecb42dd4e97b2f" kind="function"><name>gen_doc</name></member>
+    <member refid="structecto_1_1cell_1aa03c0f569bb4b14e81f4d2a8747273e5" kind="function"><name>verify_params</name></member>
+    <member refid="structecto_1_1cell_1aed712e80344ce04dbb9105bb6a1aa53a" kind="function"><name>verify_inputs</name></member>
+    <member refid="structecto_1_1cell_1ab1dfafd237e0adf273af65d549e7516e" kind="function"><name>process_connected_inputs_only</name></member>
+    <member refid="structecto_1_1cell_1a4c42ef400acac92d825e7dc25ff53bdc" kind="function"><name>set_process_connected_inputs_only</name></member>
+    <member refid="structecto_1_1cell_1a213dabd285300f5d4c7e0f5fd6142e81" kind="function"><name>clone</name></member>
+    <member refid="structecto_1_1cell_1ab9a6c3fd8f76289f338a9e05368b1aff" kind="function"><name>init</name></member>
+    <member refid="structecto_1_1cell_1a782c9d0f521f8a34c8eed309d0d8d79a" kind="function"><name>cell</name></member>
+    <member refid="structecto_1_1cell_1a98748014df1b1a4fd3fbb47f6adc8c5e" kind="function"><name>~cell</name></member>
+    <member refid="structecto_1_1cell_1a5c3c204f531de15920cb9d3db3ecfc4c" kind="function"><name>declare_params</name></member>
+    <member refid="structecto_1_1cell_1af6c3782ed0d1c258bcf5050b4af272b4" kind="function"><name>declare_io</name></member>
+    <member refid="structecto_1_1cell_1a30d48d21d6ffa86af4888f78e92241af" kind="function"><name>configure</name></member>
+    <member refid="structecto_1_1cell_1a0416d7265db282a18202b58636be7165" kind="function"><name>activate</name></member>
+    <member refid="structecto_1_1cell_1ab988f785fb943af3ff48c2d6f67a07aa" kind="function"><name>deactivate</name></member>
+    <member refid="structecto_1_1cell_1a06abb010763ff7aeaaf2b28be4a6424a" kind="function"><name>start</name></member>
+    <member refid="structecto_1_1cell_1abac52b774d350b02dc99a55c64b94bcd" kind="function"><name>stop</name></member>
+    <member refid="structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3" kind="function"><name>process</name></member>
+    <member refid="structecto_1_1cell_1ae3b84af61e78dab25f66a66773d5c5df" kind="function"><name>type</name></member>
+    <member refid="structecto_1_1cell_1a931fbc02fff66a58684ab25e00dbb2f8" kind="function"><name>name</name></member>
+    <member refid="structecto_1_1cell_1a3956efb238f50a6983b86f430c47ca05" kind="function"><name>name</name></member>
+    <member refid="structecto_1_1cell_1aefa443962201caebb08d1a3163730639" kind="function"><name>short_doc</name></member>
+    <member refid="structecto_1_1cell_1a49d510eec19d352c5729e6a2fd149340" kind="function"><name>short_doc</name></member>
+    <member refid="structecto_1_1cell_1af32a9e2113b7afcb5b225bdc3c234e8c" kind="function"><name>reset_strand</name></member>
+    <member refid="structecto_1_1cell_1ae0009fc4a4d12d400126f455396f5c9f" kind="function"><name>set_strand</name></member>
+    <member refid="structecto_1_1cell_1a486454d7466c5f0373ecb42dd4e97b2f" kind="function"><name>gen_doc</name></member>
+    <member refid="structecto_1_1cell_1aa03c0f569bb4b14e81f4d2a8747273e5" kind="function"><name>verify_params</name></member>
+    <member refid="structecto_1_1cell_1aed712e80344ce04dbb9105bb6a1aa53a" kind="function"><name>verify_inputs</name></member>
+    <member refid="structecto_1_1cell_1a213dabd285300f5d4c7e0f5fd6142e81" kind="function"><name>clone</name></member>
+    <member refid="structecto_1_1cell_1ab9a6c3fd8f76289f338a9e05368b1aff" kind="function"><name>init</name></member>
+    <member refid="structecto_1_1cell_1abcf3cc29703214a7ede63d652e17ee96" kind="function"><name>dispatch_declare_params</name></member>
+    <member refid="structecto_1_1cell_1acb4cdb70f2db329ba9c615d74c63a4b2" kind="function"><name>dispatch_declare_io</name></member>
+    <member refid="structecto_1_1cell_1a19c7c679dededd37ace918bf0ff31cd3" kind="function"><name>dispatch_configure</name></member>
+    <member refid="structecto_1_1cell_1aa345ec700e5e213364c7bb20571cd78d" kind="function"><name>dispatch_activate</name></member>
+    <member refid="structecto_1_1cell_1a4b5f111fc7b90dccce0cd70e28c9be62" kind="function"><name>dispatch_deactivate</name></member>
+    <member refid="structecto_1_1cell_1a390bd83cfdff120523efc5c3e76bc3e5" kind="function"><name>dispatch_process</name></member>
+    <member refid="structecto_1_1cell_1ab5c75358dd32fa811116654bdc76385b" kind="function"><name>dispatch_start</name></member>
+    <member refid="structecto_1_1cell_1a65ff7141e927a7115a785478a03b94bc" kind="function"><name>dispatch_stop</name></member>
+    <member refid="structecto_1_1cell_1a456b56e3291f5e2bb68ce31a4a43ece5" kind="function"><name>dispatch_name</name></member>
+    <member refid="structecto_1_1cell_1a7beccd749c33bd8b4c5827598e8fe5a5" kind="function"><name>dispatch_clone</name></member>
+    <member refid="structecto_1_1cell_1a400b8aecf15588cfb21d712fbb000e8a" kind="function"><name>dispatch_short_doc</name></member>
+    <member refid="structecto_1_1cell_1a407d24db843ffe12ac57c9a8827a9fe8" kind="function"><name>dispatch_short_doc</name></member>
+    <member refid="structecto_1_1cell_1abcf3cc29703214a7ede63d652e17ee96" kind="function"><name>dispatch_declare_params</name></member>
+    <member refid="structecto_1_1cell_1acb4cdb70f2db329ba9c615d74c63a4b2" kind="function"><name>dispatch_declare_io</name></member>
+    <member refid="structecto_1_1cell_1a19c7c679dededd37ace918bf0ff31cd3" kind="function"><name>dispatch_configure</name></member>
+    <member refid="structecto_1_1cell_1aa345ec700e5e213364c7bb20571cd78d" kind="function"><name>dispatch_activate</name></member>
+    <member refid="structecto_1_1cell_1a4b5f111fc7b90dccce0cd70e28c9be62" kind="function"><name>dispatch_deactivate</name></member>
+    <member refid="structecto_1_1cell_1a390bd83cfdff120523efc5c3e76bc3e5" kind="function"><name>dispatch_process</name></member>
+    <member refid="structecto_1_1cell_1ab5c75358dd32fa811116654bdc76385b" kind="function"><name>dispatch_start</name></member>
+    <member refid="structecto_1_1cell_1a65ff7141e927a7115a785478a03b94bc" kind="function"><name>dispatch_stop</name></member>
+    <member refid="structecto_1_1cell_1a456b56e3291f5e2bb68ce31a4a43ece5" kind="function"><name>dispatch_name</name></member>
+    <member refid="structecto_1_1cell_1a7beccd749c33bd8b4c5827598e8fe5a5" kind="function"><name>dispatch_clone</name></member>
+    <member refid="structecto_1_1cell_1a400b8aecf15588cfb21d712fbb000e8a" kind="function"><name>dispatch_short_doc</name></member>
+    <member refid="structecto_1_1cell_1a407d24db843ffe12ac57c9a8827a9fe8" kind="function"><name>dispatch_short_doc</name></member>
+    <member refid="structecto_1_1cell_1ac0ae6a72cecf48916bb6dd1b6393d1b3" kind="function"><name>cell</name></member>
+    <member refid="structecto_1_1cell_1ac0ae6a72cecf48916bb6dd1b6393d1b3" kind="function"><name>cell</name></member>
+  </compound>
+  <compound refid="structecto_1_1cell__" kind="struct"><name>ecto::cell_</name>
+    <member refid="structecto_1_1cell___1a26d9e255a2ba0335c5e90fd04efa6bfa" kind="typedef"><name>ptr</name></member>
+    <member refid="structecto_1_1cell___1a3e48e52421d132bb2bb4e343f771abeb" kind="typedef"><name>not_implemented</name></member>
+    <member refid="structecto_1_1cell___1a63c5c3dd95630a508017730ee345c23a" kind="typedef"><name>implemented</name></member>
+    <member refid="structecto_1_1cell___1ab7b111eb2672ae4eaacc668852b8b89f" kind="typedef"><name>has_declare_params</name></member>
+    <member refid="structecto_1_1cell___1a10ab0d3f85e194d548beb3251416a569" kind="typedef"><name>has_declare_io</name></member>
+    <member refid="structecto_1_1cell___1a26d9e255a2ba0335c5e90fd04efa6bfa" kind="typedef"><name>ptr</name></member>
+    <member refid="structecto_1_1cell___1a3e48e52421d132bb2bb4e343f771abeb" kind="typedef"><name>not_implemented</name></member>
+    <member refid="structecto_1_1cell___1a63c5c3dd95630a508017730ee345c23a" kind="typedef"><name>implemented</name></member>
+    <member refid="structecto_1_1cell___1ab7b111eb2672ae4eaacc668852b8b89f" kind="typedef"><name>has_declare_params</name></member>
+    <member refid="structecto_1_1cell___1a10ab0d3f85e194d548beb3251416a569" kind="typedef"><name>has_declare_io</name></member>
+    <member refid="structecto_1_1cell___1a6a5b6bd083a48acd35ffcf83dacff2f1" kind="variable"><name>SHORT_DOC</name></member>
+    <member refid="structecto_1_1cell___1aaa9154887542b8d7152f8199e9c6c9bd" kind="variable"><name>CELL_NAME</name></member>
+    <member refid="structecto_1_1cell___1ab81cf6649132223f620b739a57db04db" kind="variable"><name>MODULE_NAME</name></member>
+    <member refid="structecto_1_1cell___1a26e158738e4e4c8f0ddb64efce30d8d3" kind="variable"><name>CELL_TYPE_NAME</name></member>
+    <member refid="structecto_1_1cell___1aefbb595c18abd0479e06a6f879dac961" kind="variable"><name>impl_</name></member>
+    <member refid="structecto_1_1cell___1a8c5059153f9529bf895e3d82f05f5d7e" kind="function"><name>cell_</name></member>
+    <member refid="structecto_1_1cell___1a30176d85396dd679e227a272918f422f" kind="function"><name>~cell_</name></member>
+    <member refid="structecto_1_1cell___1a0e435a14e4cc1d5cd7d80a16f2776565" kind="function"><name>dispatch_declare_params</name></member>
+    <member refid="structecto_1_1cell___1ad95920d295860b791e3fa733fb0745db" kind="function"><name>dispatch_declare_io</name></member>
+    <member refid="structecto_1_1cell___1a53ab13ad9e8dd9fef55377d85674ff5a" kind="function"><name>configure</name></member>
+    <member refid="structecto_1_1cell___1acd3caafa6429801f4e121b469bd152a5" kind="function"><name>configure</name></member>
+    <member refid="structecto_1_1cell___1a953e526cefd3c419a01717740eab9227" kind="function"><name>dispatch_configure</name></member>
+    <member refid="structecto_1_1cell___1a06dd6747607ad7da98f104bb258fbcbb" kind="function"><name>activate</name></member>
+    <member refid="structecto_1_1cell___1a8c0319bad42186d2b79a32f7ade1376a" kind="function"><name>activate</name></member>
+    <member refid="structecto_1_1cell___1a31437fcb5a15e57e8287719f48cecbdd" kind="function"><name>dispatch_activate</name></member>
+    <member refid="structecto_1_1cell___1aa553319fd69477ddf5c2c45cb5c5e3d2" kind="function"><name>deactivate</name></member>
+    <member refid="structecto_1_1cell___1ab0dc3bd8a6bf42f620a654134df831d3" kind="function"><name>deactivate</name></member>
+    <member refid="structecto_1_1cell___1a71463eb5e248d29814066904e7f0d515" kind="function"><name>dispatch_deactivate</name></member>
+    <member refid="structecto_1_1cell___1aeb9a98d085805631cc3a3b09c277d5be" kind="function"><name>process</name></member>
+    <member refid="structecto_1_1cell___1a310050d75c3a286f013fa16652af6e17" kind="function"><name>process</name></member>
+    <member refid="structecto_1_1cell___1a1ddd0142b998f0de06a7992c5db27f16" kind="function"><name>dispatch_process</name></member>
+    <member refid="structecto_1_1cell___1a155401641b4deda52ad3eb8277a9d77d" kind="function"><name>start</name></member>
+    <member refid="structecto_1_1cell___1afbca5bafc2261f303413fd431f0b12b6" kind="function"><name>start</name></member>
+    <member refid="structecto_1_1cell___1af6929fe6c16db59235793d972ea20ff8" kind="function"><name>dispatch_start</name></member>
+    <member refid="structecto_1_1cell___1a689e109200f31da6edb491e28b101622" kind="function"><name>stop</name></member>
+    <member refid="structecto_1_1cell___1ac6da640a23124d5a154884cc6e45531c" kind="function"><name>stop</name></member>
+    <member refid="structecto_1_1cell___1a0951afcee7f4aa52f957f1a6ecc2bfb7" kind="function"><name>dispatch_stop</name></member>
+    <member refid="structecto_1_1cell___1a288dac8bba40036b3f3e6b0641833039" kind="function"><name>dispatch_name</name></member>
+    <member refid="structecto_1_1cell___1aea843d10de8a002ada9a29bec2ecb815" kind="function"><name>dispatch_short_doc</name></member>
+    <member refid="structecto_1_1cell___1a8d9ca18e234396fcdc1875507d3e11a8" kind="function"><name>dispatch_short_doc</name></member>
+    <member refid="structecto_1_1cell___1ae2868bb59ddb378cbe7b98fd4e776930" kind="function"><name>dispatch_clone</name></member>
+    <member refid="structecto_1_1cell___1a06749143e390dcc5fd90f5076620108c" kind="function"><name>init</name></member>
+    <member refid="structecto_1_1cell___1a625990e6ac4da1df9be69681881d3e28" kind="function"><name>impl</name></member>
+    <member refid="structecto_1_1cell___1a05fe9ed5d606a54f761c104f45994a5e" kind="function"><name>impl</name></member>
+    <member refid="structecto_1_1cell___1a8c5059153f9529bf895e3d82f05f5d7e" kind="function"><name>cell_</name></member>
+    <member refid="structecto_1_1cell___1a30176d85396dd679e227a272918f422f" kind="function"><name>~cell_</name></member>
+    <member refid="structecto_1_1cell___1a0e435a14e4cc1d5cd7d80a16f2776565" kind="function"><name>dispatch_declare_params</name></member>
+    <member refid="structecto_1_1cell___1ad95920d295860b791e3fa733fb0745db" kind="function"><name>dispatch_declare_io</name></member>
+    <member refid="structecto_1_1cell___1a53ab13ad9e8dd9fef55377d85674ff5a" kind="function"><name>configure</name></member>
+    <member refid="structecto_1_1cell___1acd3caafa6429801f4e121b469bd152a5" kind="function"><name>configure</name></member>
+    <member refid="structecto_1_1cell___1a953e526cefd3c419a01717740eab9227" kind="function"><name>dispatch_configure</name></member>
+    <member refid="structecto_1_1cell___1a06dd6747607ad7da98f104bb258fbcbb" kind="function"><name>activate</name></member>
+    <member refid="structecto_1_1cell___1a8c0319bad42186d2b79a32f7ade1376a" kind="function"><name>activate</name></member>
+    <member refid="structecto_1_1cell___1a31437fcb5a15e57e8287719f48cecbdd" kind="function"><name>dispatch_activate</name></member>
+    <member refid="structecto_1_1cell___1aa553319fd69477ddf5c2c45cb5c5e3d2" kind="function"><name>deactivate</name></member>
+    <member refid="structecto_1_1cell___1ab0dc3bd8a6bf42f620a654134df831d3" kind="function"><name>deactivate</name></member>
+    <member refid="structecto_1_1cell___1a71463eb5e248d29814066904e7f0d515" kind="function"><name>dispatch_deactivate</name></member>
+    <member refid="structecto_1_1cell___1aeb9a98d085805631cc3a3b09c277d5be" kind="function"><name>process</name></member>
+    <member refid="structecto_1_1cell___1a310050d75c3a286f013fa16652af6e17" kind="function"><name>process</name></member>
+    <member refid="structecto_1_1cell___1a1ddd0142b998f0de06a7992c5db27f16" kind="function"><name>dispatch_process</name></member>
+    <member refid="structecto_1_1cell___1a155401641b4deda52ad3eb8277a9d77d" kind="function"><name>start</name></member>
+    <member refid="structecto_1_1cell___1afbca5bafc2261f303413fd431f0b12b6" kind="function"><name>start</name></member>
+    <member refid="structecto_1_1cell___1af6929fe6c16db59235793d972ea20ff8" kind="function"><name>dispatch_start</name></member>
+    <member refid="structecto_1_1cell___1a689e109200f31da6edb491e28b101622" kind="function"><name>stop</name></member>
+    <member refid="structecto_1_1cell___1ac6da640a23124d5a154884cc6e45531c" kind="function"><name>stop</name></member>
+    <member refid="structecto_1_1cell___1a0951afcee7f4aa52f957f1a6ecc2bfb7" kind="function"><name>dispatch_stop</name></member>
+    <member refid="structecto_1_1cell___1a288dac8bba40036b3f3e6b0641833039" kind="function"><name>dispatch_name</name></member>
+    <member refid="structecto_1_1cell___1aea843d10de8a002ada9a29bec2ecb815" kind="function"><name>dispatch_short_doc</name></member>
+    <member refid="structecto_1_1cell___1a8d9ca18e234396fcdc1875507d3e11a8" kind="function"><name>dispatch_short_doc</name></member>
+    <member refid="structecto_1_1cell___1ae2868bb59ddb378cbe7b98fd4e776930" kind="function"><name>dispatch_clone</name></member>
+    <member refid="structecto_1_1cell___1a06749143e390dcc5fd90f5076620108c" kind="function"><name>init</name></member>
+    <member refid="structecto_1_1cell___1a625990e6ac4da1df9be69681881d3e28" kind="function"><name>impl</name></member>
+    <member refid="structecto_1_1cell___1a05fe9ed5d606a54f761c104f45994a5e" kind="function"><name>impl</name></member>
+    <member refid="structecto_1_1cell___1a6a36edc8e9eddadfe6486460bab93c93" kind="function"><name>declare_params</name></member>
+    <member refid="structecto_1_1cell___1a9673540d6196cfa4e40be503c397b1ac" kind="function"><name>declare_params</name></member>
+    <member refid="structecto_1_1cell___1a4de6c39213d7b583f295c4cb042c1f70" kind="function"><name>declare_params</name></member>
+    <member refid="structecto_1_1cell___1ac08370823fea8ed7f5991e369f6a7fa7" kind="function"><name>declare_io</name></member>
+    <member refid="structecto_1_1cell___1a20deeac5a09b3a7abaee924f361cbb3b" kind="function"><name>declare_io</name></member>
+    <member refid="structecto_1_1cell___1a542f293d31fdd0df4a4414d7b706ef7e" kind="function"><name>declare_io</name></member>
+    <member refid="structecto_1_1cell___1a6a36edc8e9eddadfe6486460bab93c93" kind="function"><name>declare_params</name></member>
+    <member refid="structecto_1_1cell___1a9673540d6196cfa4e40be503c397b1ac" kind="function"><name>declare_params</name></member>
+    <member refid="structecto_1_1cell___1a4de6c39213d7b583f295c4cb042c1f70" kind="function"><name>declare_params</name></member>
+    <member refid="structecto_1_1cell___1ac08370823fea8ed7f5991e369f6a7fa7" kind="function"><name>declare_io</name></member>
+    <member refid="structecto_1_1cell___1a20deeac5a09b3a7abaee924f361cbb3b" kind="function"><name>declare_io</name></member>
+    <member refid="structecto_1_1cell___1a542f293d31fdd0df4a4414d7b706ef7e" kind="function"><name>declare_io</name></member>
+    <member refid="structecto_1_1cell___1abb452935616e25bfbb49b77de3f5bcce" kind="function"><name>init_strand</name></member>
+    <member refid="structecto_1_1cell___1a86ac0ef672f44090b0f5e9bf3a8b56dc" kind="function"><name>init_strand</name></member>
+    <member refid="structecto_1_1cell___1abb452935616e25bfbb49b77de3f5bcce" kind="function"><name>init_strand</name></member>
+    <member refid="structecto_1_1cell___1a86ac0ef672f44090b0f5e9bf3a8b56dc" kind="function"><name>init_strand</name></member>
+  </compound>
+  <compound refid="structecto_1_1tendril_1_1Converter" kind="struct"><name>ecto::tendril::Converter</name>
+    <member refid="structecto_1_1tendril_1_1Converter_1a9987df3be3c0657bea97eeeaa190e48a" kind="function"><name>operator()</name></member>
+    <member refid="structecto_1_1tendril_1_1Converter_1a73562ca297e0c5d1c6fef136701f50d3" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="structecto_1_1tendril_1_1ConverterImpl" kind="struct"><name>ecto::tendril::ConverterImpl</name>
+    <member refid="structecto_1_1tendril_1_1ConverterImpl_1a83cf7da46b5af2bd54127a324103c55a" kind="variable"><name>instance</name></member>
+    <member refid="structecto_1_1tendril_1_1ConverterImpl_1aa03b80197057d2810198e3029a150988" kind="function"><name>operator()</name></member>
+    <member refid="structecto_1_1tendril_1_1ConverterImpl_1a1b9b248c9a7386b8b34a436f0c8453c1" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="structecto_1_1tendril_1_1ConverterImpl_3_01none_00_01___01_4" kind="struct"><name>ecto::tendril::ConverterImpl&lt; none, _ &gt;</name>
+    <member refid="structecto_1_1tendril_1_1ConverterImpl_3_01none_00_01___01_4_1ace0ef7c82a522142f1821f274541c09c" kind="variable"><name>instance</name></member>
+    <member refid="structecto_1_1tendril_1_1ConverterImpl_3_01none_00_01___01_4_1ac139edd43cc2f8371eee89ed029166d4" kind="function"><name>operator()</name></member>
+    <member refid="structecto_1_1tendril_1_1ConverterImpl_3_01none_00_01___01_4_1afbc6677e2eacb4352bff1b6f2aa94eee" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="structecto_1_1except_1_1EctoException" kind="struct"><name>ecto::except::EctoException</name>
+    <member refid="structecto_1_1except_1_1EctoException_1a5e4d1414677cf716b57620c8721b0078" kind="function"><name>EctoException</name></member>
+    <member refid="structecto_1_1except_1_1EctoException_1ab8f456a7153321c3424e9d6780170f4a" kind="function"><name>what</name></member>
+    <member refid="structecto_1_1except_1_1EctoException_1a5e4d1414677cf716b57620c8721b0078" kind="function"><name>EctoException</name></member>
+    <member refid="structecto_1_1except_1_1EctoException_1ab8f456a7153321c3424e9d6780170f4a" kind="function"><name>what</name></member>
+  </compound>
+  <compound refid="structecto_1_1graph_1_1edge" kind="struct"><name>ecto::graph::edge</name>
+    <member refid="structecto_1_1graph_1_1edge_1a88b7d991f162cd009884c3061da8169d" kind="variable"><name>impl_</name></member>
+    <member refid="structecto_1_1graph_1_1edge_1a8006b69871f55450b8acec6ac05762d4" kind="function"><name>edge</name></member>
+    <member refid="structecto_1_1graph_1_1edge_1a2fb1c33fc4d337b719a1666eab943da5" kind="function"><name>from_port</name></member>
+    <member refid="structecto_1_1graph_1_1edge_1ab1c782c9d14a3f58504783747e14f7e0" kind="function"><name>to_port</name></member>
+    <member refid="structecto_1_1graph_1_1edge_1ac2cd2d873aa55199e44f836ffada307e" kind="function"><name>front</name></member>
+    <member refid="structecto_1_1graph_1_1edge_1a0b530770694143bc00bc6c563b64a3c9" kind="function"><name>pop_front</name></member>
+    <member refid="structecto_1_1graph_1_1edge_1a257de20468c8c1b6c606448ba39c493c" kind="function"><name>push_back</name></member>
+    <member refid="structecto_1_1graph_1_1edge_1a539c89ca50c781c95ece29f7cade4d1d" kind="function"><name>size</name></member>
+    <member refid="structecto_1_1graph_1_1edge_1ab8857a18a55e6d230e84a2a07242d67e" kind="function"><name>empty</name></member>
+    <member refid="structecto_1_1graph_1_1edge_1a2761342510ae1bedb1c91bbbda5f46ef" kind="function"><name>clear</name></member>
+  </compound>
+  <compound refid="classecto_1_1graph_1_1element" kind="class"><name>ecto::graph::element</name>
+    <member refid="classecto_1_1graph_1_1element_1a6f850cead9edb37941344fdbd40ae112" kind="variable"><name>tick_</name></member>
+    <member refid="classecto_1_1graph_1_1element_1abf5d2137a1fd29f25af2b8f6bd0397df" kind="function"><name>element</name></member>
+    <member refid="classecto_1_1graph_1_1element_1a966b0c7cd87bdc5c5787d9b110966d8f" kind="function"><name>tick</name></member>
+    <member refid="classecto_1_1graph_1_1element_1a5d5b283bacb5371285e27c0f42e54985" kind="function"><name>inc_tick</name></member>
+    <member refid="classecto_1_1graph_1_1element_1a6417601ffd8159b6e00f2ff57eda1b99" kind="function"><name>reset_tick</name></member>
+  </compound>
+  <compound refid="structecto_1_1tendril_1_1empty__t" kind="struct"><name>ecto::tendril::empty_t</name>
+  </compound>
+  <compound refid="structecto_1_1registry_1_1tendril_1_1entry" kind="struct"><name>ecto::registry::tendril::entry</name>
+    <member refid="structecto_1_1registry_1_1tendril_1_1entry_1a0e06055b642fe5a4a769276ba39fde24" kind="function"><name>entry</name></member>
+  </compound>
+  <compound refid="structecto_1_1registry_1_1entry__t" kind="struct"><name>ecto::registry::entry_t</name>
+    <member refid="structecto_1_1registry_1_1entry__t_1ae1c1832273dbd622b1789a82f0832aa8" kind="variable"><name>construct</name></member>
+    <member refid="structecto_1_1registry_1_1entry__t_1a0e87799ee057b4509d45eab85def3b80" kind="variable"><name>declare_params</name></member>
+    <member refid="structecto_1_1registry_1_1entry__t_1ac052cec6adea69584fbb17f24e147ec2" kind="variable"><name>declare_io</name></member>
+    <member refid="structecto_1_1registry_1_1entry__t_1a6690e4cc01562d27df2cca184cdd06e0" kind="function"><name>construct_</name></member>
+    <member refid="structecto_1_1registry_1_1entry__t_1af0aeb9fd69fc09b5a2b5f82841cba647" kind="function"><name>declare_params_</name></member>
+    <member refid="structecto_1_1registry_1_1entry__t_1a079fd7bed79b335a8fa74c68a4ccf988" kind="function"><name>declare_io_</name></member>
+  </compound>
+  <compound refid="classecto_1_1except_1_1error__info__container__impl" kind="class"><name>ecto::except::error_info_container_impl</name>
+    <member refid="classecto_1_1except_1_1error__info__container__impl_1abe4f51bf533842a5e0b81f3e43ae6267" kind="typedef"><name>type_info_</name></member>
+    <member refid="classecto_1_1except_1_1error__info__container__impl_1a90c2628bf7c5628003cd24fd369a77da" kind="typedef"><name>error_info_base</name></member>
+    <member refid="classecto_1_1except_1_1error__info__container__impl_1a9fbca0758380cb123f790aee77d1d4d8" kind="typedef"><name>error_info_base_ptr</name></member>
+    <member refid="classecto_1_1except_1_1error__info__container__impl_1a16f5ebd1abcacd60ddbd919ea166958e" kind="typedef"><name>diagnostic_information_arg_t</name></member>
+    <member refid="classecto_1_1except_1_1error__info__container__impl_1a20b3846bc393224fe282eb64a40ee83d" kind="typedef"><name>error_info_map</name></member>
+    <member refid="classecto_1_1except_1_1error__info__container__impl_1abe4f51bf533842a5e0b81f3e43ae6267" kind="typedef"><name>type_info_</name></member>
+    <member refid="classecto_1_1except_1_1error__info__container__impl_1a90c2628bf7c5628003cd24fd369a77da" kind="typedef"><name>error_info_base</name></member>
+    <member refid="classecto_1_1except_1_1error__info__container__impl_1a9fbca0758380cb123f790aee77d1d4d8" kind="typedef"><name>error_info_base_ptr</name></member>
+    <member refid="classecto_1_1except_1_1error__info__container__impl_1a16f5ebd1abcacd60ddbd919ea166958e" kind="typedef"><name>diagnostic_information_arg_t</name></member>
+    <member refid="classecto_1_1except_1_1error__info__container__impl_1a20b3846bc393224fe282eb64a40ee83d" kind="typedef"><name>error_info_map</name></member>
+    <member refid="classecto_1_1except_1_1error__info__container__impl_1a699fdb1191a8f1fbc7bd591cc3d757aa" kind="friend"><name>boost::exception</name></member>
+    <member refid="classecto_1_1except_1_1error__info__container__impl_1a8ec60b174805696bd691a894b7f4109f" kind="variable"><name>info_</name></member>
+    <member refid="classecto_1_1except_1_1error__info__container__impl_1aeb86496a5127e19e9f787e77531b1b83" kind="variable"><name>diagnostic_info_str_</name></member>
+    <member refid="classecto_1_1except_1_1error__info__container__impl_1ade4abdc4aa11c62dd39847bc4f6c619c" kind="variable"><name>count_</name></member>
+    <member refid="classecto_1_1except_1_1error__info__container__impl_1a258f844c2a2ee441c4e397971466f2c5" kind="function"><name>error_info_container_impl</name></member>
+    <member refid="classecto_1_1except_1_1error__info__container__impl_1ab9391a11b1c7955810c184c07aec4858" kind="function"><name>~error_info_container_impl</name></member>
+    <member refid="classecto_1_1except_1_1error__info__container__impl_1ac3931483b05bd3240a8ffe11c4977b99" kind="function"><name>set</name></member>
+    <member refid="classecto_1_1except_1_1error__info__container__impl_1acab3219ea75b29048e2e4d8ad23028eb" kind="function"><name>get</name></member>
+    <member refid="classecto_1_1except_1_1error__info__container__impl_1a9cd76f7d8bd75cdc5cf29061304a622a" kind="function"><name>diagnostic_information</name></member>
+    <member refid="classecto_1_1except_1_1error__info__container__impl_1a258f844c2a2ee441c4e397971466f2c5" kind="function"><name>error_info_container_impl</name></member>
+    <member refid="classecto_1_1except_1_1error__info__container__impl_1ab9391a11b1c7955810c184c07aec4858" kind="function"><name>~error_info_container_impl</name></member>
+    <member refid="classecto_1_1except_1_1error__info__container__impl_1ac3931483b05bd3240a8ffe11c4977b99" kind="function"><name>set</name></member>
+    <member refid="classecto_1_1except_1_1error__info__container__impl_1acab3219ea75b29048e2e4d8ad23028eb" kind="function"><name>get</name></member>
+    <member refid="classecto_1_1except_1_1error__info__container__impl_1a9cd76f7d8bd75cdc5cf29061304a622a" kind="function"><name>diagnostic_information</name></member>
+    <member refid="classecto_1_1except_1_1error__info__container__impl_1ae931c5c31454852cdf3d1a84d1d588eb" kind="function"><name>add_ref</name></member>
+    <member refid="classecto_1_1except_1_1error__info__container__impl_1a59b8d31c21da10236de67f0a5bfdf4dd" kind="function"><name>release</name></member>
+    <member refid="classecto_1_1except_1_1error__info__container__impl_1ae931c5c31454852cdf3d1a84d1d588eb" kind="function"><name>add_ref</name></member>
+    <member refid="classecto_1_1except_1_1error__info__container__impl_1a59b8d31c21da10236de67f0a5bfdf4dd" kind="function"><name>release</name></member>
+  </compound>
+  <compound refid="classboost_1_1python_1_1detail_1_1final__std__map__derived__policies" kind="class"><name>boost::python::detail::final_std_map_derived_policies</name>
+  </compound>
+  <compound refid="classboost_1_1python_1_1detail_1_1final__std__vector__derived__policies" kind="class"><name>boost::python::detail::final_std_vector_derived_policies</name>
+  </compound>
+  <compound refid="classecto_1_1py_1_1gil" kind="class"><name>ecto::py::gil</name>
+    <member refid="classecto_1_1py_1_1gil_1af91dedbf0eb88a914bacb64ff176bf93" kind="variable"><name>impl_</name></member>
+    <member refid="classecto_1_1py_1_1gil_1aad7e0cb610b4766dbdfa918227e806cc" kind="function"><name>gil</name></member>
+    <member refid="classecto_1_1py_1_1gil_1a18685c76c39837ddf90159fb0721ab62" kind="function"><name>~gil</name></member>
+  </compound>
+  <compound refid="structecto_1_1py_1_1gilstatus" kind="struct"><name>ecto::py::gilstatus</name>
+    <member refid="structecto_1_1py_1_1gilstatus_1a454efe188c683788ca52b64b1c87245b" kind="variable"><name>file</name></member>
+    <member refid="structecto_1_1py_1_1gilstatus_1a86f9f360d4950496f737ce0faa4d7e1b" kind="variable"><name>line</name></member>
+    <member refid="structecto_1_1py_1_1gilstatus_1aaeba7e13dad90eaefa0a3c119e0a33ff" kind="variable"><name>what</name></member>
+    <member refid="structecto_1_1py_1_1gilstatus_1a9d3fd3fb2c0db89ac667eb534d9ba470" kind="function"><name>gilstatus</name></member>
+  </compound>
+  <compound refid="structecto_1_1profile_1_1graph__stats__type" kind="struct"><name>ecto::profile::graph_stats_type</name>
+    <member refid="structecto_1_1profile_1_1graph__stats__type_1a340d79ae72ca5639e55098c860640ba8" kind="variable"><name>cumulative_time</name></member>
+    <member refid="structecto_1_1profile_1_1graph__stats__type_1a0d465d23569a8af1789c0b57ccb21017" kind="variable"><name>cumulative_ticks</name></member>
+    <member refid="structecto_1_1profile_1_1graph__stats__type_1aefc20d119cb949420bf74e845a8a1e8c" kind="function"><name>graph_stats_type</name></member>
+    <member refid="structecto_1_1profile_1_1graph__stats__type_1ab412a3b91cbd9b062cdcd0f078ca163d" kind="function"><name>as_string</name></member>
+    <member refid="structecto_1_1profile_1_1graph__stats__type_1aefc20d119cb949420bf74e845a8a1e8c" kind="function"><name>graph_stats_type</name></member>
+    <member refid="structecto_1_1profile_1_1graph__stats__type_1ab412a3b91cbd9b062cdcd0f078ca163d" kind="function"><name>as_string</name></member>
+  </compound>
+  <compound refid="structecto_1_1graph_1_1graph__t" kind="struct"><name>ecto::graph::graph_t</name>
+  </compound>
+  <compound refid="structecto_1_1profile_1_1graphstats__collector" kind="struct"><name>ecto::profile::graphstats_collector</name>
+    <member refid="structecto_1_1profile_1_1graphstats__collector_1ad2a745e661114e28bd044844bf2b60fd" kind="variable"><name>gs_</name></member>
+    <member refid="structecto_1_1profile_1_1graphstats__collector_1a85cb67d72c9d1072634b879776e2e4b8" kind="variable"><name>start_time</name></member>
+    <member refid="structecto_1_1profile_1_1graphstats__collector_1a7a840b075fd490da5107ea538614d017" kind="variable"><name>start_tick</name></member>
+    <member refid="structecto_1_1profile_1_1graphstats__collector_1a375c75ce1c0197d1d87a5fc1bdf97050" kind="function"><name>graphstats_collector</name></member>
+    <member refid="structecto_1_1profile_1_1graphstats__collector_1a1bc967dcde1e3418aeeb10e58a52d79f" kind="function"><name>~graphstats_collector</name></member>
+    <member refid="structecto_1_1profile_1_1graphstats__collector_1a375c75ce1c0197d1d87a5fc1bdf97050" kind="function"><name>graphstats_collector</name></member>
+    <member refid="structecto_1_1profile_1_1graphstats__collector_1a1bc967dcde1e3418aeeb10e58a52d79f" kind="function"><name>~graphstats_collector</name></member>
+  </compound>
+  <compound refid="structecto_1_1has__f" kind="struct"><name>ecto::has_f</name>
+    <member refid="structecto_1_1has__f_1a37dd9c69c6cfed2ac70c2529d493d410" kind="enum"><name>@0</name></member>
+    <member refid="structecto_1_1has__f_1a8998dcad6a2d7da6cd0b1158089c6d08ae56dbd7ffd8a284535cce3d5af3580a7" kind="enumvalue"><name>declare_params</name></member>
+    <member refid="structecto_1_1has__f_1abc0a1a04163d85af95636c6213729909" kind="enum"><name>@1</name></member>
+    <member refid="structecto_1_1has__f_1af2f06fa91e667772be9731d32548b94ca46e5e9b2bb07bc150e6f74c17e53ab33" kind="enumvalue"><name>declare_io</name></member>
+    <member refid="structecto_1_1has__f_1a173737354c871f8785a6bbe7640bda1d" kind="enum"><name>@2</name></member>
+    <member refid="structecto_1_1has__f_1a1958eba96f4107abadfe89cc067a42f9ae94b70f5e1b17c668eb0a405c2935209" kind="enumvalue"><name>configure</name></member>
+    <member refid="structecto_1_1has__f_1a8f077b20e8dd579e1a427ac6c80c3d3f" kind="enum"><name>@3</name></member>
+    <member refid="structecto_1_1has__f_1a6d7dc18b2e3dc6e2466a405c13088084af52c138881600722d08741fffb3db5d8" kind="enumvalue"><name>activate</name></member>
+    <member refid="structecto_1_1has__f_1afa9dc8feb074d51ee4600f20447b2724" kind="enum"><name>@4</name></member>
+    <member refid="structecto_1_1has__f_1a84ef2fb38c7882e9e6cc4e1f62ad88bdaaafdc40ecd57b016fa5205b75d01907e" kind="enumvalue"><name>deactivate</name></member>
+    <member refid="structecto_1_1has__f_1a575b2f80b107061801e4c2ebd36bd2fc" kind="enum"><name>@5</name></member>
+    <member refid="structecto_1_1has__f_1acd60d393d00729a96f6407840b97a52aa2aa0b5c6e604720562dfc0c11fb509a4" kind="enumvalue"><name>process</name></member>
+    <member refid="structecto_1_1has__f_1a2f5a531214c34e93b8efd059afed9348" kind="enum"><name>@6</name></member>
+    <member refid="structecto_1_1has__f_1ab8a599463b6343f6af4c1f465284d2b2ac7031abc908db36ec1b498167454340e" kind="enumvalue"><name>start</name></member>
+    <member refid="structecto_1_1has__f_1af1ab6e8ed499c6c3b404cd7aeda85c87" kind="enum"><name>@7</name></member>
+    <member refid="structecto_1_1has__f_1a9992271f06f38c11ce0df64bf2f71570a97bc71e1e9d2872882dd1d067c95770d" kind="enumvalue"><name>stop</name></member>
+    <member refid="structecto_1_1has__f_1a8998dcad6a2d7da6cd0b1158089c6d08" kind="enum"><name>@8</name></member>
+    <member refid="structecto_1_1has__f_1a8998dcad6a2d7da6cd0b1158089c6d08ae56dbd7ffd8a284535cce3d5af3580a7" kind="enumvalue"><name>declare_params</name></member>
+    <member refid="structecto_1_1has__f_1af2f06fa91e667772be9731d32548b94c" kind="enum"><name>@9</name></member>
+    <member refid="structecto_1_1has__f_1af2f06fa91e667772be9731d32548b94ca46e5e9b2bb07bc150e6f74c17e53ab33" kind="enumvalue"><name>declare_io</name></member>
+    <member refid="structecto_1_1has__f_1a1958eba96f4107abadfe89cc067a42f9" kind="enum"><name>@10</name></member>
+    <member refid="structecto_1_1has__f_1a1958eba96f4107abadfe89cc067a42f9ae94b70f5e1b17c668eb0a405c2935209" kind="enumvalue"><name>configure</name></member>
+    <member refid="structecto_1_1has__f_1a6d7dc18b2e3dc6e2466a405c13088084" kind="enum"><name>@11</name></member>
+    <member refid="structecto_1_1has__f_1a6d7dc18b2e3dc6e2466a405c13088084af52c138881600722d08741fffb3db5d8" kind="enumvalue"><name>activate</name></member>
+    <member refid="structecto_1_1has__f_1a84ef2fb38c7882e9e6cc4e1f62ad88bd" kind="enum"><name>@12</name></member>
+    <member refid="structecto_1_1has__f_1a84ef2fb38c7882e9e6cc4e1f62ad88bdaaafdc40ecd57b016fa5205b75d01907e" kind="enumvalue"><name>deactivate</name></member>
+    <member refid="structecto_1_1has__f_1acd60d393d00729a96f6407840b97a52a" kind="enum"><name>@13</name></member>
+    <member refid="structecto_1_1has__f_1acd60d393d00729a96f6407840b97a52aa2aa0b5c6e604720562dfc0c11fb509a4" kind="enumvalue"><name>process</name></member>
+    <member refid="structecto_1_1has__f_1ab8a599463b6343f6af4c1f465284d2b2" kind="enum"><name>@14</name></member>
+    <member refid="structecto_1_1has__f_1ab8a599463b6343f6af4c1f465284d2b2ac7031abc908db36ec1b498167454340e" kind="enumvalue"><name>start</name></member>
+    <member refid="structecto_1_1has__f_1a9992271f06f38c11ce0df64bf2f71570" kind="enum"><name>@15</name></member>
+    <member refid="structecto_1_1has__f_1a9992271f06f38c11ce0df64bf2f71570a97bc71e1e9d2872882dd1d067c95770d" kind="enumvalue"><name>stop</name></member>
+    <member refid="structecto_1_1has__f_1a3fb902f1eed02919195aff1a6b28eb76" kind="typedef"><name>yes</name></member>
+    <member refid="structecto_1_1has__f_1ae0c6da775cf20caed616e24681af2807" kind="typedef"><name>no</name></member>
+    <member refid="structecto_1_1has__f_1a3fb902f1eed02919195aff1a6b28eb76" kind="typedef"><name>yes</name></member>
+    <member refid="structecto_1_1has__f_1ae0c6da775cf20caed616e24681af2807" kind="typedef"><name>no</name></member>
+    <member refid="structecto_1_1has__f_1ae63216bd7936dc02af86363f8db74b2e" kind="function"><name>test_declare_params</name></member>
+    <member refid="structecto_1_1has__f_1ab2f2693b1d6084a672893777893b9ab2" kind="function"><name>test_declare_params</name></member>
+    <member refid="structecto_1_1has__f_1a042de0d066c5b000186594964deea94e" kind="function"><name>test_declare_io</name></member>
+    <member refid="structecto_1_1has__f_1ad144a46699c480e7851fbd36394a1fe3" kind="function"><name>test_declare_io</name></member>
+    <member refid="structecto_1_1has__f_1a6665bfebbc796527bc1a775803ebd18e" kind="function"><name>test_configure</name></member>
+    <member refid="structecto_1_1has__f_1afc5065e1043ffe865662840f3a9d82fd" kind="function"><name>test_configure</name></member>
+    <member refid="structecto_1_1has__f_1a2212643cf55b3264654bc654df699cb7" kind="function"><name>test_activate</name></member>
+    <member refid="structecto_1_1has__f_1a2f43dbf6bee3d172c280f00e8fe73c33" kind="function"><name>test_activate</name></member>
+    <member refid="structecto_1_1has__f_1ae924c11bc0462d832fdd8ea97bd3599d" kind="function"><name>test_deactivate</name></member>
+    <member refid="structecto_1_1has__f_1ab8c699587d6f7d476d09b693227f5373" kind="function"><name>test_deactivate</name></member>
+    <member refid="structecto_1_1has__f_1a4e6f5942e9ee41196b52f7c728baf547" kind="function"><name>test_process</name></member>
+    <member refid="structecto_1_1has__f_1a75ec2b3763995883f3a5dd1b19097439" kind="function"><name>test_process</name></member>
+    <member refid="structecto_1_1has__f_1aa88ebe0fd23a4e875704da0d62ce489c" kind="function"><name>test_start</name></member>
+    <member refid="structecto_1_1has__f_1a089044f39fac5f7ea53eec64799c4619" kind="function"><name>test_start</name></member>
+    <member refid="structecto_1_1has__f_1a4de2275b91096c6e6d1efc2f137c380f" kind="function"><name>test_stop</name></member>
+    <member refid="structecto_1_1has__f_1a97d550e44f5260b40ddd0722bdd6f274" kind="function"><name>test_stop</name></member>
+    <member refid="structecto_1_1has__f_1ae63216bd7936dc02af86363f8db74b2e" kind="function"><name>test_declare_params</name></member>
+    <member refid="structecto_1_1has__f_1ab2f2693b1d6084a672893777893b9ab2" kind="function"><name>test_declare_params</name></member>
+    <member refid="structecto_1_1has__f_1a042de0d066c5b000186594964deea94e" kind="function"><name>test_declare_io</name></member>
+    <member refid="structecto_1_1has__f_1ad144a46699c480e7851fbd36394a1fe3" kind="function"><name>test_declare_io</name></member>
+    <member refid="structecto_1_1has__f_1a6665bfebbc796527bc1a775803ebd18e" kind="function"><name>test_configure</name></member>
+    <member refid="structecto_1_1has__f_1afc5065e1043ffe865662840f3a9d82fd" kind="function"><name>test_configure</name></member>
+    <member refid="structecto_1_1has__f_1a2212643cf55b3264654bc654df699cb7" kind="function"><name>test_activate</name></member>
+    <member refid="structecto_1_1has__f_1a2f43dbf6bee3d172c280f00e8fe73c33" kind="function"><name>test_activate</name></member>
+    <member refid="structecto_1_1has__f_1ae924c11bc0462d832fdd8ea97bd3599d" kind="function"><name>test_deactivate</name></member>
+    <member refid="structecto_1_1has__f_1ab8c699587d6f7d476d09b693227f5373" kind="function"><name>test_deactivate</name></member>
+    <member refid="structecto_1_1has__f_1a4e6f5942e9ee41196b52f7c728baf547" kind="function"><name>test_process</name></member>
+    <member refid="structecto_1_1has__f_1a75ec2b3763995883f3a5dd1b19097439" kind="function"><name>test_process</name></member>
+    <member refid="structecto_1_1has__f_1aa88ebe0fd23a4e875704da0d62ce489c" kind="function"><name>test_start</name></member>
+    <member refid="structecto_1_1has__f_1a089044f39fac5f7ea53eec64799c4619" kind="function"><name>test_start</name></member>
+    <member refid="structecto_1_1has__f_1a4de2275b91096c6e6d1efc2f137c380f" kind="function"><name>test_stop</name></member>
+    <member refid="structecto_1_1has__f_1a97d550e44f5260b40ddd0722bdd6f274" kind="function"><name>test_stop</name></member>
+  </compound>
+  <compound refid="structboost_1_1python_1_1std__map__indexing__suite_1_1init__factory" kind="struct"><name>boost::python::std_map_indexing_suite::init_factory</name>
+    <member refid="structboost_1_1python_1_1std__map__indexing__suite_1_1init__factory_1a785b4c017210dd048b47eb6c04a5cdc6" kind="typedef"><name>Holder</name></member>
+    <member refid="structboost_1_1python_1_1std__map__indexing__suite_1_1init__factory_1aea2971d45c2f4de6ac83494b504d9a19" kind="typedef"><name>instance_t</name></member>
+    <member refid="structboost_1_1python_1_1std__map__indexing__suite_1_1init__factory_1acd1c1789efbbb4f595abae51b1f0a2a0" kind="function"><name>make_holder</name></member>
+    <member refid="structboost_1_1python_1_1std__map__indexing__suite_1_1init__factory_1aa1f0944f15cb284c240d25bfa6f0ccca" kind="function"><name>from_dict</name></member>
+    <member refid="structboost_1_1python_1_1std__map__indexing__suite_1_1init__factory_1ad0dbf8e2c1b8fa7dd7ecf87415e7d3fb" kind="function"><name>from_list</name></member>
+  </compound>
+  <compound refid="structecto_1_1cell___1_1int__" kind="struct"><name>ecto::cell_::int_</name>
+  </compound>
+  <compound refid="structecto_1_1detail_1_1is__threadsafe" kind="struct"><name>ecto::detail::is_threadsafe</name>
+  </compound>
+  <compound refid="classecto_1_1py_1_1streambuf_1_1istream" kind="class"><name>ecto::py::streambuf::istream</name>
+    <member refid="classecto_1_1py_1_1streambuf_1_1istream_1aff2d95cb5e4b1113f873b7a7e1cead29" kind="function"><name>istream</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1_1istream_1ab53f3c2893d995a22ef2374ce9a00004" kind="function"><name>~istream</name></member>
+  </compound>
+  <compound refid="structecto_1_1py_1_1istream" kind="struct"><name>ecto::py::istream</name>
+    <member refid="structecto_1_1py_1_1istream_1a1261100ee2202be4989166b6a16fc1b0" kind="function"><name>istream</name></member>
+  </compound>
+  <compound refid="structboost_1_1python_1_1std__map__indexing__suite_1_1iteritems" kind="struct"><name>boost::python::std_map_indexing_suite::iteritems</name>
+    <member refid="structboost_1_1python_1_1std__map__indexing__suite_1_1iteritems_1a97f1c788acd4c665fba8ae1fcc946a45" kind="typedef"><name>result_type</name></member>
+    <member refid="structboost_1_1python_1_1std__map__indexing__suite_1_1iteritems_1a4adb01be48bc47d6c1636957267fdca2" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="structboost_1_1python_1_1std__map__indexing__suite_1_1iterkeys" kind="struct"><name>boost::python::std_map_indexing_suite::iterkeys</name>
+    <member refid="structboost_1_1python_1_1std__map__indexing__suite_1_1iterkeys_1a7c12b5aeae081d2ecf524e29e5a5c343" kind="typedef"><name>result_type</name></member>
+    <member refid="structboost_1_1python_1_1std__map__indexing__suite_1_1iterkeys_1a0e3b853fc4bbcc4777e5c663cc8bdd60" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="structboost_1_1python_1_1std__map__indexing__suite_1_1itervalues" kind="struct"><name>boost::python::std_map_indexing_suite::itervalues</name>
+    <member refid="structboost_1_1python_1_1std__map__indexing__suite_1_1itervalues_1a7d2f8df7d18009f2bad1363db4f718f3" kind="typedef"><name>result_type</name></member>
+    <member refid="structboost_1_1python_1_1std__map__indexing__suite_1_1itervalues_1a36486ce19f8e08900aabe582d0502dc8" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="structboost_1_1python_1_1std__map__indexing__suite_1_1make__transform__impl" kind="struct"><name>boost::python::std_map_indexing_suite::make_transform_impl</name>
+    <member refid="structboost_1_1python_1_1std__map__indexing__suite_1_1make__transform__impl_1a64d7b60f0e792533c1cc89b84f341b0d" kind="typedef"><name>iterator</name></member>
+    <member refid="structboost_1_1python_1_1std__map__indexing__suite_1_1make__transform__impl_1ab74967f0d94cdc5adcae986110974656" kind="function"><name>begin</name></member>
+    <member refid="structboost_1_1python_1_1std__map__indexing__suite_1_1make__transform__impl_1ac8c3535052a0a3320e73ab5b49eb6b82" kind="function"><name>end</name></member>
+    <member refid="structboost_1_1python_1_1std__map__indexing__suite_1_1make__transform__impl_1a9dbcd293bf92f94f2eaeaed8edb64ee2" kind="function"><name>range</name></member>
+  </compound>
+  <compound refid="structecto_1_1registry_1_1module__registry" kind="struct"><name>ecto::registry::module_registry</name>
+    <member refid="structecto_1_1registry_1_1module__registry_1a90fc28cbb13d6662b0b8d898985be04e" kind="typedef"><name>nullary_fn_t</name></member>
+    <member refid="structecto_1_1registry_1_1module__registry_1a77ae3e886433428c82d5dbb8039d53f6" kind="variable"><name>regvec</name></member>
+    <member refid="structecto_1_1registry_1_1module__registry_1aef2549c7e8d6840420041f2231dcdebf" kind="function"><name>add</name></member>
+    <member refid="structecto_1_1registry_1_1module__registry_1ab8a2255326e085adc04ad180aa1752ec" kind="function"><name>go</name></member>
+    <member refid="structecto_1_1registry_1_1module__registry_1ac968548cf0e11339bf002828e67b857f" kind="function"><name>instance</name></member>
+    <member refid="structecto_1_1registry_1_1module__registry_1aef45ef0e61d967ea203db086f8aa9f65" kind="function"><name>module_registry</name></member>
+  </compound>
+  <compound refid="structecto_1_1tendril_1_1none" kind="struct"><name>ecto::tendril::none</name>
+    <member refid="structecto_1_1tendril_1_1none_1ad595e74035f67c86885f0c37b2e67e3b" kind="function"><name>operator=</name></member>
+    <member refid="structecto_1_1tendril_1_1none_1a02032ee9d796f16d0db5ec2f531d9f46" kind="function"><name>operator=</name></member>
+    <member refid="structecto_1_1tendril_1_1none_1aad4dd147c25c51d5edb1aaaaa2f226ea" kind="friend"><name>operator==</name></member>
+    <member refid="structecto_1_1tendril_1_1none_1a347ef8229889570e77256cd3b6e8d6b8" kind="friend"><name>operator&lt;&lt;</name></member>
+  </compound>
+  <compound refid="classecto_1_1py_1_1nothing__to__lock" kind="class"><name>ecto::py::nothing_to_lock</name>
+    <member refid="classecto_1_1py_1_1nothing__to__lock_1a277b110e856f61f30f645e4bed50c566" kind="function"><name>nothing_to_lock</name></member>
+    <member refid="classecto_1_1py_1_1nothing__to__lock_1aa734fa290aeb9aa7de729960aa12df9b" kind="function"><name>~nothing_to_lock</name></member>
+  </compound>
+  <compound refid="classecto_1_1py_1_1streambuf_1_1ostream" kind="class"><name>ecto::py::streambuf::ostream</name>
+    <member refid="classecto_1_1py_1_1streambuf_1_1ostream_1ab62cdec76b066fa4492b032dd1533bc5" kind="function"><name>ostream</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1_1ostream_1abeaab4a21b07a3bbf944d4ce8693a7b5" kind="function"><name>~ostream</name></member>
+  </compound>
+  <compound refid="structecto_1_1py_1_1ostream" kind="struct"><name>ecto::py::ostream</name>
+    <member refid="structecto_1_1py_1_1ostream_1a5fc23212b0b77a69a0c4e7e67133b2c8" kind="function"><name>ostream</name></member>
+    <member refid="structecto_1_1py_1_1ostream_1a69cba9ec021b14b76fd08d35ea322434" kind="function"><name>~ostream</name></member>
+  </compound>
+  <compound refid="structecto_1_1plasm" kind="struct"><name>ecto::plasm</name>
+    <member refid="structecto_1_1plasm_1a899b9da452ab35849f07038c90990ac3" kind="typedef"><name>ptr</name></member>
+    <member refid="structecto_1_1plasm_1afd3b9e2d4732023ab9e94553e0d66ac4" kind="typedef"><name>cptr</name></member>
+    <member refid="structecto_1_1plasm_1a899b9da452ab35849f07038c90990ac3" kind="typedef"><name>ptr</name></member>
+    <member refid="structecto_1_1plasm_1afd3b9e2d4732023ab9e94553e0d66ac4" kind="typedef"><name>cptr</name></member>
+    <member refid="structecto_1_1plasm_1a3fa8095e74d8f7b36a5fce7ebcd3e79c" kind="variable"><name>impl_</name></member>
+    <member refid="structecto_1_1plasm_1a8d074da8290587fab0ed04d5cfe3f6b1" kind="variable"><name>configured</name></member>
+    <member refid="structecto_1_1plasm_1a4305f269960e8ccc92b19b2f0480b16d" kind="friend"><name>boost::serialization::access</name></member>
+    <member refid="structecto_1_1plasm_1a1d4a2f7e4fa1a4ef839c7ba0316a825c" kind="function"><name>plasm</name></member>
+    <member refid="structecto_1_1plasm_1a3000d2cb042c0875b4d5c38d33763845" kind="function"><name>~plasm</name></member>
+    <member refid="structecto_1_1plasm_1a3419c720b1f839cf9b423655cf4de343" kind="function"><name>insert</name></member>
+    <member refid="structecto_1_1plasm_1a0ca320f5cef8372cfa713fd7991ad3b2" kind="function"><name>connect</name></member>
+    <member refid="structecto_1_1plasm_1a5e187b40ce0a7d7ed9a6859452aed5ca" kind="function"><name>disconnect</name></member>
+    <member refid="structecto_1_1plasm_1a6350e90b6d85a218e7a84183eaed0c18" kind="function"><name>viz</name></member>
+    <member refid="structecto_1_1plasm_1a4586d90c908123a18dbd3a26c206f63c" kind="function"><name>viz</name></member>
+    <member refid="structecto_1_1plasm_1a9554edd5758b8a83ed092a81e249f64a" kind="function"><name>check</name></member>
+    <member refid="structecto_1_1plasm_1a4f8de02440afdad0aa395fbaea03399e" kind="function"><name>graph</name></member>
+    <member refid="structecto_1_1plasm_1ac6cde6d1d615e85f442ce299fdf0e7a0" kind="function"><name>graph</name></member>
+    <member refid="structecto_1_1plasm_1aaeeabeb3f78c1a7291eb14e0f705574e" kind="function"><name>size</name></member>
+    <member refid="structecto_1_1plasm_1aa7724234d631563b10de07030c066e01" kind="function"><name>cells</name></member>
+    <member refid="structecto_1_1plasm_1a55d56445bd1d09b9422390fb49e81bec" kind="function"><name>configure_all</name></member>
+    <member refid="structecto_1_1plasm_1a4419135c6c8dd8bb0cc7f4807a025df2" kind="function"><name>activate_all</name></member>
+    <member refid="structecto_1_1plasm_1a6c10f2812f731c3787e5e22bdd80e9bc" kind="function"><name>deactivate_all</name></member>
+    <member refid="structecto_1_1plasm_1a992f656fa931efc20d2cf1a97c963cec" kind="function"><name>reset_ticks</name></member>
+    <member refid="structecto_1_1plasm_1ab0fd6bec2e5d8943363fe5aa36c1d676" kind="function"><name>save</name></member>
+    <member refid="structecto_1_1plasm_1a854400c2f46f995731e058c72a547185" kind="function"><name>load</name></member>
+    <member refid="structecto_1_1plasm_1a1d4a2f7e4fa1a4ef839c7ba0316a825c" kind="function"><name>plasm</name></member>
+    <member refid="structecto_1_1plasm_1a3000d2cb042c0875b4d5c38d33763845" kind="function"><name>~plasm</name></member>
+    <member refid="structecto_1_1plasm_1a3419c720b1f839cf9b423655cf4de343" kind="function"><name>insert</name></member>
+    <member refid="structecto_1_1plasm_1a0ca320f5cef8372cfa713fd7991ad3b2" kind="function"><name>connect</name></member>
+    <member refid="structecto_1_1plasm_1a5e187b40ce0a7d7ed9a6859452aed5ca" kind="function"><name>disconnect</name></member>
+    <member refid="structecto_1_1plasm_1a6350e90b6d85a218e7a84183eaed0c18" kind="function"><name>viz</name></member>
+    <member refid="structecto_1_1plasm_1a4586d90c908123a18dbd3a26c206f63c" kind="function"><name>viz</name></member>
+    <member refid="structecto_1_1plasm_1a9554edd5758b8a83ed092a81e249f64a" kind="function"><name>check</name></member>
+    <member refid="structecto_1_1plasm_1a4f8de02440afdad0aa395fbaea03399e" kind="function"><name>graph</name></member>
+    <member refid="structecto_1_1plasm_1ac6cde6d1d615e85f442ce299fdf0e7a0" kind="function"><name>graph</name></member>
+    <member refid="structecto_1_1plasm_1aaeeabeb3f78c1a7291eb14e0f705574e" kind="function"><name>size</name></member>
+    <member refid="structecto_1_1plasm_1aa7724234d631563b10de07030c066e01" kind="function"><name>cells</name></member>
+    <member refid="structecto_1_1plasm_1a55d56445bd1d09b9422390fb49e81bec" kind="function"><name>configure_all</name></member>
+    <member refid="structecto_1_1plasm_1a4419135c6c8dd8bb0cc7f4807a025df2" kind="function"><name>activate_all</name></member>
+    <member refid="structecto_1_1plasm_1a6c10f2812f731c3787e5e22bdd80e9bc" kind="function"><name>deactivate_all</name></member>
+    <member refid="structecto_1_1plasm_1a992f656fa931efc20d2cf1a97c963cec" kind="function"><name>reset_ticks</name></member>
+    <member refid="structecto_1_1plasm_1ab0fd6bec2e5d8943363fe5aa36c1d676" kind="function"><name>save</name></member>
+    <member refid="structecto_1_1plasm_1a854400c2f46f995731e058c72a547185" kind="function"><name>load</name></member>
+    <member refid="structecto_1_1plasm_1a420eb464746042e8247a69828e6782af" kind="function"><name>save</name></member>
+    <member refid="structecto_1_1plasm_1ae6540bca37d0980ec24b0b75061e124e" kind="function"><name>load</name></member>
+    <member refid="structecto_1_1plasm_1ac443cf0a58324a8003e1c9fd3b49b428" kind="function"><name>BOOST_SERIALIZATION_SPLIT_MEMBER</name></member>
+    <member refid="structecto_1_1plasm_1a420eb464746042e8247a69828e6782af" kind="function"><name>save</name></member>
+    <member refid="structecto_1_1plasm_1ae6540bca37d0980ec24b0b75061e124e" kind="function"><name>load</name></member>
+    <member refid="structecto_1_1plasm_1ac443cf0a58324a8003e1c9fd3b49b428" kind="function"><name>BOOST_SERIALIZATION_SPLIT_MEMBER</name></member>
+  </compound>
+  <compound refid="structecto_1_1detail_1_1python__mutex" kind="struct"><name>ecto::detail::python_mutex</name>
+    <member refid="structecto_1_1detail_1_1python__mutex_1af0a9d3c8b5d8ad0e8f8584101a197fa5" kind="typedef"><name>type</name></member>
+  </compound>
+  <compound refid="structboost_1_1python_1_1detail_1_1raw__constructor__dispatcher" kind="struct"><name>boost::python::detail::raw_constructor_dispatcher</name>
+    <member refid="structboost_1_1python_1_1detail_1_1raw__constructor__dispatcher_1a055de51d7e8492c050508aa131ec1dd5" kind="variable"><name>f</name></member>
+    <member refid="structboost_1_1python_1_1detail_1_1raw__constructor__dispatcher_1a24c048cfc2d50e1897e6a779eef33f5c" kind="function"><name>raw_constructor_dispatcher</name></member>
+    <member refid="structboost_1_1python_1_1detail_1_1raw__constructor__dispatcher_1ae3fe9c3c2b28ec59a57468fc05381a96" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="structecto_1_1serialization_1_1reader__" kind="struct"><name>ecto::serialization::reader_</name>
+    <member refid="structecto_1_1serialization_1_1reader___1a8dfc44aa7e7f689b932720efb9ac541a" kind="typedef"><name>value_type</name></member>
+    <member refid="structecto_1_1serialization_1_1reader___1aff0b5af9cb0ab1c83872367ffe595e04" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="classecto_1_1ref__count" kind="class"><name>ecto::ref_count</name>
+    <member refid="classecto_1_1ref__count_1a983fe76ebfb0351182fc31968bcbafd4" kind="variable"><name>m_</name></member>
+    <member refid="classecto_1_1ref__count_1a156a5db53cf932f5dfe68b83bf3aca24" kind="variable"><name>t_</name></member>
+    <member refid="classecto_1_1ref__count_1a39fc7e105b142b7444a90dc6a3796828" kind="function"><name>ref_count</name></member>
+    <member refid="classecto_1_1ref__count_1a22b67e2d381344ff4c9b4c453bb47e23" kind="function"><name>~ref_count</name></member>
+    <member refid="classecto_1_1ref__count_1a39fc7e105b142b7444a90dc6a3796828" kind="function"><name>ref_count</name></member>
+    <member refid="classecto_1_1ref__count_1a22b67e2d381344ff4c9b4c453bb47e23" kind="function"><name>~ref_count</name></member>
+  </compound>
+  <compound refid="structecto_1_1serialization_1_1register__serializer" kind="struct"><name>ecto::serialization::register_serializer</name>
+    <member refid="structecto_1_1serialization_1_1register__serializer_1a31c9f04624076aa209e66232a511c627" kind="typedef"><name>writer_binary_oa</name></member>
+    <member refid="structecto_1_1serialization_1_1register__serializer_1a7783674d19bdb5a7f2143953d6a7302f" kind="typedef"><name>reader_binary_ia</name></member>
+    <member refid="structecto_1_1serialization_1_1register__serializer_1a742ed82697621237f599631009e47e05" kind="variable"><name>instance</name></member>
+    <member refid="structecto_1_1serialization_1_1register__serializer_1ae339eb881e0afbb36bff03a34263c683" kind="function"><name>register_serializer</name></member>
+  </compound>
+  <compound refid="structecto_1_1registry_1_1registrator" kind="struct"><name>ecto::registry::registrator</name>
+    <member refid="structecto_1_1registry_1_1registrator_1ae352ebfb18c87dc7fb3f649ecbe445fa" kind="typedef"><name>cell_t</name></member>
+    <member refid="structecto_1_1registry_1_1registrator_1a794acc964cefc0a374129823b4ee5246" kind="variable"><name>name_</name></member>
+    <member refid="structecto_1_1registry_1_1registrator_1a6eb361c892595a3d71ab627829c07bdb" kind="variable"><name>docstring_</name></member>
+    <member refid="structecto_1_1registry_1_1registrator_1a0b0f6e3aa1718476b962a007786e7496" kind="variable"><name>inst</name></member>
+    <member refid="structecto_1_1registry_1_1registrator_1aa46347f24e15fcc5955523d5e2adadf7" kind="function"><name>create</name></member>
+    <member refid="structecto_1_1registry_1_1registrator_1a3c8bafa2e65ef88c572c1779fb05fd12" kind="function"><name>registrator</name></member>
+    <member refid="structecto_1_1registry_1_1registrator_1a11572913b91238e8d6415bb89cc7ac1a" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="structecto_1_1serialization_1_1registry" kind="struct"><name>ecto::serialization::registry</name>
+    <member refid="structecto_1_1serialization_1_1registry_1a9bbc5358e0b5bb519983c16db9c6391b" kind="typedef"><name>serial_fn_t</name></member>
+    <member refid="structecto_1_1serialization_1_1registry_1a89253dc4749e297b132dacb9e14967c2" kind="typedef"><name>serial_map_t</name></member>
+    <member refid="structecto_1_1serialization_1_1registry_1a7ef09466a24edc21695e3905c0a7921b" kind="variable"><name>serial_map</name></member>
+    <member refid="structecto_1_1serialization_1_1registry_1ae82f89f8e2bdcf2573671a6d390a94e2" kind="function"><name>add</name></member>
+    <member refid="structecto_1_1serialization_1_1registry_1a9642b0813d8bb6c99dffb527b9d57419" kind="function"><name>add</name></member>
+    <member refid="structecto_1_1serialization_1_1registry_1afaecca49afab42cb3f41a7a515b69cbb" kind="function"><name>serialize</name></member>
+    <member refid="structecto_1_1serialization_1_1registry_1a19aae99a3cc5ddb4b56d069faf01e300" kind="function"><name>instance</name></member>
+    <member refid="structecto_1_1serialization_1_1registry_1acbf5b14a8ef87e8a1324ad852e3e3f13" kind="function"><name>registry</name></member>
+  </compound>
+  <compound refid="classecto_1_1scheduler" kind="class"><name>ecto::scheduler</name>
+    <member refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200" kind="enum"><name>State</name></member>
+    <member refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200aa27ca6edd42506aec7037a3f09b0ac3d" kind="enumvalue"><name>INIT</name></member>
+    <member refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200a8cfc990d9db7b20dc7890f9a46683161" kind="enumvalue"><name>RUNNING</name></member>
+    <member refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200a1b848d0faf5a1c5244260cd1d5e8f15d" kind="enumvalue"><name>EXECUTING</name></member>
+    <member refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200ab987368a802356f20d91ec3115a70647" kind="enumvalue"><name>STOPPING</name></member>
+    <member refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200a0bd10f92bee9fa9c58fd9f609fb5ef0c" kind="enumvalue"><name>FINI</name></member>
+    <member refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200a9cf0870e87f3bfbd9e01fa67e5d3daf7" kind="enumvalue"><name>ERROR</name></member>
+    <member refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200aa27ca6edd42506aec7037a3f09b0ac3d" kind="enumvalue"><name>INIT</name></member>
+    <member refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200a8cfc990d9db7b20dc7890f9a46683161" kind="enumvalue"><name>RUNNING</name></member>
+    <member refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200a1b848d0faf5a1c5244260cd1d5e8f15d" kind="enumvalue"><name>EXECUTING</name></member>
+    <member refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200ab987368a802356f20d91ec3115a70647" kind="enumvalue"><name>STOPPING</name></member>
+    <member refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200a0bd10f92bee9fa9c58fd9f609fb5ef0c" kind="enumvalue"><name>FINI</name></member>
+    <member refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200a9cf0870e87f3bfbd9e01fa67e5d3daf7" kind="enumvalue"><name>ERROR</name></member>
+    <member refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200" kind="enum"><name>State</name></member>
+    <member refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200aa27ca6edd42506aec7037a3f09b0ac3d" kind="enumvalue"><name>INIT</name></member>
+    <member refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200a8cfc990d9db7b20dc7890f9a46683161" kind="enumvalue"><name>RUNNING</name></member>
+    <member refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200a1b848d0faf5a1c5244260cd1d5e8f15d" kind="enumvalue"><name>EXECUTING</name></member>
+    <member refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200ab987368a802356f20d91ec3115a70647" kind="enumvalue"><name>STOPPING</name></member>
+    <member refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200a0bd10f92bee9fa9c58fd9f609fb5ef0c" kind="enumvalue"><name>FINI</name></member>
+    <member refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200a9cf0870e87f3bfbd9e01fa67e5d3daf7" kind="enumvalue"><name>ERROR</name></member>
+    <member refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200aa27ca6edd42506aec7037a3f09b0ac3d" kind="enumvalue"><name>INIT</name></member>
+    <member refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200a8cfc990d9db7b20dc7890f9a46683161" kind="enumvalue"><name>RUNNING</name></member>
+    <member refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200a1b848d0faf5a1c5244260cd1d5e8f15d" kind="enumvalue"><name>EXECUTING</name></member>
+    <member refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200ab987368a802356f20d91ec3115a70647" kind="enumvalue"><name>STOPPING</name></member>
+    <member refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200a0bd10f92bee9fa9c58fd9f609fb5ef0c" kind="enumvalue"><name>FINI</name></member>
+    <member refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200a9cf0870e87f3bfbd9e01fa67e5d3daf7" kind="enumvalue"><name>ERROR</name></member>
+    <member refid="classecto_1_1scheduler_1a9ccfb508a5bf75ec7ca69b475a7c7226" kind="variable"><name>plasm_</name></member>
+    <member refid="classecto_1_1scheduler_1a4a9aa8c66b611d13461e631b568fb5a5" kind="variable"><name>graph_</name></member>
+    <member refid="classecto_1_1scheduler_1a0c291644c5fc92399a96466ac3b5cc38" kind="variable"><name>stack_</name></member>
+    <member refid="classecto_1_1scheduler_1a6da29ce8fc4f4d2a1c451a577e049c62" kind="variable"><name>graphstats_</name></member>
+    <member refid="classecto_1_1scheduler_1af8f90a97a59811157c657cecb8512069" kind="variable"><name>io_svc_</name></member>
+    <member refid="classecto_1_1scheduler_1a47a29f5a0e1f1ab8ce816b0c63442b5c" kind="variable"><name>mtx_</name></member>
+    <member refid="classecto_1_1scheduler_1a21d2aac4a8a2ef665942b7c9b741250c" kind="variable"><name>state_</name></member>
+    <member refid="classecto_1_1scheduler_1a650d97445fe90ba4572d208430f71e20" kind="variable"><name>runners_</name></member>
+    <member refid="classecto_1_1scheduler_1a7eedec3e00966ffa25a5172bdaa8b7c6" kind="variable"><name>interrupt_connection</name></member>
+    <member refid="classecto_1_1scheduler_1abbb89be5b75cc481087fc2b2b1f00147" kind="variable"><name>interrupted</name></member>
+    <member refid="classecto_1_1scheduler_1a3a2999bde52bfacfc194243ef2ae4f89" kind="function"><name>scheduler</name></member>
+    <member refid="classecto_1_1scheduler_1aac758e34705ebab32cf66bdf42f0d89d" kind="function"><name>~scheduler</name></member>
+    <member refid="classecto_1_1scheduler_1ad917e3fa322f0a065e306afec7284d4e" kind="function"><name>execute</name></member>
+    <member refid="classecto_1_1scheduler_1a2e9982c19e57c9e578d2f8f54c24dc1a" kind="function"><name>execute_async</name></member>
+    <member refid="classecto_1_1scheduler_1a7fcfe7583c13ff5d2294242aedfa0b1a" kind="function"><name>run_job</name></member>
+    <member refid="classecto_1_1scheduler_1a326022cba6c3154f28f9694b7c9968fd" kind="function"><name>run</name></member>
+    <member refid="classecto_1_1scheduler_1a8d5ce4f97e511341f315bb7621ba38f4" kind="function"><name>run</name></member>
+    <member refid="classecto_1_1scheduler_1a99ac4b8df3d015f6a39d0cf7607cc657" kind="function"><name>running</name></member>
+    <member refid="classecto_1_1scheduler_1a13257817e1cc6c1ce04ef0bfdabc5375" kind="function"><name>executing</name></member>
+    <member refid="classecto_1_1scheduler_1ab974783264da5c33a19110926b5565f4" kind="function"><name>stop</name></member>
+    <member refid="classecto_1_1scheduler_1a99d2f51779f856b3905bb8b493f091c4" kind="function"><name>stats</name></member>
+    <member refid="classecto_1_1scheduler_1a5497ae108416ccdf7d80fa7c8e462992" kind="function"><name>state</name></member>
+    <member refid="classecto_1_1scheduler_1a3a2999bde52bfacfc194243ef2ae4f89" kind="function"><name>scheduler</name></member>
+    <member refid="classecto_1_1scheduler_1aac758e34705ebab32cf66bdf42f0d89d" kind="function"><name>~scheduler</name></member>
+    <member refid="classecto_1_1scheduler_1ad917e3fa322f0a065e306afec7284d4e" kind="function"><name>execute</name></member>
+    <member refid="classecto_1_1scheduler_1a2e9982c19e57c9e578d2f8f54c24dc1a" kind="function"><name>execute_async</name></member>
+    <member refid="classecto_1_1scheduler_1a7fcfe7583c13ff5d2294242aedfa0b1a" kind="function"><name>run_job</name></member>
+    <member refid="classecto_1_1scheduler_1a326022cba6c3154f28f9694b7c9968fd" kind="function"><name>run</name></member>
+    <member refid="classecto_1_1scheduler_1a8d5ce4f97e511341f315bb7621ba38f4" kind="function"><name>run</name></member>
+    <member refid="classecto_1_1scheduler_1a99ac4b8df3d015f6a39d0cf7607cc657" kind="function"><name>running</name></member>
+    <member refid="classecto_1_1scheduler_1a13257817e1cc6c1ce04ef0bfdabc5375" kind="function"><name>executing</name></member>
+    <member refid="classecto_1_1scheduler_1ab974783264da5c33a19110926b5565f4" kind="function"><name>stop</name></member>
+    <member refid="classecto_1_1scheduler_1a99d2f51779f856b3905bb8b493f091c4" kind="function"><name>stats</name></member>
+    <member refid="classecto_1_1scheduler_1abe971e8b6f6c77ab35c862c723b6d5e9" kind="function"><name>state</name></member>
+    <member refid="classecto_1_1scheduler_1a04cb7ea1040fcb02f5c843ca33ffa1a6" kind="function"><name>state</name></member>
+    <member refid="classecto_1_1scheduler_1adc21b65d6b046032648161c16ca89f77" kind="function"><name>execute_init</name></member>
+    <member refid="classecto_1_1scheduler_1ae96db9aa735b4aec8eda6c1ea5616b95" kind="function"><name>execute_iter</name></member>
+    <member refid="classecto_1_1scheduler_1abab4de26974143a076ac532ffac4f67f" kind="function"><name>execute_fini</name></member>
+    <member refid="classecto_1_1scheduler_1ad922a0a31e48a09ae6b6a95a4a1a20e5" kind="function"><name>compute_stack</name></member>
+    <member refid="classecto_1_1scheduler_1a7620d82ec37d2d8da7a4526df6f97083" kind="function"><name>state</name></member>
+    <member refid="classecto_1_1scheduler_1adc21b65d6b046032648161c16ca89f77" kind="function"><name>execute_init</name></member>
+    <member refid="classecto_1_1scheduler_1ae96db9aa735b4aec8eda6c1ea5616b95" kind="function"><name>execute_iter</name></member>
+    <member refid="classecto_1_1scheduler_1abab4de26974143a076ac532ffac4f67f" kind="function"><name>execute_fini</name></member>
+    <member refid="classecto_1_1scheduler_1ae803a977a35883a6a0b8f83e7ba63d3c" kind="function"><name>interrupt</name></member>
+    <member refid="classecto_1_1scheduler_1ad922a0a31e48a09ae6b6a95a4a1a20e5" kind="function"><name>compute_stack</name></member>
+  </compound>
+  <compound refid="classecto_1_1py_1_1scoped__call__back__to__python" kind="class"><name>ecto::py::scoped_call_back_to_python</name>
+    <member refid="classecto_1_1py_1_1scoped__call__back__to__python_1a67de9bb9e263a7e77cefe47e75b18512" kind="variable"><name>gilstate</name></member>
+    <member refid="classecto_1_1py_1_1scoped__call__back__to__python_1a4f4d2f01e986f7b93028996a7bd8498f" kind="variable"><name>have</name></member>
+    <member refid="classecto_1_1py_1_1scoped__call__back__to__python_1a421a7edb2c8c08321c015312217caad7" kind="variable"><name>mystatus</name></member>
+    <member refid="classecto_1_1py_1_1scoped__call__back__to__python_1aa0e62dcba9ee21268b612d0a70849b2d" kind="function"><name>scoped_call_back_to_python</name></member>
+    <member refid="classecto_1_1py_1_1scoped__call__back__to__python_1a55b49e169de3007a19bb3881d96c38cc" kind="function"><name>~scoped_call_back_to_python</name></member>
+  </compound>
+  <compound refid="classecto_1_1py_1_1scoped__gil__release" kind="class"><name>ecto::py::scoped_gil_release</name>
+    <member refid="classecto_1_1py_1_1scoped__gil__release_1a5ecad50e9899f01f3779ac22009af5a4" kind="variable"><name>thread_states</name></member>
+    <member refid="classecto_1_1py_1_1scoped__gil__release_1a9e9fbf0c5819ac1b706437d99a6459a3" kind="variable"><name>mine</name></member>
+    <member refid="classecto_1_1py_1_1scoped__gil__release_1a888a6813c86b9bbd2d5cd0d4a0f7e2f2" kind="variable"><name>mystatus</name></member>
+    <member refid="classecto_1_1py_1_1scoped__gil__release_1afd4cb62267206421eca93969a8bb0865" kind="function"><name>scoped_gil_release</name></member>
+    <member refid="classecto_1_1py_1_1scoped__gil__release_1addd644daf557129d6584829cda6b9cc0" kind="function"><name>~scoped_gil_release</name></member>
+  </compound>
+  <compound refid="classecto_1_1atomic_1_1scoped__lock" kind="class"><name>ecto::atomic::scoped_lock</name>
+    <member refid="classecto_1_1atomic_1_1scoped__lock_1a637b9c7c8246e2ac352cb03fa9f4b229" kind="variable"><name>sl</name></member>
+    <member refid="classecto_1_1atomic_1_1scoped__lock_1a89aa811b27815c91f99b3673a7f76753" kind="variable"><name>value</name></member>
+    <member refid="classecto_1_1atomic_1_1scoped__lock_1aa5a512f623ed5bd0f4010e200ad86e14" kind="function"><name>scoped_lock</name></member>
+  </compound>
+  <compound refid="structecto_1_1spore" kind="class"><name>ecto::spore</name>
+    <member refid="structecto_1_1spore_1aa1e4c8dec72f4671c3469b84136677e4" kind="typedef"><name>this_type</name></member>
+    <member refid="structecto_1_1spore_1af36d72731a0e1b823de1b411c34b1a1c" kind="typedef"><name>value_type</name></member>
+    <member refid="structecto_1_1spore_1a79afa6b324736afc257bc89c6c770f81" kind="typedef"><name>reference_type</name></member>
+    <member refid="structecto_1_1spore_1af00c161eec3285210e59c856aff26456" kind="typedef"><name>pointer_type</name></member>
+    <member refid="structecto_1_1spore_1af1219cc7b5343824699fc7f66a5c5891" kind="typedef"><name>const_pointer_type</name></member>
+    <member refid="structecto_1_1spore_1a162474193fb3865f81f8b49b74858aa3" kind="typedef"><name>unspecified_bool_type</name></member>
+    <member refid="structecto_1_1spore_1a17e2ffe6861f828cad58904d20f117d4" kind="variable"><name>tendril_</name></member>
+    <member refid="structecto_1_1spore_1a6b22569e73747f63644005c77d0fccd8" kind="function"><name>spore</name></member>
+    <member refid="structecto_1_1spore_1af45353900f648ef26ff9eb778dd61f23" kind="function"><name>spore</name></member>
+    <member refid="structecto_1_1spore_1ac46e4114f6e01b3acfa4a7ae4dd9dc67" kind="function"><name>set_callback</name></member>
+    <member refid="structecto_1_1spore_1a979e896020612cd69604f8dad43f412d" kind="function"><name>notify</name></member>
+    <member refid="structecto_1_1spore_1a5eb3c4df0a6b798de09a76e2efbb5fb0" kind="function"><name>set_doc</name></member>
+    <member refid="structecto_1_1spore_1a1d4ad4266f0e03bcf5b3c930cb9428a9" kind="function"><name>set_default_val</name></member>
+    <member refid="structecto_1_1spore_1a3a358fb5a6cf0d18c854399285e98184" kind="function"><name>dirty</name></member>
+    <member refid="structecto_1_1spore_1a82d0d47b28034003965e8f70f4afea59" kind="function"><name>dirty</name></member>
+    <member refid="structecto_1_1spore_1ae982e7c491c3445a6b4672494c6151b7" kind="function"><name>user_supplied</name></member>
+    <member refid="structecto_1_1spore_1a6c1f818917367c7c1e04e2d362257317" kind="function"><name>has_default</name></member>
+    <member refid="structecto_1_1spore_1a94342d6ff2601ae701dc4b66e53cb05c" kind="function"><name>required</name></member>
+    <member refid="structecto_1_1spore_1a3520306f4699901fe09cd0fe0cd29ab0" kind="function"><name>required</name></member>
+    <member refid="structecto_1_1spore_1ad84fe1edeea4944545266bdf3b93556b" kind="function"><name>operator-&gt;</name></member>
+    <member refid="structecto_1_1spore_1aeab6c0fdaf10bf4a3d1570d3eef46bd1" kind="function"><name>operator-&gt;</name></member>
+    <member refid="structecto_1_1spore_1a6d693f3096c3fede0c85351d36adaded" kind="function"><name>operator*</name></member>
+    <member refid="structecto_1_1spore_1ae13ad63a891e8ed71d9010c18b754588" kind="function"><name>operator*</name></member>
+    <member refid="structecto_1_1spore_1ae47aff3850e59591aed5fe2ad0b8d567" kind="function"><name>operator unspecified_bool_type</name></member>
+    <member refid="structecto_1_1spore_1a42f435f8c44fea74854382e0526e36ca" kind="function"><name>get</name></member>
+    <member refid="structecto_1_1spore_1a07c4091d4e5c14c30de319ec0f14b7de" kind="function"><name>get</name></member>
+  </compound>
+  <compound refid="structecto_1_1spore__assign__impl" kind="struct"><name>ecto::spore_assign_impl</name>
+    <member refid="structecto_1_1spore__assign__impl_1a374a7ffdead1191878d49a6ef295ada6" kind="typedef"><name>PtrToMember</name></member>
+    <member refid="structecto_1_1spore__assign__impl_1a4947968d387bce16aab17acdfd094019" kind="typedef"><name>result_type</name></member>
+    <member refid="structecto_1_1spore__assign__impl_1a8d8ead313308f3ecfb7d5f2ed4fbe975" kind="variable"><name>member_</name></member>
+    <member refid="structecto_1_1spore__assign__impl_1a961946cb7f186c6a836467363b747915" kind="variable"><name>key_</name></member>
+    <member refid="structecto_1_1spore__assign__impl_1a13bb14dea6f8005bad7376803d2ec5ea" kind="function"><name>spore_assign_impl</name></member>
+    <member refid="structecto_1_1spore__assign__impl_1af8848e99411d9cfe3bb52e70478f2628" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="structecto_1_1profile_1_1stats__collector" kind="struct"><name>ecto::profile::stats_collector</name>
+    <member refid="structecto_1_1profile_1_1stats__collector_1ae607313a8ecc75d6a6ab201cdf7c2d61" kind="variable"><name>start</name></member>
+    <member refid="structecto_1_1profile_1_1stats__collector_1a1814bc20f4bd96a974fa629249816603" kind="variable"><name>stats</name></member>
+    <member refid="structecto_1_1profile_1_1stats__collector_1a8322226b54061aa2cdccd1461d7fbc4e" kind="variable"><name>instancename</name></member>
+    <member refid="structecto_1_1profile_1_1stats__collector_1adae561b196f7ec50f42ba76031924ee4" kind="function"><name>stats_collector</name></member>
+    <member refid="structecto_1_1profile_1_1stats__collector_1aa1521de3406025190b06d0b7bad33064" kind="function"><name>~stats_collector</name></member>
+    <member refid="structecto_1_1profile_1_1stats__collector_1adae561b196f7ec50f42ba76031924ee4" kind="function"><name>stats_collector</name></member>
+    <member refid="structecto_1_1profile_1_1stats__collector_1aa1521de3406025190b06d0b7bad33064" kind="function"><name>~stats_collector</name></member>
+  </compound>
+  <compound refid="structecto_1_1profile_1_1stats__type" kind="struct"><name>ecto::profile::stats_type</name>
+    <member refid="structecto_1_1profile_1_1stats__type_1a570c8df89c2318ab98757e29670ba70b" kind="variable"><name>ncalls</name></member>
+    <member refid="structecto_1_1profile_1_1stats__type_1affa2973693dec71733bcf8f7b6cf9c0b" kind="variable"><name>total_ticks</name></member>
+    <member refid="structecto_1_1profile_1_1stats__type_1a25c84366176dc49eb9b113a4e74c6b5a" kind="variable"><name>on</name></member>
+    <member refid="structecto_1_1profile_1_1stats__type_1ab34b76c48cbf95d269a5307a5bbb2fe8" kind="function"><name>stats_type</name></member>
+    <member refid="structecto_1_1profile_1_1stats__type_1aca1fbd5470c0485c965f62c796e3286c" kind="function"><name>elapsed_time</name></member>
+    <member refid="structecto_1_1profile_1_1stats__type_1ad595fe2ba3250310a832a776dfc53b9c" kind="function"><name>frequency</name></member>
+    <member refid="structecto_1_1profile_1_1stats__type_1ab34b76c48cbf95d269a5307a5bbb2fe8" kind="function"><name>stats_type</name></member>
+    <member refid="structecto_1_1profile_1_1stats__type_1aca1fbd5470c0485c965f62c796e3286c" kind="function"><name>elapsed_time</name></member>
+    <member refid="structecto_1_1profile_1_1stats__type_1ad595fe2ba3250310a832a776dfc53b9c" kind="function"><name>frequency</name></member>
+  </compound>
+  <compound refid="classboost_1_1python_1_1std__map__indexing__suite" kind="class"><name>boost::python::std_map_indexing_suite</name>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1aff9ed68cf30e805a04a313d92c62ab38" kind="typedef"><name>value_type</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a3e9a6a8b8ba34759cf0ba99fe5966041" kind="typedef"><name>data_type</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a4e2daeb60a58d6ce9964e0ea27680009" kind="typedef"><name>key_type</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a4b2ac75883fba93dbca6d9e83197c842" kind="typedef"><name>index_type</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1ad1c24ad53b2e27b061f75591c74296c2" kind="typedef"><name>size_type</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a54aa644dcb3913334f8b0152901940ef" kind="typedef"><name>difference_type</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1aae0c4473455223a4e048cc207ca7b3ea" kind="typedef"><name>const_iterator</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a802d62d636e685954b7abe3331de7af6" kind="function"><name>pair_getitem</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a09b84169bb3b2ceb9c576c41cd63280e" kind="function"><name>pair_iter</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a639bbbf3265c0cab8419b106590c3857" kind="function"><name>pair_len</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a1d08ce35eb71bc9248f64a515d6d9775" kind="function"><name>keys</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a81c04a5902c3ea0b559b56ab66e600a9" kind="function"><name>values</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a6e44b3f64f0723b75c7e00b8d46bab92" kind="function"><name>items</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a6012daef85763e30ed55ef753933ff1b" kind="function"><name>dict_get</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a56d69ee32c136ed83389eefae5f8df3a" kind="function"><name>dict_pop</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a923cb4bd1266dd53065eba4d3c91279a" kind="function"><name>dict_pop_default</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1af207a28bb4d4a7fa8364139dd0484a84" kind="function"><name>dict_pop_item</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a8aedb678ae655adaf30a5f0200fdeda9" kind="function"><name>dict_fromkeys</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a77daf7a1f7b0da0d6035e91dfa118899" kind="function"><name>dict_update</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1ad2e6c20740dd4ad7058f04e958fc499c" kind="function"><name>make_transform</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a1147c134bf910497fb9a467a21522933" kind="function"><name>print_elem</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a7c13569acfb66f1adb8d92c581091654" kind="function"><name>get_data</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a28a13c6039a1305e3605c6ca3a9803d9" kind="function"><name>get_key</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a8650d42e8d1d7e095f6cfc9e664f0fab" kind="function"><name>get_item</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a5dc3dd492671db19152e7c64b62e9f97" kind="function"><name>set_item</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a9af154020b49d26a30de90bfb07b122d" kind="function"><name>delete_item</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a2a7b98e15824d0e74ae4620cbfa636d0" kind="function"><name>size</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a89557475c8931027399dddf66fb251c1" kind="function"><name>contains</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a62974da613b1b56663d9736a8612bddd" kind="function"><name>compare_index</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a79bc222baa6b652f2f688f2a3add9d75" kind="function"><name>convert_index</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a32aecfee63f8763608a0149050134623" kind="function"><name>extension_def</name></member>
+    <member refid="classboost_1_1python_1_1std__map__indexing__suite_1aeea6d865c496b7145baa50301a4b5702" kind="function"><name>BOOST_PYTHON_FUNCTION_OVERLOADS</name></member>
+  </compound>
+  <compound refid="classboost_1_1python_1_1std__vector__indexing__suite" kind="class"><name>boost::python::std_vector_indexing_suite</name>
+    <member refid="classboost_1_1python_1_1std__vector__indexing__suite_1a9c3db9df25d6966c54154275377c94ce" kind="typedef"><name>data_type</name></member>
+    <member refid="classboost_1_1python_1_1std__vector__indexing__suite_1aad8e15443d4d920d6b15e1781fba568a" kind="typedef"><name>key_type</name></member>
+    <member refid="classboost_1_1python_1_1std__vector__indexing__suite_1a3124827b535a08798fbd33b9fee7b668" kind="typedef"><name>index_type</name></member>
+    <member refid="classboost_1_1python_1_1std__vector__indexing__suite_1af582d879611acb090b6d227a64914cc6" kind="typedef"><name>size_type</name></member>
+    <member refid="classboost_1_1python_1_1std__vector__indexing__suite_1a546a5483c04385c153a5987f5ba16709" kind="typedef"><name>difference_type</name></member>
+    <member refid="classboost_1_1python_1_1std__vector__indexing__suite_1a5245748d2887fb696789dd5d3aa789ab" kind="function"><name>extension_def</name></member>
+    <member refid="classboost_1_1python_1_1std__vector__indexing__suite_1a04e38bebceb369bd5f81f4a7558368bb" kind="function"><name>get_item</name></member>
+    <member refid="classboost_1_1python_1_1std__vector__indexing__suite_1a4123e6c0c99de706c07b215cb4828e91" kind="function"><name>get_slice</name></member>
+    <member refid="classboost_1_1python_1_1std__vector__indexing__suite_1a8093bf206598b549f350eb7ab4d59d8a" kind="function"><name>set_item</name></member>
+    <member refid="classboost_1_1python_1_1std__vector__indexing__suite_1a5860806d99df81ed866c00d4af262ab2" kind="function"><name>set_slice</name></member>
+    <member refid="classboost_1_1python_1_1std__vector__indexing__suite_1a953bb2f295f9b910a62ddf3b03b4ea9f" kind="function"><name>set_slice</name></member>
+    <member refid="classboost_1_1python_1_1std__vector__indexing__suite_1a477ccd2f35d93733914492e270ed93a3" kind="function"><name>delete_item</name></member>
+    <member refid="classboost_1_1python_1_1std__vector__indexing__suite_1a4e5036ad4dcbeabac4810e0bdcd0fc6a" kind="function"><name>delete_slice</name></member>
+    <member refid="classboost_1_1python_1_1std__vector__indexing__suite_1a059f5de12aa0af411f52015dd27b0a19" kind="function"><name>size</name></member>
+    <member refid="classboost_1_1python_1_1std__vector__indexing__suite_1ada4d804650938d5b87d4efce91531c1b" kind="function"><name>contains</name></member>
+    <member refid="classboost_1_1python_1_1std__vector__indexing__suite_1acd47ccbb06430a34f564ee676d39e7b8" kind="function"><name>get_min_index</name></member>
+    <member refid="classboost_1_1python_1_1std__vector__indexing__suite_1aa9957225fda1af9c656fa851f98cf869" kind="function"><name>get_max_index</name></member>
+    <member refid="classboost_1_1python_1_1std__vector__indexing__suite_1a1c4278e0572c2d6e0078d96528894e5c" kind="function"><name>compare_index</name></member>
+    <member refid="classboost_1_1python_1_1std__vector__indexing__suite_1ae4228941b0d743b8cfd1362fe95a1795" kind="function"><name>convert_index</name></member>
+    <member refid="classboost_1_1python_1_1std__vector__indexing__suite_1a317a62cce09e40822e7c376cd6afc7b4" kind="function"><name>append</name></member>
+    <member refid="classboost_1_1python_1_1std__vector__indexing__suite_1a1e7c971129b8f99b579fbe311ce378d6" kind="function"><name>extend</name></member>
+    <member refid="classboost_1_1python_1_1std__vector__indexing__suite_1a0857a3ee7c2b30c2d4b3452c8d16665e" kind="function"><name>base_append</name></member>
+    <member refid="classboost_1_1python_1_1std__vector__indexing__suite_1a1860d96ad96a74166d03d433826a5249" kind="function"><name>container_from_object</name></member>
+    <member refid="classboost_1_1python_1_1std__vector__indexing__suite_1acac3b93b150b5101da9b16e961ea4f09" kind="function"><name>base_extend</name></member>
+  </compound>
+  <compound refid="structecto_1_1strand" kind="struct"><name>ecto::strand</name>
+    <member refid="structecto_1_1strand_1a084e92534065005498a40649cf340cdb" kind="variable"><name>impl_</name></member>
+    <member refid="structecto_1_1strand_1a725689a7162bf15ff81cbc8007047544" kind="function"><name>strand</name></member>
+    <member refid="structecto_1_1strand_1a426cd63d46582d61ca662b4da9a34efd" kind="function"><name>~strand</name></member>
+    <member refid="structecto_1_1strand_1a99ce04e7c9d0152049fcee57a8e9c8f0" kind="function"><name>id</name></member>
+    <member refid="structecto_1_1strand_1a251900ed19b2c9019fd4829927d95fc1" kind="function"><name>reset</name></member>
+    <member refid="structecto_1_1strand_1a687f2ed8d061a09fd2b9e63f91849369" kind="friend"><name>operator==</name></member>
+    <member refid="structecto_1_1strand_1a405520dc3f966a737e21988538ff8a24" kind="friend"><name>on_strand</name></member>
+  </compound>
+  <compound refid="structecto_1_1strand__hash" kind="struct"><name>ecto::strand_hash</name>
+    <member refid="structecto_1_1strand__hash_1a393c00cad7586e1d7a76cf44c95aaa4a" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="classecto_1_1py_1_1streambuf" kind="class"><name>ecto::py::streambuf</name>
+    <member refid="classecto_1_1py_1_1streambuf_1ac46c69e7d213fec69f80d1943389366c" kind="typedef"><name>base_t</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1acd255be6a50678c600c431c5bea7bc7b" kind="typedef"><name>char_type</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1a1bfd3d3f54b7b91a5ea54f980436a617" kind="typedef"><name>int_type</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1afdd3f60ff0d0b2f4645742690b7d27dd" kind="typedef"><name>pos_type</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1aa01772d1599fc51089a209a69fcab7c7" kind="typedef"><name>off_type</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1aaf8a5185360343bec29d804d5b416417" kind="typedef"><name>traits_type</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1a7a20a01fb9aeda8677b3c65bccd6b59d" kind="variable"><name>default_buffer_size</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1a77a192df96e66a2e19cdfce078017df8" kind="variable"><name>py_read</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1aad739c2392d3c8f0de7d44719c7cc37a" kind="variable"><name>py_write</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1ad4e0dc91a74411d2181897d026ff945b" kind="variable"><name>py_seek</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1a3735b9e199be3e58c277354127a86146" kind="variable"><name>py_tell</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1a8d60fa297a9140474d136a48342ac850" kind="variable"><name>buffer_size</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1ac239012691e5d3485572159a53600005" kind="variable"><name>read_buffer</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1a331e541fac616ac9ac3a81fb117057c6" kind="variable"><name>write_buffer</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1a7b219ca66aa176fdfbc9d6fb63d15cef" kind="variable"><name>pos_of_read_buffer_end_in_py_file</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1a1775b9bced7a5ff74fe30c788e20ad9e" kind="variable"><name>pos_of_write_buffer_end_in_py_file</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1a8267e360cfb0201b1518a0dfd3d7c353" kind="variable"><name>farthest_pptr</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1a63254ed85f60504895f526272e19dd34" kind="variable"><name>file_obj</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1ab4446bbe746f4d3713c15492d798872e" kind="function"><name>traits_type_eof</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1a363d9b87292423903bc5fe94782ad6e0" kind="function"><name>streambuf</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1a3a63f6d4610731b218bcdca5603a51ef" kind="function"><name>~streambuf</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1aba2bcdbeeee00b043f918e60f86ebdd4" kind="function"><name>showmanyc</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1adf2601f0f067538a980dced85e8f8d2e" kind="function"><name>underflow</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1a6eb250e56b6bbc9345b4f00981e4182f" kind="function"><name>overflow</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1af09b35e1d7da997aacdf99c8802c0fa2" kind="function"><name>sync</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1af30e4b5af87fcc71a7974b1c00721dbb" kind="function"><name>seekoff</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1a5763f3ff57fc8044b30a695ad7c403f7" kind="function"><name>seekpos</name></member>
+    <member refid="classecto_1_1py_1_1streambuf_1a367a7e20642d4a3ebcefd2f6abc3c3e6" kind="function"><name>seekoff_without_calling_python</name></member>
+  </compound>
+  <compound refid="structecto_1_1py_1_1streambuf__capsule" kind="struct"><name>ecto::py::streambuf_capsule</name>
+    <member refid="structecto_1_1py_1_1streambuf__capsule_1af18572e50f3cc158db18b7c0655ccd33" kind="variable"><name>python_streambuf</name></member>
+    <member refid="structecto_1_1py_1_1streambuf__capsule_1ad175cd2ce674303c092041a5da481b73" kind="function"><name>streambuf_capsule</name></member>
+    <member refid="structecto_1_1py_1_1streambuf__capsule_1a716c8fa0af952120d46dd781409c4af4" kind="function"><name>get_original_file</name></member>
+  </compound>
+  <compound refid="classecto_1_1tendril" kind="class"><name>ecto::tendril</name>
+    <member refid="classecto_1_1tendril_1a50eb3613436e99dc4dfa670141ccd91a" kind="enum"><name>@16</name></member>
+    <member refid="classecto_1_1tendril_1a50eb3613436e99dc4dfa670141ccd91aa122dd16c5a22a6e22c7caedf7be1d92f" kind="enumvalue"><name>DEFAULT_VALUE</name></member>
+    <member refid="classecto_1_1tendril_1a50eb3613436e99dc4dfa670141ccd91aa7ae45e8526726df642f14c19db78564d" kind="enumvalue"><name>DIRTY</name></member>
+    <member refid="classecto_1_1tendril_1a50eb3613436e99dc4dfa670141ccd91aa26dbd8778d8007b845bb247f6ce87ff8" kind="enumvalue"><name>USER_SUPPLIED</name></member>
+    <member refid="classecto_1_1tendril_1a50eb3613436e99dc4dfa670141ccd91aac686a7ccc1227f1ae09d79536683136b" kind="enumvalue"><name>REQUIRED</name></member>
+    <member refid="classecto_1_1tendril_1a50eb3613436e99dc4dfa670141ccd91aa4906c6f7c63b6934ea683ea05716abee" kind="enumvalue"><name>OPTIONAL</name></member>
+    <member refid="classecto_1_1tendril_1a50eb3613436e99dc4dfa670141ccd91aa8748e76437a722b0cfb3652fefd47d67" kind="enumvalue"><name>N_FLAGS</name></member>
+    <member refid="classecto_1_1tendril_1ad312bffc767516bd2340d02cd9e218ae" kind="typedef"><name>TendrilJob</name></member>
+    <member refid="classecto_1_1tendril_1a59a62b4ac15de3a6a63a515dace8c420" kind="typedef"><name>job_signal_t</name></member>
+    <member refid="classecto_1_1tendril_1ab8098c05197f972a821c8b094b9a6010" kind="variable"><name>empty</name></member>
+    <member refid="classecto_1_1tendril_1a8bc7ae1c22c1af9765284666af02868b" kind="variable"><name>holder_</name></member>
+    <member refid="classecto_1_1tendril_1a5b237bfa0a9acefc48d577b77380058d" kind="variable"><name>type_ID_</name></member>
+    <member refid="classecto_1_1tendril_1a6e8304d03aa8a24be843d3bb8d26332d" kind="variable"><name>doc_</name></member>
+    <member refid="classecto_1_1tendril_1a7b2a11ba7c80606fafda80d34b0a1bfe" kind="variable"><name>flags_</name></member>
+    <member refid="classecto_1_1tendril_1acf171c75c0ace5cd108e8355ee83199c" kind="variable"><name>jobs_</name></member>
+    <member refid="classecto_1_1tendril_1ac4d6bcc7c0f82c7017a9e0c53a942121" kind="variable"><name>converter</name></member>
+    <member refid="classecto_1_1tendril_1aa775aa54d52fbb5b7d2812dd904ea90d" kind="function"><name>tendril</name></member>
+    <member refid="classecto_1_1tendril_1abb8f8d05782b38994938e58741f4a9d2" kind="function"><name>~tendril</name></member>
+    <member refid="classecto_1_1tendril_1a6943a97fe2565d6fe9f3846c1f0e7f0f" kind="function"><name>tendril</name></member>
+    <member refid="classecto_1_1tendril_1ae243d8cfce7c2c1c2de255de9494d0fe" kind="function"><name>operator=</name></member>
+    <member refid="classecto_1_1tendril_1a24e2db86267573daae84264cd25159e3" kind="function"><name>tendril</name></member>
+    <member refid="classecto_1_1tendril_1abc5115b6657e60dba3ef4135759c4e64" kind="function"><name>type_name</name></member>
+    <member refid="classecto_1_1tendril_1aaeae99c2cf8c8c391e0328bfcf967a83" kind="function"><name>type_id</name></member>
+    <member refid="classecto_1_1tendril_1abbe2652bc7ca2d65b63feef0c9561891" kind="function"><name>doc</name></member>
+    <member refid="classecto_1_1tendril_1ad56ae7364e7f7464eba444aebc50adc8" kind="function"><name>set_doc</name></member>
+    <member refid="classecto_1_1tendril_1a9186713043e34915df9488fb135110b3" kind="function"><name>set_default_val</name></member>
+    <member refid="classecto_1_1tendril_1a216eb6b817644e1dfd76d3ba07d0ced7" kind="function"><name>required</name></member>
+    <member refid="classecto_1_1tendril_1aa10be79605183977989cf01956aedeb6" kind="function"><name>required</name></member>
+    <member refid="classecto_1_1tendril_1aeeacd721a1d85f6c71c6d238b47c17f6" kind="function"><name>get</name></member>
+    <member refid="classecto_1_1tendril_1a25420b71b89431659b310730ca6c55f0" kind="function"><name>get</name></member>
+    <member refid="classecto_1_1tendril_1ab02075b0d910360104974c1771edcc7f" kind="function"><name>operator&lt;&lt;</name></member>
+    <member refid="classecto_1_1tendril_1af9df4c4225712b440c9340d8969e337e" kind="function"><name>operator&lt;&lt;</name></member>
+    <member refid="classecto_1_1tendril_1adbf8a7e6ac9bc41d9a17f2f362e8d3f6" kind="function"><name>operator&lt;&lt;</name></member>
+    <member refid="classecto_1_1tendril_1adec0a36989492e2bd9ae9f03f954b9af" kind="function"><name>is_type</name></member>
+    <member refid="classecto_1_1tendril_1a7974ef8e1d4cd1936a72c429c0f3dbf7" kind="function"><name>same_type</name></member>
+    <member refid="classecto_1_1tendril_1a7033cbab493d0120443b69c951e5d26c" kind="function"><name>compatible_type</name></member>
+    <member refid="classecto_1_1tendril_1ae856d0e8b9b6eb899e9b6a9b6472e231" kind="function"><name>enforce_compatible_type</name></member>
+    <member refid="classecto_1_1tendril_1a9322a1212d70252a9a7c4f5192871475" kind="function"><name>enforce_type</name></member>
+    <member refid="classecto_1_1tendril_1a8c46edfd052cdae0fef4705d5f5943c6" kind="function"><name>user_supplied</name></member>
+    <member refid="classecto_1_1tendril_1a3aa500420a52a0546e21105b3fb96ad0" kind="function"><name>user_supplied</name></member>
+    <member refid="classecto_1_1tendril_1af8a2ace0ae30083415116db06644ba17" kind="function"><name>has_default</name></member>
+    <member refid="classecto_1_1tendril_1a94a24ca32acd13f83f5af41030a77fdf" kind="function"><name>connect</name></member>
+    <member refid="classecto_1_1tendril_1ab3c536756c1b4eb24c97691d23eb485a" kind="function"><name>set_callback</name></member>
+    <member refid="classecto_1_1tendril_1a87c2df829c12bcd46089d74183c1d8d8" kind="function"><name>notify</name></member>
+    <member refid="classecto_1_1tendril_1aabe2c05389023df143746b5b63b7701e" kind="function"><name>dirty</name></member>
+    <member refid="classecto_1_1tendril_1a9c2bb6262190404d3b1648cdcc2960d8" kind="function"><name>dirty</name></member>
+    <member refid="classecto_1_1tendril_1a0c843f467b21eee9e5bba8f3f8bc14aa" kind="function"><name>operator&gt;&gt;</name></member>
+    <member refid="classecto_1_1tendril_1af019a42fb91908e32db96b84f4a0f978" kind="function"><name>operator&gt;&gt;</name></member>
+    <member refid="classecto_1_1tendril_1aade5aa6d8c439ff515e312f5c9950ec9" kind="function"><name>operator&gt;&gt;</name></member>
+    <member refid="classecto_1_1tendril_1aaa5858033151487cab9e98e50c79887b" kind="function"><name>operator&gt;&gt;</name></member>
+    <member refid="classecto_1_1tendril_1ad0b2e6eaec37bd46a474ed974ab4272b" kind="function"><name>operator&gt;&gt;</name></member>
+    <member refid="classecto_1_1tendril_1a697125cfa2b1b53ada4e5e2ee6847181" kind="function"><name>serialize</name></member>
+    <member refid="classecto_1_1tendril_1a28d02ba43d5ab79639436674ceb4316e" kind="function"><name>unsafe_get</name></member>
+    <member refid="classecto_1_1tendril_1ab3844fa9929e75160b6d8597d1c44cf9" kind="function"><name>unsafe_get</name></member>
+    <member refid="classecto_1_1tendril_1ae8da62875367ec7b906f1f350dff4492" kind="function"><name>set_holder</name></member>
+    <member refid="classecto_1_1tendril_1a1751ddffc72288bfbd460a559a276a76" kind="function"><name>copy_holder</name></member>
+    <member refid="classecto_1_1tendril_1a8ed098a7d9ba3269b0626dbc652acbce" kind="friend"><name>operator&gt;&gt;</name></member>
+    <member refid="classecto_1_1tendril_1aceb1e0490d8850a65097e1133128872d" kind="friend"><name>operator&gt;&gt;</name></member>
+    <member refid="classecto_1_1tendril_1a35ebb8c910d87ca418e2ddfb290c5d9d" kind="friend"><name>operator&gt;&gt;</name></member>
+    <member refid="classecto_1_1tendril_1a18f3881527bb0fd1b375b6bf00369f43" kind="friend"><name>operator&lt;&lt;</name></member>
+    <member refid="classecto_1_1tendril_1acd75e54b603d2a22cddc47149956d395" kind="friend"><name>operator&lt;&lt;</name></member>
+    <member refid="classecto_1_1tendril_1a53f493493716022d7e6c2b897d0ce715" kind="friend"><name>operator&lt;&lt;</name></member>
+    <member refid="classecto_1_1tendril_1adb5f2d5bf635a25473997e793f29a5a7" kind="friend"><name>make_tendril</name></member>
+  </compound>
+  <compound refid="classecto_1_1tendrils" kind="class"><name>ecto::tendrils</name>
+    <member refid="classecto_1_1tendrils_1a3647503829f1b29de220584d265c63fb" kind="typedef"><name>storage_type</name></member>
+    <member refid="classecto_1_1tendrils_1a6f0b7bd6e3a03f047351303630b889e0" kind="typedef"><name>iterator</name></member>
+    <member refid="classecto_1_1tendrils_1a86df9983555ca4ebdae8b1d36aa4bbd8" kind="typedef"><name>const_iterator</name></member>
+    <member refid="classecto_1_1tendrils_1a736870868e76890e198448924cecdd4f" kind="typedef"><name>value_type</name></member>
+    <member refid="classecto_1_1tendrils_1aa6165c6ab72d93cd56796ea81e450245" kind="typedef"><name>key_type</name></member>
+    <member refid="classecto_1_1tendrils_1af3726f822a4fd60a1095bba31f1926ef" kind="typedef"><name>size_type</name></member>
+    <member refid="classecto_1_1tendrils_1a919b9a4666ad641148b6a432a1fd08fb" kind="typedef"><name>difference_type</name></member>
+    <member refid="classecto_1_1tendrils_1aa347bebda44153437e8554a25bed9e6b" kind="typedef"><name>key_compare</name></member>
+    <member refid="classecto_1_1tendrils_1aca7990b4d8ccfbddfb4d5c805345ca23" kind="typedef"><name>sig_t</name></member>
+    <member refid="classecto_1_1tendrils_1afaa587298937ffa94ccfefc8a97b4edc" kind="variable"><name>storage</name></member>
+    <member refid="classecto_1_1tendrils_1a40635d009ae082dccde9486c1293212e" kind="variable"><name>static_bindings_</name></member>
+    <member refid="classecto_1_1tendrils_1a4e76bfe7ed91c88fa8bd3249c275c0ef" kind="function"><name>tendrils</name></member>
+    <member refid="classecto_1_1tendrils_1a1191620f21a9dc618eb4380e2cf48b63" kind="function"><name>begin</name></member>
+    <member refid="classecto_1_1tendrils_1a10d0c932826165f25406b849b958ad27" kind="function"><name>begin</name></member>
+    <member refid="classecto_1_1tendrils_1ae77c08ecbfff9aa13b442e4e9eb11441" kind="function"><name>end</name></member>
+    <member refid="classecto_1_1tendrils_1aec3278598a3d3bc3c3810ec3cecf72cb" kind="function"><name>end</name></member>
+    <member refid="classecto_1_1tendrils_1a4af12838006b6cfda8157dc3957c166e" kind="function"><name>find</name></member>
+    <member refid="classecto_1_1tendrils_1af0ef7fa5535b477b83620a66331a475b" kind="function"><name>find</name></member>
+    <member refid="classecto_1_1tendrils_1ac7bfc201ab8170684307cb7095323c2d" kind="function"><name>clear</name></member>
+    <member refid="classecto_1_1tendrils_1a3f86ef76f17dbde432321239fcbfd639" kind="function"><name>size</name></member>
+    <member refid="classecto_1_1tendrils_1aa6bc2c6a64d087c1b516119d0550f83c" kind="function"><name>count</name></member>
+    <member refid="classecto_1_1tendrils_1a700cd209735e5b6254669a6f9c16b74f" kind="function"><name>erase</name></member>
+    <member refid="classecto_1_1tendrils_1a58aa945fa23bdeef212ea4a69d077e52" kind="function"><name>erase</name></member>
+    <member refid="classecto_1_1tendrils_1ac8926dfa72716d030751e09f6461fa6c" kind="function"><name>insert</name></member>
+    <member refid="classecto_1_1tendrils_1a98adbbe057fc34545cd51c7deeafca2f" kind="function"><name>insert</name></member>
+    <member refid="classecto_1_1tendrils_1ab56662cb08014858ce9df9403a357954" kind="function"><name>key_comp</name></member>
+    <member refid="classecto_1_1tendrils_1aebef8c562cb501738d2a7f8fa5e53518" kind="function"><name>declare</name></member>
+    <member refid="classecto_1_1tendrils_1a58b219396a7e5ca2f2876efc2f66aa38" kind="function"><name>declare</name></member>
+    <member refid="classecto_1_1tendrils_1a89e7ed34481d3ed987ddfd5ba35174ae" kind="function"><name>declare</name></member>
+    <member refid="classecto_1_1tendrils_1a65a2a2745bd52ccc827c63d4cc016224" kind="function"><name>declare</name></member>
+    <member refid="classecto_1_1tendrils_1a1072755c7df91725bcabb7dc65db103b" kind="function"><name>realize_potential</name></member>
+    <member refid="classecto_1_1tendrils_1aa32bcd230653775b655b63a415a349eb" kind="function"><name>declare</name></member>
+    <member refid="classecto_1_1tendrils_1a43aea6bf46edc5921a9768838b9fbe93" kind="function"><name>get</name></member>
+    <member refid="classecto_1_1tendrils_1a2462fa379fff3d0f81afa8eb40d45624" kind="function"><name>operator[]</name></member>
+    <member refid="classecto_1_1tendrils_1a774ab854c749359953b44ffdaa62456c" kind="function"><name>operator[]</name></member>
+    <member refid="classecto_1_1tendrils_1a3e29152c1c0979cf02219d0e02b8fb5e" kind="function"><name>print_doc</name></member>
+    <member refid="classecto_1_1tendrils_1aa9839d00f20cf2a3b87c0cbf19864a4f" kind="function"><name>serialize</name></member>
+    <member refid="classecto_1_1tendrils_1aa33d16327157994060a8051d2bbe018e" kind="function"><name>doesnt_exist</name></member>
+    <member refid="classecto_1_1tendrils_1a7ee52bb996bd2ec581ff2008dea341dc" kind="function"><name>tendrils</name></member>
+  </compound>
+  <compound refid="structecto_1_1abi_1_1verifier" kind="struct"><name>ecto::abi::verifier</name>
+    <member refid="structecto_1_1abi_1_1verifier_1abdc30e8e14063a743a8f4b185f2b0cee" kind="function"><name>verifier</name></member>
+  </compound>
+  <compound refid="classecto_1_1graph_1_1vertex" kind="class"><name>ecto::graph::vertex</name>
+    <member refid="classecto_1_1graph_1_1vertex_1a14485eadc4288f5d4e5e32e6b5218ec7" kind="variable"><name>cell_</name></member>
+    <member refid="classecto_1_1graph_1_1vertex_1abf79016904200297ba32e42534c8ac53" kind="variable"><name>stats_</name></member>
+    <member refid="classecto_1_1graph_1_1vertex_1a18cea5500866c9d86ce252e84d3881c6" kind="function"><name>vertex</name></member>
+    <member refid="classecto_1_1graph_1_1vertex_1aa5876238d51eb82bed7a17414bd74132" kind="function"><name>cell</name></member>
+    <member refid="classecto_1_1graph_1_1vertex_1a7b2bed5e1305cc26855c5bc8bc6884df" kind="function"><name>cell</name></member>
+    <member refid="classecto_1_1graph_1_1vertex_1a38bfe554aa3f8413769be22dff0ea2c3" kind="function"><name>stats</name></member>
+    <member refid="classecto_1_1graph_1_1vertex_1a522f60e25aa0d769b3826911e0c69d6f" kind="function"><name>stats</name></member>
+    <member refid="classecto_1_1graph_1_1vertex_1a18cea5500866c9d86ce252e84d3881c6" kind="function"><name>vertex</name></member>
+    <member refid="classecto_1_1graph_1_1vertex_1aa5876238d51eb82bed7a17414bd74132" kind="function"><name>cell</name></member>
+    <member refid="classecto_1_1graph_1_1vertex_1a7b2bed5e1305cc26855c5bc8bc6884df" kind="function"><name>cell</name></member>
+    <member refid="classecto_1_1graph_1_1vertex_1a38bfe554aa3f8413769be22dff0ea2c3" kind="function"><name>stats</name></member>
+    <member refid="classecto_1_1graph_1_1vertex_1a522f60e25aa0d769b3826911e0c69d6f" kind="function"><name>stats</name></member>
+  </compound>
+  <compound refid="structecto_1_1except_1_1detail_1_1wrap" kind="struct"><name>ecto::except::detail::wrap</name>
+  </compound>
+  <compound refid="structecto_1_1serialization_1_1writer__" kind="struct"><name>ecto::serialization::writer_</name>
+    <member refid="structecto_1_1serialization_1_1writer___1a7a5dbe7d60f82a5e8d7eafe31be2c893" kind="typedef"><name>value_type</name></member>
+    <member refid="structecto_1_1serialization_1_1writer___1ae8cb26a463f934177654f5a0c3a397bb" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="namespaceboost" kind="namespace"><name>boost</name>
+    <member refid="namespaceboost_1ac098a4e20f2e80e827e2022ad264473a" kind="function"><name>BOOST_PP_SEQ_FOR_EACH</name></member>
+    <member refid="namespaceboost_1a54199d7ccb025863b84b2b597328302c" kind="function"><name>operator&lt;&lt;</name></member>
+  </compound>
+  <compound refid="namespaceboost_1_1python" kind="namespace"><name>boost::python</name>
+    <member refid="namespaceboost_1_1python_1a20a5b1e179218af6c459e8c6fdf8b8cc" kind="function"><name>raw_constructor</name></member>
+  </compound>
+  <compound refid="namespaceboost_1_1python_1_1detail" kind="namespace"><name>boost::python::detail</name>
+  </compound>
+  <compound refid="namespaceboost_1_1serialization" kind="namespace"><name>boost::serialization</name>
+    <member refid="namespaceboost_1_1serialization_1a2426e0778002bc8706de04819006b274" kind="function"><name>save</name></member>
+    <member refid="namespaceboost_1_1serialization_1a05438bec420c8465b28eab17e1e1dc16" kind="function"><name>load</name></member>
+  </compound>
+  <compound refid="namespaceecto" kind="namespace"><name>ecto</name>
+    <member refid="namespaceecto_1a02939764b22968505f82e425c83272c2" kind="enum"><name>tendril_type</name></member>
+    <member refid="namespaceecto_1a02939764b22968505f82e425c83272c2a2a607ed53342989a455e71bf3a78cb08" kind="enumvalue"><name>OUTPUT</name></member>
+    <member refid="namespaceecto_1a02939764b22968505f82e425c83272c2adf3175f3e2ad3637b6fca943b4cc7672" kind="enumvalue"><name>INPUT</name></member>
+    <member refid="namespaceecto_1a02939764b22968505f82e425c83272c2a39346743c7a624185996a561642a9aaa" kind="enumvalue"><name>PARAMETER</name></member>
+    <member refid="namespaceecto_1a93d82cd28db695d53963fb696582762c" kind="enum"><name>ReturnCode</name></member>
+    <member refid="namespaceecto_1a93d82cd28db695d53963fb696582762ca93233d0e6456b2e8f52d285b74c463c8" kind="enumvalue"><name>OK</name></member>
+    <member refid="namespaceecto_1a93d82cd28db695d53963fb696582762ca2f13d3238ae038f318ed92ac37bb8e35" kind="enumvalue"><name>QUIT</name></member>
+    <member refid="namespaceecto_1a93d82cd28db695d53963fb696582762cae5d8da4794c8cb4bef2ea7d344b5a6ef" kind="enumvalue"><name>DO_OVER</name></member>
+    <member refid="namespaceecto_1a93d82cd28db695d53963fb696582762caa1fa43a25faf4b9de785d390013c664b" kind="enumvalue"><name>BREAK</name></member>
+    <member refid="namespaceecto_1a93d82cd28db695d53963fb696582762ca65d745b18bdbe2335a48275e09547760" kind="enumvalue"><name>CONTINUE</name></member>
+    <member refid="namespaceecto_1a93d82cd28db695d53963fb696582762caef5b25213be1330790a3112518e3a44b" kind="enumvalue"><name>UNKNOWN</name></member>
+    <member refid="namespaceecto_1a93d82cd28db695d53963fb696582762ca93233d0e6456b2e8f52d285b74c463c8" kind="enumvalue"><name>OK</name></member>
+    <member refid="namespaceecto_1a93d82cd28db695d53963fb696582762ca2f13d3238ae038f318ed92ac37bb8e35" kind="enumvalue"><name>QUIT</name></member>
+    <member refid="namespaceecto_1a93d82cd28db695d53963fb696582762cae5d8da4794c8cb4bef2ea7d344b5a6ef" kind="enumvalue"><name>DO_OVER</name></member>
+    <member refid="namespaceecto_1a93d82cd28db695d53963fb696582762caa1fa43a25faf4b9de785d390013c664b" kind="enumvalue"><name>BREAK</name></member>
+    <member refid="namespaceecto_1a93d82cd28db695d53963fb696582762ca65d745b18bdbe2335a48275e09547760" kind="enumvalue"><name>CONTINUE</name></member>
+    <member refid="namespaceecto_1a93d82cd28db695d53963fb696582762caef5b25213be1330790a3112518e3a44b" kind="enumvalue"><name>UNKNOWN</name></member>
+    <member refid="namespaceecto_1a93d82cd28db695d53963fb696582762c" kind="enum"><name>ReturnCode</name></member>
+    <member refid="namespaceecto_1a93d82cd28db695d53963fb696582762ca93233d0e6456b2e8f52d285b74c463c8" kind="enumvalue"><name>OK</name></member>
+    <member refid="namespaceecto_1a93d82cd28db695d53963fb696582762ca2f13d3238ae038f318ed92ac37bb8e35" kind="enumvalue"><name>QUIT</name></member>
+    <member refid="namespaceecto_1a93d82cd28db695d53963fb696582762cae5d8da4794c8cb4bef2ea7d344b5a6ef" kind="enumvalue"><name>DO_OVER</name></member>
+    <member refid="namespaceecto_1a93d82cd28db695d53963fb696582762caa1fa43a25faf4b9de785d390013c664b" kind="enumvalue"><name>BREAK</name></member>
+    <member refid="namespaceecto_1a93d82cd28db695d53963fb696582762ca65d745b18bdbe2335a48275e09547760" kind="enumvalue"><name>CONTINUE</name></member>
+    <member refid="namespaceecto_1a93d82cd28db695d53963fb696582762caef5b25213be1330790a3112518e3a44b" kind="enumvalue"><name>UNKNOWN</name></member>
+    <member refid="namespaceecto_1a93d82cd28db695d53963fb696582762ca93233d0e6456b2e8f52d285b74c463c8" kind="enumvalue"><name>OK</name></member>
+    <member refid="namespaceecto_1a93d82cd28db695d53963fb696582762ca2f13d3238ae038f318ed92ac37bb8e35" kind="enumvalue"><name>QUIT</name></member>
+    <member refid="namespaceecto_1a93d82cd28db695d53963fb696582762cae5d8da4794c8cb4bef2ea7d344b5a6ef" kind="enumvalue"><name>DO_OVER</name></member>
+    <member refid="namespaceecto_1a93d82cd28db695d53963fb696582762caa1fa43a25faf4b9de785d390013c664b" kind="enumvalue"><name>BREAK</name></member>
+    <member refid="namespaceecto_1a93d82cd28db695d53963fb696582762ca65d745b18bdbe2335a48275e09547760" kind="enumvalue"><name>CONTINUE</name></member>
+    <member refid="namespaceecto_1a93d82cd28db695d53963fb696582762caef5b25213be1330790a3112518e3a44b" kind="enumvalue"><name>UNKNOWN</name></member>
+    <member refid="namespaceecto_1a96ba8fa498cc4b8e2a0217a9e236b50d" kind="typedef"><name>stamp_t</name></member>
+    <member refid="namespaceecto_1a5bbe8fb0da047cb18d92eb9dfb469652" kind="typedef"><name>ptime_t</name></member>
+    <member refid="namespaceecto_1a0952d5ebd059cbd79b978ecab9ec781c" kind="typedef"><name>ptime_duration_t</name></member>
+    <member refid="namespaceecto_1a477c167c1e1288b689db5872f650540e" kind="typedef"><name>hours_t</name></member>
+    <member refid="namespaceecto_1ad57e5ebf1455dd895ce11804e47669e5" kind="typedef"><name>minutes_t</name></member>
+    <member refid="namespaceecto_1ae14f91b3661ad9cb774590b15407742c" kind="typedef"><name>seconds_t</name></member>
+    <member refid="namespaceecto_1ab1f4721cc3b311f9615b3092d291260b" kind="typedef"><name>millisec_t</name></member>
+    <member refid="namespaceecto_1affe36dc8be6d20a6b8f7359655c8dc23" kind="typedef"><name>microsec_t</name></member>
+    <member refid="namespaceecto_1a84fb5f6130275382e5cbeb5fdececa78" kind="typedef"><name>tendril_ptr</name></member>
+    <member refid="namespaceecto_1ad01f26ee47597f71a6f86ee34bb3ffe4" kind="typedef"><name>tendril_cptr</name></member>
+    <member refid="namespaceecto_1a89953a225525948cb71d5488c3c6472b" kind="typedef"><name>tendrils_ptr</name></member>
+    <member refid="namespaceecto_1a6165b23b34082cfc17104ca7e9f1b212" kind="typedef"><name>tendrils_cptr</name></member>
+    <member refid="namespaceecto_1aed1809e82b9229ea81ef9ee3438cf62c" kind="typedef"><name>cell_ptr</name></member>
+    <member refid="namespaceecto_1ab708c826226c91fd6f3c8c121f293a78" kind="typedef"><name>cell_cptr</name></member>
+    <member refid="namespaceecto_1a6b83be6cd685db71f03b14871653475f" kind="typedef"><name>plasm_ptr</name></member>
+    <member refid="namespaceecto_1a5a9973f00c94e30353acb27c3d2fa836" kind="typedef"><name>plasm_cptr</name></member>
+    <member refid="namespaceecto_1a98ca3b7b690de778292922c806e7588d" kind="typedef"><name>strand_ptr</name></member>
+    <member refid="namespaceecto_1abbad20d834739bbf762269e4e04a6732" kind="typedef"><name>strand_cptr</name></member>
+    <member refid="namespaceecto_1a776138cb830340922312c3ec98c15b6d" kind="function"><name>spore_assign</name></member>
+    <member refid="namespaceecto_1a3870bebbdf6a0d01f28424e402be2834" kind="function"><name>log</name></member>
+    <member refid="namespaceecto_1af79493e380ac31e886186e2ba1a1b809" kind="function"><name>assert_failed</name></member>
+    <member refid="namespaceecto_1a34c1f436c47dc08392c8248632cde6f0" kind="function"><name>logging_on</name></member>
+    <member refid="namespaceecto_1a7300f29f56aab7f09d11060432ad081e" kind="function"><name>ReturnCodeToStr</name></member>
+    <member refid="namespaceecto_1a653dab75b6cd892233b9f3676a5d2921" kind="function"><name>on_strand</name></member>
+    <member refid="namespaceecto_1af284ea4dc605a1d2e037731e5f35eeaa" kind="function"><name>make_tendril</name></member>
+    <member refid="namespaceecto_1af5e1929b12d596f7cc45a3fe7c76c5ed" kind="function"><name>microseconds</name></member>
+    <member refid="namespaceecto_1a67829007171203782a69bde851cb1dc6" kind="function"><name>local_time</name></member>
+    <member refid="namespaceecto_1ad48a07c99914e7c96702bcce4baf6bc6" kind="function"><name>universal_time</name></member>
+    <member refid="namespaceecto_1a980294f61090496ef65bc6b201f38944" kind="function"><name>name_of</name></member>
+    <member refid="namespaceecto_1ae8640f8758655b241efbd681cef5727f" kind="function"><name>name_of</name></member>
+    <member refid="namespaceecto_1a56b14793c548143a90d5bff5a7c279b8" kind="function"><name>symbolic_name_of</name></member>
+    <member refid="namespaceecto_1a2420930e76b8e95a3f241c4dc154f8f8" kind="function"><name>name_of</name></member>
+    <member refid="namespaceecto_1a1df1f18305fe27e87f2a845d02f31db9" kind="function"><name>symbolic_name_of</name></member>
+  </compound>
+  <compound refid="namespaceecto_1_1abi" kind="namespace"><name>ecto::abi</name>
+  </compound>
+  <compound refid="namespaceecto_1_1abi_1_1@26" kind="namespace"><name>ecto::abi::@26</name>
+  </compound>
+  <compound refid="namespaceecto_1_1detail" kind="namespace"><name>ecto::detail</name>
+  </compound>
+  <compound refid="namespaceecto_1_1except" kind="namespace"><name>ecto::except</name>
+    <member refid="namespaceecto_1_1except_1a6ed4b851e67551e870e933f85628cb6f" kind="function"><name>BOOST_PP_SEQ_FOR_EACH</name></member>
+    <member refid="namespaceecto_1_1except_1a8161938bf962eaf02d9b0e73b80a5c4a" kind="function"><name>diagnostic_string</name></member>
+    <member refid="namespaceecto_1_1except_1ae56832eeac0c3e23f11c197a8f5a6971" kind="function"><name>diagnostic_string</name></member>
+    <member refid="namespaceecto_1_1except_1a8744cfe3c8d4364696873aeb175c68b9" kind="function"><name>BOOST_PP_SEQ_FOR_EACH</name></member>
+  </compound>
+  <compound refid="namespaceecto_1_1except_1_1detail" kind="namespace"><name>ecto::except::detail</name>
+  </compound>
+  <compound refid="namespaceecto_1_1except_1_1py" kind="namespace"><name>ecto::except::py</name>
+    <member refid="namespaceecto_1_1except_1_1py_1aa4bf68cfcd0841cb7a460309876d7ff5" kind="function"><name>rethrow</name></member>
+    <member refid="namespaceecto_1_1except_1_1py_1adac8cd291a28a954641f812732f0d1c3" kind="function"><name>rethrow</name></member>
+  </compound>
+  <compound refid="namespaceecto_1_1graph" kind="namespace"><name>ecto::graph</name>
+    <member refid="namespaceecto_1_1graph_1ad6da390ef18395607e6eab139f37fcf4" kind="typedef"><name>edge_ptr</name></member>
+    <member refid="namespaceecto_1_1graph_1ac45fa43674f9071675a1ebbf4d021eb4" kind="typedef"><name>edge_cptr</name></member>
+    <member refid="namespaceecto_1_1graph_1a878e413dd7cdb7395b02f5be20e12b51" kind="typedef"><name>vertex_ptr</name></member>
+    <member refid="namespaceecto_1_1graph_1ab1ad7248e81caff384fed98d61fca8ca" kind="typedef"><name>vertex_cptr</name></member>
+    <member refid="namespaceecto_1_1graph_1a3313c6217262c9d746a5f80d0a4708d7" kind="function"><name>get_connected_input_tendril_names</name></member>
+    <member refid="namespaceecto_1_1graph_1a6a06bfc5757345d0a4531988e8125197" kind="function"><name>move_inputs</name></member>
+    <member refid="namespaceecto_1_1graph_1a540b97ac69ca6f09dfe9a60e1ebd5a1e" kind="function"><name>move_outputs</name></member>
+    <member refid="namespaceecto_1_1graph_1a13df50b98a1c4fe0d35ce7a3ea7316e1" kind="function"><name>invoke_configuration</name></member>
+    <member refid="namespaceecto_1_1graph_1a0b293971d5460ed370597d2e7c5d0b9c" kind="function"><name>invoke_process</name></member>
+  </compound>
+  <compound refid="namespaceecto_1_1profile" kind="namespace"><name>ecto::profile</name>
+    <member refid="namespaceecto_1_1profile_1aedec79d10deb5a37a71464c79a02187a" kind="function"><name>read_tsc</name></member>
+  </compound>
+  <compound refid="namespaceecto_1_1py" kind="namespace"><name>ecto::py</name>
+    <member refid="namespaceecto_1_1py_1a103dc3e3c8ee425860ae2260f930752e" kind="function"><name>file_and_line_as_string</name></member>
+    <member refid="namespaceecto_1_1py_1abc1149eb9720c52fa9191bf7ee10ccf2" kind="function"><name>repr</name></member>
+    <member refid="namespaceecto_1_1py_1a9baa9f1e5394841101cbdc2eab37094c" kind="function"><name>postregistration</name></member>
+  </compound>
+  <compound refid="namespaceecto_1_1registry" kind="namespace"><name>ecto::registry</name>
+    <member refid="namespaceecto_1_1registry_1a3f75a16f135bcadb9bf1a7000b807b3b" kind="typedef"><name>factory_fn_t</name></member>
+    <member refid="namespaceecto_1_1registry_1a04d849b45313a8ce9a602095e1edade9" kind="typedef"><name>declare_params_t</name></member>
+    <member refid="namespaceecto_1_1registry_1af52d8f0fff3baaf352e2523ab8ed7977" kind="typedef"><name>declare_io_t</name></member>
+    <member refid="namespaceecto_1_1registry_1a6418eb4a71ad1556cf3555da28e16a8d" kind="function"><name>lookup</name></member>
+    <member refid="namespaceecto_1_1registry_1a784e20c3d722892c0ce9f129b6c2f757" kind="function"><name>create</name></member>
+    <member refid="namespaceecto_1_1registry_1af698665e1f634f8634ecd7348aa778ab" kind="function"><name>create_initialized</name></member>
+    <member refid="namespaceecto_1_1registry_1aef6687acec4199b3863fac767049bf76" kind="function"><name>register_factory_fn</name></member>
+  </compound>
+  <compound refid="namespaceecto_1_1registry_1_1tendril" kind="namespace"><name>ecto::registry::tendril</name>
+    <member refid="namespaceecto_1_1registry_1_1tendril_1ae22480a936472049982cbab1f0ebb042" kind="function"><name>add</name></member>
+    <member refid="namespaceecto_1_1registry_1_1tendril_1a0f79f6d8838565c91f43e05c93a3f01d" kind="function"><name>get</name></member>
+    <member refid="namespaceecto_1_1registry_1_1tendril_1a7e62217ece919ba72bb0aca35c93fd7b" kind="function"><name>type_names</name></member>
+  </compound>
+  <compound refid="namespaceecto_1_1serialization" kind="namespace"><name>ecto::serialization</name>
+    <member refid="namespaceecto_1_1serialization_1ad544c8b5416e0ecfe692922b2f2e8e54" kind="typedef"><name>registry_binary_oa</name></member>
+    <member refid="namespaceecto_1_1serialization_1a465425ff3a756de86571c1262f22d2ba" kind="typedef"><name>registry_binary_ia</name></member>
+    <member refid="namespaceecto_1_1serialization_1a77b3e77a54adf1a888736007260a9343" kind="function"><name>save</name></member>
+    <member refid="namespaceecto_1_1serialization_1a1960d58009e397c926055229f8e1c347" kind="function"><name>load</name></member>
+  </compound>
+  <compound refid="namespaceecto_1_1test" kind="namespace"><name>ecto::test</name>
+    <member refid="namespaceecto_1_1test_1ae34aab3f49c4e0d8ba421135cafca312" kind="variable"><name>max_delay</name></member>
+    <member refid="namespaceecto_1_1test_1ab6aaaa31355ed0c3c07380853b4ee174" kind="function"><name>random_delay</name></member>
+    <member refid="namespaceecto_1_1test_1abdfa3ef5cd4f48e6a428bf0d8c500450" kind="function"><name>get_from_env_with_default</name></member>
+  </compound>
+  <compound refid="mainpage_8hpp" kind="file"><name>mainpage.hpp</name>
+  </compound>
+  <compound refid="abi_8hpp" kind="file"><name>abi.hpp</name>
+    <member refid="abi_8hpp_1a121b94d4e9f7581c4ed7d0a3fc2659fa" kind="define"><name>ECTO_ABI_VERSION</name></member>
+  </compound>
+  <compound refid="all_8hpp" kind="file"><name>all.hpp</name>
+  </compound>
+  <compound refid="all_8hpp~" kind="file"><name>all.hpp~</name>
+  </compound>
+  <compound refid="atomic_8hpp" kind="file"><name>atomic.hpp</name>
+  </compound>
+  <compound refid="cell_8hpp" kind="file"><name>cell.hpp</name>
+    <member refid="cell_8hpp_1a09cfce003df2d7598c0d06a00c64c49c" kind="define"><name>ECTO_RETURN_VALUES</name></member>
+  </compound>
+  <compound refid="serialization_2cell_8hpp" kind="file"><name>cell.hpp</name>
+  </compound>
+  <compound refid="cell_8hpp~" kind="file"><name>cell.hpp~</name>
+    <member refid="cell_8hpp~_1a09cfce003df2d7598c0d06a00c64c49c" kind="define"><name>ECTO_RETURN_VALUES</name></member>
+  </compound>
+  <compound refid="ecto_8hpp" kind="file"><name>ecto.hpp</name>
+  </compound>
+  <compound refid="ecto_8hpp~" kind="file"><name>ecto.hpp~</name>
+  </compound>
+  <compound refid="edge_8hpp" kind="file"><name>edge.hpp</name>
+  </compound>
+  <compound refid="element_8hpp" kind="file"><name>element.hpp</name>
+  </compound>
+  <compound refid="except_8hpp" kind="file"><name>except.hpp</name>
+    <member refid="except_8hpp_1a6a632b3827deba566cbca48b37bf53e2" kind="define"><name>ECTO_EXCEPTION_TAG_NAMES</name></member>
+    <member refid="except_8hpp_1ad3bbab1baffa25e20db0635270c5f108" kind="define"><name>ECTO_EXCEPTIONS</name></member>
+    <member refid="except_8hpp_1adbf60807e9dffa4b82209ed4a8e78fd1" kind="define"><name>BOOST_PREPROCESSOR_CONFIG_LIMITS_HPP</name></member>
+    <member refid="except_8hpp_1ae60f080f6aa76332f308c11c5b722e4e" kind="define"><name>ECTO_PP_ITERLIMIT</name></member>
+    <member refid="except_8hpp_1a750e4458efafc6fb925498412fb16a4b" kind="define"><name>BOOST_PP_LIMIT_MAG</name></member>
+    <member refid="except_8hpp_1a7cab985088506b7f93f8b08f4f28eeb9" kind="define"><name>BOOST_PP_LIMIT_TUPLE</name></member>
+    <member refid="except_8hpp_1a015024e3c1dda11dc0230991acdd529e" kind="define"><name>BOOST_PP_LIMIT_DIM</name></member>
+    <member refid="except_8hpp_1ad851940ee907a903796df76bea76b8aa" kind="define"><name>BOOST_PP_LIMIT_REPEAT</name></member>
+    <member refid="except_8hpp_1ad081cc556d6300248148d294ce5788fa" kind="define"><name>BOOST_PP_LIMIT_WHILE</name></member>
+    <member refid="except_8hpp_1a1cdabd3425574a3d8795507fceb87386" kind="define"><name>BOOST_PP_LIMIT_FOR</name></member>
+    <member refid="except_8hpp_1a9c158421e02e59e0f68e039f788b1512" kind="define"><name>BOOST_PP_LIMIT_ITERATION</name></member>
+    <member refid="except_8hpp_1a4d9a13f4509f732fecee9f0bf243da68" kind="define"><name>BOOST_PP_LIMIT_ITERATION_DIM</name></member>
+    <member refid="except_8hpp_1a14527b9ffc75126134564bd0de28c990" kind="define"><name>BOOST_PP_LIMIT_SEQ</name></member>
+    <member refid="except_8hpp_1a7351250ea0acf4a9dfbabd6d3d66268e" kind="define"><name>BOOST_PP_LIMIT_SLOT_SIG</name></member>
+    <member refid="except_8hpp_1a1e8b63072e6969aedd69a7f4b3135bd7" kind="define"><name>BOOST_PP_LIMIT_SLOT_COUNT</name></member>
+    <member refid="except_8hpp_1a9b77695b9c45c36934e7c890ce6f682f" kind="define"><name>ECTO_DECLARE_EXCEPTION</name></member>
+    <member refid="except_8hpp_1a4a4f231e4fe0f923cd9ee3a48803ca30" kind="define"><name>ECTO_EXCEPTION_TAG_DECL</name></member>
+    <member refid="except_8hpp_1a2208dd18b625b09e449c9e471e55ea36" kind="define"><name>ECTO_EXCEPTION_TAG_TYPE_NAME_RETURN_T</name></member>
+    <member refid="except_8hpp_1a61f61285d4749b701b559d10678908a4" kind="define"><name>ECTO_EXCEPTION_TAG_TYPE_NAME_DECL</name></member>
+  </compound>
+  <compound refid="except_8hpp~" kind="file"><name>except.hpp~</name>
+    <member refid="except_8hpp~_1a6a632b3827deba566cbca48b37bf53e2" kind="define"><name>ECTO_EXCEPTION_TAG_NAMES</name></member>
+    <member refid="except_8hpp~_1ad3bbab1baffa25e20db0635270c5f108" kind="define"><name>ECTO_EXCEPTIONS</name></member>
+    <member refid="except_8hpp~_1adbf60807e9dffa4b82209ed4a8e78fd1" kind="define"><name>BOOST_PREPROCESSOR_CONFIG_LIMITS_HPP</name></member>
+    <member refid="except_8hpp~_1ae60f080f6aa76332f308c11c5b722e4e" kind="define"><name>ECTO_PP_ITERLIMIT</name></member>
+    <member refid="except_8hpp~_1a750e4458efafc6fb925498412fb16a4b" kind="define"><name>BOOST_PP_LIMIT_MAG</name></member>
+    <member refid="except_8hpp~_1a7cab985088506b7f93f8b08f4f28eeb9" kind="define"><name>BOOST_PP_LIMIT_TUPLE</name></member>
+    <member refid="except_8hpp~_1a015024e3c1dda11dc0230991acdd529e" kind="define"><name>BOOST_PP_LIMIT_DIM</name></member>
+    <member refid="except_8hpp~_1ad851940ee907a903796df76bea76b8aa" kind="define"><name>BOOST_PP_LIMIT_REPEAT</name></member>
+    <member refid="except_8hpp~_1ad081cc556d6300248148d294ce5788fa" kind="define"><name>BOOST_PP_LIMIT_WHILE</name></member>
+    <member refid="except_8hpp~_1a1cdabd3425574a3d8795507fceb87386" kind="define"><name>BOOST_PP_LIMIT_FOR</name></member>
+    <member refid="except_8hpp~_1a9c158421e02e59e0f68e039f788b1512" kind="define"><name>BOOST_PP_LIMIT_ITERATION</name></member>
+    <member refid="except_8hpp~_1a4d9a13f4509f732fecee9f0bf243da68" kind="define"><name>BOOST_PP_LIMIT_ITERATION_DIM</name></member>
+    <member refid="except_8hpp~_1a14527b9ffc75126134564bd0de28c990" kind="define"><name>BOOST_PP_LIMIT_SEQ</name></member>
+    <member refid="except_8hpp~_1a7351250ea0acf4a9dfbabd6d3d66268e" kind="define"><name>BOOST_PP_LIMIT_SLOT_SIG</name></member>
+    <member refid="except_8hpp~_1a1e8b63072e6969aedd69a7f4b3135bd7" kind="define"><name>BOOST_PP_LIMIT_SLOT_COUNT</name></member>
+    <member refid="except_8hpp~_1a9b77695b9c45c36934e7c890ce6f682f" kind="define"><name>ECTO_DECLARE_EXCEPTION</name></member>
+    <member refid="except_8hpp~_1a4a4f231e4fe0f923cd9ee3a48803ca30" kind="define"><name>ECTO_EXCEPTION_TAG_DECL</name></member>
+    <member refid="except_8hpp~_1a2208dd18b625b09e449c9e471e55ea36" kind="define"><name>ECTO_EXCEPTION_TAG_TYPE_NAME_RETURN_T</name></member>
+    <member refid="except_8hpp~_1a61f61285d4749b701b559d10678908a4" kind="define"><name>ECTO_EXCEPTION_TAG_TYPE_NAME_DECL</name></member>
+  </compound>
+  <compound refid="forward_8hpp" kind="file"><name>forward.hpp</name>
+  </compound>
+  <compound refid="types_8hpp" kind="file"><name>types.hpp</name>
+    <member refid="types_8hpp_1a1b842552ac2cc75cc74e65896efc7e55" kind="define"><name>BOOST_NO_HASH</name></member>
+  </compound>
+  <compound refid="utilities_8hpp" kind="file"><name>utilities.hpp</name>
+  </compound>
+  <compound refid="impl_2parameters_8hpp" kind="file"><name>parameters.hpp</name>
+  </compound>
+  <compound refid="parameters_8hpp" kind="file"><name>parameters.hpp</name>
+    <member refid="parameters_8hpp_1ac9757f633f20c113336d7dc4ce2cbee7" kind="define"><name>ECTO_COMMON_TYPES</name></member>
+  </compound>
+  <compound refid="log_8hpp" kind="file"><name>log.hpp</name>
+    <member refid="log_8hpp_1aa02c6e583b77dd3704fadaeb9226ca1a" kind="define"><name>ECTO_ASSERT</name></member>
+    <member refid="log_8hpp_1a52b93b5650a3830cd4216dee79428e6c" kind="define"><name>ECTO_LOG_DEBUG</name></member>
+    <member refid="log_8hpp_1ae375f89df537ac140d32247479bcc611" kind="define"><name>ECTO_START</name></member>
+    <member refid="log_8hpp_1ad3e0477016ce115b214fb8c3fc5d6f1e" kind="define"><name>ECTO_FINISH</name></member>
+    <member refid="log_8hpp_1ad686c520d8ee4f107785ee2bfebd0ed9" kind="define"><name>ECTO_TRACE_EXCEPTION</name></member>
+  </compound>
+  <compound refid="module_8hpp" kind="file"><name>module.hpp</name>
+    <member refid="module_8hpp_1a16425e2e4a5b3e75f614fc4e7a717237" kind="define"><name>ECTO_ASSERT_MODULE_NAME</name></member>
+    <member refid="module_8hpp_1a70842bcf79db6cf1a4bd152e4219ba44" kind="define"><name>ECTO_DEFINE_MODULE</name></member>
+  </compound>
+  <compound refid="plasm_8hpp" kind="file"><name>plasm.hpp</name>
+  </compound>
+  <compound refid="plasm_8hpp~" kind="file"><name>plasm.hpp~</name>
+  </compound>
+  <compound refid="profile_8hpp" kind="file"><name>profile.hpp</name>
+  </compound>
+  <compound refid="profile_8hpp~" kind="file"><name>profile.hpp~</name>
+  </compound>
+  <compound refid="python_8hpp" kind="file"><name>python.hpp</name>
+    <member refid="python_8hpp_1a1d1670056b000763eff9d847d1b278d9" kind="define"><name>ECTO_SCOPED_GILRELEASE</name></member>
+    <member refid="python_8hpp_1a35348385dcbe88e8b584f4ef5067371a" kind="define"><name>ECTO_SCOPED_CALLPYTHON</name></member>
+  </compound>
+  <compound refid="gil_8hpp" kind="file"><name>gil.hpp</name>
+  </compound>
+  <compound refid="raw__constructor_8hpp" kind="file"><name>raw_constructor.hpp</name>
+  </compound>
+  <compound refid="repr_8hpp" kind="file"><name>repr.hpp</name>
+  </compound>
+  <compound refid="std__map__indexing__suite_8hpp" kind="file"><name>std_map_indexing_suite.hpp</name>
+  </compound>
+  <compound refid="std__vector__indexing__suite_8hpp" kind="file"><name>std_vector_indexing_suite.hpp</name>
+  </compound>
+  <compound refid="streambuf_8hpp" kind="file"><name>streambuf.hpp</name>
+    <member refid="streambuf_8hpp_1ae20ff583f662ecd38dd6e3d54cbb725c" kind="define"><name>TBXX_ASSERT</name></member>
+    <member refid="streambuf_8hpp_1a9b90c8175ab5fb075139b947c67935ff" kind="define"><name>TBXX_UNREACHABLE_ERROR</name></member>
+  </compound>
+  <compound refid="registry_8hpp" kind="file"><name>registry.hpp</name>
+    <member refid="registry_8hpp_1a920572cca29192da92b356e1f0ad2785" kind="define"><name>ECTO_MODULETAG</name></member>
+    <member refid="registry_8hpp_1a39cc4c1ee0dc526701d6bb710054e09d" kind="define"><name>ECTO_CELL</name></member>
+    <member refid="registry_8hpp_1a020a1d8a9551e5154fd6a7f18eb0d5a1" kind="define"><name>ECTO_INSTANTIATE_REGISTRY</name></member>
+    <member refid="registry_8hpp_1af4ec7a046d01e6679a5642972f468873" kind="define"><name>ECTO_REGISTER</name></member>
+  </compound>
+  <compound refid="serialization_2registry_8hpp" kind="file"><name>registry.hpp</name>
+    <member refid="serialization_2registry_8hpp_1ad5d035c036a61c039fc9aa77bb6ead5b" kind="define"><name>ECTO_REGISTER_SERIALIZERS</name></member>
+    <member refid="serialization_2registry_8hpp_1a12f48be608e34f182e8c5453106ab1d5" kind="define"><name>ECTO_INSTANTIATE_SERIALIZATION</name></member>
+  </compound>
+  <compound refid="rethrow_8hpp" kind="file"><name>rethrow.hpp</name>
+  </compound>
+  <compound refid="scheduler_8hpp" kind="file"><name>scheduler.hpp</name>
+    <member refid="scheduler_8hpp_1aa84dbe584b0b7df365956205e05572c0" kind="define"><name>BOOST_SIGNALS2_MAX_ARGS</name></member>
+  </compound>
+  <compound refid="scheduler_8hpp~" kind="file"><name>scheduler.hpp~</name>
+  </compound>
+  <compound refid="spore_8hpp" kind="file"><name>spore.hpp</name>
+  </compound>
+  <compound refid="strand_8hpp" kind="file"><name>strand.hpp</name>
+  </compound>
+  <compound refid="tendril_8hpp" kind="file"><name>tendril.hpp</name>
+    <member refid="tendril_8hpp_1aa84dbe584b0b7df365956205e05572c0" kind="define"><name>BOOST_SIGNALS2_MAX_ARGS</name></member>
+  </compound>
+  <compound refid="serialization_2tendril_8hpp" kind="file"><name>tendril.hpp</name>
+  </compound>
+  <compound refid="tendrils_8hpp" kind="file"><name>tendrils.hpp</name>
+    <member refid="tendrils_8hpp_1aa84dbe584b0b7df365956205e05572c0" kind="define"><name>BOOST_SIGNALS2_MAX_ARGS</name></member>
+  </compound>
+  <compound refid="test_8hpp" kind="file"><name>test.hpp</name>
+    <member refid="test_8hpp_1ad596883c00b384e64cded971372700b4" kind="define"><name>ECTO_RANDOM_DELAY</name></member>
+  </compound>
+  <compound refid="time_8hpp" kind="file"><name>time.hpp</name>
+  </compound>
+  <compound refid="traits_8hpp" kind="file"><name>traits.hpp</name>
+    <member refid="traits_8hpp_1a3ffa6f8f490132ab0ca275caf570cd5a" kind="define"><name>ECTO_THREAD_UNSAFE</name></member>
+    <member refid="traits_8hpp_1a0257937771b4ae0a643e3480b19f42df" kind="define"><name>ECTO_NEEDS_PYTHON_GIL</name></member>
+  </compound>
+  <compound refid="util_8hpp" kind="file"><name>util.hpp</name>
+    <member refid="util_8hpp_1ab55b7868679cda60fc162580957fb98c" kind="define"><name>ECTO_EXPORT</name></member>
+  </compound>
+  <compound refid="vertex_8hpp" kind="file"><name>vertex.hpp</name>
+  </compound>
+  <compound refid="vertex_8hpp~" kind="file"><name>vertex.hpp~</name>
+  </compound>
+  <compound refid="dir_a5d38a4ad95fdd6188c0a5c3fb7d35c8" kind="dir"><name>/home/vrabaud/workspace/recognition_kitchen/src/ecto/doc</name>
+  </compound>
+  <compound refid="dir_22d5aae6406e40a4ad09d88fd721071a" kind="dir"><name>/home/vrabaud/workspace/recognition_kitchen/src/ecto/doc/doxygen</name>
+  </compound>
+  <compound refid="dir_c24cbdf628439aa3208a039e526fc43e" kind="dir"><name>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto</name>
+  </compound>
+  <compound refid="dir_dc58272ec78547c0b260acc76988d759" kind="dir"><name>/home/vrabaud/workspace/recognition_kitchen/src/ecto</name>
+  </compound>
+  <compound refid="dir_30c299c00e268ad0ca3a5cd08f2b9299" kind="dir"><name>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/graph</name>
+  </compound>
+  <compound refid="dir_1f9320df8291dad569ce928f8ba185f7" kind="dir"><name>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/impl</name>
+  </compound>
+  <compound refid="dir_49694466ee6c864d4a1aa63bc4101e39" kind="dir"><name>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include</name>
+  </compound>
+  <compound refid="dir_b81b1299b3c12345209d2146296177a7" kind="dir"><name>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python</name>
+  </compound>
+  <compound refid="dir_b8ba8bdecec24202647344231f3c9d1d" kind="dir"><name>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization</name>
+  </compound>
+  <compound refid="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir"><name>/home/vrabaud/workspace/recognition_kitchen/src</name>
+  </compound>
+  <compound refid="indexpage" kind="page"><name>index</name>
+  </compound>
+</doxygenindex>

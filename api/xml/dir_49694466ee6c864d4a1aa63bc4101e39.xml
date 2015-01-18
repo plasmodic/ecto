@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="dir_49694466ee6c864d4a1aa63bc4101e39" kind="dir">
+    <compoundname>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include</compoundname>
+    <innerdir refid="dir_c24cbdf628439aa3208a039e526fc43e">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classecto_1_1atomic" kind="class" prot="public">
+    <compoundname>ecto::atomic</compoundname>
+    <basecompoundref prot="private" virt="non-virtual">noncopyable</basecompoundref>
+    <includes refid="atomic_8hpp" local="no">atomic.hpp</includes>
+    <innerclass refid="classecto_1_1atomic_1_1scoped__lock" prot="public">ecto::atomic::scoped_lock</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classecto_1_1atomic_1ac5ba45af623c7bc47e6918e290e39c67" prot="private" static="no" mutable="no">
+        <type>T</type>
+        <definition>T ecto::atomic&lt; T &gt;::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/atomic.hpp" line="43" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/atomic.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classecto_1_1atomic_1a52a121e21f9449371998dbccaca0cbde" prot="private" static="no" mutable="no">
+        <type>boost::mutex</type>
+        <definition>boost::mutex ecto::atomic&lt; T &gt;::mtx</definition>
+        <argsstring></argsstring>
+        <name>mtx</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/atomic.hpp" line="44" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/atomic.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classecto_1_1atomic_1ab905c76c87a64092b9c4217c6cc2b00d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ecto::atomic&lt; T &gt;::atomic</definition>
+        <argsstring>()</argsstring>
+        <name>atomic</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/atomic.hpp" line="48" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/atomic.hpp" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1atomic_1a805df2159911558f653edbe19a789b51" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ecto::atomic&lt; T &gt;::atomic</definition>
+        <argsstring>(T v)</argsstring>
+        <name>atomic</name>
+        <param>
+          <type>T</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/atomic.hpp" line="49" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/atomic.hpp" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1atomic_1aa98175bf31ad55fe61e5d3d324a4f664" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T</type>
+        <definition>T ecto::atomic&lt; T &gt;::get</definition>
+        <argsstring>()</argsstring>
+        <name>get</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/atomic.hpp" line="51" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/atomic.hpp" bodystart="51" bodyend="51"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="246">
+        <label>noncopyable</label>
+      </node>
+      <node id="245">
+        <label>ecto::atomic&lt; T &gt;</label>
+        <link refid="classecto_1_1atomic"/>
+        <childnode refid="246" relation="private-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="248">
+        <label>noncopyable</label>
+      </node>
+      <node id="247">
+        <label>ecto::atomic&lt; T &gt;</label>
+        <link refid="classecto_1_1atomic"/>
+        <childnode refid="248" relation="private-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/atomic.hpp" line="41" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/atomic.hpp" bodystart="40" bodyend="63"/>
+    <listofallmembers>
+      <member refid="classecto_1_1atomic_1ab905c76c87a64092b9c4217c6cc2b00d" prot="public" virt="non-virtual"><scope>ecto::atomic</scope><name>atomic</name></member>
+      <member refid="classecto_1_1atomic_1a805df2159911558f653edbe19a789b51" prot="public" virt="non-virtual"><scope>ecto::atomic</scope><name>atomic</name></member>
+      <member refid="classecto_1_1atomic_1aa98175bf31ad55fe61e5d3d324a4f664" prot="public" virt="non-virtual"><scope>ecto::atomic</scope><name>get</name></member>
+      <member refid="classecto_1_1atomic_1a52a121e21f9449371998dbccaca0cbde" prot="private" virt="non-virtual"><scope>ecto::atomic</scope><name>mtx</name></member>
+      <member refid="classecto_1_1atomic_1ac5ba45af623c7bc47e6918e290e39c67" prot="private" virt="non-virtual"><scope>ecto::atomic</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

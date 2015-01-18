@@ -1,0 +1,840 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="namespaceecto" kind="namespace">
+    <compoundname>ecto</compoundname>
+    <innerclass refid="classecto_1_1tendrils" prot="public">ecto::tendrils</innerclass>
+    <innerclass refid="structecto_1_1spore__assign__impl" prot="public">ecto::spore_assign_impl</innerclass>
+    <innerclass refid="structecto_1_1plasm" prot="public">ecto::plasm</innerclass>
+    <innerclass refid="classecto_1_1atomic" prot="public">ecto::atomic</innerclass>
+    <innerclass refid="structecto_1_1cell" prot="public">ecto::cell</innerclass>
+    <innerclass refid="structecto_1_1has__f" prot="public">ecto::has_f</innerclass>
+    <innerclass refid="structecto_1_1cell__" prot="public">ecto::cell_</innerclass>
+    <innerclass refid="structecto_1_1strand" prot="public">ecto::strand</innerclass>
+    <innerclass refid="structecto_1_1strand__hash" prot="public">ecto::strand_hash</innerclass>
+    <innerclass refid="classecto_1_1tendril" prot="public">ecto::tendril</innerclass>
+    <innerclass refid="classecto_1_1scheduler" prot="public">ecto::scheduler</innerclass>
+    <innerclass refid="classecto_1_1ref__count" prot="public">ecto::ref_count</innerclass>
+    <innerclass refid="structecto_1_1spore" prot="public">ecto::spore</innerclass>
+    <innerclass refid="structecto_1_1bounded" prot="public">ecto::bounded</innerclass>
+    <innernamespace refid="namespaceecto_1_1abi">ecto::abi</innernamespace>
+    <innernamespace refid="namespaceecto_1_1detail">ecto::detail</innernamespace>
+    <innernamespace refid="namespaceecto_1_1except">ecto::except</innernamespace>
+    <innernamespace refid="namespaceecto_1_1graph">ecto::graph</innernamespace>
+    <innernamespace refid="namespaceecto_1_1profile">ecto::profile</innernamespace>
+    <innernamespace refid="namespaceecto_1_1py">ecto::py</innernamespace>
+    <innernamespace refid="namespaceecto_1_1registry">ecto::registry</innernamespace>
+    <innernamespace refid="namespaceecto_1_1serialization">ecto::serialization</innernamespace>
+    <innernamespace refid="namespaceecto_1_1test">ecto::test</innernamespace>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespaceecto_1a02939764b22968505f82e425c83272c2" prot="public" static="no">
+        <name>tendril_type</name>
+        <enumvalue id="namespaceecto_1a02939764b22968505f82e425c83272c2a2a607ed53342989a455e71bf3a78cb08" prot="public">
+          <name>OUTPUT</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceecto_1a02939764b22968505f82e425c83272c2adf3175f3e2ad3637b6fca943b4cc7672" prot="public">
+          <name>INPUT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceecto_1a02939764b22968505f82e425c83272c2a39346743c7a624185996a561642a9aaa" prot="public">
+          <name>PARAMETER</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendrils.hpp" line="45" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendrils.hpp" bodystart="44" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespaceecto_1a93d82cd28db695d53963fb696582762c" prot="public" static="no">
+        <name>ReturnCode</name>
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762ca93233d0e6456b2e8f52d285b74c463c8" prot="public">
+          <name>OK</name>
+          <initializer>=  0</initializer>
+          <briefdescription>
+<para>Everything A OK. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762ca2f13d3238ae038f318ed92ac37bb8e35" prot="public">
+          <name>QUIT</name>
+          <initializer>=  1</initializer>
+          <briefdescription>
+<para>Explicit quit now. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762cae5d8da4794c8cb4bef2ea7d344b5a6ef" prot="public">
+          <name>DO_OVER</name>
+          <initializer>=  2</initializer>
+          <briefdescription>
+<para>This modules&apos; process call needs to be made again. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762caa1fa43a25faf4b9de785d390013c664b" prot="public">
+          <name>BREAK</name>
+          <initializer>=  3</initializer>
+          <briefdescription>
+<para>Stop execution in my scope, jump to outer scope. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762ca65d745b18bdbe2335a48275e09547760" prot="public">
+          <name>CONTINUE</name>
+          <initializer>=  4</initializer>
+          <briefdescription>
+<para>Stop execution in my scope, jump to top of scope. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762caef5b25213be1330790a3112518e3a44b" prot="public">
+          <name>UNKNOWN</name>
+          <initializer>= -1</initializer>
+          <briefdescription>
+<para>Unknown return code. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762ca93233d0e6456b2e8f52d285b74c463c8" prot="public">
+          <name>OK</name>
+          <initializer>=  0</initializer>
+          <briefdescription>
+<para>Everything A OK. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762ca2f13d3238ae038f318ed92ac37bb8e35" prot="public">
+          <name>QUIT</name>
+          <initializer>=  1</initializer>
+          <briefdescription>
+<para>Explicit quit now. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762cae5d8da4794c8cb4bef2ea7d344b5a6ef" prot="public">
+          <name>DO_OVER</name>
+          <initializer>=  2</initializer>
+          <briefdescription>
+<para>This modules&apos; process call needs to be made again. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762caa1fa43a25faf4b9de785d390013c664b" prot="public">
+          <name>BREAK</name>
+          <initializer>=  3</initializer>
+          <briefdescription>
+<para>Stop execution in my scope, jump to outer scope. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762ca65d745b18bdbe2335a48275e09547760" prot="public">
+          <name>CONTINUE</name>
+          <initializer>=  4</initializer>
+          <briefdescription>
+<para>Stop execution in my scope, jump to top of scope. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762caef5b25213be1330790a3112518e3a44b" prot="public">
+          <name>UNKNOWN</name>
+          <initializer>= -1</initializer>
+          <briefdescription>
+<para>Unknown return code. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Return values for <ref refid="structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3" kindref="member">cell::process()</ref>. TODO: Should these live in cell? These are appropriate for non exceptional behavior. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="51" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" bodystart="50" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespaceecto_1a93d82cd28db695d53963fb696582762c" prot="public" static="no">
+        <name>ReturnCode</name>
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762ca93233d0e6456b2e8f52d285b74c463c8" prot="public">
+          <name>OK</name>
+          <initializer>=  0</initializer>
+          <briefdescription>
+<para>Everything A OK. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762ca2f13d3238ae038f318ed92ac37bb8e35" prot="public">
+          <name>QUIT</name>
+          <initializer>=  1</initializer>
+          <briefdescription>
+<para>Explicit quit now. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762cae5d8da4794c8cb4bef2ea7d344b5a6ef" prot="public">
+          <name>DO_OVER</name>
+          <initializer>=  2</initializer>
+          <briefdescription>
+<para>This modules&apos; process call needs to be made again. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762caa1fa43a25faf4b9de785d390013c664b" prot="public">
+          <name>BREAK</name>
+          <initializer>=  3</initializer>
+          <briefdescription>
+<para>Stop execution in my scope, jump to outer scope. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762ca65d745b18bdbe2335a48275e09547760" prot="public">
+          <name>CONTINUE</name>
+          <initializer>=  4</initializer>
+          <briefdescription>
+<para>Stop execution in my scope, jump to top of scope. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762caef5b25213be1330790a3112518e3a44b" prot="public">
+          <name>UNKNOWN</name>
+          <initializer>= -1</initializer>
+          <briefdescription>
+<para>Unknown return code. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762ca93233d0e6456b2e8f52d285b74c463c8" prot="public">
+          <name>OK</name>
+          <initializer>=  0</initializer>
+          <briefdescription>
+<para>Everything A OK. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762ca2f13d3238ae038f318ed92ac37bb8e35" prot="public">
+          <name>QUIT</name>
+          <initializer>=  1</initializer>
+          <briefdescription>
+<para>Explicit quit now. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762cae5d8da4794c8cb4bef2ea7d344b5a6ef" prot="public">
+          <name>DO_OVER</name>
+          <initializer>=  2</initializer>
+          <briefdescription>
+<para>This modules&apos; process call needs to be made again. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762caa1fa43a25faf4b9de785d390013c664b" prot="public">
+          <name>BREAK</name>
+          <initializer>=  3</initializer>
+          <briefdescription>
+<para>Stop execution in my scope, jump to outer scope. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762ca65d745b18bdbe2335a48275e09547760" prot="public">
+          <name>CONTINUE</name>
+          <initializer>=  4</initializer>
+          <briefdescription>
+<para>Stop execution in my scope, jump to top of scope. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762caef5b25213be1330790a3112518e3a44b" prot="public">
+          <name>UNKNOWN</name>
+          <initializer>= -1</initializer>
+          <briefdescription>
+<para>Unknown return code. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Return values for <ref refid="structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3" kindref="member">cell::process()</ref>. TODO: Should these live in cell? These are appropriate for non exceptional behavior. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="51" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" bodystart="50" bodyend="58"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespaceecto_1a96ba8fa498cc4b8e2a0217a9e236b50d" prot="public" static="no">
+        <type>uint64_t</type>
+        <definition>typedef uint64_t ecto::stamp_t</definition>
+        <argsstring></argsstring>
+        <name>stamp_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/time.hpp" line="7" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/time.hpp" bodystart="7" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaceecto_1a5bbe8fb0da047cb18d92eb9dfb469652" prot="public" static="no">
+        <type>boost::posix_time::ptime</type>
+        <definition>typedef boost::posix_time::ptime ecto::ptime_t</definition>
+        <argsstring></argsstring>
+        <name>ptime_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/time.hpp" line="8" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/time.hpp" bodystart="8" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaceecto_1a0952d5ebd059cbd79b978ecab9ec781c" prot="public" static="no">
+        <type>boost::posix_time::time_duration</type>
+        <definition>typedef boost::posix_time::time_duration ecto::ptime_duration_t</definition>
+        <argsstring></argsstring>
+        <name>ptime_duration_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/time.hpp" line="9" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/time.hpp" bodystart="9" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaceecto_1a477c167c1e1288b689db5872f650540e" prot="public" static="no">
+        <type>boost::posix_time::hours</type>
+        <definition>typedef boost::posix_time::hours ecto::hours_t</definition>
+        <argsstring></argsstring>
+        <name>hours_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/time.hpp" line="10" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/time.hpp" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaceecto_1ad57e5ebf1455dd895ce11804e47669e5" prot="public" static="no">
+        <type>boost::posix_time::minutes</type>
+        <definition>typedef boost::posix_time::minutes ecto::minutes_t</definition>
+        <argsstring></argsstring>
+        <name>minutes_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/time.hpp" line="11" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/time.hpp" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaceecto_1ae14f91b3661ad9cb774590b15407742c" prot="public" static="no">
+        <type>boost::posix_time::seconds</type>
+        <definition>typedef boost::posix_time::seconds ecto::seconds_t</definition>
+        <argsstring></argsstring>
+        <name>seconds_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/time.hpp" line="12" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/time.hpp" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaceecto_1ab1f4721cc3b311f9615b3092d291260b" prot="public" static="no">
+        <type>boost::posix_time::millisec</type>
+        <definition>typedef boost::posix_time::millisec ecto::millisec_t</definition>
+        <argsstring></argsstring>
+        <name>millisec_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/time.hpp" line="13" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/time.hpp" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaceecto_1affe36dc8be6d20a6b8f7359655c8dc23" prot="public" static="no">
+        <type>boost::posix_time::microsec</type>
+        <definition>typedef boost::posix_time::microsec ecto::microsec_t</definition>
+        <argsstring></argsstring>
+        <name>microsec_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/time.hpp" line="14" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/time.hpp" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaceecto_1a84fb5f6130275382e5cbeb5fdececa78" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="classecto_1_1tendril" kindref="compound">tendril</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;tendril&gt; ecto::tendril_ptr</definition>
+        <argsstring></argsstring>
+        <name>tendril_ptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/forward.hpp" line="35" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/forward.hpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaceecto_1ad01f26ee47597f71a6f86ee34bb3ffe4" prot="public" static="no">
+        <type>boost::shared_ptr&lt; const <ref refid="classecto_1_1tendril" kindref="compound">tendril</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;const tendril&gt; ecto::tendril_cptr</definition>
+        <argsstring></argsstring>
+        <name>tendril_cptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/forward.hpp" line="36" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/forward.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaceecto_1a89953a225525948cb71d5488c3c6472b" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;tendrils&gt; ecto::tendrils_ptr</definition>
+        <argsstring></argsstring>
+        <name>tendrils_ptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/forward.hpp" line="39" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/forward.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaceecto_1a6165b23b34082cfc17104ca7e9f1b212" prot="public" static="no">
+        <type>boost::shared_ptr&lt; const <ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;const tendrils&gt; ecto::tendrils_cptr</definition>
+        <argsstring></argsstring>
+        <name>tendrils_cptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/forward.hpp" line="40" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/forward.hpp" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaceecto_1aed1809e82b9229ea81ef9ee3438cf62c" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="structecto_1_1cell" kindref="compound">cell</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;cell&gt; ecto::cell_ptr</definition>
+        <argsstring></argsstring>
+        <name>cell_ptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/forward.hpp" line="43" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/forward.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaceecto_1ab708c826226c91fd6f3c8c121f293a78" prot="public" static="no">
+        <type>boost::shared_ptr&lt; const <ref refid="structecto_1_1cell" kindref="compound">cell</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;const cell&gt; ecto::cell_cptr</definition>
+        <argsstring></argsstring>
+        <name>cell_cptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/forward.hpp" line="44" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/forward.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaceecto_1a6b83be6cd685db71f03b14871653475f" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="structecto_1_1plasm" kindref="compound">plasm</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;plasm&gt; ecto::plasm_ptr</definition>
+        <argsstring></argsstring>
+        <name>plasm_ptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/forward.hpp" line="47" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/forward.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaceecto_1a5a9973f00c94e30353acb27c3d2fa836" prot="public" static="no">
+        <type>boost::shared_ptr&lt; const <ref refid="structecto_1_1plasm" kindref="compound">plasm</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;const plasm&gt; ecto::plasm_cptr</definition>
+        <argsstring></argsstring>
+        <name>plasm_cptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/forward.hpp" line="48" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/forward.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaceecto_1a98ca3b7b690de778292922c806e7588d" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="structecto_1_1strand" kindref="compound">strand</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;strand&gt; ecto::strand_ptr</definition>
+        <argsstring></argsstring>
+        <name>strand_ptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/forward.hpp" line="51" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/forward.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaceecto_1abbad20d834739bbf762269e4e04a6732" prot="public" static="no">
+        <type>boost::shared_ptr&lt; const <ref refid="structecto_1_1strand" kindref="compound">strand</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;const strand&gt; ecto::strand_cptr</definition>
+        <argsstring></argsstring>
+        <name>strand_cptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/forward.hpp" line="52" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/forward.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespaceecto_1a776138cb830340922312c3ec98c15b6d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CellImpl</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structecto_1_1spore__assign__impl" kindref="compound">spore_assign_impl</ref>&lt; CellImpl, T &gt;</type>
+        <definition>static spore_assign_impl&lt;CellImpl, T&gt; ecto::spore_assign</definition>
+        <argsstring>(spore&lt; T &gt; CellImpl::*ptm, const std::string &amp;name)</argsstring>
+        <name>spore_assign</name>
+        <param>
+          <type><ref refid="structecto_1_1spore" kindref="compound">spore</ref>&lt; T &gt; CellImpl::*</type>
+          <declname>ptm</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Constructs a function object used for static time registration of a pointer to member ecto::spore&lt;T&gt; and a <ref refid="classecto_1_1tendrils" kindref="compound">ecto::tendrils</ref> object. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptm</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to an ecto::spore&lt;T&gt; member of your cell impl. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The corresponding key in the <ref refid="classecto_1_1tendrils" kindref="compound">ecto::tendrils</ref> object. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A function object appropriate for static time registration. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendrils.hpp" line="277" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendrils.hpp" bodystart="277" bodyend="280"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceecto_1a3870bebbdf6a0d01f28424e402be2834" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="util_8hpp_1ab55b7868679cda60fc162580957fb98c" kindref="member">ECTO_EXPORT</ref> void</type>
+        <definition>ECTO_EXPORT void ecto::log</definition>
+        <argsstring>(const char *, const char *, unsigned line, const std::string &amp;msg)</argsstring>
+        <name>log</name>
+        <param>
+          <type>const char *</type>
+        </param>
+        <param>
+          <type>const char *</type>
+        </param>
+        <param>
+          <type>unsigned</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/log.hpp" line="41" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceecto_1af79493e380ac31e886186e2ba1a1b809" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="util_8hpp_1ab55b7868679cda60fc162580957fb98c" kindref="member">ECTO_EXPORT</ref> void</type>
+        <definition>ECTO_EXPORT void ecto::assert_failed</definition>
+        <argsstring>(const char *, const char *file, unsigned line, const char *cond, const char *msg)</argsstring>
+        <name>assert_failed</name>
+        <param>
+          <type>const char *</type>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>file</declname>
+        </param>
+        <param>
+          <type>unsigned</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>cond</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/log.hpp" line="42" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceecto_1a34c1f436c47dc08392c8248632cde6f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ecto::logging_on</definition>
+        <argsstring>()</argsstring>
+        <name>logging_on</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/log.hpp" line="43" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceecto_1a7300f29f56aab7f09d11060432ad081e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string &amp; ecto::ReturnCodeToStr</definition>
+        <argsstring>(int rval)</argsstring>
+        <name>ReturnCodeToStr</name>
+        <param>
+          <type>int</type>
+          <declname>rval</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="64" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceecto_1a653dab75b6cd892233b9f3676a5d2921" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::on_strand</definition>
+        <argsstring>(cell_ptr c, boost::asio::io_service &amp;s, boost::function&lt; void()&gt; h)</argsstring>
+        <name>on_strand</name>
+        <param>
+          <type><ref refid="namespaceecto_1aed1809e82b9229ea81ef9ee3438cf62c" kindref="member">cell_ptr</ref></type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>boost::asio::io_service &amp;</type>
+          <declname>s</declname>
+        </param>
+        <param>
+          <type>boost::function&lt; void()&gt;</type>
+          <declname>h</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/strand.hpp" line="63" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceecto_1af284ea4dc605a1d2e037731e5f35eeaa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="namespaceecto_1a84fb5f6130275382e5cbeb5fdececa78" kindref="member">tendril_ptr</ref></type>
+        <definition>tendril_ptr ecto::make_tendril</definition>
+        <argsstring>()</argsstring>
+        <name>make_tendril</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" line="483" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" bodystart="483" bodyend="488"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceecto_1af5e1929b12d596f7cc45a3fe7c76c5ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespaceecto_1a96ba8fa498cc4b8e2a0217a9e236b50d" kindref="member">stamp_t</ref></type>
+        <definition>stamp_t ecto::microseconds</definition>
+        <argsstring>()</argsstring>
+        <name>microseconds</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The number of microseconds since the first call to this function. <simplesect kind="return"><para>microseconds, i.e. 10-6 seconds </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/time.hpp" line="23" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceecto_1a67829007171203782a69bde851cb1dc6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespaceecto_1a5bbe8fb0da047cb18d92eb9dfb469652" kindref="member">ptime_t</ref></type>
+        <definition>ptime_t ecto::local_time</definition>
+        <argsstring>()</argsstring>
+        <name>local_time</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/time.hpp" line="24" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceecto_1ad48a07c99914e7c96702bcce4baf6bc6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespaceecto_1a5bbe8fb0da047cb18d92eb9dfb469652" kindref="member">ptime_t</ref></type>
+        <definition>ptime_t ecto::universal_time</definition>
+        <argsstring>()</argsstring>
+        <name>universal_time</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/time.hpp" line="25" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceecto_1a980294f61090496ef65bc6b201f38944" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="util_8hpp_1ab55b7868679cda60fc162580957fb98c" kindref="member">ECTO_EXPORT</ref> const std::string &amp;</type>
+        <definition>ECTO_EXPORT const std::string&amp; ecto::name_of</definition>
+        <argsstring>(const std::type_info &amp;ti)</argsstring>
+        <name>name_of</name>
+        <param>
+          <type>const std::type_info &amp;</type>
+          <declname>ti</declname>
+        </param>
+        <briefdescription>
+<para>Get the unmangled type name of a type_info object. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ti</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type_info to look up unmangled name for. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The unmangled name. e.g. cv::Mat or pcl::PointCloud&lt;pcl::PointXYZ&gt; </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/util.hpp" line="59" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceecto_1ae8640f8758655b241efbd681cef5727f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="util_8hpp_1ab55b7868679cda60fc162580957fb98c" kindref="member">ECTO_EXPORT</ref> const std::string &amp;</type>
+        <definition>ECTO_EXPORT const std::string&amp; ecto::name_of</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>name_of</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Demangle the given name. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/util.hpp" line="64" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceecto_1a56b14793c548143a90d5bff5a7c279b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="util_8hpp_1ab55b7868679cda60fc162580957fb98c" kindref="member">ECTO_EXPORT</ref> std::string</type>
+        <definition>ECTO_EXPORT std::string ecto::symbolic_name_of</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>symbolic_name_of</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/util.hpp" line="66" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceecto_1a2420930e76b8e95a3f241c4dc154f8f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>const std::string &amp;</type>
+        <definition>const std::string&amp; ecto::name_of</definition>
+        <argsstring>()</argsstring>
+        <name>name_of</name>
+        <briefdescription>
+<para>Get the unmangled type name of a type. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the type that one wants a name for. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The unmangled name of the given type. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/util.hpp" line="74" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/util.hpp" bodystart="74" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceecto_1a1df1f18305fe27e87f2a845d02f31db9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>const std::string &amp;</type>
+        <definition>const std::string&amp; ecto::symbolic_name_of</definition>
+        <argsstring>()</argsstring>
+        <name>symbolic_name_of</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/util.hpp" line="81" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/util.hpp" bodystart="81" bodyend="85"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/impl/parameters.hpp" line="10" column="1"/>
+  </compounddef>
+</doxygen>

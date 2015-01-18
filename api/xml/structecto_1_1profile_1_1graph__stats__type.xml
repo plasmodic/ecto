@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="structecto_1_1profile_1_1graph__stats__type" kind="struct" prot="public">
+    <compoundname>ecto::profile::graph_stats_type</compoundname>
+    <includes refid="profile_8hpp" local="no">profile.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structecto_1_1profile_1_1graph__stats__type_1a340d79ae72ca5639e55098c860640ba8" prot="public" static="no" mutable="no">
+        <type>boost::posix_time::time_duration</type>
+        <definition>boost::posix_time::time_duration ecto::profile::graph_stats_type::cumulative_time</definition>
+        <argsstring></argsstring>
+        <name>cumulative_time</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp" line="47" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structecto_1_1profile_1_1graph__stats__type_1a0d465d23569a8af1789c0b57ccb21017" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t ecto::profile::graph_stats_type::cumulative_ticks</definition>
+        <argsstring></argsstring>
+        <name>cumulative_ticks</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp" line="48" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structecto_1_1profile_1_1graph__stats__type_1aefc20d119cb949420bf74e845a8a1e8c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ecto::profile::graph_stats_type::graph_stats_type</definition>
+        <argsstring>()</argsstring>
+        <name>graph_stats_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp" line="46" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1profile_1_1graph__stats__type_1ab412a3b91cbd9b062cdcd0f078ca163d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string ecto::profile::graph_stats_type::as_string</definition>
+        <argsstring>(graph::graph_t &amp;g) const </argsstring>
+        <name>as_string</name>
+        <param>
+          <type><ref refid="structecto_1_1graph_1_1graph__t" kindref="compound">graph::graph_t</ref> &amp;</type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp" line="50" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1profile_1_1graph__stats__type_1aefc20d119cb949420bf74e845a8a1e8c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ecto::profile::graph_stats_type::graph_stats_type</definition>
+        <argsstring>()</argsstring>
+        <name>graph_stats_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp~" line="47" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp~" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1profile_1_1graph__stats__type_1ab412a3b91cbd9b062cdcd0f078ca163d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string ecto::profile::graph_stats_type::as_string</definition>
+        <argsstring>(graph::graph_t &amp;g) const </argsstring>
+        <name>as_string</name>
+        <param>
+          <type><ref refid="structecto_1_1graph_1_1graph__t" kindref="compound">graph::graph_t</ref> &amp;</type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp~" line="51" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp" line="45" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp" bodystart="44" bodyend="51"/>
+    <listofallmembers>
+      <member refid="structecto_1_1profile_1_1graph__stats__type_1ab412a3b91cbd9b062cdcd0f078ca163d" prot="public" virt="non-virtual"><scope>ecto::profile::graph_stats_type</scope><name>as_string</name></member>
+      <member refid="structecto_1_1profile_1_1graph__stats__type_1ab412a3b91cbd9b062cdcd0f078ca163d" prot="public" virt="non-virtual"><scope>ecto::profile::graph_stats_type</scope><name>as_string</name></member>
+      <member refid="structecto_1_1profile_1_1graph__stats__type_1a0d465d23569a8af1789c0b57ccb21017" prot="public" virt="non-virtual"><scope>ecto::profile::graph_stats_type</scope><name>cumulative_ticks</name></member>
+      <member refid="structecto_1_1profile_1_1graph__stats__type_1a340d79ae72ca5639e55098c860640ba8" prot="public" virt="non-virtual"><scope>ecto::profile::graph_stats_type</scope><name>cumulative_time</name></member>
+      <member refid="structecto_1_1profile_1_1graph__stats__type_1aefc20d119cb949420bf74e845a8a1e8c" prot="public" virt="non-virtual"><scope>ecto::profile::graph_stats_type</scope><name>graph_stats_type</name></member>
+      <member refid="structecto_1_1profile_1_1graph__stats__type_1aefc20d119cb949420bf74e845a8a1e8c" prot="public" virt="non-virtual"><scope>ecto::profile::graph_stats_type</scope><name>graph_stats_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

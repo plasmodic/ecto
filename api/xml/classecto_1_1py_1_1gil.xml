@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classecto_1_1py_1_1gil" kind="class" prot="public">
+    <compoundname>ecto::py::gil</compoundname>
+    <basecompoundref prot="private" virt="non-virtual">noncopyable</basecompoundref>
+    <includes refid="gil_8hpp" local="no">gil.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classecto_1_1py_1_1gil_1af91dedbf0eb88a914bacb64ff176bf93" prot="private" static="no" mutable="no">
+        <type>boost::scoped_ptr&lt; impl &gt;</type>
+        <definition>boost::scoped_ptr&lt;impl&gt; ecto::py::gil::impl_</definition>
+        <argsstring></argsstring>
+        <name>impl_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/gil.hpp" line="40" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/gil.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classecto_1_1py_1_1gil_1aad7e0cb610b4766dbdfa918227e806cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ecto::py::gil::gil</definition>
+        <argsstring>()</argsstring>
+        <name>gil</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/gil.hpp" line="43" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1py_1_1gil_1a18685c76c39837ddf90159fb0721ab62" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ecto::py::gil::~gil</definition>
+        <argsstring>()</argsstring>
+        <name>~gil</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/gil.hpp" line="44" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="323">
+        <label>noncopyable</label>
+      </node>
+      <node id="322">
+        <label>ecto::py::gil</label>
+        <link refid="classecto_1_1py_1_1gil"/>
+        <childnode refid="323" relation="private-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="325">
+        <label>noncopyable</label>
+      </node>
+      <node id="324">
+        <label>ecto::py::gil</label>
+        <link refid="classecto_1_1py_1_1gil"/>
+        <childnode refid="325" relation="private-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/gil.hpp" line="38" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/gil.hpp" bodystart="37" bodyend="45"/>
+    <listofallmembers>
+      <member refid="classecto_1_1py_1_1gil_1aad7e0cb610b4766dbdfa918227e806cc" prot="public" virt="non-virtual"><scope>ecto::py::gil</scope><name>gil</name></member>
+      <member refid="classecto_1_1py_1_1gil_1af91dedbf0eb88a914bacb64ff176bf93" prot="private" virt="non-virtual"><scope>ecto::py::gil</scope><name>impl_</name></member>
+      <member refid="classecto_1_1py_1_1gil_1a18685c76c39837ddf90159fb0721ab62" prot="public" virt="non-virtual"><scope>ecto::py::gil</scope><name>~gil</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

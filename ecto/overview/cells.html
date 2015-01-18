@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -275,7 +273,7 @@ their signatures match the above specification.</p>
 Where is the inheritence and polymorphism?</p>
 <p class="attribution">&mdash;Egon</p>
 </div></blockquote>
-<p>You might be thinking these kinds of things... Well the registration with ecto occurs in the macro <a class="reference internal" href="../usage/techniques/autoregister.html#ECTO_CELL" title="ECTO_CELL"><tt class="xref c c-macro docutils literal"><span class="pre">ECTO_CELL</span></tt></a>.
+<p>You might be thinking these kinds of things... Well the registration with ecto occurs in the macro <a class="reference internal" href="../usage/techniques/autoregister.html#c.ECTO_CELL" title="ECTO_CELL"><tt class="xref c c-macro docutils literal"><span class="pre">ECTO_CELL</span></tt></a>.
 This macro
 does some amount of extra fanciness, but in the end it takes your struct and does something similar
 to the following simplified example:</p>
@@ -313,7 +311,7 @@ to the following simplified example:</p>
 </div>
 <p>The real implementation uses <a class="reference external" href="http://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error">SFINAE</a> to enable
 optional implementation of the interface functions.
-The macro <a class="reference internal" href="../usage/techniques/autoregister.html#ECTO_CELL" title="ECTO_CELL"><tt class="xref c c-macro docutils literal"><span class="pre">ECTO_CELL</span></tt></a> also constructs python
+The macro <a class="reference internal" href="../usage/techniques/autoregister.html#c.ECTO_CELL" title="ECTO_CELL"><tt class="xref c c-macro docutils literal"><span class="pre">ECTO_CELL</span></tt></a> also constructs python
 bindings for your cell, and
 generates RST formated doc strings from the
 static declaration parameter and io functions.
@@ -369,7 +367,8 @@ generated, and it is important that you write cells that will <strong>not</stron
 import.</p>
 <p>Another cool aspect of documentation generation is its full integration into sphinx
 docs. Placing the following command in sphinx:</p>
-<div class="highlight-python"><pre>.. ectocell:: ecto.ecto_overview Printer01</pre>
+<div class="highlight-python"><div class="highlight"><pre>.. ectocell:: ecto.ecto_overview Printer01
+</pre></div>
 </div>
 <p>Produces:</p>
 <div class="section" id="Printer01">
@@ -417,7 +416,8 @@ line:</p>
 arguments to the parameters declared in <a class="reference internal" href="#cell-printer01"><em>Printer</em></a>.</p>
 </div></blockquote>
 <p>Every Cell gets a constructor that has the following python signature:</p>
-<div class="highlight-python"><pre>Cell([Cell.type_name()], [param1=...],[param2=...])</pre>
+<div class="highlight-python"><div class="highlight"><pre>Cell([Cell.type_name()], [param1=...],[param2=...])
+</pre></div>
 </div>
 <div class="sidebar">
 <p class="first sidebar-title">When is configure called?</p>
@@ -577,7 +577,7 @@ cell.</li>
     </div>
     <div class="footer">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

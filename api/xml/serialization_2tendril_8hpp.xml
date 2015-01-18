@@ -1,0 +1,262 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="serialization_2tendril_8hpp" kind="file">
+    <compoundname>tendril.hpp</compoundname>
+    <includes refid="tendril_8hpp" local="no">ecto/tendril.hpp</includes>
+    <includes local="no">boost/archive/binary_iarchive.hpp</includes>
+    <includes local="no">boost/archive/binary_oarchive.hpp</includes>
+    <includes local="no">boost/iostreams/device/array.hpp</includes>
+    <includes local="no">boost/iostreams/device/back_inserter.hpp</includes>
+    <includes local="no">boost/iostreams/stream_buffer.hpp</includes>
+    <incdepgraph>
+      <node id="2350">
+        <label>boost/version.hpp</label>
+      </node>
+      <node id="2339">
+        <label>boost/shared_ptr.hpp</label>
+      </node>
+      <node id="2371">
+        <label>boost/iostreams/device/back_inserter.hpp</label>
+      </node>
+      <node id="2337">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/tendril.hpp</label>
+        <link refid="serialization/tendril.hpp"/>
+        <childnode refid="2338" relation="include">
+        </childnode>
+        <childnode refid="2368" relation="include">
+        </childnode>
+        <childnode refid="2369" relation="include">
+        </childnode>
+        <childnode refid="2370" relation="include">
+        </childnode>
+        <childnode refid="2371" relation="include">
+        </childnode>
+        <childnode refid="2372" relation="include">
+        </childnode>
+      </node>
+      <node id="2341">
+        <label>boost/signals2.hpp</label>
+      </node>
+      <node id="2368">
+        <label>boost/archive/binary_iarchive.hpp</label>
+      </node>
+      <node id="2343">
+        <label>ecto/forward.hpp</label>
+        <link refid="forward_8hpp"/>
+        <childnode refid="2339" relation="include">
+        </childnode>
+      </node>
+      <node id="2351">
+        <label>stdexcept</label>
+      </node>
+      <node id="2362">
+        <label>boost/thread/thread.hpp</label>
+      </node>
+      <node id="2363">
+        <label>boost/noncopyable.hpp</label>
+      </node>
+      <node id="2347">
+        <label>string</label>
+      </node>
+      <node id="2352">
+        <label>map</label>
+      </node>
+      <node id="2372">
+        <label>boost/iostreams/stream_buffer.hpp</label>
+      </node>
+      <node id="2344">
+        <label>ecto/util.hpp</label>
+        <link refid="util_8hpp"/>
+        <childnode refid="2345" relation="include">
+        </childnode>
+        <childnode refid="2346" relation="include">
+        </childnode>
+        <childnode refid="2347" relation="include">
+        </childnode>
+      </node>
+      <node id="2360">
+        <label>ecto/python.hpp</label>
+        <link refid="python_8hpp"/>
+        <childnode refid="2349" relation="include">
+        </childnode>
+        <childnode refid="2361" relation="include">
+        </childnode>
+        <childnode refid="2362" relation="include">
+        </childnode>
+        <childnode refid="2352" relation="include">
+        </childnode>
+        <childnode refid="2363" relation="include">
+        </childnode>
+      </node>
+      <node id="2340">
+        <label>boost/function/function1.hpp</label>
+      </node>
+      <node id="2338">
+        <label>ecto/tendril.hpp</label>
+        <link refid="tendril_8hpp"/>
+        <childnode refid="2339" relation="include">
+        </childnode>
+        <childnode refid="2340" relation="include">
+        </childnode>
+        <childnode refid="2341" relation="include">
+        </childnode>
+        <childnode refid="2342" relation="include">
+        </childnode>
+        <childnode refid="2343" relation="include">
+        </childnode>
+        <childnode refid="2344" relation="include">
+        </childnode>
+        <childnode refid="2348" relation="include">
+        </childnode>
+        <childnode refid="2360" relation="include">
+        </childnode>
+        <childnode refid="2364" relation="include">
+        </childnode>
+        <childnode refid="2366" relation="include">
+        </childnode>
+        <childnode refid="2347" relation="include">
+        </childnode>
+        <childnode refid="2367" relation="include">
+        </childnode>
+      </node>
+      <node id="2369">
+        <label>boost/archive/binary_oarchive.hpp</label>
+      </node>
+      <node id="2370">
+        <label>boost/iostreams/device/array.hpp</label>
+      </node>
+      <node id="2342">
+        <label>boost/any.hpp</label>
+      </node>
+      <node id="2358">
+        <label>boost/preprocessor/stringize.hpp</label>
+      </node>
+      <node id="2355">
+        <label>boost/exception/exception.hpp</label>
+      </node>
+      <node id="2353">
+        <label>ecto/config.hpp</label>
+      </node>
+      <node id="2346">
+        <label>typeinfo</label>
+      </node>
+      <node id="2367">
+        <label>bitset</label>
+      </node>
+      <node id="2365">
+        <label>boost/python/object_fwd.hpp</label>
+      </node>
+      <node id="2361">
+        <label>boost/python.hpp</label>
+      </node>
+      <node id="2356">
+        <label>boost/exception/info.hpp</label>
+      </node>
+      <node id="2349">
+        <label>Python.h</label>
+      </node>
+      <node id="2366">
+        <label>vector</label>
+      </node>
+      <node id="2364">
+        <label>ecto/python/repr.hpp</label>
+        <link refid="repr_8hpp"/>
+        <childnode refid="2365" relation="include">
+        </childnode>
+        <childnode refid="2347" relation="include">
+        </childnode>
+      </node>
+      <node id="2345">
+        <label>iostream</label>
+      </node>
+      <node id="2357">
+        <label>boost/preprocessor/cat.hpp</label>
+      </node>
+      <node id="2354">
+        <label>boost/optional.hpp</label>
+      </node>
+      <node id="2348">
+        <label>ecto/except.hpp</label>
+        <link refid="except_8hpp"/>
+        <childnode refid="2349" relation="include">
+        </childnode>
+        <childnode refid="2350" relation="include">
+        </childnode>
+        <childnode refid="2351" relation="include">
+        </childnode>
+        <childnode refid="2347" relation="include">
+        </childnode>
+        <childnode refid="2352" relation="include">
+        </childnode>
+        <childnode refid="2353" relation="include">
+        </childnode>
+        <childnode refid="2344" relation="include">
+        </childnode>
+        <childnode refid="2354" relation="include">
+        </childnode>
+        <childnode refid="2355" relation="include">
+        </childnode>
+        <childnode refid="2356" relation="include">
+        </childnode>
+        <childnode refid="2357" relation="include">
+        </childnode>
+        <childnode refid="2358" relation="include">
+        </childnode>
+        <childnode refid="2359" relation="include">
+        </childnode>
+      </node>
+      <node id="2359">
+        <label>boost/preprocessor/seq/for_each.hpp</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespaceecto">ecto</innernamespace>
+    <innernamespace refid="namespaceecto_1_1serialization">ecto::serialization</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="tendril_8hpp" kindref="compound">ecto/tendril.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/archive/binary_iarchive.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/archive/binary_oarchive.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/iostreams/device/array.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/iostreams/device/back_inserter.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/iostreams/stream_buffer.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ecto</highlight></codeline>
+<codeline lineno="10"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="11" refid="namespaceecto_1_1serialization" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">serialization</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>BufT&gt;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16" refid="namespaceecto_1_1serialization_1a77b3e77a54adf1a888736007260a9343" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespaceecto_1_1serialization_1a77b3e77a54adf1a888736007260a9343" kindref="member">save</ref>(BufT&amp;<sp/>buf,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1tendril" kindref="compound">tendril</ref>&amp;<sp/>t)</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">io<sp/>=<sp/>boost::iostreams;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>io::back_insert_device&lt;BufT&gt;<sp/>inserter(buf);</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>io::stream_buffer<sp/>&lt;<sp/>io::back_insert_device&lt;BufT&gt;<sp/>&gt;<sp/>strbuf(inserter);</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>boost::archive::binary_oarchive<sp/>boa(strbuf,<sp/>boost::archive::no_header);</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>boa<sp/>&lt;&lt;<sp/>t;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>BufT&gt;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29" refid="namespaceecto_1_1serialization_1a1960d58009e397c926055229f8e1c347" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespaceecto_1_1serialization_1a1960d58009e397c926055229f8e1c347" kindref="member">load</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>BufT&amp;<sp/>buf,<sp/><ref refid="classecto_1_1tendril" kindref="compound">tendril</ref>&amp;<sp/>t)</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">io<sp/>=<sp/>boost::iostreams;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>io::array_source<sp/>msgsrc((</highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*)<sp/>buf.data(),<sp/>buf.size());</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>io::stream_buffer<sp/>&lt;<sp/>io::array_source<sp/>&gt;<sp/>msgbufsrc(msgsrc);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>boost::archive::binary_iarchive<sp/>bia(msgbufsrc,<sp/>boost::archive::no_header);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bia<sp/>&gt;&gt;<sp/>t;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="40"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/tendril.hpp"/>
+  </compounddef>
+</doxygen>

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -98,7 +96,8 @@ source for this document than there is on this page.</p>
 <dt id="directive-ectocell &lt;Module&gt; &lt;CellType&gt;">
 <tt class="descname">.. ectocell &lt;Module&gt; &lt;CellType&gt;::</tt><a class="headerlink" href="#directive-ectocell <Module> <CellType>" title="Permalink to this definition">¶</a></dt>
 <dd><p>Placing the following command in sphinx:</p>
-<div class="highlight-python"><pre>.. ectocell:: ecto.ecto_test Add</pre>
+<div class="highlight-python"><div class="highlight"><pre>.. ectocell:: ecto.ecto_test Add
+</pre></div>
 </div>
 <p>Will import the python module <tt class="docutils literal"><span class="pre">ecto.ecto_test</span></tt> into the running Sphinx
 process, find the class named <tt class="docutils literal"><span class="pre">Add</span></tt> and generate documentation,
@@ -150,7 +149,8 @@ takes the name of a file and the name of an object in that file.
 Sphinx will execute the file, pull the named object out of the file
 (which must be a live plasm), get the <tt class="docutils literal"><span class="pre">graphviz</span></tt> information from
 the plasm, generate and include a graphic.  For instance this direcive:</p>
-<div class="highlight-python"><pre>.. ectoplot:: ../../sampleplasm.py plasm</pre>
+<div class="highlight-python"><div class="highlight"><pre>.. ectoplot:: ../../sampleplasm.py plasm
+</pre></div>
 </div>
 <p>Will look for the file <tt class="docutils literal"><span class="pre">sampleplasm.py</span></tt> in the documentation
 directory, execute it, pull out and plot the object named plasm.  If
@@ -260,7 +260,7 @@ calling .rst file</p>
     </div>
     <div class="footer">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

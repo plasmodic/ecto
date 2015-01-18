@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="namespaceecto_1_1serialization" kind="namespace">
+    <compoundname>ecto::serialization</compoundname>
+    <innerclass refid="structecto_1_1serialization_1_1writer__" prot="public">ecto::serialization::writer_</innerclass>
+    <innerclass refid="structecto_1_1serialization_1_1reader__" prot="public">ecto::serialization::reader_</innerclass>
+    <innerclass refid="structecto_1_1serialization_1_1registry" prot="public">ecto::serialization::registry</innerclass>
+    <innerclass refid="structecto_1_1serialization_1_1register__serializer" prot="public">ecto::serialization::register_serializer</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespaceecto_1_1serialization_1ad544c8b5416e0ecfe692922b2f2e8e54" prot="public" static="no">
+        <type><ref refid="structecto_1_1serialization_1_1registry" kindref="compound">registry</ref>&lt; boost::archive::binary_oarchive &gt;</type>
+        <definition>typedef registry&lt;boost::archive::binary_oarchive&gt; ecto::serialization::registry_binary_oa</definition>
+        <argsstring></argsstring>
+        <name>registry_binary_oa</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/registry.hpp" line="107" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/registry.hpp" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaceecto_1_1serialization_1a465425ff3a756de86571c1262f22d2ba" prot="public" static="no">
+        <type><ref refid="structecto_1_1serialization_1_1registry" kindref="compound">registry</ref>&lt; boost::archive::binary_iarchive &gt;</type>
+        <definition>typedef registry&lt;boost::archive::binary_iarchive&gt; ecto::serialization::registry_binary_ia</definition>
+        <argsstring></argsstring>
+        <name>registry_binary_ia</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/registry.hpp" line="108" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/registry.hpp" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespaceecto_1_1serialization_1a77b3e77a54adf1a888736007260a9343" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename BufT</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void ecto::serialization::save</definition>
+        <argsstring>(BufT &amp;buf, const tendril &amp;t)</argsstring>
+        <name>save</name>
+        <param>
+          <type>BufT &amp;</type>
+          <declname>buf</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classecto_1_1tendril" kindref="compound">tendril</ref> &amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/tendril.hpp" line="16" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/tendril.hpp" bodystart="16" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceecto_1_1serialization_1a1960d58009e397c926055229f8e1c347" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename BufT</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void ecto::serialization::load</definition>
+        <argsstring>(const BufT &amp;buf, tendril &amp;t)</argsstring>
+        <name>load</name>
+        <param>
+          <type>const BufT &amp;</type>
+          <declname>buf</declname>
+        </param>
+        <param>
+          <type><ref refid="classecto_1_1tendril" kindref="compound">tendril</ref> &amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/tendril.hpp" line="29" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/tendril.hpp" bodystart="29" bodyend="38"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/tendril.hpp" line="12" column="1"/>
+  </compounddef>
+</doxygen>

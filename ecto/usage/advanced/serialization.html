@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -104,13 +102,13 @@ cells, ecto supports <a class="reference external" href="http://www.boost.org/do
 <dt>Steps to ensure your types can be serialized:</dt>
 <dd><ol class="first last arabic simple">
 <li>Write boost serialization methods for your types, don&#8217;t worry all the basic types should work by default.</li>
-<li>Use the <a class="reference internal" href="#ECTO_REGISTER_SERIALIZERS" title="ECTO_REGISTER_SERIALIZERS"><tt class="xref c c-macro docutils literal"><span class="pre">ECTO_REGISTER_SERIALIZERS</span></tt></a> in one of your translation units.</li>
+<li>Use the <a class="reference internal" href="#c.ECTO_REGISTER_SERIALIZERS" title="ECTO_REGISTER_SERIALIZERS"><tt class="xref c c-macro docutils literal"><span class="pre">ECTO_REGISTER_SERIALIZERS</span></tt></a> in one of your translation units.</li>
 </ol>
 </dd>
 </dl>
 <dl class="macro">
-<dt id="ECTO_REGISTER_SERIALIZERS">
-<tt class="descname">ECTO_REGISTER_SERIALIZERS</tt><big>(</big>Type<big>)</big><a class="headerlink" href="#ECTO_REGISTER_SERIALIZERS" title="Permalink to this definition">¶</a></dt>
+<dt id="c.ECTO_REGISTER_SERIALIZERS">
+<tt class="descname">ECTO_REGISTER_SERIALIZERS</tt><big>(</big>Type<big>)</big><a class="headerlink" href="#c.ECTO_REGISTER_SERIALIZERS" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>Sample:</p>
@@ -244,7 +242,7 @@ node [shape=plaintext]
 
 <span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">tutorial_native_plasm</span>
   <span class="s">ecto</span>
-  <span class="o">${</span><span class="nv">ECTO_DEP_LIBS</span><span class="o">}</span>
+  <span class="o">${</span><span class="nv">catkin_LIBRARIES</span><span class="o">}</span>
   <span class="s">hello_ecto_ectomodule</span> <span class="c">#uses cells from this module.</span>
 <span class="p">)</span>
 </pre></div>
@@ -299,7 +297,7 @@ o
     </div>
     <div class="footer">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

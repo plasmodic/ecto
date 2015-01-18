@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="structboost_1_1python_1_1std__map__indexing__suite_1_1init__factory" kind="struct" prot="public">
+    <compoundname>boost::python::std_map_indexing_suite::init_factory</compoundname>
+    <includes refid="std__map__indexing__suite_8hpp" local="no">std_map_indexing_suite.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename PyClassT</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structboost_1_1python_1_1std__map__indexing__suite_1_1init__factory_1a785b4c017210dd048b47eb6c04a5cdc6" prot="public" static="no">
+        <type>PyClassT::metadata::holder</type>
+        <definition>typedef PyClassT::metadata::holder boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::init_factory&lt; PyClassT &gt;::Holder</definition>
+        <argsstring></argsstring>
+        <name>Holder</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="208" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="208" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structboost_1_1python_1_1std__map__indexing__suite_1_1init__factory_1aea2971d45c2f4de6ac83494b504d9a19" prot="public" static="no">
+        <type>bp::objects::instance&lt; <ref refid="structboost_1_1python_1_1std__map__indexing__suite_1_1init__factory_1a785b4c017210dd048b47eb6c04a5cdc6" kindref="member">Holder</ref> &gt;</type>
+        <definition>typedef bp::objects::instance&lt;Holder&gt; boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::init_factory&lt; PyClassT &gt;::instance_t</definition>
+        <argsstring></argsstring>
+        <name>instance_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="209" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="209" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structboost_1_1python_1_1std__map__indexing__suite_1_1init__factory_1acd1c1789efbbb4f595abae51b1f0a2a0" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::init_factory&lt; PyClassT &gt;::make_holder</definition>
+        <argsstring>(PyObject *p)</argsstring>
+        <name>make_holder</name>
+        <param>
+          <type>PyObject *</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="213" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="213" bodyend="225"/>
+      </memberdef>
+      <memberdef kind="function" id="structboost_1_1python_1_1std__map__indexing__suite_1_1init__factory_1aa1f0944f15cb284c240d25bfa6f0ccca" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::init_factory&lt; PyClassT &gt;::from_dict</definition>
+        <argsstring>(PyObject *p, bp::dict const &amp;dict)</argsstring>
+        <name>from_dict</name>
+        <param>
+          <type>PyObject *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>bp::dict const &amp;</type>
+          <declname>dict</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="226" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="226" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="function" id="structboost_1_1python_1_1std__map__indexing__suite_1_1init__factory_1ad0dbf8e2c1b8fa7dd7ecf87415e7d3fb" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::init_factory&lt; PyClassT &gt;::from_list</definition>
+        <argsstring>(PyObject *p, bp::list const &amp;list)</argsstring>
+        <name>from_list</name>
+        <param>
+          <type>PyObject *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>bp::list const &amp;</type>
+          <declname>list</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="232" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="232" bodyend="237"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="207" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="207" bodyend="238"/>
+    <listofallmembers>
+      <member refid="structboost_1_1python_1_1std__map__indexing__suite_1_1init__factory_1aa1f0944f15cb284c240d25bfa6f0ccca" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite::init_factory</scope><name>from_dict</name></member>
+      <member refid="structboost_1_1python_1_1std__map__indexing__suite_1_1init__factory_1ad0dbf8e2c1b8fa7dd7ecf87415e7d3fb" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite::init_factory</scope><name>from_list</name></member>
+      <member refid="structboost_1_1python_1_1std__map__indexing__suite_1_1init__factory_1a785b4c017210dd048b47eb6c04a5cdc6" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite::init_factory</scope><name>Holder</name></member>
+      <member refid="structboost_1_1python_1_1std__map__indexing__suite_1_1init__factory_1aea2971d45c2f4de6ac83494b504d9a19" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite::init_factory</scope><name>instance_t</name></member>
+      <member refid="structboost_1_1python_1_1std__map__indexing__suite_1_1init__factory_1acd1c1789efbbb4f595abae51b1f0a2a0" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite::init_factory</scope><name>make_holder</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

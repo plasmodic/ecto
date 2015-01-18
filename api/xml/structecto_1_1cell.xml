@@ -1,0 +1,1451 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="structecto_1_1cell" kind="struct" prot="public" abstract="yes">
+    <compoundname>ecto::cell</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">noncopyable</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">noncopyable</basecompoundref>
+    <derivedcompoundref refid="structecto_1_1cell__" prot="public" virt="non-virtual">ecto::cell_&lt; Impl &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structecto_1_1cell__" prot="public" virt="non-virtual">ecto::cell_&lt; Impl &gt;</derivedcompoundref>
+    <includes refid="cell_8hpp" local="no">cell.hpp</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structecto_1_1cell_1af2cab9d2bc012088c4f58c40da57a862" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="structecto_1_1cell" kindref="compound">cell</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;cell&gt; ecto::cell::ptr</definition>
+        <argsstring></argsstring>
+        <name>ptr</name>
+        <briefdescription>
+<para>A convenience pointer typedef. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="95" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structecto_1_1cell_1af2cab9d2bc012088c4f58c40da57a862" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="structecto_1_1cell" kindref="compound">cell</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;cell&gt; ecto::cell::ptr</definition>
+        <argsstring></argsstring>
+        <name>ptr</name>
+        <briefdescription>
+<para>A convenience pointer typedef. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="95" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structecto_1_1cell_1ae00a91199c758cf7c24dcf0ecdf70a27" prot="public" static="no" mutable="no">
+        <type><ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref></type>
+        <definition>tendrils ecto::cell::parameters</definition>
+        <argsstring></argsstring>
+        <name>parameters</name>
+        <briefdescription>
+<para>Parameters. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="195" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" bodystart="195" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structecto_1_1cell_1a65099b0458a7761b8bfa7a1ddc17e92f" prot="public" static="no" mutable="no">
+        <type><ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref></type>
+        <definition>tendrils ecto::cell::inputs</definition>
+        <argsstring></argsstring>
+        <name>inputs</name>
+        <briefdescription>
+<para>Inputs, inboxes, always have a valid value ( may be NULL ) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="197" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" bodystart="197" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structecto_1_1cell_1a93951743b603faba35312ebdb07ceb22" prot="public" static="no" mutable="no">
+        <type><ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref></type>
+        <definition>tendrils ecto::cell::outputs</definition>
+        <argsstring></argsstring>
+        <name>outputs</name>
+        <briefdescription>
+<para>Outputs, outboxes, always have a valid value ( may be NULL ) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="199" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" bodystart="199" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structecto_1_1cell_1a0ecc893a5427877548d0c39a208a5a26" prot="public" static="no" mutable="no">
+        <type>boost::optional&lt; <ref refid="structecto_1_1strand" kindref="compound">strand</ref> &gt;</type>
+        <definition>boost::optional&lt; strand &gt; ecto::cell::strand_</definition>
+        <argsstring></argsstring>
+        <name>strand_</name>
+        <briefdescription>
+<para>The strand that this cell should be executed in. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="202" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" bodystart="202" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structecto_1_1cell_1a2bf4e65c7a699624c61d3b55cfac45ed" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string ecto::cell::instance_name_</definition>
+        <argsstring></argsstring>
+        <name>instance_name_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="239" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" bodystart="239" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structecto_1_1cell_1a187d36610ae8035e9f589de06ecc0d0a" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ecto::cell::configured_</definition>
+        <argsstring></argsstring>
+        <name>configured_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="240" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" bodystart="240" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structecto_1_1cell_1ad270620c006f30471b2371feb38b6a03" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ecto::cell::activated_</definition>
+        <argsstring></argsstring>
+        <name>activated_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="241" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" bodystart="241" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structecto_1_1cell_1a9a9d7fa3bb72fd74073a997bfb6cbad8" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ecto::cell::process_connected_inputs_only_</definition>
+        <argsstring></argsstring>
+        <name>process_connected_inputs_only_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="242" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" bodystart="242" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structecto_1_1cell_1a782c9d0f521f8a34c8eed309d0d8d79a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ecto::cell::cell</definition>
+        <argsstring>()</argsstring>
+        <name>cell</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="97" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a98748014df1b1a4fd3fbb47f6adc8c5e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual ecto::cell::~cell</definition>
+        <argsstring>()</argsstring>
+        <name>~cell</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="98" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a5c3c204f531de15920cb9d3db3ecfc4c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::cell::declare_params</definition>
+        <argsstring>()</argsstring>
+        <name>declare_params</name>
+        <briefdescription>
+<para>Dispatches parameter declaration code. After this code, the parameters for the cell will be set to their defaults. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="103" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1af6c3782ed0d1c258bcf5050b4af272b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::cell::declare_io</definition>
+        <argsstring>()</argsstring>
+        <name>declare_io</name>
+        <briefdescription>
+<para>Dispatches input/output declaration code. It is assumed that the parameters have been declared before this is called, so that inputs and outputs may be dependent on those parameters. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="108" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a30d48d21d6ffa86af4888f78e92241af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::cell::configure</definition>
+        <argsstring>()</argsstring>
+        <name>configure</name>
+        <briefdescription>
+<para>Given initialized parameters,inputs, and outputs, this will dispatch the client configuration code. This will allocated an instace of the clients cell, so this should not be called during introspection. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="114" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a0416d7265db282a18202b58636be7165" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::cell::activate</definition>
+        <argsstring>()</argsstring>
+        <name>activate</name>
+        <briefdescription>
+<para>Activate the cell. i.e. Put it into a &quot;ready&quot; state, opening sockets, etc. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="119" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1ab988f785fb943af3ff48c2d6f67a07aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::cell::deactivate</definition>
+        <argsstring>()</argsstring>
+        <name>deactivate</name>
+        <briefdescription>
+<para>Deactivate the cell. i.e. Put it into an &quot;unready&quot; state, closing sockets, etc. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="124" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a06abb010763ff7aeaaf2b28be4a6424a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::cell::start</definition>
+        <argsstring>()</argsstring>
+        <name>start</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>scheduler is going to call <ref refid="structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3" kindref="member">process()</ref> zero or more times. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="127" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1abac52b774d350b02dc99a55c64b94bcd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::cell::stop</definition>
+        <argsstring>()</argsstring>
+        <name>stop</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>scheduler is not going to call <ref refid="structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3" kindref="member">process()</ref> for a while. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="130" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespaceecto_1a93d82cd28db695d53963fb696582762c" kindref="member">ReturnCode</ref></type>
+        <definition>ReturnCode ecto::cell::process</definition>
+        <argsstring>()</argsstring>
+        <name>process</name>
+        <briefdescription>
+<para>Dispatches the process function for the client cell. This should only be called from one thread at a time. Also, this function may throw exceptions... </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A return code, <ref refid="namespaceecto_1a93d82cd28db695d53963fb696582762ca93233d0e6456b2e8f52d285b74c463c8" kindref="member">ecto::OK</ref> , or 0 means all is ok. Anything non zero should be considered an exit signal. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="139" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a407e320190ee98c1a1a3042ac3c38f0e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespaceecto_1a93d82cd28db695d53963fb696582762c" kindref="member">ReturnCode</ref></type>
+        <definition>ReturnCode ecto::cell::process_with_only_these_inputs</definition>
+        <argsstring>(const tendrils &amp;connected_inputs)</argsstring>
+        <name>process_with_only_these_inputs</name>
+        <param>
+          <type>const <ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref> &amp;</type>
+          <declname>connected_inputs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="140" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1ae3b84af61e78dab25f66a66773d5c5df" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string ecto::cell::type</definition>
+        <argsstring>() const </argsstring>
+        <name>type</name>
+        <briefdescription>
+<para>Return the type of the child class. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A human readable non mangled name for the client class. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="145" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" bodystart="145" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a931fbc02fff66a58684ab25e00dbb2f8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string ecto::cell::name</definition>
+        <argsstring>() const </argsstring>
+        <name>name</name>
+        <briefdescription>
+<para>Grab the name of the instance. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The name of the instance, or the address if none was given when object was constructed. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="151" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" bodystart="151" bodyend="152"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a3956efb238f50a6983b86f430c47ca05" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::cell::name</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>name</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Set the name of the instance. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="155" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" bodystart="155" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1aefa443962201caebb08d1a3163730639" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string ecto::cell::short_doc</definition>
+        <argsstring>() const </argsstring>
+        <name>short_doc</name>
+        <briefdescription>
+<para>Set the short_doc_ of the instance. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="159" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" bodystart="159" bodyend="160"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a49d510eec19d352c5729e6a2fd149340" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::cell::short_doc</definition>
+        <argsstring>(const std::string &amp;short_doc)</argsstring>
+        <name>short_doc</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>short_doc</declname>
+        </param>
+        <briefdescription>
+<para>Set the short_doc_ of the instance. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="163" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" bodystart="163" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1af32a9e2113b7afcb5b225bdc3c234e8c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::cell::reset_strand</definition>
+        <argsstring>()</argsstring>
+        <name>reset_strand</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="166" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1ae0009fc4a4d12d400126f455396f5c9f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::cell::set_strand</definition>
+        <argsstring>(ecto::strand)</argsstring>
+        <name>set_strand</name>
+        <param>
+          <type><ref refid="structecto_1_1strand" kindref="compound">ecto::strand</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="167" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a486454d7466c5f0373ecb42dd4e97b2f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string ecto::cell::gen_doc</definition>
+        <argsstring>(const std::string &amp;doc=&quot;A module...&quot;) const </argsstring>
+        <name>gen_doc</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>doc</declname>
+          <defval>&quot;A module...&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Generate an Restructured Text doc string for the cell. Includes documentation for all parameters, inputs, outputs. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>doc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The highest level documentation for the cell. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A nicely formatted doc string. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="174" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1aa03c0f569bb4b14e81f4d2a8747273e5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::cell::verify_params</definition>
+        <argsstring>() const </argsstring>
+        <name>verify_params</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="176" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1aed712e80344ce04dbb9105bb6a1aa53a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::cell::verify_inputs</definition>
+        <argsstring>() const </argsstring>
+        <name>verify_inputs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="177" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1ab1dfafd237e0adf273af65d549e7516e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ecto::cell::process_connected_inputs_only</definition>
+        <argsstring>() const </argsstring>
+        <name>process_connected_inputs_only</name>
+        <briefdescription>
+<para>Processing mode query - only connected tendrils or all. Typically used by the scheduler to arrange input tendrils when invoking a process. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>flag only connected input tendrils if true, all otherwise. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="185" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" bodystart="185" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a4c42ef400acac92d825e7dc25ff53bdc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::cell::set_process_connected_inputs_only</definition>
+        <argsstring>(const bool &amp;value)</argsstring>
+        <name>set_process_connected_inputs_only</name>
+        <param>
+          <type>const bool &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="188" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" bodystart="188" bodyend="190"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a213dabd285300f5d4c7e0f5fd6142e81" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structecto_1_1cell_1af2cab9d2bc012088c4f58c40da57a862" kindref="member">ptr</ref></type>
+        <definition>ptr ecto::cell::clone</definition>
+        <argsstring>() const </argsstring>
+        <name>clone</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="192" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1ab9a6c3fd8f76289f338a9e05368b1aff" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool ecto::cell::init</definition>
+        <argsstring>()=0</argsstring>
+        <name>init</name>
+        <reimplementedby refid="structecto_1_1cell___1a06749143e390dcc5fd90f5076620108c">init</reimplementedby>
+        <reimplementedby refid="structecto_1_1cell___1a06749143e390dcc5fd90f5076620108c">init</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="204" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a782c9d0f521f8a34c8eed309d0d8d79a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ecto::cell::cell</definition>
+        <argsstring>()</argsstring>
+        <name>cell</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="97" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a98748014df1b1a4fd3fbb47f6adc8c5e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual ecto::cell::~cell</definition>
+        <argsstring>()</argsstring>
+        <name>~cell</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="98" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a5c3c204f531de15920cb9d3db3ecfc4c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::cell::declare_params</definition>
+        <argsstring>()</argsstring>
+        <name>declare_params</name>
+        <briefdescription>
+<para>Dispatches parameter declaration code. After this code, the parameters for the cell will be set to their defaults. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="103" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1af6c3782ed0d1c258bcf5050b4af272b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::cell::declare_io</definition>
+        <argsstring>()</argsstring>
+        <name>declare_io</name>
+        <briefdescription>
+<para>Dispatches input/output declaration code. It is assumed that the parameters have been declared before this is called, so that inputs and outputs may be dependent on those parameters. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="108" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a30d48d21d6ffa86af4888f78e92241af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::cell::configure</definition>
+        <argsstring>()</argsstring>
+        <name>configure</name>
+        <briefdescription>
+<para>Given initialized parameters,inputs, and outputs, this will dispatch the client configuration code. This will allocated an instace of the clients cell, so this should not be called during introspection. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="114" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a0416d7265db282a18202b58636be7165" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::cell::activate</definition>
+        <argsstring>()</argsstring>
+        <name>activate</name>
+        <briefdescription>
+<para>Activate the cell. i.e. Put it into a &quot;ready&quot; state, opening sockets, etc. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="119" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1ab988f785fb943af3ff48c2d6f67a07aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::cell::deactivate</definition>
+        <argsstring>()</argsstring>
+        <name>deactivate</name>
+        <briefdescription>
+<para>Deactivate the cell. i.e. Put it into an &quot;unready&quot; state, closing sockets, etc. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="124" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a06abb010763ff7aeaaf2b28be4a6424a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::cell::start</definition>
+        <argsstring>()</argsstring>
+        <name>start</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>scheduler is going to call <ref refid="structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3" kindref="member">process()</ref> zero or more times. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="127" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1abac52b774d350b02dc99a55c64b94bcd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::cell::stop</definition>
+        <argsstring>()</argsstring>
+        <name>stop</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>scheduler is not going to call <ref refid="structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3" kindref="member">process()</ref> for a while. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="130" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespaceecto_1a93d82cd28db695d53963fb696582762c" kindref="member">ReturnCode</ref></type>
+        <definition>ReturnCode ecto::cell::process</definition>
+        <argsstring>()</argsstring>
+        <name>process</name>
+        <briefdescription>
+<para>Dispatches the process function for the client cell. This should only be called from one thread at a time. Also, this function may throw exceptions... </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A return code, <ref refid="namespaceecto_1a93d82cd28db695d53963fb696582762ca93233d0e6456b2e8f52d285b74c463c8" kindref="member">ecto::OK</ref> , or 0 means all is ok. Anything non zero should be considered an exit signal. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="139" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1ae3b84af61e78dab25f66a66773d5c5df" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string ecto::cell::type</definition>
+        <argsstring>() const </argsstring>
+        <name>type</name>
+        <briefdescription>
+<para>Return the type of the child class. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A human readable non mangled name for the client class. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="144" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" bodystart="144" bodyend="144"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a931fbc02fff66a58684ab25e00dbb2f8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string ecto::cell::name</definition>
+        <argsstring>() const </argsstring>
+        <name>name</name>
+        <briefdescription>
+<para>Grab the name of the instance. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The name of the instance, or the address if none was given when object was constructed. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="150" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" bodystart="150" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a3956efb238f50a6983b86f430c47ca05" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::cell::name</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>name</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Set the name of the instance. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="154" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" bodystart="154" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1aefa443962201caebb08d1a3163730639" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string ecto::cell::short_doc</definition>
+        <argsstring>() const </argsstring>
+        <name>short_doc</name>
+        <briefdescription>
+<para>Set the short_doc_ of the instance. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="158" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" bodystart="158" bodyend="159"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a49d510eec19d352c5729e6a2fd149340" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::cell::short_doc</definition>
+        <argsstring>(const std::string &amp;short_doc)</argsstring>
+        <name>short_doc</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>short_doc</declname>
+        </param>
+        <briefdescription>
+<para>Set the short_doc_ of the instance. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="162" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" bodystart="162" bodyend="163"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1af32a9e2113b7afcb5b225bdc3c234e8c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::cell::reset_strand</definition>
+        <argsstring>()</argsstring>
+        <name>reset_strand</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="165" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1ae0009fc4a4d12d400126f455396f5c9f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::cell::set_strand</definition>
+        <argsstring>(ecto::strand)</argsstring>
+        <name>set_strand</name>
+        <param>
+          <type><ref refid="structecto_1_1strand" kindref="compound">ecto::strand</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="166" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a486454d7466c5f0373ecb42dd4e97b2f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string ecto::cell::gen_doc</definition>
+        <argsstring>(const std::string &amp;doc=&quot;A module...&quot;) const </argsstring>
+        <name>gen_doc</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>doc</declname>
+          <defval>&quot;A module...&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Generate an Restructured Text doc string for the cell. Includes documentation for all parameters, inputs, outputs. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>doc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The highest level documentation for the cell. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A nicely formatted doc string. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="173" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1aa03c0f569bb4b14e81f4d2a8747273e5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::cell::verify_params</definition>
+        <argsstring>() const </argsstring>
+        <name>verify_params</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="175" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1aed712e80344ce04dbb9105bb6a1aa53a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::cell::verify_inputs</definition>
+        <argsstring>() const </argsstring>
+        <name>verify_inputs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="176" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a213dabd285300f5d4c7e0f5fd6142e81" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structecto_1_1cell_1af2cab9d2bc012088c4f58c40da57a862" kindref="member">ptr</ref></type>
+        <definition>ptr ecto::cell::clone</definition>
+        <argsstring>() const </argsstring>
+        <name>clone</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="178" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1ab9a6c3fd8f76289f338a9e05368b1aff" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool ecto::cell::init</definition>
+        <argsstring>()=0</argsstring>
+        <name>init</name>
+        <reimplementedby refid="structecto_1_1cell___1a06749143e390dcc5fd90f5076620108c">init</reimplementedby>
+        <reimplementedby refid="structecto_1_1cell___1a06749143e390dcc5fd90f5076620108c">init</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="190" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="structecto_1_1cell_1abcf3cc29703214a7ede63d652e17ee96" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void ecto::cell::dispatch_declare_params</definition>
+        <argsstring>(tendrils &amp;t)=0</argsstring>
+        <name>dispatch_declare_params</name>
+        <reimplementedby refid="structecto_1_1cell___1a0e435a14e4cc1d5cd7d80a16f2776565">dispatch_declare_params</reimplementedby>
+        <reimplementedby refid="structecto_1_1cell___1a0e435a14e4cc1d5cd7d80a16f2776565">dispatch_declare_params</reimplementedby>
+        <param>
+          <type><ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref> &amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="208" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1acb4cdb70f2db329ba9c615d74c63a4b2" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void ecto::cell::dispatch_declare_io</definition>
+        <argsstring>(const tendrils &amp;params, tendrils &amp;inputs, tendrils &amp;outputs)=0</argsstring>
+        <name>dispatch_declare_io</name>
+        <reimplementedby refid="structecto_1_1cell___1ad95920d295860b791e3fa733fb0745db">dispatch_declare_io</reimplementedby>
+        <reimplementedby refid="structecto_1_1cell___1ad95920d295860b791e3fa733fb0745db">dispatch_declare_io</reimplementedby>
+        <param>
+          <type>const <ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref> &amp;</type>
+          <declname>params</declname>
+        </param>
+        <param>
+          <type><ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref> &amp;</type>
+          <declname>inputs</declname>
+        </param>
+        <param>
+          <type><ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref> &amp;</type>
+          <declname>outputs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="210" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a19c7c679dededd37ace918bf0ff31cd3" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void ecto::cell::dispatch_configure</definition>
+        <argsstring>(const tendrils &amp;params, const tendrils &amp;inputs, const tendrils &amp;outputs)=0</argsstring>
+        <name>dispatch_configure</name>
+        <reimplementedby refid="structecto_1_1cell___1a953e526cefd3c419a01717740eab9227">dispatch_configure</reimplementedby>
+        <reimplementedby refid="structecto_1_1cell___1a953e526cefd3c419a01717740eab9227">dispatch_configure</reimplementedby>
+        <param>
+          <type>const <ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref> &amp;</type>
+          <declname>params</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref> &amp;</type>
+          <declname>inputs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref> &amp;</type>
+          <declname>outputs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="213" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1aa345ec700e5e213364c7bb20571cd78d" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void ecto::cell::dispatch_activate</definition>
+        <argsstring>()=0</argsstring>
+        <name>dispatch_activate</name>
+        <reimplementedby refid="structecto_1_1cell___1a31437fcb5a15e57e8287719f48cecbdd">dispatch_activate</reimplementedby>
+        <reimplementedby refid="structecto_1_1cell___1a31437fcb5a15e57e8287719f48cecbdd">dispatch_activate</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="217" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a4b5f111fc7b90dccce0cd70e28c9be62" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void ecto::cell::dispatch_deactivate</definition>
+        <argsstring>()=0</argsstring>
+        <name>dispatch_deactivate</name>
+        <reimplementedby refid="structecto_1_1cell___1a71463eb5e248d29814066904e7f0d515">dispatch_deactivate</reimplementedby>
+        <reimplementedby refid="structecto_1_1cell___1a71463eb5e248d29814066904e7f0d515">dispatch_deactivate</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="219" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a390bd83cfdff120523efc5c3e76bc3e5" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="namespaceecto_1a93d82cd28db695d53963fb696582762c" kindref="member">ReturnCode</ref></type>
+        <definition>virtual ReturnCode ecto::cell::dispatch_process</definition>
+        <argsstring>(const tendrils &amp;inputs, const tendrils &amp;outputs)=0</argsstring>
+        <name>dispatch_process</name>
+        <reimplementedby refid="structecto_1_1cell___1a1ddd0142b998f0de06a7992c5db27f16">dispatch_process</reimplementedby>
+        <reimplementedby refid="structecto_1_1cell___1a1ddd0142b998f0de06a7992c5db27f16">dispatch_process</reimplementedby>
+        <param>
+          <type>const <ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref> &amp;</type>
+          <declname>inputs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref> &amp;</type>
+          <declname>outputs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="221" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1ab5c75358dd32fa811116654bdc76385b" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void ecto::cell::dispatch_start</definition>
+        <argsstring>()=0</argsstring>
+        <name>dispatch_start</name>
+        <reimplementedby refid="structecto_1_1cell___1af6929fe6c16db59235793d972ea20ff8">dispatch_start</reimplementedby>
+        <reimplementedby refid="structecto_1_1cell___1af6929fe6c16db59235793d972ea20ff8">dispatch_start</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="224" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a65ff7141e927a7115a785478a03b94bc" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void ecto::cell::dispatch_stop</definition>
+        <argsstring>()=0</argsstring>
+        <name>dispatch_stop</name>
+        <reimplementedby refid="structecto_1_1cell___1a0951afcee7f4aa52f957f1a6ecc2bfb7">dispatch_stop</reimplementedby>
+        <reimplementedby refid="structecto_1_1cell___1a0951afcee7f4aa52f957f1a6ecc2bfb7">dispatch_stop</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="225" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a456b56e3291f5e2bb68ce31a4a43ece5" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::string</type>
+        <definition>virtual std::string ecto::cell::dispatch_name</definition>
+        <argsstring>() const =0</argsstring>
+        <name>dispatch_name</name>
+        <reimplementedby refid="structecto_1_1cell___1a288dac8bba40036b3f3e6b0641833039">dispatch_name</reimplementedby>
+        <reimplementedby refid="structecto_1_1cell___1a288dac8bba40036b3f3e6b0641833039">dispatch_name</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="227" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a7beccd749c33bd8b4c5827598e8fe5a5" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="structecto_1_1cell_1af2cab9d2bc012088c4f58c40da57a862" kindref="member">ptr</ref></type>
+        <definition>virtual ptr ecto::cell::dispatch_clone</definition>
+        <argsstring>() const =0</argsstring>
+        <name>dispatch_clone</name>
+        <reimplementedby refid="structecto_1_1cell___1ae2868bb59ddb378cbe7b98fd4e776930">dispatch_clone</reimplementedby>
+        <reimplementedby refid="structecto_1_1cell___1ae2868bb59ddb378cbe7b98fd4e776930">dispatch_clone</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="229" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a400b8aecf15588cfb21d712fbb000e8a" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>std::string</type>
+        <definition>virtual std::string ecto::cell::dispatch_short_doc</definition>
+        <argsstring>() const </argsstring>
+        <name>dispatch_short_doc</name>
+        <reimplementedby refid="structecto_1_1cell___1aea843d10de8a002ada9a29bec2ecb815">dispatch_short_doc</reimplementedby>
+        <reimplementedby refid="structecto_1_1cell___1aea843d10de8a002ada9a29bec2ecb815">dispatch_short_doc</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="231" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" bodystart="231" bodyend="232"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a407d24db843ffe12ac57c9a8827a9fe8" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void ecto::cell::dispatch_short_doc</definition>
+        <argsstring>(const std::string &amp;)</argsstring>
+        <name>dispatch_short_doc</name>
+        <reimplementedby refid="structecto_1_1cell___1a8d9ca18e234396fcdc1875507d3e11a8">dispatch_short_doc</reimplementedby>
+        <reimplementedby refid="structecto_1_1cell___1a8d9ca18e234396fcdc1875507d3e11a8">dispatch_short_doc</reimplementedby>
+        <param>
+          <type>const std::string &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="234" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" bodystart="234" bodyend="234"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1abcf3cc29703214a7ede63d652e17ee96" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void ecto::cell::dispatch_declare_params</definition>
+        <argsstring>(tendrils &amp;t)=0</argsstring>
+        <name>dispatch_declare_params</name>
+        <reimplementedby refid="structecto_1_1cell___1a0e435a14e4cc1d5cd7d80a16f2776565">dispatch_declare_params</reimplementedby>
+        <reimplementedby refid="structecto_1_1cell___1a0e435a14e4cc1d5cd7d80a16f2776565">dispatch_declare_params</reimplementedby>
+        <param>
+          <type><ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref> &amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="194" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1acb4cdb70f2db329ba9c615d74c63a4b2" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void ecto::cell::dispatch_declare_io</definition>
+        <argsstring>(const tendrils &amp;params, tendrils &amp;inputs, tendrils &amp;outputs)=0</argsstring>
+        <name>dispatch_declare_io</name>
+        <reimplementedby refid="structecto_1_1cell___1ad95920d295860b791e3fa733fb0745db">dispatch_declare_io</reimplementedby>
+        <reimplementedby refid="structecto_1_1cell___1ad95920d295860b791e3fa733fb0745db">dispatch_declare_io</reimplementedby>
+        <param>
+          <type>const <ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref> &amp;</type>
+          <declname>params</declname>
+        </param>
+        <param>
+          <type><ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref> &amp;</type>
+          <declname>inputs</declname>
+        </param>
+        <param>
+          <type><ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref> &amp;</type>
+          <declname>outputs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="196" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a19c7c679dededd37ace918bf0ff31cd3" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void ecto::cell::dispatch_configure</definition>
+        <argsstring>(const tendrils &amp;params, const tendrils &amp;inputs, const tendrils &amp;outputs)=0</argsstring>
+        <name>dispatch_configure</name>
+        <reimplementedby refid="structecto_1_1cell___1a953e526cefd3c419a01717740eab9227">dispatch_configure</reimplementedby>
+        <reimplementedby refid="structecto_1_1cell___1a953e526cefd3c419a01717740eab9227">dispatch_configure</reimplementedby>
+        <param>
+          <type>const <ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref> &amp;</type>
+          <declname>params</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref> &amp;</type>
+          <declname>inputs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref> &amp;</type>
+          <declname>outputs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="199" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1aa345ec700e5e213364c7bb20571cd78d" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void ecto::cell::dispatch_activate</definition>
+        <argsstring>()=0</argsstring>
+        <name>dispatch_activate</name>
+        <reimplementedby refid="structecto_1_1cell___1a31437fcb5a15e57e8287719f48cecbdd">dispatch_activate</reimplementedby>
+        <reimplementedby refid="structecto_1_1cell___1a31437fcb5a15e57e8287719f48cecbdd">dispatch_activate</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="203" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a4b5f111fc7b90dccce0cd70e28c9be62" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void ecto::cell::dispatch_deactivate</definition>
+        <argsstring>()=0</argsstring>
+        <name>dispatch_deactivate</name>
+        <reimplementedby refid="structecto_1_1cell___1a71463eb5e248d29814066904e7f0d515">dispatch_deactivate</reimplementedby>
+        <reimplementedby refid="structecto_1_1cell___1a71463eb5e248d29814066904e7f0d515">dispatch_deactivate</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="205" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a390bd83cfdff120523efc5c3e76bc3e5" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="namespaceecto_1a93d82cd28db695d53963fb696582762c" kindref="member">ReturnCode</ref></type>
+        <definition>virtual ReturnCode ecto::cell::dispatch_process</definition>
+        <argsstring>(const tendrils &amp;inputs, const tendrils &amp;outputs)=0</argsstring>
+        <name>dispatch_process</name>
+        <reimplementedby refid="structecto_1_1cell___1a1ddd0142b998f0de06a7992c5db27f16">dispatch_process</reimplementedby>
+        <reimplementedby refid="structecto_1_1cell___1a1ddd0142b998f0de06a7992c5db27f16">dispatch_process</reimplementedby>
+        <param>
+          <type>const <ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref> &amp;</type>
+          <declname>inputs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref> &amp;</type>
+          <declname>outputs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="207" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1ab5c75358dd32fa811116654bdc76385b" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void ecto::cell::dispatch_start</definition>
+        <argsstring>()=0</argsstring>
+        <name>dispatch_start</name>
+        <reimplementedby refid="structecto_1_1cell___1af6929fe6c16db59235793d972ea20ff8">dispatch_start</reimplementedby>
+        <reimplementedby refid="structecto_1_1cell___1af6929fe6c16db59235793d972ea20ff8">dispatch_start</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="210" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a65ff7141e927a7115a785478a03b94bc" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void ecto::cell::dispatch_stop</definition>
+        <argsstring>()=0</argsstring>
+        <name>dispatch_stop</name>
+        <reimplementedby refid="structecto_1_1cell___1a0951afcee7f4aa52f957f1a6ecc2bfb7">dispatch_stop</reimplementedby>
+        <reimplementedby refid="structecto_1_1cell___1a0951afcee7f4aa52f957f1a6ecc2bfb7">dispatch_stop</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="211" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a456b56e3291f5e2bb68ce31a4a43ece5" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::string</type>
+        <definition>virtual std::string ecto::cell::dispatch_name</definition>
+        <argsstring>() const =0</argsstring>
+        <name>dispatch_name</name>
+        <reimplementedby refid="structecto_1_1cell___1a288dac8bba40036b3f3e6b0641833039">dispatch_name</reimplementedby>
+        <reimplementedby refid="structecto_1_1cell___1a288dac8bba40036b3f3e6b0641833039">dispatch_name</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="213" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a7beccd749c33bd8b4c5827598e8fe5a5" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="structecto_1_1cell_1af2cab9d2bc012088c4f58c40da57a862" kindref="member">ptr</ref></type>
+        <definition>virtual ptr ecto::cell::dispatch_clone</definition>
+        <argsstring>() const =0</argsstring>
+        <name>dispatch_clone</name>
+        <reimplementedby refid="structecto_1_1cell___1ae2868bb59ddb378cbe7b98fd4e776930">dispatch_clone</reimplementedby>
+        <reimplementedby refid="structecto_1_1cell___1ae2868bb59ddb378cbe7b98fd4e776930">dispatch_clone</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="215" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a400b8aecf15588cfb21d712fbb000e8a" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>std::string</type>
+        <definition>virtual std::string ecto::cell::dispatch_short_doc</definition>
+        <argsstring>() const </argsstring>
+        <name>dispatch_short_doc</name>
+        <reimplementedby refid="structecto_1_1cell___1aea843d10de8a002ada9a29bec2ecb815">dispatch_short_doc</reimplementedby>
+        <reimplementedby refid="structecto_1_1cell___1aea843d10de8a002ada9a29bec2ecb815">dispatch_short_doc</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="217" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" bodystart="217" bodyend="218"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1a407d24db843ffe12ac57c9a8827a9fe8" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void ecto::cell::dispatch_short_doc</definition>
+        <argsstring>(const std::string &amp;)</argsstring>
+        <name>dispatch_short_doc</name>
+        <reimplementedby refid="structecto_1_1cell___1a8d9ca18e234396fcdc1875507d3e11a8">dispatch_short_doc</reimplementedby>
+        <reimplementedby refid="structecto_1_1cell___1a8d9ca18e234396fcdc1875507d3e11a8">dispatch_short_doc</reimplementedby>
+        <param>
+          <type>const std::string &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="220" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" bodystart="220" bodyend="220"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="structecto_1_1cell_1ac0ae6a72cecf48916bb6dd1b6393d1b3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ecto::cell::cell</definition>
+        <argsstring>(const cell &amp;)</argsstring>
+        <name>cell</name>
+        <param>
+          <type>const <ref refid="structecto_1_1cell" kindref="compound">cell</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="237" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1cell_1ac0ae6a72cecf48916bb6dd1b6393d1b3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ecto::cell::cell</definition>
+        <argsstring>(const cell &amp;)</argsstring>
+        <name>cell</name>
+        <param>
+          <type>const <ref refid="structecto_1_1cell" kindref="compound">cell</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="223" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para><ref refid="structecto_1_1cell" kindref="compound">ecto::cell</ref> is the non virtual interface to the basic building block of ecto graphs. This interface should never be the parent of client cell, but may be used for polymorphic access to client cells. </para>    </briefdescription>
+    <detaileddescription>
+<para>Clients should expose their code to this interface through ecto::wrap, or ecto::create_cell&lt;T&gt;().</para><para>For a client&apos;s cell to satisfy the <ref refid="structecto_1_1cell" kindref="compound">ecto::cell</ref> idiom, it must look similar to the following definition. <programlisting><codeline><highlight class="keyword">struct<sp/></highlight><highlight class="normal">MyEctoCell</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//called<sp/>first<sp/>thing,<sp/>the<sp/>user<sp/>should<sp/>declare<sp/>their<sp/>parameters<sp/>in<sp/>this</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//free<sp/>standing<sp/>function.</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structecto_1_1cell_1a5c3c204f531de15920cb9d3db3ecfc4c" kindref="member">declare_params</ref>(tendrils&amp;<sp/>params);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//declare<sp/>inputs<sp/>and<sp/>outputs<sp/>here.<sp/>The<sp/>parameters<sp/>may<sp/>be<sp/>used<sp/>to</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//determine<sp/>the<sp/>io</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structecto_1_1cell_1af6c3782ed0d1c258bcf5050b4af272b4" kindref="member">declare_io</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>tendrils&amp;<sp/>params,<sp/>tendrils&amp;<sp/>in,<sp/>tendrils&amp;<sp/>out);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//called<sp/>right<sp/>after<sp/>allocation<sp/>of<sp/>the<sp/>cell,<sp/>exactly<sp/>once.</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structecto_1_1cell_1a30d48d21d6ffa86af4888f78e92241af" kindref="member">configure</ref>(tendrils&amp;<sp/>params,<sp/>tendrils&amp;<sp/><ref refid="structecto_1_1cell_1a65099b0458a7761b8bfa7a1ddc17e92f" kindref="member">inputs</ref>,<sp/>tendrils&amp;<sp/><ref refid="structecto_1_1cell_1a93951743b603faba35312ebdb07ceb22" kindref="member">outputs</ref>);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//called<sp/>at<sp/>every<sp/>execution<sp/>of<sp/>the<sp/>graph</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3" kindref="member">process</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>tendrils&amp;<sp/>in,<sp/>tendrils&amp;<sp/>out);</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+</programlisting></para><para>All functions are optional. </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="254">
+        <label>noncopyable</label>
+      </node>
+      <node id="255">
+        <label>ecto::cell_&lt; Impl &gt;</label>
+        <link refid="structecto_1_1cell__"/>
+        <childnode refid="253" relation="public-inheritance">
+        </childnode>
+        <childnode refid="253" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="253">
+        <label>ecto::cell</label>
+        <link refid="structecto_1_1cell"/>
+        <childnode refid="254" relation="public-inheritance">
+        </childnode>
+        <childnode refid="254" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="257">
+        <label>noncopyable</label>
+      </node>
+      <node id="258">
+        <label>ecto::tendrils</label>
+        <link refid="classecto_1_1tendrils"/>
+        <childnode refid="257" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="256">
+        <label>ecto::cell</label>
+        <link refid="structecto_1_1cell"/>
+        <childnode refid="257" relation="public-inheritance">
+        </childnode>
+        <childnode refid="257" relation="public-inheritance">
+        </childnode>
+        <childnode refid="258" relation="usage">
+          <edgelabel>outputs</edgelabel>
+          <edgelabel>inputs</edgelabel>
+          <edgelabel>parameters</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="94" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" bodystart="93" bodyend="244"/>
+    <listofallmembers>
+      <member refid="structecto_1_1cell_1a0416d7265db282a18202b58636be7165" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>activate</name></member>
+      <member refid="structecto_1_1cell_1a0416d7265db282a18202b58636be7165" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>activate</name></member>
+      <member refid="structecto_1_1cell_1ad270620c006f30471b2371feb38b6a03" prot="private" virt="non-virtual"><scope>ecto::cell</scope><name>activated_</name></member>
+      <member refid="structecto_1_1cell_1a782c9d0f521f8a34c8eed309d0d8d79a" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>cell</name></member>
+      <member refid="structecto_1_1cell_1ac0ae6a72cecf48916bb6dd1b6393d1b3" prot="private" virt="non-virtual"><scope>ecto::cell</scope><name>cell</name></member>
+      <member refid="structecto_1_1cell_1a782c9d0f521f8a34c8eed309d0d8d79a" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>cell</name></member>
+      <member refid="structecto_1_1cell_1ac0ae6a72cecf48916bb6dd1b6393d1b3" prot="private" virt="non-virtual"><scope>ecto::cell</scope><name>cell</name></member>
+      <member refid="structecto_1_1cell_1a213dabd285300f5d4c7e0f5fd6142e81" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>clone</name></member>
+      <member refid="structecto_1_1cell_1a213dabd285300f5d4c7e0f5fd6142e81" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>clone</name></member>
+      <member refid="structecto_1_1cell_1a30d48d21d6ffa86af4888f78e92241af" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>configure</name></member>
+      <member refid="structecto_1_1cell_1a30d48d21d6ffa86af4888f78e92241af" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>configure</name></member>
+      <member refid="structecto_1_1cell_1a187d36610ae8035e9f589de06ecc0d0a" prot="private" virt="non-virtual"><scope>ecto::cell</scope><name>configured_</name></member>
+      <member refid="structecto_1_1cell_1ab988f785fb943af3ff48c2d6f67a07aa" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>deactivate</name></member>
+      <member refid="structecto_1_1cell_1ab988f785fb943af3ff48c2d6f67a07aa" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>deactivate</name></member>
+      <member refid="structecto_1_1cell_1af6c3782ed0d1c258bcf5050b4af272b4" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>declare_io</name></member>
+      <member refid="structecto_1_1cell_1af6c3782ed0d1c258bcf5050b4af272b4" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>declare_io</name></member>
+      <member refid="structecto_1_1cell_1a5c3c204f531de15920cb9d3db3ecfc4c" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>declare_params</name></member>
+      <member refid="structecto_1_1cell_1a5c3c204f531de15920cb9d3db3ecfc4c" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>declare_params</name></member>
+      <member refid="structecto_1_1cell_1aa345ec700e5e213364c7bb20571cd78d" prot="protected" virt="pure-virtual"><scope>ecto::cell</scope><name>dispatch_activate</name></member>
+      <member refid="structecto_1_1cell_1aa345ec700e5e213364c7bb20571cd78d" prot="protected" virt="pure-virtual"><scope>ecto::cell</scope><name>dispatch_activate</name></member>
+      <member refid="structecto_1_1cell_1a7beccd749c33bd8b4c5827598e8fe5a5" prot="protected" virt="pure-virtual"><scope>ecto::cell</scope><name>dispatch_clone</name></member>
+      <member refid="structecto_1_1cell_1a7beccd749c33bd8b4c5827598e8fe5a5" prot="protected" virt="pure-virtual"><scope>ecto::cell</scope><name>dispatch_clone</name></member>
+      <member refid="structecto_1_1cell_1a19c7c679dededd37ace918bf0ff31cd3" prot="protected" virt="pure-virtual"><scope>ecto::cell</scope><name>dispatch_configure</name></member>
+      <member refid="structecto_1_1cell_1a19c7c679dededd37ace918bf0ff31cd3" prot="protected" virt="pure-virtual"><scope>ecto::cell</scope><name>dispatch_configure</name></member>
+      <member refid="structecto_1_1cell_1a4b5f111fc7b90dccce0cd70e28c9be62" prot="protected" virt="pure-virtual"><scope>ecto::cell</scope><name>dispatch_deactivate</name></member>
+      <member refid="structecto_1_1cell_1a4b5f111fc7b90dccce0cd70e28c9be62" prot="protected" virt="pure-virtual"><scope>ecto::cell</scope><name>dispatch_deactivate</name></member>
+      <member refid="structecto_1_1cell_1acb4cdb70f2db329ba9c615d74c63a4b2" prot="protected" virt="pure-virtual"><scope>ecto::cell</scope><name>dispatch_declare_io</name></member>
+      <member refid="structecto_1_1cell_1acb4cdb70f2db329ba9c615d74c63a4b2" prot="protected" virt="pure-virtual"><scope>ecto::cell</scope><name>dispatch_declare_io</name></member>
+      <member refid="structecto_1_1cell_1abcf3cc29703214a7ede63d652e17ee96" prot="protected" virt="pure-virtual"><scope>ecto::cell</scope><name>dispatch_declare_params</name></member>
+      <member refid="structecto_1_1cell_1abcf3cc29703214a7ede63d652e17ee96" prot="protected" virt="pure-virtual"><scope>ecto::cell</scope><name>dispatch_declare_params</name></member>
+      <member refid="structecto_1_1cell_1a456b56e3291f5e2bb68ce31a4a43ece5" prot="protected" virt="pure-virtual"><scope>ecto::cell</scope><name>dispatch_name</name></member>
+      <member refid="structecto_1_1cell_1a456b56e3291f5e2bb68ce31a4a43ece5" prot="protected" virt="pure-virtual"><scope>ecto::cell</scope><name>dispatch_name</name></member>
+      <member refid="structecto_1_1cell_1a390bd83cfdff120523efc5c3e76bc3e5" prot="protected" virt="pure-virtual"><scope>ecto::cell</scope><name>dispatch_process</name></member>
+      <member refid="structecto_1_1cell_1a390bd83cfdff120523efc5c3e76bc3e5" prot="protected" virt="pure-virtual"><scope>ecto::cell</scope><name>dispatch_process</name></member>
+      <member refid="structecto_1_1cell_1a400b8aecf15588cfb21d712fbb000e8a" prot="protected" virt="virtual"><scope>ecto::cell</scope><name>dispatch_short_doc</name></member>
+      <member refid="structecto_1_1cell_1a407d24db843ffe12ac57c9a8827a9fe8" prot="protected" virt="virtual"><scope>ecto::cell</scope><name>dispatch_short_doc</name></member>
+      <member refid="structecto_1_1cell_1a400b8aecf15588cfb21d712fbb000e8a" prot="protected" virt="virtual"><scope>ecto::cell</scope><name>dispatch_short_doc</name></member>
+      <member refid="structecto_1_1cell_1a407d24db843ffe12ac57c9a8827a9fe8" prot="protected" virt="virtual"><scope>ecto::cell</scope><name>dispatch_short_doc</name></member>
+      <member refid="structecto_1_1cell_1ab5c75358dd32fa811116654bdc76385b" prot="protected" virt="pure-virtual"><scope>ecto::cell</scope><name>dispatch_start</name></member>
+      <member refid="structecto_1_1cell_1ab5c75358dd32fa811116654bdc76385b" prot="protected" virt="pure-virtual"><scope>ecto::cell</scope><name>dispatch_start</name></member>
+      <member refid="structecto_1_1cell_1a65ff7141e927a7115a785478a03b94bc" prot="protected" virt="pure-virtual"><scope>ecto::cell</scope><name>dispatch_stop</name></member>
+      <member refid="structecto_1_1cell_1a65ff7141e927a7115a785478a03b94bc" prot="protected" virt="pure-virtual"><scope>ecto::cell</scope><name>dispatch_stop</name></member>
+      <member refid="structecto_1_1cell_1a486454d7466c5f0373ecb42dd4e97b2f" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>gen_doc</name></member>
+      <member refid="structecto_1_1cell_1a486454d7466c5f0373ecb42dd4e97b2f" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>gen_doc</name></member>
+      <member refid="structecto_1_1cell_1ab9a6c3fd8f76289f338a9e05368b1aff" prot="public" virt="pure-virtual"><scope>ecto::cell</scope><name>init</name></member>
+      <member refid="structecto_1_1cell_1ab9a6c3fd8f76289f338a9e05368b1aff" prot="public" virt="pure-virtual"><scope>ecto::cell</scope><name>init</name></member>
+      <member refid="structecto_1_1cell_1a65099b0458a7761b8bfa7a1ddc17e92f" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>inputs</name></member>
+      <member refid="structecto_1_1cell_1a2bf4e65c7a699624c61d3b55cfac45ed" prot="private" virt="non-virtual"><scope>ecto::cell</scope><name>instance_name_</name></member>
+      <member refid="structecto_1_1cell_1a931fbc02fff66a58684ab25e00dbb2f8" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>name</name></member>
+      <member refid="structecto_1_1cell_1a3956efb238f50a6983b86f430c47ca05" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>name</name></member>
+      <member refid="structecto_1_1cell_1a931fbc02fff66a58684ab25e00dbb2f8" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>name</name></member>
+      <member refid="structecto_1_1cell_1a3956efb238f50a6983b86f430c47ca05" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>name</name></member>
+      <member refid="structecto_1_1cell_1a93951743b603faba35312ebdb07ceb22" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>outputs</name></member>
+      <member refid="structecto_1_1cell_1ae00a91199c758cf7c24dcf0ecdf70a27" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>parameters</name></member>
+      <member refid="structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>process</name></member>
+      <member refid="structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>process</name></member>
+      <member refid="structecto_1_1cell_1ab1dfafd237e0adf273af65d549e7516e" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>process_connected_inputs_only</name></member>
+      <member refid="structecto_1_1cell_1a9a9d7fa3bb72fd74073a997bfb6cbad8" prot="private" virt="non-virtual"><scope>ecto::cell</scope><name>process_connected_inputs_only_</name></member>
+      <member refid="structecto_1_1cell_1a407e320190ee98c1a1a3042ac3c38f0e" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>process_with_only_these_inputs</name></member>
+      <member refid="structecto_1_1cell_1af2cab9d2bc012088c4f58c40da57a862" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>ptr</name></member>
+      <member refid="structecto_1_1cell_1af2cab9d2bc012088c4f58c40da57a862" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>ptr</name></member>
+      <member refid="structecto_1_1cell_1af32a9e2113b7afcb5b225bdc3c234e8c" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>reset_strand</name></member>
+      <member refid="structecto_1_1cell_1af32a9e2113b7afcb5b225bdc3c234e8c" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>reset_strand</name></member>
+      <member refid="structecto_1_1cell_1a4c42ef400acac92d825e7dc25ff53bdc" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>set_process_connected_inputs_only</name></member>
+      <member refid="structecto_1_1cell_1ae0009fc4a4d12d400126f455396f5c9f" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>set_strand</name></member>
+      <member refid="structecto_1_1cell_1ae0009fc4a4d12d400126f455396f5c9f" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>set_strand</name></member>
+      <member refid="structecto_1_1cell_1aefa443962201caebb08d1a3163730639" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>short_doc</name></member>
+      <member refid="structecto_1_1cell_1a49d510eec19d352c5729e6a2fd149340" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>short_doc</name></member>
+      <member refid="structecto_1_1cell_1aefa443962201caebb08d1a3163730639" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>short_doc</name></member>
+      <member refid="structecto_1_1cell_1a49d510eec19d352c5729e6a2fd149340" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>short_doc</name></member>
+      <member refid="structecto_1_1cell_1a06abb010763ff7aeaaf2b28be4a6424a" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>start</name></member>
+      <member refid="structecto_1_1cell_1a06abb010763ff7aeaaf2b28be4a6424a" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>start</name></member>
+      <member refid="structecto_1_1cell_1abac52b774d350b02dc99a55c64b94bcd" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>stop</name></member>
+      <member refid="structecto_1_1cell_1abac52b774d350b02dc99a55c64b94bcd" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>stop</name></member>
+      <member refid="structecto_1_1cell_1a0ecc893a5427877548d0c39a208a5a26" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>strand_</name></member>
+      <member refid="structecto_1_1cell_1ae3b84af61e78dab25f66a66773d5c5df" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>type</name></member>
+      <member refid="structecto_1_1cell_1ae3b84af61e78dab25f66a66773d5c5df" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>type</name></member>
+      <member refid="structecto_1_1cell_1aed712e80344ce04dbb9105bb6a1aa53a" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>verify_inputs</name></member>
+      <member refid="structecto_1_1cell_1aed712e80344ce04dbb9105bb6a1aa53a" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>verify_inputs</name></member>
+      <member refid="structecto_1_1cell_1aa03c0f569bb4b14e81f4d2a8747273e5" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>verify_params</name></member>
+      <member refid="structecto_1_1cell_1aa03c0f569bb4b14e81f4d2a8747273e5" prot="public" virt="non-virtual"><scope>ecto::cell</scope><name>verify_params</name></member>
+      <member refid="structecto_1_1cell_1a98748014df1b1a4fd3fbb47f6adc8c5e" prot="public" virt="virtual"><scope>ecto::cell</scope><name>~cell</name></member>
+      <member refid="structecto_1_1cell_1a98748014df1b1a4fd3fbb47f6adc8c5e" prot="public" virt="virtual"><scope>ecto::cell</scope><name>~cell</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

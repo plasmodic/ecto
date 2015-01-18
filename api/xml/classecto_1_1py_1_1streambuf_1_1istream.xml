@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classecto_1_1py_1_1streambuf_1_1istream" kind="class" prot="public">
+    <compoundname>ecto::py::streambuf::istream</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">istream</basecompoundref>
+    <derivedcompoundref refid="structecto_1_1py_1_1istream" prot="public" virt="non-virtual">ecto::py::istream</derivedcompoundref>
+    <includes refid="streambuf_8hpp" local="no">streambuf.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classecto_1_1py_1_1streambuf_1_1istream_1aff2d95cb5e4b1113f873b7a7e1cead29" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ecto::py::streambuf::istream::istream</definition>
+        <argsstring>(streambuf &amp;buf)</argsstring>
+        <name>istream</name>
+        <param>
+          <type><ref refid="classecto_1_1py_1_1streambuf" kindref="compound">streambuf</ref> &amp;</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/streambuf.hpp" line="514" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/streambuf.hpp" bodystart="514" bodyend="517"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1py_1_1streambuf_1_1istream_1ab53f3c2893d995a22ef2374ce9a00004" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ecto::py::streambuf::istream::~istream</definition>
+        <argsstring>()</argsstring>
+        <name>~istream</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/streambuf.hpp" line="519" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/streambuf.hpp" bodystart="519" bodyend="519"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="348">
+        <label>std::istream</label>
+      </node>
+      <node id="349">
+        <label>ecto::py::istream</label>
+        <link refid="structecto_1_1py_1_1istream"/>
+        <childnode refid="347" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="347">
+        <label>ecto::py::streambuf::istream</label>
+        <link refid="classecto_1_1py_1_1streambuf_1_1istream"/>
+        <childnode refid="348" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="351">
+        <label>std::istream</label>
+      </node>
+      <node id="350">
+        <label>ecto::py::streambuf::istream</label>
+        <link refid="classecto_1_1py_1_1streambuf_1_1istream"/>
+        <childnode refid="351" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/streambuf.hpp" line="512" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/streambuf.hpp" bodystart="511" bodyend="520"/>
+    <listofallmembers>
+      <member refid="classecto_1_1py_1_1streambuf_1_1istream_1aff2d95cb5e4b1113f873b7a7e1cead29" prot="public" virt="non-virtual"><scope>ecto::py::streambuf::istream</scope><name>istream</name></member>
+      <member refid="classecto_1_1py_1_1streambuf_1_1istream_1ab53f3c2893d995a22ef2374ce9a00004" prot="public" virt="non-virtual"><scope>ecto::py::streambuf::istream</scope><name>~istream</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

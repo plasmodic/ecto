@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -156,14 +154,7 @@ immediately.</p>
 <dl class="method">
 <dt id="ecto.Scheduler.stop">
 <tt class="descname">stop</tt><big>(</big><big>)</big><a class="headerlink" href="#ecto.Scheduler.stop" title="Permalink to this definition">¶</a></dt>
-<dd><p>Stops the background graph execution at the end of the current process() call.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="ecto.Scheduler.wait">
-<tt class="descname">wait</tt><big>(</big><big>)</big><a class="headerlink" href="#ecto.Scheduler.wait" title="Permalink to this definition">¶</a></dt>
-<dd><p>Blocks until the execution started by the last call to
-execute_async() is finished.</p>
+<dd><p>Stops the background graph execution at the end of the current process() call and block until it is stopped</p>
 </dd></dl>
 
 </dd></dl>
@@ -171,14 +162,12 @@ execute_async() is finished.</p>
 </div>
 <div class="section" id="reentrant-running">
 <h2>Reentrant running<a class="headerlink" href="#reentrant-running" title="Permalink to this headline">¶</a></h2>
-<p>The schedulers are fully reentrant, meaning, that when you stop(), and wait() on
-a scheduler it may be executed again.</p>
+<p>The schedulers are fully reentrant, meaning, that when you stop(), on a scheduler it may be executed again.</p>
 <p>The following code is therefore valid for any ecto scheduler:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">s</span> <span class="o">=</span> <span class="n">Sheduler</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 <span class="n">s</span><span class="o">.</span><span class="n">execute_async</span><span class="p">()</span>
 <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">s</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-<span class="n">s</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
 <span class="n">s</span><span class="o">.</span><span class="n">execute_async</span><span class="p">()</span>
 <span class="k">assert</span> <span class="n">s</span><span class="o">.</span><span class="n">running</span><span class="p">()</span>
 </pre></div>
@@ -213,7 +202,7 @@ a scheduler it may be executed again.</p>
     </div>
     <div class="footer">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

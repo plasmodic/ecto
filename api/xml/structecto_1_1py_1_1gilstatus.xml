@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="structecto_1_1py_1_1gilstatus" kind="struct" prot="public">
+    <compoundname>ecto::py::gilstatus</compoundname>
+    <includes refid="python_8hpp" local="no">python.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structecto_1_1py_1_1gilstatus_1a454efe188c683788ca52b64b1c87245b" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* ecto::py::gilstatus::file</definition>
+        <argsstring></argsstring>
+        <name>file</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python.hpp" line="50" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structecto_1_1py_1_1gilstatus_1a86f9f360d4950496f737ce0faa4d7e1b" prot="public" static="no" mutable="no">
+        <type>unsigned</type>
+        <definition>unsigned ecto::py::gilstatus::line</definition>
+        <argsstring></argsstring>
+        <name>line</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python.hpp" line="51" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structecto_1_1py_1_1gilstatus_1aaeba7e13dad90eaefa0a3c119e0a33ff" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* ecto::py::gilstatus::what</definition>
+        <argsstring></argsstring>
+        <name>what</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python.hpp" line="52" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structecto_1_1py_1_1gilstatus_1a9d3fd3fb2c0db89ac667eb534d9ba470" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ecto::py::gilstatus::gilstatus</definition>
+        <argsstring>(const char *f, unsigned l, const char *w)</argsstring>
+        <name>gilstatus</name>
+        <param>
+          <type>const char *</type>
+          <declname>f</declname>
+        </param>
+        <param>
+          <type>unsigned</type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>w</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python.hpp" line="53" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python.hpp" line="49" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python.hpp" bodystart="48" bodyend="54"/>
+    <listofallmembers>
+      <member refid="structecto_1_1py_1_1gilstatus_1a454efe188c683788ca52b64b1c87245b" prot="public" virt="non-virtual"><scope>ecto::py::gilstatus</scope><name>file</name></member>
+      <member refid="structecto_1_1py_1_1gilstatus_1a9d3fd3fb2c0db89ac667eb534d9ba470" prot="public" virt="non-virtual"><scope>ecto::py::gilstatus</scope><name>gilstatus</name></member>
+      <member refid="structecto_1_1py_1_1gilstatus_1a86f9f360d4950496f737ce0faa4d7e1b" prot="public" virt="non-virtual"><scope>ecto::py::gilstatus</scope><name>line</name></member>
+      <member refid="structecto_1_1py_1_1gilstatus_1aaeba7e13dad90eaefa0a3c119e0a33ff" prot="public" virt="non-virtual"><scope>ecto::py::gilstatus</scope><name>what</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

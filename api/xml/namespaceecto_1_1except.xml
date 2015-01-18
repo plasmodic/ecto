@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="namespaceecto_1_1except" kind="namespace">
+    <compoundname>ecto::except</compoundname>
+    <innerclass refid="classecto_1_1except_1_1error__info__container__impl" prot="public">ecto::except::error_info_container_impl</innerclass>
+    <innerclass refid="structecto_1_1except_1_1EctoException" prot="public">ecto::except::EctoException</innerclass>
+    <innernamespace refid="namespaceecto_1_1except_1_1detail">ecto::except::detail</innernamespace>
+    <innernamespace refid="namespaceecto_1_1except_1_1py">ecto::except::py</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespaceecto_1_1except_1a6ed4b851e67551e870e933f85628cb6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ecto::except::BOOST_PP_SEQ_FOR_EACH</definition>
+        <argsstring>(ECTO_DECLARE_EXCEPTION,~, ECTO_EXCEPTIONS)</argsstring>
+        <name>BOOST_PP_SEQ_FOR_EACH</name>
+        <param>
+          <type><ref refid="except_8hpp_1a9b77695b9c45c36934e7c890ce6f682f" kindref="member">ECTO_DECLARE_EXCEPTION</ref></type>
+        </param>
+        <param>
+          <type>~</type>
+        </param>
+        <param>
+          <type><ref refid="except_8hpp_1ad3bbab1baffa25e20db0635270c5f108" kindref="member">ECTO_EXCEPTIONS</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="160" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceecto_1_1except_1a8161938bf962eaf02d9b0e73b80a5c4a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string ecto::except::diagnostic_string</definition>
+        <argsstring>(const EctoException &amp;)</argsstring>
+        <name>diagnostic_string</name>
+        <param>
+          <type>const <ref refid="structecto_1_1except_1_1EctoException" kindref="compound">EctoException</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="162" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceecto_1_1except_1ae56832eeac0c3e23f11c197a8f5a6971" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>boost::optional&lt; std::string &gt;</type>
+        <definition>boost::optional&lt; std::string &gt; ecto::except::diagnostic_string</definition>
+        <argsstring>(const EctoException &amp;e, const std::string &amp;tag)</argsstring>
+        <name>diagnostic_string</name>
+        <param>
+          <type>const <ref refid="structecto_1_1except_1_1EctoException" kindref="compound">EctoException</ref> &amp;</type>
+          <declname>e</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>tag</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="164" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceecto_1_1except_1a8744cfe3c8d4364696873aeb175c68b9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ecto::except::BOOST_PP_SEQ_FOR_EACH</definition>
+        <argsstring>(ECTO_EXCEPTION_TAG_DECL,~, ECTO_EXCEPTION_TAG_NAMES)</argsstring>
+        <name>BOOST_PP_SEQ_FOR_EACH</name>
+        <param>
+          <type><ref refid="except_8hpp_1a4a4f231e4fe0f923cd9ee3a48803ca30" kindref="member">ECTO_EXCEPTION_TAG_DECL</ref></type>
+        </param>
+        <param>
+          <type>~</type>
+        </param>
+        <param>
+          <type><ref refid="except_8hpp_1a6a632b3827deba566cbca48b37bf53e2" kindref="member">ECTO_EXCEPTION_TAG_NAMES</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="172" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="82" column="1"/>
+  </compounddef>
+</doxygen>

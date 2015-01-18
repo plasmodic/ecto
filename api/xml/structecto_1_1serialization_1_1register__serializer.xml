@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="structecto_1_1serialization_1_1register__serializer" kind="struct" prot="public">
+    <compoundname>ecto::serialization::register_serializer</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">noncopyable</basecompoundref>
+    <includes refid="serialization_2registry_8hpp" local="no">registry.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structecto_1_1serialization_1_1register__serializer_1a31c9f04624076aa209e66232a511c627" prot="public" static="no">
+        <type><ref refid="structecto_1_1serialization_1_1writer__" kindref="compound">writer_</ref>&lt; T, boost::archive::binary_oarchive &gt;</type>
+        <definition>typedef writer_&lt;T, boost::archive::binary_oarchive&gt; ecto::serialization::register_serializer&lt; T &gt;::writer_binary_oa</definition>
+        <argsstring></argsstring>
+        <name>writer_binary_oa</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/registry.hpp" line="114" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/registry.hpp" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structecto_1_1serialization_1_1register__serializer_1a7783674d19bdb5a7f2143953d6a7302f" prot="public" static="no">
+        <type><ref refid="structecto_1_1serialization_1_1reader__" kindref="compound">reader_</ref>&lt; T, boost::archive::binary_iarchive &gt;</type>
+        <definition>typedef reader_&lt;T, boost::archive::binary_iarchive&gt; ecto::serialization::register_serializer&lt; T &gt;::reader_binary_ia</definition>
+        <argsstring></argsstring>
+        <name>reader_binary_ia</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/registry.hpp" line="115" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/registry.hpp" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="structecto_1_1serialization_1_1register__serializer_1a742ed82697621237f599631009e47e05" prot="private" static="yes" mutable="no">
+        <type>const <ref refid="structecto_1_1serialization_1_1register__serializer" kindref="compound">register_serializer</ref></type>
+        <definition>const register_serializer&lt; T &gt; ecto::serialization::register_serializer&lt; T &gt;::instance</definition>
+        <argsstring></argsstring>
+        <name>instance</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/registry.hpp" line="117" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/registry.hpp" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="structecto_1_1serialization_1_1register__serializer_1ae339eb881e0afbb36bff03a34263c683" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ecto::serialization::register_serializer&lt; T &gt;::register_serializer</definition>
+        <argsstring>()</argsstring>
+        <name>register_serializer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/registry.hpp" line="118" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/registry.hpp" bodystart="118" bodyend="122"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="410">
+        <label>noncopyable</label>
+      </node>
+      <node id="409">
+        <label>ecto::serialization::register_serializer&lt; T &gt;</label>
+        <link refid="structecto_1_1serialization_1_1register__serializer"/>
+        <childnode refid="410" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="412">
+        <label>noncopyable</label>
+      </node>
+      <node id="411">
+        <label>ecto::serialization::register_serializer&lt; T &gt;</label>
+        <link refid="structecto_1_1serialization_1_1register__serializer"/>
+        <childnode refid="412" relation="public-inheritance">
+        </childnode>
+        <childnode refid="411" relation="usage">
+          <edgelabel>instance</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/registry.hpp" line="113" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/registry.hpp" bodystart="112" bodyend="123"/>
+    <listofallmembers>
+      <member refid="structecto_1_1serialization_1_1register__serializer_1a742ed82697621237f599631009e47e05" prot="private" virt="non-virtual"><scope>ecto::serialization::register_serializer</scope><name>instance</name></member>
+      <member refid="structecto_1_1serialization_1_1register__serializer_1a7783674d19bdb5a7f2143953d6a7302f" prot="public" virt="non-virtual"><scope>ecto::serialization::register_serializer</scope><name>reader_binary_ia</name></member>
+      <member refid="structecto_1_1serialization_1_1register__serializer_1ae339eb881e0afbb36bff03a34263c683" prot="private" virt="non-virtual"><scope>ecto::serialization::register_serializer</scope><name>register_serializer</name></member>
+      <member refid="structecto_1_1serialization_1_1register__serializer_1a31c9f04624076aa209e66232a511c627" prot="public" virt="non-virtual"><scope>ecto::serialization::register_serializer</scope><name>writer_binary_oa</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

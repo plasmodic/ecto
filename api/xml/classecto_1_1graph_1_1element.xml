@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classecto_1_1graph_1_1element" kind="class" prot="public">
+    <compoundname>ecto::graph::element</compoundname>
+    <derivedcompoundref refid="structecto_1_1graph_1_1edge" prot="public" virt="non-virtual">ecto::graph::edge</derivedcompoundref>
+    <derivedcompoundref refid="classecto_1_1graph_1_1vertex" prot="public" virt="non-virtual">ecto::graph::vertex</derivedcompoundref>
+    <derivedcompoundref refid="classecto_1_1graph_1_1vertex" prot="public" virt="non-virtual">ecto::graph::vertex</derivedcompoundref>
+    <includes refid="element_8hpp" local="no">element.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classecto_1_1graph_1_1element_1a6f850cead9edb37941344fdbd40ae112" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t ecto::graph::element::tick_</definition>
+        <argsstring></argsstring>
+        <name>tick_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" line="44" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classecto_1_1graph_1_1element_1abf5d2137a1fd29f25af2b8f6bd0397df" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ecto::graph::element::element</definition>
+        <argsstring>()</argsstring>
+        <name>element</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" line="38" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1graph_1_1element_1a966b0c7cd87bdc5c5787d9b110966d8f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t ecto::graph::element::tick</definition>
+        <argsstring>() const </argsstring>
+        <name>tick</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" line="40" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1graph_1_1element_1a5d5b283bacb5371285e27c0f42e54985" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::graph::element::inc_tick</definition>
+        <argsstring>()</argsstring>
+        <name>inc_tick</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" line="41" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classecto_1_1graph_1_1element_1a6417601ffd8159b6e00f2ff57eda1b99" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::graph::element::reset_tick</definition>
+        <argsstring>()</argsstring>
+        <name>reset_tick</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" line="42" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" bodystart="42" bodyend="42"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="293">
+        <label>ecto::graph::edge</label>
+        <link refid="structecto_1_1graph_1_1edge"/>
+        <childnode refid="292" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="294">
+        <label>ecto::graph::vertex</label>
+        <link refid="classecto_1_1graph_1_1vertex"/>
+        <childnode refid="292" relation="public-inheritance">
+        </childnode>
+        <childnode refid="292" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="292">
+        <label>ecto::graph::element</label>
+        <link refid="classecto_1_1graph_1_1element"/>
+      </node>
+    </inheritancegraph>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" line="36" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" bodystart="35" bodyend="45"/>
+    <listofallmembers>
+      <member refid="classecto_1_1graph_1_1element_1abf5d2137a1fd29f25af2b8f6bd0397df" prot="public" virt="non-virtual"><scope>ecto::graph::element</scope><name>element</name></member>
+      <member refid="classecto_1_1graph_1_1element_1a5d5b283bacb5371285e27c0f42e54985" prot="public" virt="non-virtual"><scope>ecto::graph::element</scope><name>inc_tick</name></member>
+      <member refid="classecto_1_1graph_1_1element_1a6417601ffd8159b6e00f2ff57eda1b99" prot="public" virt="non-virtual"><scope>ecto::graph::element</scope><name>reset_tick</name></member>
+      <member refid="classecto_1_1graph_1_1element_1a966b0c7cd87bdc5c5787d9b110966d8f" prot="public" virt="non-virtual"><scope>ecto::graph::element</scope><name>tick</name></member>
+      <member refid="classecto_1_1graph_1_1element_1a6f850cead9edb37941344fdbd40ae112" prot="private" virt="non-virtual"><scope>ecto::graph::element</scope><name>tick_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

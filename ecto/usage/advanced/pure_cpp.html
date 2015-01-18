@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -150,153 +148,6 @@ to your <tt class="docutils literal"><span class="pre">PYTHONPATH</span></tt> en
 <p>The easiest is to look at some examples in the <tt class="docutils literal"><span class="pre">test</span></tt> folder. Those are self contained but you could define
 the cells in their own headers. The notation in C++ is almost the same as in Python and a commented
 example should be enough:</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="c1">//</span>
-<span class="c1">// Copyright (c) 2011, Willow Garage, Inc.</span>
-<span class="c1">// All rights reserved.</span>
-<span class="c1">//</span>
-<span class="c1">// Redistribution and use in source and binary forms, with or without</span>
-<span class="c1">// modification, are permitted provided that the following conditions are met:</span>
-<span class="c1">//     * Redistributions of source code must retain the above copyright</span>
-<span class="c1">//       notice, this list of conditions and the following disclaimer.</span>
-<span class="c1">//     * Redistributions in binary form must reproduce the above copyright</span>
-<span class="c1">//       notice, this list of conditions and the following disclaimer in the</span>
-<span class="c1">//       documentation and/or other materials provided with the distribution.</span>
-<span class="c1">//     * Neither the name of the Willow Garage, Inc. nor the names of its</span>
-<span class="c1">//       contributors may be used to endorse or promote products derived from</span>
-<span class="c1">//       this software without specific prior written permission.</span>
-<span class="c1">//</span>
-<span class="c1">// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;</span>
-<span class="c1">// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE</span>
-<span class="c1">// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE</span>
-<span class="c1">// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE</span>
-<span class="c1">// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR</span>
-<span class="c1">// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF</span>
-<span class="c1">// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS</span>
-<span class="c1">// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN</span>
-<span class="c1">// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)</span>
-<span class="c1">// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span>
-<span class="c1">// POSSIBILITY OF SUCH DAMAGE.</span>
-<span class="c1">//</span>
-
-<span class="c1">// This file is use in the docs</span>
-<span class="cp">#include &lt;gtest/gtest.h&gt;</span>
-<span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
-<span class="cp">#include &lt;ecto/scheduler.hpp&gt;</span>
-<span class="cp">#include &lt;ecto/plasm.hpp&gt;</span>
-
-<span class="cp">#define STRINGDIDLY(A) std::string(#A)</span>
-
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">ecto</span><span class="p">;</span>
-<span class="k">namespace</span> <span class="p">{</span>
-  <span class="c1">// Declare a bogus cell that just outputs stuff</span>
-  <span class="k">struct</span> <span class="n">Module1</span>
-  <span class="p">{</span>
-    <span class="k">static</span> <span class="kt">void</span>
-    <span class="n">declare_io</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">p</span><span class="p">,</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">in</span><span class="p">,</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">)</span>
-    <span class="p">{</span>
-      <span class="n">out</span><span class="p">.</span><span class="n">declare</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="p">(</span><span class="s">&quot;d&quot;</span><span class="p">);</span>
-    <span class="p">}</span>
-  <span class="p">};</span>
-
-  <span class="c1">// Declare a bogus cell that just reads stuff</span>
-  <span class="k">struct</span> <span class="n">Module2</span>
-  <span class="p">{</span>
-    <span class="k">static</span> <span class="kt">void</span>
-    <span class="n">declare_io</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">p</span><span class="p">,</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">in</span><span class="p">,</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">)</span>
-    <span class="p">{</span>
-      <span class="n">in</span><span class="p">.</span><span class="n">declare</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="p">(</span><span class="s">&quot;d&quot;</span><span class="p">);</span>
-    <span class="p">}</span>
-  <span class="p">};</span>
-
-  <span class="c1">// Declare a bogus cell that gets stuff in and spits it out</span>
-  <span class="k">struct</span> <span class="n">Passthrough</span>
-  <span class="p">{</span>
-    <span class="k">static</span> <span class="kt">void</span> <span class="n">declare_io</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">parms</span><span class="p">,</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">in</span><span class="p">,</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">)</span>
-    <span class="p">{</span>
-      <span class="c1">// The type could be explicit but the &#39;none&#39; is used to specify any type</span>
-      <span class="n">in</span><span class="p">.</span><span class="n">declare</span><span class="o">&lt;</span><span class="n">tendril</span><span class="o">::</span><span class="n">none</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;in&quot;</span><span class="p">,</span> <span class="s">&quot;Any type&quot;</span><span class="p">);</span>
-      <span class="n">out</span><span class="p">.</span><span class="n">declare</span><span class="o">&lt;</span><span class="n">tendril</span><span class="o">::</span><span class="n">none</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">,</span> <span class="s">&quot;Any type on the output...&quot;</span><span class="p">);</span>
-      <span class="n">out</span><span class="p">[</span><span class="s">&quot;out&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">in</span><span class="p">[</span><span class="s">&quot;in&quot;</span><span class="p">];</span> <span class="c1">//assign the ptr.</span>
-    <span class="p">}</span>
-  <span class="p">};</span>
-
-<span class="p">}</span>
-<span class="n">TEST</span><span class="p">(</span><span class="n">Plasm</span><span class="p">,</span> <span class="n">Viz</span><span class="p">)</span>
-<span class="p">{</span>
-  <span class="c1">// Create an empty plasm</span>
-  <span class="n">ecto</span><span class="o">::</span><span class="n">plasm</span> <span class="n">p</span><span class="p">;</span>
-  <span class="c1">// Create some cells</span>
-  <span class="n">ecto</span><span class="o">::</span><span class="n">cell</span><span class="o">::</span><span class="n">ptr</span> <span class="n">m1</span><span class="p">(</span><span class="k">new</span> <span class="n">ecto</span><span class="o">::</span><span class="n">cell_</span><span class="o">&lt;</span><span class="n">Module1</span><span class="o">&gt;</span><span class="p">),</span> <span class="n">m2</span><span class="p">(</span><span class="k">new</span> <span class="n">ecto</span><span class="o">::</span><span class="n">cell_</span><span class="o">&lt;</span><span class="n">Module2</span><span class="o">&gt;</span><span class="p">);</span>
-  <span class="c1">// Initialize the cells</span>
-  <span class="n">m1</span><span class="o">-&gt;</span><span class="n">declare_params</span><span class="p">();</span>
-  <span class="n">m1</span><span class="o">-&gt;</span><span class="n">declare_io</span><span class="p">();</span>
-  <span class="n">m2</span><span class="o">-&gt;</span><span class="n">declare_params</span><span class="p">();</span>
-  <span class="n">m2</span><span class="o">-&gt;</span><span class="n">declare_io</span><span class="p">();</span>
-  <span class="c1">// Connect the cells in the plasm: the output named &#39;d&#39; of the cell &#39;m1&#39; is</span>
-  <span class="c1">// connected to the input &#39;d&#39; of the cell &#39;m2&#39;</span>
-  <span class="n">p</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="n">m1</span><span class="p">,</span><span class="s">&quot;d&quot;</span><span class="p">,</span><span class="n">m2</span><span class="p">,</span><span class="s">&quot;d&quot;</span><span class="p">);</span>
-  <span class="c1">// Visualize the plasm</span>
-  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">p</span><span class="p">.</span><span class="n">viz</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="n">TEST</span><span class="p">(</span><span class="n">Plasm</span><span class="p">,</span> <span class="n">Passthrough</span><span class="p">)</span>
-<span class="p">{</span>
-  <span class="c1">// Create an empty plasm</span>
-  <span class="n">ecto</span><span class="o">::</span><span class="n">plasm</span><span class="o">::</span><span class="n">ptr</span> <span class="n">p</span><span class="p">(</span><span class="k">new</span> <span class="n">ecto</span><span class="o">::</span><span class="n">plasm</span><span class="p">);</span>
-  <span class="c1">// Create some cells</span>
-  <span class="n">ecto</span><span class="o">::</span><span class="n">cell</span><span class="o">::</span><span class="n">ptr</span> <span class="n">m1</span><span class="p">(</span><span class="k">new</span> <span class="n">cell_</span><span class="o">&lt;</span><span class="n">Module1</span><span class="o">&gt;</span><span class="p">),</span>
-    <span class="n">m2</span><span class="p">(</span><span class="k">new</span> <span class="n">cell_</span><span class="o">&lt;</span><span class="n">Module2</span><span class="o">&gt;</span><span class="p">),</span>
-    <span class="n">pass</span><span class="p">(</span><span class="k">new</span> <span class="n">cell_</span><span class="o">&lt;</span><span class="n">Passthrough</span><span class="o">&gt;</span><span class="p">);</span>
-  <span class="c1">// Initialize some cells</span>
-  <span class="n">m1</span><span class="o">-&gt;</span><span class="n">declare_params</span><span class="p">();</span>
-  <span class="n">m2</span><span class="o">-&gt;</span><span class="n">declare_params</span><span class="p">();</span>
-  <span class="n">pass</span><span class="o">-&gt;</span><span class="n">declare_params</span><span class="p">();</span>
-  <span class="n">m1</span><span class="o">-&gt;</span><span class="n">declare_io</span><span class="p">();</span>
-  <span class="n">m2</span><span class="o">-&gt;</span><span class="n">declare_io</span><span class="p">();</span>
-  <span class="n">pass</span><span class="o">-&gt;</span><span class="n">declare_io</span><span class="p">();</span>
-  <span class="c1">// Impose the output of a cell to be of certain value</span>
-  <span class="c1">// That could be done inside the cell but this is just</span>
-  <span class="c1">// to show that tendrils can be modified like in Python</span>
-  <span class="n">m1</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">[</span><span class="s">&quot;d&quot;</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mf">5.0</span><span class="p">;</span>
-  <span class="c1">// Create some connection inside the plasm</span>
-  <span class="n">p</span><span class="o">-&gt;</span><span class="n">connect</span><span class="p">(</span><span class="n">m1</span><span class="p">,</span><span class="s">&quot;d&quot;</span><span class="p">,</span><span class="n">pass</span><span class="p">,</span><span class="s">&quot;in&quot;</span><span class="p">);</span>
-  <span class="n">p</span><span class="o">-&gt;</span><span class="n">connect</span><span class="p">(</span><span class="n">pass</span><span class="p">,</span><span class="s">&quot;out&quot;</span><span class="p">,</span><span class="n">m2</span><span class="p">,</span><span class="s">&quot;d&quot;</span><span class="p">);</span>
-  <span class="c1">// Create a scheduler to execute your plasm</span>
-  <span class="n">ecto</span><span class="o">::</span><span class="n">scheduler</span> <span class="n">sched</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
-  <span class="c1">// Execute your plasm once</span>
-  <span class="n">sched</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-  <span class="kt">double</span> <span class="n">out</span><span class="p">;</span>
-  <span class="c1">// Read the output &#39;d&#39; of the &#39;m2&#39; cell</span>
-  <span class="n">m2</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">[</span><span class="s">&quot;d&quot;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">out</span><span class="p">;</span>
-  <span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="n">out</span> <span class="o">==</span> <span class="mf">5.0</span><span class="p">);</span>
-  <span class="c1">// Read the output &#39;out&#39; of the plasm</span>
-  <span class="n">pass</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">[</span><span class="s">&quot;out&quot;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">out</span><span class="p">;</span>
-  <span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="n">out</span> <span class="o">==</span> <span class="mf">5.0</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="n">TEST</span><span class="p">(</span><span class="n">Plasm</span><span class="p">,</span> <span class="n">Registry</span><span class="p">)</span>
-<span class="p">{</span>
-  <span class="c1">// Create a cell that is of type &quot;Add&quot; from the module &quot;ecto_test&quot;</span>
-  <span class="n">ecto</span><span class="o">::</span><span class="n">cell</span><span class="o">::</span><span class="n">ptr</span> <span class="n">add</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">::</span><span class="n">registry</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;ecto_test::Add&quot;</span><span class="p">);</span>
-  <span class="n">add</span><span class="o">-&gt;</span><span class="n">declare_params</span><span class="p">();</span>
-  <span class="n">add</span><span class="o">-&gt;</span><span class="n">declare_io</span><span class="p">();</span>
-
-  <span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="n">add</span><span class="p">);</span>
-  <span class="c1">// Display the name of the cell</span>
-  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">add</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="s">&quot;ecto_test::Add&quot;</span><span class="p">,</span> <span class="n">add</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">());</span>
-
-  <span class="n">ecto</span><span class="o">::</span><span class="n">plasm</span><span class="o">::</span><span class="n">ptr</span> <span class="n">p</span><span class="p">(</span><span class="k">new</span> <span class="n">ecto</span><span class="o">::</span><span class="n">plasm</span><span class="p">());</span>
-  <span class="n">add</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">[</span><span class="s">&quot;left&quot;</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mf">1.0</span><span class="p">;</span>
-  <span class="n">add</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">[</span><span class="s">&quot;right&quot;</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mf">2.0</span><span class="p">;</span>
-
-  <span class="n">p</span><span class="o">-&gt;</span><span class="n">insert</span><span class="p">(</span><span class="n">add</span><span class="p">);</span>
-  <span class="n">ecto</span><span class="o">::</span><span class="n">scheduler</span> <span class="n">sched</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
-  <span class="n">sched</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="n">add</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;out&quot;</span><span class="p">),</span> <span class="mi">3</span><span class="p">);</span>
-<span class="p">}</span>
-</pre></div>
-</div>
 </div>
 </div>
 
@@ -327,7 +178,7 @@ example should be enough:</p>
     </div>
     <div class="footer">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

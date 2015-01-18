@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classboost_1_1python_1_1detail_1_1final__std__map__derived__policies" kind="class" prot="public">
+    <compoundname>boost::python::detail::final_std_map_derived_policies</compoundname>
+    <basecompoundref refid="classboost_1_1python_1_1std__map__indexing__suite" prot="public" virt="non-virtual">boost::python::std_map_indexing_suite&lt; Container, NoProxy, final_std_map_derived_policies&lt; Container, NoProxy &gt; &gt;</basecompoundref>
+    <includes refid="std__map__indexing__suite_8hpp" local="no">std_map_indexing_suite.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class Container</type>
+      </param>
+      <param>
+        <type>bool</type>
+        <declname>NoProxy</declname>
+        <defname>NoProxy</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="311">
+        <label>boost::python::std_map_indexing_suite&lt; Container, NoProxy, final_std_map_derived_policies&lt; Container, NoProxy &gt; &gt;</label>
+        <link refid="classboost_1_1python_1_1std__map__indexing__suite"/>
+        <childnode refid="312" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="312">
+        <label>indexing_suite&lt; Container, final_std_map_derived_policies&lt; Container, NoProxy &gt;, NoProxy, true, Container::value_type::second_type, Container::key_type, Container::key_type &gt;</label>
+      </node>
+      <node id="310">
+        <label>boost::python::detail::final_std_map_derived_policies&lt; Container, NoProxy &gt;</label>
+        <link refid="classboost_1_1python_1_1detail_1_1final__std__map__derived__policies"/>
+        <childnode refid="311" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="314">
+        <label>boost::python::std_map_indexing_suite&lt; Container, NoProxy, final_std_map_derived_policies&lt; Container, NoProxy &gt; &gt;</label>
+        <link refid="classboost_1_1python_1_1std__map__indexing__suite"/>
+        <childnode refid="315" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="315">
+        <label>indexing_suite&lt; Container, final_std_map_derived_policies&lt; Container, NoProxy &gt;, NoProxy, true, Container::value_type::second_type, Container::key_type, Container::key_type &gt;</label>
+      </node>
+      <node id="313">
+        <label>boost::python::detail::final_std_map_derived_policies&lt; Container, NoProxy &gt;</label>
+        <link refid="classboost_1_1python_1_1detail_1_1final__std__map__derived__policies"/>
+        <childnode refid="314" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="31" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="29" bodyend="31"/>
+    <listofallmembers>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1aeea6d865c496b7145baa50301a4b5702" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>BOOST_PYTHON_FUNCTION_OVERLOADS</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a62974da613b1b56663d9736a8612bddd" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>compare_index</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1aae0c4473455223a4e048cc207ca7b3ea" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>const_iterator</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a89557475c8931027399dddf66fb251c1" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>contains</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a79bc222baa6b652f2f688f2a3add9d75" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>convert_index</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a3e9a6a8b8ba34759cf0ba99fe5966041" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>data_type</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a9af154020b49d26a30de90bfb07b122d" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>delete_item</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a8aedb678ae655adaf30a5f0200fdeda9" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>dict_fromkeys</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a6012daef85763e30ed55ef753933ff1b" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>dict_get</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a56d69ee32c136ed83389eefae5f8df3a" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>dict_pop</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a923cb4bd1266dd53065eba4d3c91279a" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>dict_pop_default</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1af207a28bb4d4a7fa8364139dd0484a84" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>dict_pop_item</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a77daf7a1f7b0da0d6035e91dfa118899" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>dict_update</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a54aa644dcb3913334f8b0152901940ef" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>difference_type</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a32aecfee63f8763608a0149050134623" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>extension_def</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a7c13569acfb66f1adb8d92c581091654" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>get_data</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a8650d42e8d1d7e095f6cfc9e664f0fab" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>get_item</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a28a13c6039a1305e3605c6ca3a9803d9" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>get_key</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a4b2ac75883fba93dbca6d9e83197c842" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>index_type</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a6e44b3f64f0723b75c7e00b8d46bab92" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>items</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a4e2daeb60a58d6ce9964e0ea27680009" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>key_type</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a1d08ce35eb71bc9248f64a515d6d9775" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>keys</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1ad2e6c20740dd4ad7058f04e958fc499c" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>make_transform</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a802d62d636e685954b7abe3331de7af6" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>pair_getitem</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a09b84169bb3b2ceb9c576c41cd63280e" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>pair_iter</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a639bbbf3265c0cab8419b106590c3857" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>pair_len</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a1147c134bf910497fb9a467a21522933" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>print_elem</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a5dc3dd492671db19152e7c64b62e9f97" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>set_item</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a2a7b98e15824d0e74ae4620cbfa636d0" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>size</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1ad1c24ad53b2e27b061f75591c74296c2" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>size_type</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1aff9ed68cf30e805a04a313d92c62ab38" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>value_type</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a81c04a5902c3ea0b559b56ab66e600a9" prot="public" virt="non-virtual"><scope>boost::python::detail::final_std_map_derived_policies</scope><name>values</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

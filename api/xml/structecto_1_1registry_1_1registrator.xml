@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="structecto_1_1registry_1_1registrator" kind="struct" prot="public">
+    <compoundname>ecto::registry::registrator</compoundname>
+    <includes refid="registry_8hpp" local="no">registry.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Module</type>
+      </param>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structecto_1_1registry_1_1registrator_1ae352ebfb18c87dc7fb3f649ecbe445fa" prot="public" static="no">
+        <type>::<ref refid="structecto_1_1cell__" kindref="compound">ecto::cell_</ref>&lt; T &gt;</type>
+        <definition>typedef ::ecto::cell_&lt;T&gt; ecto::registry::registrator&lt; Module, T &gt;::cell_t</definition>
+        <argsstring></argsstring>
+        <name>cell_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp" line="101" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structecto_1_1registry_1_1registrator_1a794acc964cefc0a374129823b4ee5246" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* ecto::registry::registrator&lt; Module, T &gt;::name_</definition>
+        <argsstring></argsstring>
+        <name>name_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp" line="98" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structecto_1_1registry_1_1registrator_1a6eb361c892595a3d71ab627829c07bdb" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* ecto::registry::registrator&lt; Module, T &gt;::docstring_</definition>
+        <argsstring></argsstring>
+        <name>docstring_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp" line="99" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structecto_1_1registry_1_1registrator_1a0b0f6e3aa1718476b962a007786e7496" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="structecto_1_1registry_1_1registrator" kindref="compound">registrator</ref> &amp;</type>
+        <definition>const registrator&amp; ecto::registry::registrator&lt; Module, T &gt;::inst</definition>
+        <argsstring></argsstring>
+        <name>inst</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp" line="126" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structecto_1_1registry_1_1registrator_1aa46347f24e15fcc5955523d5e2adadf7" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>boost::shared_ptr&lt; <ref refid="structecto_1_1cell" kindref="compound">cell</ref> &gt;</type>
+        <definition>static boost::shared_ptr&lt;cell&gt; ecto::registry::registrator&lt; Module, T &gt;::create</definition>
+        <argsstring>()</argsstring>
+        <name>create</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp" line="103" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp" bodystart="103" bodyend="106"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structecto_1_1registry_1_1registrator_1a3c8bafa2e65ef88c572c1779fb05fd12" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ecto::registry::registrator&lt; Module, T &gt;::registrator</definition>
+        <argsstring>(const char *name, const char *docstring)</argsstring>
+        <name>registrator</name>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>docstring</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp" line="108" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp" bodystart="108" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1registry_1_1registrator_1a11572913b91238e8d6415bb89cc7ac1a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::registry::registrator&lt; Module, T &gt;::operator()</definition>
+        <argsstring>() const </argsstring>
+        <name>operator()</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp" line="122" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp" bodystart="122" bodyend="125"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="414">
+        <label>ecto::registry::registrator&lt; Module, T &gt;</label>
+        <link refid="structecto_1_1registry_1_1registrator"/>
+        <childnode refid="414" relation="usage">
+          <edgelabel>inst</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp" line="97" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp" bodystart="96" bodyend="127"/>
+    <listofallmembers>
+      <member refid="structecto_1_1registry_1_1registrator_1ae352ebfb18c87dc7fb3f649ecbe445fa" prot="public" virt="non-virtual"><scope>ecto::registry::registrator</scope><name>cell_t</name></member>
+      <member refid="structecto_1_1registry_1_1registrator_1aa46347f24e15fcc5955523d5e2adadf7" prot="public" virt="non-virtual"><scope>ecto::registry::registrator</scope><name>create</name></member>
+      <member refid="structecto_1_1registry_1_1registrator_1a6eb361c892595a3d71ab627829c07bdb" prot="public" virt="non-virtual"><scope>ecto::registry::registrator</scope><name>docstring_</name></member>
+      <member refid="structecto_1_1registry_1_1registrator_1a0b0f6e3aa1718476b962a007786e7496" prot="public" virt="non-virtual"><scope>ecto::registry::registrator</scope><name>inst</name></member>
+      <member refid="structecto_1_1registry_1_1registrator_1a794acc964cefc0a374129823b4ee5246" prot="public" virt="non-virtual"><scope>ecto::registry::registrator</scope><name>name_</name></member>
+      <member refid="structecto_1_1registry_1_1registrator_1a11572913b91238e8d6415bb89cc7ac1a" prot="public" virt="non-virtual"><scope>ecto::registry::registrator</scope><name>operator()</name></member>
+      <member refid="structecto_1_1registry_1_1registrator_1a3c8bafa2e65ef88c572c1779fb05fd12" prot="public" virt="non-virtual"><scope>ecto::registry::registrator</scope><name>registrator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

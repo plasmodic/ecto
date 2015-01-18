@@ -1,0 +1,58 @@
+\hypertarget{namespaceecto_1_1serialization}{\section{ecto\-:\-:serialization Namespace Reference}
+\label{namespaceecto_1_1serialization}\index{ecto\-::serialization@{ecto\-::serialization}}
+}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structecto_1_1serialization_1_1writer__}{writer\-\_\-}
+\item 
+struct \hyperlink{structecto_1_1serialization_1_1reader__}{reader\-\_\-}
+\item 
+struct \hyperlink{structecto_1_1serialization_1_1registry}{registry}
+\item 
+struct \hyperlink{structecto_1_1serialization_1_1register__serializer}{register\-\_\-serializer}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef \hyperlink{structecto_1_1serialization_1_1registry}{registry}\\*
+$<$ boost\-::archive\-::binary\-\_\-oarchive $>$ \hyperlink{namespaceecto_1_1serialization_ad544c8b5416e0ecfe692922b2f2e8e54}{registry\-\_\-binary\-\_\-oa}
+\item 
+typedef \hyperlink{structecto_1_1serialization_1_1registry}{registry}\\*
+$<$ boost\-::archive\-::binary\-\_\-iarchive $>$ \hyperlink{namespaceecto_1_1serialization_a465425ff3a756de86571c1262f22d2ba}{registry\-\_\-binary\-\_\-ia}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Buf\-T $>$ }\\void \hyperlink{namespaceecto_1_1serialization_a77b3e77a54adf1a888736007260a9343}{save} (Buf\-T \&buf, const \hyperlink{classecto_1_1tendril}{tendril} \&t)
+\item 
+{\footnotesize template$<$typename Buf\-T $>$ }\\void \hyperlink{namespaceecto_1_1serialization_a1960d58009e397c926055229f8e1c347}{load} (const Buf\-T \&buf, \hyperlink{classecto_1_1tendril}{tendril} \&t)
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{namespaceecto_1_1serialization_a465425ff3a756de86571c1262f22d2ba}{\index{ecto\-::serialization@{ecto\-::serialization}!registry\-\_\-binary\-\_\-ia@{registry\-\_\-binary\-\_\-ia}}
+\index{registry\-\_\-binary\-\_\-ia@{registry\-\_\-binary\-\_\-ia}!ecto::serialization@{ecto\-::serialization}}
+\subsubsection[{registry\-\_\-binary\-\_\-ia}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf registry}$<$boost\-::archive\-::binary\-\_\-iarchive$>$ {\bf ecto\-::serialization\-::registry\-\_\-binary\-\_\-ia}}}\label{namespaceecto_1_1serialization_a465425ff3a756de86571c1262f22d2ba}
+\hypertarget{namespaceecto_1_1serialization_ad544c8b5416e0ecfe692922b2f2e8e54}{\index{ecto\-::serialization@{ecto\-::serialization}!registry\-\_\-binary\-\_\-oa@{registry\-\_\-binary\-\_\-oa}}
+\index{registry\-\_\-binary\-\_\-oa@{registry\-\_\-binary\-\_\-oa}!ecto::serialization@{ecto\-::serialization}}
+\subsubsection[{registry\-\_\-binary\-\_\-oa}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf registry}$<$boost\-::archive\-::binary\-\_\-oarchive$>$ {\bf ecto\-::serialization\-::registry\-\_\-binary\-\_\-oa}}}\label{namespaceecto_1_1serialization_ad544c8b5416e0ecfe692922b2f2e8e54}
+
+
+\subsection{Function Documentation}
+\hypertarget{namespaceecto_1_1serialization_a1960d58009e397c926055229f8e1c347}{\index{ecto\-::serialization@{ecto\-::serialization}!load@{load}}
+\index{load@{load}!ecto::serialization@{ecto\-::serialization}}
+\subsubsection[{load}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Buf\-T $>$ void ecto\-::serialization\-::load (
+\begin{DoxyParamCaption}
+\item[{const Buf\-T \&}]{buf, }
+\item[{tendril \&}]{t}
+\end{DoxyParamCaption}
+)}}\label{namespaceecto_1_1serialization_a1960d58009e397c926055229f8e1c347}
+\hypertarget{namespaceecto_1_1serialization_a77b3e77a54adf1a888736007260a9343}{\index{ecto\-::serialization@{ecto\-::serialization}!save@{save}}
+\index{save@{save}!ecto::serialization@{ecto\-::serialization}}
+\subsubsection[{save}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Buf\-T $>$ void ecto\-::serialization\-::save (
+\begin{DoxyParamCaption}
+\item[{Buf\-T \&}]{buf, }
+\item[{const tendril \&}]{t}
+\end{DoxyParamCaption}
+)}}\label{namespaceecto_1_1serialization_a77b3e77a54adf1a888736007260a9343}

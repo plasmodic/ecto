@@ -1,0 +1,96 @@
+\hypertarget{log_8hpp}{\section{/home/vrabaud/workspace/recognition\-\_\-kitchen/src/ecto/include/ecto/log.hpp File Reference}
+\label{log_8hpp}\index{/home/vrabaud/workspace/recognition\-\_\-kitchen/src/ecto/include/ecto/log.\-hpp@{/home/vrabaud/workspace/recognition\-\_\-kitchen/src/ecto/include/ecto/log.\-hpp}}
+}
+{\ttfamily \#include $<$ecto/config.\-hpp$>$}\\*
+{\ttfamily \#include $<$ecto/util.\-hpp$>$}\\*
+{\ttfamily \#include $<$ecto/test.\-hpp$>$}\\*
+{\ttfamily \#include $<$stdint.\-h$>$}\\*
+Include dependency graph for log.\-hpp\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{log_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{log_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceecto}{ecto}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{log_8hpp_aa02c6e583b77dd3704fadaeb9226ca1a}{E\-C\-T\-O\-\_\-\-A\-S\-S\-E\-R\-T}(X, msg)
+\item 
+\#define \hyperlink{log_8hpp_a52b93b5650a3830cd4216dee79428e6c}{E\-C\-T\-O\-\_\-\-L\-O\-G\-\_\-\-D\-E\-B\-U\-G}(fmg, args)~do \{ \hyperlink{test_8hpp_ad596883c00b384e64cded971372700b4}{E\-C\-T\-O\-\_\-\-R\-A\-N\-D\-O\-M\-\_\-\-D\-E\-L\-A\-Y}(); \} while (false)
+\item 
+\#define \hyperlink{log_8hpp_ae375f89df537ac140d32247479bcc611}{E\-C\-T\-O\-\_\-\-S\-T\-A\-R\-T}()~do \{ \hyperlink{test_8hpp_ad596883c00b384e64cded971372700b4}{E\-C\-T\-O\-\_\-\-R\-A\-N\-D\-O\-M\-\_\-\-D\-E\-L\-A\-Y}(); \} while(false)
+\item 
+\#define \hyperlink{log_8hpp_ad3e0477016ce115b214fb8c3fc5d6f1e}{E\-C\-T\-O\-\_\-\-F\-I\-N\-I\-S\-H}()~do \{ \hyperlink{test_8hpp_ad596883c00b384e64cded971372700b4}{E\-C\-T\-O\-\_\-\-R\-A\-N\-D\-O\-M\-\_\-\-D\-E\-L\-A\-Y}(); \} while(false)
+\item 
+\#define \hyperlink{log_8hpp_ad686c520d8ee4f107785ee2bfebd0ed9}{E\-C\-T\-O\-\_\-\-T\-R\-A\-C\-E\-\_\-\-E\-X\-C\-E\-P\-T\-I\-O\-N}(E)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{util_8hpp_ab55b7868679cda60fc162580957fb98c}{E\-C\-T\-O\-\_\-\-E\-X\-P\-O\-R\-T} void \hyperlink{namespaceecto_a3870bebbdf6a0d01f28424e402be2834}{ecto\-::log} (const char $\ast$, const char $\ast$, unsigned line, const std\-::string \&msg)
+\item 
+\hyperlink{util_8hpp_ab55b7868679cda60fc162580957fb98c}{E\-C\-T\-O\-\_\-\-E\-X\-P\-O\-R\-T} void \hyperlink{namespaceecto_af79493e380ac31e886186e2ba1a1b809}{ecto\-::assert\-\_\-failed} (const char $\ast$, const char $\ast$file, unsigned line, const char $\ast$cond, const char $\ast$msg)
+\item 
+bool \hyperlink{namespaceecto_a34c1f436c47dc08392c8248632cde6f0}{ecto\-::logging\-\_\-on} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{log_8hpp_aa02c6e583b77dd3704fadaeb9226ca1a}{\index{log.\-hpp@{log.\-hpp}!E\-C\-T\-O\-\_\-\-A\-S\-S\-E\-R\-T@{E\-C\-T\-O\-\_\-\-A\-S\-S\-E\-R\-T}}
+\index{E\-C\-T\-O\-\_\-\-A\-S\-S\-E\-R\-T@{E\-C\-T\-O\-\_\-\-A\-S\-S\-E\-R\-T}!log.hpp@{log.\-hpp}}
+\subsubsection[{E\-C\-T\-O\-\_\-\-A\-S\-S\-E\-R\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define E\-C\-T\-O\-\_\-\-A\-S\-S\-E\-R\-T(
+\begin{DoxyParamCaption}
+\item[{}]{X, }
+\item[{}]{msg}
+\end{DoxyParamCaption}
+)}}\label{log_8hpp_aa02c6e583b77dd3704fadaeb9226ca1a}
+{\bfseries Value\-:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{do} \{                                                                  \hyperlink{test_8hpp_ad596883c00b384e64cded971372700b4}{\(\backslash\)}
+\hyperlink{test_8hpp_ad596883c00b384e64cded971372700b4}{    ECTO\_RANDOM\_DELAY}();                                                \(\backslash\)
+    if (X) ; \textcolor{keywordflow}{else} \hyperlink{namespaceecto_af79493e380ac31e886186e2ba1a1b809}{ecto::assert\_failed}(\_\_PRETTY\_FUNCTION\_\_, \_\_FILE\_\_, \_\_LINE\_\_, #X, msg);
+       \(\backslash\)
+  \} \textcolor{keywordflow}{while}(\textcolor{keyword}{false})
+\end{DoxyCode}
+\hypertarget{log_8hpp_ad3e0477016ce115b214fb8c3fc5d6f1e}{\index{log.\-hpp@{log.\-hpp}!E\-C\-T\-O\-\_\-\-F\-I\-N\-I\-S\-H@{E\-C\-T\-O\-\_\-\-F\-I\-N\-I\-S\-H}}
+\index{E\-C\-T\-O\-\_\-\-F\-I\-N\-I\-S\-H@{E\-C\-T\-O\-\_\-\-F\-I\-N\-I\-S\-H}!log.hpp@{log.\-hpp}}
+\subsubsection[{E\-C\-T\-O\-\_\-\-F\-I\-N\-I\-S\-H}]{\setlength{\rightskip}{0pt plus 5cm}\#define E\-C\-T\-O\-\_\-\-F\-I\-N\-I\-S\-H(
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)~do \{ {\bf E\-C\-T\-O\-\_\-\-R\-A\-N\-D\-O\-M\-\_\-\-D\-E\-L\-A\-Y}(); \} while(false)}}\label{log_8hpp_ad3e0477016ce115b214fb8c3fc5d6f1e}
+\hypertarget{log_8hpp_a52b93b5650a3830cd4216dee79428e6c}{\index{log.\-hpp@{log.\-hpp}!E\-C\-T\-O\-\_\-\-L\-O\-G\-\_\-\-D\-E\-B\-U\-G@{E\-C\-T\-O\-\_\-\-L\-O\-G\-\_\-\-D\-E\-B\-U\-G}}
+\index{E\-C\-T\-O\-\_\-\-L\-O\-G\-\_\-\-D\-E\-B\-U\-G@{E\-C\-T\-O\-\_\-\-L\-O\-G\-\_\-\-D\-E\-B\-U\-G}!log.hpp@{log.\-hpp}}
+\subsubsection[{E\-C\-T\-O\-\_\-\-L\-O\-G\-\_\-\-D\-E\-B\-U\-G}]{\setlength{\rightskip}{0pt plus 5cm}\#define E\-C\-T\-O\-\_\-\-L\-O\-G\-\_\-\-D\-E\-B\-U\-G(
+\begin{DoxyParamCaption}
+\item[{}]{fmg, }
+\item[{}]{args}
+\end{DoxyParamCaption}
+)~do \{ {\bf E\-C\-T\-O\-\_\-\-R\-A\-N\-D\-O\-M\-\_\-\-D\-E\-L\-A\-Y}(); \} while (false)}}\label{log_8hpp_a52b93b5650a3830cd4216dee79428e6c}
+\hypertarget{log_8hpp_ae375f89df537ac140d32247479bcc611}{\index{log.\-hpp@{log.\-hpp}!E\-C\-T\-O\-\_\-\-S\-T\-A\-R\-T@{E\-C\-T\-O\-\_\-\-S\-T\-A\-R\-T}}
+\index{E\-C\-T\-O\-\_\-\-S\-T\-A\-R\-T@{E\-C\-T\-O\-\_\-\-S\-T\-A\-R\-T}!log.hpp@{log.\-hpp}}
+\subsubsection[{E\-C\-T\-O\-\_\-\-S\-T\-A\-R\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define E\-C\-T\-O\-\_\-\-S\-T\-A\-R\-T(
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)~do \{ {\bf E\-C\-T\-O\-\_\-\-R\-A\-N\-D\-O\-M\-\_\-\-D\-E\-L\-A\-Y}(); \} while(false)}}\label{log_8hpp_ae375f89df537ac140d32247479bcc611}
+\hypertarget{log_8hpp_ad686c520d8ee4f107785ee2bfebd0ed9}{\index{log.\-hpp@{log.\-hpp}!E\-C\-T\-O\-\_\-\-T\-R\-A\-C\-E\-\_\-\-E\-X\-C\-E\-P\-T\-I\-O\-N@{E\-C\-T\-O\-\_\-\-T\-R\-A\-C\-E\-\_\-\-E\-X\-C\-E\-P\-T\-I\-O\-N}}
+\index{E\-C\-T\-O\-\_\-\-T\-R\-A\-C\-E\-\_\-\-E\-X\-C\-E\-P\-T\-I\-O\-N@{E\-C\-T\-O\-\_\-\-T\-R\-A\-C\-E\-\_\-\-E\-X\-C\-E\-P\-T\-I\-O\-N}!log.hpp@{log.\-hpp}}
+\subsubsection[{E\-C\-T\-O\-\_\-\-T\-R\-A\-C\-E\-\_\-\-E\-X\-C\-E\-P\-T\-I\-O\-N}]{\setlength{\rightskip}{0pt plus 5cm}\#define E\-C\-T\-O\-\_\-\-T\-R\-A\-C\-E\-\_\-\-E\-X\-C\-E\-P\-T\-I\-O\-N(
+\begin{DoxyParamCaption}
+\item[{}]{E}
+\end{DoxyParamCaption}
+)}}\label{log_8hpp_ad686c520d8ee4f107785ee2bfebd0ed9}

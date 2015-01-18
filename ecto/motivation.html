@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -108,7 +106,8 @@ perception groups, namely dataflow programming in a single process,
 was difficult to implement using a distributed message passing
 framework (ROS).</p>
 <p>For instance, given a data flow like this:</p>
-<img src="../_images/perception_programming.svg" width="50%" /><p>The &#8220;perception logic&#8221; part of the program needs a guarantee that the
+<a class="reference internal image-reference" href="../_images/perception_programming.svg"><img src="../_images/perception_programming.svg" width="50%" /></a>
+<p>The &#8220;perception logic&#8221; part of the program needs a guarantee that the
 incoming sensor readings (kinect, webcam and laser) correspond to one
 another.  It may additionally require that each observation be
 processed in sequence, e.g. that no sensor readings are dropped and
@@ -116,7 +115,8 @@ that time-ordering is preserved over multiple iterations of the graph.</p>
 <p>The perception logic itself may have arbitrary internal structure and
 require internal synchronization to function correctly.  Consider a
 typical point cloud processing pipeline for tabletop segmentation:</p>
-<img src="../_images/pointcloud_processing.svg" width="50%" /><p>The &#8220;Merge&#8221; operation will need to know that its two inputs correspond
+<a class="reference internal image-reference" href="../_images/pointcloud_processing.svg"><img src="../_images/pointcloud_processing.svg" width="50%" /></a>
+<p>The &#8220;Merge&#8221; operation will need to know that its two inputs correspond
 to the same original sensor data, regardless of how long e.g. the
 normal estmation or planar segmentation steps run.  The
 ExtractClusters uses bounding boxes calculated in earlier steps to
@@ -297,7 +297,7 @@ layers is straightforward.</p>
     </div>
     <div class="footer">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

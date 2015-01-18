@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -102,7 +100,7 @@
 <em class="property">class </em><tt class="descclassname">ecto.cell.</tt><tt class="descname">Cell</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../../_modules/ecto/cell.html#Cell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.cell.Cell" title="Permalink to this definition">¶</a></dt>
 <dd><p>When creating a cell from Python, just inherit from that class and define
 the same functions as in C++ if you want (i.e. declare_params(self, p),
-declare_io(self, p), configure(self, p, i, o) and run(self, i, o)</p>
+declare_io(self, p, i, o), configure(self, p, i, o) and process(self, i, o)</p>
 </dd></dl>
 
 </div>
@@ -111,7 +109,7 @@ declare_io(self, p), configure(self, p, i, o) and run(self, i, o)</p>
 <p>You have the same functionalities as in C++ with Tendril:</p>
 <dl class="class">
 <dt id="ecto.Tendril">
-<em class="property">class </em><tt class="descclassname">ecto.</tt><tt class="descname">Tendril</tt><a class="headerlink" href="#ecto.Tendril" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">ecto.</tt><tt class="descname">Tendril</tt><big>(</big><em>(object)arg1</em><big>)</big><a class="headerlink" href="#ecto.Tendril" title="Permalink to this definition">¶</a></dt>
 <dd><p>The Tendril is the slendor winding organ of ecto.
 It is a type erasing holder with meta data that enable introspection.</p>
 <dl class="method">
@@ -243,7 +241,7 @@ If none are available it will be None.</p>
 <p>And similaryl with an ecto.Tendrils:</p>
 <dl class="class">
 <dt id="ecto.Tendrils">
-<em class="property">class </em><tt class="descclassname">ecto.</tt><tt class="descname">Tendrils</tt><a class="headerlink" href="#ecto.Tendrils" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">ecto.</tt><tt class="descname">Tendrils</tt><big>(</big><em>(object)arg1</em><big>)</big><a class="headerlink" href="#ecto.Tendrils" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
 <dt id="ecto.Tendrils.at">
 <tt class="descname">at</tt><big>(</big><em>(Tendrils)arg1</em>, <em>(str)arg2</em><big>)</big> &rarr; Tendril :<a class="headerlink" href="#ecto.Tendrils.at" title="Permalink to this definition">¶</a></dt>
@@ -455,7 +453,7 @@ If key is not found, d is returned if given, otherwise KeyError is raised</p>
 <p>This is all you can do with a plasm in Python:</p>
 <dl class="class">
 <dt id="ecto.Plasm">
-<em class="property">class </em><tt class="descclassname">ecto.</tt><tt class="descname">Plasm</tt><a class="headerlink" href="#ecto.Plasm" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">ecto.</tt><tt class="descname">Plasm</tt><big>(</big><em>(object)arg1</em><big>)</big><a class="headerlink" href="#ecto.Plasm" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
 <dt id="ecto.Plasm.activate_all">
 <tt class="descname">activate_all</tt><big>(</big><em>(Plasm)arg1</em><big>)</big> &rarr; None :<a class="headerlink" href="#ecto.Plasm.activate_all" title="Permalink to this definition">¶</a></dt>
@@ -850,7 +848,7 @@ the cell (with the forwarded parameters if any, and they have priority over forw
     </div>
     <div class="footer">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -206,6 +204,9 @@ graph</strong>, it is passed to the <tt class="docutils literal"><span class="pr
 <li><p class="first"><strong>cell</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">boost::shared_ptr&lt;ecto::cell&gt;</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> no default value</em></p>
 <p>Cell to conditionally execute. The inputs and outputs of this cell will be replicated to the If cell.</p>
 </li>
+<li><p class="first"><strong>input_tendril_name</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">std::string</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">__test__</span></tt></p>
+<p>Name to use for the conditional input tendril.</p>
+</li>
 </ul>
 </p>
 <p class="topic-title first">Inputs<ul>
@@ -358,16 +359,16 @@ objects are converted immediately to this type.</p>
 </pre></div>
 </div>
 <p>The output is:</p>
-<div class="highlight-text"><div class="highlight"><pre>***** 1 ***** 0x11146c0
-***** 2 ***** 0x11146c0
-***** 3 ***** 0x11146c0
-***** 4 ***** 0x11146c0
-***** 5 ***** 0x11146c0
-***** 6 ***** 0x11146c0
-***** 7 ***** 0x11146c0
-***** 8 ***** 0x11146c0
-***** 9 ***** 0x11146c0
-***** 10 ***** 0x11146c0
+<div class="highlight-text"><div class="highlight"><pre>***** 1 ***** 0x23662d0
+***** 2 ***** 0x23662d0
+***** 3 ***** 0x23662d0
+***** 4 ***** 0x23662d0
+***** 5 ***** 0x23662d0
+***** 6 ***** 0x23662d0
+***** 7 ***** 0x23662d0
+***** 8 ***** 0x23662d0
+***** 9 ***** 0x23662d0
+***** 10 ***** 0x23662d0
 </pre></div>
 </div>
 <p>And the graph looks like the following. Notice that there is no cycle:</p>
@@ -418,7 +419,7 @@ node [shape=plaintext]
     </div>
     <div class="footer">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

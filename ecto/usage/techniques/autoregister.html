@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -94,8 +92,8 @@
 possible to store each cell&#8217;s definition in a different translation
 unit, reducing recompile times.</p>
 <dl class="macro">
-<dt id="ECTO_CELL">
-<tt class="descname">ECTO_CELL</tt><big>(</big>pymodule_name, cell_type_name, &quot;CellTypeName&quot;, &quot;Cell<em>&nbsp;Docstring&quot;</em><big>)</big><a class="headerlink" href="#ECTO_CELL" title="Permalink to this definition">¶</a></dt>
+<dt id="c.ECTO_CELL">
+<tt class="descname">ECTO_CELL</tt><big>(</big>pymodule_name, cell_type_name, &quot;CellTypeName&quot;, &quot;Cell<em>&nbsp;Docstring&quot;</em><big>)</big><a class="headerlink" href="#c.ECTO_CELL" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>Mark each ecto cell as such with the <tt class="docutils literal"><span class="pre">ECTO_CELL</span></tt> macro</p>
@@ -113,8 +111,8 @@ cell.</p>
 <p>This may be placed in any translation unit within the shared library,
 e.g. in a file Add.cpp that contains the code above.</p>
 <span class="target" id="ecto-thread-unsafe"></span><dl class="macro">
-<dt id="ECTO_THREAD_UNSAFE">
-<tt class="descname">ECTO_THREAD_UNSAFE</tt><big>(</big>CellType<big>)</big><a class="headerlink" href="#ECTO_THREAD_UNSAFE" title="Permalink to this definition">¶</a></dt>
+<dt id="c.ECTO_THREAD_UNSAFE">
+<tt class="descname">ECTO_THREAD_UNSAFE</tt><big>(</big>CellType<big>)</big><a class="headerlink" href="#c.ECTO_THREAD_UNSAFE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>Marks a cell type as thread unsafe; no two instances of this type will
@@ -130,8 +128,8 @@ ever have their process methods called concurrently.  Example:</p>
 </pre></div>
 </div>
 <span class="target" id="ecto-define-module"></span><dl class="macro">
-<dt id="ECTO_DEFINE_MODULE">
-<tt class="descname">ECTO_DEFINE_MODULE</tt><big>(</big>pymodule_name<big>)</big><a class="headerlink" href="#ECTO_DEFINE_MODULE" title="Permalink to this definition">¶</a></dt>
+<dt id="c.ECTO_DEFINE_MODULE">
+<tt class="descname">ECTO_DEFINE_MODULE</tt><big>(</big>pymodule_name<big>)</big><a class="headerlink" href="#c.ECTO_DEFINE_MODULE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>In a single place inside the shared library (e.g. <tt class="docutils literal"><span class="pre">myecto_module.cpp</span></tt>), call
@@ -176,7 +174,7 @@ parameter values passed from the script have readable symbolic names.</p>
     </div>
     <div class="footer">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

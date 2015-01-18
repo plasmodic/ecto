@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="namespaceecto_1_1py" kind="namespace">
+    <compoundname>ecto::py</compoundname>
+    <innerclass refid="classecto_1_1py_1_1streambuf" prot="public">ecto::py::streambuf</innerclass>
+    <innerclass refid="structecto_1_1py_1_1streambuf__capsule" prot="public">ecto::py::streambuf_capsule</innerclass>
+    <innerclass refid="structecto_1_1py_1_1ostream" prot="public">ecto::py::ostream</innerclass>
+    <innerclass refid="structecto_1_1py_1_1istream" prot="public">ecto::py::istream</innerclass>
+    <innerclass refid="classecto_1_1py_1_1gil" prot="public">ecto::py::gil</innerclass>
+    <innerclass refid="classecto_1_1py_1_1nothing__to__lock" prot="public">ecto::py::nothing_to_lock</innerclass>
+    <innerclass refid="structecto_1_1py_1_1gilstatus" prot="public">ecto::py::gilstatus</innerclass>
+    <innerclass refid="classecto_1_1py_1_1scoped__gil__release" prot="public">ecto::py::scoped_gil_release</innerclass>
+    <innerclass refid="classecto_1_1py_1_1scoped__call__back__to__python" prot="public">ecto::py::scoped_call_back_to_python</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespaceecto_1_1py_1a103dc3e3c8ee425860ae2260f930752e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string ecto::py::file_and_line_as_string</definition>
+        <argsstring>(const char *file, long line)</argsstring>
+        <name>file_and_line_as_string</name>
+        <param>
+          <type>const char *</type>
+          <declname>file</declname>
+        </param>
+        <param>
+          <type>long</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>A stream buffer getting data from and putting data into a Python file object. </para>        </briefdescription>
+        <detaileddescription>
+<para>The aims are as follow:</para><para><itemizedlist>
+<listitem><para>Given a C++ function acting on a standard stream, e.g.</para></listitem></itemizedlist>
+</para><para><programlisting><codeline><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>read_inputs(std::istream&amp;<sp/>input)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>...</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>input<sp/>&gt;&gt;<sp/>something<sp/>&gt;&gt;<sp/>something_else;</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para><para>and given a piece of Python code which creates a file-like object, to be able to pass this file object to that C++ function, e.g.</para><para><programlisting><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/>gzip</highlight></codeline>
+<codeline><highlight class="normal">gzip_file_obj<sp/>=<sp/>gzip.GzipFile(...)</highlight></codeline>
+<codeline><highlight class="normal">read_inputs(gzip_file_obj)</highlight></codeline>
+</programlisting></para><para>and have the standard stream pull data from and put data into the Python file object.</para><para><itemizedlist>
+<listitem><para>When Python <computeroutput>read_inputs()</computeroutput> returns, the Python object is able to continue reading or writing where the C++ code left off.</para></listitem><listitem><para>Operations in C++ on mere files should be competitively fast compared to the direct use of <computeroutput>std::fstream</computeroutput>.</para></listitem></itemizedlist>
+</para><para><bold>Motivation</bold> </para><para><itemizedlist>
+<listitem><para>the standard Python library offer of file-like objects (files, compressed files and archives, network, ...) is far superior to the offer of streams in the C++ standard library and Boost C++ libraries.</para></listitem><listitem><para>i/o code involves a fair amount of text processing which is more efficiently prototyped in Python but then one may need to rewrite a time-critical part in C++, in as seamless a manner as possible.</para></listitem></itemizedlist>
+</para><para><bold>Usage</bold> </para><para>This is 2-step:</para><para><itemizedlist>
+<listitem><para>a trivial wrapper function</para></listitem></itemizedlist>
+</para><para><programlisting><codeline><highlight class="keyword">using</highlight><highlight class="normal"><sp/>ecto::python::streambuf;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>read_inputs_wrapper(streambuf&amp;<sp/>input)</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>streambuf::istream<sp/>is(input);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>read_inputs(is);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">def(</highlight><highlight class="stringliteral">&quot;read_inputs&quot;</highlight><highlight class="normal">,<sp/>read_inputs_wrapper);</highlight></codeline>
+</programlisting></para><para>which has to be written every time one wants a Python binding for such a C++ function.</para><para><itemizedlist>
+<listitem><para>the Python side</para></listitem></itemizedlist>
+</para><para><programlisting><codeline><highlight class="normal">from<sp/>boost.python<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>streambuf</highlight></codeline>
+<codeline><highlight class="normal">read_inputs(streambuf(python_file_obj=obj,<sp/>buffer_size=1024))</highlight></codeline>
+</programlisting></para><para><computeroutput>buffer_size</computeroutput> is optional. See also: <computeroutput>default_buffer_size</computeroutput> </para><para>Note: references are to the C++ standard (the numbers between parentheses at the end of references are margin markers). </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/streambuf.hpp" line="167" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/streambuf.hpp" bodystart="167" bodyend="174"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceecto_1_1py_1abc1149eb9720c52fa9191bf7ee10ccf2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string ecto::py::repr</definition>
+        <argsstring>(const boost::python::object &amp;obj)</argsstring>
+        <name>repr</name>
+        <param>
+          <type>const boost::python::object &amp;</type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/repr.hpp" line="36" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceecto_1_1py_1a9baa9f1e5394841101cbdc2eab37094c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::py::postregistration</definition>
+        <argsstring>(const std::string &amp;, const std::string &amp;, const std::string &amp;)</argsstring>
+        <name>postregistration</name>
+        <param>
+          <type>const std::string &amp;</type>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp" line="41" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/streambuf.hpp" line="87" column="1"/>
+  </compounddef>
+</doxygen>

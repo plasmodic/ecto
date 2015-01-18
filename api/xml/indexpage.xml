@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="indexpage" kind="page">
+    <compoundname>index</compoundname>
+    <title>My Personal Index Page</title>
+    <detaileddescription>
+<sect1 id="index_1intro_sec">
+<title>Introduction</title>
+<para>This is the C++ API of ecto.</para><para>As a user, you probably are interested in the following classes:<itemizedlist>
+<listitem><para><ref refid="structecto_1_1cell" kindref="compound">ecto::cell</ref></para></listitem><listitem><para><ref refid="classecto_1_1tendril" kindref="compound">ecto::tendril</ref></para></listitem><listitem><para><ref refid="classecto_1_1tendrils" kindref="compound">ecto::tendrils</ref></para></listitem><listitem><para><ref refid="structecto_1_1spore" kindref="compound">ecto::spore</ref></para></listitem></itemizedlist>
+</para><para>As a developer, the core ones you want to look at are:<itemizedlist>
+<listitem><para><ref refid="structecto_1_1plasm" kindref="compound">ecto::plasm</ref></para></listitem><listitem><para><ref refid="classecto_1_1scheduler" kindref="compound">ecto::scheduler</ref></para></listitem></itemizedlist>
+</para><para>and everything else of course :) </para></sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

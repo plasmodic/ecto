@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="structecto_1_1except_1_1EctoException" kind="struct" prot="public">
+    <compoundname>ecto::except::EctoException</compoundname>
+    <basecompoundref prot="public" virt="virtual">exception</basecompoundref>
+    <basecompoundref prot="public" virt="virtual">exception</basecompoundref>
+    <basecompoundref prot="public" virt="virtual">exception</basecompoundref>
+    <basecompoundref prot="public" virt="virtual">exception</basecompoundref>
+    <includes refid="except_8hpp" local="no">except.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structecto_1_1except_1_1EctoException_1a5e4d1414677cf716b57620c8721b0078" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ecto::except::EctoException::EctoException</definition>
+        <argsstring>()</argsstring>
+        <name>EctoException</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="148" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1except_1_1EctoException_1ab8f456a7153321c3424e9d6780170f4a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>const char *</type>
+        <definition>virtual const char* ecto::except::EctoException::what</definition>
+        <argsstring>() const </argsstring>
+        <name>what</name>
+        <exceptions> throw ()</exceptions>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="149" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1except_1_1EctoException_1a5e4d1414677cf716b57620c8721b0078" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ecto::except::EctoException::EctoException</definition>
+        <argsstring>()</argsstring>
+        <name>EctoException</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp" line="148" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structecto_1_1except_1_1EctoException_1ab8f456a7153321c3424e9d6780170f4a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>const char *</type>
+        <definition>virtual const char* ecto::except::EctoException::what</definition>
+        <argsstring>() const </argsstring>
+        <name>what</name>
+        <exceptions> throw ()</exceptions>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp" line="149" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="283">
+        <label>exception</label>
+      </node>
+      <node id="282">
+        <label>boost::exception</label>
+      </node>
+      <node id="281">
+        <label>std::exception</label>
+      </node>
+      <node id="280">
+        <label>ecto::except::EctoException</label>
+        <link refid="structecto_1_1except_1_1EctoException"/>
+        <childnode refid="281" relation="public-inheritance">
+        </childnode>
+        <childnode refid="282" relation="public-inheritance">
+        </childnode>
+        <childnode refid="283" relation="public-inheritance">
+        </childnode>
+        <childnode refid="283" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="287">
+        <label>exception</label>
+      </node>
+      <node id="286">
+        <label>boost::exception</label>
+      </node>
+      <node id="285">
+        <label>std::exception</label>
+      </node>
+      <node id="284">
+        <label>ecto::except::EctoException</label>
+        <link refid="structecto_1_1except_1_1EctoException"/>
+        <childnode refid="285" relation="public-inheritance">
+        </childnode>
+        <childnode refid="286" relation="public-inheritance">
+        </childnode>
+        <childnode refid="287" relation="public-inheritance">
+        </childnode>
+        <childnode refid="287" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="147" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" bodystart="146" bodyend="150"/>
+    <listofallmembers>
+      <member refid="structecto_1_1except_1_1EctoException_1a5e4d1414677cf716b57620c8721b0078" prot="public" virt="non-virtual"><scope>ecto::except::EctoException</scope><name>EctoException</name></member>
+      <member refid="structecto_1_1except_1_1EctoException_1a5e4d1414677cf716b57620c8721b0078" prot="public" virt="non-virtual"><scope>ecto::except::EctoException</scope><name>EctoException</name></member>
+      <member refid="structecto_1_1except_1_1EctoException_1ab8f456a7153321c3424e9d6780170f4a" prot="public" virt="virtual"><scope>ecto::except::EctoException</scope><name>what</name></member>
+      <member refid="structecto_1_1except_1_1EctoException_1ab8f456a7153321c3424e9d6780170f4a" prot="public" virt="virtual"><scope>ecto::except::EctoException</scope><name>what</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="namespaceecto_1_1graph" kind="namespace">
+    <compoundname>ecto::graph</compoundname>
+    <innerclass refid="classecto_1_1graph_1_1element" prot="public">ecto::graph::element</innerclass>
+    <innerclass refid="structecto_1_1graph_1_1graph__t" prot="public">ecto::graph::graph_t</innerclass>
+    <innerclass refid="classecto_1_1graph_1_1vertex" prot="public">ecto::graph::vertex</innerclass>
+    <innerclass refid="structecto_1_1graph_1_1edge" prot="public">ecto::graph::edge</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespaceecto_1_1graph_1ad6da390ef18395607e6eab139f37fcf4" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="structecto_1_1graph_1_1edge" kindref="compound">edge</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;edge&gt; ecto::graph::edge_ptr</definition>
+        <argsstring></argsstring>
+        <name>edge_ptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/forward.hpp" line="60" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/forward.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaceecto_1_1graph_1ac45fa43674f9071675a1ebbf4d021eb4" prot="public" static="no">
+        <type>boost::shared_ptr&lt; const <ref refid="structecto_1_1graph_1_1edge" kindref="compound">edge</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;const edge&gt; ecto::graph::edge_cptr</definition>
+        <argsstring></argsstring>
+        <name>edge_cptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/forward.hpp" line="61" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/forward.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaceecto_1_1graph_1a878e413dd7cdb7395b02f5be20e12b51" prot="public" static="no">
+        <type>boost::shared_ptr&lt; <ref refid="classecto_1_1graph_1_1vertex" kindref="compound">vertex</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;vertex&gt; ecto::graph::vertex_ptr</definition>
+        <argsstring></argsstring>
+        <name>vertex_ptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/forward.hpp" line="64" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/forward.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaceecto_1_1graph_1ab1ad7248e81caff384fed98d61fca8ca" prot="public" static="no">
+        <type>boost::shared_ptr&lt; const <ref refid="classecto_1_1graph_1_1vertex" kindref="compound">vertex</ref> &gt;</type>
+        <definition>typedef boost::shared_ptr&lt;const vertex&gt; ecto::graph::vertex_cptr</definition>
+        <argsstring></argsstring>
+        <name>vertex_cptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/forward.hpp" line="65" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/forward.hpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespaceecto_1_1graph_1a3313c6217262c9d746a5f80d0a4708d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::set&lt; std::string &gt;</type>
+        <definition>std::set&lt;std::string&gt; ecto::graph::get_connected_input_tendril_names</definition>
+        <argsstring>(graph_t &amp;graph, graph_t::vertex_descriptor vd)</argsstring>
+        <name>get_connected_input_tendril_names</name>
+        <param>
+          <type><ref refid="structecto_1_1graph_1_1graph__t" kindref="compound">graph_t</ref> &amp;</type>
+          <declname>graph</declname>
+        </param>
+        <param>
+          <type>graph_t::vertex_descriptor</type>
+          <declname>vd</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/graph/utilities.hpp" line="38" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceecto_1_1graph_1a6a06bfc5757345d0a4531988e8125197" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::graph::move_inputs</definition>
+        <argsstring>(graph_t &amp;graph, graph_t::vertex_descriptor vd)</argsstring>
+        <name>move_inputs</name>
+        <param>
+          <type><ref refid="structecto_1_1graph_1_1graph__t" kindref="compound">graph_t</ref> &amp;</type>
+          <declname>graph</declname>
+        </param>
+        <param>
+          <type>graph_t::vertex_descriptor</type>
+          <declname>vd</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/graph/utilities.hpp" line="39" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceecto_1_1graph_1a540b97ac69ca6f09dfe9a60e1ebd5a1e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::graph::move_outputs</definition>
+        <argsstring>(graph_t &amp;graph, graph_t::vertex_descriptor vd)</argsstring>
+        <name>move_outputs</name>
+        <param>
+          <type><ref refid="structecto_1_1graph_1_1graph__t" kindref="compound">graph_t</ref> &amp;</type>
+          <declname>graph</declname>
+        </param>
+        <param>
+          <type>graph_t::vertex_descriptor</type>
+          <declname>vd</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/graph/utilities.hpp" line="40" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceecto_1_1graph_1a13df50b98a1c4fe0d35ce7a3ea7316e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ecto::graph::invoke_configuration</definition>
+        <argsstring>(graph_t &amp;graph, graph_t::vertex_descriptor vd)</argsstring>
+        <name>invoke_configuration</name>
+        <param>
+          <type><ref refid="structecto_1_1graph_1_1graph__t" kindref="compound">graph_t</ref> &amp;</type>
+          <declname>graph</declname>
+        </param>
+        <param>
+          <type>graph_t::vertex_descriptor</type>
+          <declname>vd</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/graph/utilities.hpp" line="41" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceecto_1_1graph_1a0b293971d5460ed370597d2e7c5d0b9c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int ecto::graph::invoke_process</definition>
+        <argsstring>(graph_t &amp;graph, graph_t::vertex_descriptor vd)</argsstring>
+        <name>invoke_process</name>
+        <param>
+          <type><ref refid="structecto_1_1graph_1_1graph__t" kindref="compound">graph_t</ref> &amp;</type>
+          <declname>graph</declname>
+        </param>
+        <param>
+          <type>graph_t::vertex_descriptor</type>
+          <declname>vd</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/graph/utilities.hpp" line="42" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" line="33" column="1"/>
+  </compounddef>
+</doxygen>

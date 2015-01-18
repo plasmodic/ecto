@@ -1,0 +1,692 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classboost_1_1python_1_1std__map__indexing__suite" kind="class" prot="public">
+    <compoundname>boost::python::std_map_indexing_suite</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">indexing_suite&lt; Container, DerivedPolicies, NoProxy, true, Container::value_type::second_type, Container::key_type, Container::key_type &gt;</basecompoundref>
+    <includes refid="std__map__indexing__suite_8hpp" local="no">std_map_indexing_suite.hpp</includes>
+    <innerclass refid="structboost_1_1python_1_1std__map__indexing__suite_1_1init__factory" prot="public">boost::python::std_map_indexing_suite::init_factory</innerclass>
+    <innerclass refid="structboost_1_1python_1_1std__map__indexing__suite_1_1iteritems" prot="public">boost::python::std_map_indexing_suite::iteritems</innerclass>
+    <innerclass refid="structboost_1_1python_1_1std__map__indexing__suite_1_1iterkeys" prot="public">boost::python::std_map_indexing_suite::iterkeys</innerclass>
+    <innerclass refid="structboost_1_1python_1_1std__map__indexing__suite_1_1itervalues" prot="public">boost::python::std_map_indexing_suite::itervalues</innerclass>
+    <innerclass refid="structboost_1_1python_1_1std__map__indexing__suite_1_1make__transform__impl" prot="public">boost::python::std_map_indexing_suite::make_transform_impl</innerclass>
+    <templateparamlist>
+      <param>
+        <type>class</type>
+        <declname>Container</declname>
+        <defname>Container</defname>
+      </param>
+      <param>
+        <type>bool</type>
+        <declname>NoProxy</declname>
+        <defname>NoProxy</defname>
+      </param>
+      <param>
+        <type>class</type>
+        <declname>DerivedPolicies</declname>
+        <defname>DerivedPolicies</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classboost_1_1python_1_1std__map__indexing__suite_1aff9ed68cf30e805a04a313d92c62ab38" prot="public" static="no">
+        <type>Container::value_type</type>
+        <definition>typedef Container::value_type boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="68" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classboost_1_1python_1_1std__map__indexing__suite_1a3e9a6a8b8ba34759cf0ba99fe5966041" prot="public" static="no">
+        <type>Container::value_type::second_type</type>
+        <definition>typedef Container::value_type::second_type boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::data_type</definition>
+        <argsstring></argsstring>
+        <name>data_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="69" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classboost_1_1python_1_1std__map__indexing__suite_1a4e2daeb60a58d6ce9964e0ea27680009" prot="public" static="no">
+        <type>Container::key_type</type>
+        <definition>typedef Container::key_type boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::key_type</definition>
+        <argsstring></argsstring>
+        <name>key_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="70" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classboost_1_1python_1_1std__map__indexing__suite_1a4b2ac75883fba93dbca6d9e83197c842" prot="public" static="no">
+        <type>Container::key_type</type>
+        <definition>typedef Container::key_type boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::index_type</definition>
+        <argsstring></argsstring>
+        <name>index_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="71" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classboost_1_1python_1_1std__map__indexing__suite_1ad1c24ad53b2e27b061f75591c74296c2" prot="public" static="no">
+        <type>Container::size_type</type>
+        <definition>typedef Container::size_type boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::size_type</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="72" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classboost_1_1python_1_1std__map__indexing__suite_1a54aa644dcb3913334f8b0152901940ef" prot="public" static="no">
+        <type>Container::difference_type</type>
+        <definition>typedef Container::difference_type boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::difference_type</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="73" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classboost_1_1python_1_1std__map__indexing__suite_1aae0c4473455223a4e048cc207ca7b3ea" prot="public" static="no">
+        <type>Container::const_iterator</type>
+        <definition>typedef Container::const_iterator boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::const_iterator</definition>
+        <argsstring></argsstring>
+        <name>const_iterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="74" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classboost_1_1python_1_1std__map__indexing__suite_1a802d62d636e685954b7abe3331de7af6" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>object</type>
+        <definition>static object boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::pair_getitem</definition>
+        <argsstring>(value_type const &amp;x, int i)</argsstring>
+        <name>pair_getitem</name>
+        <param>
+          <type><ref refid="classboost_1_1python_1_1std__map__indexing__suite_1aff9ed68cf30e805a04a313d92c62ab38" kindref="member">value_type</ref> const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="79" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="79" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1python_1_1std__map__indexing__suite_1a09b84169bb3b2ceb9c576c41cd63280e" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>PyObject *</type>
+        <definition>static PyObject* boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::pair_iter</definition>
+        <argsstring>(value_type const &amp;x)</argsstring>
+        <name>pair_iter</name>
+        <param>
+          <type><ref refid="classboost_1_1python_1_1std__map__indexing__suite_1aff9ed68cf30e805a04a313d92c62ab38" kindref="member">value_type</ref> const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="93" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="93" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1python_1_1std__map__indexing__suite_1a639bbbf3265c0cab8419b106590c3857" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>static int boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::pair_len</definition>
+        <argsstring>(value_type const &amp;x)</argsstring>
+        <name>pair_len</name>
+        <param>
+          <type><ref refid="classboost_1_1python_1_1std__map__indexing__suite_1aff9ed68cf30e805a04a313d92c62ab38" kindref="member">value_type</ref> const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="99" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="99" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1python_1_1std__map__indexing__suite_1a1d08ce35eb71bc9248f64a515d6d9775" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bp::list</type>
+        <definition>static bp::list boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::keys</definition>
+        <argsstring>(Container const &amp;x)</argsstring>
+        <name>keys</name>
+        <param>
+          <type>Container const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="102" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="102" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1python_1_1std__map__indexing__suite_1a81c04a5902c3ea0b559b56ab66e600a9" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bp::list</type>
+        <definition>static bp::list boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::values</definition>
+        <argsstring>(Container const &amp;x)</argsstring>
+        <name>values</name>
+        <param>
+          <type>Container const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="110" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="110" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1python_1_1std__map__indexing__suite_1a6e44b3f64f0723b75c7e00b8d46bab92" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bp::list</type>
+        <definition>static bp::list boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::items</definition>
+        <argsstring>(Container const &amp;x)</argsstring>
+        <name>items</name>
+        <param>
+          <type>Container const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="118" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="118" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1python_1_1std__map__indexing__suite_1a6012daef85763e30ed55ef753933ff1b" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>object</type>
+        <definition>static object boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::dict_get</definition>
+        <argsstring>(Container const &amp;x, index_type const &amp;k, object const &amp;default_val=object())</argsstring>
+        <name>dict_get</name>
+        <param>
+          <type>Container const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="classboost_1_1python_1_1std__map__indexing__suite_1a4b2ac75883fba93dbca6d9e83197c842" kindref="member">index_type</ref> const &amp;</type>
+          <declname>k</declname>
+        </param>
+        <param>
+          <type>object const &amp;</type>
+          <declname>default_val</declname>
+          <defval>object()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="137" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="137" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1python_1_1std__map__indexing__suite_1a56d69ee32c136ed83389eefae5f8df3a" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>object</type>
+        <definition>static object boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::dict_pop</definition>
+        <argsstring>(Container &amp;x, index_type const &amp;k)</argsstring>
+        <name>dict_pop</name>
+        <param>
+          <type>Container &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="classboost_1_1python_1_1std__map__indexing__suite_1a4b2ac75883fba93dbca6d9e83197c842" kindref="member">index_type</ref> const &amp;</type>
+          <declname>k</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="147" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="147" bodyend="161"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1python_1_1std__map__indexing__suite_1a923cb4bd1266dd53065eba4d3c91279a" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>object</type>
+        <definition>static object boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::dict_pop_default</definition>
+        <argsstring>(Container &amp;x, index_type const &amp;k, object const &amp;default_val)</argsstring>
+        <name>dict_pop_default</name>
+        <param>
+          <type>Container &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="classboost_1_1python_1_1std__map__indexing__suite_1a4b2ac75883fba93dbca6d9e83197c842" kindref="member">index_type</ref> const &amp;</type>
+          <declname>k</declname>
+        </param>
+        <param>
+          <type>object const &amp;</type>
+          <declname>default_val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="164" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="164" bodyend="174"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1python_1_1std__map__indexing__suite_1af207a28bb4d4a7fa8364139dd0484a84" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>object</type>
+        <definition>static object boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::dict_pop_item</definition>
+        <argsstring>(Container &amp;x)</argsstring>
+        <name>dict_pop_item</name>
+        <param>
+          <type>Container &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="177" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="177" bodyend="191"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1python_1_1std__map__indexing__suite_1a8aedb678ae655adaf30a5f0200fdeda9" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>object</type>
+        <definition>static object boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::dict_fromkeys</definition>
+        <argsstring>(object const &amp;keys, object const &amp;value)</argsstring>
+        <name>dict_fromkeys</name>
+        <param>
+          <type>object const &amp;</type>
+          <declname>keys</declname>
+        </param>
+        <param>
+          <type>object const &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="194" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="194" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1python_1_1std__map__indexing__suite_1a77daf7a1f7b0da0d6035e91dfa118899" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::dict_update</definition>
+        <argsstring>(object &amp;x, object const &amp;dictlike)</argsstring>
+        <name>dict_update</name>
+        <param>
+          <type>object &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>object const &amp;</type>
+          <declname>dictlike</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="241" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="241" bodyend="251"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1python_1_1std__map__indexing__suite_1ad2e6c20740dd4ad7058f04e958fc499c" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Transform</type>
+          </param>
+        </templateparamlist>
+        <type>bp::object</type>
+        <definition>static bp::object boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::make_transform</definition>
+        <argsstring>()</argsstring>
+        <name>make_transform</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="305" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="305" bodyend="308"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1python_1_1std__map__indexing__suite_1a1147c134bf910497fb9a467a21522933" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>object</type>
+        <definition>static object boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::print_elem</definition>
+        <argsstring>(typename Container::value_type const &amp;e)</argsstring>
+        <name>print_elem</name>
+        <param>
+          <type>typename Container::value_type const &amp;</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="311" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="311" bodyend="314"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1python_1_1std__map__indexing__suite_1a7c13569acfb66f1adb8d92c581091654" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>mpl::if_&lt; is_class&lt; <ref refid="classboost_1_1python_1_1std__map__indexing__suite_1a3e9a6a8b8ba34759cf0ba99fe5966041" kindref="member">data_type</ref> &gt;, <ref refid="classboost_1_1python_1_1std__map__indexing__suite_1a3e9a6a8b8ba34759cf0ba99fe5966041" kindref="member">data_type</ref> &amp;, <ref refid="classboost_1_1python_1_1std__map__indexing__suite_1a3e9a6a8b8ba34759cf0ba99fe5966041" kindref="member">data_type</ref> &gt;::type</type>
+        <definition>static mpl::if_&lt; is_class&lt;data_type&gt; , data_type&amp; , data_type &gt;::type boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::get_data</definition>
+        <argsstring>(typename Container::value_type &amp;e)</argsstring>
+        <name>get_data</name>
+        <param>
+          <type>typename Container::value_type &amp;</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="322" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="322" bodyend="325"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1python_1_1std__map__indexing__suite_1a28a13c6039a1305e3605c6ca3a9803d9" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Container::key_type</type>
+        <definition>static Container::key_type boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::get_key</definition>
+        <argsstring>(typename Container::value_type &amp;e)</argsstring>
+        <name>get_key</name>
+        <param>
+          <type>typename Container::value_type &amp;</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="328" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="328" bodyend="331"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1python_1_1std__map__indexing__suite_1a8650d42e8d1d7e095f6cfc9e664f0fab" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classboost_1_1python_1_1std__map__indexing__suite_1a3e9a6a8b8ba34759cf0ba99fe5966041" kindref="member">data_type</ref> &amp;</type>
+        <definition>static data_type&amp; boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::get_item</definition>
+        <argsstring>(Container &amp;container, index_type i_)</argsstring>
+        <name>get_item</name>
+        <param>
+          <type>Container &amp;</type>
+          <declname>container</declname>
+        </param>
+        <param>
+          <type><ref refid="classboost_1_1python_1_1std__map__indexing__suite_1a4b2ac75883fba93dbca6d9e83197c842" kindref="member">index_type</ref></type>
+          <declname>i_</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="334" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="334" bodyend="343"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1python_1_1std__map__indexing__suite_1a5dc3dd492671db19152e7c64b62e9f97" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::set_item</definition>
+        <argsstring>(Container &amp;container, index_type i, data_type const &amp;v)</argsstring>
+        <name>set_item</name>
+        <param>
+          <type>Container &amp;</type>
+          <declname>container</declname>
+        </param>
+        <param>
+          <type><ref refid="classboost_1_1python_1_1std__map__indexing__suite_1a4b2ac75883fba93dbca6d9e83197c842" kindref="member">index_type</ref></type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type><ref refid="classboost_1_1python_1_1std__map__indexing__suite_1a3e9a6a8b8ba34759cf0ba99fe5966041" kindref="member">data_type</ref> const &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="346" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="346" bodyend="349"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1python_1_1std__map__indexing__suite_1a9af154020b49d26a30de90bfb07b122d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::delete_item</definition>
+        <argsstring>(Container &amp;container, index_type i)</argsstring>
+        <name>delete_item</name>
+        <param>
+          <type>Container &amp;</type>
+          <declname>container</declname>
+        </param>
+        <param>
+          <type><ref refid="classboost_1_1python_1_1std__map__indexing__suite_1a4b2ac75883fba93dbca6d9e83197c842" kindref="member">index_type</ref></type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="352" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="352" bodyend="355"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1python_1_1std__map__indexing__suite_1a2a7b98e15824d0e74ae4620cbfa636d0" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>static size_t boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::size</definition>
+        <argsstring>(Container &amp;container)</argsstring>
+        <name>size</name>
+        <param>
+          <type>Container &amp;</type>
+          <declname>container</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="358" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="358" bodyend="361"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1python_1_1std__map__indexing__suite_1a89557475c8931027399dddf66fb251c1" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::contains</definition>
+        <argsstring>(Container &amp;container, key_type const &amp;key)</argsstring>
+        <name>contains</name>
+        <param>
+          <type>Container &amp;</type>
+          <declname>container</declname>
+        </param>
+        <param>
+          <type><ref refid="classboost_1_1python_1_1std__map__indexing__suite_1a4e2daeb60a58d6ce9964e0ea27680009" kindref="member">key_type</ref> const &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="364" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="364" bodyend="367"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1python_1_1std__map__indexing__suite_1a62974da613b1b56663d9736a8612bddd" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::compare_index</definition>
+        <argsstring>(Container &amp;container, index_type a, index_type b)</argsstring>
+        <name>compare_index</name>
+        <param>
+          <type>Container &amp;</type>
+          <declname>container</declname>
+        </param>
+        <param>
+          <type><ref refid="classboost_1_1python_1_1std__map__indexing__suite_1a4b2ac75883fba93dbca6d9e83197c842" kindref="member">index_type</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type><ref refid="classboost_1_1python_1_1std__map__indexing__suite_1a4b2ac75883fba93dbca6d9e83197c842" kindref="member">index_type</ref></type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="370" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="370" bodyend="373"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1python_1_1std__map__indexing__suite_1a79bc222baa6b652f2f688f2a3add9d75" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classboost_1_1python_1_1std__map__indexing__suite_1a4b2ac75883fba93dbca6d9e83197c842" kindref="member">index_type</ref></type>
+        <definition>static index_type boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::convert_index</definition>
+        <argsstring>(Container &amp;container, PyObject *i_)</argsstring>
+        <name>convert_index</name>
+        <param>
+          <type>Container &amp;</type>
+          <declname>container</declname>
+        </param>
+        <param>
+          <type>PyObject *</type>
+          <declname>i_</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="376" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="376" bodyend="393"/>
+      </memberdef>
+      <memberdef kind="function" id="classboost_1_1python_1_1std__map__indexing__suite_1a32aecfee63f8763608a0149050134623" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Class</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>static void boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::extension_def</definition>
+        <argsstring>(Class &amp;cl)</argsstring>
+        <name>extension_def</name>
+        <param>
+          <type>Class &amp;</type>
+          <declname>cl</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="397" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="397" bodyend="467"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classboost_1_1python_1_1std__map__indexing__suite_1aeea6d865c496b7145baa50301a4b5702" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;::BOOST_PYTHON_FUNCTION_OVERLOADS</definition>
+        <argsstring>(dict_get_overloads, dict_get, 2, 3)</argsstring>
+        <name>BOOST_PYTHON_FUNCTION_OVERLOADS</name>
+        <param>
+          <type>dict_get_overloads</type>
+        </param>
+        <param>
+          <type><ref refid="classboost_1_1python_1_1std__map__indexing__suite_1a6012daef85763e30ed55ef753933ff1b" kindref="member">dict_get</ref></type>
+        </param>
+        <param>
+          <type>2</type>
+        </param>
+        <param>
+          <type>3</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="144" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="448">
+        <label>indexing_suite&lt; Container, DerivedPolicies, NoProxy, true, Container::value_type::second_type, Container::key_type, Container::key_type &gt;</label>
+      </node>
+      <node id="447">
+        <label>boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;</label>
+        <link refid="classboost_1_1python_1_1std__map__indexing__suite"/>
+        <childnode refid="448" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="450">
+        <label>indexing_suite&lt; Container, DerivedPolicies, NoProxy, true, Container::value_type::second_type, Container::key_type, Container::key_type &gt;</label>
+      </node>
+      <node id="449">
+        <label>boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;</label>
+        <link refid="classboost_1_1python_1_1std__map__indexing__suite"/>
+        <childnode refid="450" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" line="24" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp" bodystart="24" bodyend="-1"/>
+    <listofallmembers>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1aeea6d865c496b7145baa50301a4b5702" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>BOOST_PYTHON_FUNCTION_OVERLOADS</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a62974da613b1b56663d9736a8612bddd" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>compare_index</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1aae0c4473455223a4e048cc207ca7b3ea" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>const_iterator</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a89557475c8931027399dddf66fb251c1" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>contains</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a79bc222baa6b652f2f688f2a3add9d75" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>convert_index</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a3e9a6a8b8ba34759cf0ba99fe5966041" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>data_type</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a9af154020b49d26a30de90bfb07b122d" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>delete_item</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a8aedb678ae655adaf30a5f0200fdeda9" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>dict_fromkeys</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a6012daef85763e30ed55ef753933ff1b" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>dict_get</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a56d69ee32c136ed83389eefae5f8df3a" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>dict_pop</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a923cb4bd1266dd53065eba4d3c91279a" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>dict_pop_default</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1af207a28bb4d4a7fa8364139dd0484a84" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>dict_pop_item</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a77daf7a1f7b0da0d6035e91dfa118899" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>dict_update</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a54aa644dcb3913334f8b0152901940ef" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>difference_type</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a32aecfee63f8763608a0149050134623" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>extension_def</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a7c13569acfb66f1adb8d92c581091654" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>get_data</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a8650d42e8d1d7e095f6cfc9e664f0fab" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>get_item</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a28a13c6039a1305e3605c6ca3a9803d9" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>get_key</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a4b2ac75883fba93dbca6d9e83197c842" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>index_type</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a6e44b3f64f0723b75c7e00b8d46bab92" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>items</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a4e2daeb60a58d6ce9964e0ea27680009" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>key_type</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a1d08ce35eb71bc9248f64a515d6d9775" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>keys</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1ad2e6c20740dd4ad7058f04e958fc499c" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>make_transform</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a802d62d636e685954b7abe3331de7af6" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>pair_getitem</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a09b84169bb3b2ceb9c576c41cd63280e" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>pair_iter</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a639bbbf3265c0cab8419b106590c3857" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>pair_len</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a1147c134bf910497fb9a467a21522933" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>print_elem</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a5dc3dd492671db19152e7c64b62e9f97" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>set_item</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a2a7b98e15824d0e74ae4620cbfa636d0" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>size</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1ad1c24ad53b2e27b061f75591c74296c2" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>size_type</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1aff9ed68cf30e805a04a313d92c62ab38" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>value_type</name></member>
+      <member refid="classboost_1_1python_1_1std__map__indexing__suite_1a81c04a5902c3ea0b559b56ab66e600a9" prot="public" virt="non-virtual"><scope>boost::python::std_map_indexing_suite</scope><name>values</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
