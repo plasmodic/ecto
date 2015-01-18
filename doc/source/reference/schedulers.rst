@@ -50,19 +50,13 @@ Singlethreaded
 
    .. method:: stop()
 
-      Stops the background graph execution at the end of the current process() call.
-
-   .. method:: wait()
-
-      Blocks until the execution started by the last call to
-      execute_async() is finished.
+      Stops the background graph execution at the end of the current process() call and block until it is stopped
 
 
 Reentrant running
-------------------
+-----------------
 
-The schedulers are fully reentrant, meaning, that when you stop(), and wait() on
-a scheduler it may be executed again.
+The schedulers are fully reentrant, meaning, that when you stop(), on a scheduler it may be executed again.
 
 The following code is therefore valid for any ecto scheduler:
 
@@ -72,7 +66,6 @@ The following code is therefore valid for any ecto scheduler:
     s.execute_async()
     time.sleep(0.5)
     s.stop()
-    s.wait()
     s.execute_async()
     assert s.running()
 
