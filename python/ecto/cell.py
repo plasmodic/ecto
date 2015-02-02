@@ -38,7 +38,7 @@ class Cell(_cell_base):
         if name == '__impl':
             return self
         else:
-            if self.__dict__.hasget(name, None):
+            if name in self.__dict__:
                 return self.__dict__[name]
             else:
                 raise AttributeError(self, name)
