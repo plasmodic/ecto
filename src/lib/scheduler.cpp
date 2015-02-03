@@ -89,7 +89,7 @@ bool scheduler::execute(unsigned num_iters)
 {
   //std::cerr << this << " scheduler::execute(" << num_iters << ")\n";
   execute_async(num_iters);
-  run();
+    run();
   return (state_ > 0); // NOT thread-safe!
 }
 
@@ -132,9 +132,13 @@ bool scheduler::run(unsigned timeout_usec)
   using namespace boost::posix_time;
   ptime quit = microsec_clock::universal_time() + microseconds(timeout_usec);
   std::size_t n = 0;
-  do {
-    n = io_svc_.run_one(); // Sit and spin.
-  } while (n && microsec_clock::universal_time() < quit);
+  {
+    // by default let procesing be free of the gil
+    ECTO_SCOPED_GILRELEASE();
+    do {
+      n = io_svc_.run_one(); // Sit and spin.
+    } while (n && microsec_clock::universal_time() < quit);
+  }
   return (state_ > 0); // NOT thread-safe!
 }
 
@@ -142,7 +146,11 @@ bool scheduler::run()
 {
   ref_count<> c(mtx_, runners_);
   profile::graphstats_collector gs(graphstats_); // TODO: NOT thread-safe!
-  io_svc_.run();
+  {
+    // by default let procesing be free of the gil
+    ECTO_SCOPED_GILRELEASE();
+    io_svc_.run();
+  }
   return (state_ > 0); // NOT thread-safe!
 }
 
