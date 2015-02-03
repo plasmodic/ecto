@@ -84,8 +84,5 @@ namespace ecto {
   }
 }
 
-//#define ECTO_SCOPED_GILRELEASE() ecto::py::scoped_gil_release gilrelease ## __LINE__(__FILE__, __LINE__)
-#define ECTO_SCOPED_GILRELEASE()
-
-//#define ECTO_SCOPED_CALLPYTHON() ecto::py::scoped_call_back_to_python gilcall ## __LINE__(__FILE__, __LINE__)
-#define ECTO_SCOPED_CALLPYTHON()
+#define ECTO_SCOPED_GILRELEASE() ecto::py::scoped_gil_release gilrelease ## __LINE__(__FILE__, __LINE__)
+#define ECTO_SCOPED_CALLPYTHON() ecto::py::scoped_call_back_to_python gilcall ## __LINE__(__FILE__, __LINE__)
