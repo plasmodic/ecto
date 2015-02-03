@@ -58,7 +58,6 @@ namespace {
               << "*** when back in the interpreter thread.\n"
               << "*** or Ctrl-\\ (backslash) for a hard stop.\n" << std::endl;
     SINGLE_THREADED_SIGINT_SIGNAL();
-    PyErr_SetInterrupt();
   }
 } // End of anonymous namespace.
 
