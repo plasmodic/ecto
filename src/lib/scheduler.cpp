@@ -222,31 +222,39 @@ void scheduler::execute_iter(unsigned cur_iter, unsigned num_iters,
     throw; // Propagate to the calling thread.
   }
 
-  // TODO: Handle BREAK or CONTINUE? There are serious implications for
-  // multi-threaded scheduling.
   switch (retval) {
-  case ecto::OK:
-    ++stack_idx;
-    if (stack_.size() <= stack_idx) {
-      stack_idx = 0;
-      ++cur_iter;
+    case ecto::BREAK:
+      // unimplemented (move to default) -> https://github.com/plasmodic/ecto/issues/251
 
-      // Made it through the stack. Do it again?
-      if (num_iters && cur_iter >= num_iters) {
-        // No longer executing, but still "running".
-        state(RUNNING);
-        return;
+    case ecto::CONTINUE:
+      // unimplemented (move to default) -> https://github.com/plasmodic/ecto/issues/251
+
+    case ecto::OK:
+    {
+      ++stack_idx;
+      if (stack_.size() <= stack_idx) {
+        stack_idx = 0;
+        ++cur_iter;
+
+        // Made it through the stack. Do it again?
+        if (num_iters && cur_iter >= num_iters) {
+          // No longer executing, but still "running".
+          state(RUNNING);
+          return;
+        }
       }
+      break; // continue execution in this method.
     }
-    break; // continue execution in this method.
 
-  case ecto::DO_OVER:
-    break; // Reschedule this cell e.g. Don't bump the stack_idx.
+    case ecto::DO_OVER:
+      break; // Reschedule this cell i.e. don't bump the stack index.
 
-  default:
-    // Don't schedule any more cells, just finalize and quit.
-    io_svc_.post(boost::bind(& scheduler::execute_fini, this));
-    return;
+    default:
+    {
+      // Don't schedule any more cells, just finalize and quit.
+      io_svc_.post(boost::bind(& scheduler::execute_fini, this));
+      return;
+    }
   }
 
   io_svc_.post(boost::bind(& scheduler::execute_iter, this,
