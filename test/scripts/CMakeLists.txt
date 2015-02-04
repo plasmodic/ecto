@@ -82,6 +82,7 @@ foreach(file
     test_tendrils
     test_tendrils_mux
     test_tendrils_serialization
+    test_threaded_scheduler
     test_type_mismatch_errors
     test_wrong_param_type
     )

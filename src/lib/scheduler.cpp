@@ -88,7 +88,7 @@ bool scheduler::execute(unsigned num_iters)
 {
   //std::cerr << this << " scheduler::execute(" << num_iters << ")\n";
   execute_async(num_iters);
-    run();
+  run();
   return (state_ > 0); // NOT thread-safe!
 }
 

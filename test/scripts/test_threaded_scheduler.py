@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 #
 # Copyright (c) 2011, Willow Garage, Inc.
 # All rights reserved.
@@ -25,40 +26,34 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 #
-ectomodule(ecto_test
-  Accumulator.cpp
-  Add.cpp
-  BpObjectToCellPtr.cpp
-  CantCallMeFromTwoThreads.cpp
-  ConfigureCalledOnce.cpp
-  DontCallMeFromTwoThreads.cpp
-  DoOverFor.cpp
-  EmitAndAccept.cpp
-  ExceptInConstructor.cpp
-  FileIO.cpp
-  Multiply.cpp
-  Quitter.cpp
-  QuitAfter.cpp
-  Increment.cpp
-  LatticeSleep.cpp
-  Printer.cpp
-  Ping.cpp
-  Metrics.cpp
-  Gather.cpp
-  Generate.cpp
-  RequiredInput.cpp
-  RequiredParam.cpp
-  RequiredIO.cpp
-  Passthrough.cpp
-  ParameterWatcher.cpp
-  Sleep.cpp
-  SleepPyObjectAbuser.cpp
-  StartStopCounter.cpp
-  Throttle.cpp
-  ThrowAfter.cpp
-  Uniform01.cpp
-  throws_in_handler.cpp
-  gil_exercise.cpp
-  ecto_test.cpp
-  DESTINATION  ecto
-)
+import ecto
+import ecto.ecto_test as ecto_test
+import sys
+from ecto.test import test
+
+def build_pipelines():
+
+    left_plasm = ecto.Plasm()
+    right_plasm = ecto.Plasm()
+    accumulator = ecto_test.Accumulator("Accumulator", connected_inputs_only=True)
+    left_generator = ecto_test.Generate("Left Generator", step=1.0, start=1.0, stop=10.0)
+    right_generator = ecto_test.Generate("Right Generator", step=2.0, start=1.0, stop=10.0)
+    left_plasm.connect(left_generator["out"] >> accumulator["left"])
+    right_plasm.connect(right_generator["out"] >> accumulator["right"])
+    plasms = {
+          "left": left_plasm,
+          "right": right_plasm
+         }
+    scheduler = ecto.ThreadedScheduler(plasms, disable_qt_management=True)
+    return (accumulator, scheduler)
+
+
+@test
+def test_plasm():
+    (accumulator, scheduler) = build_pipelines()
+    scheduler.spin()
+    print( "RESULT: %s" % accumulator.outputs.out)
+    assert accumulator.outputs.out == 80.0
+
+if __name__ == '__main__':
+    test_plasm()
