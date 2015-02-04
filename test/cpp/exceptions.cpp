@@ -241,8 +241,6 @@ TEST(Exceptions, WrongType)
 TEST(Exceptions, WrongType_sched)
 {
   for (unsigned j=0; j<100; ++j) {
-    Py_Finalize();
-
     cell::ptr m(new cell_<WrongType>);
     m->declare_params();
     m->declare_io();
@@ -261,13 +259,11 @@ TEST(Exceptions, WrongType_sched)
         threw = true;
       }
     EXPECT_TRUE(threw);
-    Py_Initialize();
   }
 }
 
 TEST(Exceptions, ParameterCBExcept_sched)
 {
-  Py_Finalize();
   cell::ptr m(new cell_<ParameterCBExcept>);
   m->declare_params();
   m->declare_io();
@@ -285,7 +281,6 @@ TEST(Exceptions, ParameterCBExcept_sched)
     {
       std::cout << "Good, threw an exception:\n" << ecto::except::diagnostic_string(e) << std::endl;
     }
-  Py_Initialize();
 }
 
 TEST(Exceptions, ConstructorExcept)

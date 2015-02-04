@@ -49,7 +49,7 @@ def invoke(Scheduler, whatnext):
     print Scheduler, whatnext
     p = makeplasm()
     s = Scheduler(p)
-    s.execute_async()
+    s.prepare_jobs()
     assert s.running()
     whatnext(s)
 

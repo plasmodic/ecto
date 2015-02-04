@@ -44,15 +44,15 @@ def test_async_multiple_sched(Sched):
     p2 = make_plasm()
     
     s1 = Sched(p1)
-    s1.execute_async()
+    s1.prepare_jobs()
 
     s2 = Sched(p2)
-    s2.execute_async()
+    s2.prepare_jobs()
     for i in range(3):
       s2.run_job() # Exececute a few cells.
     s2.stop()
     assert not s2.running()
-    s2.execute_async()
+    s2.prepare_jobs()
     for i in range(5):
       s2.run_job() # Exececute a few cells.
     assert s2.running()

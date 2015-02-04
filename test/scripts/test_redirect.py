@@ -59,7 +59,7 @@ for s in [ecto.Scheduler]:
 
     print s, "ASYNC"
     sched2 = make(s)
-    sched2.execute_async(niter=5)
+    sched2.prepare_jobs(niter=5)
     sched2.run()
     ecto.unlog_to_file()
     verify()

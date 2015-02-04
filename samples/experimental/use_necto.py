@@ -41,7 +41,7 @@ plasm.connect(g['out'] >> source['in'],
               )
 
 sched = ecto.Scheduler(plasm)
-sched.execute_async()
+sched.prepare_jobs()
 
 def scope():
     p = Printer(print_type='double')

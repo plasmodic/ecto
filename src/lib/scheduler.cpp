@@ -80,22 +80,18 @@ scheduler::scheduler(plasm_ptr p)
 scheduler::~scheduler()
 {
   interrupt_connection.disconnect();
-  //std::cerr << this << " ~scheduler()\n";
   stop();
 }
 
 bool scheduler::execute(unsigned num_iters)
 {
-  //std::cerr << this << " scheduler::execute(" << num_iters << ")\n";
-  execute_async(num_iters);
+  prepare_jobs(num_iters);
   run();
   return (state_ > 0); // NOT thread-safe!
 }
 
-bool scheduler::execute_async(unsigned num_iters)
+bool scheduler::prepare_jobs(unsigned num_iters)
 {
-
-  //std::cerr << this << " scheduler::execute_async(" << num_iters << ")\n";
   { // BEGIN mtx_ scope.
     mutex::scoped_lock l(mtx_);
     if (EXECUTING == state_)

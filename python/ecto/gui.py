@@ -52,7 +52,7 @@ try:
 
         def exec_one(self):
             if not self.sched.running():
-                self.sched.execute_async()
+                self.sched.prepare_jobs()
             try:
                 #give ecto a slice of time
                 rval = self.sched.run(1000) #exec for 1000 microseconds

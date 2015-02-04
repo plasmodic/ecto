@@ -1,0 +1,29 @@
+digraph G
+{
+  subgraph cluster_odometry {
+    label="1kHz";
+    a->b;
+  }
+  subgraph cluster_tracking {
+    label="30Hz";
+    c->d;
+    d->e;
+    d->f;
+    e->g;
+    g->h;
+    f->h;
+  }
+  subgraph cluster_mapping {
+    label="1Hz";
+    i->j;
+    j->k;
+    k->l;
+  }
+
+
+b [color="red"];
+d [color="red"];
+f [color="blue"];
+i [color="blue"];
+}
+

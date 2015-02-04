@@ -49,6 +49,7 @@ With great flexibility comes great tips and tricks. The following info might hel
     :maxdepth: 1
 
     tips/connections.rst
+    tips/optional-inputs.rst
     tips/argparse.rst
     tips/ectodoc.rst
 
@@ -76,6 +77,8 @@ Well, what is I want to do for loops ? or integrate with Python better ? or not 
 
     advanced/wrapping_enums.rst
     advanced/yaml.rst
-    advanced/strands.rst
     advanced/serialization.rst
     advanced/pure_cpp.rst
+
+..  advanced/strands.rst - threading inside a single graph got deprecated so this is no longer relevant.
+    

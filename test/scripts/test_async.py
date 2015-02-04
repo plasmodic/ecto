@@ -42,7 +42,7 @@ def test_parameter_callbacks():
     plasm.insert(sleep)
     #ecto.view_plasm(plasm)
     sched = ecto.Scheduler(plasm)
-    sched.execute_async(1)
+    sched.prepare_jobs(1)
     sched.run_job() # check plasm, init parms, and compute_stack
     number = 1000
     param_watcher.params.value = number
@@ -62,7 +62,7 @@ def test_async_stop_on_destructor():
     plasm.insert(sleep)
     #ecto.view_plasm(plasm)
     sched = ecto.Scheduler(plasm)
-    sched.execute_async()
+    sched.prepare_jobs()
     for i in range(0, 10):
       sched.run_job()
     # TODO (JTF) How to check for stop on dtor?

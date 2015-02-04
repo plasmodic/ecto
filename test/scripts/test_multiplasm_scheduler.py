@@ -44,7 +44,7 @@ def build_pipelines():
           "left": left_plasm,
           "right": right_plasm
          }
-    scheduler = ecto.ThreadedScheduler(plasms, disable_qt_management=True)
+    scheduler = ecto.MultiPlasmScheduler(plasms, disable_qt_management=True)
     return (accumulator, scheduler)
 
 

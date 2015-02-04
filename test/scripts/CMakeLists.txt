@@ -57,6 +57,7 @@ foreach(file
     test_metrics
     test_module_qualification
     test_modules
+    test_multiplasm_scheduler
     test_multiprocess
     test_nested_if
     test_no_ecto_import
@@ -82,7 +83,6 @@ foreach(file
     test_tendrils
     test_tendrils_mux
     test_tendrils_serialization
-    test_threaded_scheduler
     test_type_mismatch_errors
     test_wrong_param_type
     )

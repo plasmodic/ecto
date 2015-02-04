@@ -53,7 +53,7 @@ from PySide.QtGui import QApplication
 # Classes
 ##############################################################################
 
-class ThreadedScheduler:
+class MultiPlasmScheduler:
     '''
     Schedules multiple plasms, each one in a separate thread and then
     manages these threads. Useful for combining multiple ecto pipelines.
@@ -99,6 +99,6 @@ class ThreadedScheduler:
             QApplication.closeAllWindows()
             QApplication.exit()
 
-    def printStatistics(self):
+    def print_statistics(self):
         for scheduler in self.schedulers.values():
             print scheduler.stats()

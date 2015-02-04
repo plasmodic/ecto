@@ -44,8 +44,8 @@ def makeplasm():
     return plasm
 
 def async(s):
-    print "s.execute_async"
-    s.execute_async(niter=5)
+    print "s.prepare_jobs"
+    s.prepare_jobs(niter=5)
     assert s.running()
 
 def sync(s):
