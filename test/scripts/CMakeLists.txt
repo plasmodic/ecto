@@ -57,6 +57,7 @@ foreach(file
     test_metrics
     test_module_qualification
     test_modules
+    test_multiplasm_scheduler
     test_multiprocess
     test_nested_if
     test_no_ecto_import

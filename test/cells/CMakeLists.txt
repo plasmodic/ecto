@@ -26,6 +26,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 ectomodule(ecto_test
+  Accumulator.cpp
   Add.cpp
   BpObjectToCellPtr.cpp
   CantCallMeFromTwoThreads.cpp

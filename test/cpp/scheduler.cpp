@@ -173,7 +173,7 @@ TEST(Scheduler, DestroyWhileRunning1)
   plasm::ptr p = makeplasm();
   scheduler* s = new scheduler(p);
   EXPECT_FALSE(s->running());
-  s->execute_async();
+  s->prepare_jobs();
   EXPECT_TRUE(s->running());
   delete s;
 }
@@ -183,7 +183,7 @@ TEST(Scheduler, DestroyWhileRunning2)
   plasm::ptr p = makeplasm();
   scheduler* s = new scheduler(p);
   EXPECT_FALSE(s->running());
-  s->execute_async();
+  s->prepare_jobs();
   s->run_job();
   EXPECT_TRUE(s->running());
   delete s;
@@ -222,7 +222,7 @@ TEST(Scheduler, TimedRun)
     plasm::ptr p = makeplasm(dur_secs);
     scheduler s(p);
     EXPECT_FALSE(s.running());
-    s.execute_async();
+    s.prepare_jobs();
     EXPECT_TRUE(s.running());
     const ptime start = microsec_clock::universal_time();
     s.run(dur_usecs);
@@ -246,17 +246,17 @@ TEST(Scheduler, State1)
   EXPECT_EQ(s.state(), scheduler::FINI);
   s.stop(); // Make sure stop() after explicit stop works.
   EXPECT_EQ(s.state(), scheduler::FINI);
-  s.execute_async(1); // Make sure it can start back up.
+  s.prepare_jobs(1); // Make sure it can start back up.
   EXPECT_EQ(s.state(), scheduler::EXECUTING);
 }
 
 TEST(Scheduler, State2)
 {
-  // Test states with execute_async() and explicit stop().
+  // Test states with prepare_jobs() and explicit stop().
   plasm::ptr p = makeplasm(0.001);
   scheduler s(p);
   EXPECT_EQ(s.state(), scheduler::INIT);
-  s.execute_async(5);
+  s.prepare_jobs(5);
   EXPECT_EQ(s.state(), scheduler::EXECUTING);
   s.run_job();
   EXPECT_EQ(s.state(), scheduler::EXECUTING);
@@ -266,7 +266,7 @@ TEST(Scheduler, State2)
   EXPECT_EQ(s.state(), scheduler::FINI);
   s.stop(); // Make sure stop() after explicit stop works.
   EXPECT_EQ(s.state(), scheduler::FINI);
-  s.execute_async(1); // Make sure it can start back up.
+  s.prepare_jobs(1); // Make sure it can start back up.
   EXPECT_EQ(s.state(), scheduler::EXECUTING);
 }
 
@@ -282,7 +282,7 @@ TEST(Scheduler, State3)
   EXPECT_EQ(s.state(), scheduler::FINI);
   s.stop(); // Make sure stop() after automatic stop works.
   EXPECT_EQ(s.state(), scheduler::FINI);
-  s.execute_async(1); // Make sure it can start back up.
+  s.prepare_jobs(1); // Make sure it can start back up.
   EXPECT_EQ(s.state(), scheduler::EXECUTING);
 }
 
@@ -296,39 +296,39 @@ TEST(Scheduler, State4)
   EXPECT_EQ(s.state(), scheduler::FINI);
   s.stop(); // Make sure stop() after automatic stop works.
   EXPECT_EQ(s.state(), scheduler::FINI);
-  s.execute_async(1); // Make sure it can start back up.
+  s.prepare_jobs(1); // Make sure it can start back up.
   EXPECT_EQ(s.state(), scheduler::EXECUTING);
 }
 
 TEST(Scheduler, State5)
 {
-  // Test states with execute_async() and automatic stop().
+  // Test states with prepare_jobs() and automatic stop().
   plasm::ptr p = make_quitter_plasm(1); // Quit after 1 full iteration.
   scheduler s(p);
   EXPECT_EQ(s.state(), scheduler::INIT);
-  s.execute_async(1);
+  s.prepare_jobs(1);
   EXPECT_EQ(s.state(), scheduler::EXECUTING);
   s.run();
   EXPECT_EQ(s.state(), scheduler::RUNNING);
-  s.execute_async(1);
+  s.prepare_jobs(1);
   EXPECT_EQ(s.state(), scheduler::EXECUTING);
   s.run();
   EXPECT_EQ(s.state(), scheduler::FINI);
-  s.execute_async(1); // Make sure it can start back up.
+  s.prepare_jobs(1); // Make sure it can start back up.
   EXPECT_EQ(s.state(), scheduler::EXECUTING);
 }
 
 TEST(Scheduler, State6)
 {
-  // Test states with execute_async() and automatic stop().
+  // Test states with prepare_jobs() and automatic stop().
   plasm::ptr p = make_quitter_plasm(1); // Quit after 1 full iteration.
   scheduler s(p);
   EXPECT_EQ(s.state(), scheduler::INIT);
-  s.execute_async(); // Go till stop.
+  s.prepare_jobs(); // Go till stop.
   EXPECT_EQ(s.state(), scheduler::EXECUTING);
   s.run();
   EXPECT_EQ(s.state(), scheduler::FINI);
-  s.execute_async(1); // Make sure it can start back up.
+  s.prepare_jobs(1); // Make sure it can start back up.
   EXPECT_EQ(s.state(), scheduler::EXECUTING);
 }
 
@@ -344,7 +344,7 @@ TEST(Scheduler, State7)
   EXPECT_EQ(s.state(), scheduler::ERROR);
   s.stop(); // Make sure stop() after exception works.
   EXPECT_EQ(s.state(), scheduler::ERROR);
-  s.execute_async(1); // Make sure it can start back up.
+  s.prepare_jobs(1); // Make sure it can start back up.
   EXPECT_EQ(s.state(), scheduler::EXECUTING);
 }
 
@@ -358,7 +358,7 @@ TEST(Scheduler, State8)
   EXPECT_EQ(s.state(), scheduler::ERROR);
   s.stop(); // Make sure stop() after automatic stop works.
   EXPECT_EQ(s.state(), scheduler::ERROR);
-  s.execute_async(1); // Make sure it can start back up.
+  s.prepare_jobs(1); // Make sure it can start back up.
   EXPECT_EQ(s.state(), scheduler::EXECUTING);
 }
 

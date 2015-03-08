@@ -57,7 +57,7 @@ public:
     /** One of the execute*() methods was called and successfully completed
      * the specified number of iterations. */
     RUNNING,
-    /** execute() is running, or execute_async() was called, and
+    /** execute() is running, or jobs have been prepared and
      * the specified number of iterations have not been completed. */
     EXECUTING,
     /** stop() was called, but the scheduler has not stopped yet. */
@@ -80,14 +80,16 @@ public:
    *   num_iters is 0.
    */
   bool execute(unsigned num_iters = 0);
-  /** Kick off an asynchronous plasm execution for num_iters iterations.
-   * No actual work will be done without calling the run*() methods.
+  /** Prepare jobs for execution of a plasm over num_iters iterations.
+   * No actual work will be done without calling the run*() methods. This just
+   * fills up the io service queues with the jobs required for initialisation
+   * and execution of the plasm over the specified number of iterations.
    * @param[in] num_iters The number of iterations to execute the plasm. 0 indicates
    *   that the plasm should be executed until some cell::process() call
    *   returns ecto::QUIT. \attention A call to run() will block indefinately if
    *   num_iters is 0.
    */
-  bool execute_async(unsigned num_iters = 0);
+  bool prepare_jobs(unsigned num_iters = 0);
 
   /** Run one job in the calling thread of execution.
    * \note A job is not necessarily (but is usually) a cell::process() call.

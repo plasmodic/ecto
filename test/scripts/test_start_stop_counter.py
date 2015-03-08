@@ -78,7 +78,7 @@ def synctwice(s, ss):
 
     # Test asynchronous execute with no stops.
     for i in range(iters):
-        s.execute_async(niter=5)
+        s.prepare_jobs(niter=5)
         s.run()
 
         print "NSTART=", ss.outputs.nstart
@@ -105,7 +105,7 @@ def synctwice(s, ss):
     # Test asynchronous execute with stops
     for i in range(iters):
         s.stop()
-        s.execute_async(niter=5)
+        s.prepare_jobs(niter=5)
         s.run()
 
         print "NSTART=", ss.outputs.nstart
@@ -117,7 +117,7 @@ def synctwice(s, ss):
         assert ss.outputs.nprocess == 3*5*iters + 5*(i+1)
 
     # Test partial asynchronous execution
-    s.execute_async()
+    s.prepare_jobs()
     for i in range(2): # 2 cell::process() jobs + no execute_init() jobs.
         s.run_job() # Make sure params, etc are initialized, and process() is called once on each cell.
     s.stop()
@@ -144,10 +144,10 @@ for j in range(ecto.test.iterations):
     do_test(synctwice)
 
 def things_not_too_slow(s, ss):
-    s.execute_async()
+    s.prepare_jobs()
     s.stop()
     print s.stats()
-    s.execute_async()
+    s.prepare_jobs()
     s.stop()
     print s.stats()
 

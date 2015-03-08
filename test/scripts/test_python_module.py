@@ -53,13 +53,13 @@ def test_python_module_plasm(Schedtype):
     for i in range(1,5):
         print "HERE"
         sched.execute(niter=1)
-        sched.execute_async(niter=1)
+        sched.prepare_jobs(niter=1)
         sched.run()
         assert g.outputs.out == i*2
         assert mod.outputs.out == "spam"*i*2
 
     sched.execute(niter=1)
-    sched.execute_async(niter=1)
+    sched.prepare_jobs(niter=1)
     sched.run()
     assert g.outputs.out == 10
     assert mod.outputs.out == "spam"*10

@@ -38,10 +38,10 @@ namespace ecto {
     template <typename T> bool execute1 (T& s, unsigned arg1)
     { return s.execute(arg1); }
 
-    template <typename T> bool execute_async0 (T& s)
-    { return s.execute_async(); }
-    template <typename T> bool execute_async1 (T& s, unsigned arg1)
-    { return s.execute_async(arg1); }
+    template <typename T> bool prepare_jobs0 (T& s)
+    { return s.prepare_jobs(); }
+    template <typename T> bool prepare_jobs1 (T& s, unsigned arg1)
+    { return s.prepare_jobs(arg1); }
 
     template <typename T> bool run0 (T& s)
     { return s.run(); }
@@ -55,8 +55,8 @@ namespace ecto {
       bp::class_<T, boost::noncopyable>(name, bp::init<ecto::plasm::ptr>())
         .def("execute", &execute0<T>)
         .def("execute", &execute1<T>, arg("niter"))
-        .def("execute_async", &execute_async0<T>)
-        .def("execute_async", &execute_async1<T>, arg("niter"))
+        .def("prepare_jobs", &prepare_jobs0<T>)
+        .def("prepare_jobs", &prepare_jobs1<T>, arg("niter"))
 
         //.def("interrupt", &T::interrupt)
         .def("stop", &T::stop)

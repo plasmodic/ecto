@@ -80,22 +80,18 @@ scheduler::scheduler(plasm_ptr p)
 scheduler::~scheduler()
 {
   interrupt_connection.disconnect();
-  //std::cerr << this << " ~scheduler()\n";
   stop();
 }
 
 bool scheduler::execute(unsigned num_iters)
 {
-  //std::cerr << this << " scheduler::execute(" << num_iters << ")\n";
-  execute_async(num_iters);
+  prepare_jobs(num_iters);
   run();
   return (state_ > 0); // NOT thread-safe!
 }
 
-bool scheduler::execute_async(unsigned num_iters)
+bool scheduler::prepare_jobs(unsigned num_iters)
 {
-
-  //std::cerr << this << " scheduler::execute_async(" << num_iters << ")\n";
   { // BEGIN mtx_ scope.
     mutex::scoped_lock l(mtx_);
     if (EXECUTING == state_)
@@ -131,9 +127,13 @@ bool scheduler::run(unsigned timeout_usec)
   using namespace boost::posix_time;
   ptime quit = microsec_clock::universal_time() + microseconds(timeout_usec);
   std::size_t n = 0;
-  do {
-    n = io_svc_.run_one(); // Sit and spin.
-  } while (n && microsec_clock::universal_time() < quit);
+  {
+    // by default let procesing be free of the gil
+    ECTO_SCOPED_GILRELEASE();
+    do {
+      n = io_svc_.run_one(); // Sit and spin.
+    } while (n && microsec_clock::universal_time() < quit);
+  }
   return (state_ > 0); // NOT thread-safe!
 }
 
@@ -141,7 +141,11 @@ bool scheduler::run()
 {
   ref_count<> c(mtx_, runners_);
   profile::graphstats_collector gs(graphstats_); // TODO: NOT thread-safe!
-  io_svc_.run();
+  {
+    // by default let procesing be free of the gil
+    ECTO_SCOPED_GILRELEASE();
+    io_svc_.run();
+  }
   return (state_ > 0); // NOT thread-safe!
 }
 
@@ -214,31 +218,39 @@ void scheduler::execute_iter(unsigned cur_iter, unsigned num_iters,
     throw; // Propagate to the calling thread.
   }
 
-  // TODO: Handle BREAK or CONTINUE? There are serious implications for
-  // multi-threaded scheduling.
   switch (retval) {
-  case ecto::OK:
-    ++stack_idx;
-    if (stack_.size() <= stack_idx) {
-      stack_idx = 0;
-      ++cur_iter;
+    case ecto::BREAK:
+      // unimplemented (move to default) -> https://github.com/plasmodic/ecto/issues/251
 
-      // Made it through the stack. Do it again?
-      if (num_iters && cur_iter >= num_iters) {
-        // No longer executing, but still "running".
-        state(RUNNING);
-        return;
+    case ecto::CONTINUE:
+      // unimplemented (move to default) -> https://github.com/plasmodic/ecto/issues/251
+
+    case ecto::OK:
+    {
+      ++stack_idx;
+      if (stack_.size() <= stack_idx) {
+        stack_idx = 0;
+        ++cur_iter;
+
+        // Made it through the stack. Do it again?
+        if (num_iters && cur_iter >= num_iters) {
+          // No longer executing, but still "running".
+          state(RUNNING);
+          return;
+        }
       }
+      break; // continue execution in this method.
     }
-    break; // continue execution in this method.
 
-  case ecto::DO_OVER:
-    break; // Reschedule this cell e.g. Don't bump the stack_idx.
+    case ecto::DO_OVER:
+      break; // Reschedule this cell i.e. don't bump the stack index.
 
-  default:
-    // Don't schedule any more cells, just finalize and quit.
-    io_svc_.post(boost::bind(& scheduler::execute_fini, this));
-    return;
+    default:
+    {
+      // Don't schedule any more cells, just finalize and quit.
+      io_svc_.post(boost::bind(& scheduler::execute_fini, this));
+      return;
+    }
   }
 
   io_svc_.post(boost::bind(& scheduler::execute_iter, this,

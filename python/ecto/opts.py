@@ -45,8 +45,8 @@ def use_ipython(options, sched, plasm, locals={}):
     for key, val in locals.items():
         vars()[key] = val
 
-    sched.execute_async(options.niter)
-    print "Scheduler running in async mode. To execute for some number of microseconds, type:"
+    sched.prepare_jobs(options.niter)
+    print "Scheduler ready to run. To execute for some number of microseconds, type:"
     print "sched.run(1000)"
 
     import IPython

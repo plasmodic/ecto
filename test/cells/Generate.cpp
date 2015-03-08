@@ -36,12 +36,13 @@ namespace ecto_test
   template<typename T>
   struct Generate
   {
-    ecto::spore<T> step_, start_, out_; //so that it receives updates dynamically.
+    ecto::spore<T> step_, start_, stop_, out_; //so that it receives updates dynamically.
 
     static void declare_params(tendrils& parameters)
     {
       parameters.declare<T> ("step", "The step with which i generate integers.", 2);
       parameters.declare<T> ("start", "My starting value.", 0);
+      parameters.declare<T> ("stop", "Stop if the generated value exceeds this upper bound (0 implies no upper bound)", 0);
     }
 
     static void declare_io(const ecto::tendrils& parameters, ecto::tendrils& inputs, ecto::tendrils& outputs)
@@ -53,12 +54,16 @@ namespace ecto_test
     {
       start_ = parameters["start"];
       step_ = parameters["step"];
+      stop_ = parameters["stop"];
       out_ = outputs["out"];
       *out_ = *start_ - *step_;
     }
 
     int process(const ecto::tendrils& inputs, const ecto::tendrils& outputs)
     {
+      if (( *stop_ != 0 ) && ( *out_ + *step_ > *stop_ )) {
+        return ecto::QUIT;
+      }
       *out_ += *step_;
       return ecto::OK;
     }

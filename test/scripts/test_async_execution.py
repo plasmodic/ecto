@@ -89,13 +89,13 @@ def synctwice(s, ex):
 
 def ex_async_twice(s, ex):
     assert not s.running()
-    s.execute_async(niter=5)
+    s.prepare_jobs(niter=5)
     print "once..."
     assert s.running()
     t = time.time()
     try:
         print "twice..."
-        s.execute_async(niter=5)
+        s.prepare_jobs(niter=5)
         fail("that should have thrown")
     except ecto.EctoException, e:
         print "okay, threw"
@@ -109,7 +109,7 @@ def ex_async_twice(s, ex):
 
 def ex_async_then_sync_throws(s, ex):
     assert not s.running()
-    s.execute_async(niter=5)
+    s.prepare_jobs(niter=5)
     print "once..."
     assert s.running()
     t = time.time()
@@ -139,7 +139,7 @@ def wait_on_nothing(s, ex):
 
 def running_check(s, ex):
     assert not s.running()
-    s.execute_async(niter=5)
+    s.prepare_jobs(niter=5)
     assert s.running()
     s.run()
     assert s.running()
@@ -149,7 +149,7 @@ def wait_check(s, ex):
     print __name__, s
     assert not s.running()
     t = time.time()
-    s.execute_async(niter=5)
+    s.prepare_jobs(niter=5)
     assert time.time() - t < ex
     s.run()
     print time.time() - t > ex+eps  # we might be multithreaded
@@ -181,7 +181,7 @@ do_test(wait_check)
 #    p = makeplasm()
 #
 #    st = ecto.schedulers.Multithreaded(p)
-#    st.execute_async()
+#    st.prepare_jobs()
 #    time.sleep(1.3) # wait until we are in steady state
 #    start = time.time()
 #    st.stop()
@@ -192,7 +192,7 @@ do_test(wait_check)
 #    print "hc=", hc, "(hc-1.0)/hc=", ((hc-1.0)/hc)
 #    assert elapsed >= (hc-1.0)/hc
 #    assert elapsed <= (1.0 + eps)
-#    st.execute_async()
+#    st.prepare_jobs()
 #    time.sleep(1.0)
 #    # this time the start is just before stop is called, not
 #    # when execute was called
@@ -237,7 +237,7 @@ def stoppable():
     assert st.running()
 
     start = time.time()
-    st.execute_async(1)
+    st.prepare_jobs(1)
     st.run()
     elapsed = time.time() - start
     print "elapsed Scheduler:", elapsed
