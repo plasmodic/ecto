@@ -125,10 +125,10 @@
     <detaileddescription>
     </detaileddescription>
     <collaborationgraph>
-      <node id="414">
+      <node id="406">
         <label>ecto::registry::registrator&lt; Module, T &gt;</label>
         <link refid="structecto_1_1registry_1_1registrator"/>
-        <childnode refid="414" relation="usage">
+        <childnode refid="406" relation="usage">
           <edgelabel>inst</edgelabel>
         </childnode>
       </node>

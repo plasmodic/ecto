@@ -529,24 +529,24 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="451">
+      <node id="443">
         <label>boost::python::std_vector_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;</label>
         <link refid="classboost_1_1python_1_1std__vector__indexing__suite"/>
-        <childnode refid="452" relation="public-inheritance">
+        <childnode refid="444" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="452">
+      <node id="444">
         <label>indexing_suite&lt; Container, DerivedPolicies, NoProxy &gt;</label>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="453">
+      <node id="445">
         <label>boost::python::std_vector_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;</label>
         <link refid="classboost_1_1python_1_1std__vector__indexing__suite"/>
-        <childnode refid="454" relation="public-inheritance">
+        <childnode refid="446" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="454">
+      <node id="446">
         <label>indexing_suite&lt; Container, DerivedPolicies, NoProxy &gt;</label>
       </node>
     </collaborationgraph>

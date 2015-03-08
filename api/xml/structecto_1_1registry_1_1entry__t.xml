@@ -106,19 +106,19 @@
     <detaileddescription>
     </detaileddescription>
     <collaborationgraph>
-      <node id="303">
+      <node id="297">
         <label>noncopyable</label>
       </node>
-      <node id="302">
+      <node id="296">
         <label>ecto::tendrils</label>
         <link refid="classecto_1_1tendrils"/>
-        <childnode refid="303" relation="private-inheritance">
+        <childnode refid="297" relation="private-inheritance">
         </childnode>
       </node>
-      <node id="301">
+      <node id="295">
         <label>ecto::registry::entry_t</label>
         <link refid="structecto_1_1registry_1_1entry__t"/>
-        <childnode refid="302" relation="usage">
+        <childnode refid="296" relation="usage">
           <edgelabel>declare_params</edgelabel>
           <edgelabel>declare_io</edgelabel>
         </childnode>

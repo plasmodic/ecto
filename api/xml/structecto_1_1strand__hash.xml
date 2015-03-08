@@ -28,24 +28,24 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="458">
+      <node id="450">
         <label>std::unary_function&lt; strand, std::size_t &gt;</label>
       </node>
-      <node id="457">
+      <node id="449">
         <label>ecto::strand_hash</label>
         <link refid="structecto_1_1strand__hash"/>
-        <childnode refid="458" relation="public-inheritance">
+        <childnode refid="450" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="460">
+      <node id="452">
         <label>std::unary_function&lt; strand, std::size_t &gt;</label>
       </node>
-      <node id="459">
+      <node id="451">
         <label>ecto::strand_hash</label>
         <link refid="structecto_1_1strand__hash"/>
-        <childnode refid="460" relation="public-inheritance">
+        <childnode refid="452" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>

@@ -60,26 +60,26 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="266">
+      <node id="262">
         <label>ecto::tendril::Converter</label>
         <link refid="structecto_1_1tendril_1_1Converter"/>
       </node>
-      <node id="269">
+      <node id="265">
         <label>ecto::tendril::ConverterImpl&lt; none, _ &gt;</label>
         <link refid="structecto_1_1tendril_1_1ConverterImpl_3_01none_00_01___01_4"/>
-        <childnode refid="266" relation="public-inheritance">
+        <childnode refid="262" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="268">
+      <node id="264">
         <label>ecto::tendril::ConverterImpl&lt; T, _ &gt;</label>
         <link refid="structecto_1_1tendril_1_1ConverterImpl"/>
-        <childnode refid="266" relation="public-inheritance">
+        <childnode refid="262" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="267">
+      <node id="263">
         <label>ecto::tendril::ConverterImpl&lt; ecto::tendril::none, _ &gt;</label>
         <link refid="structecto_1_1tendril_1_1ConverterImpl"/>
-        <childnode refid="266" relation="public-inheritance">
+        <childnode refid="262" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>

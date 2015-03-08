@@ -807,24 +807,24 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="476">
+      <node id="468">
         <label>noncopyable</label>
       </node>
-      <node id="475">
+      <node id="467">
         <label>ecto::tendrils</label>
         <link refid="classecto_1_1tendrils"/>
-        <childnode refid="476" relation="private-inheritance">
+        <childnode refid="468" relation="private-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="478">
+      <node id="470">
         <label>noncopyable</label>
       </node>
-      <node id="477">
+      <node id="469">
         <label>ecto::tendrils</label>
         <link refid="classecto_1_1tendrils"/>
-        <childnode refid="478" relation="private-inheritance">
+        <childnode refid="470" relation="private-inheritance">
         </childnode>
       </node>
     </collaborationgraph>

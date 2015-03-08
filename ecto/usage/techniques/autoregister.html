@@ -110,23 +110,6 @@ string, 2. Type of cell, 3.  string name of cell, 4. docstring for
 cell.</p>
 <p>This may be placed in any translation unit within the shared library,
 e.g. in a file Add.cpp that contains the code above.</p>
-<span class="target" id="ecto-thread-unsafe"></span><dl class="macro">
-<dt id="c.ECTO_THREAD_UNSAFE">
-<tt class="descname">ECTO_THREAD_UNSAFE</tt><big>(</big>CellType<big>)</big><a class="headerlink" href="#c.ECTO_THREAD_UNSAFE" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<p>Marks a cell type as thread unsafe; no two instances of this type will
-ever have their process methods called concurrently.  Example:</p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="k">struct</span> <span class="n">ThreadUnsafeCell</span> <span class="p">{</span>
-  <span class="kt">int</span> <span class="n">process</span><span class="p">(</span><span class="k">const</span> <span class="n">ecto</span><span class="o">::</span><span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">inputs</span><span class="p">,</span> <span class="p">...)</span>
-  <span class="c1">// ...</span>
-<span class="p">};</span>
-
-<span class="n">ECTO_THREAD_UNSAFE</span><span class="p">(</span><span class="n">ThreadUnsafeCell</span><span class="p">);</span>
-<span class="n">ECTO_CELL</span><span class="p">(</span><span class="n">ecto_test</span><span class="p">,</span> <span class="n">ThreadUnsafeCell</span><span class="p">,</span> <span class="s">&quot;ThreadUnsafeCell&quot;</span><span class="p">,</span>
-          <span class="s">&quot;Do something dangerous with globals/statics&quot;</span><span class="p">);</span>
-</pre></div>
-</div>
 <span class="target" id="ecto-define-module"></span><dl class="macro">
 <dt id="c.ECTO_DEFINE_MODULE">
 <tt class="descname">ECTO_DEFINE_MODULE</tt><big>(</big>pymodule_name<big>)</big><a class="headerlink" href="#c.ECTO_DEFINE_MODULE" title="Permalink to this definition">¶</a></dt>

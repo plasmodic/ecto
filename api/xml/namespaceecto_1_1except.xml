@@ -27,7 +27,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="160" column="1"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp" line="160" column="1"/>
       </memberdef>
       <memberdef kind="function" id="namespaceecto_1_1except_1a8161938bf962eaf02d9b0e73b80a5c4a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -43,11 +43,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="162" column="1"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp" line="162" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="namespaceecto_1_1except_1ae56832eeac0c3e23f11c197a8f5a6971" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="namespaceecto_1_1except_1abebe710f45e8d06b2df19d02bf15b193" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>boost::optional&lt; std::string &gt;</type>
-        <definition>boost::optional&lt; std::string &gt; ecto::except::diagnostic_string</definition>
+        <definition>boost::optional&lt;std::string&gt; ecto::except::diagnostic_string</definition>
         <argsstring>(const EctoException &amp;e, const std::string &amp;tag)</argsstring>
         <name>diagnostic_string</name>
         <param>
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="164" column="1"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp" line="164" column="1"/>
       </memberdef>
       <memberdef kind="function" id="namespaceecto_1_1except_1a8744cfe3c8d4364696873aeb175c68b9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -86,13 +86,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="172" column="1"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp" line="172" column="1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="82" column="1"/>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/rethrow.hpp" line="37" column="1"/>
   </compounddef>
 </doxygen>

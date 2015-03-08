@@ -19,36 +19,36 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="311">
+      <node id="303">
         <label>boost::python::std_map_indexing_suite&lt; Container, NoProxy, final_std_map_derived_policies&lt; Container, NoProxy &gt; &gt;</label>
         <link refid="classboost_1_1python_1_1std__map__indexing__suite"/>
-        <childnode refid="312" relation="public-inheritance">
+        <childnode refid="304" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="312">
+      <node id="304">
         <label>indexing_suite&lt; Container, final_std_map_derived_policies&lt; Container, NoProxy &gt;, NoProxy, true, Container::value_type::second_type, Container::key_type, Container::key_type &gt;</label>
       </node>
-      <node id="310">
+      <node id="302">
         <label>boost::python::detail::final_std_map_derived_policies&lt; Container, NoProxy &gt;</label>
         <link refid="classboost_1_1python_1_1detail_1_1final__std__map__derived__policies"/>
-        <childnode refid="311" relation="public-inheritance">
+        <childnode refid="303" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="314">
+      <node id="306">
         <label>boost::python::std_map_indexing_suite&lt; Container, NoProxy, final_std_map_derived_policies&lt; Container, NoProxy &gt; &gt;</label>
         <link refid="classboost_1_1python_1_1std__map__indexing__suite"/>
-        <childnode refid="315" relation="public-inheritance">
+        <childnode refid="307" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="315">
+      <node id="307">
         <label>indexing_suite&lt; Container, final_std_map_derived_policies&lt; Container, NoProxy &gt;, NoProxy, true, Container::value_type::second_type, Container::key_type, Container::key_type &gt;</label>
       </node>
-      <node id="313">
+      <node id="305">
         <label>boost::python::detail::final_std_map_derived_policies&lt; Container, NoProxy &gt;</label>
         <link refid="classboost_1_1python_1_1detail_1_1final__std__map__derived__policies"/>
-        <childnode refid="314" relation="public-inheritance">
+        <childnode refid="306" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>

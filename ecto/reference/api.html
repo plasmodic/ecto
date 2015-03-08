@@ -261,14 +261,14 @@ struct MyEctoCell
 {
   //called first thing, the user should declare their parameters in this
   //free standing function.
-  static void declare_params(tendrils&amp; params);
+  static void <a class="reference internal" href="#project0structecto_1_1cell_1a5c3c204f531de15920cb9d3db3ecfc4c"><em>declare_params</em></a>(tendrils&amp; params);
   //declare inputs and outputs here. The parameters may be used to
   //determine the io
-  static void declare_io(const tendrils&amp; params, tendrils&amp; in, tendrils&amp; out);
+  static void <a class="reference internal" href="#project0structecto_1_1cell_1af6c3782ed0d1c258bcf5050b4af272b4"><em>declare_io</em></a>(const tendrils&amp; params, tendrils&amp; in, tendrils&amp; out);
   //called right after allocation of the cell, exactly once.
-  void configure(tendrils&amp; params, tendrils&amp; <a class="reference internal" href="#project0structecto_1_1cell_1a65099b0458a7761b8bfa7a1ddc17e92f"><em>inputs</em></a>, tendrils&amp; <a class="reference internal" href="#project0structecto_1_1cell_1a93951743b603faba35312ebdb07ceb22"><em>outputs</em></a>);
+  void <a class="reference internal" href="#project0structecto_1_1cell_1a30d48d21d6ffa86af4888f78e92241af"><em>configure</em></a>(tendrils&amp; params, tendrils&amp; <a class="reference internal" href="#project0structecto_1_1cell_1a65099b0458a7761b8bfa7a1ddc17e92f"><em>inputs</em></a>, tendrils&amp; <a class="reference internal" href="#project0structecto_1_1cell_1a93951743b603faba35312ebdb07ceb22"><em>outputs</em></a>);
   //called at every execution of the graph
-  int process(const tendrils&amp; in, tendrils&amp; out);
+  int <a class="reference internal" href="#project0structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3"><em>process</em></a>(const tendrils&amp; in, tendrils&amp; out);
 };
 </pre>
 </p>
@@ -276,11 +276,6 @@ struct MyEctoCell
 </p>
 <em>Public Type</em><blockquote>
 <div><p><span class="target" id="project0structecto_1_1cell_1af2cab9d2bc012088c4f58c40da57a862"></span>typedef boost::shared_ptr&lt;  <a class="reference internal" href="#project0structecto_1_1cell"><em>cell</em></a>  &gt; <strong>ptr</strong></p>
-<blockquote>
-<div><p>A convenience pointer typedef. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1af2cab9d2bc012088c4f58c40da57a862"></span>typedef boost::shared_ptr&lt;  <a class="reference internal" href="#project0structecto_1_1cell"><em>cell</em></a>  &gt; <strong>ptr</strong></p>
 <blockquote>
 <div><p>A convenience pointer typedef. </p>
 <p></p>
@@ -349,7 +344,7 @@ struct MyEctoCell
 </p>
 <blockquote>
 <div><p></p>
-<p>scheduler is going to call process() zero or more times. </p>
+<p>scheduler is going to call <a class="reference internal" href="#project0structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3"><em>process()</em></a> zero or more times. </p>
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1cell_1abac52b774d350b02dc99a55c64b94bcd"></span><div class="line-block">
 <div class="line">void <strong>stop</strong>()</div>
@@ -357,10 +352,10 @@ struct MyEctoCell
 </p>
 <blockquote>
 <div><p></p>
-<p>scheduler is not going to call process() for a while. </p>
+<p>scheduler is not going to call <a class="reference internal" href="#project0structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3"><em>process()</em></a> for a while. </p>
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3"></span><div class="line-block">
-<div class="line">ReturnCode <strong>process</strong>()</div>
+<div class="line"><a class="reference internal" href="#project0namespaceecto_1a93d82cd28db695d53963fb696582762c"><em>ReturnCode</em></a> <strong>process</strong>()</div>
 </div>
 </p>
 <blockquote>
@@ -372,7 +367,7 @@ struct MyEctoCell
 </p>
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1cell_1a407e320190ee98c1a1a3042ac3c38f0e"></span><div class="line-block">
-<div class="line">ReturnCode <strong>process_with_only_these_inputs</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; connected_inputs)</div>
+<div class="line"><a class="reference internal" href="#project0namespaceecto_1a93d82cd28db695d53963fb696582762c"><em>ReturnCode</em></a> <strong>process_with_only_these_inputs</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; connected_inputs)</div>
 </div>
 </p>
 <blockquote>
@@ -498,205 +493,7 @@ struct MyEctoCell
 <p></p>
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1cell_1a213dabd285300f5d4c7e0f5fd6142e81"></span><div class="line-block">
-<div class="line">ptr <strong>clone</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1ab9a6c3fd8f76289f338a9e05368b1aff"></span><div class="line-block">
-<div class="line">bool <strong>init</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1a782c9d0f521f8a34c8eed309d0d8d79a"></span><div class="line-block">
-<div class="line"> <strong>cell</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1a98748014df1b1a4fd3fbb47f6adc8c5e"></span><div class="line-block">
-<div class="line"> <strong>~cell</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1a5c3c204f531de15920cb9d3db3ecfc4c"></span><div class="line-block">
-<div class="line">void <strong>declare_params</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>Dispatches parameter declaration code. After this code, the parameters for the cell will be set to their defaults. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1af6c3782ed0d1c258bcf5050b4af272b4"></span><div class="line-block">
-<div class="line">void <strong>declare_io</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>Dispatches input/output declaration code. It is assumed that the parameters have been declared before this is called, so that inputs and outputs may be dependent on those parameters. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1a30d48d21d6ffa86af4888f78e92241af"></span><div class="line-block">
-<div class="line">void <strong>configure</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>Given initialized parameters,inputs, and outputs, this will dispatch the client configuration code. This will allocated an instace of the clients cell, so this should not be called during introspection. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1a0416d7265db282a18202b58636be7165"></span><div class="line-block">
-<div class="line">void <strong>activate</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>Activate the cell. i.e. Put it into a &#8220;ready&#8221; state, opening sockets, etc. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1ab988f785fb943af3ff48c2d6f67a07aa"></span><div class="line-block">
-<div class="line">void <strong>deactivate</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>Deactivate the cell. i.e. Put it into an &#8220;unready&#8221; state, closing sockets, etc. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1a06abb010763ff7aeaaf2b28be4a6424a"></span><div class="line-block">
-<div class="line">void <strong>start</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p>scheduler is going to call process() zero or more times. </p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1abac52b774d350b02dc99a55c64b94bcd"></span><div class="line-block">
-<div class="line">void <strong>stop</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p>scheduler is not going to call process() for a while. </p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3"></span><div class="line-block">
-<div class="line">ReturnCode <strong>process</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>Dispatches the process function for the client cell. This should only be called from one thread at a time. Also, this function may throw exceptions... </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>A return code, ecto::OK , or 0 means all is ok. Anything non zero should be considered an exit signal. </dd>
-</dl>
-</p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1ae3b84af61e78dab25f66a66773d5c5df"></span><div class="line-block">
-<div class="line">std::string <strong>type</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>Return the type of the child class. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>A human readable non mangled name for the client class. </dd>
-</dl>
-</p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1a931fbc02fff66a58684ab25e00dbb2f8"></span><div class="line-block">
-<div class="line">std::string <strong>name</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>Grab the name of the instance. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>The name of the instance, or the address if none was given when object was constructed. </dd>
-</dl>
-</p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1a3956efb238f50a6983b86f430c47ca05"></span><div class="line-block">
-<div class="line">void <strong>name</strong>(const std::string &amp; name)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Set the name of the instance. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1aefa443962201caebb08d1a3163730639"></span><div class="line-block">
-<div class="line">std::string <strong>short_doc</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>Set the short_doc_ of the instance. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1a49d510eec19d352c5729e6a2fd149340"></span><div class="line-block">
-<div class="line">void <strong>short_doc</strong>(const std::string &amp; short_doc)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Set the short_doc_ of the instance. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1af32a9e2113b7afcb5b225bdc3c234e8c"></span><div class="line-block">
-<div class="line">void <strong>reset_strand</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1ae0009fc4a4d12d400126f455396f5c9f"></span><div class="line-block">
-<div class="line">void <strong>set_strand</strong>(<a class="reference internal" href="#project0structecto_1_1strand"><em>ecto::strand</em></a>)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1a486454d7466c5f0373ecb42dd4e97b2f"></span><div class="line-block">
-<div class="line">std::string <strong>gen_doc</strong>(const std::string &amp; doc = &#8220;A module...&#8221;)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Generate an Restructured Text doc string for the cell. Includes documentation for all parameters, inputs, outputs. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>A nicely formatted doc string. </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><tt class="first docutils literal"><span class="pre">doc</span></tt> - <p>The highest level documentation for the cell. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1aa03c0f569bb4b14e81f4d2a8747273e5"></span><div class="line-block">
-<div class="line">void <strong>verify_params</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1aed712e80344ce04dbb9105bb6a1aa53a"></span><div class="line-block">
-<div class="line">void <strong>verify_inputs</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1a213dabd285300f5d4c7e0f5fd6142e81"></span><div class="line-block">
-<div class="line">ptr <strong>clone</strong>()</div>
+<div class="line"><a class="reference internal" href="#project0structecto_1_1cell_1af2cab9d2bc012088c4f58c40da57a862"><em>ptr</em></a> <strong>clone</strong>()</div>
 </div>
 </p>
 <blockquote>
@@ -728,7 +525,7 @@ struct MyEctoCell
 <div><p>Outputs, outboxes, always have a valid value ( may be NULL ) </p>
 <p></p>
 </div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1a0ecc893a5427877548d0c39a208a5a26"></span>boost::optional&lt;  <a class="reference internal" href="#project0structecto_1_1strand"><em>strand</em></a>  &gt; <strong>strand_</strong></p>
+<p><span class="target" id="project0structecto_1_1cell_1ada052f06257277c1b53c82226dff5821"></span>boost::optional&lt;  <a class="reference internal" href="#project0structecto_1_1strand"><em>strand</em></a>  &gt; <strong>strand_</strong></p>
 <blockquote>
 <div><p>The strand that this cell should be executed in. </p>
 <p></p>
@@ -776,7 +573,7 @@ struct MyEctoCell
 <p></p>
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1cell_1a390bd83cfdff120523efc5c3e76bc3e5"></span><div class="line-block">
-<div class="line">ReturnCode <strong>dispatch_process</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; inputs, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; outputs)</div>
+<div class="line"><a class="reference internal" href="#project0namespaceecto_1a93d82cd28db695d53963fb696582762c"><em>ReturnCode</em></a> <strong>dispatch_process</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; inputs, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; outputs)</div>
 </div>
 </p>
 <blockquote>
@@ -808,103 +605,7 @@ struct MyEctoCell
 <p></p>
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1cell_1a7beccd749c33bd8b4c5827598e8fe5a5"></span><div class="line-block">
-<div class="line">ptr <strong>dispatch_clone</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1a400b8aecf15588cfb21d712fbb000e8a"></span><div class="line-block">
-<div class="line">std::string <strong>dispatch_short_doc</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1a407d24db843ffe12ac57c9a8827a9fe8"></span><div class="line-block">
-<div class="line">void <strong>dispatch_short_doc</strong>(const std::string &amp;)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1abcf3cc29703214a7ede63d652e17ee96"></span><div class="line-block">
-<div class="line">void <strong>dispatch_declare_params</strong>(<a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; t)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1acb4cdb70f2db329ba9c615d74c63a4b2"></span><div class="line-block">
-<div class="line">void <strong>dispatch_declare_io</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; params, <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; inputs, <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; outputs)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1a19c7c679dededd37ace918bf0ff31cd3"></span><div class="line-block">
-<div class="line">void <strong>dispatch_configure</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; params, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; inputs, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; outputs)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1aa345ec700e5e213364c7bb20571cd78d"></span><div class="line-block">
-<div class="line">void <strong>dispatch_activate</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1a4b5f111fc7b90dccce0cd70e28c9be62"></span><div class="line-block">
-<div class="line">void <strong>dispatch_deactivate</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1a390bd83cfdff120523efc5c3e76bc3e5"></span><div class="line-block">
-<div class="line">ReturnCode <strong>dispatch_process</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; inputs, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; outputs)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1ab5c75358dd32fa811116654bdc76385b"></span><div class="line-block">
-<div class="line">void <strong>dispatch_start</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1a65ff7141e927a7115a785478a03b94bc"></span><div class="line-block">
-<div class="line">void <strong>dispatch_stop</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1a456b56e3291f5e2bb68ce31a4a43ece5"></span><div class="line-block">
-<div class="line">std::string <strong>dispatch_name</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1a7beccd749c33bd8b4c5827598e8fe5a5"></span><div class="line-block">
-<div class="line">ptr <strong>dispatch_clone</strong>()</div>
+<div class="line"><a class="reference internal" href="#project0structecto_1_1cell_1af2cab9d2bc012088c4f58c40da57a862"><em>ptr</em></a> <strong>dispatch_clone</strong>()</div>
 </div>
 </p>
 <blockquote>
@@ -930,14 +631,6 @@ struct MyEctoCell
 </div></blockquote>
 <em>Private Functions</em><blockquote>
 <div><p><span class="target" id="project0structecto_1_1cell_1ac0ae6a72cecf48916bb6dd1b6393d1b3"></span><div class="line-block">
-<div class="line"> <strong>cell</strong>(const  <a class="reference internal" href="#project0structecto_1_1cell"><em>cell</em></a>  &amp;)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell_1ac0ae6a72cecf48916bb6dd1b6393d1b3"></span><div class="line-block">
 <div class="line"> <strong>cell</strong>(const  <a class="reference internal" href="#project0structecto_1_1cell"><em>cell</em></a>  &amp;)</div>
 </div>
 </p>
@@ -993,37 +686,12 @@ struct MyEctoCell
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1ab7b111eb2672ae4eaacc668852b8b89f"></span>typedef <a class="reference internal" href="#project0structecto_1_1cell___1_1int__"><em>int_</em></a> &lt;  <a class="reference internal" href="#project0structecto_1_1has__f"><em>has_f</em></a> &lt; Impl &gt;:: declare_params  &gt; <strong>has_declare_params</strong></p>
+<p><span class="target" id="project0structecto_1_1cell___1ab7b111eb2672ae4eaacc668852b8b89f"></span>typedef <a class="reference internal" href="#project0structecto_1_1cell___1_1int__"><em>int_</em></a> &lt;  <a class="reference internal" href="#project0structecto_1_1has__f"><em>has_f</em></a> &lt; Impl &gt;:: <a class="reference internal" href="#project0structecto_1_1cell___1a6a36edc8e9eddadfe6486460bab93c93"><em>declare_params</em></a>  &gt; <strong>has_declare_params</strong></p>
 <blockquote>
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a10ab0d3f85e194d548beb3251416a569"></span>typedef <a class="reference internal" href="#project0structecto_1_1cell___1_1int__"><em>int_</em></a> &lt;  <a class="reference internal" href="#project0structecto_1_1has__f"><em>has_f</em></a> &lt; Impl &gt;:: declare_io  &gt; <strong>has_declare_io</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a26d9e255a2ba0335c5e90fd04efa6bfa"></span>typedef boost::shared_ptr&lt;  <a class="reference internal" href="#project0structecto_1_1cell__"><em>cell_</em></a> &lt; Impl &gt; &gt; <strong>ptr</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a3e48e52421d132bb2bb4e343f771abeb"></span>typedef <a class="reference internal" href="#project0structecto_1_1cell___1_1int__"><em>int_</em></a> &lt; 0 &gt; <strong>not_implemented</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a63c5c3dd95630a508017730ee345c23a"></span>typedef <a class="reference internal" href="#project0structecto_1_1cell___1_1int__"><em>int_</em></a> &lt; 1 &gt; <strong>implemented</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1ab7b111eb2672ae4eaacc668852b8b89f"></span>typedef <a class="reference internal" href="#project0structecto_1_1cell___1_1int__"><em>int_</em></a> &lt;  <a class="reference internal" href="#project0structecto_1_1has__f"><em>has_f</em></a> &lt; Impl &gt;:: declare_params  &gt; <strong>has_declare_params</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a10ab0d3f85e194d548beb3251416a569"></span>typedef <a class="reference internal" href="#project0structecto_1_1cell___1_1int__"><em>int_</em></a> &lt;  <a class="reference internal" href="#project0structecto_1_1has__f"><em>has_f</em></a> &lt; Impl &gt;:: declare_io  &gt; <strong>has_declare_io</strong></p>
+<p><span class="target" id="project0structecto_1_1cell___1a10ab0d3f85e194d548beb3251416a569"></span>typedef <a class="reference internal" href="#project0structecto_1_1cell___1_1int__"><em>int_</em></a> &lt;  <a class="reference internal" href="#project0structecto_1_1has__f"><em>has_f</em></a> &lt; Impl &gt;:: <a class="reference internal" href="#project0structecto_1_1cell___1ac08370823fea8ed7f5991e369f6a7fa7"><em>declare_io</em></a>  &gt; <strong>has_declare_io</strong></p>
 <blockquote>
 <div><p></p>
 <p></p>
@@ -1063,7 +731,7 @@ struct MyEctoCell
 <p></p>
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1cell___1a53ab13ad9e8dd9fef55377d85674ff5a"></span><div class="line-block">
-<div class="line">void <strong>configure</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp;, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp;, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp;, not_implemented)</div>
+<div class="line">void <strong>configure</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp;, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp;, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp;, <a class="reference internal" href="#project0structecto_1_1cell___1a3e48e52421d132bb2bb4e343f771abeb"><em>not_implemented</em></a>)</div>
 </div>
 </p>
 <blockquote>
@@ -1071,7 +739,7 @@ struct MyEctoCell
 <p></p>
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1cell___1acd3caafa6429801f4e121b469bd152a5"></span><div class="line-block">
-<div class="line">void <strong>configure</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; params, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; inputs, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; outputs, implemented)</div>
+<div class="line">void <strong>configure</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; params, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; inputs, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; outputs, <a class="reference internal" href="#project0structecto_1_1cell___1a63c5c3dd95630a508017730ee345c23a"><em>implemented</em></a>)</div>
 </div>
 </p>
 <blockquote>
@@ -1087,7 +755,7 @@ struct MyEctoCell
 <p></p>
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1cell___1a06dd6747607ad7da98f104bb258fbcbb"></span><div class="line-block">
-<div class="line">void <strong>activate</strong>(not_implemented)</div>
+<div class="line">void <strong>activate</strong>(<a class="reference internal" href="#project0structecto_1_1cell___1a3e48e52421d132bb2bb4e343f771abeb"><em>not_implemented</em></a>)</div>
 </div>
 </p>
 <blockquote>
@@ -1095,7 +763,7 @@ struct MyEctoCell
 <p></p>
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1cell___1a8c0319bad42186d2b79a32f7ade1376a"></span><div class="line-block">
-<div class="line">void <strong>activate</strong>(implemented)</div>
+<div class="line">void <strong>activate</strong>(<a class="reference internal" href="#project0structecto_1_1cell___1a63c5c3dd95630a508017730ee345c23a"><em>implemented</em></a>)</div>
 </div>
 </p>
 <blockquote>
@@ -1111,7 +779,7 @@ struct MyEctoCell
 <p></p>
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1cell___1aa553319fd69477ddf5c2c45cb5c5e3d2"></span><div class="line-block">
-<div class="line">void <strong>deactivate</strong>(not_implemented)</div>
+<div class="line">void <strong>deactivate</strong>(<a class="reference internal" href="#project0structecto_1_1cell___1a3e48e52421d132bb2bb4e343f771abeb"><em>not_implemented</em></a>)</div>
 </div>
 </p>
 <blockquote>
@@ -1119,7 +787,7 @@ struct MyEctoCell
 <p></p>
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1cell___1ab0dc3bd8a6bf42f620a654134df831d3"></span><div class="line-block">
-<div class="line">void <strong>deactivate</strong>(implemented)</div>
+<div class="line">void <strong>deactivate</strong>(<a class="reference internal" href="#project0structecto_1_1cell___1a63c5c3dd95630a508017730ee345c23a"><em>implemented</em></a>)</div>
 </div>
 </p>
 <blockquote>
@@ -1135,7 +803,7 @@ struct MyEctoCell
 <p></p>
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1cell___1aeb9a98d085805631cc3a3b09c277d5be"></span><div class="line-block">
-<div class="line">ReturnCode <strong>process</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp;, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp;, not_implemented)</div>
+<div class="line"><a class="reference internal" href="#project0namespaceecto_1a93d82cd28db695d53963fb696582762c"><em>ReturnCode</em></a> <strong>process</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp;, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp;, <a class="reference internal" href="#project0structecto_1_1cell___1a3e48e52421d132bb2bb4e343f771abeb"><em>not_implemented</em></a>)</div>
 </div>
 </p>
 <blockquote>
@@ -1143,7 +811,7 @@ struct MyEctoCell
 <p></p>
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1cell___1a310050d75c3a286f013fa16652af6e17"></span><div class="line-block">
-<div class="line">ReturnCode <strong>process</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; inputs, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; outputs, implemented)</div>
+<div class="line"><a class="reference internal" href="#project0namespaceecto_1a93d82cd28db695d53963fb696582762c"><em>ReturnCode</em></a> <strong>process</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; inputs, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; outputs, <a class="reference internal" href="#project0structecto_1_1cell___1a63c5c3dd95630a508017730ee345c23a"><em>implemented</em></a>)</div>
 </div>
 </p>
 <blockquote>
@@ -1151,7 +819,7 @@ struct MyEctoCell
 <p></p>
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1cell___1a1ddd0142b998f0de06a7992c5db27f16"></span><div class="line-block">
-<div class="line">ReturnCode <strong>dispatch_process</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; inputs, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; outputs)</div>
+<div class="line"><a class="reference internal" href="#project0namespaceecto_1a93d82cd28db695d53963fb696582762c"><em>ReturnCode</em></a> <strong>dispatch_process</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; inputs, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; outputs)</div>
 </div>
 </p>
 <blockquote>
@@ -1159,7 +827,7 @@ struct MyEctoCell
 <p></p>
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1cell___1a155401641b4deda52ad3eb8277a9d77d"></span><div class="line-block">
-<div class="line">void <strong>start</strong>(not_implemented)</div>
+<div class="line">void <strong>start</strong>(<a class="reference internal" href="#project0structecto_1_1cell___1a3e48e52421d132bb2bb4e343f771abeb"><em>not_implemented</em></a>)</div>
 </div>
 </p>
 <blockquote>
@@ -1167,7 +835,7 @@ struct MyEctoCell
 <p></p>
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1cell___1afbca5bafc2261f303413fd431f0b12b6"></span><div class="line-block">
-<div class="line">void <strong>start</strong>(implemented)</div>
+<div class="line">void <strong>start</strong>(<a class="reference internal" href="#project0structecto_1_1cell___1a63c5c3dd95630a508017730ee345c23a"><em>implemented</em></a>)</div>
 </div>
 </p>
 <blockquote>
@@ -1183,7 +851,7 @@ struct MyEctoCell
 <p></p>
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1cell___1a689e109200f31da6edb491e28b101622"></span><div class="line-block">
-<div class="line">void <strong>stop</strong>(not_implemented)</div>
+<div class="line">void <strong>stop</strong>(<a class="reference internal" href="#project0structecto_1_1cell___1a3e48e52421d132bb2bb4e343f771abeb"><em>not_implemented</em></a>)</div>
 </div>
 </p>
 <blockquote>
@@ -1191,7 +859,7 @@ struct MyEctoCell
 <p></p>
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1cell___1ac6da640a23124d5a154884cc6e45531c"></span><div class="line-block">
-<div class="line">void <strong>stop</strong>(implemented)</div>
+<div class="line">void <strong>stop</strong>(<a class="reference internal" href="#project0structecto_1_1cell___1a63c5c3dd95630a508017730ee345c23a"><em>implemented</em></a>)</div>
 </div>
 </p>
 <blockquote>
@@ -1231,239 +899,7 @@ struct MyEctoCell
 <p></p>
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1cell___1ae2868bb59ddb378cbe7b98fd4e776930"></span><div class="line-block">
-<div class="line">cell::ptr <strong>dispatch_clone</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a06749143e390dcc5fd90f5076620108c"></span><div class="line-block">
-<div class="line">bool <strong>init</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a625990e6ac4da1df9be69681881d3e28"></span><div class="line-block">
-<div class="line">Impl &amp; <strong>impl</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>Grab a typed reference to the implementation of the cell. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a05fe9ed5d606a54f761c104f45994a5e"></span><div class="line-block">
-<div class="line">const Impl &amp; <strong>impl</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a8c5059153f9529bf895e3d82f05f5d7e"></span><div class="line-block">
-<div class="line"> <strong>cell_</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a30176d85396dd679e227a272918f422f"></span><div class="line-block">
-<div class="line"> <strong>~cell_</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a0e435a14e4cc1d5cd7d80a16f2776565"></span><div class="line-block">
-<div class="line">void <strong>dispatch_declare_params</strong>(<a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; params)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1ad95920d295860b791e3fa733fb0745db"></span><div class="line-block">
-<div class="line">void <strong>dispatch_declare_io</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; params, <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; inputs, <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; outputs)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a53ab13ad9e8dd9fef55377d85674ff5a"></span><div class="line-block">
-<div class="line">void <strong>configure</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp;, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp;, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp;, not_implemented)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1acd3caafa6429801f4e121b469bd152a5"></span><div class="line-block">
-<div class="line">void <strong>configure</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; params, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; inputs, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; outputs, implemented)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a953e526cefd3c419a01717740eab9227"></span><div class="line-block">
-<div class="line">void <strong>dispatch_configure</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; params, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; inputs, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; outputs)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a06dd6747607ad7da98f104bb258fbcbb"></span><div class="line-block">
-<div class="line">void <strong>activate</strong>(not_implemented)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a8c0319bad42186d2b79a32f7ade1376a"></span><div class="line-block">
-<div class="line">void <strong>activate</strong>(implemented)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a31437fcb5a15e57e8287719f48cecbdd"></span><div class="line-block">
-<div class="line">void <strong>dispatch_activate</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1aa553319fd69477ddf5c2c45cb5c5e3d2"></span><div class="line-block">
-<div class="line">void <strong>deactivate</strong>(not_implemented)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1ab0dc3bd8a6bf42f620a654134df831d3"></span><div class="line-block">
-<div class="line">void <strong>deactivate</strong>(implemented)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a71463eb5e248d29814066904e7f0d515"></span><div class="line-block">
-<div class="line">void <strong>dispatch_deactivate</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1aeb9a98d085805631cc3a3b09c277d5be"></span><div class="line-block">
-<div class="line">ReturnCode <strong>process</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp;, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp;, not_implemented)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a310050d75c3a286f013fa16652af6e17"></span><div class="line-block">
-<div class="line">ReturnCode <strong>process</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; inputs, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; outputs, implemented)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a1ddd0142b998f0de06a7992c5db27f16"></span><div class="line-block">
-<div class="line">ReturnCode <strong>dispatch_process</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; inputs, const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; outputs)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a155401641b4deda52ad3eb8277a9d77d"></span><div class="line-block">
-<div class="line">void <strong>start</strong>(not_implemented)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1afbca5bafc2261f303413fd431f0b12b6"></span><div class="line-block">
-<div class="line">void <strong>start</strong>(implemented)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1af6929fe6c16db59235793d972ea20ff8"></span><div class="line-block">
-<div class="line">void <strong>dispatch_start</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a689e109200f31da6edb491e28b101622"></span><div class="line-block">
-<div class="line">void <strong>stop</strong>(not_implemented)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1ac6da640a23124d5a154884cc6e45531c"></span><div class="line-block">
-<div class="line">void <strong>stop</strong>(implemented)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a0951afcee7f4aa52f957f1a6ecc2bfb7"></span><div class="line-block">
-<div class="line">void <strong>dispatch_stop</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a288dac8bba40036b3f3e6b0641833039"></span><div class="line-block">
-<div class="line">std::string <strong>dispatch_name</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1aea843d10de8a002ada9a29bec2ecb815"></span><div class="line-block">
-<div class="line">std::string <strong>dispatch_short_doc</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a8d9ca18e234396fcdc1875507d3e11a8"></span><div class="line-block">
-<div class="line">void <strong>dispatch_short_doc</strong>(const std::string &amp;)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1ae2868bb59ddb378cbe7b98fd4e776930"></span><div class="line-block">
-<div class="line">cell::ptr <strong>dispatch_clone</strong>()</div>
+<div class="line"><a class="reference internal" href="#project0structecto_1_1cell_1af2cab9d2bc012088c4f58c40da57a862"><em>cell::ptr</em></a> <strong>dispatch_clone</strong>()</div>
 </div>
 </p>
 <blockquote>
@@ -1497,7 +933,7 @@ struct MyEctoCell
 </div></blockquote>
 <em>Public Static Functions</em><blockquote>
 <div><p><span class="target" id="project0structecto_1_1cell___1a6a36edc8e9eddadfe6486460bab93c93"></span><div class="line-block">
-<div class="line">void <strong>declare_params</strong>(<a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; params, not_implemented)</div>
+<div class="line">void <strong>declare_params</strong>(<a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; params, <a class="reference internal" href="#project0structecto_1_1cell___1a3e48e52421d132bb2bb4e343f771abeb"><em>not_implemented</em></a>)</div>
 </div>
 </p>
 <blockquote>
@@ -1505,7 +941,7 @@ struct MyEctoCell
 <p></p>
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1cell___1a9673540d6196cfa4e40be503c397b1ac"></span><div class="line-block">
-<div class="line">void <strong>declare_params</strong>(<a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; params, implemented)</div>
+<div class="line">void <strong>declare_params</strong>(<a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; params, <a class="reference internal" href="#project0structecto_1_1cell___1a63c5c3dd95630a508017730ee345c23a"><em>implemented</em></a>)</div>
 </div>
 </p>
 <blockquote>
@@ -1521,7 +957,7 @@ struct MyEctoCell
 <p></p>
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1cell___1ac08370823fea8ed7f5991e369f6a7fa7"></span><div class="line-block">
-<div class="line">void <strong>declare_io</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; params, <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; inputs, <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; outputs, not_implemented)</div>
+<div class="line">void <strong>declare_io</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; params, <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; inputs, <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; outputs, <a class="reference internal" href="#project0structecto_1_1cell___1a3e48e52421d132bb2bb4e343f771abeb"><em>not_implemented</em></a>)</div>
 </div>
 </p>
 <blockquote>
@@ -1529,55 +965,7 @@ struct MyEctoCell
 <p></p>
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1cell___1a20deeac5a09b3a7abaee924f361cbb3b"></span><div class="line-block">
-<div class="line">void <strong>declare_io</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; params, <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; inputs, <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; outputs, implemented)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a542f293d31fdd0df4a4414d7b706ef7e"></span><div class="line-block">
-<div class="line">void <strong>declare_io</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; params, <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; inputs, <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; outputs)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a6a36edc8e9eddadfe6486460bab93c93"></span><div class="line-block">
-<div class="line">void <strong>declare_params</strong>(<a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; params, not_implemented)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a9673540d6196cfa4e40be503c397b1ac"></span><div class="line-block">
-<div class="line">void <strong>declare_params</strong>(<a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; params, implemented)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a4de6c39213d7b583f295c4cb042c1f70"></span><div class="line-block">
-<div class="line">void <strong>declare_params</strong>(<a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; params)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1ac08370823fea8ed7f5991e369f6a7fa7"></span><div class="line-block">
-<div class="line">void <strong>declare_io</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; params, <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; inputs, <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; outputs, not_implemented)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a20deeac5a09b3a7abaee924f361cbb3b"></span><div class="line-block">
-<div class="line">void <strong>declare_io</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; params, <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; inputs, <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; outputs, implemented)</div>
+<div class="line">void <strong>declare_io</strong>(const  <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; params, <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; inputs, <a class="reference internal" href="#project0classecto_1_1tendrils"><em>tendrils</em></a>  &amp; outputs, <a class="reference internal" href="#project0structecto_1_1cell___1a63c5c3dd95630a508017730ee345c23a"><em>implemented</em></a>)</div>
 </div>
 </p>
 <blockquote>
@@ -1632,25 +1020,9 @@ struct MyEctoCell
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1abb452935616e25bfbb49b77de3f5bcce"></span><div class="line-block">
-<div class="line">void <strong>init_strand</strong>(boost::mpl::true_)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1cell___1a86ac0ef672f44090b0f5e9bf3a8b56dc"></span><div class="line-block">
-<div class="line">void <strong>init_strand</strong>(boost::mpl::false_)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
 </div></blockquote>
 <em>Private Members</em><blockquote>
-<div><p><span class="target" id="project0structecto_1_1cell___1aefbb595c18abd0479e06a6f879dac961"></span>boost::scoped_ptr&lt; Impl &gt; <strong>impl_</strong></p>
+<div><p><span class="target" id="project0structecto_1_1cell___1a2984b78c1ed24aca6ee427502bd6e8c4"></span>boost::scoped_ptr&lt; Impl &gt; <strong>impl_</strong></p>
 <blockquote>
 <div><p></p>
 <p></p>
@@ -1757,22 +1129,6 @@ struct MyEctoCell
 <p></p>
 <em>Public Functions</em><blockquote>
 <div><p><span class="target" id="project0structecto_1_1except_1_1EctoException_1a5e4d1414677cf716b57620c8721b0078"></span><div class="line-block">
-<div class="line"> <strong>EctoException</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1except_1_1EctoException_1ab8f456a7153321c3424e9d6780170f4a"></span><div class="line-block">
-<div class="line">const char * <strong>what</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1except_1_1EctoException_1a5e4d1414677cf716b57620c8721b0078"></span><div class="line-block">
 <div class="line"> <strong>EctoException</strong>()</div>
 </div>
 </p>
@@ -2031,7 +1387,7 @@ struct MyEctoCell
 <p></p>
 </div></blockquote>
 <p><span class="target" id="project0classecto_1_1except_1_1error__info__container__impl_1ac3931483b05bd3240a8ffe11c4977b99"></span><div class="line-block">
-<div class="line">void <strong>set</strong>(error_info_base_ptr  const &amp; x, type_info_  const &amp; typeid_)</div>
+<div class="line">void <strong>set</strong>(<a class="reference internal" href="#project0classecto_1_1except_1_1error__info__container__impl_1a9fbca0758380cb123f790aee77d1d4d8"><em>error_info_base_ptr</em></a>  const &amp; x, <a class="reference internal" href="#project0classecto_1_1except_1_1error__info__container__impl_1abe4f51bf533842a5e0b81f3e43ae6267"><em>type_info_</em></a>  const &amp; typeid_)</div>
 </div>
 </p>
 <blockquote>
@@ -2039,47 +1395,7 @@ struct MyEctoCell
 <p></p>
 </div></blockquote>
 <p><span class="target" id="project0classecto_1_1except_1_1error__info__container__impl_1acab3219ea75b29048e2e4d8ad23028eb"></span><div class="line-block">
-<div class="line">error_info_base_ptr <strong>get</strong>(type_info_  const &amp; ti)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1except_1_1error__info__container__impl_1a9cd76f7d8bd75cdc5cf29061304a622a"></span><div class="line-block">
-<div class="line">char const * <strong>diagnostic_information</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1except_1_1error__info__container__impl_1a258f844c2a2ee441c4e397971466f2c5"></span><div class="line-block">
-<div class="line"> <strong>error_info_container_impl</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1except_1_1error__info__container__impl_1ab9391a11b1c7955810c184c07aec4858"></span><div class="line-block">
-<div class="line"> <strong>~error_info_container_impl</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1except_1_1error__info__container__impl_1ac3931483b05bd3240a8ffe11c4977b99"></span><div class="line-block">
-<div class="line">void <strong>set</strong>(error_info_base_ptr  const &amp; x, type_info_  const &amp; typeid_)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1except_1_1error__info__container__impl_1acab3219ea75b29048e2e4d8ad23028eb"></span><div class="line-block">
-<div class="line">error_info_base_ptr <strong>get</strong>(type_info_  const &amp; ti)</div>
+<div class="line"><a class="reference internal" href="#project0classecto_1_1except_1_1error__info__container__impl_1a9fbca0758380cb123f790aee77d1d4d8"><em>error_info_base_ptr</em></a> <strong>get</strong>(<a class="reference internal" href="#project0classecto_1_1except_1_1error__info__container__impl_1abe4f51bf533842a5e0b81f3e43ae6267"><em>type_info_</em></a>  const &amp; ti)</div>
 </div>
 </p>
 <blockquote>
@@ -2106,7 +1422,7 @@ struct MyEctoCell
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p><span class="target" id="project0classecto_1_1except_1_1error__info__container__impl_1a9fbca0758380cb123f790aee77d1d4d8"></span>typedef boost::shared_ptr&lt;  error_info_base  &gt; <strong>error_info_base_ptr</strong></p>
+<p><span class="target" id="project0classecto_1_1except_1_1error__info__container__impl_1a9fbca0758380cb123f790aee77d1d4d8"></span>typedef boost::shared_ptr&lt;  <a class="reference internal" href="#project0classecto_1_1except_1_1error__info__container__impl_1a90c2628bf7c5628003cd24fd369a77da"><em>error_info_base</em></a>  &gt; <strong>error_info_base_ptr</strong></p>
 <blockquote>
 <div><p></p>
 <p></p>
@@ -2116,32 +1432,7 @@ struct MyEctoCell
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p><span class="target" id="project0classecto_1_1except_1_1error__info__container__impl_1a20b3846bc393224fe282eb64a40ee83d"></span>typedef std::map&lt; std::string,  error_info_base_ptr  &gt; <strong>error_info_map</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1except_1_1error__info__container__impl_1abe4f51bf533842a5e0b81f3e43ae6267"></span>typedef ::boost::exception_detail::type_info_ <strong>type_info_</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1except_1_1error__info__container__impl_1a90c2628bf7c5628003cd24fd369a77da"></span>typedef ::boost::exception_detail::error_info_base <strong>error_info_base</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1except_1_1error__info__container__impl_1a9fbca0758380cb123f790aee77d1d4d8"></span>typedef boost::shared_ptr&lt;  error_info_base  &gt; <strong>error_info_base_ptr</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1except_1_1error__info__container__impl_1a16f5ebd1abcacd60ddbd919ea166958e"></span>typedef const char * <strong>diagnostic_information_arg_t</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1except_1_1error__info__container__impl_1a20b3846bc393224fe282eb64a40ee83d"></span>typedef std::map&lt; std::string,  error_info_base_ptr  &gt; <strong>error_info_map</strong></p>
+<p><span class="target" id="project0classecto_1_1except_1_1error__info__container__impl_1a20b3846bc393224fe282eb64a40ee83d"></span>typedef std::map&lt; std::string,  <a class="reference internal" href="#project0classecto_1_1except_1_1error__info__container__impl_1a9fbca0758380cb123f790aee77d1d4d8"><em>error_info_base_ptr</em></a>  &gt; <strong>error_info_map</strong></p>
 <blockquote>
 <div><p></p>
 <p></p>
@@ -2164,25 +1455,9 @@ struct MyEctoCell
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p><span class="target" id="project0classecto_1_1except_1_1error__info__container__impl_1ae931c5c31454852cdf3d1a84d1d588eb"></span><div class="line-block">
-<div class="line">void <strong>add_ref</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1except_1_1error__info__container__impl_1a59b8d31c21da10236de67f0a5bfdf4dd"></span><div class="line-block">
-<div class="line">bool <strong>release</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
 </div></blockquote>
 <em>Private Members</em><blockquote>
-<div><p><span class="target" id="project0classecto_1_1except_1_1error__info__container__impl_1a8ec60b174805696bd691a894b7f4109f"></span>error_info_map <strong>info_</strong></p>
+<div><p><span class="target" id="project0classecto_1_1except_1_1error__info__container__impl_1a8ec60b174805696bd691a894b7f4109f"></span><a class="reference internal" href="#project0classecto_1_1except_1_1error__info__container__impl_1a20b3846bc393224fe282eb64a40ee83d"><em>error_info_map</em></a> <strong>info_</strong></p>
 <blockquote>
 <div><p></p>
 <p></p>
@@ -2199,7 +1474,7 @@ struct MyEctoCell
 </div></blockquote>
 </div></blockquote>
 <em>Friends</em><blockquote>
-<div><p><span class="target" id="project0classecto_1_1except_1_1error__info__container__impl_1a699fdb1191a8f1fbc7bd591cc3d757aa"></span>friend class <strong>boost::exception</strong></p>
+<div><p><span class="target" id="project0classecto_1_1except_1_1error__info__container__impl_1a17667d5fc9c440eb33937b735d4fdfe6"></span>friend class <strong>boost::exception</strong></p>
 <blockquote>
 <div><p></p>
 <p></p>
@@ -2316,22 +1591,6 @@ struct MyEctoCell
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p><span class="target" id="project0structecto_1_1profile_1_1graph__stats__type_1aefc20d119cb949420bf74e845a8a1e8c"></span><div class="line-block">
-<div class="line"> <strong>graph_stats_type</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1profile_1_1graph__stats__type_1ab412a3b91cbd9b062cdcd0f078ca163d"></span><div class="line-block">
-<div class="line">std::string <strong>as_string</strong>(<a class="reference internal" href="#project0structecto_1_1graph_1_1graph__t"><em>graph::graph_t</em></a>  &amp; g)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
 </div></blockquote>
 <em>Public Members</em><blockquote>
 <div><p><span class="target" id="project0structecto_1_1profile_1_1graph__stats__type_1a340d79ae72ca5639e55098c860640ba8"></span>boost::posix_time::time_duration <strong>cumulative_time</strong></p>
@@ -2378,25 +1637,9 @@ struct MyEctoCell
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p><span class="target" id="project0structecto_1_1profile_1_1graphstats__collector_1a375c75ce1c0197d1d87a5fc1bdf97050"></span><div class="line-block">
-<div class="line"> <strong>graphstats_collector</strong>(<a class="reference internal" href="#project0structecto_1_1profile_1_1graph__stats__type"><em>graph_stats_type</em></a>  &amp; gs)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1profile_1_1graphstats__collector_1a1bc967dcde1e3418aeeb10e58a52d79f"></span><div class="line-block">
-<div class="line"> <strong>~graphstats_collector</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
 </div></blockquote>
 <em>Public Members</em><blockquote>
-<div><p><span class="target" id="project0structecto_1_1profile_1_1graphstats__collector_1ad2a745e661114e28bd044844bf2b60fd"></span><a class="reference internal" href="#project0structecto_1_1profile_1_1graph__stats__type"><em>graph_stats_type</em></a>  &amp; <strong>gs_</strong></p>
+<div><p><span class="target" id="project0structecto_1_1profile_1_1graphstats__collector_1a4a6ceeeffacb5f69edc173d5aaf3cf89"></span><a class="reference internal" href="#project0structecto_1_1profile_1_1graph__stats__type"><em>graph_stats_type</em></a>  &amp; <strong>gs_</strong></p>
 <blockquote>
 <div><p></p>
 <p></p>
@@ -2494,88 +1737,6 @@ struct MyEctoCell
 <li><tt class="first docutils literal"><span class="pre">stop</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">sizeof(test_stop&lt;T&gt;</span> <span class="pre">(0))</span> <span class="pre">==</span> <span class="pre">sizeof(yes)</span></tt> - </li>
 </ul>
 </div></blockquote>
-<p><span class="target" id="project0structecto_1_1has__f_1a8998dcad6a2d7da6cd0b1158089c6d08"></span><strong>Anonymous enum</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-<p><em>Values:</em></p>
-<ul class="breatheenumvalues">
-<li><tt class="first docutils literal"><span class="pre">declare_params</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">sizeof(test_declare_params&lt;T&gt;</span> <span class="pre">(0))</span> <span class="pre">==</span> <span class="pre">sizeof(yes)</span></tt> - </li>
-</ul>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1has__f_1af2f06fa91e667772be9731d32548b94c"></span><strong>Anonymous enum</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-<p><em>Values:</em></p>
-<ul class="breatheenumvalues">
-<li><tt class="first docutils literal"><span class="pre">declare_io</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">sizeof(test_declare_io&lt;T&gt;</span> <span class="pre">(0))</span> <span class="pre">==</span> <span class="pre">sizeof(yes)</span></tt> - </li>
-</ul>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1has__f_1a1958eba96f4107abadfe89cc067a42f9"></span><strong>Anonymous enum</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-<p><em>Values:</em></p>
-<ul class="breatheenumvalues">
-<li><tt class="first docutils literal"><span class="pre">configure</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">sizeof(test_configure&lt;T&gt;</span> <span class="pre">(0))</span> <span class="pre">==</span> <span class="pre">sizeof(yes)</span></tt> - </li>
-</ul>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1has__f_1a6d7dc18b2e3dc6e2466a405c13088084"></span><strong>Anonymous enum</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-<p><em>Values:</em></p>
-<ul class="breatheenumvalues">
-<li><tt class="first docutils literal"><span class="pre">activate</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">sizeof(test_activate&lt;T&gt;</span> <span class="pre">(0))</span> <span class="pre">==</span> <span class="pre">sizeof(yes)</span></tt> - </li>
-</ul>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1has__f_1a84ef2fb38c7882e9e6cc4e1f62ad88bd"></span><strong>Anonymous enum</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-<p><em>Values:</em></p>
-<ul class="breatheenumvalues">
-<li><tt class="first docutils literal"><span class="pre">deactivate</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">sizeof(test_deactivate&lt;T&gt;</span> <span class="pre">(0))</span> <span class="pre">==</span> <span class="pre">sizeof(yes)</span></tt> - </li>
-</ul>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1has__f_1acd60d393d00729a96f6407840b97a52a"></span><strong>Anonymous enum</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-<p><em>Values:</em></p>
-<ul class="breatheenumvalues">
-<li><tt class="first docutils literal"><span class="pre">process</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">sizeof(test_process&lt;T&gt;</span> <span class="pre">(0))</span> <span class="pre">==</span> <span class="pre">sizeof(yes)</span></tt> - </li>
-</ul>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1has__f_1ab8a599463b6343f6af4c1f465284d2b2"></span><strong>Anonymous enum</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-<p><em>Values:</em></p>
-<ul class="breatheenumvalues">
-<li><tt class="first docutils literal"><span class="pre">start</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">sizeof(test_start&lt;T&gt;</span> <span class="pre">(0))</span> <span class="pre">==</span> <span class="pre">sizeof(yes)</span></tt> - </li>
-</ul>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1has__f_1a9992271f06f38c11ce0df64bf2f71570"></span><strong>Anonymous enum</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-<p><em>Values:</em></p>
-<ul class="breatheenumvalues">
-<li><tt class="first docutils literal"><span class="pre">stop</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">sizeof(test_stop&lt;T&gt;</span> <span class="pre">(0))</span> <span class="pre">==</span> <span class="pre">sizeof(yes)</span></tt> - </li>
-</ul>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1has__f_1a3fb902f1eed02919195aff1a6b28eb76"></span>typedef char <strong>yes</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1has__f_1ae0c6da775cf20caed616e24681af2807"></span>typedef char(&amp; <strong>no</strong>)[2]</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
 <p><span class="target" id="project0structecto_1_1has__f_1a3fb902f1eed02919195aff1a6b28eb76"></span>typedef char <strong>yes</strong></p>
 <blockquote>
 <div><p></p>
@@ -2590,7 +1751,7 @@ struct MyEctoCell
 <em>Public Static Functions</em><blockquote>
 <div><p><span class="target" id="project0structecto_1_1has__f_1ae63216bd7936dc02af86363f8db74b2e"></span><div class="line-block">
 <div class="line">template &lt; class U &gt;</div>
-<div class="line">yes <strong>test_declare_params</strong>(__typeof__ &amp;:: declare_params)</div>
+<div class="line"><a class="reference internal" href="#project0structecto_1_1has__f_1a3fb902f1eed02919195aff1a6b28eb76"><em>yes</em></a> <strong>test_declare_params</strong>(__typeof__ &amp;:: declare_params)</div>
 </div>
 </p>
 <blockquote>
@@ -2599,7 +1760,7 @@ struct MyEctoCell
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1has__f_1ab2f2693b1d6084a672893777893b9ab2"></span><div class="line-block">
 <div class="line">template &lt; class U &gt;</div>
-<div class="line">no <strong>test_declare_params</strong>(...)</div>
+<div class="line"><a class="reference internal" href="#project0structecto_1_1has__f_1ae0c6da775cf20caed616e24681af2807"><em>no</em></a> <strong>test_declare_params</strong>(...)</div>
 </div>
 </p>
 <blockquote>
@@ -2608,7 +1769,7 @@ struct MyEctoCell
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1has__f_1a042de0d066c5b000186594964deea94e"></span><div class="line-block">
 <div class="line">template &lt; class U &gt;</div>
-<div class="line">yes <strong>test_declare_io</strong>(__typeof__ &amp;:: declare_io)</div>
+<div class="line"><a class="reference internal" href="#project0structecto_1_1has__f_1a3fb902f1eed02919195aff1a6b28eb76"><em>yes</em></a> <strong>test_declare_io</strong>(__typeof__ &amp;:: declare_io)</div>
 </div>
 </p>
 <blockquote>
@@ -2617,7 +1778,7 @@ struct MyEctoCell
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1has__f_1ad144a46699c480e7851fbd36394a1fe3"></span><div class="line-block">
 <div class="line">template &lt; class U &gt;</div>
-<div class="line">no <strong>test_declare_io</strong>(...)</div>
+<div class="line"><a class="reference internal" href="#project0structecto_1_1has__f_1ae0c6da775cf20caed616e24681af2807"><em>no</em></a> <strong>test_declare_io</strong>(...)</div>
 </div>
 </p>
 <blockquote>
@@ -2626,7 +1787,7 @@ struct MyEctoCell
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1has__f_1a6665bfebbc796527bc1a775803ebd18e"></span><div class="line-block">
 <div class="line">template &lt; class U &gt;</div>
-<div class="line">yes <strong>test_configure</strong>(__typeof__ &amp;:: configure)</div>
+<div class="line"><a class="reference internal" href="#project0structecto_1_1has__f_1a3fb902f1eed02919195aff1a6b28eb76"><em>yes</em></a> <strong>test_configure</strong>(__typeof__ &amp;:: configure)</div>
 </div>
 </p>
 <blockquote>
@@ -2635,7 +1796,7 @@ struct MyEctoCell
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1has__f_1afc5065e1043ffe865662840f3a9d82fd"></span><div class="line-block">
 <div class="line">template &lt; class U &gt;</div>
-<div class="line">no <strong>test_configure</strong>(...)</div>
+<div class="line"><a class="reference internal" href="#project0structecto_1_1has__f_1ae0c6da775cf20caed616e24681af2807"><em>no</em></a> <strong>test_configure</strong>(...)</div>
 </div>
 </p>
 <blockquote>
@@ -2644,7 +1805,7 @@ struct MyEctoCell
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1has__f_1a2212643cf55b3264654bc654df699cb7"></span><div class="line-block">
 <div class="line">template &lt; class U &gt;</div>
-<div class="line">yes <strong>test_activate</strong>(__typeof__ &amp;:: activate)</div>
+<div class="line"><a class="reference internal" href="#project0structecto_1_1has__f_1a3fb902f1eed02919195aff1a6b28eb76"><em>yes</em></a> <strong>test_activate</strong>(__typeof__ &amp;:: activate)</div>
 </div>
 </p>
 <blockquote>
@@ -2653,7 +1814,7 @@ struct MyEctoCell
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1has__f_1a2f43dbf6bee3d172c280f00e8fe73c33"></span><div class="line-block">
 <div class="line">template &lt; class U &gt;</div>
-<div class="line">no <strong>test_activate</strong>(...)</div>
+<div class="line"><a class="reference internal" href="#project0structecto_1_1has__f_1ae0c6da775cf20caed616e24681af2807"><em>no</em></a> <strong>test_activate</strong>(...)</div>
 </div>
 </p>
 <blockquote>
@@ -2662,7 +1823,7 @@ struct MyEctoCell
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1has__f_1ae924c11bc0462d832fdd8ea97bd3599d"></span><div class="line-block">
 <div class="line">template &lt; class U &gt;</div>
-<div class="line">yes <strong>test_deactivate</strong>(__typeof__ &amp;:: deactivate)</div>
+<div class="line"><a class="reference internal" href="#project0structecto_1_1has__f_1a3fb902f1eed02919195aff1a6b28eb76"><em>yes</em></a> <strong>test_deactivate</strong>(__typeof__ &amp;:: deactivate)</div>
 </div>
 </p>
 <blockquote>
@@ -2671,7 +1832,7 @@ struct MyEctoCell
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1has__f_1ab8c699587d6f7d476d09b693227f5373"></span><div class="line-block">
 <div class="line">template &lt; class U &gt;</div>
-<div class="line">no <strong>test_deactivate</strong>(...)</div>
+<div class="line"><a class="reference internal" href="#project0structecto_1_1has__f_1ae0c6da775cf20caed616e24681af2807"><em>no</em></a> <strong>test_deactivate</strong>(...)</div>
 </div>
 </p>
 <blockquote>
@@ -2680,7 +1841,7 @@ struct MyEctoCell
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1has__f_1a4e6f5942e9ee41196b52f7c728baf547"></span><div class="line-block">
 <div class="line">template &lt; class U &gt;</div>
-<div class="line">yes <strong>test_process</strong>(__typeof__ &amp;:: process)</div>
+<div class="line"><a class="reference internal" href="#project0structecto_1_1has__f_1a3fb902f1eed02919195aff1a6b28eb76"><em>yes</em></a> <strong>test_process</strong>(__typeof__ &amp;:: process)</div>
 </div>
 </p>
 <blockquote>
@@ -2689,7 +1850,7 @@ struct MyEctoCell
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1has__f_1a75ec2b3763995883f3a5dd1b19097439"></span><div class="line-block">
 <div class="line">template &lt; class U &gt;</div>
-<div class="line">no <strong>test_process</strong>(...)</div>
+<div class="line"><a class="reference internal" href="#project0structecto_1_1has__f_1ae0c6da775cf20caed616e24681af2807"><em>no</em></a> <strong>test_process</strong>(...)</div>
 </div>
 </p>
 <blockquote>
@@ -2698,7 +1859,7 @@ struct MyEctoCell
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1has__f_1aa88ebe0fd23a4e875704da0d62ce489c"></span><div class="line-block">
 <div class="line">template &lt; class U &gt;</div>
-<div class="line">yes <strong>test_start</strong>(__typeof__ &amp;:: start)</div>
+<div class="line"><a class="reference internal" href="#project0structecto_1_1has__f_1a3fb902f1eed02919195aff1a6b28eb76"><em>yes</em></a> <strong>test_start</strong>(__typeof__ &amp;:: start)</div>
 </div>
 </p>
 <blockquote>
@@ -2707,7 +1868,7 @@ struct MyEctoCell
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1has__f_1a089044f39fac5f7ea53eec64799c4619"></span><div class="line-block">
 <div class="line">template &lt; class U &gt;</div>
-<div class="line">no <strong>test_start</strong>(...)</div>
+<div class="line"><a class="reference internal" href="#project0structecto_1_1has__f_1ae0c6da775cf20caed616e24681af2807"><em>no</em></a> <strong>test_start</strong>(...)</div>
 </div>
 </p>
 <blockquote>
@@ -2716,7 +1877,7 @@ struct MyEctoCell
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1has__f_1a4de2275b91096c6e6d1efc2f137c380f"></span><div class="line-block">
 <div class="line">template &lt; class U &gt;</div>
-<div class="line">yes <strong>test_stop</strong>(__typeof__ &amp;:: stop)</div>
+<div class="line"><a class="reference internal" href="#project0structecto_1_1has__f_1a3fb902f1eed02919195aff1a6b28eb76"><em>yes</em></a> <strong>test_stop</strong>(__typeof__ &amp;:: stop)</div>
 </div>
 </p>
 <blockquote>
@@ -2725,151 +1886,7 @@ struct MyEctoCell
 </div></blockquote>
 <p><span class="target" id="project0structecto_1_1has__f_1a97d550e44f5260b40ddd0722bdd6f274"></span><div class="line-block">
 <div class="line">template &lt; class U &gt;</div>
-<div class="line">no <strong>test_stop</strong>(...)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1has__f_1ae63216bd7936dc02af86363f8db74b2e"></span><div class="line-block">
-<div class="line">template &lt; class U &gt;</div>
-<div class="line">yes <strong>test_declare_params</strong>(__typeof__ &amp;:: declare_params)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1has__f_1ab2f2693b1d6084a672893777893b9ab2"></span><div class="line-block">
-<div class="line">template &lt; class U &gt;</div>
-<div class="line">no <strong>test_declare_params</strong>(...)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1has__f_1a042de0d066c5b000186594964deea94e"></span><div class="line-block">
-<div class="line">template &lt; class U &gt;</div>
-<div class="line">yes <strong>test_declare_io</strong>(__typeof__ &amp;:: declare_io)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1has__f_1ad144a46699c480e7851fbd36394a1fe3"></span><div class="line-block">
-<div class="line">template &lt; class U &gt;</div>
-<div class="line">no <strong>test_declare_io</strong>(...)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1has__f_1a6665bfebbc796527bc1a775803ebd18e"></span><div class="line-block">
-<div class="line">template &lt; class U &gt;</div>
-<div class="line">yes <strong>test_configure</strong>(__typeof__ &amp;:: configure)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1has__f_1afc5065e1043ffe865662840f3a9d82fd"></span><div class="line-block">
-<div class="line">template &lt; class U &gt;</div>
-<div class="line">no <strong>test_configure</strong>(...)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1has__f_1a2212643cf55b3264654bc654df699cb7"></span><div class="line-block">
-<div class="line">template &lt; class U &gt;</div>
-<div class="line">yes <strong>test_activate</strong>(__typeof__ &amp;:: activate)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1has__f_1a2f43dbf6bee3d172c280f00e8fe73c33"></span><div class="line-block">
-<div class="line">template &lt; class U &gt;</div>
-<div class="line">no <strong>test_activate</strong>(...)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1has__f_1ae924c11bc0462d832fdd8ea97bd3599d"></span><div class="line-block">
-<div class="line">template &lt; class U &gt;</div>
-<div class="line">yes <strong>test_deactivate</strong>(__typeof__ &amp;:: deactivate)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1has__f_1ab8c699587d6f7d476d09b693227f5373"></span><div class="line-block">
-<div class="line">template &lt; class U &gt;</div>
-<div class="line">no <strong>test_deactivate</strong>(...)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1has__f_1a4e6f5942e9ee41196b52f7c728baf547"></span><div class="line-block">
-<div class="line">template &lt; class U &gt;</div>
-<div class="line">yes <strong>test_process</strong>(__typeof__ &amp;:: process)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1has__f_1a75ec2b3763995883f3a5dd1b19097439"></span><div class="line-block">
-<div class="line">template &lt; class U &gt;</div>
-<div class="line">no <strong>test_process</strong>(...)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1has__f_1aa88ebe0fd23a4e875704da0d62ce489c"></span><div class="line-block">
-<div class="line">template &lt; class U &gt;</div>
-<div class="line">yes <strong>test_start</strong>(__typeof__ &amp;:: start)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1has__f_1a089044f39fac5f7ea53eec64799c4619"></span><div class="line-block">
-<div class="line">template &lt; class U &gt;</div>
-<div class="line">no <strong>test_start</strong>(...)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1has__f_1a4de2275b91096c6e6d1efc2f137c380f"></span><div class="line-block">
-<div class="line">template &lt; class U &gt;</div>
-<div class="line">yes <strong>test_stop</strong>(__typeof__ &amp;:: stop)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1has__f_1a97d550e44f5260b40ddd0722bdd6f274"></span><div class="line-block">
-<div class="line">template &lt; class U &gt;</div>
-<div class="line">no <strong>test_stop</strong>(...)</div>
+<div class="line"><a class="reference internal" href="#project0structecto_1_1has__f_1ae0c6da775cf20caed616e24681af2807"><em>no</em></a> <strong>test_stop</strong>(...)</div>
 </div>
 </p>
 <blockquote>
@@ -3299,221 +2316,9 @@ struct MyEctoCell
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p><span class="target" id="project0structecto_1_1plasm_1a899b9da452ab35849f07038c90990ac3"></span>typedef boost::shared_ptr&lt;  <a class="reference internal" href="#project0structecto_1_1plasm"><em>plasm</em></a>  &gt; <strong>ptr</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1plasm_1afd3b9e2d4732023ab9e94553e0d66ac4"></span>typedef boost::shared_ptr&lt;  <a class="reference internal" href="#project0structecto_1_1plasm"><em>plasm</em></a>  const  &gt; <strong>cptr</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
 </div></blockquote>
 <em>Public Functions</em><blockquote>
 <div><p><span class="target" id="project0structecto_1_1plasm_1a1d4a2f7e4fa1a4ef839c7ba0316a825c"></span><div class="line-block">
-<div class="line"> <strong>plasm</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1plasm_1a3000d2cb042c0875b4d5c38d33763845"></span><div class="line-block">
-<div class="line"> <strong>~plasm</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1plasm_1a3419c720b1f839cf9b423655cf4de343"></span><div class="line-block">
-<div class="line">void <strong>insert</strong>(<a class="reference internal" href="#project0namespaceecto_1aed1809e82b9229ea81ef9ee3438cf62c"><em>cell_ptr</em></a> mod)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Insert the cell into the graph so that it may be executed by a scheduler. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><tt class="first docutils literal"><span class="pre">mod</span></tt> - <p>The cell to insert into the graph. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1plasm_1a0ca320f5cef8372cfa713fd7991ad3b2"></span><div class="line-block">
-<div class="line">void <strong>connect</strong>(<a class="reference internal" href="#project0namespaceecto_1aed1809e82b9229ea81ef9ee3438cf62c"><em>cell_ptr</em></a> from, const std::string &amp; output, <a class="reference internal" href="#project0namespaceecto_1aed1809e82b9229ea81ef9ee3438cf62c"><em>cell_ptr</em></a> to, const std::string &amp; input)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Connect one cell to another, and populate the graph accordingly. This will throw on a type mismatch. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><tt class="first docutils literal"><span class="pre">from</span></tt> - <p>The from cell </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">output</span></tt> - <p>The output key of the from cell </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">to</span></tt> - <p>The to cell </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">input</span></tt> - <p>The input key from the to cell. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1plasm_1a5e187b40ce0a7d7ed9a6859452aed5ca"></span><div class="line-block">
-<div class="line">void <strong>disconnect</strong>(<a class="reference internal" href="#project0namespaceecto_1aed1809e82b9229ea81ef9ee3438cf62c"><em>cell_ptr</em></a> from, const std::string &amp; output, <a class="reference internal" href="#project0namespaceecto_1aed1809e82b9229ea81ef9ee3438cf62c"><em>cell_ptr</em></a> to, const std::string &amp; input)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p><p>Disconnect a tendril from another tendril.</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><tt class="first docutils literal"><span class="pre">from</span></tt> - <p></p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">output</span></tt> - <p></p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">to</span></tt> - <p></p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">input</span></tt> - <p></p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1plasm_1a6350e90b6d85a218e7a84183eaed0c18"></span><div class="line-block">
-<div class="line">void <strong>viz</strong>(std::ostream &amp; out)</div>
-</div>
-</p>
-<blockquote>
-<div><p>output graphviz to a stream. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><tt class="first docutils literal"><span class="pre">out</span></tt> - <p>the output stream. Graphviz will be in plain text format. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1plasm_1a4586d90c908123a18dbd3a26c206f63c"></span><div class="line-block">
-<div class="line">std::string <strong>viz</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>Get a std::string graphiz of the cell. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd></dd>
-</dl>
-</p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1plasm_1a9554edd5758b8a83ed092a81e249f64a"></span><div class="line-block">
-<div class="line">void <strong>check</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>Check that all tags on the graph are satisfied. This will throw on errors in the graph, including, if required inputs are not connected if required outputs are not connected, if there are cycles, etc... </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1plasm_1a4f8de02440afdad0aa395fbaea03399e"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#project0structecto_1_1graph_1_1graph__t"><em>graph::graph_t</em></a>  &amp; <strong>graph</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>Get the underlying boost graph that this plasm has constructed. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd></dd>
-</dl>
-</p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1plasm_1ac6cde6d1d615e85f442ce299fdf0e7a0"></span><div class="line-block">
-<div class="line">const  <a class="reference internal" href="#project0structecto_1_1graph_1_1graph__t"><em>graph::graph_t</em></a>  &amp; <strong>graph</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1plasm_1aaeeabeb3f78c1a7291eb14e0f705574e"></span><div class="line-block">
-<div class="line">std::size_t <strong>size</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>Return the number of cells in the plasm (vertices in the graph) </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1plasm_1aa7724234d631563b10de07030c066e01"></span><div class="line-block">
-<div class="line">std::vector&lt;  <a class="reference internal" href="#project0namespaceecto_1aed1809e82b9229ea81ef9ee3438cf62c"><em>cell_ptr</em></a>  &gt; <strong>cells</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>Grab a set of all the cells from the plasm. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>a set of cells. </dd>
-</dl>
-</p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1plasm_1a55d56445bd1d09b9422390fb49e81bec"></span><div class="line-block">
-<div class="line">void <strong>configure_all</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>Calls configure on all modules, if configure has not already been called. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1plasm_1a4419135c6c8dd8bb0cc7f4807a025df2"></span><div class="line-block">
-<div class="line">void <strong>activate_all</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>Calls activate on all modules, if hasn&#8217;t already been called. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1plasm_1a6c10f2812f731c3787e5e22bdd80e9bc"></span><div class="line-block">
-<div class="line">void <strong>deactivate_all</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>Calls deactivate on all modules, if it hasn&#8217;t already been called. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1plasm_1a992f656fa931efc20d2cf1a97c963cec"></span><div class="line-block">
-<div class="line">void <strong>reset_ticks</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1plasm_1ab0fd6bec2e5d8943363fe5aa36c1d676"></span><div class="line-block">
-<div class="line">void <strong>save</strong>(std::ostream &amp;)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1plasm_1a854400c2f46f995731e058c72a547185"></span><div class="line-block">
-<div class="line">void <strong>load</strong>(std::istream &amp;)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1plasm_1a1d4a2f7e4fa1a4ef839c7ba0316a825c"></span><div class="line-block">
 <div class="line"> <strong>plasm</strong>()</div>
 </div>
 </p>
@@ -3743,35 +2548,9 @@ struct MyEctoCell
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p><span class="target" id="project0structecto_1_1plasm_1a420eb464746042e8247a69828e6782af"></span><div class="line-block">
-<div class="line">template &lt; class Archive &gt;</div>
-<div class="line">void <strong>save</strong>(Archive &amp; ar, const unsigned int)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1plasm_1ae6540bca37d0980ec24b0b75061e124e"></span><div class="line-block">
-<div class="line">template &lt; class Archive &gt;</div>
-<div class="line">void <strong>load</strong>(Archive &amp; ar, const unsigned int)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1plasm_1ac443cf0a58324a8003e1c9fd3b49b428"></span><div class="line-block">
-<div class="line"> <strong>BOOST_SERIALIZATION_SPLIT_MEMBER</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
 </div></blockquote>
 <em>Private Members</em><blockquote>
-<div><p><span class="target" id="project0structecto_1_1plasm_1a3fa8095e74d8f7b36a5fce7ebcd3e79c"></span>boost::shared_ptr&lt; impl &gt; <strong>impl_</strong></p>
+<div><p><span class="target" id="project0structecto_1_1plasm_1a4cfd41e9dc82039a75970755565b2513"></span>boost::shared_ptr&lt; impl &gt; <strong>impl_</strong></p>
 <blockquote>
 <div><p></p>
 <p></p>
@@ -3783,7 +2562,7 @@ struct MyEctoCell
 </div></blockquote>
 </div></blockquote>
 <em>Friends</em><blockquote>
-<div><p><span class="target" id="project0structecto_1_1plasm_1a4305f269960e8ccc92b19b2f0480b16d"></span>friend class <strong>boost::serialization::access</strong></p>
+<div><p><span class="target" id="project0structecto_1_1plasm_1ac98d07dd8f7b70e16ccb9a01abf56b9c"></span>friend class <strong>boost::serialization::access</strong></p>
 <blockquote>
 <div><p></p>
 <p></p>
@@ -3891,30 +2670,14 @@ struct MyEctoCell
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p><span class="target" id="project0classecto_1_1ref__count_1a39fc7e105b142b7444a90dc6a3796828"></span><div class="line-block">
-<div class="line"> <strong>ref_count</strong>(Mutex_T &amp; m, Count_T &amp; t)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1ref__count_1a22b67e2d381344ff4c9b4c453bb47e23"></span><div class="line-block">
-<div class="line"> <strong>~ref_count</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
 </div></blockquote>
 <em>Private Members</em><blockquote>
-<div><p><span class="target" id="project0classecto_1_1ref__count_1a983fe76ebfb0351182fc31968bcbafd4"></span>Mutex_T &amp; <strong>m_</strong></p>
+<div><p><span class="target" id="project0classecto_1_1ref__count_1a766db0f4309f593f6c3086a1ebead3a5"></span>Mutex_T &amp; <strong>m_</strong></p>
 <blockquote>
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p><span class="target" id="project0classecto_1_1ref__count_1a156a5db53cf932f5dfe68b83bf3aca24"></span>Count_T &amp; <strong>t_</strong></p>
+<p><span class="target" id="project0classecto_1_1ref__count_1a689842816509f8f13710aee79b8c9898"></span>Count_T &amp; <strong>t_</strong></p>
 <blockquote>
 <div><p></p>
 <p></p>
@@ -4115,57 +2878,13 @@ struct MyEctoCell
 </li>
 <li><tt class="first docutils literal"><span class="pre">RUNNING</span></tt> - <p>One of the execute*() methods was called and successfully completed the specified number of iterations. </p>
 </li>
-<li><tt class="first docutils literal"><span class="pre">EXECUTING</span></tt> - <p>execute() is running, or execute_async() was called, and the specified number of iterations have not been completed. </p>
+<li><tt class="first docutils literal"><span class="pre">EXECUTING</span></tt> - <p><a class="reference internal" href="#project0classecto_1_1scheduler_1ad917e3fa322f0a065e306afec7284d4e"><em>execute()</em></a> is running, or jobs have been prepared and the specified number of iterations have not been completed. </p>
 </li>
-<li><tt class="first docutils literal"><span class="pre">STOPPING</span></tt> - <p>stop() was called, but the scheduler has not stopped yet. </p>
+<li><tt class="first docutils literal"><span class="pre">STOPPING</span></tt> - <p><a class="reference internal" href="#project0classecto_1_1scheduler_1ab974783264da5c33a19110926b5565f4"><em>stop()</em></a> was called, but the scheduler has not stopped yet. </p>
 </li>
-<li><tt class="first docutils literal"><span class="pre">FINI</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">-1</span></tt> - <p>stop() completed, or one of the cell::process() calls returned ecto::QUIT and the scheduler is no longer running. </p>
+<li><tt class="first docutils literal"><span class="pre">FINI</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">-1</span></tt> - <p><a class="reference internal" href="#project0classecto_1_1scheduler_1ab974783264da5c33a19110926b5565f4"><em>stop()</em></a> completed, or one of the <a class="reference internal" href="#project0structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3"><em>cell::process()</em></a> calls returned ecto::QUIT and the scheduler is no longer running. </p>
 </li>
-<li><tt class="first docutils literal"><span class="pre">ERROR</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">-2</span></tt> - <p>One of the cell::process() calls returned an error or threw, and the scheduler is no longer running. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">INIT</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">0</span></tt> - <p>None of the execute*() methods have been called yet. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">RUNNING</span></tt> - <p>One of the execute*() methods was called and successfully completed the specified number of iterations. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">EXECUTING</span></tt> - <p>execute() is running, or execute_async() was called, and the specified number of iterations have not been completed. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">STOPPING</span></tt> - <p>stop() was called, but the scheduler has not stopped yet. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">FINI</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">-1</span></tt> - <p>stop() completed, or one of the cell::process() calls returned ecto::QUIT and the scheduler is no longer running. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">ERROR</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">-2</span></tt> - <p>One of the cell::process() calls returned an error or threw, and the scheduler is no longer running. </p>
-</li>
-</ul>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200"></span><strong>State enum</strong></p>
-<blockquote>
-<div><p></p>
-<p>Scheduler states. Values greater than 0 indicate a &#8220;running&#8221; state. </p>
-<p><em>Values:</em></p>
-<ul class="breatheenumvalues">
-<li><tt class="first docutils literal"><span class="pre">INIT</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">0</span></tt> - <p>None of the execute*() methods have been called yet. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">RUNNING</span></tt> - <p>One of the execute*() methods was called and successfully completed the specified number of iterations. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">EXECUTING</span></tt> - <p>execute() is running, or execute_async() was called, and the specified number of iterations have not been completed. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">STOPPING</span></tt> - <p>stop() was called, but the scheduler has not stopped yet. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">FINI</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">-1</span></tt> - <p>stop() completed, or one of the cell::process() calls returned ecto::QUIT and the scheduler is no longer running. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">ERROR</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">-2</span></tt> - <p>One of the cell::process() calls returned an error or threw, and the scheduler is no longer running. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">INIT</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">0</span></tt> - <p>None of the execute*() methods have been called yet. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">RUNNING</span></tt> - <p>One of the execute*() methods was called and successfully completed the specified number of iterations. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">EXECUTING</span></tt> - <p>execute() is running, or execute_async() was called, and the specified number of iterations have not been completed. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">STOPPING</span></tt> - <p>stop() was called, but the scheduler has not stopped yet. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">FINI</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">-1</span></tt> - <p>stop() completed, or one of the cell::process() calls returned ecto::QUIT and the scheduler is no longer running. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">ERROR</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">-2</span></tt> - <p>One of the cell::process() calls returned an error or threw, and the scheduler is no longer running. </p>
+<li><tt class="first docutils literal"><span class="pre">ERROR</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">-2</span></tt> - <p>One of the <a class="reference internal" href="#project0structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3"><em>cell::process()</em></a> calls returned an error or threw, and the scheduler is no longer running. </p>
 </li>
 </ul>
 </div></blockquote>
@@ -4198,25 +2917,25 @@ struct MyEctoCell
 <dd>This call will block indefinately if num_iters is 0. </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
-<li><tt class="first docutils literal"><span class="pre">num_iters</span></tt> - <p>The number of iterations to execute the plasm. 0 indicates that the plasm should be executed until some cell::process() call returns ecto::QUIT. </p>
+<li><tt class="first docutils literal"><span class="pre">num_iters</span></tt> - <p>The number of iterations to execute the plasm. 0 indicates that the plasm should be executed until some <a class="reference internal" href="#project0structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3"><em>cell::process()</em></a> call returns ecto::QUIT. </p>
 </li>
 </ul>
 </dd>
 </dl>
 </p>
 </div></blockquote>
-<p><span class="target" id="project0classecto_1_1scheduler_1a2e9982c19e57c9e578d2f8f54c24dc1a"></span><div class="line-block">
-<div class="line">bool <strong>execute_async</strong>(unsigned num_iters = 0)</div>
+<p><span class="target" id="project0classecto_1_1scheduler_1a6f723a36600b0a47c9b387c460cf3d59"></span><div class="line-block">
+<div class="line">bool <strong>prepare_jobs</strong>(unsigned num_iters = 0)</div>
 </div>
 </p>
 <blockquote>
 <div><p></p>
-<p>Kick off an asynchronous plasm execution for num_iters iterations. No actual work will be done without calling the run*() methods. <dl class="docutils">
+<p>Prepare jobs for execution of a plasm over num_iters iterations. No actual work will be done without calling the run*() methods. This just fills up the io service queues with the jobs required for initialisation and execution of the plasm over the specified number of iterations. <dl class="docutils">
 <dt><strong>Attention</strong></dt>
-<dd>A call to run() will block indefinately if num_iters is 0. </dd>
+<dd>A call to <a class="reference internal" href="#project0classecto_1_1scheduler_1a8d5ce4f97e511341f315bb7621ba38f4"><em>run()</em></a> will block indefinately if num_iters is 0. </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
-<li><tt class="first docutils literal"><span class="pre">num_iters</span></tt> - <p>The number of iterations to execute the plasm. 0 indicates that the plasm should be executed until some cell::process() call returns ecto::QUIT. </p>
+<li><tt class="first docutils literal"><span class="pre">num_iters</span></tt> - <p>The number of iterations to execute the plasm. 0 indicates that the plasm should be executed until some <a class="reference internal" href="#project0structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3"><em>cell::process()</em></a> call returns ecto::QUIT. </p>
 </li>
 </ul>
 </dd>
@@ -4231,7 +2950,7 @@ struct MyEctoCell
 <div><p></p>
 <p>Run one job in the calling thread of execution. <dl class="docutils">
 <dt><strong>Note</strong></dt>
-<dd>A job is not necessarily (but is usually) a cell::process() call. </dd>
+<dd>A job is not necessarily (but is usually) a <a class="reference internal" href="#project0structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3"><em>cell::process()</em></a> call. </dd>
 <dt><strong>Attention</strong></dt>
 <dd>If using python cells, this method must be called from the main python thread. </dd>
 <dt><strong>Return</strong></dt>
@@ -4322,169 +3041,7 @@ struct MyEctoCell
 </p>
 </div></blockquote>
 <p><span class="target" id="project0classecto_1_1scheduler_1a5497ae108416ccdf7d80fa7c8e462992"></span><div class="line-block">
-<div class="line">State <strong>state</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>The current scheduler state. </dd>
-</dl>
-</p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1scheduler_1a3a2999bde52bfacfc194243ef2ae4f89"></span><div class="line-block">
-<div class="line"> <strong>scheduler</strong>(<a class="reference internal" href="#project0namespaceecto_1a6b83be6cd685db71f03b14871653475f"><em>plasm_ptr</em></a> p)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1scheduler_1aac758e34705ebab32cf66bdf42f0d89d"></span><div class="line-block">
-<div class="line"> <strong>~scheduler</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1scheduler_1ad917e3fa322f0a065e306afec7284d4e"></span><div class="line-block">
-<div class="line">bool <strong>execute</strong>(unsigned num_iters = 0)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p>Synchronously execute plasm for num_iters iterations. <dl class="docutils">
-<dt><strong>Attention</strong></dt>
-<dd>This call will block indefinately if num_iters is 0. </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><tt class="first docutils literal"><span class="pre">num_iters</span></tt> - <p>The number of iterations to execute the plasm. 0 indicates that the plasm should be executed until some cell::process() call returns ecto::QUIT. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1scheduler_1a2e9982c19e57c9e578d2f8f54c24dc1a"></span><div class="line-block">
-<div class="line">bool <strong>execute_async</strong>(unsigned num_iters = 0)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p>Kick off an asynchronous plasm execution for num_iters iterations. No actual work will be done without calling the run*() methods. <dl class="docutils">
-<dt><strong>Attention</strong></dt>
-<dd>A call to run() will block indefinately if num_iters is 0. </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><tt class="first docutils literal"><span class="pre">num_iters</span></tt> - <p>The number of iterations to execute the plasm. 0 indicates that the plasm should be executed until some cell::process() call returns ecto::QUIT. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1scheduler_1a7fcfe7583c13ff5d2294242aedfa0b1a"></span><div class="line-block">
-<div class="line">bool <strong>run_job</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p>Run one job in the calling thread of execution. <dl class="docutils">
-<dt><strong>Note</strong></dt>
-<dd>A job is not necessarily (but is usually) a cell::process() call. </dd>
-<dt><strong>Attention</strong></dt>
-<dd>If using python cells, this method must be called from the main python thread. </dd>
-<dt><strong>Return</strong></dt>
-<dd>true indicates that the scheduler is still &#8220;running.&#8221; </dd>
-</dl>
-</p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1scheduler_1a326022cba6c3154f28f9694b7c9968fd"></span><div class="line-block">
-<div class="line">bool <strong>run</strong>(unsigned timeout_usec)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p>Run jobs in the calling thread for the specified number of microseconds, or until the io_service is depleted. <dl class="docutils">
-<dt><strong>Attention</strong></dt>
-<dd>Assuming the io_service does not run out of work, this is the minimum amount of time that will be spent running jobs. </dd>
-<dt><strong>Return</strong></dt>
-<dd>true indicates that the scheduler is still &#8220;running.&#8221; </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><tt class="first docutils literal"><span class="pre">timeout_usec</span></tt> - <p>The number of microsecs to run io_service jobs. </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1scheduler_1a8d5ce4f97e511341f315bb7621ba38f4"></span><div class="line-block">
-<div class="line">bool <strong>run</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p>Run jobs in the calling thread until the io_service is depleted. <dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>true indicates that the scheduler is still &#8220;running.&#8221; </dd>
-</dl>
-</p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1scheduler_1a99ac4b8df3d015f6a39d0cf7607cc657"></span><div class="line-block">
-<div class="line">bool <strong>running</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>true indicates that the plasm is currently in a running state (state_ &gt; 0, i.e. RUNNING, EXECUTING, or STOPPING). </dd>
-</dl>
-</p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1scheduler_1a13257817e1cc6c1ce04ef0bfdabc5375"></span><div class="line-block">
-<div class="line">bool <strong>executing</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>true indicates that the plasm is currently in an executing state ( state_ == EXECUTING). </dd>
-</dl>
-</p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1scheduler_1ab974783264da5c33a19110926b5565f4"></span><div class="line-block">
-<div class="line">void <strong>stop</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p>Stop the scheduler, and flush any jobs in the io_service. <dl class="docutils">
-<dt><strong>Note</strong></dt>
-<dd>The scheduler will no longer be in the running state. </dd>
-<dt><strong>Attention</strong></dt>
-<dd>The plasm may be in the middle of the stack when it is stopped, but successive calls to execute*() start from the beginning. </dd>
-</dl>
-</p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1scheduler_1a99d2f51779f856b3905bb8b493f091c4"></span><div class="line-block">
-<div class="line">std::string <strong>stats</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>The current graph execution stats. </dd>
-</dl>
-</p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1scheduler_1abe971e8b6f6c77ab35c862c723b6d5e9"></span><div class="line-block">
-<div class="line">State <strong>state</strong>()</div>
+<div class="line"><a class="reference internal" href="#project0classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200"><em>State</em></a> <strong>state</strong>()</div>
 </div>
 </p>
 <blockquote>
@@ -4498,47 +3055,7 @@ struct MyEctoCell
 </div></blockquote>
 <em>Private Functions</em><blockquote>
 <div><p><span class="target" id="project0classecto_1_1scheduler_1a04cb7ea1040fcb02f5c843ca33ffa1a6"></span><div class="line-block">
-<div class="line">State <strong>state</strong>(State state)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1scheduler_1adc21b65d6b046032648161c16ca89f77"></span><div class="line-block">
-<div class="line">void <strong>execute_init</strong>(unsigned num_iteRelWithDebInfors)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1scheduler_1ae96db9aa735b4aec8eda6c1ea5616b95"></span><div class="line-block">
-<div class="line">void <strong>execute_iter</strong>(unsigned cur_iter, unsigned num_iters, std::size_t stack_idx)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1scheduler_1abab4de26974143a076ac532ffac4f67f"></span><div class="line-block">
-<div class="line">void <strong>execute_fini</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1scheduler_1ad922a0a31e48a09ae6b6a95a4a1a20e5"></span><div class="line-block">
-<div class="line">void <strong>compute_stack</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p>Check plasm for correctness, configure it, activate it, then sort it topologically to populate stack_. This method is idempotent. </p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1scheduler_1a7620d82ec37d2d8da7a4526df6f97083"></span><div class="line-block">
-<div class="line">State <strong>state</strong>(State)</div>
+<div class="line"><a class="reference internal" href="#project0classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200"><em>State</em></a> <strong>state</strong>(<a class="reference internal" href="#project0classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200"><em>State</em></a> state)</div>
 </div>
 </p>
 <blockquote>
@@ -4592,12 +3109,12 @@ struct MyEctoCell
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p><span class="target" id="project0classecto_1_1scheduler_1a4a9aa8c66b611d13461e631b568fb5a5"></span><a class="reference internal" href="#project0structecto_1_1graph_1_1graph__t"><em>ecto::graph::graph_t</em></a>  &amp; <strong>graph_</strong></p>
+<p><span class="target" id="project0classecto_1_1scheduler_1a79de9623f94d1003dc34f12fc69c5981"></span><a class="reference internal" href="#project0structecto_1_1graph_1_1graph__t"><em>ecto::graph::graph_t</em></a>  &amp; <strong>graph_</strong></p>
 <blockquote>
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p><span class="target" id="project0classecto_1_1scheduler_1a0c291644c5fc92399a96466ac3b5cc38"></span>std::vector&lt; ecto::graph::graph_t::vertex_descriptor &gt; <strong>stack_</strong></p>
+<p><span class="target" id="project0classecto_1_1scheduler_1ad2b6561ebc08afd8cf8edaa39cb702b8"></span>std::vector&lt; ecto::graph::graph_t::vertex_descriptor &gt; <strong>stack_</strong></p>
 <blockquote>
 <div><p></p>
 <p></p>
@@ -4617,7 +3134,7 @@ struct MyEctoCell
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p><span class="target" id="project0classecto_1_1scheduler_1a21d2aac4a8a2ef665942b7c9b741250c"></span>State <strong>state_</strong></p>
+<p><span class="target" id="project0classecto_1_1scheduler_1a21d2aac4a8a2ef665942b7c9b741250c"></span><a class="reference internal" href="#project0classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200"><em>State</em></a> <strong>state_</strong></p>
 <blockquote>
 <div><p>Current state of the scheduler. </p>
 <p></p>
@@ -5056,22 +3573,6 @@ struct MyEctoCell
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p><span class="target" id="project0structecto_1_1profile_1_1stats__collector_1adae561b196f7ec50f42ba76031924ee4"></span><div class="line-block">
-<div class="line"> <strong>stats_collector</strong>(const std::string &amp; n, <a class="reference internal" href="#project0structecto_1_1profile_1_1stats__type"><em>stats_type</em></a>  &amp; stats)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1profile_1_1stats__collector_1aa1521de3406025190b06d0b7bad33064"></span><div class="line-block">
-<div class="line"> <strong>~stats_collector</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
 </div></blockquote>
 <em>Public Members</em><blockquote>
 <div><p><span class="target" id="project0structecto_1_1profile_1_1stats__collector_1ae607313a8ecc75d6a6ab201cdf7c2d61"></span>const unsigned long <strong>start</strong></p>
@@ -5079,12 +3580,12 @@ struct MyEctoCell
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p><span class="target" id="project0structecto_1_1profile_1_1stats__collector_1a1814bc20f4bd96a974fa629249816603"></span><a class="reference internal" href="#project0structecto_1_1profile_1_1stats__type"><em>stats_type</em></a>  &amp; <strong>stats</strong></p>
+<p><span class="target" id="project0structecto_1_1profile_1_1stats__collector_1a2c206fb60ea04b5162ec43a609f2a185"></span><a class="reference internal" href="#project0structecto_1_1profile_1_1stats__type"><em>stats_type</em></a>  &amp; <strong>stats</strong></p>
 <blockquote>
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p><span class="target" id="project0structecto_1_1profile_1_1stats__collector_1a8322226b54061aa2cdccd1461d7fbc4e"></span>const std::string &amp; <strong>instancename</strong></p>
+<p><span class="target" id="project0structecto_1_1profile_1_1stats__collector_1ac3d5d7adf91b02719a6b897869683f03"></span>const std::string &amp; <strong>instancename</strong></p>
 <blockquote>
 <div><p></p>
 <p></p>
@@ -5100,30 +3601,6 @@ struct MyEctoCell
 <p></p>
 <em>Public Functions</em><blockquote>
 <div><p><span class="target" id="project0structecto_1_1profile_1_1stats__type_1ab34b76c48cbf95d269a5307a5bbb2fe8"></span><div class="line-block">
-<div class="line"> <strong>stats_type</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1profile_1_1stats__type_1aca1fbd5470c0485c965f62c796e3286c"></span><div class="line-block">
-<div class="line">double <strong>elapsed_time</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1profile_1_1stats__type_1ad595fe2ba3250310a832a776dfc53b9c"></span><div class="line-block">
-<div class="line">double <strong>frequency</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0structecto_1_1profile_1_1stats__type_1ab34b76c48cbf95d269a5307a5bbb2fe8"></span><div class="line-block">
 <div class="line"> <strong>stats_type</strong>()</div>
 </div>
 </p>
@@ -5930,7 +4407,7 @@ struct MyEctoCell
 <p>Items held by the tendril must be copy constructible and copiable. </p>
 </p>
 <em>Public Type</em><blockquote>
-<div><p><span class="target" id="project0classecto_1_1tendril_1a50eb3613436e99dc4dfa670141ccd91a"></span><strong>Anonymous enum</strong></p>
+<div><p><span class="target" id="project0classecto_1_1tendril_1ab63b76909681783917fcb55e3c89f4ac"></span><strong>Anonymous enum</strong></p>
 <blockquote>
 <div><p></p>
 <p></p>
@@ -6913,46 +5390,6 @@ and will be mashed with spam.&#8221;. </p>
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p><span class="target" id="project0classecto_1_1graph_1_1vertex_1a18cea5500866c9d86ce252e84d3881c6"></span><div class="line-block">
-<div class="line"> <strong>vertex</strong>(<a class="reference internal" href="#project0namespaceecto_1aed1809e82b9229ea81ef9ee3438cf62c"><em>cell_ptr</em></a> c)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1graph_1_1vertex_1aa5876238d51eb82bed7a17414bd74132"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#project0namespaceecto_1ab708c826226c91fd6f3c8c121f293a78"><em>cell_cptr</em></a> <strong>cell</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1graph_1_1vertex_1a7b2bed5e1305cc26855c5bc8bc6884df"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#project0namespaceecto_1aed1809e82b9229ea81ef9ee3438cf62c"><em>cell_ptr</em></a> <strong>cell</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1graph_1_1vertex_1a38bfe554aa3f8413769be22dff0ea2c3"></span><div class="line-block">
-<div class="line">const  <a class="reference internal" href="#project0structecto_1_1profile_1_1stats__type"><em>profile::stats_type</em></a>  &amp; <strong>stats</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0classecto_1_1graph_1_1vertex_1a522f60e25aa0d769b3826911e0c69d6f"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#project0structecto_1_1profile_1_1stats__type"><em>profile::stats_type</em></a>  &amp; <strong>stats</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
 </div></blockquote>
 <em>Private Members</em><blockquote>
 <div><p><span class="target" id="project0classecto_1_1graph_1_1vertex_1a14485eadc4288f5d4e5e32e6b5218ec7"></span><a class="reference internal" href="#project0namespaceecto_1aed1809e82b9229ea81ef9ee3438cf62c"><em>cell_ptr</em></a> <strong>cell_</strong></p>
@@ -6962,7 +5399,7 @@ and will be mashed with spam.&#8221;. </p>
 </div></blockquote>
 <p><span class="target" id="project0classecto_1_1graph_1_1vertex_1abf79016904200297ba32e42534c8ac53"></span><a class="reference internal" href="#project0structecto_1_1profile_1_1stats__type"><em>profile::stats_type</em></a> <strong>stats_</strong></p>
 <blockquote>
-<div><p>For collecting execution statistics for cell::process() calls. </p>
+<div><p>For collecting execution statistics for <a class="reference internal" href="#project0structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3"><em>cell::process()</em></a> calls. </p>
 <p></p>
 </div></blockquote>
 </div></blockquote>
@@ -7017,7 +5454,7 @@ and will be mashed with spam.&#8221;. </p>
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p><span class="target" id="project0namespaceboost_1a54199d7ccb025863b84b2b597328302c"></span><div class="line-block">
+<p><span class="target" id="project0namespaceboost_1a50253cbebddb80700be930287ab2fcde"></span><div class="line-block">
 <div class="line">template &lt; class E, class Tag, class T &gt;</div>
 <div class="line">E const &amp; <strong>operator&lt;&lt;</strong>(E const &amp; x, error_info&lt; :: <a class="reference internal" href="#project0structecto_1_1except_1_1detail_1_1wrap"><em>ecto::except::detail::wrap</em></a> &lt; Tag &gt;, T &gt; const &amp; v)</div>
 </div>
@@ -7192,54 +5629,10 @@ and will be mashed with spam.&#8221;. </p>
 </div></blockquote>
 <p><span class="target" id="project0namespaceecto_1a93d82cd28db695d53963fb696582762c"></span><strong>ReturnCode enum</strong></p>
 <blockquote>
-<div><p>Return values for cell::process(). TODO: Should these live in cell? These are appropriate for non exceptional behavior. </p>
+<div><p>Return values for <a class="reference internal" href="#project0structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3"><em>cell::process()</em></a>. TODO: Should these live in cell? These are appropriate for non exceptional behavior. </p>
 <p></p>
 <p><em>Values:</em></p>
 <ul class="breatheenumvalues">
-<li><tt class="first docutils literal"><span class="pre">OK</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span>&nbsp; <span class="pre">0</span></tt> - <p>Everything A OK. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">QUIT</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span>&nbsp; <span class="pre">1</span></tt> - <p>Explicit quit now. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">DO_OVER</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span>&nbsp; <span class="pre">2</span></tt> - <p>This modules&#8217; process call needs to be made again. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">BREAK</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span>&nbsp; <span class="pre">3</span></tt> - <p>Stop execution in my scope, jump to outer scope. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">CONTINUE</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span>&nbsp; <span class="pre">4</span></tt> - <p>Stop execution in my scope, jump to top of scope. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">UNKNOWN</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">-1</span></tt> - <p>Unknown return code. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">OK</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span>&nbsp; <span class="pre">0</span></tt> - <p>Everything A OK. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">QUIT</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span>&nbsp; <span class="pre">1</span></tt> - <p>Explicit quit now. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">DO_OVER</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span>&nbsp; <span class="pre">2</span></tt> - <p>This modules&#8217; process call needs to be made again. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">BREAK</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span>&nbsp; <span class="pre">3</span></tt> - <p>Stop execution in my scope, jump to outer scope. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">CONTINUE</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span>&nbsp; <span class="pre">4</span></tt> - <p>Stop execution in my scope, jump to top of scope. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">UNKNOWN</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">-1</span></tt> - <p>Unknown return code. </p>
-</li>
-</ul>
-</div></blockquote>
-<p><span class="target" id="project0namespaceecto_1a93d82cd28db695d53963fb696582762c"></span><strong>ReturnCode enum</strong></p>
-<blockquote>
-<div><p>Return values for cell::process(). TODO: Should these live in cell? These are appropriate for non exceptional behavior. </p>
-<p></p>
-<p><em>Values:</em></p>
-<ul class="breatheenumvalues">
-<li><tt class="first docutils literal"><span class="pre">OK</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span>&nbsp; <span class="pre">0</span></tt> - <p>Everything A OK. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">QUIT</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span>&nbsp; <span class="pre">1</span></tt> - <p>Explicit quit now. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">DO_OVER</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span>&nbsp; <span class="pre">2</span></tt> - <p>This modules&#8217; process call needs to be made again. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">BREAK</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span>&nbsp; <span class="pre">3</span></tt> - <p>Stop execution in my scope, jump to outer scope. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">CONTINUE</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span>&nbsp; <span class="pre">4</span></tt> - <p>Stop execution in my scope, jump to top of scope. </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">UNKNOWN</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">-1</span></tt> - <p>Unknown return code. </p>
-</li>
 <li><tt class="first docutils literal"><span class="pre">OK</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span>&nbsp; <span class="pre">0</span></tt> - <p>Everything A OK. </p>
 </li>
 <li><tt class="first docutils literal"><span class="pre">QUIT</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span>&nbsp; <span class="pre">1</span></tt> - <p>Explicit quit now. </p>
@@ -7301,7 +5694,7 @@ and will be mashed with spam.&#8221;. </p>
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p><span class="target" id="project0namespaceecto_1a7300f29f56aab7f09d11060432ad081e"></span><div class="line-block">
+<p><span class="target" id="project0namespaceecto_1a00786d16020c07e60fea08e8352dba30"></span><div class="line-block">
 <div class="line">const std::string &amp; <strong>ReturnCodeToStr</strong>(int rval)</div>
 </div>
 </p>
@@ -7425,8 +5818,8 @@ and will be mashed with spam.&#8221;. </p>
 <div><p></p>
 <p></p>
 </div></blockquote>
-<div class="line-block" id="project0namespaceecto_1_1abi_1_1&#64;26">
-<div class="line"><em>namespace</em> <strong>ecto::abi::&#64;26</strong></div>
+<div class="line-block" id="project0namespaceecto_1_1abi_1_1&#64;22">
+<div class="line"><em>namespace</em> <strong>ecto::abi::&#64;22</strong></div>
 </div>
 <blockquote>
 <div><p></p>
@@ -7462,7 +5855,7 @@ and will be mashed with spam.&#8221;. </p>
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p><span class="target" id="project0namespaceecto_1_1except_1ae56832eeac0c3e23f11c197a8f5a6971"></span><div class="line-block">
+<p><span class="target" id="project0namespaceecto_1_1except_1abebe710f45e8d06b2df19d02bf15b193"></span><div class="line-block">
 <div class="line">boost::optional&lt; std::string &gt; <strong>diagnostic_string</strong>(const  <a class="reference internal" href="#project0structecto_1_1except_1_1EctoException"><em>EctoException</em></a>  &amp; e, const std::string &amp; tag)</div>
 </div>
 </p>
@@ -7879,23 +6272,6 @@ read_inputs(streambuf(python_file_obj=obj, buffer_size=1024))
 <div><p></p>
 <p></p>
 </div></blockquote>
-<div class="line-block" id="project0all_8hpp~">
-<div class="line"><em>file</em> <strong>all.hpp~</strong></div>
-<div class="line"><em>#include &lt;Python.h&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/python.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/cell.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/ecto.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/edge.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/except.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/spore.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/tendril.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/tendrils.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/vertex.hpp&gt;</em></div>
-</div>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
 <div class="line-block" id="project0atomic_8hpp">
 <div class="line"><em>file</em> <strong>atomic.hpp</strong></div>
 <div class="line"><em>#include &lt;boost/thread.hpp&gt;</em></div>
@@ -7941,49 +6317,9 @@ read_inputs(streambuf(python_file_obj=obj, buffer_size=1024))
 <div><p></p>
 <p></p>
 </div></blockquote>
-<div class="line-block" id="project0cell_8hpp~">
-<div class="line"><em>file</em> <strong>cell.hpp~</strong></div>
-<div class="line"><em>#include &lt;ecto/forward.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/log.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/strand.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/tendril.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/tendrils.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/traits.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/util.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;boost/noncopyable.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;boost/optional.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;boost/shared_ptr.hpp&gt;</em></div>
-</div>
-<blockquote>
-<div><p></p>
-<p></p>
-<em>Defines</em><blockquote>
-<div><p><span class="target" id="project0cell_8hpp~_1a09cfce003df2d7598c0d06a00c64c49c"></span><strong>ECTO_RETURN_VALUES</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-</div></blockquote>
-</div></blockquote>
 <div class="line-block" id="project0ecto_8hpp">
 <div class="line"><em>file</em> <strong>ecto.hpp</strong></div>
 <div class="line"><em>#include &lt;Python.h&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/python.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;iostream&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/forward.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/version.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/abi.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/util.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/cell.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/registry.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/module.hpp&gt;</em></div>
-</div>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<div class="line-block" id="project0ecto_8hpp~">
-<div class="line"><em>file</em> <strong>ecto.hpp~</strong></div>
 <div class="line"><em>#include &lt;ecto/python.hpp&gt;</em></div>
 <div class="line"><em>#include &lt;iostream&gt;</em></div>
 <div class="line"><em>#include &lt;ecto/forward.hpp&gt;</em></div>
@@ -8132,123 +6468,6 @@ read_inputs(streambuf(python_file_obj=obj, buffer_size=1024))
 </div></blockquote>
 </div></blockquote>
 </div></blockquote>
-<div class="line-block" id="project0except_8hpp~">
-<div class="line"><em>file</em> <strong>except.hpp~</strong></div>
-<div class="line"><em>#include &lt;boost/version.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;stdexcept&gt;</em></div>
-<div class="line"><em>#include &lt;string&gt;</em></div>
-<div class="line"><em>#include &lt;map&gt;</em></div>
-<div class="line"><em>#include &lt;Python.h&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/config.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/util.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;boost/optional.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;boost/exception/exception.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;boost/exception/info.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;boost/preprocessor/cat.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;boost/preprocessor/stringize.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;boost/preprocessor/seq/for_each.hpp&gt;</em></div>
-</div>
-<blockquote>
-<div><p></p>
-<p></p>
-<em>Defines</em><blockquote>
-<div><p><span class="target" id="project0except_8hpp~_1a6a632b3827deba566cbca48b37bf53e2"></span><strong>ECTO_EXCEPTION_TAG_NAMES</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0except_8hpp~_1ad3bbab1baffa25e20db0635270c5f108"></span><strong>ECTO_EXCEPTIONS</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0except_8hpp~_1adbf60807e9dffa4b82209ed4a8e78fd1"></span><strong>BOOST_PREPROCESSOR_CONFIG_LIMITS_HPP</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0except_8hpp~_1ae60f080f6aa76332f308c11c5b722e4e"></span><strong>ECTO_PP_ITERLIMIT</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0except_8hpp~_1a750e4458efafc6fb925498412fb16a4b"></span><strong>BOOST_PP_LIMIT_MAG</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0except_8hpp~_1a7cab985088506b7f93f8b08f4f28eeb9"></span><strong>BOOST_PP_LIMIT_TUPLE</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0except_8hpp~_1a015024e3c1dda11dc0230991acdd529e"></span><strong>BOOST_PP_LIMIT_DIM</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0except_8hpp~_1ad851940ee907a903796df76bea76b8aa"></span><strong>BOOST_PP_LIMIT_REPEAT</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0except_8hpp~_1ad081cc556d6300248148d294ce5788fa"></span><strong>BOOST_PP_LIMIT_WHILE</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0except_8hpp~_1a1cdabd3425574a3d8795507fceb87386"></span><strong>BOOST_PP_LIMIT_FOR</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0except_8hpp~_1a9c158421e02e59e0f68e039f788b1512"></span><strong>BOOST_PP_LIMIT_ITERATION</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0except_8hpp~_1a4d9a13f4509f732fecee9f0bf243da68"></span><strong>BOOST_PP_LIMIT_ITERATION_DIM</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0except_8hpp~_1a14527b9ffc75126134564bd0de28c990"></span><strong>BOOST_PP_LIMIT_SEQ</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0except_8hpp~_1a7351250ea0acf4a9dfbabd6d3d66268e"></span><strong>BOOST_PP_LIMIT_SLOT_SIG</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0except_8hpp~_1a1e8b63072e6969aedd69a7f4b3135bd7"></span><strong>BOOST_PP_LIMIT_SLOT_COUNT</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0except_8hpp~_1a9b77695b9c45c36934e7c890ce6f682f"></span><strong>ECTO_DECLARE_EXCEPTION</strong>(r, data, T)</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0except_8hpp~_1a4a4f231e4fe0f923cd9ee3a48803ca30"></span><strong>ECTO_EXCEPTION_TAG_DECL</strong>(r, data, NAME)</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0except_8hpp~_1a2208dd18b625b09e449c9e471e55ea36"></span><strong>ECTO_EXCEPTION_TAG_TYPE_NAME_RETURN_T</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="project0except_8hpp~_1a61f61285d4749b701b559d10678908a4"></span><strong>ECTO_EXCEPTION_TAG_TYPE_NAME_DECL</strong>(r, data, NAME)</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-</div></blockquote>
-</div></blockquote>
 <div class="line-block" id="project0forward_8hpp">
 <div class="line"><em>file</em> <strong>forward.hpp</strong></div>
 <div class="line"><em>#include &lt;boost/shared_ptr.hpp&gt;</em></div>
@@ -8390,38 +6609,8 @@ read_inputs(streambuf(python_file_obj=obj, buffer_size=1024))
 <div><p></p>
 <p></p>
 </div></blockquote>
-<div class="line-block" id="project0plasm_8hpp~">
-<div class="line"><em>file</em> <strong>plasm.hpp~</strong></div>
-<div class="line"><em>#include &lt;boost/shared_ptr.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;boost/enable_shared_from_this.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;boost/noncopyable.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;boost/serialization/split_member.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;boost/thread.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;string&gt;</em></div>
-<div class="line"><em>#include &lt;map&gt;</em></div>
-<div class="line"><em>#include &lt;list&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/forward.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/tendril.hpp&gt;</em></div>
-</div>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
 <div class="line-block" id="project0profile_8hpp">
 <div class="line"><em>file</em> <strong>profile.hpp</strong></div>
-<div class="line"><em>#include &lt;stdint.h&gt;</em></div>
-<div class="line"><em>#include &lt;Python.h&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/forward.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/util.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/log.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;boost/date_time/posix_time/posix_time.hpp&gt;</em></div>
-</div>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<div class="line-block" id="project0profile_8hpp~">
-<div class="line"><em>file</em> <strong>profile.hpp~</strong></div>
 <div class="line"><em>#include &lt;stdint.h&gt;</em></div>
 <div class="line"><em>#include &lt;Python.h&gt;</em></div>
 <div class="line"><em>#include &lt;ecto/forward.hpp&gt;</em></div>
@@ -8631,19 +6820,6 @@ read_inputs(streambuf(python_file_obj=obj, buffer_size=1024))
 </div></blockquote>
 </div></blockquote>
 </div></blockquote>
-<div class="line-block" id="project0scheduler_8hpp~">
-<div class="line"><em>file</em> <strong>scheduler.hpp~</strong></div>
-<div class="line"><em>#include &lt;ecto/log.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/forward.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/profile.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;boost/asio.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;boost/thread/mutex.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/impl/graph_types.hpp&gt;</em></div>
-</div>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
 <div class="line-block" id="project0spore_8hpp">
 <div class="line"><em>file</em> <strong>spore.hpp</strong></div>
 <div class="line"><em>#include &lt;boost/shared_ptr.hpp&gt;</em></div>
@@ -8795,16 +6971,6 @@ read_inputs(streambuf(python_file_obj=obj, buffer_size=1024))
 <div class="line-block" id="project0vertex_8hpp">
 <div class="line"><em>file</em> <strong>vertex.hpp</strong></div>
 <div class="line"><em>#include &lt;Python.h&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/element.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/forward.hpp&gt;</em></div>
-<div class="line"><em>#include &lt;ecto/profile.hpp&gt;</em></div>
-</div>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<div class="line-block" id="project0vertex_8hpp~">
-<div class="line"><em>file</em> <strong>vertex.hpp~</strong></div>
 <div class="line"><em>#include &lt;ecto/element.hpp&gt;</em></div>
 <div class="line"><em>#include &lt;ecto/forward.hpp&gt;</em></div>
 <div class="line"><em>#include &lt;ecto/profile.hpp&gt;</em></div>

@@ -106,24 +106,24 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="371">
+      <node id="363">
         <label>boost::noncopyable</label>
       </node>
-      <node id="370">
+      <node id="362">
         <label>ecto::registry::module_registry&lt; ModuleTag &gt;</label>
         <link refid="structecto_1_1registry_1_1module__registry"/>
-        <childnode refid="371" relation="public-inheritance">
+        <childnode refid="363" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="373">
+      <node id="365">
         <label>boost::noncopyable</label>
       </node>
-      <node id="372">
+      <node id="364">
         <label>ecto::registry::module_registry&lt; ModuleTag &gt;</label>
         <link refid="structecto_1_1registry_1_1module__registry"/>
-        <childnode refid="373" relation="public-inheritance">
+        <childnode refid="365" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>

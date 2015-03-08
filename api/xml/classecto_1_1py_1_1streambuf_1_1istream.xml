@@ -42,30 +42,30 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="348">
+      <node id="340">
         <label>std::istream</label>
       </node>
-      <node id="349">
+      <node id="341">
         <label>ecto::py::istream</label>
         <link refid="structecto_1_1py_1_1istream"/>
-        <childnode refid="347" relation="public-inheritance">
+        <childnode refid="339" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="347">
+      <node id="339">
         <label>ecto::py::streambuf::istream</label>
         <link refid="classecto_1_1py_1_1streambuf_1_1istream"/>
-        <childnode refid="348" relation="public-inheritance">
+        <childnode refid="340" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="351">
+      <node id="343">
         <label>std::istream</label>
       </node>
-      <node id="350">
+      <node id="342">
         <label>ecto::py::streambuf::istream</label>
         <link refid="classecto_1_1py_1_1streambuf_1_1istream"/>
-        <childnode refid="351" relation="public-inheritance">
+        <childnode refid="343" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>

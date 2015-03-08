@@ -14,9 +14,9 @@
       </param>
     </templateparamlist>
       <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classecto_1_1ref__count_1a983fe76ebfb0351182fc31968bcbafd4" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classecto_1_1ref__count_1a766db0f4309f593f6c3086a1ebead3a5" prot="private" static="no" mutable="no">
         <type>Mutex_T &amp;</type>
-        <definition>Mutex_T &amp; ecto::ref_count&lt; Mutex_T, Count_T &gt;::m_</definition>
+        <definition>Mutex_T&amp; ecto::ref_count&lt; Mutex_T, Count_T &gt;::m_</definition>
         <argsstring></argsstring>
         <name>m_</name>
         <briefdescription>
@@ -25,11 +25,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp~" line="171" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp~" bodystart="171" bodyend="-1"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp" line="183" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp" bodystart="183" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classecto_1_1ref__count_1a156a5db53cf932f5dfe68b83bf3aca24" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classecto_1_1ref__count_1a689842816509f8f13710aee79b8c9898" prot="private" static="no" mutable="no">
         <type>Count_T &amp;</type>
-        <definition>Count_T &amp; ecto::ref_count&lt; Mutex_T, Count_T &gt;::t_</definition>
+        <definition>Count_T&amp; ecto::ref_count&lt; Mutex_T, Count_T &gt;::t_</definition>
         <argsstring></argsstring>
         <name>t_</name>
         <briefdescription>
@@ -38,7 +38,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp~" line="172" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp~" bodystart="172" bodyend="-1"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp" line="184" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp" bodystart="184" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp~" line="161" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp~" bodystart="161" bodyend="165"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp" line="173" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp" bodystart="173" bodyend="177"/>
       </memberdef>
       <memberdef kind="function" id="classecto_1_1ref__count_1a22b67e2d381344ff4c9b4c453bb47e23" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -74,54 +74,18 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp~" line="166" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp~" bodystart="166" bodyend="169"/>
-      </memberdef>
-      <memberdef kind="function" id="classecto_1_1ref__count_1a39fc7e105b142b7444a90dc6a3796828" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type></type>
-        <definition>ecto::ref_count&lt; Mutex_T, Count_T &gt;::ref_count</definition>
-        <argsstring>(Mutex_T &amp;m, Count_T &amp;t)</argsstring>
-        <name>ref_count</name>
-        <param>
-          <type>Mutex_T &amp;</type>
-          <declname>m</declname>
-        </param>
-        <param>
-          <type>Count_T &amp;</type>
-          <declname>t</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp" line="171" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp" bodystart="171" bodyend="175"/>
-      </memberdef>
-      <memberdef kind="function" id="classecto_1_1ref__count_1a22b67e2d381344ff4c9b4c453bb47e23" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type></type>
-        <definition>ecto::ref_count&lt; Mutex_T, Count_T &gt;::~ref_count</definition>
-        <argsstring>()</argsstring>
-        <name>~ref_count</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp" line="176" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp" bodystart="176" bodyend="179"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp" line="178" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp" bodystart="178" bodyend="181"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp~" line="159" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp~" bodystart="159" bodyend="173"/>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp" line="171" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp" bodystart="171" bodyend="185"/>
     <listofallmembers>
-      <member refid="classecto_1_1ref__count_1a983fe76ebfb0351182fc31968bcbafd4" prot="private" virt="non-virtual"><scope>ecto::ref_count</scope><name>m_</name></member>
+      <member refid="classecto_1_1ref__count_1a766db0f4309f593f6c3086a1ebead3a5" prot="private" virt="non-virtual"><scope>ecto::ref_count</scope><name>m_</name></member>
       <member refid="classecto_1_1ref__count_1a39fc7e105b142b7444a90dc6a3796828" prot="public" virt="non-virtual"><scope>ecto::ref_count</scope><name>ref_count</name></member>
-      <member refid="classecto_1_1ref__count_1a39fc7e105b142b7444a90dc6a3796828" prot="public" virt="non-virtual"><scope>ecto::ref_count</scope><name>ref_count</name></member>
-      <member refid="classecto_1_1ref__count_1a156a5db53cf932f5dfe68b83bf3aca24" prot="private" virt="non-virtual"><scope>ecto::ref_count</scope><name>t_</name></member>
-      <member refid="classecto_1_1ref__count_1a22b67e2d381344ff4c9b4c453bb47e23" prot="public" virt="non-virtual"><scope>ecto::ref_count</scope><name>~ref_count</name></member>
+      <member refid="classecto_1_1ref__count_1a689842816509f8f13710aee79b8c9898" prot="private" virt="non-virtual"><scope>ecto::ref_count</scope><name>t_</name></member>
       <member refid="classecto_1_1ref__count_1a22b67e2d381344ff4c9b4c453bb47e23" prot="public" virt="non-virtual"><scope>ecto::ref_count</scope><name>~ref_count</name></member>
     </listofallmembers>
   </compounddef>

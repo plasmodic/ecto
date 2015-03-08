@@ -25,9 +25,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="191" column="1"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp" line="191" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="namespaceboost_1a54199d7ccb025863b84b2b597328302c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="namespaceboost_1a50253cbebddb80700be930287ab2fcde" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class E</type>
@@ -40,7 +40,7 @@
           </param>
         </templateparamlist>
         <type>E const &amp;</type>
-        <definition>E const &amp; boost::operator&lt;&lt;</definition>
+        <definition>E const&amp; boost::operator&lt;&lt;</definition>
         <argsstring>(E const &amp;x, error_info&lt; ::ecto::except::detail::wrap&lt; Tag &gt;, T &gt; const &amp;v)</argsstring>
         <name>operator&lt;&lt;</name>
         <param>
@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="195" column="1"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp" line="195" column="1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

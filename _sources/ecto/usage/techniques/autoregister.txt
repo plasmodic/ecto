@@ -25,24 +25,6 @@ cell.
 This may be placed in any translation unit within the shared library,
 e.g. in a file Add.cpp that contains the code above.  
 
-.. _ecto_thread_unsafe:
-
-.. c:macro:: ECTO_THREAD_UNSAFE(CellType)
-
-Marks a cell type as thread unsafe; no two instances of this type will
-ever have their process methods called concurrently.  Example:
-
-.. code-block:: c++
-
-  struct ThreadUnsafeCell {
-    int process(const ecto::tendrils& inputs, ...)
-    // ...
-  };
-
-  ECTO_THREAD_UNSAFE(ThreadUnsafeCell);
-  ECTO_CELL(ecto_test, ThreadUnsafeCell, "ThreadUnsafeCell", 
-            "Do something dangerous with globals/statics");
-
 .. _ecto_define_module:
 
 .. c:macro:: ECTO_DEFINE_MODULE(pymodule_name)

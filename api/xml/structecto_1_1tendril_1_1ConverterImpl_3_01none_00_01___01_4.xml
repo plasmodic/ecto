@@ -74,37 +74,37 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="276">
+      <node id="272">
         <label>ecto::tendril::Converter</label>
         <link refid="structecto_1_1tendril_1_1Converter"/>
       </node>
-      <node id="275">
+      <node id="271">
         <label>ecto::tendril::ConverterImpl&lt; none, _ &gt;</label>
         <link refid="structecto_1_1tendril_1_1ConverterImpl_3_01none_00_01___01_4"/>
-        <childnode refid="276" relation="public-inheritance">
+        <childnode refid="272" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="278">
+      <node id="274">
         <label>ecto::tendril::Converter</label>
         <link refid="structecto_1_1tendril_1_1Converter"/>
       </node>
-      <node id="277">
+      <node id="273">
         <label>ecto::tendril::ConverterImpl&lt; none, _ &gt;</label>
         <link refid="structecto_1_1tendril_1_1ConverterImpl_3_01none_00_01___01_4"/>
-        <childnode refid="278" relation="public-inheritance">
+        <childnode refid="274" relation="public-inheritance">
         </childnode>
-        <childnode refid="279" relation="usage">
+        <childnode refid="275" relation="usage">
           <edgelabel>instance</edgelabel>
         </childnode>
       </node>
-      <node id="279">
+      <node id="275">
         <label>ecto::tendril::ConverterImpl&lt; ecto::tendril::none, _ &gt;</label>
         <link refid="structecto_1_1tendril_1_1ConverterImpl"/>
-        <childnode refid="278" relation="public-inheritance">
+        <childnode refid="274" relation="public-inheritance">
         </childnode>
-        <childnode refid="279" relation="usage">
+        <childnode refid="275" relation="usage">
           <edgelabel>instance</edgelabel>
         </childnode>
       </node>

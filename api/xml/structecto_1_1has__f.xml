@@ -11,7 +11,7 @@
       <sectiondef kind="public-type">
       <memberdef kind="enum" id="structecto_1_1has__f_1a37dd9c69c6cfed2ac70c2529d493d410" prot="public" static="no">
         <name>@0</name>
-        <enumvalue id="structecto_1_1has__f_1a8998dcad6a2d7da6cd0b1158089c6d08ae56dbd7ffd8a284535cce3d5af3580a7" prot="public">
+        <enumvalue id="structecto_1_1has__f_1a37dd9c69c6cfed2ac70c2529d493d410a41824f56b5af096de7e6ee2ccbe9943b" prot="public">
           <name>declare_params</name>
           <initializer>= sizeof(test_declare_params&lt;T&gt; (0)) == sizeof(yes)</initializer>
           <briefdescription>
@@ -29,7 +29,7 @@
       </memberdef>
       <memberdef kind="enum" id="structecto_1_1has__f_1abc0a1a04163d85af95636c6213729909" prot="public" static="no">
         <name>@1</name>
-        <enumvalue id="structecto_1_1has__f_1af2f06fa91e667772be9731d32548b94ca46e5e9b2bb07bc150e6f74c17e53ab33" prot="public">
+        <enumvalue id="structecto_1_1has__f_1abc0a1a04163d85af95636c6213729909ac01ab4ed00f005d55b0813ccb49166f2" prot="public">
           <name>declare_io</name>
           <initializer>= sizeof(test_declare_io&lt;T&gt; (0)) == sizeof(yes)</initializer>
           <briefdescription>
@@ -47,7 +47,7 @@
       </memberdef>
       <memberdef kind="enum" id="structecto_1_1has__f_1a173737354c871f8785a6bbe7640bda1d" prot="public" static="no">
         <name>@2</name>
-        <enumvalue id="structecto_1_1has__f_1a1958eba96f4107abadfe89cc067a42f9ae94b70f5e1b17c668eb0a405c2935209" prot="public">
+        <enumvalue id="structecto_1_1has__f_1a173737354c871f8785a6bbe7640bda1da1bc6475abb988c1b998c700d66894960" prot="public">
           <name>configure</name>
           <initializer>= sizeof(test_configure&lt;T&gt; (0)) == sizeof(yes)</initializer>
           <briefdescription>
@@ -65,7 +65,7 @@
       </memberdef>
       <memberdef kind="enum" id="structecto_1_1has__f_1a8f077b20e8dd579e1a427ac6c80c3d3f" prot="public" static="no">
         <name>@3</name>
-        <enumvalue id="structecto_1_1has__f_1a6d7dc18b2e3dc6e2466a405c13088084af52c138881600722d08741fffb3db5d8" prot="public">
+        <enumvalue id="structecto_1_1has__f_1a8f077b20e8dd579e1a427ac6c80c3d3fa848797161f1dda4f3676f4e2271ebe40" prot="public">
           <name>activate</name>
           <initializer>= sizeof(test_activate&lt;T&gt; (0)) == sizeof(yes)</initializer>
           <briefdescription>
@@ -83,7 +83,7 @@
       </memberdef>
       <memberdef kind="enum" id="structecto_1_1has__f_1afa9dc8feb074d51ee4600f20447b2724" prot="public" static="no">
         <name>@4</name>
-        <enumvalue id="structecto_1_1has__f_1a84ef2fb38c7882e9e6cc4e1f62ad88bdaaafdc40ecd57b016fa5205b75d01907e" prot="public">
+        <enumvalue id="structecto_1_1has__f_1afa9dc8feb074d51ee4600f20447b2724a0f0eba1c7cf0a59268313a95842a7b42" prot="public">
           <name>deactivate</name>
           <initializer>= sizeof(test_deactivate&lt;T&gt; (0)) == sizeof(yes)</initializer>
           <briefdescription>
@@ -101,7 +101,7 @@
       </memberdef>
       <memberdef kind="enum" id="structecto_1_1has__f_1a575b2f80b107061801e4c2ebd36bd2fc" prot="public" static="no">
         <name>@5</name>
-        <enumvalue id="structecto_1_1has__f_1acd60d393d00729a96f6407840b97a52aa2aa0b5c6e604720562dfc0c11fb509a4" prot="public">
+        <enumvalue id="structecto_1_1has__f_1a575b2f80b107061801e4c2ebd36bd2fcaa6d57b41a7edff0b538fbfddd6e1bf0e" prot="public">
           <name>process</name>
           <initializer>= sizeof(test_process&lt;T&gt; (0)) == sizeof(yes)</initializer>
           <briefdescription>
@@ -119,7 +119,7 @@
       </memberdef>
       <memberdef kind="enum" id="structecto_1_1has__f_1a2f5a531214c34e93b8efd059afed9348" prot="public" static="no">
         <name>@6</name>
-        <enumvalue id="structecto_1_1has__f_1ab8a599463b6343f6af4c1f465284d2b2ac7031abc908db36ec1b498167454340e" prot="public">
+        <enumvalue id="structecto_1_1has__f_1a2f5a531214c34e93b8efd059afed9348a210df924551c3e6407abe7c1f12b85d0" prot="public">
           <name>start</name>
           <initializer>= sizeof(test_start&lt;T&gt; (0)) == sizeof(yes)</initializer>
           <briefdescription>
@@ -137,7 +137,7 @@
       </memberdef>
       <memberdef kind="enum" id="structecto_1_1has__f_1af1ab6e8ed499c6c3b404cd7aeda85c87" prot="public" static="no">
         <name>@7</name>
-        <enumvalue id="structecto_1_1has__f_1a9992271f06f38c11ce0df64bf2f71570a97bc71e1e9d2872882dd1d067c95770d" prot="public">
+        <enumvalue id="structecto_1_1has__f_1af1ab6e8ed499c6c3b404cd7aeda85c87a6db3f78bcdda21cf158666ed1f9dfead" prot="public">
           <name>stop</name>
           <initializer>= sizeof(test_stop&lt;T&gt; (0)) == sizeof(yes)</initializer>
           <briefdescription>
@@ -152,150 +152,6 @@
         <inbodydescription>
         </inbodydescription>
         <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="327" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" bodystart="326" bodyend="329"/>
-      </memberdef>
-      <memberdef kind="enum" id="structecto_1_1has__f_1a8998dcad6a2d7da6cd0b1158089c6d08" prot="public" static="no">
-        <name>@8</name>
-        <enumvalue id="structecto_1_1has__f_1a8998dcad6a2d7da6cd0b1158089c6d08ae56dbd7ffd8a284535cce3d5af3580a7" prot="public">
-          <name>declare_params</name>
-          <initializer>= sizeof(test_declare_params&lt;T&gt; (0)) == sizeof(yes)</initializer>
-          <briefdescription>
-          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="249" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" bodystart="248" bodyend="251"/>
-      </memberdef>
-      <memberdef kind="enum" id="structecto_1_1has__f_1af2f06fa91e667772be9731d32548b94c" prot="public" static="no">
-        <name>@9</name>
-        <enumvalue id="structecto_1_1has__f_1af2f06fa91e667772be9731d32548b94ca46e5e9b2bb07bc150e6f74c17e53ab33" prot="public">
-          <name>declare_io</name>
-          <initializer>= sizeof(test_declare_io&lt;T&gt; (0)) == sizeof(yes)</initializer>
-          <briefdescription>
-          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="258" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" bodystart="257" bodyend="260"/>
-      </memberdef>
-      <memberdef kind="enum" id="structecto_1_1has__f_1a1958eba96f4107abadfe89cc067a42f9" prot="public" static="no">
-        <name>@10</name>
-        <enumvalue id="structecto_1_1has__f_1a1958eba96f4107abadfe89cc067a42f9ae94b70f5e1b17c668eb0a405c2935209" prot="public">
-          <name>configure</name>
-          <initializer>= sizeof(test_configure&lt;T&gt; (0)) == sizeof(yes)</initializer>
-          <briefdescription>
-          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="267" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" bodystart="266" bodyend="269"/>
-      </memberdef>
-      <memberdef kind="enum" id="structecto_1_1has__f_1a6d7dc18b2e3dc6e2466a405c13088084" prot="public" static="no">
-        <name>@11</name>
-        <enumvalue id="structecto_1_1has__f_1a6d7dc18b2e3dc6e2466a405c13088084af52c138881600722d08741fffb3db5d8" prot="public">
-          <name>activate</name>
-          <initializer>= sizeof(test_activate&lt;T&gt; (0)) == sizeof(yes)</initializer>
-          <briefdescription>
-          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="276" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" bodystart="275" bodyend="278"/>
-      </memberdef>
-      <memberdef kind="enum" id="structecto_1_1has__f_1a84ef2fb38c7882e9e6cc4e1f62ad88bd" prot="public" static="no">
-        <name>@12</name>
-        <enumvalue id="structecto_1_1has__f_1a84ef2fb38c7882e9e6cc4e1f62ad88bdaaafdc40ecd57b016fa5205b75d01907e" prot="public">
-          <name>deactivate</name>
-          <initializer>= sizeof(test_deactivate&lt;T&gt; (0)) == sizeof(yes)</initializer>
-          <briefdescription>
-          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="285" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" bodystart="284" bodyend="287"/>
-      </memberdef>
-      <memberdef kind="enum" id="structecto_1_1has__f_1acd60d393d00729a96f6407840b97a52a" prot="public" static="no">
-        <name>@13</name>
-        <enumvalue id="structecto_1_1has__f_1acd60d393d00729a96f6407840b97a52aa2aa0b5c6e604720562dfc0c11fb509a4" prot="public">
-          <name>process</name>
-          <initializer>= sizeof(test_process&lt;T&gt; (0)) == sizeof(yes)</initializer>
-          <briefdescription>
-          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="294" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" bodystart="293" bodyend="296"/>
-      </memberdef>
-      <memberdef kind="enum" id="structecto_1_1has__f_1ab8a599463b6343f6af4c1f465284d2b2" prot="public" static="no">
-        <name>@14</name>
-        <enumvalue id="structecto_1_1has__f_1ab8a599463b6343f6af4c1f465284d2b2ac7031abc908db36ec1b498167454340e" prot="public">
-          <name>start</name>
-          <initializer>= sizeof(test_start&lt;T&gt; (0)) == sizeof(yes)</initializer>
-          <briefdescription>
-          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="303" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" bodystart="302" bodyend="305"/>
-      </memberdef>
-      <memberdef kind="enum" id="structecto_1_1has__f_1a9992271f06f38c11ce0df64bf2f71570" prot="public" static="no">
-        <name>@15</name>
-        <enumvalue id="structecto_1_1has__f_1a9992271f06f38c11ce0df64bf2f71570a97bc71e1e9d2872882dd1d067c95770d" prot="public">
-          <name>stop</name>
-          <initializer>= sizeof(test_stop&lt;T&gt; (0)) == sizeof(yes)</initializer>
-          <briefdescription>
-          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="312" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" bodystart="311" bodyend="314"/>
       </memberdef>
       <memberdef kind="typedef" id="structecto_1_1has__f_1a3fb902f1eed02919195aff1a6b28eb76" prot="public" static="no">
         <type>char</type>
@@ -323,32 +179,6 @@
         </inbodydescription>
         <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="255" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" bodystart="255" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="structecto_1_1has__f_1a3fb902f1eed02919195aff1a6b28eb76" prot="public" static="no">
-        <type>char</type>
-        <definition>typedef char ecto::has_f&lt; T &gt;::yes</definition>
-        <argsstring></argsstring>
-        <name>yes</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="239" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" bodystart="239" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="structecto_1_1has__f_1ae0c6da775cf20caed616e24681af2807" prot="public" static="no">
-        <type>char(&amp;</type>
-        <definition>typedef char(&amp; ecto::has_f&lt; T &gt;::no)[2]</definition>
-        <argsstring>)[2]</argsstring>
-        <name>no</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="240" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" bodystart="240" bodyend="-1"/>
-      </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-func">
       <memberdef kind="function" id="structecto_1_1has__f_1ae63216bd7936dc02af86363f8db74b2e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -362,7 +192,7 @@
         <argsstring>(__typeof__(&amp;U::declare_params))</argsstring>
         <name>test_declare_params</name>
         <param>
-          <type>__typeof__ &amp;::<ref refid="structecto_1_1has__f_1a8998dcad6a2d7da6cd0b1158089c6d08ae56dbd7ffd8a284535cce3d5af3580a7" kindref="member">declare_params</ref></type>
+          <type>__typeof__ &amp;::<ref refid="structecto_1_1has__f_1a37dd9c69c6cfed2ac70c2529d493d410a41824f56b5af096de7e6ee2ccbe9943b" kindref="member">declare_params</ref></type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -404,7 +234,7 @@
         <argsstring>(__typeof__(&amp;U::declare_io))</argsstring>
         <name>test_declare_io</name>
         <param>
-          <type>__typeof__ &amp;::<ref refid="structecto_1_1has__f_1af2f06fa91e667772be9731d32548b94ca46e5e9b2bb07bc150e6f74c17e53ab33" kindref="member">declare_io</ref></type>
+          <type>__typeof__ &amp;::<ref refid="structecto_1_1has__f_1abc0a1a04163d85af95636c6213729909ac01ab4ed00f005d55b0813ccb49166f2" kindref="member">declare_io</ref></type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -446,7 +276,7 @@
         <argsstring>(__typeof__(&amp;U::configure))</argsstring>
         <name>test_configure</name>
         <param>
-          <type>__typeof__ &amp;::<ref refid="structecto_1_1has__f_1a1958eba96f4107abadfe89cc067a42f9ae94b70f5e1b17c668eb0a405c2935209" kindref="member">configure</ref></type>
+          <type>__typeof__ &amp;::<ref refid="structecto_1_1has__f_1a173737354c871f8785a6bbe7640bda1da1bc6475abb988c1b998c700d66894960" kindref="member">configure</ref></type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -488,7 +318,7 @@
         <argsstring>(__typeof__(&amp;U::activate))</argsstring>
         <name>test_activate</name>
         <param>
-          <type>__typeof__ &amp;::<ref refid="structecto_1_1has__f_1a6d7dc18b2e3dc6e2466a405c13088084af52c138881600722d08741fffb3db5d8" kindref="member">activate</ref></type>
+          <type>__typeof__ &amp;::<ref refid="structecto_1_1has__f_1a8f077b20e8dd579e1a427ac6c80c3d3fa848797161f1dda4f3676f4e2271ebe40" kindref="member">activate</ref></type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -530,7 +360,7 @@
         <argsstring>(__typeof__(&amp;U::deactivate))</argsstring>
         <name>test_deactivate</name>
         <param>
-          <type>__typeof__ &amp;::<ref refid="structecto_1_1has__f_1a84ef2fb38c7882e9e6cc4e1f62ad88bdaaafdc40ecd57b016fa5205b75d01907e" kindref="member">deactivate</ref></type>
+          <type>__typeof__ &amp;::<ref refid="structecto_1_1has__f_1afa9dc8feb074d51ee4600f20447b2724a0f0eba1c7cf0a59268313a95842a7b42" kindref="member">deactivate</ref></type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -572,7 +402,7 @@
         <argsstring>(__typeof__(&amp;U::process))</argsstring>
         <name>test_process</name>
         <param>
-          <type>__typeof__ &amp;::<ref refid="structecto_1_1has__f_1acd60d393d00729a96f6407840b97a52aa2aa0b5c6e604720562dfc0c11fb509a4" kindref="member">process</ref></type>
+          <type>__typeof__ &amp;::<ref refid="structecto_1_1has__f_1a575b2f80b107061801e4c2ebd36bd2fcaa6d57b41a7edff0b538fbfddd6e1bf0e" kindref="member">process</ref></type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -614,7 +444,7 @@
         <argsstring>(__typeof__(&amp;U::start))</argsstring>
         <name>test_start</name>
         <param>
-          <type>__typeof__ &amp;::<ref refid="structecto_1_1has__f_1ab8a599463b6343f6af4c1f465284d2b2ac7031abc908db36ec1b498167454340e" kindref="member">start</ref></type>
+          <type>__typeof__ &amp;::<ref refid="structecto_1_1has__f_1a2f5a531214c34e93b8efd059afed9348a210df924551c3e6407abe7c1f12b85d0" kindref="member">start</ref></type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -656,7 +486,7 @@
         <argsstring>(__typeof__(&amp;U::stop))</argsstring>
         <name>test_stop</name>
         <param>
-          <type>__typeof__ &amp;::<ref refid="structecto_1_1has__f_1a9992271f06f38c11ce0df64bf2f71570a97bc71e1e9d2872882dd1d067c95770d" kindref="member">stop</ref></type>
+          <type>__typeof__ &amp;::<ref refid="structecto_1_1has__f_1af1ab6e8ed499c6c3b404cd7aeda85c87a6db3f78bcdda21cf158666ed1f9dfead" kindref="member">stop</ref></type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -687,342 +517,6 @@
         </inbodydescription>
         <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="325" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="structecto_1_1has__f_1ae63216bd7936dc02af86363f8db74b2e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class U</type>
-          </param>
-        </templateparamlist>
-        <type><ref refid="structecto_1_1has__f_1a3fb902f1eed02919195aff1a6b28eb76" kindref="member">yes</ref></type>
-        <definition>static yes ecto::has_f&lt; T &gt;::test_declare_params</definition>
-        <argsstring>(__typeof__(&amp;U::declare_params))</argsstring>
-        <name>test_declare_params</name>
-        <param>
-          <type>__typeof__ &amp;::<ref refid="structecto_1_1has__f_1a8998dcad6a2d7da6cd0b1158089c6d08ae56dbd7ffd8a284535cce3d5af3580a7" kindref="member">declare_params</ref></type>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="245" column="1"/>
-      </memberdef>
-      <memberdef kind="function" id="structecto_1_1has__f_1ab2f2693b1d6084a672893777893b9ab2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class U</type>
-          </param>
-        </templateparamlist>
-        <type><ref refid="structecto_1_1has__f_1ae0c6da775cf20caed616e24681af2807" kindref="member">no</ref></type>
-        <definition>static no ecto::has_f&lt; T &gt;::test_declare_params</definition>
-        <argsstring>(...)</argsstring>
-        <name>test_declare_params</name>
-        <param>
-          <type>...</type>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="247" column="1"/>
-      </memberdef>
-      <memberdef kind="function" id="structecto_1_1has__f_1a042de0d066c5b000186594964deea94e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class U</type>
-          </param>
-        </templateparamlist>
-        <type><ref refid="structecto_1_1has__f_1a3fb902f1eed02919195aff1a6b28eb76" kindref="member">yes</ref></type>
-        <definition>static yes ecto::has_f&lt; T &gt;::test_declare_io</definition>
-        <argsstring>(__typeof__(&amp;U::declare_io))</argsstring>
-        <name>test_declare_io</name>
-        <param>
-          <type>__typeof__ &amp;::<ref refid="structecto_1_1has__f_1af2f06fa91e667772be9731d32548b94ca46e5e9b2bb07bc150e6f74c17e53ab33" kindref="member">declare_io</ref></type>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="254" column="1"/>
-      </memberdef>
-      <memberdef kind="function" id="structecto_1_1has__f_1ad144a46699c480e7851fbd36394a1fe3" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class U</type>
-          </param>
-        </templateparamlist>
-        <type><ref refid="structecto_1_1has__f_1ae0c6da775cf20caed616e24681af2807" kindref="member">no</ref></type>
-        <definition>static no ecto::has_f&lt; T &gt;::test_declare_io</definition>
-        <argsstring>(...)</argsstring>
-        <name>test_declare_io</name>
-        <param>
-          <type>...</type>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="256" column="1"/>
-      </memberdef>
-      <memberdef kind="function" id="structecto_1_1has__f_1a6665bfebbc796527bc1a775803ebd18e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class U</type>
-          </param>
-        </templateparamlist>
-        <type><ref refid="structecto_1_1has__f_1a3fb902f1eed02919195aff1a6b28eb76" kindref="member">yes</ref></type>
-        <definition>static yes ecto::has_f&lt; T &gt;::test_configure</definition>
-        <argsstring>(__typeof__(&amp;U::configure))</argsstring>
-        <name>test_configure</name>
-        <param>
-          <type>__typeof__ &amp;::<ref refid="structecto_1_1has__f_1a1958eba96f4107abadfe89cc067a42f9ae94b70f5e1b17c668eb0a405c2935209" kindref="member">configure</ref></type>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="263" column="1"/>
-      </memberdef>
-      <memberdef kind="function" id="structecto_1_1has__f_1afc5065e1043ffe865662840f3a9d82fd" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class U</type>
-          </param>
-        </templateparamlist>
-        <type><ref refid="structecto_1_1has__f_1ae0c6da775cf20caed616e24681af2807" kindref="member">no</ref></type>
-        <definition>static no ecto::has_f&lt; T &gt;::test_configure</definition>
-        <argsstring>(...)</argsstring>
-        <name>test_configure</name>
-        <param>
-          <type>...</type>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="265" column="1"/>
-      </memberdef>
-      <memberdef kind="function" id="structecto_1_1has__f_1a2212643cf55b3264654bc654df699cb7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class U</type>
-          </param>
-        </templateparamlist>
-        <type><ref refid="structecto_1_1has__f_1a3fb902f1eed02919195aff1a6b28eb76" kindref="member">yes</ref></type>
-        <definition>static yes ecto::has_f&lt; T &gt;::test_activate</definition>
-        <argsstring>(__typeof__(&amp;U::activate))</argsstring>
-        <name>test_activate</name>
-        <param>
-          <type>__typeof__ &amp;::<ref refid="structecto_1_1has__f_1a6d7dc18b2e3dc6e2466a405c13088084af52c138881600722d08741fffb3db5d8" kindref="member">activate</ref></type>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="272" column="1"/>
-      </memberdef>
-      <memberdef kind="function" id="structecto_1_1has__f_1a2f43dbf6bee3d172c280f00e8fe73c33" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class U</type>
-          </param>
-        </templateparamlist>
-        <type><ref refid="structecto_1_1has__f_1ae0c6da775cf20caed616e24681af2807" kindref="member">no</ref></type>
-        <definition>static no ecto::has_f&lt; T &gt;::test_activate</definition>
-        <argsstring>(...)</argsstring>
-        <name>test_activate</name>
-        <param>
-          <type>...</type>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="274" column="1"/>
-      </memberdef>
-      <memberdef kind="function" id="structecto_1_1has__f_1ae924c11bc0462d832fdd8ea97bd3599d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class U</type>
-          </param>
-        </templateparamlist>
-        <type><ref refid="structecto_1_1has__f_1a3fb902f1eed02919195aff1a6b28eb76" kindref="member">yes</ref></type>
-        <definition>static yes ecto::has_f&lt; T &gt;::test_deactivate</definition>
-        <argsstring>(__typeof__(&amp;U::deactivate))</argsstring>
-        <name>test_deactivate</name>
-        <param>
-          <type>__typeof__ &amp;::<ref refid="structecto_1_1has__f_1a84ef2fb38c7882e9e6cc4e1f62ad88bdaaafdc40ecd57b016fa5205b75d01907e" kindref="member">deactivate</ref></type>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="281" column="1"/>
-      </memberdef>
-      <memberdef kind="function" id="structecto_1_1has__f_1ab8c699587d6f7d476d09b693227f5373" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class U</type>
-          </param>
-        </templateparamlist>
-        <type><ref refid="structecto_1_1has__f_1ae0c6da775cf20caed616e24681af2807" kindref="member">no</ref></type>
-        <definition>static no ecto::has_f&lt; T &gt;::test_deactivate</definition>
-        <argsstring>(...)</argsstring>
-        <name>test_deactivate</name>
-        <param>
-          <type>...</type>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="283" column="1"/>
-      </memberdef>
-      <memberdef kind="function" id="structecto_1_1has__f_1a4e6f5942e9ee41196b52f7c728baf547" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class U</type>
-          </param>
-        </templateparamlist>
-        <type><ref refid="structecto_1_1has__f_1a3fb902f1eed02919195aff1a6b28eb76" kindref="member">yes</ref></type>
-        <definition>static yes ecto::has_f&lt; T &gt;::test_process</definition>
-        <argsstring>(__typeof__(&amp;U::process))</argsstring>
-        <name>test_process</name>
-        <param>
-          <type>__typeof__ &amp;::<ref refid="structecto_1_1has__f_1acd60d393d00729a96f6407840b97a52aa2aa0b5c6e604720562dfc0c11fb509a4" kindref="member">process</ref></type>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="290" column="1"/>
-      </memberdef>
-      <memberdef kind="function" id="structecto_1_1has__f_1a75ec2b3763995883f3a5dd1b19097439" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class U</type>
-          </param>
-        </templateparamlist>
-        <type><ref refid="structecto_1_1has__f_1ae0c6da775cf20caed616e24681af2807" kindref="member">no</ref></type>
-        <definition>static no ecto::has_f&lt; T &gt;::test_process</definition>
-        <argsstring>(...)</argsstring>
-        <name>test_process</name>
-        <param>
-          <type>...</type>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="292" column="1"/>
-      </memberdef>
-      <memberdef kind="function" id="structecto_1_1has__f_1aa88ebe0fd23a4e875704da0d62ce489c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class U</type>
-          </param>
-        </templateparamlist>
-        <type><ref refid="structecto_1_1has__f_1a3fb902f1eed02919195aff1a6b28eb76" kindref="member">yes</ref></type>
-        <definition>static yes ecto::has_f&lt; T &gt;::test_start</definition>
-        <argsstring>(__typeof__(&amp;U::start))</argsstring>
-        <name>test_start</name>
-        <param>
-          <type>__typeof__ &amp;::<ref refid="structecto_1_1has__f_1ab8a599463b6343f6af4c1f465284d2b2ac7031abc908db36ec1b498167454340e" kindref="member">start</ref></type>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="299" column="1"/>
-      </memberdef>
-      <memberdef kind="function" id="structecto_1_1has__f_1a089044f39fac5f7ea53eec64799c4619" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class U</type>
-          </param>
-        </templateparamlist>
-        <type><ref refid="structecto_1_1has__f_1ae0c6da775cf20caed616e24681af2807" kindref="member">no</ref></type>
-        <definition>static no ecto::has_f&lt; T &gt;::test_start</definition>
-        <argsstring>(...)</argsstring>
-        <name>test_start</name>
-        <param>
-          <type>...</type>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="301" column="1"/>
-      </memberdef>
-      <memberdef kind="function" id="structecto_1_1has__f_1a4de2275b91096c6e6d1efc2f137c380f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class U</type>
-          </param>
-        </templateparamlist>
-        <type><ref refid="structecto_1_1has__f_1a3fb902f1eed02919195aff1a6b28eb76" kindref="member">yes</ref></type>
-        <definition>static yes ecto::has_f&lt; T &gt;::test_stop</definition>
-        <argsstring>(__typeof__(&amp;U::stop))</argsstring>
-        <name>test_stop</name>
-        <param>
-          <type>__typeof__ &amp;::<ref refid="structecto_1_1has__f_1a9992271f06f38c11ce0df64bf2f71570a97bc71e1e9d2872882dd1d067c95770d" kindref="member">stop</ref></type>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="308" column="1"/>
-      </memberdef>
-      <memberdef kind="function" id="structecto_1_1has__f_1a97d550e44f5260b40ddd0722bdd6f274" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class U</type>
-          </param>
-        </templateparamlist>
-        <type><ref refid="structecto_1_1has__f_1ae0c6da775cf20caed616e24681af2807" kindref="member">no</ref></type>
-        <definition>static no ecto::has_f&lt; T &gt;::test_stop</definition>
-        <argsstring>(...)</argsstring>
-        <name>test_stop</name>
-        <param>
-          <type>...</type>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="310" column="1"/>
-      </memberdef>
       </sectiondef>
     <briefdescription>
 <para>Helper class for determining if client modules have function implementations or not. </para>    </briefdescription>
@@ -1030,49 +524,31 @@
     </detaileddescription>
     <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="253" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" bodystart="252" bodyend="330"/>
     <listofallmembers>
-      <member refid="structecto_1_1has__f_1a6d7dc18b2e3dc6e2466a405c13088084af52c138881600722d08741fffb3db5d8" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>activate</name></member>
-      <member refid="structecto_1_1has__f_1a1958eba96f4107abadfe89cc067a42f9ae94b70f5e1b17c668eb0a405c2935209" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>configure</name></member>
-      <member refid="structecto_1_1has__f_1a84ef2fb38c7882e9e6cc4e1f62ad88bdaaafdc40ecd57b016fa5205b75d01907e" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>deactivate</name></member>
-      <member refid="structecto_1_1has__f_1af2f06fa91e667772be9731d32548b94ca46e5e9b2bb07bc150e6f74c17e53ab33" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>declare_io</name></member>
-      <member refid="structecto_1_1has__f_1a8998dcad6a2d7da6cd0b1158089c6d08ae56dbd7ffd8a284535cce3d5af3580a7" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>declare_params</name></member>
+      <member refid="structecto_1_1has__f_1a8f077b20e8dd579e1a427ac6c80c3d3fa848797161f1dda4f3676f4e2271ebe40" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>activate</name></member>
+      <member refid="structecto_1_1has__f_1a173737354c871f8785a6bbe7640bda1da1bc6475abb988c1b998c700d66894960" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>configure</name></member>
+      <member refid="structecto_1_1has__f_1afa9dc8feb074d51ee4600f20447b2724a0f0eba1c7cf0a59268313a95842a7b42" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>deactivate</name></member>
+      <member refid="structecto_1_1has__f_1abc0a1a04163d85af95636c6213729909ac01ab4ed00f005d55b0813ccb49166f2" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>declare_io</name></member>
+      <member refid="structecto_1_1has__f_1a37dd9c69c6cfed2ac70c2529d493d410a41824f56b5af096de7e6ee2ccbe9943b" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>declare_params</name></member>
       <member refid="structecto_1_1has__f_1ae0c6da775cf20caed616e24681af2807" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>no</name></member>
-      <member refid="structecto_1_1has__f_1ae0c6da775cf20caed616e24681af2807" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>no</name></member>
-      <member refid="structecto_1_1has__f_1acd60d393d00729a96f6407840b97a52aa2aa0b5c6e604720562dfc0c11fb509a4" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>process</name></member>
-      <member refid="structecto_1_1has__f_1ab8a599463b6343f6af4c1f465284d2b2ac7031abc908db36ec1b498167454340e" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>start</name></member>
-      <member refid="structecto_1_1has__f_1a9992271f06f38c11ce0df64bf2f71570a97bc71e1e9d2872882dd1d067c95770d" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>stop</name></member>
-      <member refid="structecto_1_1has__f_1a2212643cf55b3264654bc654df699cb7" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_activate</name></member>
-      <member refid="structecto_1_1has__f_1a2f43dbf6bee3d172c280f00e8fe73c33" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_activate</name></member>
+      <member refid="structecto_1_1has__f_1a575b2f80b107061801e4c2ebd36bd2fcaa6d57b41a7edff0b538fbfddd6e1bf0e" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>process</name></member>
+      <member refid="structecto_1_1has__f_1a2f5a531214c34e93b8efd059afed9348a210df924551c3e6407abe7c1f12b85d0" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>start</name></member>
+      <member refid="structecto_1_1has__f_1af1ab6e8ed499c6c3b404cd7aeda85c87a6db3f78bcdda21cf158666ed1f9dfead" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>stop</name></member>
       <member refid="structecto_1_1has__f_1a2212643cf55b3264654bc654df699cb7" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_activate</name></member>
       <member refid="structecto_1_1has__f_1a2f43dbf6bee3d172c280f00e8fe73c33" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_activate</name></member>
       <member refid="structecto_1_1has__f_1a6665bfebbc796527bc1a775803ebd18e" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_configure</name></member>
       <member refid="structecto_1_1has__f_1afc5065e1043ffe865662840f3a9d82fd" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_configure</name></member>
-      <member refid="structecto_1_1has__f_1a6665bfebbc796527bc1a775803ebd18e" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_configure</name></member>
-      <member refid="structecto_1_1has__f_1afc5065e1043ffe865662840f3a9d82fd" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_configure</name></member>
-      <member refid="structecto_1_1has__f_1ae924c11bc0462d832fdd8ea97bd3599d" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_deactivate</name></member>
-      <member refid="structecto_1_1has__f_1ab8c699587d6f7d476d09b693227f5373" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_deactivate</name></member>
       <member refid="structecto_1_1has__f_1ae924c11bc0462d832fdd8ea97bd3599d" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_deactivate</name></member>
       <member refid="structecto_1_1has__f_1ab8c699587d6f7d476d09b693227f5373" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_deactivate</name></member>
       <member refid="structecto_1_1has__f_1a042de0d066c5b000186594964deea94e" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_declare_io</name></member>
       <member refid="structecto_1_1has__f_1ad144a46699c480e7851fbd36394a1fe3" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_declare_io</name></member>
-      <member refid="structecto_1_1has__f_1a042de0d066c5b000186594964deea94e" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_declare_io</name></member>
-      <member refid="structecto_1_1has__f_1ad144a46699c480e7851fbd36394a1fe3" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_declare_io</name></member>
-      <member refid="structecto_1_1has__f_1ae63216bd7936dc02af86363f8db74b2e" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_declare_params</name></member>
-      <member refid="structecto_1_1has__f_1ab2f2693b1d6084a672893777893b9ab2" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_declare_params</name></member>
       <member refid="structecto_1_1has__f_1ae63216bd7936dc02af86363f8db74b2e" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_declare_params</name></member>
       <member refid="structecto_1_1has__f_1ab2f2693b1d6084a672893777893b9ab2" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_declare_params</name></member>
       <member refid="structecto_1_1has__f_1a4e6f5942e9ee41196b52f7c728baf547" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_process</name></member>
       <member refid="structecto_1_1has__f_1a75ec2b3763995883f3a5dd1b19097439" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_process</name></member>
-      <member refid="structecto_1_1has__f_1a4e6f5942e9ee41196b52f7c728baf547" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_process</name></member>
-      <member refid="structecto_1_1has__f_1a75ec2b3763995883f3a5dd1b19097439" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_process</name></member>
-      <member refid="structecto_1_1has__f_1aa88ebe0fd23a4e875704da0d62ce489c" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_start</name></member>
-      <member refid="structecto_1_1has__f_1a089044f39fac5f7ea53eec64799c4619" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_start</name></member>
       <member refid="structecto_1_1has__f_1aa88ebe0fd23a4e875704da0d62ce489c" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_start</name></member>
       <member refid="structecto_1_1has__f_1a089044f39fac5f7ea53eec64799c4619" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_start</name></member>
       <member refid="structecto_1_1has__f_1a4de2275b91096c6e6d1efc2f137c380f" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_stop</name></member>
       <member refid="structecto_1_1has__f_1a97d550e44f5260b40ddd0722bdd6f274" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_stop</name></member>
-      <member refid="structecto_1_1has__f_1a4de2275b91096c6e6d1efc2f137c380f" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_stop</name></member>
-      <member refid="structecto_1_1has__f_1a97d550e44f5260b40ddd0722bdd6f274" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>test_stop</name></member>
-      <member refid="structecto_1_1has__f_1a3fb902f1eed02919195aff1a6b28eb76" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>yes</name></member>
       <member refid="structecto_1_1has__f_1a3fb902f1eed02919195aff1a6b28eb76" prot="public" virt="non-virtual"><scope>ecto::has_f</scope><name>yes</name></member>
     </listofallmembers>
   </compounddef>

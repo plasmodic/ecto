@@ -4,132 +4,86 @@
     <compoundname>test.hpp</compoundname>
     <includedby refid="log_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/log.hpp</includedby>
     <invincdepgraph>
-      <node id="2421">
+      <node id="1783">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/log.hpp</label>
         <link refid="log_8hpp"/>
-        <childnode refid="2422" relation="include">
+        <childnode refid="1784" relation="include">
         </childnode>
-        <childnode refid="2430" relation="include">
+        <childnode refid="1790" relation="include">
         </childnode>
-        <childnode refid="2431" relation="include">
+        <childnode refid="1792" relation="include">
         </childnode>
-        <childnode refid="2432" relation="include">
-        </childnode>
-        <childnode refid="2434" relation="include">
-        </childnode>
-        <childnode refid="2436" relation="include">
-        </childnode>
-        <childnode refid="2437" relation="include">
+        <childnode refid="1793" relation="include">
         </childnode>
       </node>
-      <node id="2433">
+      <node id="1791">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/vertex.hpp</label>
         <link refid="vertex_8hpp"/>
-        <childnode refid="2426" relation="include">
-        </childnode>
-        <childnode refid="2427" relation="include">
+        <childnode refid="1787" relation="include">
         </childnode>
       </node>
-      <node id="2435">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/vertex.hpp~</label>
-        <link refid="vertex_8hpp~"/>
-      </node>
-      <node id="2437">
+      <node id="1793">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/registry.hpp</label>
         <link refid="serialization_2registry_8hpp"/>
       </node>
-      <node id="2426">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp~</label>
-        <link refid="all_8hpp~"/>
-      </node>
-      <node id="2430">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~</label>
-        <link refid="cell_8hpp~"/>
-      </node>
-      <node id="2425">
+      <node id="1786">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/ecto.hpp</label>
         <link refid="ecto_8hpp"/>
-        <childnode refid="2426" relation="include">
-        </childnode>
-        <childnode refid="2427" relation="include">
+        <childnode refid="1787" relation="include">
         </childnode>
       </node>
-      <node id="2436">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp~</label>
-        <link refid="profile_8hpp~"/>
-      </node>
-      <node id="2427">
+      <node id="1787">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp</label>
         <link refid="all_8hpp"/>
       </node>
-      <node id="2428">
+      <node id="1788">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/cell.hpp</label>
         <link refid="serialization_2cell_8hpp"/>
       </node>
-      <node id="2420">
+      <node id="1782">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/test.hpp</label>
         <link refid="test.hpp"/>
-        <childnode refid="2421" relation="include">
+        <childnode refid="1783" relation="include">
         </childnode>
       </node>
-      <node id="2423">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/ecto.hpp~</label>
-        <link refid="ecto_8hpp~"/>
-      </node>
-      <node id="2429">
+      <node id="1789">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/module.hpp</label>
         <link refid="module_8hpp"/>
-        <childnode refid="2423" relation="include">
-        </childnode>
-        <childnode refid="2425" relation="include">
+        <childnode refid="1786" relation="include">
         </childnode>
       </node>
-      <node id="2434">
+      <node id="1792">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp</label>
         <link refid="scheduler_8hpp"/>
       </node>
-      <node id="2424">
+      <node id="1785">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp</label>
         <link refid="registry_8hpp"/>
-        <childnode refid="2423" relation="include">
+        <childnode refid="1786" relation="include">
         </childnode>
-        <childnode refid="2425" relation="include">
+        <childnode refid="1788" relation="include">
         </childnode>
-        <childnode refid="2428" relation="include">
-        </childnode>
-        <childnode refid="2429" relation="include">
+        <childnode refid="1789" relation="include">
         </childnode>
       </node>
-      <node id="2422">
+      <node id="1784">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp</label>
         <link refid="cell_8hpp"/>
-        <childnode refid="2423" relation="include">
+        <childnode refid="1785" relation="include">
         </childnode>
-        <childnode refid="2424" relation="include">
+        <childnode refid="1786" relation="include">
         </childnode>
-        <childnode refid="2426" relation="include">
+        <childnode refid="1787" relation="include">
         </childnode>
-        <childnode refid="2425" relation="include">
-        </childnode>
-        <childnode refid="2427" relation="include">
-        </childnode>
-        <childnode refid="2428" relation="include">
+        <childnode refid="1788" relation="include">
         </childnode>
       </node>
-      <node id="2432">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp~</label>
-        <link refid="scheduler_8hpp~"/>
-      </node>
-      <node id="2431">
+      <node id="1790">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp</label>
         <link refid="profile_8hpp"/>
-        <childnode refid="2432" relation="include">
+        <childnode refid="1791" relation="include">
         </childnode>
-        <childnode refid="2433" relation="include">
-        </childnode>
-        <childnode refid="2434" relation="include">
-        </childnode>
-        <childnode refid="2435" relation="include">
+        <childnode refid="1792" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

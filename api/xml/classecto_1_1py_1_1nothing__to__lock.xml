@@ -37,24 +37,24 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="377">
+      <node id="369">
         <label>noncopyable</label>
       </node>
-      <node id="376">
+      <node id="368">
         <label>ecto::py::nothing_to_lock</label>
         <link refid="classecto_1_1py_1_1nothing__to__lock"/>
-        <childnode refid="377" relation="private-inheritance">
+        <childnode refid="369" relation="private-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="379">
+      <node id="371">
         <label>noncopyable</label>
       </node>
-      <node id="378">
+      <node id="370">
         <label>ecto::py::nothing_to_lock</label>
         <link refid="classecto_1_1py_1_1nothing__to__lock"/>
-        <childnode refid="379" relation="private-inheritance">
+        <childnode refid="371" relation="private-inheritance">
         </childnode>
       </node>
     </collaborationgraph>

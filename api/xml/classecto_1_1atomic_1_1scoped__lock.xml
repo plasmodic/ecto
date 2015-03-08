@@ -58,24 +58,24 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="434">
+      <node id="426">
         <label>ecto::atomic&lt; T &gt;::scoped_lock</label>
         <link refid="classecto_1_1atomic_1_1scoped__lock"/>
-        <childnode refid="435" relation="private-inheritance">
+        <childnode refid="427" relation="private-inheritance">
         </childnode>
       </node>
-      <node id="435">
+      <node id="427">
         <label>noncopyable</label>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="436">
+      <node id="428">
         <label>ecto::atomic&lt; T &gt;::scoped_lock</label>
         <link refid="classecto_1_1atomic_1_1scoped__lock"/>
-        <childnode refid="437" relation="private-inheritance">
+        <childnode refid="429" relation="private-inheritance">
         </childnode>
       </node>
-      <node id="437">
+      <node id="429">
         <label>noncopyable</label>
       </node>
     </collaborationgraph>

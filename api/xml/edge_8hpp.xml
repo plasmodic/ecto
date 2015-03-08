@@ -5,48 +5,41 @@
     <includes refid="element_8hpp" local="no">ecto/element.hpp</includes>
     <includes refid="forward_8hpp" local="no">ecto/forward.hpp</includes>
     <includes local="no">boost/shared_ptr.hpp</includes>
-    <includedby refid="all_8hpp~" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp~</includedby>
     <includedby refid="all_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp</includedby>
     <incdepgraph>
-      <node id="1669">
+      <node id="1167">
         <label>boost/shared_ptr.hpp</label>
       </node>
-      <node id="1668">
+      <node id="1166">
         <label>ecto/forward.hpp</label>
         <link refid="forward_8hpp"/>
-        <childnode refid="1669" relation="include">
+        <childnode refid="1167" relation="include">
         </childnode>
       </node>
-      <node id="1666">
+      <node id="1164">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/edge.hpp</label>
         <link refid="edge.hpp"/>
-        <childnode refid="1667" relation="include">
+        <childnode refid="1165" relation="include">
         </childnode>
-        <childnode refid="1668" relation="include">
+        <childnode refid="1166" relation="include">
         </childnode>
-        <childnode refid="1669" relation="include">
+        <childnode refid="1167" relation="include">
         </childnode>
       </node>
-      <node id="1667">
+      <node id="1165">
         <label>ecto/element.hpp</label>
         <link refid="element_8hpp"/>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="1671">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp~</label>
-        <link refid="all_8hpp~"/>
-      </node>
-      <node id="1672">
+      <node id="1169">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp</label>
         <link refid="all_8hpp"/>
       </node>
-      <node id="1670">
+      <node id="1168">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/edge.hpp</label>
         <link refid="edge.hpp"/>
-        <childnode refid="1671" relation="include">
-        </childnode>
-        <childnode refid="1672" relation="include">
+        <childnode refid="1169" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

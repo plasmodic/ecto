@@ -72,26 +72,26 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="410">
+      <node id="402">
         <label>noncopyable</label>
       </node>
-      <node id="409">
+      <node id="401">
         <label>ecto::serialization::register_serializer&lt; T &gt;</label>
         <link refid="structecto_1_1serialization_1_1register__serializer"/>
-        <childnode refid="410" relation="public-inheritance">
+        <childnode refid="402" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="412">
+      <node id="404">
         <label>noncopyable</label>
       </node>
-      <node id="411">
+      <node id="403">
         <label>ecto::serialization::register_serializer&lt; T &gt;</label>
         <link refid="structecto_1_1serialization_1_1register__serializer"/>
-        <childnode refid="412" relation="public-inheritance">
+        <childnode refid="404" relation="public-inheritance">
         </childnode>
-        <childnode refid="411" relation="usage">
+        <childnode refid="403" relation="usage">
           <edgelabel>instance</edgelabel>
         </childnode>
       </node>

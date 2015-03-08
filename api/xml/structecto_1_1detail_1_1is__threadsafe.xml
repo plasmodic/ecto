@@ -14,24 +14,24 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="343">
+      <node id="335">
         <label>ecto::detail::is_threadsafe&lt; T &gt;</label>
         <link refid="structecto_1_1detail_1_1is__threadsafe"/>
-        <childnode refid="344" relation="public-inheritance">
+        <childnode refid="336" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="344">
+      <node id="336">
         <label>boost::mpl::true_</label>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="345">
+      <node id="337">
         <label>ecto::detail::is_threadsafe&lt; T &gt;</label>
         <link refid="structecto_1_1detail_1_1is__threadsafe"/>
-        <childnode refid="346" relation="public-inheritance">
+        <childnode refid="338" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="346">
+      <node id="338">
         <label>boost::mpl::true_</label>
       </node>
     </collaborationgraph>

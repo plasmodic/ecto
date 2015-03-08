@@ -17,9 +17,9 @@
         </inbodydescription>
         <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp" line="88" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp" bodystart="88" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="structecto_1_1profile_1_1stats__collector_1a1814bc20f4bd96a974fa629249816603" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="structecto_1_1profile_1_1stats__collector_1a2c206fb60ea04b5162ec43a609f2a185" prot="public" static="no" mutable="no">
         <type><ref refid="structecto_1_1profile_1_1stats__type" kindref="compound">stats_type</ref> &amp;</type>
-        <definition>stats_type &amp; ecto::profile::stats_collector::stats</definition>
+        <definition>stats_type&amp; ecto::profile::stats_collector::stats</definition>
         <argsstring></argsstring>
         <name>stats</name>
         <briefdescription>
@@ -30,9 +30,9 @@
         </inbodydescription>
         <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp" line="89" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp" bodystart="89" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="structecto_1_1profile_1_1stats__collector_1a8322226b54061aa2cdccd1461d7fbc4e" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="structecto_1_1profile_1_1stats__collector_1ac3d5d7adf91b02719a6b897869683f03" prot="public" static="no" mutable="no">
         <type>const std::string &amp;</type>
-        <definition>const std::string &amp; ecto::profile::stats_collector::instancename</definition>
+        <definition>const std::string&amp; ecto::profile::stats_collector::instancename</definition>
         <argsstring></argsstring>
         <name>instancename</name>
         <briefdescription>
@@ -79,66 +79,30 @@
         </inbodydescription>
         <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp" line="100" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp" bodystart="100" bodyend="105"/>
       </memberdef>
-      <memberdef kind="function" id="structecto_1_1profile_1_1stats__collector_1adae561b196f7ec50f42ba76031924ee4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type></type>
-        <definition>ecto::profile::stats_collector::stats_collector</definition>
-        <argsstring>(const std::string &amp;n, stats_type &amp;stats)</argsstring>
-        <name>stats_collector</name>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>n</declname>
-        </param>
-        <param>
-          <type><ref refid="structecto_1_1profile_1_1stats__type" kindref="compound">stats_type</ref> &amp;</type>
-          <declname>stats</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp~" line="93" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp~" bodystart="93" bodyend="99"/>
-      </memberdef>
-      <memberdef kind="function" id="structecto_1_1profile_1_1stats__collector_1aa1521de3406025190b06d0b7bad33064" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type></type>
-        <definition>ecto::profile::stats_collector::~stats_collector</definition>
-        <argsstring>()</argsstring>
-        <name>~stats_collector</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp~" line="101" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp~" bodystart="101" bodyend="106"/>
-      </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
     <collaborationgraph>
-      <node id="444">
+      <node id="436">
         <label>ecto::profile::stats_type</label>
         <link refid="structecto_1_1profile_1_1stats__type"/>
       </node>
-      <node id="443">
+      <node id="435">
         <label>ecto::profile::stats_collector</label>
         <link refid="structecto_1_1profile_1_1stats__collector"/>
-        <childnode refid="444" relation="usage">
+        <childnode refid="436" relation="usage">
           <edgelabel>stats</edgelabel>
         </childnode>
       </node>
     </collaborationgraph>
     <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp" line="87" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp" bodystart="86" bodyend="106"/>
     <listofallmembers>
-      <member refid="structecto_1_1profile_1_1stats__collector_1a8322226b54061aa2cdccd1461d7fbc4e" prot="public" virt="non-virtual"><scope>ecto::profile::stats_collector</scope><name>instancename</name></member>
+      <member refid="structecto_1_1profile_1_1stats__collector_1ac3d5d7adf91b02719a6b897869683f03" prot="public" virt="non-virtual"><scope>ecto::profile::stats_collector</scope><name>instancename</name></member>
       <member refid="structecto_1_1profile_1_1stats__collector_1ae607313a8ecc75d6a6ab201cdf7c2d61" prot="public" virt="non-virtual"><scope>ecto::profile::stats_collector</scope><name>start</name></member>
-      <member refid="structecto_1_1profile_1_1stats__collector_1a1814bc20f4bd96a974fa629249816603" prot="public" virt="non-virtual"><scope>ecto::profile::stats_collector</scope><name>stats</name></member>
+      <member refid="structecto_1_1profile_1_1stats__collector_1a2c206fb60ea04b5162ec43a609f2a185" prot="public" virt="non-virtual"><scope>ecto::profile::stats_collector</scope><name>stats</name></member>
       <member refid="structecto_1_1profile_1_1stats__collector_1adae561b196f7ec50f42ba76031924ee4" prot="public" virt="non-virtual"><scope>ecto::profile::stats_collector</scope><name>stats_collector</name></member>
-      <member refid="structecto_1_1profile_1_1stats__collector_1adae561b196f7ec50f42ba76031924ee4" prot="public" virt="non-virtual"><scope>ecto::profile::stats_collector</scope><name>stats_collector</name></member>
-      <member refid="structecto_1_1profile_1_1stats__collector_1aa1521de3406025190b06d0b7bad33064" prot="public" virt="non-virtual"><scope>ecto::profile::stats_collector</scope><name>~stats_collector</name></member>
       <member refid="structecto_1_1profile_1_1stats__collector_1aa1521de3406025190b06d0b7bad33064" prot="public" virt="non-virtual"><scope>ecto::profile::stats_collector</scope><name>~stats_collector</name></member>
     </listofallmembers>
   </compounddef>

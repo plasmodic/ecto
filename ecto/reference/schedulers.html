@@ -57,8 +57,9 @@
   <h3><a href="../../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">schedulers</a><ul>
-<li><a class="reference internal" href="#singlethreaded">Singlethreaded</a></li>
-<li><a class="reference internal" href="#reentrant-running">Reentrant running</a></li>
+<li><a class="reference internal" href="#standalone-scheduler">Standalone Scheduler</a></li>
+<li><a class="reference internal" href="#threaded-execution">Threaded Execution</a></li>
+<li><a class="reference internal" href="#multiplasm-scheduler">MultiPlasm Scheduler</a></li>
 </ul>
 </li>
 </ul>
@@ -97,17 +98,17 @@
             
   <div class="section" id="schedulers">
 <span id="index-0"></span><span id="id1"></span><h1>schedulers<a class="headerlink" href="#schedulers" title="Permalink to this headline">¶</a></h1>
-<p>The schedulers operate on the plasm.  There are singlethreaded and
-threadpool schedulers.  Yes, the name <em>scheduler</em> is a little dry, and
+<p>The schedulers operate on the plasm.
+Yes, the name <em>scheduler</em> is a little dry, and
 some think a plasm should have a <em>metabolism</em> or <em>Krebs Cycle</em>
 instead, but there were no motivating name collisions (as with
 &#8216;node&#8217;).</p>
 <p>All schedulers should implement a basic interface for construction and
-execution (the same as the interface as the Singlethreaded scheduler
+execution (the same as the interface as the standalone Scheduler
 implements); scheduler-specific functions and parameters may exist
 outside this set.</p>
-<div class="section" id="singlethreaded">
-<h2>Singlethreaded<a class="headerlink" href="#singlethreaded" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="standalone-scheduler">
+<h2>Standalone Scheduler<a class="headerlink" href="#standalone-scheduler" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="ecto.Scheduler">
 <em class="property">class </em><tt class="descclassname">ecto.</tt><tt class="descname">Scheduler</tt><a class="headerlink" href="#ecto.Scheduler" title="Permalink to this definition">¶</a></dt>
@@ -140,36 +141,199 @@ execution is finished.</p>
 <dl class="method">
 <dt>
 <tt class="descname">execute_async</tt><big>(</big><em>niter</em><big>)</big></dt>
-<dd><p>These functions are the same as the blocking ones above, except
-they start an execution thread in the background and return
-immediately.</p>
+<dd><p>NOT (YET) IMPLEMENTED - These functions non-blocking versions of their
+execute*() counterparts. They start an execution thread in the
+background and return immediately.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Scheduler.prepare_jobs">
+<tt class="descname">prepare_jobs</tt><big>(</big><big>)</big><a class="headerlink" href="#ecto.Scheduler.prepare_jobs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<tt class="descname">prepare_jobs</tt><big>(</big><em>niter</em><big>)</big></dt>
+<dd><p>Prepare jobs for a manually scheduled execution via run() or run_jobs()</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.Scheduler.run">
+<tt class="descname">run</tt><big>(</big><big>)</big><a class="headerlink" href="#ecto.Scheduler.run" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<tt class="descname">run</tt><big>(</big><em>timeout_usec</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ecto.Scheduler.run_job">
+<tt class="descname">run_job</tt><big>(</big><big>)</big><a class="headerlink" href="#ecto.Scheduler.run_job" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiple methods to running scheduled jobs.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="ecto.Scheduler.running">
 <tt class="descname">running</tt><big>(</big><big>)</big><a class="headerlink" href="#ecto.Scheduler.running" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns true if the execution started by execute_async() is still running.</p>
+<dd><p>Returns true if a scheduled execution is still running.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="ecto.Scheduler.stop">
 <tt class="descname">stop</tt><big>(</big><big>)</big><a class="headerlink" href="#ecto.Scheduler.stop" title="Permalink to this definition">¶</a></dt>
-<dd><p>Stops the background graph execution at the end of the current process() call and block until it is stopped</p>
+<dd><p>If you&#8217;ve put the execution in the background (e.g. via a thread with one of the
+run* methods), then this stops the background graph execution at the end of the
+current process() call. It blocks until it is stopped</p>
 </dd></dl>
 
 </dd></dl>
 
 </div>
-<div class="section" id="reentrant-running">
-<h2>Reentrant running<a class="headerlink" href="#reentrant-running" title="Permalink to this headline">¶</a></h2>
-<p>The schedulers are fully reentrant, meaning, that when you stop(), on a scheduler it may be executed again.</p>
-<p>The following code is therefore valid for any ecto scheduler:</p>
+<div class="section" id="threaded-execution">
+<h2>Threaded Execution<a class="headerlink" href="#threaded-execution" title="Permalink to this headline">¶</a></h2>
+<p>Calling the core scheduler&#8217;s api, either via execute() or as a sequence of prepare_jobs() and
+run*() commands will execute the plasm sequentially in the current thread. To drive the execution
+of a plasm in the background simply make use of the prepare_jobs() and run() commands via python threads.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">s</span> <span class="o">=</span> <span class="n">Sheduler</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-<span class="n">s</span><span class="o">.</span><span class="n">execute_async</span><span class="p">()</span>
-<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">s</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-<span class="n">s</span><span class="o">.</span><span class="n">execute_async</span><span class="p">()</span>
-<span class="k">assert</span> <span class="n">s</span><span class="o">.</span><span class="n">running</span><span class="p">()</span>
+<span class="n">s</span><span class="o">.</span><span class="n">prepare_jobs</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">execution_thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">run</span><span class="p">)</span>
+<span class="n">execution_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="c"># do some work</span>
+<span class="n">execution_thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This scheduler is fully reentrant, meaning, that when you stop() it may be executed again at which
+point it will result running whatever jobs were remaining when it stopped.</p>
+<p>In future there should be an execute_async() implementation that will be a non-blocking counterpart to the
+blocking execute() functionality.</p>
+</div>
+<div class="section" id="multiplasm-scheduler">
+<h2>MultiPlasm Scheduler<a class="headerlink" href="#multiplasm-scheduler" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ecto.MultiPlasmScheduler">
+<em class="property">class </em><tt class="descclassname">ecto.</tt><tt class="descname">MultiPlasmScheduler</tt><a class="headerlink" href="#ecto.MultiPlasmScheduler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scheduler for parallelising continual execution of multiple plasms.</p>
+<dl class="method">
+<dt id="ecto.MultiPlasmScheduler.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>plasm_dict</em>, <em>disable_qt_management</em><big>)</big><a class="headerlink" href="#ecto.MultiPlasmScheduler.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialises the scheduler with a dictionary of name (string) and plasm key value pairs.
+<tt class="docutils literal"><span class="pre">disable_qt_management</span></tt> is there to ensure that any qt applications, especially imshows
+are closed down (or not) when the scheduler finishes spinning. This is especially useful
+as a parallelised set of plasms all work from a single QApplication instance - this
+ensures that control of them is handled from a single central location.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.MultiPlasmScheduler.spin">
+<tt class="descname">spin</tt><big>(</big><big>)</big><a class="headerlink" href="#ecto.MultiPlasmScheduler.spin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Puts each plasm&#8217;s execution in a thread and initiates them all. This blocks until all threads
+are exited.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ecto.MultiPlasmScheduler.print_statistics">
+<tt class="descname">print_statistics</tt><big>(</big><big>)</big><a class="headerlink" href="#ecto.MultiPlasmScheduler.print_statistics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call this after spinning has finished - this will print the runtime statistics of each plasm&#8217;s
+execution.</p>
+</dd></dl>
+
+</dd></dl>
+
+<p>It can be useful to execute your plasms in parallel, particularly if they are required to execute at different
+rates. Purely independant plasms can simply be run as described above, each in a separate thread. These can
+also be executed rather simply via the multiplasm scheduler. Consider the following triplet of plasms:</p>
+<p class="graphviz">
+<img src="../../_images/graphviz-267105060c0b5efb06afe6703b253d19ac29aa55.png" alt="digraph G
+{
+  subgraph cluster_odometry {
+    label=&quot;1kHz&quot;;
+    a-&gt;b;
+  }
+  subgraph cluster_tracking {
+    label=&quot;30Hz&quot;;
+    c-&gt;d;
+    d-&gt;e;
+    d-&gt;f;
+    e-&gt;g;
+    g-&gt;h;
+    f-&gt;h;
+  }
+  subgraph cluster_mapping {
+    label=&quot;1Hz&quot;;
+    i-&gt;j;
+    j-&gt;k;
+    k-&gt;l;
+  }
+
+
+b [color=&quot;red&quot;];
+d [color=&quot;red&quot;];
+f [color=&quot;blue&quot;];
+i [color=&quot;blue&quot;];
+}" />
+</p>
+<p>Python ectoscript code for scheduling this in a perpetual loop:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># construct plasms</span>
+<span class="n">plasms</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="s">&quot;odometry&quot;</span><span class="p">:</span> <span class="n">plasm_odometry</span><span class="p">,</span>
+      <span class="s">&quot;tracking&quot;</span><span class="p">:</span> <span class="n">plasm_tracking</span><span class="p">,</span>
+      <span class="s">&quot;mapping&quot;</span> <span class="p">:</span> <span class="n">plasm_mapping</span><span class="p">,</span>
+     <span class="p">}</span>
+<span class="n">scheduler</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">ThreadedScheduler</span><span class="p">(</span><span class="n">plasms</span><span class="p">)</span>
+<span class="n">scheduler</span><span class="o">.</span><span class="n">spin</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The interesting use cases however are those for which there are points of convergence in
+each ecto plasm&#8217;s pipeline. For example, the above plasms may represent the flows for
+incoming odometry (1kHz), visual tracking (30Hz) and background mapping (1Hz). Each is
+a distinct pipeline, with either transfer of data or event triggers taking place at
+particular points.</p>
+<p>The python ecto script to handle this is exactly the same, we only make sure that both the
+red cells in the first and second plasm are in fact the same cell. Similarly for the blue cells.
+For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">plasm_odometry</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>   <span class="n">a</span><span class="p">[</span><span class="s">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span> <span class="n">red</span><span class="p">[</span><span class="s">&quot;in1&quot;</span><span class="p">])</span>
+
+<span class="n">plasm_tracking</span><span class="o">.</span><span class="n">connect</span><span class="p">([</span>  <span class="n">c</span><span class="p">[</span><span class="s">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span> <span class="n">red</span><span class="p">[</span><span class="s">&quot;in2&quot;</span><span class="p">],</span>
+                        <span class="n">red</span><span class="p">[</span><span class="s">&quot;out1&quot;</span><span class="p">]</span> <span class="o">&gt;&gt;</span>   <span class="n">e</span><span class="p">[</span><span class="s">&quot;in&quot;</span><span class="p">]</span>
+                        <span class="n">red</span><span class="p">[</span><span class="s">&quot;out2&quot;</span><span class="p">]</span> <span class="o">&gt;&gt;</span>   <span class="n">f</span><span class="p">[</span><span class="s">&quot;in&quot;</span><span class="p">]</span>
+                          <span class="n">e</span><span class="p">[</span><span class="s">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span>   <span class="n">g</span><span class="p">[</span><span class="s">&quot;in&quot;</span><span class="p">]</span>
+                          <span class="n">f</span><span class="p">[</span><span class="s">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span>   <span class="n">h</span><span class="p">[</span><span class="s">&quot;in1&quot;</span><span class="p">]</span>
+                          <span class="n">g</span><span class="p">[</span><span class="s">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span>   <span class="n">h</span><span class="p">[</span><span class="s">&quot;in2&quot;</span><span class="p">]</span>
+                       <span class="p">]</span>
+                      <span class="p">)</span>
+<span class="c"># ...</span>
+</pre></div>
+</div>
+<p>Of course, this mean&#8217;s that red&#8217;s <tt class="docutils literal"><span class="pre">process()</span></tt> function may be called simultaneously
+from multiple threads and sensitive code must be protected with mutexes. You will also note
+in this example that the inputs to red are different in both plasms - if you wish to
+distinguish this from inside the <tt class="docutils literal"><span class="pre">process()</span></tt> function you will have to enable the cell&#8217;s
+<tt class="docutils literal"><span class="pre">connected_inputs_only</span></tt> parameter:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">red</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">MyCell</span><span class="p">(</span><span class="n">connected_inputs_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">plasm_odometry</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>   <span class="n">a</span><span class="p">[</span><span class="s">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span> <span class="n">red</span><span class="p">[</span><span class="s">&quot;in1&quot;</span><span class="p">])</span>
+
+<span class="n">plasm_tracking</span><span class="o">.</span><span class="n">connect</span><span class="p">([</span>  <span class="n">c</span><span class="p">[</span><span class="s">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span> <span class="n">red</span><span class="p">[</span><span class="s">&quot;in2&quot;</span><span class="p">],</span>
+                        <span class="n">red</span><span class="p">[</span><span class="s">&quot;out1&quot;</span><span class="p">]</span> <span class="o">&gt;&gt;</span>   <span class="n">e</span><span class="p">[</span><span class="s">&quot;in&quot;</span><span class="p">]</span>
+                        <span class="n">red</span><span class="p">[</span><span class="s">&quot;out2&quot;</span><span class="p">]</span> <span class="o">&gt;&gt;</span>   <span class="n">f</span><span class="p">[</span><span class="s">&quot;in&quot;</span><span class="p">]</span>
+                          <span class="n">e</span><span class="p">[</span><span class="s">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span>   <span class="n">g</span><span class="p">[</span><span class="s">&quot;in&quot;</span><span class="p">]</span>
+                          <span class="n">f</span><span class="p">[</span><span class="s">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span>   <span class="n">h</span><span class="p">[</span><span class="s">&quot;in1&quot;</span><span class="p">]</span>
+                          <span class="n">g</span><span class="p">[</span><span class="s">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span>   <span class="n">h</span><span class="p">[</span><span class="s">&quot;in2&quot;</span><span class="p">]</span>
+                       <span class="p">]</span>
+                      <span class="p">)</span>
+<span class="c"># ...</span>
+</pre></div>
+</div>
+<p>and check the input tendrils to the process function. For example:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="kt">int</span> <span class="nf">process</span><span class="p">(</span><span class="k">const</span> <span class="n">ecto</span><span class="o">::</span><span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">in</span><span class="p">,</span> <span class="k">const</span> <span class="n">ecto</span><span class="o">::</span><span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="n">in</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;in1&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="n">in</span><span class="p">.</span><span class="n">end</span><span class="p">()</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="n">processIn1</span><span class="p">(</span><span class="n">in</span><span class="p">,</span> <span class="n">out</span><span class="p">);</span>
+ <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">in</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;in2&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="n">in</span><span class="p">.</span><span class="n">end</span><span class="p">()</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="n">processIn2</span><span class="p">(</span><span class="n">in</span><span class="p">,</span> <span class="n">out</span><span class="p">);</span>
+ <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+   <span class="n">processIdle</span><span class="p">(</span><span class="n">in</span><span class="p">,</span> <span class="n">out</span><span class="p">);</span>
+ <span class="p">}</span>
 </pre></div>
 </div>
 </div>

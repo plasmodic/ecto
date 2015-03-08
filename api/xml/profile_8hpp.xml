@@ -8,123 +8,103 @@
     <includes refid="util_8hpp" local="no">ecto/util.hpp</includes>
     <includes refid="log_8hpp" local="no">ecto/log.hpp</includes>
     <includes local="no">boost/date_time/posix_time/posix_time.hpp</includes>
-    <includedby refid="scheduler_8hpp~" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp~</includedby>
     <includedby refid="vertex_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/vertex.hpp</includedby>
     <includedby refid="scheduler_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp</includedby>
-    <includedby refid="vertex_8hpp~" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/vertex.hpp~</includedby>
     <incdepgraph>
-      <node id="1961">
+      <node id="1384">
         <label>ecto/log.hpp</label>
         <link refid="log_8hpp"/>
-        <childnode refid="1962" relation="include">
+        <childnode refid="1385" relation="include">
         </childnode>
-        <childnode refid="1957" relation="include">
+        <childnode refid="1380" relation="include">
         </childnode>
-        <childnode refid="1963" relation="include">
+        <childnode refid="1386" relation="include">
         </childnode>
-        <childnode refid="1953" relation="include">
+        <childnode refid="1376" relation="include">
         </childnode>
       </node>
-      <node id="1956">
+      <node id="1379">
         <label>boost/shared_ptr.hpp</label>
       </node>
-      <node id="1953">
+      <node id="1376">
         <label>stdint.h</label>
       </node>
-      <node id="1955">
+      <node id="1378">
         <label>ecto/forward.hpp</label>
         <link refid="forward_8hpp"/>
-        <childnode refid="1956" relation="include">
+        <childnode refid="1379" relation="include">
         </childnode>
       </node>
-      <node id="1960">
+      <node id="1383">
         <label>string</label>
       </node>
-      <node id="1957">
+      <node id="1380">
         <label>ecto/util.hpp</label>
         <link refid="util_8hpp"/>
-        <childnode refid="1958" relation="include">
+        <childnode refid="1381" relation="include">
         </childnode>
-        <childnode refid="1959" relation="include">
+        <childnode refid="1382" relation="include">
         </childnode>
-        <childnode refid="1960" relation="include">
+        <childnode refid="1383" relation="include">
         </childnode>
       </node>
-      <node id="1963">
+      <node id="1386">
         <label>ecto/test.hpp</label>
         <link refid="test_8hpp"/>
       </node>
-      <node id="1962">
+      <node id="1385">
         <label>ecto/config.hpp</label>
       </node>
-      <node id="1964">
+      <node id="1387">
         <label>boost/date_time/posix_time/posix_time.hpp</label>
       </node>
-      <node id="1959">
+      <node id="1382">
         <label>typeinfo</label>
       </node>
-      <node id="1954">
+      <node id="1377">
         <label>Python.h</label>
       </node>
-      <node id="1958">
+      <node id="1381">
         <label>iostream</label>
       </node>
-      <node id="1952">
+      <node id="1375">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp</label>
         <link refid="profile.hpp"/>
-        <childnode refid="1953" relation="include">
+        <childnode refid="1376" relation="include">
         </childnode>
-        <childnode refid="1954" relation="include">
+        <childnode refid="1377" relation="include">
         </childnode>
-        <childnode refid="1955" relation="include">
+        <childnode refid="1378" relation="include">
         </childnode>
-        <childnode refid="1957" relation="include">
+        <childnode refid="1380" relation="include">
         </childnode>
-        <childnode refid="1961" relation="include">
+        <childnode refid="1384" relation="include">
         </childnode>
-        <childnode refid="1964" relation="include">
+        <childnode refid="1387" relation="include">
         </childnode>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="1967">
+      <node id="1389">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/vertex.hpp</label>
         <link refid="vertex_8hpp"/>
-        <childnode refid="1968" relation="include">
-        </childnode>
-        <childnode refid="1969" relation="include">
+        <childnode refid="1390" relation="include">
         </childnode>
       </node>
-      <node id="1971">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/vertex.hpp~</label>
-        <link refid="vertex_8hpp~"/>
-      </node>
-      <node id="1968">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp~</label>
-        <link refid="all_8hpp~"/>
-      </node>
-      <node id="1969">
+      <node id="1390">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp</label>
         <link refid="all_8hpp"/>
       </node>
-      <node id="1970">
+      <node id="1391">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp</label>
         <link refid="scheduler_8hpp"/>
       </node>
-      <node id="1966">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp~</label>
-        <link refid="scheduler_8hpp~"/>
-      </node>
-      <node id="1965">
+      <node id="1388">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp</label>
         <link refid="profile.hpp"/>
-        <childnode refid="1966" relation="include">
+        <childnode refid="1389" relation="include">
         </childnode>
-        <childnode refid="1967" relation="include">
-        </childnode>
-        <childnode refid="1970" relation="include">
-        </childnode>
-        <childnode refid="1971" relation="include">
+        <childnode refid="1391" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -193,11 +173,11 @@
 <codeline lineno="52"><highlight class="normal"></highlight></codeline>
 <codeline lineno="53" refid="structecto_1_1profile_1_1graphstats__collector" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structecto_1_1profile_1_1graphstats__collector" kindref="compound">graphstats_collector</ref></highlight></codeline>
 <codeline lineno="54"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="55" refid="structecto_1_1profile_1_1graphstats__collector_1ad2a745e661114e28bd044844bf2b60fd" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="structecto_1_1profile_1_1graph__stats__type" kindref="compound">graph_stats_type</ref>&amp;<sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1ad2a745e661114e28bd044844bf2b60fd" kindref="member">gs_</ref>;</highlight></codeline>
+<codeline lineno="55" refid="structecto_1_1profile_1_1graphstats__collector_1a4a6ceeeffacb5f69edc173d5aaf3cf89" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="structecto_1_1profile_1_1graph__stats__type" kindref="compound">graph_stats_type</ref>&amp;<sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1a4a6ceeeffacb5f69edc173d5aaf3cf89" kindref="member">gs_</ref>;</highlight></codeline>
 <codeline lineno="56" refid="structecto_1_1profile_1_1graphstats__collector_1a85cb67d72c9d1072634b879776e2e4b8" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>boost::posix_time::ptime<sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1a85cb67d72c9d1072634b879776e2e4b8" kindref="member">start_time</ref>;</highlight></codeline>
 <codeline lineno="57" refid="structecto_1_1profile_1_1graphstats__collector_1a7a840b075fd490da5107ea538614d017" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1a7a840b075fd490da5107ea538614d017" kindref="member">start_tick</ref>;</highlight></codeline>
 <codeline lineno="58" refid="structecto_1_1profile_1_1graphstats__collector_1a375c75ce1c0197d1d87a5fc1bdf97050" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1a375c75ce1c0197d1d87a5fc1bdf97050" kindref="member">graphstats_collector</ref>(<ref refid="structecto_1_1profile_1_1graph__stats__type" kindref="compound">graph_stats_type</ref>&amp;<sp/>gs)</highlight></codeline>
-<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1ad2a745e661114e28bd044844bf2b60fd" kindref="member">gs_</ref>(gs)</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1a4a6ceeeffacb5f69edc173d5aaf3cf89" kindref="member">gs_</ref>(gs)</highlight></codeline>
 <codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>,<sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1a85cb67d72c9d1072634b879776e2e4b8" kindref="member">start_time</ref>(boost::posix_time::microsec_clock::<ref refid="namespaceecto_1ad48a07c99914e7c96702bcce4baf6bc6" kindref="member">universal_time</ref>())</highlight></codeline>
 <codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>,<sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1a7a840b075fd490da5107ea538614d017" kindref="member">start_tick</ref>(profile::read_tsc())</highlight></codeline>
 <codeline lineno="62"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
@@ -208,8 +188,8 @@
 <codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>stop_tick<sp/>=<sp/><ref refid="namespaceecto_1_1profile_1aedec79d10deb5a37a71464c79a02187a" kindref="member">profile::read_tsc</ref>();</highlight></codeline>
 <codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>boost::posix_time::ptime<sp/>stop_time<sp/>=</highlight></codeline>
 <codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespaceecto_1ad48a07c99914e7c96702bcce4baf6bc6" kindref="member">boost::posix_time::microsec_clock::universal_time</ref>();</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1ad2a745e661114e28bd044844bf2b60fd" kindref="member">gs_</ref>.<ref refid="structecto_1_1profile_1_1graph__stats__type_1a340d79ae72ca5639e55098c860640ba8" kindref="member">cumulative_time</ref><sp/><sp/>+=<sp/>stop_time<sp/>-<sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1a85cb67d72c9d1072634b879776e2e4b8" kindref="member">start_time</ref>;</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1ad2a745e661114e28bd044844bf2b60fd" kindref="member">gs_</ref>.<ref refid="structecto_1_1profile_1_1graph__stats__type_1a0d465d23569a8af1789c0b57ccb21017" kindref="member">cumulative_ticks</ref><sp/>+=<sp/>stop_tick<sp/>-<sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1a7a840b075fd490da5107ea538614d017" kindref="member">start_tick</ref>;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1a4a6ceeeffacb5f69edc173d5aaf3cf89" kindref="member">gs_</ref>.<ref refid="structecto_1_1profile_1_1graph__stats__type_1a340d79ae72ca5639e55098c860640ba8" kindref="member">cumulative_time</ref><sp/><sp/>+=<sp/>stop_time<sp/>-<sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1a85cb67d72c9d1072634b879776e2e4b8" kindref="member">start_time</ref>;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1a4a6ceeeffacb5f69edc173d5aaf3cf89" kindref="member">gs_</ref>.<ref refid="structecto_1_1profile_1_1graph__stats__type_1a0d465d23569a8af1789c0b57ccb21017" kindref="member">cumulative_ticks</ref><sp/>+=<sp/>stop_tick<sp/>-<sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1a7a840b075fd490da5107ea538614d017" kindref="member">start_tick</ref>;</highlight></codeline>
 <codeline lineno="72"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
 <codeline lineno="73"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="74"><highlight class="normal"></highlight></codeline>
@@ -227,8 +207,8 @@
 <codeline lineno="86" refid="structecto_1_1profile_1_1stats__collector" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="util_8hpp_1ab55b7868679cda60fc162580957fb98c" kindref="member">ECTO_EXPORT</ref><sp/><ref refid="structecto_1_1profile_1_1stats__collector" kindref="compound">stats_collector</ref></highlight></codeline>
 <codeline lineno="87"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="88" refid="structecto_1_1profile_1_1stats__collector_1ae607313a8ecc75d6a6ab201cdf7c2d61" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/><ref refid="structecto_1_1profile_1_1stats__collector_1ae607313a8ecc75d6a6ab201cdf7c2d61" kindref="member">start</ref>;</highlight></codeline>
-<codeline lineno="89" refid="structecto_1_1profile_1_1stats__collector_1a1814bc20f4bd96a974fa629249816603" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="structecto_1_1profile_1_1stats__type" kindref="compound">stats_type</ref>&amp;<sp/><ref refid="structecto_1_1profile_1_1stats__collector_1a1814bc20f4bd96a974fa629249816603" kindref="member">stats</ref>;</highlight></codeline>
-<codeline lineno="90" refid="structecto_1_1profile_1_1stats__collector_1a8322226b54061aa2cdccd1461d7fbc4e" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/><ref refid="structecto_1_1profile_1_1stats__collector_1a8322226b54061aa2cdccd1461d7fbc4e" kindref="member">instancename</ref>;</highlight></codeline>
+<codeline lineno="89" refid="structecto_1_1profile_1_1stats__collector_1a2c206fb60ea04b5162ec43a609f2a185" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="structecto_1_1profile_1_1stats__type" kindref="compound">stats_type</ref>&amp;<sp/><ref refid="structecto_1_1profile_1_1stats__collector_1a2c206fb60ea04b5162ec43a609f2a185" kindref="member">stats</ref>;</highlight></codeline>
+<codeline lineno="90" refid="structecto_1_1profile_1_1stats__collector_1ac3d5d7adf91b02719a6b897869683f03" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/><ref refid="structecto_1_1profile_1_1stats__collector_1ac3d5d7adf91b02719a6b897869683f03" kindref="member">instancename</ref>;</highlight></codeline>
 <codeline lineno="91"><highlight class="normal"></highlight></codeline>
 <codeline lineno="92" refid="structecto_1_1profile_1_1stats__collector_1adae561b196f7ec50f42ba76031924ee4" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="structecto_1_1profile_1_1stats__collector_1adae561b196f7ec50f42ba76031924ee4" kindref="member">stats_collector</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>n,<sp/><ref refid="structecto_1_1profile_1_1stats__type" kindref="compound">stats_type</ref>&amp;<sp/>stats)</highlight></codeline>
 <codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/>start(read_tsc()),<sp/>stats(stats),<sp/>instancename(n)</highlight></codeline>

@@ -10,9 +10,9 @@
     <innerclass refid="structecto_1_1tendril_1_1empty__t" prot="public">ecto::tendril::empty_t</innerclass>
     <innerclass refid="structecto_1_1tendril_1_1none" prot="public">ecto::tendril::none</innerclass>
       <sectiondef kind="public-type">
-      <memberdef kind="enum" id="classecto_1_1tendril_1a50eb3613436e99dc4dfa670141ccd91a" prot="public" static="no">
-        <name>@16</name>
-        <enumvalue id="classecto_1_1tendril_1a50eb3613436e99dc4dfa670141ccd91aa122dd16c5a22a6e22c7caedf7be1d92f" prot="public">
+      <memberdef kind="enum" id="classecto_1_1tendril_1ab63b76909681783917fcb55e3c89f4ac" prot="public" static="no">
+        <name>@8</name>
+        <enumvalue id="classecto_1_1tendril_1ab63b76909681783917fcb55e3c89f4aca122dd16c5a22a6e22c7caedf7be1d92f" prot="public">
           <name>DEFAULT_VALUE</name>
           <initializer>=0</initializer>
           <briefdescription>
@@ -20,35 +20,35 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="classecto_1_1tendril_1a50eb3613436e99dc4dfa670141ccd91aa7ae45e8526726df642f14c19db78564d" prot="public">
+        <enumvalue id="classecto_1_1tendril_1ab63b76909681783917fcb55e3c89f4aca7ae45e8526726df642f14c19db78564d" prot="public">
           <name>DIRTY</name>
           <briefdescription>
           </briefdescription>
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="classecto_1_1tendril_1a50eb3613436e99dc4dfa670141ccd91aa26dbd8778d8007b845bb247f6ce87ff8" prot="public">
+        <enumvalue id="classecto_1_1tendril_1ab63b76909681783917fcb55e3c89f4aca26dbd8778d8007b845bb247f6ce87ff8" prot="public">
           <name>USER_SUPPLIED</name>
           <briefdescription>
           </briefdescription>
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="classecto_1_1tendril_1a50eb3613436e99dc4dfa670141ccd91aac686a7ccc1227f1ae09d79536683136b" prot="public">
+        <enumvalue id="classecto_1_1tendril_1ab63b76909681783917fcb55e3c89f4acac686a7ccc1227f1ae09d79536683136b" prot="public">
           <name>REQUIRED</name>
           <briefdescription>
           </briefdescription>
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="classecto_1_1tendril_1a50eb3613436e99dc4dfa670141ccd91aa4906c6f7c63b6934ea683ea05716abee" prot="public">
+        <enumvalue id="classecto_1_1tendril_1ab63b76909681783917fcb55e3c89f4aca4906c6f7c63b6934ea683ea05716abee" prot="public">
           <name>OPTIONAL</name>
           <briefdescription>
           </briefdescription>
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="classecto_1_1tendril_1a50eb3613436e99dc4dfa670141ccd91aa8748e76437a722b0cfb3652fefd47d67" prot="public">
+        <enumvalue id="classecto_1_1tendril_1ab63b76909681783917fcb55e3c89f4aca8748e76437a722b0cfb3652fefd47d67" prot="public">
           <name>N_FLAGS</name>
           <briefdescription>
           </briefdescription>
@@ -148,7 +148,7 @@
         <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" line="398" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" bodystart="398" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classecto_1_1tendril_1a7b2a11ba7c80606fafda80d34b0a1bfe" prot="private" static="no" mutable="no">
-        <type>std::bitset&lt; <ref refid="classecto_1_1tendril_1a50eb3613436e99dc4dfa670141ccd91aa8748e76437a722b0cfb3652fefd47d67" kindref="member">N_FLAGS</ref> &gt;</type>
+        <type>std::bitset&lt; <ref refid="classecto_1_1tendril_1ab63b76909681783917fcb55e3c89f4aca8748e76437a722b0cfb3652fefd47d67" kindref="member">N_FLAGS</ref> &gt;</type>
         <definition>std::bitset&lt;N_FLAGS&gt; ecto::tendril::flags_</definition>
         <argsstring></argsstring>
         <name>flags_</name>
@@ -1109,21 +1109,21 @@ and will be mashed with spam.&quot;. </para>        </briefdescription>
     <detaileddescription>
 <para>Each tendril is a type erasing holder for any instance of any type, and allows introspection including its value, type, and doc string.</para><para>The tendril operates as a value holder, so treat it as such. If you would like to pass it around without copies, construct a pointer to tendril, perhaps with the <ref refid="classecto_1_1tendril_1adb5f2d5bf635a25473997e793f29a5a7" kindref="member">make_tendril&lt;T&gt;()</ref> function.</para><para>Items held by the tendril must be copy constructible and copiable. </para>    </detaileddescription>
     <collaborationgraph>
-      <node id="474">
+      <node id="466">
         <label>ecto::tendril::Converter</label>
         <link refid="structecto_1_1tendril_1_1Converter"/>
       </node>
-      <node id="472">
+      <node id="464">
         <label>ecto::tendril</label>
         <link refid="classecto_1_1tendril"/>
-        <childnode refid="473" relation="usage">
+        <childnode refid="465" relation="usage">
           <edgelabel>empty</edgelabel>
         </childnode>
-        <childnode refid="474" relation="usage">
+        <childnode refid="466" relation="usage">
           <edgelabel>converter</edgelabel>
         </childnode>
       </node>
-      <node id="473">
+      <node id="465">
         <label>ecto::tendril::empty_t</label>
         <link refid="structecto_1_1tendril_1_1empty__t"/>
       </node>
@@ -1134,10 +1134,10 @@ and will be mashed with spam.&quot;. </para>        </briefdescription>
       <member refid="classecto_1_1tendril_1a94a24ca32acd13f83f5af41030a77fdf" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>connect</name></member>
       <member refid="classecto_1_1tendril_1ac4d6bcc7c0f82c7017a9e0c53a942121" prot="private" virt="non-virtual"><scope>ecto::tendril</scope><name>converter</name></member>
       <member refid="classecto_1_1tendril_1a1751ddffc72288bfbd460a559a276a76" prot="private" virt="non-virtual"><scope>ecto::tendril</scope><name>copy_holder</name></member>
-      <member refid="classecto_1_1tendril_1a50eb3613436e99dc4dfa670141ccd91aa122dd16c5a22a6e22c7caedf7be1d92f" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>DEFAULT_VALUE</name></member>
+      <member refid="classecto_1_1tendril_1ab63b76909681783917fcb55e3c89f4aca122dd16c5a22a6e22c7caedf7be1d92f" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>DEFAULT_VALUE</name></member>
       <member refid="classecto_1_1tendril_1aabe2c05389023df143746b5b63b7701e" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>dirty</name></member>
       <member refid="classecto_1_1tendril_1a9c2bb6262190404d3b1648cdcc2960d8" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>dirty</name></member>
-      <member refid="classecto_1_1tendril_1a50eb3613436e99dc4dfa670141ccd91aa7ae45e8526726df642f14c19db78564d" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>DIRTY</name></member>
+      <member refid="classecto_1_1tendril_1ab63b76909681783917fcb55e3c89f4aca7ae45e8526726df642f14c19db78564d" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>DIRTY</name></member>
       <member refid="classecto_1_1tendril_1abbe2652bc7ca2d65b63feef0c9561891" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>doc</name></member>
       <member refid="classecto_1_1tendril_1a6e8304d03aa8a24be843d3bb8d26332d" prot="private" virt="non-virtual"><scope>ecto::tendril</scope><name>doc_</name></member>
       <member refid="classecto_1_1tendril_1ab8098c05197f972a821c8b094b9a6010" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>empty</name></member>
@@ -1152,7 +1152,7 @@ and will be mashed with spam.&quot;. </para>        </briefdescription>
       <member refid="classecto_1_1tendril_1a59a62b4ac15de3a6a63a515dace8c420" prot="private" virt="non-virtual"><scope>ecto::tendril</scope><name>job_signal_t</name></member>
       <member refid="classecto_1_1tendril_1acf171c75c0ace5cd108e8355ee83199c" prot="private" virt="non-virtual"><scope>ecto::tendril</scope><name>jobs_</name></member>
       <member refid="classecto_1_1tendril_1adb5f2d5bf635a25473997e793f29a5a7" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>make_tendril</name></member>
-      <member refid="classecto_1_1tendril_1a50eb3613436e99dc4dfa670141ccd91aa8748e76437a722b0cfb3652fefd47d67" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>N_FLAGS</name></member>
+      <member refid="classecto_1_1tendril_1ab63b76909681783917fcb55e3c89f4aca8748e76437a722b0cfb3652fefd47d67" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>N_FLAGS</name></member>
       <member refid="classecto_1_1tendril_1a87c2df829c12bcd46089d74183c1d8d8" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>notify</name></member>
       <member refid="classecto_1_1tendril_1ab02075b0d910360104974c1771edcc7f" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>operator&lt;&lt;</name></member>
       <member refid="classecto_1_1tendril_1af9df4c4225712b440c9340d8969e337e" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>operator&lt;&lt;</name></member>
@@ -1169,10 +1169,10 @@ and will be mashed with spam.&quot;. </para>        </briefdescription>
       <member refid="classecto_1_1tendril_1a8ed098a7d9ba3269b0626dbc652acbce" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>operator&gt;&gt;</name></member>
       <member refid="classecto_1_1tendril_1aceb1e0490d8850a65097e1133128872d" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>operator&gt;&gt;</name></member>
       <member refid="classecto_1_1tendril_1a35ebb8c910d87ca418e2ddfb290c5d9d" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>operator&gt;&gt;</name></member>
-      <member refid="classecto_1_1tendril_1a50eb3613436e99dc4dfa670141ccd91aa4906c6f7c63b6934ea683ea05716abee" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>OPTIONAL</name></member>
+      <member refid="classecto_1_1tendril_1ab63b76909681783917fcb55e3c89f4aca4906c6f7c63b6934ea683ea05716abee" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>OPTIONAL</name></member>
       <member refid="classecto_1_1tendril_1a216eb6b817644e1dfd76d3ba07d0ced7" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>required</name></member>
       <member refid="classecto_1_1tendril_1aa10be79605183977989cf01956aedeb6" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>required</name></member>
-      <member refid="classecto_1_1tendril_1a50eb3613436e99dc4dfa670141ccd91aac686a7ccc1227f1ae09d79536683136b" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>REQUIRED</name></member>
+      <member refid="classecto_1_1tendril_1ab63b76909681783917fcb55e3c89f4acac686a7ccc1227f1ae09d79536683136b" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>REQUIRED</name></member>
       <member refid="classecto_1_1tendril_1a7974ef8e1d4cd1936a72c429c0f3dbf7" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>same_type</name></member>
       <member refid="classecto_1_1tendril_1a697125cfa2b1b53ada4e5e2ee6847181" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>serialize</name></member>
       <member refid="classecto_1_1tendril_1ab3c536756c1b4eb24c97691d23eb485a" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>set_callback</name></member>
@@ -1188,7 +1188,7 @@ and will be mashed with spam.&quot;. </para>        </briefdescription>
       <member refid="classecto_1_1tendril_1abc5115b6657e60dba3ef4135759c4e64" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>type_name</name></member>
       <member refid="classecto_1_1tendril_1a28d02ba43d5ab79639436674ceb4316e" prot="private" virt="non-virtual"><scope>ecto::tendril</scope><name>unsafe_get</name></member>
       <member refid="classecto_1_1tendril_1ab3844fa9929e75160b6d8597d1c44cf9" prot="private" virt="non-virtual"><scope>ecto::tendril</scope><name>unsafe_get</name></member>
-      <member refid="classecto_1_1tendril_1a50eb3613436e99dc4dfa670141ccd91aa26dbd8778d8007b845bb247f6ce87ff8" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>USER_SUPPLIED</name></member>
+      <member refid="classecto_1_1tendril_1ab63b76909681783917fcb55e3c89f4aca26dbd8778d8007b845bb247f6ce87ff8" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>USER_SUPPLIED</name></member>
       <member refid="classecto_1_1tendril_1a8c46edfd052cdae0fef4705d5f5943c6" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>user_supplied</name></member>
       <member refid="classecto_1_1tendril_1a3aa500420a52a0546e21105b3fb96ad0" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>user_supplied</name></member>
       <member refid="classecto_1_1tendril_1abb8f8d05782b38994938e58741f4a9d2" prot="public" virt="non-virtual"><scope>ecto::tendril</scope><name>~tendril</name></member>

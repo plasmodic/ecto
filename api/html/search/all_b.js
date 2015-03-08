@@ -1,7 +1,7 @@
 var searchData=
 [
   ['line',['line',['../structecto_1_1py_1_1gilstatus.html#a86f9f360d4950496f737ce0faa4d7e1b',1,'ecto::py::gilstatus']]],
-  ['load',['load',['../structecto_1_1plasm.html#a854400c2f46f995731e058c72a547185',1,'ecto::plasm::load(std::istream &amp;)'],['../structecto_1_1plasm.html#ae6540bca37d0980ec24b0b75061e124e',1,'ecto::plasm::load(Archive &amp;ar, const unsigned int)'],['../structecto_1_1plasm.html#a854400c2f46f995731e058c72a547185',1,'ecto::plasm::load(std::istream &amp;)'],['../structecto_1_1plasm.html#ae6540bca37d0980ec24b0b75061e124e',1,'ecto::plasm::load(Archive &amp;ar, const unsigned int)'],['../namespaceboost_1_1serialization.html#a05438bec420c8465b28eab17e1e1dc16',1,'boost::serialization::load()'],['../namespaceecto_1_1serialization.html#a1960d58009e397c926055229f8e1c347',1,'ecto::serialization::load()']]],
+  ['load',['load',['../structecto_1_1plasm.html#a854400c2f46f995731e058c72a547185',1,'ecto::plasm::load(std::istream &amp;)'],['../structecto_1_1plasm.html#ae6540bca37d0980ec24b0b75061e124e',1,'ecto::plasm::load(Archive &amp;ar, const unsigned int)'],['../namespaceboost_1_1serialization.html#a05438bec420c8465b28eab17e1e1dc16',1,'boost::serialization::load()'],['../namespaceecto_1_1serialization.html#a1960d58009e397c926055229f8e1c347',1,'ecto::serialization::load()']]],
   ['local_5ftime',['local_time',['../namespaceecto.html#a67829007171203782a69bde851cb1dc6',1,'ecto']]],
   ['log',['log',['../namespaceecto.html#a3870bebbdf6a0d01f28424e402be2834',1,'ecto']]],
   ['log_2ehpp',['log.hpp',['../log_8hpp.html',1,'']]],

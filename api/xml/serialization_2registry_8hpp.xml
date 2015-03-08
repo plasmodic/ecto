@@ -10,218 +10,218 @@
     <includes local="no">map</includes>
     <includes refid="log_8hpp" local="no">ecto/log.hpp</includes>
     <incdepgraph>
-      <node id="2167">
+      <node id="1560">
         <label>ecto/log.hpp</label>
         <link refid="log_8hpp"/>
-        <childnode refid="2151" relation="include">
+        <childnode refid="1544" relation="include">
         </childnode>
-        <childnode refid="2136" relation="include">
+        <childnode refid="1529" relation="include">
         </childnode>
-        <childnode refid="2168" relation="include">
+        <childnode refid="1561" relation="include">
         </childnode>
-        <childnode refid="2169" relation="include">
+        <childnode refid="1562" relation="include">
         </childnode>
       </node>
-      <node id="2148">
+      <node id="1541">
         <label>boost/version.hpp</label>
       </node>
-      <node id="2141">
+      <node id="1534">
         <label>boost/shared_ptr.hpp</label>
       </node>
-      <node id="2166">
+      <node id="1559">
         <label>boost/tuple/tuple.hpp</label>
       </node>
-      <node id="2133">
+      <node id="1526">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/registry.hpp</label>
         <link refid="serialization/registry.hpp"/>
-        <childnode refid="2134" relation="include">
+        <childnode refid="1527" relation="include">
         </childnode>
-        <childnode refid="2135" relation="include">
+        <childnode refid="1528" relation="include">
         </childnode>
-        <childnode refid="2136" relation="include">
+        <childnode refid="1529" relation="include">
         </childnode>
-        <childnode refid="2140" relation="include">
+        <childnode refid="1533" relation="include">
         </childnode>
-        <childnode refid="2166" relation="include">
+        <childnode refid="1559" relation="include">
         </childnode>
-        <childnode refid="2150" relation="include">
+        <childnode refid="1543" relation="include">
         </childnode>
-        <childnode refid="2167" relation="include">
+        <childnode refid="1560" relation="include">
         </childnode>
       </node>
-      <node id="2169">
+      <node id="1562">
         <label>stdint.h</label>
       </node>
-      <node id="2143">
+      <node id="1536">
         <label>boost/signals2.hpp</label>
       </node>
-      <node id="2134">
+      <node id="1527">
         <label>boost/archive/binary_iarchive.hpp</label>
       </node>
-      <node id="2145">
+      <node id="1538">
         <label>ecto/forward.hpp</label>
         <link refid="forward_8hpp"/>
-        <childnode refid="2141" relation="include">
+        <childnode refid="1534" relation="include">
         </childnode>
       </node>
-      <node id="2149">
+      <node id="1542">
         <label>stdexcept</label>
       </node>
-      <node id="2160">
+      <node id="1553">
         <label>boost/thread/thread.hpp</label>
       </node>
-      <node id="2161">
+      <node id="1554">
         <label>boost/noncopyable.hpp</label>
       </node>
-      <node id="2139">
+      <node id="1532">
         <label>string</label>
       </node>
-      <node id="2150">
+      <node id="1543">
         <label>map</label>
       </node>
-      <node id="2136">
+      <node id="1529">
         <label>ecto/util.hpp</label>
         <link refid="util_8hpp"/>
-        <childnode refid="2137" relation="include">
+        <childnode refid="1530" relation="include">
         </childnode>
-        <childnode refid="2138" relation="include">
+        <childnode refid="1531" relation="include">
         </childnode>
-        <childnode refid="2139" relation="include">
+        <childnode refid="1532" relation="include">
         </childnode>
       </node>
-      <node id="2158">
+      <node id="1551">
         <label>ecto/python.hpp</label>
         <link refid="python_8hpp"/>
-        <childnode refid="2147" relation="include">
+        <childnode refid="1540" relation="include">
         </childnode>
-        <childnode refid="2159" relation="include">
+        <childnode refid="1552" relation="include">
         </childnode>
-        <childnode refid="2160" relation="include">
+        <childnode refid="1553" relation="include">
         </childnode>
-        <childnode refid="2150" relation="include">
+        <childnode refid="1543" relation="include">
         </childnode>
-        <childnode refid="2161" relation="include">
+        <childnode refid="1554" relation="include">
         </childnode>
       </node>
-      <node id="2142">
+      <node id="1535">
         <label>boost/function/function1.hpp</label>
       </node>
-      <node id="2168">
+      <node id="1561">
         <label>ecto/test.hpp</label>
         <link refid="test_8hpp"/>
       </node>
-      <node id="2140">
+      <node id="1533">
         <label>ecto/tendril.hpp</label>
         <link refid="tendril_8hpp"/>
-        <childnode refid="2141" relation="include">
+        <childnode refid="1534" relation="include">
         </childnode>
-        <childnode refid="2142" relation="include">
+        <childnode refid="1535" relation="include">
         </childnode>
-        <childnode refid="2143" relation="include">
+        <childnode refid="1536" relation="include">
         </childnode>
-        <childnode refid="2144" relation="include">
+        <childnode refid="1537" relation="include">
         </childnode>
-        <childnode refid="2145" relation="include">
+        <childnode refid="1538" relation="include">
         </childnode>
-        <childnode refid="2136" relation="include">
+        <childnode refid="1529" relation="include">
         </childnode>
-        <childnode refid="2146" relation="include">
+        <childnode refid="1539" relation="include">
         </childnode>
-        <childnode refid="2158" relation="include">
+        <childnode refid="1551" relation="include">
         </childnode>
-        <childnode refid="2162" relation="include">
+        <childnode refid="1555" relation="include">
         </childnode>
-        <childnode refid="2164" relation="include">
+        <childnode refid="1557" relation="include">
         </childnode>
-        <childnode refid="2139" relation="include">
+        <childnode refid="1532" relation="include">
         </childnode>
-        <childnode refid="2165" relation="include">
+        <childnode refid="1558" relation="include">
         </childnode>
       </node>
-      <node id="2135">
+      <node id="1528">
         <label>boost/archive/binary_oarchive.hpp</label>
       </node>
-      <node id="2144">
+      <node id="1537">
         <label>boost/any.hpp</label>
       </node>
-      <node id="2156">
+      <node id="1549">
         <label>boost/preprocessor/stringize.hpp</label>
       </node>
-      <node id="2153">
+      <node id="1546">
         <label>boost/exception/exception.hpp</label>
       </node>
-      <node id="2151">
+      <node id="1544">
         <label>ecto/config.hpp</label>
       </node>
-      <node id="2138">
+      <node id="1531">
         <label>typeinfo</label>
       </node>
-      <node id="2165">
+      <node id="1558">
         <label>bitset</label>
       </node>
-      <node id="2163">
+      <node id="1556">
         <label>boost/python/object_fwd.hpp</label>
       </node>
-      <node id="2159">
+      <node id="1552">
         <label>boost/python.hpp</label>
       </node>
-      <node id="2154">
+      <node id="1547">
         <label>boost/exception/info.hpp</label>
       </node>
-      <node id="2147">
+      <node id="1540">
         <label>Python.h</label>
       </node>
-      <node id="2164">
+      <node id="1557">
         <label>vector</label>
       </node>
-      <node id="2162">
+      <node id="1555">
         <label>ecto/python/repr.hpp</label>
         <link refid="repr_8hpp"/>
-        <childnode refid="2163" relation="include">
+        <childnode refid="1556" relation="include">
         </childnode>
-        <childnode refid="2139" relation="include">
+        <childnode refid="1532" relation="include">
         </childnode>
       </node>
-      <node id="2137">
+      <node id="1530">
         <label>iostream</label>
       </node>
-      <node id="2155">
+      <node id="1548">
         <label>boost/preprocessor/cat.hpp</label>
       </node>
-      <node id="2152">
+      <node id="1545">
         <label>boost/optional.hpp</label>
       </node>
-      <node id="2146">
+      <node id="1539">
         <label>ecto/except.hpp</label>
         <link refid="except_8hpp"/>
-        <childnode refid="2147" relation="include">
+        <childnode refid="1540" relation="include">
         </childnode>
-        <childnode refid="2148" relation="include">
+        <childnode refid="1541" relation="include">
         </childnode>
-        <childnode refid="2149" relation="include">
+        <childnode refid="1542" relation="include">
         </childnode>
-        <childnode refid="2139" relation="include">
+        <childnode refid="1532" relation="include">
         </childnode>
-        <childnode refid="2150" relation="include">
+        <childnode refid="1543" relation="include">
         </childnode>
-        <childnode refid="2151" relation="include">
+        <childnode refid="1544" relation="include">
         </childnode>
-        <childnode refid="2136" relation="include">
+        <childnode refid="1529" relation="include">
         </childnode>
-        <childnode refid="2152" relation="include">
+        <childnode refid="1545" relation="include">
         </childnode>
-        <childnode refid="2153" relation="include">
+        <childnode refid="1546" relation="include">
         </childnode>
-        <childnode refid="2154" relation="include">
+        <childnode refid="1547" relation="include">
         </childnode>
-        <childnode refid="2155" relation="include">
+        <childnode refid="1548" relation="include">
         </childnode>
-        <childnode refid="2156" relation="include">
+        <childnode refid="1549" relation="include">
         </childnode>
-        <childnode refid="2157" relation="include">
+        <childnode refid="1550" relation="include">
         </childnode>
       </node>
-      <node id="2157">
+      <node id="1550">
         <label>boost/preprocessor/seq/for_each.hpp</label>
       </node>
     </incdepgraph>

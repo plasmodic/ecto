@@ -6,98 +6,74 @@
     <includes local="no">boost/noncopyable.hpp</includes>
     <includedby refid="traits_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/traits.hpp</includedby>
     <incdepgraph>
-      <node id="2010">
+      <node id="1412">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/gil.hpp</label>
         <link refid="gil.hpp"/>
-        <childnode refid="2011" relation="include">
+        <childnode refid="1413" relation="include">
         </childnode>
-        <childnode refid="2012" relation="include">
+        <childnode refid="1414" relation="include">
         </childnode>
       </node>
-      <node id="2012">
+      <node id="1414">
         <label>boost/noncopyable.hpp</label>
       </node>
-      <node id="2011">
+      <node id="1413">
         <label>boost/scoped_ptr.hpp</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="2019">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp~</label>
-        <link refid="all_8hpp~"/>
-      </node>
-      <node id="2013">
+      <node id="1415">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/gil.hpp</label>
         <link refid="gil.hpp"/>
-        <childnode refid="2014" relation="include">
+        <childnode refid="1416" relation="include">
         </childnode>
       </node>
-      <node id="2023">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~</label>
-        <link refid="cell_8hpp~"/>
-      </node>
-      <node id="2018">
+      <node id="1419">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/ecto.hpp</label>
         <link refid="ecto_8hpp"/>
-        <childnode refid="2019" relation="include">
-        </childnode>
-        <childnode refid="2020" relation="include">
+        <childnode refid="1420" relation="include">
         </childnode>
       </node>
-      <node id="2020">
+      <node id="1420">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp</label>
         <link refid="all_8hpp"/>
       </node>
-      <node id="2021">
+      <node id="1421">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/cell.hpp</label>
         <link refid="serialization_2cell_8hpp"/>
       </node>
-      <node id="2016">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/ecto.hpp~</label>
-        <link refid="ecto_8hpp~"/>
-      </node>
-      <node id="2022">
+      <node id="1422">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/module.hpp</label>
         <link refid="module_8hpp"/>
-        <childnode refid="2016" relation="include">
-        </childnode>
-        <childnode refid="2018" relation="include">
+        <childnode refid="1419" relation="include">
         </childnode>
       </node>
-      <node id="2014">
+      <node id="1416">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/traits.hpp</label>
         <link refid="traits_8hpp"/>
-        <childnode refid="2015" relation="include">
-        </childnode>
-        <childnode refid="2023" relation="include">
+        <childnode refid="1417" relation="include">
         </childnode>
       </node>
-      <node id="2017">
+      <node id="1418">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp</label>
         <link refid="registry_8hpp"/>
-        <childnode refid="2016" relation="include">
+        <childnode refid="1419" relation="include">
         </childnode>
-        <childnode refid="2018" relation="include">
+        <childnode refid="1421" relation="include">
         </childnode>
-        <childnode refid="2021" relation="include">
-        </childnode>
-        <childnode refid="2022" relation="include">
+        <childnode refid="1422" relation="include">
         </childnode>
       </node>
-      <node id="2015">
+      <node id="1417">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp</label>
         <link refid="cell_8hpp"/>
-        <childnode refid="2016" relation="include">
+        <childnode refid="1418" relation="include">
         </childnode>
-        <childnode refid="2017" relation="include">
+        <childnode refid="1419" relation="include">
         </childnode>
-        <childnode refid="2019" relation="include">
+        <childnode refid="1420" relation="include">
         </childnode>
-        <childnode refid="2018" relation="include">
-        </childnode>
-        <childnode refid="2020" relation="include">
-        </childnode>
-        <childnode refid="2021" relation="include">
+        <childnode refid="1421" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

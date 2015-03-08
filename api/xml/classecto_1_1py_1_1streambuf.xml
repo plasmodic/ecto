@@ -440,24 +440,24 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="461">
+      <node id="453">
         <label>ecto::py::streambuf</label>
         <link refid="classecto_1_1py_1_1streambuf"/>
-        <childnode refid="462" relation="public-inheritance">
+        <childnode refid="454" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="462">
+      <node id="454">
         <label>std::basic_streambuf&lt; char &gt;</label>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="463">
+      <node id="455">
         <label>ecto::py::streambuf</label>
         <link refid="classecto_1_1py_1_1streambuf"/>
-        <childnode refid="464" relation="public-inheritance">
+        <childnode refid="456" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="464">
+      <node id="456">
         <label>std::basic_streambuf&lt; char &gt;</label>
       </node>
     </collaborationgraph>

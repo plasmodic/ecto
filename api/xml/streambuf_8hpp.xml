@@ -10,43 +10,43 @@
     <includes local="no">streambuf</includes>
     <includes local="no">iostream</includes>
     <incdepgraph>
-      <node id="2069">
+      <node id="1464">
         <label>boost/python/object.hpp</label>
       </node>
-      <node id="2070">
+      <node id="1465">
         <label>boost/python/str.hpp</label>
       </node>
-      <node id="2073">
+      <node id="1468">
         <label>boost/utility/typed_in_place_factory.hpp</label>
       </node>
-      <node id="2068">
+      <node id="1463">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/streambuf.hpp</label>
         <link refid="streambuf.hpp"/>
-        <childnode refid="2069" relation="include">
+        <childnode refid="1464" relation="include">
         </childnode>
-        <childnode refid="2070" relation="include">
+        <childnode refid="1465" relation="include">
         </childnode>
-        <childnode refid="2071" relation="include">
+        <childnode refid="1466" relation="include">
         </childnode>
-        <childnode refid="2072" relation="include">
+        <childnode refid="1467" relation="include">
         </childnode>
-        <childnode refid="2073" relation="include">
+        <childnode refid="1468" relation="include">
         </childnode>
-        <childnode refid="2074" relation="include">
+        <childnode refid="1469" relation="include">
         </childnode>
-        <childnode refid="2075" relation="include">
+        <childnode refid="1470" relation="include">
         </childnode>
       </node>
-      <node id="2074">
+      <node id="1469">
         <label>streambuf</label>
       </node>
-      <node id="2071">
+      <node id="1466">
         <label>boost/python/extract.hpp</label>
       </node>
-      <node id="2075">
+      <node id="1470">
         <label>iostream</label>
       </node>
-      <node id="2072">
+      <node id="1467">
         <label>boost/optional.hpp</label>
       </node>
     </incdepgraph>

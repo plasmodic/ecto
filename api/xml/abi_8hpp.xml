@@ -5,79 +5,66 @@
     <includes local="no">ecto/version.hpp</includes>
     <includes refid="util_8hpp" local="no">ecto/util.hpp</includes>
     <includedby refid="impl_2parameters_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/impl/parameters.hpp</includedby>
-    <includedby refid="ecto_8hpp~" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/ecto.hpp~</includedby>
     <includedby refid="ecto_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/ecto.hpp</includedby>
     <includedby refid="parameters_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/parameters.hpp</includedby>
     <incdepgraph>
-      <node id="1265">
+      <node id="929">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/abi.hpp</label>
         <link refid="abi.hpp"/>
-        <childnode refid="1266" relation="include">
+        <childnode refid="930" relation="include">
         </childnode>
-        <childnode refid="1267" relation="include">
+        <childnode refid="931" relation="include">
         </childnode>
       </node>
-      <node id="1270">
+      <node id="934">
         <label>string</label>
       </node>
-      <node id="1267">
+      <node id="931">
         <label>ecto/util.hpp</label>
         <link refid="util_8hpp"/>
-        <childnode refid="1268" relation="include">
+        <childnode refid="932" relation="include">
         </childnode>
-        <childnode refid="1269" relation="include">
+        <childnode refid="933" relation="include">
         </childnode>
-        <childnode refid="1270" relation="include">
+        <childnode refid="934" relation="include">
         </childnode>
       </node>
-      <node id="1269">
+      <node id="933">
         <label>typeinfo</label>
       </node>
-      <node id="1266">
+      <node id="930">
         <label>ecto/version.hpp</label>
       </node>
-      <node id="1268">
+      <node id="932">
         <label>iostream</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="1275">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp~</label>
-        <link refid="all_8hpp~"/>
-      </node>
-      <node id="1271">
+      <node id="935">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/abi.hpp</label>
         <link refid="abi.hpp"/>
-        <childnode refid="1272" relation="include">
+        <childnode refid="936" relation="include">
         </childnode>
-        <childnode refid="1273" relation="include">
+        <childnode refid="937" relation="include">
         </childnode>
-        <childnode refid="1274" relation="include">
-        </childnode>
-        <childnode refid="1277" relation="include">
+        <childnode refid="939" relation="include">
         </childnode>
       </node>
-      <node id="1274">
+      <node id="937">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/ecto.hpp</label>
         <link refid="ecto_8hpp"/>
-        <childnode refid="1275" relation="include">
-        </childnode>
-        <childnode refid="1276" relation="include">
+        <childnode refid="938" relation="include">
         </childnode>
       </node>
-      <node id="1276">
+      <node id="938">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp</label>
         <link refid="all_8hpp"/>
       </node>
-      <node id="1273">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/ecto.hpp~</label>
-        <link refid="ecto_8hpp~"/>
-      </node>
-      <node id="1277">
+      <node id="939">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/parameters.hpp</label>
         <link refid="parameters_8hpp"/>
       </node>
-      <node id="1272">
+      <node id="936">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/impl/parameters.hpp</label>
         <link refid="impl_2parameters_8hpp"/>
       </node>

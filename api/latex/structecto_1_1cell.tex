@@ -25,14 +25,12 @@ Collaboration diagram for ecto\-:\-:cell\-:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=234pt]{structecto_1_1cell__coll__graph}
+\includegraphics[width=203pt]{structecto_1_1cell__coll__graph}
 \end{center}
 \end{figure}
 \subsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef boost\-::shared\-\_\-ptr$<$ \hyperlink{structecto_1_1cell}{cell} $>$ \hyperlink{structecto_1_1cell_af2cab9d2bc012088c4f58c40da57a862}{ptr}
-\begin{DoxyCompactList}\small\item\em A convenience pointer typedef. \end{DoxyCompactList}\item 
 typedef boost\-::shared\-\_\-ptr$<$ \hyperlink{structecto_1_1cell}{cell} $>$ \hyperlink{structecto_1_1cell_af2cab9d2bc012088c4f58c40da57a862}{ptr}
 \begin{DoxyCompactList}\small\item\em A convenience pointer typedef. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
@@ -87,50 +85,6 @@ void \hyperlink{structecto_1_1cell_a4c42ef400acac92d825e7dc25ff53bdc}{set\-\_\-p
 \hyperlink{structecto_1_1cell_af2cab9d2bc012088c4f58c40da57a862}{ptr} \hyperlink{structecto_1_1cell_a213dabd285300f5d4c7e0f5fd6142e81}{clone} () const 
 \item 
 virtual bool \hyperlink{structecto_1_1cell_ab9a6c3fd8f76289f338a9e05368b1aff}{init} ()=0
-\item 
-\hyperlink{structecto_1_1cell_a782c9d0f521f8a34c8eed309d0d8d79a}{cell} ()
-\item 
-virtual \hyperlink{structecto_1_1cell_a98748014df1b1a4fd3fbb47f6adc8c5e}{$\sim$cell} ()
-\item 
-void \hyperlink{structecto_1_1cell_a5c3c204f531de15920cb9d3db3ecfc4c}{declare\-\_\-params} ()
-\begin{DoxyCompactList}\small\item\em Dispatches parameter declaration code. After this code, the parameters for the cell will be set to their defaults. \end{DoxyCompactList}\item 
-void \hyperlink{structecto_1_1cell_af6c3782ed0d1c258bcf5050b4af272b4}{declare\-\_\-io} ()
-\begin{DoxyCompactList}\small\item\em Dispatches input/output declaration code. It is assumed that the parameters have been declared before this is called, so that inputs and outputs may be dependent on those parameters. \end{DoxyCompactList}\item 
-void \hyperlink{structecto_1_1cell_a30d48d21d6ffa86af4888f78e92241af}{configure} ()
-\begin{DoxyCompactList}\small\item\em Given initialized parameters,inputs, and outputs, this will dispatch the client configuration code. This will allocated an instace of the clients cell, so this should not be called during introspection. \end{DoxyCompactList}\item 
-void \hyperlink{structecto_1_1cell_a0416d7265db282a18202b58636be7165}{activate} ()
-\begin{DoxyCompactList}\small\item\em Activate the cell. i.\-e. Put it into a \char`\"{}ready\char`\"{} state, opening sockets, etc. \end{DoxyCompactList}\item 
-void \hyperlink{structecto_1_1cell_ab988f785fb943af3ff48c2d6f67a07aa}{deactivate} ()
-\begin{DoxyCompactList}\small\item\em Deactivate the cell. i.\-e. Put it into an \char`\"{}unready\char`\"{} state, closing sockets, etc. \end{DoxyCompactList}\item 
-void \hyperlink{structecto_1_1cell_a06abb010763ff7aeaaf2b28be4a6424a}{start} ()
-\item 
-void \hyperlink{structecto_1_1cell_abac52b774d350b02dc99a55c64b94bcd}{stop} ()
-\item 
-\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762c}{Return\-Code} \hyperlink{structecto_1_1cell_a6b810671ee21f5dddbc1206abfb999f3}{process} ()
-\begin{DoxyCompactList}\small\item\em Dispatches the process function for the client cell. This should only be called from one thread at a time. Also, this function may throw exceptions... \end{DoxyCompactList}\item 
-std\-::string \hyperlink{structecto_1_1cell_ae3b84af61e78dab25f66a66773d5c5df}{type} () const 
-\begin{DoxyCompactList}\small\item\em Return the type of the child class. \end{DoxyCompactList}\item 
-std\-::string \hyperlink{structecto_1_1cell_a931fbc02fff66a58684ab25e00dbb2f8}{name} () const 
-\begin{DoxyCompactList}\small\item\em Grab the name of the instance. \end{DoxyCompactList}\item 
-void \hyperlink{structecto_1_1cell_a3956efb238f50a6983b86f430c47ca05}{name} (const std\-::string \&name)
-\begin{DoxyCompactList}\small\item\em Set the name of the instance. \end{DoxyCompactList}\item 
-std\-::string \hyperlink{structecto_1_1cell_aefa443962201caebb08d1a3163730639}{short\-\_\-doc} () const 
-\begin{DoxyCompactList}\small\item\em Set the short\-\_\-doc\-\_\- of the instance. \end{DoxyCompactList}\item 
-void \hyperlink{structecto_1_1cell_a49d510eec19d352c5729e6a2fd149340}{short\-\_\-doc} (const std\-::string \&short\-\_\-doc)
-\begin{DoxyCompactList}\small\item\em Set the short\-\_\-doc\-\_\- of the instance. \end{DoxyCompactList}\item 
-void \hyperlink{structecto_1_1cell_af32a9e2113b7afcb5b225bdc3c234e8c}{reset\-\_\-strand} ()
-\item 
-void \hyperlink{structecto_1_1cell_ae0009fc4a4d12d400126f455396f5c9f}{set\-\_\-strand} (\hyperlink{structecto_1_1strand}{ecto\-::strand})
-\item 
-std\-::string \hyperlink{structecto_1_1cell_a486454d7466c5f0373ecb42dd4e97b2f}{gen\-\_\-doc} (const std\-::string \&doc=\char`\"{}A module...\char`\"{}) const 
-\begin{DoxyCompactList}\small\item\em Generate an Restructured Text doc string for the cell. Includes documentation for all parameters, inputs, outputs. \end{DoxyCompactList}\item 
-void \hyperlink{structecto_1_1cell_aa03c0f569bb4b14e81f4d2a8747273e5}{verify\-\_\-params} () const 
-\item 
-void \hyperlink{structecto_1_1cell_aed712e80344ce04dbb9105bb6a1aa53a}{verify\-\_\-inputs} () const 
-\item 
-\hyperlink{structecto_1_1cell_af2cab9d2bc012088c4f58c40da57a862}{ptr} \hyperlink{structecto_1_1cell_a213dabd285300f5d4c7e0f5fd6142e81}{clone} () const 
-\item 
-virtual bool \hyperlink{structecto_1_1cell_ab9a6c3fd8f76289f338a9e05368b1aff}{init} ()=0
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -141,7 +95,7 @@ virtual bool \hyperlink{structecto_1_1cell_ab9a6c3fd8f76289f338a9e05368b1aff}{in
 \begin{DoxyCompactList}\small\item\em Inputs, inboxes, always have a valid value ( may be N\-U\-L\-L ) \end{DoxyCompactList}\item 
 \hyperlink{classecto_1_1tendrils}{tendrils} \hyperlink{structecto_1_1cell_a93951743b603faba35312ebdb07ceb22}{outputs}
 \begin{DoxyCompactList}\small\item\em Outputs, outboxes, always have a valid value ( may be N\-U\-L\-L ) \end{DoxyCompactList}\item 
-boost\-::optional$<$ \hyperlink{structecto_1_1strand}{strand} $>$ \hyperlink{structecto_1_1cell_a0ecc893a5427877548d0c39a208a5a26}{strand\-\_\-}
+boost\-::optional$<$ \hyperlink{structecto_1_1strand}{strand} $>$ \hyperlink{structecto_1_1cell_ada052f06257277c1b53c82226dff5821}{strand\-\_\-}
 \begin{DoxyCompactList}\small\item\em The strand that this cell should be executed in. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -169,35 +123,9 @@ virtual \hyperlink{structecto_1_1cell_af2cab9d2bc012088c4f58c40da57a862}{ptr} \h
 virtual std\-::string \hyperlink{structecto_1_1cell_a400b8aecf15588cfb21d712fbb000e8a}{dispatch\-\_\-short\-\_\-doc} () const 
 \item 
 virtual void \hyperlink{structecto_1_1cell_a407d24db843ffe12ac57c9a8827a9fe8}{dispatch\-\_\-short\-\_\-doc} (const std\-::string \&)
-\item 
-virtual void \hyperlink{structecto_1_1cell_abcf3cc29703214a7ede63d652e17ee96}{dispatch\-\_\-declare\-\_\-params} (\hyperlink{classecto_1_1tendrils}{tendrils} \&t)=0
-\item 
-virtual void \hyperlink{structecto_1_1cell_acb4cdb70f2db329ba9c615d74c63a4b2}{dispatch\-\_\-declare\-\_\-io} (const \hyperlink{classecto_1_1tendrils}{tendrils} \&params, \hyperlink{classecto_1_1tendrils}{tendrils} \&\hyperlink{structecto_1_1cell_a65099b0458a7761b8bfa7a1ddc17e92f}{inputs}, \hyperlink{classecto_1_1tendrils}{tendrils} \&\hyperlink{structecto_1_1cell_a93951743b603faba35312ebdb07ceb22}{outputs})=0
-\item 
-virtual void \hyperlink{structecto_1_1cell_a19c7c679dededd37ace918bf0ff31cd3}{dispatch\-\_\-configure} (const \hyperlink{classecto_1_1tendrils}{tendrils} \&params, const \hyperlink{classecto_1_1tendrils}{tendrils} \&\hyperlink{structecto_1_1cell_a65099b0458a7761b8bfa7a1ddc17e92f}{inputs}, const \hyperlink{classecto_1_1tendrils}{tendrils} \&\hyperlink{structecto_1_1cell_a93951743b603faba35312ebdb07ceb22}{outputs})=0
-\item 
-virtual void \hyperlink{structecto_1_1cell_aa345ec700e5e213364c7bb20571cd78d}{dispatch\-\_\-activate} ()=0
-\item 
-virtual void \hyperlink{structecto_1_1cell_a4b5f111fc7b90dccce0cd70e28c9be62}{dispatch\-\_\-deactivate} ()=0
-\item 
-virtual \hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762c}{Return\-Code} \hyperlink{structecto_1_1cell_a390bd83cfdff120523efc5c3e76bc3e5}{dispatch\-\_\-process} (const \hyperlink{classecto_1_1tendrils}{tendrils} \&\hyperlink{structecto_1_1cell_a65099b0458a7761b8bfa7a1ddc17e92f}{inputs}, const \hyperlink{classecto_1_1tendrils}{tendrils} \&\hyperlink{structecto_1_1cell_a93951743b603faba35312ebdb07ceb22}{outputs})=0
-\item 
-virtual void \hyperlink{structecto_1_1cell_ab5c75358dd32fa811116654bdc76385b}{dispatch\-\_\-start} ()=0
-\item 
-virtual void \hyperlink{structecto_1_1cell_a65ff7141e927a7115a785478a03b94bc}{dispatch\-\_\-stop} ()=0
-\item 
-virtual std\-::string \hyperlink{structecto_1_1cell_a456b56e3291f5e2bb68ce31a4a43ece5}{dispatch\-\_\-name} () const =0
-\item 
-virtual \hyperlink{structecto_1_1cell_af2cab9d2bc012088c4f58c40da57a862}{ptr} \hyperlink{structecto_1_1cell_a7beccd749c33bd8b4c5827598e8fe5a5}{dispatch\-\_\-clone} () const =0
-\item 
-virtual std\-::string \hyperlink{structecto_1_1cell_a400b8aecf15588cfb21d712fbb000e8a}{dispatch\-\_\-short\-\_\-doc} () const 
-\item 
-virtual void \hyperlink{structecto_1_1cell_a407d24db843ffe12ac57c9a8827a9fe8}{dispatch\-\_\-short\-\_\-doc} (const std\-::string \&)
 \end{DoxyCompactItemize}
 \subsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
-\item 
-\hyperlink{structecto_1_1cell_ac0ae6a72cecf48916bb6dd1b6393d1b3}{cell} (const \hyperlink{structecto_1_1cell}{cell} \&)
 \item 
 \hyperlink{structecto_1_1cell_ac0ae6a72cecf48916bb6dd1b6393d1b3}{cell} (const \hyperlink{structecto_1_1cell}{cell} \&)
 \end{DoxyCompactItemize}
@@ -248,37 +176,9 @@ All functions are optional.
 
 A convenience pointer typedef. 
 
-\hypertarget{structecto_1_1cell_af2cab9d2bc012088c4f58c40da57a862}{\index{ecto\-::cell@{ecto\-::cell}!ptr@{ptr}}
-\index{ptr@{ptr}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{ptr}]{\setlength{\rightskip}{0pt plus 5cm}typedef boost\-::shared\-\_\-ptr$<${\bf cell}$>$ {\bf ecto\-::cell\-::ptr}}}\label{structecto_1_1cell_af2cab9d2bc012088c4f58c40da57a862}
-
-
-A convenience pointer typedef. 
-
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{structecto_1_1cell_a782c9d0f521f8a34c8eed309d0d8d79a}{\index{ecto\-::cell@{ecto\-::cell}!cell@{cell}}
-\index{cell@{cell}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{cell}]{\setlength{\rightskip}{0pt plus 5cm}ecto\-::cell\-::cell (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}\label{structecto_1_1cell_a782c9d0f521f8a34c8eed309d0d8d79a}
-\hypertarget{structecto_1_1cell_a98748014df1b1a4fd3fbb47f6adc8c5e}{\index{ecto\-::cell@{ecto\-::cell}!$\sim$cell@{$\sim$cell}}
-\index{$\sim$cell@{$\sim$cell}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{$\sim$cell}]{\setlength{\rightskip}{0pt plus 5cm}virtual ecto\-::cell\-::$\sim$cell (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{structecto_1_1cell_a98748014df1b1a4fd3fbb47f6adc8c5e}
-\hypertarget{structecto_1_1cell_ac0ae6a72cecf48916bb6dd1b6393d1b3}{\index{ecto\-::cell@{ecto\-::cell}!cell@{cell}}
-\index{cell@{cell}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{cell}]{\setlength{\rightskip}{0pt plus 5cm}ecto\-::cell\-::cell (
-\begin{DoxyParamCaption}
-\item[{const {\bf cell} \&}]{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}}\label{structecto_1_1cell_ac0ae6a72cecf48916bb6dd1b6393d1b3}
 \hypertarget{structecto_1_1cell_a782c9d0f521f8a34c8eed309d0d8d79a}{\index{ecto\-::cell@{ecto\-::cell}!cell@{cell}}
 \index{cell@{cell}!ecto::cell@{ecto\-::cell}}
 \subsubsection[{cell}]{\setlength{\rightskip}{0pt plus 5cm}ecto\-::cell\-::cell (
@@ -314,24 +214,6 @@ A convenience pointer typedef.
 
 Activate the cell. i.\-e. Put it into a \char`\"{}ready\char`\"{} state, opening sockets, etc. 
 
-\hypertarget{structecto_1_1cell_a0416d7265db282a18202b58636be7165}{\index{ecto\-::cell@{ecto\-::cell}!activate@{activate}}
-\index{activate@{activate}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{activate}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::cell\-::activate (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}\label{structecto_1_1cell_a0416d7265db282a18202b58636be7165}
-
-
-Activate the cell. i.\-e. Put it into a \char`\"{}ready\char`\"{} state, opening sockets, etc. 
-
-\hypertarget{structecto_1_1cell_a213dabd285300f5d4c7e0f5fd6142e81}{\index{ecto\-::cell@{ecto\-::cell}!clone@{clone}}
-\index{clone@{clone}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{clone}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ptr} ecto\-::cell\-::clone (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const}}\label{structecto_1_1cell_a213dabd285300f5d4c7e0f5fd6142e81}
 \hypertarget{structecto_1_1cell_a213dabd285300f5d4c7e0f5fd6142e81}{\index{ecto\-::cell@{ecto\-::cell}!clone@{clone}}
 \index{clone@{clone}!ecto::cell@{ecto\-::cell}}
 \subsubsection[{clone}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ptr} ecto\-::cell\-::clone (
@@ -349,28 +231,6 @@ Activate the cell. i.\-e. Put it into a \char`\"{}ready\char`\"{} state, opening
 
 
 Given initialized parameters,inputs, and outputs, this will dispatch the client configuration code. This will allocated an instace of the clients cell, so this should not be called during introspection. 
-
-\hypertarget{structecto_1_1cell_a30d48d21d6ffa86af4888f78e92241af}{\index{ecto\-::cell@{ecto\-::cell}!configure@{configure}}
-\index{configure@{configure}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{configure}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::cell\-::configure (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}\label{structecto_1_1cell_a30d48d21d6ffa86af4888f78e92241af}
-
-
-Given initialized parameters,inputs, and outputs, this will dispatch the client configuration code. This will allocated an instace of the clients cell, so this should not be called during introspection. 
-
-\hypertarget{structecto_1_1cell_ab988f785fb943af3ff48c2d6f67a07aa}{\index{ecto\-::cell@{ecto\-::cell}!deactivate@{deactivate}}
-\index{deactivate@{deactivate}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{deactivate}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::cell\-::deactivate (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}\label{structecto_1_1cell_ab988f785fb943af3ff48c2d6f67a07aa}
-
-
-Deactivate the cell. i.\-e. Put it into an \char`\"{}unready\char`\"{} state, closing sockets, etc. 
 
 \hypertarget{structecto_1_1cell_ab988f785fb943af3ff48c2d6f67a07aa}{\index{ecto\-::cell@{ecto\-::cell}!deactivate@{deactivate}}
 \index{deactivate@{deactivate}!ecto::cell@{ecto\-::cell}}
@@ -394,28 +254,6 @@ Deactivate the cell. i.\-e. Put it into an \char`\"{}unready\char`\"{} state, cl
 
 Dispatches input/output declaration code. It is assumed that the parameters have been declared before this is called, so that inputs and outputs may be dependent on those parameters. 
 
-\hypertarget{structecto_1_1cell_af6c3782ed0d1c258bcf5050b4af272b4}{\index{ecto\-::cell@{ecto\-::cell}!declare\-\_\-io@{declare\-\_\-io}}
-\index{declare\-\_\-io@{declare\-\_\-io}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{declare\-\_\-io}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::cell\-::declare\-\_\-io (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}\label{structecto_1_1cell_af6c3782ed0d1c258bcf5050b4af272b4}
-
-
-Dispatches input/output declaration code. It is assumed that the parameters have been declared before this is called, so that inputs and outputs may be dependent on those parameters. 
-
-\hypertarget{structecto_1_1cell_a5c3c204f531de15920cb9d3db3ecfc4c}{\index{ecto\-::cell@{ecto\-::cell}!declare\-\_\-params@{declare\-\_\-params}}
-\index{declare\-\_\-params@{declare\-\_\-params}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{declare\-\_\-params}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::cell\-::declare\-\_\-params (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}\label{structecto_1_1cell_a5c3c204f531de15920cb9d3db3ecfc4c}
-
-
-Dispatches parameter declaration code. After this code, the parameters for the cell will be set to their defaults. 
-
 \hypertarget{structecto_1_1cell_a5c3c204f531de15920cb9d3db3ecfc4c}{\index{ecto\-::cell@{ecto\-::cell}!declare\-\_\-params@{declare\-\_\-params}}
 \index{declare\-\_\-params@{declare\-\_\-params}!ecto::cell@{ecto\-::cell}}
 \subsubsection[{declare\-\_\-params}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::cell\-::declare\-\_\-params (
@@ -436,18 +274,7 @@ Dispatches parameter declaration code. After this code, the parameters for the c
 )\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}}\label{structecto_1_1cell_aa345ec700e5e213364c7bb20571cd78d}
 
 
-Implemented in \hyperlink{structecto_1_1cell___a31437fcb5a15e57e8287719f48cecbdd}{ecto\-::cell\-\_\-$<$ Impl $>$}, and \hyperlink{structecto_1_1cell___a31437fcb5a15e57e8287719f48cecbdd}{ecto\-::cell\-\_\-$<$ Impl $>$}.
-
-\hypertarget{structecto_1_1cell_aa345ec700e5e213364c7bb20571cd78d}{\index{ecto\-::cell@{ecto\-::cell}!dispatch\-\_\-activate@{dispatch\-\_\-activate}}
-\index{dispatch\-\_\-activate@{dispatch\-\_\-activate}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{dispatch\-\_\-activate}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ecto\-::cell\-::dispatch\-\_\-activate (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}}\label{structecto_1_1cell_aa345ec700e5e213364c7bb20571cd78d}
-
-
-Implemented in \hyperlink{structecto_1_1cell___a31437fcb5a15e57e8287719f48cecbdd}{ecto\-::cell\-\_\-$<$ Impl $>$}, and \hyperlink{structecto_1_1cell___a31437fcb5a15e57e8287719f48cecbdd}{ecto\-::cell\-\_\-$<$ Impl $>$}.
+Implemented in \hyperlink{structecto_1_1cell___a31437fcb5a15e57e8287719f48cecbdd}{ecto\-::cell\-\_\-$<$ Impl $>$}.
 
 \hypertarget{structecto_1_1cell_a7beccd749c33bd8b4c5827598e8fe5a5}{\index{ecto\-::cell@{ecto\-::cell}!dispatch\-\_\-clone@{dispatch\-\_\-clone}}
 \index{dispatch\-\_\-clone@{dispatch\-\_\-clone}!ecto::cell@{ecto\-::cell}}
@@ -458,18 +285,7 @@ Implemented in \hyperlink{structecto_1_1cell___a31437fcb5a15e57e8287719f48cecbdd
 ) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}}\label{structecto_1_1cell_a7beccd749c33bd8b4c5827598e8fe5a5}
 
 
-Implemented in \hyperlink{structecto_1_1cell___ae2868bb59ddb378cbe7b98fd4e776930}{ecto\-::cell\-\_\-$<$ Impl $>$}, and \hyperlink{structecto_1_1cell___ae2868bb59ddb378cbe7b98fd4e776930}{ecto\-::cell\-\_\-$<$ Impl $>$}.
-
-\hypertarget{structecto_1_1cell_a7beccd749c33bd8b4c5827598e8fe5a5}{\index{ecto\-::cell@{ecto\-::cell}!dispatch\-\_\-clone@{dispatch\-\_\-clone}}
-\index{dispatch\-\_\-clone@{dispatch\-\_\-clone}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{dispatch\-\_\-clone}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf ptr} ecto\-::cell\-::dispatch\-\_\-clone (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}}\label{structecto_1_1cell_a7beccd749c33bd8b4c5827598e8fe5a5}
-
-
-Implemented in \hyperlink{structecto_1_1cell___ae2868bb59ddb378cbe7b98fd4e776930}{ecto\-::cell\-\_\-$<$ Impl $>$}, and \hyperlink{structecto_1_1cell___ae2868bb59ddb378cbe7b98fd4e776930}{ecto\-::cell\-\_\-$<$ Impl $>$}.
+Implemented in \hyperlink{structecto_1_1cell___ae2868bb59ddb378cbe7b98fd4e776930}{ecto\-::cell\-\_\-$<$ Impl $>$}.
 
 \hypertarget{structecto_1_1cell_a19c7c679dededd37ace918bf0ff31cd3}{\index{ecto\-::cell@{ecto\-::cell}!dispatch\-\_\-configure@{dispatch\-\_\-configure}}
 \index{dispatch\-\_\-configure@{dispatch\-\_\-configure}!ecto::cell@{ecto\-::cell}}
@@ -482,20 +298,7 @@ Implemented in \hyperlink{structecto_1_1cell___ae2868bb59ddb378cbe7b98fd4e776930
 )\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}}\label{structecto_1_1cell_a19c7c679dededd37ace918bf0ff31cd3}
 
 
-Implemented in \hyperlink{structecto_1_1cell___a953e526cefd3c419a01717740eab9227}{ecto\-::cell\-\_\-$<$ Impl $>$}, and \hyperlink{structecto_1_1cell___a953e526cefd3c419a01717740eab9227}{ecto\-::cell\-\_\-$<$ Impl $>$}.
-
-\hypertarget{structecto_1_1cell_a19c7c679dededd37ace918bf0ff31cd3}{\index{ecto\-::cell@{ecto\-::cell}!dispatch\-\_\-configure@{dispatch\-\_\-configure}}
-\index{dispatch\-\_\-configure@{dispatch\-\_\-configure}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{dispatch\-\_\-configure}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ecto\-::cell\-::dispatch\-\_\-configure (
-\begin{DoxyParamCaption}
-\item[{const {\bf tendrils} \&}]{params, }
-\item[{const {\bf tendrils} \&}]{inputs, }
-\item[{const {\bf tendrils} \&}]{outputs}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}}\label{structecto_1_1cell_a19c7c679dededd37ace918bf0ff31cd3}
-
-
-Implemented in \hyperlink{structecto_1_1cell___a953e526cefd3c419a01717740eab9227}{ecto\-::cell\-\_\-$<$ Impl $>$}, and \hyperlink{structecto_1_1cell___a953e526cefd3c419a01717740eab9227}{ecto\-::cell\-\_\-$<$ Impl $>$}.
+Implemented in \hyperlink{structecto_1_1cell___a953e526cefd3c419a01717740eab9227}{ecto\-::cell\-\_\-$<$ Impl $>$}.
 
 \hypertarget{structecto_1_1cell_a4b5f111fc7b90dccce0cd70e28c9be62}{\index{ecto\-::cell@{ecto\-::cell}!dispatch\-\_\-deactivate@{dispatch\-\_\-deactivate}}
 \index{dispatch\-\_\-deactivate@{dispatch\-\_\-deactivate}!ecto::cell@{ecto\-::cell}}
@@ -506,18 +309,7 @@ Implemented in \hyperlink{structecto_1_1cell___a953e526cefd3c419a01717740eab9227
 )\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}}\label{structecto_1_1cell_a4b5f111fc7b90dccce0cd70e28c9be62}
 
 
-Implemented in \hyperlink{structecto_1_1cell___a71463eb5e248d29814066904e7f0d515}{ecto\-::cell\-\_\-$<$ Impl $>$}, and \hyperlink{structecto_1_1cell___a71463eb5e248d29814066904e7f0d515}{ecto\-::cell\-\_\-$<$ Impl $>$}.
-
-\hypertarget{structecto_1_1cell_a4b5f111fc7b90dccce0cd70e28c9be62}{\index{ecto\-::cell@{ecto\-::cell}!dispatch\-\_\-deactivate@{dispatch\-\_\-deactivate}}
-\index{dispatch\-\_\-deactivate@{dispatch\-\_\-deactivate}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{dispatch\-\_\-deactivate}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ecto\-::cell\-::dispatch\-\_\-deactivate (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}}\label{structecto_1_1cell_a4b5f111fc7b90dccce0cd70e28c9be62}
-
-
-Implemented in \hyperlink{structecto_1_1cell___a71463eb5e248d29814066904e7f0d515}{ecto\-::cell\-\_\-$<$ Impl $>$}, and \hyperlink{structecto_1_1cell___a71463eb5e248d29814066904e7f0d515}{ecto\-::cell\-\_\-$<$ Impl $>$}.
+Implemented in \hyperlink{structecto_1_1cell___a71463eb5e248d29814066904e7f0d515}{ecto\-::cell\-\_\-$<$ Impl $>$}.
 
 \hypertarget{structecto_1_1cell_acb4cdb70f2db329ba9c615d74c63a4b2}{\index{ecto\-::cell@{ecto\-::cell}!dispatch\-\_\-declare\-\_\-io@{dispatch\-\_\-declare\-\_\-io}}
 \index{dispatch\-\_\-declare\-\_\-io@{dispatch\-\_\-declare\-\_\-io}!ecto::cell@{ecto\-::cell}}
@@ -530,20 +322,7 @@ Implemented in \hyperlink{structecto_1_1cell___a71463eb5e248d29814066904e7f0d515
 )\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}}\label{structecto_1_1cell_acb4cdb70f2db329ba9c615d74c63a4b2}
 
 
-Implemented in \hyperlink{structecto_1_1cell___ad95920d295860b791e3fa733fb0745db}{ecto\-::cell\-\_\-$<$ Impl $>$}, and \hyperlink{structecto_1_1cell___ad95920d295860b791e3fa733fb0745db}{ecto\-::cell\-\_\-$<$ Impl $>$}.
-
-\hypertarget{structecto_1_1cell_acb4cdb70f2db329ba9c615d74c63a4b2}{\index{ecto\-::cell@{ecto\-::cell}!dispatch\-\_\-declare\-\_\-io@{dispatch\-\_\-declare\-\_\-io}}
-\index{dispatch\-\_\-declare\-\_\-io@{dispatch\-\_\-declare\-\_\-io}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{dispatch\-\_\-declare\-\_\-io}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ecto\-::cell\-::dispatch\-\_\-declare\-\_\-io (
-\begin{DoxyParamCaption}
-\item[{const {\bf tendrils} \&}]{params, }
-\item[{{\bf tendrils} \&}]{inputs, }
-\item[{{\bf tendrils} \&}]{outputs}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}}\label{structecto_1_1cell_acb4cdb70f2db329ba9c615d74c63a4b2}
-
-
-Implemented in \hyperlink{structecto_1_1cell___ad95920d295860b791e3fa733fb0745db}{ecto\-::cell\-\_\-$<$ Impl $>$}, and \hyperlink{structecto_1_1cell___ad95920d295860b791e3fa733fb0745db}{ecto\-::cell\-\_\-$<$ Impl $>$}.
+Implemented in \hyperlink{structecto_1_1cell___ad95920d295860b791e3fa733fb0745db}{ecto\-::cell\-\_\-$<$ Impl $>$}.
 
 \hypertarget{structecto_1_1cell_abcf3cc29703214a7ede63d652e17ee96}{\index{ecto\-::cell@{ecto\-::cell}!dispatch\-\_\-declare\-\_\-params@{dispatch\-\_\-declare\-\_\-params}}
 \index{dispatch\-\_\-declare\-\_\-params@{dispatch\-\_\-declare\-\_\-params}!ecto::cell@{ecto\-::cell}}
@@ -554,18 +333,7 @@ Implemented in \hyperlink{structecto_1_1cell___ad95920d295860b791e3fa733fb0745db
 )\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}}\label{structecto_1_1cell_abcf3cc29703214a7ede63d652e17ee96}
 
 
-Implemented in \hyperlink{structecto_1_1cell___a0e435a14e4cc1d5cd7d80a16f2776565}{ecto\-::cell\-\_\-$<$ Impl $>$}, and \hyperlink{structecto_1_1cell___a0e435a14e4cc1d5cd7d80a16f2776565}{ecto\-::cell\-\_\-$<$ Impl $>$}.
-
-\hypertarget{structecto_1_1cell_abcf3cc29703214a7ede63d652e17ee96}{\index{ecto\-::cell@{ecto\-::cell}!dispatch\-\_\-declare\-\_\-params@{dispatch\-\_\-declare\-\_\-params}}
-\index{dispatch\-\_\-declare\-\_\-params@{dispatch\-\_\-declare\-\_\-params}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{dispatch\-\_\-declare\-\_\-params}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ecto\-::cell\-::dispatch\-\_\-declare\-\_\-params (
-\begin{DoxyParamCaption}
-\item[{{\bf tendrils} \&}]{t}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}}\label{structecto_1_1cell_abcf3cc29703214a7ede63d652e17ee96}
-
-
-Implemented in \hyperlink{structecto_1_1cell___a0e435a14e4cc1d5cd7d80a16f2776565}{ecto\-::cell\-\_\-$<$ Impl $>$}, and \hyperlink{structecto_1_1cell___a0e435a14e4cc1d5cd7d80a16f2776565}{ecto\-::cell\-\_\-$<$ Impl $>$}.
+Implemented in \hyperlink{structecto_1_1cell___a0e435a14e4cc1d5cd7d80a16f2776565}{ecto\-::cell\-\_\-$<$ Impl $>$}.
 
 \hypertarget{structecto_1_1cell_a456b56e3291f5e2bb68ce31a4a43ece5}{\index{ecto\-::cell@{ecto\-::cell}!dispatch\-\_\-name@{dispatch\-\_\-name}}
 \index{dispatch\-\_\-name@{dispatch\-\_\-name}!ecto::cell@{ecto\-::cell}}
@@ -576,18 +344,7 @@ Implemented in \hyperlink{structecto_1_1cell___a0e435a14e4cc1d5cd7d80a16f2776565
 ) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}}\label{structecto_1_1cell_a456b56e3291f5e2bb68ce31a4a43ece5}
 
 
-Implemented in \hyperlink{structecto_1_1cell___a288dac8bba40036b3f3e6b0641833039}{ecto\-::cell\-\_\-$<$ Impl $>$}, and \hyperlink{structecto_1_1cell___a288dac8bba40036b3f3e6b0641833039}{ecto\-::cell\-\_\-$<$ Impl $>$}.
-
-\hypertarget{structecto_1_1cell_a456b56e3291f5e2bb68ce31a4a43ece5}{\index{ecto\-::cell@{ecto\-::cell}!dispatch\-\_\-name@{dispatch\-\_\-name}}
-\index{dispatch\-\_\-name@{dispatch\-\_\-name}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{dispatch\-\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}virtual std\-::string ecto\-::cell\-::dispatch\-\_\-name (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}}\label{structecto_1_1cell_a456b56e3291f5e2bb68ce31a4a43ece5}
-
-
-Implemented in \hyperlink{structecto_1_1cell___a288dac8bba40036b3f3e6b0641833039}{ecto\-::cell\-\_\-$<$ Impl $>$}, and \hyperlink{structecto_1_1cell___a288dac8bba40036b3f3e6b0641833039}{ecto\-::cell\-\_\-$<$ Impl $>$}.
+Implemented in \hyperlink{structecto_1_1cell___a288dac8bba40036b3f3e6b0641833039}{ecto\-::cell\-\_\-$<$ Impl $>$}.
 
 \hypertarget{structecto_1_1cell_a390bd83cfdff120523efc5c3e76bc3e5}{\index{ecto\-::cell@{ecto\-::cell}!dispatch\-\_\-process@{dispatch\-\_\-process}}
 \index{dispatch\-\_\-process@{dispatch\-\_\-process}!ecto::cell@{ecto\-::cell}}
@@ -599,19 +356,7 @@ Implemented in \hyperlink{structecto_1_1cell___a288dac8bba40036b3f3e6b0641833039
 )\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}}\label{structecto_1_1cell_a390bd83cfdff120523efc5c3e76bc3e5}
 
 
-Implemented in \hyperlink{structecto_1_1cell___a1ddd0142b998f0de06a7992c5db27f16}{ecto\-::cell\-\_\-$<$ Impl $>$}, and \hyperlink{structecto_1_1cell___a1ddd0142b998f0de06a7992c5db27f16}{ecto\-::cell\-\_\-$<$ Impl $>$}.
-
-\hypertarget{structecto_1_1cell_a390bd83cfdff120523efc5c3e76bc3e5}{\index{ecto\-::cell@{ecto\-::cell}!dispatch\-\_\-process@{dispatch\-\_\-process}}
-\index{dispatch\-\_\-process@{dispatch\-\_\-process}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{dispatch\-\_\-process}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Return\-Code} ecto\-::cell\-::dispatch\-\_\-process (
-\begin{DoxyParamCaption}
-\item[{const {\bf tendrils} \&}]{inputs, }
-\item[{const {\bf tendrils} \&}]{outputs}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}}\label{structecto_1_1cell_a390bd83cfdff120523efc5c3e76bc3e5}
-
-
-Implemented in \hyperlink{structecto_1_1cell___a1ddd0142b998f0de06a7992c5db27f16}{ecto\-::cell\-\_\-$<$ Impl $>$}, and \hyperlink{structecto_1_1cell___a1ddd0142b998f0de06a7992c5db27f16}{ecto\-::cell\-\_\-$<$ Impl $>$}.
+Implemented in \hyperlink{structecto_1_1cell___a1ddd0142b998f0de06a7992c5db27f16}{ecto\-::cell\-\_\-$<$ Impl $>$}.
 
 \hypertarget{structecto_1_1cell_a400b8aecf15588cfb21d712fbb000e8a}{\index{ecto\-::cell@{ecto\-::cell}!dispatch\-\_\-short\-\_\-doc@{dispatch\-\_\-short\-\_\-doc}}
 \index{dispatch\-\_\-short\-\_\-doc@{dispatch\-\_\-short\-\_\-doc}!ecto::cell@{ecto\-::cell}}
@@ -622,7 +367,7 @@ Implemented in \hyperlink{structecto_1_1cell___a1ddd0142b998f0de06a7992c5db27f16
 ) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{structecto_1_1cell_a400b8aecf15588cfb21d712fbb000e8a}
 
 
-Reimplemented in \hyperlink{structecto_1_1cell___aea843d10de8a002ada9a29bec2ecb815}{ecto\-::cell\-\_\-$<$ Impl $>$}, and \hyperlink{structecto_1_1cell___aea843d10de8a002ada9a29bec2ecb815}{ecto\-::cell\-\_\-$<$ Impl $>$}.
+Reimplemented in \hyperlink{structecto_1_1cell___aea843d10de8a002ada9a29bec2ecb815}{ecto\-::cell\-\_\-$<$ Impl $>$}.
 
 \hypertarget{structecto_1_1cell_a407d24db843ffe12ac57c9a8827a9fe8}{\index{ecto\-::cell@{ecto\-::cell}!dispatch\-\_\-short\-\_\-doc@{dispatch\-\_\-short\-\_\-doc}}
 \index{dispatch\-\_\-short\-\_\-doc@{dispatch\-\_\-short\-\_\-doc}!ecto::cell@{ecto\-::cell}}
@@ -633,29 +378,7 @@ Reimplemented in \hyperlink{structecto_1_1cell___aea843d10de8a002ada9a29bec2ecb8
 )\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{structecto_1_1cell_a407d24db843ffe12ac57c9a8827a9fe8}
 
 
-Reimplemented in \hyperlink{structecto_1_1cell___a8d9ca18e234396fcdc1875507d3e11a8}{ecto\-::cell\-\_\-$<$ Impl $>$}, and \hyperlink{structecto_1_1cell___a8d9ca18e234396fcdc1875507d3e11a8}{ecto\-::cell\-\_\-$<$ Impl $>$}.
-
-\hypertarget{structecto_1_1cell_a400b8aecf15588cfb21d712fbb000e8a}{\index{ecto\-::cell@{ecto\-::cell}!dispatch\-\_\-short\-\_\-doc@{dispatch\-\_\-short\-\_\-doc}}
-\index{dispatch\-\_\-short\-\_\-doc@{dispatch\-\_\-short\-\_\-doc}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{dispatch\-\_\-short\-\_\-doc}]{\setlength{\rightskip}{0pt plus 5cm}virtual std\-::string ecto\-::cell\-::dispatch\-\_\-short\-\_\-doc (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{structecto_1_1cell_a400b8aecf15588cfb21d712fbb000e8a}
-
-
-Reimplemented in \hyperlink{structecto_1_1cell___aea843d10de8a002ada9a29bec2ecb815}{ecto\-::cell\-\_\-$<$ Impl $>$}, and \hyperlink{structecto_1_1cell___aea843d10de8a002ada9a29bec2ecb815}{ecto\-::cell\-\_\-$<$ Impl $>$}.
-
-\hypertarget{structecto_1_1cell_a407d24db843ffe12ac57c9a8827a9fe8}{\index{ecto\-::cell@{ecto\-::cell}!dispatch\-\_\-short\-\_\-doc@{dispatch\-\_\-short\-\_\-doc}}
-\index{dispatch\-\_\-short\-\_\-doc@{dispatch\-\_\-short\-\_\-doc}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{dispatch\-\_\-short\-\_\-doc}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ecto\-::cell\-::dispatch\-\_\-short\-\_\-doc (
-\begin{DoxyParamCaption}
-\item[{const std\-::string \&}]{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{structecto_1_1cell_a407d24db843ffe12ac57c9a8827a9fe8}
-
-
-Reimplemented in \hyperlink{structecto_1_1cell___a8d9ca18e234396fcdc1875507d3e11a8}{ecto\-::cell\-\_\-$<$ Impl $>$}, and \hyperlink{structecto_1_1cell___a8d9ca18e234396fcdc1875507d3e11a8}{ecto\-::cell\-\_\-$<$ Impl $>$}.
+Reimplemented in \hyperlink{structecto_1_1cell___a8d9ca18e234396fcdc1875507d3e11a8}{ecto\-::cell\-\_\-$<$ Impl $>$}.
 
 \hypertarget{structecto_1_1cell_ab5c75358dd32fa811116654bdc76385b}{\index{ecto\-::cell@{ecto\-::cell}!dispatch\-\_\-start@{dispatch\-\_\-start}}
 \index{dispatch\-\_\-start@{dispatch\-\_\-start}!ecto::cell@{ecto\-::cell}}
@@ -666,18 +389,7 @@ Reimplemented in \hyperlink{structecto_1_1cell___a8d9ca18e234396fcdc1875507d3e11
 )\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}}\label{structecto_1_1cell_ab5c75358dd32fa811116654bdc76385b}
 
 
-Implemented in \hyperlink{structecto_1_1cell___af6929fe6c16db59235793d972ea20ff8}{ecto\-::cell\-\_\-$<$ Impl $>$}, and \hyperlink{structecto_1_1cell___af6929fe6c16db59235793d972ea20ff8}{ecto\-::cell\-\_\-$<$ Impl $>$}.
-
-\hypertarget{structecto_1_1cell_ab5c75358dd32fa811116654bdc76385b}{\index{ecto\-::cell@{ecto\-::cell}!dispatch\-\_\-start@{dispatch\-\_\-start}}
-\index{dispatch\-\_\-start@{dispatch\-\_\-start}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{dispatch\-\_\-start}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ecto\-::cell\-::dispatch\-\_\-start (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}}\label{structecto_1_1cell_ab5c75358dd32fa811116654bdc76385b}
-
-
-Implemented in \hyperlink{structecto_1_1cell___af6929fe6c16db59235793d972ea20ff8}{ecto\-::cell\-\_\-$<$ Impl $>$}, and \hyperlink{structecto_1_1cell___af6929fe6c16db59235793d972ea20ff8}{ecto\-::cell\-\_\-$<$ Impl $>$}.
+Implemented in \hyperlink{structecto_1_1cell___af6929fe6c16db59235793d972ea20ff8}{ecto\-::cell\-\_\-$<$ Impl $>$}.
 
 \hypertarget{structecto_1_1cell_a65ff7141e927a7115a785478a03b94bc}{\index{ecto\-::cell@{ecto\-::cell}!dispatch\-\_\-stop@{dispatch\-\_\-stop}}
 \index{dispatch\-\_\-stop@{dispatch\-\_\-stop}!ecto::cell@{ecto\-::cell}}
@@ -688,38 +400,8 @@ Implemented in \hyperlink{structecto_1_1cell___af6929fe6c16db59235793d972ea20ff8
 )\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}}\label{structecto_1_1cell_a65ff7141e927a7115a785478a03b94bc}
 
 
-Implemented in \hyperlink{structecto_1_1cell___a0951afcee7f4aa52f957f1a6ecc2bfb7}{ecto\-::cell\-\_\-$<$ Impl $>$}, and \hyperlink{structecto_1_1cell___a0951afcee7f4aa52f957f1a6ecc2bfb7}{ecto\-::cell\-\_\-$<$ Impl $>$}.
+Implemented in \hyperlink{structecto_1_1cell___a0951afcee7f4aa52f957f1a6ecc2bfb7}{ecto\-::cell\-\_\-$<$ Impl $>$}.
 
-\hypertarget{structecto_1_1cell_a65ff7141e927a7115a785478a03b94bc}{\index{ecto\-::cell@{ecto\-::cell}!dispatch\-\_\-stop@{dispatch\-\_\-stop}}
-\index{dispatch\-\_\-stop@{dispatch\-\_\-stop}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{dispatch\-\_\-stop}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ecto\-::cell\-::dispatch\-\_\-stop (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}}\label{structecto_1_1cell_a65ff7141e927a7115a785478a03b94bc}
-
-
-Implemented in \hyperlink{structecto_1_1cell___a0951afcee7f4aa52f957f1a6ecc2bfb7}{ecto\-::cell\-\_\-$<$ Impl $>$}, and \hyperlink{structecto_1_1cell___a0951afcee7f4aa52f957f1a6ecc2bfb7}{ecto\-::cell\-\_\-$<$ Impl $>$}.
-
-\hypertarget{structecto_1_1cell_a486454d7466c5f0373ecb42dd4e97b2f}{\index{ecto\-::cell@{ecto\-::cell}!gen\-\_\-doc@{gen\-\_\-doc}}
-\index{gen\-\_\-doc@{gen\-\_\-doc}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{gen\-\_\-doc}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string ecto\-::cell\-::gen\-\_\-doc (
-\begin{DoxyParamCaption}
-\item[{const std\-::string \&}]{doc = {\ttfamily \char`\"{}A~module...\char`\"{}}}
-\end{DoxyParamCaption}
-) const}}\label{structecto_1_1cell_a486454d7466c5f0373ecb42dd4e97b2f}
-
-
-Generate an Restructured Text doc string for the cell. Includes documentation for all parameters, inputs, outputs. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em doc} & The highest level documentation for the cell. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A nicely formatted doc string. 
-\end{DoxyReturn}
 \hypertarget{structecto_1_1cell_a486454d7466c5f0373ecb42dd4e97b2f}{\index{ecto\-::cell@{ecto\-::cell}!gen\-\_\-doc@{gen\-\_\-doc}}
 \index{gen\-\_\-doc@{gen\-\_\-doc}!ecto::cell@{ecto\-::cell}}
 \subsubsection[{gen\-\_\-doc}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string ecto\-::cell\-::gen\-\_\-doc (
@@ -748,33 +430,8 @@ A nicely formatted doc string.
 )\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{structecto_1_1cell_ab9a6c3fd8f76289f338a9e05368b1aff}
 
 
-Implemented in \hyperlink{structecto_1_1cell___a06749143e390dcc5fd90f5076620108c}{ecto\-::cell\-\_\-$<$ Impl $>$}, and \hyperlink{structecto_1_1cell___a06749143e390dcc5fd90f5076620108c}{ecto\-::cell\-\_\-$<$ Impl $>$}.
+Implemented in \hyperlink{structecto_1_1cell___a06749143e390dcc5fd90f5076620108c}{ecto\-::cell\-\_\-$<$ Impl $>$}.
 
-\hypertarget{structecto_1_1cell_ab9a6c3fd8f76289f338a9e05368b1aff}{\index{ecto\-::cell@{ecto\-::cell}!init@{init}}
-\index{init@{init}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool ecto\-::cell\-::init (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{structecto_1_1cell_ab9a6c3fd8f76289f338a9e05368b1aff}
-
-
-Implemented in \hyperlink{structecto_1_1cell___a06749143e390dcc5fd90f5076620108c}{ecto\-::cell\-\_\-$<$ Impl $>$}, and \hyperlink{structecto_1_1cell___a06749143e390dcc5fd90f5076620108c}{ecto\-::cell\-\_\-$<$ Impl $>$}.
-
-\hypertarget{structecto_1_1cell_a931fbc02fff66a58684ab25e00dbb2f8}{\index{ecto\-::cell@{ecto\-::cell}!name@{name}}
-\index{name@{name}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{name}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string ecto\-::cell\-::name (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{structecto_1_1cell_a931fbc02fff66a58684ab25e00dbb2f8}
-
-
-Grab the name of the instance. 
-
-\begin{DoxyReturn}{Returns}
-The name of the instance, or the address if none was given when object was constructed. 
-\end{DoxyReturn}
 \hypertarget{structecto_1_1cell_a931fbc02fff66a58684ab25e00dbb2f8}{\index{ecto\-::cell@{ecto\-::cell}!name@{name}}
 \index{name@{name}!ecto::cell@{ecto\-::cell}}
 \subsubsection[{name}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string ecto\-::cell\-::name (
@@ -800,17 +457,6 @@ The name of the instance, or the address if none was given when object was const
 
 Set the name of the instance. 
 
-\hypertarget{structecto_1_1cell_a3956efb238f50a6983b86f430c47ca05}{\index{ecto\-::cell@{ecto\-::cell}!name@{name}}
-\index{name@{name}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{name}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::cell\-::name (
-\begin{DoxyParamCaption}
-\item[{const std\-::string \&}]{name}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{structecto_1_1cell_a3956efb238f50a6983b86f430c47ca05}
-
-
-Set the name of the instance. 
-
 \hypertarget{structecto_1_1cell_a6b810671ee21f5dddbc1206abfb999f3}{\index{ecto\-::cell@{ecto\-::cell}!process@{process}}
 \index{process@{process}!ecto::cell@{ecto\-::cell}}
 \subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Return\-Code} ecto\-::cell\-::process (
@@ -823,21 +469,7 @@ Set the name of the instance.
 Dispatches the process function for the client cell. This should only be called from one thread at a time. Also, this function may throw exceptions... 
 
 \begin{DoxyReturn}{Returns}
-A return code, \hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762ca93233d0e6456b2e8f52d285b74c463c8}{ecto\-::\-O\-K} , or 0 means all is ok. Anything non zero should be considered an exit signal. 
-\end{DoxyReturn}
-\hypertarget{structecto_1_1cell_a6b810671ee21f5dddbc1206abfb999f3}{\index{ecto\-::cell@{ecto\-::cell}!process@{process}}
-\index{process@{process}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Return\-Code} ecto\-::cell\-::process (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}\label{structecto_1_1cell_a6b810671ee21f5dddbc1206abfb999f3}
-
-
-Dispatches the process function for the client cell. This should only be called from one thread at a time. Also, this function may throw exceptions... 
-
-\begin{DoxyReturn}{Returns}
-A return code, \hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762ca93233d0e6456b2e8f52d285b74c463c8}{ecto\-::\-O\-K} , or 0 means all is ok. Anything non zero should be considered an exit signal. 
+A return code, \hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762ca047df8448e71f9fc10f4fe310b0a4de7}{ecto\-::\-O\-K} , or 0 means all is ok. Anything non zero should be considered an exit signal. 
 \end{DoxyReturn}
 \hypertarget{structecto_1_1cell_ab1dfafd237e0adf273af65d549e7516e}{\index{ecto\-::cell@{ecto\-::cell}!process\-\_\-connected\-\_\-inputs\-\_\-only@{process\-\_\-connected\-\_\-inputs\-\_\-only}}
 \index{process\-\_\-connected\-\_\-inputs\-\_\-only@{process\-\_\-connected\-\_\-inputs\-\_\-only}!ecto::cell@{ecto\-::cell}}
@@ -867,13 +499,6 @@ flag only connected input tendrils if true, all otherwise.
 {}
 \end{DoxyParamCaption}
 )}}\label{structecto_1_1cell_af32a9e2113b7afcb5b225bdc3c234e8c}
-\hypertarget{structecto_1_1cell_af32a9e2113b7afcb5b225bdc3c234e8c}{\index{ecto\-::cell@{ecto\-::cell}!reset\-\_\-strand@{reset\-\_\-strand}}
-\index{reset\-\_\-strand@{reset\-\_\-strand}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{reset\-\_\-strand}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::cell\-::reset\-\_\-strand (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}\label{structecto_1_1cell_af32a9e2113b7afcb5b225bdc3c234e8c}
 \hypertarget{structecto_1_1cell_a4c42ef400acac92d825e7dc25ff53bdc}{\index{ecto\-::cell@{ecto\-::cell}!set\-\_\-process\-\_\-connected\-\_\-inputs\-\_\-only@{set\-\_\-process\-\_\-connected\-\_\-inputs\-\_\-only}}
 \index{set\-\_\-process\-\_\-connected\-\_\-inputs\-\_\-only@{set\-\_\-process\-\_\-connected\-\_\-inputs\-\_\-only}!ecto::cell@{ecto\-::cell}}
 \subsubsection[{set\-\_\-process\-\_\-connected\-\_\-inputs\-\_\-only}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::cell\-::set\-\_\-process\-\_\-connected\-\_\-inputs\-\_\-only (
@@ -888,13 +513,6 @@ flag only connected input tendrils if true, all otherwise.
 \item[{{\bf ecto\-::strand}}]{}
 \end{DoxyParamCaption}
 )}}\label{structecto_1_1cell_ae0009fc4a4d12d400126f455396f5c9f}
-\hypertarget{structecto_1_1cell_ae0009fc4a4d12d400126f455396f5c9f}{\index{ecto\-::cell@{ecto\-::cell}!set\-\_\-strand@{set\-\_\-strand}}
-\index{set\-\_\-strand@{set\-\_\-strand}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{set\-\_\-strand}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::cell\-::set\-\_\-strand (
-\begin{DoxyParamCaption}
-\item[{{\bf ecto\-::strand}}]{}
-\end{DoxyParamCaption}
-)}}\label{structecto_1_1cell_ae0009fc4a4d12d400126f455396f5c9f}
 \hypertarget{structecto_1_1cell_aefa443962201caebb08d1a3163730639}{\index{ecto\-::cell@{ecto\-::cell}!short\-\_\-doc@{short\-\_\-doc}}
 \index{short\-\_\-doc@{short\-\_\-doc}!ecto::cell@{ecto\-::cell}}
 \subsubsection[{short\-\_\-doc}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string ecto\-::cell\-::short\-\_\-doc (
@@ -902,28 +520,6 @@ flag only connected input tendrils if true, all otherwise.
 {}
 \end{DoxyParamCaption}
 ) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{structecto_1_1cell_aefa443962201caebb08d1a3163730639}
-
-
-Set the short\-\_\-doc\-\_\- of the instance. 
-
-\hypertarget{structecto_1_1cell_aefa443962201caebb08d1a3163730639}{\index{ecto\-::cell@{ecto\-::cell}!short\-\_\-doc@{short\-\_\-doc}}
-\index{short\-\_\-doc@{short\-\_\-doc}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{short\-\_\-doc}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string ecto\-::cell\-::short\-\_\-doc (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{structecto_1_1cell_aefa443962201caebb08d1a3163730639}
-
-
-Set the short\-\_\-doc\-\_\- of the instance. 
-
-\hypertarget{structecto_1_1cell_a49d510eec19d352c5729e6a2fd149340}{\index{ecto\-::cell@{ecto\-::cell}!short\-\_\-doc@{short\-\_\-doc}}
-\index{short\-\_\-doc@{short\-\_\-doc}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{short\-\_\-doc}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::cell\-::short\-\_\-doc (
-\begin{DoxyParamCaption}
-\item[{const std\-::string \&}]{short\-\_\-doc}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{structecto_1_1cell_a49d510eec19d352c5729e6a2fd149340}
 
 
 Set the short\-\_\-doc\-\_\- of the instance. 
@@ -946,21 +542,7 @@ Set the short\-\_\-doc\-\_\- of the instance.
 {}
 \end{DoxyParamCaption}
 )}}\label{structecto_1_1cell_a06abb010763ff7aeaaf2b28be4a6424a}
-scheduler is going to call \hyperlink{structecto_1_1cell_a6b810671ee21f5dddbc1206abfb999f3}{process()} zero or more times. \hypertarget{structecto_1_1cell_a06abb010763ff7aeaaf2b28be4a6424a}{\index{ecto\-::cell@{ecto\-::cell}!start@{start}}
-\index{start@{start}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{start}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::cell\-::start (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}\label{structecto_1_1cell_a06abb010763ff7aeaaf2b28be4a6424a}
 scheduler is going to call \hyperlink{structecto_1_1cell_a6b810671ee21f5dddbc1206abfb999f3}{process()} zero or more times. \hypertarget{structecto_1_1cell_abac52b774d350b02dc99a55c64b94bcd}{\index{ecto\-::cell@{ecto\-::cell}!stop@{stop}}
-\index{stop@{stop}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{stop}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::cell\-::stop (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}\label{structecto_1_1cell_abac52b774d350b02dc99a55c64b94bcd}
-scheduler is not going to call \hyperlink{structecto_1_1cell_a6b810671ee21f5dddbc1206abfb999f3}{process()} for a while. \hypertarget{structecto_1_1cell_abac52b774d350b02dc99a55c64b94bcd}{\index{ecto\-::cell@{ecto\-::cell}!stop@{stop}}
 \index{stop@{stop}!ecto::cell@{ecto\-::cell}}
 \subsubsection[{stop}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::cell\-::stop (
 \begin{DoxyParamCaption}
@@ -981,20 +563,6 @@ Return the type of the child class.
 \begin{DoxyReturn}{Returns}
 A human readable non mangled name for the client class. 
 \end{DoxyReturn}
-\hypertarget{structecto_1_1cell_ae3b84af61e78dab25f66a66773d5c5df}{\index{ecto\-::cell@{ecto\-::cell}!type@{type}}
-\index{type@{type}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string ecto\-::cell\-::type (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{structecto_1_1cell_ae3b84af61e78dab25f66a66773d5c5df}
-
-
-Return the type of the child class. 
-
-\begin{DoxyReturn}{Returns}
-A human readable non mangled name for the client class. 
-\end{DoxyReturn}
 \hypertarget{structecto_1_1cell_aed712e80344ce04dbb9105bb6a1aa53a}{\index{ecto\-::cell@{ecto\-::cell}!verify\-\_\-inputs@{verify\-\_\-inputs}}
 \index{verify\-\_\-inputs@{verify\-\_\-inputs}!ecto::cell@{ecto\-::cell}}
 \subsubsection[{verify\-\_\-inputs}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::cell\-::verify\-\_\-inputs (
@@ -1002,20 +570,6 @@ A human readable non mangled name for the client class.
 {}
 \end{DoxyParamCaption}
 ) const}}\label{structecto_1_1cell_aed712e80344ce04dbb9105bb6a1aa53a}
-\hypertarget{structecto_1_1cell_aed712e80344ce04dbb9105bb6a1aa53a}{\index{ecto\-::cell@{ecto\-::cell}!verify\-\_\-inputs@{verify\-\_\-inputs}}
-\index{verify\-\_\-inputs@{verify\-\_\-inputs}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{verify\-\_\-inputs}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::cell\-::verify\-\_\-inputs (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const}}\label{structecto_1_1cell_aed712e80344ce04dbb9105bb6a1aa53a}
-\hypertarget{structecto_1_1cell_aa03c0f569bb4b14e81f4d2a8747273e5}{\index{ecto\-::cell@{ecto\-::cell}!verify\-\_\-params@{verify\-\_\-params}}
-\index{verify\-\_\-params@{verify\-\_\-params}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{verify\-\_\-params}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::cell\-::verify\-\_\-params (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const}}\label{structecto_1_1cell_aa03c0f569bb4b14e81f4d2a8747273e5}
 \hypertarget{structecto_1_1cell_aa03c0f569bb4b14e81f4d2a8747273e5}{\index{ecto\-::cell@{ecto\-::cell}!verify\-\_\-params@{verify\-\_\-params}}
 \index{verify\-\_\-params@{verify\-\_\-params}!ecto::cell@{ecto\-::cell}}
 \subsubsection[{verify\-\_\-params}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::cell\-::verify\-\_\-params (
@@ -1059,16 +613,15 @@ Parameters.
 \hypertarget{structecto_1_1cell_a9a9d7fa3bb72fd74073a997bfb6cbad8}{\index{ecto\-::cell@{ecto\-::cell}!process\-\_\-connected\-\_\-inputs\-\_\-only\-\_\-@{process\-\_\-connected\-\_\-inputs\-\_\-only\-\_\-}}
 \index{process\-\_\-connected\-\_\-inputs\-\_\-only\-\_\-@{process\-\_\-connected\-\_\-inputs\-\_\-only\-\_\-}!ecto::cell@{ecto\-::cell}}
 \subsubsection[{process\-\_\-connected\-\_\-inputs\-\_\-only\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}bool ecto\-::cell\-::process\-\_\-connected\-\_\-inputs\-\_\-only\-\_\-\hspace{0.3cm}{\ttfamily [private]}}}\label{structecto_1_1cell_a9a9d7fa3bb72fd74073a997bfb6cbad8}
-\hypertarget{structecto_1_1cell_a0ecc893a5427877548d0c39a208a5a26}{\index{ecto\-::cell@{ecto\-::cell}!strand\-\_\-@{strand\-\_\-}}
+\hypertarget{structecto_1_1cell_ada052f06257277c1b53c82226dff5821}{\index{ecto\-::cell@{ecto\-::cell}!strand\-\_\-@{strand\-\_\-}}
 \index{strand\-\_\-@{strand\-\_\-}!ecto::cell@{ecto\-::cell}}
-\subsubsection[{strand\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::optional$<$ {\bf strand} $>$ ecto\-::cell\-::strand\-\_\-}}\label{structecto_1_1cell_a0ecc893a5427877548d0c39a208a5a26}
+\subsubsection[{strand\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::optional$<${\bf strand}$>$ ecto\-::cell\-::strand\-\_\-}}\label{structecto_1_1cell_ada052f06257277c1b53c82226dff5821}
 
 
 The strand that this cell should be executed in. 
 
 
 
-The documentation for this struct was generated from the following files\-:\begin{DoxyCompactItemize}
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-/home/vrabaud/workspace/recognition\-\_\-kitchen/src/ecto/include/ecto/\hyperlink{cell_8hpp}{cell.\-hpp}\item 
-/home/vrabaud/workspace/recognition\-\_\-kitchen/src/ecto/include/ecto/\hyperlink{cell_8hpp~}{cell.\-hpp$\sim$}\end{DoxyCompactItemize}
+/home/vrabaud/workspace/recognition\-\_\-kitchen/src/ecto/include/ecto/\hyperlink{cell_8hpp}{cell.\-hpp}\end{DoxyCompactItemize}

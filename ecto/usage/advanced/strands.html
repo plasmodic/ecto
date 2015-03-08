@@ -24,10 +24,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="ecto" href="../../../index.html" />
-    <link rel="up" title="Usage" href="../index.html" />
-    <link rel="next" title="Serialization: Create From Python, Load/Execute From Pure C++" href="serialization.html" />
-    <link rel="prev" title="Parameters to and from YAML" href="yaml.html" /> 
+    <link rel="top" title="ecto" href="../../../index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -39,14 +36,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="serialization.html" title="Serialization: Create From Python, Load/Execute From Pure C++"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="yaml.html" title="Parameters to and from YAML"
-             accesskey="P">previous</a> |</li>
-        <li><a href="../../../index.html">ecto</a> &raquo;</li>
-          <li><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
+        <li><a href="../../../index.html">ecto</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
@@ -54,12 +44,6 @@
             <p class="logo"><a href="../../../index.html">
               <img class="logo" src="../../../_static/ecto210.png" alt="Logo"/>
             </a></p>
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="yaml.html"
-                        title="previous chapter">Parameters to and from YAML</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="serialization.html"
-                        title="next chapter">Serialization: Create From Python, Load/Execute From Pure C++</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../../../_sources/ecto/usage/advanced/strands.txt"
@@ -93,7 +77,7 @@ concurrently with specific instances or other cells.  Simply create a
 strand and pass it as the argument <tt class="docutils literal"><span class="pre">strand</span></tt> when creating cells: no
 cells that have the same strand will ever run at the same time.</p>
 <p>One can also mark all instances of the same <strong>type</strong> of cell as always
-thread-unsafe, see <a class="reference internal" href="../techniques/autoregister.html#ecto-thread-unsafe"><em>ECTO_THREAD_UNSAFE()</em></a>.</p>
+thread-unsafe, see <em class="xref std std-ref">ECTO_THREAD_UNSAFE()</em>.</p>
 <p>Sample:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
 
@@ -121,12 +105,13 @@ thread-unsafe, see <a class="reference internal" href="../techniques/autoregiste
 </pre></div>
 </div>
 <p class="graphviz">
-<img src="../../../_images/graphviz-e7806bc8eee9b5759777d653eb733394c18d38a3.png" alt="digraph G {
+<img src="../../../_images/graphviz-3fa0b9e25764c863a4840d1cbf4d34e77e0c596a.png" alt="digraph G {
 graph [rankdir=TB, ranksep=1]
 edge [labelfontsize=8]
 node [shape=plaintext]
-0[label=&lt;&lt;TABLE BORDER=&quot;0&quot; CELLBORDER=&quot;1&quot; CELLSPACING=&quot;0&quot; CELLPADDING=&quot;4&quot;&gt;  &lt;TR&gt; &lt;TD ROWSPAN=&quot;2&quot; COLSPAN=&quot;1&quot; BGCOLOR=&quot;khaki&quot;&gt;Gen&lt;/TD&gt; &lt;TD PORT=&quot;p_start&quot; BGCOLOR=&quot;lightblue&quot;&gt;start&lt;/TD&gt;
+0[label=&lt;&lt;TABLE BORDER=&quot;0&quot; CELLBORDER=&quot;1&quot; CELLSPACING=&quot;0&quot; CELLPADDING=&quot;4&quot;&gt;  &lt;TR&gt; &lt;TD ROWSPAN=&quot;3&quot; COLSPAN=&quot;1&quot; BGCOLOR=&quot;khaki&quot;&gt;Gen&lt;/TD&gt; &lt;TD PORT=&quot;p_start&quot; BGCOLOR=&quot;lightblue&quot;&gt;start&lt;/TD&gt;
  &lt;/TR&gt; &lt;TR&gt; &lt;TD PORT=&quot;p_step&quot; BGCOLOR=&quot;lightblue&quot;&gt;step&lt;/TD&gt; &lt;/TR&gt;
+&lt;TR&gt; &lt;TD PORT=&quot;p_stop&quot; BGCOLOR=&quot;lightblue&quot;&gt;stop&lt;/TD&gt; &lt;/TR&gt;
  &lt;TR&gt;
 &lt;TD PORT=&quot;o_out&quot; BGCOLOR=&quot;indianred1&quot;&gt;out&lt;/TD&gt;
 &lt;/TR&gt; &lt;/TABLE&gt;&gt;];
@@ -161,8 +146,8 @@ node [shape=plaintext]
 4-&gt;5 [headport=&quot;i_in&quot; tailport=&quot;o_out&quot;];
 }" />
 </p>
-<div class="highlight-text"><div class="highlight"><pre>***** 1 ***** 0x140d450
-***** 2 ***** 0x140d450
+<div class="highlight-text"><div class="highlight"><pre>***** 1 ***** 0x2442580
+***** 2 ***** 0x2442580
 </pre></div>
 </div>
 </div>
@@ -182,14 +167,7 @@ node [shape=plaintext]
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="serialization.html" title="Serialization: Create From Python, Load/Execute From Pure C++"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="yaml.html" title="Parameters to and from YAML"
-             >previous</a> |</li>
-        <li><a href="../../../index.html">ecto</a> &raquo;</li>
-          <li><a href="../index.html" >Usage</a> &raquo;</li> 
+        <li><a href="../../../index.html">ecto</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

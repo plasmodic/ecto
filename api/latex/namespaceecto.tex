@@ -29,8 +29,6 @@ class \hyperlink{classecto_1_1tendrils}{tendrils}
 \begin{DoxyCompactList}\small\item\em The tendrils are a collection for the \hyperlink{classecto_1_1tendril}{ecto\-::tendril} class, addressable by a string key. \end{DoxyCompactList}\item 
 struct \hyperlink{structecto_1_1spore__assign__impl}{spore\-\_\-assign\-\_\-impl}
 \item 
-struct \hyperlink{structecto_1_1plasm}{plasm}
-\begin{DoxyCompactList}\small\item\em The plasm helps construct the graph structure in ecto. It enforces several invariants that are necessary for scheduling D\-A\-Gs and is used by all the ecto\-::schedulers to enable execution of modules that are connected in the graph. \end{DoxyCompactList}\item 
 class \hyperlink{classecto_1_1atomic}{atomic}
 \item 
 struct \hyperlink{structecto_1_1cell}{cell}
@@ -45,6 +43,8 @@ struct \hyperlink{structecto_1_1strand__hash}{strand\-\_\-hash}
 \item 
 class \hyperlink{classecto_1_1tendril}{tendril}
 \begin{DoxyCompactList}\small\item\em A tendril is the slender, winding organ of the \hyperlink{structecto_1_1cell}{ecto\-::cell} that gives it its awesome type erasure and uber flexibility. \end{DoxyCompactList}\item 
+struct \hyperlink{structecto_1_1plasm}{plasm}
+\begin{DoxyCompactList}\small\item\em The plasm helps construct the graph structure in ecto. It enforces several invariants that are necessary for scheduling D\-A\-Gs and is used by all the ecto\-::schedulers to enable execution of modules that are connected in the graph. \end{DoxyCompactList}\item 
 class \hyperlink{classecto_1_1scheduler}{scheduler}
 \item 
 class \hyperlink{classecto_1_1ref__count}{ref\-\_\-count}
@@ -109,37 +109,13 @@ enum \hyperlink{namespaceecto_a02939764b22968505f82e425c83272c2}{tendril\-\_\-ty
  \}
 \item 
 enum \hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762c}{Return\-Code} \{ \\*
-\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762ca93233d0e6456b2e8f52d285b74c463c8}{O\-K} = 0, 
-\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762ca2f13d3238ae038f318ed92ac37bb8e35}{Q\-U\-I\-T} = 1, 
-\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762cae5d8da4794c8cb4bef2ea7d344b5a6ef}{D\-O\-\_\-\-O\-V\-E\-R} = 2, 
-\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762caa1fa43a25faf4b9de785d390013c664b}{B\-R\-E\-A\-K} = 3, 
+\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762ca047df8448e71f9fc10f4fe310b0a4de7}{O\-K} = 0, 
+\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762ca6803dad912ff60afb751d630ba35f0b3}{Q\-U\-I\-T} = 1, 
+\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762caa83c6c7678d27bc12006c6343229f841}{D\-O\-\_\-\-O\-V\-E\-R} = 2, 
+\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762cab1a50eb818462b09d2aeed53db036ede}{B\-R\-E\-A\-K} = 3, 
 \\*
-\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762ca65d745b18bdbe2335a48275e09547760}{C\-O\-N\-T\-I\-N\-U\-E} = 4, 
-\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762caef5b25213be1330790a3112518e3a44b}{U\-N\-K\-N\-O\-W\-N} = -\/1, 
-\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762ca93233d0e6456b2e8f52d285b74c463c8}{O\-K} = 0, 
-\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762ca2f13d3238ae038f318ed92ac37bb8e35}{Q\-U\-I\-T} = 1, 
-\\*
-\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762cae5d8da4794c8cb4bef2ea7d344b5a6ef}{D\-O\-\_\-\-O\-V\-E\-R} = 2, 
-\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762caa1fa43a25faf4b9de785d390013c664b}{B\-R\-E\-A\-K} = 3, 
-\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762ca65d745b18bdbe2335a48275e09547760}{C\-O\-N\-T\-I\-N\-U\-E} = 4, 
-\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762caef5b25213be1330790a3112518e3a44b}{U\-N\-K\-N\-O\-W\-N} = -\/1
- \}
-\begin{DoxyCompactList}\small\item\em Return values for cell\-::process(). T\-O\-D\-O\-: Should these live in cell? These are appropriate for non exceptional behavior. \end{DoxyCompactList}\item 
-enum \hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762c}{Return\-Code} \{ \\*
-\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762ca93233d0e6456b2e8f52d285b74c463c8}{O\-K} = 0, 
-\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762ca2f13d3238ae038f318ed92ac37bb8e35}{Q\-U\-I\-T} = 1, 
-\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762cae5d8da4794c8cb4bef2ea7d344b5a6ef}{D\-O\-\_\-\-O\-V\-E\-R} = 2, 
-\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762caa1fa43a25faf4b9de785d390013c664b}{B\-R\-E\-A\-K} = 3, 
-\\*
-\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762ca65d745b18bdbe2335a48275e09547760}{C\-O\-N\-T\-I\-N\-U\-E} = 4, 
-\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762caef5b25213be1330790a3112518e3a44b}{U\-N\-K\-N\-O\-W\-N} = -\/1, 
-\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762ca93233d0e6456b2e8f52d285b74c463c8}{O\-K} = 0, 
-\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762ca2f13d3238ae038f318ed92ac37bb8e35}{Q\-U\-I\-T} = 1, 
-\\*
-\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762cae5d8da4794c8cb4bef2ea7d344b5a6ef}{D\-O\-\_\-\-O\-V\-E\-R} = 2, 
-\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762caa1fa43a25faf4b9de785d390013c664b}{B\-R\-E\-A\-K} = 3, 
-\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762ca65d745b18bdbe2335a48275e09547760}{C\-O\-N\-T\-I\-N\-U\-E} = 4, 
-\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762caef5b25213be1330790a3112518e3a44b}{U\-N\-K\-N\-O\-W\-N} = -\/1
+\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762caa00c877a06d58c100c7b0788c6c38b0a}{C\-O\-N\-T\-I\-N\-U\-E} = 4, 
+\hyperlink{namespaceecto_a93d82cd28db695d53963fb696582762caed3dfd705e16962aacd0ba04103fa6cc}{U\-N\-K\-N\-O\-W\-N} = -\/1
  \}
 \begin{DoxyCompactList}\small\item\em Return values for cell\-::process(). T\-O\-D\-O\-: Should these live in cell? These are appropriate for non exceptional behavior. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions}
@@ -154,7 +130,7 @@ $<$ Cell\-Impl, T $>$ \hyperlink{namespaceecto_a776138cb830340922312c3ec98c15b6d
 \item 
 bool \hyperlink{namespaceecto_a34c1f436c47dc08392c8248632cde6f0}{logging\-\_\-on} ()
 \item 
-const std\-::string \& \hyperlink{namespaceecto_a7300f29f56aab7f09d11060432ad081e}{Return\-Code\-To\-Str} (int rval)
+const std\-::string \& \hyperlink{namespaceecto_a00786d16020c07e60fea08e8352dba30}{Return\-Code\-To\-Str} (int rval)
 \item 
 void \hyperlink{namespaceecto_a653dab75b6cd892233b9f3676a5d2921}{on\-\_\-strand} (\hyperlink{namespaceecto_aed1809e82b9229ea81ef9ee3438cf62c}{cell\-\_\-ptr} c, boost\-::asio\-::io\-\_\-service \&s, boost\-::function$<$ void()$>$ h)
 \item 
@@ -247,65 +223,17 @@ Return values for \hyperlink{structecto_1_1cell_a6b810671ee21f5dddbc1206abfb999f
 \item[Enumerator]\par
 \begin{description}
 \index{O\-K@{O\-K}!ecto@{ecto}}\index{ecto@{ecto}!O\-K@{O\-K}}\item[{\em 
-\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762ca93233d0e6456b2e8f52d285b74c463c8}{O\-K}\label{namespaceecto_a93d82cd28db695d53963fb696582762ca93233d0e6456b2e8f52d285b74c463c8}
+\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762ca047df8448e71f9fc10f4fe310b0a4de7}{O\-K}\label{namespaceecto_a93d82cd28db695d53963fb696582762ca047df8448e71f9fc10f4fe310b0a4de7}
 }]Everything A O\-K. \index{Q\-U\-I\-T@{Q\-U\-I\-T}!ecto@{ecto}}\index{ecto@{ecto}!Q\-U\-I\-T@{Q\-U\-I\-T}}\item[{\em 
-\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762ca2f13d3238ae038f318ed92ac37bb8e35}{Q\-U\-I\-T}\label{namespaceecto_a93d82cd28db695d53963fb696582762ca2f13d3238ae038f318ed92ac37bb8e35}
+\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762ca6803dad912ff60afb751d630ba35f0b3}{Q\-U\-I\-T}\label{namespaceecto_a93d82cd28db695d53963fb696582762ca6803dad912ff60afb751d630ba35f0b3}
 }]Explicit quit now. \index{D\-O\-\_\-\-O\-V\-E\-R@{D\-O\-\_\-\-O\-V\-E\-R}!ecto@{ecto}}\index{ecto@{ecto}!D\-O\-\_\-\-O\-V\-E\-R@{D\-O\-\_\-\-O\-V\-E\-R}}\item[{\em 
-\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762cae5d8da4794c8cb4bef2ea7d344b5a6ef}{D\-O\-\_\-\-O\-V\-E\-R}\label{namespaceecto_a93d82cd28db695d53963fb696582762cae5d8da4794c8cb4bef2ea7d344b5a6ef}
+\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762caa83c6c7678d27bc12006c6343229f841}{D\-O\-\_\-\-O\-V\-E\-R}\label{namespaceecto_a93d82cd28db695d53963fb696582762caa83c6c7678d27bc12006c6343229f841}
 }]This modules' process call needs to be made again. \index{B\-R\-E\-A\-K@{B\-R\-E\-A\-K}!ecto@{ecto}}\index{ecto@{ecto}!B\-R\-E\-A\-K@{B\-R\-E\-A\-K}}\item[{\em 
-\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762caa1fa43a25faf4b9de785d390013c664b}{B\-R\-E\-A\-K}\label{namespaceecto_a93d82cd28db695d53963fb696582762caa1fa43a25faf4b9de785d390013c664b}
+\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762cab1a50eb818462b09d2aeed53db036ede}{B\-R\-E\-A\-K}\label{namespaceecto_a93d82cd28db695d53963fb696582762cab1a50eb818462b09d2aeed53db036ede}
 }]Stop execution in my scope, jump to outer scope. \index{C\-O\-N\-T\-I\-N\-U\-E@{C\-O\-N\-T\-I\-N\-U\-E}!ecto@{ecto}}\index{ecto@{ecto}!C\-O\-N\-T\-I\-N\-U\-E@{C\-O\-N\-T\-I\-N\-U\-E}}\item[{\em 
-\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762ca65d745b18bdbe2335a48275e09547760}{C\-O\-N\-T\-I\-N\-U\-E}\label{namespaceecto_a93d82cd28db695d53963fb696582762ca65d745b18bdbe2335a48275e09547760}
+\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762caa00c877a06d58c100c7b0788c6c38b0a}{C\-O\-N\-T\-I\-N\-U\-E}\label{namespaceecto_a93d82cd28db695d53963fb696582762caa00c877a06d58c100c7b0788c6c38b0a}
 }]Stop execution in my scope, jump to top of scope. \index{U\-N\-K\-N\-O\-W\-N@{U\-N\-K\-N\-O\-W\-N}!ecto@{ecto}}\index{ecto@{ecto}!U\-N\-K\-N\-O\-W\-N@{U\-N\-K\-N\-O\-W\-N}}\item[{\em 
-\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762caef5b25213be1330790a3112518e3a44b}{U\-N\-K\-N\-O\-W\-N}\label{namespaceecto_a93d82cd28db695d53963fb696582762caef5b25213be1330790a3112518e3a44b}
-}]Unknown return code. \index{O\-K@{O\-K}!ecto@{ecto}}\index{ecto@{ecto}!O\-K@{O\-K}}\item[{\em 
-\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762ca93233d0e6456b2e8f52d285b74c463c8}{O\-K}\label{namespaceecto_a93d82cd28db695d53963fb696582762ca93233d0e6456b2e8f52d285b74c463c8}
-}]Everything A O\-K. \index{Q\-U\-I\-T@{Q\-U\-I\-T}!ecto@{ecto}}\index{ecto@{ecto}!Q\-U\-I\-T@{Q\-U\-I\-T}}\item[{\em 
-\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762ca2f13d3238ae038f318ed92ac37bb8e35}{Q\-U\-I\-T}\label{namespaceecto_a93d82cd28db695d53963fb696582762ca2f13d3238ae038f318ed92ac37bb8e35}
-}]Explicit quit now. \index{D\-O\-\_\-\-O\-V\-E\-R@{D\-O\-\_\-\-O\-V\-E\-R}!ecto@{ecto}}\index{ecto@{ecto}!D\-O\-\_\-\-O\-V\-E\-R@{D\-O\-\_\-\-O\-V\-E\-R}}\item[{\em 
-\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762cae5d8da4794c8cb4bef2ea7d344b5a6ef}{D\-O\-\_\-\-O\-V\-E\-R}\label{namespaceecto_a93d82cd28db695d53963fb696582762cae5d8da4794c8cb4bef2ea7d344b5a6ef}
-}]This modules' process call needs to be made again. \index{B\-R\-E\-A\-K@{B\-R\-E\-A\-K}!ecto@{ecto}}\index{ecto@{ecto}!B\-R\-E\-A\-K@{B\-R\-E\-A\-K}}\item[{\em 
-\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762caa1fa43a25faf4b9de785d390013c664b}{B\-R\-E\-A\-K}\label{namespaceecto_a93d82cd28db695d53963fb696582762caa1fa43a25faf4b9de785d390013c664b}
-}]Stop execution in my scope, jump to outer scope. \index{C\-O\-N\-T\-I\-N\-U\-E@{C\-O\-N\-T\-I\-N\-U\-E}!ecto@{ecto}}\index{ecto@{ecto}!C\-O\-N\-T\-I\-N\-U\-E@{C\-O\-N\-T\-I\-N\-U\-E}}\item[{\em 
-\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762ca65d745b18bdbe2335a48275e09547760}{C\-O\-N\-T\-I\-N\-U\-E}\label{namespaceecto_a93d82cd28db695d53963fb696582762ca65d745b18bdbe2335a48275e09547760}
-}]Stop execution in my scope, jump to top of scope. \index{U\-N\-K\-N\-O\-W\-N@{U\-N\-K\-N\-O\-W\-N}!ecto@{ecto}}\index{ecto@{ecto}!U\-N\-K\-N\-O\-W\-N@{U\-N\-K\-N\-O\-W\-N}}\item[{\em 
-\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762caef5b25213be1330790a3112518e3a44b}{U\-N\-K\-N\-O\-W\-N}\label{namespaceecto_a93d82cd28db695d53963fb696582762caef5b25213be1330790a3112518e3a44b}
-}]Unknown return code. \end{description}
-\end{Desc}
-\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762c}{\index{ecto@{ecto}!Return\-Code@{Return\-Code}}
-\index{Return\-Code@{Return\-Code}!ecto@{ecto}}
-\subsubsection[{Return\-Code}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf ecto\-::\-Return\-Code}}}\label{namespaceecto_a93d82cd28db695d53963fb696582762c}
-
-
-Return values for \hyperlink{structecto_1_1cell_a6b810671ee21f5dddbc1206abfb999f3}{cell\-::process()}. T\-O\-D\-O\-: Should these live in cell? These are appropriate for non exceptional behavior. 
-
-\begin{Desc}
-\item[Enumerator]\par
-\begin{description}
-\index{O\-K@{O\-K}!ecto@{ecto}}\index{ecto@{ecto}!O\-K@{O\-K}}\item[{\em 
-\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762ca93233d0e6456b2e8f52d285b74c463c8}{O\-K}\label{namespaceecto_a93d82cd28db695d53963fb696582762ca93233d0e6456b2e8f52d285b74c463c8}
-}]Everything A O\-K. \index{Q\-U\-I\-T@{Q\-U\-I\-T}!ecto@{ecto}}\index{ecto@{ecto}!Q\-U\-I\-T@{Q\-U\-I\-T}}\item[{\em 
-\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762ca2f13d3238ae038f318ed92ac37bb8e35}{Q\-U\-I\-T}\label{namespaceecto_a93d82cd28db695d53963fb696582762ca2f13d3238ae038f318ed92ac37bb8e35}
-}]Explicit quit now. \index{D\-O\-\_\-\-O\-V\-E\-R@{D\-O\-\_\-\-O\-V\-E\-R}!ecto@{ecto}}\index{ecto@{ecto}!D\-O\-\_\-\-O\-V\-E\-R@{D\-O\-\_\-\-O\-V\-E\-R}}\item[{\em 
-\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762cae5d8da4794c8cb4bef2ea7d344b5a6ef}{D\-O\-\_\-\-O\-V\-E\-R}\label{namespaceecto_a93d82cd28db695d53963fb696582762cae5d8da4794c8cb4bef2ea7d344b5a6ef}
-}]This modules' process call needs to be made again. \index{B\-R\-E\-A\-K@{B\-R\-E\-A\-K}!ecto@{ecto}}\index{ecto@{ecto}!B\-R\-E\-A\-K@{B\-R\-E\-A\-K}}\item[{\em 
-\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762caa1fa43a25faf4b9de785d390013c664b}{B\-R\-E\-A\-K}\label{namespaceecto_a93d82cd28db695d53963fb696582762caa1fa43a25faf4b9de785d390013c664b}
-}]Stop execution in my scope, jump to outer scope. \index{C\-O\-N\-T\-I\-N\-U\-E@{C\-O\-N\-T\-I\-N\-U\-E}!ecto@{ecto}}\index{ecto@{ecto}!C\-O\-N\-T\-I\-N\-U\-E@{C\-O\-N\-T\-I\-N\-U\-E}}\item[{\em 
-\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762ca65d745b18bdbe2335a48275e09547760}{C\-O\-N\-T\-I\-N\-U\-E}\label{namespaceecto_a93d82cd28db695d53963fb696582762ca65d745b18bdbe2335a48275e09547760}
-}]Stop execution in my scope, jump to top of scope. \index{U\-N\-K\-N\-O\-W\-N@{U\-N\-K\-N\-O\-W\-N}!ecto@{ecto}}\index{ecto@{ecto}!U\-N\-K\-N\-O\-W\-N@{U\-N\-K\-N\-O\-W\-N}}\item[{\em 
-\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762caef5b25213be1330790a3112518e3a44b}{U\-N\-K\-N\-O\-W\-N}\label{namespaceecto_a93d82cd28db695d53963fb696582762caef5b25213be1330790a3112518e3a44b}
-}]Unknown return code. \index{O\-K@{O\-K}!ecto@{ecto}}\index{ecto@{ecto}!O\-K@{O\-K}}\item[{\em 
-\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762ca93233d0e6456b2e8f52d285b74c463c8}{O\-K}\label{namespaceecto_a93d82cd28db695d53963fb696582762ca93233d0e6456b2e8f52d285b74c463c8}
-}]Everything A O\-K. \index{Q\-U\-I\-T@{Q\-U\-I\-T}!ecto@{ecto}}\index{ecto@{ecto}!Q\-U\-I\-T@{Q\-U\-I\-T}}\item[{\em 
-\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762ca2f13d3238ae038f318ed92ac37bb8e35}{Q\-U\-I\-T}\label{namespaceecto_a93d82cd28db695d53963fb696582762ca2f13d3238ae038f318ed92ac37bb8e35}
-}]Explicit quit now. \index{D\-O\-\_\-\-O\-V\-E\-R@{D\-O\-\_\-\-O\-V\-E\-R}!ecto@{ecto}}\index{ecto@{ecto}!D\-O\-\_\-\-O\-V\-E\-R@{D\-O\-\_\-\-O\-V\-E\-R}}\item[{\em 
-\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762cae5d8da4794c8cb4bef2ea7d344b5a6ef}{D\-O\-\_\-\-O\-V\-E\-R}\label{namespaceecto_a93d82cd28db695d53963fb696582762cae5d8da4794c8cb4bef2ea7d344b5a6ef}
-}]This modules' process call needs to be made again. \index{B\-R\-E\-A\-K@{B\-R\-E\-A\-K}!ecto@{ecto}}\index{ecto@{ecto}!B\-R\-E\-A\-K@{B\-R\-E\-A\-K}}\item[{\em 
-\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762caa1fa43a25faf4b9de785d390013c664b}{B\-R\-E\-A\-K}\label{namespaceecto_a93d82cd28db695d53963fb696582762caa1fa43a25faf4b9de785d390013c664b}
-}]Stop execution in my scope, jump to outer scope. \index{C\-O\-N\-T\-I\-N\-U\-E@{C\-O\-N\-T\-I\-N\-U\-E}!ecto@{ecto}}\index{ecto@{ecto}!C\-O\-N\-T\-I\-N\-U\-E@{C\-O\-N\-T\-I\-N\-U\-E}}\item[{\em 
-\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762ca65d745b18bdbe2335a48275e09547760}{C\-O\-N\-T\-I\-N\-U\-E}\label{namespaceecto_a93d82cd28db695d53963fb696582762ca65d745b18bdbe2335a48275e09547760}
-}]Stop execution in my scope, jump to top of scope. \index{U\-N\-K\-N\-O\-W\-N@{U\-N\-K\-N\-O\-W\-N}!ecto@{ecto}}\index{ecto@{ecto}!U\-N\-K\-N\-O\-W\-N@{U\-N\-K\-N\-O\-W\-N}}\item[{\em 
-\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762caef5b25213be1330790a3112518e3a44b}{U\-N\-K\-N\-O\-W\-N}\label{namespaceecto_a93d82cd28db695d53963fb696582762caef5b25213be1330790a3112518e3a44b}
+\hypertarget{namespaceecto_a93d82cd28db695d53963fb696582762caed3dfd705e16962aacd0ba04103fa6cc}{U\-N\-K\-N\-O\-W\-N}\label{namespaceecto_a93d82cd28db695d53963fb696582762caed3dfd705e16962aacd0ba04103fa6cc}
 }]Unknown return code. \end{description}
 \end{Desc}
 \hypertarget{namespaceecto_a02939764b22968505f82e425c83272c2}{\index{ecto@{ecto}!tendril\-\_\-type@{tendril\-\_\-type}}
@@ -435,13 +363,13 @@ The unmangled name of the given type.
 \item[{boost\-::function$<$ void()$>$}]{h}
 \end{DoxyParamCaption}
 )}}\label{namespaceecto_a653dab75b6cd892233b9f3676a5d2921}
-\hypertarget{namespaceecto_a7300f29f56aab7f09d11060432ad081e}{\index{ecto@{ecto}!Return\-Code\-To\-Str@{Return\-Code\-To\-Str}}
+\hypertarget{namespaceecto_a00786d16020c07e60fea08e8352dba30}{\index{ecto@{ecto}!Return\-Code\-To\-Str@{Return\-Code\-To\-Str}}
 \index{Return\-Code\-To\-Str@{Return\-Code\-To\-Str}!ecto@{ecto}}
-\subsubsection[{Return\-Code\-To\-Str}]{\setlength{\rightskip}{0pt plus 5cm}const std\-::string \& ecto\-::\-Return\-Code\-To\-Str (
+\subsubsection[{Return\-Code\-To\-Str}]{\setlength{\rightskip}{0pt plus 5cm}const std\-::string\& ecto\-::\-Return\-Code\-To\-Str (
 \begin{DoxyParamCaption}
 \item[{int}]{rval}
 \end{DoxyParamCaption}
-)}}\label{namespaceecto_a7300f29f56aab7f09d11060432ad081e}
+)}}\label{namespaceecto_a00786d16020c07e60fea08e8352dba30}
 \hypertarget{namespaceecto_a776138cb830340922312c3ec98c15b6d}{\index{ecto@{ecto}!spore\-\_\-assign@{spore\-\_\-assign}}
 \index{spore\-\_\-assign@{spore\-\_\-assign}!ecto@{ecto}}
 \subsubsection[{spore\-\_\-assign}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Cell\-Impl , typename T $>$ static {\bf spore\-\_\-assign\-\_\-impl}$<$Cell\-Impl, T$>$ ecto\-::spore\-\_\-assign (

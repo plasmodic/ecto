@@ -12,301 +12,273 @@
     <includes local="no">map</includes>
     <includes local="no">stdexcept</includes>
     <includedby refid="cell_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp</includedby>
-    <includedby refid="cell_8hpp~" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~</includedby>
-    <includedby refid="all_8hpp~" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp~</includedby>
     <includedby refid="all_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp</includedby>
     <incdepgraph>
-      <node id="2388">
+      <node id="1753">
         <label>boost/version.hpp</label>
       </node>
-      <node id="2377">
+      <node id="1742">
         <label>boost/shared_ptr.hpp</label>
       </node>
-      <node id="2379">
+      <node id="1744">
         <label>boost/signals2.hpp</label>
       </node>
-      <node id="2381">
+      <node id="1746">
         <label>ecto/forward.hpp</label>
         <link refid="forward_8hpp"/>
-        <childnode refid="2377" relation="include">
+        <childnode refid="1742" relation="include">
         </childnode>
       </node>
-      <node id="2389">
+      <node id="1754">
         <label>stdexcept</label>
       </node>
-      <node id="2400">
+      <node id="1765">
         <label>boost/thread/thread.hpp</label>
       </node>
-      <node id="2401">
+      <node id="1766">
         <label>boost/noncopyable.hpp</label>
       </node>
-      <node id="2385">
+      <node id="1750">
         <label>string</label>
       </node>
-      <node id="2374">
+      <node id="1739">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendrils.hpp</label>
         <link refid="tendrils.hpp"/>
-        <childnode refid="2375" relation="include">
+        <childnode refid="1740" relation="include">
         </childnode>
-        <childnode refid="2376" relation="include">
+        <childnode refid="1741" relation="include">
         </childnode>
-        <childnode refid="2406" relation="include">
+        <childnode refid="1771" relation="include">
         </childnode>
-        <childnode refid="2379" relation="include">
+        <childnode refid="1744" relation="include">
         </childnode>
-        <childnode refid="2385" relation="include">
+        <childnode refid="1750" relation="include">
         </childnode>
-        <childnode refid="2407" relation="include">
+        <childnode refid="1772" relation="include">
         </childnode>
-        <childnode refid="2408" relation="include">
+        <childnode refid="1773" relation="include">
         </childnode>
-        <childnode refid="2390" relation="include">
+        <childnode refid="1755" relation="include">
         </childnode>
-        <childnode refid="2389" relation="include">
+        <childnode refid="1754" relation="include">
         </childnode>
       </node>
-      <node id="2390">
+      <node id="1755">
         <label>map</label>
       </node>
-      <node id="2375">
+      <node id="1740">
         <label>boost/thread.hpp</label>
       </node>
-      <node id="2382">
+      <node id="1747">
         <label>ecto/util.hpp</label>
         <link refid="util_8hpp"/>
-        <childnode refid="2383" relation="include">
+        <childnode refid="1748" relation="include">
         </childnode>
-        <childnode refid="2384" relation="include">
+        <childnode refid="1749" relation="include">
         </childnode>
-        <childnode refid="2385" relation="include">
+        <childnode refid="1750" relation="include">
         </childnode>
       </node>
-      <node id="2398">
+      <node id="1763">
         <label>ecto/python.hpp</label>
         <link refid="python_8hpp"/>
-        <childnode refid="2387" relation="include">
+        <childnode refid="1752" relation="include">
         </childnode>
-        <childnode refid="2399" relation="include">
+        <childnode refid="1764" relation="include">
         </childnode>
-        <childnode refid="2400" relation="include">
+        <childnode refid="1765" relation="include">
         </childnode>
-        <childnode refid="2390" relation="include">
+        <childnode refid="1755" relation="include">
         </childnode>
-        <childnode refid="2401" relation="include">
+        <childnode refid="1766" relation="include">
         </childnode>
       </node>
-      <node id="2378">
+      <node id="1743">
         <label>boost/function/function1.hpp</label>
       </node>
-      <node id="2376">
+      <node id="1741">
         <label>ecto/tendril.hpp</label>
         <link refid="tendril_8hpp"/>
-        <childnode refid="2377" relation="include">
+        <childnode refid="1742" relation="include">
         </childnode>
-        <childnode refid="2378" relation="include">
+        <childnode refid="1743" relation="include">
         </childnode>
-        <childnode refid="2379" relation="include">
+        <childnode refid="1744" relation="include">
         </childnode>
-        <childnode refid="2380" relation="include">
+        <childnode refid="1745" relation="include">
         </childnode>
-        <childnode refid="2381" relation="include">
+        <childnode refid="1746" relation="include">
         </childnode>
-        <childnode refid="2382" relation="include">
+        <childnode refid="1747" relation="include">
         </childnode>
-        <childnode refid="2386" relation="include">
+        <childnode refid="1751" relation="include">
         </childnode>
-        <childnode refid="2398" relation="include">
+        <childnode refid="1763" relation="include">
         </childnode>
-        <childnode refid="2402" relation="include">
+        <childnode refid="1767" relation="include">
         </childnode>
-        <childnode refid="2404" relation="include">
+        <childnode refid="1769" relation="include">
         </childnode>
-        <childnode refid="2385" relation="include">
+        <childnode refid="1750" relation="include">
         </childnode>
-        <childnode refid="2405" relation="include">
+        <childnode refid="1770" relation="include">
         </childnode>
       </node>
-      <node id="2380">
+      <node id="1745">
         <label>boost/any.hpp</label>
       </node>
-      <node id="2396">
+      <node id="1761">
         <label>boost/preprocessor/stringize.hpp</label>
       </node>
-      <node id="2393">
+      <node id="1758">
         <label>boost/exception/exception.hpp</label>
       </node>
-      <node id="2391">
+      <node id="1756">
         <label>ecto/config.hpp</label>
       </node>
-      <node id="2384">
+      <node id="1749">
         <label>typeinfo</label>
       </node>
-      <node id="2405">
+      <node id="1770">
         <label>bitset</label>
       </node>
-      <node id="2403">
+      <node id="1768">
         <label>boost/python/object_fwd.hpp</label>
       </node>
-      <node id="2399">
+      <node id="1764">
         <label>boost/python.hpp</label>
       </node>
-      <node id="2394">
+      <node id="1759">
         <label>boost/exception/info.hpp</label>
       </node>
-      <node id="2387">
+      <node id="1752">
         <label>Python.h</label>
       </node>
-      <node id="2404">
+      <node id="1769">
         <label>vector</label>
       </node>
-      <node id="2407">
+      <node id="1772">
         <label>sstream</label>
       </node>
-      <node id="2402">
+      <node id="1767">
         <label>ecto/python/repr.hpp</label>
         <link refid="repr_8hpp"/>
-        <childnode refid="2403" relation="include">
+        <childnode refid="1768" relation="include">
         </childnode>
-        <childnode refid="2385" relation="include">
+        <childnode refid="1750" relation="include">
         </childnode>
       </node>
-      <node id="2406">
+      <node id="1771">
         <label>ecto/spore.hpp</label>
         <link refid="spore_8hpp"/>
-        <childnode refid="2377" relation="include">
+        <childnode refid="1742" relation="include">
         </childnode>
-        <childnode refid="2378" relation="include">
+        <childnode refid="1743" relation="include">
         </childnode>
-        <childnode refid="2382" relation="include">
+        <childnode refid="1747" relation="include">
         </childnode>
-        <childnode refid="2376" relation="include">
+        <childnode refid="1741" relation="include">
         </childnode>
-        <childnode refid="2389" relation="include">
+        <childnode refid="1754" relation="include">
         </childnode>
-        <childnode refid="2385" relation="include">
+        <childnode refid="1750" relation="include">
         </childnode>
       </node>
-      <node id="2383">
+      <node id="1748">
         <label>iostream</label>
       </node>
-      <node id="2395">
+      <node id="1760">
         <label>boost/preprocessor/cat.hpp</label>
       </node>
-      <node id="2392">
+      <node id="1757">
         <label>boost/optional.hpp</label>
       </node>
-      <node id="2408">
+      <node id="1773">
         <label>cstring</label>
       </node>
-      <node id="2386">
+      <node id="1751">
         <label>ecto/except.hpp</label>
         <link refid="except_8hpp"/>
-        <childnode refid="2387" relation="include">
+        <childnode refid="1752" relation="include">
         </childnode>
-        <childnode refid="2388" relation="include">
+        <childnode refid="1753" relation="include">
         </childnode>
-        <childnode refid="2389" relation="include">
+        <childnode refid="1754" relation="include">
         </childnode>
-        <childnode refid="2385" relation="include">
+        <childnode refid="1750" relation="include">
         </childnode>
-        <childnode refid="2390" relation="include">
+        <childnode refid="1755" relation="include">
         </childnode>
-        <childnode refid="2391" relation="include">
+        <childnode refid="1756" relation="include">
         </childnode>
-        <childnode refid="2382" relation="include">
+        <childnode refid="1747" relation="include">
         </childnode>
-        <childnode refid="2392" relation="include">
+        <childnode refid="1757" relation="include">
         </childnode>
-        <childnode refid="2393" relation="include">
+        <childnode refid="1758" relation="include">
         </childnode>
-        <childnode refid="2394" relation="include">
+        <childnode refid="1759" relation="include">
         </childnode>
-        <childnode refid="2395" relation="include">
+        <childnode refid="1760" relation="include">
         </childnode>
-        <childnode refid="2396" relation="include">
+        <childnode refid="1761" relation="include">
         </childnode>
-        <childnode refid="2397" relation="include">
+        <childnode refid="1762" relation="include">
         </childnode>
       </node>
-      <node id="2397">
+      <node id="1762">
         <label>boost/preprocessor/seq/for_each.hpp</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="2414">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp~</label>
-        <link refid="all_8hpp~"/>
-      </node>
-      <node id="2418">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~</label>
-        <link refid="cell_8hpp~"/>
-      </node>
-      <node id="2413">
+      <node id="1777">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/ecto.hpp</label>
         <link refid="ecto_8hpp"/>
-        <childnode refid="2414" relation="include">
-        </childnode>
-        <childnode refid="2415" relation="include">
+        <childnode refid="1778" relation="include">
         </childnode>
       </node>
-      <node id="2409">
+      <node id="1774">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendrils.hpp</label>
         <link refid="tendrils.hpp"/>
-        <childnode refid="2410" relation="include">
+        <childnode refid="1775" relation="include">
         </childnode>
-        <childnode refid="2418" relation="include">
-        </childnode>
-        <childnode refid="2414" relation="include">
-        </childnode>
-        <childnode refid="2415" relation="include">
+        <childnode refid="1778" relation="include">
         </childnode>
       </node>
-      <node id="2415">
+      <node id="1778">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp</label>
         <link refid="all_8hpp"/>
       </node>
-      <node id="2416">
+      <node id="1779">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/cell.hpp</label>
         <link refid="serialization_2cell_8hpp"/>
       </node>
-      <node id="2411">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/ecto.hpp~</label>
-        <link refid="ecto_8hpp~"/>
-      </node>
-      <node id="2417">
+      <node id="1780">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/module.hpp</label>
         <link refid="module_8hpp"/>
-        <childnode refid="2411" relation="include">
-        </childnode>
-        <childnode refid="2413" relation="include">
+        <childnode refid="1777" relation="include">
         </childnode>
       </node>
-      <node id="2412">
+      <node id="1776">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp</label>
         <link refid="registry_8hpp"/>
-        <childnode refid="2411" relation="include">
+        <childnode refid="1777" relation="include">
         </childnode>
-        <childnode refid="2413" relation="include">
+        <childnode refid="1779" relation="include">
         </childnode>
-        <childnode refid="2416" relation="include">
-        </childnode>
-        <childnode refid="2417" relation="include">
+        <childnode refid="1780" relation="include">
         </childnode>
       </node>
-      <node id="2410">
+      <node id="1775">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp</label>
         <link refid="cell_8hpp"/>
-        <childnode refid="2411" relation="include">
+        <childnode refid="1776" relation="include">
         </childnode>
-        <childnode refid="2412" relation="include">
+        <childnode refid="1777" relation="include">
         </childnode>
-        <childnode refid="2414" relation="include">
+        <childnode refid="1778" relation="include">
         </childnode>
-        <childnode refid="2413" relation="include">
-        </childnode>
-        <childnode refid="2415" relation="include">
-        </childnode>
-        <childnode refid="2416" relation="include">
+        <childnode refid="1779" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

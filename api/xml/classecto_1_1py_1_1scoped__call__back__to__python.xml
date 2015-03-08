@@ -86,30 +86,30 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="425">
+      <node id="417">
         <label>noncopyable</label>
       </node>
-      <node id="424">
+      <node id="416">
         <label>ecto::py::scoped_call_back_to_python</label>
         <link refid="classecto_1_1py_1_1scoped__call__back__to__python"/>
-        <childnode refid="425" relation="private-inheritance">
+        <childnode refid="417" relation="private-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="428">
+      <node id="420">
         <label>ecto::py::gilstatus</label>
         <link refid="structecto_1_1py_1_1gilstatus"/>
       </node>
-      <node id="427">
+      <node id="419">
         <label>noncopyable</label>
       </node>
-      <node id="426">
+      <node id="418">
         <label>ecto::py::scoped_call_back_to_python</label>
         <link refid="classecto_1_1py_1_1scoped__call__back__to__python"/>
-        <childnode refid="427" relation="private-inheritance">
+        <childnode refid="419" relation="private-inheritance">
         </childnode>
-        <childnode refid="428" relation="usage">
+        <childnode refid="420" relation="usage">
           <edgelabel>mystatus</edgelabel>
         </childnode>
       </node>

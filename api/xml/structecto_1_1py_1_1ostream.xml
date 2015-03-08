@@ -47,60 +47,60 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="385">
+      <node id="377">
         <label>ecto::py::ostream</label>
         <link refid="structecto_1_1py_1_1ostream"/>
-        <childnode refid="386" relation="public-inheritance">
+        <childnode refid="378" relation="public-inheritance">
         </childnode>
-        <childnode refid="387" relation="public-inheritance">
+        <childnode refid="379" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="386">
+      <node id="378">
         <label>ecto::py::streambuf_capsule</label>
         <link refid="structecto_1_1py_1_1streambuf__capsule"/>
       </node>
-      <node id="387">
+      <node id="379">
         <label>ecto::py::streambuf::ostream</label>
         <link refid="classecto_1_1py_1_1streambuf_1_1ostream"/>
-        <childnode refid="388" relation="public-inheritance">
+        <childnode refid="380" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="388">
+      <node id="380">
         <label>std::ostream</label>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="389">
+      <node id="381">
         <label>ecto::py::ostream</label>
         <link refid="structecto_1_1py_1_1ostream"/>
-        <childnode refid="390" relation="public-inheritance">
+        <childnode refid="382" relation="public-inheritance">
         </childnode>
-        <childnode refid="393" relation="public-inheritance">
+        <childnode refid="385" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="390">
+      <node id="382">
         <label>ecto::py::streambuf_capsule</label>
         <link refid="structecto_1_1py_1_1streambuf__capsule"/>
-        <childnode refid="391" relation="usage">
+        <childnode refid="383" relation="usage">
           <edgelabel>python_streambuf</edgelabel>
         </childnode>
       </node>
-      <node id="393">
+      <node id="385">
         <label>ecto::py::streambuf::ostream</label>
         <link refid="classecto_1_1py_1_1streambuf_1_1ostream"/>
-        <childnode refid="394" relation="public-inheritance">
+        <childnode refid="386" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="391">
+      <node id="383">
         <label>ecto::py::streambuf</label>
         <link refid="classecto_1_1py_1_1streambuf"/>
-        <childnode refid="392" relation="public-inheritance">
+        <childnode refid="384" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="394">
+      <node id="386">
         <label>std::ostream</label>
       </node>
-      <node id="392">
+      <node id="384">
         <label>std::basic_streambuf&lt; char &gt;</label>
       </node>
     </collaborationgraph>

@@ -52,24 +52,24 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="323">
+      <node id="315">
         <label>noncopyable</label>
       </node>
-      <node id="322">
+      <node id="314">
         <label>ecto::py::gil</label>
         <link refid="classecto_1_1py_1_1gil"/>
-        <childnode refid="323" relation="private-inheritance">
+        <childnode refid="315" relation="private-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="325">
+      <node id="317">
         <label>noncopyable</label>
       </node>
-      <node id="324">
+      <node id="316">
         <label>ecto::py::gil</label>
         <link refid="classecto_1_1py_1_1gil"/>
-        <childnode refid="325" relation="private-inheritance">
+        <childnode refid="317" relation="private-inheritance">
         </childnode>
       </node>
     </collaborationgraph>

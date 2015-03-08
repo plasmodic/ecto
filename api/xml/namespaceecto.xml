@@ -4,7 +4,6 @@
     <compoundname>ecto</compoundname>
     <innerclass refid="classecto_1_1tendrils" prot="public">ecto::tendrils</innerclass>
     <innerclass refid="structecto_1_1spore__assign__impl" prot="public">ecto::spore_assign_impl</innerclass>
-    <innerclass refid="structecto_1_1plasm" prot="public">ecto::plasm</innerclass>
     <innerclass refid="classecto_1_1atomic" prot="public">ecto::atomic</innerclass>
     <innerclass refid="structecto_1_1cell" prot="public">ecto::cell</innerclass>
     <innerclass refid="structecto_1_1has__f" prot="public">ecto::has_f</innerclass>
@@ -12,6 +11,7 @@
     <innerclass refid="structecto_1_1strand" prot="public">ecto::strand</innerclass>
     <innerclass refid="structecto_1_1strand__hash" prot="public">ecto::strand_hash</innerclass>
     <innerclass refid="classecto_1_1tendril" prot="public">ecto::tendril</innerclass>
+    <innerclass refid="structecto_1_1plasm" prot="public">ecto::plasm</innerclass>
     <innerclass refid="classecto_1_1scheduler" prot="public">ecto::scheduler</innerclass>
     <innerclass refid="classecto_1_1ref__count" prot="public">ecto::ref_count</innerclass>
     <innerclass refid="structecto_1_1spore" prot="public">ecto::spore</innerclass>
@@ -60,7 +60,7 @@
       </memberdef>
       <memberdef kind="enum" id="namespaceecto_1a93d82cd28db695d53963fb696582762c" prot="public" static="no">
         <name>ReturnCode</name>
-        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762ca93233d0e6456b2e8f52d285b74c463c8" prot="public">
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762ca047df8448e71f9fc10f4fe310b0a4de7" prot="public">
           <name>OK</name>
           <initializer>=  0</initializer>
           <briefdescription>
@@ -68,7 +68,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762ca2f13d3238ae038f318ed92ac37bb8e35" prot="public">
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762ca6803dad912ff60afb751d630ba35f0b3" prot="public">
           <name>QUIT</name>
           <initializer>=  1</initializer>
           <briefdescription>
@@ -76,7 +76,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762cae5d8da4794c8cb4bef2ea7d344b5a6ef" prot="public">
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762caa83c6c7678d27bc12006c6343229f841" prot="public">
           <name>DO_OVER</name>
           <initializer>=  2</initializer>
           <briefdescription>
@@ -84,7 +84,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762caa1fa43a25faf4b9de785d390013c664b" prot="public">
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762cab1a50eb818462b09d2aeed53db036ede" prot="public">
           <name>BREAK</name>
           <initializer>=  3</initializer>
           <briefdescription>
@@ -92,7 +92,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762ca65d745b18bdbe2335a48275e09547760" prot="public">
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762caa00c877a06d58c100c7b0788c6c38b0a" prot="public">
           <name>CONTINUE</name>
           <initializer>=  4</initializer>
           <briefdescription>
@@ -100,55 +100,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762caef5b25213be1330790a3112518e3a44b" prot="public">
-          <name>UNKNOWN</name>
-          <initializer>= -1</initializer>
-          <briefdescription>
-<para>Unknown return code. </para>          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762ca93233d0e6456b2e8f52d285b74c463c8" prot="public">
-          <name>OK</name>
-          <initializer>=  0</initializer>
-          <briefdescription>
-<para>Everything A OK. </para>          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762ca2f13d3238ae038f318ed92ac37bb8e35" prot="public">
-          <name>QUIT</name>
-          <initializer>=  1</initializer>
-          <briefdescription>
-<para>Explicit quit now. </para>          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762cae5d8da4794c8cb4bef2ea7d344b5a6ef" prot="public">
-          <name>DO_OVER</name>
-          <initializer>=  2</initializer>
-          <briefdescription>
-<para>This modules&apos; process call needs to be made again. </para>          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762caa1fa43a25faf4b9de785d390013c664b" prot="public">
-          <name>BREAK</name>
-          <initializer>=  3</initializer>
-          <briefdescription>
-<para>Stop execution in my scope, jump to outer scope. </para>          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762ca65d745b18bdbe2335a48275e09547760" prot="public">
-          <name>CONTINUE</name>
-          <initializer>=  4</initializer>
-          <briefdescription>
-<para>Stop execution in my scope, jump to top of scope. </para>          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762caef5b25213be1330790a3112518e3a44b" prot="public">
+        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762caed3dfd705e16962aacd0ba04103fa6cc" prot="public">
           <name>UNKNOWN</name>
           <initializer>= -1</initializer>
           <briefdescription>
@@ -163,112 +115,6 @@
         <inbodydescription>
         </inbodydescription>
         <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" line="51" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp" bodystart="50" bodyend="58"/>
-      </memberdef>
-      <memberdef kind="enum" id="namespaceecto_1a93d82cd28db695d53963fb696582762c" prot="public" static="no">
-        <name>ReturnCode</name>
-        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762ca93233d0e6456b2e8f52d285b74c463c8" prot="public">
-          <name>OK</name>
-          <initializer>=  0</initializer>
-          <briefdescription>
-<para>Everything A OK. </para>          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762ca2f13d3238ae038f318ed92ac37bb8e35" prot="public">
-          <name>QUIT</name>
-          <initializer>=  1</initializer>
-          <briefdescription>
-<para>Explicit quit now. </para>          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762cae5d8da4794c8cb4bef2ea7d344b5a6ef" prot="public">
-          <name>DO_OVER</name>
-          <initializer>=  2</initializer>
-          <briefdescription>
-<para>This modules&apos; process call needs to be made again. </para>          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762caa1fa43a25faf4b9de785d390013c664b" prot="public">
-          <name>BREAK</name>
-          <initializer>=  3</initializer>
-          <briefdescription>
-<para>Stop execution in my scope, jump to outer scope. </para>          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762ca65d745b18bdbe2335a48275e09547760" prot="public">
-          <name>CONTINUE</name>
-          <initializer>=  4</initializer>
-          <briefdescription>
-<para>Stop execution in my scope, jump to top of scope. </para>          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762caef5b25213be1330790a3112518e3a44b" prot="public">
-          <name>UNKNOWN</name>
-          <initializer>= -1</initializer>
-          <briefdescription>
-<para>Unknown return code. </para>          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762ca93233d0e6456b2e8f52d285b74c463c8" prot="public">
-          <name>OK</name>
-          <initializer>=  0</initializer>
-          <briefdescription>
-<para>Everything A OK. </para>          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762ca2f13d3238ae038f318ed92ac37bb8e35" prot="public">
-          <name>QUIT</name>
-          <initializer>=  1</initializer>
-          <briefdescription>
-<para>Explicit quit now. </para>          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762cae5d8da4794c8cb4bef2ea7d344b5a6ef" prot="public">
-          <name>DO_OVER</name>
-          <initializer>=  2</initializer>
-          <briefdescription>
-<para>This modules&apos; process call needs to be made again. </para>          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762caa1fa43a25faf4b9de785d390013c664b" prot="public">
-          <name>BREAK</name>
-          <initializer>=  3</initializer>
-          <briefdescription>
-<para>Stop execution in my scope, jump to outer scope. </para>          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762ca65d745b18bdbe2335a48275e09547760" prot="public">
-          <name>CONTINUE</name>
-          <initializer>=  4</initializer>
-          <briefdescription>
-<para>Stop execution in my scope, jump to top of scope. </para>          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="namespaceecto_1a93d82cd28db695d53963fb696582762caef5b25213be1330790a3112518e3a44b" prot="public">
-          <name>UNKNOWN</name>
-          <initializer>= -1</initializer>
-          <briefdescription>
-<para>Unknown return code. </para>          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <briefdescription>
-<para>Return values for <ref refid="structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3" kindref="member">cell::process()</ref>. TODO: Should these live in cell? These are appropriate for non exceptional behavior. </para>        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" line="51" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp~" bodystart="50" bodyend="58"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="typedef">
@@ -625,9 +471,9 @@
         </inbodydescription>
         <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/log.hpp" line="43" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="namespaceecto_1a7300f29f56aab7f09d11060432ad081e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="namespaceecto_1a00786d16020c07e60fea08e8352dba30" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>const std::string &amp;</type>
-        <definition>const std::string &amp; ecto::ReturnCodeToStr</definition>
+        <definition>const std::string&amp; ecto::ReturnCodeToStr</definition>
         <argsstring>(int rval)</argsstring>
         <name>ReturnCodeToStr</name>
         <param>

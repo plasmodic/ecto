@@ -3,74 +3,8 @@
   <compounddef id="classecto_1_1except_1_1error__info__container__impl" kind="class" prot="public">
     <compoundname>ecto::except::error_info_container_impl</compoundname>
     <basecompoundref prot="public" virt="non-virtual">error_info_container</basecompoundref>
-    <basecompoundref prot="public" virt="non-virtual">error_info_container</basecompoundref>
     <includes refid="except_8hpp" local="no">except.hpp</includes>
       <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classecto_1_1except_1_1error__info__container__impl_1abe4f51bf533842a5e0b81f3e43ae6267" prot="private" static="no">
-        <type>::boost::exception_detail::type_info_</type>
-        <definition>typedef ::boost::exception_detail::type_info_ ecto::except::error_info_container_impl::type_info_</definition>
-        <argsstring></argsstring>
-        <name>type_info_</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="91" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" bodystart="91" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classecto_1_1except_1_1error__info__container__impl_1a90c2628bf7c5628003cd24fd369a77da" prot="private" static="no">
-        <type>::boost::exception_detail::error_info_base</type>
-        <definition>typedef ::boost::exception_detail::error_info_base ecto::except::error_info_container_impl::error_info_base</definition>
-        <argsstring></argsstring>
-        <name>error_info_base</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="92" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" bodystart="92" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classecto_1_1except_1_1error__info__container__impl_1a9fbca0758380cb123f790aee77d1d4d8" prot="private" static="no">
-        <type>boost::shared_ptr&lt; <ref refid="classecto_1_1except_1_1error__info__container__impl_1a90c2628bf7c5628003cd24fd369a77da" kindref="member">error_info_base</ref> &gt;</type>
-        <definition>typedef boost::shared_ptr&lt;error_info_base&gt; ecto::except::error_info_container_impl::error_info_base_ptr</definition>
-        <argsstring></argsstring>
-        <name>error_info_base_ptr</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="102" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" bodystart="102" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classecto_1_1except_1_1error__info__container__impl_1a16f5ebd1abcacd60ddbd919ea166958e" prot="private" static="no">
-        <type>const char *</type>
-        <definition>typedef const char* ecto::except::error_info_container_impl::diagnostic_information_arg_t</definition>
-        <argsstring></argsstring>
-        <name>diagnostic_information_arg_t</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="103" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" bodystart="103" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classecto_1_1except_1_1error__info__container__impl_1a20b3846bc393224fe282eb64a40ee83d" prot="private" static="no">
-        <type>std::map&lt; std::string, <ref refid="classecto_1_1except_1_1error__info__container__impl_1a9fbca0758380cb123f790aee77d1d4d8" kindref="member">error_info_base_ptr</ref> &gt;</type>
-        <definition>typedef std::map&lt;std::string, error_info_base_ptr&gt; ecto::except::error_info_container_impl::error_info_map</definition>
-        <argsstring></argsstring>
-        <name>error_info_map</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="129" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" bodystart="129" bodyend="-1"/>
-      </memberdef>
       <memberdef kind="typedef" id="classecto_1_1except_1_1error__info__container__impl_1abe4f51bf533842a5e0b81f3e43ae6267" prot="private" static="no">
         <type>::boost::exception_detail::type_info_</type>
         <definition>typedef ::boost::exception_detail::type_info_ ecto::except::error_info_container_impl::type_info_</definition>
@@ -138,9 +72,9 @@
       </memberdef>
       </sectiondef>
       <sectiondef kind="friend">
-      <memberdef kind="friend" id="classecto_1_1except_1_1error__info__container__impl_1a699fdb1191a8f1fbc7bd591cc3d757aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="friend" id="classecto_1_1except_1_1error__info__container__impl_1a17667d5fc9c440eb33937b735d4fdfe6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>friend class</type>
-        <definition>boost::exception</definition>
+        <definition>friend class boost::exception</definition>
         <argsstring></argsstring>
         <name>boost::exception</name>
         <briefdescription>
@@ -149,7 +83,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="126" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" bodystart="126" bodyend="-1"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp" line="126" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp" bodystart="126" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
@@ -164,7 +98,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="130" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" bodystart="130" bodyend="-1"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp" line="130" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp" bodystart="130" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classecto_1_1except_1_1error__info__container__impl_1aeb86496a5127e19e9f787e77531b1b83" prot="private" static="no" mutable="yes">
         <type>std::string</type>
@@ -177,7 +111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="131" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" bodystart="131" bodyend="-1"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp" line="131" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp" bodystart="131" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classecto_1_1except_1_1error__info__container__impl_1ade4abdc4aa11c62dd39847bc4f6c619c" prot="private" static="no" mutable="yes">
         <type>int</type>
@@ -190,88 +124,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="132" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" bodystart="132" bodyend="-1"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp" line="132" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp" bodystart="132" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
-      <memberdef kind="function" id="classecto_1_1except_1_1error__info__container__impl_1a258f844c2a2ee441c4e397971466f2c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type></type>
-        <definition>ecto::except::error_info_container_impl::error_info_container_impl</definition>
-        <argsstring>()</argsstring>
-        <name>error_info_container_impl</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="108" column="1"/>
-      </memberdef>
-      <memberdef kind="function" id="classecto_1_1except_1_1error__info__container__impl_1ab9391a11b1c7955810c184c07aec4858" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type></type>
-        <definition>ecto::except::error_info_container_impl::~error_info_container_impl</definition>
-        <argsstring>()</argsstring>
-        <name>~error_info_container_impl</name>
-        <exceptions> throw ()</exceptions>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="110" column="1"/>
-      </memberdef>
-      <memberdef kind="function" id="classecto_1_1except_1_1error__info__container__impl_1ac3931483b05bd3240a8ffe11c4977b99" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void ecto::except::error_info_container_impl::set</definition>
-        <argsstring>(error_info_base_ptr const &amp;x, type_info_ const &amp;typeid_)</argsstring>
-        <name>set</name>
-        <param>
-          <type><ref refid="classecto_1_1except_1_1error__info__container__impl_1a9fbca0758380cb123f790aee77d1d4d8" kindref="member">error_info_base_ptr</ref> const &amp;</type>
-          <declname>x</declname>
-        </param>
-        <param>
-          <type><ref refid="classecto_1_1except_1_1error__info__container__impl_1abe4f51bf533842a5e0b81f3e43ae6267" kindref="member">type_info_</ref> const &amp;</type>
-          <declname>typeid_</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="113" column="1"/>
-      </memberdef>
-      <memberdef kind="function" id="classecto_1_1except_1_1error__info__container__impl_1acab3219ea75b29048e2e4d8ad23028eb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="classecto_1_1except_1_1error__info__container__impl_1a9fbca0758380cb123f790aee77d1d4d8" kindref="member">error_info_base_ptr</ref></type>
-        <definition>error_info_base_ptr ecto::except::error_info_container_impl::get</definition>
-        <argsstring>(type_info_ const &amp;ti) const </argsstring>
-        <name>get</name>
-        <param>
-          <type><ref refid="classecto_1_1except_1_1error__info__container__impl_1abe4f51bf533842a5e0b81f3e43ae6267" kindref="member">type_info_</ref> const &amp;</type>
-          <declname>ti</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="117" column="1"/>
-      </memberdef>
-      <memberdef kind="function" id="classecto_1_1except_1_1error__info__container__impl_1a9cd76f7d8bd75cdc5cf29061304a622a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>char const *</type>
-        <definition>char const* ecto::except::error_info_container_impl::diagnostic_information</definition>
-        <argsstring>() const </argsstring>
-        <name>diagnostic_information</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="119" column="1"/>
-      </memberdef>
       <memberdef kind="function" id="classecto_1_1except_1_1error__info__container__impl_1a258f844c2a2ee441c4e397971466f2c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>ecto::except::error_info_container_impl::error_info_container_impl</definition>
@@ -363,32 +219,6 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="134" column="1"/>
-      </memberdef>
-      <memberdef kind="function" id="classecto_1_1except_1_1error__info__container__impl_1a59b8d31c21da10236de67f0a5bfdf4dd" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool ecto::except::error_info_container_impl::release</definition>
-        <argsstring>() const </argsstring>
-        <name>release</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="138" column="1"/>
-      </memberdef>
-      <memberdef kind="function" id="classecto_1_1except_1_1error__info__container__impl_1ae931c5c31454852cdf3d1a84d1d588eb" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void ecto::except::error_info_container_impl::add_ref</definition>
-        <argsstring>() const </argsstring>
-        <name>add_ref</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
         <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp" line="134" column="1"/>
       </memberdef>
       <memberdef kind="function" id="classecto_1_1except_1_1error__info__container__impl_1a59b8d31c21da10236de67f0a5bfdf4dd" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
@@ -410,66 +240,44 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="306">
-        <label>error_info_container</label>
-      </node>
-      <node id="304">
+      <node id="298">
         <label>ecto::except::error_info_container_impl</label>
         <link refid="classecto_1_1except_1_1error__info__container__impl"/>
-        <childnode refid="305" relation="public-inheritance">
-        </childnode>
-        <childnode refid="306" relation="public-inheritance">
+        <childnode refid="299" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="305">
+      <node id="299">
         <label>boost::exception_detail::error_info_container</label>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="309">
-        <label>error_info_container</label>
-      </node>
-      <node id="307">
+      <node id="300">
         <label>ecto::except::error_info_container_impl</label>
         <link refid="classecto_1_1except_1_1error__info__container__impl"/>
-        <childnode refid="308" relation="public-inheritance">
-        </childnode>
-        <childnode refid="309" relation="public-inheritance">
+        <childnode refid="301" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="308">
+      <node id="301">
         <label>boost::exception_detail::error_info_container</label>
       </node>
     </collaborationgraph>
-    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" line="90" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp~" bodystart="88" bodyend="144"/>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp" line="90" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp" bodystart="88" bodyend="144"/>
     <listofallmembers>
       <member refid="classecto_1_1except_1_1error__info__container__impl_1ae931c5c31454852cdf3d1a84d1d588eb" prot="private" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>add_ref</name></member>
-      <member refid="classecto_1_1except_1_1error__info__container__impl_1ae931c5c31454852cdf3d1a84d1d588eb" prot="private" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>add_ref</name></member>
-      <member refid="classecto_1_1except_1_1error__info__container__impl_1a699fdb1191a8f1fbc7bd591cc3d757aa" prot="public" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>boost::exception</name></member>
+      <member refid="classecto_1_1except_1_1error__info__container__impl_1a17667d5fc9c440eb33937b735d4fdfe6" prot="public" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>boost::exception</name></member>
       <member refid="classecto_1_1except_1_1error__info__container__impl_1ade4abdc4aa11c62dd39847bc4f6c619c" prot="private" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>count_</name></member>
       <member refid="classecto_1_1except_1_1error__info__container__impl_1aeb86496a5127e19e9f787e77531b1b83" prot="private" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>diagnostic_info_str_</name></member>
       <member refid="classecto_1_1except_1_1error__info__container__impl_1a9cd76f7d8bd75cdc5cf29061304a622a" prot="public" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>diagnostic_information</name></member>
-      <member refid="classecto_1_1except_1_1error__info__container__impl_1a9cd76f7d8bd75cdc5cf29061304a622a" prot="public" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>diagnostic_information</name></member>
-      <member refid="classecto_1_1except_1_1error__info__container__impl_1a16f5ebd1abcacd60ddbd919ea166958e" prot="private" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>diagnostic_information_arg_t</name></member>
       <member refid="classecto_1_1except_1_1error__info__container__impl_1a16f5ebd1abcacd60ddbd919ea166958e" prot="private" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>diagnostic_information_arg_t</name></member>
       <member refid="classecto_1_1except_1_1error__info__container__impl_1a90c2628bf7c5628003cd24fd369a77da" prot="private" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>error_info_base</name></member>
-      <member refid="classecto_1_1except_1_1error__info__container__impl_1a90c2628bf7c5628003cd24fd369a77da" prot="private" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>error_info_base</name></member>
-      <member refid="classecto_1_1except_1_1error__info__container__impl_1a9fbca0758380cb123f790aee77d1d4d8" prot="private" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>error_info_base_ptr</name></member>
       <member refid="classecto_1_1except_1_1error__info__container__impl_1a9fbca0758380cb123f790aee77d1d4d8" prot="private" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>error_info_base_ptr</name></member>
       <member refid="classecto_1_1except_1_1error__info__container__impl_1a258f844c2a2ee441c4e397971466f2c5" prot="public" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>error_info_container_impl</name></member>
-      <member refid="classecto_1_1except_1_1error__info__container__impl_1a258f844c2a2ee441c4e397971466f2c5" prot="public" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>error_info_container_impl</name></member>
       <member refid="classecto_1_1except_1_1error__info__container__impl_1a20b3846bc393224fe282eb64a40ee83d" prot="private" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>error_info_map</name></member>
-      <member refid="classecto_1_1except_1_1error__info__container__impl_1a20b3846bc393224fe282eb64a40ee83d" prot="private" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>error_info_map</name></member>
-      <member refid="classecto_1_1except_1_1error__info__container__impl_1acab3219ea75b29048e2e4d8ad23028eb" prot="public" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>get</name></member>
       <member refid="classecto_1_1except_1_1error__info__container__impl_1acab3219ea75b29048e2e4d8ad23028eb" prot="public" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>get</name></member>
       <member refid="classecto_1_1except_1_1error__info__container__impl_1a8ec60b174805696bd691a894b7f4109f" prot="private" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>info_</name></member>
       <member refid="classecto_1_1except_1_1error__info__container__impl_1a59b8d31c21da10236de67f0a5bfdf4dd" prot="private" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>release</name></member>
-      <member refid="classecto_1_1except_1_1error__info__container__impl_1a59b8d31c21da10236de67f0a5bfdf4dd" prot="private" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>release</name></member>
-      <member refid="classecto_1_1except_1_1error__info__container__impl_1ac3931483b05bd3240a8ffe11c4977b99" prot="public" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>set</name></member>
       <member refid="classecto_1_1except_1_1error__info__container__impl_1ac3931483b05bd3240a8ffe11c4977b99" prot="public" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>set</name></member>
       <member refid="classecto_1_1except_1_1error__info__container__impl_1abe4f51bf533842a5e0b81f3e43ae6267" prot="private" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>type_info_</name></member>
-      <member refid="classecto_1_1except_1_1error__info__container__impl_1abe4f51bf533842a5e0b81f3e43ae6267" prot="private" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>type_info_</name></member>
-      <member refid="classecto_1_1except_1_1error__info__container__impl_1ab9391a11b1c7955810c184c07aec4858" prot="public" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>~error_info_container_impl</name></member>
       <member refid="classecto_1_1except_1_1error__info__container__impl_1ab9391a11b1c7955810c184c07aec4858" prot="public" virt="non-virtual"><scope>ecto::except::error_info_container_impl</scope><name>~error_info_container_impl</name></member>
     </listofallmembers>
   </compounddef>

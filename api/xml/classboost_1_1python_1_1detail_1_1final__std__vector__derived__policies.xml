@@ -19,36 +19,36 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="318">
+      <node id="310">
         <label>indexing_suite&lt; Container, final_std_vector_derived_policies&lt; Container, NoProxy &gt; , NoProxy &gt;</label>
       </node>
-      <node id="317">
+      <node id="309">
         <label>boost::python::std_vector_indexing_suite&lt; Container, NoProxy, final_std_vector_derived_policies&lt; Container, NoProxy &gt; &gt;</label>
         <link refid="classboost_1_1python_1_1std__vector__indexing__suite"/>
-        <childnode refid="318" relation="public-inheritance">
+        <childnode refid="310" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="316">
+      <node id="308">
         <label>boost::python::detail::final_std_vector_derived_policies&lt; Container, NoProxy &gt;</label>
         <link refid="classboost_1_1python_1_1detail_1_1final__std__vector__derived__policies"/>
-        <childnode refid="317" relation="public-inheritance">
+        <childnode refid="309" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="321">
+      <node id="313">
         <label>indexing_suite&lt; Container, final_std_vector_derived_policies&lt; Container, NoProxy &gt; , NoProxy &gt;</label>
       </node>
-      <node id="320">
+      <node id="312">
         <label>boost::python::std_vector_indexing_suite&lt; Container, NoProxy, final_std_vector_derived_policies&lt; Container, NoProxy &gt; &gt;</label>
         <link refid="classboost_1_1python_1_1std__vector__indexing__suite"/>
-        <childnode refid="321" relation="public-inheritance">
+        <childnode refid="313" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="319">
+      <node id="311">
         <label>boost::python::detail::final_std_vector_derived_policies&lt; Container, NoProxy &gt;</label>
         <link refid="classboost_1_1python_1_1detail_1_1final__std__vector__derived__policies"/>
-        <childnode refid="320" relation="public-inheritance">
+        <childnode refid="312" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>

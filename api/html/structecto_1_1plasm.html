@@ -120,61 +120,9 @@ Public Types</h2></td></tr>
 <tr class="memitem:afd3b9e2d4732023ab9e94553e0d66ac4"><td class="memItemLeft" align="right" valign="top">typedef boost::shared_ptr<br class="typebreak"/>
 &lt; <a class="el" href="structecto_1_1plasm.html">plasm</a> const  &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#afd3b9e2d4732023ab9e94553e0d66ac4">cptr</a></td></tr>
 <tr class="separator:afd3b9e2d4732023ab9e94553e0d66ac4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a899b9da452ab35849f07038c90990ac3"><td class="memItemLeft" align="right" valign="top">typedef boost::shared_ptr&lt; <a class="el" href="structecto_1_1plasm.html">plasm</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#a899b9da452ab35849f07038c90990ac3">ptr</a></td></tr>
-<tr class="separator:a899b9da452ab35849f07038c90990ac3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd3b9e2d4732023ab9e94553e0d66ac4"><td class="memItemLeft" align="right" valign="top">typedef boost::shared_ptr<br class="typebreak"/>
-&lt; <a class="el" href="structecto_1_1plasm.html">plasm</a> const  &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#afd3b9e2d4732023ab9e94553e0d66ac4">cptr</a></td></tr>
-<tr class="separator:afd3b9e2d4732023ab9e94553e0d66ac4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1d4a2f7e4fa1a4ef839c7ba0316a825c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#a1d4a2f7e4fa1a4ef839c7ba0316a825c">plasm</a> ()</td></tr>
-<tr class="separator:a1d4a2f7e4fa1a4ef839c7ba0316a825c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3000d2cb042c0875b4d5c38d33763845"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#a3000d2cb042c0875b4d5c38d33763845">~plasm</a> ()</td></tr>
-<tr class="separator:a3000d2cb042c0875b4d5c38d33763845"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3419c720b1f839cf9b423655cf4de343"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#a3419c720b1f839cf9b423655cf4de343">insert</a> (<a class="el" href="namespaceecto.html#aed1809e82b9229ea81ef9ee3438cf62c">cell_ptr</a> mod)</td></tr>
-<tr class="memdesc:a3419c720b1f839cf9b423655cf4de343"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert the cell into the graph so that it may be executed by a scheduler.  <a href="#a3419c720b1f839cf9b423655cf4de343">More...</a><br/></td></tr>
-<tr class="separator:a3419c720b1f839cf9b423655cf4de343"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ca320f5cef8372cfa713fd7991ad3b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#a0ca320f5cef8372cfa713fd7991ad3b2">connect</a> (<a class="el" href="namespaceecto.html#aed1809e82b9229ea81ef9ee3438cf62c">cell_ptr</a> from, const std::string &amp;output, <a class="el" href="namespaceecto.html#aed1809e82b9229ea81ef9ee3438cf62c">cell_ptr</a> to, const std::string &amp;input)</td></tr>
-<tr class="memdesc:a0ca320f5cef8372cfa713fd7991ad3b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connect one cell to another, and populate the graph accordingly. This will throw on a type mismatch.  <a href="#a0ca320f5cef8372cfa713fd7991ad3b2">More...</a><br/></td></tr>
-<tr class="separator:a0ca320f5cef8372cfa713fd7991ad3b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e187b40ce0a7d7ed9a6859452aed5ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#a5e187b40ce0a7d7ed9a6859452aed5ca">disconnect</a> (<a class="el" href="namespaceecto.html#aed1809e82b9229ea81ef9ee3438cf62c">cell_ptr</a> from, const std::string &amp;output, <a class="el" href="namespaceecto.html#aed1809e82b9229ea81ef9ee3438cf62c">cell_ptr</a> to, const std::string &amp;input)</td></tr>
-<tr class="separator:a5e187b40ce0a7d7ed9a6859452aed5ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6350e90b6d85a218e7a84183eaed0c18"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#a6350e90b6d85a218e7a84183eaed0c18">viz</a> (std::ostream &amp;out) const </td></tr>
-<tr class="memdesc:a6350e90b6d85a218e7a84183eaed0c18"><td class="mdescLeft">&#160;</td><td class="mdescRight">output graphviz to a stream.  <a href="#a6350e90b6d85a218e7a84183eaed0c18">More...</a><br/></td></tr>
-<tr class="separator:a6350e90b6d85a218e7a84183eaed0c18"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4586d90c908123a18dbd3a26c206f63c"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#a4586d90c908123a18dbd3a26c206f63c">viz</a> () const </td></tr>
-<tr class="memdesc:a4586d90c908123a18dbd3a26c206f63c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a std::string graphiz of the cell.  <a href="#a4586d90c908123a18dbd3a26c206f63c">More...</a><br/></td></tr>
-<tr class="separator:a4586d90c908123a18dbd3a26c206f63c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9554edd5758b8a83ed092a81e249f64a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#a9554edd5758b8a83ed092a81e249f64a">check</a> () const </td></tr>
-<tr class="memdesc:a9554edd5758b8a83ed092a81e249f64a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check that all tags on the graph are satisfied. This will throw on errors in the graph, including, if required inputs are not connected if required outputs are not connected, if there are cycles, etc...  <a href="#a9554edd5758b8a83ed092a81e249f64a">More...</a><br/></td></tr>
-<tr class="separator:a9554edd5758b8a83ed092a81e249f64a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f8de02440afdad0aa395fbaea03399e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structecto_1_1graph_1_1graph__t.html">graph::graph_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#a4f8de02440afdad0aa395fbaea03399e">graph</a> ()</td></tr>
-<tr class="memdesc:a4f8de02440afdad0aa395fbaea03399e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the underlying boost graph that this plasm has constructed.  <a href="#a4f8de02440afdad0aa395fbaea03399e">More...</a><br/></td></tr>
-<tr class="separator:a4f8de02440afdad0aa395fbaea03399e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac6cde6d1d615e85f442ce299fdf0e7a0"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structecto_1_1graph_1_1graph__t.html">graph::graph_t</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#ac6cde6d1d615e85f442ce299fdf0e7a0">graph</a> () const </td></tr>
-<tr class="separator:ac6cde6d1d615e85f442ce299fdf0e7a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaeeabeb3f78c1a7291eb14e0f705574e"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#aaeeabeb3f78c1a7291eb14e0f705574e">size</a> () const </td></tr>
-<tr class="memdesc:aaeeabeb3f78c1a7291eb14e0f705574e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the number of cells in the plasm (vertices in the graph)  <a href="#aaeeabeb3f78c1a7291eb14e0f705574e">More...</a><br/></td></tr>
-<tr class="separator:aaeeabeb3f78c1a7291eb14e0f705574e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7724234d631563b10de07030c066e01"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="namespaceecto.html#aed1809e82b9229ea81ef9ee3438cf62c">cell_ptr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#aa7724234d631563b10de07030c066e01">cells</a> () const </td></tr>
-<tr class="memdesc:aa7724234d631563b10de07030c066e01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grab a set of all the cells from the plasm.  <a href="#aa7724234d631563b10de07030c066e01">More...</a><br/></td></tr>
-<tr class="separator:aa7724234d631563b10de07030c066e01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55d56445bd1d09b9422390fb49e81bec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#a55d56445bd1d09b9422390fb49e81bec">configure_all</a> ()</td></tr>
-<tr class="memdesc:a55d56445bd1d09b9422390fb49e81bec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls configure on all modules, if configure has not already been called.  <a href="#a55d56445bd1d09b9422390fb49e81bec">More...</a><br/></td></tr>
-<tr class="separator:a55d56445bd1d09b9422390fb49e81bec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4419135c6c8dd8bb0cc7f4807a025df2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#a4419135c6c8dd8bb0cc7f4807a025df2">activate_all</a> ()</td></tr>
-<tr class="memdesc:a4419135c6c8dd8bb0cc7f4807a025df2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls activate on all modules, if hasn't already been called.  <a href="#a4419135c6c8dd8bb0cc7f4807a025df2">More...</a><br/></td></tr>
-<tr class="separator:a4419135c6c8dd8bb0cc7f4807a025df2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c10f2812f731c3787e5e22bdd80e9bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#a6c10f2812f731c3787e5e22bdd80e9bc">deactivate_all</a> ()</td></tr>
-<tr class="memdesc:a6c10f2812f731c3787e5e22bdd80e9bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls deactivate on all modules, if it hasn't already been called.  <a href="#a6c10f2812f731c3787e5e22bdd80e9bc">More...</a><br/></td></tr>
-<tr class="separator:a6c10f2812f731c3787e5e22bdd80e9bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a992f656fa931efc20d2cf1a97c963cec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#a992f656fa931efc20d2cf1a97c963cec">reset_ticks</a> ()</td></tr>
-<tr class="separator:a992f656fa931efc20d2cf1a97c963cec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0fd6bec2e5d8943363fe5aa36c1d676"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#ab0fd6bec2e5d8943363fe5aa36c1d676">save</a> (std::ostream &amp;) const </td></tr>
-<tr class="separator:ab0fd6bec2e5d8943363fe5aa36c1d676"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a854400c2f46f995731e058c72a547185"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#a854400c2f46f995731e058c72a547185">load</a> (std::istream &amp;)</td></tr>
-<tr class="separator:a854400c2f46f995731e058c72a547185"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d4a2f7e4fa1a4ef839c7ba0316a825c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#a1d4a2f7e4fa1a4ef839c7ba0316a825c">plasm</a> ()</td></tr>
 <tr class="separator:a1d4a2f7e4fa1a4ef839c7ba0316a825c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3000d2cb042c0875b4d5c38d33763845"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#a3000d2cb042c0875b4d5c38d33763845">~plasm</a> ()</td></tr>
@@ -233,26 +181,18 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:ae6540bca37d0980ec24b0b75061e124e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac443cf0a58324a8003e1c9fd3b49b428"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#ac443cf0a58324a8003e1c9fd3b49b428">BOOST_SERIALIZATION_SPLIT_MEMBER</a> ()</td></tr>
 <tr class="separator:ac443cf0a58324a8003e1c9fd3b49b428"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a420eb464746042e8247a69828e6782af"><td class="memTemplParams" colspan="2">template&lt;class Archive &gt; </td></tr>
-<tr class="memitem:a420eb464746042e8247a69828e6782af"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#a420eb464746042e8247a69828e6782af">save</a> (Archive &amp;ar, const unsigned int) const </td></tr>
-<tr class="separator:a420eb464746042e8247a69828e6782af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6540bca37d0980ec24b0b75061e124e"><td class="memTemplParams" colspan="2">template&lt;class Archive &gt; </td></tr>
-<tr class="memitem:ae6540bca37d0980ec24b0b75061e124e"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#ae6540bca37d0980ec24b0b75061e124e">load</a> (Archive &amp;ar, const unsigned int)</td></tr>
-<tr class="separator:ae6540bca37d0980ec24b0b75061e124e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac443cf0a58324a8003e1c9fd3b49b428"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#ac443cf0a58324a8003e1c9fd3b49b428">BOOST_SERIALIZATION_SPLIT_MEMBER</a> ()</td></tr>
-<tr class="separator:ac443cf0a58324a8003e1c9fd3b49b428"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a3fa8095e74d8f7b36a5fce7ebcd3e79c"><td class="memItemLeft" align="right" valign="top">boost::shared_ptr&lt; impl &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#a3fa8095e74d8f7b36a5fce7ebcd3e79c">impl_</a></td></tr>
-<tr class="separator:a3fa8095e74d8f7b36a5fce7ebcd3e79c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cfd41e9dc82039a75970755565b2513"><td class="memItemLeft" align="right" valign="top">boost::shared_ptr&lt; impl &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#a4cfd41e9dc82039a75970755565b2513">impl_</a></td></tr>
+<tr class="separator:a4cfd41e9dc82039a75970755565b2513"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d074da8290587fab0ed04d5cfe3f6b1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#a8d074da8290587fab0ed04d5cfe3f6b1">configured</a></td></tr>
 <tr class="separator:a8d074da8290587fab0ed04d5cfe3f6b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:a4305f269960e8ccc92b19b2f0480b16d"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#a4305f269960e8ccc92b19b2f0480b16d">boost::serialization::access</a></td></tr>
-<tr class="separator:a4305f269960e8ccc92b19b2f0480b16d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac98d07dd8f7b70e16ccb9a01abf56b9c"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structecto_1_1plasm.html#ac98d07dd8f7b70e16ccb9a01abf56b9c">boost::serialization::access</a></td></tr>
+<tr class="separator:ac98d07dd8f7b70e16ccb9a01abf56b9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The plasm helps construct the graph structure in ecto. It enforces several invariants that are necessary for scheduling DAGs and is used by all the ecto::schedulers to enable execution of modules that are connected in the graph. </p>
@@ -263,30 +203,6 @@ Friends</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">typedef boost::shared_ptr&lt;<a class="el" href="structecto_1_1plasm.html">plasm</a> const&gt; <a class="el" href="structecto_1_1plasm.html#afd3b9e2d4732023ab9e94553e0d66ac4">ecto::plasm::cptr</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="afd3b9e2d4732023ab9e94553e0d66ac4"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef boost::shared_ptr&lt;<a class="el" href="structecto_1_1plasm.html">plasm</a> const&gt; <a class="el" href="structecto_1_1plasm.html#afd3b9e2d4732023ab9e94553e0d66ac4">ecto::plasm::cptr</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a899b9da452ab35849f07038c90990ac3"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef boost::shared_ptr&lt;<a class="el" href="structecto_1_1plasm.html">plasm</a>&gt; <a class="el" href="structecto_1_1plasm.html#a899b9da452ab35849f07038c90990ac3">ecto::plasm::ptr</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -336,36 +252,6 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a1d4a2f7e4fa1a4ef839c7ba0316a825c"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ecto::plasm::plasm </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a3000d2cb042c0875b4d5c38d33763845"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ecto::plasm::~plasm </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a4419135c6c8dd8bb0cc7f4807a025df2"></a>
 <div class="memitem">
@@ -384,46 +270,6 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a4419135c6c8dd8bb0cc7f4807a025df2"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ecto::plasm::activate_all </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Calls activate on all modules, if hasn't already been called. </p>
-
-</div>
-</div>
-<a class="anchor" id="ac443cf0a58324a8003e1c9fd3b49b428"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">ecto::plasm::BOOST_SERIALIZATION_SPLIT_MEMBER </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="ac443cf0a58324a8003e1c9fd3b49b428"></a>
 <div class="memitem">
 <div class="memproto">
@@ -465,24 +311,6 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aa7724234d631563b10de07030c066e01"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="namespaceecto.html#aed1809e82b9229ea81ef9ee3438cf62c">cell_ptr</a>&gt; ecto::plasm::cells </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Grab a set of all the cells from the plasm. </p>
-<dl class="section return"><dt>Returns</dt><dd>a set of cells. </dd></dl>
-
-</div>
-</div>
 <a class="anchor" id="a9554edd5758b8a83ed092a81e249f64a"></a>
 <div class="memitem">
 <div class="memproto">
@@ -497,40 +325,6 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Check that all tags on the graph are satisfied. This will throw on errors in the graph, including, if required inputs are not connected if required outputs are not connected, if there are cycles, etc... </p>
-
-</div>
-</div>
-<a class="anchor" id="a9554edd5758b8a83ed092a81e249f64a"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ecto::plasm::check </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Check that all tags on the graph are satisfied. This will throw on errors in the graph, including, if required inputs are not connected if required outputs are not connected, if there are cycles, etc... </p>
-
-</div>
-</div>
-<a class="anchor" id="a55d56445bd1d09b9422390fb49e81bec"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ecto::plasm::configure_all </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Calls configure on all modules, if configure has not already been called. </p>
 
 </div>
 </div>
@@ -600,55 +394,6 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a0ca320f5cef8372cfa713fd7991ad3b2"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ecto::plasm::connect </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceecto.html#aed1809e82b9229ea81ef9ee3438cf62c">cell_ptr</a>&#160;</td>
-          <td class="paramname"><em>from</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>output</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespaceecto.html#aed1809e82b9229ea81ef9ee3438cf62c">cell_ptr</a>&#160;</td>
-          <td class="paramname"><em>to</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>input</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Connect one cell to another, and populate the graph accordingly. This will throw on a type mismatch. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">from</td><td>The from cell </td></tr>
-    <tr><td class="paramname">output</td><td>The output key of the from cell </td></tr>
-    <tr><td class="paramname">to</td><td>The to cell </td></tr>
-    <tr><td class="paramname">input</td><td>The input key from the to cell. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a class="anchor" id="a6c10f2812f731c3787e5e22bdd80e9bc"></a>
 <div class="memitem">
 <div class="memproto">
@@ -663,71 +408,6 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Calls deactivate on all modules, if it hasn't already been called. </p>
-
-</div>
-</div>
-<a class="anchor" id="a6c10f2812f731c3787e5e22bdd80e9bc"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ecto::plasm::deactivate_all </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Calls deactivate on all modules, if it hasn't already been called. </p>
-
-</div>
-</div>
-<a class="anchor" id="a5e187b40ce0a7d7ed9a6859452aed5ca"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ecto::plasm::disconnect </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceecto.html#aed1809e82b9229ea81ef9ee3438cf62c">cell_ptr</a>&#160;</td>
-          <td class="paramname"><em>from</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>output</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespaceecto.html#aed1809e82b9229ea81ef9ee3438cf62c">cell_ptr</a>&#160;</td>
-          <td class="paramname"><em>to</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>input</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Disconnect a tendril from another tendril.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">from</td><td></td></tr>
-    <tr><td class="paramname">output</td><td></td></tr>
-    <tr><td class="paramname">to</td><td></td></tr>
-    <tr><td class="paramname">input</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -797,39 +477,6 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a4f8de02440afdad0aa395fbaea03399e"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structecto_1_1graph_1_1graph__t.html">graph::graph_t</a>&amp; ecto::plasm::graph </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get the underlying boost graph that this plasm has constructed. </p>
-<dl class="section return"><dt>Returns</dt><dd></dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ac6cde6d1d615e85f442ce299fdf0e7a0"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="structecto_1_1graph_1_1graph__t.html">graph::graph_t</a>&amp; ecto::plasm::graph </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="ac6cde6d1d615e85f442ce299fdf0e7a0"></a>
 <div class="memitem">
 <div class="memproto">
@@ -866,46 +513,6 @@ Friends</h2></td></tr>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a class="anchor" id="a3419c720b1f839cf9b423655cf4de343"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ecto::plasm::insert </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceecto.html#aed1809e82b9229ea81ef9ee3438cf62c">cell_ptr</a>&#160;</td>
-          <td class="paramname"><em>mod</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Insert the cell into the graph so that it may be executed by a scheduler. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">mod</td><td>The cell to insert into the graph. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a854400c2f46f995731e058c72a547185"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ecto::plasm::load </td>
-          <td>(</td>
-          <td class="paramtype">std::istream &amp;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
 
 </div>
 </div>
@@ -961,42 +568,6 @@ template&lt;class Archive &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ae6540bca37d0980ec24b0b75061e124e"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Archive &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ecto::plasm::load </td>
-          <td>(</td>
-          <td class="paramtype">Archive &amp;&#160;</td>
-          <td class="paramname"><em>ar</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const unsigned&#160;</td>
-          <td class="paramname"><em>int</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a992f656fa931efc20d2cf1a97c963cec"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1006,37 +577,6 @@ template&lt;class Archive &gt; </div>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a992f656fa931efc20d2cf1a97c963cec"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ecto::plasm::reset_ticks </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ab0fd6bec2e5d8943363fe5aa36c1d676"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ecto::plasm::save </td>
-          <td>(</td>
-          <td class="paramtype">std::ostream &amp;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1095,59 +635,6 @@ template&lt;class Archive &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a420eb464746042e8247a69828e6782af"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Archive &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ecto::plasm::save </td>
-          <td>(</td>
-          <td class="paramtype">Archive &amp;&#160;</td>
-          <td class="paramname"><em>ar</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const unsigned&#160;</td>
-          <td class="paramname"><em>int</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aaeeabeb3f78c1a7291eb14e0f705574e"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::size_t ecto::plasm::size </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Return the number of cells in the plasm (vertices in the graph) </p>
-
-</div>
-</div>
 <a class="anchor" id="aaeeabeb3f78c1a7291eb14e0f705574e"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1186,48 +673,6 @@ template&lt;class Archive &gt; </div>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a class="anchor" id="a6350e90b6d85a218e7a84183eaed0c18"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ecto::plasm::viz </td>
-          <td>(</td>
-          <td class="paramtype">std::ostream &amp;&#160;</td>
-          <td class="paramname"><em>out</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>output graphviz to a stream. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">out</td><td>the output stream. Graphviz will be in plain text format. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a4586d90c908123a18dbd3a26c206f63c"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string ecto::plasm::viz </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get a std::string graphiz of the cell. </p>
-<dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
 </div>
 </div>
@@ -1250,7 +695,7 @@ template&lt;class Archive &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Friends And Related Function Documentation</h2>
-<a class="anchor" id="a4305f269960e8ccc92b19b2f0480b16d"></a>
+<a class="anchor" id="ac98d07dd8f7b70e16ccb9a01abf56b9c"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1258,7 +703,7 @@ template&lt;class Archive &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">boost::serialization::access</td>
+          <td class="memname">friend class boost::serialization::access</td>
         </tr>
       </table>
   </td>
@@ -1291,7 +736,7 @@ template&lt;class Archive &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a3fa8095e74d8f7b36a5fce7ebcd3e79c"></a>
+<a class="anchor" id="a4cfd41e9dc82039a75970755565b2513"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1299,7 +744,7 @@ template&lt;class Archive &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">boost::shared_ptr&lt; impl &gt; ecto::plasm::impl_</td>
+          <td class="memname">boost::shared_ptr&lt;impl&gt; ecto::plasm::impl_</td>
         </tr>
       </table>
   </td>
@@ -1311,14 +756,13 @@ template&lt;class Archive &gt; </div>
 
 </div>
 </div>
-<hr/>The documentation for this struct was generated from the following files:<ul>
-<li>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/<a class="el" href="plasm_8hpp~.html">plasm.hpp~</a></li>
+<hr/>The documentation for this struct was generated from the following file:<ul>
 <li>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/<a class="el" href="plasm_8hpp_source.html">plasm.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jan 18 2015 23:50:59 for ecto by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 8 2015 23:00:20 for ecto by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

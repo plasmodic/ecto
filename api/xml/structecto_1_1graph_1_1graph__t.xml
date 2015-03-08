@@ -9,24 +9,24 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="331">
+      <node id="323">
         <label>boost::adjacency_list&lt; boost::vecS,boost::vecS,boost::bidirectionalS,vertex_ptr,edge_ptr &gt;</label>
       </node>
-      <node id="330">
+      <node id="322">
         <label>ecto::graph::graph_t</label>
         <link refid="structecto_1_1graph_1_1graph__t"/>
-        <childnode refid="331" relation="public-inheritance">
+        <childnode refid="323" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="333">
+      <node id="325">
         <label>boost::adjacency_list&lt; boost::vecS,boost::vecS,boost::bidirectionalS,vertex_ptr,edge_ptr &gt;</label>
       </node>
-      <node id="332">
+      <node id="324">
         <label>ecto::graph::graph_t</label>
         <link refid="structecto_1_1graph_1_1graph__t"/>
-        <childnode refid="333" relation="public-inheritance">
+        <childnode refid="325" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>

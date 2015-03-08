@@ -632,24 +632,24 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="448">
+      <node id="440">
         <label>indexing_suite&lt; Container, DerivedPolicies, NoProxy, true, Container::value_type::second_type, Container::key_type, Container::key_type &gt;</label>
       </node>
-      <node id="447">
+      <node id="439">
         <label>boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;</label>
         <link refid="classboost_1_1python_1_1std__map__indexing__suite"/>
-        <childnode refid="448" relation="public-inheritance">
+        <childnode refid="440" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="450">
+      <node id="442">
         <label>indexing_suite&lt; Container, DerivedPolicies, NoProxy, true, Container::value_type::second_type, Container::key_type, Container::key_type &gt;</label>
       </node>
-      <node id="449">
+      <node id="441">
         <label>boost::python::std_map_indexing_suite&lt; Container, NoProxy, DerivedPolicies &gt;</label>
         <link refid="classboost_1_1python_1_1std__map__indexing__suite"/>
-        <childnode refid="450" relation="public-inheritance">
+        <childnode refid="442" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>

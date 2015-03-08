@@ -84,45 +84,6 @@
         </inbodydescription>
         <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp" line="83" column="1"/>
       </memberdef>
-      <memberdef kind="function" id="structecto_1_1profile_1_1stats__type_1ab34b76c48cbf95d269a5307a5bbb2fe8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type></type>
-        <definition>ecto::profile::stats_type::stats_type</definition>
-        <argsstring>()</argsstring>
-        <name>stats_type</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp~" line="78" column="1"/>
-      </memberdef>
-      <memberdef kind="function" id="structecto_1_1profile_1_1stats__type_1aca1fbd5470c0485c965f62c796e3286c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>double</type>
-        <definition>double ecto::profile::stats_type::elapsed_time</definition>
-        <argsstring>()</argsstring>
-        <name>elapsed_time</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp~" line="83" column="1"/>
-      </memberdef>
-      <memberdef kind="function" id="structecto_1_1profile_1_1stats__type_1ad595fe2ba3250310a832a776dfc53b9c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>double</type>
-        <definition>double ecto::profile::stats_type::frequency</definition>
-        <argsstring>()</argsstring>
-        <name>frequency</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp~" line="84" column="1"/>
-      </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
@@ -131,12 +92,9 @@
     <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp" line="76" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp" bodystart="75" bodyend="84"/>
     <listofallmembers>
       <member refid="structecto_1_1profile_1_1stats__type_1aca1fbd5470c0485c965f62c796e3286c" prot="public" virt="non-virtual"><scope>ecto::profile::stats_type</scope><name>elapsed_time</name></member>
-      <member refid="structecto_1_1profile_1_1stats__type_1aca1fbd5470c0485c965f62c796e3286c" prot="public" virt="non-virtual"><scope>ecto::profile::stats_type</scope><name>elapsed_time</name></member>
-      <member refid="structecto_1_1profile_1_1stats__type_1ad595fe2ba3250310a832a776dfc53b9c" prot="public" virt="non-virtual"><scope>ecto::profile::stats_type</scope><name>frequency</name></member>
       <member refid="structecto_1_1profile_1_1stats__type_1ad595fe2ba3250310a832a776dfc53b9c" prot="public" virt="non-virtual"><scope>ecto::profile::stats_type</scope><name>frequency</name></member>
       <member refid="structecto_1_1profile_1_1stats__type_1a570c8df89c2318ab98757e29670ba70b" prot="public" virt="non-virtual"><scope>ecto::profile::stats_type</scope><name>ncalls</name></member>
       <member refid="structecto_1_1profile_1_1stats__type_1a25c84366176dc49eb9b113a4e74c6b5a" prot="public" virt="non-virtual"><scope>ecto::profile::stats_type</scope><name>on</name></member>
-      <member refid="structecto_1_1profile_1_1stats__type_1ab34b76c48cbf95d269a5307a5bbb2fe8" prot="public" virt="non-virtual"><scope>ecto::profile::stats_type</scope><name>stats_type</name></member>
       <member refid="structecto_1_1profile_1_1stats__type_1ab34b76c48cbf95d269a5307a5bbb2fe8" prot="public" virt="non-virtual"><scope>ecto::profile::stats_type</scope><name>stats_type</name></member>
       <member refid="structecto_1_1profile_1_1stats__type_1affa2973693dec71733bcf8f7b6cf9c0b" prot="public" virt="non-virtual"><scope>ecto::profile::stats_type</scope><name>total_ticks</name></member>
     </listofallmembers>

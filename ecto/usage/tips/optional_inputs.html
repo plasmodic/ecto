@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Optional Inputs &mdash; ecto</title>
+    
+    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="ecto" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">ecto</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../../index.html">
+              <img class="logo" src="../../../_static/ecto210.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Optional Inputs</a><ul>
+<li><a class="reference internal" href="#simple-example">Simple Example</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/ecto/usage/tips/optional_inputs.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="optional-inputs">
+<span id="id1"></span><h1>Optional Inputs<a class="headerlink" href="#optional-inputs" title="Permalink to this headline">¶</a></h1>
+<p>By default, input tendrils to a cell are assumed to be always connected and active
+(with at least some default value). There are times however when you may wish to
+introspect the connected inputs and react according to what input tendrils are active.
+This can provide you with increased flexibility at a small cost (i.e. you don&#8217;t need
+to build an entirely new cell) or more esoteric situations where you
+drop your cell into multiple pipelines that are possibly stretched across threads - in
+these its behaviour adapts to the inputs.</p>
+<div class="section" id="simple-example">
+<h2>Simple Example<a class="headerlink" href="#simple-example" title="Permalink to this headline">¶</a></h2>
+<p>By default, optional tendril introspection is disabled. To turn it on for your cell,
+simply enable the <tt class="docutils literal"><span class="pre">connected_inputs_only</span></tt> parameter for the cell.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">accumulator</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">Accumulator</span><span class="p">(</span><span class="s">&quot;Accumulator&quot;</span><span class="p">,</span> <span class="n">connected_inputs_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To introspect from within your cell&#8217;s <tt class="docutils literal"><span class="pre">process()</span></tt> call, simply look up the map to
+determine if your variable exists. For example, the above <tt class="docutils literal"><span class="pre">Accumulator</span></tt> cell might look like:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Accumulator</span>
+<span class="p">{</span>
+  <span class="k">static</span> <span class="kt">void</span> <span class="n">declare_io</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">p</span><span class="p">,</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">i</span><span class="p">,</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">o</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">i</span><span class="p">.</span><span class="n">declare</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Accumulator</span><span class="o">::</span><span class="n">left_</span><span class="p">,</span><span class="s">&quot;left&quot;</span><span class="p">,</span> <span class="s">&quot;Left hand operand.&quot;</span><span class="p">);</span>
+    <span class="n">i</span><span class="p">.</span><span class="n">declare</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Accumulator</span><span class="o">::</span><span class="n">right_</span><span class="p">,</span><span class="s">&quot;right&quot;</span><span class="p">,</span><span class="s">&quot;Right hand operand.&quot;</span><span class="p">);</span>
+    <span class="n">o</span><span class="p">.</span><span class="n">declare</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Accumulator</span><span class="o">::</span><span class="n">out_</span><span class="p">,</span><span class="s">&quot;out&quot;</span><span class="p">,</span><span class="s">&quot;The current accumulation.&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="kt">int</span> <span class="n">process</span><span class="p">(</span><span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="n">inputs</span><span class="p">,</span> <span class="k">const</span> <span class="n">tendrils</span><span class="o">&amp;</span> <span class="cm">/*outputs*/</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="n">inputs</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;left&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="n">inputs</span><span class="p">.</span><span class="n">end</span><span class="p">()</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="o">*</span><span class="n">out_</span> <span class="o">+=</span> <span class="o">*</span><span class="n">left_</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="n">inputs</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;right&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="n">inputs</span><span class="p">.</span><span class="n">end</span><span class="p">()</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="o">*</span><span class="n">out_</span> <span class="o">+=</span> <span class="o">*</span><span class="n">right_</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">ecto</span><span class="o">::</span><span class="n">OK</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">spore</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">out_</span><span class="p">,</span> <span class="n">left_</span><span class="p">,</span> <span class="n">right_</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">ecto</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011,  Willow Garage, Inc.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

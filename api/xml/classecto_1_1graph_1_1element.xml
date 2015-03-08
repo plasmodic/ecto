@@ -4,7 +4,6 @@
     <compoundname>ecto::graph::element</compoundname>
     <derivedcompoundref refid="structecto_1_1graph_1_1edge" prot="public" virt="non-virtual">ecto::graph::edge</derivedcompoundref>
     <derivedcompoundref refid="classecto_1_1graph_1_1vertex" prot="public" virt="non-virtual">ecto::graph::vertex</derivedcompoundref>
-    <derivedcompoundref refid="classecto_1_1graph_1_1vertex" prot="public" virt="non-virtual">ecto::graph::vertex</derivedcompoundref>
     <includes refid="element_8hpp" local="no">element.hpp</includes>
       <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classecto_1_1graph_1_1element_1a6f850cead9edb37941344fdbd40ae112" prot="private" static="no" mutable="no">
@@ -80,21 +79,19 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="293">
+      <node id="287">
         <label>ecto::graph::edge</label>
         <link refid="structecto_1_1graph_1_1edge"/>
-        <childnode refid="292" relation="public-inheritance">
+        <childnode refid="286" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="294">
+      <node id="288">
         <label>ecto::graph::vertex</label>
         <link refid="classecto_1_1graph_1_1vertex"/>
-        <childnode refid="292" relation="public-inheritance">
-        </childnode>
-        <childnode refid="292" relation="public-inheritance">
+        <childnode refid="286" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="292">
+      <node id="286">
         <label>ecto::graph::element</label>
         <link refid="classecto_1_1graph_1_1element"/>
       </node>

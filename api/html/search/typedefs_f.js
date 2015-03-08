@@ -8,5 +8,5 @@ var searchData=
   ['this_5ftype',['this_type',['../structecto_1_1spore.html#aa1e4c8dec72f4671c3469b84136677e4',1,'ecto::spore']]],
   ['traits_5ftype',['traits_type',['../classecto_1_1py_1_1streambuf.html#aaf8a5185360343bec29d804d5b416417',1,'ecto::py::streambuf']]],
   ['type',['type',['../structecto_1_1detail_1_1python__mutex.html#af0a9d3c8b5d8ad0e8f8584101a197fa5',1,'ecto::detail::python_mutex']]],
-  ['type_5finfo_5f',['type_info_',['../classecto_1_1except_1_1error__info__container__impl.html#abe4f51bf533842a5e0b81f3e43ae6267',1,'ecto::except::error_info_container_impl::type_info_()'],['../classecto_1_1except_1_1error__info__container__impl.html#abe4f51bf533842a5e0b81f3e43ae6267',1,'ecto::except::error_info_container_impl::type_info_()']]]
+  ['type_5finfo_5f',['type_info_',['../classecto_1_1except_1_1error__info__container__impl.html#abe4f51bf533842a5e0b81f3e43ae6267',1,'ecto::except::error_info_container_impl']]]
 ];
