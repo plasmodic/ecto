@@ -1,3 +1,55 @@
+Forthcoming
+-----------
+* threadable plasms update.
+  This reintroduces some level of threading into ecto. It was initially
+  removed in c2a24a51, but this left some legacy code
+  wasn't working as expressed in the documentation. These updates
+  allow parallel execution of plasms in separate threads. It doesn't
+  quite reach the scope of the original plan for ecto (threading for
+  free *inside* a plasms computation), but it does cover several useful
+  scenarios.
+* convenience class for scheduling plasms across threads.
+* Reformatted cell processing result handler (trivial).
+  For clarity, and points back to an issue created which discusses
+  the BREAK/CONTINUE options.
+* Don't clobber the underlying c++ executions when aborting, be graceful.
+  Previously used PyErr_SetInterrupt which would send a keyboard interrupt
+  back to the controlling python script. However we don't want to abort
+  in this way - it is preferable to let the execution gracefully bow out.
+  More information and the actual code that does the bowing out is in
+  pull request `#250 <https://github.com/plasmodic/ecto/issues/250>`_.
+* activate gil release/call macros
+* Be free of the GIL!
+  This lets ecto pipeline processing be free of its evil overlord, the [GIL](https://wiki.python.org/moin/GlobalInterpreterLock). That is, you can now schedule different plasms in different threads...e.g. some pseudocode:
+  # ...construct some plasms
+  image_scheduler = ecto.Scheduler(image_plasm)
+  odometry_scheduler = ecto.Scheduler(odometry_plasm)
+  image_thread = threading.Thread(name="image_thread", target=image_scheduler.execute)
+  odometry_thread = threading.Thread(name="odometry_thread", target=odometry_scheduler.execute)
+  image_thread.start()
+  odometry_thread.start()
+  image_thread.join()
+  odometry_thread.join()
+  ```
+  Of course, inside a cell's `process()` call, you can always grab the GIL momentarily if you need to using the opposite macro...`ECTO_SCOPED_CALLPYTHON`.
+* Bugfix python lookup for internal class variables
+  Probably went unnoticed for a long time since it wasn't used. Came across this (I think - was quite a while ago) while fleshing out pythonic cell construction with names and parameter args. Should have gone in at the same time as 39b9cad9.
+* fix doc
+  fixes `#239 <https://github.com/plasmodic/ecto/issues/239>`_
+* Don't clobber the underlying c++ executions when aborting, be graceful.
+  Previously used PyErr_SetInterrupt which would send a keyboard interrupt
+  back to the controlling python script. However we don't want to abort
+  in this way - it is preferable to let the execution gracefully bow out.
+  More information and the actual code that does the bowing out is in
+  pull request `#250 <https://github.com/plasmodic/ecto/issues/250>`_.
+* activate gil release/call macros
+* Bugfix python lookup for internal class variables
+  Probably went unnoticed for a long time since it wasn't used. Came across this (I think - was quite a while ago) while fleshing out pythonic cell construction with names and parameter args. Should have gone in at the same time as 39b9cad9.
+* fix doc
+  fixes `#239 <https://github.com/plasmodic/ecto/issues/239>`_
+* tiers need a boost prefix with boost 1.57
+* Contributors: Daniel Stonier, Michael Görner, Vincent Rabaud
+
 0.6.7 (2014-11-11)
 ------------------
 * Merge branch 'master' of github.com:plasmodic/ecto
