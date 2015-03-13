@@ -1,5 +1,5 @@
-Forthcoming
------------
+0.6.8 (2015-03-13)
+------------------
 * threadable plasms update.
   This reintroduces some level of threading into ecto. It was initially
   removed in c2a24a51, but this left some legacy code
