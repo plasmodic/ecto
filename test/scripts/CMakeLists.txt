@@ -25,12 +25,6 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 # 
-macro(pytest testname)
-  add_test(ecto_${testname}
-    ${CATKIN_ENV}
-    ${ARGN}
-    )
-endmacro()
 
 foreach(file
     throw_in_interpreter_thread
@@ -92,23 +86,5 @@ foreach(file
 
 endforeach()
 
-pytest(test_lineplasm0 ${CMAKE_CURRENT_SOURCE_DIR}/test_lineplasm.py 1 1 1 50)
-pytest(test_lineplasm1 ${CMAKE_CURRENT_SOURCE_DIR}/test_lineplasm.py 1 5 5 50)
-pytest(test_lineplasm2 ${CMAKE_CURRENT_SOURCE_DIR}/test_lineplasm.py 10 10 10 50)
-pytest(test_lineplasm3 ${CMAKE_CURRENT_SOURCE_DIR}/test_lineplasm.py 15 25 35 50)
-
-pytest(save_plasm_to_file
-  ${CMAKE_CURRENT_SOURCE_DIR}/save_plasm_to_file.py
-  ${ecto_BINARY_DIR}/plasm.ecto)
-
-pytest(load_plasm_from_file
-  ${CMAKE_CURRENT_SOURCE_DIR}/save_plasm_to_file.py
-  ${ecto_BINARY_DIR}/plasm.ecto)
-
-#this will complete the first time, assuming tests are executed in serial order
-#EAR todo find someway of ensure order in tests, test dependencies.
-#add_test(plasm_loader
-#    ${CMAKE_BINARY_DIR}/bin/plasm_loader
-#    ${ecto_BINARY_DIR}/plasm.ecto
-#    8
-#)
+catkin_add_nosetests(test_lineplasm.py)
+catkin_add_nosetests(save_load_plasm_file.py DEPENDENCIES plasm_loader)

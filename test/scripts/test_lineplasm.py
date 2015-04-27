@@ -26,53 +26,54 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 #
+from __future__ import print_function
 import ecto
 import ecto.ecto_test as ecto_test
 import sys
+import unittest
 
+class TestActionlib(unittest.TestCase):
 
-def test_plasm(Sched, nthreads, niter, n_nodes, incdelay):
-    plasm = ecto.Plasm()
+    def execute_plasm(self, Sched, nthreads, niter, n_nodes, incdelay):
+        plasm = ecto.Plasm()
 
-    gen = ecto_test.Generate("Gen", step=1.0, start=0.0)
-    inc = ecto_test.Increment("Increment 0", delay=incdelay)
+        gen = ecto_test.Generate("Gen", step=1.0, start=0.0)
+        inc = ecto_test.Increment("Increment 0", delay=incdelay)
 
-    plasm.connect(gen, "out", inc, "in")
+        plasm.connect(gen, "out", inc, "in")
 
-    for j in range(n_nodes-1): # one has already been added
-        inc_next = ecto_test.Increment("Increment_%u" % (j+1), delay=incdelay)
-        plasm.connect(inc, "out", inc_next, "in")
-        inc = inc_next
+        for j in range(n_nodes-1): # one has already been added
+            inc_next = ecto_test.Increment("Increment_%u" % (j+1), delay=incdelay)
+            plasm.connect(inc, "out", inc_next, "in")
+            inc = inc_next
 
-    printer = ecto_test.Printer("Printy")
-    plasm.connect(inc, "out", printer, "in")
-#
-#    o = open('graph.dot', 'w')
-#    print >>o, plasm.viz()
-#    o.close()
-#    print "\n", plasm.viz(), "\n"
-    sched = Sched(plasm)
-    sched.execute(niter)
+        printer = ecto_test.Printer("Printy")
+        plasm.connect(inc, "out", printer, "in")
+    #
+    #    o = open('graph.dot', 'w')
+    #    print >>o, plasm.viz()
+    #    o.close()
+    #    print "\n", plasm.viz(), "\n"
+        sched = Sched(plasm)
+        sched.execute(niter)
 
-    print "RESULT:", inc.outputs.out
-    shouldbe = float(n_nodes + niter - 1)
-    print "expected:", shouldbe
-    assert inc.outputs.out == shouldbe
+        print("RESULT:", inc.outputs.out)
+        shouldbe = float(n_nodes + niter - 1)
+        print("expected:", shouldbe)
+        assert inc.outputs.out == shouldbe
 
-    #sched.execute(niter)
-    #result = inc.outputs.out
-    #print "RESULT:", result
+    def test_plasm1(self):
+        self.execute_plasm(ecto.Scheduler, 1, 1, 1, 50)
 
-    #shouldbe = float(n_nodes + (niter*2 - 1))
-    #assert result == shouldbe
+    def test_plasm2(self):
+        self.execute_plasm(ecto.Scheduler, 1, 5, 5, 50)
 
-    return
+    def test_plasm3(self):
+        self.execute_plasm(ecto.Scheduler, 10, 10, 10, 50)
 
+    def test_plasm4(self):
+        self.execute_plasm(ecto.Scheduler, 15, 25, 35, 50)
 
 if __name__ == '__main__':
-    test_plasm(ecto.Scheduler,
-               nthreads=int(sys.argv[1]),
-               niter=int(sys.argv[2]),
-               n_nodes=int(sys.argv[3]),
-               incdelay=int(sys.argv[4])
-               )
+    import rosunit
+    rosunit.unitrun('ecto', 'test_lineplasm', TestActionlib)

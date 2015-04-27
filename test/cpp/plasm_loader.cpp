@@ -29,7 +29,7 @@
 #include <ecto/plasm.hpp>
 #include <ecto/serialization/registry.hpp>
 #include <ecto/serialization/cell.hpp>
-#include <ecto/schedulers/singlethreaded.hpp>
+#include <ecto/scheduler.hpp>
 #include <cstring>
 #include <fstream>
 int
@@ -42,7 +42,7 @@ main(int argc, char** argv)
   }
   ecto::plasm::ptr p(new ecto::plasm());
   std::ifstream in(argv[1]);
-  boost::archive::text_iarchive ia(in);
+  boost::archive::binary_iarchive ia(in);
   ia & *p;
 
   std::cout << "** graphviz" << std::endl;
@@ -54,6 +54,6 @@ main(int argc, char** argv)
   {
     std::cout << cells[i]->name() << std::endl;
   }
-  ecto::schedulers::singlethreaded sched(p);
+  ecto::scheduler sched(p);
   return sched.execute(std::atoi(argv[2]));
 }

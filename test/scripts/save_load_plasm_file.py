@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# 
+#
 # Copyright (c) 2011, Willow Garage, Inc.
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
 #     * Redistributions of source code must retain the above copyright
@@ -13,7 +13,7 @@
 #     * Neither the name of the Willow Garage, Inc. nor the names of its
 #       contributors may be used to endorse or promote products derived from
 #       this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -25,16 +25,49 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-# 
+#
+from __future__ import print_function
 import ecto
 import ecto.ecto_test as ecto_test
-import sys
+import subprocess
+import tempfile
+import unittest
 
-n_nodes = 5
+class TestLoadSavePlasm(unittest.TestCase):
+    FILE = tempfile.mkstemp(text=True)[1]
+    #def __del__(self):
+        #os.remove(FILE)
 
-plasm = ecto.Plasm()
+    def test_0_save_plasm(self):
+        n_nodes = 5
+        incdelay= 1
+        plasm = ecto.Plasm()
 
-plasm.load(sys.argv[1])
+        gen = ecto_test.Generate("Gen", step=1.0, start=0.0)
+        inc = ecto_test.Increment("Increment 0", delay=incdelay)
 
-print plasm.viz()
+        plasm.connect(gen, "out", inc, "in")
 
+        for j in range(n_nodes-1): # one has already been added
+            inc_next = ecto_test.Increment("Increment_%u" % (j+1), delay=incdelay)
+            plasm.connect(inc, "out", inc_next, "in")
+            inc = inc_next
+
+        printer = ecto_test.Printer("Printy")
+        plasm.connect(inc, "out", printer, "in")
+        plasm.save(self.FILE)
+
+    def test_1_load_plasm(self):
+        plasm = ecto.Plasm()
+
+        plasm.load(self.FILE)
+
+        print(plasm.viz())
+
+#    def test_2_run_plasm(self):
+#        print(self.FILE)
+#        subprocess.Popen('rosrun ecto plasm_loader ' + self.FILE + ' 8', stdout=subprocess.STDOUT, shell=True)
+
+if __name__ == '__main__':
+    import rosunit
+    rosunit.unitrun('ecto_object_recognition_ros', 'test_actionlib', TestLoadSavePlasm)
