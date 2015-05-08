@@ -1,3 +1,9 @@
+Forthcoming
+-----------
+* re-add some Python tests
+* add missing PySide dependency
+* Contributors: Vincent Rabaud
+
 0.6.8 (2015-03-13)
 ------------------
 * threadable plasms update.
