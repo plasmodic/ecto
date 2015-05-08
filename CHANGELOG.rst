@@ -1,5 +1,5 @@
-Forthcoming
------------
+0.6.9 (2015-05-08)
+------------------
 * re-add some Python tests
 * add missing PySide dependency
 * Contributors: Vincent Rabaud
