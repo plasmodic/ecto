@@ -42,8 +42,7 @@ main(int argc, char** argv)
   }
   ecto::plasm::ptr p(new ecto::plasm());
   std::ifstream in(argv[1]);
-  boost::archive::binary_iarchive ia(in);
-  ia & *p;
+  p->load(in);
 
   std::cout << "** graphviz" << std::endl;
   p->viz(std::cout);
