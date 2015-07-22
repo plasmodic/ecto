@@ -1,3 +1,10 @@
+Forthcoming
+-----------
+* update test for future fix
+* potentially fix compilation with Boost 1.58
+  could be a fix for `#275 <https://github.com/plasmodic/ecto/issues/275>`_
+* Contributors: Vincent Rabaud
+
 0.6.9 (2015-05-08)
 ------------------
 * re-add some Python tests
