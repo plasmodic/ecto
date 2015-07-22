@@ -1,6 +1,6 @@
 <package>
   <name>ecto</name>
-  <version>0.6.9</version>
+  <version>0.6.10</version>
   <description>Ecto is a hybrid C++/Python development framework for constructing and maintaining pipelines.</description>
   <author email="erublee@willowgarage.com">Ethan Rublee</author>
   <author email="straszheim@willowgarage.com">Troy Straszheim</author>

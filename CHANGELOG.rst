@@ -1,5 +1,5 @@
-Forthcoming
------------
+0.6.10 (2015-07-22)
+-------------------
 * update test for future fix
 * potentially fix compilation with Boost 1.58
   could be a fix for `#275 <https://github.com/plasmodic/ecto/issues/275>`_
