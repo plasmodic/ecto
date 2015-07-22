@@ -66,7 +66,12 @@ class TestLoadSavePlasm(unittest.TestCase):
 
 #    def test_2_run_plasm(self):
 #        print(self.FILE)
-#        subprocess.Popen('rosrun ecto plasm_loader ' + self.FILE + ' 8', stdout=subprocess.STDOUT, shell=True)
+#        print('rosrun ecto plasm_loader ' + self.FILE + ' 8')
+#        p = subprocess.Popen('rosrun ecto plasm_loader ' + self.FILE + ' 8', stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=T
+#        out, err = p.communicate()
+#        self.assertEqual(err, '')
+#        print(out)
+#        print(err)
 
 if __name__ == '__main__':
     import rosunit
