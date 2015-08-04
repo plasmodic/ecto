@@ -8,7 +8,7 @@ be executed in a variety of clever ways. Python is uses as a the graph DSL.
 
 Ecto may be found useful in domains such as perception, audio, or robotics.
 
-To get started see the online docs at http://ecto.willowgarage.com
+To get started see the online docs at http://plasmodic.github.io/ecto/
 
 Get and Build Ecto
 ==================
@@ -91,4 +91,4 @@ To install Ecto on your machine::
 
 use
 ^^^
-See the documentation (http://ecto.willowgarage.com) for detailed usage instructions.
+See the documentation (http://plasmodic.github.io/ecto/) for detailed usage instructions.
