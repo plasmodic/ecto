@@ -1,5 +1,7 @@
+#!/usr/bin/env python
 #
-# Copyright (c) 2011, Willow Garage, Inc.
+# Copyright (c) 2015, Michael 'v4hn' Goerner
+#
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -24,42 +26,27 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-#
-ectomodule(ecto_test
-  Accumulator.cpp
-  Add.cpp
-  BreakEveryN.cpp
-  BpObjectToCellPtr.cpp
-  CantCallMeFromTwoThreads.cpp
-  ConfigureCalledOnce.cpp
-  DontCallMeFromTwoThreads.cpp
-  DoOverFor.cpp
-  EmitAndAccept.cpp
-  ExceptInConstructor.cpp
-  FileIO.cpp
-  Multiply.cpp
-  Quitter.cpp
-  QuitAfter.cpp
-  Increment.cpp
-  LatticeSleep.cpp
-  Printer.cpp
-  Ping.cpp
-  Metrics.cpp
-  Gather.cpp
-  Generate.cpp
-  RequiredInput.cpp
-  RequiredParam.cpp
-  RequiredIO.cpp
-  Passthrough.cpp
-  ParameterWatcher.cpp
-  Sleep.cpp
-  SleepPyObjectAbuser.cpp
-  StartStopCounter.cpp
-  Throttle.cpp
-  ThrowAfter.cpp
-  Uniform01.cpp
-  throws_in_handler.cpp
-  gil_exercise.cpp
-  ecto_test.cpp
-  DESTINATION  ecto
-)
+
+import ecto
+import ecto.ecto_test as ecto_test
+
+# run the generator 10 times
+gen = ecto_test.Generate(start= 0, step= 1, stop= 9)
+
+# break on every second iteration
+breaker= ecto_test.BreakEveryN(n= 2)
+
+cnt = ecto.Counter()
+
+plasm = ecto.Plasm()
+plasm.connect([
+  gen[:] >> breaker[:],
+  breaker[:] >> cnt[:]
+])
+
+plasm.execute(niter= 0)
+
+# as cnt depends on breaker it will only be processed every second iteration
+result = cnt.outputs.count
+print "Counter ran " + str(result) + " times"
+assert(result == 5)

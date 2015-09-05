@@ -36,6 +36,7 @@ foreach(file
     test_async_multiple_sched
     test_async
     test_blackbox
+    test_break
     #test_bp_to_cell_ptr
     test_circular
     test_constant
