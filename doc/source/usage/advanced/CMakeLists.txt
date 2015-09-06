@@ -33,4 +33,5 @@ target_link_libraries(tutorial_native_plasm
   ecto
   ${catkin_LIBRARIES}
   hello_ecto_ectomodule #uses cells from this module.
+  ${CMAKE_THREAD_LIBS_INIT}
 )

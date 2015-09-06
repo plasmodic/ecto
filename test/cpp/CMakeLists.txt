@@ -56,6 +56,7 @@ target_link_libraries(ecto-test
   ${Boost_LIBRARIES}
   ${catkin_LIBRARIES}
   ${PYTHON_LIBRARIES}
+  ${CMAKE_THREAD_LIBS_INIT}
 )
 
 # This is actually used in the plasm loader Python test file
@@ -67,4 +68,5 @@ target_link_libraries(plasm_loader
   ecto
   ${Boost_LIBRARIES}
   ${catkin_LIBRARIES}
+  ${CMAKE_THREAD_LIBS_INIT}
 )

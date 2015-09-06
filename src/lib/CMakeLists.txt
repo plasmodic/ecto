@@ -63,6 +63,7 @@ target_link_libraries(ecto
   ${Boost_LIBRARIES}
   ${catkin_LIBRARIES}
   ${PYTHON_LIBRARIES}
+  ${CMAKE_THREAD_LIBS_INIT}
 )
 
 set_source_files_properties(log.cpp
