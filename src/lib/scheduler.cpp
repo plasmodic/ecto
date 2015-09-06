@@ -219,16 +219,14 @@ void scheduler::execute_iter(unsigned cur_iter, unsigned num_iters,
   }
 
   switch (retval) {
-    case ecto::BREAK:
-      // unimplemented (move to default) -> https://github.com/plasmodic/ecto/issues/251
-
     case ecto::CONTINUE:
       // unimplemented (move to default) -> https://github.com/plasmodic/ecto/issues/251
 
+    case ecto::BREAK:
     case ecto::OK:
     {
       ++stack_idx;
-      if (stack_.size() <= stack_idx) {
+      if (stack_.size() <= stack_idx || retval == ecto::BREAK) {
         stack_idx = 0;
         ++cur_iter;
 
