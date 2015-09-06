@@ -1,19 +1,5 @@
-Dependencies
-============
-
-Packages
---------
-
-Ecto only depends on Python and Boost so make sure you have those two sets of tools.
-On Ubuntu, simply install the corresponding pacakges:
-
-.. code-block:: bash
-
-   sudo pip install catkin_pkg breathe empy
-   sudo apt-get install python libboost-dev
-
 Nonsystem Boost
----------------
+===============
 
 (Accurate as of boost 1.47.0)
 

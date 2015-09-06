@@ -1,6 +1,20 @@
 Build Ecto From Source
 ======================
 
+Dependencies
+----------------------------------------
+
+On ubuntu its simple....
+
+.. code-block:: sh
+
+    sudo apt-get install libboost-python-dev libboost-filesystem-dev libboost-system-dev \
+            libboost-thread-dev python-setuptools python-gobject python-gtk2 graphviz doxygen \
+            python-sphinx
+
+Downloading
+----------------------------------------
+
 ecto is available here: https://github.com/plasmodic/ecto
 
 It is also dependent on ``catkin``
@@ -25,7 +39,20 @@ You should see the following outputish:
     Resolving deltas: 100% (3226/3226), done.
 
 
-building ecto
+Then get the ecto modules you want (and make sure their system dependencies
+defined in their package.xml are already installed and on your path):
+
+.. code-block:: bash
+
+  git clone http://github.com/plasmodic/ecto_image_pipeline.git
+  git clone http://github.com/plasmodic/ecto_openni.git
+  git clone http://github.com/wg-perception/opencv_candidate.git
+  git clone http://github.com/plasmodic/ecto_opencv.git
+  git clone http://github.com/plasmodic/ecto_pcl.git
+  git clone http://github.com/plasmodic/ecto_ros.git
+
+
+Building
 -------------
 
 Using a standard cmake build system, you must first create a build directory and
@@ -110,17 +137,6 @@ You should see the following outputish:
     q
     q
 
-Dependencies
-----------------------------------------
-
-On ubuntu its simple....
-
-.. code-block:: sh
-
-    sudo apt-get install libboost-python-dev libboost-filesystem-dev libboost-system-dev \
-            libboost-thread-dev python-setuptools python-gobject python-gtk2 graphviz doxygen \
-            python-sphinx
-
 Install
 ---------------------------------------
 
@@ -153,11 +169,9 @@ Docs may be generated from the source in the following manner.
 .. code-block:: sh
 
 	cd build
-	make doc #for all documentaition
-	make html #for sphinx (prefer this for usage docs)
-	make pdf #sphinx pdf manual
-	make doxygen #for c++ api docs
-	ccmake . #edit doc options.
+	make sphinx-doc # for sphinx (prefer this for usage docs)
+	make doxygen    # for c++ api docs
+	ccmake .        # edit doc options.
 
 Tests
 --------------------------------------------------
