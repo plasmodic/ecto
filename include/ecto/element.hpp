@@ -28,6 +28,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #pragma once
+#include <cstddef>
 
 namespace ecto {
 namespace graph {
