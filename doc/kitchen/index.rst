@@ -5,7 +5,7 @@ Initially aimed at computer vision and perception research tasks, Ecto is a hybr
 
 Ecto itself is small, has minimal dependencies (C++, Boost, Python) and works with or without OpenCV, PCL, and ROS in any combination. We believe that Ecto allows vision and perception researchers to express their computational models in a natural fashion, obviating e.g. ROS time synchronizers and ROS nodelets in most cases.
 
-As of 2012, Ecto is officially released. It is being used by researchers at Willow Garage and in industry for prototype applications of object capture and modelling, `object recognition <http://wg-perception.github.com/object_recognition_core/>`_, pose estimation and refinement, vision slam, projector-based augmented reality and chess playing.
+As of 2012, Ecto is officially released. It is being used by researchers at Willow Garage and in industry for prototype applications of object capture and modelling, `object recognition <http://wg-perception.github.com/object_recognition_core/>`_, pose estimation and refinement, visual slam, projector-based augmented reality and chess playing.
 
 
 To understand ecto, you probably want to go over the Ecto docs first:

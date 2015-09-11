@@ -1,8 +1,16 @@
 Build Ecto From Source
 ======================
 
+Ecto is built using `catkin`_. Although it is the build tool favoured to build ROS packages, it is
+also perfectly usable for a large suite of interdependent non-ros packages. It is in large part a
+cmake/setuptools wrapper, so familiarity with these tools makes the jump to catkin not so large.
+
+.. _`catkin`: http://docs.ros.org/api/catkin/html/
+
+The instructions below assume an ubuntu system and use of the fundamental catkin tools.
+
 Dependencies
-----------------------------------------
+------------
 
 On ubuntu its simple....
 
@@ -12,105 +20,37 @@ On ubuntu its simple....
             libboost-thread-dev python-setuptools python-gobject python-gtk2 graphviz doxygen \
             python-sphinx
 
-Downloading
-----------------------------------------
-
-ecto is available here: https://github.com/plasmodic/ecto
-
-It is also dependent on ``catkin``
-
-.. code-block:: bash
-
-  mkdir ecto_kitchen && cd ecto_kitchen
-  git clone http://github.com/ros/catkin.git
-  git clone http://github.com/plasmodic/ecto.git
-  ln -s catkin/cmake/toplevel.cmake CMakeLists.txt
-
-You should see the following outputish:
-
-::
-
-    $ git clone git://github.com/plasmodic/ecto.git
-    Initialized empty Git repository in /tmp/scratchy/ecto/.git/
-    remote: Counting objects: 5011, done.
-    remote: Compressing objects: 100% (1767/1767), done.
-    remote: Total 5011 (delta 3226), reused 4711 (delta 2927)
-    Receiving objects: 100% (5011/5011), 1.07 MiB | 994 KiB/s, done.
-    Resolving deltas: 100% (3226/3226), done.
-
-
-Then get the ecto modules you want (and make sure their system dependencies
-defined in their package.xml are already installed and on your path):
-
-.. code-block:: bash
-
-  git clone http://github.com/plasmodic/ecto_image_pipeline.git
-  git clone http://github.com/plasmodic/ecto_openni.git
-  git clone http://github.com/wg-perception/opencv_candidate.git
-  git clone http://github.com/plasmodic/ecto_opencv.git
-  git clone http://github.com/plasmodic/ecto_pcl.git
-  git clone http://github.com/plasmodic/ecto_ros.git
-
-
-Building
--------------
-
-Using a standard cmake build system, you must first create a build directory and
-run cmake to configure the build system. `cmake` may be run with all default settings for all but
-the most advanced user.
-
-.. code-block:: bash
-
-  mkdir build && cd build && cmake ..
-
-
-You should see the following outputish:
-
-::
-
-    $ mkdir build
-    $ cd build
-    $ cmake ..
-    -- The C compiler identification is GNU
-    -- The CXX compiler identification is GNU
-    -- Check for working C compiler: /usr/bin/gcc
-    ... etc etc
-    -- Building ecto version: 0.1.0
-    -- Building ecto code name: mold spore (alpha)
-    -- flags:  -Werror -Wall -Wl,--no-undefined -O3 -DNDEBUG
-    -- Configuring done
-    -- Generating done
-    -- Build files have been written to: /tmp/scratchy/ecto/build
-
-
-If that completed with out error or warnings you are ready to build ecto:
+For catkin and it's tools :
 
 .. code-block:: sh
 
-    make
+   sudo apt-get install python-catkin-pkg ros-indigo-catkin
 
-You should see the following outputish:
+Building
+--------
 
-::
 
-    $ make
-    Scanning dependencies of target ecto
-    [  2%] Building CXX object src/lib/CMakeFiles/ecto.dir/abi.cpp.o
-    [  4%] Building CXX object src/lib/CMakeFiles/ecto.dir/tendril.cpp.o
-    ... etc etc
-    Linking CXX shared library ../../lib/ecto_test.so
-    [100%] Built target ecto_test_ectomodule
+.. code-block:: bash
 
+  source /opt/ros/indigo/setup.bash
+  mkdir -p ecto_ws/src
+  cd ecto_ws/src
+  catkin_init_workspace
+  git clone http://github.com/plasmodic/ecto.git
+  cd ..
+  catkin_make
+
+Running
+-------
 
 Now you have a working build of ecto! You should try to run a test.
 
 .. code-block:: sh
 
-    #cd to the root of the ecto kitchen
-    cd ..
-    #add ecto to your python path
-    . build/devel/setup.bash
-    python ecto/samples/hello.py
+    cd ecto_ws
+    # add ecto to your python path
+    . devel/setup.bash
+    python src/ecto/samples/hello.py
 
 You should see the following outputish:
 
@@ -138,7 +78,7 @@ You should see the following outputish:
     q
 
 Install
----------------------------------------
+-------
 
 You may install ecto using the following:
 
@@ -149,20 +89,26 @@ You may install ecto using the following:
   sudo ldconfig
 
 
-This will install ecto to the appropriate system paths. On ubuntu the install may touch the following folders:
+This will install ecto to the appropriate system paths. If built with catkin_make, it wil by default put
+the resulting install space in `ecto_ws/install`. You can modify `CMAKE_INSTALL_PREFIX`
+to redirect it:
 
 .. code-block:: sh
 
-  /usr/local/include/ecto-VERSION/
-  /usr/local/share/ecto-VERSION/
-  /usr/local/lib/python*/dist-packages/
+  cd ecto_ws
+  rm -rf build devel
+  catkin_make -DCMAKE_INSTALL_PREFIX=/usr/local
 
+Ecto deliverables get installed in the following locations:
 
-The advantage to installing ecto is that it becomes much easier for client code to use.  cmake will auto-magically
-be able to find ecto, and it will be in your pythonpath by default.
+.. code-block:: sh
+
+  CMAKE_INSTALL_PREFIX/include/ecto-VERSION/
+  CMAKE_INSTALL_PREFIX/share/ecto-VERSION/
+  CMAKE_INSTALL_PREFIX/lib/python*/dist-packages/
 
 Docs
-------------------------------------------------
+----
 
 Docs may be generated from the source in the following manner.
 
@@ -174,7 +120,7 @@ Docs may be generated from the source in the following manner.
 	ccmake .        # edit doc options.
 
 Tests
---------------------------------------------------
+-----
 
 .. code-block:: sh
 
@@ -187,4 +133,44 @@ or
 
 	cd build
 	ctest -V
+
+
+Esoterica
+=========
+
+
+Building Additional Ecto Repos
+------------------------------
+
+Build up your workspace with additional repos. Make sure system dependencies are installed (manually or via rosdep)
+before building. Some other officially supported ecto repositories include:
+
+* git clone http://github.com/plasmodic/ecto_image_pipeline.git
+* git clone http://github.com/plasmodic/ecto_openni.git
+* git clone http://github.com/wg-perception/opencv_candidate.git
+* git clone http://github.com/plasmodic/ecto_opencv.git
+* git clone http://github.com/plasmodic/ecto_pcl.git
+* git clone http://github.com/plasmodic/ecto_ros.git
+
+Alternative Build - Pure Catkin/CMake Style
+-------------------------------------------
+
+The preceding instructions utilise the typical tools made available through ROS. You can instead prefer
+an almost pure catkin/cmake approach (sans the `ros-indigo-catkin` deb):
+
+
+.. code-block:: bash
+   
+   mkdir -p ecto_ws/src && cd ecto_ws/src
+   git clone http://github.com/ros/catkin.git
+   git clone http://github.com/plasmodic/ecto.git
+   ln -s catkin/cmake/toplevel.cmake CMakeLists.txt
+   cd ..
+   mkdir build
+   cd build
+   cmake ../src
+   make -j5
+   make install
+   # source the environment, get ready to run!
+   source devel/setup.bash
 

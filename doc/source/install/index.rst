@@ -3,11 +3,12 @@
 Installing ecto
 ===============
 
-If you have access to a ROS repository, just install the ros-distro_name-ecto packages. E.g., if you are on Indigo:
+If you have access to a ROS repository, just install the `ros-<distro>-ecto-xxx`
+packages. E.g., if you are on indigo:
 
 .. code-block:: bash
 
-    sudo apt-get install ros-indigo-ecto
+    sudo apt-get install ros-indigo-ecto-*
 
 Otherwise, ecto is still easy to build from source:
 
