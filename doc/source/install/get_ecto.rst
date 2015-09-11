@@ -1,5 +1,5 @@
-Build Ecto From Source
-======================
+Ecto From Source
+================
 
 Ecto is built using `catkin`_. Although it is the build tool favoured to build ROS packages, it is
 also perfectly usable for a large suite of interdependent non-ros packages. It is in large part a
@@ -133,10 +133,6 @@ or
 
 	cd build
 	ctest -V
-
-
-Esoterica
-=========
 
 
 Building Additional Ecto Repos
