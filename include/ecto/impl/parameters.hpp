@@ -1,6 +1,8 @@
 #pragma once
 
 #include <ecto/abi.hpp>
+#include <ecto/parameters.hpp>
+
 #include <stdexcept>
 #include <exception>
 #include <boost/format.hpp>
