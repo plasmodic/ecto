@@ -1,3 +1,27 @@
+Forthcoming
+-----------
+* minor doc syntax fixes
+* saner installation instructions from source.
+* add missing includes to make headers compile standalone
+  - add cstddef to introduce std::size_t
+  - add parameters.hpp to its implementation (works because of #pragma once)
+* fix bsd-license check script
+  Not all Copyright is (1.) from 2011 and (2.) by Willow Garage
+  autofix is undefined if ECTO_LICENSE_AUTOFIX is not exported.
+* Re-add thread library to linker list
+  Regression caused by 8e354b5aa8281ea8117fc93adb290998b7810be7
+* docs about various entities that affect graph execution, also other minor cleanups.
+  Removed the redundancies in the install docs (2x install instructions and 2x dependencies)
+  and cleaned the place up a bit.
+* Provide test for ecto::BREAK return value.
+* implement ecto::BREAK behavior
+  This patch makes ecto schedule the next iteration
+  through the plasm with ecto::BREAK as discussed in
+  https://github.com/plasmodic/ecto/issues/251
+* remove some old Willow Garage URLs
+* update doc's url
+* Contributors: Daniel Stonier, Michael Görner, Po-Jen Lai, Scott K Logan, Vincent Rabaud, v4hn
+
 0.6.10 (2015-07-22)
 -------------------
 * update test for future fix
