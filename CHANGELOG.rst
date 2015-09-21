@@ -1,5 +1,5 @@
-Forthcoming
------------
+0.6.11 (2015-09-21)
+-------------------
 * minor doc syntax fixes
 * saner installation instructions from source.
 * add missing includes to make headers compile standalone
