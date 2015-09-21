@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="structecto_1_1py_1_1ostream" kind="struct" prot="public">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="structecto_1_1py_1_1ostream" kind="struct" language="C++" prot="public">
     <compoundname>ecto::py::ostream</compoundname>
     <basecompoundref refid="structecto_1_1py_1_1streambuf__capsule" prot="public" virt="non-virtual">ecto::py::streambuf_capsule</basecompoundref>
     <basecompoundref refid="classecto_1_1py_1_1streambuf_1_1ostream" prot="public" virt="non-virtual">ecto::py::streambuf::ostream</basecompoundref>

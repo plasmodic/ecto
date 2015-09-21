@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="util_8hpp" kind="file">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="util_8hpp" kind="file" language="C++">
     <compoundname>util.hpp</compoundname>
     <includes local="no">iostream</includes>
     <includes local="no">typeinfo</includes>
@@ -16,199 +16,201 @@
     <includedby refid="serialization_2registry_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/registry.hpp</includedby>
     <includedby refid="except_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp</includedby>
     <incdepgraph>
-      <node id="1814">
+      <node id="1827">
         <label>string</label>
       </node>
-      <node id="1811">
+      <node id="1824">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/util.hpp</label>
         <link refid="util.hpp"/>
-        <childnode refid="1812" relation="include">
+        <childnode refid="1825" relation="include">
         </childnode>
-        <childnode refid="1813" relation="include">
+        <childnode refid="1826" relation="include">
         </childnode>
-        <childnode refid="1814" relation="include">
+        <childnode refid="1827" relation="include">
         </childnode>
       </node>
-      <node id="1813">
+      <node id="1826">
         <label>typeinfo</label>
       </node>
-      <node id="1812">
+      <node id="1825">
         <label>iostream</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="1816">
+      <node id="1829">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/log.hpp</label>
         <link refid="log_8hpp"/>
-        <childnode refid="1817" relation="include">
+        <childnode refid="1830" relation="include">
         </childnode>
-        <childnode refid="1823" relation="include">
+        <childnode refid="1836" relation="include">
         </childnode>
-        <childnode refid="1825" relation="include">
+        <childnode refid="1838" relation="include">
         </childnode>
-        <childnode refid="1826" relation="include">
+        <childnode refid="1839" relation="include">
         </childnode>
       </node>
-      <node id="1824">
+      <node id="1837">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/vertex.hpp</label>
         <link refid="vertex_8hpp"/>
-        <childnode refid="1820" relation="include">
+        <childnode refid="1833" relation="include">
         </childnode>
       </node>
-      <node id="1836">
+      <node id="1849">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/rethrow.hpp</label>
         <link refid="rethrow_8hpp"/>
       </node>
-      <node id="1831">
+      <node id="1844">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/tendril.hpp</label>
         <link refid="serialization_2tendril_8hpp"/>
       </node>
-      <node id="1826">
+      <node id="1839">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/registry.hpp</label>
         <link refid="serialization_2registry_8hpp"/>
       </node>
-      <node id="1829">
+      <node id="1842">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp</label>
         <link refid="plasm_8hpp"/>
       </node>
-      <node id="1832">
+      <node id="1845">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/abi.hpp</label>
         <link refid="abi_8hpp"/>
-        <childnode refid="1833" relation="include">
-        </childnode>
-        <childnode refid="1819" relation="include">
-        </childnode>
-        <childnode refid="1834" relation="include">
-        </childnode>
-      </node>
-      <node id="1819">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/ecto.hpp</label>
-        <link refid="ecto_8hpp"/>
-        <childnode refid="1820" relation="include">
-        </childnode>
-      </node>
-      <node id="1828">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendrils.hpp</label>
-        <link refid="tendrils_8hpp"/>
-        <childnode refid="1817" relation="include">
-        </childnode>
-        <childnode refid="1820" relation="include">
-        </childnode>
-      </node>
-      <node id="1820">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp</label>
-        <link refid="all_8hpp"/>
-      </node>
-      <node id="1815">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/util.hpp</label>
-        <link refid="util.hpp"/>
-        <childnode refid="1816" relation="include">
-        </childnode>
-        <childnode refid="1817" relation="include">
-        </childnode>
-        <childnode refid="1827" relation="include">
-        </childnode>
-        <childnode refid="1818" relation="include">
-        </childnode>
-        <childnode refid="1823" relation="include">
+        <childnode refid="1846" relation="include">
         </childnode>
         <childnode refid="1832" relation="include">
         </childnode>
-        <childnode refid="1819" relation="include">
+        <childnode refid="1847" relation="include">
         </childnode>
+      </node>
+      <node id="1832">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/ecto.hpp</label>
+        <link refid="ecto_8hpp"/>
+        <childnode refid="1833" relation="include">
+        </childnode>
+      </node>
+      <node id="1841">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendrils.hpp</label>
+        <link refid="tendrils_8hpp"/>
         <childnode refid="1830" relation="include">
         </childnode>
-        <childnode refid="1826" relation="include">
-        </childnode>
-        <childnode refid="1835" relation="include">
+        <childnode refid="1833" relation="include">
         </childnode>
       </node>
-      <node id="1821">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/cell.hpp</label>
-        <link refid="serialization_2cell_8hpp"/>
+      <node id="1833">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp</label>
+        <link refid="all_8hpp"/>
       </node>
-      <node id="1827">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp</label>
-        <link refid="tendril_8hpp"/>
-        <childnode refid="1828" relation="include">
-        </childnode>
-        <childnode refid="1817" relation="include">
-        </childnode>
+      <node id="1828">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/util.hpp</label>
+        <link refid="util.hpp"/>
         <childnode refid="1829" relation="include">
         </childnode>
         <childnode refid="1830" relation="include">
         </childnode>
-        <childnode refid="1820" relation="include">
+        <childnode refid="1840" relation="include">
         </childnode>
         <childnode refid="1831" relation="include">
         </childnode>
-        <childnode refid="1826" relation="include">
+        <childnode refid="1836" relation="include">
         </childnode>
-      </node>
-      <node id="1822">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/module.hpp</label>
-        <link refid="module_8hpp"/>
-        <childnode refid="1819" relation="include">
+        <childnode refid="1845" relation="include">
         </childnode>
-      </node>
-      <node id="1825">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp</label>
-        <link refid="scheduler_8hpp"/>
+        <childnode refid="1832" relation="include">
+        </childnode>
+        <childnode refid="1843" relation="include">
+        </childnode>
+        <childnode refid="1839" relation="include">
+        </childnode>
+        <childnode refid="1848" relation="include">
+        </childnode>
       </node>
       <node id="1834">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/parameters.hpp</label>
-        <link refid="parameters_8hpp"/>
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/cell.hpp</label>
+        <link refid="serialization_2cell_8hpp"/>
       </node>
-      <node id="1830">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp</label>
-        <link refid="spore_8hpp"/>
-        <childnode refid="1828" relation="include">
+      <node id="1840">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp</label>
+        <link refid="tendril_8hpp"/>
+        <childnode refid="1841" relation="include">
         </childnode>
-        <childnode refid="1820" relation="include">
+        <childnode refid="1830" relation="include">
         </childnode>
-      </node>
-      <node id="1818">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp</label>
-        <link refid="registry_8hpp"/>
-        <childnode refid="1819" relation="include">
+        <childnode refid="1842" relation="include">
         </childnode>
-        <childnode refid="1821" relation="include">
+        <childnode refid="1843" relation="include">
         </childnode>
-        <childnode refid="1822" relation="include">
+        <childnode refid="1833" relation="include">
         </childnode>
-      </node>
-      <node id="1833">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/impl/parameters.hpp</label>
-        <link refid="impl_2parameters_8hpp"/>
-      </node>
-      <node id="1817">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp</label>
-        <link refid="cell_8hpp"/>
-        <childnode refid="1818" relation="include">
+        <childnode refid="1844" relation="include">
         </childnode>
-        <childnode refid="1819" relation="include">
-        </childnode>
-        <childnode refid="1820" relation="include">
-        </childnode>
-        <childnode refid="1821" relation="include">
+        <childnode refid="1839" relation="include">
         </childnode>
       </node>
       <node id="1835">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp</label>
-        <link refid="except_8hpp"/>
-        <childnode refid="1827" relation="include">
-        </childnode>
-        <childnode refid="1836" relation="include">
-        </childnode>
-        <childnode refid="1820" relation="include">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/module.hpp</label>
+        <link refid="module_8hpp"/>
+        <childnode refid="1832" relation="include">
         </childnode>
       </node>
-      <node id="1823">
+      <node id="1838">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp</label>
+        <link refid="scheduler_8hpp"/>
+      </node>
+      <node id="1847">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/parameters.hpp</label>
+        <link refid="parameters_8hpp"/>
+        <childnode refid="1846" relation="include">
+        </childnode>
+      </node>
+      <node id="1843">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp</label>
+        <link refid="spore_8hpp"/>
+        <childnode refid="1841" relation="include">
+        </childnode>
+        <childnode refid="1833" relation="include">
+        </childnode>
+      </node>
+      <node id="1831">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp</label>
+        <link refid="registry_8hpp"/>
+        <childnode refid="1832" relation="include">
+        </childnode>
+        <childnode refid="1834" relation="include">
+        </childnode>
+        <childnode refid="1835" relation="include">
+        </childnode>
+      </node>
+      <node id="1846">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/impl/parameters.hpp</label>
+        <link refid="impl_2parameters_8hpp"/>
+      </node>
+      <node id="1830">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp</label>
+        <link refid="cell_8hpp"/>
+        <childnode refid="1831" relation="include">
+        </childnode>
+        <childnode refid="1832" relation="include">
+        </childnode>
+        <childnode refid="1833" relation="include">
+        </childnode>
+        <childnode refid="1834" relation="include">
+        </childnode>
+      </node>
+      <node id="1848">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp</label>
+        <link refid="except_8hpp"/>
+        <childnode refid="1840" relation="include">
+        </childnode>
+        <childnode refid="1849" relation="include">
+        </childnode>
+        <childnode refid="1833" relation="include">
+        </childnode>
+      </node>
+      <node id="1836">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp</label>
         <link refid="profile_8hpp"/>
-        <childnode refid="1824" relation="include">
+        <childnode refid="1837" relation="include">
         </childnode>
-        <childnode refid="1825" relation="include">
+        <childnode refid="1838" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -258,8 +260,8 @@
 <codeline lineno="26"><highlight class="comment"><sp/>*<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE</highlight></codeline>
 <codeline lineno="27"><highlight class="comment"><sp/>*<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
 <codeline lineno="28"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight></codeline>
-<codeline lineno="30"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;typeinfo&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="33"><highlight class="normal"></highlight></codeline>
@@ -271,17 +273,17 @@
 <codeline lineno="39"><highlight class="comment">*/</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="40"><highlight class="normal"></highlight><highlight class="comment">//<sp/>We<sp/>are<sp/>using<sp/>the<sp/>Visual<sp/>Studio<sp/>Compiler<sp/>and<sp/>building<sp/>Shared<sp/>libraries</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="41"><highlight class="normal"></highlight></codeline>
-<codeline lineno="42"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined<sp/>(_WIN32)<sp/></highlight></codeline>
-<codeline lineno="43"><highlight class="preprocessor"></highlight><highlight class="preprocessor"><sp/><sp/>#if<sp/>defined(ecto_cpp_EXPORTS)</highlight></codeline>
-<codeline lineno="44"><highlight class="preprocessor"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/><sp/>ECTO_EXPORT<sp/>__declspec(dllexport)</highlight></codeline>
-<codeline lineno="45"><highlight class="preprocessor"></highlight><highlight class="preprocessor"><sp/><sp/>#else</highlight></codeline>
-<codeline lineno="46"><highlight class="preprocessor"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/><sp/>ECTO_EXPORT<sp/>__declspec(dllimport)</highlight></codeline>
-<codeline lineno="47"><highlight class="preprocessor"></highlight><highlight class="preprocessor"><sp/><sp/>#endif<sp/></highlight><highlight class="comment">/*<sp/>MyLibrary_EXPORTS<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
-<codeline lineno="48"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#else<sp/></highlight><highlight class="comment">/*<sp/>defined<sp/>(_WIN32)<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
-<codeline lineno="49" refid="util_8hpp_1ab55b7868679cda60fc162580957fb98c" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor"><sp/>#define<sp/>ECTO_EXPORT</highlight></codeline>
-<codeline lineno="50"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
-<codeline lineno="51"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="52"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ecto</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined<sp/>(_WIN32)<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/>#if<sp/>defined(ecto_cpp_EXPORTS)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/><sp/>ECTO_EXPORT<sp/>__declspec(dllexport)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/>#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#define<sp/><sp/>ECTO_EXPORT<sp/>__declspec(dllimport)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/>#endif<sp/></highlight><highlight class="comment">/*<sp/>MyLibrary_EXPORTS<sp/>*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="preprocessor">#else<sp/></highlight><highlight class="comment">/*<sp/>defined<sp/>(_WIN32)<sp/>*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49" refid="util_8hpp_1ab55b7868679cda60fc162580957fb98c" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/>#define<sp/>ECTO_EXPORT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceecto" kindref="compound">ecto</ref></highlight></codeline>
 <codeline lineno="53"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="59"><highlight class="normal"><sp/><sp/><ref refid="util_8hpp_1ab55b7868679cda60fc162580957fb98c" kindref="member">ECTO_EXPORT</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/><ref refid="namespaceecto_1a980294f61090496ef65bc6b201f38944" kindref="member">name_of</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::type_info<sp/>&amp;ti);</highlight></codeline>
 <codeline lineno="60"><highlight class="normal"></highlight></codeline>

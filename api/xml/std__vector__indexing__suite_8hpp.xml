@@ -1,28 +1,28 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="std__vector__indexing__suite_8hpp" kind="file">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="std__vector__indexing__suite_8hpp" kind="file" language="C++">
     <compoundname>std_vector_indexing_suite.hpp</compoundname>
     <includes local="no">boost/python/suite/indexing/indexing_suite.hpp</includes>
     <includes local="no">boost/python/suite/indexing/container_utils.hpp</includes>
     <includes local="no">boost/python/iterator.hpp</includes>
     <incdepgraph>
-      <node id="1461">
+      <node id="1474">
         <label>boost/python/iterator.hpp</label>
       </node>
-      <node id="1458">
+      <node id="1471">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_vector_indexing_suite.hpp</label>
         <link refid="std_vector_indexing_suite.hpp"/>
-        <childnode refid="1459" relation="include">
+        <childnode refid="1472" relation="include">
         </childnode>
-        <childnode refid="1460" relation="include">
+        <childnode refid="1473" relation="include">
         </childnode>
-        <childnode refid="1461" relation="include">
+        <childnode refid="1474" relation="include">
         </childnode>
       </node>
-      <node id="1459">
+      <node id="1472">
         <label>boost/python/suite/indexing/indexing_suite.hpp</label>
       </node>
-      <node id="1460">
+      <node id="1473">
         <label>boost/python/suite/indexing/container_utils.hpp</label>
       </node>
     </incdepgraph>
@@ -44,14 +44,14 @@
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Modified<sp/>by<sp/>Jakob<sp/>van<sp/>Santen,<sp/>September<sp/>2010</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/>Willow<sp/>Garage<sp/>BSD<sp/>License<sp/>not<sp/>applicable</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ICETRAY_PYTHON_STD_VECTOR_INDEXING_SUITE_HPP_INCLUDED</highlight></codeline>
-<codeline lineno="9"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#<sp/>define<sp/>ICETRAY_PYTHON_STD_VECTOR_INDEXING_SUITE_HPP_INCLUDED</highlight></codeline>
-<codeline lineno="10"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ICETRAY_PYTHON_STD_VECTOR_INDEXING_SUITE_HPP_INCLUDED</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/>define<sp/>ICETRAY_PYTHON_STD_VECTOR_INDEXING_SUITE_HPP_INCLUDED</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/>include<sp/>&lt;boost/python/suite/indexing/indexing_suite.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/>include<sp/>&lt;boost/python/suite/indexing/container_utils.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/>include<sp/>&lt;boost/python/iterator.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight></codeline>
-<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">boost<sp/>{<sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">python<sp/>{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceboost" kindref="compound">boost</ref><sp/>{<sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">python<sp/>{</highlight></codeline>
 <codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Forward<sp/>declaration</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Container,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>NoProxy,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>DerivedPolicies&gt;</highlight></codeline>
@@ -111,16 +111,16 @@
 <codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight></codeline>
 <codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>mpl::if_&lt;</highlight></codeline>
 <codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>is_class&lt;data_type&gt;</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a9c3db9df25d6966c54154275377c94ce" kindref="member">data_type</ref>&amp;</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a9c3db9df25d6966c54154275377c94ce" kindref="member">data_type</ref></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>data_type&amp;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>data_type</highlight></codeline>
 <codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&gt;::type</highlight></codeline>
-<codeline lineno="78" refid="classboost_1_1python_1_1std__vector__indexing__suite_1a04e38bebceb369bd5f81f4a7558368bb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a04e38bebceb369bd5f81f4a7558368bb" kindref="member">get_item</ref>(Container&amp;<sp/>container,<sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a3124827b535a08798fbd33b9fee7b668" kindref="member">index_type</ref><sp/>i)</highlight></codeline>
+<codeline lineno="78" refid="classboost_1_1python_1_1std__vector__indexing__suite_1a04e38bebceb369bd5f81f4a7558368bb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a04e38bebceb369bd5f81f4a7558368bb" kindref="member">get_item</ref>(Container&amp;<sp/>container,<sp/>index_type<sp/>i)</highlight></codeline>
 <codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/></highlight></codeline>
 <codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>container[i];</highlight></codeline>
 <codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="82"><highlight class="normal"></highlight></codeline>
 <codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">object</highlight><highlight class="normal"><sp/></highlight></codeline>
-<codeline lineno="84" refid="classboost_1_1python_1_1std__vector__indexing__suite_1a4123e6c0c99de706c07b215cb4828e91" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a4123e6c0c99de706c07b215cb4828e91" kindref="member">get_slice</ref>(Container&amp;<sp/>container,<sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a3124827b535a08798fbd33b9fee7b668" kindref="member">index_type</ref><sp/>from,<sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a3124827b535a08798fbd33b9fee7b668" kindref="member">index_type</ref><sp/>to)</highlight></codeline>
+<codeline lineno="84" refid="classboost_1_1python_1_1std__vector__indexing__suite_1a4123e6c0c99de706c07b215cb4828e91" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a4123e6c0c99de706c07b215cb4828e91" kindref="member">get_slice</ref>(Container&amp;<sp/>container,<sp/>index_type<sp/>from,<sp/>index_type<sp/>to)</highlight></codeline>
 <codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/></highlight></codeline>
 <codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(from<sp/>&gt;<sp/>to)</highlight></codeline>
 <codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>object(Container());</highlight></codeline>
@@ -128,14 +128,14 @@
 <codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="90"><highlight class="normal"></highlight></codeline>
 <codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/></highlight></codeline>
-<codeline lineno="92" refid="classboost_1_1python_1_1std__vector__indexing__suite_1a8093bf206598b549f350eb7ab4d59d8a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a8093bf206598b549f350eb7ab4d59d8a" kindref="member">set_item</ref>(Container&amp;<sp/>container,<sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a3124827b535a08798fbd33b9fee7b668" kindref="member">index_type</ref><sp/>i,<sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a9c3db9df25d6966c54154275377c94ce" kindref="member">data_type</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>v)</highlight></codeline>
+<codeline lineno="92" refid="classboost_1_1python_1_1std__vector__indexing__suite_1a8093bf206598b549f350eb7ab4d59d8a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a8093bf206598b549f350eb7ab4d59d8a" kindref="member">set_item</ref>(Container&amp;<sp/>container,<sp/>index_type<sp/>i,<sp/>data_type<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>v)</highlight></codeline>
 <codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/></highlight></codeline>
 <codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>container[i]<sp/>=<sp/>v;</highlight></codeline>
 <codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="96"><highlight class="normal"></highlight></codeline>
 <codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/></highlight></codeline>
-<codeline lineno="98" refid="classboost_1_1python_1_1std__vector__indexing__suite_1a5860806d99df81ed866c00d4af262ab2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a5860806d99df81ed866c00d4af262ab2" kindref="member">set_slice</ref>(Container&amp;<sp/>container,<sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a3124827b535a08798fbd33b9fee7b668" kindref="member">index_type</ref><sp/>from,<sp/></highlight></codeline>
-<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a3124827b535a08798fbd33b9fee7b668" kindref="member">index_type</ref><sp/>to,<sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a9c3db9df25d6966c54154275377c94ce" kindref="member">data_type</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>v)</highlight></codeline>
+<codeline lineno="98" refid="classboost_1_1python_1_1std__vector__indexing__suite_1a5860806d99df81ed866c00d4af262ab2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a5860806d99df81ed866c00d4af262ab2" kindref="member">set_slice</ref>(Container&amp;<sp/>container,<sp/>index_type<sp/>from,<sp/></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>index_type<sp/>to,<sp/>data_type<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>v)</highlight></codeline>
 <codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/></highlight></codeline>
 <codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(from<sp/>&gt;<sp/>to)<sp/>{</highlight></codeline>
 <codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
@@ -148,8 +148,8 @@
 <codeline lineno="109"><highlight class="normal"></highlight></codeline>
 <codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Iter&gt;</highlight></codeline>
 <codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/></highlight></codeline>
-<codeline lineno="112" refid="classboost_1_1python_1_1std__vector__indexing__suite_1a953bb2f295f9b910a62ddf3b03b4ea9f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a953bb2f295f9b910a62ddf3b03b4ea9f" kindref="member">set_slice</ref>(Container&amp;<sp/>container,<sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a3124827b535a08798fbd33b9fee7b668" kindref="member">index_type</ref><sp/>from,<sp/></highlight></codeline>
-<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a3124827b535a08798fbd33b9fee7b668" kindref="member">index_type</ref><sp/>to,<sp/>Iter<sp/>first,<sp/>Iter<sp/>last)</highlight></codeline>
+<codeline lineno="112" refid="classboost_1_1python_1_1std__vector__indexing__suite_1a953bb2f295f9b910a62ddf3b03b4ea9f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a953bb2f295f9b910a62ddf3b03b4ea9f" kindref="member">set_slice</ref>(Container&amp;<sp/>container,<sp/>index_type<sp/>from,<sp/></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>index_type<sp/>to,<sp/>Iter<sp/>first,<sp/>Iter<sp/>last)</highlight></codeline>
 <codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/></highlight></codeline>
 <codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(from<sp/>&gt;<sp/>to)<sp/>{</highlight></codeline>
 <codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>container.insert(container.begin()+from,<sp/>first,<sp/>last);</highlight></codeline>
@@ -161,13 +161,13 @@
 <codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="123"><highlight class="normal"></highlight></codeline>
 <codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/></highlight></codeline>
-<codeline lineno="125" refid="classboost_1_1python_1_1std__vector__indexing__suite_1a477ccd2f35d93733914492e270ed93a3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a477ccd2f35d93733914492e270ed93a3" kindref="member">delete_item</ref>(Container&amp;<sp/>container,<sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a3124827b535a08798fbd33b9fee7b668" kindref="member">index_type</ref><sp/>i)</highlight></codeline>
+<codeline lineno="125" refid="classboost_1_1python_1_1std__vector__indexing__suite_1a477ccd2f35d93733914492e270ed93a3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a477ccd2f35d93733914492e270ed93a3" kindref="member">delete_item</ref>(Container&amp;<sp/>container,<sp/>index_type<sp/>i)</highlight></codeline>
 <codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/></highlight></codeline>
 <codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>container.erase(container.begin()+i);</highlight></codeline>
 <codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/></highlight></codeline>
-<codeline lineno="131" refid="classboost_1_1python_1_1std__vector__indexing__suite_1a4e5036ad4dcbeabac4810e0bdcd0fc6a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a4e5036ad4dcbeabac4810e0bdcd0fc6a" kindref="member">delete_slice</ref>(Container&amp;<sp/>container,<sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a3124827b535a08798fbd33b9fee7b668" kindref="member">index_type</ref><sp/>from,<sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a3124827b535a08798fbd33b9fee7b668" kindref="member">index_type</ref><sp/>to)</highlight></codeline>
+<codeline lineno="131" refid="classboost_1_1python_1_1std__vector__indexing__suite_1a4e5036ad4dcbeabac4810e0bdcd0fc6a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a4e5036ad4dcbeabac4810e0bdcd0fc6a" kindref="member">delete_slice</ref>(Container&amp;<sp/>container,<sp/>index_type<sp/>from,<sp/>index_type<sp/>to)</highlight></codeline>
 <codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/></highlight></codeline>
 <codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(from<sp/>&gt;<sp/>to)<sp/>{</highlight></codeline>
 <codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>A<sp/>null-op.</highlight><highlight class="normal"></highlight></codeline>
@@ -183,31 +183,31 @@
 <codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="147" refid="classboost_1_1python_1_1std__vector__indexing__suite_1ada4d804650938d5b87d4efce91531c1b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1ada4d804650938d5b87d4efce91531c1b" kindref="member">contains</ref>(Container&amp;<sp/>container,<sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1aad8e15443d4d920d6b15e1781fba568a" kindref="member">key_type</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>key)</highlight></codeline>
+<codeline lineno="147" refid="classboost_1_1python_1_1std__vector__indexing__suite_1ada4d804650938d5b87d4efce91531c1b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1ada4d804650938d5b87d4efce91531c1b" kindref="member">contains</ref>(Container&amp;<sp/>container,<sp/>key_type<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>key)</highlight></codeline>
 <codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::find(container.begin(),<sp/>container.end(),<sp/>key)</highlight></codeline>
 <codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>!=<sp/>container.end();</highlight></codeline>
 <codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a3124827b535a08798fbd33b9fee7b668" kindref="member">index_type</ref></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>index_type</highlight></codeline>
 <codeline lineno="154" refid="classboost_1_1python_1_1std__vector__indexing__suite_1acd47ccbb06430a34f564ee676d39e7b8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1acd47ccbb06430a34f564ee676d39e7b8" kindref="member">get_min_index</ref>(Container&amp;<sp/></highlight><highlight class="comment">/*container*/</highlight><highlight class="normal">)</highlight></codeline>
 <codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/></highlight></codeline>
 <codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
 <codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="158"><highlight class="normal"></highlight></codeline>
-<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a3124827b535a08798fbd33b9fee7b668" kindref="member">index_type</ref></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>index_type</highlight></codeline>
 <codeline lineno="160" refid="classboost_1_1python_1_1std__vector__indexing__suite_1aa9957225fda1af9c656fa851f98cf869" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1aa9957225fda1af9c656fa851f98cf869" kindref="member">get_max_index</ref>(Container&amp;<sp/>container)</highlight></codeline>
 <codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/></highlight></codeline>
 <codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>container.size();</highlight></codeline>
 <codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight></codeline>
-<codeline lineno="166" refid="classboost_1_1python_1_1std__vector__indexing__suite_1a1c4278e0572c2d6e0078d96528894e5c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a1c4278e0572c2d6e0078d96528894e5c" kindref="member">compare_index</ref>(Container&amp;<sp/></highlight><highlight class="comment">/*container*/</highlight><highlight class="normal">,<sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a3124827b535a08798fbd33b9fee7b668" kindref="member">index_type</ref><sp/>a,<sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a3124827b535a08798fbd33b9fee7b668" kindref="member">index_type</ref><sp/>b)</highlight></codeline>
+<codeline lineno="166" refid="classboost_1_1python_1_1std__vector__indexing__suite_1a1c4278e0572c2d6e0078d96528894e5c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a1c4278e0572c2d6e0078d96528894e5c" kindref="member">compare_index</ref>(Container&amp;<sp/></highlight><highlight class="comment">/*container*/</highlight><highlight class="normal">,<sp/>index_type<sp/>a,<sp/>index_type<sp/>b)</highlight></codeline>
 <codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>a<sp/>&lt;<sp/>b;</highlight></codeline>
 <codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a3124827b535a08798fbd33b9fee7b668" kindref="member">index_type</ref></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>index_type</highlight></codeline>
 <codeline lineno="172" refid="classboost_1_1python_1_1std__vector__indexing__suite_1ae4228941b0d743b8cfd1362fe95a1795" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1ae4228941b0d743b8cfd1362fe95a1795" kindref="member">convert_index</ref>(Container&amp;<sp/>container,<sp/>PyObject*<sp/>i_)</highlight></codeline>
 <codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/></highlight></codeline>
 <codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>extract&lt;long&gt;<sp/>i(i_);</highlight></codeline>
@@ -230,7 +230,7 @@
 <codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/></highlight></codeline>
-<codeline lineno="194" refid="classboost_1_1python_1_1std__vector__indexing__suite_1a317a62cce09e40822e7c376cd6afc7b4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a317a62cce09e40822e7c376cd6afc7b4" kindref="member">append</ref>(Container&amp;<sp/>container,<sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a9c3db9df25d6966c54154275377c94ce" kindref="member">data_type</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>v)</highlight></codeline>
+<codeline lineno="194" refid="classboost_1_1python_1_1std__vector__indexing__suite_1a317a62cce09e40822e7c376cd6afc7b4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classboost_1_1python_1_1std__vector__indexing__suite_1a317a62cce09e40822e7c376cd6afc7b4" kindref="member">append</ref>(Container&amp;<sp/>container,<sp/>data_type<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>v)</highlight></codeline>
 <codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/></highlight></codeline>
 <codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>container.push_back(v);</highlight></codeline>
 <codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>

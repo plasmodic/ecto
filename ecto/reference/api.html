@@ -261,14 +261,14 @@ struct MyEctoCell
 {
   //called first thing, the user should declare their parameters in this
   //free standing function.
-  static void <a class="reference internal" href="#project0structecto_1_1cell_1a5c3c204f531de15920cb9d3db3ecfc4c"><em>declare_params</em></a>(tendrils&amp; params);
+  static void declare_params(tendrils&amp; params);
   //declare inputs and outputs here. The parameters may be used to
   //determine the io
-  static void <a class="reference internal" href="#project0structecto_1_1cell_1af6c3782ed0d1c258bcf5050b4af272b4"><em>declare_io</em></a>(const tendrils&amp; params, tendrils&amp; in, tendrils&amp; out);
+  static void declare_io(const tendrils&amp; params, tendrils&amp; in, tendrils&amp; out);
   //called right after allocation of the cell, exactly once.
-  void <a class="reference internal" href="#project0structecto_1_1cell_1a30d48d21d6ffa86af4888f78e92241af"><em>configure</em></a>(tendrils&amp; params, tendrils&amp; <a class="reference internal" href="#project0structecto_1_1cell_1a65099b0458a7761b8bfa7a1ddc17e92f"><em>inputs</em></a>, tendrils&amp; <a class="reference internal" href="#project0structecto_1_1cell_1a93951743b603faba35312ebdb07ceb22"><em>outputs</em></a>);
+  void configure(tendrils&amp; params, tendrils&amp; inputs, tendrils&amp; outputs);
   //called at every execution of the graph
-  int <a class="reference internal" href="#project0structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3"><em>process</em></a>(const tendrils&amp; in, tendrils&amp; out);
+  int process(const tendrils&amp; in, tendrils&amp; out);
 };
 </pre>
 </p>
@@ -1345,17 +1345,17 @@ struct MyEctoCell
 </div></blockquote>
 </div></blockquote>
 <em>Public Members</em><blockquote>
-<div><p><span class="target" id="project0structecto_1_1registry_1_1entry__t_1ae1c1832273dbd622b1789a82f0832aa8"></span><a class="reference internal" href="#project0namespaceecto_1_1registry_1a3f75a16f135bcadb9bf1a7000b807b3b"><em>factory_fn_t</em></a> <strong>construct</strong></p>
+<div><p><span class="target" id="project0structecto_1_1registry_1_1entry__t_1ae1c1832273dbd622b1789a82f0832aa8"></span><a class="reference internal" href="#project0namespaceecto_1_1registry_1afc9d1f3d51e708d9304a2f1e77cf4e4c"><em>factory_fn_t</em></a> <strong>construct</strong></p>
 <blockquote>
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p><span class="target" id="project0structecto_1_1registry_1_1entry__t_1a0e87799ee057b4509d45eab85def3b80"></span><a class="reference internal" href="#project0namespaceecto_1_1registry_1a04d849b45313a8ce9a602095e1edade9"><em>declare_params_t</em></a> <strong>declare_params</strong></p>
+<p><span class="target" id="project0structecto_1_1registry_1_1entry__t_1a0e87799ee057b4509d45eab85def3b80"></span><a class="reference internal" href="#project0namespaceecto_1_1registry_1ac7ab506518f9462777eb958eeff86d4f"><em>declare_params_t</em></a> <strong>declare_params</strong></p>
 <blockquote>
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p><span class="target" id="project0structecto_1_1registry_1_1entry__t_1ac052cec6adea69584fbb17f24e147ec2"></span><a class="reference internal" href="#project0namespaceecto_1_1registry_1af52d8f0fff3baaf352e2523ab8ed7977"><em>declare_io_t</em></a> <strong>declare_io</strong></p>
+<p><span class="target" id="project0structecto_1_1registry_1_1entry__t_1ac052cec6adea69584fbb17f24e147ec2"></span><a class="reference internal" href="#project0namespaceecto_1_1registry_1aeb28ed8594052fabba16371c256380c4"><em>declare_io_t</em></a> <strong>declare_io</strong></p>
 <blockquote>
 <div><p></p>
 <p></p>
@@ -3644,7 +3644,7 @@ struct MyEctoCell
 </div></blockquote>
 </div></blockquote>
 <div class="line-block" id="project0classboost_1_1python_1_1std__map__indexing__suite">
-<div class="line">template &lt; class Container, bool NoProxy, class DerivedPolicies &gt;</div>
+<div class="line">template &lt; class Container, bool NoProxy = false, class DerivedPolicies = <a class="reference internal" href="#project0classboost_1_1python_1_1detail_1_1final__std__map__derived__policies"><em>detail::final_std_map_derived_policies</em></a> &lt;Container, NoProxy&gt; &gt;</div>
 <div class="line"><em>class</em> <strong>boost::python::std_map_indexing_suite</strong></div>
 <div class="line"><em>#include &lt;std_map_indexing_suite.hpp&gt;</em></div>
 </div>
@@ -3896,7 +3896,7 @@ struct MyEctoCell
 </div></blockquote>
 </div></blockquote>
 <div class="line-block" id="project0classboost_1_1python_1_1std__vector__indexing__suite">
-<div class="line">template &lt; class Container, bool NoProxy, class DerivedPolicies &gt;</div>
+<div class="line">template &lt; class Container, bool NoProxy = false, class DerivedPolicies = <a class="reference internal" href="#project0classboost_1_1python_1_1detail_1_1final__std__vector__derived__policies"><em>detail::final_std_vector_derived_policies</em></a> &lt;Container, NoProxy&gt; &gt;</div>
 <div class="line"><em>class</em> <strong>boost::python::std_vector_indexing_suite</strong></div>
 <div class="line"><em>#include &lt;std_vector_indexing_suite.hpp&gt;</em></div>
 </div>
@@ -6076,17 +6076,17 @@ read_inputs(streambuf(python_file_obj=obj, buffer_size=1024))
 <div><p></p>
 <p></p>
 <em>Typedefs</em><blockquote>
-<div><p><span class="target" id="project0namespaceecto_1_1registry_1a3f75a16f135bcadb9bf1a7000b807b3b"></span>typedef boost::shared_ptr&lt;  <a class="reference internal" href="#project0structecto_1_1cell"><em>cell</em></a>  &gt;(* <strong>factory_fn_t</strong>)()</p>
+<div><p><span class="target" id="project0namespaceecto_1_1registry_1afc9d1f3d51e708d9304a2f1e77cf4e4c"></span>typedef boost::shared_ptr&lt;  <a class="reference internal" href="#project0structecto_1_1cell"><em>cell</em></a>  &gt;(* <strong>factory_fn_t</strong>)()</p>
 <blockquote>
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p><span class="target" id="project0namespaceecto_1_1registry_1a04d849b45313a8ce9a602095e1edade9"></span>typedef void(* <strong>declare_params_t</strong>)(ecto::tendrils &amp;)</p>
+<p><span class="target" id="project0namespaceecto_1_1registry_1ac7ab506518f9462777eb958eeff86d4f"></span>typedef void(* <strong>declare_params_t</strong>)(ecto::tendrils &amp;)</p>
 <blockquote>
 <div><p></p>
 <p></p>
 </div></blockquote>
-<p><span class="target" id="project0namespaceecto_1_1registry_1af52d8f0fff3baaf352e2523ab8ed7977"></span>typedef void(* <strong>declare_io_t</strong>)(const ecto::tendrils &amp;, ecto::tendrils &amp;, ecto::tendrils &amp;)</p>
+<p><span class="target" id="project0namespaceecto_1_1registry_1aeb28ed8594052fabba16371c256380c4"></span>typedef void(* <strong>declare_io_t</strong>)(const ecto::tendrils &amp;, ecto::tendrils &amp;, ecto::tendrils &amp;)</p>
 <blockquote>
 <div><p></p>
 <p></p>
@@ -6346,6 +6346,7 @@ read_inputs(streambuf(python_file_obj=obj, buffer_size=1024))
 </div></blockquote>
 <div class="line-block" id="project0element_8hpp">
 <div class="line"><em>file</em> <strong>element.hpp</strong></div>
+<div class="line"><em>#include &lt;cstddef&gt;</em></div>
 </div>
 <blockquote>
 <div><p></p>
@@ -6506,6 +6507,7 @@ read_inputs(streambuf(python_file_obj=obj, buffer_size=1024))
 <div class="line-block" id="project0impl_2parameters_8hpp">
 <div class="line"><em>file</em> <strong>parameters.hpp</strong></div>
 <div class="line"><em>#include &lt;ecto/abi.hpp&gt;</em></div>
+<div class="line"><em>#include &lt;ecto/parameters.hpp&gt;</em></div>
 <div class="line"><em>#include &lt;stdexcept&gt;</em></div>
 <div class="line"><em>#include &lt;exception&gt;</em></div>
 <div class="line"><em>#include &lt;boost/format.hpp&gt;</em></div>
@@ -7076,7 +7078,7 @@ read_inputs(streambuf(python_file_obj=obj, buffer_size=1024))
     </div>
     <div class="footer">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>

@@ -123,13 +123,13 @@ use/readability.</p>
   <span class="p">{</span>
     <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;strategy&quot;</span><span class="p">);</span>
     <span class="k">switch</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">case</span> <span class="n">FAST</span>:
+    <span class="k">case</span> <span class="nl">FAST</span><span class="p">:</span>
       <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;running FAST</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-    <span class="k">case</span> <span class="n">SLOW</span>:
+    <span class="k">case</span> <span class="nl">SLOW</span><span class="p">:</span>
       <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;running SLOW</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-    <span class="k">case</span> <span class="n">ADAPTIVE</span>:
+    <span class="k">case</span> <span class="nl">ADAPTIVE</span><span class="p">:</span>
       <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;running ADAPTIVE</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-    <span class="nl">default:</span>
+    <span class="k">default</span><span class="o">:</span>
       <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;BAD!  Unhandled value of enum parameter&quot;</span><span class="p">;</span>
     <span class="p">}</span>
 
@@ -213,13 +213,13 @@ cell, declare and get the parameter as being of the enum type,</p>
   <span class="p">{</span>
     <span class="n">Strategy</span> <span class="n">s</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="n">Strategy</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;strategy&quot;</span><span class="p">);</span>
     <span class="k">switch</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">case</span> <span class="n">FAST</span>:
+    <span class="k">case</span> <span class="nl">FAST</span><span class="p">:</span>
       <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;running FAST</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-    <span class="k">case</span> <span class="n">SLOW</span>:
+    <span class="k">case</span> <span class="nl">SLOW</span><span class="p">:</span>
       <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;running SLOW</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-    <span class="k">case</span> <span class="n">ADAPTIVE</span>:
+    <span class="k">case</span> <span class="nl">ADAPTIVE</span><span class="p">:</span>
       <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;running ADAPTIVE</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-    <span class="nl">default:</span>
+    <span class="k">default</span><span class="o">:</span>
       <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;BAD!  Unhandled value of enum parameter&quot;</span><span class="p">;</span>
     <span class="p">}</span>
 
@@ -357,7 +357,7 @@ class Strategy(Boost.Python.enum)
     </div>
     <div class="footer">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>

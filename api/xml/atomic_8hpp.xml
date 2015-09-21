@@ -1,22 +1,22 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="atomic_8hpp" kind="file">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="atomic_8hpp" kind="file" language="C++">
     <compoundname>atomic.hpp</compoundname>
     <includes local="no">boost/thread.hpp</includes>
     <includes local="no">boost/noncopyable.hpp</includes>
     <incdepgraph>
-      <node id="1002">
+      <node id="1010">
         <label>boost/noncopyable.hpp</label>
       </node>
-      <node id="1001">
+      <node id="1009">
         <label>boost/thread.hpp</label>
       </node>
-      <node id="1000">
+      <node id="1008">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/atomic.hpp</label>
         <link refid="atomic.hpp"/>
-        <childnode refid="1001" relation="include">
+        <childnode refid="1009" relation="include">
         </childnode>
-        <childnode refid="1002" relation="include">
+        <childnode refid="1010" relation="include">
         </childnode>
       </node>
     </incdepgraph>
@@ -56,11 +56,11 @@
 <codeline lineno="26"><highlight class="comment"><sp/>*<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE</highlight></codeline>
 <codeline lineno="27"><highlight class="comment"><sp/>*<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
 <codeline lineno="28"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight></codeline>
-<codeline lineno="30"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/thread.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/thread.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/noncopyable.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight></codeline>
-<codeline lineno="33"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ecto</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceecto" kindref="compound">ecto</ref></highlight></codeline>
 <codeline lineno="34"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"></highlight></codeline>
 <codeline lineno="36"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
@@ -76,7 +76,7 @@
 <codeline lineno="46"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="47"><highlight class="normal"></highlight></codeline>
 <codeline lineno="48" refid="classecto_1_1atomic_1ab905c76c87a64092b9c4217c6cc2b00d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classecto_1_1atomic_1ab905c76c87a64092b9c4217c6cc2b00d" kindref="member">atomic</ref>()<sp/>{<sp/>}</highlight></codeline>
-<codeline lineno="49" refid="classecto_1_1atomic_1a805df2159911558f653edbe19a789b51" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1atomic_1a805df2159911558f653edbe19a789b51" kindref="member">atomic</ref>(T<sp/>v)<sp/>:<sp/><ref refid="classecto_1_1atomic_1ac5ba45af623c7bc47e6918e290e39c67" kindref="member">value</ref>(v)<sp/>{<sp/>}</highlight></codeline>
+<codeline lineno="49" refid="classecto_1_1atomic_1a805df2159911558f653edbe19a789b51" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1atomic_1a805df2159911558f653edbe19a789b51" kindref="member">atomic</ref>(T<sp/>v)<sp/>:<sp/>value(v)<sp/>{<sp/>}</highlight></codeline>
 <codeline lineno="50"><highlight class="normal"></highlight></codeline>
 <codeline lineno="51" refid="classecto_1_1atomic_1aa98175bf31ad55fe61e5d3d324a4f664" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>T<sp/></highlight><highlight class="keyword">get</highlight><highlight class="normal">()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1atomic_1ac5ba45af623c7bc47e6918e290e39c67" kindref="member">value</ref>;<sp/>}</highlight></codeline>
 <codeline lineno="52"><highlight class="normal"></highlight></codeline>
@@ -86,7 +86,7 @@
 <codeline lineno="56"><highlight class="normal"></highlight></codeline>
 <codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="58"><highlight class="normal"></highlight></codeline>
-<codeline lineno="59" refid="classecto_1_1atomic_1_1scoped__lock_1aa5a512f623ed5bd0f4010e200ad86e14" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classecto_1_1atomic_1_1scoped__lock_1aa5a512f623ed5bd0f4010e200ad86e14" kindref="member">scoped_lock</ref>(<ref refid="classecto_1_1atomic" kindref="compound">atomic</ref>&amp;<sp/>a_)<sp/>:<sp/><ref refid="classecto_1_1atomic_1_1scoped__lock_1a637b9c7c8246e2ac352cb03fa9f4b229" kindref="member">sl</ref>(a_.<ref refid="classecto_1_1atomic_1a52a121e21f9449371998dbccaca0cbde" kindref="member">mtx</ref>),<sp/><ref refid="classecto_1_1atomic_1_1scoped__lock_1a89aa811b27815c91f99b3673a7f76753" kindref="member">value</ref>(a_.<ref refid="classecto_1_1atomic_1_1scoped__lock_1a89aa811b27815c91f99b3673a7f76753" kindref="member">value</ref>)<sp/>{<sp/>}</highlight></codeline>
+<codeline lineno="59" refid="classecto_1_1atomic_1_1scoped__lock_1aa5a512f623ed5bd0f4010e200ad86e14" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classecto_1_1atomic_1_1scoped__lock_1aa5a512f623ed5bd0f4010e200ad86e14" kindref="member">scoped_lock</ref>(<ref refid="classecto_1_1atomic" kindref="compound">atomic</ref>&amp;<sp/>a_)<sp/>:<sp/>sl(a_.mtx),<sp/>value(a_.value)<sp/>{<sp/>}</highlight></codeline>
 <codeline lineno="60" refid="classecto_1_1atomic_1_1scoped__lock_1a89aa811b27815c91f99b3673a7f76753" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>T&amp;<sp/><ref refid="classecto_1_1atomic_1_1scoped__lock_1a89aa811b27815c91f99b3673a7f76753" kindref="member">value</ref>;</highlight></codeline>
 <codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="62"><highlight class="normal"></highlight></codeline>

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="tendrils_8hpp" kind="file">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="tendrils_8hpp" kind="file" language="C++">
     <compoundname>tendrils.hpp</compoundname>
     <includes local="no">boost/thread.hpp</includes>
     <includes refid="tendril_8hpp" local="no">ecto/tendril.hpp</includes>
@@ -14,204 +14,94 @@
     <includedby refid="cell_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp</includedby>
     <includedby refid="all_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp</includedby>
     <incdepgraph>
-      <node id="1753">
+      <node id="1766">
         <label>boost/version.hpp</label>
       </node>
-      <node id="1742">
+      <node id="1755">
         <label>boost/shared_ptr.hpp</label>
       </node>
-      <node id="1744">
+      <node id="1757">
         <label>boost/signals2.hpp</label>
       </node>
-      <node id="1746">
+      <node id="1759">
         <label>ecto/forward.hpp</label>
         <link refid="forward_8hpp"/>
-        <childnode refid="1742" relation="include">
-        </childnode>
-      </node>
-      <node id="1754">
-        <label>stdexcept</label>
-      </node>
-      <node id="1765">
-        <label>boost/thread/thread.hpp</label>
-      </node>
-      <node id="1766">
-        <label>boost/noncopyable.hpp</label>
-      </node>
-      <node id="1750">
-        <label>string</label>
-      </node>
-      <node id="1739">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendrils.hpp</label>
-        <link refid="tendrils.hpp"/>
-        <childnode refid="1740" relation="include">
-        </childnode>
-        <childnode refid="1741" relation="include">
-        </childnode>
-        <childnode refid="1771" relation="include">
-        </childnode>
-        <childnode refid="1744" relation="include">
-        </childnode>
-        <childnode refid="1750" relation="include">
-        </childnode>
-        <childnode refid="1772" relation="include">
-        </childnode>
-        <childnode refid="1773" relation="include">
-        </childnode>
         <childnode refid="1755" relation="include">
         </childnode>
-        <childnode refid="1754" relation="include">
-        </childnode>
-      </node>
-      <node id="1755">
-        <label>map</label>
-      </node>
-      <node id="1740">
-        <label>boost/thread.hpp</label>
-      </node>
-      <node id="1747">
-        <label>ecto/util.hpp</label>
-        <link refid="util_8hpp"/>
-        <childnode refid="1748" relation="include">
-        </childnode>
-        <childnode refid="1749" relation="include">
-        </childnode>
-        <childnode refid="1750" relation="include">
-        </childnode>
-      </node>
-      <node id="1763">
-        <label>ecto/python.hpp</label>
-        <link refid="python_8hpp"/>
-        <childnode refid="1752" relation="include">
-        </childnode>
-        <childnode refid="1764" relation="include">
-        </childnode>
-        <childnode refid="1765" relation="include">
-        </childnode>
-        <childnode refid="1755" relation="include">
-        </childnode>
-        <childnode refid="1766" relation="include">
-        </childnode>
-      </node>
-      <node id="1743">
-        <label>boost/function/function1.hpp</label>
-      </node>
-      <node id="1741">
-        <label>ecto/tendril.hpp</label>
-        <link refid="tendril_8hpp"/>
-        <childnode refid="1742" relation="include">
-        </childnode>
-        <childnode refid="1743" relation="include">
-        </childnode>
-        <childnode refid="1744" relation="include">
-        </childnode>
-        <childnode refid="1745" relation="include">
-        </childnode>
-        <childnode refid="1746" relation="include">
-        </childnode>
-        <childnode refid="1747" relation="include">
-        </childnode>
-        <childnode refid="1751" relation="include">
-        </childnode>
-        <childnode refid="1763" relation="include">
-        </childnode>
-        <childnode refid="1767" relation="include">
-        </childnode>
-        <childnode refid="1769" relation="include">
-        </childnode>
-        <childnode refid="1750" relation="include">
-        </childnode>
-        <childnode refid="1770" relation="include">
-        </childnode>
-      </node>
-      <node id="1745">
-        <label>boost/any.hpp</label>
-      </node>
-      <node id="1761">
-        <label>boost/preprocessor/stringize.hpp</label>
-      </node>
-      <node id="1758">
-        <label>boost/exception/exception.hpp</label>
-      </node>
-      <node id="1756">
-        <label>ecto/config.hpp</label>
-      </node>
-      <node id="1749">
-        <label>typeinfo</label>
-      </node>
-      <node id="1770">
-        <label>bitset</label>
-      </node>
-      <node id="1768">
-        <label>boost/python/object_fwd.hpp</label>
-      </node>
-      <node id="1764">
-        <label>boost/python.hpp</label>
-      </node>
-      <node id="1759">
-        <label>boost/exception/info.hpp</label>
-      </node>
-      <node id="1752">
-        <label>Python.h</label>
-      </node>
-      <node id="1769">
-        <label>vector</label>
-      </node>
-      <node id="1772">
-        <label>sstream</label>
       </node>
       <node id="1767">
-        <label>ecto/python/repr.hpp</label>
-        <link refid="repr_8hpp"/>
-        <childnode refid="1768" relation="include">
-        </childnode>
-        <childnode refid="1750" relation="include">
-        </childnode>
+        <label>stdexcept</label>
       </node>
-      <node id="1771">
-        <label>ecto/spore.hpp</label>
-        <link refid="spore_8hpp"/>
-        <childnode refid="1742" relation="include">
-        </childnode>
-        <childnode refid="1743" relation="include">
-        </childnode>
-        <childnode refid="1747" relation="include">
-        </childnode>
-        <childnode refid="1741" relation="include">
-        </childnode>
-        <childnode refid="1754" relation="include">
-        </childnode>
-        <childnode refid="1750" relation="include">
-        </childnode>
+      <node id="1778">
+        <label>boost/thread/thread.hpp</label>
       </node>
-      <node id="1748">
-        <label>iostream</label>
+      <node id="1779">
+        <label>boost/noncopyable.hpp</label>
       </node>
-      <node id="1760">
-        <label>boost/preprocessor/cat.hpp</label>
+      <node id="1763">
+        <label>string</label>
       </node>
-      <node id="1757">
-        <label>boost/optional.hpp</label>
-      </node>
-      <node id="1773">
-        <label>cstring</label>
-      </node>
-      <node id="1751">
-        <label>ecto/except.hpp</label>
-        <link refid="except_8hpp"/>
-        <childnode refid="1752" relation="include">
-        </childnode>
+      <node id="1752">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendrils.hpp</label>
+        <link refid="tendrils.hpp"/>
         <childnode refid="1753" relation="include">
         </childnode>
         <childnode refid="1754" relation="include">
         </childnode>
-        <childnode refid="1750" relation="include">
+        <childnode refid="1784" relation="include">
         </childnode>
+        <childnode refid="1757" relation="include">
+        </childnode>
+        <childnode refid="1763" relation="include">
+        </childnode>
+        <childnode refid="1785" relation="include">
+        </childnode>
+        <childnode refid="1786" relation="include">
+        </childnode>
+        <childnode refid="1768" relation="include">
+        </childnode>
+        <childnode refid="1767" relation="include">
+        </childnode>
+      </node>
+      <node id="1768">
+        <label>map</label>
+      </node>
+      <node id="1753">
+        <label>boost/thread.hpp</label>
+      </node>
+      <node id="1760">
+        <label>ecto/util.hpp</label>
+        <link refid="util_8hpp"/>
+        <childnode refid="1761" relation="include">
+        </childnode>
+        <childnode refid="1762" relation="include">
+        </childnode>
+        <childnode refid="1763" relation="include">
+        </childnode>
+      </node>
+      <node id="1776">
+        <label>ecto/python.hpp</label>
+        <link refid="python_8hpp"/>
+        <childnode refid="1765" relation="include">
+        </childnode>
+        <childnode refid="1777" relation="include">
+        </childnode>
+        <childnode refid="1778" relation="include">
+        </childnode>
+        <childnode refid="1768" relation="include">
+        </childnode>
+        <childnode refid="1779" relation="include">
+        </childnode>
+      </node>
+      <node id="1756">
+        <label>boost/function/function1.hpp</label>
+      </node>
+      <node id="1754">
+        <label>ecto/tendril.hpp</label>
+        <link refid="tendril_8hpp"/>
         <childnode refid="1755" relation="include">
         </childnode>
         <childnode refid="1756" relation="include">
-        </childnode>
-        <childnode refid="1747" relation="include">
         </childnode>
         <childnode refid="1757" relation="include">
         </childnode>
@@ -221,64 +111,174 @@
         </childnode>
         <childnode refid="1760" relation="include">
         </childnode>
-        <childnode refid="1761" relation="include">
+        <childnode refid="1764" relation="include">
         </childnode>
-        <childnode refid="1762" relation="include">
+        <childnode refid="1776" relation="include">
+        </childnode>
+        <childnode refid="1780" relation="include">
+        </childnode>
+        <childnode refid="1782" relation="include">
+        </childnode>
+        <childnode refid="1763" relation="include">
+        </childnode>
+        <childnode refid="1783" relation="include">
         </childnode>
       </node>
+      <node id="1758">
+        <label>boost/any.hpp</label>
+      </node>
+      <node id="1774">
+        <label>boost/preprocessor/stringize.hpp</label>
+      </node>
+      <node id="1771">
+        <label>boost/exception/exception.hpp</label>
+      </node>
+      <node id="1769">
+        <label>ecto/config.hpp</label>
+      </node>
       <node id="1762">
+        <label>typeinfo</label>
+      </node>
+      <node id="1783">
+        <label>bitset</label>
+      </node>
+      <node id="1781">
+        <label>boost/python/object_fwd.hpp</label>
+      </node>
+      <node id="1777">
+        <label>boost/python.hpp</label>
+      </node>
+      <node id="1772">
+        <label>boost/exception/info.hpp</label>
+      </node>
+      <node id="1765">
+        <label>Python.h</label>
+      </node>
+      <node id="1782">
+        <label>vector</label>
+      </node>
+      <node id="1785">
+        <label>sstream</label>
+      </node>
+      <node id="1780">
+        <label>ecto/python/repr.hpp</label>
+        <link refid="repr_8hpp"/>
+        <childnode refid="1781" relation="include">
+        </childnode>
+        <childnode refid="1763" relation="include">
+        </childnode>
+      </node>
+      <node id="1784">
+        <label>ecto/spore.hpp</label>
+        <link refid="spore_8hpp"/>
+        <childnode refid="1755" relation="include">
+        </childnode>
+        <childnode refid="1756" relation="include">
+        </childnode>
+        <childnode refid="1760" relation="include">
+        </childnode>
+        <childnode refid="1754" relation="include">
+        </childnode>
+        <childnode refid="1767" relation="include">
+        </childnode>
+        <childnode refid="1763" relation="include">
+        </childnode>
+      </node>
+      <node id="1761">
+        <label>iostream</label>
+      </node>
+      <node id="1773">
+        <label>boost/preprocessor/cat.hpp</label>
+      </node>
+      <node id="1770">
+        <label>boost/optional.hpp</label>
+      </node>
+      <node id="1786">
+        <label>cstring</label>
+      </node>
+      <node id="1764">
+        <label>ecto/except.hpp</label>
+        <link refid="except_8hpp"/>
+        <childnode refid="1765" relation="include">
+        </childnode>
+        <childnode refid="1766" relation="include">
+        </childnode>
+        <childnode refid="1767" relation="include">
+        </childnode>
+        <childnode refid="1763" relation="include">
+        </childnode>
+        <childnode refid="1768" relation="include">
+        </childnode>
+        <childnode refid="1769" relation="include">
+        </childnode>
+        <childnode refid="1760" relation="include">
+        </childnode>
+        <childnode refid="1770" relation="include">
+        </childnode>
+        <childnode refid="1771" relation="include">
+        </childnode>
+        <childnode refid="1772" relation="include">
+        </childnode>
+        <childnode refid="1773" relation="include">
+        </childnode>
+        <childnode refid="1774" relation="include">
+        </childnode>
+        <childnode refid="1775" relation="include">
+        </childnode>
+      </node>
+      <node id="1775">
         <label>boost/preprocessor/seq/for_each.hpp</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="1777">
+      <node id="1790">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/ecto.hpp</label>
         <link refid="ecto_8hpp"/>
-        <childnode refid="1778" relation="include">
+        <childnode refid="1791" relation="include">
         </childnode>
       </node>
-      <node id="1774">
+      <node id="1787">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendrils.hpp</label>
         <link refid="tendrils.hpp"/>
-        <childnode refid="1775" relation="include">
+        <childnode refid="1788" relation="include">
         </childnode>
-        <childnode refid="1778" relation="include">
+        <childnode refid="1791" relation="include">
         </childnode>
       </node>
-      <node id="1778">
+      <node id="1791">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp</label>
         <link refid="all_8hpp"/>
       </node>
-      <node id="1779">
+      <node id="1792">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/cell.hpp</label>
         <link refid="serialization_2cell_8hpp"/>
       </node>
-      <node id="1780">
+      <node id="1793">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/module.hpp</label>
         <link refid="module_8hpp"/>
-        <childnode refid="1777" relation="include">
+        <childnode refid="1790" relation="include">
         </childnode>
       </node>
-      <node id="1776">
+      <node id="1789">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp</label>
         <link refid="registry_8hpp"/>
-        <childnode refid="1777" relation="include">
+        <childnode refid="1790" relation="include">
         </childnode>
-        <childnode refid="1779" relation="include">
+        <childnode refid="1792" relation="include">
         </childnode>
-        <childnode refid="1780" relation="include">
+        <childnode refid="1793" relation="include">
         </childnode>
       </node>
-      <node id="1775">
+      <node id="1788">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp</label>
         <link refid="cell_8hpp"/>
-        <childnode refid="1776" relation="include">
+        <childnode refid="1789" relation="include">
         </childnode>
-        <childnode refid="1777" relation="include">
+        <childnode refid="1790" relation="include">
         </childnode>
-        <childnode refid="1778" relation="include">
+        <childnode refid="1791" relation="include">
         </childnode>
-        <childnode refid="1779" relation="include">
+        <childnode refid="1792" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -331,20 +331,20 @@
 <codeline lineno="26"><highlight class="comment"><sp/>*<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE</highlight></codeline>
 <codeline lineno="27"><highlight class="comment"><sp/>*<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
 <codeline lineno="28"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight></codeline>
-<codeline lineno="30"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/thread.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/thread.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="tendril_8hpp" kindref="compound">ecto/tendril.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="spore_8hpp" kindref="compound">ecto/spore.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/thread.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="34" refid="tendrils_8hpp_1aa84dbe584b0b7df365956205e05572c0" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BOOST_SIGNALS2_MAX_ARGS<sp/>3</highlight></codeline>
-<codeline lineno="35"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/signals2.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34" refid="tendrils_8hpp_1aa84dbe584b0b7df365956205e05572c0" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BOOST_SIGNALS2_MAX_ARGS<sp/>3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/signals2.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;sstream&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstring&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="39"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;map&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="40"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdexcept&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="41"><highlight class="normal"></highlight></codeline>
-<codeline lineno="42"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ecto</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceecto" kindref="compound">ecto</ref></highlight></codeline>
 <codeline lineno="43"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="44" refid="namespaceecto_1a02939764b22968505f82e425c83272c2" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="namespaceecto_1a02939764b22968505f82e425c83272c2" kindref="member">tendril_type</ref></highlight></codeline>
 <codeline lineno="45"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
@@ -368,21 +368,21 @@
 <codeline lineno="66"><highlight class="normal"></highlight></codeline>
 <codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref>();</highlight></codeline>
 <codeline lineno="68"><highlight class="normal"></highlight></codeline>
-<codeline lineno="69" refid="classecto_1_1tendrils_1a1191620f21a9dc618eb4380e2cf48b63" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classecto_1_1tendrils_1a6f0b7bd6e3a03f047351303630b889e0" kindref="member">iterator</ref><sp/><ref refid="classecto_1_1tendrils_1a1191620f21a9dc618eb4380e2cf48b63" kindref="member">begin</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>storage.begin();<sp/>}</highlight></codeline>
-<codeline lineno="70" refid="classecto_1_1tendrils_1a10d0c932826165f25406b849b958ad27" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classecto_1_1tendrils_1a86df9983555ca4ebdae8b1d36aa4bbd8" kindref="member">const_iterator</ref><sp/><ref refid="classecto_1_1tendrils_1a10d0c932826165f25406b849b958ad27" kindref="member">begin</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>storage.begin();<sp/>}</highlight></codeline>
-<codeline lineno="71" refid="classecto_1_1tendrils_1ae77c08ecbfff9aa13b442e4e9eb11441" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classecto_1_1tendrils_1a6f0b7bd6e3a03f047351303630b889e0" kindref="member">iterator</ref><sp/><ref refid="classecto_1_1tendrils_1ae77c08ecbfff9aa13b442e4e9eb11441" kindref="member">end</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>storage.end();<sp/>}</highlight></codeline>
-<codeline lineno="72" refid="classecto_1_1tendrils_1aec3278598a3d3bc3c3810ec3cecf72cb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classecto_1_1tendrils_1a86df9983555ca4ebdae8b1d36aa4bbd8" kindref="member">const_iterator</ref><sp/><ref refid="classecto_1_1tendrils_1aec3278598a3d3bc3c3810ec3cecf72cb" kindref="member">end</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>storage.end();<sp/>}</highlight></codeline>
+<codeline lineno="69" refid="classecto_1_1tendrils_1a1191620f21a9dc618eb4380e2cf48b63" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>iterator<sp/><ref refid="classecto_1_1tendrils_1a1191620f21a9dc618eb4380e2cf48b63" kindref="member">begin</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>storage.begin();<sp/>}</highlight></codeline>
+<codeline lineno="70" refid="classecto_1_1tendrils_1a10d0c932826165f25406b849b958ad27" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>const_iterator<sp/><ref refid="classecto_1_1tendrils_1a10d0c932826165f25406b849b958ad27" kindref="member">begin</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>storage.begin();<sp/>}</highlight></codeline>
+<codeline lineno="71" refid="classecto_1_1tendrils_1ae77c08ecbfff9aa13b442e4e9eb11441" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>iterator<sp/><ref refid="classecto_1_1tendrils_1ae77c08ecbfff9aa13b442e4e9eb11441" kindref="member">end</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>storage.end();<sp/>}</highlight></codeline>
+<codeline lineno="72" refid="classecto_1_1tendrils_1aec3278598a3d3bc3c3810ec3cecf72cb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>const_iterator<sp/><ref refid="classecto_1_1tendrils_1aec3278598a3d3bc3c3810ec3cecf72cb" kindref="member">end</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>storage.end();<sp/>}</highlight></codeline>
 <codeline lineno="73"><highlight class="normal"></highlight></codeline>
-<codeline lineno="74" refid="classecto_1_1tendrils_1a4af12838006b6cfda8157dc3957c166e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classecto_1_1tendrils_1a6f0b7bd6e3a03f047351303630b889e0" kindref="member">iterator</ref><sp/><ref refid="classecto_1_1tendrils_1a4af12838006b6cfda8157dc3957c166e" kindref="member">find</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>storage.find(name);<sp/>}</highlight></codeline>
-<codeline lineno="75" refid="classecto_1_1tendrils_1af0ef7fa5535b477b83620a66331a475b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classecto_1_1tendrils_1a86df9983555ca4ebdae8b1d36aa4bbd8" kindref="member">const_iterator</ref><sp/><ref refid="classecto_1_1tendrils_1af0ef7fa5535b477b83620a66331a475b" kindref="member">find</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>storage.find(name);<sp/>}</highlight></codeline>
+<codeline lineno="74" refid="classecto_1_1tendrils_1a4af12838006b6cfda8157dc3957c166e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>iterator<sp/><ref refid="classecto_1_1tendrils_1a4af12838006b6cfda8157dc3957c166e" kindref="member">find</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>storage.find(name);<sp/>}</highlight></codeline>
+<codeline lineno="75" refid="classecto_1_1tendrils_1af0ef7fa5535b477b83620a66331a475b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>const_iterator<sp/><ref refid="classecto_1_1tendrils_1af0ef7fa5535b477b83620a66331a475b" kindref="member">find</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>storage.find(name);<sp/>}</highlight></codeline>
 <codeline lineno="76"><highlight class="normal"></highlight></codeline>
 <codeline lineno="77" refid="classecto_1_1tendrils_1ac7bfc201ab8170684307cb7095323c2d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1tendrils_1ac7bfc201ab8170684307cb7095323c2d" kindref="member">clear</ref>()<sp/>{<sp/>storage.clear();<sp/>}</highlight></codeline>
 <codeline lineno="78"><highlight class="normal"></highlight></codeline>
-<codeline lineno="79" refid="classecto_1_1tendrils_1a3f86ef76f17dbde432321239fcbfd639" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classecto_1_1tendrils_1af3726f822a4fd60a1095bba31f1926ef" kindref="member">size_type</ref><sp/><ref refid="classecto_1_1tendrils_1a3f86ef76f17dbde432321239fcbfd639" kindref="member">size</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>storage.size();<sp/>}</highlight></codeline>
-<codeline lineno="80" refid="classecto_1_1tendrils_1aa6bc2c6a64d087c1b516119d0550f83c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classecto_1_1tendrils_1af3726f822a4fd60a1095bba31f1926ef" kindref="member">size_type</ref><sp/><ref refid="classecto_1_1tendrils_1aa6bc2c6a64d087c1b516119d0550f83c" kindref="member">count</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>storage.count(name);<sp/>}</highlight></codeline>
+<codeline lineno="79" refid="classecto_1_1tendrils_1a3f86ef76f17dbde432321239fcbfd639" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>size_type<sp/><ref refid="classecto_1_1tendrils_1a3f86ef76f17dbde432321239fcbfd639" kindref="member">size</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>storage.size();<sp/>}</highlight></codeline>
+<codeline lineno="80" refid="classecto_1_1tendrils_1aa6bc2c6a64d087c1b516119d0550f83c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>size_type<sp/><ref refid="classecto_1_1tendrils_1aa6bc2c6a64d087c1b516119d0550f83c" kindref="member">count</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>storage.count(name);<sp/>}</highlight></codeline>
 <codeline lineno="81"><highlight class="normal"></highlight></codeline>
-<codeline lineno="82" refid="classecto_1_1tendrils_1a700cd209735e5b6254669a6f9c16b74f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1tendrils_1a700cd209735e5b6254669a6f9c16b74f" kindref="member">erase</ref>(<ref refid="classecto_1_1tendrils_1a6f0b7bd6e3a03f047351303630b889e0" kindref="member">iterator</ref><sp/>pos)<sp/>{<sp/>storage.erase(pos);<sp/>}</highlight></codeline>
-<codeline lineno="83" refid="classecto_1_1tendrils_1a58aa945fa23bdeef212ea4a69d077e52" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1tendrils_1a58aa945fa23bdeef212ea4a69d077e52" kindref="member">erase</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1tendrils_1aa6165c6ab72d93cd56796ea81e450245" kindref="member">key_type</ref>&amp;<sp/>k)<sp/>{<sp/>storage.erase(k);<sp/>}</highlight></codeline>
+<codeline lineno="82" refid="classecto_1_1tendrils_1a700cd209735e5b6254669a6f9c16b74f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1tendrils_1a700cd209735e5b6254669a6f9c16b74f" kindref="member">erase</ref>(iterator<sp/>pos)<sp/>{<sp/>storage.erase(pos);<sp/>}</highlight></codeline>
+<codeline lineno="83" refid="classecto_1_1tendrils_1a58aa945fa23bdeef212ea4a69d077e52" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1tendrils_1a58aa945fa23bdeef212ea4a69d077e52" kindref="member">erase</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>key_type&amp;<sp/>k)<sp/>{<sp/>storage.erase(k);<sp/>}</highlight></codeline>
 <codeline lineno="84"><highlight class="normal"></highlight></codeline>
 <codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>InputIterator&gt;</highlight></codeline>
 <codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"></highlight></codeline>
@@ -391,12 +391,12 @@
 <codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>storage.insert(first,<sp/>last);</highlight></codeline>
 <codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="91"><highlight class="normal"></highlight></codeline>
-<codeline lineno="92" refid="classecto_1_1tendrils_1a98adbbe057fc34545cd51c7deeafca2f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::pair&lt;iterator,<sp/>bool&gt;<sp/><ref refid="classecto_1_1tendrils_1a98adbbe057fc34545cd51c7deeafca2f" kindref="member">insert</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1tendrils_1a736870868e76890e198448924cecdd4f" kindref="member">value_type</ref><sp/>&amp;v)</highlight></codeline>
+<codeline lineno="92" refid="classecto_1_1tendrils_1a98adbbe057fc34545cd51c7deeafca2f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::pair&lt;iterator,<sp/>bool&gt;<sp/><ref refid="classecto_1_1tendrils_1a98adbbe057fc34545cd51c7deeafca2f" kindref="member">insert</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>value_type<sp/>&amp;v)</highlight></codeline>
 <codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>storage.insert(v);</highlight></codeline>
 <codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="96"><highlight class="normal"></highlight></codeline>
-<codeline lineno="97" refid="classecto_1_1tendrils_1ab56662cb08014858ce9df9403a357954" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classecto_1_1tendrils_1aa347bebda44153437e8554a25bed9e6b" kindref="member">key_compare</ref><sp/><ref refid="classecto_1_1tendrils_1ab56662cb08014858ce9df9403a357954" kindref="member">key_comp</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>storage.key_comp();<sp/>}</highlight></codeline>
+<codeline lineno="97" refid="classecto_1_1tendrils_1ab56662cb08014858ce9df9403a357954" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>key_compare<sp/><ref refid="classecto_1_1tendrils_1ab56662cb08014858ce9df9403a357954" kindref="member">key_comp</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>storage.key_comp();<sp/>}</highlight></codeline>
 <codeline lineno="98"><highlight class="normal"></highlight></codeline>
 <codeline lineno="99"><highlight class="normal"></highlight></codeline>
 <codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
@@ -444,7 +444,7 @@
 <codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/>T&amp;</highlight></codeline>
 <codeline lineno="190" refid="classecto_1_1tendrils_1a43aea6bf46edc5921a9768838b9fbe93" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">get</highlight><highlight class="normal">(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classecto_1_1tendrils_1a86df9983555ca4ebdae8b1d36aa4bbd8" kindref="member">const_iterator</ref><sp/>iter<sp/>=<sp/>storage.find(name);</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>const_iterator<sp/>iter<sp/>=<sp/>storage.find(name);</highlight></codeline>
 <codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(iter<sp/>==<sp/>end())</highlight></codeline>
@@ -474,9 +474,9 @@
 <codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>doesnt_exist(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1tendrils" kindref="compound">tendrils</ref>&amp;);</highlight></codeline>
 <codeline lineno="232"><highlight class="normal"></highlight></codeline>
-<codeline lineno="233" refid="classecto_1_1tendrils_1afaa587298937ffa94ccfefc8a97b4edc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classecto_1_1tendrils_1a3647503829f1b29de220584d265c63fb" kindref="member">storage_type</ref><sp/><ref refid="classecto_1_1tendrils_1afaa587298937ffa94ccfefc8a97b4edc" kindref="member">storage</ref>;</highlight></codeline>
+<codeline lineno="233" refid="classecto_1_1tendrils_1afaa587298937ffa94ccfefc8a97b4edc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>storage_type<sp/><ref refid="classecto_1_1tendrils_1afaa587298937ffa94ccfefc8a97b4edc" kindref="member">storage</ref>;</highlight></codeline>
 <codeline lineno="234" refid="classecto_1_1tendrils_1aca7990b4d8ccfbddfb4d5c805345ca23" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>boost::signals2::signal&lt;void(void*,<sp/>const<sp/>tendrils*)&gt;<sp/><ref refid="classecto_1_1tendrils_1aca7990b4d8ccfbddfb4d5c805345ca23" kindref="member">sig_t</ref>;</highlight></codeline>
-<codeline lineno="235" refid="classecto_1_1tendrils_1a40635d009ae082dccde9486c1293212e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classecto_1_1tendrils_1aca7990b4d8ccfbddfb4d5c805345ca23" kindref="member">sig_t</ref><sp/><ref refid="classecto_1_1tendrils_1a40635d009ae082dccde9486c1293212e" kindref="member">static_bindings_</ref>;</highlight></codeline>
+<codeline lineno="235" refid="classecto_1_1tendrils_1a40635d009ae082dccde9486c1293212e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>sig_t<sp/><ref refid="classecto_1_1tendrils_1a40635d009ae082dccde9486c1293212e" kindref="member">static_bindings_</ref>;</highlight></codeline>
 <codeline lineno="236"><highlight class="normal"></highlight></codeline>
 <codeline lineno="237"><highlight class="normal"><sp/>};</highlight></codeline>
 <codeline lineno="238"><highlight class="normal"></highlight></codeline>

@@ -1,6 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structecto_1_1tendril_1_1Converter.html" title="ecto::tendril::Converter" alt="" coords="6,77,175,104"/>
-<area shape="rect" id="node2" href="$structecto_1_1tendril_1_1ConverterImpl.html" title="ecto::tendril::Converter\lImpl\&lt; ecto::tendril::none, _ \&gt;" alt="" coords="224,5,435,46"/>
-<area shape="rect" id="node3" href="$structecto_1_1tendril_1_1ConverterImpl.html" title="ecto::tendril::Converter\lImpl\&lt; T, _ \&gt;" alt="" coords="245,70,414,111"/>
-<area shape="rect" id="node4" href="$structecto_1_1tendril_1_1ConverterImpl_3_01none_00_01___01_4.html" title="ecto::tendril::Converter\lImpl\&lt; none, _ \&gt;" alt="" coords="245,135,414,177"/>
+<area shape="rect" id="node1" href="$structecto_1_1tendril_1_1Converter.html" title="ecto::tendril::Converter" alt="" coords="5,78,175,105"/>
+<area shape="rect" id="node2" href="$structecto_1_1tendril_1_1ConverterImpl.html" title="ecto::tendril::Converter\lImpl\&lt; ecto::tendril::none, _ \&gt;" alt="" coords="223,5,433,47"/>
+<area shape="rect" id="node3" href="$structecto_1_1tendril_1_1ConverterImpl.html" title="ecto::tendril::Converter\lImpl\&lt; T, _ \&gt;" alt="" coords="243,71,413,112"/>
+<area shape="rect" id="node4" href="$structecto_1_1tendril_1_1ConverterImpl_3_01none_00_01___01_4.html" title="ecto::tendril::Converter\lImpl\&lt; none, _ \&gt;" alt="" coords="243,136,413,177"/>
 </map>

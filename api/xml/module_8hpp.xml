@@ -1,359 +1,359 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="module_8hpp" kind="file">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="module_8hpp" kind="file" language="C++">
     <compoundname>module.hpp</compoundname>
     <includes refid="python_8hpp" local="no">ecto/python.hpp</includes>
     <includes refid="registry_8hpp" local="no">ecto/registry.hpp</includes>
     <includedby refid="ecto_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/ecto.hpp</includedby>
     <incdepgraph>
-      <node id="1304">
+      <node id="1317">
         <label>ecto/log.hpp</label>
         <link refid="log_8hpp"/>
-        <childnode refid="1305" relation="include">
-        </childnode>
-        <childnode refid="1299" relation="include">
-        </childnode>
-        <childnode refid="1306" relation="include">
-        </childnode>
-        <childnode refid="1307" relation="include">
-        </childnode>
-      </node>
-      <node id="1316">
-        <label>boost/version.hpp</label>
-      </node>
-      <node id="1298">
-        <label>boost/shared_ptr.hpp</label>
-      </node>
-      <node id="1307">
-        <label>stdint.h</label>
-      </node>
-      <node id="1313">
-        <label>boost/signals2.hpp</label>
-      </node>
-      <node id="1308">
-        <label>ecto/strand.hpp</label>
-        <link refid="strand_8hpp"/>
-        <childnode refid="1298" relation="include">
-        </childnode>
-        <childnode refid="1309" relation="include">
-        </childnode>
-        <childnode refid="1310" relation="include">
-        </childnode>
-        <childnode refid="1297" relation="include">
-        </childnode>
-      </node>
-      <node id="1334">
-        <label>ecto/python/gil.hpp</label>
-        <link refid="gil_8hpp"/>
-        <childnode refid="1335" relation="include">
-        </childnode>
-        <childnode refid="1292" relation="include">
-        </childnode>
-      </node>
-      <node id="1297">
-        <label>ecto/forward.hpp</label>
-        <link refid="forward_8hpp"/>
-        <childnode refid="1298" relation="include">
-        </childnode>
-      </node>
-      <node id="1317">
-        <label>stdexcept</label>
-      </node>
-      <node id="1290">
-        <label>boost/thread/thread.hpp</label>
-      </node>
-      <node id="1302">
-        <label>string</label>
-      </node>
-      <node id="1292">
-        <label>boost/noncopyable.hpp</label>
-      </node>
-      <node id="1327">
-        <label>ecto/tendrils.hpp</label>
-        <link refid="tendrils_8hpp"/>
-        <childnode refid="1328" relation="include">
-        </childnode>
-        <childnode refid="1311" relation="include">
-        </childnode>
-        <childnode refid="1329" relation="include">
-        </childnode>
-        <childnode refid="1313" relation="include">
-        </childnode>
-        <childnode refid="1302" relation="include">
-        </childnode>
-        <childnode refid="1330" relation="include">
-        </childnode>
-        <childnode refid="1331" relation="include">
-        </childnode>
-        <childnode refid="1291" relation="include">
-        </childnode>
-        <childnode refid="1317" relation="include">
-        </childnode>
-      </node>
-      <node id="1291">
-        <label>map</label>
-      </node>
-      <node id="1328">
-        <label>boost/thread.hpp</label>
-      </node>
-      <node id="1295">
-        <label>boost/function/function0.hpp</label>
-      </node>
-      <node id="1299">
-        <label>ecto/util.hpp</label>
-        <link refid="util_8hpp"/>
-        <childnode refid="1300" relation="include">
-        </childnode>
-        <childnode refid="1301" relation="include">
-        </childnode>
-        <childnode refid="1302" relation="include">
-        </childnode>
-      </node>
-      <node id="1287">
-        <label>ecto/python.hpp</label>
-        <link refid="python_8hpp"/>
-        <childnode refid="1288" relation="include">
-        </childnode>
-        <childnode refid="1289" relation="include">
-        </childnode>
-        <childnode refid="1290" relation="include">
-        </childnode>
-        <childnode refid="1291" relation="include">
-        </childnode>
-        <childnode refid="1292" relation="include">
-        </childnode>
-      </node>
-      <node id="1312">
-        <label>boost/function/function1.hpp</label>
-      </node>
-      <node id="1306">
-        <label>ecto/test.hpp</label>
-        <link refid="test_8hpp"/>
-      </node>
-      <node id="1311">
-        <label>ecto/tendril.hpp</label>
-        <link refid="tendril_8hpp"/>
-        <childnode refid="1298" relation="include">
-        </childnode>
-        <childnode refid="1312" relation="include">
-        </childnode>
-        <childnode refid="1313" relation="include">
-        </childnode>
-        <childnode refid="1314" relation="include">
-        </childnode>
-        <childnode refid="1297" relation="include">
-        </childnode>
-        <childnode refid="1299" relation="include">
-        </childnode>
-        <childnode refid="1315" relation="include">
-        </childnode>
-        <childnode refid="1287" relation="include">
-        </childnode>
-        <childnode refid="1324" relation="include">
-        </childnode>
-        <childnode refid="1294" relation="include">
-        </childnode>
-        <childnode refid="1302" relation="include">
-        </childnode>
-        <childnode refid="1326" relation="include">
-        </childnode>
-      </node>
-      <node id="1309">
-        <label>boost/function.hpp</label>
-      </node>
-      <node id="1314">
-        <label>boost/any.hpp</label>
-      </node>
-      <node id="1322">
-        <label>boost/preprocessor/stringize.hpp</label>
-      </node>
-      <node id="1319">
-        <label>boost/exception/exception.hpp</label>
-      </node>
-      <node id="1305">
-        <label>ecto/config.hpp</label>
-      </node>
-      <node id="1310">
-        <label>boost/asio.hpp</label>
-      </node>
-      <node id="1286">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/module.hpp</label>
-        <link refid="module.hpp"/>
-        <childnode refid="1287" relation="include">
-        </childnode>
-        <childnode refid="1293" relation="include">
-        </childnode>
-      </node>
-      <node id="1301">
-        <label>typeinfo</label>
-      </node>
-      <node id="1326">
-        <label>bitset</label>
-      </node>
-      <node id="1325">
-        <label>boost/python/object_fwd.hpp</label>
-      </node>
-      <node id="1332">
-        <label>ecto/traits.hpp</label>
-        <link refid="traits_8hpp"/>
-        <childnode refid="1333" relation="include">
-        </childnode>
-        <childnode refid="1334" relation="include">
-        </childnode>
-      </node>
-      <node id="1289">
-        <label>boost/python.hpp</label>
-      </node>
-      <node id="1320">
-        <label>boost/exception/info.hpp</label>
-      </node>
-      <node id="1288">
-        <label>Python.h</label>
-      </node>
-      <node id="1294">
-        <label>vector</label>
-      </node>
-      <node id="1330">
-        <label>sstream</label>
-      </node>
-      <node id="1324">
-        <label>ecto/python/repr.hpp</label>
-        <link refid="repr_8hpp"/>
-        <childnode refid="1325" relation="include">
-        </childnode>
-        <childnode refid="1302" relation="include">
-        </childnode>
-      </node>
-      <node id="1335">
-        <label>boost/scoped_ptr.hpp</label>
-      </node>
-      <node id="1329">
-        <label>ecto/spore.hpp</label>
-        <link refid="spore_8hpp"/>
-        <childnode refid="1298" relation="include">
-        </childnode>
-        <childnode refid="1312" relation="include">
-        </childnode>
-        <childnode refid="1299" relation="include">
-        </childnode>
-        <childnode refid="1311" relation="include">
-        </childnode>
-        <childnode refid="1317" relation="include">
-        </childnode>
-        <childnode refid="1302" relation="include">
-        </childnode>
-      </node>
-      <node id="1300">
-        <label>iostream</label>
-      </node>
-      <node id="1321">
-        <label>boost/preprocessor/cat.hpp</label>
-      </node>
-      <node id="1318">
-        <label>boost/optional.hpp</label>
-      </node>
-      <node id="1293">
-        <label>ecto/registry.hpp</label>
-        <link refid="registry_8hpp"/>
-        <childnode refid="1294" relation="include">
-        </childnode>
-        <childnode refid="1292" relation="include">
-        </childnode>
-        <childnode refid="1295" relation="include">
-        </childnode>
-        <childnode refid="1296" relation="include">
-        </childnode>
-        <childnode refid="1297" relation="include">
-        </childnode>
-        <childnode refid="1299" relation="include">
-        </childnode>
-        <childnode refid="1303" relation="include">
-        </childnode>
-      </node>
-      <node id="1296">
-        <label>boost/make_shared.hpp</label>
-      </node>
-      <node id="1333">
-        <label>boost/mpl/bool.hpp</label>
-      </node>
-      <node id="1331">
-        <label>cstring</label>
-      </node>
-      <node id="1303">
-        <label>ecto/cell.hpp</label>
-        <link refid="cell_8hpp"/>
-        <childnode refid="1288" relation="include">
-        </childnode>
-        <childnode refid="1297" relation="include">
-        </childnode>
-        <childnode refid="1304" relation="include">
-        </childnode>
-        <childnode refid="1308" relation="include">
-        </childnode>
-        <childnode refid="1311" relation="include">
-        </childnode>
-        <childnode refid="1327" relation="include">
-        </childnode>
-        <childnode refid="1332" relation="include">
-        </childnode>
-        <childnode refid="1299" relation="include">
-        </childnode>
-        <childnode refid="1292" relation="include">
-        </childnode>
         <childnode refid="1318" relation="include">
         </childnode>
-        <childnode refid="1298" relation="include">
-        </childnode>
-      </node>
-      <node id="1315">
-        <label>ecto/except.hpp</label>
-        <link refid="except_8hpp"/>
-        <childnode refid="1288" relation="include">
-        </childnode>
-        <childnode refid="1316" relation="include">
-        </childnode>
-        <childnode refid="1317" relation="include">
-        </childnode>
-        <childnode refid="1302" relation="include">
-        </childnode>
-        <childnode refid="1291" relation="include">
-        </childnode>
-        <childnode refid="1305" relation="include">
-        </childnode>
-        <childnode refid="1299" relation="include">
-        </childnode>
-        <childnode refid="1318" relation="include">
+        <childnode refid="1312" relation="include">
         </childnode>
         <childnode refid="1319" relation="include">
         </childnode>
         <childnode refid="1320" relation="include">
         </childnode>
-        <childnode refid="1321" relation="include">
+      </node>
+      <node id="1329">
+        <label>boost/version.hpp</label>
+      </node>
+      <node id="1311">
+        <label>boost/shared_ptr.hpp</label>
+      </node>
+      <node id="1320">
+        <label>stdint.h</label>
+      </node>
+      <node id="1326">
+        <label>boost/signals2.hpp</label>
+      </node>
+      <node id="1321">
+        <label>ecto/strand.hpp</label>
+        <link refid="strand_8hpp"/>
+        <childnode refid="1311" relation="include">
         </childnode>
         <childnode refid="1322" relation="include">
         </childnode>
         <childnode refid="1323" relation="include">
         </childnode>
+        <childnode refid="1310" relation="include">
+        </childnode>
+      </node>
+      <node id="1347">
+        <label>ecto/python/gil.hpp</label>
+        <link refid="gil_8hpp"/>
+        <childnode refid="1348" relation="include">
+        </childnode>
+        <childnode refid="1305" relation="include">
+        </childnode>
+      </node>
+      <node id="1310">
+        <label>ecto/forward.hpp</label>
+        <link refid="forward_8hpp"/>
+        <childnode refid="1311" relation="include">
+        </childnode>
+      </node>
+      <node id="1330">
+        <label>stdexcept</label>
+      </node>
+      <node id="1303">
+        <label>boost/thread/thread.hpp</label>
+      </node>
+      <node id="1315">
+        <label>string</label>
+      </node>
+      <node id="1305">
+        <label>boost/noncopyable.hpp</label>
+      </node>
+      <node id="1340">
+        <label>ecto/tendrils.hpp</label>
+        <link refid="tendrils_8hpp"/>
+        <childnode refid="1341" relation="include">
+        </childnode>
+        <childnode refid="1324" relation="include">
+        </childnode>
+        <childnode refid="1342" relation="include">
+        </childnode>
+        <childnode refid="1326" relation="include">
+        </childnode>
+        <childnode refid="1315" relation="include">
+        </childnode>
+        <childnode refid="1343" relation="include">
+        </childnode>
+        <childnode refid="1344" relation="include">
+        </childnode>
+        <childnode refid="1304" relation="include">
+        </childnode>
+        <childnode refid="1330" relation="include">
+        </childnode>
+      </node>
+      <node id="1304">
+        <label>map</label>
+      </node>
+      <node id="1341">
+        <label>boost/thread.hpp</label>
+      </node>
+      <node id="1308">
+        <label>boost/function/function0.hpp</label>
+      </node>
+      <node id="1312">
+        <label>ecto/util.hpp</label>
+        <link refid="util_8hpp"/>
+        <childnode refid="1313" relation="include">
+        </childnode>
+        <childnode refid="1314" relation="include">
+        </childnode>
+        <childnode refid="1315" relation="include">
+        </childnode>
+      </node>
+      <node id="1300">
+        <label>ecto/python.hpp</label>
+        <link refid="python_8hpp"/>
+        <childnode refid="1301" relation="include">
+        </childnode>
+        <childnode refid="1302" relation="include">
+        </childnode>
+        <childnode refid="1303" relation="include">
+        </childnode>
+        <childnode refid="1304" relation="include">
+        </childnode>
+        <childnode refid="1305" relation="include">
+        </childnode>
+      </node>
+      <node id="1325">
+        <label>boost/function/function1.hpp</label>
+      </node>
+      <node id="1319">
+        <label>ecto/test.hpp</label>
+        <link refid="test_8hpp"/>
+      </node>
+      <node id="1324">
+        <label>ecto/tendril.hpp</label>
+        <link refid="tendril_8hpp"/>
+        <childnode refid="1311" relation="include">
+        </childnode>
+        <childnode refid="1325" relation="include">
+        </childnode>
+        <childnode refid="1326" relation="include">
+        </childnode>
+        <childnode refid="1327" relation="include">
+        </childnode>
+        <childnode refid="1310" relation="include">
+        </childnode>
+        <childnode refid="1312" relation="include">
+        </childnode>
+        <childnode refid="1328" relation="include">
+        </childnode>
+        <childnode refid="1300" relation="include">
+        </childnode>
+        <childnode refid="1337" relation="include">
+        </childnode>
+        <childnode refid="1307" relation="include">
+        </childnode>
+        <childnode refid="1315" relation="include">
+        </childnode>
+        <childnode refid="1339" relation="include">
+        </childnode>
+      </node>
+      <node id="1322">
+        <label>boost/function.hpp</label>
+      </node>
+      <node id="1327">
+        <label>boost/any.hpp</label>
+      </node>
+      <node id="1335">
+        <label>boost/preprocessor/stringize.hpp</label>
+      </node>
+      <node id="1332">
+        <label>boost/exception/exception.hpp</label>
+      </node>
+      <node id="1318">
+        <label>ecto/config.hpp</label>
       </node>
       <node id="1323">
+        <label>boost/asio.hpp</label>
+      </node>
+      <node id="1299">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/module.hpp</label>
+        <link refid="module.hpp"/>
+        <childnode refid="1300" relation="include">
+        </childnode>
+        <childnode refid="1306" relation="include">
+        </childnode>
+      </node>
+      <node id="1314">
+        <label>typeinfo</label>
+      </node>
+      <node id="1339">
+        <label>bitset</label>
+      </node>
+      <node id="1338">
+        <label>boost/python/object_fwd.hpp</label>
+      </node>
+      <node id="1345">
+        <label>ecto/traits.hpp</label>
+        <link refid="traits_8hpp"/>
+        <childnode refid="1346" relation="include">
+        </childnode>
+        <childnode refid="1347" relation="include">
+        </childnode>
+      </node>
+      <node id="1302">
+        <label>boost/python.hpp</label>
+      </node>
+      <node id="1333">
+        <label>boost/exception/info.hpp</label>
+      </node>
+      <node id="1301">
+        <label>Python.h</label>
+      </node>
+      <node id="1307">
+        <label>vector</label>
+      </node>
+      <node id="1343">
+        <label>sstream</label>
+      </node>
+      <node id="1337">
+        <label>ecto/python/repr.hpp</label>
+        <link refid="repr_8hpp"/>
+        <childnode refid="1338" relation="include">
+        </childnode>
+        <childnode refid="1315" relation="include">
+        </childnode>
+      </node>
+      <node id="1348">
+        <label>boost/scoped_ptr.hpp</label>
+      </node>
+      <node id="1342">
+        <label>ecto/spore.hpp</label>
+        <link refid="spore_8hpp"/>
+        <childnode refid="1311" relation="include">
+        </childnode>
+        <childnode refid="1325" relation="include">
+        </childnode>
+        <childnode refid="1312" relation="include">
+        </childnode>
+        <childnode refid="1324" relation="include">
+        </childnode>
+        <childnode refid="1330" relation="include">
+        </childnode>
+        <childnode refid="1315" relation="include">
+        </childnode>
+      </node>
+      <node id="1313">
+        <label>iostream</label>
+      </node>
+      <node id="1334">
+        <label>boost/preprocessor/cat.hpp</label>
+      </node>
+      <node id="1331">
+        <label>boost/optional.hpp</label>
+      </node>
+      <node id="1306">
+        <label>ecto/registry.hpp</label>
+        <link refid="registry_8hpp"/>
+        <childnode refid="1307" relation="include">
+        </childnode>
+        <childnode refid="1305" relation="include">
+        </childnode>
+        <childnode refid="1308" relation="include">
+        </childnode>
+        <childnode refid="1309" relation="include">
+        </childnode>
+        <childnode refid="1310" relation="include">
+        </childnode>
+        <childnode refid="1312" relation="include">
+        </childnode>
+        <childnode refid="1316" relation="include">
+        </childnode>
+      </node>
+      <node id="1309">
+        <label>boost/make_shared.hpp</label>
+      </node>
+      <node id="1346">
+        <label>boost/mpl/bool.hpp</label>
+      </node>
+      <node id="1344">
+        <label>cstring</label>
+      </node>
+      <node id="1316">
+        <label>ecto/cell.hpp</label>
+        <link refid="cell_8hpp"/>
+        <childnode refid="1301" relation="include">
+        </childnode>
+        <childnode refid="1310" relation="include">
+        </childnode>
+        <childnode refid="1317" relation="include">
+        </childnode>
+        <childnode refid="1321" relation="include">
+        </childnode>
+        <childnode refid="1324" relation="include">
+        </childnode>
+        <childnode refid="1340" relation="include">
+        </childnode>
+        <childnode refid="1345" relation="include">
+        </childnode>
+        <childnode refid="1312" relation="include">
+        </childnode>
+        <childnode refid="1305" relation="include">
+        </childnode>
+        <childnode refid="1331" relation="include">
+        </childnode>
+        <childnode refid="1311" relation="include">
+        </childnode>
+      </node>
+      <node id="1328">
+        <label>ecto/except.hpp</label>
+        <link refid="except_8hpp"/>
+        <childnode refid="1301" relation="include">
+        </childnode>
+        <childnode refid="1329" relation="include">
+        </childnode>
+        <childnode refid="1330" relation="include">
+        </childnode>
+        <childnode refid="1315" relation="include">
+        </childnode>
+        <childnode refid="1304" relation="include">
+        </childnode>
+        <childnode refid="1318" relation="include">
+        </childnode>
+        <childnode refid="1312" relation="include">
+        </childnode>
+        <childnode refid="1331" relation="include">
+        </childnode>
+        <childnode refid="1332" relation="include">
+        </childnode>
+        <childnode refid="1333" relation="include">
+        </childnode>
+        <childnode refid="1334" relation="include">
+        </childnode>
+        <childnode refid="1335" relation="include">
+        </childnode>
+        <childnode refid="1336" relation="include">
+        </childnode>
+      </node>
+      <node id="1336">
         <label>boost/preprocessor/seq/for_each.hpp</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="1337">
+      <node id="1350">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/ecto.hpp</label>
         <link refid="ecto_8hpp"/>
-        <childnode refid="1338" relation="include">
+        <childnode refid="1351" relation="include">
         </childnode>
       </node>
-      <node id="1338">
+      <node id="1351">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp</label>
         <link refid="all_8hpp"/>
       </node>
-      <node id="1336">
+      <node id="1349">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/module.hpp</label>
         <link refid="module.hpp"/>
-        <childnode refid="1337" relation="include">
+        <childnode refid="1350" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -424,8 +424,8 @@
 <codeline lineno="26"><highlight class="comment"><sp/>*<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE</highlight></codeline>
 <codeline lineno="27"><highlight class="comment"><sp/>*<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
 <codeline lineno="28"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight></codeline>
-<codeline lineno="30"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight><highlight class="comment">//<sp/>This<sp/>header<sp/>should<sp/>get<sp/>you<sp/>what<sp/>you<sp/>need<sp/>for<sp/>ECTO_DEFINE_MODULE</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight></codeline>
 <codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="python_8hpp" kindref="compound">ecto/python.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
@@ -433,8 +433,8 @@
 <codeline lineno="35"><highlight class="normal"></highlight></codeline>
 <codeline lineno="36" refid="module_8hpp_1a16425e2e4a5b3e75f614fc4e7a717237" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECTO_ASSERT_MODULE_NAME(MODULE)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
 <codeline lineno="37"><highlight class="preprocessor"><sp/><sp/>template<sp/>&lt;unsigned<sp/>T&gt;<sp/><sp/>void<sp/>incorrect_ecto_module_name_##MODULE();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="38"><highlight class="preprocessor"><sp/><sp/>extern<sp/>template<sp/>void<sp/>incorrect_ecto_module_name_##MODULE&lt;MODULE##_ectomodule_EXPORTS&gt;();</highlight></codeline>
-<codeline lineno="39"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="preprocessor"><sp/><sp/>extern<sp/>template<sp/>void<sp/>incorrect_ecto_module_name_##MODULE&lt;MODULE##_ectomodule_EXPORTS&gt;();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
 <codeline lineno="40" refid="module_8hpp_1a70842bcf79db6cf1a4bd152e4219ba44" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECTO_DEFINE_MODULE(modname)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
 <codeline lineno="41"><highlight class="preprocessor"><sp/><sp/>ECTO_INSTANTIATE_REGISTRY(modname)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
 <codeline lineno="42"><highlight class="preprocessor"><sp/><sp/>ECTO_ASSERT_MODULE_NAME(modname)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
@@ -443,8 +443,8 @@
 <codeline lineno="45"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>ECTO_REGISTER(modname);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
 <codeline lineno="46"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>init_module_##modname##_rest();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
 <codeline lineno="47"><highlight class="preprocessor"><sp/><sp/>}<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="48"><highlight class="preprocessor"><sp/><sp/>void<sp/>init_module_##modname##_rest()</highlight></codeline>
-<codeline lineno="49"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="preprocessor"><sp/><sp/>void<sp/>init_module_##modname##_rest()</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
 <codeline lineno="50"><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/module.hpp"/>

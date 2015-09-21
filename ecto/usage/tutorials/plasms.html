@@ -63,6 +63,7 @@
 <li><a class="reference internal" href="#connections">Connections</a></li>
 <li><a class="reference internal" href="#graphs">Graphs</a></li>
 <li><a class="reference internal" href="#execution">Execution</a></li>
+<li><a class="reference internal" href="#affecting-the-execution-of-the-graph">Affecting the Execution of the Graph</a></li>
 </ul>
 </li>
 </ul>
@@ -282,7 +283,7 @@ see <a class="reference internal" href="../techniques/ecto_cells.html#entangleme
 </div>
 <div class="section" id="execution">
 <h3>Execution<a class="headerlink" href="#execution" title="Permalink to this headline">¶</a></h3>
-<p>Once a plasm is constructed, it may be used with an <a class="reference internal" href="../../reference/schedulers.html#schedulers"><em>ecto scheduler</em></a></p>
+<p>Once a plasm is constructed, it may be used with an <a class="reference internal" href="../../reference/schedulers.html#schedulers"><em>ecto scheduler</em></a>.</p>
 <div class="highlight-py"><div class="highlight"><pre><span class="c"># create a scheduler that will run that plasm</span>
 <span class="n">sched</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Scheduler</span><span class="p">(</span><span class="n">plasm</span><span class="p">)</span>
 <span class="c"># execute the plasm</span>
@@ -294,6 +295,30 @@ does a <a class="reference external" href="http://en.wikipedia.org/wiki/Topologi
 on the graph, and then executes each cell in order.
 This repeats for the specified number of iterations,
 or indefinitely if <tt class="docutils literal"><span class="pre">niter</span></tt> is <tt class="docutils literal"><span class="pre">0</span></tt>.</p>
+<p>For parallel or threaded execution of plasms, please read the <a class="reference internal" href="../../reference/schedulers.html#schedulers"><em>schedulers</em></a>
+documentation for a more detailed reference. Note that support for parallel execution is
+presently restricted to running multiple graphs in parallel. Although one of the project&#8217;s
+initial design goals, it does not at this time introduce parallelism to the internal execution
+of a graph (this is a very complex thing to manage).</p>
+</div>
+<div class="section" id="affecting-the-execution-of-the-graph">
+<h3>Affecting the Execution of the Graph<a class="headerlink" href="#affecting-the-execution-of-the-graph" title="Permalink to this headline">¶</a></h3>
+<p>There are various tricks that can be used to affect/interrupt/halt the direction of execution
+of the graph.</p>
+<p>Various cells can manipulate the graph by grouping or providing some conditional logic that
+affects the processing of cells that have been combined internally within themselves.
+See for example, the <a class="reference internal" href="../techniques/black_box.html#black-box"><em>BlackBox</em></a> and <a class="reference internal" href="../techniques/ecto_cells.html#if"><em>If</em></a> cells.</p>
+<p>The return value from a cell&#8217;s <cite>process()</cite> function will also instruct the <a class="reference internal" href="../../reference/schedulers.html#schedulers"><em>scheduler</em></a>
+on how it should continue processing cells in the remainder of the graph. The possible return values
+are listed below with an explanation for quick reference:</p>
+<ul class="simple">
+<li><em class="xref std std-ref">ecto::OK</em> : directed execution proceeds normally to the next cell in the graph.</li>
+<li><em class="xref std std-ref">ecto::DO_OVER</em> : repeats processing for that cell.</li>
+<li><em class="xref std std-ref">ecto::BREAK</em> : abort the current iteration of the graph and return to its starting point.</li>
+<li><em class="xref std std-ref">ecto::QUIT</em> : completely terminate the execution.</li>
+</ul>
+<p>Mutexes/barriers or similar intraprocess mechanisms inside a cell that is present in
+multiple parallelised graphs will also halt execution of the graph at a particular point.</p>
 </div>
 </div>
 </div>
@@ -325,7 +350,7 @@ or indefinitely if <tt class="docutils literal"><span class="pre">niter</span></
     </div>
     <div class="footer">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>

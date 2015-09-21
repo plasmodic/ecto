@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="structecto_1_1detail_1_1is__threadsafe" kind="struct" prot="public">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="structecto_1_1detail_1_1is__threadsafe" kind="struct" language="C++" prot="public">
     <compoundname>ecto::detail::is_threadsafe</compoundname>
     <basecompoundref prot="public" virt="non-virtual">true_</basecompoundref>
     <includes refid="traits_8hpp" local="no">traits.hpp</includes>

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="log_8hpp" kind="file">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="log_8hpp" kind="file" language="C++">
     <compoundname>log.hpp</compoundname>
     <includes local="no">ecto/config.hpp</includes>
     <includes refid="util_8hpp" local="no">ecto/util.hpp</includes>
@@ -11,123 +11,123 @@
     <includedby refid="scheduler_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp</includedby>
     <includedby refid="serialization_2registry_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/registry.hpp</includedby>
     <incdepgraph>
-      <node id="1267">
+      <node id="1280">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/log.hpp</label>
         <link refid="log.hpp"/>
-        <childnode refid="1268" relation="include">
-        </childnode>
-        <childnode refid="1269" relation="include">
-        </childnode>
-        <childnode refid="1273" relation="include">
-        </childnode>
-        <childnode refid="1274" relation="include">
-        </childnode>
-      </node>
-      <node id="1274">
-        <label>stdint.h</label>
-      </node>
-      <node id="1272">
-        <label>string</label>
-      </node>
-      <node id="1269">
-        <label>ecto/util.hpp</label>
-        <link refid="util_8hpp"/>
-        <childnode refid="1270" relation="include">
-        </childnode>
-        <childnode refid="1271" relation="include">
-        </childnode>
-        <childnode refid="1272" relation="include">
-        </childnode>
-      </node>
-      <node id="1273">
-        <label>ecto/test.hpp</label>
-        <link refid="test_8hpp"/>
-      </node>
-      <node id="1268">
-        <label>ecto/config.hpp</label>
-      </node>
-      <node id="1271">
-        <label>typeinfo</label>
-      </node>
-      <node id="1270">
-        <label>iostream</label>
-      </node>
-    </incdepgraph>
-    <invincdepgraph>
-      <node id="1275">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/log.hpp</label>
-        <link refid="log.hpp"/>
-        <childnode refid="1276" relation="include">
+        <childnode refid="1281" relation="include">
         </childnode>
         <childnode refid="1282" relation="include">
+        </childnode>
+        <childnode refid="1286" relation="include">
+        </childnode>
+        <childnode refid="1287" relation="include">
+        </childnode>
+      </node>
+      <node id="1287">
+        <label>stdint.h</label>
+      </node>
+      <node id="1285">
+        <label>string</label>
+      </node>
+      <node id="1282">
+        <label>ecto/util.hpp</label>
+        <link refid="util_8hpp"/>
+        <childnode refid="1283" relation="include">
         </childnode>
         <childnode refid="1284" relation="include">
         </childnode>
         <childnode refid="1285" relation="include">
         </childnode>
       </node>
+      <node id="1286">
+        <label>ecto/test.hpp</label>
+        <link refid="test_8hpp"/>
+      </node>
+      <node id="1281">
+        <label>ecto/config.hpp</label>
+      </node>
+      <node id="1284">
+        <label>typeinfo</label>
+      </node>
       <node id="1283">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/vertex.hpp</label>
-        <link refid="vertex_8hpp"/>
-        <childnode refid="1279" relation="include">
+        <label>iostream</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1288">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/log.hpp</label>
+        <link refid="log.hpp"/>
+        <childnode refid="1289" relation="include">
+        </childnode>
+        <childnode refid="1295" relation="include">
+        </childnode>
+        <childnode refid="1297" relation="include">
+        </childnode>
+        <childnode refid="1298" relation="include">
         </childnode>
       </node>
-      <node id="1285">
+      <node id="1296">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/vertex.hpp</label>
+        <link refid="vertex_8hpp"/>
+        <childnode refid="1292" relation="include">
+        </childnode>
+      </node>
+      <node id="1298">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/registry.hpp</label>
         <link refid="serialization_2registry_8hpp"/>
       </node>
-      <node id="1278">
+      <node id="1291">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/ecto.hpp</label>
         <link refid="ecto_8hpp"/>
-        <childnode refid="1279" relation="include">
+        <childnode refid="1292" relation="include">
         </childnode>
       </node>
-      <node id="1279">
+      <node id="1292">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp</label>
         <link refid="all_8hpp"/>
       </node>
-      <node id="1280">
+      <node id="1293">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/cell.hpp</label>
         <link refid="serialization_2cell_8hpp"/>
       </node>
-      <node id="1281">
+      <node id="1294">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/module.hpp</label>
         <link refid="module_8hpp"/>
-        <childnode refid="1278" relation="include">
+        <childnode refid="1291" relation="include">
         </childnode>
       </node>
-      <node id="1284">
+      <node id="1297">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp</label>
         <link refid="scheduler_8hpp"/>
       </node>
-      <node id="1277">
+      <node id="1290">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp</label>
         <link refid="registry_8hpp"/>
-        <childnode refid="1278" relation="include">
+        <childnode refid="1291" relation="include">
         </childnode>
-        <childnode refid="1280" relation="include">
+        <childnode refid="1293" relation="include">
         </childnode>
-        <childnode refid="1281" relation="include">
+        <childnode refid="1294" relation="include">
         </childnode>
       </node>
-      <node id="1276">
+      <node id="1289">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp</label>
         <link refid="cell_8hpp"/>
-        <childnode refid="1277" relation="include">
+        <childnode refid="1290" relation="include">
         </childnode>
-        <childnode refid="1278" relation="include">
+        <childnode refid="1291" relation="include">
         </childnode>
-        <childnode refid="1279" relation="include">
+        <childnode refid="1292" relation="include">
         </childnode>
-        <childnode refid="1280" relation="include">
+        <childnode refid="1293" relation="include">
         </childnode>
       </node>
-      <node id="1282">
+      <node id="1295">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp</label>
         <link refid="profile_8hpp"/>
-        <childnode refid="1283" relation="include">
+        <childnode refid="1296" relation="include">
         </childnode>
-        <childnode refid="1284" relation="include">
+        <childnode refid="1297" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -231,54 +231,54 @@
 <codeline lineno="26"><highlight class="comment"><sp/>*<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE</highlight></codeline>
 <codeline lineno="27"><highlight class="comment"><sp/>*<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
 <codeline lineno="28"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight></codeline>
-<codeline lineno="30"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ecto/config.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight></codeline>
-<codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(ECTO_LOGGING)</highlight></codeline>
-<codeline lineno="34"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/format.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="35"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
-<codeline lineno="36"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="util_8hpp" kindref="compound">ecto/util.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(ECTO_LOGGING)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/format.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="util_8hpp" kindref="compound">ecto/util.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="test_8hpp" kindref="compound">ecto/test.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="39"><highlight class="normal"></highlight></codeline>
-<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ecto<sp/>{</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceecto" kindref="compound">ecto</ref><sp/>{</highlight></codeline>
 <codeline lineno="41"><highlight class="normal"><sp/><sp/><ref refid="util_8hpp_1ab55b7868679cda60fc162580957fb98c" kindref="member">ECTO_EXPORT</ref><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="namespaceecto_1a3870bebbdf6a0d01f28424e402be2834" kindref="member">log</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*,<sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/>line,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>msg);</highlight></codeline>
 <codeline lineno="42"><highlight class="normal"><sp/><sp/><ref refid="util_8hpp_1ab55b7868679cda60fc162580957fb98c" kindref="member">ECTO_EXPORT</ref><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="namespaceecto_1af79493e380ac31e886186e2ba1a1b809" kindref="member">assert_failed</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>file,<sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/>line,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>cond,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>msg);</highlight></codeline>
 <codeline lineno="43"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="namespaceecto_1a34c1f436c47dc08392c8248632cde6f0" kindref="member">logging_on</ref>();</highlight></codeline>
 <codeline lineno="44"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="45"><highlight class="normal"></highlight></codeline>
-<codeline lineno="46"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NDEBUG</highlight></codeline>
-<codeline lineno="47"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>ECTO_ASSERT(X,<sp/>msg)<sp/>do<sp/>{<sp/>ECTO_RANDOM_DELAY();<sp/>}<sp/>while(false)</highlight></codeline>
-<codeline lineno="48"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#else</highlight></codeline>
-<codeline lineno="49" refid="log_8hpp_1aa02c6e583b77dd3704fadaeb9226ca1a" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>ECTO_ASSERT(X,<sp/>msg)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NDEBUG</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECTO_ASSERT(X,<sp/>msg)<sp/>do<sp/>{<sp/>ECTO_RANDOM_DELAY();<sp/>}<sp/>while(false)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49" refid="log_8hpp_1aa02c6e583b77dd3704fadaeb9226ca1a" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECTO_ASSERT(X,<sp/>msg)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
 <codeline lineno="50"><highlight class="preprocessor"><sp/><sp/>do<sp/>{<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
 <codeline lineno="51"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>ECTO_RANDOM_DELAY();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
 <codeline lineno="52"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>if<sp/>(X)<sp/>;<sp/>else<sp/>ecto::assert_failed(__PRETTY_FUNCTION__,<sp/>__FILE__,<sp/>__LINE__,<sp/>#X,<sp/>msg);<sp/>\</highlight></codeline>
-<codeline lineno="53"><highlight class="preprocessor"><sp/><sp/>}<sp/>while(false)</highlight></codeline>
-<codeline lineno="54"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
-<codeline lineno="55"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="56"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(ECTO_LOGGING)</highlight></codeline>
-<codeline lineno="57"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>ECTO_LOG_DEBUG(fmt,<sp/>args)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="53"><highlight class="preprocessor"><sp/><sp/>}<sp/>while(false)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(ECTO_LOGGING)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECTO_LOG_DEBUG(fmt,<sp/>args)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
 <codeline lineno="58"><highlight class="preprocessor"><sp/><sp/>do<sp/>{<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
 <codeline lineno="59"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>ECTO_RANDOM_DELAY();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
 <codeline lineno="60"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>if<sp/>(__builtin_expect((ecto::logging_on()),<sp/>0))<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
 <codeline lineno="61"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/>::ecto::log(__PRETTY_FUNCTION__,<sp/>__FILE__,<sp/>__LINE__,<sp/>str(boost::format(fmt)<sp/>%<sp/>args));<sp/>\</highlight></codeline>
-<codeline lineno="62"><highlight class="preprocessor"><sp/><sp/>}<sp/>while<sp/>(false)</highlight></codeline>
-<codeline lineno="63"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>ECTO_START()<sp/><sp/>ECTO_LOG_DEBUG(&quot;&gt;&gt;&gt;<sp/>%s&quot;,<sp/>__PRETTY_FUNCTION__);</highlight></codeline>
-<codeline lineno="64"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>ECTO_FINISH()<sp/>ECTO_LOG_DEBUG(&quot;&lt;&lt;&lt;<sp/>%s&quot;,<sp/>__PRETTY_FUNCTION__);</highlight></codeline>
-<codeline lineno="65"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#else</highlight></codeline>
-<codeline lineno="66" refid="log_8hpp_1a52b93b5650a3830cd4216dee79428e6c" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>ECTO_LOG_DEBUG(fmg,<sp/>args)<sp/>do<sp/>{<sp/>ECTO_RANDOM_DELAY();<sp/>}<sp/>while<sp/>(false)</highlight></codeline>
-<codeline lineno="67" refid="log_8hpp_1ae375f89df537ac140d32247479bcc611" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>ECTO_START()<sp/>do<sp/>{<sp/>ECTO_RANDOM_DELAY();<sp/>}<sp/>while(false)</highlight></codeline>
-<codeline lineno="68" refid="log_8hpp_1ad3e0477016ce115b214fb8c3fc5d6f1e" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>ECTO_FINISH()<sp/>do<sp/>{<sp/>ECTO_RANDOM_DELAY();<sp/>}<sp/>while(false)</highlight></codeline>
-<codeline lineno="69"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
-<codeline lineno="70"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="71"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>ECTO_TRACE_EXCEPTIONS</highlight></codeline>
-<codeline lineno="72"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>ECTO_TRACE_EXCEPTION(E)<sp/>ECTO_LOG_DEBUG(&quot;CAUGHT:<sp/>%s&quot;,<sp/>E);</highlight></codeline>
-<codeline lineno="73"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#else</highlight></codeline>
-<codeline lineno="74" refid="log_8hpp_1ad686c520d8ee4f107785ee2bfebd0ed9" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>ECTO_TRACE_EXCEPTION(E)</highlight></codeline>
-<codeline lineno="75"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
-<codeline lineno="76"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="preprocessor"><sp/><sp/>}<sp/>while<sp/>(false)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECTO_START()<sp/><sp/>ECTO_LOG_DEBUG(&quot;&gt;&gt;&gt;<sp/>%s&quot;,<sp/>__PRETTY_FUNCTION__);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECTO_FINISH()<sp/>ECTO_LOG_DEBUG(&quot;&lt;&lt;&lt;<sp/>%s&quot;,<sp/>__PRETTY_FUNCTION__);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66" refid="log_8hpp_1a52b93b5650a3830cd4216dee79428e6c" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECTO_LOG_DEBUG(fmg,<sp/>args)<sp/>do<sp/>{<sp/>ECTO_RANDOM_DELAY();<sp/>}<sp/>while<sp/>(false)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67" refid="log_8hpp_1ae375f89df537ac140d32247479bcc611" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECTO_START()<sp/>do<sp/>{<sp/>ECTO_RANDOM_DELAY();<sp/>}<sp/>while(false)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68" refid="log_8hpp_1ad3e0477016ce115b214fb8c3fc5d6f1e" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECTO_FINISH()<sp/>do<sp/>{<sp/>ECTO_RANDOM_DELAY();<sp/>}<sp/>while(false)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>ECTO_TRACE_EXCEPTIONS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECTO_TRACE_EXCEPTION(E)<sp/>ECTO_LOG_DEBUG(&quot;CAUGHT:<sp/>%s&quot;,<sp/>E);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74" refid="log_8hpp_1ad686c520d8ee4f107785ee2bfebd0ed9" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECTO_TRACE_EXCEPTION(E)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/log.hpp"/>
   </compounddef>

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="namespaceecto_1_1test" kind="namespace">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="namespaceecto_1_1test" kind="namespace" language="C++">
     <compoundname>ecto::test</compoundname>
       <sectiondef kind="var">
       <memberdef kind="variable" id="namespaceecto_1_1test_1ae34aab3f49c4e0d8ba421135cafca312" prot="public" static="no" mutable="no">

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="except_8hpp" kind="file">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="except_8hpp" kind="file" language="C++">
     <compoundname>except.hpp</compoundname>
     <includes local="no">Python.h</includes>
     <includes local="no">boost/version.hpp</includes>
@@ -19,74 +19,58 @@
     <includedby refid="rethrow_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/rethrow.hpp</includedby>
     <includedby refid="all_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp</includedby>
     <incdepgraph>
-      <node id="1177">
+      <node id="1187">
         <label>boost/version.hpp</label>
       </node>
-      <node id="1178">
+      <node id="1188">
         <label>stdexcept</label>
       </node>
-      <node id="1179">
+      <node id="1189">
         <label>string</label>
       </node>
-      <node id="1180">
+      <node id="1190">
         <label>map</label>
       </node>
-      <node id="1182">
+      <node id="1192">
         <label>ecto/util.hpp</label>
         <link refid="util_8hpp"/>
-        <childnode refid="1183" relation="include">
+        <childnode refid="1193" relation="include">
         </childnode>
-        <childnode refid="1184" relation="include">
+        <childnode refid="1194" relation="include">
         </childnode>
-        <childnode refid="1179" relation="include">
+        <childnode refid="1189" relation="include">
         </childnode>
       </node>
-      <node id="1189">
+      <node id="1199">
         <label>boost/preprocessor/stringize.hpp</label>
       </node>
-      <node id="1186">
+      <node id="1196">
         <label>boost/exception/exception.hpp</label>
       </node>
-      <node id="1181">
+      <node id="1191">
         <label>ecto/config.hpp</label>
       </node>
-      <node id="1184">
+      <node id="1194">
         <label>typeinfo</label>
       </node>
-      <node id="1187">
+      <node id="1197">
         <label>boost/exception/info.hpp</label>
       </node>
-      <node id="1176">
+      <node id="1186">
         <label>Python.h</label>
       </node>
-      <node id="1183">
+      <node id="1193">
         <label>iostream</label>
       </node>
-      <node id="1188">
+      <node id="1198">
         <label>boost/preprocessor/cat.hpp</label>
       </node>
-      <node id="1185">
+      <node id="1195">
         <label>boost/optional.hpp</label>
       </node>
-      <node id="1175">
+      <node id="1185">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp</label>
         <link refid="except.hpp"/>
-        <childnode refid="1176" relation="include">
-        </childnode>
-        <childnode refid="1177" relation="include">
-        </childnode>
-        <childnode refid="1178" relation="include">
-        </childnode>
-        <childnode refid="1179" relation="include">
-        </childnode>
-        <childnode refid="1180" relation="include">
-        </childnode>
-        <childnode refid="1181" relation="include">
-        </childnode>
-        <childnode refid="1182" relation="include">
-        </childnode>
-        <childnode refid="1185" relation="include">
-        </childnode>
         <childnode refid="1186" relation="include">
         </childnode>
         <childnode refid="1187" relation="include">
@@ -97,95 +81,10 @@
         </childnode>
         <childnode refid="1190" relation="include">
         </childnode>
-      </node>
-      <node id="1190">
-        <label>boost/preprocessor/seq/for_each.hpp</label>
-      </node>
-    </incdepgraph>
-    <invincdepgraph>
-      <node id="1204">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/rethrow.hpp</label>
-        <link refid="rethrow_8hpp"/>
-      </node>
-      <node id="1202">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/tendril.hpp</label>
-        <link refid="serialization_2tendril_8hpp"/>
-      </node>
-      <node id="1203">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/registry.hpp</label>
-        <link refid="serialization_2registry_8hpp"/>
-      </node>
-      <node id="1200">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp</label>
-        <link refid="plasm_8hpp"/>
-      </node>
-      <node id="1196">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/ecto.hpp</label>
-        <link refid="ecto_8hpp"/>
-        <childnode refid="1197" relation="include">
+        <childnode refid="1191" relation="include">
         </childnode>
-      </node>
-      <node id="1193">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendrils.hpp</label>
-        <link refid="tendrils_8hpp"/>
-        <childnode refid="1194" relation="include">
+        <childnode refid="1192" relation="include">
         </childnode>
-        <childnode refid="1197" relation="include">
-        </childnode>
-      </node>
-      <node id="1197">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp</label>
-        <link refid="all_8hpp"/>
-      </node>
-      <node id="1198">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/cell.hpp</label>
-        <link refid="serialization_2cell_8hpp"/>
-      </node>
-      <node id="1192">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp</label>
-        <link refid="tendril_8hpp"/>
-        <childnode refid="1193" relation="include">
-        </childnode>
-        <childnode refid="1194" relation="include">
-        </childnode>
-        <childnode refid="1200" relation="include">
-        </childnode>
-        <childnode refid="1201" relation="include">
-        </childnode>
-        <childnode refid="1197" relation="include">
-        </childnode>
-        <childnode refid="1202" relation="include">
-        </childnode>
-        <childnode refid="1203" relation="include">
-        </childnode>
-      </node>
-      <node id="1199">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/module.hpp</label>
-        <link refid="module_8hpp"/>
-        <childnode refid="1196" relation="include">
-        </childnode>
-      </node>
-      <node id="1201">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp</label>
-        <link refid="spore_8hpp"/>
-        <childnode refid="1193" relation="include">
-        </childnode>
-        <childnode refid="1197" relation="include">
-        </childnode>
-      </node>
-      <node id="1195">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp</label>
-        <link refid="registry_8hpp"/>
-        <childnode refid="1196" relation="include">
-        </childnode>
-        <childnode refid="1198" relation="include">
-        </childnode>
-        <childnode refid="1199" relation="include">
-        </childnode>
-      </node>
-      <node id="1194">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp</label>
-        <link refid="cell_8hpp"/>
         <childnode refid="1195" relation="include">
         </childnode>
         <childnode refid="1196" relation="include">
@@ -194,15 +93,116 @@
         </childnode>
         <childnode refid="1198" relation="include">
         </childnode>
+        <childnode refid="1199" relation="include">
+        </childnode>
+        <childnode refid="1200" relation="include">
+        </childnode>
       </node>
-      <node id="1191">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp</label>
-        <link refid="except.hpp"/>
-        <childnode refid="1192" relation="include">
+      <node id="1200">
+        <label>boost/preprocessor/seq/for_each.hpp</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1214">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/rethrow.hpp</label>
+        <link refid="rethrow_8hpp"/>
+      </node>
+      <node id="1212">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/tendril.hpp</label>
+        <link refid="serialization_2tendril_8hpp"/>
+      </node>
+      <node id="1213">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/registry.hpp</label>
+        <link refid="serialization_2registry_8hpp"/>
+      </node>
+      <node id="1210">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp</label>
+        <link refid="plasm_8hpp"/>
+      </node>
+      <node id="1206">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/ecto.hpp</label>
+        <link refid="ecto_8hpp"/>
+        <childnode refid="1207" relation="include">
+        </childnode>
+      </node>
+      <node id="1203">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendrils.hpp</label>
+        <link refid="tendrils_8hpp"/>
+        <childnode refid="1204" relation="include">
+        </childnode>
+        <childnode refid="1207" relation="include">
+        </childnode>
+      </node>
+      <node id="1207">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp</label>
+        <link refid="all_8hpp"/>
+      </node>
+      <node id="1208">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/cell.hpp</label>
+        <link refid="serialization_2cell_8hpp"/>
+      </node>
+      <node id="1202">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp</label>
+        <link refid="tendril_8hpp"/>
+        <childnode refid="1203" relation="include">
         </childnode>
         <childnode refid="1204" relation="include">
         </childnode>
-        <childnode refid="1197" relation="include">
+        <childnode refid="1210" relation="include">
+        </childnode>
+        <childnode refid="1211" relation="include">
+        </childnode>
+        <childnode refid="1207" relation="include">
+        </childnode>
+        <childnode refid="1212" relation="include">
+        </childnode>
+        <childnode refid="1213" relation="include">
+        </childnode>
+      </node>
+      <node id="1209">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/module.hpp</label>
+        <link refid="module_8hpp"/>
+        <childnode refid="1206" relation="include">
+        </childnode>
+      </node>
+      <node id="1211">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp</label>
+        <link refid="spore_8hpp"/>
+        <childnode refid="1203" relation="include">
+        </childnode>
+        <childnode refid="1207" relation="include">
+        </childnode>
+      </node>
+      <node id="1205">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp</label>
+        <link refid="registry_8hpp"/>
+        <childnode refid="1206" relation="include">
+        </childnode>
+        <childnode refid="1208" relation="include">
+        </childnode>
+        <childnode refid="1209" relation="include">
+        </childnode>
+      </node>
+      <node id="1204">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp</label>
+        <link refid="cell_8hpp"/>
+        <childnode refid="1205" relation="include">
+        </childnode>
+        <childnode refid="1206" relation="include">
+        </childnode>
+        <childnode refid="1207" relation="include">
+        </childnode>
+        <childnode refid="1208" relation="include">
+        </childnode>
+      </node>
+      <node id="1201">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/except.hpp</label>
+        <link refid="except.hpp"/>
+        <childnode refid="1202" relation="include">
+        </childnode>
+        <childnode refid="1214" relation="include">
+        </childnode>
+        <childnode refid="1207" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -480,39 +480,39 @@
 <codeline lineno="26"><highlight class="comment"><sp/>*<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE</highlight></codeline>
 <codeline lineno="27"><highlight class="comment"><sp/>*<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
 <codeline lineno="28"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight></codeline>
-<codeline lineno="30"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
 <codeline lineno="31" refid="except_8hpp_1a6a632b3827deba566cbca48b37bf53e2" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECTO_EXCEPTION_TAG_NAMES<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
 <codeline lineno="32"><highlight class="preprocessor"><sp/><sp/>(from_typename)(to_typename)(from_key)(to_key)(from_cell)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
 <codeline lineno="33"><highlight class="preprocessor"><sp/><sp/>(to_cell)(cpp_typename)(pyobject_repr)(actualtype_hint)(spore_typename)<sp/>\</highlight></codeline>
 <codeline lineno="34"><highlight class="preprocessor"><sp/><sp/>(diag_msg)(actualkeys_hint)(tendril_key)(cell_name)(cell_type)(function_name)<sp/><sp/><sp/><sp/>\</highlight></codeline>
 <codeline lineno="35"><highlight class="preprocessor"><sp/><sp/>(hint)(which_tendrils)(prev_typename)(cur_typename)(type)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="36"><highlight class="preprocessor"><sp/><sp/>(what)(when)</highlight></codeline>
-<codeline lineno="37"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="preprocessor"><sp/><sp/>(what)(when)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
 <codeline lineno="38" refid="except_8hpp_1ad3bbab1baffa25e20db0635270c5f108" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECTO_EXCEPTIONS<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
 <codeline lineno="39"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>(TypeMismatch)(ValueNone)(ValueRequired)(NonExistant)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
 <codeline lineno="40"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>(FailedFromPythonConversion)(TendrilRedeclaration)(CellException)<sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="41"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>(NotConnected)(AlreadyConnected)(NullTendril)</highlight></codeline>
-<codeline lineno="42"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>(NotConnected)(AlreadyConnected)(NullTendril)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
 <codeline lineno="43"><highlight class="normal"></highlight><highlight class="comment">//<sp/>these<sp/>are<sp/>to<sp/>speed<sp/>up<sp/>the<sp/>preprocessor<sp/>metaprogramming</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="44"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/>ifndef<sp/>BOOST_PREPROCESSOR_CONFIG_LIMITS_HPP</highlight></codeline>
-<codeline lineno="45" refid="except_8hpp_1adbf60807e9dffa4b82209ed4a8e78fd1" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#<sp/>define<sp/>BOOST_PREPROCESSOR_CONFIG_LIMITS_HPP</highlight></codeline>
-<codeline lineno="46"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#</highlight></codeline>
-<codeline lineno="47" refid="except_8hpp_1ae60f080f6aa76332f308c11c5b722e4e" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#<sp/>define<sp/>ECTO_PP_ITERLIMIT<sp/>22</highlight></codeline>
-<codeline lineno="48" refid="except_8hpp_1a750e4458efafc6fb925498412fb16a4b" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#<sp/>define<sp/>BOOST_PP_LIMIT_MAG<sp/>ECTO_PP_ITERLIMIT</highlight></codeline>
-<codeline lineno="49" refid="except_8hpp_1a7cab985088506b7f93f8b08f4f28eeb9" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#<sp/>define<sp/>BOOST_PP_LIMIT_TUPLE<sp/>25</highlight></codeline>
-<codeline lineno="50" refid="except_8hpp_1a015024e3c1dda11dc0230991acdd529e" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#<sp/>define<sp/>BOOST_PP_LIMIT_DIM<sp/>3</highlight></codeline>
-<codeline lineno="51" refid="except_8hpp_1ad851940ee907a903796df76bea76b8aa" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#<sp/>define<sp/>BOOST_PP_LIMIT_REPEAT<sp/>ECTO_PP_ITERLIMIT</highlight></codeline>
-<codeline lineno="52" refid="except_8hpp_1ad081cc556d6300248148d294ce5788fa" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#<sp/>define<sp/>BOOST_PP_LIMIT_WHILE<sp/>ECTO_PP_ITERLIMIT</highlight></codeline>
-<codeline lineno="53" refid="except_8hpp_1a1cdabd3425574a3d8795507fceb87386" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#<sp/>define<sp/>BOOST_PP_LIMIT_FOR<sp/>ECTO_PP_ITERLIMIT</highlight></codeline>
-<codeline lineno="54" refid="except_8hpp_1a9c158421e02e59e0f68e039f788b1512" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#<sp/>define<sp/>BOOST_PP_LIMIT_ITERATION<sp/>ECTO_PP_ITERLIMIT</highlight></codeline>
-<codeline lineno="55" refid="except_8hpp_1a4d9a13f4509f732fecee9f0bf243da68" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#<sp/>define<sp/>BOOST_PP_LIMIT_ITERATION_DIM<sp/>2</highlight></codeline>
-<codeline lineno="56" refid="except_8hpp_1a14527b9ffc75126134564bd0de28c990" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#<sp/>define<sp/>BOOST_PP_LIMIT_SEQ<sp/>ECTO_PP_ITERLIMIT</highlight></codeline>
-<codeline lineno="57" refid="except_8hpp_1a7351250ea0acf4a9dfbabd6d3d66268e" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#<sp/>define<sp/>BOOST_PP_LIMIT_SLOT_SIG<sp/>10</highlight></codeline>
-<codeline lineno="58" refid="except_8hpp_1a1e8b63072e6969aedd69a7f4b3135bd7" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#<sp/>define<sp/>BOOST_PP_LIMIT_SLOT_COUNT<sp/>5</highlight></codeline>
-<codeline lineno="59"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#</highlight></codeline>
-<codeline lineno="60"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#<sp/>endif</highlight></codeline>
-<codeline lineno="61"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/>ifndef<sp/>BOOST_PREPROCESSOR_CONFIG_LIMITS_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45" refid="except_8hpp_1adbf60807e9dffa4b82209ed4a8e78fd1" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/>define<sp/>BOOST_PREPROCESSOR_CONFIG_LIMITS_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="preprocessor">#</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47" refid="except_8hpp_1ae60f080f6aa76332f308c11c5b722e4e" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/>define<sp/>ECTO_PP_ITERLIMIT<sp/>22</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48" refid="except_8hpp_1a750e4458efafc6fb925498412fb16a4b" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/>define<sp/>BOOST_PP_LIMIT_MAG<sp/>ECTO_PP_ITERLIMIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49" refid="except_8hpp_1a7cab985088506b7f93f8b08f4f28eeb9" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/>define<sp/>BOOST_PP_LIMIT_TUPLE<sp/>25</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50" refid="except_8hpp_1a015024e3c1dda11dc0230991acdd529e" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/>define<sp/>BOOST_PP_LIMIT_DIM<sp/>3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51" refid="except_8hpp_1ad851940ee907a903796df76bea76b8aa" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/>define<sp/>BOOST_PP_LIMIT_REPEAT<sp/>ECTO_PP_ITERLIMIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52" refid="except_8hpp_1ad081cc556d6300248148d294ce5788fa" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/>define<sp/>BOOST_PP_LIMIT_WHILE<sp/>ECTO_PP_ITERLIMIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53" refid="except_8hpp_1a1cdabd3425574a3d8795507fceb87386" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/>define<sp/>BOOST_PP_LIMIT_FOR<sp/>ECTO_PP_ITERLIMIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54" refid="except_8hpp_1a9c158421e02e59e0f68e039f788b1512" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/>define<sp/>BOOST_PP_LIMIT_ITERATION<sp/>ECTO_PP_ITERLIMIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55" refid="except_8hpp_1a4d9a13f4509f732fecee9f0bf243da68" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/>define<sp/>BOOST_PP_LIMIT_ITERATION_DIM<sp/>2</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56" refid="except_8hpp_1a14527b9ffc75126134564bd0de28c990" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/>define<sp/>BOOST_PP_LIMIT_SEQ<sp/>ECTO_PP_ITERLIMIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57" refid="except_8hpp_1a7351250ea0acf4a9dfbabd6d3d66268e" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/>define<sp/>BOOST_PP_LIMIT_SLOT_SIG<sp/>10</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58" refid="except_8hpp_1a1e8b63072e6969aedd69a7f4b3135bd7" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/>define<sp/>BOOST_PP_LIMIT_SLOT_COUNT<sp/>5</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="preprocessor">#</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/>endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
 <codeline lineno="62"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Python.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="63"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/version.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="64"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdexcept&gt;</highlight><highlight class="normal"></highlight></codeline>
@@ -529,8 +529,8 @@
 <codeline lineno="75"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/preprocessor/stringize.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="76"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/preprocessor/seq/for_each.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="77"><highlight class="normal"></highlight></codeline>
-<codeline lineno="78"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight></codeline>
-<codeline lineno="79"><highlight class="preprocessor"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ecto</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceecto" kindref="compound">ecto</ref></highlight></codeline>
 <codeline lineno="80"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="81"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">except</highlight></codeline>
 <codeline lineno="82"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
@@ -549,14 +549,14 @@
 <codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/>hacks<sp/>for<sp/>boost::exception<sp/>implementation<sp/>details<sp/>that<sp/>are</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/>moving<sp/>around.</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="98"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(ECTO_EXCEPTION_SHARED_POINTERS_ARE_CONST)</highlight></codeline>
-<codeline lineno="99"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>boost::shared_ptr&lt;error_info_base<sp/>const&gt;<sp/><ref refid="classecto_1_1except_1_1error__info__container__impl_1a9fbca0758380cb123f790aee77d1d4d8" kindref="member">error_info_base_ptr</ref>;</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(ECTO_EXCEPTION_SHARED_POINTERS_ARE_CONST)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>boost::shared_ptr&lt;error_info_base<sp/>const&gt;<sp/><ref refid="classecto_1_1except_1_1error__info__container__impl_1a9fbca0758380cb123f790aee77d1d4d8" kindref="member">error_info_base_ptr</ref>;</highlight></codeline>
 <codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1except_1_1error__info__container__impl_1a16f5ebd1abcacd60ddbd919ea166958e" kindref="member">diagnostic_information_arg_t</ref>;</highlight></codeline>
-<codeline lineno="101"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight></codeline>
-<codeline lineno="102" refid="classecto_1_1except_1_1error__info__container__impl_1a9fbca0758380cb123f790aee77d1d4d8" refkind="member"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>boost::shared_ptr&lt;error_info_base&gt;<sp/><ref refid="classecto_1_1except_1_1error__info__container__impl_1a9fbca0758380cb123f790aee77d1d4d8" kindref="member">error_info_base_ptr</ref>;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="102" refid="classecto_1_1except_1_1error__info__container__impl_1a9fbca0758380cb123f790aee77d1d4d8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>boost::shared_ptr&lt;error_info_base&gt;<sp/><ref refid="classecto_1_1except_1_1error__info__container__impl_1a9fbca0758380cb123f790aee77d1d4d8" kindref="member">error_info_base_ptr</ref>;</highlight></codeline>
 <codeline lineno="103" refid="classecto_1_1except_1_1error__info__container__impl_1a16f5ebd1abcacd60ddbd919ea166958e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="classecto_1_1except_1_1error__info__container__impl_1a16f5ebd1abcacd60ddbd919ea166958e" kindref="member">diagnostic_information_arg_t</ref>;</highlight></codeline>
-<codeline lineno="104"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
-<codeline lineno="105"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
 <codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="107"><highlight class="normal"></highlight></codeline>
 <codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classecto_1_1except_1_1error__info__container__impl_1a258f844c2a2ee441c4e397971466f2c5" kindref="member">error_info_container_impl</ref>();</highlight></codeline>
@@ -564,17 +564,17 @@
 <codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classecto_1_1except_1_1error__info__container__impl_1ab9391a11b1c7955810c184c07aec4858" kindref="member">~error_info_container_impl</ref>()<sp/>throw();</highlight></codeline>
 <codeline lineno="111"><highlight class="normal"></highlight></codeline>
 <codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classecto_1_1except_1_1error__info__container__impl_1ac3931483b05bd3240a8ffe11c4977b99" kindref="member">set</ref>(<ref refid="classecto_1_1except_1_1error__info__container__impl_1a9fbca0758380cb123f790aee77d1d4d8" kindref="member">error_info_base_ptr</ref><sp/>const<sp/>&amp;<sp/>x,</highlight></codeline>
-<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classecto_1_1except_1_1error__info__container__impl_1abe4f51bf533842a5e0b81f3e43ae6267" kindref="member">type_info_</ref><sp/>const<sp/>&amp;<sp/>typeid_);</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classecto_1_1except_1_1error__info__container__impl_1ac3931483b05bd3240a8ffe11c4977b99" kindref="member">set</ref>(error_info_base_ptr<sp/>const<sp/>&amp;<sp/>x,</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>type_info_<sp/>const<sp/>&amp;<sp/>typeid_);</highlight></codeline>
 <codeline lineno="115"><highlight class="normal"></highlight></codeline>
-<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classecto_1_1except_1_1error__info__container__impl_1a9fbca0758380cb123f790aee77d1d4d8" kindref="member">error_info_base_ptr</ref></highlight></codeline>
-<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classecto_1_1except_1_1error__info__container__impl_1acab3219ea75b29048e2e4d8ad23028eb" kindref="member">get</ref>(<sp/><ref refid="classecto_1_1except_1_1error__info__container__impl_1abe4f51bf533842a5e0b81f3e43ae6267" kindref="member">type_info_</ref><sp/>const<sp/>&amp;<sp/>ti<sp/>)<sp/>const;</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>error_info_base_ptr</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classecto_1_1except_1_1error__info__container__impl_1acab3219ea75b29048e2e4d8ad23028eb" kindref="member">get</ref>(<sp/>type_info_<sp/>const<sp/>&amp;<sp/>ti<sp/>)<sp/>const;</highlight></codeline>
 <codeline lineno="118"><highlight class="normal"></highlight></codeline>
 <codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>const<sp/>*<sp/><ref refid="classecto_1_1except_1_1error__info__container__impl_1a9cd76f7d8bd75cdc5cf29061304a622a" kindref="member">diagnostic_information</ref>(</highlight></codeline>
-<codeline lineno="120"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(ECTO_EXCEPTION_DIAGNOSTIC_IMPL_TAKES_CHARSTAR)</highlight></codeline>
-<codeline lineno="121"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">*</highlight></codeline>
-<codeline lineno="122"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
-<codeline lineno="123"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(ECTO_EXCEPTION_DIAGNOSTIC_IMPL_TAKES_CHARSTAR)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">*</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="125"><highlight class="normal"></highlight></codeline>
 <codeline lineno="126" refid="classecto_1_1except_1_1error__info__container__impl_1a17667d5fc9c440eb33937b735d4fdfe6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classecto_1_1except_1_1error__info__container__impl_1a17667d5fc9c440eb33937b735d4fdfe6" kindref="member">boost::exception</ref>;</highlight></codeline>
@@ -586,15 +586,15 @@
 <codeline lineno="132" refid="classecto_1_1except_1_1error__info__container__impl_1ade4abdc4aa11c62dd39847bc4f6c619c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1except_1_1error__info__container__impl_1ade4abdc4aa11c62dd39847bc4f6c619c" kindref="member">count_</ref>;</highlight></codeline>
 <codeline lineno="133"><highlight class="normal"></highlight></codeline>
 <codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1except_1_1error__info__container__impl_1ae931c5c31454852cdf3d1a84d1d588eb" kindref="member">add_ref</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="135"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(ECTO_EXCEPTION_RELEASE_RETURNS_VOID)</highlight></codeline>
-<codeline lineno="136"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1except_1_1error__info__container__impl_1a59b8d31c21da10236de67f0a5bfdf4dd" kindref="member">release</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="137"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight></codeline>
-<codeline lineno="138"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1except_1_1error__info__container__impl_1a59b8d31c21da10236de67f0a5bfdf4dd" kindref="member">release</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="139"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
-<codeline lineno="140"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#if<sp/>defined(ECTO_EXCEPTION_HAS_CLONE)</highlight></codeline>
-<codeline lineno="141"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>::boost::exception_detail::refcount_ptr&lt;<sp/>::boost::exception_detail::error_info_container&gt;<sp/>clone()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="142"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
-<codeline lineno="143"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(ECTO_EXCEPTION_RELEASE_RETURNS_VOID)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1except_1_1error__info__container__impl_1a59b8d31c21da10236de67f0a5bfdf4dd" kindref="member">release</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1except_1_1error__info__container__impl_1a59b8d31c21da10236de67f0a5bfdf4dd" kindref="member">release</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(ECTO_EXCEPTION_HAS_CLONE)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>::boost::exception_detail::refcount_ptr&lt;<sp/>::boost::exception_detail::error_info_container&gt;<sp/>clone()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
 <codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="145"><highlight class="normal"></highlight></codeline>
 <codeline lineno="146" refid="structecto_1_1except_1_1EctoException" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structecto_1_1except_1_1EctoException" kindref="compound">EctoException</ref><sp/>:<sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>std::exception,<sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>boost::exception</highlight></codeline>
@@ -609,8 +609,8 @@
 <codeline lineno="155"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>struct<sp/>T<sp/>:<sp/>virtual<sp/>EctoException<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
 <codeline lineno="156"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>{<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
 <codeline lineno="157"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/>const<sp/>char*<sp/>what()<sp/>const<sp/>throw();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="158"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="159"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>};</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
 <codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespaceecto_1_1except_1a6ed4b851e67551e870e933f85628cb6f" kindref="member">BOOST_PP_SEQ_FOR_EACH</ref>(<ref refid="except_8hpp_1a9b77695b9c45c36934e7c890ce6f682f" kindref="member">ECTO_DECLARE_EXCEPTION</ref>,<sp/>~,<sp/><ref refid="except_8hpp_1ad3bbab1baffa25e20db0635270c5f108" kindref="member">ECTO_EXCEPTIONS</ref>);</highlight></codeline>
 <codeline lineno="161"><highlight class="normal"></highlight></codeline>
 <codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/><ref refid="namespaceecto_1_1except_1a8161938bf962eaf02d9b0e73b80a5c4a" kindref="member">diagnostic_string</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>EctoException&amp;);</highlight></codeline>
@@ -622,35 +622,35 @@
 <codeline lineno="168"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>struct<sp/>BOOST_PP_CAT(tag_,<sp/>NAME);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
 <codeline lineno="169"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>typedef<sp/>::boost::error_info&lt;detail::wrap&lt;BOOST_PP_CAT(tag_,<sp/>NAME)&gt;,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
 <codeline lineno="170"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string&gt;<sp/>NAME;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="171"><highlight class="preprocessor"></highlight></codeline>
-<codeline lineno="172"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespaceecto_1_1except_1a6ed4b851e67551e870e933f85628cb6f" kindref="member">BOOST_PP_SEQ_FOR_EACH</ref>(<ref refid="except_8hpp_1a4a4f231e4fe0f923cd9ee3a48803ca30" kindref="member">ECTO_EXCEPTION_TAG_DECL</ref>,<sp/>~,<sp/><ref refid="except_8hpp_1a6a632b3827deba566cbca48b37bf53e2" kindref="member">ECTO_EXCEPTION_TAG_NAMES</ref>);</highlight></codeline>
+<codeline lineno="171"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespaceecto_1_1except_1a6ed4b851e67551e870e933f85628cb6f" kindref="member">BOOST_PP_SEQ_FOR_EACH</ref>(<ref refid="except_8hpp_1a4a4f231e4fe0f923cd9ee3a48803ca30" kindref="member">ECTO_EXCEPTION_TAG_DECL</ref>,<sp/>~,<sp/><ref refid="except_8hpp_1a6a632b3827deba566cbca48b37bf53e2" kindref="member">ECTO_EXCEPTION_TAG_NAMES</ref>);</highlight></codeline>
 <codeline lineno="173"><highlight class="normal"></highlight></codeline>
 <codeline lineno="174"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
 <codeline lineno="175"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="176"><highlight class="normal"></highlight></codeline>
-<codeline lineno="177"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">boost<sp/>{</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceboost" kindref="compound">boost</ref><sp/>{</highlight></codeline>
 <codeline lineno="178"><highlight class="normal"></highlight></codeline>
-<codeline lineno="179"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(ECTO_EXCEPTION_TAG_TYPE_NAME_RETURNS_STRING)</highlight></codeline>
-<codeline lineno="180"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>ECTO_EXCEPTION_TAG_TYPE_NAME_RETURN_T<sp/>std::string</highlight></codeline>
-<codeline lineno="181"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#else</highlight></codeline>
-<codeline lineno="182" refid="except_8hpp_1a2208dd18b625b09e449c9e471e55ea36" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>ECTO_EXCEPTION_TAG_TYPE_NAME_RETURN_T<sp/>const<sp/>char*</highlight></codeline>
-<codeline lineno="183"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
-<codeline lineno="184"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(ECTO_EXCEPTION_TAG_TYPE_NAME_RETURNS_STRING)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>ECTO_EXCEPTION_TAG_TYPE_NAME_RETURN_T<sp/>std::string</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="182" refid="except_8hpp_1a2208dd18b625b09e449c9e471e55ea36" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/>define<sp/>ECTO_EXCEPTION_TAG_TYPE_NAME_RETURN_T<sp/>const<sp/>char*</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight></codeline>
 <codeline lineno="185" refid="except_8hpp_1a61f61285d4749b701b559d10678908a4" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECTO_EXCEPTION_TAG_TYPE_NAME_DECL(r,<sp/>data,<sp/>NAME)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
 <codeline lineno="186"><highlight class="preprocessor"><sp/><sp/>template<sp/>&lt;&gt;<sp/>inline<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
 <codeline lineno="187"><highlight class="preprocessor"><sp/><sp/>ECTO_EXCEPTION_TAG_TYPE_NAME_RETURN_T<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
 <codeline lineno="188"><highlight class="preprocessor"><sp/><sp/>tag_type_name&lt;<sp/>::ecto::except::detail::wrap&lt;<sp/>BOOST_PP_CAT(::ecto::except::tag_,<sp/>NAME)&gt;<sp/>&gt;()<sp/>{<sp/>\</highlight></codeline>
 <codeline lineno="189"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>return<sp/>BOOST_PP_STRINGIZE(NAME);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="190"><highlight class="preprocessor"><sp/><sp/>}</highlight></codeline>
-<codeline lineno="191"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><ref refid="namespaceboost_1ac098a4e20f2e80e827e2022ad264473a" kindref="member">BOOST_PP_SEQ_FOR_EACH</ref>(<ref refid="except_8hpp_1a61f61285d4749b701b559d10678908a4" kindref="member">ECTO_EXCEPTION_TAG_TYPE_NAME_DECL</ref>,<sp/>~,<sp/><ref refid="except_8hpp_1a6a632b3827deba566cbca48b37bf53e2" kindref="member">ECTO_EXCEPTION_TAG_NAMES</ref>);</highlight></codeline>
+<codeline lineno="190"><highlight class="preprocessor"><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><ref refid="namespaceboost_1ac098a4e20f2e80e827e2022ad264473a" kindref="member">BOOST_PP_SEQ_FOR_EACH</ref>(<ref refid="except_8hpp_1a61f61285d4749b701b559d10678908a4" kindref="member">ECTO_EXCEPTION_TAG_TYPE_NAME_DECL</ref>,<sp/>~,<sp/><ref refid="except_8hpp_1a6a632b3827deba566cbca48b37bf53e2" kindref="member">ECTO_EXCEPTION_TAG_NAMES</ref>);</highlight></codeline>
 <codeline lineno="192"><highlight class="normal"></highlight></codeline>
 <codeline lineno="193"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>E,</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Tag,</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="194"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>((BOOST_VERSION<sp/>/<sp/>100)<sp/>%<sp/>1000)<sp/>&lt;=<sp/>42</highlight></codeline>
-<codeline lineno="195"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/>E<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;</highlight></codeline>
-<codeline lineno="196"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight></codeline>
-<codeline lineno="197"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>enable_if&lt;exception_detail::derives_boost_exception&lt;E&gt;,E<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;&gt;::type</highlight></codeline>
-<codeline lineno="198"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
-<codeline lineno="199"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><ref refid="namespaceboost_1a50253cbebddb80700be930287ab2fcde" kindref="member">operator&lt;&lt;</ref>(<sp/>E<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>x,</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>((BOOST_VERSION<sp/>/<sp/>100)<sp/>%<sp/>1000)<sp/>&lt;=<sp/>42</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/>E<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>enable_if&lt;exception_detail::derives_boost_exception&lt;E&gt;,E<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;&gt;::type</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><ref refid="namespaceboost_1a50253cbebddb80700be930287ab2fcde" kindref="member">operator&lt;&lt;</ref>(<sp/>E<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>x,</highlight></codeline>
 <codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>error_info&lt;<sp/>::<ref refid="structecto_1_1except_1_1detail_1_1wrap" kindref="compound">ecto::except::detail::wrap&lt;Tag&gt;</ref>,<sp/>T&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>v<sp/>);</highlight></codeline>
 <codeline lineno="201"><highlight class="normal"></highlight></codeline>
 <codeline lineno="202"><highlight class="normal">}</highlight></codeline>

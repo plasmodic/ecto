@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="structecto_1_1graph_1_1graph__t" kind="struct" prot="public">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="structecto_1_1graph_1_1graph__t" kind="struct" language="C++" prot="public">
     <compoundname>ecto::graph::graph_t</compoundname>
     <basecompoundref prot="public" virt="non-virtual">boost::adjacency_list&lt; boost::vecS, boost::vecS, boost::bidirectionalS, vertex_ptr, edge_ptr &gt;</basecompoundref>
     <includes refid="types_8hpp" local="no">types.hpp</includes>

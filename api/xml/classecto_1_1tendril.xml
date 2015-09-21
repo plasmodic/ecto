@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="classecto_1_1tendril" kind="class" prot="public">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="classecto_1_1tendril" kind="class" language="C++" prot="public">
     <compoundname>ecto::tendril</compoundname>
     <includes refid="tendril_8hpp" local="no">tendril.hpp</includes>
     <innerclass refid="structecto_1_1tendril_1_1Caller" prot="public">ecto::tendril::Caller</innerclass>

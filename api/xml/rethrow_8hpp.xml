@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="rethrow_8hpp" kind="file">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="rethrow_8hpp" kind="file" language="C++">
     <compoundname>rethrow.hpp</compoundname>
     <includes refid="except_8hpp" local="no">ecto/except.hpp</includes>
     <includes local="no">boost/exception/all.hpp</includes>
@@ -8,16 +8,93 @@
     <includes local="no">boost/asio.hpp</includes>
     <includes refid="forward_8hpp" local="no">ecto/forward.hpp</includes>
     <incdepgraph>
-      <node id="1585">
+      <node id="1598">
         <label>boost/shared_ptr.hpp</label>
       </node>
-      <node id="1567">
+      <node id="1580">
         <label>boost/version.hpp</label>
       </node>
-      <node id="1564">
+      <node id="1577">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/rethrow.hpp</label>
         <link refid="rethrow.hpp"/>
-        <childnode refid="1565" relation="include">
+        <childnode refid="1578" relation="include">
+        </childnode>
+        <childnode refid="1594" relation="include">
+        </childnode>
+        <childnode refid="1595" relation="include">
+        </childnode>
+        <childnode refid="1596" relation="include">
+        </childnode>
+        <childnode refid="1597" relation="include">
+        </childnode>
+      </node>
+      <node id="1594">
+        <label>boost/exception/all.hpp</label>
+      </node>
+      <node id="1597">
+        <label>ecto/forward.hpp</label>
+        <link refid="forward_8hpp"/>
+        <childnode refid="1598" relation="include">
+        </childnode>
+      </node>
+      <node id="1581">
+        <label>stdexcept</label>
+      </node>
+      <node id="1582">
+        <label>string</label>
+      </node>
+      <node id="1583">
+        <label>map</label>
+      </node>
+      <node id="1585">
+        <label>ecto/util.hpp</label>
+        <link refid="util_8hpp"/>
+        <childnode refid="1586" relation="include">
+        </childnode>
+        <childnode refid="1587" relation="include">
+        </childnode>
+        <childnode refid="1582" relation="include">
+        </childnode>
+      </node>
+      <node id="1595">
+        <label>boost/function.hpp</label>
+      </node>
+      <node id="1592">
+        <label>boost/preprocessor/stringize.hpp</label>
+      </node>
+      <node id="1589">
+        <label>boost/exception/exception.hpp</label>
+      </node>
+      <node id="1584">
+        <label>ecto/config.hpp</label>
+      </node>
+      <node id="1596">
+        <label>boost/asio.hpp</label>
+      </node>
+      <node id="1587">
+        <label>typeinfo</label>
+      </node>
+      <node id="1590">
+        <label>boost/exception/info.hpp</label>
+      </node>
+      <node id="1579">
+        <label>Python.h</label>
+      </node>
+      <node id="1586">
+        <label>iostream</label>
+      </node>
+      <node id="1591">
+        <label>boost/preprocessor/cat.hpp</label>
+      </node>
+      <node id="1588">
+        <label>boost/optional.hpp</label>
+      </node>
+      <node id="1578">
+        <label>ecto/except.hpp</label>
+        <link refid="except_8hpp"/>
+        <childnode refid="1579" relation="include">
+        </childnode>
+        <childnode refid="1580" relation="include">
         </childnode>
         <childnode refid="1581" relation="include">
         </childnode>
@@ -27,99 +104,22 @@
         </childnode>
         <childnode refid="1584" relation="include">
         </childnode>
-      </node>
-      <node id="1581">
-        <label>boost/exception/all.hpp</label>
-      </node>
-      <node id="1584">
-        <label>ecto/forward.hpp</label>
-        <link refid="forward_8hpp"/>
         <childnode refid="1585" relation="include">
         </childnode>
-      </node>
-      <node id="1568">
-        <label>stdexcept</label>
-      </node>
-      <node id="1569">
-        <label>string</label>
-      </node>
-      <node id="1570">
-        <label>map</label>
-      </node>
-      <node id="1572">
-        <label>ecto/util.hpp</label>
-        <link refid="util_8hpp"/>
-        <childnode refid="1573" relation="include">
+        <childnode refid="1588" relation="include">
         </childnode>
-        <childnode refid="1574" relation="include">
+        <childnode refid="1589" relation="include">
         </childnode>
-        <childnode refid="1569" relation="include">
+        <childnode refid="1590" relation="include">
+        </childnode>
+        <childnode refid="1591" relation="include">
+        </childnode>
+        <childnode refid="1592" relation="include">
+        </childnode>
+        <childnode refid="1593" relation="include">
         </childnode>
       </node>
-      <node id="1582">
-        <label>boost/function.hpp</label>
-      </node>
-      <node id="1579">
-        <label>boost/preprocessor/stringize.hpp</label>
-      </node>
-      <node id="1576">
-        <label>boost/exception/exception.hpp</label>
-      </node>
-      <node id="1571">
-        <label>ecto/config.hpp</label>
-      </node>
-      <node id="1583">
-        <label>boost/asio.hpp</label>
-      </node>
-      <node id="1574">
-        <label>typeinfo</label>
-      </node>
-      <node id="1577">
-        <label>boost/exception/info.hpp</label>
-      </node>
-      <node id="1566">
-        <label>Python.h</label>
-      </node>
-      <node id="1573">
-        <label>iostream</label>
-      </node>
-      <node id="1578">
-        <label>boost/preprocessor/cat.hpp</label>
-      </node>
-      <node id="1575">
-        <label>boost/optional.hpp</label>
-      </node>
-      <node id="1565">
-        <label>ecto/except.hpp</label>
-        <link refid="except_8hpp"/>
-        <childnode refid="1566" relation="include">
-        </childnode>
-        <childnode refid="1567" relation="include">
-        </childnode>
-        <childnode refid="1568" relation="include">
-        </childnode>
-        <childnode refid="1569" relation="include">
-        </childnode>
-        <childnode refid="1570" relation="include">
-        </childnode>
-        <childnode refid="1571" relation="include">
-        </childnode>
-        <childnode refid="1572" relation="include">
-        </childnode>
-        <childnode refid="1575" relation="include">
-        </childnode>
-        <childnode refid="1576" relation="include">
-        </childnode>
-        <childnode refid="1577" relation="include">
-        </childnode>
-        <childnode refid="1578" relation="include">
-        </childnode>
-        <childnode refid="1579" relation="include">
-        </childnode>
-        <childnode refid="1580" relation="include">
-        </childnode>
-      </node>
-      <node id="1580">
+      <node id="1593">
         <label>boost/preprocessor/seq/for_each.hpp</label>
       </node>
     </incdepgraph>
@@ -159,14 +159,14 @@
 <codeline lineno="26"><highlight class="normal"></highlight><highlight class="comment">//<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="27"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="28"><highlight class="normal"></highlight></codeline>
-<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight></codeline>
-<codeline lineno="30"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="except_8hpp" kindref="compound">ecto/except.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="except_8hpp" kindref="compound">ecto/except.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/exception/all.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/function.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/asio.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="forward_8hpp" kindref="compound">ecto/forward.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="35"><highlight class="normal"></highlight></codeline>
-<codeline lineno="36"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ecto<sp/>{</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceecto" kindref="compound">ecto</ref><sp/>{</highlight></codeline>
 <codeline lineno="37" refid="namespaceecto_1_1except" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">except<sp/>{</highlight></codeline>
 <codeline lineno="38"><highlight class="normal"></highlight></codeline>
 <codeline lineno="39" refid="namespaceecto_1_1except_1_1py" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">py<sp/>{</highlight></codeline>

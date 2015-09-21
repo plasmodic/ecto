@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="namespaceecto_1_1except" kind="namespace">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="namespaceecto_1_1except" kind="namespace" language="C++">
     <compoundname>ecto::except</compoundname>
-    <innerclass refid="classecto_1_1except_1_1error__info__container__impl" prot="public">ecto::except::error_info_container_impl</innerclass>
     <innerclass refid="structecto_1_1except_1_1EctoException" prot="public">ecto::except::EctoException</innerclass>
+    <innerclass refid="classecto_1_1except_1_1error__info__container__impl" prot="public">ecto::except::error_info_container_impl</innerclass>
     <innernamespace refid="namespaceecto_1_1except_1_1detail">ecto::except::detail</innernamespace>
     <innernamespace refid="namespaceecto_1_1except_1_1py">ecto::except::py</innernamespace>
       <sectiondef kind="func">

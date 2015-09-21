@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="namespaceboost_1_1python" kind="namespace">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="namespaceboost_1_1python" kind="namespace" language="C++">
     <compoundname>boost::python</compoundname>
     <innerclass refid="classboost_1_1python_1_1std__map__indexing__suite" prot="public">boost::python::std_map_indexing_suite</innerclass>
     <innerclass refid="classboost_1_1python_1_1std__vector__indexing__suite" prot="public">boost::python::std_vector_indexing_suite</innerclass>

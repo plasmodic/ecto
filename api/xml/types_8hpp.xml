@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="types_8hpp" kind="file">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="types_8hpp" kind="file" language="C++">
     <compoundname>types.hpp</compoundname>
     <includes local="no">deque</includes>
     <includes refid="forward_8hpp" local="no">ecto/forward.hpp</includes>
@@ -9,52 +9,52 @@
     <includedby refid="utilities_8hpp" local="yes">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/graph/utilities.hpp</includedby>
     <includedby refid="scheduler_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp</includedby>
     <incdepgraph>
-      <node id="1231">
+      <node id="1241">
         <label>boost/shared_ptr.hpp</label>
       </node>
-      <node id="1230">
+      <node id="1240">
         <label>ecto/forward.hpp</label>
         <link refid="forward_8hpp"/>
-        <childnode refid="1231" relation="include">
+        <childnode refid="1241" relation="include">
         </childnode>
       </node>
-      <node id="1232">
+      <node id="1242">
         <label>boost/graph/graph_traits.hpp</label>
       </node>
-      <node id="1229">
+      <node id="1239">
         <label>deque</label>
       </node>
-      <node id="1233">
+      <node id="1243">
         <label>boost/graph/adjacency_list.hpp</label>
       </node>
-      <node id="1228">
+      <node id="1238">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/graph/types.hpp</label>
         <link refid="types.hpp"/>
-        <childnode refid="1229" relation="include">
+        <childnode refid="1239" relation="include">
         </childnode>
-        <childnode refid="1230" relation="include">
+        <childnode refid="1240" relation="include">
         </childnode>
-        <childnode refid="1232" relation="include">
+        <childnode refid="1242" relation="include">
         </childnode>
-        <childnode refid="1233" relation="include">
+        <childnode refid="1243" relation="include">
         </childnode>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="1236">
+      <node id="1246">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp</label>
         <link refid="scheduler_8hpp"/>
       </node>
-      <node id="1235">
+      <node id="1245">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/graph/utilities.hpp</label>
         <link refid="utilities_8hpp"/>
       </node>
-      <node id="1234">
+      <node id="1244">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/graph/types.hpp</label>
         <link refid="types.hpp"/>
-        <childnode refid="1235" relation="include">
+        <childnode refid="1245" relation="include">
         </childnode>
-        <childnode refid="1236" relation="include">
+        <childnode refid="1246" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -106,18 +106,18 @@
 <codeline lineno="26"><highlight class="comment"><sp/>*<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE</highlight></codeline>
 <codeline lineno="27"><highlight class="comment"><sp/>*<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
 <codeline lineno="28"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight></codeline>
-<codeline lineno="30"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;deque&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight></codeline>
 <codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="forward_8hpp" kindref="compound">ecto/forward.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="34"><highlight class="normal"></highlight></codeline>
 <codeline lineno="35"><highlight class="normal"></highlight><highlight class="comment">//this<sp/>quiets<sp/>a<sp/>deprecated<sp/>warning</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="36" refid="types_8hpp_1a1b842552ac2cc75cc74e65896efc7e55" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BOOST_NO_HASH</highlight></codeline>
-<codeline lineno="37"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/graph/graph_traits.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="types_8hpp_1a1b842552ac2cc75cc74e65896efc7e55" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BOOST_NO_HASH</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/graph/graph_traits.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/graph/adjacency_list.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="39"><highlight class="normal"></highlight></codeline>
-<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ecto<sp/>{</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceecto" kindref="compound">ecto</ref><sp/>{</highlight></codeline>
 <codeline lineno="41"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">graph<sp/>{</highlight></codeline>
 <codeline lineno="42"><highlight class="normal"></highlight></codeline>
 <codeline lineno="43"><highlight class="normal"></highlight><highlight class="comment">//<sp/>if<sp/>the<sp/>first<sp/>argument<sp/>is<sp/>a<sp/>sequence<sp/>type<sp/>(vecS,<sp/>etc)</highlight><highlight class="normal"></highlight></codeline>

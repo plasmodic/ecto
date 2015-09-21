@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="serialization_2registry_8hpp" kind="file">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="serialization_2registry_8hpp" kind="file" language="C++">
     <compoundname>registry.hpp</compoundname>
     <includes local="no">boost/archive/binary_iarchive.hpp</includes>
     <includes local="no">boost/archive/binary_oarchive.hpp</includes>
@@ -10,208 +10,109 @@
     <includes local="no">map</includes>
     <includes refid="log_8hpp" local="no">ecto/log.hpp</includes>
     <incdepgraph>
-      <node id="1560">
+      <node id="1573">
         <label>ecto/log.hpp</label>
         <link refid="log_8hpp"/>
-        <childnode refid="1544" relation="include">
-        </childnode>
-        <childnode refid="1529" relation="include">
-        </childnode>
-        <childnode refid="1561" relation="include">
-        </childnode>
-        <childnode refid="1562" relation="include">
-        </childnode>
-      </node>
-      <node id="1541">
-        <label>boost/version.hpp</label>
-      </node>
-      <node id="1534">
-        <label>boost/shared_ptr.hpp</label>
-      </node>
-      <node id="1559">
-        <label>boost/tuple/tuple.hpp</label>
-      </node>
-      <node id="1526">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/registry.hpp</label>
-        <link refid="serialization/registry.hpp"/>
-        <childnode refid="1527" relation="include">
-        </childnode>
-        <childnode refid="1528" relation="include">
-        </childnode>
-        <childnode refid="1529" relation="include">
-        </childnode>
-        <childnode refid="1533" relation="include">
-        </childnode>
-        <childnode refid="1559" relation="include">
-        </childnode>
-        <childnode refid="1543" relation="include">
-        </childnode>
-        <childnode refid="1560" relation="include">
-        </childnode>
-      </node>
-      <node id="1562">
-        <label>stdint.h</label>
-      </node>
-      <node id="1536">
-        <label>boost/signals2.hpp</label>
-      </node>
-      <node id="1527">
-        <label>boost/archive/binary_iarchive.hpp</label>
-      </node>
-      <node id="1538">
-        <label>ecto/forward.hpp</label>
-        <link refid="forward_8hpp"/>
-        <childnode refid="1534" relation="include">
-        </childnode>
-      </node>
-      <node id="1542">
-        <label>stdexcept</label>
-      </node>
-      <node id="1553">
-        <label>boost/thread/thread.hpp</label>
-      </node>
-      <node id="1554">
-        <label>boost/noncopyable.hpp</label>
-      </node>
-      <node id="1532">
-        <label>string</label>
-      </node>
-      <node id="1543">
-        <label>map</label>
-      </node>
-      <node id="1529">
-        <label>ecto/util.hpp</label>
-        <link refid="util_8hpp"/>
-        <childnode refid="1530" relation="include">
-        </childnode>
-        <childnode refid="1531" relation="include">
-        </childnode>
-        <childnode refid="1532" relation="include">
-        </childnode>
-      </node>
-      <node id="1551">
-        <label>ecto/python.hpp</label>
-        <link refid="python_8hpp"/>
-        <childnode refid="1540" relation="include">
-        </childnode>
-        <childnode refid="1552" relation="include">
-        </childnode>
-        <childnode refid="1553" relation="include">
-        </childnode>
-        <childnode refid="1543" relation="include">
-        </childnode>
-        <childnode refid="1554" relation="include">
-        </childnode>
-      </node>
-      <node id="1535">
-        <label>boost/function/function1.hpp</label>
-      </node>
-      <node id="1561">
-        <label>ecto/test.hpp</label>
-        <link refid="test_8hpp"/>
-      </node>
-      <node id="1533">
-        <label>ecto/tendril.hpp</label>
-        <link refid="tendril_8hpp"/>
-        <childnode refid="1534" relation="include">
-        </childnode>
-        <childnode refid="1535" relation="include">
-        </childnode>
-        <childnode refid="1536" relation="include">
-        </childnode>
-        <childnode refid="1537" relation="include">
-        </childnode>
-        <childnode refid="1538" relation="include">
-        </childnode>
-        <childnode refid="1529" relation="include">
-        </childnode>
-        <childnode refid="1539" relation="include">
-        </childnode>
-        <childnode refid="1551" relation="include">
-        </childnode>
-        <childnode refid="1555" relation="include">
-        </childnode>
         <childnode refid="1557" relation="include">
         </childnode>
-        <childnode refid="1532" relation="include">
+        <childnode refid="1542" relation="include">
         </childnode>
-        <childnode refid="1558" relation="include">
+        <childnode refid="1574" relation="include">
+        </childnode>
+        <childnode refid="1575" relation="include">
         </childnode>
       </node>
-      <node id="1528">
-        <label>boost/archive/binary_oarchive.hpp</label>
-      </node>
-      <node id="1537">
-        <label>boost/any.hpp</label>
-      </node>
-      <node id="1549">
-        <label>boost/preprocessor/stringize.hpp</label>
-      </node>
-      <node id="1546">
-        <label>boost/exception/exception.hpp</label>
-      </node>
-      <node id="1544">
-        <label>ecto/config.hpp</label>
-      </node>
-      <node id="1531">
-        <label>typeinfo</label>
-      </node>
-      <node id="1558">
-        <label>bitset</label>
-      </node>
-      <node id="1556">
-        <label>boost/python/object_fwd.hpp</label>
-      </node>
-      <node id="1552">
-        <label>boost/python.hpp</label>
+      <node id="1554">
+        <label>boost/version.hpp</label>
       </node>
       <node id="1547">
-        <label>boost/exception/info.hpp</label>
+        <label>boost/shared_ptr.hpp</label>
       </node>
-      <node id="1540">
-        <label>Python.h</label>
-      </node>
-      <node id="1557">
-        <label>vector</label>
-      </node>
-      <node id="1555">
-        <label>ecto/python/repr.hpp</label>
-        <link refid="repr_8hpp"/>
-        <childnode refid="1556" relation="include">
-        </childnode>
-        <childnode refid="1532" relation="include">
-        </childnode>
-      </node>
-      <node id="1530">
-        <label>iostream</label>
-      </node>
-      <node id="1548">
-        <label>boost/preprocessor/cat.hpp</label>
-      </node>
-      <node id="1545">
-        <label>boost/optional.hpp</label>
+      <node id="1572">
+        <label>boost/tuple/tuple.hpp</label>
       </node>
       <node id="1539">
-        <label>ecto/except.hpp</label>
-        <link refid="except_8hpp"/>
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/registry.hpp</label>
+        <link refid="serialization/registry.hpp"/>
         <childnode refid="1540" relation="include">
         </childnode>
         <childnode refid="1541" relation="include">
         </childnode>
         <childnode refid="1542" relation="include">
         </childnode>
-        <childnode refid="1532" relation="include">
+        <childnode refid="1546" relation="include">
         </childnode>
+        <childnode refid="1572" relation="include">
+        </childnode>
+        <childnode refid="1556" relation="include">
+        </childnode>
+        <childnode refid="1573" relation="include">
+        </childnode>
+      </node>
+      <node id="1575">
+        <label>stdint.h</label>
+      </node>
+      <node id="1549">
+        <label>boost/signals2.hpp</label>
+      </node>
+      <node id="1540">
+        <label>boost/archive/binary_iarchive.hpp</label>
+      </node>
+      <node id="1551">
+        <label>ecto/forward.hpp</label>
+        <link refid="forward_8hpp"/>
+        <childnode refid="1547" relation="include">
+        </childnode>
+      </node>
+      <node id="1555">
+        <label>stdexcept</label>
+      </node>
+      <node id="1566">
+        <label>boost/thread/thread.hpp</label>
+      </node>
+      <node id="1567">
+        <label>boost/noncopyable.hpp</label>
+      </node>
+      <node id="1545">
+        <label>string</label>
+      </node>
+      <node id="1556">
+        <label>map</label>
+      </node>
+      <node id="1542">
+        <label>ecto/util.hpp</label>
+        <link refid="util_8hpp"/>
         <childnode refid="1543" relation="include">
         </childnode>
         <childnode refid="1544" relation="include">
         </childnode>
-        <childnode refid="1529" relation="include">
-        </childnode>
         <childnode refid="1545" relation="include">
         </childnode>
-        <childnode refid="1546" relation="include">
+      </node>
+      <node id="1564">
+        <label>ecto/python.hpp</label>
+        <link refid="python_8hpp"/>
+        <childnode refid="1553" relation="include">
         </childnode>
+        <childnode refid="1565" relation="include">
+        </childnode>
+        <childnode refid="1566" relation="include">
+        </childnode>
+        <childnode refid="1556" relation="include">
+        </childnode>
+        <childnode refid="1567" relation="include">
+        </childnode>
+      </node>
+      <node id="1548">
+        <label>boost/function/function1.hpp</label>
+      </node>
+      <node id="1574">
+        <label>ecto/test.hpp</label>
+        <link refid="test_8hpp"/>
+      </node>
+      <node id="1546">
+        <label>ecto/tendril.hpp</label>
+        <link refid="tendril_8hpp"/>
         <childnode refid="1547" relation="include">
         </childnode>
         <childnode refid="1548" relation="include">
@@ -220,8 +121,107 @@
         </childnode>
         <childnode refid="1550" relation="include">
         </childnode>
+        <childnode refid="1551" relation="include">
+        </childnode>
+        <childnode refid="1542" relation="include">
+        </childnode>
+        <childnode refid="1552" relation="include">
+        </childnode>
+        <childnode refid="1564" relation="include">
+        </childnode>
+        <childnode refid="1568" relation="include">
+        </childnode>
+        <childnode refid="1570" relation="include">
+        </childnode>
+        <childnode refid="1545" relation="include">
+        </childnode>
+        <childnode refid="1571" relation="include">
+        </childnode>
+      </node>
+      <node id="1541">
+        <label>boost/archive/binary_oarchive.hpp</label>
       </node>
       <node id="1550">
+        <label>boost/any.hpp</label>
+      </node>
+      <node id="1562">
+        <label>boost/preprocessor/stringize.hpp</label>
+      </node>
+      <node id="1559">
+        <label>boost/exception/exception.hpp</label>
+      </node>
+      <node id="1557">
+        <label>ecto/config.hpp</label>
+      </node>
+      <node id="1544">
+        <label>typeinfo</label>
+      </node>
+      <node id="1571">
+        <label>bitset</label>
+      </node>
+      <node id="1569">
+        <label>boost/python/object_fwd.hpp</label>
+      </node>
+      <node id="1565">
+        <label>boost/python.hpp</label>
+      </node>
+      <node id="1560">
+        <label>boost/exception/info.hpp</label>
+      </node>
+      <node id="1553">
+        <label>Python.h</label>
+      </node>
+      <node id="1570">
+        <label>vector</label>
+      </node>
+      <node id="1568">
+        <label>ecto/python/repr.hpp</label>
+        <link refid="repr_8hpp"/>
+        <childnode refid="1569" relation="include">
+        </childnode>
+        <childnode refid="1545" relation="include">
+        </childnode>
+      </node>
+      <node id="1543">
+        <label>iostream</label>
+      </node>
+      <node id="1561">
+        <label>boost/preprocessor/cat.hpp</label>
+      </node>
+      <node id="1558">
+        <label>boost/optional.hpp</label>
+      </node>
+      <node id="1552">
+        <label>ecto/except.hpp</label>
+        <link refid="except_8hpp"/>
+        <childnode refid="1553" relation="include">
+        </childnode>
+        <childnode refid="1554" relation="include">
+        </childnode>
+        <childnode refid="1555" relation="include">
+        </childnode>
+        <childnode refid="1545" relation="include">
+        </childnode>
+        <childnode refid="1556" relation="include">
+        </childnode>
+        <childnode refid="1557" relation="include">
+        </childnode>
+        <childnode refid="1542" relation="include">
+        </childnode>
+        <childnode refid="1558" relation="include">
+        </childnode>
+        <childnode refid="1559" relation="include">
+        </childnode>
+        <childnode refid="1560" relation="include">
+        </childnode>
+        <childnode refid="1561" relation="include">
+        </childnode>
+        <childnode refid="1562" relation="include">
+        </childnode>
+        <childnode refid="1563" relation="include">
+        </childnode>
+      </node>
+      <node id="1563">
         <label>boost/preprocessor/seq/for_each.hpp</label>
       </node>
     </incdepgraph>
@@ -295,14 +295,14 @@
 <codeline lineno="26"><highlight class="comment"><sp/>*<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE</highlight></codeline>
 <codeline lineno="27"><highlight class="comment"><sp/>*<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
 <codeline lineno="28"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight></codeline>
-<codeline lineno="30"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>BOOST_VERSION<sp/>&lt;=<sp/>104000</highlight></codeline>
-<codeline lineno="32"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#pragma<sp/>GCC<sp/>diagnostic<sp/>ignored<sp/>&quot;-Wsign-compare&quot;</highlight></codeline>
-<codeline lineno="33"><highlight class="preprocessor"></highlight><highlight class="comment">//<sp/>TODO<sp/>EAR<sp/>meh<sp/>noisy<sp/>--<sp/>We<sp/>should<sp/>make<sp/>a<sp/>portable<sp/>stable<sp/>archive<sp/>type.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>BOOST_VERSION<sp/>&lt;=<sp/>104000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>GCC<sp/>diagnostic<sp/>ignored<sp/>&quot;-Wsign-compare&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="comment">//<sp/>TODO<sp/>EAR<sp/>meh<sp/>noisy<sp/>--<sp/>We<sp/>should<sp/>make<sp/>a<sp/>portable<sp/>stable<sp/>archive<sp/>type.</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="34"><highlight class="normal"></highlight><highlight class="comment">//#pragma<sp/>message<sp/>&quot;Ignoring<sp/>signed-unsigned<sp/>comparison<sp/>in<sp/>boost::serialization<sp/>in<sp/>1.40&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="35"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
-<codeline lineno="36"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
 <codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/archive/binary_iarchive.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/archive/binary_oarchive.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="39"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="util_8hpp" kindref="compound">ecto/util.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
@@ -310,7 +310,7 @@
 <codeline lineno="41"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/tuple/tuple.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="42"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;map&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="log_8hpp" kindref="compound">ecto/log.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="44"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ecto</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceecto" kindref="compound">ecto</ref></highlight></codeline>
 <codeline lineno="45"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="46"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">serialization</highlight></codeline>
 <codeline lineno="47"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
@@ -353,16 +353,16 @@
 <codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="log_8hpp_1a52b93b5650a3830cd4216dee79428e6c" kindref="member">ECTO_LOG_DEBUG</ref>(</highlight><highlight class="stringliteral">&quot;%s&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Serializer::value_type<sp/>value_type;</highlight></codeline>
 <codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name<sp/>=<sp/>name_of&lt;value_type&gt;();</highlight></codeline>
-<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structecto_1_1serialization_1_1registry_1a9bbc5358e0b5bb519983c16db9c6391b" kindref="member">serial_fn_t</ref><sp/>fnc<sp/>=<sp/><ref refid="structecto_1_1serialization_1_1registry_1a9bbc5358e0b5bb519983c16db9c6391b" kindref="member">serial_fn_t</ref>(s);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>serial_fn_t<sp/>fnc<sp/>=<sp/><ref refid="structecto_1_1serialization_1_1registry_1a9bbc5358e0b5bb519983c16db9c6391b" kindref="member">serial_fn_t</ref>(s);</highlight></codeline>
 <codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structecto_1_1serialization_1_1registry_1ae82f89f8e2bdcf2573671a6d390a94e2" kindref="member">add</ref>(name,<sp/>fnc);</highlight></codeline>
 <codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="90"><highlight class="normal"></highlight></codeline>
 <codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structecto_1_1serialization_1_1registry_1ae82f89f8e2bdcf2573671a6d390a94e2" kindref="member">add</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name,<sp/><ref refid="structecto_1_1serialization_1_1registry_1a9bbc5358e0b5bb519983c16db9c6391b" kindref="member">serial_fn_t</ref><sp/>fnc);</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structecto_1_1serialization_1_1registry_1ae82f89f8e2bdcf2573671a6d390a94e2" kindref="member">add</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name,<sp/>serial_fn_t<sp/>fnc);</highlight></codeline>
 <codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structecto_1_1serialization_1_1registry_1afaecca49afab42cb3f41a7a515b69cbb" kindref="member">serialize</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>key,<sp/>Archive&amp;<sp/>ar,<sp/><ref refid="classecto_1_1tendril" kindref="compound">tendril</ref>&amp;<sp/>t)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="95"><highlight class="normal"></highlight></codeline>
-<codeline lineno="96" refid="structecto_1_1serialization_1_1registry_1a7ef09466a24edc21695e3905c0a7921b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structecto_1_1serialization_1_1registry_1a89253dc4749e297b132dacb9e14967c2" kindref="member">serial_map_t</ref><sp/><ref refid="structecto_1_1serialization_1_1registry_1a7ef09466a24edc21695e3905c0a7921b" kindref="member">serial_map</ref>;</highlight></codeline>
+<codeline lineno="96" refid="structecto_1_1serialization_1_1registry_1a7ef09466a24edc21695e3905c0a7921b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>serial_map_t<sp/><ref refid="structecto_1_1serialization_1_1registry_1a7ef09466a24edc21695e3905c0a7921b" kindref="member">serial_map</ref>;</highlight></codeline>
 <codeline lineno="97"><highlight class="normal"></highlight></codeline>
 <codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="structecto_1_1serialization_1_1registry" kindref="compound">registry&lt;Archive&gt;</ref>&amp;<sp/><ref refid="structecto_1_1serialization_1_1registry_1a19aae99a3cc5ddb4b56d069faf01e300" kindref="member">instance</ref>();</highlight></codeline>
 <codeline lineno="99"><highlight class="normal"></highlight></codeline>
@@ -403,12 +403,12 @@
 <codeline lineno="134"><highlight class="preprocessor"><sp/><sp/>namespace<sp/>serialization{<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
 <codeline lineno="135"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>template<sp/>struct<sp/>register_serializer&lt;Type&gt;;<sp/>\</highlight></codeline>
 <codeline lineno="136"><highlight class="preprocessor"><sp/><sp/>}<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
-<codeline lineno="137"><highlight class="preprocessor">}</highlight></codeline>
-<codeline lineno="138"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="preprocessor">}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
 <codeline lineno="139" refid="serialization_2registry_8hpp_1a12f48be608e34f182e8c5453106ab1d5" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECTO_INSTANTIATE_SERIALIZATION(T)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
 <codeline lineno="140"><highlight class="preprocessor"><sp/><sp/>template<sp/>void<sp/>T::serialize(boost::archive::binary_oarchive&amp;,<sp/>const<sp/>unsigned<sp/>int);<sp/>\</highlight></codeline>
-<codeline lineno="141"><highlight class="preprocessor"><sp/><sp/>template<sp/>void<sp/>T::serialize(boost::archive::binary_iarchive&amp;,<sp/>const<sp/>unsigned<sp/>int);</highlight></codeline>
-<codeline lineno="142"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="preprocessor"><sp/><sp/>template<sp/>void<sp/>T::serialize(boost::archive::binary_iarchive&amp;,<sp/>const<sp/>unsigned<sp/>int);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/registry.hpp"/>
   </compounddef>

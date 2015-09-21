@@ -1,40 +1,38 @@
-\hypertarget{structecto_1_1plasm}{\section{ecto\-:\-:plasm Struct Reference}
-\label{structecto_1_1plasm}\index{ecto\-::plasm@{ecto\-::plasm}}
-}
+\hypertarget{structecto_1_1plasm}{}\section{ecto\+:\+:plasm Struct Reference}
+\label{structecto_1_1plasm}\index{ecto\+::plasm@{ecto\+::plasm}}
 
 
-The plasm helps construct the graph structure in ecto. It enforces several invariants that are necessary for scheduling D\-A\-Gs and is used by all the ecto\-::schedulers to enable execution of modules that are connected in the graph.  
-
-
-
-
-{\ttfamily \#include $<$plasm.\-hpp$>$}
+The plasm helps construct the graph structure in ecto. It enforces several invariants that are necessary for scheduling D\+A\+Gs and is used by all the ecto\+::schedulers to enable execution of modules that are connected in the graph.  
 
 
 
-Inheritance diagram for ecto\-:\-:plasm\-:\nopagebreak
+
+{\ttfamily \#include $<$plasm.\+hpp$>$}
+
+
+
+Inheritance diagram for ecto\+:\+:plasm\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=295pt]{structecto_1_1plasm__inherit__graph}
+\includegraphics[width=296pt]{structecto_1_1plasm__inherit__graph}
 \end{center}
 \end{figure}
 
 
-Collaboration diagram for ecto\-:\-:plasm\-:\nopagebreak
+Collaboration diagram for ecto\+:\+:plasm\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=295pt]{structecto_1_1plasm__coll__graph}
+\includegraphics[width=296pt]{structecto_1_1plasm__coll__graph}
 \end{center}
 \end{figure}
 \subsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef boost\-::shared\-\_\-ptr$<$ \hyperlink{structecto_1_1plasm}{plasm} $>$ \hyperlink{structecto_1_1plasm_a899b9da452ab35849f07038c90990ac3}{ptr}
+typedef boost\+::shared\+\_\+ptr$<$ \hyperlink{structecto_1_1plasm}{plasm} $>$ \hyperlink{structecto_1_1plasm_a899b9da452ab35849f07038c90990ac3}{ptr}
 \item 
-typedef boost\-::shared\-\_\-ptr\\*
-$<$ \hyperlink{structecto_1_1plasm}{plasm} const  $>$ \hyperlink{structecto_1_1plasm_afd3b9e2d4732023ab9e94553e0d66ac4}{cptr}
+typedef boost\+::shared\+\_\+ptr$<$ \hyperlink{structecto_1_1plasm}{plasm} const  $>$ \hyperlink{structecto_1_1plasm_afd3b9e2d4732023ab9e94553e0d66ac4}{cptr}
 \end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -43,37 +41,37 @@ $<$ \hyperlink{structecto_1_1plasm}{plasm} const  $>$ \hyperlink{structecto_1_1p
 \item 
 \hyperlink{structecto_1_1plasm_a3000d2cb042c0875b4d5c38d33763845}{$\sim$plasm} ()
 \item 
-void \hyperlink{structecto_1_1plasm_a3419c720b1f839cf9b423655cf4de343}{insert} (\hyperlink{namespaceecto_aed1809e82b9229ea81ef9ee3438cf62c}{cell\-\_\-ptr} mod)
+void \hyperlink{structecto_1_1plasm_a3419c720b1f839cf9b423655cf4de343}{insert} (\hyperlink{namespaceecto_aed1809e82b9229ea81ef9ee3438cf62c}{cell\+\_\+ptr} mod)
 \begin{DoxyCompactList}\small\item\em Insert the cell into the graph so that it may be executed by a scheduler. \end{DoxyCompactList}\item 
-void \hyperlink{structecto_1_1plasm_a0ca320f5cef8372cfa713fd7991ad3b2}{connect} (\hyperlink{namespaceecto_aed1809e82b9229ea81ef9ee3438cf62c}{cell\-\_\-ptr} from, const std\-::string \&output, \hyperlink{namespaceecto_aed1809e82b9229ea81ef9ee3438cf62c}{cell\-\_\-ptr} to, const std\-::string \&input)
+void \hyperlink{structecto_1_1plasm_a0ca320f5cef8372cfa713fd7991ad3b2}{connect} (\hyperlink{namespaceecto_aed1809e82b9229ea81ef9ee3438cf62c}{cell\+\_\+ptr} from, const std\+::string \&output, \hyperlink{namespaceecto_aed1809e82b9229ea81ef9ee3438cf62c}{cell\+\_\+ptr} to, const std\+::string \&input)
 \begin{DoxyCompactList}\small\item\em Connect one cell to another, and populate the graph accordingly. This will throw on a type mismatch. \end{DoxyCompactList}\item 
-void \hyperlink{structecto_1_1plasm_a5e187b40ce0a7d7ed9a6859452aed5ca}{disconnect} (\hyperlink{namespaceecto_aed1809e82b9229ea81ef9ee3438cf62c}{cell\-\_\-ptr} from, const std\-::string \&output, \hyperlink{namespaceecto_aed1809e82b9229ea81ef9ee3438cf62c}{cell\-\_\-ptr} to, const std\-::string \&input)
+void \hyperlink{structecto_1_1plasm_a5e187b40ce0a7d7ed9a6859452aed5ca}{disconnect} (\hyperlink{namespaceecto_aed1809e82b9229ea81ef9ee3438cf62c}{cell\+\_\+ptr} from, const std\+::string \&output, \hyperlink{namespaceecto_aed1809e82b9229ea81ef9ee3438cf62c}{cell\+\_\+ptr} to, const std\+::string \&input)
 \item 
-void \hyperlink{structecto_1_1plasm_a6350e90b6d85a218e7a84183eaed0c18}{viz} (std\-::ostream \&out) const 
+void \hyperlink{structecto_1_1plasm_a6350e90b6d85a218e7a84183eaed0c18}{viz} (std\+::ostream \&out) const 
 \begin{DoxyCompactList}\small\item\em output graphviz to a stream. \end{DoxyCompactList}\item 
-std\-::string \hyperlink{structecto_1_1plasm_a4586d90c908123a18dbd3a26c206f63c}{viz} () const 
-\begin{DoxyCompactList}\small\item\em Get a std\-::string graphiz of the cell. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{structecto_1_1plasm_a4586d90c908123a18dbd3a26c206f63c}{viz} () const 
+\begin{DoxyCompactList}\small\item\em Get a std\+::string graphiz of the cell. \end{DoxyCompactList}\item 
 void \hyperlink{structecto_1_1plasm_a9554edd5758b8a83ed092a81e249f64a}{check} () const 
 \begin{DoxyCompactList}\small\item\em Check that all tags on the graph are satisfied. This will throw on errors in the graph, including, if required inputs are not connected if required outputs are not connected, if there are cycles, etc... \end{DoxyCompactList}\item 
-\hyperlink{structecto_1_1graph_1_1graph__t}{graph\-::graph\-\_\-t} \& \hyperlink{structecto_1_1plasm_a4f8de02440afdad0aa395fbaea03399e}{graph} ()
+\hyperlink{structecto_1_1graph_1_1graph__t}{graph\+::graph\+\_\+t} \& \hyperlink{structecto_1_1plasm_a4f8de02440afdad0aa395fbaea03399e}{graph} ()
 \begin{DoxyCompactList}\small\item\em Get the underlying boost graph that this plasm has constructed. \end{DoxyCompactList}\item 
-const \hyperlink{structecto_1_1graph_1_1graph__t}{graph\-::graph\-\_\-t} \& \hyperlink{structecto_1_1plasm_ac6cde6d1d615e85f442ce299fdf0e7a0}{graph} () const 
+const \hyperlink{structecto_1_1graph_1_1graph__t}{graph\+::graph\+\_\+t} \& \hyperlink{structecto_1_1plasm_ac6cde6d1d615e85f442ce299fdf0e7a0}{graph} () const 
 \item 
-std\-::size\-\_\-t \hyperlink{structecto_1_1plasm_aaeeabeb3f78c1a7291eb14e0f705574e}{size} () const 
+std\+::size\+\_\+t \hyperlink{structecto_1_1plasm_aaeeabeb3f78c1a7291eb14e0f705574e}{size} () const 
 \begin{DoxyCompactList}\small\item\em Return the number of cells in the plasm (vertices in the graph) \end{DoxyCompactList}\item 
-std\-::vector$<$ \hyperlink{namespaceecto_aed1809e82b9229ea81ef9ee3438cf62c}{cell\-\_\-ptr} $>$ \hyperlink{structecto_1_1plasm_aa7724234d631563b10de07030c066e01}{cells} () const 
+std\+::vector$<$ \hyperlink{namespaceecto_aed1809e82b9229ea81ef9ee3438cf62c}{cell\+\_\+ptr} $>$ \hyperlink{structecto_1_1plasm_aa7724234d631563b10de07030c066e01}{cells} () const 
 \begin{DoxyCompactList}\small\item\em Grab a set of all the cells from the plasm. \end{DoxyCompactList}\item 
-void \hyperlink{structecto_1_1plasm_a55d56445bd1d09b9422390fb49e81bec}{configure\-\_\-all} ()
+void \hyperlink{structecto_1_1plasm_a55d56445bd1d09b9422390fb49e81bec}{configure\+\_\+all} ()
 \begin{DoxyCompactList}\small\item\em Calls configure on all modules, if configure has not already been called. \end{DoxyCompactList}\item 
-void \hyperlink{structecto_1_1plasm_a4419135c6c8dd8bb0cc7f4807a025df2}{activate\-\_\-all} ()
-\begin{DoxyCompactList}\small\item\em Calls activate on all modules, if hasn't already been called. \end{DoxyCompactList}\item 
-void \hyperlink{structecto_1_1plasm_a6c10f2812f731c3787e5e22bdd80e9bc}{deactivate\-\_\-all} ()
-\begin{DoxyCompactList}\small\item\em Calls deactivate on all modules, if it hasn't already been called. \end{DoxyCompactList}\item 
-void \hyperlink{structecto_1_1plasm_a992f656fa931efc20d2cf1a97c963cec}{reset\-\_\-ticks} ()
+void \hyperlink{structecto_1_1plasm_a4419135c6c8dd8bb0cc7f4807a025df2}{activate\+\_\+all} ()
+\begin{DoxyCompactList}\small\item\em Calls activate on all modules, if hasn\textquotesingle{}t already been called. \end{DoxyCompactList}\item 
+void \hyperlink{structecto_1_1plasm_a6c10f2812f731c3787e5e22bdd80e9bc}{deactivate\+\_\+all} ()
+\begin{DoxyCompactList}\small\item\em Calls deactivate on all modules, if it hasn\textquotesingle{}t already been called. \end{DoxyCompactList}\item 
+void \hyperlink{structecto_1_1plasm_a992f656fa931efc20d2cf1a97c963cec}{reset\+\_\+ticks} ()
 \item 
-void \hyperlink{structecto_1_1plasm_ab0fd6bec2e5d8943363fe5aa36c1d676}{save} (std\-::ostream \&) const 
+void \hyperlink{structecto_1_1plasm_ab0fd6bec2e5d8943363fe5aa36c1d676}{save} (std\+::ostream \&) const 
 \item 
-void \hyperlink{structecto_1_1plasm_a854400c2f46f995731e058c72a547185}{load} (std\-::istream \&)
+void \hyperlink{structecto_1_1plasm_a854400c2f46f995731e058c72a547185}{load} (std\+::istream \&)
 \end{DoxyCompactItemize}
 \subsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -82,77 +80,77 @@ void \hyperlink{structecto_1_1plasm_a854400c2f46f995731e058c72a547185}{load} (st
 \item 
 {\footnotesize template$<$class Archive $>$ }\\void \hyperlink{structecto_1_1plasm_ae6540bca37d0980ec24b0b75061e124e}{load} (Archive \&ar, const unsigned int)
 \item 
-\hyperlink{structecto_1_1plasm_ac443cf0a58324a8003e1c9fd3b49b428}{B\-O\-O\-S\-T\-\_\-\-S\-E\-R\-I\-A\-L\-I\-Z\-A\-T\-I\-O\-N\-\_\-\-S\-P\-L\-I\-T\-\_\-\-M\-E\-M\-B\-E\-R} ()
+\hyperlink{structecto_1_1plasm_ac443cf0a58324a8003e1c9fd3b49b428}{B\+O\+O\+S\+T\+\_\+\+S\+E\+R\+I\+A\+L\+I\+Z\+A\+T\+I\+O\+N\+\_\+\+S\+P\+L\+I\+T\+\_\+\+M\+E\+M\+B\+E\+R} ()
 \end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-boost\-::shared\-\_\-ptr$<$ impl $>$ \hyperlink{structecto_1_1plasm_a4cfd41e9dc82039a75970755565b2513}{impl\-\_\-}
+boost\+::shared\+\_\+ptr$<$ impl $>$ \hyperlink{structecto_1_1plasm_a4cfd41e9dc82039a75970755565b2513}{impl\+\_\+}
 \item 
 bool \hyperlink{structecto_1_1plasm_a8d074da8290587fab0ed04d5cfe3f6b1}{configured}
 \end{DoxyCompactItemize}
 \subsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
-class \hyperlink{structecto_1_1plasm_ac98d07dd8f7b70e16ccb9a01abf56b9c}{boost\-::serialization\-::access}
+class \hyperlink{structecto_1_1plasm_ac98d07dd8f7b70e16ccb9a01abf56b9c}{boost\+::serialization\+::access}
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-The plasm helps construct the graph structure in ecto. It enforces several invariants that are necessary for scheduling D\-A\-Gs and is used by all the ecto\-::schedulers to enable execution of modules that are connected in the graph. 
+The plasm helps construct the graph structure in ecto. It enforces several invariants that are necessary for scheduling D\+A\+Gs and is used by all the ecto\+::schedulers to enable execution of modules that are connected in the graph. 
 
 \subsection{Member Typedef Documentation}
-\hypertarget{structecto_1_1plasm_afd3b9e2d4732023ab9e94553e0d66ac4}{\index{ecto\-::plasm@{ecto\-::plasm}!cptr@{cptr}}
-\index{cptr@{cptr}!ecto::plasm@{ecto\-::plasm}}
-\subsubsection[{cptr}]{\setlength{\rightskip}{0pt plus 5cm}typedef boost\-::shared\-\_\-ptr$<${\bf plasm} const$>$ {\bf ecto\-::plasm\-::cptr}}}\label{structecto_1_1plasm_afd3b9e2d4732023ab9e94553e0d66ac4}
-\hypertarget{structecto_1_1plasm_a899b9da452ab35849f07038c90990ac3}{\index{ecto\-::plasm@{ecto\-::plasm}!ptr@{ptr}}
-\index{ptr@{ptr}!ecto::plasm@{ecto\-::plasm}}
-\subsubsection[{ptr}]{\setlength{\rightskip}{0pt plus 5cm}typedef boost\-::shared\-\_\-ptr$<${\bf plasm}$>$ {\bf ecto\-::plasm\-::ptr}}}\label{structecto_1_1plasm_a899b9da452ab35849f07038c90990ac3}
+\hypertarget{structecto_1_1plasm_afd3b9e2d4732023ab9e94553e0d66ac4}{}\index{ecto\+::plasm@{ecto\+::plasm}!cptr@{cptr}}
+\index{cptr@{cptr}!ecto\+::plasm@{ecto\+::plasm}}
+\subsubsection[{cptr}]{\setlength{\rightskip}{0pt plus 5cm}typedef boost\+::shared\+\_\+ptr$<${\bf plasm} const$>$ {\bf ecto\+::plasm\+::cptr}}\label{structecto_1_1plasm_afd3b9e2d4732023ab9e94553e0d66ac4}
+\hypertarget{structecto_1_1plasm_a899b9da452ab35849f07038c90990ac3}{}\index{ecto\+::plasm@{ecto\+::plasm}!ptr@{ptr}}
+\index{ptr@{ptr}!ecto\+::plasm@{ecto\+::plasm}}
+\subsubsection[{ptr}]{\setlength{\rightskip}{0pt plus 5cm}typedef boost\+::shared\+\_\+ptr$<${\bf plasm}$>$ {\bf ecto\+::plasm\+::ptr}}\label{structecto_1_1plasm_a899b9da452ab35849f07038c90990ac3}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{structecto_1_1plasm_a1d4a2f7e4fa1a4ef839c7ba0316a825c}{\index{ecto\-::plasm@{ecto\-::plasm}!plasm@{plasm}}
-\index{plasm@{plasm}!ecto::plasm@{ecto\-::plasm}}
-\subsubsection[{plasm}]{\setlength{\rightskip}{0pt plus 5cm}ecto\-::plasm\-::plasm (
+\hypertarget{structecto_1_1plasm_a1d4a2f7e4fa1a4ef839c7ba0316a825c}{}\index{ecto\+::plasm@{ecto\+::plasm}!plasm@{plasm}}
+\index{plasm@{plasm}!ecto\+::plasm@{ecto\+::plasm}}
+\subsubsection[{plasm}]{\setlength{\rightskip}{0pt plus 5cm}ecto\+::plasm\+::plasm (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{structecto_1_1plasm_a1d4a2f7e4fa1a4ef839c7ba0316a825c}
-\hypertarget{structecto_1_1plasm_a3000d2cb042c0875b4d5c38d33763845}{\index{ecto\-::plasm@{ecto\-::plasm}!$\sim$plasm@{$\sim$plasm}}
-\index{$\sim$plasm@{$\sim$plasm}!ecto::plasm@{ecto\-::plasm}}
-\subsubsection[{$\sim$plasm}]{\setlength{\rightskip}{0pt plus 5cm}ecto\-::plasm\-::$\sim$plasm (
+)}\label{structecto_1_1plasm_a1d4a2f7e4fa1a4ef839c7ba0316a825c}
+\hypertarget{structecto_1_1plasm_a3000d2cb042c0875b4d5c38d33763845}{}\index{ecto\+::plasm@{ecto\+::plasm}!````~plasm@{$\sim$plasm}}
+\index{````~plasm@{$\sim$plasm}!ecto\+::plasm@{ecto\+::plasm}}
+\subsubsection[{$\sim$plasm}]{\setlength{\rightskip}{0pt plus 5cm}ecto\+::plasm\+::$\sim$plasm (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{structecto_1_1plasm_a3000d2cb042c0875b4d5c38d33763845}
+)}\label{structecto_1_1plasm_a3000d2cb042c0875b4d5c38d33763845}
 
 
 \subsection{Member Function Documentation}
-\hypertarget{structecto_1_1plasm_a4419135c6c8dd8bb0cc7f4807a025df2}{\index{ecto\-::plasm@{ecto\-::plasm}!activate\-\_\-all@{activate\-\_\-all}}
-\index{activate\-\_\-all@{activate\-\_\-all}!ecto::plasm@{ecto\-::plasm}}
-\subsubsection[{activate\-\_\-all}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::plasm\-::activate\-\_\-all (
+\hypertarget{structecto_1_1plasm_a4419135c6c8dd8bb0cc7f4807a025df2}{}\index{ecto\+::plasm@{ecto\+::plasm}!activate\+\_\+all@{activate\+\_\+all}}
+\index{activate\+\_\+all@{activate\+\_\+all}!ecto\+::plasm@{ecto\+::plasm}}
+\subsubsection[{activate\+\_\+all}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::plasm\+::activate\+\_\+all (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{structecto_1_1plasm_a4419135c6c8dd8bb0cc7f4807a025df2}
+)}\label{structecto_1_1plasm_a4419135c6c8dd8bb0cc7f4807a025df2}
 
 
-Calls activate on all modules, if hasn't already been called. 
+Calls activate on all modules, if hasn\textquotesingle{}t already been called. 
 
-\hypertarget{structecto_1_1plasm_ac443cf0a58324a8003e1c9fd3b49b428}{\index{ecto\-::plasm@{ecto\-::plasm}!B\-O\-O\-S\-T\-\_\-\-S\-E\-R\-I\-A\-L\-I\-Z\-A\-T\-I\-O\-N\-\_\-\-S\-P\-L\-I\-T\-\_\-\-M\-E\-M\-B\-E\-R@{B\-O\-O\-S\-T\-\_\-\-S\-E\-R\-I\-A\-L\-I\-Z\-A\-T\-I\-O\-N\-\_\-\-S\-P\-L\-I\-T\-\_\-\-M\-E\-M\-B\-E\-R}}
-\index{B\-O\-O\-S\-T\-\_\-\-S\-E\-R\-I\-A\-L\-I\-Z\-A\-T\-I\-O\-N\-\_\-\-S\-P\-L\-I\-T\-\_\-\-M\-E\-M\-B\-E\-R@{B\-O\-O\-S\-T\-\_\-\-S\-E\-R\-I\-A\-L\-I\-Z\-A\-T\-I\-O\-N\-\_\-\-S\-P\-L\-I\-T\-\_\-\-M\-E\-M\-B\-E\-R}!ecto::plasm@{ecto\-::plasm}}
-\subsubsection[{B\-O\-O\-S\-T\-\_\-\-S\-E\-R\-I\-A\-L\-I\-Z\-A\-T\-I\-O\-N\-\_\-\-S\-P\-L\-I\-T\-\_\-\-M\-E\-M\-B\-E\-R}]{\setlength{\rightskip}{0pt plus 5cm}ecto\-::plasm\-::\-B\-O\-O\-S\-T\-\_\-\-S\-E\-R\-I\-A\-L\-I\-Z\-A\-T\-I\-O\-N\-\_\-\-S\-P\-L\-I\-T\-\_\-\-M\-E\-M\-B\-E\-R (
+\hypertarget{structecto_1_1plasm_ac443cf0a58324a8003e1c9fd3b49b428}{}\index{ecto\+::plasm@{ecto\+::plasm}!B\+O\+O\+S\+T\+\_\+\+S\+E\+R\+I\+A\+L\+I\+Z\+A\+T\+I\+O\+N\+\_\+\+S\+P\+L\+I\+T\+\_\+\+M\+E\+M\+B\+E\+R@{B\+O\+O\+S\+T\+\_\+\+S\+E\+R\+I\+A\+L\+I\+Z\+A\+T\+I\+O\+N\+\_\+\+S\+P\+L\+I\+T\+\_\+\+M\+E\+M\+B\+E\+R}}
+\index{B\+O\+O\+S\+T\+\_\+\+S\+E\+R\+I\+A\+L\+I\+Z\+A\+T\+I\+O\+N\+\_\+\+S\+P\+L\+I\+T\+\_\+\+M\+E\+M\+B\+E\+R@{B\+O\+O\+S\+T\+\_\+\+S\+E\+R\+I\+A\+L\+I\+Z\+A\+T\+I\+O\+N\+\_\+\+S\+P\+L\+I\+T\+\_\+\+M\+E\+M\+B\+E\+R}!ecto\+::plasm@{ecto\+::plasm}}
+\subsubsection[{B\+O\+O\+S\+T\+\_\+\+S\+E\+R\+I\+A\+L\+I\+Z\+A\+T\+I\+O\+N\+\_\+\+S\+P\+L\+I\+T\+\_\+\+M\+E\+M\+B\+E\+R}]{\setlength{\rightskip}{0pt plus 5cm}ecto\+::plasm\+::\+B\+O\+O\+S\+T\+\_\+\+S\+E\+R\+I\+A\+L\+I\+Z\+A\+T\+I\+O\+N\+\_\+\+S\+P\+L\+I\+T\+\_\+\+M\+E\+M\+B\+E\+R (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}}\label{structecto_1_1plasm_ac443cf0a58324a8003e1c9fd3b49b428}
-\hypertarget{structecto_1_1plasm_aa7724234d631563b10de07030c066e01}{\index{ecto\-::plasm@{ecto\-::plasm}!cells@{cells}}
-\index{cells@{cells}!ecto::plasm@{ecto\-::plasm}}
-\subsubsection[{cells}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf cell\-\_\-ptr}$>$ ecto\-::plasm\-::cells (
+)\hspace{0.3cm}{\ttfamily [private]}}\label{structecto_1_1plasm_ac443cf0a58324a8003e1c9fd3b49b428}
+\hypertarget{structecto_1_1plasm_aa7724234d631563b10de07030c066e01}{}\index{ecto\+::plasm@{ecto\+::plasm}!cells@{cells}}
+\index{cells@{cells}!ecto\+::plasm@{ecto\+::plasm}}
+\subsubsection[{cells}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf cell\+\_\+ptr}$>$ ecto\+::plasm\+::cells (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const}}\label{structecto_1_1plasm_aa7724234d631563b10de07030c066e01}
+) const}\label{structecto_1_1plasm_aa7724234d631563b10de07030c066e01}
 
 
 Grab a set of all the cells from the plasm. 
@@ -160,38 +158,38 @@ Grab a set of all the cells from the plasm.
 \begin{DoxyReturn}{Returns}
 a set of cells. 
 \end{DoxyReturn}
-\hypertarget{structecto_1_1plasm_a9554edd5758b8a83ed092a81e249f64a}{\index{ecto\-::plasm@{ecto\-::plasm}!check@{check}}
-\index{check@{check}!ecto::plasm@{ecto\-::plasm}}
-\subsubsection[{check}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::plasm\-::check (
+\hypertarget{structecto_1_1plasm_a9554edd5758b8a83ed092a81e249f64a}{}\index{ecto\+::plasm@{ecto\+::plasm}!check@{check}}
+\index{check@{check}!ecto\+::plasm@{ecto\+::plasm}}
+\subsubsection[{check}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::plasm\+::check (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const}}\label{structecto_1_1plasm_a9554edd5758b8a83ed092a81e249f64a}
+) const}\label{structecto_1_1plasm_a9554edd5758b8a83ed092a81e249f64a}
 
 
 Check that all tags on the graph are satisfied. This will throw on errors in the graph, including, if required inputs are not connected if required outputs are not connected, if there are cycles, etc... 
 
-\hypertarget{structecto_1_1plasm_a55d56445bd1d09b9422390fb49e81bec}{\index{ecto\-::plasm@{ecto\-::plasm}!configure\-\_\-all@{configure\-\_\-all}}
-\index{configure\-\_\-all@{configure\-\_\-all}!ecto::plasm@{ecto\-::plasm}}
-\subsubsection[{configure\-\_\-all}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::plasm\-::configure\-\_\-all (
+\hypertarget{structecto_1_1plasm_a55d56445bd1d09b9422390fb49e81bec}{}\index{ecto\+::plasm@{ecto\+::plasm}!configure\+\_\+all@{configure\+\_\+all}}
+\index{configure\+\_\+all@{configure\+\_\+all}!ecto\+::plasm@{ecto\+::plasm}}
+\subsubsection[{configure\+\_\+all}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::plasm\+::configure\+\_\+all (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{structecto_1_1plasm_a55d56445bd1d09b9422390fb49e81bec}
+)}\label{structecto_1_1plasm_a55d56445bd1d09b9422390fb49e81bec}
 
 
 Calls configure on all modules, if configure has not already been called. 
 
-\hypertarget{structecto_1_1plasm_a0ca320f5cef8372cfa713fd7991ad3b2}{\index{ecto\-::plasm@{ecto\-::plasm}!connect@{connect}}
-\index{connect@{connect}!ecto::plasm@{ecto\-::plasm}}
-\subsubsection[{connect}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::plasm\-::connect (
+\hypertarget{structecto_1_1plasm_a0ca320f5cef8372cfa713fd7991ad3b2}{}\index{ecto\+::plasm@{ecto\+::plasm}!connect@{connect}}
+\index{connect@{connect}!ecto\+::plasm@{ecto\+::plasm}}
+\subsubsection[{connect}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::plasm\+::connect (
 \begin{DoxyParamCaption}
-\item[{{\bf cell\-\_\-ptr}}]{from, }
-\item[{const std\-::string \&}]{output, }
-\item[{{\bf cell\-\_\-ptr}}]{to, }
-\item[{const std\-::string \&}]{input}
+\item[{{\bf cell\+\_\+ptr}}]{from, }
+\item[{const std\+::string \&}]{output, }
+\item[{{\bf cell\+\_\+ptr}}]{to, }
+\item[{const std\+::string \&}]{input}
 \end{DoxyParamCaption}
-)}}\label{structecto_1_1plasm_a0ca320f5cef8372cfa713fd7991ad3b2}
+)}\label{structecto_1_1plasm_a0ca320f5cef8372cfa713fd7991ad3b2}
 
 
 Connect one cell to another, and populate the graph accordingly. This will throw on a type mismatch. 
@@ -207,27 +205,27 @@ Connect one cell to another, and populate the graph accordingly. This will throw
 {\em input} & The input key from the to cell. \\
 \hline
 \end{DoxyParams}
-\hypertarget{structecto_1_1plasm_a6c10f2812f731c3787e5e22bdd80e9bc}{\index{ecto\-::plasm@{ecto\-::plasm}!deactivate\-\_\-all@{deactivate\-\_\-all}}
-\index{deactivate\-\_\-all@{deactivate\-\_\-all}!ecto::plasm@{ecto\-::plasm}}
-\subsubsection[{deactivate\-\_\-all}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::plasm\-::deactivate\-\_\-all (
+\hypertarget{structecto_1_1plasm_a6c10f2812f731c3787e5e22bdd80e9bc}{}\index{ecto\+::plasm@{ecto\+::plasm}!deactivate\+\_\+all@{deactivate\+\_\+all}}
+\index{deactivate\+\_\+all@{deactivate\+\_\+all}!ecto\+::plasm@{ecto\+::plasm}}
+\subsubsection[{deactivate\+\_\+all}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::plasm\+::deactivate\+\_\+all (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{structecto_1_1plasm_a6c10f2812f731c3787e5e22bdd80e9bc}
+)}\label{structecto_1_1plasm_a6c10f2812f731c3787e5e22bdd80e9bc}
 
 
-Calls deactivate on all modules, if it hasn't already been called. 
+Calls deactivate on all modules, if it hasn\textquotesingle{}t already been called. 
 
-\hypertarget{structecto_1_1plasm_a5e187b40ce0a7d7ed9a6859452aed5ca}{\index{ecto\-::plasm@{ecto\-::plasm}!disconnect@{disconnect}}
-\index{disconnect@{disconnect}!ecto::plasm@{ecto\-::plasm}}
-\subsubsection[{disconnect}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::plasm\-::disconnect (
+\hypertarget{structecto_1_1plasm_a5e187b40ce0a7d7ed9a6859452aed5ca}{}\index{ecto\+::plasm@{ecto\+::plasm}!disconnect@{disconnect}}
+\index{disconnect@{disconnect}!ecto\+::plasm@{ecto\+::plasm}}
+\subsubsection[{disconnect}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::plasm\+::disconnect (
 \begin{DoxyParamCaption}
-\item[{{\bf cell\-\_\-ptr}}]{from, }
-\item[{const std\-::string \&}]{output, }
-\item[{{\bf cell\-\_\-ptr}}]{to, }
-\item[{const std\-::string \&}]{input}
+\item[{{\bf cell\+\_\+ptr}}]{from, }
+\item[{const std\+::string \&}]{output, }
+\item[{{\bf cell\+\_\+ptr}}]{to, }
+\item[{const std\+::string \&}]{input}
 \end{DoxyParamCaption}
-)}}\label{structecto_1_1plasm_a5e187b40ce0a7d7ed9a6859452aed5ca}
+)}\label{structecto_1_1plasm_a5e187b40ce0a7d7ed9a6859452aed5ca}
 Disconnect a tendril from another tendril.
 
 
@@ -241,13 +239,13 @@ Disconnect a tendril from another tendril.
 {\em input} & \\
 \hline
 \end{DoxyParams}
-\hypertarget{structecto_1_1plasm_a4f8de02440afdad0aa395fbaea03399e}{\index{ecto\-::plasm@{ecto\-::plasm}!graph@{graph}}
-\index{graph@{graph}!ecto::plasm@{ecto\-::plasm}}
-\subsubsection[{graph}]{\setlength{\rightskip}{0pt plus 5cm}{\bf graph\-::graph\-\_\-t}\& ecto\-::plasm\-::graph (
+\hypertarget{structecto_1_1plasm_a4f8de02440afdad0aa395fbaea03399e}{}\index{ecto\+::plasm@{ecto\+::plasm}!graph@{graph}}
+\index{graph@{graph}!ecto\+::plasm@{ecto\+::plasm}}
+\subsubsection[{graph}]{\setlength{\rightskip}{0pt plus 5cm}{\bf graph\+::graph\+\_\+t}\& ecto\+::plasm\+::graph (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{structecto_1_1plasm_a4f8de02440afdad0aa395fbaea03399e}
+)}\label{structecto_1_1plasm_a4f8de02440afdad0aa395fbaea03399e}
 
 
 Get the underlying boost graph that this plasm has constructed. 
@@ -255,20 +253,20 @@ Get the underlying boost graph that this plasm has constructed.
 \begin{DoxyReturn}{Returns}
 
 \end{DoxyReturn}
-\hypertarget{structecto_1_1plasm_ac6cde6d1d615e85f442ce299fdf0e7a0}{\index{ecto\-::plasm@{ecto\-::plasm}!graph@{graph}}
-\index{graph@{graph}!ecto::plasm@{ecto\-::plasm}}
-\subsubsection[{graph}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf graph\-::graph\-\_\-t}\& ecto\-::plasm\-::graph (
+\hypertarget{structecto_1_1plasm_ac6cde6d1d615e85f442ce299fdf0e7a0}{}\index{ecto\+::plasm@{ecto\+::plasm}!graph@{graph}}
+\index{graph@{graph}!ecto\+::plasm@{ecto\+::plasm}}
+\subsubsection[{graph}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf graph\+::graph\+\_\+t}\& ecto\+::plasm\+::graph (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const}}\label{structecto_1_1plasm_ac6cde6d1d615e85f442ce299fdf0e7a0}
-\hypertarget{structecto_1_1plasm_a3419c720b1f839cf9b423655cf4de343}{\index{ecto\-::plasm@{ecto\-::plasm}!insert@{insert}}
-\index{insert@{insert}!ecto::plasm@{ecto\-::plasm}}
-\subsubsection[{insert}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::plasm\-::insert (
+) const}\label{structecto_1_1plasm_ac6cde6d1d615e85f442ce299fdf0e7a0}
+\hypertarget{structecto_1_1plasm_a3419c720b1f839cf9b423655cf4de343}{}\index{ecto\+::plasm@{ecto\+::plasm}!insert@{insert}}
+\index{insert@{insert}!ecto\+::plasm@{ecto\+::plasm}}
+\subsubsection[{insert}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::plasm\+::insert (
 \begin{DoxyParamCaption}
-\item[{{\bf cell\-\_\-ptr}}]{mod}
+\item[{{\bf cell\+\_\+ptr}}]{mod}
 \end{DoxyParamCaption}
-)}}\label{structecto_1_1plasm_a3419c720b1f839cf9b423655cf4de343}
+)}\label{structecto_1_1plasm_a3419c720b1f839cf9b423655cf4de343}
 
 
 Insert the cell into the graph so that it may be executed by a scheduler. 
@@ -278,61 +276,61 @@ Insert the cell into the graph so that it may be executed by a scheduler.
 {\em mod} & The cell to insert into the graph. \\
 \hline
 \end{DoxyParams}
-\hypertarget{structecto_1_1plasm_a854400c2f46f995731e058c72a547185}{\index{ecto\-::plasm@{ecto\-::plasm}!load@{load}}
-\index{load@{load}!ecto::plasm@{ecto\-::plasm}}
-\subsubsection[{load}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::plasm\-::load (
+\hypertarget{structecto_1_1plasm_a854400c2f46f995731e058c72a547185}{}\index{ecto\+::plasm@{ecto\+::plasm}!load@{load}}
+\index{load@{load}!ecto\+::plasm@{ecto\+::plasm}}
+\subsubsection[{load}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::plasm\+::load (
 \begin{DoxyParamCaption}
-\item[{std\-::istream \&}]{}
+\item[{std\+::istream \&}]{}
 \end{DoxyParamCaption}
-)}}\label{structecto_1_1plasm_a854400c2f46f995731e058c72a547185}
-\hypertarget{structecto_1_1plasm_ae6540bca37d0980ec24b0b75061e124e}{\index{ecto\-::plasm@{ecto\-::plasm}!load@{load}}
-\index{load@{load}!ecto::plasm@{ecto\-::plasm}}
-\subsubsection[{load}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Archive $>$ void ecto\-::plasm\-::load (
-\begin{DoxyParamCaption}
-\item[{Archive \&}]{ar, }
-\item[{const unsigned}]{int}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}}\label{structecto_1_1plasm_ae6540bca37d0980ec24b0b75061e124e}
-\hypertarget{structecto_1_1plasm_a992f656fa931efc20d2cf1a97c963cec}{\index{ecto\-::plasm@{ecto\-::plasm}!reset\-\_\-ticks@{reset\-\_\-ticks}}
-\index{reset\-\_\-ticks@{reset\-\_\-ticks}!ecto::plasm@{ecto\-::plasm}}
-\subsubsection[{reset\-\_\-ticks}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::plasm\-::reset\-\_\-ticks (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}\label{structecto_1_1plasm_a992f656fa931efc20d2cf1a97c963cec}
-\hypertarget{structecto_1_1plasm_ab0fd6bec2e5d8943363fe5aa36c1d676}{\index{ecto\-::plasm@{ecto\-::plasm}!save@{save}}
-\index{save@{save}!ecto::plasm@{ecto\-::plasm}}
-\subsubsection[{save}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::plasm\-::save (
-\begin{DoxyParamCaption}
-\item[{std\-::ostream \&}]{}
-\end{DoxyParamCaption}
-) const}}\label{structecto_1_1plasm_ab0fd6bec2e5d8943363fe5aa36c1d676}
-\hypertarget{structecto_1_1plasm_a420eb464746042e8247a69828e6782af}{\index{ecto\-::plasm@{ecto\-::plasm}!save@{save}}
-\index{save@{save}!ecto::plasm@{ecto\-::plasm}}
-\subsubsection[{save}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Archive $>$ void ecto\-::plasm\-::save (
+)}\label{structecto_1_1plasm_a854400c2f46f995731e058c72a547185}
+\hypertarget{structecto_1_1plasm_ae6540bca37d0980ec24b0b75061e124e}{}\index{ecto\+::plasm@{ecto\+::plasm}!load@{load}}
+\index{load@{load}!ecto\+::plasm@{ecto\+::plasm}}
+\subsubsection[{load}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Archive $>$ void ecto\+::plasm\+::load (
 \begin{DoxyParamCaption}
 \item[{Archive \&}]{ar, }
 \item[{const unsigned}]{int}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [private]}}}\label{structecto_1_1plasm_a420eb464746042e8247a69828e6782af}
-\hypertarget{structecto_1_1plasm_aaeeabeb3f78c1a7291eb14e0f705574e}{\index{ecto\-::plasm@{ecto\-::plasm}!size@{size}}
-\index{size@{size}!ecto::plasm@{ecto\-::plasm}}
-\subsubsection[{size}]{\setlength{\rightskip}{0pt plus 5cm}std\-::size\-\_\-t ecto\-::plasm\-::size (
+)\hspace{0.3cm}{\ttfamily [private]}}\label{structecto_1_1plasm_ae6540bca37d0980ec24b0b75061e124e}
+\hypertarget{structecto_1_1plasm_a992f656fa931efc20d2cf1a97c963cec}{}\index{ecto\+::plasm@{ecto\+::plasm}!reset\+\_\+ticks@{reset\+\_\+ticks}}
+\index{reset\+\_\+ticks@{reset\+\_\+ticks}!ecto\+::plasm@{ecto\+::plasm}}
+\subsubsection[{reset\+\_\+ticks}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::plasm\+::reset\+\_\+ticks (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const}}\label{structecto_1_1plasm_aaeeabeb3f78c1a7291eb14e0f705574e}
+)}\label{structecto_1_1plasm_a992f656fa931efc20d2cf1a97c963cec}
+\hypertarget{structecto_1_1plasm_ab0fd6bec2e5d8943363fe5aa36c1d676}{}\index{ecto\+::plasm@{ecto\+::plasm}!save@{save}}
+\index{save@{save}!ecto\+::plasm@{ecto\+::plasm}}
+\subsubsection[{save}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::plasm\+::save (
+\begin{DoxyParamCaption}
+\item[{std\+::ostream \&}]{}
+\end{DoxyParamCaption}
+) const}\label{structecto_1_1plasm_ab0fd6bec2e5d8943363fe5aa36c1d676}
+\hypertarget{structecto_1_1plasm_a420eb464746042e8247a69828e6782af}{}\index{ecto\+::plasm@{ecto\+::plasm}!save@{save}}
+\index{save@{save}!ecto\+::plasm@{ecto\+::plasm}}
+\subsubsection[{save}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Archive $>$ void ecto\+::plasm\+::save (
+\begin{DoxyParamCaption}
+\item[{Archive \&}]{ar, }
+\item[{const unsigned}]{int}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\label{structecto_1_1plasm_a420eb464746042e8247a69828e6782af}
+\hypertarget{structecto_1_1plasm_aaeeabeb3f78c1a7291eb14e0f705574e}{}\index{ecto\+::plasm@{ecto\+::plasm}!size@{size}}
+\index{size@{size}!ecto\+::plasm@{ecto\+::plasm}}
+\subsubsection[{size}]{\setlength{\rightskip}{0pt plus 5cm}std\+::size\+\_\+t ecto\+::plasm\+::size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{structecto_1_1plasm_aaeeabeb3f78c1a7291eb14e0f705574e}
 
 
 Return the number of cells in the plasm (vertices in the graph) 
 
-\hypertarget{structecto_1_1plasm_a6350e90b6d85a218e7a84183eaed0c18}{\index{ecto\-::plasm@{ecto\-::plasm}!viz@{viz}}
-\index{viz@{viz}!ecto::plasm@{ecto\-::plasm}}
-\subsubsection[{viz}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\-::plasm\-::viz (
+\hypertarget{structecto_1_1plasm_a6350e90b6d85a218e7a84183eaed0c18}{}\index{ecto\+::plasm@{ecto\+::plasm}!viz@{viz}}
+\index{viz@{viz}!ecto\+::plasm@{ecto\+::plasm}}
+\subsubsection[{viz}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::plasm\+::viz (
 \begin{DoxyParamCaption}
-\item[{std\-::ostream \&}]{out}
+\item[{std\+::ostream \&}]{out}
 \end{DoxyParamCaption}
-) const}}\label{structecto_1_1plasm_a6350e90b6d85a218e7a84183eaed0c18}
+) const}\label{structecto_1_1plasm_a6350e90b6d85a218e7a84183eaed0c18}
 
 
 output graphviz to a stream. 
@@ -342,16 +340,16 @@ output graphviz to a stream.
 {\em out} & the output stream. Graphviz will be in plain text format. \\
 \hline
 \end{DoxyParams}
-\hypertarget{structecto_1_1plasm_a4586d90c908123a18dbd3a26c206f63c}{\index{ecto\-::plasm@{ecto\-::plasm}!viz@{viz}}
-\index{viz@{viz}!ecto::plasm@{ecto\-::plasm}}
-\subsubsection[{viz}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string ecto\-::plasm\-::viz (
+\hypertarget{structecto_1_1plasm_a4586d90c908123a18dbd3a26c206f63c}{}\index{ecto\+::plasm@{ecto\+::plasm}!viz@{viz}}
+\index{viz@{viz}!ecto\+::plasm@{ecto\+::plasm}}
+\subsubsection[{viz}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string ecto\+::plasm\+::viz (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const}}\label{structecto_1_1plasm_a4586d90c908123a18dbd3a26c206f63c}
+) const}\label{structecto_1_1plasm_a4586d90c908123a18dbd3a26c206f63c}
 
 
-Get a std\-::string graphiz of the cell. 
+Get a std\+::string graphiz of the cell. 
 
 \begin{DoxyReturn}{Returns}
 
@@ -359,20 +357,20 @@ Get a std\-::string graphiz of the cell.
 
 
 \subsection{Friends And Related Function Documentation}
-\hypertarget{structecto_1_1plasm_ac98d07dd8f7b70e16ccb9a01abf56b9c}{\index{ecto\-::plasm@{ecto\-::plasm}!boost\-::serialization\-::access@{boost\-::serialization\-::access}}
-\index{boost\-::serialization\-::access@{boost\-::serialization\-::access}!ecto::plasm@{ecto\-::plasm}}
-\subsubsection[{boost\-::serialization\-::access}]{\setlength{\rightskip}{0pt plus 5cm}friend class boost\-::serialization\-::access\hspace{0.3cm}{\ttfamily [friend]}}}\label{structecto_1_1plasm_ac98d07dd8f7b70e16ccb9a01abf56b9c}
+\hypertarget{structecto_1_1plasm_ac98d07dd8f7b70e16ccb9a01abf56b9c}{}\index{ecto\+::plasm@{ecto\+::plasm}!boost\+::serialization\+::access@{boost\+::serialization\+::access}}
+\index{boost\+::serialization\+::access@{boost\+::serialization\+::access}!ecto\+::plasm@{ecto\+::plasm}}
+\subsubsection[{boost\+::serialization\+::access}]{\setlength{\rightskip}{0pt plus 5cm}friend class boost\+::serialization\+::access\hspace{0.3cm}{\ttfamily [friend]}}\label{structecto_1_1plasm_ac98d07dd8f7b70e16ccb9a01abf56b9c}
 
 
 \subsection{Member Data Documentation}
-\hypertarget{structecto_1_1plasm_a8d074da8290587fab0ed04d5cfe3f6b1}{\index{ecto\-::plasm@{ecto\-::plasm}!configured@{configured}}
-\index{configured@{configured}!ecto::plasm@{ecto\-::plasm}}
-\subsubsection[{configured}]{\setlength{\rightskip}{0pt plus 5cm}bool ecto\-::plasm\-::configured\hspace{0.3cm}{\ttfamily [private]}}}\label{structecto_1_1plasm_a8d074da8290587fab0ed04d5cfe3f6b1}
-\hypertarget{structecto_1_1plasm_a4cfd41e9dc82039a75970755565b2513}{\index{ecto\-::plasm@{ecto\-::plasm}!impl\-\_\-@{impl\-\_\-}}
-\index{impl\-\_\-@{impl\-\_\-}!ecto::plasm@{ecto\-::plasm}}
-\subsubsection[{impl\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::shared\-\_\-ptr$<$impl$>$ ecto\-::plasm\-::impl\-\_\-\hspace{0.3cm}{\ttfamily [private]}}}\label{structecto_1_1plasm_a4cfd41e9dc82039a75970755565b2513}
+\hypertarget{structecto_1_1plasm_a8d074da8290587fab0ed04d5cfe3f6b1}{}\index{ecto\+::plasm@{ecto\+::plasm}!configured@{configured}}
+\index{configured@{configured}!ecto\+::plasm@{ecto\+::plasm}}
+\subsubsection[{configured}]{\setlength{\rightskip}{0pt plus 5cm}bool ecto\+::plasm\+::configured\hspace{0.3cm}{\ttfamily [private]}}\label{structecto_1_1plasm_a8d074da8290587fab0ed04d5cfe3f6b1}
+\hypertarget{structecto_1_1plasm_a4cfd41e9dc82039a75970755565b2513}{}\index{ecto\+::plasm@{ecto\+::plasm}!impl\+\_\+@{impl\+\_\+}}
+\index{impl\+\_\+@{impl\+\_\+}!ecto\+::plasm@{ecto\+::plasm}}
+\subsubsection[{impl\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}boost\+::shared\+\_\+ptr$<$impl$>$ ecto\+::plasm\+::impl\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{structecto_1_1plasm_a4cfd41e9dc82039a75970755565b2513}
 
 
-The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-/home/vrabaud/workspace/recognition\-\_\-kitchen/src/ecto/include/ecto/\hyperlink{plasm_8hpp}{plasm.\-hpp}\end{DoxyCompactItemize}
+/home/vrabaud/workspace/recognition\+\_\+kitchen/src/ecto/include/ecto/\hyperlink{plasm_8hpp}{plasm.\+hpp}\end{DoxyCompactItemize}

@@ -1,32 +1,44 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="element_8hpp" kind="file">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="element_8hpp" kind="file" language="C++">
     <compoundname>element.hpp</compoundname>
+    <includes local="no">cstddef</includes>
     <includedby refid="vertex_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/vertex.hpp</includedby>
     <includedby refid="edge_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/edge.hpp</includedby>
-    <invincdepgraph>
-      <node id="1172">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/vertex.hpp</label>
-        <link refid="vertex_8hpp"/>
-        <childnode refid="1173" relation="include">
+    <incdepgraph>
+      <node id="1180">
+        <label>cstddef</label>
+      </node>
+      <node id="1179">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp</label>
+        <link refid="element.hpp"/>
+        <childnode refid="1180" relation="include">
         </childnode>
       </node>
-      <node id="1173">
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1182">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/vertex.hpp</label>
+        <link refid="vertex_8hpp"/>
+        <childnode refid="1183" relation="include">
+        </childnode>
+      </node>
+      <node id="1183">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp</label>
         <link refid="all_8hpp"/>
       </node>
-      <node id="1174">
+      <node id="1184">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/edge.hpp</label>
         <link refid="edge_8hpp"/>
-        <childnode refid="1173" relation="include">
+        <childnode refid="1183" relation="include">
         </childnode>
       </node>
-      <node id="1171">
+      <node id="1181">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp</label>
         <link refid="element.hpp"/>
-        <childnode refid="1172" relation="include">
+        <childnode refid="1182" relation="include">
         </childnode>
-        <childnode refid="1174" relation="include">
+        <childnode refid="1184" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -67,25 +79,26 @@
 <codeline lineno="27"><highlight class="comment"><sp/>*<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE</highlight></codeline>
 <codeline lineno="28"><highlight class="comment"><sp/>*<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
 <codeline lineno="29"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight></codeline>
-<codeline lineno="31"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="32"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ecto<sp/>{</highlight></codeline>
-<codeline lineno="33" refid="namespaceecto_1_1graph" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">graph<sp/>{</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"></highlight></codeline>
-<codeline lineno="35" refid="classecto_1_1graph_1_1element" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classecto_1_1graph_1_1element" kindref="compound">element</ref></highlight></codeline>
-<codeline lineno="36"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="37"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="38" refid="classecto_1_1graph_1_1element_1abf5d2137a1fd29f25af2b8f6bd0397df" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classecto_1_1graph_1_1element_1abf5d2137a1fd29f25af2b8f6bd0397df" kindref="member">element</ref>()<sp/>:<sp/><ref refid="classecto_1_1graph_1_1element_1a6f850cead9edb37941344fdbd40ae112" kindref="member">tick_</ref>(0)<sp/>{}</highlight></codeline>
-<codeline lineno="39"><highlight class="normal"></highlight></codeline>
-<codeline lineno="40" refid="classecto_1_1graph_1_1element_1a966b0c7cd87bdc5c5787d9b110966d8f" refkind="member"><highlight class="normal"><sp/><sp/>std::size_t<sp/><ref refid="classecto_1_1graph_1_1element_1a966b0c7cd87bdc5c5787d9b110966d8f" kindref="member">tick</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1graph_1_1element_1a6f850cead9edb37941344fdbd40ae112" kindref="member">tick_</ref>;<sp/>}</highlight></codeline>
-<codeline lineno="41" refid="classecto_1_1graph_1_1element_1a5d5b283bacb5371285e27c0f42e54985" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1graph_1_1element_1a5d5b283bacb5371285e27c0f42e54985" kindref="member">inc_tick</ref>()<sp/>{<sp/>++<ref refid="classecto_1_1graph_1_1element_1a6f850cead9edb37941344fdbd40ae112" kindref="member">tick_</ref>;<sp/>}</highlight></codeline>
-<codeline lineno="42" refid="classecto_1_1graph_1_1element_1a6417601ffd8159b6e00f2ff57eda1b99" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1graph_1_1element_1a6417601ffd8159b6e00f2ff57eda1b99" kindref="member">reset_tick</ref>()<sp/>{<sp/><ref refid="classecto_1_1graph_1_1element_1a6f850cead9edb37941344fdbd40ae112" kindref="member">tick_</ref><sp/>=<sp/>0;<sp/>}</highlight></codeline>
-<codeline lineno="43"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="44" refid="classecto_1_1graph_1_1element_1a6f850cead9edb37941344fdbd40ae112" refkind="member"><highlight class="normal"><sp/><sp/>std::size_t<sp/><ref refid="classecto_1_1graph_1_1element_1a6f850cead9edb37941344fdbd40ae112" kindref="member">tick_</ref>;</highlight></codeline>
-<codeline lineno="45"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="46"><highlight class="normal"></highlight></codeline>
-<codeline lineno="47"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>of<sp/>namespace<sp/>graph.</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="48"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>of<sp/>namespace<sp/>ecto.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstddef&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceecto" kindref="compound">ecto</ref><sp/>{</highlight></codeline>
+<codeline lineno="34" refid="namespaceecto_1_1graph" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">graph<sp/>{</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="classecto_1_1graph_1_1element" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classecto_1_1graph_1_1element" kindref="compound">element</ref></highlight></codeline>
+<codeline lineno="37"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="39" refid="classecto_1_1graph_1_1element_1abf5d2137a1fd29f25af2b8f6bd0397df" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classecto_1_1graph_1_1element_1abf5d2137a1fd29f25af2b8f6bd0397df" kindref="member">element</ref>()<sp/>:<sp/><ref refid="classecto_1_1graph_1_1element_1a6f850cead9edb37941344fdbd40ae112" kindref="member">tick_</ref>(0)<sp/>{}</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41" refid="classecto_1_1graph_1_1element_1a966b0c7cd87bdc5c5787d9b110966d8f" refkind="member"><highlight class="normal"><sp/><sp/>std::size_t<sp/><ref refid="classecto_1_1graph_1_1element_1a966b0c7cd87bdc5c5787d9b110966d8f" kindref="member">tick</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1graph_1_1element_1a6f850cead9edb37941344fdbd40ae112" kindref="member">tick_</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="42" refid="classecto_1_1graph_1_1element_1a5d5b283bacb5371285e27c0f42e54985" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1graph_1_1element_1a5d5b283bacb5371285e27c0f42e54985" kindref="member">inc_tick</ref>()<sp/>{<sp/>++<ref refid="classecto_1_1graph_1_1element_1a6f850cead9edb37941344fdbd40ae112" kindref="member">tick_</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="43" refid="classecto_1_1graph_1_1element_1a6417601ffd8159b6e00f2ff57eda1b99" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1graph_1_1element_1a6417601ffd8159b6e00f2ff57eda1b99" kindref="member">reset_tick</ref>()<sp/>{<sp/><ref refid="classecto_1_1graph_1_1element_1a6f850cead9edb37941344fdbd40ae112" kindref="member">tick_</ref><sp/>=<sp/>0;<sp/>}</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="45" refid="classecto_1_1graph_1_1element_1a6f850cead9edb37941344fdbd40ae112" refkind="member"><highlight class="normal"><sp/><sp/>std::size_t<sp/><ref refid="classecto_1_1graph_1_1element_1a6f850cead9edb37941344fdbd40ae112" kindref="member">tick_</ref>;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>of<sp/>namespace<sp/>graph.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>of<sp/>namespace<sp/>ecto.</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp"/>
   </compounddef>

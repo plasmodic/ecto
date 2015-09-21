@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="structecto_1_1registry_1_1entry__t" kind="struct" prot="public">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="structecto_1_1registry_1_1entry__t" kind="struct" language="C++" prot="public">
     <compoundname>ecto::registry::entry_t</compoundname>
     <includes refid="registry_8hpp" local="no">registry.hpp</includes>
       <sectiondef kind="public-attrib">
       <memberdef kind="variable" id="structecto_1_1registry_1_1entry__t_1ae1c1832273dbd622b1789a82f0832aa8" prot="public" static="no" mutable="no">
-        <type><ref refid="namespaceecto_1_1registry_1a3f75a16f135bcadb9bf1a7000b807b3b" kindref="member">factory_fn_t</ref></type>
+        <type><ref refid="namespaceecto_1_1registry_1afc9d1f3d51e708d9304a2f1e77cf4e4c" kindref="member">factory_fn_t</ref></type>
         <definition>factory_fn_t ecto::registry::entry_t::construct</definition>
         <argsstring></argsstring>
         <name>construct</name>
@@ -18,7 +18,7 @@
         <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp" line="54" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp" bodystart="54" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structecto_1_1registry_1_1entry__t_1a0e87799ee057b4509d45eab85def3b80" prot="public" static="no" mutable="no">
-        <type><ref refid="namespaceecto_1_1registry_1a04d849b45313a8ce9a602095e1edade9" kindref="member">declare_params_t</ref></type>
+        <type><ref refid="namespaceecto_1_1registry_1ac7ab506518f9462777eb958eeff86d4f" kindref="member">declare_params_t</ref></type>
         <definition>declare_params_t ecto::registry::entry_t::declare_params</definition>
         <argsstring></argsstring>
         <name>declare_params</name>
@@ -31,7 +31,7 @@
         <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp" line="55" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp" bodystart="55" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structecto_1_1registry_1_1entry__t_1ac052cec6adea69584fbb17f24e147ec2" prot="public" static="no" mutable="no">
-        <type><ref refid="namespaceecto_1_1registry_1af52d8f0fff3baaf352e2523ab8ed7977" kindref="member">declare_io_t</ref></type>
+        <type><ref refid="namespaceecto_1_1registry_1aeb28ed8594052fabba16371c256380c4" kindref="member">declare_io_t</ref></type>
         <definition>declare_io_t ecto::registry::entry_t::declare_io</definition>
         <argsstring></argsstring>
         <name>declare_io</name>

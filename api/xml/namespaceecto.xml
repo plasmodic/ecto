@@ -1,21 +1,21 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="namespaceecto" kind="namespace">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="namespaceecto" kind="namespace" language="C++">
     <compoundname>ecto</compoundname>
-    <innerclass refid="classecto_1_1tendrils" prot="public">ecto::tendrils</innerclass>
-    <innerclass refid="structecto_1_1spore__assign__impl" prot="public">ecto::spore_assign_impl</innerclass>
     <innerclass refid="classecto_1_1atomic" prot="public">ecto::atomic</innerclass>
+    <innerclass refid="structecto_1_1bounded" prot="public">ecto::bounded</innerclass>
     <innerclass refid="structecto_1_1cell" prot="public">ecto::cell</innerclass>
-    <innerclass refid="structecto_1_1has__f" prot="public">ecto::has_f</innerclass>
     <innerclass refid="structecto_1_1cell__" prot="public">ecto::cell_</innerclass>
+    <innerclass refid="structecto_1_1has__f" prot="public">ecto::has_f</innerclass>
+    <innerclass refid="structecto_1_1plasm" prot="public">ecto::plasm</innerclass>
+    <innerclass refid="classecto_1_1ref__count" prot="public">ecto::ref_count</innerclass>
+    <innerclass refid="classecto_1_1scheduler" prot="public">ecto::scheduler</innerclass>
+    <innerclass refid="structecto_1_1spore" prot="public">ecto::spore</innerclass>
+    <innerclass refid="structecto_1_1spore__assign__impl" prot="public">ecto::spore_assign_impl</innerclass>
     <innerclass refid="structecto_1_1strand" prot="public">ecto::strand</innerclass>
     <innerclass refid="structecto_1_1strand__hash" prot="public">ecto::strand_hash</innerclass>
     <innerclass refid="classecto_1_1tendril" prot="public">ecto::tendril</innerclass>
-    <innerclass refid="structecto_1_1plasm" prot="public">ecto::plasm</innerclass>
-    <innerclass refid="classecto_1_1scheduler" prot="public">ecto::scheduler</innerclass>
-    <innerclass refid="classecto_1_1ref__count" prot="public">ecto::ref_count</innerclass>
-    <innerclass refid="structecto_1_1spore" prot="public">ecto::spore</innerclass>
-    <innerclass refid="structecto_1_1bounded" prot="public">ecto::bounded</innerclass>
+    <innerclass refid="classecto_1_1tendrils" prot="public">ecto::tendrils</innerclass>
     <innernamespace refid="namespaceecto_1_1abi">ecto::abi</innernamespace>
     <innernamespace refid="namespaceecto_1_1detail">ecto::detail</innernamespace>
     <innernamespace refid="namespaceecto_1_1except">ecto::except</innernamespace>
@@ -681,6 +681,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/impl/parameters.hpp" line="10" column="1"/>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/impl/parameters.hpp" line="12" column="1"/>
   </compounddef>
 </doxygen>

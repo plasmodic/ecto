@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="structboost_1_1python_1_1detail_1_1raw__constructor__dispatcher" kind="struct" prot="public">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="structboost_1_1python_1_1detail_1_1raw__constructor__dispatcher" kind="struct" language="C++" prot="public">
     <compoundname>boost::python::detail::raw_constructor_dispatcher</compoundname>
     <includes refid="raw__constructor_8hpp" local="no">raw_constructor.hpp</includes>
     <templateparamlist>

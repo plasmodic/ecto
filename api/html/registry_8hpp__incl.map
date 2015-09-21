@@ -1,16 +1,16 @@
 <map id="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp" name="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp">
 <area shape="rect" id="node6" href="$forward_8hpp.html" title="ecto/forward.hpp" alt="" coords="2797,408,2926,435"/>
-<area shape="rect" id="node8" href="$util_8hpp.html" title="ecto/util.hpp" alt="" coords="2544,491,2646,517"/>
+<area shape="rect" id="node8" href="$util_8hpp.html" title="ecto/util.hpp" alt="" coords="2544,490,2646,517"/>
 <area shape="rect" id="node12" href="$cell_8hpp.html" title="ecto/cell.hpp" alt="" coords="2428,109,2530,136"/>
 <area shape="rect" id="node14" href="$log_8hpp.html" title="ecto/log.hpp" alt="" coords="2570,408,2671,435"/>
 <area shape="rect" id="node18" href="$strand_8hpp.html" title="ecto/strand.hpp" alt="" coords="2947,333,3070,360"/>
 <area shape="rect" id="node21" href="$tendril_8hpp.html" title="ecto/tendril.hpp" alt="" coords="1439,333,1562,360"/>
-<area shape="rect" id="node41" href="$tendrils_8hpp.html" title="ecto/tendrils.hpp" alt="" coords="1508,184,1636,211"/>
+<area shape="rect" id="node41" href="$tendrils_8hpp.html" title="ecto/tendrils.hpp" alt="" coords="1508,184,1637,211"/>
 <area shape="rect" id="node46" href="$traits_8hpp.html" title="ecto/traits.hpp" alt="" coords="2286,184,2400,211"/>
-<area shape="rect" id="node16" href="$test_8hpp.html" title="ecto/test.hpp" alt="" coords="2910,491,3016,517"/>
+<area shape="rect" id="node16" href="$test_8hpp.html" title="ecto/test.hpp" alt="" coords="2910,490,3016,517"/>
 <area shape="rect" id="node25" href="$except_8hpp.html" title="ecto/except.hpp" alt="" coords="1738,408,1863,435"/>
 <area shape="rect" id="node35" href="$python_8hpp.html" title="ecto/python.hpp" alt="" coords="764,408,890,435"/>
-<area shape="rect" id="node38" href="$repr_8hpp.html" title="ecto/python/repr.hpp" alt="" coords="966,408,1119,435"/>
+<area shape="rect" id="node38" href="$repr_8hpp.html" title="ecto/python/repr.hpp" alt="" coords="966,408,1120,435"/>
 <area shape="rect" id="node43" href="$spore_8hpp.html" title="ecto/spore.hpp" alt="" coords="2076,259,2194,285"/>
 <area shape="rect" id="node48" href="$gil_8hpp.html" title="ecto/python/gil.hpp" alt="" coords="1820,259,1964,285"/>
 </map>

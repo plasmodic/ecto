@@ -1,14 +1,18 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="structecto_1_1registry_1_1registrator" kind="struct" prot="public">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="structecto_1_1registry_1_1registrator" kind="struct" language="C++" prot="public">
     <compoundname>ecto::registry::registrator</compoundname>
     <includes refid="registry_8hpp" local="no">registry.hpp</includes>
     <templateparamlist>
       <param>
-        <type>typename Module</type>
+        <type>typename</type>
+        <declname>Module</declname>
+        <defname>Module</defname>
       </param>
       <param>
-        <type>typename T</type>
+        <type>typename</type>
+        <declname>T</declname>
+        <defname>T</defname>
       </param>
     </templateparamlist>
       <sectiondef kind="public-type">

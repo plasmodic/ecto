@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="classecto_1_1graph_1_1element" kind="class" prot="public">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="classecto_1_1graph_1_1element" kind="class" language="C++" prot="public">
     <compoundname>ecto::graph::element</compoundname>
     <derivedcompoundref refid="structecto_1_1graph_1_1edge" prot="public" virt="non-virtual">ecto::graph::edge</derivedcompoundref>
     <derivedcompoundref refid="classecto_1_1graph_1_1vertex" prot="public" virt="non-virtual">ecto::graph::vertex</derivedcompoundref>
@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" line="44" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" bodystart="44" bodyend="-1"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" line="45" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" bodystart="45" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" line="38" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" bodystart="38" bodyend="38"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" line="39" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" bodystart="39" bodyend="39"/>
       </memberdef>
       <memberdef kind="function" id="classecto_1_1graph_1_1element_1a966b0c7cd87bdc5c5787d9b110966d8f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>std::size_t</type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" line="40" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" bodystart="40" bodyend="40"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" line="41" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" bodystart="41" bodyend="41"/>
       </memberdef>
       <memberdef kind="function" id="classecto_1_1graph_1_1element_1a5d5b283bacb5371285e27c0f42e54985" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" line="41" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" bodystart="41" bodyend="41"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" line="42" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" bodystart="42" bodyend="42"/>
       </memberdef>
       <memberdef kind="function" id="classecto_1_1graph_1_1element_1a6417601ffd8159b6e00f2ff57eda1b99" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" line="42" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" bodystart="42" bodyend="42"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" line="43" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" bodystart="43" bodyend="43"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -96,7 +96,7 @@
         <link refid="classecto_1_1graph_1_1element"/>
       </node>
     </inheritancegraph>
-    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" line="36" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" bodystart="35" bodyend="45"/>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" line="37" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/element.hpp" bodystart="36" bodyend="46"/>
     <listofallmembers>
       <member refid="classecto_1_1graph_1_1element_1abf5d2137a1fd29f25af2b8f6bd0397df" prot="public" virt="non-virtual"><scope>ecto::graph::element</scope><name>element</name></member>
       <member refid="classecto_1_1graph_1_1element_1a5d5b283bacb5371285e27c0f42e54985" prot="public" virt="non-virtual"><scope>ecto::graph::element</scope><name>inc_tick</name></member>

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="namespaceboost_1_1serialization" kind="namespace">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="namespaceboost_1_1serialization" kind="namespace" language="C++">
     <compoundname>boost::serialization</compoundname>
       <sectiondef kind="func">
       <memberdef kind="function" id="namespaceboost_1_1serialization_1a2426e0778002bc8706de04819006b274" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">

@@ -1,7 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node2" href="$classecto_1_1py_1_1streambuf_1_1istream.html" title="ecto::py::streambuf\l::istream" alt="" coords="131,5,277,46"/>
-<area shape="rect" id="node3" href="$structecto_1_1py_1_1istream.html" title="ecto::py::istream" alt="" coords="329,49,458,76"/>
-<area shape="rect" id="node5" href="$classecto_1_1py_1_1streambuf_1_1ostream.html" title="ecto::py::streambuf\l::ostream" alt="" coords="131,135,277,177"/>
-<area shape="rect" id="node6" href="$structecto_1_1py_1_1ostream.html" title="ecto::py::ostream" alt="" coords="326,107,461,133"/>
-<area shape="rect" id="node7" href="$structecto_1_1py_1_1streambuf__capsule.html" title="ecto::py::streambuf\l_capsule" alt="" coords="131,70,277,111"/>
+<area shape="rect" id="node2" href="$classecto_1_1py_1_1streambuf_1_1istream.html" title="ecto::py::streambuf\l::istream" alt="" coords="129,5,276,47"/>
+<area shape="rect" id="node3" href="$structecto_1_1py_1_1istream.html" title="ecto::py::istream" alt="" coords="327,50,456,77"/>
+<area shape="rect" id="node5" href="$classecto_1_1py_1_1streambuf_1_1ostream.html" title="ecto::py::streambuf\l::ostream" alt="" coords="129,136,276,177"/>
+<area shape="rect" id="node6" href="$structecto_1_1py_1_1ostream.html" title="ecto::py::ostream" alt="" coords="324,107,459,134"/>
+<area shape="rect" id="node7" href="$structecto_1_1py_1_1streambuf__capsule.html" title="ecto::py::streambuf\l_capsule" alt="" coords="129,71,276,112"/>
 </map>

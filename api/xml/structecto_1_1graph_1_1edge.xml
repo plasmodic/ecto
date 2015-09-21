@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="structecto_1_1graph_1_1edge" kind="struct" prot="public">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="structecto_1_1graph_1_1edge" kind="struct" language="C++" prot="public">
     <compoundname>ecto::graph::edge</compoundname>
     <basecompoundref refid="classecto_1_1graph_1_1element" prot="public" virt="non-virtual">ecto::graph::element</basecompoundref>
     <includes refid="edge_8hpp" local="no">edge.hpp</includes>

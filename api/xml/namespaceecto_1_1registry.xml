@@ -1,15 +1,15 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="namespaceecto_1_1registry" kind="namespace">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="namespaceecto_1_1registry" kind="namespace" language="C++">
     <compoundname>ecto::registry</compoundname>
     <innerclass refid="structecto_1_1registry_1_1entry__t" prot="public">ecto::registry::entry_t</innerclass>
     <innerclass refid="structecto_1_1registry_1_1module__registry" prot="public">ecto::registry::module_registry</innerclass>
     <innerclass refid="structecto_1_1registry_1_1registrator" prot="public">ecto::registry::registrator</innerclass>
     <innernamespace refid="namespaceecto_1_1registry_1_1tendril">ecto::registry::tendril</innernamespace>
       <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="namespaceecto_1_1registry_1a3f75a16f135bcadb9bf1a7000b807b3b" prot="public" static="no">
+      <memberdef kind="typedef" id="namespaceecto_1_1registry_1afc9d1f3d51e708d9304a2f1e77cf4e4c" prot="public" static="no">
         <type>boost::shared_ptr&lt; <ref refid="structecto_1_1cell" kindref="compound">cell</ref> &gt;(*</type>
-        <definition>typedef boost::shared_ptr&lt;cell&gt;(* ecto::registry::factory_fn_t)()</definition>
+        <definition>typedef boost::shared_ptr&lt;cell&gt;(* ecto::registry::factory_fn_t) ()</definition>
         <argsstring>)()</argsstring>
         <name>factory_fn_t</name>
         <briefdescription>
@@ -20,9 +20,9 @@
         </inbodydescription>
         <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp" line="48" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp" bodystart="48" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="namespaceecto_1_1registry_1a04d849b45313a8ce9a602095e1edade9" prot="public" static="no">
+      <memberdef kind="typedef" id="namespaceecto_1_1registry_1ac7ab506518f9462777eb958eeff86d4f" prot="public" static="no">
         <type>void(*</type>
-        <definition>typedef void(* ecto::registry::declare_params_t)(ecto::tendrils &amp;)</definition>
+        <definition>typedef void(* ecto::registry::declare_params_t) (ecto::tendrils &amp;)</definition>
         <argsstring>)(ecto::tendrils &amp;)</argsstring>
         <name>declare_params_t</name>
         <briefdescription>
@@ -33,9 +33,9 @@
         </inbodydescription>
         <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp" line="49" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp" bodystart="49" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="namespaceecto_1_1registry_1af52d8f0fff3baaf352e2523ab8ed7977" prot="public" static="no">
+      <memberdef kind="typedef" id="namespaceecto_1_1registry_1aeb28ed8594052fabba16371c256380c4" prot="public" static="no">
         <type>void(*</type>
-        <definition>typedef void(* ecto::registry::declare_io_t)(const ecto::tendrils &amp;, ecto::tendrils &amp;, ecto::tendrils &amp;)</definition>
+        <definition>typedef void(* ecto::registry::declare_io_t) (const ecto::tendrils &amp;, ecto::tendrils &amp;, ecto::tendrils &amp;)</definition>
         <argsstring>)(const ecto::tendrils &amp;, ecto::tendrils &amp;, ecto::tendrils &amp;)</argsstring>
         <name>declare_io_t</name>
         <briefdescription>

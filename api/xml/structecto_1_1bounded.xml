@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="structecto_1_1bounded" kind="struct" prot="public">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="structecto_1_1bounded" kind="struct" language="C++" prot="public">
     <compoundname>ecto::bounded</compoundname>
     <includes refid="parameters_8hpp" local="no">parameters.hpp</includes>
     <templateparamlist>
@@ -86,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/parameters.hpp" line="15" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/impl/parameters.hpp" bodystart="12" bodyend="19"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/parameters.hpp" line="15" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/impl/parameters.hpp" bodystart="14" bodyend="21"/>
       </memberdef>
       <memberdef kind="function" id="structecto_1_1bounded_1a77b53af4586fb05eb2f9e4b0f350b42d" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
         <type></type>
@@ -103,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/parameters.hpp" line="17" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/impl/parameters.hpp" bodystart="22" bodyend="29"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/parameters.hpp" line="17" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/impl/parameters.hpp" bodystart="24" bodyend="31"/>
       </memberdef>
       <memberdef kind="function" id="structecto_1_1bounded_1a3c8158a8581de90b22f1f702b47d4c78" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="structecto_1_1bounded" kindref="compound">bounded</ref> &amp;</type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/parameters.hpp" line="20" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/impl/parameters.hpp" bodystart="42" bodyend="46"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/parameters.hpp" line="20" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/impl/parameters.hpp" bodystart="44" bodyend="48"/>
       </memberdef>
       <memberdef kind="function" id="structecto_1_1bounded_1aff81e7792f2b05be160cd0d8cde73023" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -137,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/parameters.hpp" line="22" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/impl/parameters.hpp" bodystart="32" bodyend="38"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/parameters.hpp" line="22" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/impl/parameters.hpp" bodystart="34" bodyend="40"/>
       </memberdef>
       <memberdef kind="function" id="structecto_1_1bounded_1a7d73cabf049b631f8abc9973a2bff183" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -154,7 +154,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/parameters.hpp" line="25" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/impl/parameters.hpp" bodystart="50" bodyend="57"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/parameters.hpp" line="25" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/impl/parameters.hpp" bodystart="52" bodyend="59"/>
       </memberdef>
       <memberdef kind="function" id="structecto_1_1bounded_1a929439a21225157ab7ba7f4427dc42ad" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -167,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/parameters.hpp" line="28" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/impl/parameters.hpp" bodystart="61" bodyend="65"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/parameters.hpp" line="28" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/impl/parameters.hpp" bodystart="63" bodyend="67"/>
       </memberdef>
       <memberdef kind="function" id="structecto_1_1bounded_1ae032eb9fc9ba64687a249f50a7bdf877" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -180,7 +180,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/parameters.hpp" line="30" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/impl/parameters.hpp" bodystart="68" bodyend="71"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/parameters.hpp" line="30" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/impl/parameters.hpp" bodystart="70" bodyend="73"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="structecto_1_1cell" kind="struct" prot="public" abstract="yes">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="structecto_1_1cell" kind="struct" language="C++" prot="public" abstract="yes">
     <compoundname>ecto::cell</compoundname>
     <basecompoundref prot="public" virt="non-virtual">noncopyable</basecompoundref>
     <derivedcompoundref refid="structecto_1_1cell__" prot="public" virt="non-virtual">ecto::cell_&lt; Impl &gt;</derivedcompoundref>
@@ -723,18 +723,18 @@
     <briefdescription>
 <para><ref refid="structecto_1_1cell" kindref="compound">ecto::cell</ref> is the non virtual interface to the basic building block of ecto graphs. This interface should never be the parent of client cell, but may be used for polymorphic access to client cells. </para>    </briefdescription>
     <detaileddescription>
-<para>Clients should expose their code to this interface through ecto::wrap, or ecto::create_cell&lt;T&gt;().</para><para>For a client&apos;s cell to satisfy the <ref refid="structecto_1_1cell" kindref="compound">ecto::cell</ref> idiom, it must look similar to the following definition. <programlisting><codeline><highlight class="keyword">struct<sp/></highlight><highlight class="normal">MyEctoCell</highlight></codeline>
+<para>Clients should expose their code to this interface through ecto::wrap, or ecto::create_cell&lt;T&gt;().</para><para>For a client&apos;s cell to satisfy the <ref refid="structecto_1_1cell" kindref="compound">ecto::cell</ref> idiom, it must look similar to the following definition. <programlisting><codeline><highlight class="normal">struct<sp/>MyEctoCell</highlight></codeline>
 <codeline><highlight class="normal">{</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//called<sp/>first<sp/>thing,<sp/>the<sp/>user<sp/>should<sp/>declare<sp/>their<sp/>parameters<sp/>in<sp/>this</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//free<sp/>standing<sp/>function.</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structecto_1_1cell_1a5c3c204f531de15920cb9d3db3ecfc4c" kindref="member">declare_params</ref>(tendrils&amp;<sp/>params);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//declare<sp/>inputs<sp/>and<sp/>outputs<sp/>here.<sp/>The<sp/>parameters<sp/>may<sp/>be<sp/>used<sp/>to</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//determine<sp/>the<sp/>io</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structecto_1_1cell_1af6c3782ed0d1c258bcf5050b4af272b4" kindref="member">declare_io</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>tendrils&amp;<sp/>params,<sp/>tendrils&amp;<sp/>in,<sp/>tendrils&amp;<sp/>out);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//called<sp/>right<sp/>after<sp/>allocation<sp/>of<sp/>the<sp/>cell,<sp/>exactly<sp/>once.</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structecto_1_1cell_1a30d48d21d6ffa86af4888f78e92241af" kindref="member">configure</ref>(tendrils&amp;<sp/>params,<sp/>tendrils&amp;<sp/><ref refid="structecto_1_1cell_1a65099b0458a7761b8bfa7a1ddc17e92f" kindref="member">inputs</ref>,<sp/>tendrils&amp;<sp/><ref refid="structecto_1_1cell_1a93951743b603faba35312ebdb07ceb22" kindref="member">outputs</ref>);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//called<sp/>at<sp/>every<sp/>execution<sp/>of<sp/>the<sp/>graph</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structecto_1_1cell_1a6b810671ee21f5dddbc1206abfb999f3" kindref="member">process</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>tendrils&amp;<sp/>in,<sp/>tendrils&amp;<sp/>out);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>//called<sp/>first<sp/>thing,<sp/>the<sp/>user<sp/>should<sp/>declare<sp/>their<sp/>parameters<sp/>in<sp/>this</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>//free<sp/>standing<sp/>function.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>static<sp/>void<sp/>declare_params(tendrils&amp;<sp/>params);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>//declare<sp/>inputs<sp/>and<sp/>outputs<sp/>here.<sp/>The<sp/>parameters<sp/>may<sp/>be<sp/>used<sp/>to</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>//determine<sp/>the<sp/>io</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>static<sp/>void<sp/>declare_io(const<sp/>tendrils&amp;<sp/>params,<sp/>tendrils&amp;<sp/>in,<sp/>tendrils&amp;<sp/>out);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>//called<sp/>right<sp/>after<sp/>allocation<sp/>of<sp/>the<sp/>cell,<sp/>exactly<sp/>once.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>void<sp/>configure(tendrils&amp;<sp/>params,<sp/>tendrils&amp;<sp/>inputs,<sp/>tendrils&amp;<sp/>outputs);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>//called<sp/>at<sp/>every<sp/>execution<sp/>of<sp/>the<sp/>graph</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>int<sp/>process(const<sp/>tendrils&amp;<sp/>in,<sp/>tendrils&amp;<sp/>out);</highlight></codeline>
 <codeline><highlight class="normal">};</highlight></codeline>
 </programlisting></para><para>All functions are optional. </para>    </detaileddescription>
     <inheritancegraph>

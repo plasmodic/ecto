@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="structboost_1_1python_1_1std__map__indexing__suite_1_1itervalues" kind="struct" prot="public">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="structboost_1_1python_1_1std__map__indexing__suite_1_1itervalues" kind="struct" language="C++" prot="public">
     <compoundname>boost::python::std_map_indexing_suite::itervalues</compoundname>
     <includes refid="std__map__indexing__suite_8hpp" local="no">std_map_indexing_suite.hpp</includes>
       <sectiondef kind="public-type">

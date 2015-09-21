@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="plasm_8hpp" kind="file">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="plasm_8hpp" kind="file" language="C++">
     <compoundname>plasm.hpp</compoundname>
     <includes local="no">Python.h</includes>
     <includes local="no">boost/shared_ptr.hpp</includes>
@@ -14,195 +14,33 @@
     <includes refid="forward_8hpp" local="no">ecto/forward.hpp</includes>
     <includes refid="tendril_8hpp" local="no">ecto/tendril.hpp</includes>
     <incdepgraph>
-      <node id="1348">
+      <node id="1361">
         <label>list</label>
       </node>
-      <node id="1358">
+      <node id="1371">
         <label>boost/version.hpp</label>
       </node>
-      <node id="1341">
+      <node id="1354">
         <label>boost/shared_ptr.hpp</label>
       </node>
-      <node id="1339">
+      <node id="1352">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp</label>
         <link refid="plasm.hpp"/>
-        <childnode refid="1340" relation="include">
+        <childnode refid="1353" relation="include">
         </childnode>
-        <childnode refid="1341" relation="include">
+        <childnode refid="1354" relation="include">
         </childnode>
-        <childnode refid="1342" relation="include">
-        </childnode>
-        <childnode refid="1343" relation="include">
-        </childnode>
-        <childnode refid="1344" relation="include">
-        </childnode>
-        <childnode refid="1345" relation="include">
-        </childnode>
-        <childnode refid="1346" relation="include">
-        </childnode>
-        <childnode refid="1347" relation="include">
-        </childnode>
-        <childnode refid="1348" relation="include">
-        </childnode>
-        <childnode refid="1349" relation="include">
-        </childnode>
-        <childnode refid="1350" relation="include">
-        </childnode>
-      </node>
-      <node id="1352">
-        <label>boost/signals2.hpp</label>
-      </node>
-      <node id="1349">
-        <label>ecto/forward.hpp</label>
-        <link refid="forward_8hpp"/>
-        <childnode refid="1341" relation="include">
-        </childnode>
-      </node>
-      <node id="1359">
-        <label>stdexcept</label>
-      </node>
-      <node id="1369">
-        <label>boost/thread/thread.hpp</label>
-      </node>
-      <node id="1346">
-        <label>string</label>
-      </node>
-      <node id="1343">
-        <label>boost/noncopyable.hpp</label>
-      </node>
-      <node id="1347">
-        <label>map</label>
-      </node>
-      <node id="1345">
-        <label>boost/thread.hpp</label>
-      </node>
-      <node id="1354">
-        <label>ecto/util.hpp</label>
-        <link refid="util_8hpp"/>
         <childnode refid="1355" relation="include">
         </childnode>
         <childnode refid="1356" relation="include">
         </childnode>
-        <childnode refid="1346" relation="include">
-        </childnode>
-      </node>
-      <node id="1367">
-        <label>ecto/python.hpp</label>
-        <link refid="python_8hpp"/>
-        <childnode refid="1340" relation="include">
-        </childnode>
-        <childnode refid="1368" relation="include">
-        </childnode>
-        <childnode refid="1369" relation="include">
-        </childnode>
-        <childnode refid="1347" relation="include">
-        </childnode>
-        <childnode refid="1343" relation="include">
-        </childnode>
-      </node>
-      <node id="1351">
-        <label>boost/function/function1.hpp</label>
-      </node>
-      <node id="1350">
-        <label>ecto/tendril.hpp</label>
-        <link refid="tendril_8hpp"/>
-        <childnode refid="1341" relation="include">
-        </childnode>
-        <childnode refid="1351" relation="include">
-        </childnode>
-        <childnode refid="1352" relation="include">
-        </childnode>
-        <childnode refid="1353" relation="include">
-        </childnode>
-        <childnode refid="1349" relation="include">
-        </childnode>
-        <childnode refid="1354" relation="include">
-        </childnode>
         <childnode refid="1357" relation="include">
-        </childnode>
-        <childnode refid="1367" relation="include">
-        </childnode>
-        <childnode refid="1370" relation="include">
-        </childnode>
-        <childnode refid="1372" relation="include">
-        </childnode>
-        <childnode refid="1346" relation="include">
-        </childnode>
-        <childnode refid="1373" relation="include">
-        </childnode>
-      </node>
-      <node id="1353">
-        <label>boost/any.hpp</label>
-      </node>
-      <node id="1365">
-        <label>boost/preprocessor/stringize.hpp</label>
-      </node>
-      <node id="1362">
-        <label>boost/exception/exception.hpp</label>
-      </node>
-      <node id="1360">
-        <label>ecto/config.hpp</label>
-      </node>
-      <node id="1356">
-        <label>typeinfo</label>
-      </node>
-      <node id="1373">
-        <label>bitset</label>
-      </node>
-      <node id="1371">
-        <label>boost/python/object_fwd.hpp</label>
-      </node>
-      <node id="1368">
-        <label>boost/python.hpp</label>
-      </node>
-      <node id="1363">
-        <label>boost/exception/info.hpp</label>
-      </node>
-      <node id="1340">
-        <label>Python.h</label>
-      </node>
-      <node id="1372">
-        <label>vector</label>
-      </node>
-      <node id="1370">
-        <label>ecto/python/repr.hpp</label>
-        <link refid="repr_8hpp"/>
-        <childnode refid="1371" relation="include">
-        </childnode>
-        <childnode refid="1346" relation="include">
-        </childnode>
-      </node>
-      <node id="1342">
-        <label>boost/enable_shared_from_this.hpp</label>
-      </node>
-      <node id="1355">
-        <label>iostream</label>
-      </node>
-      <node id="1364">
-        <label>boost/preprocessor/cat.hpp</label>
-      </node>
-      <node id="1361">
-        <label>boost/optional.hpp</label>
-      </node>
-      <node id="1344">
-        <label>boost/serialization/split_member.hpp</label>
-      </node>
-      <node id="1357">
-        <label>ecto/except.hpp</label>
-        <link refid="except_8hpp"/>
-        <childnode refid="1340" relation="include">
         </childnode>
         <childnode refid="1358" relation="include">
         </childnode>
         <childnode refid="1359" relation="include">
         </childnode>
-        <childnode refid="1346" relation="include">
-        </childnode>
-        <childnode refid="1347" relation="include">
-        </childnode>
         <childnode refid="1360" relation="include">
-        </childnode>
-        <childnode refid="1354" relation="include">
         </childnode>
         <childnode refid="1361" relation="include">
         </childnode>
@@ -210,14 +48,176 @@
         </childnode>
         <childnode refid="1363" relation="include">
         </childnode>
+      </node>
+      <node id="1365">
+        <label>boost/signals2.hpp</label>
+      </node>
+      <node id="1362">
+        <label>ecto/forward.hpp</label>
+        <link refid="forward_8hpp"/>
+        <childnode refid="1354" relation="include">
+        </childnode>
+      </node>
+      <node id="1372">
+        <label>stdexcept</label>
+      </node>
+      <node id="1382">
+        <label>boost/thread/thread.hpp</label>
+      </node>
+      <node id="1359">
+        <label>string</label>
+      </node>
+      <node id="1356">
+        <label>boost/noncopyable.hpp</label>
+      </node>
+      <node id="1360">
+        <label>map</label>
+      </node>
+      <node id="1358">
+        <label>boost/thread.hpp</label>
+      </node>
+      <node id="1367">
+        <label>ecto/util.hpp</label>
+        <link refid="util_8hpp"/>
+        <childnode refid="1368" relation="include">
+        </childnode>
+        <childnode refid="1369" relation="include">
+        </childnode>
+        <childnode refid="1359" relation="include">
+        </childnode>
+      </node>
+      <node id="1380">
+        <label>ecto/python.hpp</label>
+        <link refid="python_8hpp"/>
+        <childnode refid="1353" relation="include">
+        </childnode>
+        <childnode refid="1381" relation="include">
+        </childnode>
+        <childnode refid="1382" relation="include">
+        </childnode>
+        <childnode refid="1360" relation="include">
+        </childnode>
+        <childnode refid="1356" relation="include">
+        </childnode>
+      </node>
+      <node id="1364">
+        <label>boost/function/function1.hpp</label>
+      </node>
+      <node id="1363">
+        <label>ecto/tendril.hpp</label>
+        <link refid="tendril_8hpp"/>
+        <childnode refid="1354" relation="include">
+        </childnode>
         <childnode refid="1364" relation="include">
         </childnode>
         <childnode refid="1365" relation="include">
         </childnode>
         <childnode refid="1366" relation="include">
         </childnode>
+        <childnode refid="1362" relation="include">
+        </childnode>
+        <childnode refid="1367" relation="include">
+        </childnode>
+        <childnode refid="1370" relation="include">
+        </childnode>
+        <childnode refid="1380" relation="include">
+        </childnode>
+        <childnode refid="1383" relation="include">
+        </childnode>
+        <childnode refid="1385" relation="include">
+        </childnode>
+        <childnode refid="1359" relation="include">
+        </childnode>
+        <childnode refid="1386" relation="include">
+        </childnode>
       </node>
       <node id="1366">
+        <label>boost/any.hpp</label>
+      </node>
+      <node id="1378">
+        <label>boost/preprocessor/stringize.hpp</label>
+      </node>
+      <node id="1375">
+        <label>boost/exception/exception.hpp</label>
+      </node>
+      <node id="1373">
+        <label>ecto/config.hpp</label>
+      </node>
+      <node id="1369">
+        <label>typeinfo</label>
+      </node>
+      <node id="1386">
+        <label>bitset</label>
+      </node>
+      <node id="1384">
+        <label>boost/python/object_fwd.hpp</label>
+      </node>
+      <node id="1381">
+        <label>boost/python.hpp</label>
+      </node>
+      <node id="1376">
+        <label>boost/exception/info.hpp</label>
+      </node>
+      <node id="1353">
+        <label>Python.h</label>
+      </node>
+      <node id="1385">
+        <label>vector</label>
+      </node>
+      <node id="1383">
+        <label>ecto/python/repr.hpp</label>
+        <link refid="repr_8hpp"/>
+        <childnode refid="1384" relation="include">
+        </childnode>
+        <childnode refid="1359" relation="include">
+        </childnode>
+      </node>
+      <node id="1355">
+        <label>boost/enable_shared_from_this.hpp</label>
+      </node>
+      <node id="1368">
+        <label>iostream</label>
+      </node>
+      <node id="1377">
+        <label>boost/preprocessor/cat.hpp</label>
+      </node>
+      <node id="1374">
+        <label>boost/optional.hpp</label>
+      </node>
+      <node id="1357">
+        <label>boost/serialization/split_member.hpp</label>
+      </node>
+      <node id="1370">
+        <label>ecto/except.hpp</label>
+        <link refid="except_8hpp"/>
+        <childnode refid="1353" relation="include">
+        </childnode>
+        <childnode refid="1371" relation="include">
+        </childnode>
+        <childnode refid="1372" relation="include">
+        </childnode>
+        <childnode refid="1359" relation="include">
+        </childnode>
+        <childnode refid="1360" relation="include">
+        </childnode>
+        <childnode refid="1373" relation="include">
+        </childnode>
+        <childnode refid="1367" relation="include">
+        </childnode>
+        <childnode refid="1374" relation="include">
+        </childnode>
+        <childnode refid="1375" relation="include">
+        </childnode>
+        <childnode refid="1376" relation="include">
+        </childnode>
+        <childnode refid="1377" relation="include">
+        </childnode>
+        <childnode refid="1378" relation="include">
+        </childnode>
+        <childnode refid="1379" relation="include">
+        </childnode>
+      </node>
+      <node id="1379">
         <label>boost/preprocessor/seq/for_each.hpp</label>
       </node>
     </incdepgraph>
@@ -256,8 +256,8 @@
 <codeline lineno="26"><highlight class="comment"><sp/>*<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE</highlight></codeline>
 <codeline lineno="27"><highlight class="comment"><sp/>*<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
 <codeline lineno="28"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight></codeline>
-<codeline lineno="30"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Python.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/shared_ptr.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/enable_shared_from_this.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
@@ -272,7 +272,7 @@
 <codeline lineno="42"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="forward_8hpp" kindref="compound">ecto/forward.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="tendril_8hpp" kindref="compound">ecto/tendril.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="44"><highlight class="normal"></highlight></codeline>
-<codeline lineno="45"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ecto</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceecto" kindref="compound">ecto</ref></highlight></codeline>
 <codeline lineno="46"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="47"><highlight class="normal"></highlight></codeline>
 <codeline lineno="54" refid="structecto_1_1plasm" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="util_8hpp_1ab55b7868679cda60fc162580957fb98c" kindref="member">ECTO_EXPORT</ref><sp/><ref refid="structecto_1_1plasm" kindref="compound">plasm</ref><sp/>:</highlight></codeline>

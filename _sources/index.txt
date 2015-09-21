@@ -5,7 +5,7 @@ Initially aimed at computer vision and perception research tasks, Ecto is a hybr
 
 Ecto itself is small, has minimal dependencies (C++, Boost, Python) and works with or without OpenCV, PCL, and ROS in any combination. We believe that Ecto allows vision and perception researchers to express their computational models in a natural fashion, obviating e.g. ROS time synchronizers and ROS nodelets in most cases.
 
-As of 2012, Ecto is officially released. It is being used by researchers at Willow Garage and in industry for prototype applications of object capture and modelling, `object recognition <http://wg-perception.github.com/object_recognition_core/>`_, pose estimation and refinement, projector-based augmented reality and chess playing.
+As of 2012, Ecto is officially released. It is being used by researchers at Willow Garage and in industry for prototype applications of object capture and modelling, `object recognition <http://wg-perception.github.com/object_recognition_core/>`_, pose estimation and refinement, visual slam, projector-based augmented reality and chess playing.
 
 
 To understand ecto, you probably want to go over the Ecto docs first:
@@ -13,8 +13,8 @@ To understand ecto, you probably want to go over the Ecto docs first:
 .. toctree::
    :maxdepth: 1
 
-   ecto/overview/index.rst
-   Advanced Install <ecto/install/index.rst>
+   Overview <ecto/overview/index.rst>
+   Install <ecto/install/index.rst>
    Usage <ecto/usage/index.rst>
    ecto/reference/index.rst
 
@@ -27,39 +27,6 @@ Ecto has several modules that wrap different libraries or functionalities:
    * :ref:`ecto_openni <ectoopenni:ecto_openni>`
    * :ref:`ecto_pcl <ectopcl:ecto_pcl>`
    * :ref:`ecto_ros <ectoros:ecto_ros>`
-
-.. rubric:: Install
-
-If you are on ROS Fuerte or above, you probably just want to install the packages available in the ROS repositories named ros-DISTO-ecto-PACKAGE
-
-If you want to install from source, you will have to get them from https://github.com/plasmodic/ecto:
-
-.. code-block:: bash
-
-  mkdir ecto_kitchen && cd ecto_kitchen
-  sudo pip install catkin_pkg breathe empy
-  git clone http://github.com/ros/catkin.git
-  git clone http://github.com/plasmodic/ecto.git
-  ln -s catkin/cmake/toplevel.cmake CMakeLists.txt
-
-Then get the ecto modules you want (and make sure their dependencies defined in their package.xml
-are on your path):
-
-.. code-block:: bash
-
-  git clone http://github.com/plasmodic/ecto_image_pipeline.git
-  git clone http://github.com/plasmodic/ecto_openni.git
-  git clone http://github.com/wg-perception/opencv_candidate.git
-  git clone http://github.com/plasmodic/ecto_opencv.git
-  git clone http://github.com/plasmodic/ecto_pcl.git
-  git clone http://github.com/plasmodic/ecto_ros.git
-
-And you're then good to go for the usual cmake install except you need to add ``catkin_pkg``
-to your Python path:
-
-.. code-block:: bash
-
-  mkdir build && cd build && cmake ../ && make
 
 .. rubric:: Bug reports
 

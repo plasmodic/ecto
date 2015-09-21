@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.6">
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.9.1">
   <compound refid="classecto_1_1atomic" kind="class"><name>ecto::atomic</name>
     <member refid="classecto_1_1atomic_1ac5ba45af623c7bc47e6918e290e39c67" kind="variable"><name>value</name></member>
     <member refid="classecto_1_1atomic_1a52a121e21f9449371998dbccaca0cbde" kind="variable"><name>mtx</name></member>
@@ -826,9 +826,9 @@
     <member refid="namespaceecto_1_1py_1a9baa9f1e5394841101cbdc2eab37094c" kind="function"><name>postregistration</name></member>
   </compound>
   <compound refid="namespaceecto_1_1registry" kind="namespace"><name>ecto::registry</name>
-    <member refid="namespaceecto_1_1registry_1a3f75a16f135bcadb9bf1a7000b807b3b" kind="typedef"><name>factory_fn_t</name></member>
-    <member refid="namespaceecto_1_1registry_1a04d849b45313a8ce9a602095e1edade9" kind="typedef"><name>declare_params_t</name></member>
-    <member refid="namespaceecto_1_1registry_1af52d8f0fff3baaf352e2523ab8ed7977" kind="typedef"><name>declare_io_t</name></member>
+    <member refid="namespaceecto_1_1registry_1afc9d1f3d51e708d9304a2f1e77cf4e4c" kind="typedef"><name>factory_fn_t</name></member>
+    <member refid="namespaceecto_1_1registry_1ac7ab506518f9462777eb958eeff86d4f" kind="typedef"><name>declare_params_t</name></member>
+    <member refid="namespaceecto_1_1registry_1aeb28ed8594052fabba16371c256380c4" kind="typedef"><name>declare_io_t</name></member>
     <member refid="namespaceecto_1_1registry_1a6418eb4a71ad1556cf3555da28e16a8d" kind="function"><name>lookup</name></member>
     <member refid="namespaceecto_1_1registry_1a784e20c3d722892c0ce9f129b6c2f757" kind="function"><name>create</name></member>
     <member refid="namespaceecto_1_1registry_1af698665e1f634f8634ecd7348aa778ab" kind="function"><name>create_initialized</name></member>

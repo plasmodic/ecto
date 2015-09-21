@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="classecto_1_1except_1_1error__info__container__impl" kind="class" prot="public">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="classecto_1_1except_1_1error__info__container__impl" kind="class" language="C++" prot="public">
     <compoundname>ecto::except::error_info_container_impl</compoundname>
     <basecompoundref prot="public" virt="non-virtual">error_info_container</basecompoundref>
     <includes refid="except_8hpp" local="no">except.hpp</includes>

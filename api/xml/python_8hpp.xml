@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="python_8hpp" kind="file">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="python_8hpp" kind="file" language="C++">
     <compoundname>python.hpp</compoundname>
     <includes local="no">Python.h</includes>
     <includes local="no">boost/python.hpp</includes>
@@ -13,141 +13,141 @@
     <includedby refid="all_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp</includedby>
     <includedby refid="module_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/module.hpp</includedby>
     <incdepgraph>
-      <node id="1395">
+      <node id="1408">
         <label>boost/thread/thread.hpp</label>
       </node>
-      <node id="1397">
+      <node id="1410">
         <label>boost/noncopyable.hpp</label>
       </node>
-      <node id="1396">
+      <node id="1409">
         <label>map</label>
       </node>
-      <node id="1392">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python.hpp</label>
-        <link refid="python.hpp"/>
-        <childnode refid="1393" relation="include">
-        </childnode>
-        <childnode refid="1394" relation="include">
-        </childnode>
-        <childnode refid="1395" relation="include">
-        </childnode>
-        <childnode refid="1396" relation="include">
-        </childnode>
-        <childnode refid="1397" relation="include">
-        </childnode>
-      </node>
-      <node id="1394">
-        <label>boost/python.hpp</label>
-      </node>
-      <node id="1393">
-        <label>Python.h</label>
-      </node>
-    </incdepgraph>
-    <invincdepgraph>
-      <node id="1410">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/tendril.hpp</label>
-        <link refid="serialization_2tendril_8hpp"/>
-      </node>
-      <node id="1411">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/registry.hpp</label>
-        <link refid="serialization_2registry_8hpp"/>
-      </node>
-      <node id="1408">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp</label>
-        <link refid="plasm_8hpp"/>
-      </node>
-      <node id="1404">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/ecto.hpp</label>
-        <link refid="ecto_8hpp"/>
-        <childnode refid="1405" relation="include">
-        </childnode>
-      </node>
-      <node id="1401">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendrils.hpp</label>
-        <link refid="tendrils_8hpp"/>
-        <childnode refid="1402" relation="include">
-        </childnode>
-        <childnode refid="1405" relation="include">
-        </childnode>
-      </node>
       <node id="1405">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp</label>
-        <link refid="all_8hpp"/>
-      </node>
-      <node id="1399">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp</label>
-        <link refid="std__map__indexing__suite_8hpp"/>
-      </node>
-      <node id="1398">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python.hpp</label>
         <link refid="python.hpp"/>
-        <childnode refid="1399" relation="include">
-        </childnode>
-        <childnode refid="1400" relation="include">
-        </childnode>
-        <childnode refid="1404" relation="include">
-        </childnode>
-        <childnode refid="1405" relation="include">
+        <childnode refid="1406" relation="include">
         </childnode>
         <childnode refid="1407" relation="include">
-        </childnode>
-      </node>
-      <node id="1406">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/cell.hpp</label>
-        <link refid="serialization_2cell_8hpp"/>
-      </node>
-      <node id="1400">
-        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp</label>
-        <link refid="tendril_8hpp"/>
-        <childnode refid="1401" relation="include">
-        </childnode>
-        <childnode refid="1402" relation="include">
         </childnode>
         <childnode refid="1408" relation="include">
         </childnode>
         <childnode refid="1409" relation="include">
         </childnode>
-        <childnode refid="1405" relation="include">
-        </childnode>
         <childnode refid="1410" relation="include">
-        </childnode>
-        <childnode refid="1411" relation="include">
         </childnode>
       </node>
       <node id="1407">
+        <label>boost/python.hpp</label>
+      </node>
+      <node id="1406">
+        <label>Python.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1423">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/tendril.hpp</label>
+        <link refid="serialization_2tendril_8hpp"/>
+      </node>
+      <node id="1424">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/registry.hpp</label>
+        <link refid="serialization_2registry_8hpp"/>
+      </node>
+      <node id="1421">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/plasm.hpp</label>
+        <link refid="plasm_8hpp"/>
+      </node>
+      <node id="1417">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/ecto.hpp</label>
+        <link refid="ecto_8hpp"/>
+        <childnode refid="1418" relation="include">
+        </childnode>
+      </node>
+      <node id="1414">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendrils.hpp</label>
+        <link refid="tendrils_8hpp"/>
+        <childnode refid="1415" relation="include">
+        </childnode>
+        <childnode refid="1418" relation="include">
+        </childnode>
+      </node>
+      <node id="1418">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp</label>
+        <link refid="all_8hpp"/>
+      </node>
+      <node id="1412">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/std_map_indexing_suite.hpp</label>
+        <link refid="std__map__indexing__suite_8hpp"/>
+      </node>
+      <node id="1411">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python.hpp</label>
+        <link refid="python.hpp"/>
+        <childnode refid="1412" relation="include">
+        </childnode>
+        <childnode refid="1413" relation="include">
+        </childnode>
+        <childnode refid="1417" relation="include">
+        </childnode>
+        <childnode refid="1418" relation="include">
+        </childnode>
+        <childnode refid="1420" relation="include">
+        </childnode>
+      </node>
+      <node id="1419">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/cell.hpp</label>
+        <link refid="serialization_2cell_8hpp"/>
+      </node>
+      <node id="1413">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp</label>
+        <link refid="tendril_8hpp"/>
+        <childnode refid="1414" relation="include">
+        </childnode>
+        <childnode refid="1415" relation="include">
+        </childnode>
+        <childnode refid="1421" relation="include">
+        </childnode>
+        <childnode refid="1422" relation="include">
+        </childnode>
+        <childnode refid="1418" relation="include">
+        </childnode>
+        <childnode refid="1423" relation="include">
+        </childnode>
+        <childnode refid="1424" relation="include">
+        </childnode>
+      </node>
+      <node id="1420">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/module.hpp</label>
         <link refid="module_8hpp"/>
-        <childnode refid="1404" relation="include">
+        <childnode refid="1417" relation="include">
         </childnode>
       </node>
-      <node id="1409">
+      <node id="1422">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/spore.hpp</label>
         <link refid="spore_8hpp"/>
-        <childnode refid="1401" relation="include">
+        <childnode refid="1414" relation="include">
         </childnode>
-        <childnode refid="1405" relation="include">
+        <childnode refid="1418" relation="include">
         </childnode>
       </node>
-      <node id="1403">
+      <node id="1416">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp</label>
         <link refid="registry_8hpp"/>
-        <childnode refid="1404" relation="include">
+        <childnode refid="1417" relation="include">
         </childnode>
-        <childnode refid="1406" relation="include">
+        <childnode refid="1419" relation="include">
         </childnode>
-        <childnode refid="1407" relation="include">
+        <childnode refid="1420" relation="include">
         </childnode>
       </node>
-      <node id="1402">
+      <node id="1415">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp</label>
         <link refid="cell_8hpp"/>
-        <childnode refid="1403" relation="include">
+        <childnode refid="1416" relation="include">
         </childnode>
-        <childnode refid="1404" relation="include">
+        <childnode refid="1417" relation="include">
         </childnode>
-        <childnode refid="1405" relation="include">
+        <childnode refid="1418" relation="include">
         </childnode>
-        <childnode refid="1406" relation="include">
+        <childnode refid="1419" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -215,14 +215,14 @@
 <codeline lineno="26"><highlight class="comment"><sp/>*<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE</highlight></codeline>
 <codeline lineno="27"><highlight class="comment"><sp/>*<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
 <codeline lineno="28"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight></codeline>
-<codeline lineno="30"><highlight class="preprocessor"></highlight><highlight class="comment">//do<sp/>not<sp/>include<sp/>this<sp/>in<sp/>ecto<sp/>lib<sp/>files,<sp/>only<sp/>in<sp/>client<sp/>modules</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="comment">//do<sp/>not<sp/>include<sp/>this<sp/>in<sp/>ecto<sp/>lib<sp/>files,<sp/>only<sp/>in<sp/>client<sp/>modules</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight></codeline>
-<codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>push_macro(&quot;_POSIX_C_SOURCE&quot;)</highlight></codeline>
-<codeline lineno="33"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#pragma<sp/>push_macro(&quot;_XOPEN_SOURCE&quot;)</highlight></codeline>
-<codeline lineno="34"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>_POSIX_C_SOURCE</highlight></codeline>
-<codeline lineno="35"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>_XOPEN_SOURCE</highlight></codeline>
-<codeline lineno="36"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#include<sp/>&lt;Python.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>push_macro(&quot;_POSIX_C_SOURCE&quot;)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>push_macro(&quot;_XOPEN_SOURCE&quot;)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#undef<sp/>_POSIX_C_SOURCE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="preprocessor">#undef<sp/>_XOPEN_SOURCE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Python.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/python.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/thread/thread.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="39"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;map&gt;</highlight><highlight class="normal"></highlight></codeline>
@@ -231,7 +231,7 @@
 <codeline lineno="42"><highlight class="normal"></highlight></codeline>
 <codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/noncopyable.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="44"><highlight class="normal"></highlight></codeline>
-<codeline lineno="45"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ecto<sp/>{</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceecto" kindref="compound">ecto</ref><sp/>{</highlight></codeline>
 <codeline lineno="46"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">py<sp/>{</highlight></codeline>
 <codeline lineno="47"><highlight class="normal"></highlight></codeline>
 <codeline lineno="48" refid="structecto_1_1py_1_1gilstatus" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structecto_1_1py_1_1gilstatus" kindref="compound">gilstatus</ref></highlight></codeline>
@@ -273,8 +273,8 @@
 <codeline lineno="84"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
 <codeline lineno="85"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="86"><highlight class="normal"></highlight></codeline>
-<codeline lineno="87" refid="python_8hpp_1a1d1670056b000763eff9d847d1b278d9" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECTO_SCOPED_GILRELEASE()<sp/>ecto::py::scoped_gil_release<sp/>gilrelease<sp/>##<sp/>__LINE__(__FILE__,<sp/>__LINE__)</highlight></codeline>
-<codeline lineno="88" refid="python_8hpp_1a35348385dcbe88e8b584f4ef5067371a" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>ECTO_SCOPED_CALLPYTHON()<sp/>ecto::py::scoped_call_back_to_python<sp/>gilcall<sp/>##<sp/>__LINE__(__FILE__,<sp/>__LINE__)</highlight></codeline>
+<codeline lineno="87" refid="python_8hpp_1a1d1670056b000763eff9d847d1b278d9" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECTO_SCOPED_GILRELEASE()<sp/>ecto::py::scoped_gil_release<sp/>gilrelease<sp/>##<sp/>__LINE__(__FILE__,<sp/>__LINE__)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="88" refid="python_8hpp_1a35348385dcbe88e8b584f4ef5067371a" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECTO_SCOPED_CALLPYTHON()<sp/>ecto::py::scoped_call_back_to_python<sp/>gilcall<sp/>##<sp/>__LINE__(__FILE__,<sp/>__LINE__)</highlight></codeline>
     </programlisting>
     <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python.hpp"/>
   </compounddef>

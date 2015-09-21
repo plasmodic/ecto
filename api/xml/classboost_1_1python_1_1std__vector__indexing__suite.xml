@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="classboost_1_1python_1_1std__vector__indexing__suite" kind="class" prot="public">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="classboost_1_1python_1_1std__vector__indexing__suite" kind="class" language="C++" prot="public">
     <compoundname>boost::python::std_vector_indexing_suite</compoundname>
     <basecompoundref prot="public" virt="non-virtual">indexing_suite&lt; Container, DerivedPolicies, NoProxy &gt;</basecompoundref>
     <includes refid="std__vector__indexing__suite_8hpp" local="no">std_vector_indexing_suite.hpp</includes>
@@ -14,11 +14,13 @@
         <type>bool</type>
         <declname>NoProxy</declname>
         <defname>NoProxy</defname>
+        <defval>false</defval>
       </param>
       <param>
         <type>class</type>
         <declname>DerivedPolicies</declname>
         <defname>DerivedPolicies</defname>
+        <defval><ref refid="classboost_1_1python_1_1detail_1_1final__std__vector__derived__policies" kindref="compound">detail::final_std_vector_derived_policies</ref>&lt;Container, NoProxy&gt;</defval>
       </param>
     </templateparamlist>
       <sectiondef kind="public-type">

@@ -1,89 +1,89 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="test_8hpp" kind="file">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="test_8hpp" kind="file" language="C++">
     <compoundname>test.hpp</compoundname>
     <includedby refid="log_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/log.hpp</includedby>
     <invincdepgraph>
-      <node id="1783">
+      <node id="1796">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/log.hpp</label>
         <link refid="log_8hpp"/>
-        <childnode refid="1784" relation="include">
+        <childnode refid="1797" relation="include">
         </childnode>
-        <childnode refid="1790" relation="include">
+        <childnode refid="1803" relation="include">
         </childnode>
-        <childnode refid="1792" relation="include">
+        <childnode refid="1805" relation="include">
         </childnode>
-        <childnode refid="1793" relation="include">
+        <childnode refid="1806" relation="include">
         </childnode>
       </node>
-      <node id="1791">
+      <node id="1804">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/vertex.hpp</label>
         <link refid="vertex_8hpp"/>
-        <childnode refid="1787" relation="include">
+        <childnode refid="1800" relation="include">
         </childnode>
       </node>
-      <node id="1793">
+      <node id="1806">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/registry.hpp</label>
         <link refid="serialization_2registry_8hpp"/>
       </node>
-      <node id="1786">
+      <node id="1799">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/ecto.hpp</label>
         <link refid="ecto_8hpp"/>
-        <childnode refid="1787" relation="include">
+        <childnode refid="1800" relation="include">
         </childnode>
       </node>
-      <node id="1787">
+      <node id="1800">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp</label>
         <link refid="all_8hpp"/>
       </node>
-      <node id="1788">
+      <node id="1801">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/cell.hpp</label>
         <link refid="serialization_2cell_8hpp"/>
       </node>
-      <node id="1782">
+      <node id="1795">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/test.hpp</label>
         <link refid="test.hpp"/>
-        <childnode refid="1783" relation="include">
+        <childnode refid="1796" relation="include">
         </childnode>
       </node>
-      <node id="1789">
+      <node id="1802">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/module.hpp</label>
         <link refid="module_8hpp"/>
-        <childnode refid="1786" relation="include">
+        <childnode refid="1799" relation="include">
         </childnode>
       </node>
-      <node id="1792">
+      <node id="1805">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp</label>
         <link refid="scheduler_8hpp"/>
       </node>
-      <node id="1785">
+      <node id="1798">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp</label>
         <link refid="registry_8hpp"/>
-        <childnode refid="1786" relation="include">
+        <childnode refid="1799" relation="include">
         </childnode>
-        <childnode refid="1788" relation="include">
+        <childnode refid="1801" relation="include">
         </childnode>
-        <childnode refid="1789" relation="include">
+        <childnode refid="1802" relation="include">
         </childnode>
       </node>
-      <node id="1784">
+      <node id="1797">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp</label>
         <link refid="cell_8hpp"/>
-        <childnode refid="1785" relation="include">
+        <childnode refid="1798" relation="include">
         </childnode>
-        <childnode refid="1786" relation="include">
+        <childnode refid="1799" relation="include">
         </childnode>
-        <childnode refid="1787" relation="include">
+        <childnode refid="1800" relation="include">
         </childnode>
-        <childnode refid="1788" relation="include">
+        <childnode refid="1801" relation="include">
         </childnode>
       </node>
-      <node id="1790">
+      <node id="1803">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/profile.hpp</label>
         <link refid="profile_8hpp"/>
-        <childnode refid="1791" relation="include">
+        <childnode refid="1804" relation="include">
         </childnode>
-        <childnode refid="1792" relation="include">
+        <childnode refid="1805" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -134,9 +134,9 @@
 <codeline lineno="25"><highlight class="normal"></highlight><highlight class="comment">//<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="26"><highlight class="normal"></highlight><highlight class="comment">//<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="27"><highlight class="normal"></highlight><highlight class="comment">//<sp/></highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight></codeline>
-<codeline lineno="29"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ecto<sp/>{</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceecto" kindref="compound">ecto</ref><sp/>{</highlight></codeline>
 <codeline lineno="31" refid="namespaceecto_1_1test" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">test<sp/>{</highlight></codeline>
 <codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="namespaceecto_1_1test_1ab6aaaa31355ed0c3c07380853b4ee174" kindref="member">random_delay</ref>();</highlight></codeline>
 <codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
@@ -146,12 +146,12 @@
 <codeline lineno="37"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
 <codeline lineno="38"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="39"><highlight class="normal"></highlight></codeline>
-<codeline lineno="40"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>ECTO_STRESS_TEST</highlight></codeline>
-<codeline lineno="41"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>ECTO_RANDOM_DELAY()<sp/>::ecto::test::random_delay()</highlight></codeline>
-<codeline lineno="42"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#else</highlight></codeline>
-<codeline lineno="43" refid="test_8hpp_1ad596883c00b384e64cded971372700b4" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>ECTO_RANDOM_DELAY()</highlight></codeline>
-<codeline lineno="44"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
-<codeline lineno="45"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>ECTO_STRESS_TEST</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECTO_RANDOM_DELAY()<sp/>::ecto::test::random_delay()</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43" refid="test_8hpp_1ad596883c00b384e64cded971372700b4" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECTO_RANDOM_DELAY()</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
 <codeline lineno="46"><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/test.hpp"/>

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="structecto_1_1strand__hash" kind="struct" prot="public">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="structecto_1_1strand__hash" kind="struct" language="C++" prot="public">
     <compoundname>ecto::strand_hash</compoundname>
     <basecompoundref prot="public" virt="non-virtual">std::unary_function&lt; strand, std::size_t &gt;</basecompoundref>
     <includes refid="strand_8hpp" local="no">strand.hpp</includes>

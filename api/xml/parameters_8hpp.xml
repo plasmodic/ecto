@@ -1,55 +1,68 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="parameters_8hpp" kind="file">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="parameters_8hpp" kind="file" language="C++">
     <compoundname>parameters.hpp</compoundname>
     <includes refid="abi_8hpp" local="no">ecto/abi.hpp</includes>
     <includes local="no">string</includes>
     <includes local="no">stdint.h</includes>
+    <includedby refid="impl_2parameters_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/impl/parameters.hpp</includedby>
     <incdepgraph>
-      <node id="1265">
+      <node id="1277">
         <label>stdint.h</label>
       </node>
-      <node id="1259">
+      <node id="1271">
         <label>ecto/abi.hpp</label>
         <link refid="abi_8hpp"/>
-        <childnode refid="1260" relation="include">
+        <childnode refid="1272" relation="include">
         </childnode>
-        <childnode refid="1261" relation="include">
+        <childnode refid="1273" relation="include">
         </childnode>
       </node>
-      <node id="1264">
+      <node id="1276">
         <label>string</label>
       </node>
-      <node id="1261">
+      <node id="1273">
         <label>ecto/util.hpp</label>
         <link refid="util_8hpp"/>
-        <childnode refid="1262" relation="include">
+        <childnode refid="1274" relation="include">
         </childnode>
-        <childnode refid="1263" relation="include">
+        <childnode refid="1275" relation="include">
         </childnode>
-        <childnode refid="1264" relation="include">
+        <childnode refid="1276" relation="include">
         </childnode>
       </node>
-      <node id="1263">
+      <node id="1275">
         <label>typeinfo</label>
       </node>
-      <node id="1260">
+      <node id="1272">
         <label>ecto/version.hpp</label>
       </node>
-      <node id="1258">
+      <node id="1270">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/parameters.hpp</label>
         <link refid="parameters.hpp"/>
-        <childnode refid="1259" relation="include">
+        <childnode refid="1271" relation="include">
         </childnode>
-        <childnode refid="1264" relation="include">
+        <childnode refid="1276" relation="include">
         </childnode>
-        <childnode refid="1265" relation="include">
+        <childnode refid="1277" relation="include">
         </childnode>
       </node>
-      <node id="1262">
+      <node id="1274">
         <label>iostream</label>
       </node>
     </incdepgraph>
+    <invincdepgraph>
+      <node id="1278">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/parameters.hpp</label>
+        <link refid="parameters.hpp"/>
+        <childnode refid="1279" relation="include">
+        </childnode>
+      </node>
+      <node id="1279">
+        <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/impl/parameters.hpp</label>
+        <link refid="impl_2parameters_8hpp"/>
+      </node>
+    </invincdepgraph>
     <innerclass refid="structecto_1_1bounded" prot="public">ecto::bounded</innerclass>
     <innernamespace refid="namespaceecto">ecto</innernamespace>
       <sectiondef kind="define">
@@ -70,16 +83,16 @@
     <detaileddescription>
     </detaileddescription>
     <programlisting>
-<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight></codeline>
-<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
 <codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="abi_8hpp" kindref="compound">ecto/abi.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight></codeline>
 <codeline lineno="7" refid="parameters_8hpp_1ac9757f633f20c113336d7dc4ce2cbee7" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ECTO_COMMON_TYPES<sp/>\</highlight></codeline>
-<codeline lineno="8"><highlight class="preprocessor"><sp/><sp/>(char)(int)(long)(float)(double)(uint8_t)(uint16_t)(uint32_t)(uint64_t)</highlight></codeline>
-<codeline lineno="9"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ecto</highlight></codeline>
+<codeline lineno="8"><highlight class="preprocessor"><sp/><sp/>(char)(int)(long)(float)(double)(uint8_t)(uint16_t)(uint32_t)(uint64_t)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceecto" kindref="compound">ecto</ref></highlight></codeline>
 <codeline lineno="11"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="12"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
 <codeline lineno="13" refid="structecto_1_1bounded" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structecto_1_1bounded" kindref="compound">bounded</ref></highlight></codeline>

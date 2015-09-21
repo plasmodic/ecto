@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Build Ecto From Source &mdash; ecto</title>
+    <title>Ecto From Source &mdash; ecto</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <link rel="top" title="ecto" href="../../index.html" />
     <link rel="up" title="Installing ecto" href="index.html" />
-    <link rel="next" title="Requirements" href="get_ecto_win32.html" />
-    <link rel="prev" title="Dependencies" href="dependencies.html" /> 
+    <link rel="next" title="Nonsystem Boost" href="non_system_boost.html" />
+    <link rel="prev" title="Installing ecto" href="index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -40,10 +40,10 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="get_ecto_win32.html" title="Requirements"
+          <a href="non_system_boost.html" title="Nonsystem Boost"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="dependencies.html" title="Dependencies"
+          <a href="index.html" title="Installing ecto"
              accesskey="P">previous</a> |</li>
         <li><a href="../../index.html">ecto</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Installing ecto</a> &raquo;</li> 
@@ -56,22 +56,25 @@
             </a></p>
   <h3><a href="../../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Build Ecto From Source</a><ul>
-<li><a class="reference internal" href="#building-ecto">building ecto</a></li>
+<li><a class="reference internal" href="#">Ecto From Source</a><ul>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#building">Building</a></li>
+<li><a class="reference internal" href="#running">Running</a></li>
 <li><a class="reference internal" href="#install">Install</a></li>
 <li><a class="reference internal" href="#docs">Docs</a></li>
 <li><a class="reference internal" href="#tests">Tests</a></li>
+<li><a class="reference internal" href="#building-additional-ecto-repos">Building Additional Ecto Repos</a></li>
+<li><a class="reference internal" href="#alternative-build-pure-catkin-cmake-style">Alternative Build - Pure Catkin/CMake Style</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="dependencies.html"
-                        title="previous chapter">Dependencies</a></p>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Installing ecto</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="get_ecto_win32.html"
-                        title="next chapter">Requirements</a></p>
+  <p class="topless"><a href="non_system_boost.html"
+                        title="next chapter">Nonsystem Boost</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../../_sources/ecto/install/get_ecto.txt"
@@ -98,70 +101,44 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="build-ecto-from-source">
-<h1>Build Ecto From Source<a class="headerlink" href="#build-ecto-from-source" title="Permalink to this headline">¶</a></h1>
-<p>ecto is available here: <a class="reference external" href="https://github.com/plasmodic/ecto">https://github.com/plasmodic/ecto</a></p>
-<p>It is also dependent on <tt class="docutils literal"><span class="pre">catkin</span></tt></p>
-<div class="highlight-bash"><div class="highlight"><pre>mkdir ecto_kitchen <span class="o">&amp;&amp;</span> <span class="nb">cd </span>ecto_kitchen
-git clone http://github.com/ros/catkin.git
+  <div class="section" id="ecto-from-source">
+<h1>Ecto From Source<a class="headerlink" href="#ecto-from-source" title="Permalink to this headline">¶</a></h1>
+<p>Ecto is built using <a class="reference external" href="http://docs.ros.org/api/catkin/html/">catkin</a>. Although it is the build tool favoured to build ROS packages, it is
+also perfectly usable for a large suite of interdependent non-ros packages. It is in large part a
+cmake/setuptools wrapper, so familiarity with these tools makes the jump to catkin not so large.</p>
+<p>The instructions below assume an ubuntu system and use of the fundamental catkin tools.</p>
+<div class="section" id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<p>On ubuntu its simple....</p>
+<div class="highlight-sh"><div class="highlight"><pre>sudo apt-get install libboost-python-dev libboost-filesystem-dev libboost-system-dev <span class="se">\</span>
+        libboost-thread-dev python-setuptools python-gobject python-gtk2 graphviz doxygen <span class="se">\</span>
+        python-sphinx
+</pre></div>
+</div>
+<p>For catkin and it&#8217;s tools :</p>
+<div class="highlight-sh"><div class="highlight"><pre>sudo apt-get install python-catkin-pkg ros-indigo-catkin
+</pre></div>
+</div>
+</div>
+<div class="section" id="building">
+<h2>Building<a class="headerlink" href="#building" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nb">source</span> /opt/ros/indigo/setup.bash
+mkdir -p ecto_ws/src
+<span class="nb">cd </span>ecto_ws/src
+catkin_init_workspace
 git clone http://github.com/plasmodic/ecto.git
-ln -s catkin/cmake/toplevel.cmake CMakeLists.txt
-</pre></div>
-</div>
-<p>You should see the following outputish:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ git clone git://github.com/plasmodic/ecto.git
-Initialized empty Git repository in /tmp/scratchy/ecto/.git/
-remote: Counting objects: 5011, done.
-remote: Compressing objects: 100% (1767/1767), done.
-remote: Total 5011 (delta 3226), reused 4711 (delta 2927)
-Receiving objects: 100% (5011/5011), 1.07 MiB | 994 KiB/s, done.
-Resolving deltas: 100% (3226/3226), done.
-</pre></div>
-</div>
-<div class="section" id="building-ecto">
-<h2>building ecto<a class="headerlink" href="#building-ecto" title="Permalink to this headline">¶</a></h2>
-<p>Using a standard cmake build system, you must first create a build directory and
-run cmake to configure the build system. <cite>cmake</cite> may be run with all default settings for all but
-the most advanced user.</p>
-<div class="highlight-bash"><div class="highlight"><pre>mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd </span>build <span class="o">&amp;&amp;</span> cmake ..
-</pre></div>
-</div>
-<p>You should see the following outputish:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ mkdir build
-$ cd build
-$ cmake ..
--- The C compiler identification is GNU
--- The CXX compiler identification is GNU
--- Check for working C compiler: /usr/bin/gcc
-... etc etc
--- Building ecto version: 0.1.0
--- Building ecto code name: mold spore (alpha)
--- flags:  -Werror -Wall -Wl,--no-undefined -O3 -DNDEBUG
--- Configuring done
--- Generating done
--- Build files have been written to: /tmp/scratchy/ecto/build
-</pre></div>
-</div>
-<p>If that completed with out error or warnings you are ready to build ecto:</p>
-<div class="highlight-sh"><div class="highlight"><pre>make
-</pre></div>
-</div>
-<p>You should see the following outputish:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ make
-Scanning dependencies of target ecto
-[  2%] Building CXX object src/lib/CMakeFiles/ecto.dir/abi.cpp.o
-[  4%] Building CXX object src/lib/CMakeFiles/ecto.dir/tendril.cpp.o
-... etc etc
-Linking CXX shared library ../../lib/ecto_test.so
-[100%] Built target ecto_test_ectomodule
-</pre></div>
-</div>
-<p>Now you have a working build of ecto! You should try to run a test.</p>
-<div class="highlight-sh"><div class="highlight"><pre><span class="c">#cd to the root of the ecto kitchen</span>
 <span class="nb">cd</span> ..
-<span class="c">#add ecto to your python path</span>
-. build/devel/setup.bash
-python ecto/samples/hello.py
+catkin_make
+</pre></div>
+</div>
+</div>
+<div class="section" id="running">
+<h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
+<p>Now you have a working build of ecto! You should try to run a test.</p>
+<div class="highlight-sh"><div class="highlight"><pre><span class="nb">cd </span>ecto_ws
+<span class="c"># add ecto to your python path</span>
+. devel/setup.bash
+python src/ecto/samples/hello.py
 </pre></div>
 </div>
 <p>You should see the following outputish:</p>
@@ -188,15 +165,6 @@ q
 </pre></div>
 </div>
 </div>
-<div class="section" id="dependencies">
-<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
-<p>On ubuntu its simple....</p>
-<div class="highlight-sh"><div class="highlight"><pre>sudo apt-get install libboost-python-dev libboost-filesystem-dev libboost-system-dev <span class="se">\</span>
-        libboost-thread-dev python-setuptools python-gobject python-gtk2 graphviz doxygen <span class="se">\</span>
-        python-sphinx
-</pre></div>
-</div>
-</div>
 <div class="section" id="install">
 <h2>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
 <p>You may install ecto using the following:</p>
@@ -205,24 +173,28 @@ sudo make install
 sudo ldconfig
 </pre></div>
 </div>
-<p>This will install ecto to the appropriate system paths. On ubuntu the install may touch the following folders:</p>
-<div class="highlight-sh"><div class="highlight"><pre>/usr/local/include/ecto-VERSION/
-/usr/local/share/ecto-VERSION/
-/usr/local/lib/python*/dist-packages/
+<p>This will install ecto to the appropriate system paths. If built with catkin_make, it wil by default put
+the resulting install space in <cite>ecto_ws/install</cite>. You can modify <cite>CMAKE_INSTALL_PREFIX</cite>
+to redirect it:</p>
+<div class="highlight-sh"><div class="highlight"><pre><span class="nb">cd </span>ecto_ws
+rm -rf build devel
+catkin_make -DCMAKE_INSTALL_PREFIX<span class="o">=</span>/usr/local
 </pre></div>
 </div>
-<p>The advantage to installing ecto is that it becomes much easier for client code to use.  cmake will auto-magically
-be able to find ecto, and it will be in your pythonpath by default.</p>
+<p>Ecto deliverables get installed in the following locations:</p>
+<div class="highlight-sh"><div class="highlight"><pre>CMAKE_INSTALL_PREFIX/include/ecto-VERSION/
+CMAKE_INSTALL_PREFIX/share/ecto-VERSION/
+CMAKE_INSTALL_PREFIX/lib/python*/dist-packages/
+</pre></div>
+</div>
 </div>
 <div class="section" id="docs">
 <h2>Docs<a class="headerlink" href="#docs" title="Permalink to this headline">¶</a></h2>
 <p>Docs may be generated from the source in the following manner.</p>
 <div class="highlight-sh"><div class="highlight"><pre><span class="nb">cd </span>build
-make doc <span class="c">#for all documentaition</span>
-make html <span class="c">#for sphinx (prefer this for usage docs)</span>
-make pdf <span class="c">#sphinx pdf manual</span>
-make doxygen <span class="c">#for c++ api docs</span>
-ccmake . <span class="c">#edit doc options.</span>
+make sphinx-doc <span class="c"># for sphinx (prefer this for usage docs)</span>
+make doxygen    <span class="c"># for c++ api docs</span>
+ccmake .        <span class="c"># edit doc options.</span>
 </pre></div>
 </div>
 </div>
@@ -235,6 +207,38 @@ make <span class="nb">test</span>
 <p>or</p>
 <div class="highlight-sh"><div class="highlight"><pre><span class="nb">cd </span>build
 ctest -V
+</pre></div>
+</div>
+</div>
+<div class="section" id="building-additional-ecto-repos">
+<h2>Building Additional Ecto Repos<a class="headerlink" href="#building-additional-ecto-repos" title="Permalink to this headline">¶</a></h2>
+<p>Build up your workspace with additional repos. Make sure system dependencies are installed (manually or via rosdep)
+before building. Some other officially supported ecto repositories include:</p>
+<ul class="simple">
+<li>git clone <a class="reference external" href="http://github.com/plasmodic/ecto_image_pipeline.git">http://github.com/plasmodic/ecto_image_pipeline.git</a></li>
+<li>git clone <a class="reference external" href="http://github.com/plasmodic/ecto_openni.git">http://github.com/plasmodic/ecto_openni.git</a></li>
+<li>git clone <a class="reference external" href="http://github.com/wg-perception/opencv_candidate.git">http://github.com/wg-perception/opencv_candidate.git</a></li>
+<li>git clone <a class="reference external" href="http://github.com/plasmodic/ecto_opencv.git">http://github.com/plasmodic/ecto_opencv.git</a></li>
+<li>git clone <a class="reference external" href="http://github.com/plasmodic/ecto_pcl.git">http://github.com/plasmodic/ecto_pcl.git</a></li>
+<li>git clone <a class="reference external" href="http://github.com/plasmodic/ecto_ros.git">http://github.com/plasmodic/ecto_ros.git</a></li>
+</ul>
+</div>
+<div class="section" id="alternative-build-pure-catkin-cmake-style">
+<h2>Alternative Build - Pure Catkin/CMake Style<a class="headerlink" href="#alternative-build-pure-catkin-cmake-style" title="Permalink to this headline">¶</a></h2>
+<p>The preceding instructions utilise the typical tools made available through ROS. You can instead prefer
+an almost pure catkin/cmake approach (sans the <cite>ros-indigo-catkin</cite> deb):</p>
+<div class="highlight-bash"><div class="highlight"><pre>mkdir -p ecto_ws/src <span class="o">&amp;&amp;</span> <span class="nb">cd </span>ecto_ws/src
+git clone http://github.com/ros/catkin.git
+git clone http://github.com/plasmodic/ecto.git
+ln -s catkin/cmake/toplevel.cmake CMakeLists.txt
+<span class="nb">cd</span> ..
+mkdir build
+<span class="nb">cd </span>build
+cmake ../src
+make -j5
+make install
+<span class="c"># source the environment, get ready to run!</span>
+<span class="nb">source </span>devel/setup.bash
 </pre></div>
 </div>
 </div>
@@ -256,10 +260,10 @@ ctest -V
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="get_ecto_win32.html" title="Requirements"
+          <a href="non_system_boost.html" title="Nonsystem Boost"
              >next</a> |</li>
         <li class="right" >
-          <a href="dependencies.html" title="Dependencies"
+          <a href="index.html" title="Installing ecto"
              >previous</a> |</li>
         <li><a href="../../index.html">ecto</a> &raquo;</li>
           <li><a href="index.html" >Installing ecto</a> &raquo;</li> 
@@ -267,7 +271,7 @@ ctest -V
     </div>
     <div class="footer">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>

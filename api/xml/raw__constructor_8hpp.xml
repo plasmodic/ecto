@@ -1,34 +1,34 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="raw__constructor_8hpp" kind="file">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="raw__constructor_8hpp" kind="file" language="C++">
     <compoundname>raw_constructor.hpp</compoundname>
     <includes local="no">Python.h</includes>
     <includes local="no">boost/python.hpp</includes>
     <includes local="no">boost/python/raw_function.hpp</includes>
     <includes local="no">boost/python/detail/api_placeholder.hpp</includes>
     <incdepgraph>
-      <node id="1423">
+      <node id="1436">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/python/raw_constructor.hpp</label>
         <link refid="raw_constructor.hpp"/>
-        <childnode refid="1424" relation="include">
+        <childnode refid="1437" relation="include">
         </childnode>
-        <childnode refid="1425" relation="include">
+        <childnode refid="1438" relation="include">
         </childnode>
-        <childnode refid="1426" relation="include">
+        <childnode refid="1439" relation="include">
         </childnode>
-        <childnode refid="1427" relation="include">
+        <childnode refid="1440" relation="include">
         </childnode>
       </node>
-      <node id="1425">
+      <node id="1438">
         <label>boost/python.hpp</label>
       </node>
-      <node id="1424">
+      <node id="1437">
         <label>Python.h</label>
       </node>
-      <node id="1426">
+      <node id="1439">
         <label>boost/python/raw_function.hpp</label>
       </node>
-      <node id="1427">
+      <node id="1440">
         <label>boost/python/detail/api_placeholder.hpp</label>
       </node>
     </incdepgraph>
@@ -69,14 +69,14 @@
 <codeline lineno="26"><highlight class="comment"><sp/>*<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE</highlight></codeline>
 <codeline lineno="27"><highlight class="comment"><sp/>*<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
 <codeline lineno="28"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight></codeline>
-<codeline lineno="30"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Python.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/python.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/python/raw_function.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/python/detail/api_placeholder.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="35"><highlight class="normal"></highlight></codeline>
-<codeline lineno="36"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">boost<sp/>{<sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">python<sp/>{</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceboost" kindref="compound">boost</ref><sp/>{<sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">python<sp/>{</highlight></codeline>
 <codeline lineno="37"><highlight class="normal"></highlight></codeline>
 <codeline lineno="38"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">detail<sp/>{</highlight></codeline>
 <codeline lineno="39"><highlight class="normal"></highlight></codeline>

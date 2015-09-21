@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="namespaceecto_1_1profile" kind="namespace">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="namespaceecto_1_1profile" kind="namespace" language="C++">
     <compoundname>ecto::profile</compoundname>
     <innerclass refid="structecto_1_1profile_1_1graph__stats__type" prot="public">ecto::profile::graph_stats_type</innerclass>
     <innerclass refid="structecto_1_1profile_1_1graphstats__collector" prot="public">ecto::profile::graphstats_collector</innerclass>
-    <innerclass refid="structecto_1_1profile_1_1stats__type" prot="public">ecto::profile::stats_type</innerclass>
     <innerclass refid="structecto_1_1profile_1_1stats__collector" prot="public">ecto::profile::stats_collector</innerclass>
+    <innerclass refid="structecto_1_1profile_1_1stats__type" prot="public">ecto::profile::stats_type</innerclass>
       <sectiondef kind="func">
       <memberdef kind="function" id="namespaceecto_1_1profile_1aedec79d10deb5a37a71464c79a02187a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>unsigned long</type>

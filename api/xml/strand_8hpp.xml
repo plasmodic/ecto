@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="strand_8hpp" kind="file">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="strand_8hpp" kind="file" language="C++">
     <compoundname>strand.hpp</compoundname>
     <includes local="no">boost/shared_ptr.hpp</includes>
     <includes local="no">boost/function.hpp</includes>
@@ -8,81 +8,81 @@
     <includes refid="forward_8hpp" local="no">ecto/forward.hpp</includes>
     <includedby refid="cell_8hpp" local="no">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp</includedby>
     <incdepgraph>
-      <node id="1649">
+      <node id="1662">
         <label>boost/shared_ptr.hpp</label>
       </node>
-      <node id="1648">
+      <node id="1661">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/strand.hpp</label>
         <link refid="strand.hpp"/>
-        <childnode refid="1649" relation="include">
+        <childnode refid="1662" relation="include">
         </childnode>
-        <childnode refid="1650" relation="include">
+        <childnode refid="1663" relation="include">
         </childnode>
-        <childnode refid="1651" relation="include">
+        <childnode refid="1664" relation="include">
         </childnode>
-        <childnode refid="1652" relation="include">
+        <childnode refid="1665" relation="include">
         </childnode>
       </node>
-      <node id="1652">
+      <node id="1665">
         <label>ecto/forward.hpp</label>
         <link refid="forward_8hpp"/>
-        <childnode refid="1649" relation="include">
+        <childnode refid="1662" relation="include">
         </childnode>
       </node>
-      <node id="1650">
+      <node id="1663">
         <label>boost/function.hpp</label>
       </node>
-      <node id="1651">
+      <node id="1664">
         <label>boost/asio.hpp</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="1653">
+      <node id="1666">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/strand.hpp</label>
         <link refid="strand.hpp"/>
-        <childnode refid="1654" relation="include">
+        <childnode refid="1667" relation="include">
         </childnode>
       </node>
-      <node id="1656">
+      <node id="1669">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/ecto.hpp</label>
         <link refid="ecto_8hpp"/>
-        <childnode refid="1657" relation="include">
+        <childnode refid="1670" relation="include">
         </childnode>
       </node>
-      <node id="1657">
+      <node id="1670">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/all.hpp</label>
         <link refid="all_8hpp"/>
       </node>
-      <node id="1658">
+      <node id="1671">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/serialization/cell.hpp</label>
         <link refid="serialization_2cell_8hpp"/>
       </node>
-      <node id="1659">
+      <node id="1672">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/module.hpp</label>
         <link refid="module_8hpp"/>
-        <childnode refid="1656" relation="include">
+        <childnode refid="1669" relation="include">
         </childnode>
       </node>
-      <node id="1655">
+      <node id="1668">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/registry.hpp</label>
         <link refid="registry_8hpp"/>
-        <childnode refid="1656" relation="include">
+        <childnode refid="1669" relation="include">
         </childnode>
-        <childnode refid="1658" relation="include">
+        <childnode refid="1671" relation="include">
         </childnode>
-        <childnode refid="1659" relation="include">
+        <childnode refid="1672" relation="include">
         </childnode>
       </node>
-      <node id="1654">
+      <node id="1667">
         <label>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/cell.hpp</label>
         <link refid="cell_8hpp"/>
-        <childnode refid="1655" relation="include">
+        <childnode refid="1668" relation="include">
         </childnode>
-        <childnode refid="1656" relation="include">
+        <childnode refid="1669" relation="include">
         </childnode>
-        <childnode refid="1657" relation="include">
+        <childnode refid="1670" relation="include">
         </childnode>
-        <childnode refid="1658" relation="include">
+        <childnode refid="1671" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -122,14 +122,14 @@
 <codeline lineno="26"><highlight class="comment"><sp/>*<sp/>ARISING<sp/>IN<sp/>ANY<sp/>WAY<sp/>OUT<sp/>OF<sp/>THE<sp/>USE<sp/>OF<sp/>THIS<sp/>SOFTWARE,<sp/>EVEN<sp/>IF<sp/>ADVISED<sp/>OF<sp/>THE</highlight></codeline>
 <codeline lineno="27"><highlight class="comment"><sp/>*<sp/>POSSIBILITY<sp/>OF<sp/>SUCH<sp/>DAMAGE.</highlight></codeline>
 <codeline lineno="28"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight></codeline>
-<codeline lineno="30"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/shared_ptr.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/function.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/asio.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="forward_8hpp" kindref="compound">ecto/forward.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="35"><highlight class="normal"></highlight></codeline>
-<codeline lineno="36"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ecto</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceecto" kindref="compound">ecto</ref></highlight></codeline>
 <codeline lineno="37"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="38" refid="structecto_1_1strand" refkind="compound"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structecto_1_1strand" kindref="compound">strand</ref></highlight></codeline>
 <codeline lineno="39"><highlight class="normal"><sp/><sp/>{</highlight></codeline>

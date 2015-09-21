@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
-  <compounddef id="namespaceecto_1_1serialization" kind="namespace">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="namespaceecto_1_1serialization" kind="namespace" language="C++">
     <compoundname>ecto::serialization</compoundname>
-    <innerclass refid="structecto_1_1serialization_1_1writer__" prot="public">ecto::serialization::writer_</innerclass>
     <innerclass refid="structecto_1_1serialization_1_1reader__" prot="public">ecto::serialization::reader_</innerclass>
-    <innerclass refid="structecto_1_1serialization_1_1registry" prot="public">ecto::serialization::registry</innerclass>
     <innerclass refid="structecto_1_1serialization_1_1register__serializer" prot="public">ecto::serialization::register_serializer</innerclass>
+    <innerclass refid="structecto_1_1serialization_1_1registry" prot="public">ecto::serialization::registry</innerclass>
+    <innerclass refid="structecto_1_1serialization_1_1writer__" prot="public">ecto::serialization::writer_</innerclass>
       <sectiondef kind="typedef">
       <memberdef kind="typedef" id="namespaceecto_1_1serialization_1ad544c8b5416e0ecfe692922b2f2e8e54" prot="public" static="no">
         <type><ref refid="structecto_1_1serialization_1_1registry" kindref="compound">registry</ref>&lt; boost::archive::binary_oarchive &gt;</type>
