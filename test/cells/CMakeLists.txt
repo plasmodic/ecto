@@ -62,4 +62,5 @@ ectomodule(ecto_test
   gil_exercise.cpp
   ecto_test.cpp
   DESTINATION  ecto
+  INSTALL
 )
