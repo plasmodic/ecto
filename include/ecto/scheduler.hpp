@@ -196,6 +196,12 @@ bool scheduler::running() const
   return static_cast<int>(state_) > 0;
 }
 
+bool scheduler::executing() const
+{
+  boost::mutex::scoped_lock l(mtx_);
+  return state_ == scheduler::EXECUTING;
+}
+
 scheduler::State scheduler::state(State state)
 {
   boost::mutex::scoped_lock l(mtx_);
