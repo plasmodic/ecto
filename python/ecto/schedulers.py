@@ -44,10 +44,17 @@ Some extra interfaces that assist with scheduler management.
 # Imports
 ##############################################################################
 
+from __future__ import print_function
+
 import ecto
 import threading
-from PySide.QtCore import QTimer
-from PySide.QtGui import QApplication
+try:
+    from PySide.QtCore import QTimer
+    from PySide.QtGui import QApplication
+    HAS_QT = True
+except ImportError as e:
+    print(e)
+    HAS_QT = False
 
 ##############################################################################
 # Classes
@@ -67,6 +74,8 @@ class MultiPlasmScheduler:
     @param disable_qt_management : toggle the calls to kill QApplication after the threads finish.
     '''
     def __init__(self, plasm_dict={}, disable_qt_management=False):
+        if not HAS_QT:
+            disable_qt_management=True
         self.plasms = plasm_dict
         self.schedulers = {}
         self.threads = {}
@@ -101,4 +110,4 @@ class MultiPlasmScheduler:
 
     def print_statistics(self):
         for scheduler in self.schedulers.values():
-            print scheduler.stats()
+            print(scheduler.stats())
