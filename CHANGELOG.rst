@@ -1,5 +1,5 @@
-Forthcoming
------------
+0.6.12 (2016-04-17)
+-------------------
 * fix tests on Kinetic
 * fix PySide dependency
 * add missing implementation for executing
