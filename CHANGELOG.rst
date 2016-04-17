@@ -1,3 +1,13 @@
+Forthcoming
+-----------
+* fix tests on Kinetic
+* fix PySide dependency
+* add missing implementation for executing
+  That fixes `#233 <https://github.com/plasmodic/ecto/issues/233>`_
+* install the ecto library of test cells for users to utilise in their own tests.
+* checking for ecto-test target existence
+* Contributors: Daniel Stonier, Vincent Rabaud, edgarriba
+
 0.6.11 (2015-09-21)
 -------------------
 * minor doc syntax fixes
