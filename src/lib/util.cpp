@@ -101,8 +101,11 @@ namespace ecto
     }
 
     const std::string&
-    lookup(const std::string& mangled)
+    lookup(std::string mangled)
     {
+      if (mangled == typeid(mangled).name())
+        mangled = "std::string";
+
       dict_t::iterator iter = m.find(mangled);
       if (iter != m.end())
         return iter->second;
@@ -140,6 +143,13 @@ namespace ecto
     return type_mapping::instance().lookup(s);
   }
 
+  template<>
+  const std::string& name_of<std::string>()
+  {
+    static const std::string& name_cache = "std::string";
+    return name_cache;
+  }
+
   std::string
   symbolic_name_of(const std::string& t_name)
   {
@@ -151,6 +161,12 @@ namespace ecto
     return result;
   }
 
+  template<>
+  const std::string& symbolic_name_of<std::string>()
+  {
+    static const std::string name_cache = symbolic_name_of("std::string");
+    return name_cache;
+  }
 }
 
 

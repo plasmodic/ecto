@@ -216,8 +216,7 @@ namespace ecto
     bool
     is_type() const
     {
-      const char* ourname = name_of<T>().c_str();
-      return ourname == type_ID_;
+      return name_of<T>() == type_name();
     }
 
     /**

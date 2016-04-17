@@ -166,7 +166,7 @@ namespace ecto
   bool
   tendril::same_type(const tendril& rhs) const
   {
-    return rhs.type_ID_ == type_ID_;
+    return rhs.type_name() == type_name();
   }
 
   bool
@@ -287,6 +287,10 @@ namespace ecto
         bool inserted;
         tr_t::iterator it;
         boost::tie(it, inserted) = tr.insert(std::make_pair(t.type_name(), t));
+        if (t.type_name() == name_of<std::string>()) {
+          tr.insert(std::make_pair("std::string", t));
+          tr.insert(std::make_pair("std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >", t));
+        }
         return inserted;
       }
       const ecto::tendril&
