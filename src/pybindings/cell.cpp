@@ -34,6 +34,7 @@
 #include <boost/python/iterator.hpp>
 #include <boost/python/slice.hpp>
 #include <boost/python/stl_iterator.hpp>
+#include <boost/python/register_ptr_to_python.hpp>
 
 #include <ecto/python/std_map_indexing_suite.hpp>
 #include <ecto/python/raw_constructor.hpp>
@@ -187,6 +188,7 @@ namespace ecto
         .def("activate", ((void(cell::*)()) &cell::activate))
         .def("deactivate", ((void(cell::*)()) &cell::deactivate))
         ;
+      bp::register_ptr_to_python<boost::shared_ptr<cell> >();
 
       bp::class_<cellwrap, boost::shared_ptr<cellwrap>, boost::noncopyable> ("_cell_base" /*bp::no_init*/)
         .def("_set_process_connected_inputs_only", &cell::set_process_connected_inputs_only)
@@ -220,6 +222,7 @@ namespace ecto
         .def("__getitem__", getitem_list)
         .def("__getitem__", getitem_slice)
         ;
+      bp::register_ptr_to_python<boost::shared_ptr<cellwrap> >();
 
       bp::def("__getitem_str__", getitem_str);
       bp::def("__getitem_slice__", getitem_slice);

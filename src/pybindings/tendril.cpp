@@ -169,6 +169,7 @@ void wrapConnection(){
     Tendril_.def("listT", &py_tendril_reg_list);
     Tendril_.staticmethod("listT");
     Tendril_.enable_pickling();
+  bp::register_ptr_to_python< boost::shared_ptr<tendril> >();
 
 }
 }
