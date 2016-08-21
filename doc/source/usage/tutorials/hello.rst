@@ -18,7 +18,7 @@ You'll need a CMake file named ``CMakeLists.txt`` :download:`srcs/CMakeListsHell
 c++
 ---
 
-So, the c++ side of things.  Ecto code structurally break down into 
+So, the c++ side of things.  Ecto code structurally break down into
 :ref:`Cells <cells-overview>` and :ref:`Modules <modules-overview>`
 
 The module code:
@@ -26,16 +26,16 @@ The module code:
   Download: :download:`srcs/tutorial.cpp`
 
   .. _code-module:
- 
+
   .. literalinclude:: srcs/tutorial.cpp
      :language: cpp
-  
+
 The cell code:
 
   Download: :download:`srcs/Hello.cpp`
 
   .. _code-hello:
-  
+
   .. literalinclude:: srcs/Hello.cpp
     :language: cpp
 
