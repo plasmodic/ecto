@@ -7,6 +7,5 @@ d = generate_distutils_setup()
 
 d['packages'] = ['ecto', 'ecto.sphinx', 'ecto.impl' ]
 d['package_dir'] = {'': 'python'}
-d['install_requires'] = []
 
 setup(**d)
