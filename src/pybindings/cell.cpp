@@ -42,6 +42,7 @@
 #include <string>
 namespace bp = boost::python;
 #include "tendril_spec.hpp"
+#include "converter.hpp"
 
 namespace ecto
 {
@@ -188,7 +189,7 @@ namespace ecto
         .def("activate", ((void(cell::*)()) &cell::activate))
         .def("deactivate", ((void(cell::*)()) &cell::deactivate))
         ;
-      bp::register_ptr_to_python<boost::shared_ptr<cell> >();
+      BP_REGISTER_SHARED_PTR_TO_PYTHON(cell);
 
       bp::class_<cellwrap, boost::shared_ptr<cellwrap>, boost::noncopyable> ("_cell_base" /*bp::no_init*/)
         .def("_set_process_connected_inputs_only", &cell::set_process_connected_inputs_only)
@@ -222,7 +223,7 @@ namespace ecto
         .def("__getitem__", getitem_list)
         .def("__getitem__", getitem_slice)
         ;
-      bp::register_ptr_to_python<boost::shared_ptr<cellwrap> >();
+      BP_REGISTER_SHARED_PTR_TO_PYTHON(cellwrap);
 
       bp::def("__getitem_str__", getitem_str);
       bp::def("__getitem_slice__", getitem_slice);

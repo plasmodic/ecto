@@ -34,6 +34,8 @@
 
 #include <ecto/serialization/tendril.hpp>
 
+#include "converter.hpp"
+
 namespace bp = boost::python;
 
 namespace ecto
@@ -169,7 +171,7 @@ void wrapConnection(){
     Tendril_.def("listT", &py_tendril_reg_list);
     Tendril_.staticmethod("listT");
     Tendril_.enable_pickling();
-  bp::register_ptr_to_python< boost::shared_ptr<tendril> >();
+  BP_REGISTER_SHARED_PTR_TO_PYTHON(tendril);
 
 }
 }
