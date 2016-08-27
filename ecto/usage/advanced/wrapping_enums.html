@@ -29,8 +29,8 @@
     <link rel="next" title="Parameters to and from YAML" href="yaml.html" />
     <link rel="prev" title="Valgrind" href="../external/valgrind.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -45,11 +45,11 @@
         <li class="right" >
           <a href="../external/valgrind.html" title="Valgrind"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../../index.html">ecto</a> &raquo;</li>
-          <li><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../../../index.html">
               <img class="logo" src="../../../_static/ecto210.png" alt="Logo"/>
@@ -69,12 +69,14 @@
   <h4>Next topic</h4>
   <p class="topless"><a href="yaml.html"
                         title="next chapter">Parameters to and from YAML</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../../../_sources/ecto/usage/advanced/wrapping_enums.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/ecto/usage/advanced/wrapping_enums.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
       <input type="text" name="q" />
@@ -93,7 +95,7 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="wrapping-enumerations">
 <h1>Wrapping enumerations<a class="headerlink" href="#wrapping-enumerations" title="Permalink to this headline">¶</a></h1>
@@ -102,9 +104,9 @@
 <p>Ecto cells that take parameters that are enumerations should <strong>wrap
 those enumerations using boost::python</strong>, this vastly improves
 use/readability.</p>
-<p>For instance, this cell takes its parameter <tt class="docutils literal"><span class="pre">strategy</span></tt> as an integer:</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
-<span class="cp">#include &lt;iostream&gt;</span>
+<p>For instance, this cell takes its parameter <code class="docutils literal"><span class="pre">strategy</span></code> as an integer:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&lt;ecto/ecto.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
 
 <span class="k">using</span> <span class="n">ecto</span><span class="o">::</span><span class="n">tendrils</span><span class="p">;</span>
 
@@ -149,7 +151,7 @@ say what the legal values are for this parameter:</p>
 <p class="topic-title first">Brief doc<p>Example of how *not* to handle parameters that are enums</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>strategy</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> no default value</em></p>
+<li><p class="first"><strong>strategy</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> no default value</em></p>
 <p>How to run our algorithm</p>
 </li>
 </ul>
@@ -159,7 +161,7 @@ say what the legal values are for this parameter:</p>
 </div>
 </div>
 <p>And though the cell functions correctly if used correctly, (note here
-that the direct call to <tt class="docutils literal"><span class="pre">process()</span></tt> is only for convenience, you&#8217;ll
+that the direct call to <code class="docutils literal"><span class="pre">process()</span></code> is only for convenience, you&#8217;ll
 typically be adding the cell to a plasm and letting a scheduler do
 this),</p>
 <div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#!/usr/bin/python</span>
@@ -171,7 +173,8 @@ this),</p>
 </pre></div>
 </div>
 <p>output:</p>
-<div class="highlight-text"><div class="highlight"><pre>running SLOW
+<div class="highlight-text"><div class="highlight"><pre>No module named PySide.QtCore
+running SLOW
 </pre></div>
 </div>
 <p>it is easy to pass invalid values to the cell from python, and easy to
@@ -185,7 +188,8 @@ forget to handle out-of-range values:</p>
 </pre></div>
 </div>
 <p>output:</p>
-<div class="highlight-text"><div class="highlight"><pre>BAD!  Unhandled value of enum parameter
+<div class="highlight-text"><div class="highlight"><pre>No module named PySide.QtCore
+BAD!  Unhandled value of enum parameter
 </pre></div>
 </div>
 </div>
@@ -193,8 +197,8 @@ forget to handle out-of-range values:</p>
 <h2>Solution: enum parameters as enums, and wrap your enumerations<a class="headerlink" href="#solution-enum-parameters-as-enums-and-wrap-your-enumerations" title="Permalink to this headline">¶</a></h2>
 <p>Make sure that the parameters are of the enum type itself.  In the
 cell, declare and get the parameter as being of the enum type,</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;iostream&gt;</span>
-<span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;ecto/ecto.hpp&gt;</span><span class="cp"></span>
 
 <span class="k">using</span> <span class="n">ecto</span><span class="o">::</span><span class="n">tendrils</span><span class="p">;</span>
 
@@ -230,11 +234,11 @@ cell, declare and get the parameter as being of the enum type,</p>
           <span class="s">&quot;This is how to defined enum parameters.  Like this.&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>And wrap the enum in the <a class="reference internal" href="../techniques/autoregister.html#ecto-define-module"><em>ECTO_DEFINE_MODULE</em></a> section like so:</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
-<span class="cp">#include &lt;ecto/python.hpp&gt;</span>
+<p>And wrap the enum in the <a class="reference internal" href="../techniques/autoregister.html#ecto-define-module"><span>ECTO_DEFINE_MODULE</span></a> section like so:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&lt;ecto/ecto.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;ecto/python.hpp&gt;</span><span class="cp"></span>
 
-<span class="cp">#include &lt;boost/python.hpp&gt;</span>
+<span class="cp">#include</span> <span class="cpf">&lt;boost/python.hpp&gt;</span><span class="cp"></span>
 
 <span class="k">enum</span> <span class="n">Strategy</span> <span class="p">{</span>
   <span class="n">FAST</span><span class="p">,</span> <span class="n">SLOW</span><span class="p">,</span> <span class="n">ADAPTIVE</span>
@@ -262,7 +266,7 @@ will show the correct type (and therefore values) for the parameter:</p>
 <p class="topic-title first">Brief doc<p>This is how to defined enum parameters.  Like this.</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>strategy</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">Strategy</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> no default value</em><p><em>Legal Values: </em><tt class="docutils literal"><span class="pre">FAST</span> <span class="pre">(0)</span>&nbsp;&nbsp; </tt><tt class="docutils literal"><span class="pre">SLOW</span> <span class="pre">(1)</span>&nbsp;&nbsp; </tt><tt class="docutils literal"><span class="pre">ADAPTIVE</span> <span class="pre">(2)</span>&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>strategy</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">Strategy</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> no default value</em><p><em>Legal Values: </em><code class="docutils literal"><span class="pre">FAST</span> <span class="pre">(0)</span>&nbsp;&nbsp; </code><code class="docutils literal"><span class="pre">SLOW</span> <span class="pre">(1)</span>&nbsp;&nbsp; </code><code class="docutils literal"><span class="pre">ADAPTIVE</span> <span class="pre">(2)</span>&nbsp;&nbsp; </code></p>
 </p>
 <p>How to run our algorithm</p>
 </li>
@@ -273,7 +277,7 @@ will show the correct type (and therefore values) for the parameter:</p>
 </div>
 </div>
 <p>And if you try to pass magic numbers to cells, you get a reasonable error:</p>
-<div class="highlight-py"><div class="highlight"><pre><span class="c">#!/usr/bin/python</span>
+<div class="highlight-py"><div class="highlight"><pre><span class="ch">#!/usr/bin/python</span>
 
 <span class="kn">import</span> <span class="nn">ecto_examples</span>
 
@@ -290,7 +294,8 @@ ImportError: No module named ecto_examples
 </pre></div>
 </div>
 <p>The enum type gets a reasonable docstring,</p>
-<div class="highlight-text"><div class="highlight"><pre>Help on class Strategy in module ecto.ecto_examples:
+<div class="highlight-text"><div class="highlight"><pre>No module named PySide.QtCore
+Help on class Strategy in module ecto.ecto_examples:
 
 class Strategy(Boost.Python.enum)
  |  Method resolution order:
@@ -316,7 +321,7 @@ class Strategy(Boost.Python.enum)
 </pre></div>
 </div>
 <p>And the normal way to use this kind of thing would be:</p>
-<div class="highlight-py"><div class="highlight"><pre><span class="c">#!/usr/bin/python</span>
+<div class="highlight-py"><div class="highlight"><pre><span class="ch">#!/usr/bin/python</span>
 
 <span class="kn">import</span> <span class="nn">ecto.ecto_examples</span> <span class="kn">as</span> <span class="nn">ecto_examples</span>
 
@@ -324,7 +329,8 @@ class Strategy(Boost.Python.enum)
 <span class="n">cell</span><span class="o">.</span><span class="n">process</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="highlight-text"><div class="highlight"><pre>running ADAPTIVE
+<div class="highlight-text"><div class="highlight"><pre>No module named PySide.QtCore
+running ADAPTIVE
 </pre></div>
 </div>
 </div>
@@ -336,7 +342,7 @@ class Strategy(Boost.Python.enum)
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -351,13 +357,13 @@ class Strategy(Boost.Python.enum)
         <li class="right" >
           <a href="../external/valgrind.html" title="Valgrind"
              >previous</a> |</li>
-        <li><a href="../../../index.html">ecto</a> &raquo;</li>
-          <li><a href="../index.html" >Usage</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Usage</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

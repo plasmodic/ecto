@@ -29,8 +29,8 @@
     <link rel="next" title="Hello Ecto!" href="tutorials/hello.html" />
     <link rel="prev" title="Usage" href="index.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -45,11 +45,11 @@
         <li class="right" >
           <a href="index.html" title="Usage"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">ecto</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Usage</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Usage</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../../index.html">
               <img class="logo" src="../../_static/ecto210.png" alt="Logo"/>
@@ -73,12 +73,14 @@
   <h4>Next topic</h4>
   <p class="topless"><a href="tutorials/hello.html"
                         title="next chapter">Hello Ecto!</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../../_sources/ecto/usage/client_usage.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/ecto/usage/client_usage.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
       <input type="text" name="q" />
@@ -97,7 +99,7 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="using-ecto-in-your-own-projects">
 <span id="client-usage"></span><h1>Using ecto in your own projects<a class="headerlink" href="#using-ecto-in-your-own-projects" title="Permalink to this headline">¶</a></h1>
@@ -133,15 +135,15 @@ hello.py
 <span class="c">#)</span>
 </pre></div>
 </div>
-<p>Take notice of the command <tt class="docutils literal"><span class="pre">find_package(ecto</span> <span class="pre">REQUIRED)</span></tt>. If ecto is installed on your
+<p>Take notice of the command <code class="docutils literal"><span class="pre">find_package(ecto</span> <span class="pre">REQUIRED)</span></code>. If ecto is installed on your
 system, or built somewhere, this will enable your project to become an ecto beast.</p>
-<p>The <tt class="docutils literal"><span class="pre">ectomodule</span></tt> macro is the one that defines your C++ set of cells. The first argument is
-mandotory and is the <tt class="docutils literal"><span class="pre">NAME</span></tt> of your module. It then accept a <tt class="docutils literal"><span class="pre">DESTINATION</span></tt> argument where you define
-in which subfolder of your project to install the module and a <tt class="docutils literal"><span class="pre">INSTALL</span></tt> flag that defines whether your
-module will be isntalled or not when during <tt class="docutils literal"><span class="pre">make</span> <span class="pre">install</span></tt> (you might not want to if it is a test module).
-In case you want more flexibility, just know that this macro defines a <tt class="docutils literal"><span class="pre">${NAME}_ectomodule</span></tt> CMake target.</p>
-<p>The second and last ecto macro you need to know is <tt class="docutils literal"><span class="pre">link_ecto</span></tt> that you can use to link your module to
-external libraries (it just abstracts this <tt class="docutils literal"><span class="pre">${NAME}_ectomodule</span></tt> target for you).</p>
+<p>The <code class="docutils literal"><span class="pre">ectomodule</span></code> macro is the one that defines your C++ set of cells. The first argument is
+mandotory and is the <code class="docutils literal"><span class="pre">NAME</span></code> of your module. It then accept a <code class="docutils literal"><span class="pre">DESTINATION</span></code> argument where you define
+in which subfolder of your project to install the module and a <code class="docutils literal"><span class="pre">INSTALL</span></code> flag that defines whether your
+module will be isntalled or not when during <code class="docutils literal"><span class="pre">make</span> <span class="pre">install</span></code> (you might not want to if it is a test module).
+In case you want more flexibility, just know that this macro defines a <code class="docutils literal"><span class="pre">${NAME}_ectomodule</span></code> CMake target.</p>
+<p>The second and last ecto macro you need to know is <code class="docutils literal"><span class="pre">link_ecto</span></code> that you can use to link your module to
+external libraries (it just abstracts this <code class="docutils literal"><span class="pre">${NAME}_ectomodule</span></code> target for you).</p>
 <div class="section" id="ecto-is-installed">
 <h3>ecto is installed<a class="headerlink" href="#ecto-is-installed" title="Permalink to this headline">¶</a></h3>
 <p>CMake should complete without error, using default settings.</p>
@@ -200,7 +202,7 @@ external libraries (it just abstracts this <tt class="docutils literal"><span cl
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -215,13 +217,13 @@ external libraries (it just abstracts this <tt class="docutils literal"><span cl
         <li class="right" >
           <a href="index.html" title="Usage"
              >previous</a> |</li>
-        <li><a href="../../index.html">ecto</a> &raquo;</li>
-          <li><a href="index.html" >Usage</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Usage</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

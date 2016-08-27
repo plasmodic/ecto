@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
   <compounddef id="streambuf_8hpp" kind="file" language="C++">
     <compoundname>streambuf.hpp</compoundname>
     <includes local="no">boost/python/object.hpp</includes>
@@ -541,9 +541,9 @@
 <codeline lineno="540"><highlight class="normal"></highlight></codeline>
 <codeline lineno="541" refid="structecto_1_1py_1_1streambuf__capsule_1ad175cd2ce674303c092041a5da481b73" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="structecto_1_1py_1_1streambuf__capsule_1ad175cd2ce674303c092041a5da481b73" kindref="member">streambuf_capsule</ref>(</highlight></codeline>
 <codeline lineno="542"><highlight class="normal"><sp/><sp/><sp/><sp/>bp::object&amp;<sp/>python_file_obj,</highlight></codeline>
-<codeline lineno="543"><highlight class="normal"><sp/><sp/><sp/><sp/>std::size_t<sp/>buffer_size=0)</highlight></codeline>
+<codeline lineno="543"><highlight class="normal"><sp/><sp/><sp/><sp/>std::size_t<sp/><ref refid="classecto_1_1py_1_1streambuf_1a8d60fa297a9140474d136a48342ac850" kindref="member">buffer_size</ref>=0)</highlight></codeline>
 <codeline lineno="544"><highlight class="normal"><sp/><sp/>:</highlight></codeline>
-<codeline lineno="545"><highlight class="normal"><sp/><sp/><sp/><sp/>python_streambuf(python_file_obj,<sp/>buffer_size)</highlight></codeline>
+<codeline lineno="545"><highlight class="normal"><sp/><sp/><sp/><sp/>python_streambuf(python_file_obj,<sp/><ref refid="classecto_1_1py_1_1streambuf_1a8d60fa297a9140474d136a48342ac850" kindref="member">buffer_size</ref>)</highlight></codeline>
 <codeline lineno="546"><highlight class="normal"><sp/><sp/>{}</highlight></codeline>
 <codeline lineno="547"><highlight class="normal"></highlight></codeline>
 <codeline lineno="548" refid="structecto_1_1py_1_1streambuf__capsule_1a716c8fa0af952120d46dd781409c4af4" refkind="member"><highlight class="normal"><sp/><sp/>bp::object<sp/><ref refid="structecto_1_1py_1_1streambuf__capsule_1a716c8fa0af952120d46dd781409c4af4" kindref="member">get_original_file</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>python_streambuf.<ref refid="classecto_1_1py_1_1streambuf_1a63254ed85f60504895f526272e19dd34" kindref="member">file_obj</ref>;}</highlight></codeline>
@@ -553,10 +553,10 @@
 <codeline lineno="552"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="553" refid="structecto_1_1py_1_1ostream_1a5fc23212b0b77a69a0c4e7e67133b2c8" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="structecto_1_1py_1_1ostream_1a5fc23212b0b77a69a0c4e7e67133b2c8" kindref="member">ostream</ref>(</highlight></codeline>
 <codeline lineno="554"><highlight class="normal"><sp/><sp/><sp/><sp/>bp::object&amp;<sp/>python_file_obj,</highlight></codeline>
-<codeline lineno="555"><highlight class="normal"><sp/><sp/><sp/><sp/>std::size_t<sp/>buffer_size=0)</highlight></codeline>
+<codeline lineno="555"><highlight class="normal"><sp/><sp/><sp/><sp/>std::size_t<sp/><ref refid="classecto_1_1py_1_1streambuf_1a8d60fa297a9140474d136a48342ac850" kindref="member">buffer_size</ref>=0)</highlight></codeline>
 <codeline lineno="556"><highlight class="normal"><sp/><sp/>:</highlight></codeline>
-<codeline lineno="557"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structecto_1_1py_1_1streambuf__capsule" kindref="compound">streambuf_capsule</ref>(python_file_obj,<sp/>buffer_size),</highlight></codeline>
-<codeline lineno="558"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classecto_1_1py_1_1streambuf" kindref="compound">streambuf</ref>::<ref refid="structecto_1_1py_1_1ostream" kindref="compound">ostream</ref>(<ref refid="structecto_1_1py_1_1streambuf__capsule_1af18572e50f3cc158db18b7c0655ccd33" kindref="member">python_streambuf</ref>)</highlight></codeline>
+<codeline lineno="557"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structecto_1_1py_1_1streambuf__capsule" kindref="compound">streambuf_capsule</ref>(python_file_obj,<sp/><ref refid="classecto_1_1py_1_1streambuf_1a8d60fa297a9140474d136a48342ac850" kindref="member">buffer_size</ref>),</highlight></codeline>
+<codeline lineno="558"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classecto_1_1py_1_1streambuf" kindref="compound">streambuf</ref>::<ref refid="structecto_1_1py_1_1ostream" kindref="compound">ostream</ref>(python_streambuf)</highlight></codeline>
 <codeline lineno="559"><highlight class="normal"><sp/><sp/>{}</highlight></codeline>
 <codeline lineno="560"><highlight class="normal"></highlight></codeline>
 <codeline lineno="561" refid="structecto_1_1py_1_1ostream_1a69cba9ec021b14b76fd08d35ea322434" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="structecto_1_1py_1_1ostream_1a69cba9ec021b14b76fd08d35ea322434" kindref="member">~ostream</ref>()</highlight></codeline>
@@ -581,10 +581,10 @@
 <codeline lineno="580"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="581" refid="structecto_1_1py_1_1istream_1a1261100ee2202be4989166b6a16fc1b0" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="structecto_1_1py_1_1istream_1a1261100ee2202be4989166b6a16fc1b0" kindref="member">istream</ref>(</highlight></codeline>
 <codeline lineno="582"><highlight class="normal"><sp/><sp/><sp/><sp/>bp::object&amp;<sp/>python_file_obj,</highlight></codeline>
-<codeline lineno="583"><highlight class="normal"><sp/><sp/><sp/><sp/>std::size_t<sp/>buffer_size=0)</highlight></codeline>
+<codeline lineno="583"><highlight class="normal"><sp/><sp/><sp/><sp/>std::size_t<sp/><ref refid="classecto_1_1py_1_1streambuf_1a8d60fa297a9140474d136a48342ac850" kindref="member">buffer_size</ref>=0)</highlight></codeline>
 <codeline lineno="584"><highlight class="normal"><sp/><sp/>:</highlight></codeline>
-<codeline lineno="585"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structecto_1_1py_1_1streambuf__capsule" kindref="compound">streambuf_capsule</ref>(python_file_obj,<sp/>buffer_size),</highlight></codeline>
-<codeline lineno="586"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classecto_1_1py_1_1streambuf" kindref="compound">streambuf</ref>::<ref refid="structecto_1_1py_1_1istream" kindref="compound">istream</ref>(<ref refid="structecto_1_1py_1_1streambuf__capsule_1af18572e50f3cc158db18b7c0655ccd33" kindref="member">python_streambuf</ref>)</highlight></codeline>
+<codeline lineno="585"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structecto_1_1py_1_1streambuf__capsule" kindref="compound">streambuf_capsule</ref>(python_file_obj,<sp/><ref refid="classecto_1_1py_1_1streambuf_1a8d60fa297a9140474d136a48342ac850" kindref="member">buffer_size</ref>),</highlight></codeline>
+<codeline lineno="586"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classecto_1_1py_1_1streambuf" kindref="compound">streambuf</ref>::<ref refid="structecto_1_1py_1_1istream" kindref="compound">istream</ref>(python_streambuf)</highlight></codeline>
 <codeline lineno="587"><highlight class="normal"><sp/><sp/>{}</highlight></codeline>
 <codeline lineno="588"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="589"><highlight class="normal"></highlight></codeline>

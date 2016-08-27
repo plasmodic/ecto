@@ -29,8 +29,8 @@
     <link rel="next" title="Usage" href="../usage/index.html" />
     <link rel="prev" title="Nonsystem Boost" href="non_system_boost.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -45,11 +45,11 @@
         <li class="right" >
           <a href="non_system_boost.html" title="Nonsystem Boost"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">ecto</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Installing ecto</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Installing ecto</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../../index.html">
               <img class="logo" src="../../_static/ecto210.png" alt="Logo"/>
@@ -66,12 +66,14 @@
   <h4>Next topic</h4>
   <p class="topless"><a href="../usage/index.html"
                         title="next chapter">Usage</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../../_sources/ecto/install/get_ecto_win32.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/ecto/install/get_ecto_win32.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
       <input type="text" name="q" />
@@ -90,7 +92,7 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="requirements">
 <span id="get-ecto-win32"></span><h1>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h1>
@@ -108,11 +110,11 @@
 <div class="section" id="path">
 <h1>path<a class="headerlink" href="#path" title="Permalink to this headline">¶</a></h1>
 <p>Windows needs some path setup for this to go smoothly.</p>
-<div class="highlight-sh"><div class="highlight"><pre><span class="nb">set </span><span class="nv">PATH</span><span class="o">=</span>C:<span class="se">\P</span>rogram Files<span class="se">\C</span>Make 2.8<span class="se">\b</span>in<span class="p">;</span>C:<span class="se">\P</span>ython26<span class="se">\;</span>C:<span class="se">\g</span>test<span class="se">\l</span>ib_dir
+<div class="highlight-sh"><div class="highlight"><pre><span class="nb">set</span> <span class="nv">PATH</span><span class="o">=</span>C:<span class="se">\P</span>rogram Files<span class="se">\C</span>Make 2.8<span class="se">\b</span>in<span class="p">;</span>C:<span class="se">\P</span>ython26<span class="se">\;</span>C:<span class="se">\g</span>test<span class="se">\l</span>ib_dir
 </pre></div>
 </div>
 <p>Also it may be useful to always work from the <strong>Visual Studio Command Prompt</strong> or otherwise
-be sure to source the <tt class="docutils literal"><span class="pre">C:\Program</span> <span class="pre">Files\Microsoft</span> <span class="pre">Visual</span> <span class="pre">Studio</span> <span class="pre">10.0\VC\vcvarsall.bat</span></tt> before
+be sure to source the <code class="docutils literal"><span class="pre">C:\Program</span> <span class="pre">Files\Microsoft</span> <span class="pre">Visual</span> <span class="pre">Studio</span> <span class="pre">10.0\VC\vcvarsall.bat</span></code> before
 starting any work.</p>
 <p><a class="reference external" href="http://technet.microsoft.com/en-us/sysinternals/bb896645">http://technet.microsoft.com/en-us/sysinternals/bb896645</a></p>
 </div>
@@ -123,7 +125,7 @@ starting any work.</p>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -138,13 +140,13 @@ starting any work.</p>
         <li class="right" >
           <a href="non_system_boost.html" title="Nonsystem Boost"
              >previous</a> |</li>
-        <li><a href="../../index.html">ecto</a> &raquo;</li>
-          <li><a href="index.html" >Installing ecto</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Installing ecto</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

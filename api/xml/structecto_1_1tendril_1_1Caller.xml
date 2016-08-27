@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
   <compounddef id="structecto_1_1tendril_1_1Caller" kind="struct" language="C++" prot="public">
     <compoundname>ecto::tendril::Caller</compoundname>
     <includes refid="tendril_8hpp" local="no">tendril.hpp</includes>
@@ -20,7 +20,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" line="274" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" bodystart="274" bodyend="-1"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" line="273" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" bodystart="273" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-attrib">
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" line="284" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" bodystart="284" bodyend="-1"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" line="283" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" bodystart="283" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -54,7 +54,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" line="275" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" bodystart="275" bodyend="277"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" line="274" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" bodystart="274" bodyend="276"/>
       </memberdef>
       <memberdef kind="function" id="structecto_1_1tendril_1_1Caller_1a19099e68a2059823575e71f45b2c0b20" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -71,14 +71,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" line="280" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" bodystart="280" bodyend="283"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" line="279" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" bodystart="279" bodyend="282"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" line="273" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" bodystart="272" bodyend="285"/>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" line="272" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" bodystart="271" bodyend="284"/>
     <listofallmembers>
       <member refid="structecto_1_1tendril_1_1Caller_1a84b71a5526ff59dcbd6cb7a102f8d9db" prot="public" virt="non-virtual"><scope>ecto::tendril::Caller</scope><name>Caller</name></member>
       <member refid="structecto_1_1tendril_1_1Caller_1afecdbc09ca504c16292a6365ab1cd950" prot="public" virt="non-virtual"><scope>ecto::tendril::Caller</scope><name>cb</name></member>

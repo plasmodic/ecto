@@ -29,8 +29,8 @@
     <link rel="next" title="Requirements" href="get_ecto_win32.html" />
     <link rel="prev" title="Ecto From Source" href="get_ecto.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -45,11 +45,11 @@
         <li class="right" >
           <a href="get_ecto.html" title="Ecto From Source"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">ecto</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Installing ecto</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Installing ecto</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../../index.html">
               <img class="logo" src="../../_static/ecto210.png" alt="Logo"/>
@@ -60,12 +60,14 @@
   <h4>Next topic</h4>
   <p class="topless"><a href="get_ecto_win32.html"
                         title="next chapter">Requirements</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../../_sources/ecto/install/non_system_boost.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/ecto/install/non_system_boost.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
       <input type="text" name="q" />
@@ -84,7 +86,7 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="nonsystem-boost">
 <h1>Nonsystem Boost<a class="headerlink" href="#nonsystem-boost" title="Permalink to this headline">¶</a></h1>
@@ -92,8 +94,8 @@
 <p>If you want to build against nonsystem boost (i.e. boost that isn&#8217;t
 available as a package) on linux, you need to use specific build
 flags, so that boost&#8217;s uniquely cantankerous build system generates
-files that cmake&#8217;s <tt class="docutils literal"><span class="pre">find_package()</span></tt> can find.  First you run the
-included <tt class="docutils literal"><span class="pre">bootstrap.sh</span></tt>, then run bjam like this:</p>
+files that cmake&#8217;s <code class="docutils literal"><span class="pre">find_package()</span></code> can find.  First you run the
+included <code class="docutils literal"><span class="pre">bootstrap.sh</span></code>, then run bjam like this:</p>
 <div class="highlight-python"><div class="highlight"><pre>./bjam threading=multi link=shared runtime-link=shared --layout=tagged install
 </pre></div>
 </div>
@@ -132,12 +134,12 @@ This package will be built according to these values:
 Enter a number to change any of them or press ENTER to continue:
 </pre></div>
 </div>
-<p>With boost, <tt class="docutils literal"><span class="pre">checkinstall</span></tt> figures out a reasonable package name due
+<p>With boost, <code class="docutils literal"><span class="pre">checkinstall</span></code> figures out a reasonable package name due
 to the name of the directory that the boost tarball unpacks to.  With
-others it can get it wrong... <tt class="docutils literal"><span class="pre">tmp</span></tt> is a terrible name for a
+others it can get it wrong... <code class="docutils literal"><span class="pre">tmp</span></code> is a terrible name for a
 package.</p>
 <p>When you then want to detect this new boost when running cmake, use
-<tt class="docutils literal"><span class="pre">BOOST_ROOT</span></tt> (see also the cmake docs for <tt class="docutils literal"><span class="pre">FindBoost</span></tt>), e.g.:</p>
+<code class="docutils literal"><span class="pre">BOOST_ROOT</span></code> (see also the cmake docs for <code class="docutils literal"><span class="pre">FindBoost</span></code>), e.g.:</p>
 <div class="highlight-bash"><div class="highlight"><pre>cmake ../src -DBOOST_ROOT<span class="o">=</span>/usr/local/boost-1.40.0
 </pre></div>
 </div>
@@ -149,7 +151,7 @@ package.</p>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -164,13 +166,13 @@ package.</p>
         <li class="right" >
           <a href="get_ecto.html" title="Ecto From Source"
              >previous</a> |</li>
-        <li><a href="../../index.html">ecto</a> &raquo;</li>
-          <li><a href="index.html" >Installing ecto</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Installing ecto</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

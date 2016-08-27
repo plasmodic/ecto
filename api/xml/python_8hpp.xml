@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
   <compounddef id="python_8hpp" kind="file" language="C++">
     <compoundname>python.hpp</compoundname>
     <includes local="no">Python.h</includes>
@@ -252,8 +252,8 @@
 <codeline lineno="63" refid="classecto_1_1py_1_1scoped__gil__release_1a9e9fbf0c5819ac1b706437d99a6459a3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1py_1_1scoped__gil__release_1a9e9fbf0c5819ac1b706437d99a6459a3" kindref="member">mine</ref>;</highlight></codeline>
 <codeline lineno="64" refid="classecto_1_1py_1_1scoped__gil__release_1a888a6813c86b9bbd2d5cd0d4a0f7e2f2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structecto_1_1py_1_1gilstatus" kindref="compound">gilstatus</ref><sp/><ref refid="classecto_1_1py_1_1scoped__gil__release_1a888a6813c86b9bbd2d5cd0d4a0f7e2f2" kindref="member">mystatus</ref>;</highlight></codeline>
 <codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classecto_1_1py_1_1scoped__gil__release_1afd4cb62267206421eca93969a8bb0865" kindref="member">scoped_gil_release</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>file,<sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/>line);</highlight></codeline>
-<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classecto_1_1py_1_1scoped__gil__release_1addd644daf557129d6584829cda6b9cc0" kindref="member">~scoped_gil_release</ref>();</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classecto_1_1py_1_1scoped__gil__release" kindref="compound">scoped_gil_release</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="structecto_1_1py_1_1gilstatus_1a454efe188c683788ca52b64b1c87245b" kindref="member">file</ref>,<sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/><ref refid="structecto_1_1py_1_1gilstatus_1a86f9f360d4950496f737ce0faa4d7e1b" kindref="member">line</ref>);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>~<ref refid="classecto_1_1py_1_1scoped__gil__release" kindref="compound">scoped_gil_release</ref>();</highlight></codeline>
 <codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="69"><highlight class="normal"></highlight></codeline>
 <codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
@@ -267,8 +267,8 @@
 <codeline lineno="78"><highlight class="normal"></highlight></codeline>
 <codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="80"><highlight class="normal"></highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classecto_1_1py_1_1scoped__call__back__to__python_1aa0e62dcba9ee21268b612d0a70849b2d" kindref="member">scoped_call_back_to_python</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>file,<sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/>line);</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classecto_1_1py_1_1scoped__call__back__to__python_1a55b49e169de3007a19bb3881d96c38cc" kindref="member">~scoped_call_back_to_python</ref>();</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classecto_1_1py_1_1scoped__call__back__to__python" kindref="compound">scoped_call_back_to_python</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="structecto_1_1py_1_1gilstatus_1a454efe188c683788ca52b64b1c87245b" kindref="member">file</ref>,<sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/><ref refid="structecto_1_1py_1_1gilstatus_1a86f9f360d4950496f737ce0faa4d7e1b" kindref="member">line</ref>);</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>~<ref refid="classecto_1_1py_1_1scoped__call__back__to__python" kindref="compound">scoped_call_back_to_python</ref>();</highlight></codeline>
 <codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="84"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
 <codeline lineno="85"><highlight class="normal">}</highlight></codeline>

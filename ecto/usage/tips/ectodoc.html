@@ -29,8 +29,8 @@
     <link rel="next" title="Using IPython" href="../external/ipython.html" />
     <link rel="prev" title="Command line helpers: getting stats, GUIS, a shell and more automagically !" href="argparse.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -45,11 +45,11 @@
         <li class="right" >
           <a href="argparse.html" title="Command line helpers: getting stats, GUIS, a shell and more automagically !"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../../index.html">ecto</a> &raquo;</li>
-          <li><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../../../index.html">
               <img class="logo" src="../../../_static/ecto210.png" alt="Logo"/>
@@ -60,12 +60,14 @@
   <h4>Next topic</h4>
   <p class="topless"><a href="../external/ipython.html"
                         title="next chapter">Using IPython</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../../../_sources/ecto/usage/tips/ectodoc.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/ecto/usage/tips/ectodoc.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
       <input type="text" name="q" />
@@ -84,7 +86,7 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="automatic-documentation-and-ecto-s-sphinx-extensions">
 <span id="ectodoc"></span><h1>Automatic Documentation and Ecto&#8217;s Sphinx Extensions<a class="headerlink" href="#automatic-documentation-and-ecto-s-sphinx-extensions" title="Permalink to this headline">¶</a></h1>
@@ -94,13 +96,13 @@ before-and-after sphinx view....  there is much less text in the
 source for this document than there is on this page.</p>
 <dl class="directive">
 <dt id="directive-ectocell &lt;Module&gt; &lt;CellType&gt;">
-<tt class="descname">.. ectocell &lt;Module&gt; &lt;CellType&gt;::</tt><a class="headerlink" href="#directive-ectocell <Module> <CellType>" title="Permalink to this definition">¶</a></dt>
+<code class="descname">.. ectocell &lt;Module&gt; &lt;CellType&gt;::</code><a class="headerlink" href="#directive-ectocell <Module> <CellType>" title="Permalink to this definition">¶</a></dt>
 <dd><p>Placing the following command in sphinx:</p>
 <div class="highlight-python"><div class="highlight"><pre>.. ectocell:: ecto.ecto_test Add
 </pre></div>
 </div>
-<p>Will import the python module <tt class="docutils literal"><span class="pre">ecto.ecto_test</span></tt> into the running Sphinx
-process, find the class named <tt class="docutils literal"><span class="pre">Add</span></tt> and generate documentation,
+<p>Will import the python module <code class="docutils literal"><span class="pre">ecto.ecto_test</span></code> into the running Sphinx
+process, find the class named <code class="docutils literal"><span class="pre">Add</span></code> and generate documentation,
 which looks like this (actual output):</p>
 <div class="section" id="Add">
 <span id="index-0"></span><span id="ecto.ecto_test.Add"></span><h2>Add<a class="headerlink" href="#Add" title="Permalink to this headline">¶</a></h2>
@@ -110,16 +112,16 @@ which looks like this (actual output):</p>
 </p>
 <p></p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>left</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>left</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>Left hand operand.</p>
 </li>
-<li><p class="first"><strong>right</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>right</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>Right hand operand.</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>The result.</p>
 </li>
 </ul>
@@ -128,14 +130,15 @@ which looks like this (actual output):</p>
 </div>
 <p>Cells&#8217; docstrings should contain identical information, albeit
 surrounded with a bit of noise:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/python</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="ch">#!/usr/bin/python</span>
 
 <span class="kn">import</span> <span class="nn">ecto.ecto_test</span> <span class="kn">as</span> <span class="nn">ecto_test</span>
 <span class="k">print</span> <span class="n">help</span><span class="p">(</span><span class="n">ecto_test</span><span class="o">.</span><span class="n">Add</span><span class="p">)</span>
+
 </pre></div>
 </div>
 <p>and the output below, which is truncated for clarity as there is
-quite a bit of noise, starting with <tt class="docutils literal"><span class="pre">Methods</span> <span class="pre">defined</span> <span class="pre">here</span></tt>.</p>
+quite a bit of noise, starting with <code class="docutils literal"><span class="pre">Methods</span> <span class="pre">defined</span> <span class="pre">here</span></code>.</p>
 <div class="highlight-text"><div class="highlight"><pre>
 </pre></div>
 </div>
@@ -143,19 +146,19 @@ quite a bit of noise, starting with <tt class="docutils literal"><span class="pr
 
 <dl class="directive">
 <dt id="directive-ectoplot &lt;file&gt; &lt;object&gt;">
-<tt class="descname">.. ectoplot &lt;file&gt; &lt;object&gt;::</tt><a class="headerlink" href="#directive-ectoplot <file> <object>" title="Permalink to this definition">¶</a></dt>
+<code class="descname">.. ectoplot &lt;file&gt; &lt;object&gt;::</code><a class="headerlink" href="#directive-ectoplot <file> <object>" title="Permalink to this definition">¶</a></dt>
 <dd><p>This directive generates and includes graph diagrams.  The directive
 takes the name of a file and the name of an object in that file.
 Sphinx will execute the file, pull the named object out of the file
-(which must be a live plasm), get the <tt class="docutils literal"><span class="pre">graphviz</span></tt> information from
+(which must be a live plasm), get the <code class="docutils literal"><span class="pre">graphviz</span></code> information from
 the plasm, generate and include a graphic.  For instance this direcive:</p>
 <div class="highlight-python"><div class="highlight"><pre>.. ectoplot:: ../../sampleplasm.py plasm
 </pre></div>
 </div>
-<p>Will look for the file <tt class="docutils literal"><span class="pre">sampleplasm.py</span></tt> in the documentation
+<p>Will look for the file <code class="docutils literal"><span class="pre">sampleplasm.py</span></code> in the documentation
 directory, execute it, pull out and plot the object named plasm.  If
 that script looks like this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/python</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="ch">#!/usr/bin/python</span>
 <span class="kn">import</span> <span class="nn">ecto</span>
 <span class="kn">import</span> <span class="nn">ecto.ecto_test</span> <span class="kn">as</span> <span class="nn">ecto_test</span>
 
@@ -168,9 +171,11 @@ that script looks like this:</p>
 
 <span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">gen</span><span class="p">[:]</span> <span class="o">&gt;&gt;</span> <span class="n">inc</span><span class="p">[:],</span>
               <span class="n">gen</span><span class="p">[:]</span> <span class="o">&gt;&gt;</span> <span class="n">mul</span><span class="p">[:],</span>
-              <span class="n">mul</span><span class="p">[:]</span> <span class="o">&gt;&gt;</span> <span class="n">add</span><span class="p">[</span><span class="s">&#39;left&#39;</span><span class="p">],</span>
-              <span class="n">inc</span><span class="p">[:]</span> <span class="o">&gt;&gt;</span> <span class="n">add</span><span class="p">[</span><span class="s">&#39;right&#39;</span><span class="p">],</span>
+              <span class="n">mul</span><span class="p">[:]</span> <span class="o">&gt;&gt;</span> <span class="n">add</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">],</span>
+              <span class="n">inc</span><span class="p">[:]</span> <span class="o">&gt;&gt;</span> <span class="n">add</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">],</span>
               <span class="p">)</span>
+
+
 </pre></div>
 </div>
 <p>you&#8217;ll get this:</p>
@@ -214,18 +219,18 @@ node [shape=plaintext]
 
 <dl class="directive">
 <dt id="directive-program-output">
-<tt class="descname">.. program-output::</tt><a class="headerlink" href="#directive-program-output" title="Permalink to this definition">¶</a></dt>
+<code class="descname">.. program-output::</code><a class="headerlink" href="#directive-program-output" title="Permalink to this definition">¶</a></dt>
 <dd><p>This directive has been taken from the sphinx contributions
 repository and souped up a bit.  Extra options are:</p>
 <ul>
-<li><p class="first"><tt class="docutils literal"><span class="pre">:until:</span> <span class="pre">&lt;string&gt;</span></tt></p>
+<li><p class="first"><code class="docutils literal"><span class="pre">:until:</span> <span class="pre">&lt;string&gt;</span></code></p>
 <p>truncate program output after first occurrance of &lt;string&gt;, which
-may contain spaces.  This is done with a simple <tt class="docutils literal"><span class="pre">find</span></tt></p>
+may contain spaces.  This is done with a simple <code class="docutils literal"><span class="pre">find</span></code></p>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">:expect_error:</span></tt></p>
+<li><p class="first"><code class="docutils literal"><span class="pre">:expect_error:</span></code></p>
 <p>expect the script to return an error, so don&#8217;t fail if it does</p>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">:in_srcdir:</span></tt></p>
+<li><p class="first"><code class="docutils literal"><span class="pre">:in_srcdir:</span></code></p>
 <p>the path specified is relative to the filesystem location of the
 calling .rst file</p>
 </li>
@@ -240,7 +245,7 @@ calling .rst file</p>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -255,13 +260,13 @@ calling .rst file</p>
         <li class="right" >
           <a href="argparse.html" title="Command line helpers: getting stats, GUIS, a shell and more automagically !"
              >previous</a> |</li>
-        <li><a href="../../../index.html">ecto</a> &raquo;</li>
-          <li><a href="../index.html" >Usage</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Usage</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

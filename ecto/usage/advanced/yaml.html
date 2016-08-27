@@ -29,8 +29,8 @@
     <link rel="next" title="Serialization: Create From Python, Load/Execute From Pure C++" href="serialization.html" />
     <link rel="prev" title="Wrapping enumerations" href="wrapping_enums.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -45,11 +45,11 @@
         <li class="right" >
           <a href="wrapping_enums.html" title="Wrapping enumerations"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../../index.html">ecto</a> &raquo;</li>
-          <li><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../../../index.html">
               <img class="logo" src="../../../_static/ecto210.png" alt="Logo"/>
@@ -68,12 +68,14 @@
   <h4>Next topic</h4>
   <p class="topless"><a href="serialization.html"
                         title="next chapter">Serialization: Create From Python, Load/Execute From Pure C++</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../../../_sources/ecto/usage/advanced/yaml.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/ecto/usage/advanced/yaml.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
       <input type="text" name="q" />
@@ -92,7 +94,7 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="parameters-to-and-from-yaml">
 <h1>Parameters to and from YAML<a class="headerlink" href="#parameters-to-and-from-yaml" title="Permalink to this headline">¶</a></h1>
@@ -100,48 +102,49 @@
 <div class="section" id="sample">
 <h2>sample<a class="headerlink" href="#sample" title="Permalink to this headline">¶</a></h2>
 <p>A sample of using argparse with ecto.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="ch">#!/usr/bin/env python</span>
 <span class="kn">from</span> <span class="nn">ecto</span> <span class="kn">import</span> <span class="n">Constant</span>
 <span class="kn">from</span> <span class="nn">ecto.ecto_test</span> <span class="kn">import</span> <span class="n">Multiply</span>
 <span class="kn">from</span> <span class="nn">ecto.opts</span> <span class="kn">import</span> <span class="n">CellYamlFactory</span>
 <span class="kn">import</span> <span class="nn">yaml</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
-<span class="n">m_factory</span> <span class="o">=</span> <span class="n">CellYamlFactory</span><span class="p">(</span><span class="n">Multiply</span><span class="p">,</span> <span class="s">&#39;mult&#39;</span><span class="p">)</span>
+<span class="n">m_factory</span> <span class="o">=</span> <span class="n">CellYamlFactory</span><span class="p">(</span><span class="n">Multiply</span><span class="p">,</span> <span class="s1">&#39;mult&#39;</span><span class="p">)</span>
 
-<span class="c">#write to file</span>
+<span class="c1">#write to file</span>
 <span class="n">tmp_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">tmpnam</span><span class="p">()</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">tmp_name</span><span class="p">,</span><span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">tmp_name</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">m_factory</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
-<span class="c">#to string</span>
-<span class="k">print</span> <span class="s">&#39;#some yaml</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span><span class="n">m_factory</span><span class="o">.</span><span class="n">dump</span><span class="p">()</span> 
+<span class="c1">#to string</span>
+<span class="k">print</span> <span class="s1">&#39;#some yaml</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">m_factory</span><span class="o">.</span><span class="n">dump</span><span class="p">()</span> 
 
-<span class="c">#read from file</span>
+<span class="c1">#read from file</span>
 <span class="n">parsed</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">tmp_name</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">tmp_name</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">parsed</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">tmp_name</span><span class="p">)</span>
 
-<span class="c">#create an instance from a parsed yaml file</span>
-<span class="n">m</span> <span class="o">=</span> <span class="n">m_factory</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">parsed</span><span class="p">,</span><span class="n">cell_name</span><span class="o">=</span><span class="s">&#39;my_mult_instance&#39;</span><span class="p">)</span>
+<span class="c1">#create an instance from a parsed yaml file</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">m_factory</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">parsed</span><span class="p">,</span><span class="n">cell_name</span><span class="o">=</span><span class="s1">&#39;my_mult_instance&#39;</span><span class="p">)</span>
 <span class="k">print</span> <span class="n">m</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">name</span><span class="p">(),</span> <span class="n">m</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">factor</span>
 </pre></div>
 </div>
 <p>Running gives us:</p>
 <div class="highlight-text"><div class="highlight"><pre>/home/vrabaud/workspace/recognition_kitchen/src/ecto/doc/kitchen/ecto/usage/advanced/sample_yaml.py:11: RuntimeWarning: tmpnam is a potential security risk to your program
   tmp_name = os.tmpnam()
+No module named PySide.QtCore
 #some yaml
 mult:
   factor: 3.14
   factor__doc__: A factor to multiply by.
 
-&lt;ecto.ecto_test.Multiply object at 0x7f4fdf180d08&gt; my_mult_instance 3.14
+&lt;ecto.ecto_test.Multiply object at 0x7fac60c22db8&gt; my_mult_instance 3.14
 </pre></div>
 </div>
 <dl class="class">
 <dt id="ecto.opts.CellYamlFactory">
-<em class="property">class </em><tt class="descclassname">ecto.opts.</tt><tt class="descname">CellYamlFactory</tt><big>(</big><em>CellOrCellType</em>, <em>prefix</em><big>)</big><a class="reference internal" href="../../../_modules/ecto/opts.html#CellYamlFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.opts.CellYamlFactory" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">ecto.opts.</code><code class="descname">CellYamlFactory</code><span class="sig-paren">(</span><em>CellOrCellType</em>, <em>prefix</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ecto/opts.html#CellYamlFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.opts.CellYamlFactory" title="Permalink to this definition">¶</a></dt>
 <dd><p>A factory to go between cells and YAML files</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -157,7 +160,7 @@ mult:
 </table>
 <dl class="method">
 <dt id="ecto.opts.CellYamlFactory.dump">
-<tt class="descname">dump</tt><big>(</big><em>stream=None</em><big>)</big><a class="reference internal" href="../../../_modules/ecto/opts.html#CellYamlFactory.dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.opts.CellYamlFactory.dump" title="Permalink to this definition">¶</a></dt>
+<code class="descname">dump</code><span class="sig-paren">(</span><em>stream=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ecto/opts.html#CellYamlFactory.dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.opts.CellYamlFactory.dump" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dump YAML for this factory.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -173,7 +176,7 @@ mult:
 
 <dl class="method">
 <dt id="ecto.opts.CellYamlFactory.load">
-<tt class="descname">load</tt><big>(</big><em>parsed</em>, <em>cell_name=''</em><big>)</big><a class="reference internal" href="../../../_modules/ecto/opts.html#CellYamlFactory.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.opts.CellYamlFactory.load" title="Permalink to this definition">¶</a></dt>
+<code class="descname">load</code><span class="sig-paren">(</span><em>parsed</em>, <em>cell_name=''</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ecto/opts.html#CellYamlFactory.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.opts.CellYamlFactory.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a cell from a parsed bit of YAML.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -203,7 +206,7 @@ mult:
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -218,13 +221,13 @@ mult:
         <li class="right" >
           <a href="wrapping_enums.html" title="Wrapping enumerations"
              >previous</a> |</li>
-        <li><a href="../../../index.html">ecto</a> &raquo;</li>
-          <li><a href="../index.html" >Usage</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Usage</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

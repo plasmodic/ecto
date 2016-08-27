@@ -29,8 +29,8 @@
     <link rel="next" title="Module ecto_test" href="ecto_test_cells.html" />
     <link rel="prev" title="tendril" href="tendril.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -45,11 +45,11 @@
         <li class="right" >
           <a href="tendril.html" title="tendril"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">ecto</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Reference</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Reference</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../../index.html">
               <img class="logo" src="../../_static/ecto210.png" alt="Logo"/>
@@ -70,12 +70,14 @@
   <h4>Next topic</h4>
   <p class="topless"><a href="ecto_test_cells.html"
                         title="next chapter">Module ecto_test</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../../_sources/ecto/reference/schedulers.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/ecto/reference/schedulers.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
       <input type="text" name="q" />
@@ -94,7 +96,7 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="schedulers">
 <span id="index-0"></span><span id="id1"></span><h1>schedulers<a class="headerlink" href="#schedulers" title="Permalink to this headline">¶</a></h1>
@@ -111,36 +113,36 @@ outside this set.</p>
 <h2>Standalone Scheduler<a class="headerlink" href="#standalone-scheduler" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="ecto.Scheduler">
-<em class="property">class </em><tt class="descclassname">ecto.</tt><tt class="descname">Scheduler</tt><a class="headerlink" href="#ecto.Scheduler" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">ecto.</code><code class="descname">Scheduler</code><a class="headerlink" href="#ecto.Scheduler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Singlethreaded scheduler.  This class will execute the cells in the
 plasm in topological order in a single thread.</p>
 <dl class="method">
 <dt id="ecto.Scheduler.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>plasm</em><big>)</big><a class="headerlink" href="#ecto.Scheduler.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>plasm</em><span class="sig-paren">)</span><a class="headerlink" href="#ecto.Scheduler.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct one around a plasm</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="ecto.Scheduler.execute">
-<tt class="descname">execute</tt><big>(</big><big>)</big><a class="headerlink" href="#ecto.Scheduler.execute" title="Permalink to this definition">¶</a></dt>
+<code class="descname">execute</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ecto.Scheduler.execute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute the graph in an infinite loop.  Blocks.</p>
 </dd></dl>
 
 <dl class="method">
 <dt>
-<tt class="descname">execute</tt><big>(</big><em>niter</em><big>)</big></dt>
+<code class="descname">execute</code><span class="sig-paren">(</span><em>niter</em><span class="sig-paren">)</span></dt>
 <dd><p>Execute the graph niter times.  This call will blocks until the
 execution is finished.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="ecto.Scheduler.execute_async">
-<tt class="descname">execute_async</tt><big>(</big><big>)</big><a class="headerlink" href="#ecto.Scheduler.execute_async" title="Permalink to this definition">¶</a></dt>
+<code class="descname">execute_async</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ecto.Scheduler.execute_async" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt>
-<tt class="descname">execute_async</tt><big>(</big><em>niter</em><big>)</big></dt>
+<code class="descname">execute_async</code><span class="sig-paren">(</span><em>niter</em><span class="sig-paren">)</span></dt>
 <dd><p>NOT (YET) IMPLEMENTED - These functions non-blocking versions of their
 execute*() counterparts. They start an execution thread in the
 background and return immediately.</p>
@@ -148,40 +150,40 @@ background and return immediately.</p>
 
 <dl class="method">
 <dt id="ecto.Scheduler.prepare_jobs">
-<tt class="descname">prepare_jobs</tt><big>(</big><big>)</big><a class="headerlink" href="#ecto.Scheduler.prepare_jobs" title="Permalink to this definition">¶</a></dt>
+<code class="descname">prepare_jobs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ecto.Scheduler.prepare_jobs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt>
-<tt class="descname">prepare_jobs</tt><big>(</big><em>niter</em><big>)</big></dt>
+<code class="descname">prepare_jobs</code><span class="sig-paren">(</span><em>niter</em><span class="sig-paren">)</span></dt>
 <dd><p>Prepare jobs for a manually scheduled execution via run() or run_jobs()</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="ecto.Scheduler.run">
-<tt class="descname">run</tt><big>(</big><big>)</big><a class="headerlink" href="#ecto.Scheduler.run" title="Permalink to this definition">¶</a></dt>
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ecto.Scheduler.run" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt>
-<tt class="descname">run</tt><big>(</big><em>timeout_usec</em><big>)</big></dt>
+<code class="descname">run</code><span class="sig-paren">(</span><em>timeout_usec</em><span class="sig-paren">)</span></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="ecto.Scheduler.run_job">
-<tt class="descname">run_job</tt><big>(</big><big>)</big><a class="headerlink" href="#ecto.Scheduler.run_job" title="Permalink to this definition">¶</a></dt>
+<code class="descname">run_job</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ecto.Scheduler.run_job" title="Permalink to this definition">¶</a></dt>
 <dd><p>Multiple methods to running scheduled jobs.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="ecto.Scheduler.running">
-<tt class="descname">running</tt><big>(</big><big>)</big><a class="headerlink" href="#ecto.Scheduler.running" title="Permalink to this definition">¶</a></dt>
+<code class="descname">running</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ecto.Scheduler.running" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns true if a scheduled execution is still running.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="ecto.Scheduler.stop">
-<tt class="descname">stop</tt><big>(</big><big>)</big><a class="headerlink" href="#ecto.Scheduler.stop" title="Permalink to this definition">¶</a></dt>
+<code class="descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ecto.Scheduler.stop" title="Permalink to this definition">¶</a></dt>
 <dd><p>If you&#8217;ve put the execution in the background (e.g. via a thread with one of the
 run* methods), then this stops the background graph execution at the end of the
 current process() call. It blocks until it is stopped</p>
@@ -197,9 +199,9 @@ run*() commands will execute the plasm sequentially in the current thread. To dr
 of a plasm in the background simply make use of the prepare_jobs() and run() commands via python threads.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">s</span> <span class="o">=</span> <span class="n">Sheduler</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 <span class="n">s</span><span class="o">.</span><span class="n">prepare_jobs</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">execution_thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">run</span><span class="p">)</span>
+<span class="n">execution_thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">run</span><span class="p">)</span>
 <span class="n">execution_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-<span class="c"># do some work</span>
+<span class="c1"># do some work</span>
 <span class="n">execution_thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -212,13 +214,13 @@ blocking execute() functionality.</p>
 <h2>MultiPlasm Scheduler<a class="headerlink" href="#multiplasm-scheduler" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="ecto.MultiPlasmScheduler">
-<em class="property">class </em><tt class="descclassname">ecto.</tt><tt class="descname">MultiPlasmScheduler</tt><a class="headerlink" href="#ecto.MultiPlasmScheduler" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">ecto.</code><code class="descname">MultiPlasmScheduler</code><a class="headerlink" href="#ecto.MultiPlasmScheduler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Scheduler for parallelising continual execution of multiple plasms.</p>
 <dl class="method">
 <dt id="ecto.MultiPlasmScheduler.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>plasm_dict</em>, <em>disable_qt_management</em><big>)</big><a class="headerlink" href="#ecto.MultiPlasmScheduler.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>plasm_dict</em>, <em>disable_qt_management</em><span class="sig-paren">)</span><a class="headerlink" href="#ecto.MultiPlasmScheduler.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialises the scheduler with a dictionary of name (string) and plasm key value pairs.
-<tt class="docutils literal"><span class="pre">disable_qt_management</span></tt> is there to ensure that any qt applications, especially imshows
+<code class="docutils literal"><span class="pre">disable_qt_management</span></code> is there to ensure that any qt applications, especially imshows
 are closed down (or not) when the scheduler finishes spinning. This is especially useful
 as a parallelised set of plasms all work from a single QApplication instance - this
 ensures that control of them is handled from a single central location.</p>
@@ -226,14 +228,14 @@ ensures that control of them is handled from a single central location.</p>
 
 <dl class="method">
 <dt id="ecto.MultiPlasmScheduler.spin">
-<tt class="descname">spin</tt><big>(</big><big>)</big><a class="headerlink" href="#ecto.MultiPlasmScheduler.spin" title="Permalink to this definition">¶</a></dt>
+<code class="descname">spin</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ecto.MultiPlasmScheduler.spin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Puts each plasm&#8217;s execution in a thread and initiates them all. This blocks until all threads
 are exited.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="ecto.MultiPlasmScheduler.print_statistics">
-<tt class="descname">print_statistics</tt><big>(</big><big>)</big><a class="headerlink" href="#ecto.MultiPlasmScheduler.print_statistics" title="Permalink to this definition">¶</a></dt>
+<code class="descname">print_statistics</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ecto.MultiPlasmScheduler.print_statistics" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call this after spinning has finished - this will print the runtime statistics of each plasm&#8217;s
 execution.</p>
 </dd></dl>
@@ -274,11 +276,11 @@ i [color=&quot;blue&quot;];
 }" />
 </p>
 <p>Python ectoscript code for scheduling this in a perpetual loop:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c"># construct plasms</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c1"># construct plasms</span>
 <span class="n">plasms</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="s">&quot;odometry&quot;</span><span class="p">:</span> <span class="n">plasm_odometry</span><span class="p">,</span>
-      <span class="s">&quot;tracking&quot;</span><span class="p">:</span> <span class="n">plasm_tracking</span><span class="p">,</span>
-      <span class="s">&quot;mapping&quot;</span> <span class="p">:</span> <span class="n">plasm_mapping</span><span class="p">,</span>
+      <span class="s2">&quot;odometry&quot;</span><span class="p">:</span> <span class="n">plasm_odometry</span><span class="p">,</span>
+      <span class="s2">&quot;tracking&quot;</span><span class="p">:</span> <span class="n">plasm_tracking</span><span class="p">,</span>
+      <span class="s2">&quot;mapping&quot;</span> <span class="p">:</span> <span class="n">plasm_mapping</span><span class="p">,</span>
      <span class="p">}</span>
 <span class="n">scheduler</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">ThreadedScheduler</span><span class="p">(</span><span class="n">plasms</span><span class="p">)</span>
 <span class="n">scheduler</span><span class="o">.</span><span class="n">spin</span><span class="p">()</span>
@@ -292,37 +294,37 @@ particular points.</p>
 <p>The python ecto script to handle this is exactly the same, we only make sure that both the
 red cells in the first and second plasm are in fact the same cell. Similarly for the blue cells.
 For example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">plasm_odometry</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>   <span class="n">a</span><span class="p">[</span><span class="s">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span> <span class="n">red</span><span class="p">[</span><span class="s">&quot;in1&quot;</span><span class="p">])</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">plasm_odometry</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>   <span class="n">a</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span> <span class="n">red</span><span class="p">[</span><span class="s2">&quot;in1&quot;</span><span class="p">])</span>
 
-<span class="n">plasm_tracking</span><span class="o">.</span><span class="n">connect</span><span class="p">([</span>  <span class="n">c</span><span class="p">[</span><span class="s">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span> <span class="n">red</span><span class="p">[</span><span class="s">&quot;in2&quot;</span><span class="p">],</span>
-                        <span class="n">red</span><span class="p">[</span><span class="s">&quot;out1&quot;</span><span class="p">]</span> <span class="o">&gt;&gt;</span>   <span class="n">e</span><span class="p">[</span><span class="s">&quot;in&quot;</span><span class="p">]</span>
-                        <span class="n">red</span><span class="p">[</span><span class="s">&quot;out2&quot;</span><span class="p">]</span> <span class="o">&gt;&gt;</span>   <span class="n">f</span><span class="p">[</span><span class="s">&quot;in&quot;</span><span class="p">]</span>
-                          <span class="n">e</span><span class="p">[</span><span class="s">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span>   <span class="n">g</span><span class="p">[</span><span class="s">&quot;in&quot;</span><span class="p">]</span>
-                          <span class="n">f</span><span class="p">[</span><span class="s">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span>   <span class="n">h</span><span class="p">[</span><span class="s">&quot;in1&quot;</span><span class="p">]</span>
-                          <span class="n">g</span><span class="p">[</span><span class="s">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span>   <span class="n">h</span><span class="p">[</span><span class="s">&quot;in2&quot;</span><span class="p">]</span>
+<span class="n">plasm_tracking</span><span class="o">.</span><span class="n">connect</span><span class="p">([</span>  <span class="n">c</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span> <span class="n">red</span><span class="p">[</span><span class="s2">&quot;in2&quot;</span><span class="p">],</span>
+                        <span class="n">red</span><span class="p">[</span><span class="s2">&quot;out1&quot;</span><span class="p">]</span> <span class="o">&gt;&gt;</span>   <span class="n">e</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">]</span>
+                        <span class="n">red</span><span class="p">[</span><span class="s2">&quot;out2&quot;</span><span class="p">]</span> <span class="o">&gt;&gt;</span>   <span class="n">f</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">]</span>
+                          <span class="n">e</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span>   <span class="n">g</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">]</span>
+                          <span class="n">f</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span>   <span class="n">h</span><span class="p">[</span><span class="s2">&quot;in1&quot;</span><span class="p">]</span>
+                          <span class="n">g</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span>   <span class="n">h</span><span class="p">[</span><span class="s2">&quot;in2&quot;</span><span class="p">]</span>
                        <span class="p">]</span>
                       <span class="p">)</span>
-<span class="c"># ...</span>
+<span class="c1"># ...</span>
 </pre></div>
 </div>
-<p>Of course, this mean&#8217;s that red&#8217;s <tt class="docutils literal"><span class="pre">process()</span></tt> function may be called simultaneously
+<p>Of course, this mean&#8217;s that red&#8217;s <code class="docutils literal"><span class="pre">process()</span></code> function may be called simultaneously
 from multiple threads and sensitive code must be protected with mutexes. You will also note
 in this example that the inputs to red are different in both plasms - if you wish to
-distinguish this from inside the <tt class="docutils literal"><span class="pre">process()</span></tt> function you will have to enable the cell&#8217;s
-<tt class="docutils literal"><span class="pre">connected_inputs_only</span></tt> parameter:</p>
+distinguish this from inside the <code class="docutils literal"><span class="pre">process()</span></code> function you will have to enable the cell&#8217;s
+<code class="docutils literal"><span class="pre">connected_inputs_only</span></code> parameter:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">red</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">MyCell</span><span class="p">(</span><span class="n">connected_inputs_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
-<span class="n">plasm_odometry</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>   <span class="n">a</span><span class="p">[</span><span class="s">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span> <span class="n">red</span><span class="p">[</span><span class="s">&quot;in1&quot;</span><span class="p">])</span>
+<span class="n">plasm_odometry</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>   <span class="n">a</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span> <span class="n">red</span><span class="p">[</span><span class="s2">&quot;in1&quot;</span><span class="p">])</span>
 
-<span class="n">plasm_tracking</span><span class="o">.</span><span class="n">connect</span><span class="p">([</span>  <span class="n">c</span><span class="p">[</span><span class="s">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span> <span class="n">red</span><span class="p">[</span><span class="s">&quot;in2&quot;</span><span class="p">],</span>
-                        <span class="n">red</span><span class="p">[</span><span class="s">&quot;out1&quot;</span><span class="p">]</span> <span class="o">&gt;&gt;</span>   <span class="n">e</span><span class="p">[</span><span class="s">&quot;in&quot;</span><span class="p">]</span>
-                        <span class="n">red</span><span class="p">[</span><span class="s">&quot;out2&quot;</span><span class="p">]</span> <span class="o">&gt;&gt;</span>   <span class="n">f</span><span class="p">[</span><span class="s">&quot;in&quot;</span><span class="p">]</span>
-                          <span class="n">e</span><span class="p">[</span><span class="s">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span>   <span class="n">g</span><span class="p">[</span><span class="s">&quot;in&quot;</span><span class="p">]</span>
-                          <span class="n">f</span><span class="p">[</span><span class="s">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span>   <span class="n">h</span><span class="p">[</span><span class="s">&quot;in1&quot;</span><span class="p">]</span>
-                          <span class="n">g</span><span class="p">[</span><span class="s">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span>   <span class="n">h</span><span class="p">[</span><span class="s">&quot;in2&quot;</span><span class="p">]</span>
+<span class="n">plasm_tracking</span><span class="o">.</span><span class="n">connect</span><span class="p">([</span>  <span class="n">c</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span> <span class="n">red</span><span class="p">[</span><span class="s2">&quot;in2&quot;</span><span class="p">],</span>
+                        <span class="n">red</span><span class="p">[</span><span class="s2">&quot;out1&quot;</span><span class="p">]</span> <span class="o">&gt;&gt;</span>   <span class="n">e</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">]</span>
+                        <span class="n">red</span><span class="p">[</span><span class="s2">&quot;out2&quot;</span><span class="p">]</span> <span class="o">&gt;&gt;</span>   <span class="n">f</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">]</span>
+                          <span class="n">e</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span>   <span class="n">g</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">]</span>
+                          <span class="n">f</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span>   <span class="n">h</span><span class="p">[</span><span class="s2">&quot;in1&quot;</span><span class="p">]</span>
+                          <span class="n">g</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">]</span>  <span class="o">&gt;&gt;</span>   <span class="n">h</span><span class="p">[</span><span class="s2">&quot;in2&quot;</span><span class="p">]</span>
                        <span class="p">]</span>
                       <span class="p">)</span>
-<span class="c"># ...</span>
+<span class="c1"># ...</span>
 </pre></div>
 </div>
 <p>and check the input tendrils to the process function. For example:</p>
@@ -345,7 +347,7 @@ distinguish this from inside the <tt class="docutils literal"><span class="pre">
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -360,13 +362,13 @@ distinguish this from inside the <tt class="docutils literal"><span class="pre">
         <li class="right" >
           <a href="tendril.html" title="tendril"
              >previous</a> |</li>
-        <li><a href="../../index.html">ecto</a> &raquo;</li>
-          <li><a href="index.html" >Reference</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Reference</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

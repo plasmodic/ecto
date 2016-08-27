@@ -37,13 +37,13 @@ struct \hyperlink{structecto_1_1tendril_1_1none}{none}
 \begin{DoxyCompactItemize}
 \item 
 enum \{ \\*
-\hyperlink{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca122dd16c5a22a6e22c7caedf7be1d92f}{D\+E\+F\+A\+U\+L\+T\+\_\+\+V\+A\+L\+U\+E} =0, 
-\hyperlink{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca7ae45e8526726df642f14c19db78564d}{D\+I\+R\+T\+Y}, 
-\hyperlink{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca26dbd8778d8007b845bb247f6ce87ff8}{U\+S\+E\+R\+\_\+\+S\+U\+P\+P\+L\+I\+E\+D}, 
-\hyperlink{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4acac686a7ccc1227f1ae09d79536683136b}{R\+E\+Q\+U\+I\+R\+E\+D}, 
+\hyperlink{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca122dd16c5a22a6e22c7caedf7be1d92f}{D\+E\+F\+A\+U\+L\+T\+\_\+\+V\+A\+L\+UE} =0, 
+\hyperlink{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca7ae45e8526726df642f14c19db78564d}{D\+I\+R\+TY}, 
+\hyperlink{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca26dbd8778d8007b845bb247f6ce87ff8}{U\+S\+E\+R\+\_\+\+S\+U\+P\+P\+L\+I\+ED}, 
+\hyperlink{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4acac686a7ccc1227f1ae09d79536683136b}{R\+E\+Q\+U\+I\+R\+ED}, 
 \\*
-\hyperlink{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca4906c6f7c63b6934ea683ea05716abee}{O\+P\+T\+I\+O\+N\+A\+L}, 
-\hyperlink{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca8748e76437a722b0cfb3652fefd47d67}{N\+\_\+\+F\+L\+A\+G\+S}
+\hyperlink{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca4906c6f7c63b6934ea683ea05716abee}{O\+P\+T\+I\+O\+N\+AL}, 
+\hyperlink{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca8748e76437a722b0cfb3652fefd47d67}{N\+\_\+\+F\+L\+A\+GS}
  \}
 \item 
 typedef boost\+::function1$<$ void, \hyperlink{classecto_1_1tendril}{tendril} \& $>$ \hyperlink{classecto_1_1tendril_ad312bffc767516bd2340d02cd9e218ae}{Tendril\+Job}
@@ -154,7 +154,7 @@ const char $\ast$ \hyperlink{classecto_1_1tendril_a5b237bfa0a9acefc48d577b773800
 \item 
 std\+::string \hyperlink{classecto_1_1tendril_a6e8304d03aa8a24be843d3bb8d26332d}{doc\+\_\+}
 \item 
-std\+::bitset$<$ \hyperlink{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca8748e76437a722b0cfb3652fefd47d67}{N\+\_\+\+F\+L\+A\+G\+S} $>$ \hyperlink{classecto_1_1tendril_a7b2a11ba7c80606fafda80d34b0a1bfe}{flags\+\_\+}
+std\+::bitset$<$ \hyperlink{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca8748e76437a722b0cfb3652fefd47d67}{N\+\_\+\+F\+L\+A\+GS} $>$ \hyperlink{classecto_1_1tendril_a7b2a11ba7c80606fafda80d34b0a1bfe}{flags\+\_\+}
 \item 
 \hyperlink{classecto_1_1tendril_a59a62b4ac15de3a6a63a515dace8c420}{job\+\_\+signal\+\_\+t} \hyperlink{classecto_1_1tendril_acf171c75c0ace5cd108e8355ee83199c}{jobs\+\_\+}
 \item 
@@ -189,69 +189,69 @@ The tendril operates as a value holder, so treat it as such. If you would like t
 Items held by the tendril must be copy constructible and copiable. 
 
 \subsection{Member Typedef Documentation}
-\hypertarget{classecto_1_1tendril_a59a62b4ac15de3a6a63a515dace8c420}{}\index{ecto\+::tendril@{ecto\+::tendril}!job\+\_\+signal\+\_\+t@{job\+\_\+signal\+\_\+t}}
+\index{ecto\+::tendril@{ecto\+::tendril}!job\+\_\+signal\+\_\+t@{job\+\_\+signal\+\_\+t}}
 \index{job\+\_\+signal\+\_\+t@{job\+\_\+signal\+\_\+t}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{job\+\_\+signal\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}typedef boost\+::signals2\+::signal$<$void({\bf tendril}\&)$>$ {\bf ecto\+::tendril\+::job\+\_\+signal\+\_\+t}\hspace{0.3cm}{\ttfamily [private]}}\label{classecto_1_1tendril_a59a62b4ac15de3a6a63a515dace8c420}
-\hypertarget{classecto_1_1tendril_ad312bffc767516bd2340d02cd9e218ae}{}\index{ecto\+::tendril@{ecto\+::tendril}!Tendril\+Job@{Tendril\+Job}}
+\subsubsection[{\texorpdfstring{job\+\_\+signal\+\_\+t}{job_signal_t}}]{\setlength{\rightskip}{0pt plus 5cm}typedef boost\+::signals2\+::signal$<$void({\bf tendril}\&)$>$ {\bf ecto\+::tendril\+::job\+\_\+signal\+\_\+t}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classecto_1_1tendril_a59a62b4ac15de3a6a63a515dace8c420}{}\label{classecto_1_1tendril_a59a62b4ac15de3a6a63a515dace8c420}
+\index{ecto\+::tendril@{ecto\+::tendril}!Tendril\+Job@{Tendril\+Job}}
 \index{Tendril\+Job@{Tendril\+Job}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{Tendril\+Job}]{\setlength{\rightskip}{0pt plus 5cm}typedef boost\+::function1$<$void, {\bf tendril}\&$>$ {\bf ecto\+::tendril\+::\+Tendril\+Job}}\label{classecto_1_1tendril_ad312bffc767516bd2340d02cd9e218ae}
+\subsubsection[{\texorpdfstring{Tendril\+Job}{TendrilJob}}]{\setlength{\rightskip}{0pt plus 5cm}typedef boost\+::function1$<$void, {\bf tendril}\&$>$ {\bf ecto\+::tendril\+::\+Tendril\+Job}}\hypertarget{classecto_1_1tendril_ad312bffc767516bd2340d02cd9e218ae}{}\label{classecto_1_1tendril_ad312bffc767516bd2340d02cd9e218ae}
 
 
 \subsection{Member Enumeration Documentation}
-\hypertarget{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4ac}{}\subsubsection[{anonymous enum}]{\setlength{\rightskip}{0pt plus 5cm}anonymous enum}\label{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4ac}
+\subsubsection[{\texorpdfstring{anonymous enum}{anonymous enum}}]{\setlength{\rightskip}{0pt plus 5cm}anonymous enum}\hypertarget{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4ac}{}\label{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4ac}
 \begin{Desc}
 \item[Enumerator]\par
 \begin{description}
-\index{D\+E\+F\+A\+U\+L\+T\+\_\+\+V\+A\+L\+U\+E@{D\+E\+F\+A\+U\+L\+T\+\_\+\+V\+A\+L\+U\+E}!ecto\+::tendril@{ecto\+::tendril}}\index{ecto\+::tendril@{ecto\+::tendril}!D\+E\+F\+A\+U\+L\+T\+\_\+\+V\+A\+L\+U\+E@{D\+E\+F\+A\+U\+L\+T\+\_\+\+V\+A\+L\+U\+E}}\item[{\em 
-\hypertarget{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca122dd16c5a22a6e22c7caedf7be1d92f}{}D\+E\+F\+A\+U\+L\+T\+\_\+\+V\+A\+L\+U\+E\label{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca122dd16c5a22a6e22c7caedf7be1d92f}
-}]\index{D\+I\+R\+T\+Y@{D\+I\+R\+T\+Y}!ecto\+::tendril@{ecto\+::tendril}}\index{ecto\+::tendril@{ecto\+::tendril}!D\+I\+R\+T\+Y@{D\+I\+R\+T\+Y}}\item[{\em 
-\hypertarget{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca7ae45e8526726df642f14c19db78564d}{}D\+I\+R\+T\+Y\label{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca7ae45e8526726df642f14c19db78564d}
-}]\index{U\+S\+E\+R\+\_\+\+S\+U\+P\+P\+L\+I\+E\+D@{U\+S\+E\+R\+\_\+\+S\+U\+P\+P\+L\+I\+E\+D}!ecto\+::tendril@{ecto\+::tendril}}\index{ecto\+::tendril@{ecto\+::tendril}!U\+S\+E\+R\+\_\+\+S\+U\+P\+P\+L\+I\+E\+D@{U\+S\+E\+R\+\_\+\+S\+U\+P\+P\+L\+I\+E\+D}}\item[{\em 
-\hypertarget{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca26dbd8778d8007b845bb247f6ce87ff8}{}U\+S\+E\+R\+\_\+\+S\+U\+P\+P\+L\+I\+E\+D\label{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca26dbd8778d8007b845bb247f6ce87ff8}
-}]\index{R\+E\+Q\+U\+I\+R\+E\+D@{R\+E\+Q\+U\+I\+R\+E\+D}!ecto\+::tendril@{ecto\+::tendril}}\index{ecto\+::tendril@{ecto\+::tendril}!R\+E\+Q\+U\+I\+R\+E\+D@{R\+E\+Q\+U\+I\+R\+E\+D}}\item[{\em 
-\hypertarget{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4acac686a7ccc1227f1ae09d79536683136b}{}R\+E\+Q\+U\+I\+R\+E\+D\label{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4acac686a7ccc1227f1ae09d79536683136b}
-}]\index{O\+P\+T\+I\+O\+N\+A\+L@{O\+P\+T\+I\+O\+N\+A\+L}!ecto\+::tendril@{ecto\+::tendril}}\index{ecto\+::tendril@{ecto\+::tendril}!O\+P\+T\+I\+O\+N\+A\+L@{O\+P\+T\+I\+O\+N\+A\+L}}\item[{\em 
-\hypertarget{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca4906c6f7c63b6934ea683ea05716abee}{}O\+P\+T\+I\+O\+N\+A\+L\label{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca4906c6f7c63b6934ea683ea05716abee}
-}]\index{N\+\_\+\+F\+L\+A\+G\+S@{N\+\_\+\+F\+L\+A\+G\+S}!ecto\+::tendril@{ecto\+::tendril}}\index{ecto\+::tendril@{ecto\+::tendril}!N\+\_\+\+F\+L\+A\+G\+S@{N\+\_\+\+F\+L\+A\+G\+S}}\item[{\em 
-\hypertarget{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca8748e76437a722b0cfb3652fefd47d67}{}N\+\_\+\+F\+L\+A\+G\+S\label{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca8748e76437a722b0cfb3652fefd47d67}
+\index{D\+E\+F\+A\+U\+L\+T\+\_\+\+V\+A\+L\+UE@{D\+E\+F\+A\+U\+L\+T\+\_\+\+V\+A\+L\+UE}!ecto\+::tendril@{ecto\+::tendril}}\index{ecto\+::tendril@{ecto\+::tendril}!D\+E\+F\+A\+U\+L\+T\+\_\+\+V\+A\+L\+UE@{D\+E\+F\+A\+U\+L\+T\+\_\+\+V\+A\+L\+UE}}\item[{\em 
+D\+E\+F\+A\+U\+L\+T\+\_\+\+V\+A\+L\+UE\hypertarget{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca122dd16c5a22a6e22c7caedf7be1d92f}{}\label{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca122dd16c5a22a6e22c7caedf7be1d92f}
+}]\index{D\+I\+R\+TY@{D\+I\+R\+TY}!ecto\+::tendril@{ecto\+::tendril}}\index{ecto\+::tendril@{ecto\+::tendril}!D\+I\+R\+TY@{D\+I\+R\+TY}}\item[{\em 
+D\+I\+R\+TY\hypertarget{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca7ae45e8526726df642f14c19db78564d}{}\label{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca7ae45e8526726df642f14c19db78564d}
+}]\index{U\+S\+E\+R\+\_\+\+S\+U\+P\+P\+L\+I\+ED@{U\+S\+E\+R\+\_\+\+S\+U\+P\+P\+L\+I\+ED}!ecto\+::tendril@{ecto\+::tendril}}\index{ecto\+::tendril@{ecto\+::tendril}!U\+S\+E\+R\+\_\+\+S\+U\+P\+P\+L\+I\+ED@{U\+S\+E\+R\+\_\+\+S\+U\+P\+P\+L\+I\+ED}}\item[{\em 
+U\+S\+E\+R\+\_\+\+S\+U\+P\+P\+L\+I\+ED\hypertarget{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca26dbd8778d8007b845bb247f6ce87ff8}{}\label{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca26dbd8778d8007b845bb247f6ce87ff8}
+}]\index{R\+E\+Q\+U\+I\+R\+ED@{R\+E\+Q\+U\+I\+R\+ED}!ecto\+::tendril@{ecto\+::tendril}}\index{ecto\+::tendril@{ecto\+::tendril}!R\+E\+Q\+U\+I\+R\+ED@{R\+E\+Q\+U\+I\+R\+ED}}\item[{\em 
+R\+E\+Q\+U\+I\+R\+ED\hypertarget{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4acac686a7ccc1227f1ae09d79536683136b}{}\label{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4acac686a7ccc1227f1ae09d79536683136b}
+}]\index{O\+P\+T\+I\+O\+N\+AL@{O\+P\+T\+I\+O\+N\+AL}!ecto\+::tendril@{ecto\+::tendril}}\index{ecto\+::tendril@{ecto\+::tendril}!O\+P\+T\+I\+O\+N\+AL@{O\+P\+T\+I\+O\+N\+AL}}\item[{\em 
+O\+P\+T\+I\+O\+N\+AL\hypertarget{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca4906c6f7c63b6934ea683ea05716abee}{}\label{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca4906c6f7c63b6934ea683ea05716abee}
+}]\index{N\+\_\+\+F\+L\+A\+GS@{N\+\_\+\+F\+L\+A\+GS}!ecto\+::tendril@{ecto\+::tendril}}\index{ecto\+::tendril@{ecto\+::tendril}!N\+\_\+\+F\+L\+A\+GS@{N\+\_\+\+F\+L\+A\+GS}}\item[{\em 
+N\+\_\+\+F\+L\+A\+GS\hypertarget{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca8748e76437a722b0cfb3652fefd47d67}{}\label{classecto_1_1tendril_ab63b76909681783917fcb55e3c89f4aca8748e76437a722b0cfb3652fefd47d67}
 }]\end{description}
 \end{Desc}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classecto_1_1tendril_aa775aa54d52fbb5b7d2812dd904ea90d}{}\index{ecto\+::tendril@{ecto\+::tendril}!tendril@{tendril}}
+\index{ecto\+::tendril@{ecto\+::tendril}!tendril@{tendril}}
 \index{tendril@{tendril}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{tendril}]{\setlength{\rightskip}{0pt plus 5cm}ecto\+::tendril\+::tendril (
+\subsubsection[{\texorpdfstring{tendril()}{tendril()}}]{\setlength{\rightskip}{0pt plus 5cm}ecto\+::tendril\+::tendril (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}\label{classecto_1_1tendril_aa775aa54d52fbb5b7d2812dd904ea90d}
+)}\hypertarget{classecto_1_1tendril_aa775aa54d52fbb5b7d2812dd904ea90d}{}\label{classecto_1_1tendril_aa775aa54d52fbb5b7d2812dd904ea90d}
 
 
 Creates a tendril that is initialized with the \hyperlink{structecto_1_1tendril_1_1none}{tendril\+::none} type. This should be fairly cheap. 
 
-\hypertarget{classecto_1_1tendril_abb8f8d05782b38994938e58741f4a9d2}{}\index{ecto\+::tendril@{ecto\+::tendril}!````~tendril@{$\sim$tendril}}
+\index{ecto\+::tendril@{ecto\+::tendril}!````~tendril@{$\sim$tendril}}
 \index{````~tendril@{$\sim$tendril}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{$\sim$tendril}]{\setlength{\rightskip}{0pt plus 5cm}ecto\+::tendril\+::$\sim$tendril (
+\subsubsection[{\texorpdfstring{$\sim$tendril()}{~tendril()}}]{\setlength{\rightskip}{0pt plus 5cm}ecto\+::tendril\+::$\sim$tendril (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}\label{classecto_1_1tendril_abb8f8d05782b38994938e58741f4a9d2}
-\hypertarget{classecto_1_1tendril_a6943a97fe2565d6fe9f3846c1f0e7f0f}{}\index{ecto\+::tendril@{ecto\+::tendril}!tendril@{tendril}}
+)}\hypertarget{classecto_1_1tendril_abb8f8d05782b38994938e58741f4a9d2}{}\label{classecto_1_1tendril_abb8f8d05782b38994938e58741f4a9d2}
+\index{ecto\+::tendril@{ecto\+::tendril}!tendril@{tendril}}
 \index{tendril@{tendril}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{tendril}]{\setlength{\rightskip}{0pt plus 5cm}ecto\+::tendril\+::tendril (
+\subsubsection[{\texorpdfstring{tendril(const tendril \&rhs)}{tendril(const tendril &rhs)}}]{\setlength{\rightskip}{0pt plus 5cm}ecto\+::tendril\+::tendril (
 \begin{DoxyParamCaption}
 \item[{const {\bf tendril} \&}]{rhs}
 \end{DoxyParamCaption}
-)}\label{classecto_1_1tendril_a6943a97fe2565d6fe9f3846c1f0e7f0f}
-\hypertarget{classecto_1_1tendril_a24e2db86267573daae84264cd25159e3}{}\index{ecto\+::tendril@{ecto\+::tendril}!tendril@{tendril}}
+)}\hypertarget{classecto_1_1tendril_a6943a97fe2565d6fe9f3846c1f0e7f0f}{}\label{classecto_1_1tendril_a6943a97fe2565d6fe9f3846c1f0e7f0f}
+\index{ecto\+::tendril@{ecto\+::tendril}!tendril@{tendril}}
 \index{tendril@{tendril}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{tendril}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ ecto\+::tendril\+::tendril (
+\subsubsection[{\texorpdfstring{tendril(const T \&t, const std\+::string \&doc)}{tendril(const T &t, const std::string &doc)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ ecto\+::tendril\+::tendril (
 \begin{DoxyParamCaption}
 \item[{const T \&}]{t, }
 \item[{const std\+::string \&}]{doc}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classecto_1_1tendril_a24e2db86267573daae84264cd25159e3}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classecto_1_1tendril_a24e2db86267573daae84264cd25159e3}{}\label{classecto_1_1tendril_a24e2db86267573daae84264cd25159e3}
 
 
 A convenience constructor for creating a tendril that holds the given type. 
@@ -271,52 +271,52 @@ A convenience constructor for creating a tendril that holds the given type.
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classecto_1_1tendril_a7033cbab493d0120443b69c951e5d26c}{}\index{ecto\+::tendril@{ecto\+::tendril}!compatible\+\_\+type@{compatible\+\_\+type}}
+\index{ecto\+::tendril@{ecto\+::tendril}!compatible\+\_\+type@{compatible\+\_\+type}}
 \index{compatible\+\_\+type@{compatible\+\_\+type}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{compatible\+\_\+type}]{\setlength{\rightskip}{0pt plus 5cm}bool ecto\+::tendril\+::compatible\+\_\+type (
+\subsubsection[{\texorpdfstring{compatible\+\_\+type(const tendril \&rhs) const }{compatible_type(const tendril &rhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool ecto\+::tendril\+::compatible\+\_\+type (
 \begin{DoxyParamCaption}
 \item[{const {\bf tendril} \&}]{rhs}
 \end{DoxyParamCaption}
-) const}\label{classecto_1_1tendril_a7033cbab493d0120443b69c951e5d26c}
-\hypertarget{classecto_1_1tendril_a94a24ca32acd13f83f5af41030a77fdf}{}\index{ecto\+::tendril@{ecto\+::tendril}!connect@{connect}}
+) const}\hypertarget{classecto_1_1tendril_a7033cbab493d0120443b69c951e5d26c}{}\label{classecto_1_1tendril_a7033cbab493d0120443b69c951e5d26c}
+\index{ecto\+::tendril@{ecto\+::tendril}!connect@{connect}}
 \index{connect@{connect}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{connect}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Signature $>$ boost\+::signals2\+::connection ecto\+::tendril\+::connect (
+\subsubsection[{\texorpdfstring{connect(\+Signature slot)}{connect(Signature slot)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Signature $>$ boost\+::signals2\+::connection ecto\+::tendril\+::connect (
 \begin{DoxyParamCaption}
 \item[{Signature}]{slot}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classecto_1_1tendril_a94a24ca32acd13f83f5af41030a77fdf}
-\hypertarget{classecto_1_1tendril_a1751ddffc72288bfbd460a559a276a76}{}\index{ecto\+::tendril@{ecto\+::tendril}!copy\+\_\+holder@{copy\+\_\+holder}}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classecto_1_1tendril_a94a24ca32acd13f83f5af41030a77fdf}{}\label{classecto_1_1tendril_a94a24ca32acd13f83f5af41030a77fdf}
+\index{ecto\+::tendril@{ecto\+::tendril}!copy\+\_\+holder@{copy\+\_\+holder}}
 \index{copy\+\_\+holder@{copy\+\_\+holder}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{copy\+\_\+holder}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::tendril\+::copy\+\_\+holder (
+\subsubsection[{\texorpdfstring{copy\+\_\+holder(const tendril \&rhs)}{copy_holder(const tendril &rhs)}}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::tendril\+::copy\+\_\+holder (
 \begin{DoxyParamCaption}
 \item[{const {\bf tendril} \&}]{rhs}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}\label{classecto_1_1tendril_a1751ddffc72288bfbd460a559a276a76}
-\hypertarget{classecto_1_1tendril_aabe2c05389023df143746b5b63b7701e}{}\index{ecto\+::tendril@{ecto\+::tendril}!dirty@{dirty}}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classecto_1_1tendril_a1751ddffc72288bfbd460a559a276a76}{}\label{classecto_1_1tendril_a1751ddffc72288bfbd460a559a276a76}
+\index{ecto\+::tendril@{ecto\+::tendril}!dirty@{dirty}}
 \index{dirty@{dirty}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{dirty}]{\setlength{\rightskip}{0pt plus 5cm}bool ecto\+::tendril\+::dirty (
+\subsubsection[{\texorpdfstring{dirty() const }{dirty() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool ecto\+::tendril\+::dirty (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const}\label{classecto_1_1tendril_aabe2c05389023df143746b5b63b7701e}
-The tendril has likely been modified since the last time that notify has beend called. This gets unset after its changed-\/callbacks have fired \hypertarget{classecto_1_1tendril_a9c2bb6262190404d3b1648cdcc2960d8}{}\index{ecto\+::tendril@{ecto\+::tendril}!dirty@{dirty}}
+) const}\hypertarget{classecto_1_1tendril_aabe2c05389023df143746b5b63b7701e}{}\label{classecto_1_1tendril_aabe2c05389023df143746b5b63b7701e}
+The tendril has likely been modified since the last time that notify has beend called. This gets unset after its changed-\/callbacks have fired \index{ecto\+::tendril@{ecto\+::tendril}!dirty@{dirty}}
 \index{dirty@{dirty}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{dirty}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::tendril\+::dirty (
+\subsubsection[{\texorpdfstring{dirty(bool)}{dirty(bool)}}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::tendril\+::dirty (
 \begin{DoxyParamCaption}
 \item[{bool}]{}
 \end{DoxyParamCaption}
-)}\label{classecto_1_1tendril_a9c2bb6262190404d3b1648cdcc2960d8}
+)}\hypertarget{classecto_1_1tendril_a9c2bb6262190404d3b1648cdcc2960d8}{}\label{classecto_1_1tendril_a9c2bb6262190404d3b1648cdcc2960d8}
 
 
 Set the tendril dirty, implying that the value has changed. 
 
-\hypertarget{classecto_1_1tendril_abbe2652bc7ca2d65b63feef0c9561891}{}\index{ecto\+::tendril@{ecto\+::tendril}!doc@{doc}}
+\index{ecto\+::tendril@{ecto\+::tendril}!doc@{doc}}
 \index{doc@{doc}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{doc}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string ecto\+::tendril\+::doc (
+\subsubsection[{\texorpdfstring{doc() const }{doc() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string ecto\+::tendril\+::doc (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const}\label{classecto_1_1tendril_abbe2652bc7ca2d65b63feef0c9561891}
+) const}\hypertarget{classecto_1_1tendril_abbe2652bc7ca2d65b63feef0c9561891}{}\label{classecto_1_1tendril_abbe2652bc7ca2d65b63feef0c9561891}
 
 
 A doc string for this tendril, \char`\"{}foo is for the input
@@ -325,59 +325,59 @@ and will be mashed with spam.\char`\"{}.
 \begin{DoxyReturn}{Returns}
 A very descriptive human readable string of whatever the tendril is holding on to. 
 \end{DoxyReturn}
-\hypertarget{classecto_1_1tendril_ae856d0e8b9b6eb899e9b6a9b6472e231}{}\index{ecto\+::tendril@{ecto\+::tendril}!enforce\+\_\+compatible\+\_\+type@{enforce\+\_\+compatible\+\_\+type}}
+\index{ecto\+::tendril@{ecto\+::tendril}!enforce\+\_\+compatible\+\_\+type@{enforce\+\_\+compatible\+\_\+type}}
 \index{enforce\+\_\+compatible\+\_\+type@{enforce\+\_\+compatible\+\_\+type}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{enforce\+\_\+compatible\+\_\+type}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::tendril\+::enforce\+\_\+compatible\+\_\+type (
+\subsubsection[{\texorpdfstring{enforce\+\_\+compatible\+\_\+type(const tendril \&rhs) const }{enforce_compatible_type(const tendril &rhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::tendril\+::enforce\+\_\+compatible\+\_\+type (
 \begin{DoxyParamCaption}
 \item[{const {\bf tendril} \&}]{rhs}
 \end{DoxyParamCaption}
-) const}\label{classecto_1_1tendril_ae856d0e8b9b6eb899e9b6a9b6472e231}
-\hypertarget{classecto_1_1tendril_a9322a1212d70252a9a7c4f5192871475}{}\index{ecto\+::tendril@{ecto\+::tendril}!enforce\+\_\+type@{enforce\+\_\+type}}
+) const}\hypertarget{classecto_1_1tendril_ae856d0e8b9b6eb899e9b6a9b6472e231}{}\label{classecto_1_1tendril_ae856d0e8b9b6eb899e9b6a9b6472e231}
+\index{ecto\+::tendril@{ecto\+::tendril}!enforce\+\_\+type@{enforce\+\_\+type}}
 \index{enforce\+\_\+type@{enforce\+\_\+type}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{enforce\+\_\+type}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ void ecto\+::tendril\+::enforce\+\_\+type (
+\subsubsection[{\texorpdfstring{enforce\+\_\+type() const }{enforce_type() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ void ecto\+::tendril\+::enforce\+\_\+type (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classecto_1_1tendril_a9322a1212d70252a9a7c4f5192871475}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classecto_1_1tendril_a9322a1212d70252a9a7c4f5192871475}{}\label{classecto_1_1tendril_a9322a1212d70252a9a7c4f5192871475}
 
 
 runtime check if the tendril is of the given type, this will throw. 
 
-\hypertarget{classecto_1_1tendril_aeeacd721a1d85f6c71c6d238b47c17f6}{}\index{ecto\+::tendril@{ecto\+::tendril}!get@{get}}
+\index{ecto\+::tendril@{ecto\+::tendril}!get@{get}}
 \index{get@{get}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ const T\& ecto\+::tendril\+::get (
+\subsubsection[{\texorpdfstring{get() const }{get() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ const T\& ecto\+::tendril\+::get (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classecto_1_1tendril_aeeacd721a1d85f6c71c6d238b47c17f6}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classecto_1_1tendril_aeeacd721a1d85f6c71c6d238b47c17f6}{}\label{classecto_1_1tendril_aeeacd721a1d85f6c71c6d238b47c17f6}
 Given T this will get the type from the tendril, also enforcing type with an exception. \begin{DoxyReturn}{Returns}
 a const reference to the value of the tendril (no copies) 
 \end{DoxyReturn}
-\hypertarget{classecto_1_1tendril_a25420b71b89431659b310730ca6c55f0}{}\index{ecto\+::tendril@{ecto\+::tendril}!get@{get}}
+\index{ecto\+::tendril@{ecto\+::tendril}!get@{get}}
 \index{get@{get}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ T\& ecto\+::tendril\+::get (
+\subsubsection[{\texorpdfstring{get()}{get()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ T\& ecto\+::tendril\+::get (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classecto_1_1tendril_a25420b71b89431659b310730ca6c55f0}
-\hypertarget{classecto_1_1tendril_af8a2ace0ae30083415116db06644ba17}{}\index{ecto\+::tendril@{ecto\+::tendril}!has\+\_\+default@{has\+\_\+default}}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classecto_1_1tendril_a25420b71b89431659b310730ca6c55f0}{}\label{classecto_1_1tendril_a25420b71b89431659b310730ca6c55f0}
+\index{ecto\+::tendril@{ecto\+::tendril}!has\+\_\+default@{has\+\_\+default}}
 \index{has\+\_\+default@{has\+\_\+default}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{has\+\_\+default}]{\setlength{\rightskip}{0pt plus 5cm}bool ecto\+::tendril\+::has\+\_\+default (
+\subsubsection[{\texorpdfstring{has\+\_\+default() const }{has_default() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool ecto\+::tendril\+::has\+\_\+default (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const}\label{classecto_1_1tendril_af8a2ace0ae30083415116db06644ba17}
+) const}\hypertarget{classecto_1_1tendril_af8a2ace0ae30083415116db06644ba17}{}\label{classecto_1_1tendril_af8a2ace0ae30083415116db06644ba17}
 
 
 The tendril was initialized with default value. 
 
-\hypertarget{classecto_1_1tendril_adec0a36989492e2bd9ae9f03f954b9af}{}\index{ecto\+::tendril@{ecto\+::tendril}!is\+\_\+type@{is\+\_\+type}}
+\index{ecto\+::tendril@{ecto\+::tendril}!is\+\_\+type@{is\+\_\+type}}
 \index{is\+\_\+type@{is\+\_\+type}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{is\+\_\+type}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ bool ecto\+::tendril\+::is\+\_\+type (
+\subsubsection[{\texorpdfstring{is\+\_\+type() const }{is_type() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ bool ecto\+::tendril\+::is\+\_\+type (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classecto_1_1tendril_adec0a36989492e2bd9ae9f03f954b9af}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classecto_1_1tendril_adec0a36989492e2bd9ae9f03f954b9af}{}\label{classecto_1_1tendril_adec0a36989492e2bd9ae9f03f954b9af}
 
 
 runtime check if the tendril is of the given type. 
@@ -385,101 +385,101 @@ runtime check if the tendril is of the given type.
 \begin{DoxyReturn}{Returns}
 true if it is the type. 
 \end{DoxyReturn}
-\hypertarget{classecto_1_1tendril_a87c2df829c12bcd46089d74183c1d8d8}{}\index{ecto\+::tendril@{ecto\+::tendril}!notify@{notify}}
+\index{ecto\+::tendril@{ecto\+::tendril}!notify@{notify}}
 \index{notify@{notify}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{notify}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::tendril\+::notify (
+\subsubsection[{\texorpdfstring{notify()}{notify()}}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::tendril\+::notify (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}\label{classecto_1_1tendril_a87c2df829c12bcd46089d74183c1d8d8}
+)}\hypertarget{classecto_1_1tendril_a87c2df829c12bcd46089d74183c1d8d8}{}\label{classecto_1_1tendril_a87c2df829c12bcd46089d74183c1d8d8}
 
 
 Notify the callback, only if this is dirty. 
 
-\hypertarget{classecto_1_1tendril_ab02075b0d910360104974c1771edcc7f}{}\index{ecto\+::tendril@{ecto\+::tendril}!operator$<$$<$@{operator$<$$<$}}
+\index{ecto\+::tendril@{ecto\+::tendril}!operator$<$$<$@{operator$<$$<$}}
 \index{operator$<$$<$@{operator$<$$<$}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ void ecto\+::tendril\+::operator$<$$<$ (
+\subsubsection[{\texorpdfstring{operator$<$$<$(const T \&val)}{operator<<(const T &val)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ void ecto\+::tendril\+::operator$<$$<$ (
 \begin{DoxyParamCaption}
 \item[{const T \&}]{val}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classecto_1_1tendril_ab02075b0d910360104974c1771edcc7f}
-\hypertarget{classecto_1_1tendril_af9df4c4225712b440c9340d8969e337e}{}\index{ecto\+::tendril@{ecto\+::tendril}!operator$<$$<$@{operator$<$$<$}}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classecto_1_1tendril_ab02075b0d910360104974c1771edcc7f}{}\label{classecto_1_1tendril_ab02075b0d910360104974c1771edcc7f}
+\index{ecto\+::tendril@{ecto\+::tendril}!operator$<$$<$@{operator$<$$<$}}
 \index{operator$<$$<$@{operator$<$$<$}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::tendril\+::operator$<$$<$ (
+\subsubsection[{\texorpdfstring{operator$<$$<$(const boost\+::python\+::object \&obj)}{operator<<(const boost::python::object &obj)}}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::tendril\+::operator$<$$<$ (
 \begin{DoxyParamCaption}
 \item[{const boost\+::python\+::object \&}]{obj}
 \end{DoxyParamCaption}
-)}\label{classecto_1_1tendril_af9df4c4225712b440c9340d8969e337e}
-\hypertarget{classecto_1_1tendril_adbf8a7e6ac9bc41d9a17f2f362e8d3f6}{}\index{ecto\+::tendril@{ecto\+::tendril}!operator$<$$<$@{operator$<$$<$}}
+)}\hypertarget{classecto_1_1tendril_af9df4c4225712b440c9340d8969e337e}{}\label{classecto_1_1tendril_af9df4c4225712b440c9340d8969e337e}
+\index{ecto\+::tendril@{ecto\+::tendril}!operator$<$$<$@{operator$<$$<$}}
 \index{operator$<$$<$@{operator$<$$<$}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}{\bf tendril}\& ecto\+::tendril\+::operator$<$$<$ (
+\subsubsection[{\texorpdfstring{operator$<$$<$(const tendril \&rhs)}{operator<<(const tendril &rhs)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf tendril}\& ecto\+::tendril\+::operator$<$$<$ (
 \begin{DoxyParamCaption}
 \item[{const {\bf tendril} \&}]{rhs}
 \end{DoxyParamCaption}
-)}\label{classecto_1_1tendril_adbf8a7e6ac9bc41d9a17f2f362e8d3f6}
-\hypertarget{classecto_1_1tendril_ae243d8cfce7c2c1c2de255de9494d0fe}{}\index{ecto\+::tendril@{ecto\+::tendril}!operator=@{operator=}}
+)}\hypertarget{classecto_1_1tendril_adbf8a7e6ac9bc41d9a17f2f362e8d3f6}{}\label{classecto_1_1tendril_adbf8a7e6ac9bc41d9a17f2f362e8d3f6}
+\index{ecto\+::tendril@{ecto\+::tendril}!operator=@{operator=}}
 \index{operator=@{operator=}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf tendril}\& ecto\+::tendril\+::operator= (
+\subsubsection[{\texorpdfstring{operator=(const tendril \&rhs)}{operator=(const tendril &rhs)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf tendril}\& ecto\+::tendril\+::operator= (
 \begin{DoxyParamCaption}
 \item[{const {\bf tendril} \&}]{rhs}
 \end{DoxyParamCaption}
-)}\label{classecto_1_1tendril_ae243d8cfce7c2c1c2de255de9494d0fe}
-\hypertarget{classecto_1_1tendril_a0c843f467b21eee9e5bba8f3f8bc14aa}{}\index{ecto\+::tendril@{ecto\+::tendril}!operator$>$$>$@{operator$>$$>$}}
+)}\hypertarget{classecto_1_1tendril_ae243d8cfce7c2c1c2de255de9494d0fe}{}\label{classecto_1_1tendril_ae243d8cfce7c2c1c2de255de9494d0fe}
+\index{ecto\+::tendril@{ecto\+::tendril}!operator$>$$>$@{operator$>$$>$}}
 \index{operator$>$$>$@{operator$>$$>$}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{operator$>$$>$}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ void ecto\+::tendril\+::operator$>$$>$ (
+\subsubsection[{\texorpdfstring{operator$>$$>$(\+T \&val) const }{operator>>(T &val) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ void ecto\+::tendril\+::operator$>$$>$ (
 \begin{DoxyParamCaption}
 \item[{T \&}]{val}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classecto_1_1tendril_a0c843f467b21eee9e5bba8f3f8bc14aa}
-\hypertarget{classecto_1_1tendril_af019a42fb91908e32db96b84f4a0f978}{}\index{ecto\+::tendril@{ecto\+::tendril}!operator$>$$>$@{operator$>$$>$}}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classecto_1_1tendril_a0c843f467b21eee9e5bba8f3f8bc14aa}{}\label{classecto_1_1tendril_a0c843f467b21eee9e5bba8f3f8bc14aa}
+\index{ecto\+::tendril@{ecto\+::tendril}!operator$>$$>$@{operator$>$$>$}}
 \index{operator$>$$>$@{operator$>$$>$}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{operator$>$$>$}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::tendril\+::operator$>$$>$ (
+\subsubsection[{\texorpdfstring{operator$>$$>$(boost\+::python\+::object \&obj) const }{operator>>(boost::python::object &obj) const }}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::tendril\+::operator$>$$>$ (
 \begin{DoxyParamCaption}
 \item[{boost\+::python\+::object \&}]{obj}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classecto_1_1tendril_af019a42fb91908e32db96b84f4a0f978}
-\hypertarget{classecto_1_1tendril_aade5aa6d8c439ff515e312f5c9950ec9}{}\index{ecto\+::tendril@{ecto\+::tendril}!operator$>$$>$@{operator$>$$>$}}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classecto_1_1tendril_af019a42fb91908e32db96b84f4a0f978}{}\label{classecto_1_1tendril_af019a42fb91908e32db96b84f4a0f978}
+\index{ecto\+::tendril@{ecto\+::tendril}!operator$>$$>$@{operator$>$$>$}}
 \index{operator$>$$>$@{operator$>$$>$}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{operator$>$$>$}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::tendril\+::operator$>$$>$ (
+\subsubsection[{\texorpdfstring{operator$>$$>$(const tendril\+\_\+ptr \&rhs) const }{operator>>(const tendril_ptr &rhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::tendril\+::operator$>$$>$ (
 \begin{DoxyParamCaption}
 \item[{const {\bf tendril\+\_\+ptr} \&}]{rhs}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classecto_1_1tendril_aade5aa6d8c439ff515e312f5c9950ec9}
-\hypertarget{classecto_1_1tendril_aaa5858033151487cab9e98e50c79887b}{}\index{ecto\+::tendril@{ecto\+::tendril}!operator$>$$>$@{operator$>$$>$}}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classecto_1_1tendril_aade5aa6d8c439ff515e312f5c9950ec9}{}\label{classecto_1_1tendril_aade5aa6d8c439ff515e312f5c9950ec9}
+\index{ecto\+::tendril@{ecto\+::tendril}!operator$>$$>$@{operator$>$$>$}}
 \index{operator$>$$>$@{operator$>$$>$}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{operator$>$$>$}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::tendril\+::operator$>$$>$ (
+\subsubsection[{\texorpdfstring{operator$>$$>$(tendril\+\_\+ptr \&rhs) const }{operator>>(tendril_ptr &rhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::tendril\+::operator$>$$>$ (
 \begin{DoxyParamCaption}
 \item[{{\bf tendril\+\_\+ptr} \&}]{rhs}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classecto_1_1tendril_aaa5858033151487cab9e98e50c79887b}
-\hypertarget{classecto_1_1tendril_ad0b2e6eaec37bd46a474ed974ab4272b}{}\index{ecto\+::tendril@{ecto\+::tendril}!operator$>$$>$@{operator$>$$>$}}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classecto_1_1tendril_aaa5858033151487cab9e98e50c79887b}{}\label{classecto_1_1tendril_aaa5858033151487cab9e98e50c79887b}
+\index{ecto\+::tendril@{ecto\+::tendril}!operator$>$$>$@{operator$>$$>$}}
 \index{operator$>$$>$@{operator$>$$>$}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{operator$>$$>$}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::tendril\+::operator$>$$>$ (
+\subsubsection[{\texorpdfstring{operator$>$$>$(tendril \&rhs) const }{operator>>(tendril &rhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::tendril\+::operator$>$$>$ (
 \begin{DoxyParamCaption}
 \item[{{\bf tendril} \&}]{rhs}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classecto_1_1tendril_ad0b2e6eaec37bd46a474ed974ab4272b}
-\hypertarget{classecto_1_1tendril_a216eb6b817644e1dfd76d3ba07d0ced7}{}\index{ecto\+::tendril@{ecto\+::tendril}!required@{required}}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classecto_1_1tendril_ad0b2e6eaec37bd46a474ed974ab4272b}{}\label{classecto_1_1tendril_ad0b2e6eaec37bd46a474ed974ab4272b}
+\index{ecto\+::tendril@{ecto\+::tendril}!required@{required}}
 \index{required@{required}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{required}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::tendril\+::required (
+\subsubsection[{\texorpdfstring{required(bool b)}{required(bool b)}}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::tendril\+::required (
 \begin{DoxyParamCaption}
 \item[{bool}]{b}
 \end{DoxyParamCaption}
-)}\label{classecto_1_1tendril_a216eb6b817644e1dfd76d3ba07d0ced7}
-\hypertarget{classecto_1_1tendril_aa10be79605183977989cf01956aedeb6}{}\index{ecto\+::tendril@{ecto\+::tendril}!required@{required}}
+)}\hypertarget{classecto_1_1tendril_a216eb6b817644e1dfd76d3ba07d0ced7}{}\label{classecto_1_1tendril_a216eb6b817644e1dfd76d3ba07d0ced7}
+\index{ecto\+::tendril@{ecto\+::tendril}!required@{required}}
 \index{required@{required}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{required}]{\setlength{\rightskip}{0pt plus 5cm}bool ecto\+::tendril\+::required (
+\subsubsection[{\texorpdfstring{required() const }{required() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool ecto\+::tendril\+::required (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const}\label{classecto_1_1tendril_aa10be79605183977989cf01956aedeb6}
-\hypertarget{classecto_1_1tendril_a7974ef8e1d4cd1936a72c429c0f3dbf7}{}\index{ecto\+::tendril@{ecto\+::tendril}!same\+\_\+type@{same\+\_\+type}}
+) const}\hypertarget{classecto_1_1tendril_aa10be79605183977989cf01956aedeb6}{}\label{classecto_1_1tendril_aa10be79605183977989cf01956aedeb6}
+\index{ecto\+::tendril@{ecto\+::tendril}!same\+\_\+type@{same\+\_\+type}}
 \index{same\+\_\+type@{same\+\_\+type}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{same\+\_\+type}]{\setlength{\rightskip}{0pt plus 5cm}bool ecto\+::tendril\+::same\+\_\+type (
+\subsubsection[{\texorpdfstring{same\+\_\+type(const tendril \&rhs) const }{same_type(const tendril &rhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool ecto\+::tendril\+::same\+\_\+type (
 \begin{DoxyParamCaption}
 \item[{const {\bf tendril} \&}]{rhs}
 \end{DoxyParamCaption}
-) const}\label{classecto_1_1tendril_a7974ef8e1d4cd1936a72c429c0f3dbf7}
+) const}\hypertarget{classecto_1_1tendril_a7974ef8e1d4cd1936a72c429c0f3dbf7}{}\label{classecto_1_1tendril_a7974ef8e1d4cd1936a72c429c0f3dbf7}
 
 
 Test if the given tendril is the same type as this one. 
@@ -492,21 +492,21 @@ Test if the given tendril is the same type as this one.
 \begin{DoxyReturn}{Returns}
 true if they are the same type. 
 \end{DoxyReturn}
-\hypertarget{classecto_1_1tendril_a697125cfa2b1b53ada4e5e2ee6847181}{}\index{ecto\+::tendril@{ecto\+::tendril}!serialize@{serialize}}
+\index{ecto\+::tendril@{ecto\+::tendril}!serialize@{serialize}}
 \index{serialize@{serialize}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{serialize}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Archive $>$ void ecto\+::tendril\+::serialize (
+\subsubsection[{\texorpdfstring{serialize(\+Archive \&ar, const unsigned int)}{serialize(Archive &ar, const unsigned int)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Archive $>$ void ecto\+::tendril\+::serialize (
 \begin{DoxyParamCaption}
 \item[{Archive \&}]{ar, }
 \item[{const unsigned}]{int}
 \end{DoxyParamCaption}
-)}\label{classecto_1_1tendril_a697125cfa2b1b53ada4e5e2ee6847181}
-\hypertarget{classecto_1_1tendril_ab3c536756c1b4eb24c97691d23eb485a}{}\index{ecto\+::tendril@{ecto\+::tendril}!set\+\_\+callback@{set\+\_\+callback}}
+)}\hypertarget{classecto_1_1tendril_a697125cfa2b1b53ada4e5e2ee6847181}{}\label{classecto_1_1tendril_a697125cfa2b1b53ada4e5e2ee6847181}
+\index{ecto\+::tendril@{ecto\+::tendril}!set\+\_\+callback@{set\+\_\+callback}}
 \index{set\+\_\+callback@{set\+\_\+callback}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{set\+\_\+callback}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf tendril}\& ecto\+::tendril\+::set\+\_\+callback (
+\subsubsection[{\texorpdfstring{set\+\_\+callback(typename boost\+::function1$<$ void, T $>$ cb)}{set_callback(typename boost::function1< void, T > cb)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf tendril}\& ecto\+::tendril\+::set\+\_\+callback (
 \begin{DoxyParamCaption}
 \item[{typename boost\+::function1$<$ void, T $>$}]{cb}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classecto_1_1tendril_ab3c536756c1b4eb24c97691d23eb485a}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classecto_1_1tendril_ab3c536756c1b4eb24c97691d23eb485a}{}\label{classecto_1_1tendril_ab3c536756c1b4eb24c97691d23eb485a}
 Register a typed callback with the tendril... Will throw on wrong type. 
 \begin{DoxyParams}{Parameters}
 {\em cb} & Will be called by the notify function, if the tendril is dirty. \\
@@ -515,13 +515,13 @@ Register a typed callback with the tendril... Will throw on wrong type.
 \begin{DoxyReturn}{Returns}
 this 
 \end{DoxyReturn}
-\hypertarget{classecto_1_1tendril_a9186713043e34915df9488fb135110b3}{}\index{ecto\+::tendril@{ecto\+::tendril}!set\+\_\+default\+\_\+val@{set\+\_\+default\+\_\+val}}
+\index{ecto\+::tendril@{ecto\+::tendril}!set\+\_\+default\+\_\+val@{set\+\_\+default\+\_\+val}}
 \index{set\+\_\+default\+\_\+val@{set\+\_\+default\+\_\+val}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{set\+\_\+default\+\_\+val}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ void ecto\+::tendril\+::set\+\_\+default\+\_\+val (
+\subsubsection[{\texorpdfstring{set\+\_\+default\+\_\+val(const T \&val=\+T())}{set_default_val(const T &val=T())}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ void ecto\+::tendril\+::set\+\_\+default\+\_\+val (
 \begin{DoxyParamCaption}
 \item[{const T \&}]{val = {\ttfamily T()}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classecto_1_1tendril_a9186713043e34915df9488fb135110b3}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classecto_1_1tendril_a9186713043e34915df9488fb135110b3}{}\label{classecto_1_1tendril_a9186713043e34915df9488fb135110b3}
 
 
 This sets the default value of the tendril. This is a. 
@@ -531,13 +531,13 @@ This sets the default value of the tendril. This is a.
 {\em val} & \\
 \hline
 \end{DoxyParams}
-\hypertarget{classecto_1_1tendril_ad56ae7364e7f7464eba444aebc50adc8}{}\index{ecto\+::tendril@{ecto\+::tendril}!set\+\_\+doc@{set\+\_\+doc}}
+\index{ecto\+::tendril@{ecto\+::tendril}!set\+\_\+doc@{set\+\_\+doc}}
 \index{set\+\_\+doc@{set\+\_\+doc}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{set\+\_\+doc}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::tendril\+::set\+\_\+doc (
+\subsubsection[{\texorpdfstring{set\+\_\+doc(const std\+::string \&doc\+\_\+str)}{set_doc(const std::string &doc_str)}}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::tendril\+::set\+\_\+doc (
 \begin{DoxyParamCaption}
 \item[{const std\+::string \&}]{doc\+\_\+str}
 \end{DoxyParamCaption}
-)}\label{classecto_1_1tendril_ad56ae7364e7f7464eba444aebc50adc8}
+)}\hypertarget{classecto_1_1tendril_ad56ae7364e7f7464eba444aebc50adc8}{}\label{classecto_1_1tendril_ad56ae7364e7f7464eba444aebc50adc8}
 
 
 The doc for this tendril is runtime defined, so you may want to update it. 
@@ -547,27 +547,27 @@ The doc for this tendril is runtime defined, so you may want to update it.
 {\em doc\+\_\+str} & A human readable description of the tendril. \\
 \hline
 \end{DoxyParams}
-\hypertarget{classecto_1_1tendril_ae8da62875367ec7b906f1f350dff4492}{}\index{ecto\+::tendril@{ecto\+::tendril}!set\+\_\+holder@{set\+\_\+holder}}
+\index{ecto\+::tendril@{ecto\+::tendril}!set\+\_\+holder@{set\+\_\+holder}}
 \index{set\+\_\+holder@{set\+\_\+holder}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{set\+\_\+holder}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ void ecto\+::tendril\+::set\+\_\+holder (
+\subsubsection[{\texorpdfstring{set\+\_\+holder(const T \&t=\+T())}{set_holder(const T &t=T())}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ void ecto\+::tendril\+::set\+\_\+holder (
 \begin{DoxyParamCaption}
 \item[{const T \&}]{t = {\ttfamily T()}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\label{classecto_1_1tendril_ae8da62875367ec7b906f1f350dff4492}
-\hypertarget{classecto_1_1tendril_aaeae99c2cf8c8c391e0328bfcf967a83}{}\index{ecto\+::tendril@{ecto\+::tendril}!type\+\_\+id@{type\+\_\+id}}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\hypertarget{classecto_1_1tendril_ae8da62875367ec7b906f1f350dff4492}{}\label{classecto_1_1tendril_ae8da62875367ec7b906f1f350dff4492}
+\index{ecto\+::tendril@{ecto\+::tendril}!type\+\_\+id@{type\+\_\+id}}
 \index{type\+\_\+id@{type\+\_\+id}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{type\+\_\+id}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ ecto\+::tendril\+::type\+\_\+id (
+\subsubsection[{\texorpdfstring{type\+\_\+id() const }{type_id() const }}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ ecto\+::tendril\+::type\+\_\+id (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classecto_1_1tendril_aaeae99c2cf8c8c391e0328bfcf967a83}
-\hypertarget{classecto_1_1tendril_abc5115b6657e60dba3ef4135759c4e64}{}\index{ecto\+::tendril@{ecto\+::tendril}!type\+\_\+name@{type\+\_\+name}}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classecto_1_1tendril_aaeae99c2cf8c8c391e0328bfcf967a83}{}\label{classecto_1_1tendril_aaeae99c2cf8c8c391e0328bfcf967a83}
+\index{ecto\+::tendril@{ecto\+::tendril}!type\+\_\+name@{type\+\_\+name}}
 \index{type\+\_\+name@{type\+\_\+name}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{type\+\_\+name}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string ecto\+::tendril\+::type\+\_\+name (
+\subsubsection[{\texorpdfstring{type\+\_\+name() const }{type_name() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string ecto\+::tendril\+::type\+\_\+name (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const}\label{classecto_1_1tendril_abc5115b6657e60dba3ef4135759c4e64}
+) const}\hypertarget{classecto_1_1tendril_abc5115b6657e60dba3ef4135759c4e64}{}\label{classecto_1_1tendril_abc5115b6657e60dba3ef4135759c4e64}
 
 
 This is an unmangled type name for what ever tendril is holding. 
@@ -575,120 +575,120 @@ This is an unmangled type name for what ever tendril is holding.
 \begin{DoxyReturn}{Returns}
 the unmangled name, e.\+g. \char`\"{}cv\+::\+Mat\char`\"{}, or \char`\"{}pcl\+::\+Point\+Cloud$<$pcl\+::\+Point\+X\+Y\+Z$>$\char`\"{} 
 \end{DoxyReturn}
-\hypertarget{classecto_1_1tendril_a28d02ba43d5ab79639436674ceb4316e}{}\index{ecto\+::tendril@{ecto\+::tendril}!unsafe\+\_\+get@{unsafe\+\_\+get}}
+\index{ecto\+::tendril@{ecto\+::tendril}!unsafe\+\_\+get@{unsafe\+\_\+get}}
 \index{unsafe\+\_\+get@{unsafe\+\_\+get}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{unsafe\+\_\+get}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ const T\& ecto\+::tendril\+::unsafe\+\_\+get (
+\subsubsection[{\texorpdfstring{unsafe\+\_\+get() const }{unsafe_get() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ const T\& ecto\+::tendril\+::unsafe\+\_\+get (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\label{classecto_1_1tendril_a28d02ba43d5ab79639436674ceb4316e}
-\hypertarget{classecto_1_1tendril_ab3844fa9929e75160b6d8597d1c44cf9}{}\index{ecto\+::tendril@{ecto\+::tendril}!unsafe\+\_\+get@{unsafe\+\_\+get}}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\hypertarget{classecto_1_1tendril_a28d02ba43d5ab79639436674ceb4316e}{}\label{classecto_1_1tendril_a28d02ba43d5ab79639436674ceb4316e}
+\index{ecto\+::tendril@{ecto\+::tendril}!unsafe\+\_\+get@{unsafe\+\_\+get}}
 \index{unsafe\+\_\+get@{unsafe\+\_\+get}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{unsafe\+\_\+get}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ T\& ecto\+::tendril\+::unsafe\+\_\+get (
+\subsubsection[{\texorpdfstring{unsafe\+\_\+get()}{unsafe_get()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ T\& ecto\+::tendril\+::unsafe\+\_\+get (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\label{classecto_1_1tendril_ab3844fa9929e75160b6d8597d1c44cf9}
-\hypertarget{classecto_1_1tendril_a8c46edfd052cdae0fef4705d5f5943c6}{}\index{ecto\+::tendril@{ecto\+::tendril}!user\+\_\+supplied@{user\+\_\+supplied}}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\hypertarget{classecto_1_1tendril_ab3844fa9929e75160b6d8597d1c44cf9}{}\label{classecto_1_1tendril_ab3844fa9929e75160b6d8597d1c44cf9}
+\index{ecto\+::tendril@{ecto\+::tendril}!user\+\_\+supplied@{user\+\_\+supplied}}
 \index{user\+\_\+supplied@{user\+\_\+supplied}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{user\+\_\+supplied}]{\setlength{\rightskip}{0pt plus 5cm}bool ecto\+::tendril\+::user\+\_\+supplied (
+\subsubsection[{\texorpdfstring{user\+\_\+supplied() const }{user_supplied() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool ecto\+::tendril\+::user\+\_\+supplied (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const}\label{classecto_1_1tendril_a8c46edfd052cdae0fef4705d5f5943c6}
+) const}\hypertarget{classecto_1_1tendril_a8c46edfd052cdae0fef4705d5f5943c6}{}\label{classecto_1_1tendril_a8c46edfd052cdae0fef4705d5f5943c6}
 
 
 The value that this tendril holds was supplied by the user at some point. 
 
-\hypertarget{classecto_1_1tendril_a3aa500420a52a0546e21105b3fb96ad0}{}\index{ecto\+::tendril@{ecto\+::tendril}!user\+\_\+supplied@{user\+\_\+supplied}}
+\index{ecto\+::tendril@{ecto\+::tendril}!user\+\_\+supplied@{user\+\_\+supplied}}
 \index{user\+\_\+supplied@{user\+\_\+supplied}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{user\+\_\+supplied}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::tendril\+::user\+\_\+supplied (
+\subsubsection[{\texorpdfstring{user\+\_\+supplied(bool v)}{user_supplied(bool v)}}]{\setlength{\rightskip}{0pt plus 5cm}void ecto\+::tendril\+::user\+\_\+supplied (
 \begin{DoxyParamCaption}
 \item[{bool}]{v}
 \end{DoxyParamCaption}
-)}\label{classecto_1_1tendril_a3aa500420a52a0546e21105b3fb96ad0}
+)}\hypertarget{classecto_1_1tendril_a3aa500420a52a0546e21105b3fb96ad0}{}\label{classecto_1_1tendril_a3aa500420a52a0546e21105b3fb96ad0}
 
 
 \subsection{Friends And Related Function Documentation}
-\hypertarget{classecto_1_1tendril_adb5f2d5bf635a25473997e793f29a5a7}{}\index{ecto\+::tendril@{ecto\+::tendril}!make\+\_\+tendril@{make\+\_\+tendril}}
+\index{ecto\+::tendril@{ecto\+::tendril}!make\+\_\+tendril@{make\+\_\+tendril}}
 \index{make\+\_\+tendril@{make\+\_\+tendril}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{make\+\_\+tendril}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf tendril\+\_\+ptr} make\+\_\+tendril (
+\subsubsection[{\texorpdfstring{make\+\_\+tendril}{make_tendril}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf tendril\+\_\+ptr} make\+\_\+tendril (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [friend]}}\label{classecto_1_1tendril_adb5f2d5bf635a25473997e793f29a5a7}
-\hypertarget{classecto_1_1tendril_a18f3881527bb0fd1b375b6bf00369f43}{}\index{ecto\+::tendril@{ecto\+::tendril}!operator$<$$<$@{operator$<$$<$}}
+)\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classecto_1_1tendril_adb5f2d5bf635a25473997e793f29a5a7}{}\label{classecto_1_1tendril_adb5f2d5bf635a25473997e793f29a5a7}
+\index{ecto\+::tendril@{ecto\+::tendril}!operator$<$$<$@{operator$<$$<$}}
 \index{operator$<$$<$@{operator$<$$<$}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ void operator$<$$<$ (
+\subsubsection[{\texorpdfstring{operator$<$$<$}{operator<<}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ void operator$<$$<$ (
 \begin{DoxyParamCaption}
 \item[{const {\bf tendril\+\_\+ptr} \&}]{lhs, }
 \item[{const T \&}]{rhs}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [friend]}}\label{classecto_1_1tendril_a18f3881527bb0fd1b375b6bf00369f43}
-\hypertarget{classecto_1_1tendril_acd75e54b603d2a22cddc47149956d395}{}\index{ecto\+::tendril@{ecto\+::tendril}!operator$<$$<$@{operator$<$$<$}}
+)\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classecto_1_1tendril_a18f3881527bb0fd1b375b6bf00369f43}{}\label{classecto_1_1tendril_a18f3881527bb0fd1b375b6bf00369f43}
+\index{ecto\+::tendril@{ecto\+::tendril}!operator$<$$<$@{operator$<$$<$}}
 \index{operator$<$$<$@{operator$<$$<$}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}void operator$<$$<$ (
+\subsubsection[{\texorpdfstring{operator$<$$<$}{operator<<}}]{\setlength{\rightskip}{0pt plus 5cm}void operator$<$$<$ (
 \begin{DoxyParamCaption}
 \item[{const {\bf tendril\+\_\+ptr} \&}]{lhs, }
 \item[{const {\bf tendril\+\_\+ptr} \&}]{rhs}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [friend]}}\label{classecto_1_1tendril_acd75e54b603d2a22cddc47149956d395}
-\hypertarget{classecto_1_1tendril_a53f493493716022d7e6c2b897d0ce715}{}\index{ecto\+::tendril@{ecto\+::tendril}!operator$<$$<$@{operator$<$$<$}}
+)\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classecto_1_1tendril_acd75e54b603d2a22cddc47149956d395}{}\label{classecto_1_1tendril_acd75e54b603d2a22cddc47149956d395}
+\index{ecto\+::tendril@{ecto\+::tendril}!operator$<$$<$@{operator$<$$<$}}
 \index{operator$<$$<$@{operator$<$$<$}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}void operator$<$$<$ (
+\subsubsection[{\texorpdfstring{operator$<$$<$}{operator<<}}]{\setlength{\rightskip}{0pt plus 5cm}void operator$<$$<$ (
 \begin{DoxyParamCaption}
 \item[{const {\bf tendril\+\_\+ptr} \&}]{lhs, }
 \item[{const {\bf tendril\+\_\+cptr} \&}]{rhs}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [friend]}}\label{classecto_1_1tendril_a53f493493716022d7e6c2b897d0ce715}
-\hypertarget{classecto_1_1tendril_a8ed098a7d9ba3269b0626dbc652acbce}{}\index{ecto\+::tendril@{ecto\+::tendril}!operator$>$$>$@{operator$>$$>$}}
+)\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classecto_1_1tendril_a53f493493716022d7e6c2b897d0ce715}{}\label{classecto_1_1tendril_a53f493493716022d7e6c2b897d0ce715}
+\index{ecto\+::tendril@{ecto\+::tendril}!operator$>$$>$@{operator$>$$>$}}
 \index{operator$>$$>$@{operator$>$$>$}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{operator$>$$>$}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ void operator$>$$>$ (
+\subsubsection[{\texorpdfstring{operator$>$$>$}{operator>>}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ void operator$>$$>$ (
 \begin{DoxyParamCaption}
 \item[{const {\bf tendril\+\_\+cptr} \&}]{rhs, }
 \item[{T \&}]{val}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [friend]}}\label{classecto_1_1tendril_a8ed098a7d9ba3269b0626dbc652acbce}
-\hypertarget{classecto_1_1tendril_aceb1e0490d8850a65097e1133128872d}{}\index{ecto\+::tendril@{ecto\+::tendril}!operator$>$$>$@{operator$>$$>$}}
+)\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classecto_1_1tendril_a8ed098a7d9ba3269b0626dbc652acbce}{}\label{classecto_1_1tendril_a8ed098a7d9ba3269b0626dbc652acbce}
+\index{ecto\+::tendril@{ecto\+::tendril}!operator$>$$>$@{operator$>$$>$}}
 \index{operator$>$$>$@{operator$>$$>$}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{operator$>$$>$}]{\setlength{\rightskip}{0pt plus 5cm}void operator$>$$>$ (
+\subsubsection[{\texorpdfstring{operator$>$$>$}{operator>>}}]{\setlength{\rightskip}{0pt plus 5cm}void operator$>$$>$ (
 \begin{DoxyParamCaption}
 \item[{const {\bf tendril\+\_\+ptr} \&}]{rhs, }
 \item[{boost\+::python\+::object \&}]{obj}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [friend]}}\label{classecto_1_1tendril_aceb1e0490d8850a65097e1133128872d}
-\hypertarget{classecto_1_1tendril_a35ebb8c910d87ca418e2ddfb290c5d9d}{}\index{ecto\+::tendril@{ecto\+::tendril}!operator$>$$>$@{operator$>$$>$}}
+)\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classecto_1_1tendril_aceb1e0490d8850a65097e1133128872d}{}\label{classecto_1_1tendril_aceb1e0490d8850a65097e1133128872d}
+\index{ecto\+::tendril@{ecto\+::tendril}!operator$>$$>$@{operator$>$$>$}}
 \index{operator$>$$>$@{operator$>$$>$}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{operator$>$$>$}]{\setlength{\rightskip}{0pt plus 5cm}void operator$>$$>$ (
+\subsubsection[{\texorpdfstring{operator$>$$>$}{operator>>}}]{\setlength{\rightskip}{0pt plus 5cm}void operator$>$$>$ (
 \begin{DoxyParamCaption}
 \item[{const {\bf tendril\+\_\+cptr} \&}]{rhs, }
 \item[{boost\+::python\+::object \&}]{obj}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [friend]}}\label{classecto_1_1tendril_a35ebb8c910d87ca418e2ddfb290c5d9d}
+)\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classecto_1_1tendril_a35ebb8c910d87ca418e2ddfb290c5d9d}{}\label{classecto_1_1tendril_a35ebb8c910d87ca418e2ddfb290c5d9d}
 
 
 \subsection{Member Data Documentation}
-\hypertarget{classecto_1_1tendril_ac4d6bcc7c0f82c7017a9e0c53a942121}{}\index{ecto\+::tendril@{ecto\+::tendril}!converter@{converter}}
+\index{ecto\+::tendril@{ecto\+::tendril}!converter@{converter}}
 \index{converter@{converter}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{converter}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Converter}$\ast$ ecto\+::tendril\+::converter\hspace{0.3cm}{\ttfamily [private]}}\label{classecto_1_1tendril_ac4d6bcc7c0f82c7017a9e0c53a942121}
-\hypertarget{classecto_1_1tendril_a6e8304d03aa8a24be843d3bb8d26332d}{}\index{ecto\+::tendril@{ecto\+::tendril}!doc\+\_\+@{doc\+\_\+}}
+\subsubsection[{\texorpdfstring{converter}{converter}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Converter}$\ast$ ecto\+::tendril\+::converter\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classecto_1_1tendril_ac4d6bcc7c0f82c7017a9e0c53a942121}{}\label{classecto_1_1tendril_ac4d6bcc7c0f82c7017a9e0c53a942121}
+\index{ecto\+::tendril@{ecto\+::tendril}!doc\+\_\+@{doc\+\_\+}}
 \index{doc\+\_\+@{doc\+\_\+}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{doc\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string ecto\+::tendril\+::doc\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classecto_1_1tendril_a6e8304d03aa8a24be843d3bb8d26332d}
-\hypertarget{classecto_1_1tendril_ab8098c05197f972a821c8b094b9a6010}{}\index{ecto\+::tendril@{ecto\+::tendril}!empty@{empty}}
+\subsubsection[{\texorpdfstring{doc\+\_\+}{doc_}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string ecto\+::tendril\+::doc\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classecto_1_1tendril_a6e8304d03aa8a24be843d3bb8d26332d}{}\label{classecto_1_1tendril_a6e8304d03aa8a24be843d3bb8d26332d}
+\index{ecto\+::tendril@{ecto\+::tendril}!empty@{empty}}
 \index{empty@{empty}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{empty}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf empty\+\_\+t} ecto\+::tendril\+::empty\hspace{0.3cm}{\ttfamily [static]}}\label{classecto_1_1tendril_ab8098c05197f972a821c8b094b9a6010}
-\hypertarget{classecto_1_1tendril_a7b2a11ba7c80606fafda80d34b0a1bfe}{}\index{ecto\+::tendril@{ecto\+::tendril}!flags\+\_\+@{flags\+\_\+}}
+\subsubsection[{\texorpdfstring{empty}{empty}}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf empty\+\_\+t} ecto\+::tendril\+::empty\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classecto_1_1tendril_ab8098c05197f972a821c8b094b9a6010}{}\label{classecto_1_1tendril_ab8098c05197f972a821c8b094b9a6010}
+\index{ecto\+::tendril@{ecto\+::tendril}!flags\+\_\+@{flags\+\_\+}}
 \index{flags\+\_\+@{flags\+\_\+}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{flags\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}std\+::bitset$<${\bf N\+\_\+\+F\+L\+A\+G\+S}$>$ ecto\+::tendril\+::flags\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classecto_1_1tendril_a7b2a11ba7c80606fafda80d34b0a1bfe}
-\hypertarget{classecto_1_1tendril_a8bc7ae1c22c1af9765284666af02868b}{}\index{ecto\+::tendril@{ecto\+::tendril}!holder\+\_\+@{holder\+\_\+}}
+\subsubsection[{\texorpdfstring{flags\+\_\+}{flags_}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::bitset$<${\bf N\+\_\+\+F\+L\+A\+GS}$>$ ecto\+::tendril\+::flags\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classecto_1_1tendril_a7b2a11ba7c80606fafda80d34b0a1bfe}{}\label{classecto_1_1tendril_a7b2a11ba7c80606fafda80d34b0a1bfe}
+\index{ecto\+::tendril@{ecto\+::tendril}!holder\+\_\+@{holder\+\_\+}}
 \index{holder\+\_\+@{holder\+\_\+}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{holder\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}boost\+::any ecto\+::tendril\+::holder\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classecto_1_1tendril_a8bc7ae1c22c1af9765284666af02868b}
-\hypertarget{classecto_1_1tendril_acf171c75c0ace5cd108e8355ee83199c}{}\index{ecto\+::tendril@{ecto\+::tendril}!jobs\+\_\+@{jobs\+\_\+}}
+\subsubsection[{\texorpdfstring{holder\+\_\+}{holder_}}]{\setlength{\rightskip}{0pt plus 5cm}boost\+::any ecto\+::tendril\+::holder\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classecto_1_1tendril_a8bc7ae1c22c1af9765284666af02868b}{}\label{classecto_1_1tendril_a8bc7ae1c22c1af9765284666af02868b}
+\index{ecto\+::tendril@{ecto\+::tendril}!jobs\+\_\+@{jobs\+\_\+}}
 \index{jobs\+\_\+@{jobs\+\_\+}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{jobs\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}{\bf job\+\_\+signal\+\_\+t} ecto\+::tendril\+::jobs\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classecto_1_1tendril_acf171c75c0ace5cd108e8355ee83199c}
-\hypertarget{classecto_1_1tendril_a5b237bfa0a9acefc48d577b77380058d}{}\index{ecto\+::tendril@{ecto\+::tendril}!type\+\_\+\+I\+D\+\_\+@{type\+\_\+\+I\+D\+\_\+}}
+\subsubsection[{\texorpdfstring{jobs\+\_\+}{jobs_}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf job\+\_\+signal\+\_\+t} ecto\+::tendril\+::jobs\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classecto_1_1tendril_acf171c75c0ace5cd108e8355ee83199c}{}\label{classecto_1_1tendril_acf171c75c0ace5cd108e8355ee83199c}
+\index{ecto\+::tendril@{ecto\+::tendril}!type\+\_\+\+I\+D\+\_\+@{type\+\_\+\+I\+D\+\_\+}}
 \index{type\+\_\+\+I\+D\+\_\+@{type\+\_\+\+I\+D\+\_\+}!ecto\+::tendril@{ecto\+::tendril}}
-\subsubsection[{type\+\_\+\+I\+D\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ ecto\+::tendril\+::type\+\_\+\+I\+D\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\label{classecto_1_1tendril_a5b237bfa0a9acefc48d577b77380058d}
+\subsubsection[{\texorpdfstring{type\+\_\+\+I\+D\+\_\+}{type_ID_}}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ ecto\+::tendril\+::type\+\_\+\+I\+D\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classecto_1_1tendril_a5b237bfa0a9acefc48d577b77380058d}{}\label{classecto_1_1tendril_a5b237bfa0a9acefc48d577b77380058d}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

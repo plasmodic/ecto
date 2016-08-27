@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
   <compounddef id="namespaceecto" kind="namespace" language="C++">
     <compoundname>ecto</compoundname>
     <innerclass refid="classecto_1_1atomic" prot="public">ecto::atomic</innerclass>
@@ -529,7 +529,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" line="483" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" bodystart="483" bodyend="488"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" line="482" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" bodystart="482" bodyend="487"/>
       </memberdef>
       <memberdef kind="function" id="namespaceecto_1af5e1929b12d596f7cc45a3fe7c76c5ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="namespaceecto_1a96ba8fa498cc4b8e2a0217a9e236b50d" kindref="member">stamp_t</ref></type>

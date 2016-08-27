@@ -29,8 +29,8 @@
     <link rel="next" title="Tendril Connections" href="../tips/connections.html" />
     <link rel="prev" title="Builtin Ecto Cells" href="ecto_cells.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -45,11 +45,11 @@
         <li class="right" >
           <a href="ecto_cells.html" title="Builtin Ecto Cells"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../../index.html">ecto</a> &raquo;</li>
-          <li><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../../../index.html">
               <img class="logo" src="../../../_static/ecto210.png" alt="Logo"/>
@@ -70,12 +70,14 @@
   <h4>Next topic</h4>
   <p class="topless"><a href="../tips/connections.html"
                         title="next chapter">Tendril Connections</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../../../_sources/ecto/usage/techniques/black_box.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/ecto/usage/techniques/black_box.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
       <input type="text" name="q" />
@@ -94,16 +96,16 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="blackbox">
 <span id="black-box"></span><h1>BlackBox<a class="headerlink" href="#blackbox" title="Permalink to this headline">¶</a></h1>
-<p>The <tt class="docutils literal"><span class="pre">BlackBox</span></tt> is an encapsulation method for ecto graphs: it behaves like a meta-cell.</p>
+<p>The <code class="docutils literal"><span class="pre">BlackBox</span></code> is an encapsulation method for ecto graphs: it behaves like a meta-cell.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<p>Let&#8217;s take the plasm from <a class="reference internal" href="../tutorials/plasms.html#tutorial-hello-plasms"><em>Hello Plasms!</em></a> but let&#8217;s assume that we want to
-encapsulate it so that it looks like a cell to a user. Let&#8217;s use a <tt class="docutils literal"><span class="pre">BlackBox</span></tt>.</p>
-<div class="highlight-py"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<p>Let&#8217;s take the plasm from <a class="reference internal" href="../tutorials/plasms.html#tutorial-hello-plasms"><span>Hello Plasms!</span></a> but let&#8217;s assume that we want to
+encapsulate it so that it looks like a cell to a user. Let&#8217;s use a <code class="docutils literal"><span class="pre">BlackBox</span></code>.</p>
+<div class="highlight-py"><div class="highlight"><pre><span class="ch">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">ecto</span>
 <span class="kn">from</span> <span class="nn">ecto.tutorial</span> <span class="kn">import</span> <span class="n">Increment</span><span class="p">,</span> <span class="n">Add</span>
 <span class="kn">from</span> <span class="nn">ecto</span> <span class="kn">import</span> <span class="n">BlackBoxCellInfo</span> <span class="k">as</span> <span class="n">CellInfo</span><span class="p">,</span> <span class="n">BlackBoxForward</span> <span class="k">as</span> <span class="n">Forward</span>
@@ -121,11 +123,11 @@ encapsulate it so that it looks like a cell to a user. Let&#8217;s use a <tt cla
 <span class="sd">        Only cells from which something is forwarded have to be declared</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">cells</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="c"># &#39;i2&#39; has its start value exposed to the user so only a type is given</span>
-        <span class="n">cells</span><span class="p">[</span><span class="s">&#39;i2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">CellInfo</span><span class="p">(</span><span class="n">Increment</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;Inc 2&#39;</span><span class="p">)</span>
-        <span class="c"># &#39;add&#39; is always the same so we could define with a CellInfo(Add, name=&#39;Add&#39;) or</span>
-        <span class="c"># just with an instance</span>
-        <span class="n">cells</span><span class="p">[</span><span class="s">&#39;add&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Add</span><span class="p">(</span><span class="s">&#39;Add&#39;</span><span class="p">)</span>
+        <span class="c1"># &#39;i2&#39; has its start value exposed to the user so only a type is given</span>
+        <span class="n">cells</span><span class="p">[</span><span class="s1">&#39;i2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">CellInfo</span><span class="p">(</span><span class="n">Increment</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Inc 2&#39;</span><span class="p">)</span>
+        <span class="c1"># &#39;add&#39; is always the same so we could define with a CellInfo(Add, name=&#39;Add&#39;) or</span>
+        <span class="c1"># just with an instance</span>
+        <span class="n">cells</span><span class="p">[</span><span class="s1">&#39;add&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Add</span><span class="p">(</span><span class="s1">&#39;Add&#39;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">cells</span>
 
@@ -134,37 +136,37 @@ encapsulate it so that it looks like a cell to a user. Let&#8217;s use a <tt cla
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Implement the virtual function from the base class</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c"># we forward the start parameter of the cells &#39;i2&#39; but the user will</span>
-        <span class="c"># see it as &#39;start2&#39;</span>
-        <span class="n">p</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;i2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">Forward</span><span class="p">(</span><span class="s">&#39;start&#39;</span><span class="p">,</span><span class="n">new_key</span><span class="o">=</span><span class="s">&#39;start2&#39;</span><span class="p">,</span><span class="n">new_default</span><span class="o">=</span><span class="mi">20</span><span class="p">)]}</span>
+        <span class="c1"># we forward the start parameter of the cells &#39;i2&#39; but the user will</span>
+        <span class="c1"># see it as &#39;start2&#39;</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;i2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">Forward</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span><span class="n">new_key</span><span class="o">=</span><span class="s1">&#39;start2&#39;</span><span class="p">,</span><span class="n">new_default</span><span class="o">=</span><span class="mi">20</span><span class="p">)]}</span>
 
-        <span class="c"># there are no inputs to expose to the user</span>
+        <span class="c1"># there are no inputs to expose to the user</span>
         <span class="n">i</span><span class="o">=</span><span class="p">{}</span>
 
-        <span class="c"># we forward all the outputs from add to the user</span>
-        <span class="n">o</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;add&#39;</span><span class="p">:</span> <span class="s">&#39;all&#39;</span><span class="p">}</span>
+        <span class="c1"># we forward all the outputs from add to the user</span>
+        <span class="n">o</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;add&#39;</span><span class="p">:</span> <span class="s1">&#39;all&#39;</span><span class="p">}</span>
 
         <span class="k">return</span> <span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_p</span><span class="p">,</span><span class="n">_i</span><span class="p">,</span><span class="n">_o</span><span class="p">):</span>
-        <span class="c"># implicitly, &#39;add&#39; and &#39;i2&#39; will be created as they have been declared</span>
-        <span class="c"># only &#39;i1&#39; needs to be defined</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">i1</span> <span class="o">=</span> <span class="n">Increment</span><span class="p">(</span><span class="s">&#39;Inc 1&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+        <span class="c1"># implicitly, &#39;add&#39; and &#39;i2&#39; will be created as they have been declared</span>
+        <span class="c1"># only &#39;i1&#39; needs to be defined</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">i1</span> <span class="o">=</span> <span class="n">Increment</span><span class="p">(</span><span class="s1">&#39;Inc 1&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">connections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_p</span><span class="p">):</span>
-        <span class="c"># define the connections like you would for the plasm</span>
-        <span class="k">return</span> <span class="p">[</span> <span class="bp">self</span><span class="o">.</span><span class="n">i1</span><span class="p">[</span><span class="s">&#39;output&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">],</span>
-                 <span class="bp">self</span><span class="o">.</span><span class="n">i2</span><span class="p">[</span><span class="s">&#39;output&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">[</span><span class="s">&#39;b&#39;</span><span class="p">]</span> <span class="p">]</span>
+        <span class="c1"># define the connections like you would for the plasm</span>
+        <span class="k">return</span> <span class="p">[</span> <span class="bp">self</span><span class="o">.</span><span class="n">i1</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">i2</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="p">]</span>
 
-<span class="c"># create an instance of my BlackBox</span>
+<span class="c1"># create an instance of my BlackBox</span>
 <span class="n">my_blackbox</span> <span class="o">=</span> <span class="n">MyBlackBox</span><span class="p">(</span><span class="n">start2</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
-<span class="c"># create a plasm that only contains the BlackBox</span>
+<span class="c1"># create a plasm that only contains the BlackBox</span>
 <span class="n">plasm</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Plasm</span><span class="p">()</span>
 <span class="n">plasm</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">my_blackbox</span><span class="p">)</span>
-<span class="c"># execute the plasm</span>
+<span class="c1"># execute the plasm</span>
 <span class="n">plasm</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">niter</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
-<span class="c"># display the output name &#39;output&#39; in the outputs of cell &#39;add&#39;</span>
+<span class="c1"># display the output name &#39;output&#39; in the outputs of cell &#39;add&#39;</span>
 <span class="k">print</span> <span class="n">my_blackbox</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">output</span>
 </pre></div>
 </div>
@@ -177,9 +179,9 @@ encapsulate it so that it looks like a cell to a user. Let&#8217;s use a <tt cla
 <span class="sd">    &quot;&quot;&quot;</span>
 </pre></div>
 </div>
-<p>We know we will forward the parameters of <tt class="docutils literal"><span class="pre">i2</span></tt> to the user and the output of <tt class="docutils literal"><span class="pre">add</span></tt>.
-To have <tt class="docutils literal"><span class="pre">declare_io</span></tt> and <tt class="docutils literal"><span class="pre">declare_params</span></tt> work statically, we need to define those cells
-in <tt class="docutils literal"><span class="pre">declare_cells</span></tt>.</p>
+<p>We know we will forward the parameters of <code class="docutils literal"><span class="pre">i2</span></code> to the user and the output of <code class="docutils literal"><span class="pre">add</span></code>.
+To have <code class="docutils literal"><span class="pre">declare_io</span></code> and <code class="docutils literal"><span class="pre">declare_params</span></code> work statically, we need to define those cells
+in <code class="docutils literal"><span class="pre">declare_cells</span></code>.</p>
 <div class="highlight-py"><div class="highlight"><pre>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">declare_cells</span><span class="p">(</span><span class="n">_p</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -187,13 +189,14 @@ in <tt class="docutils literal"><span class="pre">declare_cells</span></tt>.</p>
 <span class="sd">        Only cells from which something is forwarded have to be declared</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">cells</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="c"># &#39;i2&#39; has its start value exposed to the user so only a type is given</span>
-        <span class="n">cells</span><span class="p">[</span><span class="s">&#39;i2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">CellInfo</span><span class="p">(</span><span class="n">Increment</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;Inc 2&#39;</span><span class="p">)</span>
-        <span class="c"># &#39;add&#39; is always the same so we could define with a CellInfo(Add, name=&#39;Add&#39;) or</span>
-        <span class="c"># just with an instance</span>
-        <span class="n">cells</span><span class="p">[</span><span class="s">&#39;add&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Add</span><span class="p">(</span><span class="s">&#39;Add&#39;</span><span class="p">)</span>
+        <span class="c1"># &#39;i2&#39; has its start value exposed to the user so only a type is given</span>
+        <span class="n">cells</span><span class="p">[</span><span class="s1">&#39;i2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">CellInfo</span><span class="p">(</span><span class="n">Increment</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Inc 2&#39;</span><span class="p">)</span>
+        <span class="c1"># &#39;add&#39; is always the same so we could define with a CellInfo(Add, name=&#39;Add&#39;) or</span>
+        <span class="c1"># just with an instance</span>
+        <span class="n">cells</span><span class="p">[</span><span class="s1">&#39;add&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Add</span><span class="p">(</span><span class="s1">&#39;Add&#39;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">cells</span>
+
 </pre></div>
 </div>
 <p>We also need to define the different forwards</p>
@@ -202,36 +205,40 @@ in <tt class="docutils literal"><span class="pre">declare_cells</span></tt>.</p>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Implement the virtual function from the base class</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c"># we forward the start parameter of the cells &#39;i2&#39; but the user will</span>
-        <span class="c"># see it as &#39;start2&#39;</span>
-        <span class="n">p</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;i2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">Forward</span><span class="p">(</span><span class="s">&#39;start&#39;</span><span class="p">,</span><span class="n">new_key</span><span class="o">=</span><span class="s">&#39;start2&#39;</span><span class="p">,</span><span class="n">new_default</span><span class="o">=</span><span class="mi">20</span><span class="p">)]}</span>
+        <span class="c1"># we forward the start parameter of the cells &#39;i2&#39; but the user will</span>
+        <span class="c1"># see it as &#39;start2&#39;</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;i2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">Forward</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span><span class="n">new_key</span><span class="o">=</span><span class="s1">&#39;start2&#39;</span><span class="p">,</span><span class="n">new_default</span><span class="o">=</span><span class="mi">20</span><span class="p">)]}</span>
 
-        <span class="c"># there are no inputs to expose to the user</span>
+        <span class="c1"># there are no inputs to expose to the user</span>
         <span class="n">i</span><span class="o">=</span><span class="p">{}</span>
 
-        <span class="c"># we forward all the outputs from add to the user</span>
-        <span class="n">o</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;add&#39;</span><span class="p">:</span> <span class="s">&#39;all&#39;</span><span class="p">}</span>
+        <span class="c1"># we forward all the outputs from add to the user</span>
+        <span class="n">o</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;add&#39;</span><span class="p">:</span> <span class="s1">&#39;all&#39;</span><span class="p">}</span>
 
         <span class="k">return</span> <span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+
 </pre></div>
 </div>
-<p>We also need to define the cells like we would in C++ in <tt class="docutils literal"><span class="pre">configure</span></tt> except some are
-already known as they were defined in <tt class="docutils literal"><span class="pre">declare_cells</span></tt>.</p>
+<p>We also need to define the cells like we would in C++ in <code class="docutils literal"><span class="pre">configure</span></code> except some are
+already known as they were defined in <code class="docutils literal"><span class="pre">declare_cells</span></code>.</p>
 <div class="highlight-py"><div class="highlight"><pre>    <span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_p</span><span class="p">,</span><span class="n">_i</span><span class="p">,</span><span class="n">_o</span><span class="p">):</span>
-        <span class="c"># implicitly, &#39;add&#39; and &#39;i2&#39; will be created as they have been declared</span>
-        <span class="c"># only &#39;i1&#39; needs to be defined</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">i1</span> <span class="o">=</span> <span class="n">Increment</span><span class="p">(</span><span class="s">&#39;Inc 1&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+        <span class="c1"># implicitly, &#39;add&#39; and &#39;i2&#39; will be created as they have been declared</span>
+        <span class="c1"># only &#39;i1&#39; needs to be defined</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">i1</span> <span class="o">=</span> <span class="n">Increment</span><span class="p">(</span><span class="s1">&#39;Inc 1&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+
 </pre></div>
 </div>
 <p>Finally, we need to define the connections like we would in the plasm:</p>
 <div class="highlight-py"><div class="highlight"><pre>    <span class="k">def</span> <span class="nf">connections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_p</span><span class="p">):</span>
-        <span class="c"># define the connections like you would for the plasm</span>
-        <span class="k">return</span> <span class="p">[</span> <span class="bp">self</span><span class="o">.</span><span class="n">i1</span><span class="p">[</span><span class="s">&#39;output&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">],</span>
-                 <span class="bp">self</span><span class="o">.</span><span class="n">i2</span><span class="p">[</span><span class="s">&#39;output&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">[</span><span class="s">&#39;b&#39;</span><span class="p">]</span> <span class="p">]</span>
+        <span class="c1"># define the connections like you would for the plasm</span>
+        <span class="k">return</span> <span class="p">[</span> <span class="bp">self</span><span class="o">.</span><span class="n">i1</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">i2</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="p">]</span>
+
 </pre></div>
 </div>
-<p>If we execute that <tt class="docutils literal"><span class="pre">BlackBox</span></tt>, we get the same as when running the plasm:</p>
-<div class="highlight-text"><div class="highlight"><pre>42
+<p>If we execute that <code class="docutils literal"><span class="pre">BlackBox</span></code>, we get the same as when running the plasm:</p>
+<div class="highlight-text"><div class="highlight"><pre>No module named PySide.QtCore
+42
 </pre></div>
 </div>
 </div>
@@ -240,7 +247,7 @@ already known as they were defined in <tt class="docutils literal"><span class="
 <p>Here is the full Python definition and what members you are supposed to override.</p>
 <dl class="class">
 <dt id="ecto.BlackBox">
-<em class="property">class </em><tt class="descclassname">ecto.</tt><tt class="descname">BlackBox</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#ecto.BlackBox" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">ecto.</code><code class="descname">BlackBox</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ecto/blackbox.html#BlackBox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.BlackBox" title="Permalink to this definition">¶</a></dt>
 <dd><p>The BlackBox may be used as an encapsulation idiom within ecto, to declare reusable plasms.</p>
 <p>A BlackBox is a meta-cell. 3 functions need to be implemented when inheriting.
 <em>declare_fowards</em>: defines the inputs/outputs/parameters that are forwarded to the inner cells.
@@ -249,7 +256,7 @@ statically, information about the inner cells have to be given in <em>declare_ce
 <em>declare_direct_params</em>: a BlackBox can have its own parameters and this is where they are declared</p>
 <dl class="method">
 <dt id="ecto.BlackBox.cell">
-<tt class="descname">cell</tt><big>(</big><big>)</big><a class="headerlink" href="#ecto.BlackBox.cell" title="Permalink to this definition">¶</a></dt>
+<code class="descname">cell</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ecto/blackbox.html#BlackBox.cell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.BlackBox.cell" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return an instance of the cell that backs this
 BlackBox. Useful for ecto.If, or other places that expect a
 cell</p>
@@ -257,7 +264,7 @@ cell</p>
 
 <dl class="method">
 <dt id="ecto.BlackBox.configure">
-<tt class="descname">configure</tt><big>(</big><em>p</em>, <em>i</em>, <em>o</em><big>)</big><a class="headerlink" href="#ecto.BlackBox.configure" title="Permalink to this definition">¶</a></dt>
+<code class="descname">configure</code><span class="sig-paren">(</span><em>p</em>, <em>i</em>, <em>o</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ecto/blackbox.html#BlackBox.configure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.BlackBox.configure" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function has the same meaning as in C++ and can be overriden by a child class.</p>
 <p>This function should be used to allocate all cells internal to a BlackBox</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -277,7 +284,7 @@ cell</p>
 
 <dl class="method">
 <dt id="ecto.BlackBox.connections">
-<tt class="descname">connections</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#ecto.BlackBox.connections" title="Permalink to this definition">¶</a></dt>
+<code class="descname">connections</code><span class="sig-paren">(</span><em>p</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ecto/blackbox.html#BlackBox.connections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.BlackBox.connections" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function has to be overriden by a child class.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -294,7 +301,7 @@ to decide on certain connections</td>
 
 <dl class="classmethod">
 <dt id="ecto.BlackBox.declare_cells">
-<em class="property">classmethod </em><tt class="descname">declare_cells</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#ecto.BlackBox.declare_cells" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">declare_cells</code><span class="sig-paren">(</span><em>p</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ecto/blackbox.html#BlackBox.declare_cells"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.BlackBox.declare_cells" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function can be overriden by a child class.</p>
 <p>Given some parameters, define the characteristics of the cells.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -312,7 +319,7 @@ to decide on certain connections</td>
 
 <dl class="staticmethod">
 <dt id="ecto.BlackBox.declare_direct_params">
-<em class="property">static </em><tt class="descname">declare_direct_params</tt><big>(</big><em>p</em><big>)</big><a class="headerlink" href="#ecto.BlackBox.declare_direct_params" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">declare_direct_params</code><span class="sig-paren">(</span><em>p</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ecto/blackbox.html#BlackBox.declare_direct_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.BlackBox.declare_direct_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function can be overriden by a child class.</p>
 <p>This function declares normal parameters for the BlackBox, i.e. you need to declare them
 using p.declare(&#8216;key_name&#8217;, &#8216;key_docs&#8217;, default_value) like you would in a normal
@@ -333,7 +340,7 @@ statically but they are not used to build a BlackBox.</p>
 
 <dl class="classmethod">
 <dt id="ecto.BlackBox.declare_forwards">
-<em class="property">classmethod </em><tt class="descname">declare_forwards</tt><big>(</big><em>_p</em><big>)</big><a class="headerlink" href="#ecto.BlackBox.declare_forwards" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">declare_forwards</code><span class="sig-paren">(</span><em>_p</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ecto/blackbox.html#BlackBox.declare_forwards"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.BlackBox.declare_forwards" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function can be overriden by a child class.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -353,7 +360,7 @@ forwarded to/from the inner cells. It has the format:
 
 <dl class="classmethod">
 <dt id="ecto.BlackBox.declare_io">
-<em class="property">classmethod </em><tt class="descname">declare_io</tt><big>(</big><em>p</em>, <em>i</em>, <em>o</em><big>)</big><a class="headerlink" href="#ecto.BlackBox.declare_io" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">declare_io</code><span class="sig-paren">(</span><em>p</em>, <em>i</em>, <em>o</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ecto/blackbox.html#BlackBox.declare_io"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.BlackBox.declare_io" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function has the same meaning as in C++ and should NOT be overriden by a child class.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -372,7 +379,7 @@ forwarded to/from the inner cells. It has the format:
 
 <dl class="classmethod">
 <dt id="ecto.BlackBox.declare_params">
-<em class="property">classmethod </em><tt class="descname">declare_params</tt><big>(</big><em>p</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#ecto.BlackBox.declare_params" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">declare_params</code><span class="sig-paren">(</span><em>p</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ecto/blackbox.html#BlackBox.declare_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.BlackBox.declare_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method should NOT be overridden by a child class.</p>
 <p>This function returns the parameter tendrils but as there are two kinds
 (namely the BlackBox ones defined in &#8220;declare_direct_params&#8221; and the
@@ -397,7 +404,7 @@ parameters.</p>
 
 <dl class="classmethod">
 <dt id="ecto.BlackBox.inspect">
-<em class="property">classmethod </em><tt class="descname">inspect</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#ecto.BlackBox.inspect" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">inspect</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/ecto/blackbox.html#BlackBox.inspect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ecto.BlackBox.inspect" title="Permalink to this definition">¶</a></dt>
 <dd><p>This emulates the inspect method that each ecto cell has, which creates a light
 version of the cell, where the default values for p,i,o are acceptable.</p>
 </dd></dl>
@@ -417,7 +424,7 @@ version of the cell, where the default values for p,i,o are acceptable.</p>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -432,13 +439,13 @@ version of the cell, where the default values for p,i,o are acceptable.</p>
         <li class="right" >
           <a href="ecto_cells.html" title="Builtin Ecto Cells"
              >previous</a> |</li>
-        <li><a href="../../../index.html">ecto</a> &raquo;</li>
-          <li><a href="../index.html" >Usage</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Usage</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

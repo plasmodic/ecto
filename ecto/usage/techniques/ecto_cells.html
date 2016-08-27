@@ -29,8 +29,8 @@
     <link rel="next" title="BlackBox" href="black_box.html" />
     <link rel="prev" title="Python Binding Autoregistration" href="autoregister.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -45,11 +45,11 @@
         <li class="right" >
           <a href="autoregister.html" title="Python Binding Autoregistration"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../../index.html">ecto</a> &raquo;</li>
-          <li><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../../../index.html">
               <img class="logo" src="../../../_static/ecto210.png" alt="Logo"/>
@@ -70,12 +70,14 @@
   <h4>Next topic</h4>
   <p class="topless"><a href="black_box.html"
                         title="next chapter">BlackBox</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../../../_sources/ecto/usage/techniques/ecto_cells.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/ecto/usage/techniques/ecto_cells.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
       <input type="text" name="q" />
@@ -94,7 +96,7 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="builtin-ecto-cells">
 <span id="builtin-cells"></span><h1>Builtin Ecto Cells<a class="headerlink" href="#builtin-ecto-cells" title="Permalink to this headline">¶</a></h1>
@@ -107,20 +109,20 @@ weakly typed.</p>
 <span id="index-0"></span><span id="ecto.Constant"></span><h3>Constant<a class="headerlink" href="#Constant" title="Permalink to this headline">¶</a></h3>
 <p>This cell takes a python parameter that becomes a constant
 output. As long as this python type is convertable to a c++ type
-(through <tt class="docutils literal"><span class="pre">python</span></tt> bindings or basic types), it may be connected
+(through <code class="docutils literal"><span class="pre">python</span></code> bindings or basic types), it may be connected
 to cells written in c++.</p>
 <div class="topic">
 <p class="topic-title first">Brief doc<p>Constant node always outputs same value.</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>value</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">boost::python::api::object</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">None</span></tt></p>
+<li><p class="first"><strong>value</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">boost::python::api::object</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> default: </em><code class="docutils literal"><span class="pre">None</span></code></p>
 <p>Value to output</p>
 </li>
 </ul>
 </p>
 <p></p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">boost::python::api::object</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">boost::python::api::object</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>Any type, constant.</p>
 </li>
 </ul>
@@ -129,20 +131,20 @@ to cells written in c++.</p>
 </div>
 <div class="section" id="Passthrough">
 <span id="index-1"></span><span id="ecto.Passthrough"></span><h3>Passthrough<a class="headerlink" href="#Passthrough" title="Permalink to this headline">¶</a></h3>
-<p>Passthrough is mostly useful from within a <a class="reference internal" href="black_box.html#black-box"><em>BlackBox</em></a> to connect
+<p>Passthrough is mostly useful from within a <a class="reference internal" href="black_box.html#black-box"><span>BlackBox</span></a> to connect
 multiple inputs to one cell, which then becomes a singular input for the BlackBox.</p>
 <div class="topic">
 <p class="topic-title first">Brief doc<p>Passes through any type.</p>
 </p>
 <p></p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto::tendril::none</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>in</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">ecto::tendril::none</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>Any type</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto::tendril::none</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">ecto::tendril::none</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>Any type</p>
 </li>
 </ul>
@@ -156,17 +158,17 @@ multiple inputs to one cell, which then becomes a singular input for the BlackBo
 <p class="topic-title first">Brief doc<p>Will give a true result every n executions.</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>count</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">0</span></tt></p>
+<li><p class="first"><strong>count</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> default: </em><code class="docutils literal"><span class="pre">0</span></code></p>
 <p>Initial value of counter, will be incremented at every call to process.</p>
 </li>
-<li><p class="first"><strong>n</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">2</span></tt></p>
+<li><p class="first"><strong>n</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> default: </em><code class="docutils literal"><span class="pre">2</span></code></p>
 <p>Will be true at every iteration where count%n == 0</p>
 </li>
 </ul>
 </p>
 <p></p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>flag</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">bool</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>flag</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">bool</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p></p>
 </li>
 </ul>
@@ -179,38 +181,38 @@ multiple inputs to one cell, which then becomes a singular input for the BlackBo
 based on an input flag.</p>
 <p>An example of using the If cell for condition execution of a
 cell. Notice that cell that is encased in an If is <strong>not added to the
-graph</strong>, it is passed to the <tt class="docutils literal"><span class="pre">If</span></tt> cell as a <strong>parameter</strong>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+graph</strong>, it is passed to the <code class="docutils literal"><span class="pre">If</span></code> cell as a <strong>parameter</strong>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="ch">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">ecto</span>
 <span class="kn">from</span> <span class="nn">ecto</span> <span class="kn">import</span> <span class="n">If</span><span class="p">,</span> <span class="n">TrueEveryN</span>
 <span class="kn">from</span> <span class="nn">ecto.ecto_test</span> <span class="kn">import</span> <span class="n">Generate</span>
 
 <span class="n">plasm</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Plasm</span><span class="p">()</span>
-<span class="n">g</span> <span class="o">=</span> <span class="n">Generate</span><span class="p">(</span><span class="s">&quot;Generator&quot;</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">Generate</span><span class="p">(</span><span class="s2">&quot;Generator&quot;</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
 <span class="n">if_g</span> <span class="o">=</span> <span class="n">If</span><span class="p">(</span><span class="n">cell</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
 <span class="n">truer</span> <span class="o">=</span> <span class="n">TrueEveryN</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">count</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">truer</span><span class="p">[</span><span class="s">&#39;flag&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">if_g</span><span class="p">[</span><span class="s">&#39;__test__&#39;</span><span class="p">]</span>
+<span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">truer</span><span class="p">[</span><span class="s1">&#39;flag&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">if_g</span><span class="p">[</span><span class="s1">&#39;__test__&#39;</span><span class="p">]</span>
               <span class="p">)</span>
 <span class="n">plasm</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">niter</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">g</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">out</span> <span class="o">==</span> <span class="mi">3</span> <span class="c">#should have only called execute 3 times.</span>
+<span class="k">assert</span> <span class="n">g</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">out</span> <span class="o">==</span> <span class="mi">3</span> <span class="c1">#should have only called execute 3 times.</span>
 </pre></div>
 </div>
-<p>The above sample uses the built in cell <a class="reference internal" href="#trueeveryn"><em>TrueEveryN</em></a></p>
+<p>The above sample uses the built in cell <a class="reference internal" href="#trueeveryn"><span>TrueEveryN</span></a></p>
 </p>
 <div class="topic">
 <p class="topic-title first">Brief doc<p>If true, process, else, don&#8217;t.</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>cell</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">boost::shared_ptr&lt;ecto::cell&gt;</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> no default value</em></p>
+<li><p class="first"><strong>cell</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">boost::shared_ptr&lt;ecto::cell&gt;</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> no default value</em></p>
 <p>Cell to conditionally execute. The inputs and outputs of this cell will be replicated to the If cell.</p>
 </li>
-<li><p class="first"><strong>input_tendril_name</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">std::string</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">__test__</span></tt></p>
+<li><p class="first"><strong>input_tendril_name</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">std::string</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> default: </em><code class="docutils literal"><span class="pre">__test__</span></code></p>
 <p>Name to use for the conditional input tendril.</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>__test__</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">bool</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>__test__</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">bool</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>The test value. If this is true then  cell::process() is called.</p>
 </li>
 </ul>
@@ -227,11 +229,11 @@ which allow communication of values without breaking the acyclic or
 synchronous nature of graph execution.</p>
 <dl class="function">
 <dt id="ecto.EntangledPair">
-<tt class="descclassname">ecto.</tt><tt class="descname">EntangledPair</tt><big>(</big><em>(Tendril)value</em><span class="optional">[</span>, <em>(str)source_name</em><span class="optional">[</span>, <em>(str)sink_name</em><span class="optional">]</span><span class="optional">]</span><big>)</big> &rarr; tuple :<a class="headerlink" href="#ecto.EntangledPair" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">ecto.</code><code class="descname">EntangledPair</code><span class="sig-paren">(</span><em>(Tendril)value</em><span class="optional">[</span>, <em>(str)source_name</em><span class="optional">[</span>, <em>(str)sink_name</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span> &rarr; tuple :<a class="headerlink" href="#ecto.EntangledPair" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructs a pair of entangled cells. Useful for teleportation of tendrils without constructing edges in a graph.</p>
 <dl class="docutils">
 <dt>C++ signature :</dt>
-<dd>boost::python::tuple EntangledPair(boost::shared_ptr&lt;ecto::tendril&gt; [,std::string [,std::string]])</dd>
+<dd>boost::python::tuple EntangledPair(boost::shared_ptr&lt;ecto::tendril&gt; [,std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; [,std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;]])</dd>
 </dl>
 <p>EntangledPair is useful when you would like to feed the output of
 one cell into the input of another cell, without creating a cycle in
@@ -241,17 +243,17 @@ to being used.</p>
 </dd></dl>
 
 <p>Here is an example of using the EntangledPair for feedback in a graph.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="ch">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">ecto</span>
 <span class="kn">from</span> <span class="nn">ecto.ecto_test</span> <span class="kn">import</span> <span class="n">Generate</span><span class="p">,</span> <span class="n">Add</span>
 
-<span class="n">g</span> <span class="o">=</span> <span class="n">Generate</span><span class="p">(</span><span class="s">&quot;Generator&quot;</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">Generate</span><span class="p">(</span><span class="s2">&quot;Generator&quot;</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
 <span class="n">add</span> <span class="o">=</span> <span class="n">Add</span><span class="p">()</span>
-<span class="n">source</span><span class="p">,</span> <span class="n">sink</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">EntangledPair</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">add</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="s">&#39;left&#39;</span><span class="p">))</span>
+<span class="n">source</span><span class="p">,</span> <span class="n">sink</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">EntangledPair</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">add</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="s1">&#39;left&#39;</span><span class="p">))</span>
 
 <span class="n">plasm</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Plasm</span><span class="p">()</span>
-<span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">source</span><span class="p">[:]</span> <span class="o">&gt;&gt;</span> <span class="n">add</span><span class="p">[</span><span class="s">&#39;left&#39;</span><span class="p">],</span>
-              <span class="n">g</span><span class="p">[:]</span> <span class="o">&gt;&gt;</span> <span class="n">add</span><span class="p">[</span><span class="s">&#39;right&#39;</span><span class="p">],</span>
+<span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">source</span><span class="p">[:]</span> <span class="o">&gt;&gt;</span> <span class="n">add</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">],</span>
+              <span class="n">g</span><span class="p">[:]</span> <span class="o">&gt;&gt;</span> <span class="n">add</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">],</span>
               <span class="n">add</span><span class="p">[:]</span> <span class="o">&gt;&gt;</span> <span class="n">sink</span><span class="p">[:]</span>
               <span class="p">)</span>
 
@@ -261,7 +263,8 @@ to being used.</p>
 </pre></div>
 </div>
 <p>The output is:</p>
-<div class="highlight-text"><div class="highlight"><pre>1.0
+<div class="highlight-text"><div class="highlight"><pre>No module named PySide.QtCore
+1.0
 3.0
 6.0
 10.0
@@ -304,7 +307,7 @@ node [shape=plaintext]
 pay out to your graph, one item at a time. Enter the Dealer, think blackjack.</p>
 <dl class="function">
 <dt id="ecto.Dealer">
-<tt class="descclassname">ecto.</tt><tt class="descname">Dealer</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#ecto.Dealer" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">ecto.</code><code class="descname">Dealer</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#ecto.Dealer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Emit values of python iterable</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -334,13 +337,13 @@ pay out to your graph, one item at a time. Enter the Dealer, think blackjack.</p
 </ul>
 </dd>
 </dl>
-<p>The argument <tt class="docutils literal"><span class="pre">typer</span></tt> should be a tendril, which already has a type associated
+<p>The argument <code class="docutils literal"><span class="pre">typer</span></code> should be a tendril, which already has a type associated
 with it. This is used to prime the dealer&#8217;s type erasure, so that boost python
 objects are converted immediately to this type.</p>
 </dd></dl>
 
 <p>Here is an example of using the Dealer.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="ch">#!/usr/bin/env python</span>
 
 <span class="kn">import</span> <span class="nn">ecto</span>
 <span class="kn">import</span> <span class="nn">ecto.ecto_test</span> <span class="kn">as</span> <span class="nn">ecto_test</span>
@@ -348,28 +351,29 @@ objects are converted immediately to this type.</p>
 <span class="n">plasm</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Plasm</span><span class="p">()</span>
 <span class="n">printer</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">Printer</span><span class="p">()</span>
 <span class="n">cards</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
-<span class="n">dealer</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Dealer</span><span class="p">(</span><span class="n">tendril</span><span class="o">=</span><span class="n">printer</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="s">&#39;in&#39;</span><span class="p">),</span> <span class="n">iterable</span><span class="o">=</span><span class="n">cards</span><span class="p">)</span>
-<span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">dealer</span><span class="p">[</span><span class="s">&#39;out&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">printer</span><span class="p">[</span><span class="s">&#39;in&#39;</span><span class="p">])</span>
+<span class="n">dealer</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Dealer</span><span class="p">(</span><span class="n">tendril</span><span class="o">=</span><span class="n">printer</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="s1">&#39;in&#39;</span><span class="p">),</span> <span class="n">iterable</span><span class="o">=</span><span class="n">cards</span><span class="p">)</span>
+<span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">dealer</span><span class="p">[</span><span class="s1">&#39;out&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">printer</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">])</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">Scheduler</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Scheduler</span>
     <span class="n">sched</span> <span class="o">=</span> <span class="n">Scheduler</span><span class="p">(</span><span class="n">plasm</span><span class="p">)</span>
     <span class="n">sched</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
-    <span class="k">assert</span> <span class="n">dealer</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="s">&#39;out&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">type_name</span> <span class="o">==</span> <span class="s">&#39;double&#39;</span>
+    <span class="k">assert</span> <span class="n">dealer</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="s1">&#39;out&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">type_name</span> <span class="o">==</span> <span class="s1">&#39;double&#39;</span>
     <span class="k">assert</span> <span class="n">dealer</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">out</span> <span class="o">==</span> <span class="mi">10</span>
 </pre></div>
 </div>
 <p>The output is:</p>
-<div class="highlight-text"><div class="highlight"><pre>***** 1 ***** 0x238b3a0
-***** 2 ***** 0x238b3a0
-***** 3 ***** 0x238b3a0
-***** 4 ***** 0x238b3a0
-***** 5 ***** 0x238b3a0
-***** 6 ***** 0x238b3a0
-***** 7 ***** 0x238b3a0
-***** 8 ***** 0x238b3a0
-***** 9 ***** 0x238b3a0
-***** 10 ***** 0x238b3a0
+<div class="highlight-text"><div class="highlight"><pre>No module named PySide.QtCore
+***** 1 ***** 0x1a01e60
+***** 2 ***** 0x1a01e60
+***** 3 ***** 0x1a01e60
+***** 4 ***** 0x1a01e60
+***** 5 ***** 0x1a01e60
+***** 6 ***** 0x1a01e60
+***** 7 ***** 0x1a01e60
+***** 8 ***** 0x1a01e60
+***** 9 ***** 0x1a01e60
+***** 10 ***** 0x1a01e60
 </pre></div>
 </div>
 <p>And the graph looks like the following. Notice that there is no cycle:</p>
@@ -399,7 +403,7 @@ node [shape=plaintext]
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -414,13 +418,13 @@ node [shape=plaintext]
         <li class="right" >
           <a href="autoregister.html" title="Python Binding Autoregistration"
              >previous</a> |</li>
-        <li><a href="../../../index.html">ecto</a> &raquo;</li>
-          <li><a href="../index.html" >Usage</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Usage</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

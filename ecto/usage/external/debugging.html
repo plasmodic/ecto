@@ -29,8 +29,8 @@
     <link rel="next" title="Valgrind" href="valgrind.html" />
     <link rel="prev" title="Using IPython" href="ipython.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -45,11 +45,11 @@
         <li class="right" >
           <a href="ipython.html" title="Using IPython"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../../index.html">ecto</a> &raquo;</li>
-          <li><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../../../index.html">
               <img class="logo" src="../../../_static/ecto210.png" alt="Logo"/>
@@ -69,12 +69,14 @@
   <h4>Next topic</h4>
   <p class="topless"><a href="valgrind.html"
                         title="next chapter">Valgrind</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../../../_sources/ecto/usage/external/debugging.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/ecto/usage/external/debugging.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
       <input type="text" name="q" />
@@ -93,7 +95,7 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="debugging-with-gdb">
 <span id="debugging"></span><h1>Debugging with gdb<a class="headerlink" href="#debugging-with-gdb" title="Permalink to this headline">¶</a></h1>
@@ -106,10 +108,10 @@ GNU gdb (Ubuntu/Linaro 7.2-1ubuntu11) 7.2
 &quot;/ssd/ecto_kitchen/src/ecto/test/scripts/test_random.py&quot;: not in executable format: File format not recognized
 </pre></div>
 </div>
-<p>The trick is to run <tt class="docutils literal"><span class="pre">gdb</span></tt> on the python binary, not the script, and
-pass the script as an argument.  <tt class="docutils literal"><span class="pre">gdb</span></tt> will detect when the script
+<p>The trick is to run <code class="docutils literal"><span class="pre">gdb</span></code> on the python binary, not the script, and
+pass the script as an argument.  <code class="docutils literal"><span class="pre">gdb</span></code> will detect when the script
 imports modules of ecto cells and debug those too.  Use gdb&#8217;s
-<tt class="docutils literal"><span class="pre">--args</span></tt> argument, for instance:</p>
+<code class="docutils literal"><span class="pre">--args</span></code> argument, for instance:</p>
 <div class="highlight-ectosh"><div class="highlight"><pre><span class="mf">%</span><span class="gd"> gdb --args /usr/bin/python ../ecto/test/scripts/test_random.py</span>
 GNU gdb (Ubuntu/Linaro 7.2-1ubuntu11) 7.2
 Copyright (C) 2010 Free Software Foundation, Inc.
@@ -152,8 +154,8 @@ Breakpoint 1, ecto_test::Uniform01::process (this=0x1031950, inputs=..., outputs
 <span class="mf">(gdb)</span>
 </pre></div>
 </div>
-<p>As usual <tt class="docutils literal"><span class="pre">where</span></tt> will get you your backtrace.  As you can see below,
-as you go up the stack you pass from the cell&#8217;s code (the <tt class="docutils literal"><span class="pre">process</span></tt>
+<p>As usual <code class="docutils literal"><span class="pre">where</span></code> will get you your backtrace.  As you can see below,
+as you go up the stack you pass from the cell&#8217;s code (the <code class="docutils literal"><span class="pre">process</span></code>
 method):</p>
 <div class="highlight-ectosh"><div class="highlight"><pre><span class="mf">(gdb)</span><span class="gd"> where</span>
 #0  ecto_test::Uniform01::process (this=0x1031950, inputs=..., outputs=...)
@@ -230,7 +232,7 @@ No stack.
 </pre></div>
 </div>
 <p>As you can see there is no helpful information here.  The trick is to
-<tt class="docutils literal"><span class="pre">catch</span> <span class="pre">throw</span></tt>:</p>
+<code class="docutils literal"><span class="pre">catch</span> <span class="pre">throw</span></code>:</p>
 <div class="highlight-ectosh"><div class="highlight"><pre><span class="mf">(gdb)</span><span class="gd"> catch throw</span>
 Catchpoint 2 (throw)
 <span class="mf">(gdb)</span><span class="gd"> r</span>
@@ -265,7 +267,7 @@ Catchpoint 2 (exception thrown), 0x00007ffff4f0fde0 in __cxa_throw () from /usr/
 <p class="rubric">But python throws a zillion exceptions</p>
 <p>That&#8217;s right, throws exceptions to indicate the end of a loop, and
 this happens a lot during startup.  One option is to set a breakpoint
-on the constructor of <tt class="docutils literal"><span class="pre">ecto::except::EctoException</span></tt> to differentiate
+on the constructor of <code class="docutils literal"><span class="pre">ecto::except::EctoException</span></code> to differentiate
 between innocuous throws and Bad Ones.  Here, we have a throw of an
 EctoException (these are the ones that give you various information
 about the source of the error:</p>
@@ -307,7 +309,7 @@ Breakpoint 1, ecto::except::EctoException::EctoException (this=0x7fffffffcf80, _
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -322,13 +324,13 @@ Breakpoint 1, ecto::except::EctoException::EctoException (this=0x7fffffffcf80, _
         <li class="right" >
           <a href="ipython.html" title="Using IPython"
              >previous</a> |</li>
-        <li><a href="../../../index.html">ecto</a> &raquo;</li>
-          <li><a href="../index.html" >Usage</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Usage</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
   <compounddef id="scheduler_8hpp" kind="file" language="C++">
     <compoundname>scheduler.hpp</compoundname>
     <includes local="no">Python.h</includes>
@@ -262,13 +262,13 @@
 <codeline lineno="171" refid="classecto_1_1ref__count" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classecto_1_1ref__count" kindref="compound">ref_count</ref><sp/>{</highlight></codeline>
 <codeline lineno="172"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="173" refid="classecto_1_1ref__count_1a39fc7e105b142b7444a90dc6a3796828" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classecto_1_1ref__count_1a39fc7e105b142b7444a90dc6a3796828" kindref="member">ref_count</ref>(Mutex_T<sp/>&amp;<sp/>m,<sp/>Count_T<sp/>&amp;<sp/>t)</highlight></codeline>
-<codeline lineno="174"><highlight class="normal"><sp/><sp/>:<sp/><ref refid="classecto_1_1ref__count_1a766db0f4309f593f6c3086a1ebead3a5" kindref="member">m_</ref>(m),<sp/><ref refid="classecto_1_1ref__count_1a689842816509f8f13710aee79b8c9898" kindref="member">t_</ref>(t)<sp/>{</highlight></codeline>
-<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Mutex_T::scoped_lock<sp/>l(<ref refid="classecto_1_1ref__count_1a766db0f4309f593f6c3086a1ebead3a5" kindref="member">m_</ref>);</highlight></codeline>
-<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/>++<ref refid="classecto_1_1ref__count_1a689842816509f8f13710aee79b8c9898" kindref="member">t_</ref>;</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/>:<sp/>m_(m),<sp/>t_(t)<sp/>{</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Mutex_T::scoped_lock<sp/>l(m_);</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/>++t_;</highlight></codeline>
 <codeline lineno="177"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
 <codeline lineno="178" refid="classecto_1_1ref__count_1a22b67e2d381344ff4c9b4c453bb47e23" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="classecto_1_1ref__count_1a22b67e2d381344ff4c9b4c453bb47e23" kindref="member">~ref_count</ref>()<sp/>{</highlight></codeline>
-<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Mutex_T::scoped_lock<sp/>l(<ref refid="classecto_1_1ref__count_1a766db0f4309f593f6c3086a1ebead3a5" kindref="member">m_</ref>);</highlight></codeline>
-<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/>--<ref refid="classecto_1_1ref__count_1a689842816509f8f13710aee79b8c9898" kindref="member">t_</ref>;</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Mutex_T::scoped_lock<sp/>l(m_);</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/>--t_;</highlight></codeline>
 <codeline lineno="181"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
 <codeline lineno="182"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="183" refid="classecto_1_1ref__count_1a766db0f4309f593f6c3086a1ebead3a5" refkind="member"><highlight class="normal"><sp/><sp/>Mutex_T<sp/>&amp;<sp/><ref refid="classecto_1_1ref__count_1a766db0f4309f593f6c3086a1ebead3a5" kindref="member">m_</ref>;</highlight></codeline>
@@ -287,15 +287,21 @@
 <codeline lineno="196"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">int</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(<ref refid="classecto_1_1scheduler_1a21d2aac4a8a2ef665942b7c9b741250c" kindref="member">state_</ref>)<sp/>&gt;<sp/>0;</highlight></codeline>
 <codeline lineno="197"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="198"><highlight class="normal"></highlight></codeline>
-<codeline lineno="199" refid="classecto_1_1scheduler_1a04cb7ea1040fcb02f5c843ca33ffa1a6" refkind="member"><highlight class="normal"><ref refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200" kindref="member">scheduler::State</ref><sp/><ref refid="classecto_1_1scheduler_1a5497ae108416ccdf7d80fa7c8e462992" kindref="member">scheduler::state</ref>(<ref refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200" kindref="member">State</ref><sp/>state)</highlight></codeline>
-<codeline lineno="200"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="199" refid="classecto_1_1scheduler_1a13257817e1cc6c1ce04ef0bfdabc5375" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1scheduler_1a13257817e1cc6c1ce04ef0bfdabc5375" kindref="member">scheduler::executing</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="200"><highlight class="keyword"></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="201"><highlight class="normal"><sp/><sp/>boost::mutex::scoped_lock<sp/>l(<ref refid="classecto_1_1scheduler_1a47a29f5a0e1f1ab8ce816b0c63442b5c" kindref="member">mtx_</ref>);</highlight></codeline>
-<codeline lineno="202"><highlight class="normal"><sp/><sp/><ref refid="classecto_1_1scheduler_1a21d2aac4a8a2ef665942b7c9b741250c" kindref="member">state_</ref><sp/>=<sp/><ref refid="classecto_1_1scheduler_1a5497ae108416ccdf7d80fa7c8e462992" kindref="member">state</ref>;</highlight></codeline>
-<codeline lineno="203"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1scheduler_1a21d2aac4a8a2ef665942b7c9b741250c" kindref="member">state_</ref>;</highlight></codeline>
-<codeline lineno="204"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="205"><highlight class="normal"></highlight></codeline>
-<codeline lineno="206"><highlight class="normal"></highlight></codeline>
-<codeline lineno="207"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>of<sp/>namespace<sp/>ecto.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1scheduler_1a21d2aac4a8a2ef665942b7c9b741250c" kindref="member">state_</ref><sp/>==<sp/><ref refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200a3e140c949a41686e2e0481d13e89c010" kindref="member">scheduler::EXECUTING</ref>;</highlight></codeline>
+<codeline lineno="203"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"></highlight></codeline>
+<codeline lineno="205" refid="classecto_1_1scheduler_1a04cb7ea1040fcb02f5c843ca33ffa1a6" refkind="member"><highlight class="normal"><ref refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200" kindref="member">scheduler::State</ref><sp/><ref refid="classecto_1_1scheduler_1a5497ae108416ccdf7d80fa7c8e462992" kindref="member">scheduler::state</ref>(<ref refid="classecto_1_1scheduler_1a6b063d1c4bb9dad58d7ace61946b1200" kindref="member">State</ref><sp/><ref refid="classecto_1_1scheduler_1a5497ae108416ccdf7d80fa7c8e462992" kindref="member">state</ref>)</highlight></codeline>
+<codeline lineno="206"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/>boost::mutex::scoped_lock<sp/>l(<ref refid="classecto_1_1scheduler_1a47a29f5a0e1f1ab8ce816b0c63442b5c" kindref="member">mtx_</ref>);</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><ref refid="classecto_1_1scheduler_1a21d2aac4a8a2ef665942b7c9b741250c" kindref="member">state_</ref><sp/>=<sp/><ref refid="classecto_1_1scheduler_1a5497ae108416ccdf7d80fa7c8e462992" kindref="member">state</ref>;</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classecto_1_1scheduler_1a21d2aac4a8a2ef665942b7c9b741250c" kindref="member">state_</ref>;</highlight></codeline>
+<codeline lineno="210"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"></highlight></codeline>
+<codeline lineno="212"><highlight class="normal"></highlight></codeline>
+<codeline lineno="213"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>of<sp/>namespace<sp/>ecto.</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp"/>
   </compounddef>

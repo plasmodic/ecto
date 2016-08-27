@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
   <compounddef id="classecto_1_1scheduler" kind="class" language="C++" prot="public">
     <compoundname>ecto::scheduler</compoundname>
     <includes refid="scheduler_8hpp" local="no">scheduler.hpp</includes>
@@ -360,7 +360,7 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp" line="121" column="1"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp" line="121" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp" bodystart="199" bodyend="203"/>
       </memberdef>
       <memberdef kind="function" id="classecto_1_1scheduler_1ab974783264da5c33a19110926b5565f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -422,7 +422,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp" line="137" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp" bodystart="199" bodyend="204"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp" line="137" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/scheduler.hpp" bodystart="205" bodyend="210"/>
       </memberdef>
       <memberdef kind="function" id="classecto_1_1scheduler_1adc21b65d6b046032648161c16ca89f77" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>

@@ -26,8 +26,8 @@
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <link rel="top" title="ecto" href="../../../index.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -36,20 +36,22 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">ecto</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">ecto</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../../../index.html">
               <img class="logo" src="../../../_static/ecto210.png" alt="Logo"/>
             </a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../../../_sources/ecto/usage/advanced/strands.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/ecto/usage/advanced/strands.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
       <input type="text" name="q" />
@@ -68,40 +70,41 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="strands-preventing-cells-from-running-concurrently">
 <span id="strands"></span><h1>Strands:  preventing cells from running concurrently<a class="headerlink" href="#strands-preventing-cells-from-running-concurrently" title="Permalink to this headline">¶</a></h1>
 <p>Strands are used by the schedulers when cells must not run
 concurrently with specific instances or other cells.  Simply create a
-strand and pass it as the argument <tt class="docutils literal"><span class="pre">strand</span></tt> when creating cells: no
+strand and pass it as the argument <code class="docutils literal"><span class="pre">strand</span></code> when creating cells: no
 cells that have the same strand will ever run at the same time.</p>
 <p>One can also mark all instances of the same <strong>type</strong> of cell as always
-thread-unsafe, see <em class="xref std std-ref">ECTO_THREAD_UNSAFE()</em>.</p>
+thread-unsafe, see <span class="xref std std-ref">ECTO_THREAD_UNSAFE()</span>.</p>
 <p>Sample:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="ch">#!/usr/bin/env python</span>
 
 <span class="kn">import</span> <span class="nn">ecto</span>
 <span class="kn">import</span> <span class="nn">ecto.ecto_test</span> <span class="kn">as</span> <span class="nn">ecto_test</span>
 
-<span class="n">s1</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Strand</span><span class="p">()</span>  <span class="c"># No cells that have this strand will run concurrenly</span>
+<span class="n">s1</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Strand</span><span class="p">()</span>  <span class="c1"># No cells that have this strand will run concurrenly</span>
 
 <span class="n">plasm</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Plasm</span><span class="p">()</span>
-<span class="n">gen</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">Generate</span><span class="p">(</span><span class="s">&quot;Gen&quot;</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
-<span class="n">noncurr</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">DontCallMeFromTwoThreads</span><span class="p">(</span><span class="s">&quot;Unsafe0&quot;</span><span class="p">,</span> <span class="n">strand</span><span class="o">=</span><span class="n">s1</span><span class="p">)</span>
-<span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">gen</span><span class="p">[</span><span class="s">&#39;out&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">noncurr</span><span class="p">[</span><span class="s">&#39;in&#39;</span><span class="p">])</span>
+<span class="n">gen</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">Generate</span><span class="p">(</span><span class="s2">&quot;Gen&quot;</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">noncurr</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">DontCallMeFromTwoThreads</span><span class="p">(</span><span class="s2">&quot;Unsafe0&quot;</span><span class="p">,</span> <span class="n">strand</span><span class="o">=</span><span class="n">s1</span><span class="p">)</span>
+<span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">gen</span><span class="p">[</span><span class="s1">&#39;out&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">noncurr</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">])</span>
 
 <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="nb">next</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">DontCallMeFromTwoThreads</span><span class="p">(</span><span class="s">&quot;Unsafe</span><span class="si">%u</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">strand</span><span class="o">=</span><span class="n">s1</span><span class="p">)</span>
-    <span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">noncurr</span><span class="p">[</span><span class="s">&#39;out&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="nb">next</span><span class="p">[</span><span class="s">&#39;in&#39;</span><span class="p">])</span>
+    <span class="nb">next</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">DontCallMeFromTwoThreads</span><span class="p">(</span><span class="s2">&quot;Unsafe</span><span class="si">%u</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">strand</span><span class="o">=</span><span class="n">s1</span><span class="p">)</span>
+    <span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">noncurr</span><span class="p">[</span><span class="s1">&#39;out&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="nb">next</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">])</span>
     <span class="n">noncurr</span> <span class="o">=</span> <span class="nb">next</span>
 
 <span class="n">printer</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">Printer</span><span class="p">()</span>
-<span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">noncurr</span><span class="p">[</span><span class="s">&#39;out&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">printer</span><span class="p">[</span><span class="s">&#39;in&#39;</span><span class="p">])</span>
+<span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">noncurr</span><span class="p">[</span><span class="s1">&#39;out&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">printer</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">])</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">sched</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Scheduler</span><span class="p">(</span><span class="n">plasm</span><span class="p">)</span>
     <span class="n">sched</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">niter</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
 </pre></div>
 </div>
 <p class="graphviz">
@@ -146,8 +149,9 @@ node [shape=plaintext]
 4-&gt;5 [headport=&quot;i_in&quot; tailport=&quot;o_out&quot;];
 }" />
 </p>
-<div class="highlight-text"><div class="highlight"><pre>***** 1 ***** 0x1d115e0
-***** 2 ***** 0x1d115e0
+<div class="highlight-text"><div class="highlight"><pre>No module named PySide.QtCore
+***** 1 ***** 0x1d1dc90
+***** 2 ***** 0x1d1dc90
 </pre></div>
 </div>
 </div>
@@ -158,7 +162,7 @@ node [shape=plaintext]
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -167,12 +171,12 @@ node [shape=plaintext]
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">ecto</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">ecto</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

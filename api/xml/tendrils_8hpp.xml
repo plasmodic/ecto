@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
   <compounddef id="tendrils_8hpp" kind="file" language="C++">
     <compoundname>tendrils.hpp</compoundname>
     <includes local="no">boost/thread.hpp</includes>
@@ -488,8 +488,8 @@
 <codeline lineno="247"><highlight class="normal"></highlight></codeline>
 <codeline lineno="248" refid="structecto_1_1spore__assign__impl_1a13bb14dea6f8005bad7376803d2ec5ea" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structecto_1_1spore__assign__impl_1a13bb14dea6f8005bad7376803d2ec5ea" kindref="member">spore_assign_impl</ref>(<ref refid="structecto_1_1spore__assign__impl_1a374a7ffdead1191878d49a6ef295ada6" kindref="member">PtrToMember</ref><sp/>member,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>key)</highlight></codeline>
 <codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:</highlight></codeline>
-<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structecto_1_1spore__assign__impl_1a8d8ead313308f3ecfb7d5f2ed4fbe975" kindref="member">member_</ref>(member),</highlight></codeline>
-<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structecto_1_1spore__assign__impl_1a961946cb7f186c6a836467363b747915" kindref="member">key_</ref>(key)</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>member_(member),</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>key_(key)</highlight></codeline>
 <codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="254"><highlight class="normal"></highlight></codeline>
@@ -498,7 +498,7 @@
 <codeline lineno="257"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>conn.disconnect();</highlight><highlight class="comment">//this<sp/>is<sp/>a<sp/>one<sp/>time<sp/>callback.</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>CellImpl*<sp/>thiz<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">CellImpl*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(vthiz);</highlight></codeline>
-<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>(*thiz).*<ref refid="structecto_1_1spore__assign__impl_1a8d8ead313308f3ecfb7d5f2ed4fbe975" kindref="member">member_</ref><sp/>=<sp/>(*tdls)[<ref refid="structecto_1_1spore__assign__impl_1a961946cb7f186c6a836467363b747915" kindref="member">key_</ref>];</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>(*thiz).*member_<sp/>=<sp/>(*tdls)[key_];</highlight></codeline>
 <codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="262"><highlight class="normal"></highlight></codeline>
 <codeline lineno="263" refid="structecto_1_1spore__assign__impl_1a8d8ead313308f3ecfb7d5f2ed4fbe975" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structecto_1_1spore__assign__impl_1a374a7ffdead1191878d49a6ef295ada6" kindref="member">PtrToMember</ref><sp/><ref refid="structecto_1_1spore__assign__impl_1a8d8ead313308f3ecfb7d5f2ed4fbe975" kindref="member">member_</ref>;</highlight></codeline>

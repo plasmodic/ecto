@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
   <compounddef id="namespaceboost_1_1python_1_1detail" kind="namespace" language="C++">
     <compoundname>boost::python::detail</compoundname>
     <innerclass refid="classboost_1_1python_1_1detail_1_1final__std__map__derived__policies" prot="public">boost::python::detail::final_std_map_derived_policies</innerclass>

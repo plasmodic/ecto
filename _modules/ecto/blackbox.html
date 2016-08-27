@@ -25,10 +25,10 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <link rel="top" title="ecto" href="../../index.html" />
-    <link rel="up" title="ecto" href="../ecto.html" /> 
+    <link rel="up" title="Module code" href="../index.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -37,17 +37,16 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">ecto</a> &raquo;</li>
-          <li><a href="../index.html" >Module code</a> &raquo;</li>
-          <li><a href="../ecto.html" accesskey="U">ecto</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../../index.html">
               <img class="logo" src="../../_static/ecto210.png" alt="Logo"/>
             </a></p>
-<div id="searchbox" style="display: none">
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
       <input type="text" name="q" />
@@ -66,36 +65,36 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <h1>Source code for ecto.blackbox</h1><div class="highlight"><pre>
-<span class="c">#</span>
-<span class="c"># Copyright (c) 2011, Willow Garage, Inc.</span>
-<span class="c"># All rights reserved.</span>
-<span class="c">#</span>
-<span class="c"># Redistribution and use in source and binary forms, with or without</span>
-<span class="c"># modification, are permitted provided that the following conditions are met:</span>
-<span class="c">#     * Redistributions of source code must retain the above copyright</span>
-<span class="c">#       notice, this list of conditions and the following disclaimer.</span>
-<span class="c">#     * Redistributions in binary form must reproduce the above copyright</span>
-<span class="c">#       notice, this list of conditions and the following disclaimer in the</span>
-<span class="c">#       documentation and/or other materials provided with the distribution.</span>
-<span class="c">#     * Neither the name of the Willow Garage, Inc. nor the names of its</span>
-<span class="c">#       contributors may be used to endorse or promote products derived from</span>
-<span class="c">#       this software without specific prior written permission.</span>
-<span class="c">#</span>
-<span class="c"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;</span>
-<span class="c"># AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE</span>
-<span class="c"># IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE</span>
-<span class="c"># ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE</span>
-<span class="c"># LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR</span>
-<span class="c"># CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF</span>
-<span class="c"># SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS</span>
-<span class="c"># INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN</span>
-<span class="c"># CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)</span>
-<span class="c"># ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span>
-<span class="c"># POSSIBILITY OF SUCH DAMAGE.</span>
-<span class="c">#</span>
+<span class="c1">#</span>
+<span class="c1"># Copyright (c) 2011, Willow Garage, Inc.</span>
+<span class="c1"># All rights reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Redistribution and use in source and binary forms, with or without</span>
+<span class="c1"># modification, are permitted provided that the following conditions are met:</span>
+<span class="c1">#     * Redistributions of source code must retain the above copyright</span>
+<span class="c1">#       notice, this list of conditions and the following disclaimer.</span>
+<span class="c1">#     * Redistributions in binary form must reproduce the above copyright</span>
+<span class="c1">#       notice, this list of conditions and the following disclaimer in the</span>
+<span class="c1">#       documentation and/or other materials provided with the distribution.</span>
+<span class="c1">#     * Neither the name of the Willow Garage, Inc. nor the names of its</span>
+<span class="c1">#       contributors may be used to endorse or promote products derived from</span>
+<span class="c1">#       this software without specific prior written permission.</span>
+<span class="c1">#</span>
+<span class="c1"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;</span>
+<span class="c1"># AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE</span>
+<span class="c1"># IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE</span>
+<span class="c1"># ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE</span>
+<span class="c1"># LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR</span>
+<span class="c1"># CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF</span>
+<span class="c1"># SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS</span>
+<span class="c1"># INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN</span>
+<span class="c1"># CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)</span>
+<span class="c1"># ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span>
+<span class="c1"># POSSIBILITY OF SUCH DAMAGE.</span>
+<span class="c1">#</span>
 <span class="kn">import</span> <span class="nn">collections</span>
 <span class="kn">import</span> <span class="nn">ecto</span>
 <span class="kn">import</span> <span class="nn">types</span>
@@ -104,7 +103,7 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="ne">RuntimeError</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<span class="n">_BlackBoxForward</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span><span class="s">&#39;BlackBoxForward&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;key&#39;</span><span class="p">,</span> <span class="s">&#39;new_key&#39;</span><span class="p">,</span> <span class="s">&#39;new_doc&#39;</span><span class="p">,</span> <span class="s">&#39;new_default&#39;</span><span class="p">])</span>
+<span class="n">_BlackBoxForward</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;BlackBoxForward&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">,</span> <span class="s1">&#39;new_key&#39;</span><span class="p">,</span> <span class="s1">&#39;new_doc&#39;</span><span class="p">,</span> <span class="s1">&#39;new_default&#39;</span><span class="p">])</span>
 
 <div class="viewcode-block" id="BlackBoxForward"><a class="viewcode-back" href="../../ecto/reference/python.html#ecto.blackbox.BlackBoxForward">[docs]</a><span class="k">def</span> <span class="nf">BlackBoxForward</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">new_key</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">new_doc</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">new_default</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -118,9 +117,9 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">new_key</span><span class="p">:</span>
         <span class="n">new_key</span> <span class="o">=</span> <span class="n">key</span>
-    <span class="k">return</span> <span class="n">_BlackBoxForward</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">new_key</span><span class="p">,</span> <span class="n">new_doc</span><span class="p">,</span> <span class="n">new_default</span><span class="p">)</span>
-</div>
-<span class="n">_BlackBoxCellInfo</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span><span class="s">&#39;BlackBoxCellInfo&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;python_class&#39;</span><span class="p">,</span> <span class="s">&#39;params&#39;</span><span class="p">,</span> <span class="s">&#39;name&#39;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">_BlackBoxForward</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">new_key</span><span class="p">,</span> <span class="n">new_doc</span><span class="p">,</span> <span class="n">new_default</span><span class="p">)</span></div>
+
+<span class="n">_BlackBoxCellInfo</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;BlackBoxCellInfo&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;python_class&#39;</span><span class="p">,</span> <span class="s1">&#39;params&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">])</span>
 
 <div class="viewcode-block" id="BlackBoxCellInfo"><a class="viewcode-back" href="../../ecto/reference/python.html#ecto.blackbox.BlackBoxCellInfo">[docs]</a><span class="k">def</span> <span class="nf">BlackBoxCellInfo</span><span class="p">(</span><span class="n">python_class</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -136,8 +135,8 @@
         <span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">python_class</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">params</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
         <span class="n">params</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">return</span> <span class="n">_BlackBoxCellInfo</span><span class="p">(</span><span class="n">python_class</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-</div>
+    <span class="k">return</span> <span class="n">_BlackBoxCellInfo</span><span class="p">(</span><span class="n">python_class</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span></div>
+
 <span class="k">def</span> <span class="nf">_deep_copy_tendrils</span><span class="p">(</span><span class="n">tendrils_in</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Given some tendrils and their values, deep copy them</span>
@@ -178,29 +177,29 @@
         <span class="n">params</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="n">cell_class</span> <span class="o">=</span> <span class="n">cell_info</span><span class="o">.</span><span class="n">python_class</span>
-    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">cell_class</span><span class="p">,</span> <span class="s">&#39;params&#39;</span><span class="p">):</span>
-        <span class="c"># this is a C++ cell visible from Python</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">cell_class</span><span class="p">,</span> <span class="s1">&#39;params&#39;</span><span class="p">):</span>
+        <span class="c1"># this is a C++ cell visible from Python</span>
         <span class="n">tendrils</span> <span class="o">=</span> <span class="n">_deep_copy_tendrils</span><span class="p">(</span><span class="n">cell_class</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="c"># otherwise, call the declare_params function</span>
+        <span class="c1"># otherwise, call the declare_params function</span>
         <span class="n">tendrils</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Tendrils</span><span class="p">()</span>
         <span class="k">if</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">cell_class</span><span class="p">,</span> <span class="n">BlackBox</span><span class="p">):</span>
             <span class="n">cell_class</span><span class="o">.</span><span class="n">declare_params</span><span class="p">(</span><span class="n">tendrils</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">cell_class</span><span class="o">.</span><span class="n">declare_params</span><span class="p">(</span><span class="n">tendrils</span><span class="p">)</span>
 
-    <span class="c"># override the values with whatever is in params</span>
+    <span class="c1"># override the values with whatever is in params</span>
     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">tendrils</span><span class="p">:</span>
             <span class="n">tendrils</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
 
-    <span class="c"># override the values with whatever is in forwards</span>
+    <span class="c1"># override the values with whatever is in forwards</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">forwards</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">forward</span> <span class="ow">in</span> <span class="n">forwards</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">forward</span><span class="o">.</span><span class="n">key</span> <span class="ow">in</span> <span class="n">tendrils</span> <span class="ow">and</span> <span class="n">forward</span><span class="o">.</span><span class="n">new_default</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="n">tendrils</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">forward</span><span class="o">.</span><span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">forward</span><span class="o">.</span><span class="n">new_default</span><span class="p">)</span>
 
-    <span class="c"># override the values with whatever is in cell_info</span>
+    <span class="c1"># override the values with whatever is in cell_info</span>
     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">cell_info</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">tendrils</span><span class="p">:</span>
             <span class="n">tendrils</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
@@ -218,7 +217,7 @@
 <span class="sd">    :param forwards: forwards to follow the rules of</span>
 <span class="sd">    :param tendrils_to: the tendrils to which data will be copied to</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">forwards</span> <span class="o">==</span> <span class="s">&#39;all&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">forwards</span> <span class="o">==</span> <span class="s1">&#39;all&#39;</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">tendril</span> <span class="ow">in</span> <span class="n">tendrils_from</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tendrils_to</span><span class="p">:</span>
                 <span class="n">new_tendril</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Tendril</span><span class="o">.</span><span class="n">createT</span><span class="p">(</span><span class="n">tendril</span><span class="o">.</span><span class="n">type_name</span><span class="p">)</span>
@@ -233,9 +232,9 @@
         <span class="k">for</span> <span class="n">forward</span> <span class="ow">in</span> <span class="n">forwards</span><span class="p">:</span>
             <span class="n">key</span><span class="p">,</span> <span class="n">new_key</span><span class="p">,</span> <span class="n">new_doc</span><span class="p">,</span> <span class="n">new_default</span> <span class="o">=</span> <span class="n">forward</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tendrils_from</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">BlackBoxError</span><span class="p">(</span><span class="s">&#39;No tendril &quot;</span><span class="si">%s</span><span class="s">&quot; found when declaring forward </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span>
+                <span class="k">raise</span> <span class="n">BlackBoxError</span><span class="p">(</span><span class="s1">&#39;No tendril &quot;</span><span class="si">%s</span><span class="s1">&quot; found when declaring forward </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span>
                                     <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">forward</span><span class="p">)))</span>
-            <span class="c"># declare the new forwarded tendril</span>
+            <span class="c1"># declare the new forwarded tendril</span>
             <span class="n">tendril</span> <span class="o">=</span> <span class="n">tendrils_from</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">new_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tendrils_to</span><span class="p">:</span>
                 <span class="n">new_tendril</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Tendril</span><span class="o">.</span><span class="n">createT</span><span class="p">(</span><span class="n">tendril</span><span class="o">.</span><span class="n">type_name</span><span class="p">)</span>
@@ -246,11 +245,11 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">tendrils_to</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">new_key</span><span class="p">)</span><span class="o">.</span><span class="n">copy_value</span><span class="p">(</span><span class="n">tendril</span><span class="p">)</span>
 
-            <span class="c"># update the docs if needed</span>
+            <span class="c1"># update the docs if needed</span>
             <span class="k">if</span> <span class="n">new_doc</span><span class="p">:</span>
                 <span class="n">tendrils_to</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">new_key</span><span class="p">)</span><span class="o">.</span><span class="n">doc</span> <span class="o">=</span> <span class="n">new_doc</span>
 
-            <span class="c"># update the default if needed</span>
+            <span class="c1"># update the default if needed</span>
             <span class="k">if</span> <span class="n">new_default</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="n">tendrils_to</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">new_key</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">new_default</span><span class="p">)</span>
 
@@ -263,31 +262,31 @@
 <span class="sd">    :param forwards: forwards to follow the rules of</span>
 <span class="sd">    :param tendrils_to: the tendrils to which data will be copied to</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">forwards</span> <span class="o">==</span> <span class="s">&#39;all&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">forwards</span> <span class="o">==</span> <span class="s1">&#39;all&#39;</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">tendril</span> <span class="ow">in</span> <span class="n">tendrils_from</span><span class="p">:</span>
             <span class="n">tendrils_to</span><span class="o">.</span><span class="n">declare</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">tendril</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">forwards</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">BlackBoxError</span><span class="p">(</span><span class="s">&#39;Your declare_forwards must return &quot;all&quot; or an array of BlackBoxForward. &#39;</span>
-                                <span class="s">&#39;It now is </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">forwards</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="n">BlackBoxError</span><span class="p">(</span><span class="s1">&#39;Your declare_forwards must return &quot;all&quot; or an array of BlackBoxForward. &#39;</span>
+                                <span class="s1">&#39;It now is </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">forwards</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">forward</span> <span class="ow">in</span> <span class="n">forwards</span><span class="p">:</span>
             <span class="n">key</span><span class="p">,</span> <span class="n">new_key</span><span class="p">,</span> <span class="n">new_doc</span><span class="p">,</span> <span class="n">new_default</span> <span class="o">=</span> <span class="n">forward</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tendrils_from</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">BlackBoxError</span><span class="p">(</span><span class="s">&#39;No tendril &quot;</span><span class="si">%s</span><span class="s">&quot; found when declaring forward </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span>
+                <span class="k">raise</span> <span class="n">BlackBoxError</span><span class="p">(</span><span class="s1">&#39;No tendril &quot;</span><span class="si">%s</span><span class="s1">&quot; found when declaring forward </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span>
                                     <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">forward</span><span class="p">)))</span>
 
-            <span class="c"># declare the new forwarded tendril</span>
+            <span class="c1"># declare the new forwarded tendril</span>
             <span class="n">tendrils_to</span><span class="o">.</span><span class="n">declare</span><span class="p">(</span><span class="n">new_key</span><span class="p">,</span> <span class="n">tendrils_from</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
 
-            <span class="c"># update the docs if needed</span>
+            <span class="c1"># update the docs if needed</span>
             <span class="k">if</span> <span class="n">new_doc</span><span class="p">:</span>
                 <span class="n">tendrils_to</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">new_key</span><span class="p">)</span><span class="o">.</span><span class="n">doc</span> <span class="o">=</span> <span class="n">new_doc</span>
 
-            <span class="c"># update the default if needed</span>
+            <span class="c1"># update the default if needed</span>
             <span class="k">if</span> <span class="n">new_default</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="n">tendrils_to</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">new_key</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">new_default</span><span class="p">)</span>
 
-<div class="viewcode-block" id="BlackBox"><a class="viewcode-back" href="../../ecto/reference/python.html#ecto.blackbox.BlackBox">[docs]</a><span class="k">class</span> <span class="nc">BlackBox</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="BlackBox"><a class="viewcode-back" href="../../ecto/usage/techniques/black_box.html#ecto.blackbox.BlackBox">[docs]</a><span class="k">class</span> <span class="nc">BlackBox</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The BlackBox may be used as an encapsulation idiom within ecto, to declare reusable plasms.</span>
 <span class="sd">    </span>
@@ -305,22 +304,22 @@
 <span class="sd">                     of the BlackBox</span>
 <span class="sd">        :param kwargs: any parameter that is a declared parameter or a forwarded one</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c"># check that the overrides have proper types</span>
-        <span class="c"># declare_direct_params has to be a classmethod or a staticmethod (as declare_params uses it and it&#39;s a</span>
-        <span class="c"># classmethod)</span>
+        <span class="c1"># check that the overrides have proper types</span>
+        <span class="c1"># declare_direct_params has to be a classmethod or a staticmethod (as declare_params uses it and it&#39;s a</span>
+        <span class="c1"># classmethod)</span>
         <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">declare_cells</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">declare_direct_params</span><span class="p">,</span>
                      <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">declare_forwards</span><span class="p">]:</span>
             <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">func</span><span class="p">)</span> <span class="o">!=</span> <span class="n">types</span><span class="o">.</span><span class="n">FunctionType</span><span class="p">:</span>
                 <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">func</span><span class="p">)</span> <span class="o">!=</span> <span class="n">types</span><span class="o">.</span><span class="n">MethodType</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="n">BlackBoxError</span><span class="p">(</span><span class="s">&#39;The &quot;</span><span class="si">%s</span><span class="s">&quot; member of the BlackBox </span><span class="si">%s</span><span class="s"> &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span>
-                                        <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;is not a function.&#39;</span><span class="p">)</span>
+                    <span class="k">raise</span> <span class="n">BlackBoxError</span><span class="p">(</span><span class="s1">&#39;The &quot;</span><span class="si">%s</span><span class="s1">&quot; member of the BlackBox </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span>
+                                        <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;is not a function.&#39;</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">func</span><span class="o">.</span><span class="n">__self__</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="n">BlackBoxError</span><span class="p">(</span><span class="s">&#39;The &quot;</span><span class="si">%s</span><span class="s">&quot; function of the BlackBox </span><span class="si">%s</span><span class="s"> &#39;</span>  <span class="o">%</span> <span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span>
-                                <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;needs to be decorated with @classmethod or @staticmethod.&#39;</span><span class="p">)</span>
+                    <span class="k">raise</span> <span class="n">BlackBoxError</span><span class="p">(</span><span class="s1">&#39;The &quot;</span><span class="si">%s</span><span class="s1">&quot; function of the BlackBox </span><span class="si">%s</span><span class="s1"> &#39;</span>  <span class="o">%</span> <span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;needs to be decorated with @classmethod or @staticmethod.&#39;</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">niter</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;niter&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">niter</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;niter&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__impl</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">__params</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Tendrils</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__inputs</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Tendrils</span><span class="p">()</span>
@@ -340,7 +339,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__impl</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">__gen_doc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">short_doc</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+        <span class="n">short_doc</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__doc__</span><span class="p">:</span>
             <span class="n">short_doc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__doc__</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__impl</span><span class="o">.</span><span class="n">gen_doc</span><span class="p">(</span><span class="n">short_doc</span><span class="p">)</span>
@@ -352,11 +351,11 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">connections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__params</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">BlackBoxError</span><span class="p">(</span><span class="s">&#39;Got error &quot;</span><span class="si">%s</span><span class="s">&quot; when calling connections on &quot;</span><span class="si">%s</span><span class="s">&quot;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">)))</span>
+            <span class="k">raise</span> <span class="n">BlackBoxError</span><span class="p">(</span><span class="s1">&#39;Got error &quot;</span><span class="si">%s</span><span class="s1">&quot; when calling connections on &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">)))</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">connections</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">BlackBoxError</span><span class="p">(</span><span class="s">&#39;Your BlackBox has empty connections&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">BlackBoxError</span><span class="p">(</span><span class="s1">&#39;Your BlackBox has empty connections&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">connections</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s">&#39;__iter__&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">):</span>
                 <span class="n">plasm</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -367,27 +366,27 @@
                                            <span class="n">outputs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__outputs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;parameters&#39;</span><span class="p">,):</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;params&#39;</span>
-        <span class="k">if</span> <span class="s">&#39;__impl&#39;</span> <span class="ow">not</span> <span class="ow">in</span>  <span class="n">name</span> <span class="ow">and</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__impl</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;parameters&#39;</span><span class="p">,):</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;params&#39;</span>
+        <span class="k">if</span> <span class="s1">&#39;__impl&#39;</span> <span class="ow">not</span> <span class="ow">in</span>  <span class="n">name</span> <span class="ow">and</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__impl</span><span class="p">):</span>
             <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__impl</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s">&#39;__impl&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;__impl&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__impl</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__dir__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">[</span><span class="s">&#39;outputs&#39;</span><span class="p">,</span> <span class="s">&#39;inputs&#39;</span><span class="p">,</span> <span class="s">&#39;params&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;outputs&#39;</span><span class="p">,</span> <span class="s1">&#39;inputs&#39;</span><span class="p">,</span> <span class="s1">&#39;params&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="BlackBox.inspect"><a class="viewcode-back" href="../../ecto/reference/python.html#ecto.blackbox.BlackBox.inspect">[docs]</a>    <span class="k">def</span> <span class="nf">inspect</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="BlackBox.inspect"><a class="viewcode-back" href="../../ecto/usage/techniques/black_box.html#ecto.blackbox.BlackBox.inspect">[docs]</a>    <span class="k">def</span> <span class="nf">inspect</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;This emulates the inspect method that each ecto cell has, which creates a light</span>
 <span class="sd">        version of the cell, where the default values for p,i,o are acceptable.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</div>
+        <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
     <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="BlackBox.declare_direct_params"><a class="viewcode-back" href="../../ecto/reference/python.html#ecto.blackbox.BlackBox.declare_direct_params">[docs]</a>    <span class="k">def</span> <span class="nf">declare_direct_params</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<div class="viewcode-block" id="BlackBox.declare_direct_params"><a class="viewcode-back" href="../../ecto/usage/techniques/black_box.html#ecto.blackbox.BlackBox.declare_direct_params">[docs]</a>    <span class="k">def</span> <span class="nf">declare_direct_params</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function can be overriden by a child class.</span>
 
@@ -402,10 +401,10 @@
 
 <span class="sd">        :param p: an ecto.Tendrils() object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
-</div>
+        <span class="k">pass</span></div>
+
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="BlackBox.declare_cells"><a class="viewcode-back" href="../../ecto/reference/python.html#ecto.blackbox.BlackBox.declare_cells">[docs]</a>    <span class="k">def</span> <span class="nf">declare_cells</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<div class="viewcode-block" id="BlackBox.declare_cells"><a class="viewcode-back" href="../../ecto/usage/techniques/black_box.html#ecto.blackbox.BlackBox.declare_cells">[docs]</a>    <span class="k">def</span> <span class="nf">declare_cells</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function can be overriden by a child class.</span>
 
@@ -415,10 +414,10 @@
 <span class="sd">        :return: a dictionary of the form:</span>
 <span class="sd">                    {&#39;cell_name&#39;: BlackBoxCellInfo_call, &#39;cell_name&#39;: cell_instance}</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">{}</span>
-</div>
+        <span class="k">return</span> <span class="p">{}</span></div>
+
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="BlackBox.declare_params"><a class="viewcode-back" href="../../ecto/reference/python.html#ecto.blackbox.BlackBox.declare_params">[docs]</a>    <span class="k">def</span> <span class="nf">declare_params</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="BlackBox.declare_params"><a class="viewcode-back" href="../../ecto/usage/techniques/black_box.html#ecto.blackbox.BlackBox.declare_params">[docs]</a>    <span class="k">def</span> <span class="nf">declare_params</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method should NOT be overridden by a child class.</span>
 
@@ -433,33 +432,33 @@
 <span class="sd">        :param p: an ecto.Tendrils() object</span>
 <span class="sd">        :param kwargs: anything sent to the constructor of the BlackBox</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c"># First, figure out the direct parameters</span>
+        <span class="c1"># First, figure out the direct parameters</span>
         <span class="n">cls</span><span class="o">.</span><span class="n">declare_direct_params</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 
-        <span class="c"># complete the p using the default values given in **kwargs</span>
+        <span class="c1"># complete the p using the default values given in **kwargs</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">p</span><span class="p">:</span>
                 <span class="n">p</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
 
-        <span class="c"># now that we know the parameters, define the cells accordingly</span>
+        <span class="c1"># now that we know the parameters, define the cells accordingly</span>
         <span class="n">cell_infos</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">declare_cells</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cell_infos</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">BlackBoxError</span><span class="p">(</span><span class="s">&#39;Your declare_cells needs to return a dictionary &#39;</span>
-                                <span class="s">&#39;of the form:</span><span class="se">\n</span><span class="s">&#39;</span>
-                                <span class="s">&#39;{&quot;cell_name&quot;: BlackBoxCellInfo}&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">BlackBoxError</span><span class="p">(</span><span class="s1">&#39;Your declare_cells needs to return a dictionary &#39;</span>
+                                <span class="s1">&#39;of the form:</span><span class="se">\n</span><span class="s1">&#39;</span>
+                                <span class="s1">&#39;{&quot;cell_name&quot;: BlackBoxCellInfo}&#39;</span><span class="p">)</span>
 
-        <span class="c"># parse the cell BlackBoxForwards and add them to the tendrils p calling</span>
-        <span class="c"># the declare_params from the cells or their .params to get tendril info</span>
+        <span class="c1"># parse the cell BlackBoxForwards and add them to the tendrils p calling</span>
+        <span class="c1"># the declare_params from the cells or their .params to get tendril info</span>
         <span class="n">p_forwards</span><span class="p">,</span> <span class="n">_i_forwards</span><span class="p">,</span> <span class="n">_o_forwards</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">declare_forwards</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">cell_name</span><span class="p">,</span> <span class="n">forwards</span> <span class="ow">in</span> <span class="n">p_forwards</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cell_infos</span><span class="p">[</span><span class="n">cell_name</span><span class="p">],</span> <span class="n">_BlackBoxCellInfo</span><span class="p">):</span>
                 <span class="n">tendrils_params</span> <span class="o">=</span> <span class="n">_get_param_tendrils</span><span class="p">(</span><span class="n">cell_infos</span><span class="p">[</span><span class="n">cell_name</span><span class="p">],</span> <span class="n">forwards</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">tendrils_params</span> <span class="o">=</span> <span class="n">cell_infos</span><span class="p">[</span><span class="n">cell_name</span><span class="p">]</span><span class="o">.</span><span class="n">params</span>
-            <span class="n">_deep_copy_tendrils_to_tendrils</span><span class="p">(</span><span class="n">tendrils_params</span><span class="p">,</span> <span class="n">forwards</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-</div>
+            <span class="n">_deep_copy_tendrils_to_tendrils</span><span class="p">(</span><span class="n">tendrils_params</span><span class="p">,</span> <span class="n">forwards</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span></div>
+
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="BlackBox.declare_forwards"><a class="viewcode-back" href="../../ecto/reference/python.html#ecto.blackbox.BlackBox.declare_forwards">[docs]</a>    <span class="k">def</span> <span class="nf">declare_forwards</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">_p</span><span class="p">):</span>
+<div class="viewcode-block" id="BlackBox.declare_forwards"><a class="viewcode-back" href="../../ecto/usage/techniques/black_box.html#ecto.blackbox.BlackBox.declare_forwards">[docs]</a>    <span class="k">def</span> <span class="nf">declare_forwards</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">_p</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function can be overriden by a child class.</span>
 
@@ -470,10 +469,10 @@
 <span class="sd">                    forwarded to/from the inner cells. It has the format:</span>
 <span class="sd">                    {&#39;cell_name&#39;: &#39;all&#39;, &#39;cell_name&#39;: [BlackBoxForward_call1, BlackBoxForward_call2]}</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">({},</span> <span class="p">{},</span> <span class="p">{})</span>
-</div>
+        <span class="k">return</span> <span class="p">({},</span> <span class="p">{},</span> <span class="p">{})</span></div>
+
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="BlackBox.declare_io"><a class="viewcode-back" href="../../ecto/reference/python.html#ecto.blackbox.BlackBox.declare_io">[docs]</a>    <span class="k">def</span> <span class="nf">declare_io</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">o</span><span class="p">):</span>
+<div class="viewcode-block" id="BlackBox.declare_io"><a class="viewcode-back" href="../../ecto/usage/techniques/black_box.html#ecto.blackbox.BlackBox.declare_io">[docs]</a>    <span class="k">def</span> <span class="nf">declare_io</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">o</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function has the same meaning as in C++ and should NOT be overriden by a child class.</span>
 
@@ -485,34 +484,34 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">_p_forwards</span><span class="p">,</span> <span class="n">i_forwards</span><span class="p">,</span> <span class="n">o_forwards</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">declare_forwards</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">BlackBoxError</span><span class="p">(</span><span class="s">&#39;Your declare_forwards needs to return a tuple of 3 dictionaries &#39;</span>
-                                <span class="s">&#39;of the form:</span><span class="se">\n</span><span class="s">&#39;</span>
-                                <span class="s">&#39;{&quot;cell_name&quot;: &quot;all&quot;, &quot;cell_name&quot;: [BlackBoxForward1, BlackBoxForward2]}&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">BlackBoxError</span><span class="p">(</span><span class="s1">&#39;Your declare_forwards needs to return a tuple of 3 dictionaries &#39;</span>
+                                <span class="s1">&#39;of the form:</span><span class="se">\n</span><span class="s1">&#39;</span>
+                                <span class="s1">&#39;{&quot;cell_name&quot;: &quot;all&quot;, &quot;cell_name&quot;: [BlackBoxForward1, BlackBoxForward2]}&#39;</span><span class="p">)</span>
 
-        <span class="c"># go over the two sets of tendrils: i and o</span>
-        <span class="k">for</span> <span class="n">info_tuple</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">i_forwards</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s">&#39;inputs&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">o_forwards</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="s">&#39;outputs&#39;</span><span class="p">)]:</span>
+        <span class="c1"># go over the two sets of tendrils: i and o</span>
+        <span class="k">for</span> <span class="n">info_tuple</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">i_forwards</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s1">&#39;inputs&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">o_forwards</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="s1">&#39;outputs&#39;</span><span class="p">)]:</span>
             <span class="n">cell_forwards</span><span class="p">,</span> <span class="n">tendrils</span><span class="p">,</span> <span class="n">tendril_type</span> <span class="o">=</span> <span class="n">info_tuple</span>
             <span class="k">for</span> <span class="n">cell_name</span><span class="p">,</span> <span class="n">forwards</span> <span class="ow">in</span> <span class="n">cell_forwards</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="n">cell_info</span> <span class="o">=</span> <span class="n">cell_infos</span><span class="p">[</span><span class="n">cell_name</span><span class="p">]</span>
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cell_infos</span><span class="p">[</span><span class="n">cell_name</span><span class="p">],</span> <span class="n">_BlackBoxCellInfo</span><span class="p">):</span>
                     <span class="n">python_class</span> <span class="o">=</span> <span class="n">cell_infos</span><span class="p">[</span><span class="n">cell_name</span><span class="p">]</span><span class="o">.</span><span class="n">python_class</span>
                     <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">python_class</span><span class="p">,</span> <span class="n">tendril_type</span><span class="p">):</span>
-                        <span class="c"># get the tendrils from the class if it has them</span>
+                        <span class="c1"># get the tendrils from the class if it has them</span>
                         <span class="n">_deep_copy_tendrils_to_tendrils</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">python_class</span><span class="p">,</span> <span class="n">tendril_type</span><span class="p">),</span> <span class="n">forwards</span><span class="p">,</span> <span class="n">tendrils</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>
-                        <span class="c"># in case the cell has no &#39;inputs&#39;/&#39;outputs&#39; attribute (e.g. if it is a BlackBox</span>
-                        <span class="c"># or a pure Python cell)</span>
+                        <span class="c1"># in case the cell has no &#39;inputs&#39;/&#39;outputs&#39; attribute (e.g. if it is a BlackBox</span>
+                        <span class="c1"># or a pure Python cell)</span>
                         <span class="n">cell_params</span> <span class="o">=</span> <span class="n">_get_param_tendrils</span><span class="p">(</span><span class="n">cell_info</span><span class="p">,</span> <span class="n">forwards</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cell_name</span><span class="p">,</span> <span class="p">{}))</span>
                         <span class="n">cell_tendrils</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Tendrils</span><span class="p">()</span>
-                        <span class="k">if</span> <span class="n">tendril_type</span> <span class="o">==</span> <span class="s">&#39;inputs&#39;</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">tendril_type</span> <span class="o">==</span> <span class="s1">&#39;inputs&#39;</span><span class="p">:</span>
                             <span class="n">python_class</span><span class="o">.</span><span class="n">declare_io</span><span class="p">(</span><span class="n">cell_params</span><span class="p">,</span> <span class="n">cell_tendrils</span><span class="p">,</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Tendrils</span><span class="p">())</span>
                         <span class="k">else</span><span class="p">:</span>
                             <span class="n">python_class</span><span class="o">.</span><span class="n">declare_io</span><span class="p">(</span><span class="n">cell_params</span><span class="p">,</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Tendrils</span><span class="p">(),</span> <span class="n">cell_tendrils</span><span class="p">)</span>
 
                         <span class="n">_deep_copy_tendrils_to_tendrils</span><span class="p">(</span><span class="n">cell_tendrils</span><span class="p">,</span> <span class="n">forwards</span><span class="p">,</span> <span class="n">tendrils</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">_deep_copy_tendrils_to_tendrils</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">cell_info</span><span class="p">,</span> <span class="n">tendril_type</span><span class="p">),</span> <span class="n">forwards</span><span class="p">,</span> <span class="n">tendrils</span><span class="p">)</span>
-</div>
+                    <span class="n">_deep_copy_tendrils_to_tendrils</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">cell_info</span><span class="p">,</span> <span class="n">tendril_type</span><span class="p">),</span> <span class="n">forwards</span><span class="p">,</span> <span class="n">tendrils</span><span class="p">)</span></div>
+
     <span class="k">def</span> <span class="nf">__configure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Private implementation that generates the cells/tendrils inside the BlackBox</span>
@@ -520,7 +519,7 @@
         <span class="n">p</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Tendrils</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">declare_direct_params</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 
-        <span class="c"># complete the p using the default values given in **kwargs</span>
+        <span class="c1"># complete the p using the default values given in **kwargs</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">p</span><span class="p">:</span>
                 <span class="n">p</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
@@ -528,32 +527,32 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">p_forwards</span><span class="p">,</span> <span class="n">i_forwards</span><span class="p">,</span> <span class="n">o_forwards</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">declare_forwards</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">BlackBoxError</span><span class="p">(</span><span class="s">&#39;Your declare_forwards needs to return a tuple of 3 dictionaries &#39;</span>
-                                <span class="s">&#39;of the form:</span><span class="se">\n</span><span class="s">&#39;</span>
-                                <span class="s">&#39;{&quot;cell_name&quot;: &quot;all&quot;, &quot;cell_name&quot;: [BlackBoxForward1, BlackBoxForward2]}: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">BlackBoxError</span><span class="p">(</span><span class="s1">&#39;Your declare_forwards needs to return a tuple of 3 dictionaries &#39;</span>
+                                <span class="s1">&#39;of the form:</span><span class="se">\n</span><span class="s1">&#39;</span>
+                                <span class="s1">&#39;{&quot;cell_name&quot;: &quot;all&quot;, &quot;cell_name&quot;: [BlackBoxForward1, BlackBoxForward2]}: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
 
-        <span class="c"># create the cells</span>
+        <span class="c1"># create the cells</span>
         <span class="n">cell_infos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">declare_cells</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">cell_name</span><span class="p">,</span> <span class="n">cell_info</span> <span class="ow">in</span> <span class="n">cell_infos</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="c"># if a full-fledged cell is given, just assign it to the blackbox member right away</span>
+            <span class="c1"># if a full-fledged cell is given, just assign it to the blackbox member right away</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cell_info</span><span class="p">,</span> <span class="n">_BlackBoxCellInfo</span><span class="p">):</span>
                 <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell_name</span><span class="p">,</span> <span class="n">cell_info</span><span class="p">)</span>
                 <span class="k">continue</span>
 
             <span class="n">cell_tendrils</span> <span class="o">=</span> <span class="n">_get_param_tendrils</span><span class="p">(</span><span class="n">cell_info</span><span class="p">,</span> <span class="n">p_forwards</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cell_name</span><span class="p">,</span> <span class="p">[]),</span> <span class="n">kwargs</span><span class="p">)</span>
 
-            <span class="c"># convert the tendrils to parameters to send to the constructor</span>
+            <span class="c1"># convert the tendrils to parameters to send to the constructor</span>
             <span class="n">params</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">tendril</span> <span class="ow">in</span> <span class="n">cell_tendrils</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="n">params</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">tendril</span><span class="o">.</span><span class="n">val</span>
 
-            <span class="c"># add the cell to the BlackBox</span>
+            <span class="c1"># add the cell to the BlackBox</span>
             <span class="k">if</span> <span class="n">cell_info</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
                 <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell_name</span><span class="p">,</span> <span class="n">cell_info</span><span class="o">.</span><span class="n">python_class</span><span class="p">(</span><span class="n">cell_info</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">))</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell_name</span><span class="p">,</span> <span class="n">cell_info</span><span class="o">.</span><span class="n">python_class</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">))</span>
 
-        <span class="c"># redefine the parameters so that they are linked to tendrils of actual cells</span>
+        <span class="c1"># redefine the parameters so that they are linked to tendrils of actual cells</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__params</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Tendrils</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">declare_direct_params</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__params</span><span class="p">)</span>
 
@@ -561,32 +560,32 @@
             <span class="n">cell</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell_name</span><span class="p">)</span>
             <span class="n">_copy_tendrils_to_tendrils</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">forwards</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__params</span><span class="p">)</span>
 
-        <span class="c"># complete the params using the default values given in **kwargs</span>
+        <span class="c1"># complete the params using the default values given in **kwargs</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__params</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">__params</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
 
-        <span class="c"># redefine the io so that they are linked to tendrils of actual cells</span>
+        <span class="c1"># redefine the io so that they are linked to tendrils of actual cells</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__inputs</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Tendrils</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__outputs</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Tendrils</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">tendril_type</span><span class="p">,</span> <span class="n">all_forwards</span> <span class="ow">in</span> <span class="p">[(</span><span class="s">&#39;inputs&#39;</span><span class="p">,</span> <span class="n">i_forwards</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;outputs&#39;</span><span class="p">,</span> <span class="n">o_forwards</span><span class="p">)]:</span>
+        <span class="k">for</span> <span class="n">tendril_type</span><span class="p">,</span> <span class="n">all_forwards</span> <span class="ow">in</span> <span class="p">[(</span><span class="s1">&#39;inputs&#39;</span><span class="p">,</span> <span class="n">i_forwards</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;outputs&#39;</span><span class="p">,</span> <span class="n">o_forwards</span><span class="p">)]:</span>
             <span class="k">for</span> <span class="n">cell_name</span><span class="p">,</span> <span class="n">forwards</span> <span class="ow">in</span> <span class="n">all_forwards</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell_name</span><span class="p">):</span>
-                    <span class="k">raise</span> <span class="n">BlackBoxError</span><span class="p">(</span><span class="s">&#39;Cell of name &quot;</span><span class="si">%s</span><span class="s">&quot; needs to be &#39;</span> <span class="o">%</span> <span class="n">cell_name</span> <span class="o">+</span>
-                                        <span class="s">&#39;declared in &quot;declare_cells&quot;&#39;</span><span class="p">)</span>
+                    <span class="k">raise</span> <span class="n">BlackBoxError</span><span class="p">(</span><span class="s1">&#39;Cell of name &quot;</span><span class="si">%s</span><span class="s1">&quot; needs to be &#39;</span> <span class="o">%</span> <span class="n">cell_name</span> <span class="o">+</span>
+                                        <span class="s1">&#39;declared in &quot;declare_cells&quot;&#39;</span><span class="p">)</span>
                 <span class="n">cell</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell_name</span><span class="p">)</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">tendril_type</span><span class="p">):</span>
-                    <span class="k">raise</span> <span class="n">BlackBoxError</span><span class="p">(</span><span class="s">&#39;Cell of name &quot;</span><span class="si">%s</span><span class="s">&quot; needs has no </span><span class="si">%s</span><span class="s"> &#39;</span> <span class="o">%</span>
+                    <span class="k">raise</span> <span class="n">BlackBoxError</span><span class="p">(</span><span class="s1">&#39;Cell of name &quot;</span><span class="si">%s</span><span class="s1">&quot; needs has no </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span>
                                         <span class="p">(</span><span class="n">cell_name</span><span class="p">,</span> <span class="n">tendril_type</span><span class="p">))</span>
-                <span class="k">if</span> <span class="n">tendril_type</span><span class="o">==</span><span class="s">&#39;inputs&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">tendril_type</span><span class="o">==</span><span class="s1">&#39;inputs&#39;</span><span class="p">:</span>
                     <span class="n">_copy_tendrils_to_tendrils</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="n">forwards</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__inputs</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">_copy_tendrils_to_tendrils</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">outputs</span><span class="p">,</span> <span class="n">forwards</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__outputs</span><span class="p">)</span>
 
-        <span class="c"># call the configure from the user</span>
+        <span class="c1"># call the configure from the user</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__params</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__inputs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__outputs</span><span class="p">)</span>
 
-<div class="viewcode-block" id="BlackBox.configure"><a class="viewcode-back" href="../../ecto/reference/python.html#ecto.blackbox.BlackBox.configure">[docs]</a>    <span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">o</span><span class="p">):</span>
+<div class="viewcode-block" id="BlackBox.configure"><a class="viewcode-back" href="../../ecto/usage/techniques/black_box.html#ecto.blackbox.BlackBox.configure">[docs]</a>    <span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">o</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function has the same meaning as in C++ and can be overriden by a child class.</span>
 
@@ -596,9 +595,9 @@
 <span class="sd">        :param i: an ecto.Tendrils object for the inputs</span>
 <span class="sd">        :param o: an ecto.Tendrils object for the outputs</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
-</div>
-<div class="viewcode-block" id="BlackBox.connections"><a class="viewcode-back" href="../../ecto/reference/python.html#ecto.blackbox.BlackBox.connections">[docs]</a>    <span class="k">def</span> <span class="nf">connections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="BlackBox.connections"><a class="viewcode-back" href="../../ecto/usage/techniques/black_box.html#ecto.blackbox.BlackBox.connections">[docs]</a>    <span class="k">def</span> <span class="nf">connections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function has to be overriden by a child class.</span>
 
@@ -606,9 +605,9 @@
 <span class="sd">                  to decide on certain connections</span>
 <span class="sd">        :return: an iterable of tendril connections.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">&quot;All BlackBox&#39;s must implement at least the connections function....&quot;</span><span class="p">)</span>
-</div>
-<div class="viewcode-block" id="BlackBox.cell"><a class="viewcode-back" href="../../ecto/reference/python.html#ecto.blackbox.BlackBox.cell">[docs]</a>    <span class="k">def</span> <span class="nf">cell</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;All BlackBox&#39;s must implement at least the connections function....&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="BlackBox.cell"><a class="viewcode-back" href="../../ecto/usage/techniques/black_box.html#ecto.blackbox.BlackBox.cell">[docs]</a>    <span class="k">def</span> <span class="nf">cell</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Return an instance of the cell that backs this</span>
 <span class="sd">        BlackBox. Useful for ecto.If, or other places that expect a</span>
@@ -622,7 +621,7 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -631,14 +630,13 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">ecto</a> &raquo;</li>
-          <li><a href="../index.html" >Module code</a> &raquo;</li>
-          <li><a href="../ecto.html" >ecto</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

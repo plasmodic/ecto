@@ -29,8 +29,8 @@
     <link rel="next" title="Cells" href="cells.html" />
     <link rel="prev" title="Overview of Ecto" href="index.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -45,11 +45,11 @@
         <li class="right" >
           <a href="index.html" title="Overview of Ecto"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">ecto</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Overview of Ecto</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Overview of Ecto</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../../index.html">
               <img class="logo" src="../../_static/ecto210.png" alt="Logo"/>
@@ -60,12 +60,14 @@
   <h4>Next topic</h4>
   <p class="topless"><a href="cells.html"
                         title="next chapter">Cells</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../../_sources/ecto/overview/summary.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/ecto/overview/summary.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
       <input type="text" name="q" />
@@ -84,18 +86,18 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="quickguide">
 <span id="checlist"></span><h1>Quickguide<a class="headerlink" href="#quickguide" title="Permalink to this headline">¶</a></h1>
 <p>You definitely need to go through more docs but this is the rough outline of what happens when you write ecto code: you define
-Python/C++ cells that belong to a Python module. You then use that module to create a graph called <tt class="docutils literal"><span class="pre">plasm</span></tt>, and you execute it.</p>
+Python/C++ cells that belong to a Python module. You then use that module to create a graph called <code class="docutils literal"><span class="pre">plasm</span></code>, and you execute it.</p>
 <p>Ecto can be both pure C++ or pure Python but we&#8217;ll show you a combination of both as it provides the speed/tightness of the first one
 and the flexibility of the second one.</p>
 <p>You need to go through the following steps:</p>
 <blockquote>
 <div><ul>
-<li><p class="first">If you create C++ cells, you need to define your ecto module through an <tt class="docutils literal"><span class="pre">ectomodule</span></tt> CMake macro:</p>
+<li><p class="first">If you create C++ cells, you need to define your ecto module through an <code class="docutils literal"><span class="pre">ectomodule</span></code> CMake macro:</p>
 <div class="highlight-cmake"><div class="highlight"><pre><span class="nb">ectomodule</span><span class="p">(</span><span class="s">my_ecto_module_name</span> <span class="s">INSTALL</span>
                                <span class="s">DESTINATION</span> <span class="s">./here/different_name</span>
                                <span class="s">module.cpp</span>
@@ -106,7 +108,7 @@ and the flexibility of the second one.</p>
 </div>
 </li>
 <li><p class="first">You need a module.cpp file that simply defines the Python module containing your cells</p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
+<div class="highlight-c++"><div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&lt;ecto/ecto.hpp&gt;</span><span class="cp"></span>
 <span class="n">ECTO_DEFINE_MODULE</span><span class="p">(</span><span class="n">my_module</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
 </pre></div>
 </div>
@@ -124,22 +126,22 @@ and the flexibility of the second one.</p>
 </div>
 </li>
 <li><p class="first">you create a Python script to create your graph called plasm and run it:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="ch">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">ecto</span>
 <span class="kn">import</span> <span class="nn">my_awesome_cpp_ecto_module</span>
 <span class="kn">import</span> <span class="nn">my_awesome_python_ecto_module</span>
 
-<span class="c"># create a plasm</span>
+<span class="c1"># create a plasm</span>
 <span class="n">plasm</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Plasm</span><span class="p">()</span>
 
-<span class="c"># create some cells</span>
+<span class="c1"># create some cells</span>
 <span class="n">cell1</span> <span class="o">=</span> <span class="n">my_awesome_cpp_ecto_module</span><span class="o">.</span><span class="n">MyAwesomeCell1</span><span class="p">(</span><span class="n">param1</span><span class="o">=</span><span class="n">whatever1</span><span class="p">)</span>
 <span class="n">cell2</span> <span class="o">=</span> <span class="n">my_awesome_python_ecto_module</span><span class="o">.</span><span class="n">MyAwesomeCell2</span><span class="p">(</span><span class="n">param2</span><span class="o">=</span><span class="n">whatever2</span><span class="p">)</span>
 
-<span class="c"># connect those cells in the plasm</span>
-<span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">cell1</span><span class="p">[</span><span class="s">&#39;output&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">cell2</span><span class="p">[</span><span class="s">&#39;input&#39;</span><span class="p">])</span>
+<span class="c1"># connect those cells in the plasm</span>
+<span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">cell1</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">cell2</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">])</span>
 
-<span class="c"># execute the graph</span>
+<span class="c1"># execute the graph</span>
 <span class="n">plasm</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">niter</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -154,7 +156,7 @@ and the flexibility of the second one.</p>
 <li>you have access to multithreading and scheduling transparently</li>
 </ul>
 </div></blockquote>
-<p>Pretty good for a first start but <tt class="docutils literal"><span class="pre">ecto</span></tt> offers way, way more like:</p>
+<p>Pretty good for a first start but <code class="docutils literal"><span class="pre">ecto</span></code> offers way, way more like:</p>
 <blockquote>
 <div><ul class="simple">
 <li>more complex graphs than DAGs (like condition/for loops)</li>
@@ -176,7 +178,7 @@ and the flexibility of the second one.</p>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -191,13 +193,13 @@ and the flexibility of the second one.</p>
         <li class="right" >
           <a href="index.html" title="Overview of Ecto"
              >previous</a> |</li>
-        <li><a href="../../index.html">ecto</a> &raquo;</li>
-          <li><a href="index.html" >Overview of Ecto</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Overview of Ecto</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

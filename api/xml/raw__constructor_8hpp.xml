@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
   <compounddef id="raw__constructor_8hpp" kind="file" language="C++">
     <compoundname>raw_constructor.hpp</compoundname>
     <includes local="no">Python.h</includes>
@@ -108,7 +108,7 @@
 <codeline lineno="65"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>detail</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="66"><highlight class="normal"></highlight></codeline>
 <codeline lineno="67"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>F&gt;</highlight></codeline>
-<codeline lineno="68" refid="namespaceboost_1_1python_1a20a5b1e179218af6c459e8c6fdf8b8cc" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">object</highlight><highlight class="normal"><sp/><ref refid="namespaceboost_1_1python_1a20a5b1e179218af6c459e8c6fdf8b8cc" kindref="member">raw_constructor</ref>(F<sp/>f,<sp/>std::size_t<sp/>min_args<sp/>=<sp/>0)</highlight></codeline>
+<codeline lineno="68" refid="namespaceboost_1_1python_1a20a5b1e179218af6c459e8c6fdf8b8cc" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">object</highlight><highlight class="normal"><sp/><ref refid="namespaceboost_1_1python_1a20a5b1e179218af6c459e8c6fdf8b8cc" kindref="member">raw_constructor</ref>(F<sp/><ref refid="structboost_1_1python_1_1detail_1_1raw__constructor__dispatcher_1a055de51d7e8492c050508aa131ec1dd5" kindref="member">f</ref>,<sp/>std::size_t<sp/>min_args<sp/>=<sp/>0)</highlight></codeline>
 <codeline lineno="69"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>detail::make_raw_function(</highlight></codeline>
 <codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>objects::py_function(</highlight></codeline>

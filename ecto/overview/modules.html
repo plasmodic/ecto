@@ -29,8 +29,8 @@
     <link rel="next" title="Installing ecto" href="../install/index.html" />
     <link rel="prev" title="Cells" href="cells.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -45,11 +45,11 @@
         <li class="right" >
           <a href="cells.html" title="Cells"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">ecto</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Overview of Ecto</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Overview of Ecto</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../../index.html">
               <img class="logo" src="../../_static/ecto210.png" alt="Logo"/>
@@ -60,12 +60,14 @@
   <h4>Next topic</h4>
   <p class="topless"><a href="../install/index.html"
                         title="next chapter">Installing ecto</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../../_sources/ecto/overview/modules.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/ecto/overview/modules.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
       <input type="text" name="q" />
@@ -84,7 +86,7 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="modules">
 <span id="modules-overview"></span><h1>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h1>
@@ -97,23 +99,23 @@ object.  From a build system perspective a module looks like:</p>
   <span class="p">)</span>
 </pre></div>
 </div>
-<p>Where <tt class="docutils literal"><span class="pre">module.cpp</span></tt> is the recommended idiom for defining your ecto module.
+<p>Where <code class="docutils literal"><span class="pre">module.cpp</span></code> is the recommended idiom for defining your ecto module.
 INSTALL is an optional argument: if set, the module will also be installed (you might
 not want to install a test module). DESTINATION is the relative path where to
-install the module (e.g.: <tt class="docutils literal"><span class="pre">./</span></tt> (default) or <tt class="docutils literal"><span class="pre">${PROJECT_NAME}/ecto_cells</span></tt>).
-It will contain very little code and use the <a class="reference internal" href="../usage/techniques/autoregister.html#c.ECTO_DEFINE_MODULE" title="ECTO_DEFINE_MODULE"><tt class="xref c c-macro docutils literal"><span class="pre">ECTO_DEFINE_MODULE</span></tt></a>. A typical
-<tt class="docutils literal"><span class="pre">module.cpp</span></tt> will look like:</p>
+install the module (e.g.: <code class="docutils literal"><span class="pre">./</span></code> (default) or <code class="docutils literal"><span class="pre">${PROJECT_NAME}/ecto_cells</span></code>).
+It will contain very little code and use the <a class="reference internal" href="../usage/techniques/autoregister.html#c.ECTO_DEFINE_MODULE" title="ECTO_DEFINE_MODULE"><code class="xref c c-macro docutils literal"><span class="pre">ECTO_DEFINE_MODULE</span></code></a>. A typical
+<code class="docutils literal"><span class="pre">module.cpp</span></code> will look like:</p>
 <blockquote>
-<div><div class="highlight-c++"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
+<div><div class="highlight-c++"><div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&lt;ecto/ecto.hpp&gt;</span><span class="cp"></span>
 
 <span class="n">ECTO_DEFINE_MODULE</span><span class="p">(</span><span class="n">my_ecto_module</span><span class="p">){}</span>
 </pre></div>
 </div>
-<p>It is important that the name given to your <tt class="docutils literal"><span class="pre">ectomodule</span></tt> macro, <tt class="docutils literal"><span class="pre">my_ecto_module</span></tt>
-matches that given to <a class="reference internal" href="../usage/techniques/autoregister.html#c.ECTO_DEFINE_MODULE" title="ECTO_DEFINE_MODULE"><tt class="xref c c-macro docutils literal"><span class="pre">ECTO_DEFINE_MODULE</span></tt></a>.</p>
+<p>It is important that the name given to your <code class="docutils literal"><span class="pre">ectomodule</span></code> macro, <code class="docutils literal"><span class="pre">my_ecto_module</span></code>
+matches that given to <a class="reference internal" href="../usage/techniques/autoregister.html#c.ECTO_DEFINE_MODULE" title="ECTO_DEFINE_MODULE"><code class="xref c c-macro docutils literal"><span class="pre">ECTO_DEFINE_MODULE</span></code></a>.</p>
 </div></blockquote>
 <p>And every other cpp file will contain typically a single cell, exported:</p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
+<div class="highlight-c++"><div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&lt;ecto/ecto.hpp&gt;</span><span class="cp"></span>
 
 <span class="k">namespace</span> <span class="n">my_ecto_module</span>
 <span class="p">{</span>
@@ -130,19 +132,19 @@ matches that given to <a class="reference internal" href="../usage/techniques/au
 violations.  Also notice that most ecto modules do not contain header files, as your
 ecto cells should be rather self contained, use common types for
 tendrils (int, float, cv::Mat, pcl::PointCloud), etc ...</p>
-<p>The <tt class="docutils literal"><span class="pre">ectomodule</span></tt> cmake macro will yield a shared library artifact in your build, that
+<p>The <code class="docutils literal"><span class="pre">ectomodule</span></code> cmake macro will yield a shared library artifact in your build, that
 has no lib prefix. This shared library is accessible to python if it is in
 the python python path.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#import the ecto module</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c1">#import the ecto module</span>
 <span class="kn">import</span> <span class="nn">my_ecto_module</span>
 
-<span class="c">#access a cell from the module</span>
+<span class="c1">#access a cell from the module</span>
 <span class="n">hello</span> <span class="o">=</span> <span class="n">my_ecto_module</span><span class="o">.</span><span class="n">Hello</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Your project may contain any number of modules, and each module may have any number
 of cells. More advanced projects might use python package layout, which should work
-fine with compiled ecto modules, see <a class="reference internal" href="../usage/techniques/python-packages.html#techniques-python-packages"><em>Using python packages with ecto projects</em></a>.</p>
+fine with compiled ecto modules, see <a class="reference internal" href="../usage/techniques/python-packages.html#techniques-python-packages"><span>Using python packages with ecto projects</span></a>.</p>
 </div>
 
 
@@ -151,7 +153,7 @@ fine with compiled ecto modules, see <a class="reference internal" href="../usag
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -166,13 +168,13 @@ fine with compiled ecto modules, see <a class="reference internal" href="../usag
         <li class="right" >
           <a href="cells.html" title="Cells"
              >previous</a> |</li>
-        <li><a href="../../index.html">ecto</a> &raquo;</li>
-          <li><a href="index.html" >Overview of Ecto</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Overview of Ecto</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

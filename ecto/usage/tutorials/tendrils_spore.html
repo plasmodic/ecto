@@ -29,8 +29,8 @@
     <link rel="next" title="Using python packages with ecto projects" href="../techniques/python-packages.html" />
     <link rel="prev" title="Lifecycle of Cells" href="lifecycle.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -45,11 +45,11 @@
         <li class="right" >
           <a href="lifecycle.html" title="Lifecycle of Cells"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../../index.html">ecto</a> &raquo;</li>
-          <li><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../../../index.html">
               <img class="logo" src="../../../_static/ecto210.png" alt="Logo"/>
@@ -60,12 +60,14 @@
   <h4>Next topic</h4>
   <p class="topless"><a href="../techniques/python-packages.html"
                         title="next chapter">Using python packages with ecto projects</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../../../_sources/ecto/usage/tutorials/tendrils_spore.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/ecto/usage/tutorials/tendrils_spore.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
       <input type="text" name="q" />
@@ -84,17 +86,17 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="tendrils-and-spores">
 <h1>Tendrils and Spores<a class="headerlink" href="#tendrils-and-spores" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference internal" href="../../reference/tendril.html#tendrils-overview"><em>Tendrils</em></a> are what defines the inputs/outputs/parameters of any cell.
-They are a mapping from a string to the matching <a class="reference internal" href="../../reference/tendril.html#tendril-overview"><em>tendril</em></a>. So what is a
+<p><a class="reference internal" href="../../reference/tendril.html#tendrils-overview"><span>Tendrils</span></a> are what defines the inputs/outputs/parameters of any cell.
+They are a mapping from a string to the matching <a class="reference internal" href="../../reference/tendril.html#tendril-overview"><span>tendril</span></a>. So what is a
 tendril then ? Well, it is a container that holdes the input/output/parameter in a type-agnostic
-way (like a <tt class="docutils literal"><span class="pre">boost::any</span></tt>) to allow for static introspection and Python interaction.</p>
+way (like a <code class="docutils literal"><span class="pre">boost::any</span></code>) to allow for static introspection and Python interaction.</p>
 <p>We have seen some code that uses tendrils to extract the information at runtime but there are other ways of getting the data. Here we will show three different ways to get the data, but you will most likely always use the last one. The first method is the most convenient to write but the other methods can also have their use case (usually for lower level tendril manipulation).</p>
 <p>We have seen how to use tendrils with a runtime registration:</p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
+<div class="highlight-c++"><div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&lt;ecto/ecto.hpp&gt;</span><span class="cp"></span>
 
 <span class="k">using</span> <span class="n">ecto</span><span class="o">::</span><span class="n">tendrils</span><span class="p">;</span>
 <span class="k">namespace</span> <span class="n">tutorial</span>
@@ -121,9 +123,9 @@ way (like a <tt class="docutils literal"><span class="pre">boost::any</span></tt
 <span class="n">ECTO_CELL</span><span class="p">(</span><span class="n">tutorial</span><span class="p">,</span> <span class="n">tutorial</span><span class="o">::</span><span class="n">Add</span><span class="p">,</span> <span class="s">&quot;Add&quot;</span><span class="p">,</span> <span class="s">&quot;Adds two integers together.&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>In an effort to save duplicate declaration, you may register a member <a class="reference internal" href="../../reference/tendril.html#spore-overview"><em>spore</em></a> at
+<p>In an effort to save duplicate declaration, you may register a member <a class="reference internal" href="../../reference/tendril.html#spore-overview"><span>spore</span></a> at
 tendril declaration time. A spore is basically a typed wrapper around a tendril that behaves just like a pointer.</p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
+<div class="highlight-c++"><div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&lt;ecto/ecto.hpp&gt;</span><span class="cp"></span>
 
 <span class="k">using</span> <span class="n">ecto</span><span class="o">::</span><span class="n">tendrils</span><span class="p">;</span>
 <span class="k">namespace</span> <span class="n">tutorial</span>
@@ -159,7 +161,7 @@ tendril declaration time. A spore is basically a typed wrapper around a tendril 
 </pre></div>
 </div>
 <p>And you can actually register a spore to a tendril when you&#8217;re declaring it, making things even shorter:</p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
+<div class="highlight-c++"><div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&lt;ecto/ecto.hpp&gt;</span><span class="cp"></span>
 
 <span class="k">using</span> <span class="n">ecto</span><span class="o">::</span><span class="n">tendrils</span><span class="p">;</span>
 <span class="k">namespace</span> <span class="n">tutorial</span>
@@ -195,7 +197,7 @@ tendril declaration time. A spore is basically a typed wrapper around a tendril 
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -210,13 +212,13 @@ tendril declaration time. A spore is basically a typed wrapper around a tendril 
         <li class="right" >
           <a href="lifecycle.html" title="Lifecycle of Cells"
              >previous</a> |</li>
-        <li><a href="../../../index.html">ecto</a> &raquo;</li>
-          <li><a href="../index.html" >Usage</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Usage</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

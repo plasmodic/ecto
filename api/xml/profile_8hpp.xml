@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
   <compounddef id="profile_8hpp" kind="file" language="C++">
     <compoundname>profile.hpp</compoundname>
     <includes local="no">stdint.h</includes>
@@ -188,8 +188,8 @@
 <codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>stop_tick<sp/>=<sp/><ref refid="namespaceecto_1_1profile_1aedec79d10deb5a37a71464c79a02187a" kindref="member">profile::read_tsc</ref>();</highlight></codeline>
 <codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>boost::posix_time::ptime<sp/>stop_time<sp/>=</highlight></codeline>
 <codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespaceecto_1ad48a07c99914e7c96702bcce4baf6bc6" kindref="member">boost::posix_time::microsec_clock::universal_time</ref>();</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>gs_.<ref refid="structecto_1_1profile_1_1graph__stats__type_1a340d79ae72ca5639e55098c860640ba8" kindref="member">cumulative_time</ref><sp/><sp/>+=<sp/>stop_time<sp/>-<sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1a85cb67d72c9d1072634b879776e2e4b8" kindref="member">start_time</ref>;</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>gs_.<ref refid="structecto_1_1profile_1_1graph__stats__type_1a0d465d23569a8af1789c0b57ccb21017" kindref="member">cumulative_ticks</ref><sp/>+=<sp/>stop_tick<sp/>-<sp/><ref refid="structecto_1_1profile_1_1graphstats__collector_1a7a840b075fd490da5107ea538614d017" kindref="member">start_tick</ref>;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>gs_.<ref refid="structecto_1_1profile_1_1graph__stats__type_1a340d79ae72ca5639e55098c860640ba8" kindref="member">cumulative_time</ref><sp/><sp/>+=<sp/>stop_time<sp/>-<sp/>start_time;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>gs_.<ref refid="structecto_1_1profile_1_1graph__stats__type_1a0d465d23569a8af1789c0b57ccb21017" kindref="member">cumulative_ticks</ref><sp/>+=<sp/>stop_tick<sp/>-<sp/>start_tick;</highlight></codeline>
 <codeline lineno="72"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
 <codeline lineno="73"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="74"><highlight class="normal"></highlight></codeline>

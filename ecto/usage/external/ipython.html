@@ -29,8 +29,8 @@
     <link rel="next" title="Debugging with gdb" href="debugging.html" />
     <link rel="prev" title="Automatic Documentation and Ecto’s Sphinx Extensions" href="../tips/ectodoc.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -45,11 +45,11 @@
         <li class="right" >
           <a href="../tips/ectodoc.html" title="Automatic Documentation and Ecto’s Sphinx Extensions"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../../index.html">ecto</a> &raquo;</li>
-          <li><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../../../index.html">
               <img class="logo" src="../../../_static/ecto210.png" alt="Logo"/>
@@ -60,12 +60,14 @@
   <h4>Next topic</h4>
   <p class="topless"><a href="debugging.html"
                         title="next chapter">Debugging with gdb</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../../../_sources/ecto/usage/external/ipython.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/ecto/usage/external/ipython.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
       <input type="text" name="q" />
@@ -84,7 +86,7 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="using-ipython">
 <span id="ipython"></span><h1>Using IPython<a class="headerlink" href="#using-ipython" title="Permalink to this headline">¶</a></h1>
@@ -94,15 +96,15 @@ you can use IPython, <a class="reference external" href="http://ipython.scipy.or
 to ecto scripts.  In short, you execute the plasm asynchronously and
 then spawn an ipython interpreter in the main python interpreter
 thread:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="ch">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">ecto</span><span class="o">,</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">ecto.ecto_test</span> <span class="kn">as</span> <span class="nn">ecto_test</span>
 
 <span class="n">plasm</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Plasm</span><span class="p">()</span>
  
-<span class="n">gen</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">Generate</span><span class="p">(</span><span class="s">&quot;Gen&quot;</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
-<span class="n">inc</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">Increment</span><span class="p">(</span><span class="s">&quot;Increment 0&quot;</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">printer</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">Printer</span><span class="p">(</span><span class="s">&quot;Printy&quot;</span><span class="p">)</span>
+<span class="n">gen</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">Generate</span><span class="p">(</span><span class="s2">&quot;Gen&quot;</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="n">inc</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">Increment</span><span class="p">(</span><span class="s2">&quot;Increment 0&quot;</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">printer</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">Printer</span><span class="p">(</span><span class="s2">&quot;Printy&quot;</span><span class="p">)</span>
  
 <span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">gen</span><span class="p">[:]</span> <span class="o">&gt;&gt;</span> <span class="n">inc</span><span class="p">[:],</span>
               <span class="n">inc</span><span class="p">[:]</span> <span class="o">&gt;&gt;</span> <span class="n">printer</span><span class="p">[:])</span>
@@ -133,21 +135,21 @@ In [1]: ***** 1 ***** 0x7f96c8004a10
 <p>Ecto provides a function that will redirect the cout and cerr of the
 ecto cells to a file, reducing the chance that something will
 interfere with your ipython prompt:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="ch">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">ecto</span><span class="o">,</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">ecto.ecto_test</span> <span class="kn">as</span> <span class="nn">ecto_test</span>
 
 <span class="n">plasm</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Plasm</span><span class="p">()</span>
 
-<span class="n">gen</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">Generate</span><span class="p">(</span><span class="s">&quot;Gen&quot;</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
-<span class="n">inc</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">Increment</span><span class="p">(</span><span class="s">&quot;Increment 0&quot;</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">printer</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">Printer</span><span class="p">(</span><span class="s">&quot;Printy&quot;</span><span class="p">)</span>
+<span class="n">gen</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">Generate</span><span class="p">(</span><span class="s2">&quot;Gen&quot;</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="n">inc</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">Increment</span><span class="p">(</span><span class="s2">&quot;Increment 0&quot;</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">printer</span> <span class="o">=</span> <span class="n">ecto_test</span><span class="o">.</span><span class="n">Printer</span><span class="p">(</span><span class="s2">&quot;Printy&quot;</span><span class="p">)</span>
 
 <span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">gen</span><span class="p">[:]</span> <span class="o">&gt;&gt;</span> <span class="n">inc</span><span class="p">[:],</span>
               <span class="n">inc</span><span class="p">[:]</span> <span class="o">&gt;&gt;</span> <span class="n">printer</span><span class="p">[:])</span>
 
 <span class="n">sched</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Scheduler</span><span class="p">(</span><span class="n">plasm</span><span class="p">)</span>
-<span class="n">ecto</span><span class="o">.</span><span class="n">log_to_file</span><span class="p">(</span><span class="s">&quot;ectolog.txt&quot;</span><span class="p">)</span>
+<span class="n">ecto</span><span class="o">.</span><span class="n">log_to_file</span><span class="p">(</span><span class="s2">&quot;ectolog.txt&quot;</span><span class="p">)</span>
 <span class="n">sched</span><span class="o">.</span><span class="n">execute_async</span><span class="p">()</span>
 
 <span class="kn">from</span> <span class="nn">IPython.Shell</span> <span class="kn">import</span> <span class="n">IPShellEmbed</span>
@@ -155,23 +157,23 @@ interfere with your ipython prompt:</p>
 <span class="n">ipshell</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>And you will see the output is separated.  Try the utility <tt class="docutils literal"><span class="pre">tail</span></tt> to
+<p>And you will see the output is separated.  Try the utility <code class="docutils literal"><span class="pre">tail</span></code> to
 watch the output file: You can then change parameters of running cells
 in the ipython session while the scheduler is executing.</p>
-<p>Also see <a class="reference internal" href="../tips/argparse.html#argparsing"><em>Command line helpers: getting stats, GUIS, a shell and more automagically !</em></a> for enabling this in the command line in your
+<p>Also see <a class="reference internal" href="../tips/argparse.html#argparsing"><span>Command line helpers: getting stats, GUIS, a shell and more automagically !</span></a> for enabling this in the command line in your
 scripts.</p>
 <dl class="function">
 <dt id="ecto.log_to_file">
-<tt class="descclassname">ecto.</tt><tt class="descname">log_to_file</tt><big>(</big><em>(str)arg1</em><big>)</big> &rarr; None :<a class="headerlink" href="#ecto.log_to_file" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">ecto.</code><code class="descname">log_to_file</code><span class="sig-paren">(</span><em>(str)arg1</em><span class="sig-paren">)</span> &rarr; None :<a class="headerlink" href="#ecto.log_to_file" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>C++ signature :</dt>
-<dd>void log_to_file(std::string)</dd>
+<dd>void log_to_file(std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;)</dd>
 </dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="ecto.unlog_to_file">
-<tt class="descclassname">ecto.</tt><tt class="descname">unlog_to_file</tt><big>(</big><big>)</big> &rarr; None :<a class="headerlink" href="#ecto.unlog_to_file" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">ecto.</code><code class="descname">unlog_to_file</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; None :<a class="headerlink" href="#ecto.unlog_to_file" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>C++ signature :</dt>
 <dd>void unlog_to_file()</dd>
@@ -186,7 +188,7 @@ scripts.</p>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -201,13 +203,13 @@ scripts.</p>
         <li class="right" >
           <a href="../tips/ectodoc.html" title="Automatic Documentation and Ecto’s Sphinx Extensions"
              >previous</a> |</li>
-        <li><a href="../../../index.html">ecto</a> &raquo;</li>
-          <li><a href="../index.html" >Usage</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Usage</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

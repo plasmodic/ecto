@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
   <compounddef id="dir_c24cbdf628439aa3208a039e526fc43e" kind="dir">
     <compoundname>/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto</compoundname>
     <innerdir refid="dir_30c299c00e268ad0ca3a5cd08f2b9299">/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/graph</innerdir>

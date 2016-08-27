@@ -29,8 +29,8 @@
     <link rel="next" title="Pure C++: serialization is awesome but I REALLY want to use pure C++" href="pure_cpp.html" />
     <link rel="prev" title="Parameters to and from YAML" href="yaml.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -45,11 +45,11 @@
         <li class="right" >
           <a href="yaml.html" title="Parameters to and from YAML"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../../index.html">ecto</a> &raquo;</li>
-          <li><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../../../index.html">
               <img class="logo" src="../../../_static/ecto210.png" alt="Logo"/>
@@ -68,12 +68,14 @@
   <h4>Next topic</h4>
   <p class="topless"><a href="pure_cpp.html"
                         title="next chapter">Pure C++: serialization is awesome but I REALLY want to use pure C++</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../../../_sources/ecto/usage/advanced/serialization.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/ecto/usage/advanced/serialization.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
       <input type="text" name="q" />
@@ -92,7 +94,7 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="serialization-create-from-python-load-execute-from-pure-c">
 <span id="serialization"></span><h1>Serialization: Create From Python, Load/Execute From Pure C++<a class="headerlink" href="#serialization-create-from-python-load-execute-from-pure-c" title="Permalink to this headline">¶</a></h1>
@@ -102,17 +104,17 @@ cells, ecto supports <a class="reference external" href="http://www.boost.org/do
 <dt>Steps to ensure your types can be serialized:</dt>
 <dd><ol class="first last arabic simple">
 <li>Write boost serialization methods for your types, don&#8217;t worry all the basic types should work by default.</li>
-<li>Use the <a class="reference internal" href="#c.ECTO_REGISTER_SERIALIZERS" title="ECTO_REGISTER_SERIALIZERS"><tt class="xref c c-macro docutils literal"><span class="pre">ECTO_REGISTER_SERIALIZERS</span></tt></a> in one of your translation units.</li>
+<li>Use the <a class="reference internal" href="#c.ECTO_REGISTER_SERIALIZERS" title="ECTO_REGISTER_SERIALIZERS"><code class="xref c c-macro docutils literal"><span class="pre">ECTO_REGISTER_SERIALIZERS</span></code></a> in one of your translation units.</li>
 </ol>
 </dd>
 </dl>
 <dl class="macro">
 <dt id="c.ECTO_REGISTER_SERIALIZERS">
-<tt class="descname">ECTO_REGISTER_SERIALIZERS</tt><big>(</big>Type<big>)</big><a class="headerlink" href="#c.ECTO_REGISTER_SERIALIZERS" title="Permalink to this definition">¶</a></dt>
+<code class="descname">ECTO_REGISTER_SERIALIZERS</code><span class="sig-paren">(</span>Type<span class="sig-paren">)</span><a class="headerlink" href="#c.ECTO_REGISTER_SERIALIZERS" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>Sample:</p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
+<div class="highlight-c++"><div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&lt;ecto/ecto.hpp&gt;</span><span class="cp"></span>
 <span class="k">struct</span> <span class="n">Point</span>
 <span class="p">{</span>
   <span class="kt">float</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">n</span><span class="p">;</span>
@@ -170,13 +172,13 @@ node [shape=plaintext]
 0-&gt;2 [headport=&quot;i_str&quot; tailport=&quot;o_output&quot;];
 }" />
 </p>
-<p>Then a cpp file that can execute our <tt class="docutils literal"><span class="pre">printy.plasm</span></tt> file might look like:</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
-<span class="cp">#include &lt;ecto/serialization/registry.hpp&gt;</span>
-<span class="cp">#include &lt;ecto/serialization/cell.hpp&gt;</span>
-<span class="cp">#include &lt;ecto/serialization/plasm.hpp&gt;</span>
+<p>Then a cpp file that can execute our <code class="docutils literal"><span class="pre">printy.plasm</span></code> file might look like:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&lt;ecto/ecto.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;ecto/serialization/registry.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;ecto/serialization/cell.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;ecto/serialization/plasm.hpp&gt;</span><span class="cp"></span>
 
-<span class="cp">#include &lt;ecto/scheduler.hpp&gt;</span>
+<span class="cp">#include</span> <span class="cpf">&lt;ecto/scheduler.hpp&gt;</span><span class="cp"></span>
 
 <span class="kt">int</span>
 <span class="nf">main</span><span class="p">()</span>
@@ -277,7 +279,7 @@ o
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -292,13 +294,13 @@ o
         <li class="right" >
           <a href="yaml.html" title="Parameters to and from YAML"
              >previous</a> |</li>
-        <li><a href="../../../index.html">ecto</a> &raquo;</li>
-          <li><a href="../index.html" >Usage</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Usage</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

@@ -29,8 +29,8 @@
     <link rel="next" title="Documentation for Python" href="python.html" />
     <link rel="prev" title="schedulers" href="schedulers.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -45,11 +45,11 @@
         <li class="right" >
           <a href="schedulers.html" title="schedulers"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">ecto</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Reference</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Reference</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../../index.html">
               <img class="logo" src="../../_static/ecto210.png" alt="Logo"/>
@@ -60,12 +60,14 @@
   <h4>Next topic</h4>
   <p class="topless"><a href="python.html"
                         title="next chapter">Documentation for Python</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../../_sources/ecto/reference/ecto_test_cells.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/ecto/reference/ecto_test_cells.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
       <input type="text" name="q" />
@@ -84,7 +86,7 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="module-ecto-test">
 <h1>Module ecto_test<a class="headerlink" href="#module-ecto-test" title="Permalink to this headline">¶</a></h1>
@@ -96,19 +98,19 @@
 <p class="topic-title first">Brief doc<p>Sleep for a bit while in process, according to a list of sleep times.</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>list_o_sleeps</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">boost::python::api::object</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> no default value</em></p>
+<li><p class="first"><strong>list_o_sleeps</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">boost::python::api::object</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> no default value</em></p>
 <p>A sequence of sleeps.</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">boost::posix_time::ptime</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>in</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">boost::posix_time::ptime</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>input</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">boost::posix_time::ptime</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">boost::posix_time::ptime</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>output</p>
 </li>
 </ul>
@@ -124,7 +126,7 @@
 <p></p>
 <p></p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>output</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto::tendril::none</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>output</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">ecto::tendril::none</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>output</p>
 </li>
 </ul>
@@ -138,14 +140,14 @@
 <p class="topic-title first">Brief doc<p>Don&#8217;t allocate me, feel free to inspect.</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>str</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">std::string</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> no default value</em></p>
+<li><p class="first"><strong>str</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">std::string</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> no default value</em></p>
 <p></p>
 </li>
 </ul>
 </p>
 <p></p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>str</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">std::string</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>str</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">std::string</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p></p>
 </li>
 </ul>
@@ -160,13 +162,13 @@
 </p>
 <p></p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>in</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>required input</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>required output</p>
 </li>
 </ul>
@@ -182,7 +184,7 @@
 <p></p>
 <p></p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">boost::posix_time::ptime</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">boost::posix_time::ptime</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>output</p>
 </li>
 </ul>
@@ -196,14 +198,14 @@
 <p class="topic-title first">Brief doc<p>Uses something that is bound to python</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>Woz</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto_test::EvilNoPython</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> no default value</em></p>
+<li><p class="first"><strong>Woz</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">ecto_test::EvilNoPython</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> no default value</em></p>
 <p>A Woz is a Woz when a Woz was Woz</p>
 </li>
 </ul>
 </p>
 <p></p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>Strasz</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto_test::EvilNoPython</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>Strasz</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">ecto_test::EvilNoPython</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>A Strasz is a Strasz when a Strasz saw a Strasz</p>
 </li>
 </ul>
@@ -219,7 +221,7 @@
 <p></p>
 <p></p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>output</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">float</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>output</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">float</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>output</p>
 </li>
 </ul>
@@ -234,16 +236,16 @@
 </p>
 <p></p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>left</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>left</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>Left hand operand.</p>
 </li>
-<li><p class="first"><strong>right</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>right</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>Right hand operand.</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>The result.</p>
 </li>
 </ul>
@@ -257,19 +259,19 @@
 <p class="topic-title first">Brief doc<p>Pass on a values but break every Nth iteration.</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>n</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">long</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">1</span></tt></p>
+<li><p class="first"><strong>n</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">unsigned</span> <span class="pre">long</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> default: </em><code class="docutils literal"><span class="pre">1</span></code></p>
 <p>Break on every nth process.</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto::tendril::none</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>in</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">ecto::tendril::none</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>Any input</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto::tendril::none</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">ecto::tendril::none</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>Any input</p>
 </li>
 </ul>
@@ -283,22 +285,22 @@
 <p class="topic-title first">Brief doc<p>Holds on to handles...</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>value</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">1.0</span></tt></p>
+<li><p class="first"><strong>value</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> default: </em><code class="docutils literal"><span class="pre">1.0</span></code></p>
 <p>I use this value</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>input</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>input</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>input</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>output</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>output</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>output</p>
 </li>
-<li><p class="first"><strong>value</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>value</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>the parameter.</p>
 </li>
 </ul>
@@ -312,19 +314,19 @@
 <p class="topic-title first">Brief doc<p>Throttle to a certain Hz frequency</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>rate</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">1.0</span></tt></p>
+<li><p class="first"><strong>rate</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> default: </em><code class="docutils literal"><span class="pre">1.0</span></code></p>
 <p>Do not pass data more quickly than this many hz</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto::tendril::none</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>in</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">ecto::tendril::none</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>input</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto::tendril::none</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">ecto::tendril::none</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>input</p>
 </li>
 </ul>
@@ -338,14 +340,14 @@
 <p class="topic-title first">Brief doc<p>Reads doubles from a file like object</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>file</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">boost::shared_ptr&lt;std::istream&gt;</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> no default value</em></p>
+<li><p class="first"><strong>file</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">boost::shared_ptr&lt;std::istream&gt;</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> no default value</em></p>
 <p>A filelike object</p>
 </li>
 </ul>
 </p>
 <p></p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>output</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>output</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>A double output.</p>
 </li>
 </ul>
@@ -359,19 +361,19 @@
 <p class="topic-title first">Brief doc<p>Node with N inputs and N outputs, sleeps for a random period on each process()</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>n</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">1</span></tt></p>
+<li><p class="first"><strong>n</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> default: </em><code class="docutils literal"><span class="pre">1</span></code></p>
 <p>number of ins and outs</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>in0</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto::tendril::none</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>in0</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">ecto::tendril::none</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>input</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>out0</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto::tendril::none</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out0</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">ecto::tendril::none</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>output</p>
 </li>
 </ul>
@@ -385,13 +387,13 @@
 <p class="topic-title first">Brief doc<p>Writes doubles to a file like object</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>file</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">boost::shared_ptr&lt;std::ostream&gt;</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> no default value</em></p>
+<li><p class="first"><strong>file</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">boost::shared_ptr&lt;std::ostream&gt;</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> no default value</em></p>
 <p>A filelike object</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>input</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>input</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>A double input.</p>
 </li>
 </ul>
@@ -406,13 +408,13 @@
 <p class="topic-title first">Brief doc<p>A printer of int, double, string, bool. Use the print_type parameter to specify type.  Default is double</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>print_type</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">std::string</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">double</span></tt></p>
+<li><p class="first"><strong>print_type</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">std::string</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> default: </em><code class="docutils literal"><span class="pre">double</span></code></p>
 <p>The type string for what i&#8217;m to print... int, double, bool, string.</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>in</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>what to print</p>
 </li>
 </ul>
@@ -427,22 +429,22 @@
 <p class="topic-title first">Brief doc<p>Calcluate bandwidth and latency based on timestamps received from an upstream ping.</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>queue_size</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">10</span></tt></p>
+<li><p class="first"><strong>queue_size</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> default: </em><code class="docutils literal"><span class="pre">10</span></code></p>
 <p>size of window to collect statistics over</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">boost::posix_time::ptime</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>in</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">boost::posix_time::ptime</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>input</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>hz</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>hz</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p></p>
 </li>
-<li><p class="first"><strong>latency_seconds</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>latency_seconds</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p></p>
 </li>
 </ul>
@@ -458,7 +460,7 @@
 <p></p>
 <p></p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>output</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto_test::Struct</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>output</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">ecto_test::Struct</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>output</p>
 </li>
 </ul>
@@ -474,7 +476,7 @@
 <p></p>
 <p></p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>output</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">bool</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>output</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">bool</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>output</p>
 </li>
 </ul>
@@ -488,19 +490,19 @@
 <p class="topic-title first">Brief doc<p>Multiply an input by a constant</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>factor</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">3.14</span></tt></p>
+<li><p class="first"><strong>factor</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> default: </em><code class="docutils literal"><span class="pre">3.14</span></code></p>
 <p>A factor to multiply by.</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>in</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>multly in by factor</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>the result of in * factor</p>
 </li>
 </ul>
@@ -514,22 +516,22 @@
 <p class="topic-title first">Brief doc<p>Uses parameter change callbacks.</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>value</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">1.0</span></tt></p>
+<li><p class="first"><strong>value</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> default: </em><code class="docutils literal"><span class="pre">1.0</span></code></p>
 <p>I use this value</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>input</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>input</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>input</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>output</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>output</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>output</p>
 </li>
-<li><p class="first"><strong>value</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>value</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>the parameter.</p>
 </li>
 </ul>
@@ -543,17 +545,17 @@
 <p class="topic-title first">Brief doc<p>Generate random doubles uniformly distributed on [0, 1)</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>ncalls</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">1</span></tt></p>
+<li><p class="first"><strong>ncalls</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> default: </em><code class="docutils literal"><span class="pre">1</span></code></p>
 <p>Call this many times, return only the last. Used to generate CPU load in testing.</p>
 </li>
-<li><p class="first"><strong>seed</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> no default value</em></p>
+<li><p class="first"><strong>seed</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> no default value</em></p>
 <p>Seed.  By default the RNG is seeded from the system time.</p>
 </li>
 </ul>
 </p>
 <p></p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>output</p>
 </li>
 </ul>
@@ -567,22 +569,22 @@
 <p class="topic-title first">Brief doc<p>Gather ints</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>n</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">2</span></tt></p>
+<li><p class="first"><strong>n</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> default: </em><code class="docutils literal"><span class="pre">2</span></code></p>
 <p>N to gather</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>in_0000</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>in_0000</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>An intinput.</p>
 </li>
-<li><p class="first"><strong>in_0001</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>in_0001</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>An intinput.</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>The sum of all inputs.</p>
 </li>
 </ul>
@@ -596,19 +598,19 @@
 <p class="topic-title first">Brief doc<p>Quits the graph after so many process calls</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>N</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> no default value</em></p>
+<li><p class="first"><strong>N</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> no default value</em></p>
 <p>Quit after this many calls to process()</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>in</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>An inbox</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>outbox</p>
 </li>
 </ul>
@@ -622,20 +624,20 @@
 <p class="topic-title first">Brief doc<p>Scatter a value...</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>n</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">2</span></tt></p>
+<li><p class="first"><strong>n</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> default: </em><code class="docutils literal"><span class="pre">2</span></code></p>
 <p>Number to scatter...</p>
 </li>
-<li><p class="first"><strong>x</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">13</span></tt></p>
+<li><p class="first"><strong>x</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> default: </em><code class="docutils literal"><span class="pre">13</span></code></p>
 <p>The value to scatter...</p>
 </li>
 </ul>
 </p>
 <p></p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>out_0000</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out_0000</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>The 0th scatter</p>
 </li>
-<li><p class="first"><strong>out_0001</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out_0001</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>The 1th scatter</p>
 </li>
 </ul>
@@ -650,25 +652,25 @@
 </p>
 <p></p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto::tendril::none</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>in</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">ecto::tendril::none</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>An inbox</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>nconfigure</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>nconfigure</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p></p>
 </li>
-<li><p class="first"><strong>nprocess</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>nprocess</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p></p>
 </li>
-<li><p class="first"><strong>nstart</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>nstart</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p></p>
 </li>
-<li><p class="first"><strong>nstop</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>nstop</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p></p>
 </li>
-<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto::tendril::none</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">ecto::tendril::none</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>An inbox</p>
 </li>
 </ul>
@@ -682,13 +684,13 @@
 <p class="topic-title first">Brief doc<p>Will quit the graph on some certain input</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>str</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">std::string</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">EXIT</span></tt></p>
+<li><p class="first"><strong>str</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">std::string</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> default: </em><code class="docutils literal"><span class="pre">EXIT</span></code></p>
 <p>The default string to print</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>str</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">std::string</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>str</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">std::string</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>The input string to listen to.</p>
 </li>
 </ul>
@@ -703,22 +705,22 @@
 <p class="topic-title first">Brief doc<p>Gather doubles</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>n</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">2</span></tt></p>
+<li><p class="first"><strong>n</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> default: </em><code class="docutils literal"><span class="pre">2</span></code></p>
 <p>N to gather</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>in_0000</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>in_0000</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>An doubleinput.</p>
 </li>
-<li><p class="first"><strong>in_0001</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>in_0001</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>An doubleinput.</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>The sum of all inputs.</p>
 </li>
 </ul>
@@ -733,7 +735,7 @@
 </p>
 <p></p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>input</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">float</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>input</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">float</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>input</p>
 </li>
 </ul>
@@ -748,20 +750,20 @@
 <p class="topic-title first">Brief doc<p>Generate doubles</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>start</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">0.0</span></tt></p>
+<li><p class="first"><strong>start</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> default: </em><code class="docutils literal"><span class="pre">0.0</span></code></p>
 <p>My starting value.</p>
 </li>
-<li><p class="first"><strong>step</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">2.0</span></tt></p>
+<li><p class="first"><strong>step</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> default: </em><code class="docutils literal"><span class="pre">2.0</span></code></p>
 <p>The step with which i generate integers.</p>
 </li>
-<li><p class="first"><strong>stop</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">0.0</span></tt></p>
+<li><p class="first"><strong>stop</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> default: </em><code class="docutils literal"><span class="pre">0.0</span></code></p>
 <p>Stop if the generated value exceeds this upper bound (0 implies no upper bound)</p>
 </li>
 </ul>
 </p>
 <p></p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>The starting value + (step * iterations).</p>
 </li>
 </ul>
@@ -776,13 +778,13 @@
 </p>
 <p></p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>in</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p></p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p></p>
 </li>
 </ul>
@@ -798,7 +800,7 @@
 <p></p>
 <p></p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>output</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>output</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>output</p>
 </li>
 </ul>
@@ -813,7 +815,7 @@
 </p>
 <p></p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>input</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>input</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>input</p>
 </li>
 </ul>
@@ -829,13 +831,13 @@
 </p>
 <p></p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>in</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p></p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p></p>
 </li>
 </ul>
@@ -850,7 +852,7 @@
 </p>
 <p></p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>input</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto::tendril::none</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>input</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">ecto::tendril::none</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>input</p>
 </li>
 </ul>
@@ -865,22 +867,22 @@
 <p class="topic-title first">Brief doc<p>Returns ecto::DO_OVER for so many process calls, and returns ecto::OK every current mod N</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>N</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> no default value</em></p>
+<li><p class="first"><strong>N</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> no default value</em></p>
 <p>Return ecto::DO_OVER from process() this many times</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>in</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>An inbox</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>current</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>current</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p></p>
 </li>
-<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>outbox</p>
 </li>
 </ul>
@@ -895,7 +897,7 @@
 </p>
 <p></p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>input</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">bool</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>input</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">bool</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>input</p>
 </li>
 </ul>
@@ -911,7 +913,7 @@
 </p>
 <p></p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>input</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">std::string</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>input</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">std::string</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>input</p>
 </li>
 </ul>
@@ -926,22 +928,22 @@
 <p class="topic-title first">Brief doc<p>Shared pointer passthru</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>x</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">-1</span></tt></p>
+<li><p class="first"><strong>x</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> default: </em><code class="docutils literal"><span class="pre">-1</span></code></p>
 <p>Default value</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>input</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">boost::shared_ptr&lt;int&gt;</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>input</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">boost::shared_ptr&lt;int&gt;</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>a pass through</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>output</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">boost::shared_ptr&lt;int&gt;</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>output</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">boost::shared_ptr&lt;int&gt;</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>a pass through</p>
 </li>
-<li><p class="first"><strong>value</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>value</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>value</p>
 </li>
 </ul>
@@ -956,7 +958,7 @@
 </p>
 <p></p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>cell</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">boost::python::api::object</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>cell</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">boost::python::api::object</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>a cell ptr</p>
 </li>
 </ul>
@@ -971,19 +973,19 @@
 <p class="topic-title first">Brief doc<p>Throw after so many process calls</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>N</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> no default value</em></p>
+<li><p class="first"><strong>N</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> no default value</em></p>
 <p>Throw in the N-th call to process()</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>in</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>An inbox</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>outbox</p>
 </li>
 </ul>
@@ -1009,13 +1011,13 @@
 </p>
 <p></p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto::tendril::none</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>in</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">ecto::tendril::none</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>Any type</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto::tendril::none</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">ecto::tendril::none</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>Any type</p>
 </li>
 </ul>
@@ -1030,16 +1032,16 @@
 </p>
 <p></p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>left</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>left</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>Left hand operand.</p>
 </li>
-<li><p class="first"><strong>right</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>right</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>Right hand operand.</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>The current accumulation.</p>
 </li>
 </ul>
@@ -1054,13 +1056,13 @@
 </p>
 <p></p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>in</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>an input</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>The input + x</p>
 </li>
 </ul>
@@ -1075,7 +1077,7 @@
 </p>
 <p></p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>input</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">ecto_test::Struct</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>input</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">ecto_test::Struct</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>input</p>
 </li>
 </ul>
@@ -1101,19 +1103,19 @@
 <p class="topic-title first">Brief doc<p>Required parameter</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>x</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> no default value</em></p>
+<li><p class="first"><strong>x</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> no default value</em></p>
 <p>A required parameter.</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>in</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>an input</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>The input + x</p>
 </li>
 </ul>
@@ -1127,19 +1129,19 @@
 <p class="topic-title first">Brief doc<p>Sleep for a bit while in process</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>seconds</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">1.0</span></tt></p>
+<li><p class="first"><strong>seconds</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> default: </em><code class="docutils literal"><span class="pre">1.0</span></code></p>
 <p>sleep this many seconds</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">boost::posix_time::ptime</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>in</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">boost::posix_time::ptime</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>input</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">boost::posix_time::ptime</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">boost::posix_time::ptime</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>output</p>
 </li>
 </ul>
@@ -1153,22 +1155,22 @@
 <p class="topic-title first">Brief doc<p>Increment input by some amount</p>
 </p>
 <p class="topic-title first">Parameters<ul>
-<li><p class="first"><strong>amount</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">1.0</span></tt></p>
+<li><p class="first"><strong>amount</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> default: </em><code class="docutils literal"><span class="pre">1.0</span></code></p>
 <p>Amount to increment by.</p>
 </li>
-<li><p class="first"><strong>delay</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt><em> not </em><em>required</em><tt class="docutils literal">&nbsp;&nbsp; </tt><em> default: </em><tt class="docutils literal"><span class="pre">0</span></tt></p>
+<li><p class="first"><strong>delay</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span> </code><code class="docutils literal">&nbsp;&nbsp; </code><em> not </em><em>required</em><code class="docutils literal">&nbsp;&nbsp; </code><em> default: </em><code class="docutils literal"><span class="pre">0</span></code></p>
 <p>How long it takes to increment in milliseconds</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Inputs<ul>
-<li><p class="first"><strong>in</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>in</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>input</p>
 </li>
 </ul>
 </p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>out</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">double</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>out</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">double</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>output</p>
 </li>
 </ul>
@@ -1184,7 +1186,7 @@
 <p></p>
 <p></p>
 <p class="topic-title first">Outputs<ul>
-<li><p class="first"><strong>output</strong><tt class="docutils literal">&nbsp;&nbsp; </tt><em>   type: </em><tt class="docutils literal"><span class="pre">std::string</span> </tt><tt class="docutils literal">&nbsp;&nbsp; </tt></p>
+<li><p class="first"><strong>output</strong><code class="docutils literal">&nbsp;&nbsp; </code><em>   type: </em><code class="docutils literal"><span class="pre">std::string</span> </code><code class="docutils literal">&nbsp;&nbsp; </code></p>
 <p>output</p>
 </li>
 </ul>
@@ -1199,7 +1201,7 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -1214,13 +1216,13 @@
         <li class="right" >
           <a href="schedulers.html" title="schedulers"
              >previous</a> |</li>
-        <li><a href="../../index.html">ecto</a> &raquo;</li>
-          <li><a href="index.html" >Reference</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Reference</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

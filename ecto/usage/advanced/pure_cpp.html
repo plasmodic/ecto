@@ -29,8 +29,8 @@
     <link rel="next" title="Reference" href="../../reference/index.html" />
     <link rel="prev" title="Serialization: Create From Python, Load/Execute From Pure C++" href="serialization.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -45,11 +45,11 @@
         <li class="right" >
           <a href="serialization.html" title="Serialization: Create From Python, Load/Execute From Pure C++"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../../index.html">ecto</a> &raquo;</li>
-          <li><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../../../index.html">
               <img class="logo" src="../../../_static/ecto210.png" alt="Logo"/>
@@ -69,12 +69,14 @@
   <h4>Next topic</h4>
   <p class="topless"><a href="../../reference/index.html"
                         title="next chapter">Reference</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../../../_sources/ecto/usage/advanced/pure_cpp.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/ecto/usage/advanced/pure_cpp.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
       <input type="text" name="q" />
@@ -93,25 +95,25 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="pure-c-serialization-is-awesome-but-i-really-want-to-use-pure-c">
 <h1>Pure C++: serialization is awesome but I REALLY want to use pure C++<a class="headerlink" href="#pure-c-serialization-is-awesome-but-i-really-want-to-use-pure-c" title="Permalink to this headline">¶</a></h1>
-<p>The core of <tt class="docutils literal"><span class="pre">ecto</span></tt> is pure C++ (the cells, the module creation, the plasm creation and the scheduler) so
+<p>The core of <code class="docutils literal"><span class="pre">ecto</span></code> is pure C++ (the cells, the module creation, the plasm creation and the scheduler) so
 doing everything in C++ is possible. Let just remind you of a few things:</p>
 <blockquote>
 <div><ul class="simple">
 <li>graph based computation is far from being new and if you want pure C++ from A to Z, there are some great solutions
-out there but they might not give you all the <tt class="docutils literal"><span class="pre">ecto</span></tt> goodies (statistics, shell, ROS/PCL/OpenCV bindings, GUIS&#8217;s,
+out there but they might not give you all the <code class="docutils literal"><span class="pre">ecto</span></code> goodies (statistics, shell, ROS/PCL/OpenCV bindings, GUIS&#8217;s,
 Python interfaces ... oh wait, you don&#8217;t want that :) )</li>
 <li>Python is part of the specs so that you can use any great code you find from C, C++ and Python by wrapping it in a cell</li>
-<li>Python is used technically so that <tt class="docutils literal"><span class="pre">ecto</span></tt> does not reimplement module finding/loading</li>
-<li>Python is used technically so that <tt class="docutils literal"><span class="pre">ecto</span></tt> does not reimplement some graph generation library and it can
-actually be used as a pre-processing step (cf. <a class="reference internal" href="serialization.html#serialization"><em>Serialization: Create From Python, Load/Execute From Pure C++</em></a>)</li>
+<li>Python is used technically so that <code class="docutils literal"><span class="pre">ecto</span></code> does not reimplement module finding/loading</li>
+<li>Python is used technically so that <code class="docutils literal"><span class="pre">ecto</span></code> does not reimplement some graph generation library and it can
+actually be used as a pre-processing step (cf. <a class="reference internal" href="serialization.html#serialization"><span>Serialization: Create From Python, Load/Execute From Pure C++</span></a>)</li>
 <li>Python is only used as a glue so you don&#8217;t get any performance hit: code still runs as fast as your cells</li>
-<li>You can still set break points in your cells just like you would with pure C++ (cf <a class="reference internal" href="../external/debugging.html#debugging"><em>Debugging with gdb</em></a>). The only bad
+<li>You can still set break points in your cells just like you would with pure C++ (cf <a class="reference internal" href="../external/debugging.html#debugging"><span>Debugging with gdb</span></a>). The only bad
 thing is the ugliness of the stack (10-20 more levels as you have to go through the Python interpreter first but you don&#8217;t need to look into it.</li>
-<li>there is some overhead to learn Python but with <tt class="docutils literal"><span class="pre">ecto</span></tt>, you just need to know how to create a plasm (cf. <a class="reference internal" href="../tutorials/plasms.html#tutorial-hello-plasms"><em>Hello Plasms!</em></a>)
+<li>there is some overhead to learn Python but with <code class="docutils literal"><span class="pre">ecto</span></code>, you just need to know how to create a plasm (cf. <a class="reference internal" href="../tutorials/plasms.html#tutorial-hello-plasms"><span>Hello Plasms!</span></a>)
 and that&#8217;s the same overhead you would have to learn a graph generation syntax</li>
 </ul>
 </div></blockquote>
@@ -122,11 +124,11 @@ why too, to see if we can fix anything (more docs/tutorials ?).</p>
 load your modules or include headers defining your cells.</p>
 <div class="section" id="dynamic-loading">
 <h2>Dynamic Loading<a class="headerlink" href="#dynamic-loading" title="Permalink to this headline">¶</a></h2>
-<p>For now, <tt class="docutils literal"><span class="pre">ecto</span></tt> uses <tt class="docutils literal"><span class="pre">Boost</span> <span class="pre">Python</span></tt> to load modules and this is pure C++. There are other alternatives
-like <tt class="docutils literal"><span class="pre">pluginlib</span></tt> as used in <tt class="docutils literal"><span class="pre">ROS</span></tt> but <tt class="docutils literal"><span class="pre">Boost</span> <span class="pre">Python</span></tt> was chosen for its maturity and widespread use.</p>
-<p>First, use the <tt class="docutils literal"><span class="pre">ECTO_DEFINE_MODULE</span></tt> and <tt class="docutils literal"><span class="pre">ECTO_CELL</span></tt> macros to register your cells in <tt class="docutils literal"><span class="pre">Boost</span> <span class="pre">Python</span></tt> modules and add those
-to your <tt class="docutils literal"><span class="pre">PYTHONPATH</span></tt> environment variables.</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;ecto/python.hpp&gt; </span><span class="c1">//import this</span>
+<p>For now, <code class="docutils literal"><span class="pre">ecto</span></code> uses <code class="docutils literal"><span class="pre">Boost</span> <span class="pre">Python</span></code> to load modules and this is pure C++. There are other alternatives
+like <code class="docutils literal"><span class="pre">pluginlib</span></code> as used in <code class="docutils literal"><span class="pre">ROS</span></code> but <code class="docutils literal"><span class="pre">Boost</span> <span class="pre">Python</span></code> was chosen for its maturity and widespread use.</p>
+<p>First, use the <code class="docutils literal"><span class="pre">ECTO_DEFINE_MODULE</span></code> and <code class="docutils literal"><span class="pre">ECTO_CELL</span></code> macros to register your cells in <code class="docutils literal"><span class="pre">Boost</span> <span class="pre">Python</span></code> modules and add those
+to your <code class="docutils literal"><span class="pre">PYTHONPATH</span></code> environment variables.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&lt;ecto/python.hpp&gt; //import this</span><span class="cp"></span>
 
 <span class="c1">//inside a function called at the start of your program:</span>
 <span class="c1">//...</span>
@@ -145,7 +147,7 @@ to your <tt class="docutils literal"><span class="pre">PYTHONPATH</span></tt> en
 </div>
 <div class="section" id="non-dynamic-loading">
 <h2>Non-Dynamic Loading<a class="headerlink" href="#non-dynamic-loading" title="Permalink to this headline">¶</a></h2>
-<p>The easiest is to look at some examples in the <tt class="docutils literal"><span class="pre">test</span></tt> folder. Those are self contained but you could define
+<p>The easiest is to look at some examples in the <code class="docutils literal"><span class="pre">test</span></code> folder. Those are self contained but you could define
 the cells in their own headers. The notation in C++ is almost the same as in Python and a commented
 example should be enough:</p>
 </div>
@@ -157,7 +159,7 @@ example should be enough:</p>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -172,13 +174,13 @@ example should be enough:</p>
         <li class="right" >
           <a href="serialization.html" title="Serialization: Create From Python, Load/Execute From Pure C++"
              >previous</a> |</li>
-        <li><a href="../../../index.html">ecto</a> &raquo;</li>
-          <li><a href="../index.html" >Usage</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Usage</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

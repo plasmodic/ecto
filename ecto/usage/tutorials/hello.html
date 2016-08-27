@@ -29,8 +29,8 @@
     <link rel="next" title="Hello Plasms!" href="plasms.html" />
     <link rel="prev" title="Using ecto in your own projects" href="../client_usage.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -45,11 +45,11 @@
         <li class="right" >
           <a href="../client_usage.html" title="Using ecto in your own projects"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../../index.html">ecto</a> &raquo;</li>
-          <li><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../../../index.html">
               <img class="logo" src="../../../_static/ecto210.png" alt="Logo"/>
@@ -71,12 +71,14 @@
   <h4>Next topic</h4>
   <p class="topless"><a href="plasms.html"
                         title="next chapter">Hello Plasms!</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../../../_sources/ecto/usage/tutorials/hello.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/ecto/usage/tutorials/hello.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
       <input type="text" name="q" />
@@ -95,16 +97,16 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="hello-ecto">
 <span id="tutorial-hello-ecto"></span><h1>Hello Ecto!<a class="headerlink" href="#hello-ecto" title="Permalink to this headline">¶</a></h1>
-<p>The beginning. Well, you should have read <a class="reference internal" href="../client_usage.html#client-usage"><em>Using ecto in your own projects</em></a>
+<p>The beginning. Well, you should have read <a class="reference internal" href="../client_usage.html#client-usage"><span>Using ecto in your own projects</span></a>
 first. Your ecto experience will involve a hybrid approach to development, using
 c++ and Python.</p>
 <div class="section" id="cmake">
 <h2>CMake<a class="headerlink" href="#cmake" title="Permalink to this headline">¶</a></h2>
-<p>You&#8217;ll need a CMake file named <tt class="docutils literal"><span class="pre">CMakeLists.txt</span></tt> <a class="reference download internal" href="../../../_downloads/CMakeListsHello.txt"><tt class="xref download docutils literal"><span class="pre">srcs/CMakeListsHello.txt</span></tt></a></p>
+<p>You&#8217;ll need a CMake file named <code class="docutils literal"><span class="pre">CMakeLists.txt</span></code> <a class="reference download internal" href="../../../_downloads/CMakeListsHello.txt" download=""><code class="xref download docutils literal"><span class="pre">srcs/CMakeListsHello.txt</span></code></a></p>
 <div class="highlight-cmake"><div class="highlight"><pre><span class="c"># This is standard CMake, you need that line</span>
 <span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">2.8</span><span class="p">)</span>
 <span class="c"># This just defines the name of that project from CMake</span>
@@ -115,7 +117,10 @@ c++ and Python.</p>
 <span class="c"># This is all you need to know: it will create an ecto module named tutorial</span>
 <span class="c"># and it will be built in the ${where_your_Python_lib_are_bult}/ecto_tutorial folder.</span>
 <span class="c"># If you add the ``INSTALL`` flag, it will also install it when you do ``make install`</span>
-<span class="nb">ectomodule</span><span class="p">(</span><span class="s">tutorial</span> <span class="s">DESTINATION</span> <span class="s">./ecto_tutorial</span> <span class="s">INSTALL</span>
+
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_LIBRARY_OUTPUT_DIRECTORY</span> <span class="o">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="o">}</span><span class="s">/ecto_tutorial</span><span class="p">)</span>
+
+<span class="nb">ectomodule</span><span class="p">(</span><span class="s">tutorial</span> <span class="s">DESTINATION</span> <span class="o">${</span><span class="nv">CMAKE_LIBRARY_OUTPUT_DIRECTORY</span><span class="o">}</span> <span class="s">INSTALL</span>
     <span class="c"># You need a file defining the module (cf. below)</span>
     <span class="s">tutorial.cpp</span>
     <span class="c"># You need a file defining some content for module (cf. below)</span>
@@ -127,11 +132,11 @@ c++ and Python.</p>
 <div class="section" id="c">
 <h2>c++<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h2>
 <p>So, the c++ side of things.  Ecto code structurally break down into
-<a class="reference internal" href="../../overview/cells.html#cells-overview"><em>Cells</em></a> and <a class="reference internal" href="../../overview/modules.html#modules-overview"><em>Modules</em></a></p>
+<a class="reference internal" href="../../overview/cells.html#cells-overview"><span>Cells</span></a> and <a class="reference internal" href="../../overview/modules.html#modules-overview"><span>Modules</span></a></p>
 <p>The module code:</p>
 <blockquote>
-<div><p>Download: <a class="reference download internal" href="../../../_downloads/tutorial.cpp"><tt class="xref download docutils literal"><span class="pre">srcs/tutorial.cpp</span></tt></a></p>
-<div class="highlight-cpp" id="code-module"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
+<div><p>Download: <a class="reference download internal" href="../../../_downloads/tutorial.cpp" download=""><code class="xref download docutils literal"><span class="pre">srcs/tutorial.cpp</span></code></a></p>
+<div class="highlight-cpp" id="code-module"><div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&lt;ecto/ecto.hpp&gt;</span><span class="cp"></span>
 
 <span class="c1">//Defines a top level ecto python cell with the name &#39;tutorial&#39;</span>
 <span class="c1">//Note that the shared library must be called tutorial.so</span>
@@ -149,9 +154,9 @@ c++ and Python.</p>
 </div></blockquote>
 <p>The cell code:</p>
 <blockquote>
-<div><p>Download: <a class="reference download internal" href="../../../_downloads/Hello.cpp"><tt class="xref download docutils literal"><span class="pre">srcs/Hello.cpp</span></tt></a></p>
-<div class="highlight-cpp" id="code-hello"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
-<span class="cp">#include &lt;iostream&gt;</span>
+<div><p>Download: <a class="reference download internal" href="../../../_downloads/Hello.cpp" download=""><code class="xref download docutils literal"><span class="pre">srcs/Hello.cpp</span></code></a></p>
+<div class="highlight-cpp" id="code-hello"><div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&lt;ecto/ecto.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
 
 <span class="k">namespace</span> <span class="n">tutorial</span>
 <span class="p">{</span>
@@ -180,37 +185,37 @@ c++ and Python.</p>
 </div>
 <p>Our first example.</p>
 </div></blockquote>
-<p>As you can see in <a class="reference internal" href="#code-hello"><em>Hello.cpp</em></a> this is one of the most basic ecto cells.</p>
+<p>As you can see in <a class="reference internal" href="#code-hello"><span>Hello.cpp</span></a> this is one of the most basic ecto cells.</p>
 </div>
 <div class="section" id="python">
 <h2>python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
 <p>The python counter part to hello might look like:</p>
-<p id="code-hello-python">Download: <a class="reference download internal" href="../../../_downloads/hello.py"><tt class="xref download docutils literal"><span class="pre">srcs/hello.py</span></tt></a></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
-<span class="c"># we import out ecto module: it was built in the ecto_tutorial folder and it is named tutorial</span>
+<p id="code-hello-python">Download: <a class="reference download internal" href="../../../_downloads/hello.py" download=""><code class="xref download docutils literal"><span class="pre">srcs/hello.py</span></code></a></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># we import out ecto module: it was built in the ecto_tutorial folder and it is named tutorial</span>
 <span class="kn">import</span> <span class="nn">ecto_tutorial.tutorial</span> <span class="kn">as</span> <span class="nn">tutorial</span>
 
-<span class="c"># we get the cell that we named Hello in that module</span>
+<span class="c1"># we get the cell that we named Hello in that module</span>
 <span class="n">printer</span> <span class="o">=</span> <span class="n">tutorial</span><span class="o">.</span><span class="n">Hello</span><span class="p">()</span>
-<span class="c"># execute the cell itself</span>
+<span class="c1"># execute the cell itself</span>
 <span class="n">printer</span><span class="o">.</span><span class="n">process</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>The <tt class="docutils literal"><span class="pre">Ecto</span></tt> module is imported just like any Python module so make sure you have an <tt class="docutils literal"><span class="pre">__init__.py</span></tt> in the same folder.</p>
+<p>The <code class="docutils literal"><span class="pre">Ecto</span></code> module is imported just like any Python module so make sure you have an <code class="docutils literal"><span class="pre">__init__.py</span></code> in the same folder.</p>
 </div>
 <div class="section" id="let-s-run-it">
 <h2>Let&#8217;s run it<a class="headerlink" href="#let-s-run-it" title="Permalink to this headline">¶</a></h2>
 <p>Well first, you need to build your module and your cell. If you put the 4 files above in a common folder,
-(and make sure you renamed <tt class="docutils literal"><span class="pre">CMakeListsHello.txt</span></tt> to <tt class="docutils literal"><span class="pre">CMakeLists.txt</span></tt>), just type:</p>
-<div class="highlight-bash"><div class="highlight"><pre>mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd </span>build <span class="o">&amp;&amp;</span> cmake ../ <span class="o">&amp;&amp;</span> make <span class="o">&amp;&amp;</span> <span class="nb">cd</span> ..
+(and make sure you renamed <code class="docutils literal"><span class="pre">CMakeListsHello.txt</span></code> to <code class="docutils literal"><span class="pre">CMakeLists.txt</span></code>), just type:</p>
+<div class="highlight-bash"><div class="highlight"><pre>mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd</span> build <span class="o">&amp;&amp;</span> cmake ../ <span class="o">&amp;&amp;</span> make <span class="o">&amp;&amp;</span> <span class="nb">cd</span> ..
 </pre></div>
 </div>
-<p>Now, <tt class="docutils literal"><span class="pre">ecto</span></tt> created a Python module so it needs to be added to your Python path:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nb">export </span><span class="nv">PYTHONPATH</span><span class="o">=</span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>/build:<span class="nv">$PYTHONPATH</span>
+<p>Now, <code class="docutils literal"><span class="pre">ecto</span></code> created a Python module so it needs to be added to your Python path:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nb">export</span> <span class="nv">PYTHONPATH</span><span class="o">=</span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>/build:$PYTHONPATH
 </pre></div>
 </div>
 <p>Also, do not forget this standard Python: if you have a folder containing Python modules, for it to become a proper package,
-you need a file named <tt class="docutils literal"><span class="pre">__init__.py</span></tt> in it so:</p>
+you need a file named <code class="docutils literal"><span class="pre">__init__.py</span></code> in it so:</p>
 <div class="highlight-bash"><div class="highlight"><pre>touch ./build/ecto_tutorial/__init__.py
 </pre></div>
 </div>
@@ -218,7 +223,8 @@ you need a file named <tt class="docutils literal"><span class="pre">__init__.py
 <div class="highlight-bash"><div class="highlight"><pre>chmod <span class="m">755</span> hello.py <span class="o">&amp;&amp;</span> ./hello.py
 </pre></div>
 </div>
-<div class="highlight-text"><div class="highlight"><pre>Hello
+<div class="highlight-text"><div class="highlight"><pre>No module named PySide.QtCore
+Hello
 </pre></div>
 </div>
 </div>
@@ -230,7 +236,7 @@ you need a file named <tt class="docutils literal"><span class="pre">__init__.py
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -245,13 +251,13 @@ you need a file named <tt class="docutils literal"><span class="pre">__init__.py
         <li class="right" >
           <a href="../client_usage.html" title="Using ecto in your own projects"
              >previous</a> |</li>
-        <li><a href="../../../index.html">ecto</a> &raquo;</li>
-          <li><a href="../index.html" >Usage</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Usage</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

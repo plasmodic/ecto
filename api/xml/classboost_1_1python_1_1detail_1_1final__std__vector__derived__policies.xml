@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
   <compounddef id="classboost_1_1python_1_1detail_1_1final__std__vector__derived__policies" kind="class" language="C++" prot="public">
     <compoundname>boost::python::detail::final_std_vector_derived_policies</compoundname>
     <basecompoundref refid="classboost_1_1python_1_1std__vector__indexing__suite" prot="public" virt="non-virtual">boost::python::std_vector_indexing_suite&lt; Container, NoProxy, final_std_vector_derived_policies&lt; Container, NoProxy &gt; &gt;</basecompoundref>

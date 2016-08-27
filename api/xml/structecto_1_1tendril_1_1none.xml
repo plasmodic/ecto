@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
   <compounddef id="structecto_1_1tendril_1_1none" kind="struct" language="C++" prot="public">
     <compoundname>ecto::tendril::none</compoundname>
     <includes refid="tendril_8hpp" local="no">tendril.hpp</includes>
@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" line="262" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" bodystart="262" bodyend="262"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" line="261" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" bodystart="261" bodyend="261"/>
       </memberdef>
       <memberdef kind="function" id="structecto_1_1tendril_1_1none_1a02032ee9d796f16d0db5ec2f531d9f46" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>const <ref refid="structecto_1_1tendril_1_1none" kindref="compound">none</ref> &amp;</type>
@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" line="263" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" bodystart="263" bodyend="263"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" line="262" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" bodystart="262" bodyend="262"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="friend">
@@ -55,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" line="264" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" bodystart="264" bodyend="264"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" line="263" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" bodystart="263" bodyend="263"/>
       </memberdef>
       <memberdef kind="friend" id="structecto_1_1tendril_1_1none_1a347ef8229889570e77256cd3b6e8d6b8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>friend std::ostream &amp;</type>
@@ -75,14 +75,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" line="265" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" bodystart="265" bodyend="268"/>
+        <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" line="264" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" bodystart="264" bodyend="267"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
 <para>A none type for tendril when the tendril is uninitialized. </para>    </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" line="261" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" bodystart="261" bodyend="269"/>
+    <location file="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" line="260" column="1" bodyfile="/home/vrabaud/workspace/recognition_kitchen/src/ecto/include/ecto/tendril.hpp" bodystart="260" bodyend="268"/>
     <listofallmembers>
       <member refid="structecto_1_1tendril_1_1none_1a347ef8229889570e77256cd3b6e8d6b8" prot="public" virt="non-virtual"><scope>ecto::tendril::none</scope><name>operator&lt;&lt;</name></member>
       <member refid="structecto_1_1tendril_1_1none_1ad595e74035f67c86885f0c37b2e67e3b" prot="public" virt="non-virtual"><scope>ecto::tendril::none</scope><name>operator=</name></member>

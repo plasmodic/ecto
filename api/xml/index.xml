@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.9.1">
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.11">
   <compound refid="classecto_1_1atomic" kind="class"><name>ecto::atomic</name>
     <member refid="classecto_1_1atomic_1ac5ba45af623c7bc47e6918e290e39c67" kind="variable"><name>value</name></member>
     <member refid="classecto_1_1atomic_1a52a121e21f9449371998dbccaca0cbde" kind="variable"><name>mtx</name></member>
@@ -790,7 +790,7 @@
   </compound>
   <compound refid="namespaceecto_1_1abi" kind="namespace"><name>ecto::abi</name>
   </compound>
-  <compound refid="namespaceecto_1_1abi_1_1@22" kind="namespace"><name>ecto::abi::@22</name>
+  <compound refid="namespaceecto_1_1abi_1_1_0D22" kind="namespace"><name>ecto::abi::@22</name>
   </compound>
   <compound refid="namespaceecto_1_1detail" kind="namespace"><name>ecto::detail</name>
   </compound>

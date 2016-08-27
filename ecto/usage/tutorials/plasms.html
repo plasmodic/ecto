@@ -29,8 +29,8 @@
     <link rel="next" title="Lifecycle of Cells" href="lifecycle.html" />
     <link rel="prev" title="Hello Ecto!" href="hello.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -45,11 +45,11 @@
         <li class="right" >
           <a href="hello.html" title="Hello Ecto!"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../../index.html">ecto</a> &raquo;</li>
-          <li><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Usage</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../../../index.html">
               <img class="logo" src="../../../_static/ecto210.png" alt="Logo"/>
@@ -76,12 +76,14 @@
   <h4>Next topic</h4>
   <p class="topless"><a href="lifecycle.html"
                         title="next chapter">Lifecycle of Cells</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../../../_sources/ecto/usage/tutorials/plasms.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/ecto/usage/tutorials/plasms.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
       <input type="text" name="q" />
@@ -100,17 +102,17 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="hello-plasms">
 <span id="tutorial-hello-plasms"></span><h1>Hello Plasms!<a class="headerlink" href="#hello-plasms" title="Permalink to this headline">¶</a></h1>
-<p>Ok, so you made your first cell in <a class="reference internal" href="hello.html#tutorial-hello-ecto"><em>Hello Ecto!</em></a>.  Now lets make
+<p>Ok, so you made your first cell in <a class="reference internal" href="hello.html#tutorial-hello-ecto"><span>Hello Ecto!</span></a>.  Now lets make
 a graph, what ecto is especially good at.</p>
 <div class="section" id="c">
 <h2>c++<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h2>
 <p>Lets make two more cells</p>
-<p>Download: <a class="reference download internal" href="../../../_downloads/Increment.cpp"><tt class="xref download docutils literal"><span class="pre">srcs/Increment.cpp</span></tt></a></p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
+<p>Download: <a class="reference download internal" href="../../../_downloads/Increment.cpp" download=""><code class="xref download docutils literal"><span class="pre">srcs/Increment.cpp</span></code></a></p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&lt;ecto/ecto.hpp&gt;</span><span class="cp"></span>
 
 <span class="k">using</span> <span class="n">ecto</span><span class="o">::</span><span class="n">tendrils</span><span class="p">;</span>
 <span class="k">namespace</span> <span class="n">tutorial</span>
@@ -142,8 +144,8 @@ a graph, what ecto is especially good at.</p>
 <span class="n">ECTO_CELL</span><span class="p">(</span><span class="n">tutorial</span><span class="p">,</span> <span class="n">tutorial</span><span class="o">::</span><span class="n">Increment</span><span class="p">,</span> <span class="s">&quot;Increment&quot;</span><span class="p">,</span> <span class="s">&quot;Outputs a monotonically increasing integer.&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Download: <a class="reference download internal" href="../../../_downloads/Add.cpp"><tt class="xref download docutils literal"><span class="pre">srcs/Add.cpp</span></tt></a></p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &lt;ecto/ecto.hpp&gt;</span>
+<p>Download: <a class="reference download internal" href="../../../_downloads/Add.cpp" download=""><code class="xref download docutils literal"><span class="pre">srcs/Add.cpp</span></code></a></p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&lt;ecto/ecto.hpp&gt;</span><span class="cp"></span>
 
 <span class="k">using</span> <span class="n">ecto</span><span class="o">::</span><span class="n">tendrils</span><span class="p">;</span>
 <span class="k">namespace</span> <span class="n">tutorial</span>
@@ -174,45 +176,46 @@ a graph, what ecto is especially good at.</p>
 <div class="section" id="python">
 <h2>python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
 <p>The python counter part to hello might look like:</p>
-<p>Download: <a class="reference download internal" href="../../../_downloads/plasms.py"><tt class="xref download docutils literal"><span class="pre">srcs/plasms.py</span></tt></a></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<p>Download: <a class="reference download internal" href="../../../_downloads/plasms.py" download=""><code class="xref download docutils literal"><span class="pre">srcs/plasms.py</span></code></a></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="ch">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">ecto</span>
 <span class="kn">from</span> <span class="nn">ecto_tutorial.tutorial</span> <span class="kn">import</span> <span class="n">Increment</span><span class="p">,</span> <span class="n">Add</span>
 
-<span class="c"># create three Cell objects</span>
-<span class="n">i1</span> <span class="o">=</span> <span class="n">Increment</span><span class="p">(</span><span class="s">&#39;Inc 1&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
-<span class="n">i2</span> <span class="o">=</span> <span class="n">Increment</span><span class="p">(</span><span class="s">&#39;Inc 2&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">add</span> <span class="o">=</span> <span class="n">Add</span><span class="p">(</span><span class="s">&#39;Add&#39;</span><span class="p">)</span>
+<span class="c1"># create three Cell objects</span>
+<span class="n">i1</span> <span class="o">=</span> <span class="n">Increment</span><span class="p">(</span><span class="s1">&#39;Inc 1&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">i2</span> <span class="o">=</span> <span class="n">Increment</span><span class="p">(</span><span class="s1">&#39;Inc 2&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">add</span> <span class="o">=</span> <span class="n">Add</span><span class="p">(</span><span class="s1">&#39;Add&#39;</span><span class="p">)</span>
 
-<span class="c"># create an empty plasm: a graph</span>
+<span class="c1"># create an empty plasm: a graph</span>
 <span class="n">plasm</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Plasm</span><span class="p">()</span>
-<span class="c"># create connections inside that graph: the output named &#39;output&#39;</span>
-<span class="c"># of cell &#39;i1&#39; is connected to the inut named &#39;a&#39; of cell &#39;add&#39;</span>
-<span class="c"># and reciprocally with cell &#39;i2&#39;.</span>
-<span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">i1</span><span class="p">[</span><span class="s">&#39;output&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">add</span><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">],</span>
-              <span class="n">i2</span><span class="p">[</span><span class="s">&#39;output&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">add</span><span class="p">[</span><span class="s">&#39;b&#39;</span><span class="p">],</span>
+<span class="c1"># create connections inside that graph: the output named &#39;output&#39;</span>
+<span class="c1"># of cell &#39;i1&#39; is connected to the inut named &#39;a&#39; of cell &#39;add&#39;</span>
+<span class="c1"># and reciprocally with cell &#39;i2&#39;.</span>
+<span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">i1</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">add</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+              <span class="n">i2</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">add</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">],</span>
               <span class="p">)</span>
 
-<span class="c"># create a scheduler that will run that plasm</span>
+<span class="c1"># create a scheduler that will run that plasm</span>
 <span class="n">sched</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Scheduler</span><span class="p">(</span><span class="n">plasm</span><span class="p">)</span>
-<span class="c"># execute the plasm</span>
+<span class="c1"># execute the plasm</span>
 <span class="n">sched</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">niter</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
-<span class="c"># display the output name &#39;output&#39; in the outputs of cell &#39;add&#39;</span>
+<span class="c1"># display the output name &#39;output&#39; in the outputs of cell &#39;add&#39;</span>
 <span class="k">print</span> <span class="n">add</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">output</span>
 </pre></div>
 </div>
 <p>Lets run it:</p>
-<div class="highlight-text"><div class="highlight"><pre>42
+<div class="highlight-text"><div class="highlight"><pre>No module named PySide.QtCore
+42
 </pre></div>
 </div>
 <div class="section" id="parameters">
 <h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
 <p>Look at the allocation of our cells in the script.</p>
-<div class="highlight-py"><div class="highlight"><pre><span class="c"># create three Cell objects</span>
-<span class="n">i1</span> <span class="o">=</span> <span class="n">Increment</span><span class="p">(</span><span class="s">&#39;Inc 1&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
-<span class="n">i2</span> <span class="o">=</span> <span class="n">Increment</span><span class="p">(</span><span class="s">&#39;Inc 2&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">add</span> <span class="o">=</span> <span class="n">Add</span><span class="p">(</span><span class="s">&#39;Add&#39;</span><span class="p">)</span>
+<div class="highlight-py"><div class="highlight"><pre><span class="c1"># create three Cell objects</span>
+<span class="n">i1</span> <span class="o">=</span> <span class="n">Increment</span><span class="p">(</span><span class="s1">&#39;Inc 1&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">i2</span> <span class="o">=</span> <span class="n">Increment</span><span class="p">(</span><span class="s1">&#39;Inc 2&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">add</span> <span class="o">=</span> <span class="n">Add</span><span class="p">(</span><span class="s1">&#39;Add&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The parameters that were declared in:</p>
@@ -232,20 +235,20 @@ the cell&#8217;s instance name, which is relevant for pretty looking graphs.</p>
 <h3>Connections<a class="headerlink" href="#connections" title="Permalink to this headline">¶</a></h3>
 <p>The syntax for connecting ecto cells together in the
 plasm looks like this.</p>
-<div class="highlight-py"><div class="highlight"><pre><span class="c"># create an empty plasm: a graph</span>
+<div class="highlight-py"><div class="highlight"><pre><span class="c1"># create an empty plasm: a graph</span>
 <span class="n">plasm</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Plasm</span><span class="p">()</span>
-<span class="c"># create connections inside that graph: the output named &#39;output&#39;</span>
-<span class="c"># of cell &#39;i1&#39; is connected to the inut named &#39;a&#39; of cell &#39;add&#39;</span>
-<span class="c"># and reciprocally with cell &#39;i2&#39;.</span>
-<span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">i1</span><span class="p">[</span><span class="s">&#39;output&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">add</span><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">],</span>
-              <span class="n">i2</span><span class="p">[</span><span class="s">&#39;output&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">add</span><span class="p">[</span><span class="s">&#39;b&#39;</span><span class="p">],</span>
+<span class="c1"># create connections inside that graph: the output named &#39;output&#39;</span>
+<span class="c1"># of cell &#39;i1&#39; is connected to the inut named &#39;a&#39; of cell &#39;add&#39;</span>
+<span class="c1"># and reciprocally with cell &#39;i2&#39;.</span>
+<span class="n">plasm</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">i1</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">add</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+              <span class="n">i2</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">add</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">],</span>
               <span class="p">)</span>
 </pre></div>
 </div>
-<p>Each connection is made by using the <tt class="docutils literal"><span class="pre">&gt;&gt;</span></tt> operator, where
-the key value in the <tt class="docutils literal"><span class="pre">[]</span></tt> operator refers to an output tendril
+<p>Each connection is made by using the <code class="docutils literal"><span class="pre">&gt;&gt;</span></code> operator, where
+the key value in the <code class="docutils literal"><span class="pre">[]</span></code> operator refers to an output tendril
 on the left hand side, or an input tendril on the right hand side.
-See <a class="reference internal" href="../tips/connections.html#tendril-connections"><em>Tendril Connections</em></a> for more details on how this operator
+See <a class="reference internal" href="../tips/connections.html#tendril-connections"><span>Tendril Connections</span></a> for more details on how this operator
 works.</p>
 </div>
 <div class="section" id="graphs">
@@ -274,28 +277,29 @@ node [shape=plaintext]
 2-&gt;1 [headport=&quot;i_b&quot; tailport=&quot;o_output&quot;];
 }" />
 </p>
-<p>Plasms, graphs, in ecto are <em>Directed Acyclic Graphs</em> , see <a class="reference internal" href="../../overview/glossary.html#dag"><em>plasm</em></a>.
+<p>Plasms, graphs, in ecto are <em>Directed Acyclic Graphs</em> , see <a class="reference internal" href="../../overview/glossary.html#dag"><span>plasm</span></a>.
 The DAG is important for scheduling and determining execution order.
 It is used to describe the <strong>happens before</strong> relationships in cells.
 Because of the DAG construct, implicit feedback loops are not allowed,
 and can only be achieved through special purpose cells,
-see <a class="reference internal" href="../techniques/ecto_cells.html#entanglement"><em>Entanglement</em></a> for more information.</p>
+see <a class="reference internal" href="../techniques/ecto_cells.html#entanglement"><span>Entanglement</span></a> for more information.</p>
 </div>
 <div class="section" id="execution">
 <h3>Execution<a class="headerlink" href="#execution" title="Permalink to this headline">¶</a></h3>
-<p>Once a plasm is constructed, it may be used with an <a class="reference internal" href="../../reference/schedulers.html#schedulers"><em>ecto scheduler</em></a>.</p>
-<div class="highlight-py"><div class="highlight"><pre><span class="c"># create a scheduler that will run that plasm</span>
+<p>Once a plasm is constructed, it may be used with an <a class="reference internal" href="../../reference/schedulers.html#schedulers"><span>ecto scheduler</span></a>.</p>
+<div class="highlight-py"><div class="highlight"><pre>
+<span class="c1"># create a scheduler that will run that plasm</span>
 <span class="n">sched</span> <span class="o">=</span> <span class="n">ecto</span><span class="o">.</span><span class="n">Scheduler</span><span class="p">(</span><span class="n">plasm</span><span class="p">)</span>
-<span class="c"># execute the plasm</span>
+<span class="c1"># execute the plasm</span>
 <span class="n">sched</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">niter</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The <a class="reference internal" href="../../reference/schedulers.html#ecto.Scheduler" title="ecto.Scheduler"><tt class="xref py py-class docutils literal"><span class="pre">ecto.Scheduler</span></tt></a> scheduler essentially
+<p>The <a class="reference internal" href="../../reference/schedulers.html#ecto.Scheduler" title="ecto.Scheduler"><code class="xref py py-class docutils literal"><span class="pre">ecto.Scheduler</span></code></a> scheduler essentially
 does a <a class="reference external" href="http://en.wikipedia.org/wiki/Topological_sorting">topological-sort</a>
 on the graph, and then executes each cell in order.
 This repeats for the specified number of iterations,
-or indefinitely if <tt class="docutils literal"><span class="pre">niter</span></tt> is <tt class="docutils literal"><span class="pre">0</span></tt>.</p>
-<p>For parallel or threaded execution of plasms, please read the <a class="reference internal" href="../../reference/schedulers.html#schedulers"><em>schedulers</em></a>
+or indefinitely if <code class="docutils literal"><span class="pre">niter</span></code> is <code class="docutils literal"><span class="pre">0</span></code>.</p>
+<p>For parallel or threaded execution of plasms, please read the <a class="reference internal" href="../../reference/schedulers.html#schedulers"><span>schedulers</span></a>
 documentation for a more detailed reference. Note that support for parallel execution is
 presently restricted to running multiple graphs in parallel. Although one of the project&#8217;s
 initial design goals, it does not at this time introduce parallelism to the internal execution
@@ -307,15 +311,15 @@ of a graph (this is a very complex thing to manage).</p>
 of the graph.</p>
 <p>Various cells can manipulate the graph by grouping or providing some conditional logic that
 affects the processing of cells that have been combined internally within themselves.
-See for example, the <a class="reference internal" href="../techniques/black_box.html#black-box"><em>BlackBox</em></a> and <a class="reference internal" href="../techniques/ecto_cells.html#if"><em>If</em></a> cells.</p>
-<p>The return value from a cell&#8217;s <cite>process()</cite> function will also instruct the <a class="reference internal" href="../../reference/schedulers.html#schedulers"><em>scheduler</em></a>
+See for example, the <a class="reference internal" href="../techniques/black_box.html#black-box"><span>BlackBox</span></a> and <a class="reference internal" href="../techniques/ecto_cells.html#if"><span>If</span></a> cells.</p>
+<p>The return value from a cell&#8217;s <cite>process()</cite> function will also instruct the <a class="reference internal" href="../../reference/schedulers.html#schedulers"><span>scheduler</span></a>
 on how it should continue processing cells in the remainder of the graph. The possible return values
 are listed below with an explanation for quick reference:</p>
 <ul class="simple">
-<li><em class="xref std std-ref">ecto::OK</em> : directed execution proceeds normally to the next cell in the graph.</li>
-<li><em class="xref std std-ref">ecto::DO_OVER</em> : repeats processing for that cell.</li>
-<li><em class="xref std std-ref">ecto::BREAK</em> : abort the current iteration of the graph and return to its starting point.</li>
-<li><em class="xref std std-ref">ecto::QUIT</em> : completely terminate the execution.</li>
+<li><span class="xref std std-ref">ecto::OK</span> : directed execution proceeds normally to the next cell in the graph.</li>
+<li><span class="xref std std-ref">ecto::DO_OVER</span> : repeats processing for that cell.</li>
+<li><span class="xref std std-ref">ecto::BREAK</span> : abort the current iteration of the graph and return to its starting point.</li>
+<li><span class="xref std std-ref">ecto::QUIT</span> : completely terminate the execution.</li>
 </ul>
 <p>Mutexes/barriers or similar intraprocess mechanisms inside a cell that is present in
 multiple parallelised graphs will also halt execution of the graph at a particular point.</p>
@@ -329,7 +333,7 @@ multiple parallelised graphs will also halt execution of the graph at a particul
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -344,13 +348,13 @@ multiple parallelised graphs will also halt execution of the graph at a particul
         <li class="right" >
           <a href="hello.html" title="Hello Ecto!"
              >previous</a> |</li>
-        <li><a href="../../../index.html">ecto</a> &raquo;</li>
-          <li><a href="../index.html" >Usage</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">ecto</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Usage</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2011,  Willow Garage, Inc.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>
