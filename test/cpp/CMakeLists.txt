@@ -26,7 +26,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 
-if(NOT CATKIN_ENABLE_TESTING OR NOT TARGET ecto-test)
+if(NOT CATKIN_ENABLE_TESTING)
   message(STATUS "Disabling testing since gtest was not found.")
   return()
 endif()

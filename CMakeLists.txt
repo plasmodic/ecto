@@ -38,7 +38,7 @@ find_package(PythonLibs REQUIRED)
 
 
 catkin_package(CFG_EXTRAS ecto-extras.cmake
-               DEPENDS Boost PYTHON Threads
+               DEPENDS Boost PYTHON
                INCLUDE_DIRS include
                LIBRARIES ecto
 )
