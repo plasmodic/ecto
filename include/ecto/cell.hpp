@@ -417,8 +417,7 @@ namespace ecto
     ReturnCode process(const tendrils&, const tendrils&, not_implemented)
     { return OK; }
 
-    ReturnCode process(const tendrils& inputs, const tendrils& outputs,
-                       implemented)
+    ReturnCode process(const tendrils& inputs, const tendrils& outputs, implemented)
     { return ReturnCode(impl_->process(inputs, outputs)); }
 
     ReturnCode dispatch_process(const tendrils& inputs,

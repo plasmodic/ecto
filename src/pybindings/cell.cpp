@@ -277,7 +277,7 @@ namespace ecto
         bp::extract<std::string> e(args[0]);
         if (! e.check())
           throw std::runtime_error("Non-keyword argument (instance name) not convertible to string.");
-        m->name(e());
+        m->name(std::string(e()));
       }
     m->declare_params();
 
