@@ -103,7 +103,8 @@ bool scheduler::prepare_jobs(unsigned num_iters)
     if (state_ != RUNNING) {
       io_svc_.post(boost::bind(& scheduler::execute_init, this, num_iters));
     } else {
-      io_svc_.post(boost::bind(& scheduler::execute_iter, this, 0 /* cur_iter */, num_iters, 0 /* stack_idx */));
+      io_svc_.post(boost::bind(& scheduler::execute_iter, this,
+        0 /* cur_iter */, num_iters, 0 /* stack_idx */));
     }
     state_ = EXECUTING; // Make sure no one else can start an execution.
   } // END mtx_ scope.

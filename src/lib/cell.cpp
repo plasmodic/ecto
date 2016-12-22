@@ -227,6 +227,7 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
     configure();
     //trigger all parameter change callbacks...
     tendrils::iterator begin = parameters.begin(), end = parameters.end();
+
     while (begin != end)
     {
       try
@@ -261,12 +262,7 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
   ReturnCode
   cell::process()
   {
-    // TODO: The normal behavior should be this
     return process_with_only_these_inputs(inputs);
-//    // Uncomment this part if you want to have the same behavior that avoid the return stamen
-//    // using a GNU compiler and you should comment the above line
-//    process_with_only_these_inputs(inputs);
-//    return ecto::OK;
   }
 
   std::string

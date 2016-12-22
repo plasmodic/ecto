@@ -89,4 +89,3 @@ endforeach()
 
 catkin_add_nosetests(test_lineplasm.py)
 catkin_add_nosetests(save_load_plasm_file.py)
-#catkin_add_nosetests(save_load_plasm_file.py DEPENDENCIES plasm_loader)

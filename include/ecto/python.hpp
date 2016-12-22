@@ -33,14 +33,14 @@
 #pragma push_macro("_XOPEN_SOURCE")
 #undef _POSIX_C_SOURCE
 #undef _XOPEN_SOURCE
+#include <Python.h>
+#include <boost/python.hpp>
 #include <boost/thread/thread.hpp>
 #include <map>
 //#pragma pop_macro("_POSIX_C_SOURCE")
 //#pragma pop_macro("_XOPEN_C_SOURCE")
-#include <Python.h>
 
 #include <boost/noncopyable.hpp>
-#include <boost/python.hpp>
 
 namespace ecto {
   namespace py {

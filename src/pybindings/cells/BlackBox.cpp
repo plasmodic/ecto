@@ -78,9 +78,7 @@ namespace ecto
           else
             sched_->execute(0);
           if (! sched_->running())
-          {
             return ecto::QUIT;
-          }
         } catch (ecto::except::EctoException& e)
         {
           throw std::runtime_error(ecto::except::diagnostic_string(e));
