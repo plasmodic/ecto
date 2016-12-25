@@ -201,6 +201,7 @@ TEST(SerialTest, CellWithTendrilWithCell)
   }
 }
 
+#if BOOST_VERSION / 100 % 1000 < 62
 TEST(SerialTest, Plasm)
 {
   {
@@ -251,3 +252,4 @@ TEST(SerialTest, Plasm)
   }
 
 }
+#endif
