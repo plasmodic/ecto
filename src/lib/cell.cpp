@@ -262,7 +262,7 @@ case ecto::NAME: {static std::string x = BOOST_PP_STRINGIZE(ecto::NAME); return 
   ReturnCode
   cell::process()
   {
-    process_with_only_these_inputs(inputs);
+    return process_with_only_these_inputs(inputs);
   }
 
   std::string
